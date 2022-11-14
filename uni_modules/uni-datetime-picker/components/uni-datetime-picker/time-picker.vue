@@ -185,7 +185,6 @@
 			}
 		},
 		watch: {
-			// #ifndef VUE3
 			value: {
 				handler(newVal, oldVal) {
 					if (newVal) {
@@ -198,21 +197,6 @@
 				},
 				immediate: true
 			},
-			// #endif
-			// #ifdef VUE3
-			modelValue: {
-				handler(newVal, oldVal) {
-					if (newVal) {
-						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
-						this.initTime(false)
-					} else {
-						this.time = ''
-						this.parseValue(Date.now())
-					}
-				},
-				immediate: true
-			},
-			// #endif
 			type: {
 				handler(newValue) {
 					if (newValue === 'date') {
