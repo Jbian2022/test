@@ -1,6 +1,14 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+<!-- 	<view class="isBuy">
+		<van-action-bar>
+		  <van-action-bar-icon icon="chat-o" text="客服" />
+		  <van-action-bar-icon icon="shop-o" text="店铺" />
+		  <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" />
+		  <van-action-bar-button color="#7232dd" type="danger" text="立即购买" />
+		</van-action-bar>
+	</view> -->
     <view class="header_style">
       <view class="header_left_style">
         <view class="left_content_style">
@@ -8,7 +16,7 @@
             class="left_content_img_style"
             src="https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
           ></image>
-          <view class="left_header_style">鎴戠殑浼氬憳</view>
+          <view class="left_header_style">你好</view>
         </view>
       </view>
       <view class="header_right_style">
@@ -31,6 +39,7 @@
       <image
         class="add_img_style"
         src="../../static/app-plus/mebrs/add.svg"
+		@click="addClick"
       ></image>
     </view>
   </view>
@@ -47,6 +56,14 @@ export default {
     return {
       meberList: []
     }
+  },
+  addClick() {
+	  uni.navigateTo({
+	  	url: '',
+	  	success: res => {},
+	  	fail: () => {},
+	  	complete: () => {}
+	  });
   }
 }
 </script>
