@@ -1,14 +1,6 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-<!-- 	<view class="isBuy">
-		<van-action-bar>
-		  <van-action-bar-icon icon="chat-o" text="客服" />
-		  <van-action-bar-icon icon="shop-o" text="店铺" />
-		  <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" />
-		  <van-action-bar-button color="#7232dd" type="danger" text="立即购买" />
-		</van-action-bar>
-	</view> -->
     <view class="header_style">
       <view class="header_left_style">
         <view class="left_content_style">
@@ -26,6 +18,10 @@
         ></image>
       </view>
     </view>
+	<view class="is_buy_style">
+		<view class="buy_left" :class="isActive === 'y' ? 'active' : ''" @click.native="buyClick('y')">已购课</view>
+		<view class="buy_right" :class="isActive === 'n' ? 'active' : ''" @click.native="buyClick('n')">未购课</view>
+	</view>
     <view class="mebers_content">
       <view class="no_data_style" v-if="meberList.length === 0">
         <image
@@ -54,9 +50,11 @@ export default {
   },
   data() {
     return {
-      meberList: []
+      meberList: [],
+	  isActive: 'y'
     }
   },
+  methods: {
   addClick() {
 	  uni.navigateTo({
 	  	url: '',
@@ -64,6 +62,11 @@ export default {
 	  	fail: () => {},
 	  	complete: () => {}
 	  });
+  },
+  buyClick(type) {
+	 this.isActive = type
+  }
+	  
   }
 }
 </script>
@@ -109,6 +112,40 @@ export default {
         height: 48.59upx;
       }
     }
+  }
+  .is_buy_style {
+	  width: calc(100vw - 60upx);
+	  z-index: 40;
+	  height: 82upx;
+	  margin-left: 30upx;
+	   display: flex;
+	   align-items: center;
+	   margin-top: 36upx;
+	   .buy_left {
+		   width: 50%;
+		   height: 100%;
+		   text-align: center;
+		   background: linear-gradient(180deg, #343A44 0%, #212328 100%);
+		  line-height: 82upx;
+		  color: #A8ADB6;
+		  
+	
+			border-radius: 200px 0px 0px 200px;
+	   }
+	   .buy_right {
+		   width: 50%;
+		   height: 100%;
+		   color: #A8ADB6;
+		line-height: 82upx;
+		 text-align: center;
+		   background: linear-gradient(180deg, #343A44 0%, #212328 100%);
+		   border-radius: 0px 200px   200px 0px;
+	   }
+	   .active {
+		   background: #1370FF;
+		   color: #fff;
+	   }
+	
   }
   .mebers_content {
     width: 100vw;

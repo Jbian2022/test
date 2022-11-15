@@ -4,6 +4,11 @@
 			<image class="currency_img_style" src="../../static/app-plus/bg/currency.png"></image>
 			<view class="currency_content_style"></view>
 		</view>
+		<view v-if="theamType==='goldenCard'" class="currency_style">
+			<image class="currency_gold_img_style" src="../../static/app-plus/bg/goldenCard.png"></image>
+			<image class="currency_img_style" src="../../static/app-plus/bg/currency.png"></image>
+			<view class="currency_content_style"></view>
+		</view>
 		
 	</view>
 </template>
@@ -32,6 +37,16 @@
 			height: 100%;
 			display: flex;
 			flex-direction: column;
+			.currency_gold_img_style {
+				width: 100%;
+				height: 372upx;
+				position: absolute;
+				object-fit: contain;
+				left: 0;
+				top: 0;
+				z-index: 30;
+				opacity: 0.4;
+			}
 			.currency_img_style {
 				width: 100%;
 				height: 372upx;
