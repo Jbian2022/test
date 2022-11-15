@@ -6,6 +6,7 @@
 				<p class="a-i-c">私人专属教练，扁平学员管理</p>
 			</view>
 			<van-field
+			class="tel"
 			  readonly
 			  clickable
 			  :value="value"
@@ -66,6 +67,7 @@
 				line-height: 42upx;
 			}
 			.tel {
+				
 				margin-top: 60upx;
 				width: 610upx;
 				height: 100upx;
@@ -74,7 +76,7 @@
 				opacity: 0.15;
 			}
 			.btn-bttom {
-				margin-top: 40upx;
+			margin-top: 40upx;
 			width: 610upx;
 			height: 100upx;
 			background: #454951;
