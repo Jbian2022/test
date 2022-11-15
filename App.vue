@@ -1,3 +1,4 @@
+
 <script>
 	import initApp from '@/common/appInit.js';
 	import openApp from '@/common/openApp.js';
@@ -7,6 +8,7 @@
 	import checkIsAgree from '@/pages/uni-agree/utils/uni-agree.js';
 	import uniIdPageInit from '@/uni_modules/uni-id-pages/init.js';
 	export default {
+
 		globalData: {
 			searchText: '',
 			appVersion: {},
@@ -48,10 +50,17 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
-		}
+		},
 	}
 </script>
 
 <style>
 	/*每个页面公共css */
+	.need_bg_style {
+		width: 100vw;
+		height: 100vh;
+		position: relative;
+		overflow: hidden;
+	}
+
 </style>
