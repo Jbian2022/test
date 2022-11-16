@@ -24,11 +24,9 @@
 	</view>
     <view class="mebers_content">
       <view class="no_data_style" v-if="meberList.length === 0">
-        <image
-          class="add_style"
-          src="../../static/app-plus/mebrs/add.svg"
-        ></image>
-        <text class="my_student_style">锟斤拷去锟斤拷锟接碉拷一锟斤拷学员锟斤拷</text>
+		  <image class="no_data_meber_img_style"   src="../../static/app-plus/mebrs/nomebers.png"></image>
+
+        <!-- <text class="my_student_style">锟斤拷去锟斤拷锟接碉拷一锟斤拷学员锟斤拷</text> -->
       </view>
     </view>
     <view class="btn_add">
@@ -56,8 +54,12 @@ export default {
   },
   methods: {
   addClick() {
+	  // let addData = {
+	  // 	  studentName: '张三'
+	  //   }
+	  // this.meberList.push(addData)
 	  uni.navigateTo({
-	  	url: '',
+	  	url: '/pages/addMyMebers/addMyMebers',
 	  	success: res => {},
 	  	fail: () => {},
 	  	complete: () => {}
@@ -74,7 +76,7 @@ export default {
 <style lang="scss">
 .content_style {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 50px);
   overflow: hidden;
   position: relative;
   display: flex;
@@ -151,14 +153,13 @@ export default {
     width: 100vw;
     flex: 1;
     .no_data_style {
+		margin-top: 10%;
       width: 100%;
       display: flex;
       flex-direction: column;
-      height: 150upx;
       align-items: center;
-      .no_data_img {
-        width: 99upx;
-        height: 99upx;
+      .no_data_meber_img_style {
+        width: 100%;
       }
       .my_student_style {
         font-weight: 400;
@@ -174,7 +175,7 @@ export default {
 	 
 	  position: absolute;
 	  right: 30upx;
-	  bottom: 198upx;
+	  bottom: 30upx;
 	  .add_img_style {
 		  width: 130upx;
 		  height: 100%;
