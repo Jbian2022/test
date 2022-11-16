@@ -1,7 +1,7 @@
 {
 	"pages": [
 		{
-			"path": "pages/list/list",
+			"path": "pages/myMebers/myMebers",
 			"style": {
 				// #ifndef APP-PLUS
 				"enablePullDownRefresh": true,
@@ -267,15 +267,15 @@
 	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#F4F7FF",
+		"selectedColor": "#007AFF",
 		"borderStyle": "black",
 		"backgroundColor": "#212328",
 		"list": [
 			{
-				"pagePath": "pages/myMebers/myMebers",
+				"pagePath": "pages/list/list",
 				"iconPath": "static/tabbar/list.png",
 				"selectedIconPath": "static/tabbar/list_active.png",
-				"text": "会员"
+				"text": "列表"
 			},
 			{
 				"pagePath": "pages/grid/grid",
