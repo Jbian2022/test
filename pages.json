@@ -234,7 +234,25 @@
 				"enablePullDownRefresh": false
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/bodyAssessment/bodyAssessment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "体态评估",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/bodyTestReport/bodyTestReport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "体测报告",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		// #ifdef H5
 		"h5": {
