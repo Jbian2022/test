@@ -243,6 +243,42 @@
             }
             
         }
+        ,{
+            "path" : "pages/actionLibrary/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "动作库",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/addAction/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "新增动作",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/newWorkout/newWorkout",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "新建训练",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/trainingRecord/trainingRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "训练记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// #ifdef H5
@@ -287,7 +323,7 @@
 				"text": "会员"
 			},
 			{
-				"pagePath": "pages/grid/grid",
+				"pagePath": "pages/actionLibrary/index",
 				"iconPath": "static/tabbar/noactiveaction.svg",
 				"selectedIconPath": "static/tabbar/activeaction.svg",
 				"text": "动作库"
