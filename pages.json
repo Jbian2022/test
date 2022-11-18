@@ -279,6 +279,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/trainingRecordDetail/trainingRecordDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "训练记录详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// #ifdef H5
