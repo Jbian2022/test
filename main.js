@@ -1,5 +1,5 @@
 import App from './App'
-import i18n from './lang/i18n'
+
 
 
 // #ifndef VUE3
@@ -10,7 +10,7 @@ Vue.use(vant)
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
-	i18n,
+
 	...App
 })
 app.$mount()
@@ -24,7 +24,6 @@ import 'vant/lib/index.css'
 
 export function createApp() {
 	const app = createSSRApp(App)
-	app.use(i18n)
 	app.use(Vant)
 	return {app}
 }

@@ -132,7 +132,7 @@ export default {
 		  color: #A8ADB6;
 		  
 	
-			border-radius: 200px 0px 0px 200px;
+			border-radius: 200upx 0px 0px 200upx;
 	   }
 	   .buy_right {
 		   width: 50%;
@@ -141,7 +141,7 @@ export default {
 		line-height: 82upx;
 		 text-align: center;
 		   background: linear-gradient(180deg, #343A44 0%, #212328 100%);
-		   border-radius: 0px 200px   200px 0px;
+		   border-radius: 0px 200upx   200upx 0px;
 	   }
 	   .active {
 		   background: #1370FF;
@@ -159,7 +159,7 @@ export default {
       flex-direction: column;
       align-items: center;
       .no_data_meber_img_style {
-        width: 100%;
+        // width: 100%;
       }
       .my_student_style {
         font-weight: 400;

@@ -220,6 +220,7 @@
 		// 		"enablePullDownRefresh": false
 		// 	}
 		// },
+		
 		{
 			"path": "pages/login/login",
 			"style": {
@@ -234,7 +235,70 @@
 				"enablePullDownRefresh": false
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/addMyMebers/addMyMebers",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		,{
+		    "path" : "pages/bodyAssessment/bodyAssessment",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "体测评估",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/bodyTestReport/bodyTestReport",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "体测报告",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path" : "pages/dynamicEvaluation/dynamicEvaluation",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "动态评估",
+				"enablePullDownRefresh": false
+			}
+			
+		}
+        ,{
+            "path" : "pages/physicalAssessment/physicalAssessment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "身体评测",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/healthQuesson/healthQuesson",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "健康问答",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/physicalFitnessAssessment/physicalFitnessAssessment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "体能评估",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		// #ifdef H5
 		"h5": {
@@ -267,26 +331,26 @@
 	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#007AFF",
+		"selectedColor": "#fff",
 		"borderStyle": "black",
 		"backgroundColor": "#212328",
 		"list": [
 			{
-				"pagePath": "pages/list/list",
-				"iconPath": "static/tabbar/list.png",
-				"selectedIconPath": "static/tabbar/list_active.png",
-				"text": "列表"
+				"pagePath": "pages/myMebers/myMebers",
+				"iconPath": "static/tabbar/noactivemeber.svg",
+				"selectedIconPath": "static/tabbar/activemeber.svg",
+				"text": "会员"
 			},
 			{
 				"pagePath": "pages/grid/grid",
-				"iconPath": "static/tabbar/grid.png",
-				"selectedIconPath": "static/tabbar/grid_active.png",
-				"text": "宫格"
+				"iconPath": "static/tabbar/noactiveaction.svg",
+				"selectedIconPath": "static/tabbar/activeaction.svg",
+				"text": "动作库"
 			},
 			{
 				"pagePath": "pages/ucenter/ucenter",
-				"iconPath": "static/tabbar/me.png",
-				"selectedIconPath": "static/tabbar/me_active.png",
+				"iconPath": "static/tabbar/noactiveme.svg",
+				"selectedIconPath": "static/tabbar/activeMe.svg",
 				"text": "我的"
 			}
 		]

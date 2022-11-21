@@ -1,4 +1,6 @@
 <template>
+	<view class="content_style">
+	 <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>	
 	<van-nav-bar
 	  title="体态评估"
 	  left-text=""
@@ -9,8 +11,8 @@
 	<view class="listView">
 		<view class="listView" style="padding: 0 20px;">
 			<view>
-				<van-row gutter="20">
-				  <van-col span="12" v-for="(item,index) in fitnessprogram" :key="index">
+				<van-row :gutter="20">
+				  <van-col :span="12" v-for="(item,index) in fitnessprogram" :key="index">
 					  <view class="listitem">
 						  <view style='color: white;'>{{item.bodyparts}}</view>
 						  <view style="color:#8d9cb2;font-size: 14upx;">{{item.describe}}</view>
@@ -22,11 +24,16 @@
 			<van-button type="primary" class="btn">确认</van-button>
 		</view>
 	</view>
+	</view>
 </template>
 
 <script>
+		import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 	export default {
 		data() {
+			components: {
+				BgTheamCompontent
+			},
 			return {
 				fitnessprogram:[
 				{
@@ -72,6 +79,13 @@
 </script>
 
 <style lang="scss">
+	.content_style {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		position: relative;
+
+	}
 	.nav-bar{
 		position: fixed;
 		height: 92upx;
