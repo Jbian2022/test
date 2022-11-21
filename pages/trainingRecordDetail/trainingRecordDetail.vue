@@ -1,7 +1,7 @@
 <template>
 	<view class="training-record-detail">
 		<view class="backgroud-img"><van-image  src="../../static/newWorkout/training-record-bg.png"/></view>
-		<view class="arrow-left"><van-icon name="arrow-left" /></view>
+		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="first-title-times">
 			<view class="title">腿背胸肩超级组</view>
 			<view class="times">10.04</view>
