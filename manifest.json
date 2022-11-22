@@ -1,6 +1,6 @@
 {
     "name" : "健身APP",
-    "appid" : "__UNI__BBF5E63",
+    "appid" : "__UNI__76A9E40",
     "description" : "云端一体应用快速开发基本项目模版",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -43,7 +43,10 @@
                 "push" : {
                     "unipush" : null
                 },
-                "ad" : {}
+                "ad" : {},
+                "oauth" : {},
+                "payment" : {},
+                "share" : {}
             }
         }
     },
