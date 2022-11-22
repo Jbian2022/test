@@ -66,31 +66,27 @@
 			<van-button class="delete" @click="showDeleteDialog=true"><van-icon name="delete" /></van-button>
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
-		<z-dialog class="finish-dialog" v-model:value="showFinishDialog">
+		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
 			<view class="first-level-title">删除训练</view>
 			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
 			<view class="botton-box">
 				<van-button class="finish" block @click="finish">确认完成</van-button>
 				<van-button block @click="showFinishDialog=false">取消</van-button>
 			</view>
-		</z-dialog>
-		<z-dialog class="delete-dialog" v-model:value="showDeleteDialog">
+		</van-dialog>
+		<van-dialog class="delete-dialog" v-model:show="showDeleteDialog" :showConfirmButton="false">
 			<view class="first-level-title">删除训练</view>
 			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
 			<view class="botton-box">
 				<van-button class="delete" block>确认删除</van-button>
 				<van-button block @click="showDeleteDialog=false">取消</van-button>
 			</view>
-		</z-dialog>
+		</van-dialog>
 	</view>
 </template>
 
 <script>
-	import dialog from '../../components/dialog/index.vue'
 	export default {
-		components: {
-			'z-dialog':dialog
-		},
 		data() {
 			return {
 				showFinishDialog: false,
@@ -301,56 +297,48 @@ page{
 			color: #FFFFFF;
 		}
 	}
-	::v-deep.dialog{
+	::v-deep.van-dialog{
 		background: linear-gradient(180deg, #343A44 0%, #212328 100%);
-		.dialog-box{
-			width: 610upx;
-			height: 800upx;
-			.first-level-title{
-				padding-left: 70upx;
-				padding-top: 64upx;
-				font-size: 88upx;
-				color: #F4F7FF;
-				line-height: 124upx;
-			}
-			.second-level-title{
-				padding-top: 20upx;
-				padding-left: 70upx;
-				padding-bottom: 310upx;
-				font-size: 30upx;
-				font-weight: 400;
+		width: 610upx;
+		height: 800upx;
+		.first-level-title{
+			padding-left: 70upx;
+			padding-top: 64upx;
+			font-size: 88upx;
+			color: #F4F7FF;
+			line-height: 124upx;
+		}
+		.second-level-title{
+			padding-top: 20upx;
+			padding-left: 70upx;
+			padding-bottom: 310upx;
+			font-size: 30upx;
+			font-weight: 400;
+			color: #BDC3CE;
+		}
+		.botton-box{
+			padding: 0 70upx;
+			.van-button{
+				border: none;
+				background: transparent;
+				font-size: 32upx;
+				font-weight: 600;
+				border-radius: 16upx;
 				color: #BDC3CE;
-			}
-			.botton-box{
-				padding: 0 70upx;
-				.van-button{
-					border: none;
-					background: transparent;
-					font-size: 32upx;
-					font-weight: 600;
-					border-radius: 16upx;
-					color: #BDC3CE;
-				}
 			}
 		}
 	}
-	.finish-dialog{
-		::v-deep.dialog-box{
-			background-image: url('../../static/newWorkout/training completed.png');
-			background-size: contain;
-		}
+	::v-deep.finish-dialog{
+		background-image: url('../../static/newWorkout/training completed.png');
+		background-size: contain;
 		.van-button.finish{
 			background: #1370FF !important;
 			color: #FFFFFF !important;
-			.van-button__text{
-			}
 		}
 	}
-	.delete-dialog{
-		::v-deep.dialog-box{
-			background-image: url('../../static/newWorkout/training delete.png');
-			background-size: contain;
-		}
+	::v-deep.delete-dialog{
+		background-image: url('../../static/newWorkout/training delete.png');
+		background-size: contain;
 		.van-button.delete{
 			background: #F04242 !important;
 			color: #FFFFFF !important;

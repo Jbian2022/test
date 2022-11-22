@@ -14,6 +14,10 @@
 <script>
 export default {
     props: {
+        disabled: {
+            type: Boolean,
+            default: false
+        },
         className: {
             type: [String,Array],
             default: ''
@@ -34,6 +38,9 @@ export default {
             this.showList = false
         },
         longpressHandle(){
+            if (this.disabled){
+                return false
+            }
             this.showList = true
         }
     }

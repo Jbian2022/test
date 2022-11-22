@@ -20,7 +20,7 @@
 				<view class="action-list-title">颈前引训练动作</view>
 				<view class="action-list-box">
 					<view v-for="i in 8" :key="i" class="action-list-item">
-						<popover className="image" :list="actions" @selctClick="selectClick">
+						<popover className="image" :disabled="i>5" :list="actions" @selctClick="selectClick">
 							<van-image round src="https://img01.yzcdn.cn/vant/cat.jpeg"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
@@ -40,7 +40,7 @@
 			<van-button type="default">默认按钮</van-button>
 			<van-button type="primary">主要按钮</van-button>
 		</view>
-		<z-dialog v-model:value="showDialog">
+		<van-dialog v-model:show="showDialog" :showConfirmButton="false">
 			<view class="dialog-section">
 				<view class="dialog-title">是否确认删除</view>
 				<view class="dialog-content">确认删除该动作吗？删除后无法恢复</view>
@@ -49,17 +49,15 @@
 					<van-button type="primary" @click="showDialog=false">确认</van-button>
 				</view>
 			</view>
-		</z-dialog>
+		</van-dialog>
 	</view>
 </template>
 
 <script>
 	import popover from '../../components/popover/index.vue';
-	import dialog from '../../components/dialog/index.vue'
 	export default {
 		components: {
-			popover,
-			'z-dialog':dialog
+			popover
 		},
 		data() {
 			return {
@@ -88,7 +86,6 @@
 		},
 		methods: {
 			selectClick(item){
-				console.log(item.text)
 				if(item.text==='删除动作'){
 					this.showDialog=true
 				}
@@ -290,6 +287,10 @@ page{
 				background: #1370FF;
 			}
 		}
+	}
+	::v-deep.van-dialog{
+		background: #383D46;
+		border-radius: 24upx;
 	}
 }
 </style>
