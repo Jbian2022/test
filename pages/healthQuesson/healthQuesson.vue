@@ -16,7 +16,21 @@
 					
 				</view>
 				<view class="radio_style"  v-if="item.problemType==='radio'">
-					<view class="radio_title_style"></view>
+					<view class="radio_title_style">
+						{{item.title}}
+					</view>
+					<view class="radio_tag_style">
+						<view class="tag_style">是</view>
+						<view class="tag_style">否</view>
+					</view>
+					<view class="radio_remark_style">
+						 <van-field
+							 class="supplement_style"
+						      v-model="username"
+						      placeholder="请补充具体信息"
+						
+						    />
+					</view>
 				</view>
 				
 				
@@ -116,6 +130,7 @@
 						line-height: 80upx;
 						margin-right: 24upx;
 						
+						
 					}
 				}
 				
@@ -123,10 +138,87 @@
 			}
 			
 		}
+		.radio_style {
+			width: 100%;
+			
+			margin-top: 30upx;
+			background: #383D46;
+			border-radius: 24upx;
+			height: auto;
+			.radio_title_style {
+				font-size: 32upx;
+				font-family: PingFangSC-Semibold, PingFang SC;
+				font-weight: 600;
+				color: #F4F7FF;
+				padding-top: 40upx;
+				margin-left: 30upx;
+				
+			}
+			.radio_tag_style {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				margin-left: 30upx;
+				margin-top: 36upx;
+				padding-bottom: 30upx;
+				.tag_style {
+					width: 160upx;
+					height: 80upx;
+					background: #1370FF;
+					border-radius: 16upx;
+					line-height: 80upx;
+					margin-right: 30upx;
+					text-align: center;
+					font-size: 30upx;
+					font-family: PingFangSC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #F4F7FF;
+				
+				}
+				
+			}
+			.radio_remark_style {
+				width: calc(100% - 60upx);
+				margin-left: 30upx;
+				padding-bottom: 30upx;
+				.supplement_style {
+					width: 100%;
+					height: 160px;
+					background: #4B525E;
+					border-radius: 16px;
+					input{
+					    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+					      color: red !important;
+					    }
+					
+					  }
+			
+				}
+				
+			}
+			
+			
+		}
 			
 		}
 	}
 	
+	::v-deep .van-field__control {
+			font-size: 32upx !important;
+			font-family: PingFangSC-Semibold, PingFang SC;
+			font-weight: 600;
+			color: #F4F7FF;
+	}
+	::v-deep .van-field__control::placeholder {
+	
+		font-size: 32upx;
+		font-family: PingFangSC-Regular, PingFang SC;
+		font-weight: 400;
+		color: #BDC3CE;
+	
+	
+	}
+
 
 ::v-deep .van-cell::after {
 	border-bottom-width: 0 !important;

@@ -221,21 +221,8 @@
 		// 	}
 		// },
 		
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/logining/logining",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		}
-	    ,{
+
+	    {
             "path" : "pages/addMyMebers/addMyMebers",
             "style" :                                                                                    
             {
@@ -297,7 +284,37 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		// {
+		//    "path": "pages/login/login",
+		//    "style": {
+		//     "navigationBarTitleText": "",
+		//     "enablePullDownRefresh": false
+		//    }
+		//   },
+		  {
+		   "path": "pages/logining/logining",
+		   "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		   }
+		  },
+		  {
+		   "path": "pages/verificatioCode/verificatioCode",
+		   "style": {
+		    "navigationBarTitleText": "",
+		    "enablePullDownRefresh": false
+		   }
+		  }
+		     ,{
+		            "path" : "pages/personalnformation/personalnformation",
+		            "style" :                                                                                    
+		            {
+		                "navigationBarTitleText": "",
+		                "enablePullDownRefresh": false
+		            }
+		            
+		        }
     ],
 	"globalStyle": {
 		// #ifdef H5

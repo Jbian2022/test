@@ -1,5 +1,5 @@
 {
-    "name" : "kkkk",
+    "name" : "健身APP",
     "appid" : "__UNI__BBF5E63",
     "description" : "云端一体应用快速开发基本项目模版",
     "versionName" : "1.0.0",
@@ -36,11 +36,14 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
-            "ios" : {},
+            "ios" : {
+                "dSYMs" : false
+            },
             "sdkConfigs" : {
                 "push" : {
                     "unipush" : null
-                }
+                },
+                "ad" : {}
             }
         }
     },
@@ -64,5 +67,6 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "3"
+    "vueVersion" : "3",
+    "fallbackLocale" : "zh-Hans"
 }
