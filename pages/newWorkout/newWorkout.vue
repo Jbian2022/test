@@ -17,12 +17,18 @@
 						<view class="des-title">杠铃卧推</view>
 						<view class="info-text">已完成：10次</view>
 					</view>
-					<van-icon class="config" name="setting" />
+					<popover class="config" :list="actions" position="right" mode="click">
+						<van-image class="img"  src="../../static/newWorkout/config.png"/>
+						<template  v-slot:item="{item}">
+							<text v-if="item.text==='删除动作项'" style="color:#F04242;">{{item.text}}</text>
+							<text v-else>{{item.text}}</text>
+						</template>
+					</popover>
 				</view>
 				<view class="action-tiem-des">
-					<view class="project-item active">
+					<view v-for="i in 4" :key="i" class="project-item" :class="{active:i===1}">
 						<view class="index">
-							<text>1</text>
+							<text>{{i}}</text>
 						</view>
 						<view class="kg">
 							<text class="num">10</text>
@@ -36,26 +42,7 @@
 							<van-icon name="success" />
 						</view>
 						<view class="delete">
-							<van-icon name="delete" />
-						</view>
-					</view>
-					<view class="project-item">
-						<view class="index">
-							<text>1</text>
-						</view>
-						<view class="kg">
-							<text class="num">10</text>
-							<text>kg</text>
-						</view>
-						<view class="time">
-							<text class="num">10</text>
-							<text>次</text>
-						</view>
-						<view class="yes">
-							<van-icon name="success" />
-						</view>
-						<view class="delete">
-							<van-icon name="delete" />
+							<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
 						</view>
 					</view>
 					<view class="add-project-item">+ 新增一组</view>
@@ -63,7 +50,7 @@
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button class="delete" @click="showDeleteDialog=true"><van-icon name="delete" /></van-button>
+			<van-button class="delete" @click="showDeleteDialog=true"><van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/></van-button>
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
 		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
@@ -86,9 +73,16 @@
 </template>
 
 <script>
+	import popover from '../../components/popover/index.vue';
 	export default {
+		components: {
+			popover
+		},
 		data() {
 			return {
+				actions: [
+					{ text: '删除动作项'}
+				],
 				showFinishDialog: false,
 				showDeleteDialog: false
 			}
@@ -183,7 +177,10 @@ page{
 					right: 0;
 					top: 0;
 					color: #FFFFFF;
-					font-size: 32upx;
+					.img{
+						width: 40upx;
+						height: 40upx;
+					}
 				}
 			}
 			.action-tiem-des{
@@ -209,8 +206,9 @@ page{
 						border-radius: 16upx;
 						padding: 0 20upx;
 						color: #BDC3CE;
-						font-size: 26px;
+						font-size: 32upx;
 						min-width: 60upx;
+						box-sizing: border-box;
 					}
 					.kg,.time{
 						height: 100%;
@@ -245,6 +243,10 @@ page{
 					.delete{
 						flex: 1;
 						text-align: right;
+						.img{
+							width: 40upx;
+							height: 40upx;
+						}
 					}
 				}
 				.project-item + .project-item{
@@ -282,6 +284,10 @@ page{
 			color: #FFFFFF;
 			border: none;
 			padding: 0;
+			.img{
+				width: 40upx;
+				height: 40upx;
+			}
 			&+.van-button{
 				margin-left: 20upx;
 			}

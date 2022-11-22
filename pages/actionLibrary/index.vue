@@ -1,8 +1,8 @@
 <template>
 	<view class="action-library">
 		<view class="header">
-			<view class="all-action">全部动作库</view>
-			<view class="problem-action active">问题动作库</view>
+			<view class="all-action" :class="{active:mode==='1'}"  @click="modeChangeHandle('1')">全部动作库</view>
+			<view class="problem-action" :class="{active:mode==='2'}" @click="modeChangeHandle('2')">问题动作库</view>
 			<view class="custom-action" @click="addActionHandle">+ 自定义动作</view>
 		</view>
 		<view class="search">
@@ -11,7 +11,7 @@
 		<view class="content">
 			<view class="sidebar">
 				<van-sidebar v-model="activeKey">
-					<van-sidebar-item title="标签名称" />
+					<van-sidebar-item title="标签名称"  badge="5"/>
 					<van-sidebar-item title="标签名称" />
 					<van-sidebar-item title="标签名称" />
 				</van-sidebar>
@@ -19,7 +19,7 @@
 			<view class="action-list">
 				<view class="action-list-title">颈前引训练动作</view>
 				<view class="action-list-box">
-					<view v-for="i in 8" :key="i" class="action-list-item">
+					<view v-for="i in 8" :key="i" class="action-list-item" :class="{active:i<2}">
 						<popover className="image" :disabled="i>5" :list="actions" @selctClick="selectClick">
 							<van-image round src="https://img01.yzcdn.cn/vant/cat.jpeg"/>
 							<template  v-slot:item="{item}">
@@ -37,8 +37,8 @@
 		</view>
 		<view v-if="showSaveButton" class="footer-seat"></view>
 		<view v-if="showSaveButton" class="footer-button">
-			<van-button type="default">默认按钮</van-button>
-			<van-button type="primary">主要按钮</van-button>
+			<van-button type="default">取消</van-button>
+			<van-button type="primary">确认添加（3）</van-button>
 		</view>
 		<van-dialog v-model:show="showDialog" :showConfirmButton="false">
 			<view class="dialog-section">
@@ -61,6 +61,7 @@
 		},
 		data() {
 			return {
+				mode: '1',
 				value: null,
 				activeKey: 0,
 				actions: [
@@ -72,19 +73,22 @@
 			}
 		},
 		onLoad: function (option) {
-			if(option.hideTabBar){
+			/* if(option.hideTabBar){
 				uni.hideTabBar()
 				this.showSaveButton=true
 			}else{
 				uni.showTabBar()
 				this.showSaveButton=false
-			}
+			} */
 		},
 		mounted () {
-			/* uni.hideTabBar()
-			this.showSaveButton=true */
+			uni.hideTabBar()
+			this.showSaveButton=true
 		},
 		methods: {
+			modeChangeHandle(val){
+				this.mode = val
+			},
 			selectClick(item){
 				if(item.text==='删除动作'){
 					this.showDialog=true
@@ -151,6 +155,9 @@ page{
 		display: flex;
 		.sidebar{
 			width: 220upx;
+			.van-sidebar{
+				width: 220upx;
+			}
 			::v-deep.van-sidebar-item{
 				height: 70upx;
 				padding: 0;
@@ -158,13 +165,29 @@ page{
 				padding-left: 30upx;
 				background: transparent;
 				font-weight: 400;
-				color: #7A7F89;
-				font-size: 28upx;
+				margin: 0;
+				.van-sidebar-item__text{
+					color: #7A7F89;
+					font-size: 28upx;
+					width: 170upx;
+				}
+				.van-badge {
+					background: #1370FF;
+					border: none;
+					min-width: 28upx;
+					min-height: 28upx;
+					font-size: 20upx;
+					color: #F4F7FF;
+					top: 50%;
+					transform: translateY(-50%);
+				}
 			}
 			::v-deep.van-sidebar-item--select{
-				font-weight: 600;
-				color: #F4F7FF;
 				background: linear-gradient(270deg, #202123 0%, #383D46 100%);
+				.van-sidebar-item__text{
+					font-weight: 600;
+					color: #F4F7FF;
+				}
 				&:before{
 					height: 70upx;
 					background-color: #1370FF;
@@ -203,6 +226,7 @@ page{
 					height: 240upx;
 					background: #383D46;
 					border-radius: 24upx;
+					box-sizing: border-box;
 					&:nth-child(2n){
 						margin-left: 30upx;
 					}
@@ -220,6 +244,13 @@ page{
 						color: #A8ADB6;
 						font-size: 26upx;
 					}
+					&.active{
+						background: #1C3965;
+						border: 2upx solid #1370FF;
+						.text{
+							color: #F4F7FF;
+						}
+					}
 				}
 			}
 		}
@@ -227,9 +258,21 @@ page{
 	.dialog-section{
 		padding: 50upx;
 		.dialog-title{
+			display: flex;
+			align-items: center;
 			font-size: 52upx;
 			color: #F4F7FF;
 			line-height: 72upx;
+			&::after{
+				content: '';
+				margin-left: 20upx;
+				display: inline-block;
+				width: 60upx;
+				height: 60upx;
+				background: url('../../static/newWorkout/阻断弹窗提示@2x.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+			}
 		}
 		.dialog-content{
 			margin-top: 30upx;
