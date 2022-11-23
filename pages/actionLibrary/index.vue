@@ -73,17 +73,17 @@
 			}
 		},
 		onLoad: function (option) {
-			/* if(option.hideTabBar){
+			if(option.hideTabBar){
 				uni.hideTabBar()
 				this.showSaveButton=true
 			}else{
 				uni.showTabBar()
 				this.showSaveButton=false
-			} */
+			}
 		},
 		mounted () {
-			uni.hideTabBar()
-			this.showSaveButton=true
+			/* uni.hideTabBar()
+			this.showSaveButton=true */
 		},
 		methods: {
 			modeChangeHandle(val){
