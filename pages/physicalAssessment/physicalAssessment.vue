@@ -2,7 +2,7 @@
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent :leftNavTitle="'身体评测'"></NavBarCompontent>
-    <van-row style="background-color: #343a44">
+    <van-row>
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
@@ -181,7 +181,10 @@ export default {
   margin-top: 85upx;
 }
 .need_scoll {
-  height: 82vh !important;
+  height: 74vh !important;
   overflow-y: auto;
+}
+::v-deep .van-row {
+	background: none;
 }
 </style>

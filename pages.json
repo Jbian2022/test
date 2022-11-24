@@ -114,74 +114,79 @@
 			"path": "pages/bodyAssessment/bodyAssessment",
 			"style": {
 				"navigationBarTitleText": "体测评估",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+				
 			}
 		},
 		{
 			"path": "pages/bodyTestReport/bodyTestReport",
 			"style": {
 				"navigationBarTitleText": "体测报告",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/dynamicEvaluation/dynamicEvaluation",
 			"style": {
 				"navigationBarTitleText": "动态评估",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/physicalAssessment/physicalAssessment",
 			"style": {
 				"navigationBarTitleText": "身体评测",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/healthQuesson/healthQuesson",
 			"style": {
 				"navigationBarTitleText": "健康问答",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/physicalFitnessAssessment/physicalFitnessAssessment",
 			"style": {
 				"navigationBarTitleText": "体能评估",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/logining/logining",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/verificatioCode/verificatioCode",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/personalnformation/personalnformation",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		}
 	],
 	"globalStyle": {
 		// #ifdef H5
 		"h5": {
-			"titleNView": false
-		},
-		// #endif
-		// #ifndef APP-PLUS
-		"app-plus": {
 			"titleNView": false
 		},
 		// #endif
