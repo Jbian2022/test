@@ -298,6 +298,51 @@
             }
             
         }
+        ,{
+            "path" : "pages/shareReports/shareReports",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "shareReports",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/dynamicEvaluation/actionEvaluation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "actionEvaluation",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "actionEvaluation",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/postureAssessment/postureAssessment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "postureAssessment",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/viewReport/viewReport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "viewReport",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		// #ifdef H5

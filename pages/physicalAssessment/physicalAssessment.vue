@@ -55,7 +55,7 @@
 					{title:"填写体测报告", type: 'xzhdpg', path: '/pages/bodyTestReport/bodyTestReport'},
 					{title:"体态评估", type: 'rrxcs', path: '/pages/bodyAssessment/bodyAssessment'},
 					{title:"动态评估", type: 'gjlhcs', path: '/pages/dynamicEvaluation/dynamicEvaluation'},
-					{title:"体能评估", type: 'fwcwdxcs'}
+					{title:"体能评估", type: 'fwcwdxcs',path:'/pages/physicalFitnessAssessment/physicalFitnessAssessment'}
 				],
 				icon:true
 			}
