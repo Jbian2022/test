@@ -9,7 +9,7 @@
     </view>
     <view class="middle">
       <van-field
-        v-model="value"
+        v-model="phone"
         readonly
         clickable
         class="phone"
@@ -17,7 +17,7 @@
         @touchstart.stop="show = true"
       />
       <van-number-keyboard
-        v-model="value"
+        v-model="phone"
         :show="show"
         :maxlength="11"
         @blur="show = false"
@@ -52,17 +52,17 @@
           <text class="ying_si_remark">政策并使用本机号码登录</text>
         </view>
 
-        <view class="botter" v-if="false">
+        <view class="botter" v-if="needChecked">
           <view class="botter-top">
             <h1 class="botter-top1">欢迎使用本产品！</h1>
             <h2 class="botter-top2">welcome</h2>
             <p class="botter-top3">
               为了更好的保障您的合法权益，在使用本应用之前，请您仔细阅读《隐私协议》和《用户协议》，点击同意即表示您已阅读并同意接受我们的服务，感谢您的信任！
             </p>
-            <button class="botter-top4">
+            <button class="botter-top4" @click="agreeContiute">
               <span class="botter-top4-text">同意并继续</span>
             </button>
-            <view class="botter-top5-text" @click.native="checkFlag = false"
+            <view class="botter-top5-text" @click.native="needChecked = false"
               >不同意</view
             >
           </view>
@@ -86,16 +86,17 @@ export default {
   data() {
     return {
       show: false,
-      value: '',
+      phone: '17521791830',
       checkFlag: false,
       hasWeixinAuth: false,
-      checkPhone: ''
+      checkPhone: '',
+	  needChecked: false
     }
   },
   computed: {
     controlActiveFlag() {
       let flag = false
-      if (this.value.length === 11) {
+      if (this.phone.length === 11) {
         flag = true
       }
       return flag
@@ -116,14 +117,41 @@ export default {
     // #endif
   },
   methods: {
-    getSms() {
+    async getSms() {
       if (this.controlActiveFlag && !this.checkFlag) {
-        Toast('请同意隐私政策')
+        // Toast('请同意隐私政策')
+		this.needChecked = true
         return
       }
       if (this.controlActiveFlag) {
+		  // 发送验证码
+		  debugger
+		  const login = uniCloud.importObject('login') //第一步导入云对象
+		  // const login2 = uniCloud.callFunction({
+		  // 	name: ''
+		  // })
+
+		 try{
+		 const smsRes = await login.sendSmsCode(this.phone) 
+		 uni.navigateTo({
+		   url: '/pages/verificatioCode/verificatioCode',
+		   success: (res) => {},
+		   fail: () => {},
+		   complete: () => {}
+		 })
+		 	
+		 }catch(err){
+		 	//TODO handle the exception
+		  console.log(err,'我是错误')
+		 }
+
+	
       }
     },
+	agreeContiute() {
+		this.checkFlag = true
+		this.needChecked = false
+	},
     getWeixinCode() {
       return new Promise((resolve, reject) => {
         // #ifdef APP-PLUS

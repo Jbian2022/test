@@ -1,21 +1,23 @@
 // 云对象教程: https://uniapp.dcloud.net.cn/uniCloud/cloud-obj
 // jsdoc语法提示教程：https://ask.dcloud.net.cn/docs/#//ask.dcloud.net.cn/article/129
 const uniID = require('uni-id')
-uniID.init({ // 如果在此处传入配置信息则不会再使用config.json作为配置
-	"passwordSecret": "passwordSecret-demo", // 用于加密用户密码
-	"tokenSecret": "tokenSecret-demo", // 用于生成token
-	"tokenExpiresIn": 7200, // token过期时间
-	"passwordErrorLimit": 6, // 同一个ip密码错误最大重试次数
-	"passwordErrorRetryTime": 3600, // 超过密码重试次数之后的等待时间
-	"service": {
-		"sms": {
-			"name": "your app name", // 应用名称对应uniCloud.sendSms的data参数内的name
-			"codeExpiresIn": 180, // 验证码过期时间，单位：秒，只可取60的整数倍，不填此参数时会取默认值180秒
-			"smsKey": "your sms key", // 短信密钥key
-			"smsSecret": "your sms secret" // 短信密钥secret
-		}
-	}
-})
+// uniID.createInstance({ // 如果在此处传入配置信息则不会再使用config.json作为配置
+// 	"passwordSecret": "passwordSecret-demo", // 用于加密用户密码
+// 	"tokenSecret": "tokenSecret-demo", // 用于生成token
+// 	"tokenExpiresIn": 7200, // token过期时间
+// 	"passwordErrorLimit": 6, // 同一个ip密码错误最大重试次数
+// 	"passwordErrorRetryTime": 3600, // 超过密码重试次数之后的等待时间
+// 	"service": {
+// 		"sms": {
+// 			"name": "登录验证码", // 应用名称对应uniCloud.sendSms的data参数内的name
+// 			"codeExpiresIn": 180, // 验证码过期时间，单位：秒，只可取60的整数倍，不填此参数时会取默认值180秒
+// 			"smsKey": "301ed8d4b3a67f38ccb433ed4f6f2636", // 短信密钥key
+// 			"smsSecret": "01e02edd1f64ecf35105f1c9597faeaa", // 短信密钥secret
+// 			"templateId": "16309"
+// 		}
+// 	}
+// })
+console.log(uniID,'什么')
 module.exports = {
 	_before: function () { // 通用预处理器
 
@@ -43,7 +45,7 @@ module.exports = {
 	}
 	*/
    // 用户名注册
-   register: function(event,context) {
+   register: async function(event,context) {
 	   const {
 	   		username,
 	   		password
@@ -64,7 +66,7 @@ module.exports = {
 	   	return res
    },
    // 校验token
-   checkToken: function(event,context) {
+   checkToken: async function(event,context) {
 	   const payload = await uniID.checkToken(event.uniIdToken)
 	     const {
 	       code,
@@ -81,12 +83,12 @@ module.exports = {
 	     }
    },
    // 登出
-   logout: function(event,context) {
+   logout: async function(event,context) {
 	   const res = await uniID.logout(event.uniIdToken)
 	   	return res
    },
    // 设置用户头像
-   setAvatar: function(event, context) {
+   setAvatar: async function(event, context) {
 	  const {
 	  		avatar
 	  	} = event
@@ -101,7 +103,7 @@ module.exports = {
 	  	return res 
    },
    // 更新用户信息
-   updateUser: function(event, context) {
+   updateUser: async function(event, context) {
 	    payload = await uniID.checkToken(event.uniIdToken)
 	     if (payload.code) {
 	     	return payload
@@ -113,7 +115,7 @@ module.exports = {
 	   	return res
    },
    // 获取用户信息
-   getUserInfo: function(event, context) {
+   getUserInfo: async function(event, context) {
 	    payload = await uniID.checkToken(event.uniIdToken)
 	     if (payload.code) {
 	     	return payload
@@ -125,27 +127,49 @@ module.exports = {
 	   	return res
    },
    // 获取用户信息token
-   getUserInfoByToken: function (event, context) {
+   getUserInfoByToken: async function (event, context) {
 	   const res = await uniID.getUserInfoByToken(event.uniIdToken)
 	   	return res
    },
    // 短信验证码登录
-   sendSmsCode: function (event, context) {
-	  const {
-	  		mobile
-	  	} = event
-	    // 生成验证码可以按自己的需求来，这里以生成6位数字为例
-	    const randomStr = '00000' + Math.floor(Math.random() * 1000000)
-	    const code = randomStr.substring(randomStr.length - 6)
-	  	const res = await uniID.sendSmsCode({
-	  		mobile,
-	      code,
-	      type: 'login'
-	  	})
-	  	return res 
-   }
+   sendSmsCode:  async function (mobile) {
+	   console.log(1111)
+	
+	 try{
+		 // 生成验证码可以按自己的需求来，这里以生成6位数字为例
+		 const randomStr = '00000' + Math.floor(Math.random() * 1000000)
+		 const code = randomStr.substring(randomStr.length - 4)
+		 
+		 
+		 
+		 const res = await uniID.sendSmsCode({
+			 templateId: '16334',
+			mobile,
+			   code,
+			   type: 'login',
+		      data: {
+			   name: '健变科技',
+			   code: code,
+			   expMinute: '3',
+			 }
+		 })
+		 return res 
+		
+	}catch(err){
+		// 调用失败
+				console.log(err.errCode)
+				console.log(err.errMsg)
+				return {
+					code: err.errCode,
+					msg: err.errMsg
+				}
+
+		
+	}
+		
+   },
    // 自行设置验证码
-   setVerifyCode: function (event, context) {
+   setVerifyCode: async function (event, context) {
 	   const {
 	   		mobile
 	   	} = event
@@ -161,7 +185,7 @@ module.exports = {
 	   	return res
    },
    //  校验验证码
-   verifyCode: function (event, context) {
+   verifyCode: async function (event, context) {
 	   const {
 	   		mobile,
 	       code
@@ -174,7 +198,7 @@ module.exports = {
 	   	return res
    },
    // 手机号验证码直接登录
-   loginBySms: function (event, context) {
+   loginBySms: async function (event, context) {
 	   const {
 	   		mobile,
 	       code
@@ -186,7 +210,7 @@ module.exports = {
 	   	return res
    },
    // 手机一键登录
-   loginByUniverify: function (event, context) {
+   loginByUniverify: async function (event, context) {
 	  const {
 	  		access_token,
 	      openid
@@ -198,7 +222,7 @@ module.exports = {
 	  	return res 
    },
    // 绑定手机号
-   bindMobile: function (event,context) {
+   bindMobile: async function (event,context) {
 	   const {
 	   		mobile,
 	       code
@@ -215,7 +239,7 @@ module.exports = {
 	   	return res
    },
    // 解绑手机
-   unbindMobile:  function (event,context) {
+   unbindMobile: async  function (event,context) {
 	 const {
 	 		mobile,
 	     code
@@ -234,7 +258,7 @@ module.exports = {
    },
    // 邮箱验证码直接登录
    
-   loginByEmail:  function (event,context) {
+   loginByEmail: async  function (event,context) {
    const {
    		email,
        code
@@ -247,7 +271,7 @@ module.exports = {
    
    },
    // 微信登录
-   loginByWeixin: function(event,context) {
+   loginByWeixin: async function(event,context) {
 	   // 如下旧写法依然支持
 	   	// const res = await uniID.loginByWeixin(event.code)
 	   	const res = await uniID.loginByWeixin({
@@ -256,14 +280,14 @@ module.exports = {
 	   	return res
    },
    // 获取微信openid
-   code2SessionWeixin: function(event, context) {
+   code2SessionWeixin: async function(event, context) {
 	   const res = await uniID.code2SessionWeixin({
 	       code: event.code
 	     })
 	   	return res
    },
    // 绑定微信
-   bindWeixin: function(event, context) {
+   bindWeixin: async function(event, context) {
 	    payload = await uniID.checkToken(event.uniIdToken)
 	     if (payload.code) {
 	     	return payload
@@ -275,7 +299,7 @@ module.exports = {
 	   	return res
    },
    // 解绑微信
-	unbindWeixin: function(event,context) {
+	unbindWeixin: async function(event,context) {
 		 payload = await uniID.checkToken(event.uniIdToken)
 		  if (payload.code) {
 		  	return payload
@@ -284,15 +308,15 @@ module.exports = {
 			return res
 	},
 	// 微信数据解密
-	wxBizDataCrypt: function (event, context) {
+	wxBizDataCrypt: async function (event, context) {
 		return uniID.wxBizDataCrypt(event)
 	},
 	// 获取App平台微信登录用户信息
-	getWeixinUserInfo: function (event, context) {
+	getWeixinUserInfo: async function (event, context) {
 		return uniID.getWeixinUserInfo(event)
 	},
 	// 根据uid获取用户角色
-	getRoleByUid: function (event, context) {
+	getRoleByUid: async function (event, context) {
 		return getRoleByUid.getWeixinUserInfo(event)
 	}
    

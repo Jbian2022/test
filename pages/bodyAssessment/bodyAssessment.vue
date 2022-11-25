@@ -1,42 +1,38 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <van-nav-bar
-      title="体态评估"
-      left-text=""
-      left-arrow
-      @click-left="onClickLeft"
-      class="nav-bar"
-    />
-    <view class="listView">
-      <view class="listView" style="padding: 0 20px">
-        <view>
-          <van-row :gutter="20">
-            <van-col
-              :span="12"
-              v-for="(item, index) in fitnessprogram"
-              :key="index"
-            >
-              <view class="listitem">
-                <view style="color: white">{{ item.bodyparts }}</view>
-                <view style="color: #8d9cb2; font-size: 14upx">{{
-                  item.describe
-                }}</view>
-              </view>
-            </van-col>
-          </van-row>
-        </view>
-        <van-button type="primary" class="btn">确认</van-button>
-      </view>
-    </view>
+    <NavBarCompontent :leftNavTitle="'体态评估'"></NavBarCompontent>
+	<view class="waterfall_flow_style">
+		
+		 <view style="padding: 0 10upx;">
+		        <custom-waterfalls-flow ref="waterfallsFlowRef" :value="data.list" :column="column" :columnSpace="2" :seat="1" @wapperClick="wapperClick" @loaded="loaded">
+		  
+		            <template v-slot:default="item">
+		                <view class="item">
+		                    <view class="title">{{item.title}}</view>
+		                    <view class="desc">{{item.desc}}</view>
+		                </view>
+		            </template>
+		        </custom-waterfalls-flow>
+		    </view>
+	
+	</view>
+ 
+
   </view>
 </template>
 
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
+import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+// import XgWaterfall from '../../uni_modules/xg-waterfall/components/xg-waterfall/xg-waterfall.vue'
+import CustomWaterfallsFlow from '../../uni_modules/custom-waterfalls-flow/components/custom-waterfalls-flow/custom-waterfalls-flow.vue'
+
 export default {
   components: {
-    BgTheamCompontent
+    BgTheamCompontent,
+	NavBarCompontent,
+	CustomWaterfallsFlow
   },
   data() {
     return {
@@ -91,14 +87,46 @@ export default {
           describe:
             '紧张肌肉：胫骨前肌，胫骨后肌，屈趾长肌，屈拇长肌，伸拇长肌无力肌肉：腓骨长肌，腓骨短肌，伸拇长肌。'
         }
-      ]
+      ],
+	  data: {
+	                      list: [{  image: 'https://via.placeholder.com/200x200.png/2878ff',title: '我是标题1', desc: '描述描述描述描述描述描述描述描述1' }, 
+	                      { image: 'https://via.placeholder.com/200x200.png/2878ff', title: '我是标题2', desc: '描述描述描述描述描述描述描述描述2' }, 
+	                      { image: 'https://via.placeholder.com/200x100.png/FFB6C1', title: '我是标题3', desc: '描述描述描述描述描述描述描述描述3' }, 
+	                      { image: 'https://via.placeholder.com/200x300.png/9400D3', title: '我是标题4', desc: '描述描述描述描述描述描述描述描述4' }, 
+	                      { image: 'https://via.placeholder.com/100x240.png/B0E0E6', title: '我是标题5', desc: '描述描述描述描述描述描述描述描述5' }, 
+	                      { image: 'https://via.placeholder.com/140x280.png/7FFFAA', title: '我是标题6', desc: '描述描述描述描述描述描述描述描述6' }, 
+	                      { image: 'https://via.placeholder.com/40x60.png/EEE8AA', title: '我是标题7', desc: '描述描述描述描述描述描述描述描述7' }]
+	                  },
+	                  column: 2
     }
   },
   methods: {
     // 返回
     onClickLeft() {
       this.$router.go(-1)
-    }
+    },
+	            add() {
+	                const newArr = [{ image: 'https://via.placeholder.com/58x100.png/FF7F50', title: '我是标题8', desc: '描述描述描述描述描述描述描述描述8' }, 
+	                { image: 'https://via.placeholder.com/59x100.png/C0C0C0', title: '我是标题9', desc: '描述描述描述描述描述描述描述描述9' }, 
+	                { image: 'https://via.placeholder.com/60x100.png/FAEBD7', title: '我是标题10', desc: '描述描述描述描述描述描述描述描述10' }]
+	                this.data.list = this.data.list.concat(newArr);
+	            },
+	            changeColumn(h) {
+	                this.column = !h ? this.column - 1 : this.column + 1;
+	            },
+	            loaded() {
+	                console.log('加载完成')
+	            },
+	            wapperClick(item) {
+	                console.log('单项点击事件', item)
+	            },
+	            imageClick(item) {
+	                console.log('图片点击事件', item)
+	            },
+	            reset() {
+	                this.data.list = [{ image: 'https://via.placeholder.com/200x500.png/ff0000', title: '我是标题1', desc: '描述描述描述描述描述描述描述描述1' }]
+	                this.$refs.waterfallsFlowRef.refresh();
+	            }
   }
 }
 </script>
@@ -110,24 +138,47 @@ export default {
   overflow: hidden;
   position: relative;
 }
-.nav-bar {
-  position: fixed;
-  height: 92upx;
-  left: 0;
-  right: 0;
-  top: 0;
+
+::v-deep .waterfalls-flow-column {
+	width: calc((100% - 90upx) / 2) !important;
+	margin-left: 30upx !important;
+	margin-top: 52upx;
 }
-.listView {
-  background-color: rgba(0, 0, 0, 0.5);
-  margin-top: 50upx;
-  overflow-y: auto;
+::v-deep.column-value {
+	// width: calc((100% - 90upx) / 2);
+	height:auto;
+	background: #1C3965 !important;
+	border-radius: 16px;
+	border: 2px solid #1370FF;
+	.inner {
+		width: 100%;
+		.item {
+			box-sizing: border-box;
+			width: 100%;
+			padding: 20upx;
+			.title {
+				font-size: 26upx;
+				font-family: PingFangSC-Semibold, PingFang SC;
+				font-weight: 600;
+				color: #F4F7FF;
+			}
+			.desc {
+				padding-top: 10upx;
+				font-size: 18upx;
+				font-family: PingFangSC-Regular, PingFang SC;
+				font-weight: 400;
+				 color: #a8adb6;
+			}
+		}
+	}
 }
-.listitem {
-  margin-top: 92upx;
-  background-color: #1c3965;
-  margin: 0 0 10upx 0;
-  border-radius: 10px;
-}
+
+
+	.water_inner_style {
+		
+		
+	}
+
 
 .btn {
   width: calc(100vw - 80upx);

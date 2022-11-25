@@ -1,174 +1,255 @@
 <template>
-  <van-nav-bar
-    title="体测报告"
-    left-text=""
-    left-arrow
-    @click-left="onClickLeft"
-    class="nav-bar"
-  />
-  <view class="reportBody">
-    <van-collapse v-model="activeNames">
-      <view
-        class="collapse"
-        v-for="(item, index) in bodyTestReport"
-        :key="index"
-      >
-        <view style="margin-left: 30upx">
-          <text>{{ item.mainTitle }}</text>
+  <view class="content_style">
+    <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+    <NavBarCompontent :leftNavTitle="'体测报告填写'"></NavBarCompontent>
+
+    <view class="contetnt_form_style">
+      <van-form @submit="onSubmit">
+        <van-cell-group inset>
+          <van-field
+            v-model="studentForm.userName"
+            name="userName"
+            label="真实姓名(必填)"
+            placeholder="请填写姓名"
+            :rules="[{ required: true, message: '请填写真实姓名' }]"
+          />
+        </van-cell-group>
+        <van-cell-group inset>
+          <van-field
+            v-model="studentForm.sex"
+            is-link
+            readonly
+            name="picker"
+            label="性别(必填)"
+            placeholder="请选择性别"
+            @click="showPicker = true"
+          />
+          <van-popup v-model:show="showPicker" position="bottom">
+            <van-picker
+              :columns="columns"
+              @confirm="onConfirm"
+              @cancel="showPicker = false"
+            />
+          </van-popup>
+        </van-cell-group>
+        <van-cell-group inset>
+          <van-field
+            v-model="studentForm.sex"
+            is-link
+            readonly
+            name="picker"
+            label="生日(必填)"
+            placeholder="请选择生日"
+            @click="dateShowpicker = true"
+          />
+          <van-popup v-model:show="dateShowpicker" position="bottom">
+            <van-datetime-picker
+              v-model="currentDate"
+              type="date"
+              title="选择年月日"
+              :min-date="minDate"
+              :max-date="maxDate"
+              @confirm="onConfirm"
+              @cancel="dateShowpicker = false"
+            />
+          </van-popup>
+        </van-cell-group>
+        <van-cell-group inset>
+          <van-field
+            v-model="studentForm.userName"
+            name="userName"
+            label="手机号码(必填)"
+            placeholder="请填写手机号码"
+            :rules="[{ required: true, message: '请填写手机号码' }]"
+          />
+        </van-cell-group>
+
+
+        <view class="add_method_style">
+          <view class="add_right_style" @click.native="jumpPhysical"
+            >确认</view
+          >
         </view>
-        <van-collapse-item :title="item.subHeading" :name="index + 1">
-          代码是写出来给人看的，附带能在机器上运行。
-        </van-collapse-item>
-      </view>
-      <!-- 	<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>体重（kg）</text>
-				</view>
-				<van-collapse-item title="80" name="2">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view>
-			<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>肌肉量（kg）</text>
-				</view>
-				<van-collapse-item title="请选择肌肉量" name="3">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view>
-			<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>体脂量（kg）</text>
-				</view>
-				<van-collapse-item title="请选择体脂量" name="1">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view>
-			<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>体脂百分比（%）</text>
-				</view>
-				<van-collapse-item title="请选择体脂百分比" name="1">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view>
-			<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>腰臀脂肪比（%）</text>
-				</view>
-				<van-collapse-item title="请选择腰臀脂肪比" name="1">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view>
-			<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>基础代谢（cal）</text>
-				</view>
-				<van-collapse-item title="请选择基础代谢" name="1">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view>
-			<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>体水分</text>
-				</view>
-				<van-collapse-item title="请选择体水分" name="1">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view>
-			<view class="collapse">
-				<view style="margin-left: 30upx;">
-					<text>身体分数</text>
-				</view>
-				<van-collapse-item title="请选择身体分数" name="1">
-					代码是写出来给人看的，附带能在机器上运行。
-				</van-collapse-item>
-			</view> -->
-    </van-collapse>
-    <van-button type="primary" class="btn">确认</van-button>
+      </van-form>
+    </view>
   </view>
 </template>
 
 <script>
+import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
+import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
 export default {
+  components: {
+    BgTheamCompontent,
+    NavBarCompontent
+  },
   data() {
     return {
-      activeNames: ['1'],
-      bodyTestReport: [
-        {
-          mainTitle: '身体',
-          subHeading: '请选择身高'
-        },
-        {
-          mainTitle: '体重（kg）',
-          subHeading: '80'
-        },
-        {
-          mainTitle: '肌肉量（kg）',
-          subHeading: '请选择肌肉量'
-        },
-        {
-          mainTitle: '体脂量（kg）',
-          subHeading: '请选择体脂量'
-        },
-        {
-          mainTitle: '体脂百分比（%）',
-          subHeading: '请选择体脂百分比'
-        },
-        {
-          mainTitle: '腰臀脂肪比（%）',
-          subHeading: '请选择腰臀脂肪比'
-        },
-        {
-          mainTitle: '基础代谢（cal）',
-          subHeading: '请选择基础代谢'
-        },
-        {
-          mainTitle: '体水分',
-          subHeading: '请选择体水分'
-        },
-        {
-          mainTitle: '身体分数',
-          subHeading: '请选择身体分数'
-        }
-      ]
+      studentForm: {
+        userName: '',
+        sex: ''
+      },
+      columns: ['男', '女'],
+      showPicker: false,
+      minDate: new Date(2020, 0, 1),
+      maxDate: new Date(2025, 10, 1),
+      currentDate: new Date(2021, 0, 18),
+      dateShowpicker: false,
+  
+  
     }
   },
   methods: {
-    onClickLeft() {
-      this.$router.go(-1)
+    onConfirm() {},
+    onSubmit() {},
+
+
+    jumpPhysical() {
+      uni.navigateTo({
+        url: '/pages/physicalAssessment/physicalAssessment'
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.reportBody {
-  background-color: pink;
-  padding: 30upx;
+.van-hairline--bottom:after {
+  border-bottom-width: 0;
+  border-bottom-color: #212328;
 }
 
-.collapse {
-  background-color: #383d46;
+::v-deep.van-nav-bar__content {
+  background: #212328;
+  border: none;
+  height: 88upx;
+  box-sizing: border-box;
+}
+::v-deep.van-nav-bar .van-icon {
   color: #fff;
-  margin: 30upx 0;
-  // border-radius: 10upx;
+}
+::v-deep.van-nav-bar .van-nav-bar__text {
+  color: #fff !important;
+}
+.content_style {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  .contetnt_form_style {
+    width: 100%;
+    margin-top: 30upx;
+  }
 }
 
-::v-deep .van-collapse-item {
-  .van-cell {
-    background-color: #383d46;
-    .van-cell__title {
-      color: #7a7f89;
+::v-deep.van-cell {
+  display: flex;
+  flex-direction: column;
+  background: #383d46 !important;
+  position: relative;
+  border-bottom-width: 0 !important;
+
+  .van-cell__title {
+    width: 100% !important;
+    color: #f4f7ff !important;
+    label {
+      font-size: 30upx;
+      color: #f4f7ff !important;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+    }
+  }
+  .van-cell__value {
+    margin-top: 40upx;
+    display: flex;
+    flex-wrap: nowrap;
+    border-bottom-width: 0 !important;
+    .van-field__body {
+      .van-field__control {
+        color: #f4f7ff !important;
+      }
+      input {
+        color: #f4f7ff !important;
+      }
+    }
+  }
+  i {
+    position: absolute;
+    right: 30upx;
+    top: 120upx;
+  }
+}
+::v-deep.van-cell:after {
+  border-bottom: none;
+}
+::v-deep.van-cell-group {
+  background: #383d46 !important;
+  margin-top: 30upx;
+  border-bottom-width: 0 !important;
+}
+.is_buy_content_style {
+  width: 100%;
+  height: 140upx;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  .buy_text_style {
+    font-size: 30upx;
+    color: #f4f7ff !important;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+  }
+  .is_buy_style {
+    display: flex;
+    align-items: center;
+    width: 176upx;
+    .buy_left {
+      width: 50%;
+      height: 100%;
+      text-align: center;
+      background: linear-gradient(180deg, #343a44 0%, #212328 100%);
+      line-height: 82upx;
+      color: #a8adb6;
+
+      border-radius: 16upx 0px 0px 16upx;
+    }
+    .buy_right {
+      width: 50%;
+      height: 100%;
+      color: #a8adb6;
+      line-height: 88upx;
+      text-align: center;
+      background: linear-gradient(180deg, #343a44 0%, #212328 100%);
+      border-radius: 0px 16upx 16upx 0px;
+    }
+    .active {
+      background: #1370ff;
+      color: #fff;
     }
   }
 }
-::v-deep .van-collapse-item::after {
-  border: none;
-}
-.btn {
+
+.add_method_style {
   width: calc(100vw - 60upx);
-  margin: 0 auto;
-  border: none;
+  margin-left: 30upx;
+  margin-top: 30upx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .add_right_style {
+	  width: 100%;
+    height: 100upx;
+    font-size: 32upx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #ffffff;
+    background: #1370FF;
+    border-radius: 16upx;
+    z-index: 88;
+    text-align: center;
+    line-height: 100upx;
+  }
 }
 </style>
