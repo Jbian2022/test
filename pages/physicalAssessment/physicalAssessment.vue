@@ -185,6 +185,6 @@ export default {
   overflow-y: auto;
 }
 ::v-deep .van-row {
-	background: none;
+  background: none;
 }
 </style>
