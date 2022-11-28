@@ -81,6 +81,7 @@
 <style lang="scss">
 .open-card{
 	position: relative;
+	padding-bottom: 170upx;
 	.background{
 		position: absolute;
 		top: 0;
@@ -251,6 +252,11 @@
 		}
 	}
 	.footer-button{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
 		padding: 0 40upx;
 		padding-bottom: 68upx;
 		.van-button{
