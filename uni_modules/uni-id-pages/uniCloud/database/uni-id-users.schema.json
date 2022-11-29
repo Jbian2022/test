@@ -207,7 +207,7 @@
 			}
 		},
 		"password": {
-			"bsonType": "password",
+			"bsonType": "string",
 			"description": "密码，加密存储",
 			"title": "密码",
 			"trim": "both"

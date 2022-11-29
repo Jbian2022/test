@@ -1,7 +1,6 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <view class="guide_style"> </view>
     <view class="header_style">
       <view class="header_left_style">
         <view class="left_content_style">
@@ -42,33 +41,35 @@
         ></image>
       </view>
       <uni-swipe-action class="slide_stylle">
-        <uni-swipe-action-item :disabled="controlSwiperFlag" @change="swipeChange($event, 0)" >
+        <uni-swipe-action-item
+          :disabled="controlSwiperFlag"
+          @change="swipeChange($event, 0)"
+        >
           <template v-slot:right>
-			  
-            <view
-              class="slot-button"
-              @click.native.stop="
-                bindClick($event)
-              "
-              >
-			  <image class="slot_btn_img_style" src="../../static/app-plus/mebrs/delete.svg"></image>
-			  </view
-			  
-            >
-			<van-popup v-model:show="deleteRemarkFlag"  teleport="body">
-				<view class="confirm_dakuang_style">
-					<view class="confirm_top_style">
-						<text class="config_top_title_style">是否确认删除</text>
-						<image class="delete_waring_style" src="../../static/app-plus/mebrs/delete.svg"></image>
-						
-					</view>
-					<view class="delet_remark">确认删除该学员吗？删除后无法恢复</view>
-					<view class="delete_btn_style">
-						<view class="delete_cacel_style">取消</view>
-						<view class="delete_sure_style">确认</view>
-					</view>
-				</view>
-			</van-popup>
+            <view class="slot-button" @click.native.stop="bindClick($event)">
+              <image
+                class="slot_btn_img_style"
+                src="../../static/app-plus/mebrs/delete.svg"
+              ></image>
+            </view>
+            <van-popup v-model:show="deleteRemarkFlag" teleport="body">
+              <view class="confirm_dakuang_style">
+                <view class="confirm_top_style">
+                  <text class="config_top_title_style">是否确认删除</text>
+                  <image
+                    class="delete_waring_style"
+                    src="../../static/app-plus/mebrs/delete.svg"
+                  ></image>
+                </view>
+                <view class="delet_remark"
+                  >确认删除该学员吗？删除后无法恢复</view
+                >
+                <view class="delete_btn_style">
+                  <view class="delete_cacel_style">取消</view>
+                  <view class="delete_sure_style">确认</view>
+                </view>
+              </view>
+            </van-popup>
           </template>
           <view class="add_student_style">
             <view class="need_loop_style">
@@ -116,12 +117,33 @@
         </uni-swipe-action-item>
       </uni-swipe-action>
     </view>
-    <view class="btn_add">
-      <image
+
+    <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
+      {{ showPopover }}
+
+      <van-popover
+        @click-overlay="clickOverlay"
+        :overlay="true"
+        v-model:show="showPopover"
+        placement="left"
+      >
+        <view class="pop_tips_style pad_style">Hi～你来了</view>
+        <view class="pop_tips_style">点这里添加会员吧</view>
+
+        <template #reference>
+          <image
+            class="add_img_style"
+            src="../../static/app-plus/mebrs/add.svg"
+            @click.stop="addClick"
+          ></image>
+        </template>
+      </van-popover>
+
+      <!-- <image
         class="add_img_style"
         src="../../static/app-plus/mebrs/add.svg"
         @click="addClick"
-      ></image>
+      ></image> -->
     </view>
   </view>
 </template>
@@ -141,20 +163,40 @@ export default {
         }
       ],
       isActive: 'y',
-	controlSwiperFlag: false,
-	deleteRemarkFlag: false
+      controlSwiperFlag: false,
+      deleteRemarkFlag: false,
+      loginNum: 0,
+      showPopover: false
     }
   },
+  onLoad(options) {},
+  mounted() {
+    let self = this
+    uni.getStorage({
+      key: 'loginNum',
+      success: function (res) {
+        if (res.data) {
+          self.loginNum = res.data
+          self.showPopover = res.data == '0' ? true : false
+          // console.log(res, '次数',self.loginNum )
+        }
+      },
+      fail: function (err) {}
+    })
+  },
   methods: {
+    clickOverlay() {
+      console.log('拜拜')
+      uni.setStorageSync('loginNum', '1')
+    },
     bindClick(e) {
-		console.log(e,'>>>')
-		this.deleteRemarkFlag = true
-
+      console.log(e, '>>>')
+      this.deleteRemarkFlag = true
     },
     swipeChange(e, index) {
-		if (e === 'right') {
-			this.controlSwiperFlag = true
-		}
+      if (e === 'right') {
+        this.controlSwiperFlag = true
+      }
       console.log('当前状态：' + e + '，下标：' + index)
     },
     addClick() {
@@ -162,6 +204,7 @@ export default {
       // 	  studentName: '张三'
       //   }
       // this.meberList.push(addData)
+
       uni.navigateTo({
         url: '/pages/addMyMebers/addMyMebers',
         success: (res) => {},
@@ -179,7 +222,7 @@ export default {
 <style lang="scss">
 .content_style {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -376,7 +419,6 @@ export default {
   .btn_add {
     width: 130upx;
     height: 130upx;
-
     position: absolute;
     right: 30upx;
     bottom: calc(50px + 30upx);
@@ -387,87 +429,117 @@ export default {
       object-fit: contain;
     }
   }
+  .guid_style {
+    z-index: 2200;
+  }
 }
 .slot-button {
-	width: 100upx !important;
-	height:100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	.slot_btn_img_style {
-		width: 100upx;
-		height: 100upx;
-	}
+  width: 100upx !important;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .slot_btn_img_style {
+    width: 100upx;
+    height: 100upx;
+  }
 }
 
 ::v-deep .van-popup {
-	width: 100vw;
-	background: none !important;
+  // width: 100vw;
+  background: none !important;
 }
 .confirm_dakuang_style {
-	width: calc(100% - 60upx);
-	margin-left: 30upx;
-	height: 420upx;
-	background: #383D46;
-	border-radius: 24px;
-	.confirm_top_style {
-		width: calc(100% - 100upx);
-		margin-left: 50upx;
-		padding-top: 50upx;
-		display: flex;
-		align-items: center;
-		font-size: 52upx;
-		color: #F4F7FF;
-		.delete_waring_style {
-		
-			width: 57upx;
-			height: 48upx;
-		}
-	}
-	.delet_remark {
-		width: calc(100% - 100upx);
-		margin-left: 50upx;
-		font-size: 30upx;
-		font-family: PingFangSC-Regular, PingFang SC;
-		font-weight: 400;
-		color: #BDC3CE;
-		margin-top: 30upx;
-	}
-	.delete_btn_style {
-		width: calc(100% - 100upx);
-		margin-left: 50upx;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-top: 80upx;
-		.delete_cacel_style {
-			width: 240upx;
-			height: 90upx;
-			background: #454951;
-			border-radius: 16upx;
-			font-size: 32upx;
-			font-family: PingFangSC-Semibold, PingFang SC;
-			font-weight: 600;
-			color: #FFFFFF;
-			text-align: center;
-			line-height: 90upx;
-		}
-		.delete_sure_style {
-			width: 240upx;
-			height: 90upx;
-			background: #1370FF;
-			border-radius: 16px;
-			backdrop-filter: blur(18px);
-			font-size: 32upx;
-			font-family: PingFangSC-Semibold, PingFang SC;
-			font-weight: 600;
-			color: #FFFFFF;
-			text-align: center;
-			line-height: 90upx;
-		}
-	}
-	
-	
-	
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  height: 420upx;
+  background: #383d46;
+  border-radius: 24px;
+  .confirm_top_style {
+    width: calc(100% - 100upx);
+    margin-left: 50upx;
+    padding-top: 50upx;
+    display: flex;
+    align-items: center;
+    font-size: 52upx;
+    color: #f4f7ff;
+    .delete_waring_style {
+      width: 57upx;
+      height: 48upx;
+    }
+  }
+  .delet_remark {
+    width: calc(100% - 100upx);
+    margin-left: 50upx;
+    font-size: 30upx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #bdc3ce;
+    margin-top: 30upx;
+  }
+  .delete_btn_style {
+    width: calc(100% - 100upx);
+    margin-left: 50upx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80upx;
+    .delete_cacel_style {
+      width: 240upx;
+      height: 90upx;
+      background: #454951;
+      border-radius: 16upx;
+      font-size: 32upx;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      line-height: 90upx;
+    }
+    .delete_sure_style {
+      width: 240upx;
+      height: 90upx;
+      background: #1370ff;
+      border-radius: 16px;
+      backdrop-filter: blur(18px);
+      font-size: 32upx;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      line-height: 90upx;
+    }
+  }
+}
+
+uni-app,
+uni-page,
+uni-page-wrapper,
+uni-page-body {
+  height: 100%;
+  display: flex;
+  // flex-direction: column;
+}
+::v-deep.van-popover__wrapper {
+  width: 100%;
+  height: 100% !important;
+}
+::v-deep .van-popover__content {
+  width: 322upx;
+  height: 150upx;
+  background: linear-gradient(180deg, #2ba9ff 0%, #1370ff 100%);
+}
+.pop_tips_style {
+  font-size: 30upx;
+  font-weight: 600;
+  color: #f4f7ff;
+  padding-left: 36upx;
+}
+.pad_style {
+  padding-top: 34upx;
+}
+::v-deep .van-overlay {
+  background: #141517 !important;
+  opacity: 0.8;
 }
 </style>

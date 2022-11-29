@@ -10,7 +10,7 @@
 
     <view class="counter-matter">
       <h1 class="code">请输入验证码</h1>
-      <span class="phone">验证码已发送至 18329218839</span>
+      <span class="phone">验证码已发送至 {{ mobile }}</span>
       <!-- 明文展示验证码 -->
       <van-password-input
         class="a-i-c"
@@ -29,16 +29,18 @@
         :maxlength="4"
       />
       <!-- 登录 -->
-      <button class="btn" @click="smsLogin">
+      <button class="btn" :class="sureLogin ? 'active' : ''" @click="smsLogin">
         <span class="btn-text">登录</span>
       </button>
-      <p class="time">
+      <p class="time" :class="isFinsh ? 'timeActive' : ''" @click="resend">
         重新发送（<view
           ><van-count-down
             ref="countDown"
             millisecond
+            @finish="onFinsh"
             :time="countDown"
             :auto-start="true"
+            :class="isFinsh ? 'countActive' : ''"
             format="ss" /></view
         >）
       </p>
@@ -54,22 +56,99 @@ export default {
       smsCode: '',
       errorInfoValue: '',
       showKeyboard: false,
-      countDown: 60 * 1000
+      countDown: 60 * 1000,
+      mobile: '',
+      requestVerifyCode: '',
+      sureLogin: false,
+      isFinsh: false
     }
   },
+  onLoad(options) {
+    this.mobile = options.mobile || ''
+    // 校验验证码
+  },
+  async mounted() {
+    this.verifyCode()
+  },
+
   watch: {
     smsCode: function (n, o) {
       // console.log(n,'????')
-      if (n.length === 4 && n !== '1234') {
+      if (n.length === 4 && n !== this.requestVerifyCode) {
         this.errorInfoValue = '验证码错误'
+        this.sureLogin = false
       } else {
         this.errorInfoValue = ''
+        this.sureLogin = false
+      }
+      if (n.length === 4 && n === this.requestVerifyCode) {
+        this.sureLogin = true
       }
     }
   },
   methods: {
+    async resend() {
+      if (this.isFinsh) {
+        const login = uniCloud.importObject('login') //第一步导入云对象
+        try {
+          const smsRes = await login.sendSmsCode(this.mobile)
+          console.log(smsRes, '发送成功')
+          if (smsRes.code == 0) {
+            this.mobile = smsRes.mobile
+            this.verifyCode()
+            this.$refs.countDown.reset() //重置
+          }
+        } catch (err) {
+          //TODO handle the exception
+          console.log(err, '我是错误')
+        }
+      }
+    },
+    onFinsh() {
+      this.isFinsh = true
+    },
+    async verifyCode() {
+      let login = uniCloud.importObject('login')
+      const getVerifyRes = await login.getVerifySchema()
+      try {
+        this.requestVerifyCode =
+          getVerifyRes.length > 0 ? getVerifyRes[0] : '0000'
+      } catch (err) {}
+    },
     // 上方退出标识
-    smsLogin() {},
+    async smsLogin() {
+      const vefiryLogin = uniCloud.importObject('login') //第一步导入云对象
+      try {
+        let param = {
+          mobile: this.mobile,
+          code: this.requestVerifyCode
+        }
+        const loginRes = await vefiryLogin.loginBySms(param)
+        console.log(loginRes, '发送成功')
+        if (loginRes.code == 0) {
+          try {
+            uni.setStorageSync('userInfo', JSON.stringify(loginRes.userInfo)) //个人信息
+            uni.setStorageSync('uni_id_token', loginRes.token) //token
+            uni.setStorageSync('uid', loginRes.uid) // uid 唯一标识
+            uni.setStorageSync('tokenExpired', loginRes.tokenExpired) // 有效期
+
+            let userLogin = uniCloud.importObject('login')
+            const getUseRes = await userLogin.getUserSchema(this.mobile)
+            if (getUseRes) {
+              uni.setStorageSync('loginNum', getUseRes.affectedDocs)
+              uni.reLaunch({
+                url: '/pages/myMebers/myMebers'
+              })
+            }
+          } catch (e) {
+            // error
+          }
+        }
+      } catch (err) {
+        //TODO handle the exception
+        console.log(err, '我是错误')
+      }
+    },
     goBack() {
       uni.navigateBack()
     }
@@ -134,7 +213,7 @@ export default {
       margin-top: 80upx;
       width: 630upx;
       height: 100upx;
-      background: #1370ff;
+      background: #454951;
       border-radius: 16upx;
       .btn-text {
         width: 64upx;
@@ -146,12 +225,13 @@ export default {
         line-height: 44upx;
       }
     }
+    .active {
+      background: #1370ff;
+    }
   }
   .time {
     margin-top: 40upx;
     text-align: center;
-    // width: 216upx;
-    // height: 42upx;
     font-size: 30upx;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
@@ -160,8 +240,14 @@ export default {
     display: flex;
     justify-content: center;
   }
+  .timeActive {
+    color: #1370ff;
+  }
 }
 ::v-deep.van-count-down {
   color: #a8adb6;
+}
+.countActive {
+  color: #1370ff;
 }
 </style>
