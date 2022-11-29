@@ -79,8 +79,8 @@
 <style lang="scss" >
 	.training-record-detail{
 		position: relative;
+		padding-bottom: 170upx;
 		min-height: 100vh;
-		padding-bottom: 60upx;
 		.backgroud-img{
 			position: absolute;
 			top: 0;
@@ -201,7 +201,13 @@
 			}
 		}
 		.footer-button{
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 1;
 			padding: 30upx;
+			background: #212328;
 			.van-button{
 				background: #1370FF;
 				border-radius: 16upx;
