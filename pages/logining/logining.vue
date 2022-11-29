@@ -90,7 +90,7 @@ export default {
       checkFlag: false,
       hasWeixinAuth: false,
       checkPhone: '',
-	  needChecked: false
+      needChecked: false
     }
   },
   computed: {
@@ -120,38 +120,37 @@ export default {
     async getSms() {
       if (this.controlActiveFlag && !this.checkFlag) {
         // Toast('请同意隐私政策')
-		this.needChecked = true
+        this.needChecked = true
         return
       }
       if (this.controlActiveFlag) {
-		  // 发送验证码
-		  debugger
-		  const login = uniCloud.importObject('login') //第一步导入云对象
-		 try{
-		 const smsRes = await login.sendSmsCode(this.phone) 
-		 console.log(smsRes, '登录成功')
-		 if (smsRes.code==0) {
-			 uni.navigateTo({
-			   url: '/pages/verificatioCode/verificatioCode?' + 'mobile=' + smsRes.mobile,
-			   success: (res) => {},
-			   fail: () => {},
-			   complete: () => {}
-			 })		 
-		 }
-		 
-		 	
-		 }catch(err){
-		 	//TODO handle the exception
-		  console.log(err,'我是错误')
-		 }
-
-	
+        // 发送验证码
+        debugger
+        const login = uniCloud.importObject('login') //第一步导入云对象
+        try {
+          const smsRes = await login.sendSmsCode(this.phone)
+          console.log(smsRes, '登录成功')
+          if (smsRes.code == 0) {
+            uni.navigateTo({
+              url:
+                '/pages/verificatioCode/verificatioCode?' +
+                'mobile=' +
+                smsRes.mobile,
+              success: (res) => {},
+              fail: () => {},
+              complete: () => {}
+            })
+          }
+        } catch (err) {
+          //TODO handle the exception
+          console.log(err, '我是错误')
+        }
       }
     },
-	agreeContiute() {
-		this.checkFlag = true
-		this.needChecked = false
-	},
+    agreeContiute() {
+      this.checkFlag = true
+      this.needChecked = false
+    },
     getWeixinCode() {
       return new Promise((resolve, reject) => {
         // #ifdef APP-PLUS

@@ -69,11 +69,6 @@ export default {
   },
   async mounted() {
     this.verifyCode()
-
-
-	
-
-
   },
 
   watch: {
@@ -113,17 +108,12 @@ export default {
       this.isFinsh = true
     },
     async verifyCode() {
-		
-	let login =  uniCloud.importObject('login')
-	const getVerifyRes =  await login.getVerifySchema()
-	try {
-		this.requestVerifyCode = getVerifyRes.length > 0 ? getVerifyRes[0] : '0000'
-	} catch(err) {
-		
-	}
-
-	
-		
+      let login = uniCloud.importObject('login')
+      const getVerifyRes = await login.getVerifySchema()
+      try {
+        this.requestVerifyCode =
+          getVerifyRes.length > 0 ? getVerifyRes[0] : '0000'
+      } catch (err) {}
     },
     // 上方退出标识
     async smsLogin() {
@@ -141,16 +131,15 @@ export default {
             uni.setStorageSync('uni_id_token', loginRes.token) //token
             uni.setStorageSync('uid', loginRes.uid) // uid 唯一标识
             uni.setStorageSync('tokenExpired', loginRes.tokenExpired) // 有效期
-			
-			let userLogin =  uniCloud.importObject('login')
-			const getUseRes =  await userLogin.getUserSchema(this.mobile)
-			if (getUseRes ) {
-				uni.setStorageSync('loginNum', getUseRes.affectedDocs)
-				uni.reLaunch({
-				  url: '/pages/myMebers/myMebers'
-				})
-			}
-			
+
+            let userLogin = uniCloud.importObject('login')
+            const getUseRes = await userLogin.getUserSchema(this.mobile)
+            if (getUseRes) {
+              uni.setStorageSync('loginNum', getUseRes.affectedDocs)
+              uni.reLaunch({
+                url: '/pages/myMebers/myMebers'
+              })
+            }
           } catch (e) {
             // error
           }
