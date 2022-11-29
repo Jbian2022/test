@@ -18,20 +18,22 @@
 			</view>
 			<view class="action-list">
 				<view class="action-list-title">颈前引训练动作</view>
-				<view class="action-list-box">
-					<view v-for="i in 8" :key="i" class="action-list-item" :class="{active:i<2}">
-						<popover className="image" :disabled="i>5" :list="actions" @selctClick="selectClick">
-							<van-image round src="https://img01.yzcdn.cn/vant/cat.jpeg"/>
-							<template  v-slot:item="{item}">
-								<text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
-								<text v-else>{{item.text}}</text>
-							</template>
-						</popover>
-						<view class="text">筋膜球放松胸小肌，胸大肌</view>
+				<view class="action-list-view">
+					<view class="action-list-box">
+						<view v-for="i in 8" :key="i" class="action-list-item" :class="{active:i<2}">
+							<popover className="image" :disabled="i>5" :list="actions" @selctClick="selectClick">
+								<van-image round src="https://img01.yzcdn.cn/vant/cat.jpeg"/>
+								<template  v-slot:item="{item}">
+									<text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
+									<text v-else>{{item.text}}</text>
+								</template>
+							</popover>
+							<view class="text">筋膜球放松胸小肌，胸大肌</view>
+						</view>
 					</view>
-				</view>
-				<view class="custom-action-button" @click="addActionHandle">
-					<text> + 自定义动作</text>
+					<view class="custom-action-button" @click="addActionHandle">
+						<text> + 自定义动作</text>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -150,11 +152,13 @@ page{
 		}
 	}
 	.content{
+		height: calc(100vh - 280upx);
 		padding-top: 30upx;
-		padding-right: 30upx;
+		box-sizing: border-box;
 		display: flex;
 		.sidebar{
 			width: 220upx;
+			overflow-y:auto;
 			.van-sidebar{
 				width: 220upx;
 			}
@@ -197,10 +201,14 @@ page{
 
 		}
 		.action-list{
+			.action-list-view{
+				height: calc(100% - 50upx);
+				padding-right: 30upx;
+				overflow-y:auto;
+			}
 			flex: 1;
 			.custom-action-button{
 				margin-top: 30upx;
-				margin-bottom: 30upx;
 				display: flex;
 				align-items: center;
 				justify-content: center;
