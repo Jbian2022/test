@@ -1,125 +1,140 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <view class="header_style">
-      <view class="header_left_style">
-        <view class="left_content_style">
-          <image
-            class="left_content_img_style"
-            src="https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
-          ></image>
-          <view class="left_header_style">你好</view>
-          <view class="left_num_style">0</view>
-        </view>
-      </view>
-      <view class="header_right_style">
-        <image
-          class="right_img_style"
-          src="../../static/app-plus/mebrs/fangdajing.svg"
-        ></image>
-      </view>
-    </view>
-    <view class="is_buy_style">
-      <view
-        class="buy_left"
-        :class="isActive === 'y' ? 'active' : ''"
-        @click.native="buyClick('y')"
-        >已购课</view
-      >
-      <view
-        class="buy_right"
-        :class="isActive === 'n' ? 'active' : ''"
-        @click.native="buyClick('n')"
-        >未购课</view
-      >
-    </view>
-    <view class="mebers_content">
-      <view class="no_data_style" v-if="meberList.length === 0">
-        <image
-          class="no_data_meber_img_style"
-          src="../../static/app-plus/mebrs/nomebers.png"
-        ></image>
-      </view>
-      <uni-swipe-action class="slide_stylle">
-        <uni-swipe-action-item
-          :disabled="controlSwiperFlag"
-          @change="swipeChange($event, 0)"
-        >
-          <template v-slot:right>
-            <view class="slot-button" @click.native.stop="bindClick($event)">
-              <image
-                class="slot_btn_img_style"
-                src="../../static/app-plus/mebrs/delete.svg"
-              ></image>
-            </view>
-            <van-popup v-model:show="deleteRemarkFlag" teleport="body">
-              <view class="confirm_dakuang_style">
-                <view class="confirm_top_style">
-                  <text class="config_top_title_style">是否确认删除</text>
-                  <image
-                    class="delete_waring_style"
-                    src="../../static/app-plus/mebrs/delete.svg"
-                  ></image>
-                </view>
-                <view class="delet_remark"
-                  >确认删除该学员吗？删除后无法恢复</view
-                >
-                <view class="delete_btn_style">
-                  <view class="delete_cacel_style">取消</view>
-                  <view class="delete_sure_style">确认</view>
-                </view>
-              </view>
-            </van-popup>
-          </template>
-          <view class="add_student_style">
-            <view class="need_loop_style">
-              <view class="loop_top_style">
-                <view class="top_left_style">
-                  <text class="top_left_name_style">赵思远</text>
-                  <image
-                    class="top_left_img_style"
-                    src="../../static/app-plus/mebrs/man.svg"
-                  ></image>
-                </view>
-                <view class="top_right_style">
-                  <image
-                    class="top_right_img_style"
-                    src="../../static/app-plus/mebrs/trainingProgram.svg"
-                  ></image>
-                  <text>生产训练计划</text>
-                </view>
-              </view>
-              <view class="loop_bottom_style">
-                <view class="bottom_style">
-                  <image
-                    class="bootom_img_style"
-                    src="../../static/app-plus/mebrs/meberMessage.svg"
-                  ></image>
-                  <text class="message_style">会员信息</text>
-                </view>
-                <view class="bottom_style">
-                  <image
-                    class="bootom_img_style"
-                    src="../../static/app-plus/mebrs/evaluationInformation.svg"
-                  ></image>
-                  <text class="message_style">评测信息</text>
-                </view>
-                <view class="bottom_style">
-                  <image
-                    class="bootom_img_style"
-                    src="../../static/app-plus/mebrs/trainingLog.svg"
-                  ></image>
-                  <text class="message_style">训练记录</text>
-                </view>
-              </view>
-            </view>
-          </view>
-        </uni-swipe-action-item>
-      </uni-swipe-action>
-    </view>
+	<BetterSticky :scrollTop="scrollTop">
+		<template v-slot:header>
+
+	
+		</template>
+		<template v-slot:content>
+			<!--内容 start-->
+		<view class="header_style">
+		  <view class="header_left_style">
+		    <view class="left_content_style">
+		      <image
+		        class="left_content_img_style"
+		        src="https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
+		      ></image>
+		      <view class="left_header_style">你好</view>
+		      <view class="left_num_style">0</view>
+		    </view>
+		  </view>
+		  <view class="header_right_style">
+		    <image
+		      class="right_img_style"
+		      src="../../static/app-plus/mebrs/fangdajing.svg"
+		    ></image>
+		  </view>
+		</view>	
+			
+		<view class="is_buy_style">
+		  <view
+		    class="buy_left"
+		    :class="isActive === 'y' ? 'active' : ''"
+		    @click.native="buyClick('y')"
+		    >已购课</view
+		  >
+		  <view
+		    class="buy_right"
+		    :class="isActive === 'n' ? 'active' : ''"
+		    @click.native="buyClick('n')"
+		    >未购课</view
+		  >
+		</view>
+		<view class="mebers_content">
+		  <view class="no_data_style" v-if="meberList.length === 0">
+		    <image
+		      class="no_data_meber_img_style"
+		      src="../../static/app-plus/mebrs/nomebers.png"
+		    ></image>
+		  </view>
+		  <uni-swipe-action class="slide_stylle" v-for="(item, itemIndex) in meberList" :key="'itemIndex' + itemIndex">
+		    <uni-swipe-action-item
+		      :disabled="controlSwiperFlag"
+		      @change="swipeChange($event, 0)"
+		    >
+		      <template v-slot:right>
+		        <view class="slot-button" @click.native.stop="bindClick($event)">
+		          <image
+		            class="slot_btn_img_style"
+		            src="../../static/app-plus/mebrs/delete.svg"
+		          ></image>
+		        </view>
+		        <van-popup v-model:show="deleteRemarkFlag" teleport="body">
+		          <view class="confirm_dakuang_style">
+		            <view class="confirm_top_style">
+		              <text class="config_top_title_style">是否确认删除</text>
+		              <image
+		                class="delete_waring_style"
+		                src="../../static/app-plus/mebrs/delete.svg"
+		              ></image>
+		            </view>
+		            <view class="delet_remark"
+		              >确认删除该学员吗？删除后无法恢复</view
+		            >
+		            <view class="delete_btn_style">
+		              <view class="delete_cacel_style">取消</view>
+		              <view class="delete_sure_style">确认</view>
+		            </view>
+		          </view>
+		        </van-popup>
+		      </template>
+		      <view class="add_student_style">
+		        <view class="need_loop_style">
+		          <view class="loop_top_style">
+		            <view class="top_left_style">
+		              <text class="top_left_name_style">赵思远</text>
+		              <image
+		                class="top_left_img_style"
+		                src="../../static/app-plus/mebrs/man.svg"
+		              ></image>
+		            </view>
+		            <view class="top_right_style">
+		              <image
+		                class="top_right_img_style"
+		                src="../../static/app-plus/mebrs/trainingProgram.svg"
+		              ></image>
+		              <text>生产训练计划</text>
+		            </view>
+		          </view>
+		          <view class="loop_bottom_style">
+		            <view class="bottom_style">
+		              <image
+		                class="bootom_img_style"
+		                src="../../static/app-plus/mebrs/meberMessage.svg"
+		              ></image>
+		              <text class="message_style">会员信息</text>
+		            </view>
+		            <view class="bottom_style">
+		              <image
+		                class="bootom_img_style"
+		                src="../../static/app-plus/mebrs/evaluationInformation.svg"
+		              ></image>
+		              <text class="message_style">评测信息</text>
+		            </view>
+		            <view class="bottom_style">
+		              <image
+		                class="bootom_img_style"
+		                src="../../static/app-plus/mebrs/trainingLog.svg"
+		              ></image>
+		              <text class="message_style">训练记录</text>
+		            </view>
+		          </view>
+		        </view>
+		      </view>
+		    </uni-swipe-action-item>
+		  </uni-swipe-action>
+		</view>
+		
+	
+		</template>
+	</BetterSticky>
+	
+    
+
 
     <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
-      {{ showPopover }}
+    
 
       <van-popover
         @click-overlay="clickOverlay"
@@ -150,23 +165,39 @@
 
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
+import BetterSticky from '@/components/better-sticky/better-sticky.vue'
 
 export default {
   components: {
-    BgTheamCompontent
+    BgTheamCompontent,
+	BetterSticky
   },
   data() {
     return {
       meberList: [
         {
           name: 1
-        }
+        },
+		{
+		  name: 1
+		},
+		{
+		  name: 1
+		},
+		{
+		  name: 1
+		},
+		{
+		  name: 1
+		},
+		
       ],
       isActive: 'y',
       controlSwiperFlag: false,
       deleteRemarkFlag: false,
       loginNum: 0,
-      showPopover: false
+      showPopover: false,
+	  scrollTop: 0
     }
   },
   onLoad(options) {},
@@ -184,7 +215,13 @@ export default {
       fail: function (err) {}
     })
   },
+  //页面滚动执行方式
+  onPageScroll(e) {
+  		console.log(e.scrollTop,'????')
+  	this.scrollTop= e.scrollTop
+  },
   methods: {
+
     clickOverlay() {
       console.log('拜拜')
       uni.setStorageSync('loginNum', '1')
@@ -223,7 +260,9 @@ export default {
 .content_style {
   width: 100vw;
   // height: 100vh;
-  overflow: hidden;
+  // overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -419,7 +458,7 @@ export default {
   .btn_add {
     width: 130upx;
     height: 130upx;
-    position: absolute;
+    position: fixed;
     right: 30upx;
     bottom: calc(50px + 30upx);
     .add_img_style {
@@ -516,9 +555,8 @@ uni-app,
 uni-page,
 uni-page-wrapper,
 uni-page-body {
-  height: 100%;
-  display: flex;
-  // flex-direction: column;
+
+  height: calc(100vh - 50px);
 }
 ::v-deep.van-popover__wrapper {
   width: 100%;
@@ -541,5 +579,9 @@ uni-page-body {
 ::v-deep .van-overlay {
   background: #141517 !important;
   opacity: 0.8;
+}
+::v-deep.tui-sticky-class {
+	padding-bottom: 110upx;
+	height: 100%;
 }
 </style>
