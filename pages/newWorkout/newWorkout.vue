@@ -109,11 +109,15 @@ page{
 .new-workout{
 	padding-bottom: 168upx;
 	.header{
+		position: sticky;
+		top: 0;
+		z-index: 88;
 		display: flex;
 		justify-content: space-between;
 		padding: 30upx;
 		font-size: 48upx;
 		color: #FFFFFF;
+		background: #212328;
 		.btn{
 			width: 120upx;
 			height: 68upx;
@@ -127,7 +131,12 @@ page{
 		}
 	}
 	.workout-title{
+		position: sticky;
+		top: 128upx;
+		z-index: 88;
 		padding: 0 30upx;
+		padding-bottom: 15upx;
+		background: #212328;
 		.text{
 			height: 100upx;
 			background: #383D46;
@@ -142,6 +151,7 @@ page{
 	}
 	.action-list{
 		padding: 30upx;
+		padding-top: 15upx;
 		.action-tiem{
 			padding: 40upx;
 			background: #383D46;
