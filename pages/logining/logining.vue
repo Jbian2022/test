@@ -127,18 +127,18 @@ export default {
 		  // 发送验证码
 		  debugger
 		  const login = uniCloud.importObject('login') //第一步导入云对象
-		  // const login2 = uniCloud.callFunction({
-		  // 	name: ''
-		  // })
-
 		 try{
 		 const smsRes = await login.sendSmsCode(this.phone) 
-		 uni.navigateTo({
-		   url: '/pages/verificatioCode/verificatioCode',
-		   success: (res) => {},
-		   fail: () => {},
-		   complete: () => {}
-		 })
+		 console.log(smsRes, '登录成功')
+		 if (smsRes.code==0) {
+			 uni.navigateTo({
+			   url: '/pages/verificatioCode/verificatioCode?' + 'mobile=' + smsRes.mobile,
+			   success: (res) => {},
+			   fail: () => {},
+			   complete: () => {}
+			 })		 
+		 }
+		 
 		 	
 		 }catch(err){
 		 	//TODO handle the exception

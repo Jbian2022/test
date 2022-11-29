@@ -17,7 +17,8 @@ const uniID = require('uni-id')
 // 		}
 // 	}
 // })
-console.log(uniID,'什么')
+// console.log(uniID,'什么')
+const db = uniCloud.database()
 module.exports = {
 	_before: function () { // 通用预处理器
 
@@ -150,9 +151,10 @@ module.exports = {
 		      data: {
 			   name: '健变科技',
 			   code: code,
-			   expMinute: '3',
+			   expMinute: '5',
 			 }
 		 })
+		 console.log(res, '我是登录的第一步')
 		 return res 
 		
 	}catch(err){
@@ -318,7 +320,51 @@ module.exports = {
 	// 根据uid获取用户角色
 	getRoleByUid: async function (event, context) {
 		return getRoleByUid.getWeixinUserInfo(event)
-	}
+	},
+	
+	// 登录业务模块联表对接
+	getUserSchema: function (mobile) {
+		console.log(mobile)
+		return new Promise((resolve, reject) => {
+			
+			db.collection('uni-id-users')
+			  .where({
+					mobile: mobile	
+				})
+			  .get().then(res => {
+				  console.log(res,'>>>>>>')
+				  resolve(res)
+				 
+			  }).catch((err) => {
+				  reject(err)
+			  })
+		})
+			
+	
+	},
+	
+	getVerifySchema: function () {
+		return new Promise((resolve, reject) => {
+			db.collection('opendb-verify-codes')
+			  .orderBy('created_at', 'desc') // 按照quantity字段升序排序，quantity相同时按照create_date降序排序
+			  .get()
+			  .then((res) => {
+					// console.log(res, '我是验证码')
+			   resolve(res.data)
+			  })
+			  .catch((err) => {
+				  reject(err)
+			    console.error(err)
+			  })
+			
+
+		})
+			
+	
+	},
+	
+	
+	
    
    
 }

@@ -1,7 +1,6 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <view class="guide_style"> </view>
     <view class="header_style">
       <view class="header_left_style">
         <view class="left_content_style">
@@ -116,13 +115,30 @@
         </uni-swipe-action-item>
       </uni-swipe-action>
     </view>
-    <view class="btn_add">
-      <image
+	
+    <view class="btn_add" :class="loginNum==0 ? 'guid_style' : ''">
+		{{showPopover}}
+		
+		<van-popover @click-overlay="clickOverlay"  :overlay="true" v-model:show="showPopover" placement="left">
+		<view class="pop_tips_style pad_style">Hi～你来了</view>
+		<view class="pop_tips_style">点这里添加会员吧</view>
+		
+		  <template #reference>
+		    <image
+		      class="add_img_style"
+		      src="../../static/app-plus/mebrs/add.svg"
+		      @click.stop="addClick"
+		    ></image>
+		  </template>
+		</van-popover>
+		
+      <!-- <image
         class="add_img_style"
         src="../../static/app-plus/mebrs/add.svg"
         @click="addClick"
-      ></image>
+      ></image> -->
     </view>
+	
   </view>
 </template>
 
@@ -142,10 +158,36 @@ export default {
       ],
       isActive: 'y',
 	controlSwiperFlag: false,
-	deleteRemarkFlag: false
+	deleteRemarkFlag: false,
+	loginNum: 0,
+	showPopover: false
     }
   },
+  onLoad(options) {
+  	
+  },
+  mounted() {
+	let self = this  
+  	uni.getStorage({
+  	  key: 'loginNum',
+  	  success: function (res) {
+  	    if (res.data) {
+			self.loginNum = res.data
+			self.showPopover = res.data == '0' ? true : false
+  	    // console.log(res, '次数',self.loginNum )
+  	    }
+  	  },
+  	  fail: function (err) {
+
+  	  }
+  	})
+  	
+  },
   methods: {
+	clickOverlay() {
+		console.log('拜拜')
+		uni.setStorageSync('loginNum', '1')
+	},
     bindClick(e) {
 		console.log(e,'>>>')
 		this.deleteRemarkFlag = true
@@ -162,6 +204,7 @@ export default {
       // 	  studentName: '张三'
       //   }
       // this.meberList.push(addData)
+	  
       uni.navigateTo({
         url: '/pages/addMyMebers/addMyMebers',
         success: (res) => {},
@@ -179,7 +222,7 @@ export default {
 <style lang="scss">
 .content_style {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -376,7 +419,6 @@ export default {
   .btn_add {
     width: 130upx;
     height: 130upx;
-
     position: absolute;
     right: 30upx;
     bottom: calc(50px + 30upx);
@@ -386,6 +428,9 @@ export default {
       border-radius: 50%;
       object-fit: contain;
     }
+  }
+  .guid_style {
+	  z-index: 2200;
   }
 }
 .slot-button {
@@ -401,11 +446,11 @@ export default {
 }
 
 ::v-deep .van-popup {
-	width: 100vw;
+	// width: 100vw;
 	background: none !important;
 }
 .confirm_dakuang_style {
-	width: calc(100% - 60upx);
+	width: calc(100vw - 60upx);
 	margin-left: 30upx;
 	height: 420upx;
 	background: #383D46;
@@ -470,4 +515,34 @@ export default {
 	
 	
 }
+
+uni-app, uni-page, uni-page-wrapper, uni-page-body {
+	height: 100%;
+	display: flex;
+	// flex-direction: column;
+	
+}
+::v-deep.van-popover__wrapper {
+	width: 100%;
+	height: 100% !important;
+}
+::v-deep .van-popover__content {
+	width: 322upx;
+	height: 150upx;
+	background: linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%);
+}
+.pop_tips_style {
+	font-size: 30upx;
+	font-weight: 600;
+	color: #F4F7FF;
+	padding-left: 36upx;
+}
+.pad_style {
+	padding-top: 34upx;
+}
+::v-deep .van-overlay {
+	background: #141517 !important;
+	opacity: 0.8;
+}
+
 </style>
