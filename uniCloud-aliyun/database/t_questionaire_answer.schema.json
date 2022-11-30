@@ -1,0 +1,78 @@
+{
+	"bsonType": "object",
+	"required": ["answerId", "traineeNo", "code", "status"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"answerId": {
+			"title": "answer_id",
+			"description": "问卷回答Id,主键不重复",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"traineeNo": {
+			"title": "trainee_no",
+			"description": "学员编号,关联t_trainee表中的traineeNo字段",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"code": {
+			"title": "code",
+			"description": "问题编码,关联t_questionaire表中的code字段",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 64
+		},
+		"testResult": {
+			"title": "test_result",
+			"description": "测试结果,如果是多选类问题数组的每个元素都是一个答案选项",
+			"bsonType": "array",
+			"arrayType": "string"
+		},
+		"testDate": {
+			"title": "test_date",
+			"description": "测试时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		"status": {
+			"title": "status",
+			"description": "是否生成报告的状态,已生成:1;未生成:0;默认未生成",
+			"bsonType": "int",
+			"errorMessage": "{title}不能为空",
+			"defaultValue": 0,
+			"enum": [{
+				"text": "未生成",
+				"value": 0
+			}, {
+				"text": "已生成",
+				"value": 1
+			}]
+		},
+		"reportNo": {
+			"title": "report_no",
+			"description": "报告号",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"createdTime": {
+			"title": "created_time",
+			"description": "创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

@@ -1,0 +1,108 @@
+{
+	"bsonType": "object",
+	"required": ["userId"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"userId": {
+			"title": "user_id",
+			"description": "用户id,主键不重复",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 32
+		},
+		"userName": {
+			"title": "user_name",
+			"description": "用户名",
+			"bsonType": "string",
+			"maxLength": 90
+		},
+		"nickName": {
+			"title": "nick_name",
+			"description": "真实姓名",
+			"bsonType": "string",
+			"maxLength": 90
+		},
+		"openId": {
+			"title": "open_id",
+			"description": "唯一id,身份证号",
+			"bsonType": "string",
+			"maxLength": 32
+		},
+		"avatar": {
+			"title": "avatar",
+			"description": "头像地址",
+			"bsonType": "string"
+		},
+		"email": {
+			"title": "email",
+			"description": "邮箱",
+			"bsonType": "string",
+			"maxLength": 32
+		},
+		"password": {
+			"title": "password",
+			"description": "密码",
+			"bsonType": "string",
+			"maxLength": 90
+		},
+		"status": {
+			"title": "status",
+			"description": "登陆状态,正常:0;停用:1",
+			"bsonType": "string",
+			"maxLength": 32
+		},
+		"sex": {
+			"title": "sex",
+			"description": "用户性别,男:M;女:F;未知:U",
+			"bsonType": "string",
+			"maxLength": 32
+		},
+		"sign": {
+			"title": "sign",
+			"description": "用户个性签名",
+			"bsonType": "string",
+			"maxLength": 900
+		},
+		"phone": {
+			"title": "phone",
+			"description": "用户手机号",
+			"bsonType": "string",
+			"maxLength": 64
+		},
+		"vipLevel": {
+			"title": "vip_level",
+			"description": "用户会员等级,普通会员:1;蓝卡会员:2;金卡会员:3",
+			"bsonType": "string",
+			"maxLength": 32
+		},
+		"vipEndDate": {
+			"title": "vip_end_date",
+			"description": "用户会员有效期",
+			"bsonType": "timestamp"
+		},
+		"loginIp": {
+			"title": "login_ip",
+			"description": "用户登录IP",
+			"bsonType": "string",
+			"maxLength": 90
+		},
+		"loginDate": {
+			"title": "login_date",
+			"description": "用户登录时间",
+			"bsonType": "timestamp"
+		},
+		"createdTime": {
+			"title": "created_time",
+			"description": "用户创建时间",
+			"bsonType": "timestamp"
+		}
+	}
+}

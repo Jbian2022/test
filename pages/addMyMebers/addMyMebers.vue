@@ -4,22 +4,23 @@
     <NavBarCompontent :leftNavTitle="'添加学员'"></NavBarCompontent>
 
     <view class="contetnt_form_style">
-      <van-form @submit="onSubmit">
+      <van-form @submit="onSubmit" ref="studentForm">
         <van-cell-group inset>
           <van-field
-            v-model="studentForm.userName"
-            name="userName"
+            v-model="studentForm.traineeName"
+            name="traineeName"
             label="真实姓名(必填)"
             placeholder="请填写姓名"
             :rules="[{ required: true, message: '请填写真实姓名' }]"
+			
           />
         </van-cell-group>
         <van-cell-group inset>
           <van-field
-            v-model="studentForm.sex"
+            v-model="studentForm.gender"
             is-link
             readonly
-            name="picker"
+            name="gender"
             label="性别(必填)"
             placeholder="请选择性别"
             @click="showPicker = true"
@@ -27,14 +28,32 @@
           <van-popup v-model:show="showPicker" position="bottom">
             <van-picker
               :columns="columns"
-              @confirm="onConfirm"
-              @cancel="showPicker = false"
-            />
+             ref="gendPicker"
+			@confirm="genderConfirm"
+			 :show-toolbar="true"
+			
+            >
+			
+			</van-picker>
+	<!-- 		<template v-slot:toolbar>
+				<view class="bar_content_style">
+					<view class="bar_left_style">请选择性别</view>
+					<image class="bar_right_style" src="../../static/app-plus/mebrs/close.png" @click.stop="showPicker = false"></image> 
+							
+				</view>
+			</template> -->
+			
+	<!-- 		<template v-slot:columns-bottom>
+				<view class="custom_bottom_style" @click.stop="genderConfirm">
+					保存
+				</view>
+			</template> -->
+			
           </van-popup>
         </van-cell-group>
         <van-cell-group inset>
           <van-field
-            v-model="studentForm.sex"
+            v-model="studentForm.birthday"
             is-link
             readonly
             name="picker"
@@ -56,8 +75,8 @@
         </van-cell-group>
         <van-cell-group inset>
           <van-field
-            v-model="studentForm.userName"
-            name="userName"
+            v-model="studentForm.mobile"
+            name="mobile"
             label="手机号码(必填)"
             placeholder="请填写手机号码"
             :rules="[{ required: true, message: '请填写手机号码' }]"
@@ -69,14 +88,14 @@
             <view class="is_buy_style">
               <view
                 class="buy_left"
-                :class="isActive === 'n' ? 'active' : ''"
-                @click.native="buyClick('n')"
+                :class="studentForm.buyStatus == 0 ? 'active' : ''"
+                @click.native="buyClick(0)"
                 >无</view
               >
               <view
                 class="buy_right"
-                :class="isActive === 'y' ? 'active' : ''"
-                @click.native="buyClick('y')"
+                :class="studentForm.buyStatus == 1 ? 'active' : ''"
+                @click.native="buyClick(1)"
                 >有</view
               >
             </view>
@@ -89,7 +108,7 @@
 			     </van-button>
 			   </div> -->
         <view class="add_method_style">
-          <view class="add_left_style">直接添加</view>
+          <view class="add_left_style" native-type="submit" @click.native="addDirectly">直接添加</view>
           <view class="add_right_style" @click.native="jumpPhysical"
             >身体评测并添加</view
           >
@@ -110,23 +129,46 @@ export default {
   data() {
     return {
       studentForm: {
-        userName: '',
-        sex: ''
+        traineeName: '',
+		gender: '',
+		birthday: '',
+		mobile: '',
+		buyStatus: 0
       },
-      columns: ['男', '女'],
+      columns: [{ text: '未知', value: '0' }, { text: '男', value: '1' },{ text: '女', value: '2' }],
       showPicker: false,
       minDate: new Date(2020, 0, 1),
       maxDate: new Date(2025, 10, 1),
-      currentDate: new Date(2021, 0, 18),
+      currentDate: new Date(),
       dateShowpicker: false,
-      isActive: 'n'
+
     }
   },
   methods: {
-    onConfirm() {},
+	  genderChange(value) {
+		 
+		  this.studentForm.gender = value
+	  },
+	  genderConfirm(e) {
+	
+		console.log( e ,'kkkk' )
+			  
+
+		// let pickReason = (this.$refs.gendPicker as any).$el.children[0].children[1]; //拿到顶部栏的确认元素
+		      // pickReason.click(); //执行一下
+		// let pickReason = (this.$refs.picker as any).$el.children[0].children[1]
+		//       pickReason.click()
+		
+	  },
+	  addDirectly() {
+		  this.$refs.studentForm.submit();
+	  },
+    onConfirm( ) {
+		
+	},
     onSubmit() {},
     buyClick(type) {
-      this.isActive = type
+      this.studentForm.buyStatus = type
     },
     jumpPhysical() {
       uni.navigateTo({
@@ -287,5 +329,72 @@ export default {
     text-align: center;
     line-height: 100upx;
   }
+}
+.bar_content_style {
+	width: calc(100vw - 80upx);
+	margin-left: 40upx;
+	padding-top: 40upx;
+	display: flex;
+	justify-content: space-between;
+	
+	.bar_left_style {
+		font-size: 36upx;
+		font-family: PingFangSC-Semibold, PingFang SC;
+		font-weight: 600;
+		color: #F4F7FF;
+	}
+	.bar_right_style {
+		width: 50upx;
+		height: 50upx;
+		object-fit: contain;
+	}
+	
+}
+
+.custom_bottom_style {
+	width: calc(100vw - 80upx);
+	margin-left: 40upx;
+	margin-bottom: 68upx;
+	height: 100upx;
+	background: #1370FF;
+	border-radius: 16upx;
+	font-size: 32upx;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 100upx;
+}
+
+::v-deep .van-popup {
+	background: #383D46 !important;
+	border-radius: 24upx 24upx 0px 0px;
+	.van-picker__mask {
+		background-image: none;
+	}
+}
+::v-deep .van-ellipsis {
+		color: #F4F7FF;
+		
+		
+		
+}
+::v-deep .van-hairline-unset--top-bottom:after {
+	border-width: 0 !important;
+	width: 100%;
+	height: 100%;
+	
+	
+}
+::v-deep .van-hairline-unset--top-bottom {
+	background: rgba(75, 82, 94, 0.5) !important;
+	border-radius: 16px;
+	z-index: -1;
+
+	
+}
+::v-deep .van-picker {
+	background: #383D46 !important;
+	z-index: -3;
 }
 </style>

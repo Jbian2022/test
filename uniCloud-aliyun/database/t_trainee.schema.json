@@ -1,0 +1,90 @@
+{
+	"bsonType": "object",
+	"required": ["traineeNo", "userId"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"traineeNo": {
+			"title": "trainee_no",
+			"description": "学员编号,主键不重复",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"traineeName": {
+			"title": "trainee_name",
+			"description": "学员姓名",
+			"bsonType": "string",
+			"maxLength": 90
+		},
+		"gender": {
+			"bsonType": "string",
+			"defaultValue": "0",
+			"description": "学员性别：0 未知 1 男性 2 女性",
+			"enum": [{
+				"text": "未知",
+				"value": "0"
+			}, {
+				"text": "男",
+				"value": "1"
+			}, {
+				"text": "女",
+				"value": "2"
+			}],
+			"title": "性别"
+		},
+		"birthday": {
+			"title": "birthday",
+			"description": "学员生日",
+			"bsonType": "timestamp"
+		},
+		"phone": {
+			"title": "phone",
+			"description": "学员手机号",
+			"bsonType": "string",
+			"maxLength": 64
+		},
+		"buyStatus": {
+			"title": "buy_status",
+			"description": "购买课程的状态,已购买:1;未购买:0",
+			"defaultValue": 0,
+			"bsonType": "int",
+			"enum": [{
+				"text": "未购买",
+				"value": 0
+			}, {
+				"text": "已购买",
+				"value": 1
+			}]
+		},
+		"userId": {
+			"title": "user_id",
+			"description": "用户id,和uni-id-users表的_id关联",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"createdTime": {
+			"title": "created_time",
+			"description": "用户创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		  "mobile": {
+		      "title": "mobile",
+		      "description": "手机号",
+		      "bsonType": "string",
+		      "errorMessage": "{title}不能为空",
+		      "maxLength": 128
+		    }
+	}
+}
