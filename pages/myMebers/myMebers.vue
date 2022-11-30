@@ -3,7 +3,6 @@
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 	<BetterSticky :scrollTop="scrollTop">
 		<template v-slot:header>
-
 	
 		</template>
 		<template v-slot:content>
@@ -19,7 +18,7 @@
 		      <view class="left_num_style">0</view>
 		    </view>
 		  </view>
-		  <view class="header_right_style">
+		  <view class="header_right_style" :class="ceilingFlag ? 'search_anmition_style' : ''">
 		    <image
 		      class="right_img_style"
 		      src="../../static/app-plus/mebrs/fangdajing.svg"
@@ -27,7 +26,7 @@
 		  </view>
 		</view>	
 			
-		<view class="is_buy_style">
+		<view class="is_buy_style" :class="ceilingFlag ? 'celling_animation_style' : ''">
 		  <view
 		    class="buy_left"
 		    :class="isActive === 'y' ? 'active' : ''"
@@ -83,7 +82,7 @@
 		        <view class="need_loop_style">
 		          <view class="loop_top_style">
 		            <view class="top_left_style">
-		              <text class="top_left_name_style">赵思远</text>
+		              <text class="top_left_name_style">赵思远{{ceilingFlag}}</text>
 		              <image
 		                class="top_left_img_style"
 		                src="../../static/app-plus/mebrs/man.svg"
@@ -197,7 +196,8 @@ export default {
       deleteRemarkFlag: false,
       loginNum: 0,
       showPopover: false,
-	  scrollTop: 0
+	  scrollTop: 0,
+	  ceilingFlag: false
     }
   },
   onLoad(options) {},
@@ -209,6 +209,7 @@ export default {
         if (res.data) {
           self.loginNum = res.data
           self.showPopover = res.data == '0' ? true : false
+		 
           // console.log(res, '次数',self.loginNum )
         }
       },
@@ -217,8 +218,11 @@ export default {
   },
   //页面滚动执行方式
   onPageScroll(e) {
-  		console.log(e.scrollTop,'????')
-  	this.scrollTop= e.scrollTop
+		this.scrollTop= e.scrollTop
+		
+		 this.ceilingFlag = e.scrollTop > 50 ? true : false
+  		console.log(e.scrollTop,'????',this.ceilingFlag)
+	
   },
   methods: {
 
@@ -268,10 +272,11 @@ export default {
   flex-direction: column;
   .header_style {
     width: calc(100vw - 60upx);
+	margin-left: 30upx;
     height: 80upx;
     margin-top: 30upx;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     .header_left_style {
       width: 50%;
@@ -287,7 +292,7 @@ export default {
           object-fit: contain;
           border-radius: 50%;
           margin-right: 20upx;
-          margin-left: 30upx;
+          // margin-left: 30upx;
         }
         .left_header_style {
           font-size: 48upx;
@@ -311,10 +316,10 @@ export default {
       }
     }
     .header_right_style {
-      width: 50%;
+		
       display: block;
       .right_img_style {
-        height: 48.59upx;
+        width: 48.59upx;
         height: 48.59upx;
       }
     }
@@ -326,6 +331,7 @@ export default {
     display: flex;
     align-items: center;
     margin-top: 36upx;
+	
     .buy_left {
       width: 50%;
       height: 100%;
@@ -584,4 +590,68 @@ uni-page-body {
 	padding-bottom: 110upx;
 	height: 100%;
 }
+.celling_animation_style {
+
+	  position: fixed;
+	  left: 0;
+	  top: 0;
+	  z-index: 1000;
+	   width: 100vw !important;
+	   background: #212328;
+	   margin-top: 0 !important;	   
+	   padding-top: 36upx;
+	   padding-bottom: 36upx;
+	   animation-name: cellingAnmation;
+	     animation-duration: 0.3s;
+	   .buy_left {
+
+		   width: 40% !important;
+	   }
+	   .buy_right {
+		
+		   width: 40% !important;
+	   }
+	
+} 
+.search_anmition_style {
+	position: fixed;
+	right: 30upx;
+	top: 56upx;
+	animation-name: seachAnmation;
+  animation-duration: 0.3s;
+  z-index: 30000;
+}
+@keyframes seachAnmation {
+	0% {
+		 top: 0upx;
+		 
+	}
+	
+	
+	100% {
+		 top: 56upx;
+			 
+	}
+}
+   @keyframes cellingAnmation {
+       0% {
+        top: -45upx;
+		   
+       }
+	   
+	   
+       100% {
+        // 
+		top: 0upx;
+		 
+       }
+   }
+   .celling_style {
+	   position: fixed;
+	   left: 0;
+	   top: 0;
+   }
+   ::v-deep.tui-sticky-fixed {
+	   top: 0 !important;
+   }
 </style>

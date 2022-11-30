@@ -110,9 +110,10 @@ export default {
     async verifyCode() {
       let login = uniCloud.importObject('login')
       const getVerifyRes = await login.getVerifySchema()
+	  console.log(getVerifyRes,'?????我是验证码')
       try {
         this.requestVerifyCode =
-          getVerifyRes.length > 0 ? getVerifyRes[0] : '0000'
+          getVerifyRes.length > 0 ? getVerifyRes[0].code : '0000'
       } catch (err) {}
     },
     // 上方退出标识
