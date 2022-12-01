@@ -34,9 +34,13 @@ module.exports = {
 	   })
    },
    // 添加会员
-   addMember: function() {
+   addMember: function(data) {
 	   return new Promise((resolve, reject) => {
+		   db.collection('t_trainee').add(data).then(e=>{
 		   
+		   }).catch(err => {
+			   
+		   })
 	   		   
 	   })
    },
@@ -49,7 +53,12 @@ module.exports = {
    // 编辑会员
    updateMember: function() {
 	   return new Promise((resolve, reject) => {
+	   		   db.collection('t_trainee').doc(this.item._id).update(item).then(e=>{
+	   		   	// console.log(e)
 	   		   
+	   		   }).catch(err => {
+				   
+			   })
 	   	   })
    },
    

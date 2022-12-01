@@ -31,24 +31,11 @@
              ref="gendPicker"
 			@confirm="genderConfirm"
 			 :show-toolbar="true"
+			  title="请选择性别"
 			
             >
 			
-			</van-picker>
-	<!-- 		<template v-slot:toolbar>
-				<view class="bar_content_style">
-					<view class="bar_left_style">请选择性别</view>
-					<image class="bar_right_style" src="../../static/app-plus/mebrs/close.png" @click.stop="showPicker = false"></image> 
-							
-				</view>
-			</template> -->
-			
-	<!-- 		<template v-slot:columns-bottom>
-				<view class="custom_bottom_style" @click.stop="genderConfirm">
-					保存
-				</view>
-			</template> -->
-			
+			</van-picker>			
           </van-popup>
         </van-cell-group>
         <van-cell-group inset>
@@ -375,8 +362,11 @@ export default {
 }
 ::v-deep .van-ellipsis {
 		color: #F4F7FF;
-		
-		
+		font-size: 32upx;
+		font-family: PingFangSC-Semibold, PingFang SC;
+		font-weight: 600;
+		color: #F4F7FF;
+			
 		
 }
 ::v-deep .van-hairline-unset--top-bottom:after {
@@ -396,5 +386,21 @@ export default {
 ::v-deep .van-picker {
 	background: #383D46 !important;
 	z-index: -3;
+}
+
+::v-deep .van-picker__confirm {
+	color: #F4F7FF;
+	font-size: 32upx;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #F4F7FF;
+	line-height: 44upx;
+}
+::v-deep .van-picker__cancel {
+	font-size: 32upx;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #7A7F89;
+	line-height: 44upx;
 }
 </style>
