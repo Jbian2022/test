@@ -3,7 +3,7 @@
     <view class="header">
       <view class="all-action" :class="{active:mode===0}" @click="modeChangeHandle(0)">全部动作库</view>
       <view class="problem-action" :class="{active:mode===1}" @click="modeChangeHandle(1)">问题动作库</view>
-      <view class="custom-action" @click="addActionHandle(19)">+ 自定义动作</view>
+      <view class="custom-action" :class="{show:showSaveButton}" @click="addActionHandle(19)">+ 自定义动作</view>
     </view>
     <view class="search">
       <van-search shape="round" background="#212328" v-model="actionName" placeholder="输入动作名称搜索" @search="getActionList" />
@@ -34,7 +34,7 @@
               <view class="text">{{i.actionName}}</view>
             </view>
           </view>
-          <view class="custom-action-button" @click="addActionHandle">
+          <view v-if="!showSaveButton" class="custom-action-button" @click="addActionHandle">
             <text> + 自定义动作</text>
           </view>
         </view>
@@ -159,18 +159,15 @@ export default {
       actionList: [],
     }
   },
-  onLoad: function (option) {
-    /* if (option.hideTabBar) {
+  onShow(){
+    const type = uni.getStorageSync('actionLibraryType')
+    if(type==='select'){
       uni.hideTabBar()
       this.showSaveButton = true
     } else {
       uni.showTabBar()
       this.showSaveButton = false
-    } */
-  },
-  mounted() {
-    /* uni.hideTabBar()
-		this.showSaveButton=true */
+    }
     this.getActionList()
   },
   methods: {
@@ -205,9 +202,11 @@ export default {
       }
     },
     goNewWorkout(){
+      uni.setStorageSync('actionLibraryType', 'show')
       uni.navigateTo({
         url: '/pages/newWorkout/newWorkout'
       });
+      uni.showTabBar()
     }
   },
 }
@@ -236,6 +235,9 @@ page {
       font-size: 28upx;
       font-weight: 400;
       color: #f4f7ff;
+      &.show{
+        opacity: 0;
+      }
     }
   }
   .search {

@@ -41,7 +41,7 @@
 				}
 			}
 		},
-		mounted () {
+		onShow () {
 			this.getUserInfo()
 		},
 		methods: {

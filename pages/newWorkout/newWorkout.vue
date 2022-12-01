@@ -89,6 +89,7 @@
 		},
 		methods: {
 			addActionHandle(){
+				uni.setStorageSync('actionLibraryType', 'select')
 				uni.switchTab({
 					url: '/pages/actionLibrary/index'
 				});
