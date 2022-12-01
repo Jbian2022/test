@@ -30,6 +30,7 @@
               :columns="columns"
              ref="gendPicker"
 			@confirm="genderConfirm"
+			@cancel="showPicker=false"
 			 :show-toolbar="true"
 			  title="请选择性别"
 			
@@ -50,13 +51,14 @@
           />
           <van-popup v-model:show="dateShowpicker" position="bottom">
             <van-datetime-picker
-              v-model="currentDate"
+              v-model="studentForm.birthday"
               type="date"
               title="选择年月日"
               :min-date="minDate"
               :max-date="maxDate"
-              @confirm="onConfirm"
+              @confirm="birthConfirm"
               @cancel="dateShowpicker = false"
+			  :formatter="formatter"
             />
           </van-popup>
         </van-cell-group>
@@ -108,6 +110,7 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+import hadleDate from '@/common/timeUtil.js'
 export default {
   components: {
     BgTheamCompontent,
@@ -118,7 +121,7 @@ export default {
       studentForm: {
         traineeName: '',
 		gender: '',
-		birthday: '',
+		birthday: hadleDate.timeFormat(new Date(),"yyyy-MM-dd"),
 		mobile: '',
 		buyStatus: 0
       },
@@ -126,26 +129,44 @@ export default {
       showPicker: false,
       minDate: new Date(2020, 0, 1),
       maxDate: new Date(2025, 10, 1),
-      currentDate: new Date(),
       dateShowpicker: false,
 
     }
   },
+  mounted() {
+	// console.log(timeFormat.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss"))
+  },
   methods: {
+	      /**
+	       * 格式化日期
+	       * @param type
+	       * @param val
+	       * @returns {string|*}
+	       */
+	      formatter(type, val) {
+	        if (type === 'year') {
+	          return `${val}年`;
+	        } else if (type === 'month') {
+	          return `${val}月`;
+	        } else if (type === 'day') {
+	          return `${val}日`;
+	        } else if (type === 'hour') {
+	          return `${val}时`;
+	        } else if (type === 'minute') {
+	          return `${val}分`;
+	        }
+	        return val;
+	      },
 	  genderChange(value) {
 		 
-		  this.studentForm.gender = value
+		 
+	  },
+	  birthConfirm({ selectedValues, selectedOptions }) {
+		console.log( selectedValues, selectedOptions,'???')  
 	  },
 	  genderConfirm(e) {
-	
-		console.log( e ,'kkkk' )
-			  
-
-		// let pickReason = (this.$refs.gendPicker as any).$el.children[0].children[1]; //拿到顶部栏的确认元素
-		      // pickReason.click(); //执行一下
-		// let pickReason = (this.$refs.picker as any).$el.children[0].children[1]
-		//       pickReason.click()
-		
+		this.studentForm.gender = e.text
+		this.showPicker = false	  	
 	  },
 	  addDirectly() {
 		  this.$refs.studentForm.submit();
@@ -394,13 +415,18 @@ export default {
 	font-family: PingFangSC-Semibold, PingFang SC;
 	font-weight: 600;
 	color: #F4F7FF;
-	line-height: 44upx;
+	line-height: 50upx;
+	
 }
 ::v-deep .van-picker__cancel {
 	font-size: 32upx;
 	font-family: PingFangSC-Semibold, PingFang SC;
 	font-weight: 600;
 	color: #7A7F89;
-	line-height: 44upx;
+	line-height: 50upx;
+	
+}
+::v-deep .van-picker__toolbar {
+	margin-top: 10upx;
 }
 </style>
