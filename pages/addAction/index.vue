@@ -2,11 +2,11 @@
 	<view class="add-action">
 		<van-nav-bar title="新增动作" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="form">
-			<input class="uni-input" placeholder="请输入动作名称" />
+			<van-field class="uni-input" v-model="actionName" placeholder="请输入动作名称" />
 			<van-cell is-link title="基础用法" value="力量训练" @click="show = true" />
 		</view>
 		<view class="footer-button">
-			<van-button type="primary" block>保存</van-button>
+			<van-button type="primary" block @click="saveAction">保存</van-button>
 		</view>
 		<van-action-sheet v-model:show="show" title="选择动作类型">
 			<view class="action-type-item active">
@@ -22,16 +22,35 @@
 </template>
 
 <script>
+	const actionLibrary = uniCloud.importObject('actionLibrary')
 	export default {
 		data() {
 			return {
 				show:false,
+				actionName: null
 			}
+		},
+		onLoad: function (option) {
+			console.log(option)
+			this.type = option.type
+			this.actionClass = option.actionClass
 		},
 		methods: {
 			onClickLeft(){
-				uni.navigateBack()
+				uni.switchTab({
+					url: '/pages/actionLibrary/index',
+				})
 			},
+			async saveAction(){
+				const res = await actionLibrary.addAction({
+					type: this.type,
+					actionClass: this.actionClass,
+					actionName: this.actionName,
+					actionType: 'fasfdsafasfa'
+				})
+				this.onClickLeft()
+				console.log(res,8888)
+			}
 		}
 	}
 </script>
@@ -66,11 +85,16 @@
 				height: 108upx;
 				background: #383D46;
 				border-radius: 16upx;
-				font-weight: 400;
-				color: #eff3fc;
 				padding-left: 40upx;
-				&::placeholder{
+				::v-deep .van-field__control{
+					color: #eff3fc;
+					font-weight: 400;
+				}
+				::v-deep .van-field__control::placeholder{
 					color: #7A7F89;
+				}
+				::v-deep &:after{
+					display: none;
 				}
 			}
 			.van-cell{
