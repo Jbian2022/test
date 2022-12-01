@@ -29,13 +29,21 @@
 </template>
 
 <script>
+const My = uniCloud.importObject('my')
 	export default {
 		data() {
 			return {
 				
 			}
 		},
+		mounted () {
+			this.getUserInfo()
+		},
 		methods: {
+			async getUserInfo(){
+				const res = await My.getUserInfo()
+				console.log(res,88888)
+			},
 			openCard(){
 				uni.navigateTo({
 					url: '/pages/openCard/openCard'
