@@ -89,8 +89,8 @@
 		},
 		methods: {
 			addActionHandle(){
-				uni.navigateTo({
-					url: '/pages/addAction/index'
+				uni.switchTab({
+					url: '/pages/actionLibrary/index'
 				});
 			},
 			finish(){

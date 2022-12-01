@@ -88,7 +88,7 @@
 		                src="../../static/app-plus/mebrs/man.svg"
 		              ></image>
 		            </view>
-		            <view class="top_right_style">
+		            <view class="top_right_style" @click="goToNewWorkout">
 		              <image
 		                class="top_right_img_style"
 		                src="../../static/app-plus/mebrs/trainingProgram.svg"
@@ -111,7 +111,7 @@
 		              ></image>
 		              <text class="message_style">评测信息</text>
 		            </view>
-		            <view class="bottom_style">
+		            <view class="bottom_style" @click="goToTrainingRecord">
 		              <image
 		                class="bootom_img_style"
 		                src="../../static/app-plus/mebrs/trainingLog.svg"
@@ -255,6 +255,16 @@ export default {
     },
     buyClick(type) {
       this.isActive = type
+    },
+    goToTrainingRecord(){
+      uni.navigateTo({
+        url: '/pages/trainingRecord/trainingRecord'
+      })
+    },
+    goToNewWorkout(){
+      uni.navigateTo({
+        url: '/pages/newWorkout/newWorkout'
+      })
     }
   }
 }

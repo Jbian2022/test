@@ -43,7 +43,7 @@
     <view v-if="showSaveButton" class="footer-seat"></view>
     <view v-if="showSaveButton" class="footer-button">
       <van-button type="default">取消</van-button>
-      <van-button type="primary">确认添加（3）</van-button>
+      <van-button type="primary" @click="goNewWorkout">确认添加（3）</van-button>
     </view>
     <van-dialog v-model:show="showDialog" :showConfirmButton="false">
       <view class="dialog-section">
@@ -169,8 +169,8 @@ export default {
     } */
   },
   mounted() {
-    // uni.hideTabBar()
-		// this.showSaveButton=true
+    uni.hideTabBar()
+		this.showSaveButton=true
     this.getActionList()
   },
   methods: {
@@ -204,6 +204,11 @@ export default {
         })
       }
     },
+    goNewWorkout(){
+      uni.navigateTo({
+        url: '/pages/newWorkout/newWorkout'
+      });
+    }
   },
 }
 </script>
