@@ -2,35 +2,103 @@
 	<view class="personal-info">
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="header">
-			<view class="user-name">王教练</view>
-			<view class="user-logo">
-				<van-image class="img" round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+			<view class="user-name" @click="updateSignature('username')">{{userInfo.username||''}}</view>
+			<view class="user-logo" @click="show=true">
+				<van-image class="img" round :src="userInfo.avatar"/>
 			</view>
 		</view>
 		<view class="form">
 			<view class="form-content">
-				<van-cell title="性别" value="男" is-link />
-				<van-cell title="签名" value="蜕变，从此刻开始" is-link @click="updateSignature"/>
+				<van-cell title="性别" :value="userInfo.gender" is-link @click="updateSignature('gender')" />
+				<van-cell title="签名" :value="userInfo.comment" is-link @click="updateSignature('comment')"/>
 			</view>
 		</view>
+		<van-action-sheet
+			v-model:show="show"
+			:actions="actions"
+			cancel-text="取消"
+			close-on-click-action
+			@select="selectHandle"
+		/>
 	</view>
 </template>
 
 <script>
+	const My = uniCloud.importObject('my')
 	export default {
 		data() {
 			return {
-				
+				show:false,
+				actions :[
+					{ name: '拍照上传' },
+					{ name: '本地上传' }
+				],
+				userInfo: {
+					username: '',
+					avatar: null,
+					gender: null,
+					comment: null
+				}
 			}
 		},
+		mounted () {
+			this.getUserInfo()
+		},
 		methods: {
-			onClickLeft(){
-				uni.navigateBack()
+			async getUserInfo(){
+				const res = await My.getUserInfo()
+				const {avatar,username,gender,comment} = res.data
+				this.userInfo = {
+					avatar:avatar||null,
+					username:username||'用户名',
+					gender:gender===0?'未知':gender===1?'男':gender===2?'女':null,
+					comment
+				}
+				console.log(res,88888)
 			},
-			updateSignature(){
-				uni.navigateTo({
-					url: '/pages/updateSignature/updateSignature'
+			onClickLeft(){
+				// uni.navigateBack()
+				uni.switchTab({
+					url: '/pages/my/my'
 				});
+			},
+			updateSignature(type){
+				uni.navigateTo({
+					url: '/pages/updateSignature/updateSignature?type='+type
+				});
+			},
+			selectHandle(val){
+				if(val.name==='拍照上传'){
+					this.uploadImage('camera')
+				} else if (val.name==='本地上传') {
+					this.uploadImage('album')
+				}
+			},
+			uploadImage(sourceType){
+				const success = async (res) =>{
+					if(res.tempFiles&&res.tempFiles.length>0){
+						const result = await uniCloud.uploadFile({
+							cloudPath: Date.now() + "-" + res.tempFiles[0].name,
+							filePath: res.tempFilePaths[0]
+						});
+						const res1 = await My.updateUserInfo({
+							avatar: result.fileID
+						})
+						this.getUserInfo()
+						console.log(res1)
+					}
+				}
+				const fail = () =>{
+
+				}
+				uni.chooseImage({
+					count: 1,
+					sizeType: ['compressed'],
+					extension: ['jpg','jpeg','png'],
+					sourceType:[sourceType],
+					success,
+					fail
+				})
 			}
 		}
 	}
@@ -102,6 +170,23 @@ page{
 					border: none;
 				}
 			}
+		}
+	}
+	::v-deep.van-popup{
+		padding: 30upx;
+		background: transparent;
+		box-sizing: border-box;
+		.van-action-sheet__gap{
+			background: transparent;
+		}
+		.van-action-sheet__content,.van-action-sheet__cancel{
+			border-radius: 16upx;
+			background: #454951;
+			color: #FFFFFF;
+		}
+		.van-action-sheet__item{
+			background: #454951;
+			color: #FFFFFF;
 		}
 	}
 }

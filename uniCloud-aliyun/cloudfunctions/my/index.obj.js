@@ -28,23 +28,26 @@ module.exports = {
 		return {
 			data:res.data[0] //请根据实际需要返回值
 		}
-	}
-	
-	/* 
-	method1(param1) {
-		// 参数校验，如无参数则不需要
-		if (!param1) {
-			return {
-				errCode: 'PARAM_IS_NULL',
-				errMsg: '参数不能为空'
-			}
-		}
+	},
+	/**
+	 * 设置用户信息
+	 * @returns {object} 返回值描述
+	 */
+	async updateUserInfo(param) {
+		const {avatar,username,gender,comment} = param
+		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 		// 业务逻辑
-		
+		const db = uniCloud.database()
+		const res = await db.collection('uni-id-users').where({_id:uid}).update({
+			avatar:avatar||undefined,
+			username:username||undefined,
+			gender:gender&&gender!==0?gender:undefined,
+			comment:comment||undefined
+		})
+		console.log(res)
 		// 返回结果
 		return {
-			param1 //请根据实际需要返回值
+			data:res //请根据实际需要返回值
 		}
 	}
-	*/
 }

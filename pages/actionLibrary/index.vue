@@ -169,8 +169,8 @@ export default {
     } */
   },
   mounted() {
-    uni.hideTabBar()
-		this.showSaveButton=true
+    /* uni.hideTabBar()
+		this.showSaveButton=true */
     this.getActionList()
   },
   methods: {
