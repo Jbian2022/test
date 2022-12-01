@@ -3,7 +3,7 @@
     <view class="header">
       <view class="all-action" :class="{active:mode===0}" @click="modeChangeHandle(0)">全部动作库</view>
       <view class="problem-action" :class="{active:mode===1}" @click="modeChangeHandle(1)">问题动作库</view>
-      <view class="custom-action" @click="addActionHandle">+ 自定义动作</view>
+      <view class="custom-action" @click="addActionHandle(19)">+ 自定义动作</view>
     </view>
     <view class="search">
       <van-search shape="round" background="#212328" v-model="actionName" placeholder="输入动作名称搜索" @search="getActionList" />
@@ -20,7 +20,7 @@
         </van-sidebar>
       </view>
       <view class="action-list">
-        <view class="action-list-title">颈前引训练动作</view>
+        <view class="action-list-title">{{actionClassName}}训练动作</view>
         <view class="action-list-view">
           <view class="action-list-box">
             <view v-for="i in actionList" :key="i._id" class="action-list-item">
@@ -70,6 +70,7 @@ export default {
       mode: 0,
       actionName: null,
       actionClass: 0,
+      actionClassName: '胸',
       actionClassList: [
         {
           text: '胸',
@@ -174,6 +175,7 @@ export default {
   },
   methods: {
     async getActionList() {
+      this.actionClassName = this.actionClassList[this.actionClass].text
       const res = await actionLibrary.getActionList({
         type: this.mode,
         actionClass: this.actionClass,
@@ -191,10 +193,16 @@ export default {
         this.showDialog = true
       }
     },
-    addActionHandle() {
-      uni.navigateTo({
-        url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${this.actionClass}`,
-      })
+    addActionHandle(index) {
+      if(index===19){
+        uni.navigateTo({
+          url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${index}`,
+        })
+      } else {
+        uni.navigateTo({
+          url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${this.actionClass}`,
+        })
+      }
     },
   },
 }

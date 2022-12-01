@@ -4,9 +4,6 @@
     "uni-id": "file:../../../uni_modules/uni-id/uniCloud/cloudfunctions/common/uni-id"
   },
   "extensions": {
-    "uni-cloud-jql": {},
-    "uni-cloud-sms": {},
-    "uni-cloud-verify": {},
-    "uni-cloud-push": {}
+    "uni-cloud-jql": {}
   }
 }

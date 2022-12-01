@@ -48,9 +48,7 @@ module.exports = {
 		)).get()
 		// 返回结果
 		return {
-			data:res.data,
-			userId: uid,
-			token:this.getUniIdToken
+			data:res.data
 		}
 	},
 	/**
@@ -92,8 +90,7 @@ module.exports = {
 		})
 		// 返回结果
 		return {
-			data:res,
-			userId: uid
+			data:res
 		}
 	}
 }

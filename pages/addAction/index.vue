@@ -3,19 +3,15 @@
 		<van-nav-bar title="新增动作" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="form">
 			<van-field class="uni-input" v-model="actionName" placeholder="请输入动作名称" />
-			<van-cell is-link title="基础用法" value="力量训练" @click="show = true" />
+			<van-cell is-link title="动作类型" :value="actionType" @click="show = true" />
 		</view>
 		<view class="footer-button">
 			<van-button type="primary" block @click="saveAction">保存</van-button>
 		</view>
 		<van-action-sheet v-model:show="show" title="选择动作类型">
-			<view class="action-type-item active">
-				<view class="title">力量训练</view>
-				<view class="des">力量训练的类型，可以为自定义动作提供记录次数和重量，其中重量的单位只能为公斤（kg）和磅（lbs）</view>
-			</view>
-			<view class="action-type-item">
-				<view class="title">力量训练</view>
-				<view class="des">力量训练的类型，可以为自定义动作提供记录次数和重量，其中重量的单位只能为公斤（kg）和磅（lbs）</view>
+			<view v-for="(item,index) in actionTypeList" :key="index" class="action-type-item" :class="{active:item.active}" @click="actionTypeListSelect(item)">
+				<view class="title">{{item.title}}</view>
+				<view class="des">{{item.des}}</view>
 			</view>
 		</van-action-sheet>
 	</view>
@@ -27,7 +23,30 @@
 		data() {
 			return {
 				show:false,
-				actionName: null
+				actionName: null,
+				actionTypeList:[
+					{
+						title:'自重训练',
+						des:'自重动作、自动负重动作，都适合这种训练类型。如果你不负重，那么你可以只填写次数；如果负重，那么可以填写附加的重量',
+						active:false
+					},
+					{
+						title:'自重辅助',
+						des:'例如辅助引体向上、辅助臂屈伸等等项目，需要用到辅助重量的动作，适合这种类型。这种类型可以自行设置体重。',
+						active:false
+					},
+					{
+						title:'拉伸',
+						des:'拉伸动作无需记录任何数据',
+						active:false
+					},
+					{
+						title:'Tabata',
+						des:'符合经典意义上的Tabata训练动作时：一个动作，20秒训练，十秒休息，来回8个回合（4分钟）',
+						active:false
+					}
+				],
+				actionType: ''
 			}
 		},
 		onLoad: function (option) {
@@ -36,6 +55,13 @@
 			this.actionClass = option.actionClass
 		},
 		methods: {
+			actionTypeListSelect(child){
+				this.actionTypeList.forEach(item => {
+					item.active = false
+				});
+				child.active = true
+				this.actionType = child.title
+			},
 			onClickLeft(){
 				uni.switchTab({
 					url: '/pages/actionLibrary/index',
@@ -46,7 +72,7 @@
 					type: this.type,
 					actionClass: this.actionClass,
 					actionName: this.actionName,
-					actionType: 'fasfdsafasfa'
+					actionType: this.actionType
 				})
 				this.onClickLeft()
 				console.log(res,8888)
