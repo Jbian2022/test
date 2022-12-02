@@ -22,15 +22,23 @@
       <view class="action-list">
         <view class="action-list-title">{{actionClassName}}训练动作</view>
         <view class="action-list-view">
-          <view class="action-list-box">
-            <view v-for="i in actionList" :key="i._id" class="action-list-item">
-              <popover className="image" :disabled="actionClass!==19" :list="actions" @selctClick="selectClick">
-                <van-image round src="../../static/newWorkout/action.png" />
+          <view v-if="actionClass===19" class="action-list-box">
+            <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
+              <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick">
+                <view class="action-name">{{i.actionName[0]}}</view>
                 <template v-slot:item="{item}">
                   <text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
                   <text v-else>{{item.text}}</text>
                 </template>
               </popover>
+              <view class="text">{{i.actionName}}</view>
+            </view>
+          </view>
+          <view v-else class="action-list-box">
+            <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
+              <view class="image">
+                <van-image round src="../../static/newWorkout/action.png" />
+              </view>
               <view class="text">{{i.actionName}}</view>
             </view>
           </view>
@@ -42,8 +50,8 @@
     </view>
     <view v-if="showSaveButton" class="footer-seat"></view>
     <view v-if="showSaveButton" class="footer-button">
-      <van-button type="default">取消</van-button>
-      <van-button type="primary" @click="goNewWorkout">确认添加（3）</van-button>
+      <van-button type="default" @click="goBack">取消</van-button>
+      <van-button type="primary" @click="goNewWorkout">确认添加（{{selectNum}}）</van-button>
     </view>
     <van-dialog v-model:show="showDialog" :showConfirmButton="false">
       <view class="dialog-section">
@@ -157,11 +165,17 @@ export default {
       showDialog: false,
       showSaveButton: false,
       actionList: [],
+      selectActionList:[]
     }
   },
   onShow(){
     const type = uni.getStorageSync('actionLibraryType')
     if(type==='select'){
+      this.selectActionList=[]
+      this.actionClassList.forEach(item=>{
+        const list = this.selectActionList.filter(child => child.actionClass === item.value)
+        item.badge = list.length || null
+      })
       uni.hideTabBar()
       this.showSaveButton = true
     } else {
@@ -178,12 +192,42 @@ export default {
         actionClass: this.actionClass,
         actionName: this.actionName,
       })
-      this.actionList = res.data
+      const actionList = res.data || []
+      this.actionList = actionList.map(item=>{
+        const flag = this.selectActionList.some(i=>item._id===i._id)
+        if(flag){
+          return {
+            ...item,
+            active: true
+          }
+        } else {
+          return {
+            ...item,
+            active: false
+          }
+        }
+      })
       console.log(res, 888)
     },
     modeChangeHandle(val) {
       this.mode = val
       this.getActionList()
+    },
+    selectAction(i){
+      if(!this.showSaveButton){
+        return
+      }
+      i.active = !i.active
+      if(i.active){
+        this.selectActionList.push(i)
+      } else {
+        this.selectActionList = this.selectActionList.filter(item=>item._id!==i._id)
+      }
+      this.actionClassList.forEach(item=>{
+        const list = this.selectActionList.filter(child => child.actionClass === item.value)
+        item.badge = list.length || null
+      })
+      console.log(this.actionClassList,888)
     },
     selectClick(item) {
       if (item.text === '删除动作') {
@@ -201,14 +245,28 @@ export default {
         })
       }
     },
-    goNewWorkout(){
+    goBack(){
       uni.setStorageSync('actionLibraryType', 'show')
       uni.navigateTo({
         url: '/pages/newWorkout/newWorkout'
       });
+      this.actionList = []
+      uni.showTabBar()
+    },
+    goNewWorkout(){
+      uni.setStorageSync('actionLibraryType', 'show')
+      uni.navigateTo({
+        url: '/pages/newWorkout/newWorkout?ids='+this.selectActionList.map(item=>item._id)
+      });
+      this.actionList = []
       uni.showTabBar()
     }
   },
+  computed:{
+    selectNum(){
+      return this.selectActionList.length || 0
+    }
+  }
 }
 </script>
 
@@ -351,6 +409,17 @@ page {
           ::v-deep.image {
             padding-top: 30upx;
             text-align: center;
+            .action-name{
+              width: 100upx;
+              height: 100upx;
+              margin: 0 auto;
+              font-size: 28upx;
+              font-weight: 600;
+              line-height: 100upx;
+              border-radius: 100%;
+              background: #1370FF;
+              color: #F4F7FF;
+            }
           }
           .van-image {
             width: 100upx;

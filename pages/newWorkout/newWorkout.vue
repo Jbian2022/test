@@ -65,7 +65,7 @@
 			<view class="first-level-title">删除训练</view>
 			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
 			<view class="botton-box">
-				<van-button class="delete" block>确认删除</van-button>
+				<van-button class="delete" block @click="deleteHandle">确认删除</van-button>
 				<van-button block @click="showDeleteDialog=false">取消</van-button>
 			</view>
 		</van-dialog>
@@ -95,9 +95,10 @@
 				});
 			},
 			finish(){
-				uni.navigateTo({
-					url: '/pages/trainingRecord/trainingRecord'
-				});
+				uni.navigateBack()
+			},
+			deleteHandle(){
+				uni.navigateBack()
 			}
 		}
 	}

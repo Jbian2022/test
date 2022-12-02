@@ -3,13 +3,14 @@
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="title">设置</view>
 		<view class="form">
-			<van-cell title="注销账号" is-link />
+			<van-cell title="注销账号" is-link @click="delUser"/>
 		</view>
-		<van-button class="footer-btn" block>退出登录</van-button>
+		<van-button class="footer-btn" block @click="logout">退出登录</van-button>
 	</view>
 </template>
 
 <script>
+	const login = uniCloud.importObject('login')
 	export default {
 		data() {
 			return {
@@ -20,6 +21,16 @@
 			onClickLeft(){
 				uni.navigateBack()
 			},
+			delUser(){
+				this.logout();
+			},
+			async logout(){
+				// await login.logout();
+				uni.clearStorage();
+				uni.reLaunch({
+					url: '/pages/logining/logining'
+				});
+			}
 		}
 	}
 </script>
