@@ -1,0 +1,137 @@
+{
+	"bsonType": "object",
+	"required": ["actionId", "actionCode", "actionName", "actionType", "type"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"actionId": {
+			"title": "action_id",
+			"description": "训练动作编号,主键不重复",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"actionClass": {
+			"title": "action_class",
+			"description": "动作大类,胸,肩,腿等",
+			"bsonType": "int",
+			"enum": [{
+				"text": "胸",
+				"value": 0
+			}, {
+				"text": "背",
+				"value": 1
+			}, {
+				"text": "腿",
+				"value": 2
+			}, {
+				"text": "肩",
+				"value": 3
+			}, {
+				"text": "斜方肌",
+				"value": 4
+			}, {
+				"text": "二头",
+				"value": 5
+			}, {
+				"text": "三头",
+				"value": 6
+			}, {
+				"text": "小腿",
+				"value": 7
+			}, {
+				"text": "前臂",
+				"value": 8
+			}, {
+				"text": "臀部",
+				"value": 9
+			}, {
+				"text": "自定义动作",
+				"value": 10
+			}, {
+				"text": "颈前引",
+				"value": 11
+			}, {
+				"text": "圆肩",
+				"value": 12
+			}, {
+				"text": "驼背",
+				"value": 13
+			}, {
+				"text": "骨盆前倾",
+				"value": 14
+			}, {
+				"text": "骨盆后倾",
+				"value": 15
+			}, {
+				"text": "膝内扣",
+				"value": 16
+			}, {
+				"text": "足外翻",
+				"value": 17
+			}, {
+				"text": "足内翻",
+				"value": 18
+			}, {
+				"text": "翼状肩胛",
+				"value": 19
+			}]
+		},
+		"actionCode": {
+			"title": "action_code",
+			"description": "动作编码",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"actionName": {
+			"title": "action_name",
+			"description": "训练动作名称",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"actionType": {
+			"title": "action_type",
+			"description": "训练动作类型,力量训练,有氧训练,等",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
+		"type": {
+			"title": "type",
+			"description": "动作库类型,全部动作库:0,问题动作库:1",
+			"bsonType": "int",
+			"defaultValue": 0,
+			"errorMessage": "{title}不能为空",
+			"enum": [{
+				"text": "全部动作库",
+				"value": 0
+			}, {
+				"text": "问题动作库",
+				"value": 1
+			}]
+		},
+		"userId": {
+			"title": "user_id",
+			"description": "用户id,添加自定义动作的用户,关联uni-id-users表中的_id",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"createdTime": {
+			"title": "created_time",
+			"description": "创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}
