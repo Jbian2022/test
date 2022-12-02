@@ -89,8 +89,9 @@
 		},
 		methods: {
 			addActionHandle(){
-				uni.navigateTo({
-					url: '/pages/addAction/index'
+				uni.setStorageSync('actionLibraryType', 'select')
+				uni.switchTab({
+					url: '/pages/actionLibrary/index'
 				});
 			},
 			finish(){

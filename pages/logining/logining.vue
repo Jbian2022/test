@@ -125,7 +125,6 @@ export default {
       }
       if (this.controlActiveFlag) {
         // 发送验证码
-        debugger
         const login = uniCloud.importObject('login') //第一步导入云对象
         try {
           const smsRes = await login.sendSmsCode(this.phone)

@@ -23,7 +23,9 @@
 		},
 		methods: {
 			onClickLeft(){
-				uni.navigateBack()
+				uni.switchTab({
+					url: '/pages/myMebers/myMebers'
+				});
 			},
 			addWorkout(){
 				uni.navigateTo({

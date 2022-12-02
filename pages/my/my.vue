@@ -3,12 +3,12 @@
 		<view class="background"></view>
 		<view class="header">
 			<view class="logo" @click="personalInfo">
-				<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+				<van-image round :src="userInfo.avatar"/>
 				<view class="edit-icon"></view>
 			</view>
 			<view class="user-name">
-				<view class="name">王教练</view>
-				<view class="des">锐变，从此刻开始</view>
+				<view class="name">{{userInfo.username}}</view>
+				<view class="des">{{userInfo.comment}}</view>
 			</view>
 			<view class="config" @click="setUp"></view>
 		</view>
@@ -29,13 +29,33 @@
 </template>
 
 <script>
+	const My = uniCloud.importObject('my')
 	export default {
 		data() {
 			return {
-				
+				userInfo: {
+					username: '',
+					avatar: null,
+					gender: null,
+					comment: null
+				}
 			}
 		},
+		onShow () {
+			this.getUserInfo()
+		},
 		methods: {
+			async getUserInfo(){
+				const res = await My.getUserInfo()
+				const {avatar,username,gender,comment} = res.data
+				this.userInfo = {
+					avatar:avatar||null,
+					username:username||'用户名',
+					gender,
+					comment
+				}
+				console.log(res,88888)
+			},
 			openCard(){
 				uni.navigateTo({
 					url: '/pages/openCard/openCard'

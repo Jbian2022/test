@@ -13,7 +13,7 @@
                 src="https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
               ></image>
               <view class="left_header_style">我的会员</view>
-              <view class="left_num_style">{{meberList.length}}</view>
+              <view class="left_num_style">{{ meberList.length }}</view>
             </view>
           </view>
           <view
@@ -93,9 +93,7 @@
                 <view class="need_loop_style">
                   <view class="loop_top_style">
                     <view class="top_left_style">
-                      <text class="top_left_name_style"
-                        >赵思远</text
-                      >
+                      <text class="top_left_name_style">赵思远</text>
                       <image
                         class="top_left_img_style"
                         src="../../static/app-plus/mebrs/man.svg"
@@ -202,8 +200,7 @@ export default {
       loginNum: 0,
       showPopover: false,
       scrollTop: 0,
-      ceilingFlag: false,
-	  
+      ceilingFlag: false
     }
   },
   onLoad(options) {},
@@ -259,6 +256,16 @@ export default {
     },
     buyClick(type) {
       this.isActive = type
+    },
+    goToTrainingRecord() {
+      uni.navigateTo({
+        url: '/pages/trainingRecord/trainingRecord'
+      })
+    },
+    goToNewWorkout() {
+      uni.navigateTo({
+        url: '/pages/newWorkout/newWorkout'
+      })
     }
   }
 }
