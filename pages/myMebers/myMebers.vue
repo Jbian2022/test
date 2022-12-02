@@ -99,7 +99,7 @@
                         src="../../static/app-plus/mebrs/man.svg"
                       ></image>
                     </view>
-                    <view class="top_right_style">
+                    <view class="top_right_style" @click="goToNewWorkout">
                       <image
                         class="top_right_img_style"
                         src="../../static/app-plus/mebrs/trainingProgram.svg"
@@ -122,7 +122,7 @@
                       ></image>
                       <text class="message_style">评测信息</text>
                     </view>
-                    <view class="bottom_style">
+                    <view class="bottom_style" @click="goToTrainingRecord">
                       <image
                         class="bootom_img_style"
                         src="../../static/app-plus/mebrs/trainingLog.svg"
@@ -259,12 +259,12 @@ export default {
     },
     goToTrainingRecord() {
       uni.navigateTo({
-        url: '/pages/trainingRecord/trainingRecord'
+        url: '/pages/trainingRecord/trainingRecord?traineeNo='+'63899b9ef5cf3a1773072cd4'
       })
     },
     goToNewWorkout() {
       uni.navigateTo({
-        url: '/pages/newWorkout/newWorkout'
+        url: '/pages/newWorkout/newWorkout?traineeNo='+'63899b9ef5cf3a1773072cd4'
       })
     }
   }

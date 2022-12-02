@@ -26,23 +26,45 @@
 				actionName: null,
 				actionTypeList:[
 					{
+						type: 0,
+						title:'力量训练',
+						des:'力量训练的类型，可以为自定义动作提供记录次数和重量，其中重量的单位只能为公斤（kg）和磅（lbs）',
+						active:false
+					},
+					{
+						type: 1,
+						title:'有氧训练',
+						des:'有氧训练有多种记录形式，用户可以自行选择多种记录组合进行搭配',
+						active:false
+					},
+					{
+						type: 2,
+						title:'仅需要填写次数',
+						des:'有些动作既不会负重，也不需要重物，此时你可以选择这种记录方式',
+						active:false
+					},
+					{
+						type: 3,
+						title:'仅记录时间',
+						des:'有些动作你只想记录时间的，选择此类记录形式你可以自行选择用秒表还是计时器',
+						active:false
+					},
+					{
+						type: 4,
 						title:'自重训练',
 						des:'自重动作、自动负重动作，都适合这种训练类型。如果你不负重，那么你可以只填写次数；如果负重，那么可以填写附加的重量',
 						active:false
 					},
 					{
+						type: 5,
 						title:'自重辅助',
 						des:'例如辅助引体向上、辅助臂屈伸等等项目，需要用到辅助重量的动作，适合这种类型。这种类型可以自行设置体重。',
 						active:false
 					},
 					{
+						type: 6,
 						title:'拉伸',
 						des:'拉伸动作无需记录任何数据',
-						active:false
-					},
-					{
-						title:'Tabata',
-						des:'符合经典意义上的Tabata训练动作时：一个动作，20秒训练，十秒休息，来回8个回合（4分钟）',
 						active:false
 					}
 				],
@@ -60,7 +82,7 @@
 					item.active = false
 				});
 				child.active = true
-				this.actionType = child.title
+				this.actionType = child.type
 			},
 			onClickLeft(){
 				uni.switchTab({

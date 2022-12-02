@@ -207,7 +207,7 @@ export default {
           }
         }
       })
-      console.log(res, 888)
+      // console.log(res, 888)
     },
     modeChangeHandle(val) {
       this.mode = val
@@ -227,7 +227,7 @@ export default {
         const list = this.selectActionList.filter(child => child.actionClass === item.value)
         item.badge = list.length || null
       })
-      console.log(this.actionClassList,888)
+      // console.log(this.actionClassList,888)
     },
     selectClick(item) {
       if (item.text === '删除动作') {
@@ -247,6 +247,7 @@ export default {
     },
     goBack(){
       uni.setStorageSync('actionLibraryType', 'show')
+      uni.setStorageSync('actionList', JSON.stringify([]))
       uni.navigateTo({
         url: '/pages/newWorkout/newWorkout'
       });
@@ -255,8 +256,9 @@ export default {
     },
     goNewWorkout(){
       uni.setStorageSync('actionLibraryType', 'show')
+      uni.setStorageSync('actionList', JSON.stringify(this.selectActionList))
       uni.navigateTo({
-        url: '/pages/newWorkout/newWorkout?ids='+this.selectActionList.map(item=>item._id)
+        url: '/pages/newWorkout/newWorkout'
       });
       this.actionList = []
       uni.showTabBar()
