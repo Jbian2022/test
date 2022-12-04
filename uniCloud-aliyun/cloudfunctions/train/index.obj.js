@@ -98,5 +98,36 @@ module.exports = {
 		return {
 			data:res //请根据实际需要返回值
 		}
+	},
+	/**
+	 * 删除训练信息
+	 * @param {object} param 参数描述
+	 * @returns {object} 返回值描述
+	 */
+	async deleteTrainInfo(param) {
+		const {traineeNo,trainDate} = param
+		// 参数校验，如无参数则不需要
+		if (!param.trainDate) {
+			return {
+				errCode: 'PARAM_IS_NULL',
+				errMsg: '训练时间不能为空'
+			}
+		}
+		if (!param.traineeNo) {
+			return {
+				errCode: 'PARAM_IS_NULL',
+				errMsg: '学员编号不能为空'
+			}
+		}
+		// 业务逻辑
+		const db = uniCloud.database()
+		const res = await db.collection('t_training_log').where({
+			trainDate,
+			traineeNo
+		}).remove()
+		// 返回结果
+		return {
+			data:res //请根据实际需要返回值
+		}
 	}
 }

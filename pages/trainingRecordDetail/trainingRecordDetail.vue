@@ -14,7 +14,7 @@
 			<view v-for="j in 3" :key="j" class="info-item">
 				<view class="item-header">
 					<view class="img">
-						<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+						<van-image round src="../../static/newWorkout/action.png"/>
 					</view>
 					<view class="des-info">
 						<view class="des-title">杠铃卧推</view>

@@ -12,7 +12,7 @@
 				<view v-if="i.type===0" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -35,18 +35,18 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.kg" placeholder="" type="digit" />
+								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
 								<text>kg</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
 								<text>次</text>
 							</view>
-							<view class="yes" @click="item.active = !item.active">
+							<view class="yes" @click="item.active = !item.active,technicalData()">
 								<van-icon name="success" />
 							</view>
-							<view class="delete" @click="deleteProjectItem(i.groupList,index)">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -55,13 +55,13 @@
 				<view v-if="i.type===1" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>总里程：{{i.mileage}}km</text>
-								<text>用时：{{i.times}}</text>
+								<text>用时：{{formaterTimes(i.times,2)}}</text>
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
@@ -78,19 +78,19 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.kg" placeholder="" type="digit" />
+								<van-field v-model="item.km" placeholder="" type="digit" @blur="technicalData"/>
 								<text>km</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
 								<text>时</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
 								<text>分</text>
 							</view>
-							<view class="delete" @click="deleteProjectItem(i.groupList,index)">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -99,7 +99,7 @@
 				<view v-if="i.type===2" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -121,28 +121,28 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
 								<text>次</text>
 							</view>
-							<view class="yes" @click="item.active = !item.active">
+							<view class="yes" @click="item.active = !item.active,technicalData()">
 								<van-icon name="success" />
 							</view>
-							<view class="delete" @click="deleteProjectItem(i.groupList,index)">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()">+ 新增一组</view>
 					</view>
 				</view>
 				<view v-if="i.type===3" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
-								<text>用时：{{i.times}}</text>
+								<text>用时：{{formaterTimes(i.times)}}</text>
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
@@ -159,19 +159,19 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
 								<text>时</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
 								<text>分</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.second" placeholder="" type="digit" @blur="technicalData"/>
 								<text>秒</text>
 							</view>
-							<view class="delete" @click="deleteProjectItem(i.groupList,index)">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"  @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -180,7 +180,7 @@
 				<view v-if="i.type===4" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -203,18 +203,18 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.kg" placeholder="" type="digit" />
+								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
 								<text>kg</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
 								<text>次</text>
 							</view>
-							<view class="yes" @click="item.active = !item.active">
+							<view class="yes" @click="item.active = !item.active,technicalData()">
 								<van-icon name="success" />
 							</view>
-							<view class="delete" @click="deleteProjectItem(i.groupList,index)">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -223,7 +223,7 @@
 				<view v-if="i.type===5" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -241,7 +241,7 @@
 						</popover>
 					</view>
 					<view class="weight">
-						<van-field v-model="i.weight" placeholder="请先设置当前体重" type="digit"/>
+						<van-field v-model="i.weight" placeholder="请先设置当前体重" type="digit" @blur="technicalData"/>
 					</view>
 					<view class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
@@ -249,18 +249,18 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.kg" placeholder="" type="digit" />
+								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
 								<text>kg</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
 								<text>次</text>
 							</view>
-							<view class="yes" @click="item.active = !item.active">
+							<view class="yes" @click="item.active = !item.active,technicalData()">
 								<van-icon name="success" />
 							</view>
-							<view class="delete" @click="deleteProjectItem(i.groupList,index)">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -269,12 +269,12 @@
 				<view v-if="i.type===6" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
-								<text>总用时：{{i.times}}</text>
+								<text>总用时：{{formaterTimes(i.times)}}</text>
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
@@ -291,19 +291,19 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
 								<text>时</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
 								<text>分</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" />
+								<van-field v-model="item.second" placeholder="" type="digit" @blur="technicalData"/>
 								<text>秒</text>
 							</view>
-							<view class="delete" @click="deleteProjectItem(i.groupList,index)">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -316,8 +316,8 @@
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
 		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
-			<view class="first-level-title">删除训练</view>
-			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
+			<view class="first-level-title">完成训练</view>
+			<view class="second-level-title">是否已经完成训练了</view>
 			<view class="botton-box">
 				<van-button class="finish" block @click="finish">确认完成</van-button>
 				<van-button block @click="showFinishDialog=false">取消</van-button>
@@ -426,6 +426,7 @@
 			addProjectItem(list){
 				list.push({
 					kg: 0,
+					km: 0,
 					time: 0,
 					hour: 0,
 					minute: 0,
@@ -447,8 +448,8 @@
 				}
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
-				uni.switchTab({url:'/pages/myMebers/myMebers'})
 				uni.removeStorageSync('traineeNo')
+				uni.switchTab({url:'/pages/myMebers/myMebers'})
 			},
 			deleteHandle(){
 				uni.removeStorageSync('actionList')
@@ -469,6 +470,77 @@
 				const month=formater(d.getMonth()+1);
 				const date=formater(d.getDate());
 				return [year,month,date].join('-');
+			},
+			technicalData(){
+				this.actionList.forEach((item)=>{
+					if(item.type===0){
+						item.load = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.kg) {cur.kg = 0}
+							return cur.active ? +cur.kg + +prev : prev; 
+						}, 0)
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===1){
+						item.mileage = item.groupList.reduce( function (prev, cur) {
+							if(!cur.km) {cur.km = 0} 
+							return  +cur.km + +prev; 
+						}, 0)
+						item.times = item.groupList.reduce( function (prev, cur) {
+							if(!cur.hour) {cur.hour = 0}  
+							if(!cur.minute) {cur.minute = 0}  
+							if(!cur.second) {cur.second = 0}  
+							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+						}, 0)
+					} else if(item.type===2){
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===3){
+						item.times = item.groupList.reduce( function (prev, cur) {
+							if(!cur.hour) {cur.hour = 0}  
+							if(!cur.minute) {cur.minute = 0}  
+							if(!cur.second) {cur.second = 0}  
+							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+						}, 0)
+					} else if(item.type===4){
+						item.load = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.kg) {cur.kg = 0}
+							return cur.active ? +cur.kg + +prev : prev; 
+						}, 0)
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===5){
+						item.load = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.kg) {cur.kg = 0}
+							return cur.active ? +cur.kg + +prev : prev; 
+						}, 0)
+						if(item.weight){
+							item.load = item.load + +item.weight
+						}
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===6){
+						item.times = item.groupList.reduce( function (prev, cur) {
+							if(!cur.hour) {cur.hour = 0}  
+							if(!cur.minute) {cur.minute = 0}  
+							if(!cur.second) {cur.second = 0}  
+							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+						}, 0)
+					}
+				})
+			},
+			formaterTimes(times,type=3){
+				const hour = Math.floor(times/3600);
+				const minute = Math.floor((times-(hour*3600))/60);
+				const second = times-(hour*3600)-(minute*60);
+				return  type===3?hour+'时'+minute+'分'+second+'秒':hour+'时'+minute+'分'
 			}
 		}
 	}
@@ -680,7 +752,7 @@ page{
 			margin-top: 30upx;
 		}
 		.add-project-item{
-			padding-top: 40upx;
+			margin-top: 40upx;
 			font-size: 30upx;
 			font-weight: 500;
 			color: #FFFFFF;
