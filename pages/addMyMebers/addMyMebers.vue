@@ -17,13 +17,15 @@
         </van-cell-group>
         <van-cell-group inset>
           <van-field
-            v-model="studentForm.gender"
+            v-model="gender"
             is-link
             readonly
             name="gender"
             label="性别(必填)"
             placeholder="请选择性别"
             @click="showPicker = true"
+			:rules="[{ required: true, message: '请选择性别' }]"
+			
           />
           <van-popup v-model:show="showPicker" position="bottom">
             <van-picker
@@ -33,7 +35,7 @@
 			@cancel="showPicker=false"
 			 :show-toolbar="true"
 			  title="请选择性别"
-			
+			:defaultIndex="gendDefaultIndex"
             >
 			
 			</van-picker>			
@@ -48,10 +50,11 @@
             label="生日(必填)"
             placeholder="请选择生日"
             @click="dateShowpicker = true"
+			:rules="[{ required: true, message: '请选择生日' }]"
           />
           <van-popup v-model:show="dateShowpicker" position="bottom">
             <van-datetime-picker
-              v-model="studentForm.birthday"
+              v-model="currentDate"
               type="date"
               title="选择年月日"
               :min-date="minDate"
@@ -59,16 +62,19 @@
               @confirm="birthConfirm"
               @cancel="dateShowpicker = false"
 			  :formatter="formatter"
+			 
             />
           </van-popup>
         </van-cell-group>
         <van-cell-group inset>
           <van-field
             v-model="studentForm.mobile"
-            name="mobile"
+            name="pattern"
             label="手机号码(必填)"
             placeholder="请填写手机号码"
-            :rules="[{ required: true, message: '请填写手机号码' }]"
+			 type="tel"
+			 :max="11"
+            :rules="[{pattern, message: '请输入正确的手机号码' }]"
           />
         </van-cell-group>
         <van-cell-group inset>
@@ -120,20 +126,26 @@ export default {
     return {
       studentForm: {
         traineeName: '',
-		gender: '',
-		birthday: hadleDate.timeFormat(new Date(),"yyyy-MM-dd"),
+		gender: '0',
+		birthday: '',
 		mobile: '',
 		buyStatus: 0
       },
+	  gender: '',
       columns: [{ text: '未知', value: '0' }, { text: '男', value: '1' },{ text: '女', value: '2' }],
       showPicker: false,
-      minDate: new Date(2020, 0, 1),
+      minDate: new Date(1888, 1, 1),
       maxDate: new Date(2025, 10, 1),
       dateShowpicker: false,
-
+	  currentDate: new Date(),
+	  customFieldName: {text: 'text', value: 'value'},
+	gendDefaultIndex: 0,
+	pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
     }
   },
   mounted() {
+	 
+	
 	// console.log(timeFormat.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss"))
   },
   methods: {
@@ -161,15 +173,57 @@ export default {
 		 
 		 
 	  },
-	  birthConfirm({ selectedValues, selectedOptions }) {
-		console.log( selectedValues, selectedOptions,'???')  
+	  birthConfirm() {
+		this.studentForm.birthday = hadleDate.timeFormat(this.currentDate,  "yyyy-MM-dd");
+		this.dateShowpicker = false
+		
 	  },
 	  genderConfirm(e) {
-		this.studentForm.gender = e.text
+		 
+		this.studentForm.gender = e.value
+		this.gender = e.text
+		let defaultIndex = this.columns.findIndex(item => {
+			item.value = e.value
+		})
+		this.defaultIndex = defaultIndex
 		this.showPicker = false	  	
 	  },
 	  addDirectly() {
-		  this.$refs.studentForm.submit();
+		  var that = this
+		 this.$refs.studentForm.validate().then( () => {
+			
+			let businessCloudObject = uniCloud.importObject('businessCloudObject')
+			businessCloudObject.addMember(that.studentForm).then(res => {
+				if (res.success) {
+				console.log(1)
+					uni.switchTab({
+					  url: '/pages/myMebers/myMebers',
+					  success: (res) => {},
+					  fail: () => {},
+					  complete: () => {}
+					})
+					uni.showToast({
+						icon: 'success',
+						title: res.message,
+						duration: 800
+					})
+				} else {
+					console.log(2)
+					uni.showToast({
+						icon: 'fail',
+						title: res.message,
+						duration: 800
+					})
+				}
+			})
+			
+			
+		 }).catch(err => {
+			Toast.fail(err);
+		 })
+		 
+		
+	
 	  },
     onConfirm( ) {
 		

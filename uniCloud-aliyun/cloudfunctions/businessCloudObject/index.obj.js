@@ -1,9 +1,13 @@
 // 云对象教程: https://uniapp.dcloud.net.cn/uniCloud/cloud-obj
 // jsdoc语法提示教程：https://ask.dcloud.net.cn/docs/#//ask.dcloud.net.cn/article/129
 const db = uniCloud.database()
+const uniID = require('uni-id')
 module.exports = {
 	_before: function () { // 通用预处理器
-
+		const clientInfo = this.getClientInfo()
+		this.uniID = uniID.createInstance({ // 创建uni-id实例，其上方法同uniID
+			clientInfo
+		})
 	},
 	/**
 	 * method1方法描述
@@ -28,20 +32,66 @@ module.exports = {
 	}
 	*/
    // 获取学员列表
-   getMemberList: function() {
+   getMemberList: async function(mobile) {
+	   const token = this.getUniIdToken()
+	   	const detailInfo = await this.uniID.checkToken(token)
+		console.log(detailInfo,'detailInfo')
 	   return new Promise((resolve, reject) => {
-		   // db.collection('opendb-verify-codes')
+		   db.collection('t_trainee').where({
+			   mobile: detailInfo.userInfo.mobile,
+			   userId: detailInfo.uid   
+		   }).get().then(memberRes => {
+			   let successMessage = {
+				   success: true,
+				   ...memberRes
+			   }
+			   resolve(successMessage)
+			   
+		   }).catch(err => {
+			   reject(err)
+		   })
+		   
 	   })
    },
    // 添加会员
-   addMember: function(data) {
+   addMember: async function(data) {
+	   const token = this.getUniIdToken()
+		const { uid } = await this.uniID.checkToken(token)
+	
 	   return new Promise((resolve, reject) => {
-		   db.collection('t_trainee').add(data).then(e=>{
-		   
-		   }).catch(err => {
-			   
-		   })
-	   		   
+		   let resultParam = {
+			   ...data,
+			  userId: uid
+			 
+		   }
+		  // 先去查一下是否重复
+		  db.collection('t_trainee').where({
+			  traineeName: resultParam.traineeName
+		  }).get().then(valiodRes => {
+			  console.log(valiodRes.affectedDocs, 'valiodRes.affectedDocs')
+			  if (valiodRes.affectedDocs == 0) {
+				  db.collection('t_trainee').add(resultParam).then(() =>{
+					  let successMessage = {
+					  	success: true,
+						message: '添加成功'
+					  }
+				  resolve(successMessage)
+				  }).catch(err => {
+					  console.log(err, 'err')
+					   reject(err)
+				  })
+				  	   		   
+			  }  else {
+				  let errMsage = {
+					  success: false,
+					  message: '该学员已经被添加'
+				  }
+				  resolve(errMsage)
+			  }
+			
+		  })
+		  
+
 	   })
    },
    // 删除会员

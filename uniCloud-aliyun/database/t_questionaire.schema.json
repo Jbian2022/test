@@ -13,29 +13,39 @@
 		},
 		"questionId": {
 			"title": "question_id",
-			"description": "问题id,主键不重复",
+			"description": "问题\/问卷ID,主键不可重复",
 			"bsonType": "string",
-			"errorMessage": "{title}不能为空",
-			"maxLength": 64
+			"maxLength": 128
 		},
 		"code": {
 			"title": "code",
-			"description": "问题编码",
+			"description": "问题\/问卷编码,不可重复",
 			"bsonType": "string",
-			"errorMessage": "{title}不能为空",
-			"maxLength": 64
-		},
-		"questionName": {
-			"title": "question_name",
-			"description": "问题名\/问卷名",
-			"bsonType": "string",
-			"maxLength": 90
+			"maxLength": 128
 		},
 		"parentCode": {
 			"title": "parent_code",
-			"description": "上级问题编码,自关联本表中的code字段",
+			"description": "上级问题\/问卷编码,自关联本表中的code字段",
 			"bsonType": "string",
+			"maxLength": 128
+		},
+		"questionLevel": {
+			"title": "question_level",
+			"description": "问题\/问卷级别,身体评测为1级,健康问答和体态评估都为2级,类推",
+			"bsonType": "int",
 			"maxLength": 64
+		},
+		"seqNo": {
+			"title": "seq_no",
+			"description": "相同级别,相同parentCode问题\/问卷的序号,用于前端展示时排序",
+			"bsonType": "int",
+			"maxLength": 64
+		},
+		"questionContent": {
+			"title": "question_content",
+			"description": "问题\/问卷内容",
+			"bsonType": "string",
+			"maxLength": 900
 		},
 		"questionType": {
 			"title": "question_type",
@@ -49,11 +59,30 @@
 				"text": "单选问题",
 				"value": 1
 			}, {
-				"text": "多选问题",
+				"text": "多选问题1",
 				"value": 2
 			}, {
-				"text": "文本问题",
+				"text": "多选问题2",
 				"value": 3
+			}, {
+				"text": "文本问题",
+				"value": 4
+			}, {
+				"text": "评级问题",
+				"value": 5
+			}]
+		},
+		"inputType": {
+			"title": "input_type",
+			"description": "文本问题答案的输入类型,滑动选择输入:0;手动输入:1",
+			"bsonType": "int",
+			"errorMessage": "{title}不能为空",
+			"enum": [{
+				"text": "滑动选择输入",
+				"value": 0
+			}, {
+				"text": "手动输入",
+				"value": 1
 			}]
 		},
 		"textType": {
@@ -71,15 +100,36 @@
 		},
 		"answer": {
 			"title": "answer",
-			"description": "问题答案,数组的每个元素为选择类型问题的每一个选项",
+			"description": "问题答案,数组的每个元素为选择类型问题的每一个选项,单选和一般多选获取answerTitle,特殊多选获取answerTitle和answeerContent",
 			"bsonType": "array",
-			"arrayType": "string"
+			"arrayType": "object",
+			"properties": {
+				"answerTitle": {
+					"bsonType": "string"
+				},
+				"answeerContent": {
+					"bsonType": "string"
+				}
+			}
+		},
+		"url": {
+			"title": "url",
+			"description": "背景图片文件url路径",
+			"bsonType": "string",
+			"maxLength": 900
 		},
 		"answerRemark": {
 			"title": "answer_remark",
-			"description": "答案描述",
-			"bsonType": "string",
-			"maxLength": 900
+			"description": "答案补充的说明内容,单选和一般多选获取remakTitle,特殊多选获取remakTitle后解析detailArray数组",
+			"bsonType": "object",
+			"properties": {
+				"remarkTitle": {
+					"bsonType": "string"
+				},
+				"detailArray": {
+					"bsonType": "string"
+				}
+			}
 		},
 		"createdTime": {
 			"title": "created_time",
@@ -88,6 +138,39 @@
 			"forceDefaultValue": {
 				"$env": "now"
 			}
+		},
+		"updatedTime": {
+			"title": "updated_time",
+			"description": "创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		"createdBy": {
+			"title": "created_by",
+			"description": "创建人",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"updatedBy": {
+			"title": "updated_by",
+			"description": "修改人",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"isDelete": {
+			"title": "is_delete",
+			"description": "删除标记,已删除:1,未删除:0",
+			"bsonType": "int",
+			"defaultValue": 0,
+			"enum": [{
+				"text": "未删除",
+				"value": 0
+			}, {
+				"text": "已删除",
+				"value": 1
+			}]
 		}
 	}
 }

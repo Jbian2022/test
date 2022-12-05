@@ -1,0 +1,93 @@
+{
+	"bsonType": "object",
+	"required": ["questionId", "code", "qustionType"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"questionId": {
+			"title": "question_id",
+			"description": "问题id,主键不重复",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 64
+		},
+		"code": {
+			"title": "code",
+			"description": "问题编码",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 64
+		},
+		"questionName": {
+			"title": "question_name",
+			"description": "问题名\/问卷名",
+			"bsonType": "string",
+			"maxLength": 90
+		},
+		"parentCode": {
+			"title": "parent_code",
+			"description": "上级问题编码,自关联本表中的code字段",
+			"bsonType": "string",
+			"maxLength": 64
+		},
+		"questionType": {
+			"title": "question_type",
+			"description": "问题类型,问卷:0;单选问题:1;多选问题:2;文本问题:3",
+			"bsonType": "int",
+			"errorMessage": "{title}不能为空",
+			"enum": [{
+				"text": "问卷",
+				"value": 0
+			}, {
+				"text": "单选问题",
+				"value": 1
+			}, {
+				"text": "多选问题",
+				"value": 2
+			}, {
+				"text": "文本问题",
+				"value": 3
+			}]
+		},
+		"textType": {
+			"title": "text_type",
+			"description": "是否需要补充说明,需要补充说明:1,不需要补充说明:0",
+			"bsonType": "int",
+			"defaultValue": 0,
+			"enum": [{
+				"text": "不需要补充说明",
+				"value": 0
+			}, {
+				"text": "需要补充说明",
+				"value": 1
+			}]
+		},
+		"answer": {
+			"title": "answer",
+			"description": "问题答案,数组的每个元素为选择类型问题的每一个选项",
+			"bsonType": "array",
+			"arrayType": "string"
+		},
+		"answerRemark": {
+			"title": "answer_remark",
+			"description": "答案描述",
+			"bsonType": "string",
+			"maxLength": 900
+		},
+		"createdTime": {
+			"title": "created_time",
+			"description": "创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

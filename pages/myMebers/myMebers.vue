@@ -1,9 +1,6 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <BetterSticky :scrollTop="scrollTop">
-      <template v-slot:header> </template>
-      <template v-slot:content>
         <!--内容 start-->
         <view class="header_style">
           <view class="header_left_style">
@@ -18,7 +15,7 @@
           </view>
           <view
             class="header_right_style"
-            :class="ceilingFlag ? 'search_anmition_style' : ''"
+     
           >
             <image
               class="right_img_style"
@@ -29,7 +26,7 @@
 
         <view
           class="is_buy_style"
-          :class="ceilingFlag ? 'celling_animation_style' : ''"
+
         >
           <view
             class="buy_left"
@@ -93,11 +90,17 @@
                 <view class="need_loop_style">
                   <view class="loop_top_style">
                     <view class="top_left_style">
-                      <text class="top_left_name_style">赵思远</text>
+                      <text class="top_left_name_style">{{item.traineeName}}</text>
                       <image
                         class="top_left_img_style"
                         src="../../static/app-plus/mebrs/man.svg"
+						v-if="item.gender == 1"
                       ></image>
+					  <image
+					    class="top_left_img_style"
+					    src="../../static/app-plus/mebrs/woman.svg"
+						v-if="item.gender == 2"
+					  ></image>
                     </view>
                     <view class="top_right_style">
                       <image
@@ -135,8 +138,10 @@
             </uni-swipe-action-item>
           </uni-swipe-action>
         </view>
-      </template>
-    </BetterSticky>
+    
+	
+
+
 
     <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
       <van-popover
@@ -168,31 +173,15 @@
 
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
-import BetterSticky from '@/components/better-sticky/better-sticky.vue'
-
+var businessCloudObject = uniCloud.importObject('businessCloudObject')
 export default {
   components: {
     BgTheamCompontent,
-    BetterSticky
   },
   data() {
     return {
       meberList: [
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        }
+    
       ],
       isActive: 'y',
       controlSwiperFlag: false,
@@ -200,10 +189,21 @@ export default {
       loginNum: 0,
       showPopover: false,
       scrollTop: 0,
-      ceilingFlag: false
+
     }
   },
-  onLoad(options) {},
+  onLoad(options) {
+	uni.pageScrollTo({
+			scrollTop:0,
+			duration:0
+		})
+		// setTimeout(()=>{
+		// 		this.getTop()
+		// 	},1000)
+  },
+  created() {
+  	  this.getMemberList()
+  },
   mounted() {
     let self = this
     uni.getStorage({
@@ -218,17 +218,38 @@ export default {
       },
       fail: function (err) {}
     })
+	
   },
   //页面滚动执行方式
   onPageScroll(e) {
-    this.scrollTop = e.scrollTop
 
-    this.ceilingFlag = e.scrollTop > 50 ? true : false
-    console.log(e.scrollTop, '????', this.ceilingFlag)
+   
   },
   methods: {
+	  getTop(){
+	  		// 获取元素距离顶部的距离
+	  		var _this=this
+	  		uni.getSystemInfo({
+	  			success:(resu)=>{
+	  				const query = uni.createSelectorQuery()
+	  				query.select('#box').boundingClientRect()
+	  				query.selectViewport().scrollOffset()
+	  				query.exec(function(res){
+	  					_this.Topdistance=res[0].top
+	  					
+	  				})
+	  			},
+	  			fail:(res)=>{}
+	  		})
+	  	},
+	  getMemberList() {
+		businessCloudObject.getMemberList().then(meberListRes => {
+			console.log(meberListRes, 'meberListRes')
+			this.meberList = meberListRes.data || []
+		}).catch(err=> {})
+	  },
     clickOverlay() {
-      console.log('拜拜')
+      // console.log('拜拜')
       uni.setStorageSync('loginNum', '1')
     },
     bindClick(e) {
@@ -274,7 +295,7 @@ export default {
 <style lang="scss">
 .content_style {
   width: 100vw;
-  // height: 100vh;
+  height: 100%;
   // overflow: hidden;
   overflow-x: hidden;
   overflow-y: auto;
@@ -334,13 +355,17 @@ export default {
       }
     }
   }
+
   .is_buy_style {
-    width: calc(100vw - 60upx);
+    // width: calc(100vw - 60upx);
     height: 82upx;
     margin-left: 30upx;
     display: flex;
     align-items: center;
     margin-top: 36upx;
+	 position: sticky;
+	top: 0;
+	z-index: 999;
 
     .buy_left {
       width: 50%;
@@ -366,13 +391,23 @@ export default {
       color: #fff;
     }
   }
+  .is_buy_style::before {
+  	  width:  calc(100vw - 300upx) !important;
+  }
+  .is_buy_style::after {
+  	  width:  calc(100vw - 300upx) !important;
+  }
+
   .mebers_content {
     width: 100vw;
     flex: 1;
+	display: flex;
+	flex-direction: column;
+	background: #212328;
     .no_data_style {
       width: 100%;
       display: flex;
-      height: 100%;
+      flex: 1;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -598,6 +633,9 @@ uni-page-body {
 ::v-deep.tui-sticky-class {
   padding-bottom: 110upx;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 .celling_animation_style {
   position: fixed;

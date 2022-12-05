@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       show: false,
-      phone: '17521791830',
+      phone: '',
       checkFlag: false,
       hasWeixinAuth: false,
       checkPhone: '',
@@ -200,10 +200,12 @@ export default {
 <style scoped lang="scss">
 .counter {
   position: absolute;
-  background: url('@/static/backgroundImage.png') no-repeat center center;
-  background-size: 100% 100%;
-  width: 100vw;
-  height: 100vh;
+  background: url('@/static/backgroundImage.png');
+background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+	width: 100vw;
+	height: 100vh;
   .text {
     padding-top: 444upx;
     padding-left: 70upx;
@@ -234,7 +236,9 @@ export default {
       margin-left: 70upx;
       height: 100upx;
       background-color: rgba(244, 247, 255, 0.15);
-
+	  line-height: 100upx;
+	  padding-bottom: 0;
+	  padding-top: 0;
       border-radius: 16upx;
     }
     // 按钮

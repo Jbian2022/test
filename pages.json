@@ -3,10 +3,8 @@
 		{
 			"path": "pages/myMebers/myMebers",
 			"style": {
-				// #ifndef APP-PLUS
-				"enablePullDownRefresh": true,
-				// #endif
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
 			}
 		},
 
@@ -210,12 +208,6 @@
 				"text": "我的"
 			}
 		]
-	},
-	"uniIdRouter": {
-		"loginPage": "uni_modules/uni-id-pages/pages/login/login-withoutpwd",
-		"needLogin": [
-			"/uni_modules/uni-id-pages/pages/userinfo/userinfo"
-		],
-		"resToLogin": true
 	}
+
 }
