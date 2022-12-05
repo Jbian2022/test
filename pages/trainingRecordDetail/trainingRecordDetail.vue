@@ -3,39 +3,202 @@
 		<view class="backgroud-img"><van-image  src="../../static/newWorkout/training-record-bg.png"/></view>
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="first-title-times">
-			<view class="title">腿背胸肩超级组</view>
-			<view class="times">10.04</view>
+			<view class="title">{{traineeTitle}}</view>
+			<view class="times">{{getMonthDay(trainDate)}}</view>
 		</view>
 		<view class="second-title-day">
-			<view class="title">总负荷量：100kg</view>
-			<view class="day">星期三</view>
+			<view class="title">总负荷量：{{sumLoad}}kg</view>
+			<view class="day">星期{{getweekday(trainDate)}}</view>
 		</view>
 		<view class="info-list">
-			<view v-for="j in 3" :key="j">
-				<view class="info-item">
+			<view v-for="(j,jx) in trainInfoList" :key="jx">
+				<view v-if="j.type===0" class="info-item">
 					<view class="item-header">
 						<view class="img">
 							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
 						<view class="des-info">
-							<view class="des-title">杠铃卧推</view>
-							<view class="info-text">总次数：20次</view>
+							<view class="des-title">{{j.actionName}}</view>
+							<view class="info-text">
+								<text>负荷量：{{j.load}}kg</text>
+								<text>已完成：{{j.frequency}}次</text>
+							</view>
 						</view>
 					</view>
 					<view class="detailed-data">
-						<view v-for="i in 3" :key="i" class="data-item">
-							<view class="index">1</view>
+						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+							<view class="index">{{ix+1}}</view>
 							<view class="data-info">
 								<view class="kg">
-									<text class="num">10</text>
+									<text class="num">{{i.kg}}</text>
 									<text>kg</text>
 								</view>
 								<view class="x">
 									x
 								</view>
 								<view class="time">
-									<text class="num">10</text>
+									<text class="num">{{i.time}}</text>
 									<text>次</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view v-if="j.type===1" class="info-item">
+					<view class="item-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{j.actionName}}</view>
+							<view class="info-text">
+								<text>总里程：{{j.mileage}}km</text>
+								<text>用时：{{formaterTimes(j.times)}}</text>
+							</view>
+						</view>
+					</view>
+					<view class="detailed-data">
+						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+							<view class="index">{{ix+1}}</view>
+							<view class="data-info-km">
+								<text class="num">{{i.km}}</text>
+								<text>km</text>
+							</view>
+							<view class="data-info-time">
+								<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view v-if="j.type===2" class="info-item">
+					<view class="item-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{j.actionName}}</view>
+							<view class="info-text">
+								<text>已完成：{{j.frequency}}次</text>
+							</view>
+						</view>
+					</view>
+					<view class="detailed-data">
+						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+							<view class="index">{{ix+1}}</view>
+							<view class="data-info">
+								<view class="time">
+									<text class="num">{{i.time}}</text>
+									<text>次</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view v-if="j.type===3" class="info-item">
+					<view class="item-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{j.actionName}}</view>
+							<view class="info-text">
+								<text>总用时：{{formaterTimes(j.times)}}</text>
+							</view>
+						</view>
+					</view>
+					<view class="detailed-data">
+						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+							<view class="index">{{ix+1}}</view>
+							<view class="data-info">
+								<view class="time">
+									<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view v-if="j.type===4" class="info-item">
+					<view class="item-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{j.actionName}}</view>
+							<view class="info-text">
+								<text>负荷量：{{j.load}}kg</text>
+								<text>已完成：{{j.frequency}}次</text>
+							</view>
+						</view>
+					</view>
+					<view class="detailed-data">
+						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+							<view class="index">{{ix+1}}</view>
+							<view class="data-info">
+								<view class="kg">
+									<text class="num">{{i.kg}}</text>
+									<text>kg</text>
+								</view>
+								<view class="x">
+									x
+								</view>
+								<view class="time">
+									<text class="num">{{i.time}}</text>
+									<text>次</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view v-if="j.type===5" class="info-item">
+					<view class="item-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{j.actionName}}</view>
+							<view class="info-text">
+								<text>负荷量：{{j.load}}kg</text>
+								<text>已完成：{{j.frequency}}次</text>
+							</view>
+						</view>
+					</view>
+					<view class="detailed-data">
+						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+							<view class="index">{{ix+1}}</view>
+							<view class="data-info">
+								<view class="kg">
+									<text class="num">{{i.kg}}</text>
+									<text>kg</text>
+								</view>
+								<view class="x">
+									x
+								</view>
+								<view class="time">
+									<text class="num">{{i.time}}</text>
+									<text>次</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view v-if="j.type===6" class="info-item">
+					<view class="item-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{j.actionName}}</view>
+							<view class="info-text">
+								<text>总用时：{{formaterTimes(j.times)}}</text>
+							</view>
+						</view>
+					</view>
+					<view class="detailed-data">
+						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+							<view class="index">{{ix+1}}</view>
+							<view class="data-info">
+								<view class="time">
+									<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
 								</view>
 							</view>
 						</view>
@@ -56,6 +219,7 @@
 </template>
 
 <script>
+	const train = uniCloud.importObject('train')
 	export default {
 		data() {
 			return {
@@ -64,15 +228,62 @@
 					{ name: '分享到微信', icon: '../../static/newWorkout/wechat.png' },
 					{ name: '分享到朋友圈', icon: '../../static/newWorkout/pengyou.png' },
 					{ name: '保存到相册', icon: '../../static/newWorkout/download.png' }
-				]
+				],
+				traineeTitle: '',
+				trainDate: '',
+				sumLoad: 0,
+				trainInfoList: []
+			}
+		},
+		onLoad: function (option) { 
+			if(option.traineeNo){
+				this.traineeNo = option.traineeNo
+				this.trainDate = option.trainDate
+				this.getTrainInfo()
 			}
 		},
 		methods: {
+			async getTrainInfo(){
+				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.trainDate})
+				if(res.data&&res.data.length>0){
+					const {trainContent,traineeTitle}  = res.data[0]
+					this.traineeTitle = traineeTitle
+					this.trainInfoList = JSON.parse(trainContent)
+					this.sumLoad = this.trainInfoList.reduce(function(prev, cur) {
+						return +cur.load + +prev;
+					}, 0);
+				}
+			},
 			onClickLeft(){
 				uni.navigateBack()
 			},
 			onSelect(option) {
 				this.showShare = false
+			},
+			formaterTimes(times,type=3){
+				const hour = Math.floor(times/3600);
+				const minute = Math.floor((times-(hour*3600))/60);
+				const second = times-(hour*3600)-(minute*60);
+				return  type===3?hour+'时'+minute+'分'+second+'秒':hour+'时'+minute+'分'
+			},
+			getMonthDay(){
+				const formater = (temp) =>{
+				　　if(temp<10){
+				　　　　return "0"+temp;
+				　　}else{
+				　　　　return temp;
+				　　}
+				}
+				const d=new Date();
+				const year=d.getFullYear();
+				const month=formater(d.getMonth()+1);
+				const date=formater(d.getDate());
+				return month+'.'+date;
+			},
+			getweekday(date){
+				const weekArray = new Array("日", "一", "二", "三", "四", "五", "六");
+				const week = weekArray[new Date(date).getDay()];
+				return week;
 			}
 		}
 	}
@@ -162,10 +373,13 @@
 							margin-bottom: 14upx;
 						}
 						.info-text{
+							width: 450upx;
 							font-size: 26upx;
 							font-weight: 400;
 							color: #BDC3CE;
 							line-height: 36upx;
+							display: inline-flex;
+							justify-content: space-between;
 						}
 					}
 				}
@@ -193,6 +407,35 @@
 							color: #BDC3CE;
 							.num{
 								margin-right: 10upx;
+								font-size: 36upx;
+								font-weight: 500;
+								color: #F4F7FF;
+							}
+						}
+						.data-info-km{
+							text-align: center;
+							width: 161upx;
+							height: 80upx;
+							line-height: 80upx;
+							background: rgb(75, 82, 94, .5);
+							border-radius: 16upx;
+							font-size: 26upx;
+							color: #BDC3CE;
+							.num{
+								font-size: 36upx;
+								font-weight: 500;
+								color: #F4F7FF;
+							}
+						}
+						.data-info-time{
+							margin-left: 20upx;
+							text-align: center;
+							width: 349upx;
+							height: 80upx;
+							line-height: 80upx;
+							background: rgb(75, 82, 94, .5);
+							border-radius: 16upx;
+							.num{
 								font-size: 36upx;
 								font-weight: 500;
 								color: #F4F7FF;
