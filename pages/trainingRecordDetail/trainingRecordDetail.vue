@@ -408,6 +408,7 @@ export default {
 			top: 0;
 			left: 0;
 			right: 0;
+			z-index: 88;
 			height: 88upx;
 			display: flex;
 			align-items: center;
