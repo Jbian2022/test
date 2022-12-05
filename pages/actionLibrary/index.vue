@@ -169,9 +169,9 @@ export default {
     }
   },
   onShow(){
+    this.selectActionList=[]
     const type = uni.getStorageSync('actionLibraryType')
     if(type==='select'){
-      this.selectActionList=[]
       this.actionClassList.forEach(item=>{
         const list = this.selectActionList.filter(child => child.actionClass === item.value)
         item.badge = list.length || null

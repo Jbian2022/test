@@ -2,9 +2,9 @@
 	<view class="training-record">
 		<van-nav-bar title="赵思远" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
 		<view class="calendar">
-			<van-calendar title="训练记录" :show-mark="false" :poppable="false" :show-confirm="false">
-				<template #bottom-info>
-					<text @click.stop="sharePage">小便签</text>
+			<van-calendar title="训练记录" :show-mark="false" :poppable="false" :show-confirm="false" @confirm="onConfirm" :min-date="new Date('2021-01-01')">
+				<template #bottom-info="day">
+					<view v-show="getTrainTitle(day)" class="train-title" @click.stop="sharePage(day)">{{getTrainTitle(day)}}</view>
 				</template>
 			</van-calendar>
 		</view>
@@ -15,13 +15,31 @@
 </template>
 
 <script>
+	const train = uniCloud.importObject('train')
 	export default {
 		data() {
 			return {
-				
+				trainListInfo:{},
+				trainDate: null
+			}
+		},
+		onLoad: function (option) { 
+			if(option.traineeNo){
+				this.traineeNo = option.traineeNo
+				this.getTrainList()
 			}
 		},
 		methods: {
+			async getTrainList(){
+				const res = await train.getTrainList({traineeNo:this.traineeNo})
+				if(res.data&&res.data.length>0){
+					const trainListInfo = {}
+					res.data.forEach(item => {
+						trainListInfo[item.trainDate] = item.traineeTitle
+					});
+					this.trainListInfo = trainListInfo
+				}
+			},
 			onClickLeft(){
 				uni.switchTab({
 					url: '/pages/myMebers/myMebers'
@@ -29,13 +47,36 @@
 			},
 			addWorkout(){
 				uni.navigateTo({
-					url: '/pages/newWorkout/newWorkout'
+					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${this.trainDate}`
+				})
+			},
+			sharePage(day){
+				uni.navigateTo({
+					url: '/pages/trainingRecordDetail/trainingRecordDetail'+`?traineeNo=${this.traineeNo}&trainDate=${this.getCurTimestamp(day.date)}`
 				});
 			},
-			sharePage(){
-				uni.navigateTo({
-					url: '/pages/trainingRecordDetail/trainingRecordDetail'
-				});
+			getCurTimestamp(val){
+				const formater = (temp) =>{
+				　　if(temp<10){
+				　　　　return "0"+temp;
+				　　}else{
+				　　　　return temp;
+				　　}
+				}
+				const d=new Date(val);
+				const year=d.getFullYear();
+				const month=formater(d.getMonth()+1);
+				const date=formater(d.getDate());
+				return [year,month,date].join('-');
+			},
+			getTrainTitle(day){
+				const key = this.getCurTimestamp(day.date)
+				return this.trainListInfo[key] || ''
+			},
+			onConfirm(val){
+				if(val){
+					this.trainDate = this.getCurTimestamp(val)
+				}
 			}
 		}
 	}
@@ -109,17 +150,22 @@ page{
 				line-height: 52upx;
 				z-index: 2;
 				.van-calendar__bottom-info{
-					padding: 6upx;
+					transform: translateX(-50%);
 					bottom: auto;
 					top: 62upx;
 					left: 50%;
-					transform: translateX(-50%);
-					width: 77upx;
-					background: rgba(19, 112, 255, 0.3);
-					border-radius: 8upx;
-					font-size: 18upx;
-					color: #F4F7FF;
-					line-height: 26upx;
+					width: 100%;
+					box-sizing: border-box;
+					padding: 0 4upx;
+					.train-title{
+						padding: 6upx;
+						background: rgba(19, 112, 255, 0.3);
+						border-radius: 8upx;
+						line-height: 26upx;
+						word-break: break-all;
+						font-size: 18upx;
+						color: #F4F7FF;
+					}
 				}
 			}
 			::v-deep.van-calendar__selected-day{

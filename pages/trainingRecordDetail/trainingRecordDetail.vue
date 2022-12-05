@@ -11,30 +11,32 @@
 			<view class="day">星期三</view>
 		</view>
 		<view class="info-list">
-			<view v-for="j in 3" :key="j" class="info-item">
-				<view class="item-header">
-					<view class="img">
-						<van-image round src="../../static/newWorkout/action.png"/>
+			<view v-for="j in 3" :key="j">
+				<view class="info-item">
+					<view class="item-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">杠铃卧推</view>
+							<view class="info-text">总次数：20次</view>
+						</view>
 					</view>
-					<view class="des-info">
-						<view class="des-title">杠铃卧推</view>
-						<view class="info-text">总次数：20次</view>
-					</view>
-				</view>
-				<view class="detailed-data">
-					<view v-for="i in 3" :key="i" class="data-item">
-						<view class="index">1</view>
-						<view class="data-info">
-							<view class="kg">
-								<text class="num">10</text>
-								<text>kg</text>
-							</view>
-							<view class="x">
-								x
-							</view>
-							<view class="time">
-								<text class="num">10</text>
-								<text>次</text>
+					<view class="detailed-data">
+						<view v-for="i in 3" :key="i" class="data-item">
+							<view class="index">1</view>
+							<view class="data-info">
+								<view class="kg">
+									<text class="num">10</text>
+									<text>kg</text>
+								</view>
+								<view class="x">
+									x
+								</view>
+								<view class="time">
+									<text class="num">10</text>
+									<text>次</text>
+								</view>
 							</view>
 						</view>
 					</view>

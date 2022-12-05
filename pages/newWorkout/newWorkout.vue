@@ -357,6 +357,7 @@
 		onLoad: function (option) { 
 			if(option.traineeNo){
 				this.traineeNo = option.traineeNo
+				this.trainDate = option.trainDate || this.getCurTimestamp()
 				this.getOldInfo()
 			}
 		},
@@ -369,6 +370,7 @@
 					this.workoutName = oldTrainInfo.workoutName
 					this.traineeNo = oldTrainInfo.traineeNo
 					this.isNoOldInfo = oldTrainInfo.isNoOldInfo
+					this.trainDate = oldTrainInfo.trainDate
 				}
 				const actionListStr = uni.getStorageSync('actionList');
 				if (actionListStr) {
@@ -394,8 +396,8 @@
 		},
 		methods: {
 			async getOldInfo(){
-				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.getCurTimestamp()})
-				if(res.data||res.data.length>0){
+				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.trainDate})
+				if(res.data&&res.data.length>0){
 					const {trainContent,traineeTitle}  = res.data[0]
 					this.workoutName = traineeTitle
 					this.actionList = JSON.parse(trainContent)
@@ -410,7 +412,8 @@
 					workoutName:this.workoutName,
 					traineeNo:this.traineeNo,
 					actionList:this.actionList,
-					isNoOldInfo:this.isNoOldInfo
+					isNoOldInfo:this.isNoOldInfo,
+					trainDate:this.trainDate
 				}))
 				uni.setStorageSync('traineeNo', this.traineeNo)
 				uni.switchTab({
@@ -437,9 +440,9 @@
 			async finish(){
 				const params = {
 					traineeNo:this.traineeNo,
-					trainDate: this.getCurTimestamp(),
+					trainDate: this.trainDate,
 					traineeTitle: this.workoutName,
-					trainContent:JSON.stringify(this.actionList)
+					trainContent: JSON.stringify(this.actionList)
 				}
 				if(this.isNoOldInfo){
 					const res = await train.updateTrainInfo(params)
@@ -451,7 +454,14 @@
 				uni.removeStorageSync('traineeNo')
 				uni.switchTab({url:'/pages/myMebers/myMebers'})
 			},
-			deleteHandle(){
+			async deleteHandle(){
+				const params = {
+					traineeNo: this.traineeNo,
+					trainDate: this.trainDate
+				}
+				if(this.isNoOldInfo){
+					const res = await train.deleteTrainInfo(params)
+				}
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')

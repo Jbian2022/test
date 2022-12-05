@@ -3,7 +3,7 @@
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="title">设置</view>
 		<view class="form">
-			<van-cell title="注销账号" is-link @click="delUser"/>
+			<van-cell title="注销账号" is-link @click="closeAccount"/>
 		</view>
 		<van-button class="footer-btn" block @click="logout">退出登录</van-button>
 	</view>
@@ -21,7 +21,8 @@
 			onClickLeft(){
 				uni.navigateBack()
 			},
-			delUser(){
+			async closeAccount () {
+				// await login.closeAccount();
 				this.logout();
 			},
 			async logout(){

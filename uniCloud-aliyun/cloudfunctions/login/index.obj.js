@@ -356,15 +356,12 @@ module.exports = {
 				  reject(err)
 			    console.error(err)
 			  })
-			
-
 		})
-			
-	
 	},
-	
-	
-	
+	// 注销账号
+	closeAccount: function () {
+		return uniID.closeAccount()
+	}
    
    
 }
