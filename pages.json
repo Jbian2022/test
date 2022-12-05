@@ -90,7 +90,7 @@
 		{
 			"path": "pages/actionLibrary/index",
 			"style": {
-				"navigationBarTitleText": "动作库",
+				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -125,29 +125,33 @@
 		{
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": false
 			}
 		},
 		{
 			"path": "pages/openCard/openCard",
 			"style": {
 				"navigationBarTitleText": "开卡",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": false
 			}
 		},
 		{
 			"path": "pages/setUp/setUp",
 			"style": {
 				"navigationBarTitleText": "设置",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": false
 			}
 		},
 		{
 			"path": "pages/personalInfo/personalInfo",
 			"style": {
 				"navigationBarTitleText": "个人信息",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": false
 			}
 		},
 		{
