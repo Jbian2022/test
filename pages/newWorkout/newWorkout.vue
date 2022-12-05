@@ -600,7 +600,7 @@ page{
 			font-size: 30upx;
 			font-weight: 400;
 			padding-left: 40upx;
-			::v-deep.van-field__control{
+			::v-deep .van-field__control{
 				color: #F4F7FF;
 				padding: 0;
 				&::placeholder{
@@ -667,7 +667,7 @@ page{
 					.van-field{
 						padding: 0;
 						background: transparent;
-						::v-deep.van-field__control{
+						::v-deep .van-field__control{
 							font-size: 36upx;
 							font-weight: 500;
 							color: #F4F7FF;
@@ -743,7 +743,7 @@ page{
 					height: 80upx;
 					background: #454951;
 					border-radius: 16upx;
-					::v-deep.van-field__control{
+					::v-deep .van-field__control{
 						text-align: center;
 						font-size: 26upx;
 						font-weight: 400;
@@ -807,7 +807,7 @@ page{
 			color: #FFFFFF;
 		}
 	}
-	::v-deep.van-dialog{
+	::v-deep .van-dialog{
 		background: linear-gradient(180deg, #343A44 0%, #212328 100%);
 		width: 610upx;
 		height: 800upx;
@@ -838,7 +838,7 @@ page{
 			}
 		}
 	}
-	::v-deep.finish-dialog{
+	::v-deep .finish-dialog{
 		background-image: url('../../static/newWorkout/training completed.png');
 		background-size: contain;
 		.van-button.finish{
@@ -846,7 +846,7 @@ page{
 			color: #FFFFFF !important;
 		}
 	}
-	::v-deep.delete-dialog{
+	::v-deep .delete-dialog{
 		background-image: url('../../static/newWorkout/training delete.png');
 		background-size: contain;
 		.van-button.delete{

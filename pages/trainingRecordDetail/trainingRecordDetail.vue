@@ -570,11 +570,11 @@ export default {
 				}
 			}
 		}
-		::v-deep.van-popup {
+		::v-deep .van-popup {
 			background: #383D46;
 			border-radius: 24upx 24upx 0px 0px;
 		}
-		::v-deep.van-share-sheet__options{
+		::v-deep .van-share-sheet__options{
 			justify-content: space-around;
 			.van-share-sheet__name{
 				font-size: 28upx;

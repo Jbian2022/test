@@ -155,15 +155,15 @@ page{
 				height: 112upx;
 				background: transparent;
 				align-items: center;
-				::v-deep.van-cell__title{
+				::v-deep .van-cell__title{
 					font-size: 30upx;
 					color: #BDC3CE;
 				}
-				::v-deep.van-cell__value{
+				::v-deep .van-cell__value{
 					font-size: 30upx;
 					color: #BDC3CE;
 				}
-				::v-deep.van-icon{
+				::v-deep .van-icon{
 					color: #bdc3ce;
 				}
 				&:after{
@@ -172,7 +172,7 @@ page{
 			}
 		}
 	}
-	::v-deep.van-popup{
+	::v-deep .van-popup{
 		padding: 30upx;
 		background: transparent;
 		box-sizing: border-box;

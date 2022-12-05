@@ -87,7 +87,7 @@ page{
 	background: #212328;
 }
 .training-record{
-	::v-deep.van-nav-bar{
+	::v-deep .van-nav-bar{
 		background: #212328;
 		height: 88upx;
 		.van-nav-bar__content{
@@ -112,19 +112,19 @@ page{
 			height: 1020upx;
 			padding-top: 20upx;
 			background: #212328;
-			::v-deep.van-calendar__header{
+			::v-deep .van-calendar__header{
 				position: relative;
 				height: 180upx;
 				box-shadow: none;
 			}
-			::v-deep.van-calendar__header-title{
+			::v-deep .van-calendar__header-title{
 				text-align: left;
 				height: 66upx;
 				font-weight: 600;
 				color: #FFFFFF;
 				line-height: 66upx;
 			}
-			::v-deep.van-calendar__header-subtitle{
+			::v-deep .van-calendar__header-subtitle{
 				position: absolute;
 				top: 0;
 				right: 0;
@@ -135,13 +135,13 @@ page{
 				font-weight: 600;
 				color: #BDC3CE;
 			}
-			::v-deep.van-calendar__weekdays{
+			::v-deep .van-calendar__weekdays{
 				padding-top: 38upx;
 				border-top: 2upx solid #3B3F46;
 				color: #BDC3CE;
 				font-size: 26upx;
 			}
-			::v-deep.van-calendar__day{
+			::v-deep .van-calendar__day{
 				position: relative;
 				align-items: flex-start;
 				height: 160upx;
@@ -168,7 +168,7 @@ page{
 					}
 				}
 			}
-			::v-deep.van-calendar__selected-day{
+			::v-deep .van-calendar__selected-day{
 				align-items: flex-start;
 				background: transparent;
 				font-weight: 600;

@@ -108,7 +108,7 @@
 		background: #212328;
 	}
 	.add-action{
-		::v-deep.van-nav-bar{
+		::v-deep .van-nav-bar{
 			background: #212328;
 			height: 88upx;
 			.van-nav-bar__content{
@@ -134,14 +134,14 @@
 				background: #383D46;
 				border-radius: 16upx;
 				padding-left: 40upx;
-				::v-deep .van-field__control{
+				::v-deep  .van-field__control{
 					color: #eff3fc;
 					font-weight: 400;
 				}
-				::v-deep .van-field__control::placeholder{
+				::v-deep  .van-field__control::placeholder{
 					color: #7A7F89;
 				}
-				::v-deep &:after{
+				::v-deep  &:after{
 					display: none;
 				}
 			}
@@ -154,7 +154,7 @@
 				color: #F4F7FF;
 				align-items: center;
 				padding: 0 40upx;
-				::v-deep.van-cell__value{
+				::v-deep .van-cell__value{
 					font-size: 30upx;
 					font-weight: 400;
 					color: #F4F7FF;
@@ -182,7 +182,7 @@
 				color: #FFFFFF;
 			}
 		}
-		::v-deep.van-action-sheet__header{
+		::v-deep .van-action-sheet__header{
 			text-align: left;
 			font-size: 36upx;
 			font-weight: 600;
@@ -200,11 +200,11 @@
 				padding: 18upx;
 			}
 		}
-		::v-deep.van-popup{
+		::v-deep .van-popup{
 			background: #383D46;
 			border-radius: 24px 24px 0px 0px;
 		}
-		::v-deep.van-action-sheet__content{
+		::v-deep .van-action-sheet__content{
 			padding: 0 40upx;
 		}
 		.action-type-item{

@@ -95,7 +95,7 @@
 		background-size: contain;
 		z-index: -1;
 	}
-	::v-deep.van-nav-bar{
+	::v-deep .van-nav-bar{
 		background: transparent;
 		height: 88upx;
 		.van-nav-bar__content{
@@ -270,7 +270,7 @@
 			color: #FFE18F;
 		}
 	}
-	::v-deep.van-popup{
+	::v-deep .van-popup{
 		background: #383D46;
 		border-radius: 24upx 24upx 0px 0px;
 	}

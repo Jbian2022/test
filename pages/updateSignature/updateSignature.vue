@@ -134,7 +134,7 @@ page{
 			padding: 0 30upx;
 		}
 	}
-	::v-deep.van-field__control{
+	::v-deep .van-field__control{
 		height: 122upx;
 		background: transparent;
 		font-size: 30upx;
@@ -157,7 +157,7 @@ page{
 			height: 100upx;
 		}
 	}
-	::v-deep.van-popup{
+	::v-deep .van-popup{
 		padding: 30upx;
 		background: #212328;
 		border-radius: 0;
