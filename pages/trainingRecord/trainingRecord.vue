@@ -4,7 +4,7 @@
 		<view class="calendar">
 			<van-calendar title="训练记录" :show-mark="false" :poppable="false" :show-confirm="false">
 				<template #bottom-info>
-					小便签最小便签最
+					<text @click.stop="sharePage">小便签</text>
 				</template>
 			</van-calendar>
 		</view>
@@ -30,6 +30,11 @@
 			addWorkout(){
 				uni.navigateTo({
 					url: '/pages/newWorkout/newWorkout'
+				});
+			},
+			sharePage(){
+				uni.navigateTo({
+					url: '/pages/trainingRecordDetail/trainingRecordDetail'
 				});
 			}
 		}

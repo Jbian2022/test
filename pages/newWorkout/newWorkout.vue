@@ -5,47 +5,309 @@
 			<van-button class="btn" @click="showFinishDialog = true">完成</van-button>
 		</view>
 		<view class="workout-title">
-			<view class="text">胸背训练</view>
+			<van-field v-model="workoutName" placeholder="请输入训练名称" />
 		</view>
 		<view class="action-list">
-			<view v-for="i in 3" :key="i" class="action-tiem">
-				<view class="action-tiem-header">
-					<view class="img">
-						<van-image round src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
+			<view v-for="(i,ix) in actionList" :key="ix" class="action-type-box">
+				<view v-if="i.type===0" class="action-tiem">
+					<view class="action-tiem-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{i.actionName}}</view>
+							<view class="info-text">
+								<text>负荷量：{{i.load}}kg</text>
+								<text>已完成：{{i.frequency}}次</text>
+							</view>
+						</view>
+						<popover class="config" :list="actions" position="right" mode="click">
+							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<template  v-slot:item="{item}">
+								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
+								<text v-else>{{item.text}}</text>
+							</template>
+						</popover>
 					</view>
-					<view class="des-info">
-						<view class="des-title">杠铃卧推</view>
-						<view class="info-text">已完成：10次</view>
+					<view class="action-tiem-des">
+						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
+							<view class="index">
+								<text>{{index+1}}</text>
+							</view>
+							<view class="kg">
+								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
+								<text>kg</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<text>次</text>
+							</view>
+							<view class="yes" @click="item.active = !item.active,technicalData()">
+								<van-icon name="success" />
+							</view>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+							</view>
+						</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
 					</view>
-					<popover class="config" :list="actions" position="right" mode="click">
-						<van-image class="img"  src="../../static/newWorkout/config.png"/>
-						<template  v-slot:item="{item}">
-							<text v-if="item.text==='删除动作项'" style="color:#F04242;">{{item.text}}</text>
-							<text v-else>{{item.text}}</text>
-						</template>
-					</popover>
 				</view>
-				<view class="action-tiem-des">
-					<view v-for="i in 4" :key="i" class="project-item" :class="{active:i===1}">
-						<view class="index">
-							<text>{{i}}</text>
+				<view v-if="i.type===1" class="action-tiem">
+					<view class="action-tiem-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
 						</view>
-						<view class="kg">
-							<text class="num">10</text>
-							<text>kg</text>
+						<view class="des-info">
+							<view class="des-title">{{i.actionName}}</view>
+							<view class="info-text">
+								<text>总里程：{{i.mileage}}km</text>
+								<text>用时：{{formaterTimes(i.times,2)}}</text>
+							</view>
 						</view>
-						<view class="time">
-							<text class="num">10</text>
-							<text>次</text>
-						</view>
-						<view class="yes">
-							<van-icon name="success" />
-						</view>
-						<view class="delete">
-							<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/>
-						</view>
+						<popover class="config" :list="actions" position="right" mode="click">
+							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<template  v-slot:item="{item}">
+								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
+								<text v-else>{{item.text}}</text>
+							</template>
+						</popover>
 					</view>
-					<view class="add-project-item">+ 新增一组</view>
+					<view class="action-tiem-des">
+						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
+							<view class="index">
+								<text>{{index+1}}</text>
+							</view>
+							<view class="kg">
+								<van-field v-model="item.km" placeholder="" type="digit" @blur="technicalData"/>
+								<text>km</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
+								<text>时</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
+								<text>分</text>
+							</view>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+							</view>
+						</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+					</view>
+				</view>
+				<view v-if="i.type===2" class="action-tiem">
+					<view class="action-tiem-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{i.actionName}}</view>
+							<view class="info-text">
+								<text>已完成：{{i.frequency}}次</text>
+							</view>
+						</view>
+						<popover class="config" :list="actions" position="right" mode="click">
+							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<template  v-slot:item="{item}">
+								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
+								<text v-else>{{item.text}}</text>
+							</template>
+						</popover>
+					</view>
+					<view class="action-tiem-des">
+						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
+							<view class="index">
+								<text>{{index+1}}</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<text>次</text>
+							</view>
+							<view class="yes" @click="item.active = !item.active,technicalData()">
+								<van-icon name="success" />
+							</view>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+							</view>
+						</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()">+ 新增一组</view>
+					</view>
+				</view>
+				<view v-if="i.type===3" class="action-tiem">
+					<view class="action-tiem-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{i.actionName}}</view>
+							<view class="info-text">
+								<text>用时：{{formaterTimes(i.times)}}</text>
+							</view>
+						</view>
+						<popover class="config" :list="actions" position="right" mode="click">
+							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<template  v-slot:item="{item}">
+								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
+								<text v-else>{{item.text}}</text>
+							</template>
+						</popover>
+					</view>
+					<view class="action-tiem-des">
+						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
+							<view class="index">
+								<text>{{index+1}}</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
+								<text>时</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
+								<text>分</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.second" placeholder="" type="digit" @blur="technicalData"/>
+								<text>秒</text>
+							</view>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"  @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+							</view>
+						</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+					</view>
+				</view>
+				<view v-if="i.type===4" class="action-tiem">
+					<view class="action-tiem-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{i.actionName}}</view>
+							<view class="info-text">
+								<text>负荷量：{{i.load}}kg</text>
+								<text>已完成：{{i.frequency}}次</text>
+							</view>
+						</view>
+						<popover class="config" :list="actions" position="right" mode="click">
+							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<template  v-slot:item="{item}">
+								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
+								<text v-else>{{item.text}}</text>
+							</template>
+						</popover>
+					</view>
+					<view class="action-tiem-des">
+						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
+							<view class="index">
+								<text>{{index+1}}</text>
+							</view>
+							<view class="kg">
+								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
+								<text>kg</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<text>次</text>
+							</view>
+							<view class="yes" @click="item.active = !item.active,technicalData()">
+								<van-icon name="success" />
+							</view>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+							</view>
+						</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+					</view>
+				</view>
+				<view v-if="i.type===5" class="action-tiem">
+					<view class="action-tiem-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{i.actionName}}</view>
+							<view class="info-text">
+								<text>负荷量：{{i.load}}kg</text>
+								<text>已完成：{{i.frequency}}次</text>
+							</view>
+						</view>
+						<popover class="config" :list="actions" position="right" mode="click">
+							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<template  v-slot:item="{item}">
+								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
+								<text v-else>{{item.text}}</text>
+							</template>
+						</popover>
+					</view>
+					<view class="weight">
+						<van-field v-model="i.weight" placeholder="请先设置当前体重" type="digit" @blur="technicalData"/>
+					</view>
+					<view class="action-tiem-des">
+						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
+							<view class="index">
+								<text>{{index+1}}</text>
+							</view>
+							<view class="kg">
+								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
+								<text>kg</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<text>次</text>
+							</view>
+							<view class="yes" @click="item.active = !item.active,technicalData()">
+								<van-icon name="success" />
+							</view>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+							</view>
+						</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+					</view>
+				</view>
+				<view v-if="i.type===6" class="action-tiem">
+					<view class="action-tiem-header">
+						<view class="img">
+							<van-image round src="../../static/newWorkout/action.png"/>
+						</view>
+						<view class="des-info">
+							<view class="des-title">{{i.actionName}}</view>
+							<view class="info-text">
+								<text>总用时：{{formaterTimes(i.times)}}</text>
+							</view>
+						</view>
+						<popover class="config" :list="actions" position="right" mode="click">
+							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<template  v-slot:item="{item}">
+								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
+								<text v-else>{{item.text}}</text>
+							</template>
+						</popover>
+					</view>
+					<view class="action-tiem-des">
+						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
+							<view class="index">
+								<text>{{index+1}}</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
+								<text>时</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
+								<text>分</text>
+							</view>
+							<view class="time">
+								<van-field v-model="item.second" placeholder="" type="digit" @blur="technicalData"/>
+								<text>秒</text>
+							</view>
+							<view class="delete">
+								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+							</view>
+						</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -54,8 +316,8 @@
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
 		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
-			<view class="first-level-title">删除训练</view>
-			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
+			<view class="first-level-title">完成训练</view>
+			<view class="second-level-title">是否已经完成训练了</view>
 			<view class="botton-box">
 				<van-button class="finish" block @click="finish">确认完成</van-button>
 				<van-button block @click="showFinishDialog=false">取消</van-button>
@@ -65,7 +327,7 @@
 			<view class="first-level-title">删除训练</view>
 			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
 			<view class="botton-box">
-				<van-button class="delete" block>确认删除</van-button>
+				<van-button class="delete" block @click="deleteHandle">确认删除</van-button>
 				<van-button block @click="showDeleteDialog=false">取消</van-button>
 			</view>
 		</van-dialog>
@@ -73,6 +335,7 @@
 </template>
 
 <script>
+	const train = uniCloud.importObject('train')
 	import popover from '../../components/popover/index.vue';
 	export default {
 		components: {
@@ -80,24 +343,204 @@
 		},
 		data() {
 			return {
+				workoutName: null,
+				actionList:[],
 				actions: [
 					{ text: '删除动作项'}
 				],
+				traineeNo:null,
 				showFinishDialog: false,
-				showDeleteDialog: false
+				showDeleteDialog: false,
+				isNoOldInfo:false
+			}
+		},
+		onLoad: function (option) { 
+			if(option.traineeNo){
+				this.traineeNo = option.traineeNo
+				this.getOldInfo()
+			}
+		},
+		onShow(){
+			try {
+				const oldTrainInfoStr = uni.getStorageSync('oldTrainInfo')
+				if(oldTrainInfoStr){
+					const oldTrainInfo = JSON.parse(oldTrainInfoStr)
+					this.actionList = oldTrainInfo.actionList
+					this.workoutName = oldTrainInfo.workoutName
+					this.traineeNo = oldTrainInfo.traineeNo
+					this.isNoOldInfo = oldTrainInfo.isNoOldInfo
+				}
+				const actionListStr = uni.getStorageSync('actionList');
+				if (actionListStr) {
+					const list = JSON.parse(actionListStr)
+					const tempList = list.map(item=>{
+						return {
+							type: item.actionType,
+							actionName: item.actionName,
+							load: 0,
+							times: 0,
+							mileage: 0,
+							frequency: 0,
+							weight: null,
+							groupList: []
+						}
+					})
+					this.actionList.push(...tempList)
+					// console.log(list);
+				}
+			} catch (e) {
+				// error
 			}
 		},
 		methods: {
+			async getOldInfo(){
+				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.getCurTimestamp()})
+				if(res.data||res.data.length>0){
+					const {trainContent,traineeTitle}  = res.data[0]
+					this.workoutName = traineeTitle
+					this.actionList = JSON.parse(trainContent)
+					this.isNoOldInfo = true
+				} else {
+					this.isNoOldInfo = false
+				}
+			},
 			addActionHandle(){
 				uni.setStorageSync('actionLibraryType', 'select')
+				uni.setStorageSync('oldTrainInfo', JSON.stringify({
+					workoutName:this.workoutName,
+					traineeNo:this.traineeNo,
+					actionList:this.actionList,
+					isNoOldInfo:this.isNoOldInfo
+				}))
+				uni.setStorageSync('traineeNo', this.traineeNo)
 				uni.switchTab({
 					url: '/pages/actionLibrary/index'
 				});
 			},
-			finish(){
-				uni.navigateTo({
-					url: '/pages/trainingRecord/trainingRecord'
-				});
+			deleteActionHandle(index){
+				this.actionList.splice(index,1)
+			},
+			deleteProjectItem(list,index){
+				list.splice(index,1)
+			},
+			addProjectItem(list){
+				list.push({
+					kg: 0,
+					km: 0,
+					time: 0,
+					hour: 0,
+					minute: 0,
+					second: 0,
+					active: false
+				})
+			},
+			async finish(){
+				const params = {
+					traineeNo:this.traineeNo,
+					trainDate: this.getCurTimestamp(),
+					traineeTitle: this.workoutName,
+					trainContent:JSON.stringify(this.actionList)
+				}
+				if(this.isNoOldInfo){
+					const res = await train.updateTrainInfo(params)
+				} else {
+					const res = await train.addTrainInfo(params)
+				}
+				uni.removeStorageSync('actionList')
+				uni.removeStorageSync('oldTrainInfo')
+				uni.removeStorageSync('traineeNo')
+				uni.switchTab({url:'/pages/myMebers/myMebers'})
+			},
+			deleteHandle(){
+				uni.removeStorageSync('actionList')
+				uni.removeStorageSync('oldTrainInfo')
+				uni.removeStorageSync('traineeNo')
+				uni.switchTab({url:'/pages/myMebers/myMebers'})
+			},
+			getCurTimestamp(){
+				const formater = (temp) =>{
+				　　if(temp<10){
+				　　　　return "0"+temp;
+				　　}else{
+				　　　　return temp;
+				　　}
+				}
+				const d=new Date();
+				const year=d.getFullYear();
+				const month=formater(d.getMonth()+1);
+				const date=formater(d.getDate());
+				return [year,month,date].join('-');
+			},
+			technicalData(){
+				this.actionList.forEach((item)=>{
+					if(item.type===0){
+						item.load = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.kg) {cur.kg = 0}
+							return cur.active ? +cur.kg + +prev : prev; 
+						}, 0)
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===1){
+						item.mileage = item.groupList.reduce( function (prev, cur) {
+							if(!cur.km) {cur.km = 0} 
+							return  +cur.km + +prev; 
+						}, 0)
+						item.times = item.groupList.reduce( function (prev, cur) {
+							if(!cur.hour) {cur.hour = 0}  
+							if(!cur.minute) {cur.minute = 0}  
+							if(!cur.second) {cur.second = 0}  
+							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+						}, 0)
+					} else if(item.type===2){
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===3){
+						item.times = item.groupList.reduce( function (prev, cur) {
+							if(!cur.hour) {cur.hour = 0}  
+							if(!cur.minute) {cur.minute = 0}  
+							if(!cur.second) {cur.second = 0}  
+							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+						}, 0)
+					} else if(item.type===4){
+						item.load = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.kg) {cur.kg = 0}
+							return cur.active ? +cur.kg + +prev : prev; 
+						}, 0)
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===5){
+						item.load = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.kg) {cur.kg = 0}
+							return cur.active ? +cur.kg + +prev : prev; 
+						}, 0)
+						if(item.weight){
+							item.load = item.load + +item.weight
+						}
+						item.frequency = item.groupList.reduce( function (prev, cur) { 
+							if(!cur.time) {cur.time = 0}
+							return cur.active ? +cur.time + +prev : prev; 
+						}, 0)
+					} else if(item.type===6){
+						item.times = item.groupList.reduce( function (prev, cur) {
+							if(!cur.hour) {cur.hour = 0}  
+							if(!cur.minute) {cur.minute = 0}  
+							if(!cur.second) {cur.second = 0}  
+							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+						}, 0)
+					}
+				})
+			},
+			formaterTimes(times,type=3){
+				const hour = Math.floor(times/3600);
+				const minute = Math.floor((times-(hour*3600))/60);
+				const second = times-(hour*3600)-(minute*60);
+				return  type===3?hour+'时'+minute+'分'+second+'秒':hour+'时'+minute+'分'
 			}
 		}
 	}
@@ -138,7 +581,7 @@ page{
 		padding: 0 30upx;
 		padding-bottom: 15upx;
 		background: #212328;
-		.text{
+		.van-field{
 			height: 100upx;
 			background: #383D46;
 			border-radius: 24upx;
@@ -146,8 +589,14 @@ page{
 			align-items: center;
 			font-size: 30upx;
 			font-weight: 400;
-			color: #F4F7FF;
 			padding-left: 40upx;
+			::v-deep.van-field__control{
+				color: #F4F7FF;
+				padding: 0;
+				&::placeholder{
+					color:#7A7F89;
+				}
+			}
 		}
 	}
 	.action-list{
@@ -177,10 +626,13 @@ page{
 						margin-bottom: 14upx;
 					}
 					.info-text{
+						width: 380upx;
 						font-size: 26upx;
 						font-weight: 400;
 						color: #BDC3CE;
 						line-height: 36upx;
+						display: inline-flex;
+						justify-content: space-between;
 					}
 				}
 				.config{
@@ -202,6 +654,21 @@ page{
 					color: #BDC3CE;
 					font-size: 26upx;
 					align-items: center;
+					.van-field{
+						padding: 0;
+						background: transparent;
+						::v-deep.van-field__control{
+							font-size: 36upx;
+							font-weight: 500;
+							color: #F4F7FF;
+							&::placeholder{
+								color:#7A7F89;
+							}
+						}
+						&:after{
+							display: none;
+						}
+					}
 					&.active{
 						.kg,.time,.yes{
 							background: #01E08C;
@@ -232,11 +699,6 @@ page{
 						padding: 0 20upx;
 						width: 140upx;
 						box-sizing: border-box;
-						.num{
-							font-size: 36upx;
-							font-weight: 500;
-							color: #F4F7FF;
-						}
 					}
 					.yes{
 						height: 100%;
@@ -264,12 +726,33 @@ page{
 					margin-top: 20upx;
 				}
 			}
+			.weight{
+				margin-top: 15upx;
+				margin-bottom: -15upx;
+				.van-field{
+					height: 80upx;
+					background: #454951;
+					border-radius: 16upx;
+					::v-deep.van-field__control{
+						text-align: center;
+						font-size: 26upx;
+						font-weight: 400;
+						color: #F4F7FF;
+						&::placeholder{
+							color:#BDC3CE;
+						}
+					}
+					&:after{
+						display: none;
+					}
+				}
+			}
 		}
-		.action-tiem + .action-tiem{
+		.action-type-box + .action-type-box{
 			margin-top: 30upx;
 		}
 		.add-project-item{
-			padding-top: 40upx;
+			margin-top: 40upx;
 			font-size: 30upx;
 			font-weight: 500;
 			color: #FFFFFF;

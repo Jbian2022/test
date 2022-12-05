@@ -34,7 +34,7 @@ module.exports = {
 	 * @returns {object} 返回值描述
 	 */
 	async updateUserInfo(param) {
-		const {avatar,username,gender,comment} = param
+		const {avatar,username,gender,comment,vipLevel,vipEndDate} = param
 		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 		// 业务逻辑
 		const db = uniCloud.database()
@@ -42,7 +42,9 @@ module.exports = {
 			avatar:avatar||undefined,
 			username:username||undefined,
 			gender:gender&&gender!==0?gender:undefined,
-			comment:comment||undefined
+			comment:comment||undefined,
+			vipLevel:vipLevel||undefined,
+			vipEndDate:vipEndDate||undefined
 		})
 		console.log(res)
 		// 返回结果
