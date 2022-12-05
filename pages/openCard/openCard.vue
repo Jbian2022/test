@@ -50,11 +50,11 @@
 			<view class="title">选择支付方式</view>
 			<view class="actions">
 				<view class="action">
-					<van-image class="img" src="../../static/newWorkout/支付宝.svg"/>
+					<van-image class="img" src="../../static/newWorkout/alipay.svg"/>
 					<view class="text">支付宝</view>
 				</view>
 				<view class="action">
-					<van-image class="img" src="../../static/newWorkout/微信.svg"/>
+					<van-image class="img" src="../../static/newWorkout/weichat.svg"/>
 					<view class="text">微信</view>
 				</view>
 			</view>

@@ -462,7 +462,7 @@ page {
         display: inline-block;
         width: 60upx;
         height: 60upx;
-        background: url('../../static/newWorkout/阻断弹窗提示@2x.png');
+        background: url('../../static/newWorkout/pop-up.png');
         background-size: contain;
         background-repeat: no-repeat;
       }

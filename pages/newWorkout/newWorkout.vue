@@ -46,7 +46,7 @@
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -90,7 +90,7 @@
 								<text>分</text>
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -128,7 +128,7 @@
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()">+ 新增一组</view>
@@ -171,7 +171,7 @@
 								<text>秒</text>
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"  @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<van-image class="img" src="../../static/newWorkout/trashcan.png"  @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -214,7 +214,7 @@
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -260,7 +260,7 @@
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -303,7 +303,7 @@
 								<text>秒</text>
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -312,7 +312,7 @@
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button class="delete" @click="showDeleteDialog=true"><van-image class="img" src="../../static/newWorkout/垃圾桶@2x.png"/></van-button>
+			<van-button class="delete" @click="showDeleteDialog=true"><van-image class="img" src="../../static/newWorkout/trashcan.png"/></van-button>
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
 		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
