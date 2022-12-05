@@ -236,7 +236,8 @@
 				trainDate: '',
 				sumLoad: 0,
 				trainInfoList: [],
-				base64: null
+				base64: null,
+				url: null
 			}
 		},
 		onLoad: function (option) { 
@@ -264,7 +265,40 @@
 			onSelect(option) {
 				this.showShare = false
 				this.generateImage(()=>{
-					this.downloadFile()
+					console.log(option,88)
+					if(option.name==='保存到相册'){
+						this.downloadFile()
+					} else {
+						this.uploadImage((url)=>{
+							if(option.name==='分享到微信'){
+								uni.share({
+									provider: "weixin",
+									scene: "WXSceneSession",
+									type: 2,
+									imageUrl: url,
+									success: function (res) {
+										console.log("success:" + JSON.stringify(res));
+									},
+									fail: function (err) {
+										console.log("fail:" + JSON.stringify(err));
+									}
+								});
+							} else if (option.name==='分享到朋友圈') {
+								uni.share({
+									provider: "weixin",
+									scene: "WXSceneTimeline",
+									type: 2,
+									imageUrl: url,
+									success: function (res) {
+										console.log("success:" + JSON.stringify(res));
+									},
+									fail: function (err) {
+										console.log("fail:" + JSON.stringify(err));
+									}
+								});
+							}
+						})
+					}
 				})
 			},
 			formaterTimes(times,type=3){
@@ -292,7 +326,7 @@
 				const week = weekArray[new Date(date).getDay()];
 				return week;
 			},
-			/* base64ToFile(data){
+			base64ToFile(data){
 				const binary = atob(data.split(',')[1])
 				const mime = data.split(',')[0].match(/:(.*?);/)[1]
 				let array = []
@@ -302,31 +336,27 @@
 				const fileData = new Blob([new Uint8Array(array)], {type: mime})
 				const file = new File([fileData], `${new Date().getTime()}.png`, { type: mime })
 				return file
-			}, */
-			/* async uploadImage(){
+			},
+			async uploadImage(callback){
 				const file = this.base64ToFile(this.base64)
+				const url = URL.createObjectURL(file)
 				const result = await uniCloud.uploadFile({
 					cloudPath: Date.now() + "-share.png",
-					fileContent: file
+					filePath: url
 				});
-				console.log(result)
-			}, */
+				this.url =  result.fileID;
+				callback&&callback(result.fileID)
+				console.log('uploadImage',result)
+			},
 			downloadFile(){
-				const bitmap = new plus.nativeObj.Bitmap("test");
-				bitmap.loadBase64Data(this.base64, function() {
-					const url = "_doc/" + Date.now().getTime() + "-share.png";
-					console.log('saveHeadImgFile', url)
-					bitmap.save(url, { overwrite: true,  // 是否覆盖
-						// quality: 'quality'  // 图片清晰度
-					}, (i) => {
-						uni.saveImageToPhotosAlbum({
-							filePath: url,
-							success: function() {
-								bitmap.clear()
-							}
-						});
-					},);
-				})
+				const file = this.base64ToFile(this.base64);
+				const url = URL.createObjectURL(file);
+				uni.saveImageToPhotosAlbum({
+					filePath: url,
+					success: function() {
+						console.log('保存成功！');
+					}
+				});
 			}
 		}
 	}
