@@ -37,7 +37,7 @@
           <view v-else class="action-list-box">
             <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
               <view class="image">
-                <van-image round src="../../static/newWorkout/action.png" />
+                <van-image round src="/static/newWorkout/action.png" />
               </view>
               <view class="text">{{i.actionName}}</view>
             </view>
@@ -301,29 +301,29 @@ page {
     }
   }
   .search {
-    ::v-deep.van-search {
+    ::v-deep .van-search {
       padding: 0 30upx;
     }
-    ::v-deep.van-search__content {
+    ::v-deep .van-search__content {
       background: #383d46;
       border-radius: 40upx;
     }
-    ::v-deep.van-search__field {
+    ::v-deep .van-search__field {
       height: 80upx;
     }
-    ::v-deep.van-icon-search {
+    ::v-deep .van-icon-search {
       color: #a8adb6;
     }
-    ::v-deep.van-field__control {
+    ::v-deep .van-field__control {
       color: #f4f7ff;
     }
-    ::v-deep.van-field__control::placeholder {
+    ::v-deep .van-field__control::placeholder {
       font-size: 28upx;
       color: #7a7f89;
     }
   }
   .content {
-    height: calc(100vh - 280upx);
+    height: calc(100vh - 180upx);
     padding-top: 30upx;
     box-sizing: border-box;
     display: flex;
@@ -333,7 +333,7 @@ page {
       .van-sidebar {
         width: 220upx;
       }
-      ::v-deep.van-sidebar-item {
+      ::v-deep .van-sidebar-item {
         height: 70upx;
         padding: 0;
         padding-top: 16upx;
@@ -357,7 +357,7 @@ page {
           transform: translateY(-50%);
         }
       }
-      ::v-deep.van-sidebar-item--select {
+      ::v-deep .van-sidebar-item--select {
         background: linear-gradient(270deg, #202123 0%, #383d46 100%);
         .van-sidebar-item__text {
           font-weight: 600;
@@ -408,7 +408,7 @@ page {
           &:nth-child(2n) {
             margin-left: 30upx;
           }
-          ::v-deep.image {
+          ::v-deep .image {
             padding-top: 30upx;
             text-align: center;
             .action-name{
