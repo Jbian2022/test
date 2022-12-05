@@ -47,7 +47,7 @@
 		},
 		"comment": {
 			"bsonType": "string",
-			"description": "备注",
+			"description": "备注,用户的个性签名备注",
 			"title": "备注",
 			"trim": "both",
 			"permission": {
@@ -126,6 +126,24 @@
 				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
 				"write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
 			}
+		},
+		"vipLevel": {
+			"title": "vip_level",
+			"description": "用户会员等级,蓝卡会员:1;金卡会员:2",
+			"bsonType": "int",
+			"defaultValue": 0,
+			"enum": [{
+				"text": "蓝卡会员",
+				"value": 1
+			}, {
+				"text": "金卡会员",
+				"value": 2
+			}]
+		},
+		"vipEndDate": {
+			"title": "vip_end_date",
+			"description": "用户会员有效期",
+			"bsonType": "timestamp"
 		},
 		"invite_time": {
 			"bsonType": "timestamp",

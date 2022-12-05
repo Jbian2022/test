@@ -21,7 +21,10 @@ const uniID = require('uni-id')
 const db = uniCloud.database()
 module.exports = {
 	_before: function () { // 通用预处理器
-
+		const clientInfo = this.getClientInfo()
+		this.uniID = uniID.createInstance({ // 创建uni-id实例，其上方法同uniID
+			clientInfo
+		})
 	},
 	/**
 	 * method1方法描述
@@ -45,6 +48,8 @@ module.exports = {
 		}
 	}
 	*/
+   
+  
    // 用户名注册
    register: async function(event,context) {
 	   const {
@@ -67,21 +72,26 @@ module.exports = {
 	   	return res
    },
    // 校验token
-   checkToken: async function(event,context) {
-	   const payload = await uniID.checkToken(event.uniIdToken)
+   checkToken:  function(validToken) {
+	   return new Promise(async (resolve, reject) => {
+	   const payload = await uniID.checkToken(validToken)
 	     const {
-	       code,
-	       token,
-	       tokenExpired
+	       code
 	     } = payload
-	     if(code) { // code不为0代表token校验未通过
-	       return payload
-	     }
-	     // 其他业务代码
-	     return {
-	       token,
-	       tokenExpired
-	     }
+		 console.log(payload,'payload')
+	     if(code) {
+			  resolve(payload)
+			   // code不为0代表token校验未通过
+	      
+	     } else {
+			 resolve(payload)
+		 }
+		
+		 
+	    
+		  
+	   })
+	   
    },
    // 登出
    logout: async function(event,context) {

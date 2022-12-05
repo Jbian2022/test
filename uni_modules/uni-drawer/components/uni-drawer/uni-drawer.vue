@@ -172,6 +172,7 @@
 		right: 0;
 		background-color: $uni-mask;
 		transition: opacity 0.3s;
+		display: none;
 	}
 
 	.uni-drawer__mask--visible {

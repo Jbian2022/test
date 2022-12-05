@@ -1,0 +1,42 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"testArray": {
+			"title": "answer",
+			"description": "问题答案,数组的每个元素为选择类型问题的每一个选项",
+			"bsonType": "array",
+			"arrayType": "object",
+			"properties": {
+				"biaoti": {
+					"bsonType": "string"
+				},
+				"miaoshu": {
+					"bsonType": "string"
+				}
+			}
+		},
+		"answerRemark": {
+			"title": "answer_remark",
+			"description": "答案补充的说明内容",
+			"bsonType": "object",
+			"properties": {
+				"biaoti": {
+					"bsonType": "string"
+				},
+				"miaoshu": {
+					"bsonType": "string"
+				}
+			}
+		}
+	}
+}

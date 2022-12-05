@@ -13,7 +13,7 @@
 		},
 		"reportNo": {
 			"title": "report_no",
-			"description": "报告编号",
+			"description": "报告编号,主键不重复",
 			"bsonType": "string",
 			"errorMessage": "{title}不能为空",
 			"maxLength": 128
@@ -25,6 +25,11 @@
 			"errorMessage": "{title}不能为空",
 			"maxLength": 128
 		},
+		"reportTime": {
+			"title": "report_time",
+			"description": "报告生成时间",
+			"bsonType": "timestamp"
+		},
 		"createdTime": {
 			"title": "created_time",
 			"description": "创建时间",
@@ -32,39 +37,6 @@
 			"forceDefaultValue": {
 				"$env": "now"
 			}
-		},
-		"updatedTime": {
-			"title": "updated_time",
-			"description": "更新时间",
-			"bsonType": "timestamp",
-			"forceDefaultValue": {
-				"$env": "now"
-			}
-		},
-		"createdBy": {
-			"title": "created_by",
-			"description": "创建人",
-			"bsonType": "string",
-			"maxLength": 128
-		},
-		"updatedBy": {
-			"title": "updated_by",
-			"description": "修改人",
-			"bsonType": "string",
-			"maxLength": 128
-		},
-		"isDelete": {
-			"title": "is_delete",
-			"description": "删除标记,已删除:1,未删除:0",
-			"bsonType": "int",
-			"defaultValue": 0,
-			"enum": [{
-				"text": "未删除",
-				"value": 0
-			}, {
-				"text": "已删除",
-				"value": 1
-			}]
 		}
 	}
 }

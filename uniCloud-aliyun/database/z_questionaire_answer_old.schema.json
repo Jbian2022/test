@@ -13,28 +13,28 @@
 		},
 		"answerId": {
 			"title": "answer_id",
-			"description": "问卷结果id,主键不为空",
+			"description": "问卷回答Id,主键不重复",
 			"bsonType": "string",
 			"errorMessage": "{title}不能为空",
 			"maxLength": 128
 		},
 		"traineeNo": {
-			"title": "trainee_No",
+			"title": "trainee_no",
 			"description": "学员编号,关联t_trainee表中的traineeNo字段",
 			"bsonType": "string",
 			"errorMessage": "{title}不能为空",
 			"maxLength": 128
 		},
-		"questionaireCode": {
-			"title": "questionaire_code",
-			"description": "问卷编码,关联t_questionaire表中的code字段,只记录1级问卷的编码",
+		"code": {
+			"title": "code",
+			"description": "问题编码,关联t_questionaire表中的code字段",
 			"bsonType": "string",
 			"errorMessage": "{title}不能为空",
-			"maxLength": 128
+			"maxLength": 64
 		},
 		"testResult": {
 			"title": "test_result",
-			"description": "一级问卷的测试结果,数组种的每一个元素都应该是json,包含了当前问卷下的一个具体问题的问题内容和此问题的测试结果",
+			"description": "测试结果,如果是多选类问题数组的每个元素都是一个答案选项",
 			"bsonType": "array",
 			"arrayType": "string"
 		},
@@ -62,7 +62,7 @@
 		},
 		"reportNo": {
 			"title": "report_no",
-			"description": "评测报告id,关联t_report表中的reportNo字段",
+			"description": "报告号",
 			"bsonType": "string",
 			"maxLength": 128
 		},
@@ -73,39 +73,6 @@
 			"forceDefaultValue": {
 				"$env": "now"
 			}
-		},
-		"updatedTime": {
-			"title": "updated_time",
-			"description": "更新时间",
-			"bsonType": "timestamp",
-			"forceDefaultValue": {
-				"$env": "now"
-			}
-		},
-		"createdBy": {
-			"title": "created_by",
-			"description": "创建人",
-			"bsonType": "string",
-			"maxLength": 128
-		},
-		"updatedBy": {
-			"title": "updated_by",
-			"description": "修改人",
-			"bsonType": "string",
-			"maxLength": 128
-		},
-		"isDelete": {
-			"title": "is_delete",
-			"description": "删除标记,已删除:1,未删除:0",
-			"bsonType": "int",
-			"defaultValue": 0,
-			"enum": [{
-				"text": "未删除",
-				"value": 0
-			}, {
-				"text": "已删除",
-				"value": 1
-			}]
 		}
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"bsonType": "object",
-	"required": ["logId", "traineeNo"],
+	"required": ["trainingNo", "traineeNo"],
 	"permission": {
 		"read": true,
 		"create": true,
@@ -11,16 +11,16 @@
 		"_id": {
 			"description": "ID，系统自动生成"
 		},
-		"logId": {
-			"title": "log_id",
-			"description": "训练日志id,主键不重复",
+		"trainingNo": {
+			"title": "training_no",
+			"description": "训练日志编号,主键不为空",
 			"bsonType": "string",
 			"errorMessage": "{title}不能为空",
 			"maxLength": 128
 		},
 		"traineeNo": {
 			"title": "trainee_no",
-			"description": "学员编号,关联trainee表的traineeNo字段",
+			"description": "学员编号,关联t_trainee表的traineeNo字段",
 			"bsonType": "string",
 			"errorMessage": "{title}不能为空",
 			"maxLength": 128
@@ -32,9 +32,36 @@
 		},
 		"trainContent": {
 			"title": "train_content",
-			"description": "训练内容,数组的每一个元素是一种训练内容",
+			"description": "训练内容,数组的每一个元素是一种训练内容,格式为json,和本表种的actionType字段对应,一种actionType会有一种固定格式的json,前端可使用指定的格式解析这个json",
 			"bsonType": "array",
 			"arrayType": "string"
+		},
+		"actionType": {
+			"title": "action_type",
+			"description": "训练动作类型,力量训练,有氧训练,等",
+			"bsonType": "int",
+			"enum": [{
+				"text": "自重训练",
+				"value": 0
+			}, {
+				"text": "自重辅助",
+				"value": 1
+			}, {
+				"text": "拉伸",
+				"value": 2
+			}, {
+				"text": "力量训练",
+				"value": 3
+			}, {
+				"text": "有氧训练",
+				"value": 4
+			}, {
+				"text": "仅需要填写次数",
+				"value": 5
+			}, {
+				"text": "仅记录时间",
+				"value": 6
+			}]
 		},
 		"createdTime": {
 			"title": "created_time",
@@ -43,6 +70,39 @@
 			"forceDefaultValue": {
 				"$env": "now"
 			}
+		},
+		"updatedTime": {
+			"title": "updated_time",
+			"description": "创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		"createdBy": {
+			"title": "created_by",
+			"description": "创建人",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"updatedBy": {
+			"title": "updated_by",
+			"description": "修改人",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"isDelete": {
+			"title": "is_delete",
+			"description": "删除标记,已删除:1,未删除:0",
+			"bsonType": "int",
+			"defaultValue": 0,
+			"enum": [{
+				"text": "未删除",
+				"value": 0
+			}, {
+				"text": "已删除",
+				"value": 1
+			}]
 		}
 	}
 }

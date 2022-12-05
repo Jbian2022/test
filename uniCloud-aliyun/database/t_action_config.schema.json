@@ -53,16 +53,16 @@
 				"text": "臀部",
 				"value": 9
 			}, {
-				"text": "自定义动作",
+				"text": "颈前引",
 				"value": 10
 			}, {
-				"text": "颈前引",
+				"text": "圆肩",
 				"value": 11
 			}, {
-				"text": "圆肩",
+				"text": "驼背",
 				"value": 12
 			}, {
-				"text": "驼背",
+				"text": "翼状肩胛",
 				"value": 13
 			}, {
 				"text": "骨盆前倾",
@@ -80,7 +80,7 @@
 				"text": "足内翻",
 				"value": 18
 			}, {
-				"text": "翼状肩胛",
+				"text": "自定义动作",
 				"value": 19
 			}]
 		},
@@ -101,16 +101,62 @@
 		"actionType": {
 			"title": "action_type",
 			"description": "训练动作类型,力量训练,有氧训练,等",
-			"bsonType": "string",
-			"errorMessage": "{title}不能为空",
-			"maxLength": 128
+			"bsonType": "int",
+			"enum": [{
+				"text": "自重训练",
+				"value": 0
+			}, {
+				"text": "自重辅助",
+				"value": 1
+			}, {
+				"text": "拉伸",
+				"value": 2
+			}, {
+				"text": "力量训练",
+				"value": 3
+			}, {
+				"text": "有氧训练",
+				"value": 4
+			}, {
+				"text": "仅需要填写次数",
+				"value": 5
+			}, {
+				"text": "仅记录时间",
+				"value": 6
+			}]
+		},
+		"actionTypeDescription": {
+			"title": "action_type_description",
+			"description": "训练动作类型的详细描述,此枚举的值即为本表中actionType的描述并一一对应,本字段的值保持和actionType一致",
+			"bsonType": "int",
+			"enum": [{
+				"text": "自重动作、自动负重动作，都适合这种训练类型。如果你不负重，那么你可以只填写次数；如果负重，那么可以填写附加的重量",
+				"value": 0
+			}, {
+				"text": "例如辅助引体向上、辅助臂屈伸等等项目，需要用到辅助重量的动作，适合这种类型。这种类型可以自行设置体重",
+				"value": 1
+			}, {
+				"text": "拉伸动作无需记录任何数据",
+				"value": 2
+			}, {
+				"text": "力量训练的类型，可以为自定义动作提供记录次数和重量，其中重量的单位只能为公斤（kg）和磅（lbs）",
+				"value": 3
+			}, {
+				"text": "有氧训练有多种记录形式，用户可以自行选择多种记录组合进行搭配",
+				"value": 4
+			}, {
+				"text": "有些动作既不会负重，也不需要重物，此时你可以选择这种记录方式",
+				"value": 5
+			}, {
+				"text": "有些动作你只想记录时间的，选择此类记录形式你可以自行选择用秒表还是计时器",
+				"value": 6
+			}]
 		},
 		"type": {
 			"title": "type",
 			"description": "动作库类型,全部动作库:0,问题动作库:1",
 			"bsonType": "int",
 			"defaultValue": 0,
-			"errorMessage": "{title}不能为空",
 			"enum": [{
 				"text": "全部动作库",
 				"value": 0
@@ -125,6 +171,12 @@
 			"bsonType": "string",
 			"maxLength": 128
 		},
+		"url": {
+			"title": "url",
+			"description": "示例图片文件url路径",
+			"bsonType": "string",
+			"maxLength": 900
+		},
 		"createdTime": {
 			"title": "created_time",
 			"description": "创建时间",
@@ -132,6 +184,39 @@
 			"forceDefaultValue": {
 				"$env": "now"
 			}
+		},
+		"updatedTime": {
+			"title": "updated_time",
+			"description": "创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		"createdBy": {
+			"title": "created_by",
+			"description": "创建人",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"updatedBy": {
+			"title": "updated_by",
+			"description": "修改人",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"isDelete": {
+			"title": "is_delete",
+			"description": "删除标记,已删除:1,未删除:0",
+			"bsonType": "int",
+			"defaultValue": 0,
+			"enum": [{
+				"text": "未删除",
+				"value": 0
+			}, {
+				"text": "已删除",
+				"value": 1
+			}]
 		}
 	}
 }
