@@ -37,7 +37,8 @@
           <view v-else class="action-list-box">
             <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
               <view class="image">
-                <van-image round src="../../static/newWorkout/action.png" />
+                <!-- <van-image round src="../../static/newWorkout/action.png" /> -->
+                <view class="van-image"></view>
               </view>
               <view class="text">{{i.actionName}}</view>
             </view>
@@ -426,7 +427,9 @@ page {
           .van-image {
             width: 100upx;
             height: 100upx;
-            background: #c7c9cc;
+            display: inline-block;
+            background: url('../../static/newWorkout/action.png');
+            background-size: contain;
           }
           .text {
             padding: 8upx 30upx;

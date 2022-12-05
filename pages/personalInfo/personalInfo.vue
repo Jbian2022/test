@@ -1,5 +1,8 @@
 <template>
 	<view class="personal-info">
+		<view class="status_bar">
+            <!-- 这里是状态栏 -->
+        </view>
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="header">
 			<view class="user-name" @click="updateSignature('username')">{{userInfo.username||''}}</view>
@@ -105,6 +108,10 @@
 </script>
 
 <style lang="scss">
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
+}
 page{
 	background: #212328;
 }

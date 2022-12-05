@@ -1,5 +1,8 @@
 <template>
 	<view class="open-card">
+		<view class="status_bar">
+            <!-- 这里是状态栏 -->
+        </view>
 		<view class="background"></view>
 		<van-nav-bar title="开通金卡教练" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="vip-card">
@@ -79,6 +82,10 @@
 </script>
 
 <style lang="scss">
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
+}
 .open-card{
 	position: relative;
 	padding-bottom: 170upx;

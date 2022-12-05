@@ -1,5 +1,8 @@
 <template>
 	<view class="my">
+		<view class="status_bar">
+            <!-- 这里是状态栏 -->
+        </view>
 		<view class="background"></view>
 		<view class="header">
 			<view class="logo" @click="personalInfo">
@@ -87,6 +90,10 @@
 </script>
 
 <style lang="scss">
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
+}
 page{
 	background: #212328;
 }
