@@ -94,5 +94,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lijidong",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "html2canvas": "^1.4.1"
+  }
 }

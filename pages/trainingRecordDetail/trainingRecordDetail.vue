@@ -1,204 +1,206 @@
 <template>
 	<view class="training-record-detail">
-		<view class="backgroud-img"><van-image  src="../../static/newWorkout/training-record-bg.png"/></view>
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
-		<view class="first-title-times">
-			<view class="title">{{traineeTitle}}</view>
-			<view class="times">{{getMonthDay(trainDate)}}</view>
-		</view>
-		<view class="second-title-day">
-			<view class="title">总负荷量：{{sumLoad}}kg</view>
-			<view class="day">星期{{getweekday(trainDate)}}</view>
-		</view>
-		<view class="info-list">
-			<view v-for="(j,jx) in trainInfoList" :key="jx">
-				<view v-if="j.type===0" class="info-item">
-					<view class="item-header">
-						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
-						</view>
-						<view class="des-info">
-							<view class="des-title">{{j.actionName}}</view>
-							<view class="info-text">
-								<text>负荷量：{{j.load}}kg</text>
-								<text>已完成：{{j.frequency}}次</text>
+		<view id="training-detail">
+			<view class="backgroud-img"><van-image  src="../../static/newWorkout/training-record-bg.png"/></view>
+			<view class="first-title-times">
+				<view class="title">{{traineeTitle}}</view>
+				<view class="times">{{getMonthDay(trainDate)}}</view>
+			</view>
+			<view class="second-title-day">
+				<view class="title">总负荷量：{{sumLoad}}kg</view>
+				<view class="day">星期{{getweekday(trainDate)}}</view>
+			</view>
+			<view class="info-list">
+				<view v-for="(j,jx) in trainInfoList" :key="jx">
+					<view v-if="j.type===0" class="info-item">
+						<view class="item-header">
+							<view class="img">
+								<van-image round src="../../static/newWorkout/action.png"/>
 							</view>
-						</view>
-					</view>
-					<view class="detailed-data">
-						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
-							<view class="index">{{ix+1}}</view>
-							<view class="data-info">
-								<view class="kg">
-									<text class="num">{{i.kg}}</text>
-									<text>kg</text>
-								</view>
-								<view class="x">
-									x
-								</view>
-								<view class="time">
-									<text class="num">{{i.time}}</text>
-									<text>次</text>
+							<view class="des-info">
+								<view class="des-title">{{j.actionName}}</view>
+								<view class="info-text">
+									<text>负荷量：{{j.load}}kg</text>
+									<text>已完成：{{j.frequency}}次</text>
 								</view>
 							</view>
 						</view>
-					</view>
-				</view>
-				<view v-if="j.type===1" class="info-item">
-					<view class="item-header">
-						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
-						</view>
-						<view class="des-info">
-							<view class="des-title">{{j.actionName}}</view>
-							<view class="info-text">
-								<text>总里程：{{j.mileage}}km</text>
-								<text>用时：{{formaterTimes(j.times)}}</text>
-							</view>
-						</view>
-					</view>
-					<view class="detailed-data">
-						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
-							<view class="index">{{ix+1}}</view>
-							<view class="data-info-km">
-								<text class="num">{{i.km}}</text>
-								<text>km</text>
-							</view>
-							<view class="data-info-time">
-								<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
-							</view>
-						</view>
-					</view>
-				</view>
-				<view v-if="j.type===2" class="info-item">
-					<view class="item-header">
-						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
-						</view>
-						<view class="des-info">
-							<view class="des-title">{{j.actionName}}</view>
-							<view class="info-text">
-								<text>已完成：{{j.frequency}}次</text>
-							</view>
-						</view>
-					</view>
-					<view class="detailed-data">
-						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
-							<view class="index">{{ix+1}}</view>
-							<view class="data-info">
-								<view class="time">
-									<text class="num">{{i.time}}</text>
-									<text>次</text>
+						<view class="detailed-data">
+							<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+								<view class="index">{{ix+1}}</view>
+								<view class="data-info">
+									<view class="kg">
+										<text class="num">{{i.kg}}</text>
+										<text>kg</text>
+									</view>
+									<view class="x">
+										x
+									</view>
+									<view class="time">
+										<text class="num">{{i.time}}</text>
+										<text>次</text>
+									</view>
 								</view>
 							</view>
 						</view>
 					</view>
-				</view>
-				<view v-if="j.type===3" class="info-item">
-					<view class="item-header">
-						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
-						</view>
-						<view class="des-info">
-							<view class="des-title">{{j.actionName}}</view>
-							<view class="info-text">
-								<text>总用时：{{formaterTimes(j.times)}}</text>
+					<view v-if="j.type===1" class="info-item">
+						<view class="item-header">
+							<view class="img">
+								<van-image round src="../../static/newWorkout/action.png"/>
+							</view>
+							<view class="des-info">
+								<view class="des-title">{{j.actionName}}</view>
+								<view class="info-text">
+									<text>总里程：{{j.mileage}}km</text>
+									<text>用时：{{formaterTimes(j.times)}}</text>
+								</view>
 							</view>
 						</view>
-					</view>
-					<view class="detailed-data">
-						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
-							<view class="index">{{ix+1}}</view>
-							<view class="data-info">
-								<view class="time">
+						<view class="detailed-data">
+							<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+								<view class="index">{{ix+1}}</view>
+								<view class="data-info-km">
+									<text class="num">{{i.km}}</text>
+									<text>km</text>
+								</view>
+								<view class="data-info-time">
 									<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
 								</view>
 							</view>
 						</view>
 					</view>
-				</view>
-				<view v-if="j.type===4" class="info-item">
-					<view class="item-header">
-						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
-						</view>
-						<view class="des-info">
-							<view class="des-title">{{j.actionName}}</view>
-							<view class="info-text">
-								<text>负荷量：{{j.load}}kg</text>
-								<text>已完成：{{j.frequency}}次</text>
+					<view v-if="j.type===2" class="info-item">
+						<view class="item-header">
+							<view class="img">
+								<van-image round src="../../static/newWorkout/action.png"/>
+							</view>
+							<view class="des-info">
+								<view class="des-title">{{j.actionName}}</view>
+								<view class="info-text">
+									<text>已完成：{{j.frequency}}次</text>
+								</view>
 							</view>
 						</view>
-					</view>
-					<view class="detailed-data">
-						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
-							<view class="index">{{ix+1}}</view>
-							<view class="data-info">
-								<view class="kg">
-									<text class="num">{{i.kg}}</text>
-									<text>kg</text>
-								</view>
-								<view class="x">
-									x
-								</view>
-								<view class="time">
-									<text class="num">{{i.time}}</text>
-									<text>次</text>
+						<view class="detailed-data">
+							<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+								<view class="index">{{ix+1}}</view>
+								<view class="data-info">
+									<view class="time">
+										<text class="num">{{i.time}}</text>
+										<text>次</text>
+									</view>
 								</view>
 							</view>
 						</view>
 					</view>
-				</view>
-				<view v-if="j.type===5" class="info-item">
-					<view class="item-header">
-						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
-						</view>
-						<view class="des-info">
-							<view class="des-title">{{j.actionName}}</view>
-							<view class="info-text">
-								<text>负荷量：{{j.load}}kg</text>
-								<text>已完成：{{j.frequency}}次</text>
+					<view v-if="j.type===3" class="info-item">
+						<view class="item-header">
+							<view class="img">
+								<van-image round src="../../static/newWorkout/action.png"/>
+							</view>
+							<view class="des-info">
+								<view class="des-title">{{j.actionName}}</view>
+								<view class="info-text">
+									<text>总用时：{{formaterTimes(j.times)}}</text>
+								</view>
 							</view>
 						</view>
-					</view>
-					<view class="detailed-data">
-						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
-							<view class="index">{{ix+1}}</view>
-							<view class="data-info">
-								<view class="kg">
-									<text class="num">{{i.kg}}</text>
-									<text>kg</text>
-								</view>
-								<view class="x">
-									x
-								</view>
-								<view class="time">
-									<text class="num">{{i.time}}</text>
-									<text>次</text>
+						<view class="detailed-data">
+							<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+								<view class="index">{{ix+1}}</view>
+								<view class="data-info">
+									<view class="time">
+										<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
+									</view>
 								</view>
 							</view>
 						</view>
 					</view>
-				</view>
-				<view v-if="j.type===6" class="info-item">
-					<view class="item-header">
-						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+					<view v-if="j.type===4" class="info-item">
+						<view class="item-header">
+							<view class="img">
+								<van-image round src="../../static/newWorkout/action.png"/>
+							</view>
+							<view class="des-info">
+								<view class="des-title">{{j.actionName}}</view>
+								<view class="info-text">
+									<text>负荷量：{{j.load}}kg</text>
+									<text>已完成：{{j.frequency}}次</text>
+								</view>
+							</view>
 						</view>
-						<view class="des-info">
-							<view class="des-title">{{j.actionName}}</view>
-							<view class="info-text">
-								<text>总用时：{{formaterTimes(j.times)}}</text>
+						<view class="detailed-data">
+							<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+								<view class="index">{{ix+1}}</view>
+								<view class="data-info">
+									<view class="kg">
+										<text class="num">{{i.kg}}</text>
+										<text>kg</text>
+									</view>
+									<view class="x">
+										x
+									</view>
+									<view class="time">
+										<text class="num">{{i.time}}</text>
+										<text>次</text>
+									</view>
+								</view>
 							</view>
 						</view>
 					</view>
-					<view class="detailed-data">
-						<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
-							<view class="index">{{ix+1}}</view>
-							<view class="data-info">
-								<view class="time">
-									<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
+					<view v-if="j.type===5" class="info-item">
+						<view class="item-header">
+							<view class="img">
+								<van-image round src="../../static/newWorkout/action.png"/>
+							</view>
+							<view class="des-info">
+								<view class="des-title">{{j.actionName}}</view>
+								<view class="info-text">
+									<text>负荷量：{{j.load}}kg</text>
+									<text>已完成：{{j.frequency}}次</text>
+								</view>
+							</view>
+						</view>
+						<view class="detailed-data">
+							<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+								<view class="index">{{ix+1}}</view>
+								<view class="data-info">
+									<view class="kg">
+										<text class="num">{{i.kg}}</text>
+										<text>kg</text>
+									</view>
+									<view class="x">
+										x
+									</view>
+									<view class="time">
+										<text class="num">{{i.time}}</text>
+										<text>次</text>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view v-if="j.type===6" class="info-item">
+						<view class="item-header">
+							<view class="img">
+								<van-image round src="../../static/newWorkout/action.png"/>
+							</view>
+							<view class="des-info">
+								<view class="des-title">{{j.actionName}}</view>
+								<view class="info-text">
+									<text>总用时：{{formaterTimes(j.times)}}</text>
+								</view>
+							</view>
+						</view>
+						<view class="detailed-data">
+							<view v-for="(i,ix) in j.groupList" :key="ix" class="data-item">
+								<view class="index">{{ix+1}}</view>
+								<view class="data-info">
+									<view class="time">
+										<text class="num">{{i.hour>=10?i.hour:'0'+i.hour}}:{{i.minute>=10?i.minute:'0'+i.minute}}:{{i.second>=10?i.second:'0'+i.second}}</text>
+									</view>
 								</view>
 							</view>
 						</view>
@@ -215,6 +217,7 @@
 			@select="onSelect"
 			cancel-text=""
 		/>
+		<!-- <image v-if="base64" :src="base64" style="width: 100vw; height:200vh;"></image> -->
 	</view>
 </template>
 
@@ -232,7 +235,8 @@
 				traineeTitle: '',
 				trainDate: '',
 				sumLoad: 0,
-				trainInfoList: []
+				trainInfoList: [],
+				base64: null
 			}
 		},
 		onLoad: function (option) { 
@@ -259,6 +263,9 @@
 			},
 			onSelect(option) {
 				this.showShare = false
+				this.generateImage(()=>{
+					this.downloadFile()
+				})
 			},
 			formaterTimes(times,type=3){
 				const hour = Math.floor(times/3600);
@@ -284,16 +291,79 @@
 				const weekArray = new Array("日", "一", "二", "三", "四", "五", "六");
 				const week = weekArray[new Date(date).getDay()];
 				return week;
+			},
+			/* base64ToFile(data){
+				const binary = atob(data.split(',')[1])
+				const mime = data.split(',')[0].match(/:(.*?);/)[1]
+				let array = []
+				for (let i = 0; i < binary.length; i++) {
+					array.push(binary.charCodeAt(i))
+				}
+				const fileData = new Blob([new Uint8Array(array)], {type: mime})
+				const file = new File([fileData], `${new Date().getTime()}.png`, { type: mime })
+				return file
+			}, */
+			/* async uploadImage(){
+				const file = this.base64ToFile(this.base64)
+				const result = await uniCloud.uploadFile({
+					cloudPath: Date.now() + "-share.png",
+					fileContent: file
+				});
+				console.log(result)
+			}, */
+			downloadFile(){
+				const bitmap = new plus.nativeObj.Bitmap("test");
+				bitmap.loadBase64Data(this.base64, function() {
+					const url = "_doc/" + Date.now().getTime() + "-share.png";
+					console.log('saveHeadImgFile', url)
+					bitmap.save(url, { overwrite: true,  // 是否覆盖
+						// quality: 'quality'  // 图片清晰度
+					}, (i) => {
+						uni.saveImageToPhotosAlbum({
+							filePath: url,
+							success: function() {
+								bitmap.clear()
+							}
+						});
+					},);
+				})
 			}
 		}
 	}
 </script>
-
+<script lang="renderjs" module="canvasImage">
+import html2canvas from 'html2canvas'
+export default {
+	methods: {
+		generateImage(callback) {
+			setTimeout(() => {
+				const dom = document.getElementById('training-detail') // 需要生成图片内容的 dom 节点
+				html2canvas(dom, {
+					width: dom.clientWidth, //dom 原始宽度
+					height: dom.clientHeight,
+					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
+					scrollX: 0,
+					useCORS: true, //支持跨域
+					// scale: 2, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
+				}).then((canvas) => {
+					// 生成成功
+					// html2canvas 生成成功的图片链接需要转成 base64位的url
+					this.base64 = canvas.toDataURL('image/png')
+					callback&&callback()
+				}).catch(err=>{})
+			}, 300);
+		}
+	}
+}
+</script>
 <style lang="scss" >
 	.training-record-detail{
-		position: relative;
-		padding-bottom: 170upx;
-		min-height: 100vh;
+		#training-detail{
+			padding-bottom: 170upx;
+			padding-top: 88upx;
+			min-height: 100vh;
+			position: relative;
+		}
 		.backgroud-img{
 			position: absolute;
 			top: 0;
@@ -304,6 +374,10 @@
 			background: #212328;
 		}
 		.arrow-left{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
 			height: 88upx;
 			display: flex;
 			align-items: center;
