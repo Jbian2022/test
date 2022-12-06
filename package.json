@@ -85,6 +85,7 @@
     }
   },
   "dependencies": {
+    "moment": "^2.29.4",
     "qrcodejs2": "^0.0.2",
     "vant": "^3.6.5"
   },
