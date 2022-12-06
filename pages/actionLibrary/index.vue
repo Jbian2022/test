@@ -1,12 +1,16 @@
 <template>
   <view class="action-library">
+    <view class="status_bar"> <!-- 这里是状态栏 --> </view>
     <view class="header">
       <view class="all-action" :class="{active:mode===0}" @click="modeChangeHandle(0)">全部动作库</view>
       <view class="problem-action" :class="{active:mode===1}" @click="modeChangeHandle(1)">问题动作库</view>
       <view class="custom-action" :class="{show:showSaveButton}" @click="addActionHandle(19)">+ 自定义动作</view>
     </view>
     <view class="search">
-      <van-search shape="round" background="#212328" v-model="actionName" placeholder="输入动作名称搜索" @search="getActionList" />
+      <view class="uni-search">
+        <van-icon name="search" />
+        <input class="uni-input" v-model="actionName" @confirm="getActionList" confirm-type="search" placeholder="输入动作名称搜索" />
+      </view>
     </view>
     <view class="content" :class="{'select-page':showSaveButton}">
       <view class="sidebar">
@@ -277,12 +281,17 @@ export default {
 page {
   background: #212328;
 }
+.status_bar {
+    height: var(--status-bar-height);
+    width: 100%;
+}
 .action-library {
   .header {
+    height: 100upx;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8upx 40upx 40upx 40upx;
+    padding: 0 40upx;
     .all-action,
     .problem-action {
       font-size: 40upx;
@@ -302,30 +311,33 @@ page {
     }
   }
   .search {
-    ::v-deep .van-search {
-      padding: 0 30upx;
-    }
-    ::v-deep .van-search__content {
+    height: 140upx;
+    padding: 30upx;
+    box-sizing: border-box;
+    .uni-search{
       background: #383d46;
       border-radius: 40upx;
-    }
-    ::v-deep .van-search__field {
       height: 80upx;
-    }
-    ::v-deep .van-icon-search {
-      color: #a8adb6;
-    }
-    ::v-deep .van-field__control {
-      color: #f4f7ff;
-    }
-    ::v-deep .van-field__control::placeholder {
-      font-size: 28upx;
-      color: #7a7f89;
+      display: flex;
+      align-items: center;
+      .van-icon{
+        font-size: 28upx;
+        color: #BDC3CE;
+        margin-right: 14upx;
+        margin-left: 28upx;
+      }
+      .uni-input{
+        flex: 1;
+        color: #f4f7ff;
+        font-size: 28upx;
+        &::placeholder{
+          color: #7a7f89;
+        }
+      }
     }
   }
   .content {
-    height: calc(100vh - 180upx);
-    padding-top: 30upx;
+    height: calc(100vh - 240upx - var(--status-bar-height));
     box-sizing: border-box;
     display: flex;
     .sidebar {

@@ -1,8 +1,9 @@
 <template>
 	<view class="training-record">
-		<van-nav-bar title="赵思远" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
+		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
+		<van-nav-bar :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
 		<view class="calendar">
-			<van-calendar title="训练记录" :show-mark="false" :poppable="false" :show-confirm="false" @confirm="onConfirm" :min-date="new Date('2021-01-01')">
+			<van-calendar title="训练记录" :show-mark="false" :poppable="false" :show-confirm="false" @confirm="onConfirm">
 				<template #bottom-info="day">
 					<view v-show="getTrainTitle(day)" class="train-title" @click.stop="sharePage(day)">{{getTrainTitle(day)}}</view>
 				</template>
@@ -20,12 +21,14 @@
 		data() {
 			return {
 				trainListInfo:{},
-				trainDate: null
+				trainDate: null,
+				memberName: ''
 			}
 		},
 		onLoad: function (option) { 
 			if(option.traineeNo){
 				this.traineeNo = option.traineeNo
+				this.memberName =option.memberName
 				this.getTrainList()
 			}
 		},
@@ -85,6 +88,10 @@
 <style lang="scss">
 page{
 	background: #212328;
+}
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
 }
 .training-record{
 	::v-deep .van-nav-bar{

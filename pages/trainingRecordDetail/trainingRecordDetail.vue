@@ -2,7 +2,8 @@
 	<view class="training-record-detail">
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view id="training-detail">
-			<view class="backgroud-img"><van-image  src="../../static/newWorkout/training-record-bg.png"/></view>
+			<view class="status_bar"> <!-- 这里是状态栏 --> </view>
+			<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
 			<view class="first-title-times">
 				<view class="title">{{traineeTitle}}</view>
 				<view class="times">{{getMonthDay(trainDate)}}</view>
@@ -16,7 +17,7 @@
 					<view v-if="j.type===0" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="../../static/newWorkout/action.png"/>
+								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -48,7 +49,7 @@
 					<view v-if="j.type===1" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="../../static/newWorkout/action.png"/>
+								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -74,7 +75,7 @@
 					<view v-if="j.type===2" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="../../static/newWorkout/action.png"/>
+								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -98,7 +99,7 @@
 					<view v-if="j.type===3" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="../../static/newWorkout/action.png"/>
+								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -121,7 +122,7 @@
 					<view v-if="j.type===4" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="../../static/newWorkout/action.png"/>
+								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -153,7 +154,7 @@
 					<view v-if="j.type===5" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="../../static/newWorkout/action.png"/>
+								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -185,7 +186,7 @@
 					<view v-if="j.type===6" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="../../static/newWorkout/action.png"/>
+								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -228,9 +229,9 @@
 			return {
 				showShare: false,
 				options: [
-					{ name: '分享到微信', icon: '../../static/newWorkout/wechat.png' },
-					{ name: '分享到朋友圈', icon: '../../static/newWorkout/pengyou.png' },
-					{ name: '保存到相册', icon: '../../static/newWorkout/download.png' }
+					{ name: '分享到微信', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png' },
+					{ name: '分享到朋友圈', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png' },
+					{ name: '保存到相册', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png' }
 				],
 				traineeTitle: '',
 				trainDate: '',
@@ -264,6 +265,7 @@
 			},
 			onSelect(option) {
 				this.showShare = false
+				console.log(option,888)
 				this.generateImage(()=>{
 					console.log(option,88)
 					if(option.name==='保存到相册'){
@@ -387,7 +389,12 @@ export default {
 }
 </script>
 <style lang="scss" >
+	.status_bar {
+		height: var(--status-bar-height);
+		width: 100%;
+	}
 	.training-record-detail{
+		position: relative;
 		#training-detail{
 			padding-bottom: 170upx;
 			padding-top: 88upx;
@@ -405,7 +412,7 @@ export default {
 		}
 		.arrow-left{
 			position: absolute;
-			top: 0;
+			top: var(--status-bar-height);
 			left: 0;
 			right: 0;
 			z-index: 88;

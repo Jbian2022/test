@@ -90,44 +90,55 @@
 		{
 			"path": "pages/actionLibrary/index",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "动作库",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/addAction/index",
 			"style": {
 				"navigationBarTitleText": "新增动作",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/newWorkout/newWorkout",
 			"style": {
 				"navigationBarTitleText": "新建训练",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/trainingRecord/trainingRecord",
 			"style": {
 				"navigationBarTitleText": "训练记录",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/trainingRecordDetail/trainingRecordDetail",
 			"style": {
 				"navigationBarTitleText": "训练记录详情",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": false,
-				"navigationStyle": false
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -135,7 +146,8 @@
 			"style": {
 				"navigationBarTitleText": "开卡",
 				"enablePullDownRefresh": false,
-				"navigationStyle": false
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -143,7 +155,8 @@
 			"style": {
 				"navigationBarTitleText": "设置",
 				"enablePullDownRefresh": false,
-				"navigationStyle": false
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -151,14 +164,17 @@
 			"style": {
 				"navigationBarTitleText": "个人信息",
 				"enablePullDownRefresh": false,
-				"navigationStyle": false
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/updateSignature/updateSignature",
 			"style": {
 				"navigationBarTitleText": "修改签名",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		}
 	    ,{

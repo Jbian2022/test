@@ -1,5 +1,6 @@
 <template>
 	<view class="new-workout">
+		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<view class="header">
 			<view class="title">新建训练</view>
 			<van-button class="btn" @click="showFinishDialog = true">完成</van-button>
@@ -12,7 +13,7 @@
 				<view v-if="i.type===0" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -22,7 +23,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -55,7 +56,7 @@
 				<view v-if="i.type===1" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -65,7 +66,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -99,7 +100,7 @@
 				<view v-if="i.type===2" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -108,7 +109,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -137,7 +138,7 @@
 				<view v-if="i.type===3" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -146,7 +147,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -180,7 +181,7 @@
 				<view v-if="i.type===4" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -190,7 +191,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -223,7 +224,7 @@
 				<view v-if="i.type===5" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -233,7 +234,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -269,7 +270,7 @@
 				<view v-if="i.type===6" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="../../static/newWorkout/action.png"/>
+							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -278,7 +279,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="../../static/newWorkout/config.png"/>
+							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -312,7 +313,7 @@
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button class="delete" @click="showDeleteDialog=true"><van-image class="img" src="../../static/newWorkout/trashcan.png"/></van-button>
+			<van-button class="delete" @click="showDeleteDialog=true"><van-image class="img" src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/></van-button>
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
 		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
@@ -560,12 +561,15 @@
 page{
 	background: #212328;
 }
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
+}
 .new-workout{
-	padding-bottom: 168upx;
+	padding-bottom: 175upx;
 	.header{
-		position: sticky;
-		top: 0;
-		z-index: 88;
+		height: 126upx;
+		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
 		padding: 30upx;
@@ -585,11 +589,10 @@ page{
 		}
 	}
 	.workout-title{
-		position: sticky;
-		top: 128upx;
-		z-index: 88;
+		height: 130upx;
+		box-sizing: border-box;
 		padding: 0 30upx;
-		padding-bottom: 15upx;
+		padding-bottom: 30upx;
 		background: #212328;
 		.van-field{
 			height: 100upx;
@@ -610,8 +613,10 @@ page{
 		}
 	}
 	.action-list{
+		height: calc(100vh - 462upx - var(--status-bar-height));
+		overflow-y: auto;
 		padding: 30upx;
-		padding-top: 15upx;
+		padding-top: 0;
 		.action-tiem{
 			padding: 40upx;
 			background: #383D46;
@@ -770,6 +775,9 @@ page{
 		}
 	}
 	.footer-button{
+		height: 198upx;
+		overflow: hidden;
+		box-sizing: border-box;
 		position: fixed;
 		padding: 68upx 30upx;
 		padding-top: 30upx;

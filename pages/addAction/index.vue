@@ -1,5 +1,6 @@
 <template>
 	<view class="add-action">
+		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<van-nav-bar title="新增动作" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="form">
 			<van-field class="uni-input" v-model="actionName" placeholder="请输入动作名称" />
@@ -106,6 +107,10 @@
 <style lang="scss">
 	page{
 		background: #212328;
+	}
+	.status_bar {
+		height: var(--status-bar-height);
+		width: 100%;
 	}
 	.add-action{
 		::v-deep .van-nav-bar{

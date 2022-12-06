@@ -26,7 +26,7 @@
 		<view class="vip-title">金卡会员权益</view>
 		<view class="equity-list">
 			<view v-for="j in 8" :key="j" class="equity-item">
-				<van-image class="logo" src="../../static/newWorkout/equity.svg"/>
+				<van-image class="logo" src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/b46d2b80-3f88-4c7f-8891-b0747f8216ae.svg"/>
 				<view class="des">金卡权益</view>
 			</view>
 		</view>
@@ -53,11 +53,11 @@
 			<view class="title">选择支付方式</view>
 			<view class="actions">
 				<view class="action">
-					<van-image class="img" src="../../static/newWorkout/alipay.svg"/>
+					<van-image class="img" src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"/>
 					<view class="text">支付宝</view>
 				</view>
 				<view class="action">
-					<van-image class="img" src="../../static/newWorkout/weichat.svg"/>
+					<van-image class="img" src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"/>
 					<view class="text">微信</view>
 				</view>
 			</view>

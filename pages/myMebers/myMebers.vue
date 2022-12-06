@@ -280,7 +280,7 @@ export default {
     },
     goToTrainingRecord() {
       uni.navigateTo({
-        url: '/pages/trainingRecord/trainingRecord?traineeNo='+'63899b9ef5cf3a1773072cd4'
+        url: '/pages/trainingRecord/trainingRecord'+`?traineeNo=${'63899b9ef5cf3a1773072cd4'}&memberName=${'张雪峰'}`
       })
     },
     goToNewWorkout() {

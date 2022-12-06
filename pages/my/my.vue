@@ -102,6 +102,7 @@ page{
 	padding: 80upx 40upx 0;
 	.header{
 		display: flex;
+		position: relative;
 		.logo{
 			position: relative;
 			.van-image{
@@ -149,7 +150,7 @@ page{
 		.config{
 			position: absolute;
 			right: 40upx;
-			top: 80upx;
+			top: 0upx;
 			width: 44upx;
 			height: 44upx;
 			background: url('../../static/newWorkout/config.png');
