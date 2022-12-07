@@ -8,7 +8,7 @@
 					<view class="calendar-title">训练记录</view>
 				</template>
 				<template #operation-right="{item}">
-					<view class="calendar-date">{{getMonthDay(item)}}</view>
+					<view class="calendar-date">{{getYearMonth(item)}}</view>
 				</template>
 				<template #default="{cell}">
 					<view class="cell-box">
@@ -75,7 +75,7 @@
 					url: '/pages/trainingRecordDetail/trainingRecordDetail'+`?traineeNo=${this.traineeNo}&trainDate=${date}`
 				});
 			},
-			getMonthDay(val){
+			getYearMonth(val){
 				const formater = (temp) =>{
 				　　if(temp<10){
 				　　　　return "0"+temp;
@@ -84,9 +84,9 @@
 				　　}
 				}
 				const d=new Date(val);
+				const year = d.getFullYear();
 				const month=formater(d.getMonth()+1);
-				const date=formater(d.getDate());
-				return month+'.'+date
+				return year+'.'+month
 			},
 			getTrainTitle(day){
 				return this.trainListInfo[day] || ''

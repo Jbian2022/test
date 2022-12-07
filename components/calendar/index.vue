@@ -17,11 +17,13 @@
         <slot name="header"><span class="calendar-header-title">{{item}}</span></slot>
       </view>
     </view>
-    <view class="calendar-content" @touchstart="touchStart" @touchend="touchEnd">
-      <view v-for="(item,i) in dataList" :key="i" :class="[item.type]" @click="selectHandle(item)">
-        <slot :cell="item">
-          <view class="calendar-data-item" :class="{'is-selected':item.isSelected}">{{item.key}}</view>
-        </slot>
+    <view class="transition">
+      <view class="calendar-content" :class="[transitionClass]" @touchstart="touchStart" @touchend="touchEnd">
+        <view v-for="(item,i) in dataList" :key="i" :class="[item.type]" @click="selectHandle(item)">
+          <slot :cell="item">
+            <view class="calendar-data-item" :class="{'is-selected':item.isSelected}">{{item.key}}</view>
+          </slot>
+        </view>
       </view>
     </view>
   </view>
@@ -54,8 +56,11 @@ export default {
       weekList: ['一', '二', '三', '四', '五', '六', '日'],
       touchStartX: 0,  // 触屏起始点x  
       touchStartY: 0,  // 触屏起始点y
-      styles: {}
+      transitionClass: ''
     }
+  },
+  onShow(){
+    this.transitionClass = ''
   },
   methods: {
     render () {
@@ -159,10 +164,10 @@ export default {
         if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {  
             if (deltaX >= 0) {  
                 console.log("左滑")
-                this.nextMonth()
+                this.leftMove()
             } else {  
                 console.log("右滑")
-                this.prevMonth()
+                this.rightMove()
             }  
         } else if(Math.abs(deltaY) > 50&& Math.abs(deltaX) < Math.abs(deltaY)) {  
             if (deltaY < 0) {  
@@ -173,7 +178,23 @@ export default {
         } else {  
             console.log("可能是误触！")  
         }  
-    },       
+    }, 
+    rightMove(){
+      this.transitionClass = 'left-start'
+      const time1 = setTimeout(()=>{
+        this.nextMonth()
+        this.transitionClass = 'left-end'
+        clearTimeout(time1)
+      },300)
+    },
+    leftMove(){
+      this.transitionClass = 'right-start'
+      const time1 = setTimeout(()=>{
+        this.prevMonth()
+        this.transitionClass = 'right-end'
+        clearTimeout(time1)
+      },300)
+    }      
   },
   watch: {
     value: {
@@ -214,6 +235,10 @@ export default {
     }
   }
   .calendar-content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, minmax(150upx, 1fr));
@@ -235,16 +260,57 @@ export default {
       }
     }
   }
-  .slide-fade-enter-active {
-    transition: all .3s ease;
+  .transition{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 900upx;
   }
-  .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  .left-start{
+    animation: leftStart .2s linear 0s 1 both;
   }
-  .slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
+  .left-end{
+    left: 100%;
+    animation: leftEnd .2s linear 0s 1 both;
+  }
+  .right-start{
+    animation: rightStart .2s linear 0s 1 both;
+  }
+  .right-end{
+    left: -100%;
+    animation: rightEnd .2s linear 0s 1 both;
+  }
+  @keyframes leftStart{
+    0% {
+      left: 0px;
+    }
+    100% {
+      left: -100%;
+    }
+  }
+  @keyframes leftEnd{
+    0% {
+      left: 100%;
+    }
+    100% {
+      left: 0px;
+    }
+  }
+  @keyframes rightStart{
+    0% {
+      left: 0px;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+  @keyframes rightEnd{
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 0px;
+    }
   }
 }
 </style>
