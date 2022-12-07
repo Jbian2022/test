@@ -399,6 +399,7 @@ export default {
 			padding-bottom: 170upx;
 			padding-top: 88upx;
 			min-height: 100vh;
+			box-sizing: border-box;
 			position: relative;
 		}
 		.backgroud-img{
