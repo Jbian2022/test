@@ -12,9 +12,7 @@
 			<view v-for="(i,ix) in actionList" :key="ix" class="action-type-box">
 				<view v-if="i.type===0" class="action-tiem">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
-						</view>
+						<view class="img"></view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
@@ -23,7 +21,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
+							<view class="img"></view>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -47,7 +45,7 @@
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -313,7 +311,9 @@
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button class="delete" @click="showDeleteDialog=true"><van-image class="img" src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/></van-button>
+			<van-button class="delete" @click="showDeleteDialog=true">
+				<view class="img"></view>
+			</van-button>
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
 		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
@@ -625,11 +625,11 @@ page{
 				position: relative;
 				display: flex;
 				.img{
-					.van-image{
-						width: 100upx;
-						height: 100upx;
-						background: #C7C9CC;
-					}
+					width: 100upx;
+					height: 100upx;
+					background: url('../../static/newWorkout/action.png');
+					background-size: contain;
+					background-repeat: no-repeat;
 				}
 				.des-info{
 					margin-left: 30upx;
@@ -658,6 +658,9 @@ page{
 					.img{
 						width: 40upx;
 						height: 40upx;
+						background: url('../../static/newWorkout/trashcan.png');
+						background-size: contain;
+						background-repeat: no-repeat;
 					}
 				}
 			}
@@ -734,6 +737,9 @@ page{
 						.img{
 							width: 40upx;
 							height: 40upx;
+							background: url('../../static/newWorkout/trashcan.png');
+							background-size: contain;
+							background-repeat: no-repeat;
 						}
 					}
 				}
@@ -799,6 +805,9 @@ page{
 			.img{
 				width: 40upx;
 				height: 40upx;
+				background: url('../../static/newWorkout/trashcan.png');
+				background-size: contain;
+				background-repeat: no-repeat;
 			}
 			&+.van-button{
 				margin-left: 20upx;

@@ -7,49 +7,80 @@
 		<van-nav-bar title="开通金卡教练" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="vip-card">
 			<view class="left">
-				<view class="card-name">金卡教练</view>
+				<view class="card-info">
+					<view class="user-logo">
+						<van-image round :src="userInfo.avatar"/>
+					</view>
+					<view class="card-name">金卡教练</view>
+					<view class="card-status">生效中</view>
+				</view>
 				<view class="card-des">包年更划算哦～</view>
 			</view>
 			<view class="right"></view>
 		</view>
-		<view class="vip-title">开卡限时优惠</view>
+		<view class="vip-title">开通金卡教练</view>
 		<view class="card-types-box">
 			<view class="card-types">
-				<view v-for="i in 4" :key="i" class="type-item">
-					<view class="text">连续包月</view>
-					<view class="money">¥<text class="num">10</text></view>
-					<view class="des">次月续费20元</view>
-					<div class="activity">新用户特惠</div>
+				<view class="type-item active">
+					<view class="hot-msg">每天1元钱</view>
+					<view class="text">年卡</view>
+					<view class="money">¥<text class="num">365</text></view>
+					<view class="des">468元/年</view>
+					<div class="activity">无限会员数</div>
+				</view>
+				<view class="type-item">
+					<view class="hot-msg">立省60元</view>
+					<view class="text">三个月</view>
+					<view class="money">¥<text class="num">158</text></view>
+					<view class="des">218元/季度</view>
+					<div class="activity">限100个会员</div>
+				</view>
+				<view class="type-item">
+					<view class="hot-msg">立省20元</view>
+					<view class="text">月卡</view>
+					<view class="money">¥<text class="num">78</text></view>
+					<view class="des">98元/月</view>
+					<div class="activity">限30个会员</div>
 				</view>
 			</view>
 		</view>
-		<view class="vip-title">金卡会员权益</view>
-		<view class="equity-list">
-			<view v-for="j in 8" :key="j" class="equity-item">
-				<van-image class="logo" src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/b46d2b80-3f88-4c7f-8891-b0747f8216ae.svg"/>
-				<view class="des">金卡权益</view>
+		<view class="vip-title">金卡教练权益</view>
+		<view class="equity-box">
+			<view class="equity-list">
+				<view class="equity-item">
+					<view class="logo"></view>
+					<view class="des">金卡权益</view>
+				</view>
+				<view class="equity-item">
+					<view class="logo"></view>
+					<view class="des">金卡权益</view>
+				</view>
+				<view class="equity-item">
+					<view class="logo"></view>
+					<view class="des">金卡权益</view>
+				</view>
+				<view class="equity-item">
+					<view class="logo"></view>
+					<view class="des">金卡权益</view>
+				</view>
+				<view class="equity-item">
+					<view class="logo"></view>
+					<view class="des">金卡权益</view>
+				</view>
+				<view class="equity-item">
+					<view class="logo"></view>
+					<view class="des">金卡权益</view>
+				</view>
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button block @click="show=true">立即开通</van-button>
+			<view class="text-box">
+				<view class="yuan">已省￥103</view>
+				<view class="des">468元/年</view>
+			</view>
+			<van-button block @click="show=true">确认开通并支付￥365元</van-button>
 		</view>
-		<van-action-sheet v-model:show="show">
-			<view class="vip-title">开通金卡教练</view>
-			<view class="card-types-box">
-				<view class="card-types">
-					<view v-for="i in 4" :key="i" class="type-item" :class="{active:i===1}">
-						<view class="text">连续包月</view>
-						<view class="money">¥<text class="num">10</text></view>
-						<view class="des">次月续费20元</view>
-						<div class="activity">新用户特惠</div>
-					</view>
-				</view>
-			</view>
-			<view class="open-card-btn">
-				<van-button block @click="show=false,showPayment=true">立即开通</van-button>
-			</view>
-		</van-action-sheet>
-		<van-action-sheet class="payment-action-sheet" v-model:show="showPayment">
+		<van-action-sheet class="payment-action-sheet" v-model:show="show">
 			<view class="title">选择支付方式</view>
 			<view class="actions">
 				<view class="action">
@@ -70,7 +101,10 @@
 		data() {
 			return {
 				show:false,
-				showPayment: false
+				showPayment: false,
+				userInfo:{
+					avatar: null
+				}
 			}
 		},
 		methods: {
@@ -130,24 +164,50 @@
 		background-image: url('../../static/newWorkout/open-card-vip-bg.png');
 		background-size: contain;
 		background-repeat: no-repeat;
+		position: relative;
 		.left{
 			padding-top: 40upx;
 			padding-left: 40upx;
-			.card-name{
-				font-size: 52upx;
-				color: #93653C;
-				line-height: 72upx;
-				text-shadow: 0px 2px 2px rgba(48,29,10,0.4);
-				margin-bottom: 80upx;
-				font-weight: bold;
+			.card-info{
+				display: flex;
+				align-items: center;
+				.user-logo{
+					.van-image{
+						width: 80upx;
+						height: 80upx;
+					}
+				}
+				.card-name{
+					margin-left: 20upx;
+					font-size: 48upx;
+					color: #93653C;
+					line-height: 68upx;
+					font-weight: 600;
+				}
+				.card-status{
+					margin-left: 15upx;
+					font-size: 24upx;
+					background: #FFF0C0;
+					border-radius: 25upx;
+					padding: 10upx 20upx;
+					height: 50upx;
+					line-height: 50upx;
+					font-weight: 600;
+					color: #95673D;
+				}
 			}
 			.card-des{
+				margin-top: 85upx;
 				font-size: 26upx;
 				font-weight: 400;
 				color: #90633A;
 			}
 		}
 		.right{
+			position: absolute;
+			right: -30upx;
+			top: 0;
+			z-index: 0;
 			width: 260upx;
 			height: 260upx;
 			background: url('../../static/newWorkout/vip-logo.png');
@@ -187,74 +247,114 @@
 	}
 	.card-types-box{
 		width: 100%;
-		overflow: auto;
+		// overflow: auto;
 	}
 	.card-types{
 		display: flex;
+		padding: 0 10upx;
 		.type-item{
 			flex-shrink: 0;
-			width: 230upx;
-			height: 280upx;
+			width: 217upx;
+			height: 286upx;
 			background: rgba(56, 61, 70, .2);
-			border-radius: 24upx;
+			border-radius: 16px;
 			border: 2upx solid rgba(122, 127, 137, .2);
-			margin-left: 30upx;
-			padding: 30upx;
+			margin-left: 20upx;
 			box-sizing: border-box;
 			text-align: center;
+			position: relative;
+			.hot-msg{
+				position: absolute;
+				top: -8upx;
+				left: -2upx;
+				width: 130upx;
+				height: 44upx;
+				line-height: 44upx;
+				background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
+				border-radius: 16upx 4upx 16upx 4upx;
+				color: #90633A;
+				font-size: 24upx;
+			}
 			.text{
+				margin-top: 52upx;
 				font-size: 28upx;
 				color: #F4F7FF;
 				font-weight: bold;
 			}
 			.money{
-				margin-top: 10upx;
+				margin-top: 12upx;
 				font-size: 28upx;
 				font-weight: bold;
 				color: #FFE18F;
 				.num{
-					font-size: 56upx;
+					font-size: 52upx;
 				}
 			}
 			.des{
+				margin-top: 10upx;
 				font-size: 20upx;
 				color: #BDC3CE;
+				text-decoration:line-through;
 				margin-bottom: 22upx;
 			}
 			.activity{
-				font-size: 22upx;
+				font-size: 26upx;
 				font-weight: 500;
-				color: #90633A;
-				background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
-				border-radius: 20upx;
-				padding: 8upx 16upx;
+				color: #FFE18F;
 			}
 			&.active{
 				background: linear-gradient(180deg, #FFECB8 0%, #383D46 65%);
 				border: 2upx solid #ffe6a1;
-				overflow: hidden;
 			}
 		}
 	}
+	.equity-box{
+		margin-top: 40upx;
+		margin-bottom: 20upx;
+		padding: 0 30upx;
+	}
 	.equity-list{
-		margin-top: 20upx;
-		margin-bottom: 70upx;
 		display: flex;
 		flex-wrap: wrap;
-		padding: 0 72upx;
+		padding: 36upx 70upx;
+		background: rgba(56, 61, 70, .2);;
+		border-radius: 16upx;
+		border: 2upx solid rgba(122, 127, 137, .2);
 		.equity-item{
-			width: 25%;
+			width: 33%;
 			text-align: center;
 			margin-bottom: 30upx;
 			.logo{
-				width: 90upx;
-				height: 90upx;
+				margin: 0 auto;
+				width: 100upx;
+				height: 100upx;
+				background: linear-gradient(180deg, #69707C 0%, #383D46 100%);
+				border-radius: 100%;
+				background-image: url('../../static/newWorkout/equity2.svg');
+				background-size: contain;
+				background-repeat: no-repeat;
 			}
 			.des{
 				margin-top: 10upx;
 				font-size: 24upx;
-				color: #D1BA7D;
+				font-weight: 400;
+				color: #BDC3CE;
 				line-height: 34upx;
+			}
+			&:nth-child(2) .logo {
+				background-image: url('../../static/newWorkout/equity1.svg');
+			}
+			&:nth-child(3) .logo {
+				background-image: url('../../static/newWorkout/equity3.svg');
+			}
+			&:nth-child(4) .logo {
+				background-image: url('../../static/newWorkout/equity4.svg');
+			}
+			&:nth-child(5) .logo {
+				background-image: url('../../static/newWorkout/equity5.svg');
+			}
+			&:nth-child(6) .logo {
+				background-image: url('../../static/newWorkout/equity6.svg');
 			}
 		}
 	}
@@ -264,37 +364,41 @@
 		left: 0;
 		right: 0;
 		z-index: 1;
-		padding: 0 40upx;
-		padding-bottom: 68upx;
+		padding: 0 30upx;
+		padding-top: 20upx;
+		padding-bottom: 60upx;
+		background-color: #212328;
+		display: flex;
+		.text-box{
+			text-align: center;
+			margin-right: 44upx;
+			.yuan{
+				font-size: 32upx;
+				font-weight: 600;
+				color: #FFE18F;
+				line-height: 44upx;
+			}
+			.des{
+				margin-top: 10upx;
+				font-size: 24upx;
+				font-weight: 400;
+				color: #BDC3CE;
+				line-height: 28upx;
+				text-decoration:line-through;
+			}
+		}
 		.van-button{
-			background: linear-gradient(176deg, #5F6571 0%, #373C46 100%);
+			width: 470upx;
+			height: 90upx;
+			background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
 			border-radius: 16upx;
-			border: 2upx solid;
-			border-image: linear-gradient(179deg, rgba(198, 198, 198, 1), rgba(71, 77, 88, 1)) 2 2;
-			border: none;
-			font-size: 32upx;
+			color: #90633A;
 			font-weight: 600;
-			color: #FFE18F;
 		}
 	}
 	::v-deep .van-popup{
 		background: #383D46;
-		border-radius: 24upx 24upx 0px 0px;
-	}
-	.open-card-btn{
-		margin-top: 60upx;
-		padding: 0 40upx;
-		padding-bottom: 68upx;
-		.van-button{
-			background: linear-gradient(150deg, #FFF1C9 0%, #FFE5A1 100%);
-			border-radius: 16upx;
-			border: 2upx solid;
-			border-image: linear-gradient(180deg, rgba(255, 251, 239, 1), rgba(185, 133, 80, 1)) 2 2;
-			border: none;
-			font-size: 32upx;
-			font-weight: 600;
-			color: #90633A;
-		}
+		border-radius: 24upx 24upx 0 0;
 	}
 	.payment-action-sheet{
 		.title{
