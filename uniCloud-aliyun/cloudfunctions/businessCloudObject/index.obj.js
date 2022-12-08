@@ -1,6 +1,7 @@
 // 云对象教程: https://uniapp.dcloud.net.cn/uniCloud/cloud-obj
 // jsdoc语法提示教程：https://ask.dcloud.net.cn/docs/#//ask.dcloud.net.cn/article/129
 const db = uniCloud.database()
+const dbCmd = db.command
 const uniID = require('uni-id')
 module.exports = {
 	_before: function () { // 通用预处理器
@@ -32,14 +33,14 @@ module.exports = {
 	}
 	*/
    // 获取学员列表
-   getMemberList: async function(mobile) {
+   getMemberList: async function(buyStatus) {
 	   const token = this.getUniIdToken()
 	   	const detailInfo = await this.uniID.checkToken(token)
-		console.log(detailInfo,'detailInfo')
+		// console.log(detailInfo,'detailInfo')
 	   return new Promise((resolve, reject) => {
 		   db.collection('t_trainee').where({
-			   mobile: detailInfo.userInfo.mobile,
-			   userId: detailInfo.uid   
+			   userId: detailInfo.uid,
+				buyStatus: String(buyStatus) ? buyStatus : ''	
 		   }).get().then(memberRes => {
 			   let successMessage = {
 				   success: true,
@@ -52,6 +53,32 @@ module.exports = {
 		   })
 		   
 	   })
+   },
+   // 多字段查询会员列表
+   getMoreList: async function(data) {
+	console.log(new RegExp(/^[0-9]*[1-9][0-9]*$/).test(data) , '我是data')
+	   const token = this.getUniIdToken()
+		const { uid } = await this.uniID.checkToken(token)
+		return new Promise((resolve, reject) => {
+				   db.collection('t_trainee')
+				   .where(dbCmd.or({
+								mobile: new RegExp(data||'', 'i'), // 字段一
+								 userId: uid
+							}, {
+								traineeName: new RegExp(data||'', 'i'), // 字段二
+								 userId: uid
+							})).get().then(memberRes => {
+					   let successMessage = {
+						   success: true,
+						   ...memberRes
+					   }
+					   resolve(successMessage)
+					   
+				   }).catch(err => {
+					   reject(err)
+				   })
+				   
+		})
    },
    // 添加会员
    addMember: async function(data) {
@@ -68,7 +95,7 @@ module.exports = {
 		  db.collection('t_trainee').where({
 			  traineeName: resultParam.traineeName
 		  }).get().then(valiodRes => {
-			  console.log(valiodRes.affectedDocs, 'valiodRes.affectedDocs')
+			  // console.log(valiodRes.affectedDocs, 'valiodRes.affectedDocs')
 			  if (valiodRes.affectedDocs == 0) {
 				  db.collection('t_trainee').add(resultParam).then(() =>{
 					  let successMessage = {
@@ -95,19 +122,45 @@ module.exports = {
 	   })
    },
    // 删除会员
-   removeMember: function() {
+   removeMember: async function(data) {
+	   const token = this.getUniIdToken()
+	   	const detailInfo = await this.uniID.checkToken(token)
+		let resultParam = {
+			 userId: detailInfo.uid ,
+			 _id: data._id
+		}
 	   return new Promise((resolve, reject) => {
-	   		   
-	   	   })
+		   db.collection('t_trainee').where(resultParam).remove().then(() => {
+			   let successMessage = {
+				  success: true,
+				   message: '删除成功'
+			   }
+			   resolve(successMessage)
+		   }).catch(err => {
+			   reject(err)
+		   })		   
+	   })
    },
    // 编辑会员
-   updateMember: function() {
+   updateMember: async function(data) {
+	   const token = this.getUniIdToken()
+	   	const detailInfo = await this.uniID.checkToken(token)
+	   let resultParam = {
+		   ...data,
+		    userId: detailInfo.uid 
+	   }
+	   delete resultParam['_id']
 	   return new Promise((resolve, reject) => {
-	   		   db.collection('t_trainee').doc(this.item._id).update(item).then(e=>{
-	   		   	// console.log(e)
+	   		   db.collection('t_trainee').doc(data._id).update(resultParam).then(()=>{
+	   		   let successMessage = {
+							success: true,
+							message: '编辑成功'
+						  }
+	   		   resolve(successMessage)
 	   		   
 	   		   }).catch(err => {
-				   
+				   // console.log(err, 'err')
+				    reject(err)
 			   })
 	   	   })
    },

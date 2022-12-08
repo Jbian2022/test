@@ -2,8 +2,8 @@
   <view class="counter">
     <view class="text">
       <text class="text1"
-        >健变，<br />
-        从此刻开始。</text
+        >让教练，<br />
+        变得伟大。</text
       ><br />
       <text class="text2">私人专属教练，扁平学员管理</text>
     </view>
@@ -201,11 +201,11 @@ export default {
 .counter {
   position: absolute;
   background: url('@/static/backgroundImage.png');
-background-position: center;
-    background-size:cover;
-    background-repeat: no-repeat;
-	width: 100vw;
-	height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
   .text {
     padding-top: 444upx;
     padding-left: 70upx;
@@ -215,6 +215,7 @@ background-position: center;
       font-family: HarmonyOS_Sans_SC_Black;
       color: #ffffff;
       line-height: 140upx;
+      font-weight: 600;
     }
     .text2 {
       margin-top: 10upx;
@@ -236,9 +237,9 @@ background-position: center;
       margin-left: 70upx;
       height: 100upx;
       background-color: rgba(244, 247, 255, 0.15);
-	  line-height: 100upx;
-	  padding-bottom: 0;
-	  padding-top: 0;
+      line-height: 100upx;
+      padding-bottom: 0;
+      padding-top: 0;
       border-radius: 16upx;
     }
     // 按钮

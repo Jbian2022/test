@@ -1,0 +1,522 @@
+<template>
+	<view>
+		<view class="mebers_content">
+		        <view class="no_data_style" v-if="meberList.length === 0">
+		          <image
+		            class="no_data_meber_img_style"
+		            src="../../static/app-plus/mebrs/nomebers.png"
+		          ></image>
+		        </view>
+				
+		<!-- 			<view  class="slide_stylle"
+		          v-for="(item, itemIndex) in meberList"
+		          :key="'itemIndex' + itemIndex">
+						<view class="add_student_style">
+						<SlideLeft :data_transit="item">
+							<template v-slot:left>
+								 <view class="need_loop_style" @click.stop="updateMember(item)">
+												    <view class="loop_top_style">
+												      <view class="top_left_style">
+												        <text class="top_left_name_style">{{
+												          item.traineeName
+												        }}</text>
+												        <image
+												          class="top_left_img_style"
+												          src="../../static/app-plus/mebrs/man.svg"
+												          v-if="item.gender == 1"
+												        ></image>
+												        <image
+												          class="top_left_img_style"
+												          src="../../static/app-plus/mebrs/woman.svg"
+												          v-if="item.gender == 2"
+												        ></image>
+												      </view>
+												      <view class="top_right_style" @click.stop="goToNewWorkout">
+												        <image
+												          class="top_right_img_style"
+												          src="../../static/app-plus/mebrs/trainingProgram.svg"
+												        ></image>
+												        <text>生产训练计划</text>
+												      </view>
+												    </view>
+												    <view class="loop_bottom_style">
+												      <view class="bottom_style">
+												        <image
+												          class="bootom_img_style"
+												          src="../../static/app-plus/mebrs/meberMessage.svg"
+												        ></image>
+												        <text class="message_style">会员信息</text>
+												      </view>
+												      <view class="bottom_style">
+												        <image
+												          class="bootom_img_style"
+												          src="../../static/app-plus/mebrs/evaluationInformation.svg"
+												        ></image>
+												        <text class="message_style">评测信息</text>
+												      </view>
+												      <view class="bottom_style" @click.stop="goToTrainingRecord">
+												        <image
+												          class="bootom_img_style"
+												          src="../../static/app-plus/mebrs/trainingLog.svg"
+												        ></image>
+												        <text class="message_style">训练记录</text>
+												      </view>
+												    </view>
+												  </view>
+							</template>
+							<template v-slot:delete>
+								<view class="slot-button" @click.stop="bindClick($event)">
+								  <image
+								    class="slot_btn_img_style"
+								    src="../../static/app-plus/mebrs/delete.svg"
+								  ></image>
+								</view>
+								<van-popup v-model:show="deleteRemarkFlag" teleport="body">
+								  <view class="confirm_dakuang_style">
+								    <view class="confirm_top_style">
+								      <text class="config_top_title_style">是否确认删除</text>
+								      <image
+								        class="delete_waring_style"
+								        src="../../static/app-plus/mebrs/delete.svg"
+								      ></image>
+								    </view>
+								    <view class="delet_remark"
+								      >确认删除该学员吗？删除后无法恢复</view
+								    >
+								    <view class="delete_btn_style">
+								      <view class="delete_cacel_style" @click.stop="deleteRemarkFlag=false">取消</view>
+								      <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm">确认</view>
+								    </view>
+								  </view>
+								</van-popup>
+							</template>
+						</SlideLeft>
+						 
+						</view>
+		</view> -->
+					
+				
+				
+				
+		       <uni-swipe-action
+		          class="slide_stylle"
+		          v-for="(item, itemIndex) in meberList"
+		          :key="'itemIndex' + itemIndex"
+		        >
+		          <uni-swipe-action-item
+		           :show="item.isOpened" 
+				   :auto-close="false"
+		            @change="swipeChange($event, itemIndex, item)"
+		          >
+		            <template v-slot:right>
+		              <view class="slot-button" @click.stop="bindClick($event)">
+		                <image
+		                  class="slot_btn_img_style"
+		                  src="../../static/app-plus/mebrs/delete.svg"
+		                ></image>
+		              </view>
+		              <van-popup v-model:show="deleteRemarkFlag" teleport="body">
+		                <view class="confirm_dakuang_style">
+		                  <view class="confirm_top_style">
+		                    <text class="config_top_title_style">是否确认删除</text>
+		                    <image
+		                      class="delete_waring_style"
+		                      src="../../static/app-plus/mebrs/delete.svg"
+		                    ></image>
+		                  </view>
+		                  <view class="delet_remark"
+		                    >确认删除该学员吗？删除后无法恢复</view
+		                  >
+		                  <view class="delete_btn_style">
+		                    <view class="delete_cacel_style" @click.stop="deleteRemarkFlag=false">取消</view>
+		                    <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm">确认</view>
+		                  </view>
+		                </view>
+		              </van-popup>
+		            </template>
+		            <view class="add_student_style">
+		              <view class="need_loop_style" @click.stop="updateMember(item)">
+		                <view class="loop_top_style">
+		                  <view class="top_left_style">
+		                    <text class="top_left_name_style">{{
+		                      item.traineeName
+		                    }}</text>
+		                    <image
+		                      class="top_left_img_style"
+		                      src="../../static/app-plus/mebrs/man.svg"
+		                      v-if="item.gender == 1"
+		                    ></image>
+		                    <image
+		                      class="top_left_img_style"
+		                      src="../../static/app-plus/mebrs/woman.svg"
+		                      v-if="item.gender == 2"
+		                    ></image>
+		                  </view>
+		                  <view class="top_right_style" @click.stop="goToNewWorkout">
+		                    <image
+		                      class="top_right_img_style"
+		                      src="../../static/app-plus/mebrs/trainingProgram.svg"
+		                    ></image>
+		                    <text>生产训练计划</text>
+		                  </view>
+		                </view>
+		                <view class="loop_bottom_style">
+		                  <view class="bottom_style">
+		                    <image
+		                      class="bootom_img_style"
+		                      src="../../static/app-plus/mebrs/meberMessage.svg"
+		                    ></image>
+		                    <text class="message_style">会员信息</text>
+		                  </view>
+		                  <view class="bottom_style">
+		                    <image
+		                      class="bootom_img_style"
+		                      src="../../static/app-plus/mebrs/evaluationInformation.svg"
+		                    ></image>
+		                    <text class="message_style">评测信息</text>
+		                  </view>
+		                  <view class="bottom_style" @click.stop="goToTrainingRecord">
+		                    <image
+		                      class="bootom_img_style"
+		                      src="../../static/app-plus/mebrs/trainingLog.svg"
+		                    ></image>
+		                    <text class="message_style">训练记录</text>
+		                  </view>
+		                </view>
+		              </view>
+		            </view>
+		          </uni-swipe-action-item>
+		        </uni-swipe-action>
+		      </view>
+	</view>
+</template>
+
+<script>
+	var businessCloudObject = uniCloud.importObject('businessCloudObject')
+	export default {
+		name:"memberList",
+		data() {
+			return {
+				meberList: [],
+				deleteRemarkFlag: false,
+				delteIndex: 0,
+				
+			};
+		},
+		props: ['isActive', 'searchValue', 'type'],
+		created() {
+		  // this.getMemberList(this.isActive)
+		  // console.log(this.meberList,'????')
+		},
+		watch: {
+			isActive: {
+				handler: function(n,o) {
+					
+					
+						this.type === 'home' ? this.getMemberList(n) : ''	
+						
+					
+				},
+				immediate: true
+			},
+			searchValue: {
+				handler: function(n, o) {
+					if (this.type === 'detail') {
+						if (!n) {
+							this.meberList = []
+							return
+						}
+						console.log(n,'>>>>')
+						if (n) {
+							businessCloudObject
+							  .getMoreList(n)
+							  .then((meberListRes) => {
+							    console.log(meberListRes, 'meberListRes')
+							    this.meberList = meberListRes.data.map(item => {
+									  return {
+										  ...item,
+										  isOpened: 'none'
+									  }
+								  }) || []
+							  })
+							  .catch((err) => {})
+						}
+						
+					}
+						
+					
+					},
+			
+					deep: true
+			}
+		},
+		methods: {
+			  // 确认删除会员信息
+			 sureDeleteConfirm() {
+				
+				 businessCloudObject
+				   .removeMember(this.meberList[this.delteIndex]).then((res) => {
+					   if (res.success) {
+						   uni.showToast({
+						     icon: 'success',
+						     title: res.message,
+						     duration: 800
+						   })
+						   this.deleteRemarkFlag = false
+						    this.getMemberList(this.isActive)
+					   }
+				   }).catch((err)=> {
+					   uni.showToast({
+					     icon: 'fail',
+					     title: err.message,
+					     duration: 800
+					   })
+				   })
+				 
+			 },
+			  // 编辑会员信息
+		  updateMember(item) {
+		    uni.navigateTo({
+		      url: '/pages/addMyMebers/addMyMebers?item=' + JSON.stringify(item),
+		      success: (res) => {},
+		      fail: () => {},
+		      complete: () => {}
+		    })
+		  },
+		  memberSrollTop(event) {
+		    this.scrollTop = event.detail.scrollTop
+		    this.cellingFlag = this.scrollTop > 50 ? true : false
+		    // console.log( this.scrollTop)
+		  },
+		
+		  getMemberList(buyStatus) {
+		    businessCloudObject
+		      .getMemberList(buyStatus)
+		      .then((meberListRes) => {
+		        console.log(meberListRes, 'meberListRes')
+		        this.meberList = meberListRes.data.map(item => {
+					  return {
+						  ...item,
+						  isOpened: 'none'
+					  }
+				  }) || []
+		      })
+		      .catch((err) => {})
+		  },
+		  bindClick(e) {
+		    // console.log(e, '>>>')
+		    this.deleteRemarkFlag = true
+		  },
+		  swipeChange(e, index) {
+			 // this.meberList.forEach((config, configIndex) => {
+				//  if (index !== configIndex) {
+				// 	 config.isOpened = 'none'
+				//  } else {
+				// 	  config.isOpened = 'right'
+				//  }
+			 // })
+			  this.delteIndex = index
+		    console.log('当前状态：' + e + '，下标：' + index)
+		  },
+
+
+	    goToTrainingRecord() {
+	      uni.navigateTo({
+	        url: '/pages/trainingRecord/trainingRecord'+`?traineeNo=${'63899b9ef5cf3a1773072cd4'}&memberName=${'张雪峰'}`
+	      })
+	    },
+	    goToNewWorkout() {
+	      uni.navigateTo({
+	        url: '/pages/newWorkout/newWorkout?traineeNo='+'63899b9ef5cf3a1773072cd4'
+	      })
+	    }
+		}
+		
+	}
+</script>
+
+<style lang="scss">
+	
+	.mebers_content {
+	  width: 100vw;
+	  flex: 1;
+	  display: flex;
+	  flex-direction: column;
+	  background: #212328;
+	  .no_data_style {
+	    width: 100%;
+	    display: flex;
+	    flex: 1;
+	    flex-direction: column;
+	    align-items: center;
+	    justify-content: center;
+	    .no_data_meber_img_style {
+	      // width: 100%;
+	      width: 382upx;
+	      height: 382upx;
+	      object-fit: contain;
+	    }
+	  }
+	  .slide_stylle {
+	    width: 100%;
+	    flex: 1;
+	
+	    .add_student_style {
+	      width: 100%;
+	      display: flex;
+	      // flex: 1;
+	      align-items: center;
+	      flex-direction: column;
+	      .need_loop_style {
+	        width: calc(100% - 60upx);
+	        margin: 30upx;
+	
+	        display: flex;
+	
+	        flex-direction: column;
+	        justify-content: space-around;
+	        background: #383d46;
+	        border-radius: 24upx;
+	        height: 260upx;
+	
+	        .loop_top_style {
+	          width: 100%;
+	          display: flex;
+	          justify-content: space-around;
+	          // margin-top: 40upx;
+	          .top_left_style {
+	            width: 50%;
+	            display: flex;
+	
+	            .top_left_name_style {
+	              font-size: 40upx;
+	              font-family: PingFangSC-Semibold, PingFang SC;
+	              font-weight: 600;
+	              color: #f4f7ff;
+	            }
+	            .top_left_img_style {
+	              width: 36upx;
+	              height: 38upx;
+	              object-fit: contain;
+	              margin-left: 10upx;
+	            }
+	          }
+	          .top_right_style {
+	            width: 238upx;
+	            height: 60upx;
+	            background: rgba(1, 224, 140, 0.1);
+	            border-radius: 12upx;
+	            // opacity: 0.1;
+	            font-size: 28upx;
+	            text-align: center;
+	            line-height: 60upx;
+	            font-weight: 600;
+	            color: #01e08c;
+	            .top_right_img_style {
+	              width: 20upx;
+	              height: 22upx;
+	              object-fit: contain;
+	              margin-right: 10upx;
+	            }
+	          }
+	        }
+	        .loop_bottom_style {
+	          width: 100%;
+	          display: flex;
+	          justify-content: space-around;
+	          align-items: center;
+	          .bottom_style {
+	            display: flex;
+	            align-items: center;
+	            .bootom_img_style {
+	              width: 28upx;
+	              height: 30upx;
+	              margin-right: 8upx;
+	              object-fit: contain;
+	            }
+	            .message_style {
+	              font-size: 28upx;
+	              font-weight: 400;
+	              color: #bdc3ce;
+	            }
+	          }
+	        }
+	      }
+	    }
+	  }
+	}
+	.slot-button {
+	  width: 100upx !important;
+	  height: 100%;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  .slot_btn_img_style {
+	    width: 100upx;
+	    height: 100upx;
+	  }
+	}
+
+.confirm_dakuang_style {
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  height: 420upx;
+  background: #383d46;
+  border-radius: 24px;
+  .confirm_top_style {
+    width: calc(100% - 100upx);
+    margin-left: 50upx;
+    padding-top: 50upx;
+    display: flex;
+    align-items: center;
+    font-size: 52upx;
+    color: #f4f7ff;
+    .delete_waring_style {
+      width: 57upx;
+      height: 48upx;
+    }
+  }
+  .delet_remark {
+    width: calc(100% - 100upx);
+    margin-left: 50upx;
+    font-size: 30upx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #bdc3ce;
+    margin-top: 30upx;
+  }
+  .delete_btn_style {
+    width: calc(100% - 100upx);
+    margin-left: 50upx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80upx;
+    .delete_cacel_style {
+      width: 240upx;
+      height: 90upx;
+      background: #454951;
+      border-radius: 16upx;
+      font-size: 32upx;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      line-height: 90upx;
+    }
+    .delete_sure_style {
+      width: 240upx;
+      height: 90upx;
+      background: #1370ff;
+      border-radius: 16px;
+      backdrop-filter: blur(18px);
+      font-size: 32upx;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      line-height: 90upx;
+    }
+  }
+}
+</style>
