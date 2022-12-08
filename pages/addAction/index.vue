@@ -3,7 +3,7 @@
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<van-nav-bar title="新增动作" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="form">
-			<van-field class="uni-input" v-model="actionName" placeholder="请输入动作名称" />
+			<input class="uni-input"  v-model="actionName" placeholder="请输入动作名称" />
 			<van-cell is-link title="动作类型" :value="actionTypeName" @click="show = true" />
 		</view>
 		<view class="footer-button">
@@ -147,15 +147,10 @@
 				background: #383D46;
 				border-radius: 16upx;
 				padding-left: 40upx;
-				::v-deep  .van-field__control{
-					color: #eff3fc;
-					font-weight: 400;
-				}
-				::v-deep  .van-field__control::placeholder{
+				color: #eff3fc;
+				font-weight: 400;
+				&::placeholder{
 					color: #7A7F89;
-				}
-				::v-deep  &:after{
-					display: none;
 				}
 			}
 			.van-cell{
