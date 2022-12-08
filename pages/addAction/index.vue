@@ -4,7 +4,7 @@
 		<van-nav-bar title="新增动作" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="form">
 			<van-field class="uni-input" v-model="actionName" placeholder="请输入动作名称" />
-			<van-cell is-link title="动作类型" :value="actionType" @click="show = true" />
+			<van-cell is-link title="动作类型" :value="actionTypeName" @click="show = true" />
 		</view>
 		<view class="footer-button">
 			<van-button type="primary" block @click="saveAction">保存</van-button>
@@ -69,7 +69,8 @@
 						active:false
 					}
 				],
-				actionType: ''
+				actionType: '',
+				actionTypeName: ''
 			}
 		},
 		onLoad: function (option) {
@@ -84,6 +85,7 @@
 				});
 				child.active = true
 				this.actionType = child.type
+				this.actionTypeName = child.title
 			},
 			onClickLeft(){
 				uni.switchTab({
@@ -91,6 +93,12 @@
 				})
 			},
 			async saveAction(){
+				if(!this.actionName){
+					return uni.showToast({icon:'error', title: '请输入动作名称', duration: 2000});
+				}
+				if(!this.actionType&&this.actionType!==0){
+					return uni.showToast({icon:'error', title: '请选择动作类型', duration: 2000});
+				}
 				const res = await actionLibrary.addAction({
 					type: this.type,
 					actionClass: this.actionClass,

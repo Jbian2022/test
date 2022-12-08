@@ -28,7 +28,7 @@
         <view class="action-list-view">
           <view v-if="actionClass===19" class="action-list-box">
             <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
-              <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick">
+              <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick($event,i)">
                 <view class="action-name">{{i.actionName[0]}}</view>
                 <template v-slot:item="{item}">
                   <text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
@@ -64,7 +64,7 @@
         <view class="dialog-content">确认删除该动作吗？删除后无法恢复</view>
         <view class="dialog-btn-box">
           <van-button type="default" @click="showDialog=false">取消</van-button>
-          <van-button type="primary" @click="showDialog=false">确认</van-button>
+          <van-button type="primary" @click="deleteHandle">确认</van-button>
         </view>
       </view>
     </van-dialog>
@@ -234,9 +234,10 @@ export default {
       })
       // console.log(this.actionClassList,888)
     },
-    selectClick(item) {
+    selectClick(item,info) {
       if (item.text === '删除动作') {
         this.showDialog = true
+        this.currentAction = info
       }
     },
     addActionHandle(index) {
@@ -249,6 +250,12 @@ export default {
           url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${this.actionClass}`,
         })
       }
+    },
+    async deleteHandle(){
+      this.showDialog = false
+      const res = await actionLibrary.deleteAction({id:this.currentAction._id})
+      uni.showToast({	title: '删除成功',	duration: 1000});
+      this.getActionList()
     },
     goBack(){
       uni.setStorageSync('actionLibraryType', 'show')
@@ -492,7 +499,7 @@ page {
     }
   }
   .dialog-btn-box {
-    ::v-deep.van-button {
+    ::v-deep .van-button {
       width: 240upx;
       height: 90upx;
       background: #454951;
@@ -539,7 +546,7 @@ page {
       }
     }
   }
-  ::v-deep.van-dialog {
+  ::v-deep .van-dialog {
     background: #383d46;
     border-radius: 24upx;
   }

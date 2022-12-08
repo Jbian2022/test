@@ -439,6 +439,12 @@
 				})
 			},
 			async finish(){
+				if(!this.workoutName){
+					return uni.showToast({icon:'error', title: '请输入训练名称', duration: 2000});
+				}
+				if(!this.actionList||this.actionList.length===0){
+					return uni.showToast({icon:'error', title: '请添加动作', duration: 2000});
+				}
 				const params = {
 					traineeNo:this.traineeNo,
 					trainDate: this.trainDate,
