@@ -85,6 +85,7 @@
     }
   },
   "dependencies": {
+    "moment": "^2.29.4",
     "qrcodejs2": "^0.0.2",
     "vant": "^3.6.5"
   },
@@ -94,5 +95,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lijidong",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "html2canvas": "^1.4.1"
+  }
 }

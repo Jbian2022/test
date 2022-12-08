@@ -1,12 +1,16 @@
 <template>
   <view class="action-library">
+    <view class="status_bar"> <!-- 这里是状态栏 --> </view>
     <view class="header">
       <view class="all-action" :class="{active:mode===0}" @click="modeChangeHandle(0)">全部动作库</view>
       <view class="problem-action" :class="{active:mode===1}" @click="modeChangeHandle(1)">问题动作库</view>
       <view class="custom-action" :class="{show:showSaveButton}" @click="addActionHandle(19)">+ 自定义动作</view>
     </view>
     <view class="search">
-      <van-search shape="round" background="#212328" v-model="actionName" placeholder="输入动作名称搜索" @search="getActionList" />
+      <view class="uni-search">
+        <van-icon name="search" />
+        <input class="uni-input" v-model="actionName" @confirm="getActionList" confirm-type="search" placeholder="输入动作名称搜索" />
+      </view>
     </view>
     <view class="content" :class="{'select-page':showSaveButton}">
       <view class="sidebar">
@@ -24,7 +28,7 @@
         <view class="action-list-view">
           <view v-if="actionClass===19" class="action-list-box">
             <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
-              <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick">
+              <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick($event,i)">
                 <view class="action-name">{{i.actionName[0]}}</view>
                 <template v-slot:item="{item}">
                   <text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
@@ -37,7 +41,8 @@
           <view v-else class="action-list-box">
             <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
               <view class="image">
-                <van-image round src="../../static/newWorkout/action.png" />
+                <!-- <van-image round src="../../static/newWorkout/action.png" /> -->
+                <view class="van-image"></view>
               </view>
               <view class="text">{{i.actionName}}</view>
             </view>
@@ -59,7 +64,7 @@
         <view class="dialog-content">确认删除该动作吗？删除后无法恢复</view>
         <view class="dialog-btn-box">
           <van-button type="default" @click="showDialog=false">取消</van-button>
-          <van-button type="primary" @click="showDialog=false">确认</van-button>
+          <van-button type="primary" @click="deleteHandle">确认</van-button>
         </view>
       </view>
     </van-dialog>
@@ -169,9 +174,9 @@ export default {
     }
   },
   onShow(){
+    this.selectActionList=[]
     const type = uni.getStorageSync('actionLibraryType')
     if(type==='select'){
-      this.selectActionList=[]
       this.actionClassList.forEach(item=>{
         const list = this.selectActionList.filter(child => child.actionClass === item.value)
         item.badge = list.length || null
@@ -229,9 +234,10 @@ export default {
       })
       // console.log(this.actionClassList,888)
     },
-    selectClick(item) {
+    selectClick(item,info) {
       if (item.text === '删除动作') {
         this.showDialog = true
+        this.currentAction = info
       }
     },
     addActionHandle(index) {
@@ -244,6 +250,12 @@ export default {
           url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${this.actionClass}`,
         })
       }
+    },
+    async deleteHandle(){
+      this.showDialog = false
+      const res = await actionLibrary.deleteAction({id:this.currentAction._id})
+      uni.showToast({	title: '删除成功',	duration: 1000});
+      this.getActionList()
     },
     goBack(){
       uni.setStorageSync('actionLibraryType', 'show')
@@ -276,12 +288,17 @@ export default {
 page {
   background: #212328;
 }
+.status_bar {
+    height: var(--status-bar-height);
+    width: 100%;
+}
 .action-library {
   .header {
+    height: 100upx;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8upx 40upx 40upx 40upx;
+    padding: 0 40upx;
     .all-action,
     .problem-action {
       font-size: 40upx;
@@ -301,30 +318,33 @@ page {
     }
   }
   .search {
-    ::v-deep.van-search {
-      padding: 0 30upx;
-    }
-    ::v-deep.van-search__content {
+    height: 140upx;
+    padding: 30upx;
+    box-sizing: border-box;
+    .uni-search{
       background: #383d46;
       border-radius: 40upx;
-    }
-    ::v-deep.van-search__field {
       height: 80upx;
-    }
-    ::v-deep.van-icon-search {
-      color: #a8adb6;
-    }
-    ::v-deep.van-field__control {
-      color: #f4f7ff;
-    }
-    ::v-deep.van-field__control::placeholder {
-      font-size: 28upx;
-      color: #7a7f89;
+      display: flex;
+      align-items: center;
+      .van-icon{
+        font-size: 28upx;
+        color: #BDC3CE;
+        margin-right: 14upx;
+        margin-left: 28upx;
+      }
+      .uni-input{
+        flex: 1;
+        color: #f4f7ff;
+        font-size: 28upx;
+        &::placeholder{
+          color: #7a7f89;
+        }
+      }
     }
   }
   .content {
-    height: calc(100vh - 280upx);
-    padding-top: 30upx;
+    height: calc(100vh - 240upx - var(--status-bar-height));
     box-sizing: border-box;
     display: flex;
     .sidebar {
@@ -333,7 +353,7 @@ page {
       .van-sidebar {
         width: 220upx;
       }
-      ::v-deep.van-sidebar-item {
+      ::v-deep .van-sidebar-item {
         height: 70upx;
         padding: 0;
         padding-top: 16upx;
@@ -357,7 +377,7 @@ page {
           transform: translateY(-50%);
         }
       }
-      ::v-deep.van-sidebar-item--select {
+      ::v-deep .van-sidebar-item--select {
         background: linear-gradient(270deg, #202123 0%, #383d46 100%);
         .van-sidebar-item__text {
           font-weight: 600;
@@ -408,7 +428,7 @@ page {
           &:nth-child(2n) {
             margin-left: 30upx;
           }
-          ::v-deep.image {
+          ::v-deep .image {
             padding-top: 30upx;
             text-align: center;
             .action-name{
@@ -426,7 +446,9 @@ page {
           .van-image {
             width: 100upx;
             height: 100upx;
-            background: #c7c9cc;
+            display: inline-block;
+            background: url('../../static/newWorkout/action.png');
+            background-size: contain;
           }
           .text {
             padding: 8upx 30upx;
@@ -462,7 +484,7 @@ page {
         display: inline-block;
         width: 60upx;
         height: 60upx;
-        background: url('../../static/newWorkout/阻断弹窗提示@2x.png');
+        background: url('../../static/newWorkout/pop-up.png');
         background-size: contain;
         background-repeat: no-repeat;
       }
@@ -477,7 +499,7 @@ page {
     }
   }
   .dialog-btn-box {
-    ::v-deep.van-button {
+    ::v-deep .van-button {
       width: 240upx;
       height: 90upx;
       background: #454951;
@@ -524,7 +546,7 @@ page {
       }
     }
   }
-  ::v-deep.van-dialog {
+  ::v-deep .van-dialog {
     background: #383d46;
     border-radius: 24upx;
   }

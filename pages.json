@@ -7,7 +7,6 @@
 				"enablePullDownRefresh": false
 			}
 		},
-
 		{
 			"path": "pages/addMyMebers/addMyMebers",
 			"style": {
@@ -91,110 +90,114 @@
 			"path": "pages/actionLibrary/index",
 			"style": {
 				"navigationBarTitleText": "动作库",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/addAction/index",
 			"style": {
 				"navigationBarTitleText": "新增动作",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/newWorkout/newWorkout",
 			"style": {
 				"navigationBarTitleText": "新建训练",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/trainingRecord/trainingRecord",
 			"style": {
 				"navigationBarTitleText": "训练记录",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/trainingRecordDetail/trainingRecordDetail",
 			"style": {
 				"navigationBarTitleText": "训练记录详情",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/my/my",
 			"style": {
 				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/openCard/openCard",
 			"style": {
 				"navigationBarTitleText": "开卡",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/setUp/setUp",
 			"style": {
 				"navigationBarTitleText": "设置",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/personalInfo/personalInfo",
 			"style": {
 				"navigationBarTitleText": "个人信息",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/updateSignature/updateSignature",
 			"style": {
 				"navigationBarTitleText": "修改签名",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false
+			}
+		},
+		{
+			"path": "pages/demo/demo",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/dynamicEvaluation/actionEvaluation/actionEvaluation",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation",
+			"style": {
+				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 		}
-	    ,{
-            "path" : "pages/demo/demo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/agreement/agreement",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/memberQuery/memberQuery",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/startApp/startApp",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		// #ifdef H5
 		"h5": {
@@ -237,5 +240,4 @@
 			}
 		]
 	}
-
 }

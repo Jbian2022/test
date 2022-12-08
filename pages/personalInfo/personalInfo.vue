@@ -1,5 +1,8 @@
 <template>
 	<view class="personal-info">
+		<view class="status_bar">
+            <!-- 这里是状态栏 -->
+        </view>
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="header">
 			<view class="user-name" @click="updateSignature('username')">{{userInfo.username||''}}</view>
@@ -105,6 +108,10 @@
 </script>
 
 <style lang="scss">
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
+}
 page{
 	background: #212328;
 }
@@ -155,15 +162,15 @@ page{
 				height: 112upx;
 				background: transparent;
 				align-items: center;
-				::v-deep.van-cell__title{
+				::v-deep .van-cell__title{
 					font-size: 30upx;
 					color: #BDC3CE;
 				}
-				::v-deep.van-cell__value{
+				::v-deep .van-cell__value{
 					font-size: 30upx;
 					color: #BDC3CE;
 				}
-				::v-deep.van-icon{
+				::v-deep .van-icon{
 					color: #bdc3ce;
 				}
 				&:after{
@@ -172,7 +179,7 @@ page{
 			}
 		}
 	}
-	::v-deep.van-popup{
+	::v-deep .van-popup{
 		padding: 30upx;
 		background: transparent;
 		box-sizing: border-box;

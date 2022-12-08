@@ -1,12 +1,22 @@
 <template>
 	<view class="training-record">
-		<van-nav-bar title="赵思远" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
+		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
+		<van-nav-bar :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
 		<view class="calendar">
-			<van-calendar title="训练记录" :show-mark="false" :poppable="false" :show-confirm="false">
-				<template #bottom-info>
-					<text @click.stop="sharePage">小便签</text>
+			<calendar v-model:value="value" ref="calendar">
+				<template #operation-left>
+					<view class="calendar-title">训练记录</view>
 				</template>
-			</van-calendar>
+				<template #operation-right="{item}">
+					<view class="calendar-date">{{getYearMonth(item)}}</view>
+				</template>
+				<template #default="{cell}">
+					<view class="cell-box">
+						<view class="cell-key" :class="{active:cell.isSelected}">{{cell.key}}</view>
+						<view v-if="getTrainTitle(cell.day)" class="cell-label" @click.stop="sharePage(cell.day)">{{getTrainTitle(cell.day)}}</view>
+					</view>
+				</template>
+			</calendar>
 		</view>
 		<view class="footer-button">
 			<view class="add-button" @click="addWorkout"></view>
@@ -15,27 +25,71 @@
 </template>
 
 <script>
+	const train = uniCloud.importObject('train')
+	import calendar from '../../components/calendar/index.vue'
 	export default {
+		components: {
+			calendar
+		},
 		data() {
 			return {
-				
+				trainListInfo:{},
+				trainDate: null,
+				memberName: '',
+				value: new Date()
+			}
+		},
+		onLoad: function (option) { 
+			if(option.traineeNo){
+				this.traineeNo = option.traineeNo
+				this.memberName =option.memberName
+				this.getTrainList()
 			}
 		},
 		methods: {
+			async getTrainList(){
+				const res = await train.getTrainList({traineeNo:this.traineeNo})
+				if(res.data&&res.data.length>0){
+					const trainListInfo = {}
+					res.data.forEach(item => {
+						trainListInfo[item.trainDate] = item.traineeTitle
+					});
+					this.trainListInfo = trainListInfo
+				}
+			},
 			onClickLeft(){
 				uni.switchTab({
 					url: '/pages/myMebers/myMebers'
 				});
 			},
 			addWorkout(){
+				const list = this.$refs.calendar.getSelection()
+				const item = list.find(item=>item.isSelected)
+				if(!item) return
 				uni.navigateTo({
-					url: '/pages/newWorkout/newWorkout'
+					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${item.day}`
+				})
+			},
+			sharePage(date){
+				uni.navigateTo({
+					url: '/pages/trainingRecordDetail/trainingRecordDetail'+`?traineeNo=${this.traineeNo}&trainDate=${date}`
 				});
 			},
-			sharePage(){
-				uni.navigateTo({
-					url: '/pages/trainingRecordDetail/trainingRecordDetail'
-				});
+			getYearMonth(val){
+				const formater = (temp) =>{
+				　　if(temp<10){
+				　　　　return "0"+temp;
+				　　}else{
+				　　　　return temp;
+				　　}
+				}
+				const d=new Date(val);
+				const year = d.getFullYear();
+				const month=formater(d.getMonth()+1);
+				return year+'.'+month
+			},
+			getTrainTitle(day){
+				return this.trainListInfo[day] || ''
 			}
 		}
 	}
@@ -45,8 +99,12 @@
 page{
 	background: #212328;
 }
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
+}
 .training-record{
-	::v-deep.van-nav-bar{
+	::v-deep .van-nav-bar{
 		background: #212328;
 		height: 88upx;
 		.van-nav-bar__content{
@@ -66,76 +124,46 @@ page{
 		}
 	}
 	.calendar{
-		.van-calendar{
-			padding: 0 40upx;
-			height: 1020upx;
-			padding-top: 20upx;
-			background: #212328;
-			::v-deep.van-calendar__header{
-				position: relative;
-				height: 180upx;
-				box-shadow: none;
-			}
-			::v-deep.van-calendar__header-title{
-				text-align: left;
-				height: 66upx;
+		padding: 0 15upx;
+		.calendar-title{
+			font-size: 48upx;
+			font-weight: 600;
+			color: #FFFFFF;
+		}
+		.calendar-date{
+			font-size: 32upx;
+			font-weight: 600;
+			color: #BDC3CE;
+		}
+		.cell-box{
+			padding: 0 4upx;
+		}
+		.cell-key{
+			color: #F4F7FF;
+			width: 52upx;
+			height: 52upx;
+			text-align: center;
+			line-height: 52upx;
+			margin: 0 auto;
+			&.active{
+				background: #1370FF;
 				font-weight: 600;
-				color: #FFFFFF;
-				line-height: 66upx;
+				border-radius: 100%;
 			}
-			::v-deep.van-calendar__header-subtitle{
-				position: absolute;
-				top: 0;
-				right: 0;
-				text-align: right;
-				height: 66upx;
-				line-height: 66upx;
-				font-size: 32upx;
-				font-weight: 600;
-				color: #BDC3CE;
-			}
-			::v-deep.van-calendar__weekdays{
-				padding-top: 38upx;
-				border-top: 2upx solid #3B3F46;
-				color: #BDC3CE;
-				font-size: 26upx;
-			}
-			::v-deep.van-calendar__day{
-				position: relative;
-				align-items: flex-start;
-				height: 160upx;
-				font-size: 28upx;
-				color: #F4F7FF;
-				line-height: 52upx;
-				z-index: 2;
-				.van-calendar__bottom-info{
-					padding: 6upx;
-					bottom: auto;
-					top: 62upx;
-					left: 50%;
-					transform: translateX(-50%);
-					width: 77upx;
-					background: rgba(19, 112, 255, 0.3);
-					border-radius: 8upx;
-					font-size: 18upx;
-					color: #F4F7FF;
-					line-height: 26upx;
-				}
-			}
-			::v-deep.van-calendar__selected-day{
-				align-items: flex-start;
-				background: transparent;
-				font-weight: 600;
-				&::before{
-					position: absolute;
-					top: 0;
-					content: '';
-					width: 52upx;
-					height: 52upx;
-					z-index: -1;
-					background: #1370FF;
-					border-radius: 50%;
-				}
+		}
+		.cell-label{
+			margin-top: 8upx;
+			text-align: center;
+			word-break: break-all;
+			background: rgba(19, 112, 255, 0.3);
+			border-radius: 8upx;
+			font-size: 18upx;
+			color: #F4F7FF;
+			padding: 6upx;
+		}
+		.prev,.next{
+			.cell-key{
+				color: #7A7F89;
 			}
 		}
 	}

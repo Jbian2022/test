@@ -3,15 +3,6 @@
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
 		<view>
-			<van-collapse v-model="activeNames" 
-			class="collapseBlock"
-			border=false>
-			  <van-collapse-item title="标准动作描述" name="1" border=false>
-			    代码是写出来给人看的，附带能在机器上运行。
-			  </van-collapse-item>
-			</van-collapse>
-		</view>
-		<view>
 			
 		</view>
 	</view>

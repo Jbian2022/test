@@ -1,0 +1,149 @@
+
+.tui-sticky-fixed[data-v-e64837dc] {
+		width: 100%;
+		position: fixed;
+		top: 0;
+
+
+
+		z-index: 1;
+}
+
+
+.container {
+		padding-bottom: env(safe-area-inset-bottom);
+}
+.tips {
+		background: #fff;
+		padding: 1.5625rem 1.0625rem;
+		color: #555;
+		font-size: 0.75rem;
+		line-height: 1.3125rem;
+		position: relative;
+}
+.tips::before {
+		content: '';
+		position: absolute;
+		border-top: 0.03125rem solid #eaeef1;
+		transform: scaleY(0.5);
+		top: 0;
+		right: 0;
+		left: 0;
+}
+
+	/* .sticky-container{
+ position: relative;
+} */
+	/* sticky 容器 start */
+.sticky-item {
+		width: 100%;
+		padding: 0.625rem 0.9375rem;
+		background: #fafafa;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		box-sizing: border-box;
+}
+
+	/* sticky 容器 end */
+.date {
+		height: 1.6875rem;
+		font-size: 0.875rem;
+		background: #fff;
+		padding: 0 0.875rem;
+		border-radius: 0.78125rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		/* box-shadow: 0 0 1upx #7A7A7A; */
+}
+.date::after {
+		content: '';
+		position: absolute;
+		height: 200%;
+		width: 200%;
+		border: 0.03125rem solid #eaeef1;
+		border-radius: 1.875rem;
+		transform-origin: 0 0;
+		transform: scale(0.5);
+		left: 0;
+		top: 0;
+}
+.amount {
+		text-align: right;
+		color: #7A7A7A;
+		font-size: 0.75rem;
+}
+.list-view {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+}
+.list-view::after {
+		content: '';
+		position: absolute;
+		border-top: 0.03125rem solid #eaeef1;
+		transform: scaleY(0.5);
+		top: 0;
+		right: 0;
+		left: 0;
+}
+.list-item {
+		width: 100%;
+		padding: 0.9375rem 0.875rem;
+		box-sizing: border-box;
+		background: #fff;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+}
+.list-item::after {
+		left: 3.75rem
+}
+.item-last::after {
+		left: 0 !important
+}
+.content-box {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+}
+.logo {
+		width: 1.875rem;
+		height: 1.875rem;
+		flex-grow: 1
+}
+.des-box {
+		min-height: 4.0625rem;
+		padding-left: 0.875rem;
+		box-sizing: border-box;
+		vertical-align: top;
+		color: #333;
+		font-size: 0.75rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+}
+.tit {
+		font-size: 1rem;
+		max-width: 13.125rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+}
+.time {
+		color: #888
+}
+.money {
+		font-size: 1.1875rem;
+		font-weight: 500;
+		color: #000;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding-left: 0.625rem;
+}
+.add {
+		color: #5677FC !important;
+}
