@@ -296,31 +296,55 @@
 				this.canvasImageMsg = option.name
 			},
 			async uploadImage(callback){
-				console.log('文件上传',this.baseUrl)
-				const result = await uniCloud.uploadFile({
-					cloudPath: Date.now() + "-share.png",
-					filePath: this.baseUrl
+				const result = await train.uploadBase64({
+					base64: this.baseUrl
 				});
 				this.url =  result.fileID;
-				callback&&callback(result.fileID)
-				console.log('uploadImage',result)
+				this.canvasImageMsg = null;
+				callback&&callback(this.url);
 			},
 			downloadFile(){
-				uni.saveImageToPhotosAlbum({
-					filePath: this.baseUrl,
-					success: function(res) {
-						console.log('保存成功！',res);
-					}
+				uni.downloadFile({
+					url: this.url, //仅为示例，并非真实的资源
+					success: (res) => {
+						if (res.statusCode === 200) {
+							console.log('下载成功',res);
+							uni.saveImageToPhotosAlbum({
+								filePath: res.tempFilePath,
+								success: (res) => {
+									console.log('保存成功！',res);
+									uni.hideLoading();
+									uni.showModal({
+										showCancel: false,
+										title: '提示',
+										content: '图片已经保存到相册请查看',
+										success: function (res) {
+											if (res.confirm) {
+												console.log('用户点击确定');
+											} else if (res.cancel) {
+												console.log('用户点击取消');
+											}
+										}
+									});
+								},
+								fail:(err)=>{
+									console.log('err',err);
+								}
+							});
+						}
+					},
 				});
 			},
 			receiveRenderData(option) {
-                console.log(option, 8888)
-				this.baseUrl = option.base64
-				this.uploadImage()
-				/* if(option.name==='保存到相册'){
-					this.downloadFile()
-				} else {
-					this.uploadImage((url)=>{
+				this.showShare = false
+                console.log(option.name, 8888)
+				this.baseUrl = option.base64;
+				this.uploadImage((url)=>{
+					uni.showLoading({ title: '加载中'});
+					// #ifndef H5
+					if(option.name==='保存到相册'){
+						this.downloadFile()
+					} else {
 						if(option.name==='分享到微信'){
 							uni.share({
 								provider: "weixin",
@@ -329,6 +353,7 @@
 								imageUrl: url,
 								success: function (res) {
 									console.log("success:" + JSON.stringify(res));
+									uni.hideLoading();
 								},
 								fail: function (err) {
 									console.log("fail:" + JSON.stringify(err));
@@ -342,14 +367,16 @@
 								imageUrl: url,
 								success: function (res) {
 									console.log("success:" + JSON.stringify(res));
+									uni.hideLoading();
 								},
 								fail: function (err) {
 									console.log("fail:" + JSON.stringify(err));
 								}
 							});
 						}
-					})
-				} */
+					}
+					// #endif
+				})
             },
 		}
 	}
@@ -360,18 +387,17 @@ export default {
 	methods: {
 		generateImage(callback) {
 			setTimeout(() => {
-				const dom = document.getElementById('training-detail') // 需要生成图片内容的 dom 节点
-				const canvasBox = document.getElementById('canvas-box');
+				const dom = document.getElementById('training-detail'); // 需要生成图片内容的 dom 节点
 				html2canvas(dom, {
 					width: dom.clientWidth, //dom 原始宽度
 					height: dom.clientHeight,
 					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 					scrollX: 0,
 					useCORS: true, //支持跨域
-					// scale: 2, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
+					// scale: 1, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 				}).then((canvas) => {
-					const base64 = canvas.toDataURL('image/png')
-					callback&&callback(base64)
+					const base64 = canvas.toDataURL('image/png');
+					callback&&callback(base64);
 				}).catch(err=>{})
 			}, 300);
 		},
@@ -379,7 +405,7 @@ export default {
 			// 监听 service 层数据变更
 			if(newValue){
 				this.generateImage((base64)=>{
-					ownerInstance.callMethod('receiveRenderData', {name:newValue,base64})
+					ownerInstance.callMethod('receiveRenderData', {name:newValue,base64});
 				})
 			}
 		}

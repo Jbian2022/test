@@ -129,5 +129,28 @@ module.exports = {
 		return {
 			data:res //请根据实际需要返回值
 		}
+	},
+	/**
+	 * 删除训练信息
+	 * @param {object} param 参数描述
+	 * @returns {object} 返回值描述
+	 */
+	async uploadBase64(param) {
+		const {base64} = param
+		const base64Str = base64.replace(/^data:image\/\w+;base64,/, '')
+		// 参数校验，如无参数则不需要
+		if (!param.base64) {
+			return {
+				errCode: 'PARAM_IS_NULL',
+				errMsg: 'Base64不能为空'
+			}
+		}
+		// 业务逻辑
+		const result = await uniCloud.uploadFile({
+			cloudPath: Date.now() + "-share.png",
+			fileContent: new Buffer(base64Str, 'base64')
+		})
+		// 返回结果
+		return result //请根据实际需要返回值
 	}
 }
