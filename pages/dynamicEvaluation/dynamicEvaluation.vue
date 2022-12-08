@@ -7,6 +7,7 @@
         <view
           class="dynamicshow"
           v-for="(item, index) in dynamicEvaluationdata"
+		  @click.native="jumpModular(item)"
           :key="index"
         >
           <view class="dynamicshow_left">
@@ -52,11 +53,11 @@ export default {
   data() {
     return {
       dynamicEvaluationdata: [
-        { title: '自重深蹲评估', type: 'zzsdpg' },
-        { title: '胸椎活动评估', type: 'xzhdpg' },
-        { title: '柔韧性测试', type: 'rrxcs' },
-        { title: '关节灵活测试', type: 'gjlhcs' },
-        { title: '俯卧撑稳定性测试', type: 'fwcwdxcs' }
+        { title: '自重深蹲评估', type: 'zzsdpg',path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估'},
+        { title: '胸椎活动评估', type: 'xzhdpg' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估'},
+        { title: '柔韧性测试', type: 'rrxcs' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试'},
+        { title: '关节灵活测试', type: 'gjlhcs' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=关节灵活测试'},
+        { title: '俯卧撑稳定性测试', type: 'fwcwdxcs' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试'}
       ],
       icon: true
     }
@@ -67,7 +68,16 @@ export default {
       return {
         onClickLeft
       }
-    }
+    },
+	jumpModular(item) {
+	  // console.log(item.path,'>>>>')
+	  uni.navigateTo({
+	    url: item.path,
+	    success: (res) => {},
+	    fail: () => {},
+	    complete: () => {}
+	  })
+	}
   }
 }
 </script>

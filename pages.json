@@ -185,7 +185,22 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+			"path": "pages/dynamicEvaluation/actionEvaluation/actionEvaluation",
+			"style" :
+			{
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}
     ],
 	"globalStyle": {
 		// #ifdef H5
