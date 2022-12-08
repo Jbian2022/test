@@ -12,35 +12,21 @@
 						<van-image round :src="userInfo.avatar"/>
 					</view>
 					<view class="card-name">金卡教练</view>
-					<view class="card-status">生效中</view>
+					<view class="card-status">{{userInfo.vipEndDate?'生效中':'失效中'}}</view>
 				</view>
-				<view class="card-des">包年更划算哦～</view>
+				<view class="card-des">{{userInfo.vipEndDate?userInfo.vipEndDate:'立即续费金卡教练，畅享多项特权~'}}</view>
 			</view>
 			<view class="right"></view>
 		</view>
 		<view class="vip-title">开通金卡教练</view>
 		<view class="card-types-box">
 			<view class="card-types">
-				<view class="type-item active">
-					<view class="hot-msg">每天1元钱</view>
-					<view class="text">年卡</view>
-					<view class="money">¥<text class="num">365</text></view>
-					<view class="des">468元/年</view>
-					<div class="activity">无限会员数</div>
-				</view>
-				<view class="type-item">
-					<view class="hot-msg">立省60元</view>
-					<view class="text">三个月</view>
-					<view class="money">¥<text class="num">158</text></view>
-					<view class="des">218元/季度</view>
-					<div class="activity">限100个会员</div>
-				</view>
-				<view class="type-item">
-					<view class="hot-msg">立省20元</view>
-					<view class="text">月卡</view>
-					<view class="money">¥<text class="num">78</text></view>
-					<view class="des">98元/月</view>
-					<div class="activity">限30个会员</div>
+				<view v-for="(item,index) in cardList" :key="index" class="type-item" :class="{active:item.active}" @click="selectCard(item)">
+					<view class="hot-msg">{{item.hotMsg}}</view>
+					<view class="text">{{item.text}}</view>
+					<view class="money">¥<text class="num">{{item.money}}</text></view>
+					<view class="des">{{item.des}}{{item.unit}}</view>
+					<div class="activity">{{item.activity}}</div>
 				</view>
 			</view>
 		</view>
@@ -75,10 +61,10 @@
 		</view>
 		<view class="footer-button">
 			<view class="text-box">
-				<view class="yuan">已省￥103</view>
-				<view class="des">468元/年</view>
+				<view class="yuan">已省￥{{hotInfo.text1}}</view>
+				<view class="des">{{hotInfo.text2}}</view>
 			</view>
-			<van-button block @click="show=true">确认开通并支付￥365元</van-button>
+			<van-button block @click="show=true">确认开通并支付￥{{payMoney}}元</van-button>
 		</view>
 		<van-action-sheet class="payment-action-sheet" v-model:show="show">
 			<view class="title">选择支付方式</view>
@@ -97,6 +83,7 @@
 </template>
 
 <script>
+	const My = uniCloud.importObject('my')
 	export default {
 		data() {
 			return {
@@ -104,10 +91,66 @@
 				showPayment: false,
 				userInfo:{
 					avatar: null
-				}
+				},
+				cardList:[
+					{
+						hotMsg: '每天1元钱',
+						text: '年卡',
+						money: '365',
+						des: '468',
+						unit: '元/年',
+						activity: '无限会员数',
+						active: true
+					},
+					{
+						hotMsg: '立省60元',
+						text: '三个月',
+						money: '158',
+						des: '218',
+						unit: '元/季度',
+						activity: '限100个会员',
+						active: false
+					},
+					{
+						hotMsg: '立省20元',
+						text: '月卡',
+						money: '78',
+						des: '98',
+						unit: '元/月',
+						activity: '限30个会员',
+						active: false
+					}
+				],
+				hotInfo:{
+					text1 : '103',
+					text2: '468元/年'
+				},
+				payMoney: '365'
 			}
 		},
+		onShow(){
+			this.getUserInfo()
+		},
 		methods: {
+			async getUserInfo(){
+				const res = await My.getUserInfo()
+				const {avatar,username,comment,vipLevel,vipEndDate} = res.data
+				this.userInfo = {
+					avatar:avatar||null,
+					username:username||null,
+					comment:comment||null,
+					vipLevel:vipLevel||null,
+					vipEndDate:vipEndDate||null
+				}
+				console.log(res,88888)
+			},
+			selectCard(item){
+				this.cardList.forEach(element => element.active = false)
+				item.active = true
+				this.hotInfo.text1 = +item.des - +item.money
+				this.hotInfo.text2 = item.des + item.unit
+				this.payMoney = item.money
+			},
 			onClickLeft(){
 				uni.navigateBack()
 			},
@@ -372,6 +415,7 @@
 		.text-box{
 			text-align: center;
 			margin-right: 44upx;
+			width: 160upx;
 			.yuan{
 				font-size: 32upx;
 				font-weight: 600;

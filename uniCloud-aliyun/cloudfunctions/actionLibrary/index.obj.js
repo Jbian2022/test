@@ -92,5 +92,26 @@ module.exports = {
 		return {
 			data:res
 		}
+	},
+	async deleteAction(param){
+		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
+		const {id} = param
+		// 参数校验，如无参数则不需要
+		if (!id) {
+			return {
+				errCode: 'PARAM_IS_NULL',
+				errMsg: 'id不能为空'
+			}
+		}
+		// 业务逻辑
+		const db = uniCloud.database()
+		const res = await db.collection('t_action_config').where({
+			userId: uid,
+			_id: id
+		}).remove()
+		// 返回结果
+		return {
+			data:res
+		}
 	}
 }
