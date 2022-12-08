@@ -212,13 +212,15 @@
 		<view class="footer-button">
 			<van-button block @click="showShare=true"><van-icon name="share-o" />炫耀一下</van-button>
 		</view>
+		<!-- #ifdef APP-PLUS || H5 -->
+		<view :prop="canvasImageMsg" :change:prop="canvasImage.updateEcharts" id="canvasImage"></view>
+		<!-- #endif -->
 		<van-share-sheet
 			v-model:show="showShare"
 			:options="options"
 			@select="onSelect"
 			cancel-text=""
 		/>
-		<!-- <image v-if="base64" :src="base64" style="width: 100vw; height:200vh;"></image> -->
 	</view>
 </template>
 
@@ -237,8 +239,9 @@
 				trainDate: '',
 				sumLoad: 0,
 				trainInfoList: [],
-				base64: null,
-				url: null
+				baseUrl: null,
+				url: null,
+				canvasImageMsg: null
 			}
 		},
 		onLoad: function (option) { 
@@ -262,46 +265,6 @@
 			},
 			onClickLeft(){
 				uni.navigateBack()
-			},
-			onSelect(option) {
-				this.showShare = false
-				console.log(option,888)
-				this.generateImage(()=>{
-					console.log(option,88)
-					if(option.name==='保存到相册'){
-						this.downloadFile()
-					} else {
-						this.uploadImage((url)=>{
-							if(option.name==='分享到微信'){
-								uni.share({
-									provider: "weixin",
-									scene: "WXSceneSession",
-									type: 2,
-									imageUrl: url,
-									success: function (res) {
-										console.log("success:" + JSON.stringify(res));
-									},
-									fail: function (err) {
-										console.log("fail:" + JSON.stringify(err));
-									}
-								});
-							} else if (option.name==='分享到朋友圈') {
-								uni.share({
-									provider: "weixin",
-									scene: "WXSceneTimeline",
-									type: 2,
-									imageUrl: url,
-									success: function (res) {
-										console.log("success:" + JSON.stringify(res));
-									},
-									fail: function (err) {
-										console.log("fail:" + JSON.stringify(err));
-									}
-								});
-							}
-						})
-					}
-				})
 			},
 			formaterTimes(times,type=3){
 				const hour = Math.floor(times/3600);
@@ -328,38 +291,66 @@
 				const week = weekArray[new Date(date).getDay()];
 				return week;
 			},
-			base64ToFile(data){
-				const binary = atob(data.split(',')[1])
-				const mime = data.split(',')[0].match(/:(.*?);/)[1]
-				let array = []
-				for (let i = 0; i < binary.length; i++) {
-					array.push(binary.charCodeAt(i))
-				}
-				const fileData = new Blob([new Uint8Array(array)], {type: mime})
-				const file = new File([fileData], `${new Date().getTime()}.png`, { type: mime })
-				return file
+			onSelect(option) {
+				console.log(option,88)
+				this.canvasImageMsg = option.name
 			},
 			async uploadImage(callback){
-				const file = this.base64ToFile(this.base64)
-				const url = URL.createObjectURL(file)
+				console.log('文件上传',this.baseUrl)
 				const result = await uniCloud.uploadFile({
 					cloudPath: Date.now() + "-share.png",
-					filePath: url
+					filePath: this.baseUrl
 				});
 				this.url =  result.fileID;
 				callback&&callback(result.fileID)
 				console.log('uploadImage',result)
 			},
 			downloadFile(){
-				const file = this.base64ToFile(this.base64);
-				const url = URL.createObjectURL(file);
 				uni.saveImageToPhotosAlbum({
-					filePath: url,
-					success: function() {
-						console.log('保存成功！');
+					filePath: this.baseUrl,
+					success: function(res) {
+						console.log('保存成功！',res);
 					}
 				});
-			}
+			},
+			receiveRenderData(option) {
+                console.log(option, 8888)
+				this.baseUrl = option.base64
+				this.uploadImage()
+				/* if(option.name==='保存到相册'){
+					this.downloadFile()
+				} else {
+					this.uploadImage((url)=>{
+						if(option.name==='分享到微信'){
+							uni.share({
+								provider: "weixin",
+								scene: "WXSceneSession",
+								type: 2,
+								imageUrl: url,
+								success: function (res) {
+									console.log("success:" + JSON.stringify(res));
+								},
+								fail: function (err) {
+									console.log("fail:" + JSON.stringify(err));
+								}
+							});
+						} else if (option.name==='分享到朋友圈') {
+							uni.share({
+								provider: "weixin",
+								scene: "WXSceneTimeline",
+								type: 2,
+								imageUrl: url,
+								success: function (res) {
+									console.log("success:" + JSON.stringify(res));
+								},
+								fail: function (err) {
+									console.log("fail:" + JSON.stringify(err));
+								}
+							});
+						}
+					})
+				} */
+            },
 		}
 	}
 </script>
@@ -370,6 +361,7 @@ export default {
 		generateImage(callback) {
 			setTimeout(() => {
 				const dom = document.getElementById('training-detail') // 需要生成图片内容的 dom 节点
+				const canvasBox = document.getElementById('canvas-box');
 				html2canvas(dom, {
 					width: dom.clientWidth, //dom 原始宽度
 					height: dom.clientHeight,
@@ -378,12 +370,18 @@ export default {
 					useCORS: true, //支持跨域
 					// scale: 2, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 				}).then((canvas) => {
-					// 生成成功
-					// html2canvas 生成成功的图片链接需要转成 base64位的url
-					this.base64 = canvas.toDataURL('image/png')
-					callback&&callback()
+					const base64 = canvas.toDataURL('image/png')
+					callback&&callback(base64)
 				}).catch(err=>{})
 			}, 300);
+		},
+		updateEcharts(newValue, oldValue, ownerInstance, instance) {
+			// 监听 service 层数据变更
+			if(newValue){
+				this.generateImage((base64)=>{
+					ownerInstance.callMethod('receiveRenderData', {name:newValue,base64})
+				})
+			}
 		}
 	}
 }
@@ -395,6 +393,10 @@ export default {
 	}
 	.training-record-detail{
 		position: relative;
+		.canvas-box{
+			height: 0upx;
+			overflow: hidden;
+		}
 		#training-detail{
 			padding-bottom: 170upx;
 			padding-top: 88upx;
