@@ -165,6 +165,30 @@ module.exports = {
 	   	   })
    },
    
+   // 身体评测
+   
+   getPhysicalAssessmentList: async function() {
+   	   const token = this.getUniIdToken()
+   	   	const detailInfo = await this.uniID.checkToken(token)
+   		// console.log(detailInfo,'detailInfo')
+   	   return new Promise((resolve, reject) => {
+   		   db.collection('t_questionaire').where({
+   				questionLevel: 1
+   		   }).get().then(physicalList => {
+   			   let successMessage = {
+   				   success: true,
+   				   ...physicalList
+   			   }
+   			   resolve(successMessage)
+   			   
+   		   }).catch(err => {
+   			   reject(err)
+   		   })
+   		   
+   	   })
+   },
+   
+   
    
    
    

@@ -48,7 +48,8 @@ export default {
     let whiteRouter = [
       '/pages/logining/logining',
       '/pages/verificatioCode/verificatioCode',
-      '/pages/agreement/agreement'
+      '/pages/agreement/agreement',
+	  // '/pages/firstScreen/firstScreen'
     ]
     if (whiteRouter.indexOf(this.$route.fullPath) !== -1) {
     } else {

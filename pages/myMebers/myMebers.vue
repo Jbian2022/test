@@ -110,6 +110,7 @@ export default {
   },
   methods: {
     jumpQuery() {
+		console.log(111)
       uni.navigateTo({
         url: '/pages/memberQuery/memberQuery',
         success: (res) => {},
@@ -387,6 +388,9 @@ export default {
   // width: 100vw;
   background: none !important;
 }
+	::v-deep .van-overlay {
+		opacity: 0.2 !important;
+	}
 .confirm_dakuang_style {
   width: calc(100vw - 60upx);
   margin-left: 30upx;

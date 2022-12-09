@@ -15,6 +15,13 @@
 			}
 		},
 		{
+			"path": "pages/memberQuery/memberQuery",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/bodyAssessment/bodyAssessment",
 			"style": {
 				"navigationBarTitleText": "体测评估",
@@ -174,13 +181,6 @@
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
 				"autoBackButton": false
-			}
-		},
-		{
-			"path": "pages/demo/demo",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
 			}
 		},
 		{

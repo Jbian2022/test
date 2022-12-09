@@ -1,10 +1,10 @@
 <template>
   <view class="counter">
     <view class="text">
-      <text class="text1"
-        >让教练，<br />
-        变得伟大。</text
-      ><br />
+		<!-- <view class="text1"></view> -->
+		<image class="text1"  src="@/static/app-plus/other/coach.png"></image>
+  
+	  <br />
       <text class="text2">私人专属教练，扁平学员管理</text>
     </view>
     <view class="middle">
@@ -207,15 +207,17 @@ export default {
   width: 100vw;
   height: 100vh;
   .text {
-    padding-top: 444upx;
+    padding-top: 404upx;
     padding-left: 70upx;
     .text1 {
-      height: 280upx;
+		width: 556upx;
+      height: 306upx;
       font-size: 100upx;
       font-family: HarmonyOS_Sans_SC_Black;
       color: #ffffff;
       line-height: 140upx;
       font-weight: 600;
+	  object-fit: cover;
     }
     .text2 {
       margin-top: 10upx;

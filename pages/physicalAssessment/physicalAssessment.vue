@@ -6,7 +6,7 @@
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
-          @click.native="jumpModular(item)"
+          @click.native.stop="jumpModular(item)"
           v-for="(item, index) in dynamicEvaluationdata"
           :key="index"
         >
@@ -45,6 +45,7 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+var businessCloudObject = uniCloud.importObject('businessCloudObject')
 export default {
   components: {
     BgTheamCompontent,
@@ -78,13 +79,12 @@ export default {
       icon: true
     }
   },
+  created() {
+  	this.requestDynamicEvaluationdata()
+  },
   methods: {
-    setup() {
-      const onClickLeft = () => history.back()
-      return {
-        onClickLeft
-      }
-    },
+
+
     jumpModular(item) {
       // console.log(item.path,'>>>>')
       uni.navigateTo({
@@ -93,7 +93,17 @@ export default {
         fail: () => {},
         complete: () => {}
       })
-    }
+    },
+	requestDynamicEvaluationdata  (){
+			  businessCloudObject
+			    .getPhysicalAssessmentList()
+			    .then((res) => {
+			      console.log(res, 'res')
+			      
+			    })
+			    .catch((err) => {})
+	}
+	
   }
 }
 </script>

@@ -96,7 +96,7 @@
           <view class="add_left_style" @click.native="addDirectly"
             >直接添加</view
           >
-          <view class="add_right_style" @click.native="jumpPhysical"
+          <view class="add_right_style" @click.native="addDirectly('body')"
             >身体评测并添加</view
           >
         </view>
@@ -205,6 +205,7 @@ export default {
     },
     addDirectly(type) {
       var that = this
+	  console.log(type,'nishi')
       this.$refs.studentForm
         .validate()
         .then(() => {
@@ -250,13 +251,20 @@ export default {
             .addMember(that.studentForm)
             .then((res) => {
               if (res.success) {
-                console.log(1)
+				  console.log(type,'>>>>')
+               if (type == 'body') {
+				uni.navigateTo({
+				  url: '/pages/physicalAssessment/physicalAssessment'
+				})
+			   } else {
                 uni.switchTab({
                   url: '/pages/myMebers/myMebers',
                   success: (res) => {},
                   fail: () => {},
                   complete: () => {}
                 })
+				   
+			   }
                 uni.showToast({
                   icon: 'success',
                   title: res.message,
@@ -281,11 +289,7 @@ export default {
     buyClick(type) {
       this.studentForm.buyStatus = type
     },
-    jumpPhysical() {
-      uni.navigateTo({
-        url: '/pages/physicalAssessment/physicalAssessment'
-      })
-    }
+
   }
 }
 </script>

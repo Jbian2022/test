@@ -1,11 +1,12 @@
 <template>
-	<view>
+
 		<view class="mebers_content">
 		        <view class="no_data_style" v-if="meberList.length === 0">
 		          <image
 		            class="no_data_meber_img_style"
 		            src="../../static/app-plus/mebrs/nomebers.png"
 		          ></image>
+				  <view class="quckliy_add_style">快去添加第一个学员吧</view>
 		        </view>
 				
 		<!-- 			<view  class="slide_stylle"
@@ -188,7 +189,7 @@
 		          </uni-swipe-action-item>
 		        </uni-swipe-action>
 		      </view>
-	</view>
+
 </template>
 
 <script>
@@ -205,17 +206,21 @@
 		},
 		props: ['isActive', 'searchValue', 'type'],
 		created() {
-		  // this.getMemberList(this.isActive)
-		  // console.log(this.meberList,'????')
+			switch(this.type) {
+				case 'home':
+				this.getMemberList(this.isActive);
+				break
+				
+			}
+		},
+		onShow() {
+
 		},
 		watch: {
 			isActive: {
 				handler: function(n,o) {
-					
-					
-						this.type === 'home' ? this.getMemberList(n) : ''	
-						
-					
+
+				this.type === 'home' ? this.getMemberList(n) : ''	
 				},
 				immediate: true
 			},
@@ -228,32 +233,32 @@
 						}
 						console.log(n,'>>>>')
 						if (n) {
-							businessCloudObject
-							  .getMoreList(n)
-							  .then((meberListRes) => {
-							    console.log(meberListRes, 'meberListRes')
-							    this.meberList = meberListRes.data.map(item => {
-									  return {
-										  ...item,
-										  isOpened: 'none'
-									  }
-								  }) || []
-							  })
-							  .catch((err) => {})
+							this.searchMemberList()
 						}
 						
 					}
-						
-					
-					},
+				},
 			
 					deep: true
 			}
 		},
 		methods: {
+			searchMemberList(data) {
+				businessCloudObject
+				  .getMoreList(data)
+				  .then((meberListRes) => {
+				    console.log(meberListRes, 'meberListRes')
+				    this.meberList = meberListRes.data.map(item => {
+						  return {
+							  ...item,
+							  isOpened: 'none'
+						  }
+					  }) || []
+				  })
+				  .catch((err) => {})
+			},
 			  // 确认删除会员信息
 			 sureDeleteConfirm() {
-				
 				 businessCloudObject
 				   .removeMember(this.meberList[this.delteIndex]).then((res) => {
 					   if (res.success) {
@@ -263,7 +268,17 @@
 						     duration: 800
 						   })
 						   this.deleteRemarkFlag = false
+						   if (this.type === 'detail') {
+							   if (!this.searchValue) {
+								   this.meberList = []
+							   } else {
+								this.searchMemberList(this.searchValue) 	
+								   
+							   }
+						   } else {
 						    this.getMemberList(this.isActive)
+							   
+						   }
 					   }
 				   }).catch((err)=> {
 					   uni.showToast({
@@ -304,17 +319,9 @@
 		      .catch((err) => {})
 		  },
 		  bindClick(e) {
-		    // console.log(e, '>>>')
 		    this.deleteRemarkFlag = true
 		  },
 		  swipeChange(e, index) {
-			 // this.meberList.forEach((config, configIndex) => {
-				//  if (index !== configIndex) {
-				// 	 config.isOpened = 'none'
-				//  } else {
-				// 	  config.isOpened = 'right'
-				//  }
-			 // })
 			  this.delteIndex = index
 		    console.log('当前状态：' + e + '，下标：' + index)
 		  },
@@ -350,12 +357,20 @@
 	    flex-direction: column;
 	    align-items: center;
 	    justify-content: center;
+		margin-top: calc((100% - 380upx) / 2);
 	    .no_data_meber_img_style {
 	      // width: 100%;
 	      width: 382upx;
 	      height: 382upx;
 	      object-fit: contain;
 	    }
+		.quckliy_add_style {
+			margin-top: 20upx;
+			font-size: 28upx;
+			font-family: PingFangSC-Regular, PingFang SC;
+			font-weight: 400;
+			color: #7A7F89;
+		}
 	  }
 	  .slide_stylle {
 	    width: 100%;
@@ -519,4 +534,9 @@
     }
   }
 }
+::v-deep .van-popup {
+  // width: 100vw;
+  background: none !important;
+}
+
 </style>
