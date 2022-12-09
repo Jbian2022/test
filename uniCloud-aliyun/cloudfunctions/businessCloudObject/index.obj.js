@@ -32,14 +32,14 @@ module.exports = {
 	}
 	*/
    // 获取学员列表
-   getMemberList: async function(mobile) {
+   getMemberList: async function(buyStatus) {
 	   const token = this.getUniIdToken()
 	   	const detailInfo = await this.uniID.checkToken(token)
-		console.log(detailInfo,'detailInfo')
+		// console.log(detailInfo,'detailInfo')
 	   return new Promise((resolve, reject) => {
 		   db.collection('t_trainee').where({
-			   mobile: detailInfo.userInfo.mobile,
-			   userId: detailInfo.uid   
+			   userId: detailInfo.uid,
+				buyStatus: String(buyStatus) ? buyStatus : ''	
 		   }).get().then(memberRes => {
 			   let successMessage = {
 				   success: true,
@@ -68,7 +68,7 @@ module.exports = {
 		  db.collection('t_trainee').where({
 			  traineeName: resultParam.traineeName
 		  }).get().then(valiodRes => {
-			  console.log(valiodRes.affectedDocs, 'valiodRes.affectedDocs')
+			  // console.log(valiodRes.affectedDocs, 'valiodRes.affectedDocs')
 			  if (valiodRes.affectedDocs == 0) {
 				  db.collection('t_trainee').add(resultParam).then(() =>{
 					  let successMessage = {
@@ -95,19 +95,45 @@ module.exports = {
 	   })
    },
    // 删除会员
-   removeMember: function() {
+   removeMember: async function(data) {
+	   const token = this.getUniIdToken()
+	   	const detailInfo = await this.uniID.checkToken(token)
+		let resultParam = {
+			 userId: detailInfo.uid ,
+			 _id: data._id
+		}
 	   return new Promise((resolve, reject) => {
-	   		   
-	   	   })
+		   db.collection('t_trainee').where(resultParam).remove().then(() => {
+			   let successMessage = {
+				  success: true,
+				   message: '删除成功'
+			   }
+			   resolve(successMessage)
+		   }).catch(err => {
+			   reject(err)
+		   })		   
+	   })
    },
    // 编辑会员
-   updateMember: function() {
+   updateMember: async function(data) {
+	   const token = this.getUniIdToken()
+	   	const detailInfo = await this.uniID.checkToken(token)
+	   let resultParam = {
+		   ...data,
+		    userId: detailInfo.uid 
+	   }
+	   delete resultParam['_id']
 	   return new Promise((resolve, reject) => {
-	   		   db.collection('t_trainee').doc(this.item._id).update(item).then(e=>{
-	   		   	// console.log(e)
+	   		   db.collection('t_trainee').doc(data._id).update(resultParam).then(()=>{
+	   		   let successMessage = {
+							success: true,
+							message: '编辑成功'
+						  }
+	   		   resolve(successMessage)
 	   		   
 	   		   }).catch(err => {
-				   
+				   // console.log(err, 'err')
+				    reject(err)
 			   })
 	   	   })
    },

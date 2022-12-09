@@ -2,7 +2,7 @@
 	<view class="content_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
-		<view>
+		<view class="body_content">
 			
 		</view>
 	</view>
@@ -32,9 +32,7 @@
 			}
 		},
 		methods: {
-			setTitle(item){
-				leftNavTitle = item.pageName
-			}
+			
 		}
 	}
 </script>

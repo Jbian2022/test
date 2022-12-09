@@ -25,6 +25,13 @@
 			"errorMessage": "{title}不能为空",
 			"maxLength": 128
 		},
+		"traineeTitle": {
+			"title": "trainee_no",
+			"description": "学员编号,关联t_trainee表的traineeNo字段",
+			"bsonType": "string",
+			"errorMessage": "{title}不能为空",
+			"maxLength": 128
+		},
 		"trainDate": {
 			"title": "train_date",
 			"description": "学员训练时间，只包含年月日",

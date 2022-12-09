@@ -96,6 +96,9 @@
 			}, {
 				"text": "需要补充说明",
 				"value": 1
+			}, {
+				"text": "隐藏式补充说明,配合单选使用,点击是呼出不充说明框",
+				"value": 2
 			}]
 		},
 		"answer": {
@@ -108,6 +111,9 @@
 					"bsonType": "string"
 				},
 				"answeerContent": {
+					"bsonType": "string"
+				},
+				"leftTop": {
 					"bsonType": "string"
 				}
 			}
@@ -126,8 +132,12 @@
 				"remarkTitle": {
 					"bsonType": "string"
 				},
-				"detailArray": {
+				"url": {
 					"bsonType": "string"
+				},
+				"detailArray": {
+					"bsonType": "array",
+					"arrayType": "string"
 				}
 			}
 		},

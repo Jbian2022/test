@@ -8,3 +8,4 @@
 // 下面示例查询uni-id-users表的所有数据
 // db.collection('uni-id-users').get();
 db.collection('opendb-verify-codes').get();
+db.collection("t_config").where('maximumAge==25','gender == "1"').get();

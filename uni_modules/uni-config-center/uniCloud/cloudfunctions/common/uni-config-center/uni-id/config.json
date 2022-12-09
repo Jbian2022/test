@@ -12,7 +12,6 @@
   "preferedAppPlatform": "app",
   "app": {
     "tokenExpiresIn": 2592000,
-	"tokenExpiresThreshold": 864000,
     "oauth": {
       "weixin": {
         "appid": "wxc1a1c95912d3eca6",

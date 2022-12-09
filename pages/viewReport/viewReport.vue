@@ -407,6 +407,7 @@ margin-top: 10upx;">82</van-col>
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
+	const user = uniCloud.importObject('my');
 	export default {
 		data() {
 			return {
@@ -457,8 +458,14 @@ margin-top: 10upx;">82</van-col>
 				physicalFitnessAssessment
 				};
 		},
+		onShow() {
+			this.getUserInfo()
+		},
 		methods: {
-			
+			getUserInfo(){
+				const u = user.getUserInfo();
+				console.log(u)
+			}
 		},
 		components: {
 			BgTheamCompontent,
