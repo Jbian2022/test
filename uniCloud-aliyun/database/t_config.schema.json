@@ -1,0 +1,59 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"resultLevel": {
+			"title": "result_level",
+			"description": "结果等级",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"code": {
+			"title": "code",
+			"description": "类型编码,关联t_questionaire表中的code",
+			"bsonType": "string",
+			"maxLength": 128
+		},
+		"gender": {
+			"title": "性别",
+			"bsonType": "string",
+			"description": "学员性别：1 男性 2 女性",
+			"enum": [{
+				"text": "男",
+				"value": "1"
+			}, {
+				"text": "女",
+				"value": "2"
+			}]
+		},
+		"minimumAge": {
+			"title": "minimum_age",
+			"description": "最小年龄",
+			"bsonType": "int"
+		},
+		"maximumAge": {
+			"title": "maximum_age",
+			"description": "最大年龄",
+			"bsonType": "int"
+		},
+		"minimumResult": {
+			"title": "minimum_result",
+			"description": "最小结果（次数）",
+			"bsonType": "int"
+		},
+		"maximumResult": {
+			"title": "maximum_result",
+			"description": "最大结果（次数）",
+			"bsonType": "int"
+		}
+	}
+}
