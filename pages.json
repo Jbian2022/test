@@ -4,21 +4,24 @@
 			"path": "pages/myMebers/myMebers",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/addMyMebers/addMyMebers",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/memberQuery/memberQuery",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"autoBackButton": false
 			}
 		},
 		{
@@ -26,7 +29,8 @@
 			"style": {
 				"navigationBarTitleText": "体测评估",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -34,7 +38,8 @@
 			"style": {
 				"navigationBarTitleText": "体测报告",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -42,7 +47,8 @@
 			"style": {
 				"navigationBarTitleText": "动态评估",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -50,7 +56,8 @@
 			"style": {
 				"navigationBarTitleText": "身体评测",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -58,7 +65,8 @@
 			"style": {
 				"navigationBarTitleText": "健康问答",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -66,7 +74,8 @@
 			"style": {
 				"navigationBarTitleText": "体能评估",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -74,7 +83,8 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
@@ -82,7 +92,8 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"autoBackButton": false
 			}
 		},
 		{
