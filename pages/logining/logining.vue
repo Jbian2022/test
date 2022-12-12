@@ -1,10 +1,10 @@
 <template>
   <view class="counter">
     <view class="text">
-      <text class="text1"
-        >健变，<br />
-        从此刻开始。</text
-      ><br />
+		<!-- <view class="text1"></view> -->
+		<image class="text1"  src="@/static/app-plus/other/coach.png"></image>
+  
+	  <br />
       <text class="text2">私人专属教练，扁平学员管理</text>
     </view>
     <view class="middle">
@@ -201,20 +201,23 @@ export default {
 .counter {
   position: absolute;
   background: url('@/static/backgroundImage.png');
-background-position: center;
-    background-size:cover;
-    background-repeat: no-repeat;
-	width: 100vw;
-	height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
   .text {
-    padding-top: 444upx;
+    padding-top: 404upx;
     padding-left: 70upx;
     .text1 {
-      height: 280upx;
+		width: 556upx;
+      height: 306upx;
       font-size: 100upx;
       font-family: HarmonyOS_Sans_SC_Black;
       color: #ffffff;
       line-height: 140upx;
+      font-weight: 600;
+	  object-fit: cover;
     }
     .text2 {
       margin-top: 10upx;
@@ -236,9 +239,9 @@ background-position: center;
       margin-left: 70upx;
       height: 100upx;
       background-color: rgba(244, 247, 255, 0.15);
-	  line-height: 100upx;
-	  padding-bottom: 0;
-	  padding-top: 0;
+      line-height: 100upx;
+      padding-bottom: 0;
+      padding-top: 0;
       border-radius: 16upx;
     }
     // 按钮

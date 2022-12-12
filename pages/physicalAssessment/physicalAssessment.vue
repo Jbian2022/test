@@ -6,7 +6,7 @@
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
-          @click.native="jumpModular(item)"
+          @click.native.stop="jumpModular(item)"
           v-for="(item, index) in dynamicEvaluationdata"
           :key="index"
         >
@@ -25,7 +25,7 @@
               ></image>
             </view>
             <text class="evaluationdata">
-              {{ item.title }}
+              {{ item.questionContent }}
             </text>
           </view>
 
@@ -45,6 +45,7 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+var businessCloudObject = uniCloud.importObject('businessCloudObject')
 export default {
   components: {
     BgTheamCompontent,
@@ -53,47 +54,81 @@ export default {
   data() {
     return {
       dynamicEvaluationdata: [
-        {
-          title: '健康问答',
-          type: 'zzsdpg',
-          path: '/pages/healthQuesson/healthQuesson'
-        },
-        {
-          title: '填写体测报告',
-          type: 'xzhdpg',
-          path: '/pages/bodyTestReport/bodyTestReport'
-        },
-        {
-          title: '体态评估',
-          type: 'rrxcs',
-          path: '/pages/bodyAssessment/bodyAssessment'
-        },
-        {
-          title: '动态评估',
-          type: 'gjlhcs',
-          path: '/pages/dynamicEvaluation/dynamicEvaluation'
-        },
-        { title: '体能评估', type: 'fwcwdxcs' }
+        // {
+        //   title: '健康问答',
+        //   type: 'zzsdpg',
+        //   path: '/pages/healthQuesson/healthQuesson'
+        // },
+        // {
+        //   title: '填写体测报告',
+        //   type: 'xzhdpg',
+        //   path: '/pages/bodyTestReport/bodyTestReport'
+        // },
+        // {
+        //   title: '体态评估',
+        //   type: 'rrxcs',
+        //   path: '/pages/bodyAssessment/bodyAssessment'
+        // },
+        // {
+        //   title: '动态评估',
+        //   type: 'gjlhcs',
+        //   path: '/pages/dynamicEvaluation/dynamicEvaluation'
+        // },
+        // { title: '体能评估', type: 'fwcwdxcs' }
       ],
-      icon: true
+      icon: true,
+	  traineeNo: ''
     }
   },
+  created() {
+  	this.requestDynamicEvaluationdata()
+  },
+  onLoad(options) {
+  	if (JSON.stringify(options) !== '{}' && options.traineeNo) {
+		this.traineeNo = options.traineeNo
+	}
+  },
   methods: {
-    setup() {
-      const onClickLeft = () => history.back()
-      return {
-        onClickLeft
-      }
-    },
+
+
     jumpModular(item) {
       // console.log(item.path,'>>>>')
-      uni.navigateTo({
-        url: item.path,
-        success: (res) => {},
-        fail: () => {},
-        complete: () => {}
-      })
-    }
+
+		  
+	  if (item.hasOwnProperty('path') && item.path && this.traineeNo) {
+		  // 请求下级数据并携带过去
+		  businessCloudObject
+		    .getPhysicalChildAssessmentList(item.code)
+		    .then((res) => {
+		  			if (res.success) {
+		  				let childList = res.data
+						uni.navigateTo({
+							url: item.path + '?' + 'childList=' + JSON.stringify(childList) + '&traineeNo=' + this.traineeNo + '&questionCode=' + item.code ,
+							success: (res) => {},
+							fail: () => {},
+							complete: () => {}
+						})
+		  			}
+		      console.log(res, '我是子选项')
+		  				  // this.dynamicEvaluationdata = res.data
+		      
+		    })
+		    .catch((err) => {})
+		  
+		 
+	  }
+    },
+	requestDynamicEvaluationdata  (){
+			  businessCloudObject
+			    .getPhysicalAssessmentList()
+			    .then((res) => {
+			      console.log(res, 'res')
+				  this.dynamicEvaluationdata = res.data
+			      
+			    })
+			    .catch((err) => {})
+	}
+	
   }
 }
 </script>
@@ -104,6 +139,8 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
@@ -161,6 +198,7 @@ export default {
   border-radius: 16upx;
   margin-left: 30upx;
   margin-top: 30upx;
+  margin-bottom: 30upx;
 }
 
 ::v-deep .van-icon-success:before {
@@ -181,10 +219,12 @@ export default {
   margin-top: 85upx;
 }
 .need_scoll {
-  height: 74vh !important;
-  overflow-y: auto;
+  // height: 74vh !important;
+
 }
 ::v-deep .van-row {
   background: none;
+  flex: 1;
+  overflow-y: auto;
 }
 </style>

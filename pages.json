@@ -7,9 +7,15 @@
 				"enablePullDownRefresh": false
 			}
 		},
-
 		{
 			"path": "pages/addMyMebers/addMyMebers",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/memberQuery/memberQuery",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
@@ -176,22 +182,12 @@
 				"navigationStyle": "custom",
 				"autoBackButton": false
 			}
-		}
-	    ,{
-            "path" : "pages/demo/demo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
+		},
 		{
 			"path": "pages/dynamicEvaluation/actionEvaluation/actionEvaluation",
-			"style" :
-			{
-			    "navigationBarTitleText": "",
-			    "enablePullDownRefresh": false
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
@@ -208,7 +204,7 @@
 				"enablePullDownRefresh": false
 			}
 		}
-    ],
+	],
 	"globalStyle": {
 		// #ifdef H5
 		"h5": {
@@ -251,5 +247,4 @@
 			}
 		]
 	}
-
 }
