@@ -80,6 +80,30 @@ module.exports = {
 				   
 		})
    },
+   // 查询指定学员
+   getOnlyList: async function(data) {
+	   const token = this.getUniIdToken()
+	   	const detailInfo = await this.uniID.checkToken(token)
+		// console.log(detailInfo,'detailInfo')
+	   return new Promise((resolve, reject) => {
+		   db.collection('t_trainee').where({
+			   userId: detailInfo.uid,
+			   traineeName: data.traineeName,
+			   mobile: data.mobile
+				
+		   }).get().then(memberRes => {
+			   let successMessage = {
+				   success: true,
+				   ...memberRes
+			   }
+			   resolve(successMessage)
+			   
+		   }).catch(err => {
+			   reject(err)
+		   })
+		   
+	   })
+   },
    // 添加会员
    addMember: async function(data) {
 	   const token = this.getUniIdToken()
@@ -153,9 +177,9 @@ module.exports = {
 	   return new Promise((resolve, reject) => {
 	   		   db.collection('t_trainee').doc(data._id).update(resultParam).then(()=>{
 	   		   let successMessage = {
-							success: true,
-							message: '编辑成功'
-						  }
+				success: true,
+				message: '编辑成功'
+			  }
 	   		   resolve(successMessage)
 	   		   
 	   		   }).catch(err => {
@@ -185,6 +209,116 @@ module.exports = {
    			   reject(err)
    		   })
    		   
+   	   })
+   },
+   
+   // 配置表
+   getPhysicalChildAssessmentList: async function(parentCode) {
+	   const token = this.getUniIdToken()
+	   const detailInfo = await this.uniID.checkToken(token)
+	   return new Promise((resolve, reject) => {
+		   db.collection('t_questionaire').where({
+				parentCode: parentCode,
+				
+		   }).get().then(childList => {
+			   let successMessage = {
+				   success: true,
+				   ...childList
+			   }
+			   resolve(successMessage)
+			   
+		   }).catch(err => {
+			   reject(err)
+		   })
+	      		   
+	   })
+   },
+   
+   // 配置表操作查询
+   opearConfigQuery: async function(data) {
+	   const token = this.getUniIdToken()
+	   const detailInfo = await this.uniID.checkToken(token)
+	   return new Promise((resolve, reject) => {
+		   db.collection('t_questionaire_answer').where({
+			   traineeNo: data.traineeNo,
+				 userId: detailInfo.uid, 
+				 questionCode: data.questionCode
+				
+		   }).get().then(opearConfigRes => {
+			   let successMessage = {
+				   success: true,
+				   ...opearConfigRes
+			   }
+			   resolve(successMessage)
+			   
+		   }).catch(err => {
+			   reject(err)
+		   })
+	      		   
+	   })
+   },
+   
+   // 配置表添加
+   opearConfigAdd: async function(data, type) { 
+	   const token = this.getUniIdToken()
+	   const detailInfo = await this.uniID.checkToken(token)
+	   return new Promise((resolve, reject) => {
+		   let resultParam = {}
+		switch(type) {
+			 case 'physical':
+			 resultParam = {
+			 	...data
+			 	
+			 }
+			break;
+				
+			 
+		}   
+		
+		  db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+			  let successMessage = {
+				success: true,
+				message: '添加成功'
+			  }
+		  resolve(successMessage)
+		  }).catch(err => {
+			  console.log(err, 'err')
+			   reject(err)
+		  })
+	      		   
+	   })
+   },
+   
+   // 配置表编辑
+   
+   opearConfigEdit: async function(data, type) {
+   	   const token = this.getUniIdToken()
+   	   const detailInfo = await this.uniID.checkToken(token)
+   	   return new Promise((resolve, reject) => {
+   		   let resultParam = {}
+   		switch(type) {
+   			 case 'physical':
+   			 resultParam = {
+   			 	...data
+   			 	
+   			 }
+   			break;
+   				
+   			 
+   		}
+		   delete resultParam['_id']
+   		
+   		  db.collection('t_questionaire_answer').doc(data._id).update(resultParam).then(() =>{
+   			  let successMessage = {
+   				success: true,
+   				message: '编辑成功'
+   			  }
+   		  resolve(successMessage)
+   		  }).catch(err => {
+   			  console.log(err, 'err')
+   			   reject(err)
+   		  })
+   	      		   
    	   })
    },
    

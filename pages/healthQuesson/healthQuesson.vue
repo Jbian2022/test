@@ -4,26 +4,26 @@
 		<NavBarCompontent :leftNavTitle="'健康问答'" ></NavBarCompontent>
 		<view class="list_content_style">
 			<view class="need_loop_style" v-for="(item, itemIndex) in healthList" :key="'key' + itemIndex">
-				<view class="check_box_style" v-if="item.problemType==='checkbox'">
+		
+				<view class="check_box_style" v-if="item.questionType=== 2">
 					<van-collapse class="need_collapse_style" v-model="activeName">
-					  <van-collapse-item :title="item.title" :name="itemIndex">
+					  <van-collapse-item :title="item.questionContent" :name="itemIndex">
 						 <view class="collapes_conten_style">
-							 <view class="collapes_tag_stylle" v-for="(itemChild, itemChildIndex) in item.child" :key="'key' + itemChildIndex">{{itemChild.title}}</view>
+							 <view class="collapes_tag_stylle" @click.stop="quesionClick(item, itemChild)" :class="itemChild.checked ? 'active' : ''" v-for="(itemChild, itemChildIndex) in item.answer" :key="'key' + itemChildIndex">{{itemChild.answerTitle}}</view>
 							 
 						 </view>
 					  </van-collapse-item>
 					</van-collapse>
 					
 				</view>
-				<view class="radio_style"  v-if="item.problemType==='radio'">
+				<view class="radio_style"  v-if="item.questionType===1">
 					<view class="radio_title_style">
-						{{item.title}}
+						{{item.questionContent}}
 					</view>
 					<view class="radio_tag_style">
-						<view class="tag_style">是</view>
-						<view class="tag_style">否</view>
+						<view class="tag_style" :class="radioItem.checked ? 'active' : ''"  v-for="(radioItem, radioItemIndex) in item.answer" :key="'key' + radioItemIndex">{{radioItem.answerTitle}}</view>
 					</view>
-					<view class="radio_remark_style">
+					<view class="radio_remark_style" v-if="item.textType===1">
 						 <van-field
 							 class="supplement_style"
 						      v-model="username"
@@ -44,6 +44,7 @@
 <script>
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+	var businessCloudObject = uniCloud.importObject('businessCloudObject')
 	export default {
 		components: {
 			BgTheamCompontent,
@@ -51,34 +52,89 @@
 		},
 		data() {
 			return {
-				healthList: [
-					{
-						title: '如果您有以下疾病请点击选择',
-						problemType: 'checkbox',
-						child: [
-							{
-								title: '高血压',
-								activeFlag: true
-							},
-							{
-								title: '高血压',
-								activeFlag: true
-							},
-							{
-								title: '高血压',
-								activeFlag: true
-							}
-						]
-					},
-					{
-						title: '您是否有其他被确诊的疾病',
-						problemType: 'radio',
-						supplementaryInformation: 'y'
-					}
-				],
-				activeName: [0]
+				healthList: [],
+				activeName: [0],
+				traineeNo: '',
+				originList: [], // 源数据
+				questionCode: ''
+				
 				
 			}
+		},
+		onLoad(options) {
+			if (JSON.stringify(options) !== '{}' && options.traineeNo) {
+				this.traineeNo = options.traineeNo
+			}
+			if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('childList')) {
+				let originList = JSON.parse(options.childList) 
+				this.originList = originList
+				// console.log(this,'>>>',this.healthList)
+				
+			}
+			if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('questionCode')) {
+				this.questionCode = options.questionCode	
+			}
+			
+		},
+		mounted() {
+			this.requestList()
+		},
+		methods: {
+			requestList() {
+
+				businessCloudObject.opearConfigQuery({traineeNo: this.traineeNo, questionCode: this.questionCode}).then(res => {
+					console.log(res, 'kkkkk')
+					if (res.affectedDocs === 0) {
+						let healthList = this.originList.map(item => {
+						let answer = item.answer.length > 0 ? item.answer.map(config => {
+								return {
+									...config,
+									checked: false
+								}
+							}) : []
+						
+						return {
+							...item,
+							answer
+						}	
+						})
+						this.healthList = healthList
+					} else {
+						
+						let healthList = this.originList.map(item => {
+							let answer = item.answer.length > 0 ? item.answer.map(config => {
+							// 需要对比的数组
+							let compareData = res.data[0]
+							var checked = false
+							compareData.testResult.forEach(k => {
+								// 挑出父节点
+								// console.log(config, '>>>>>')
+								if (item.code === k.code) {
+									k.answer.length > 0 ? k.answer.map(z => {
+										if (config.answerTitle === z) {
+											checked = true
+										}
+									}) : checked = false
+								}
+							})
+								
+									return {
+										...config,
+										checked
+									}
+								}) : []
+							return {
+								...item,
+								answer
+							}	
+						})
+						console.log(healthList, 'hellow')
+						this.healthList = healthList
+					}
+					
+				}).catch((err) => {})
+			},
+			
 		}
 	}
 </script>
@@ -117,10 +173,12 @@
 					width: 100%;
 					display: flex;
 					align-items: center;
+					flex-wrap: wrap;
+					
 					.collapes_tag_stylle {
 						width: 187upx;
 						height: 80upx;
-						background: #1370FF;
+						background: #4B525E;
 						border-radius: 16upx;
 						font-size: 28upx;
 						// font-family: PingFangSC-Semibold, PingFang SC;
@@ -129,8 +187,16 @@
 						text-align: center;
 						line-height: 80upx;
 						margin-right: 24upx;
+						margin-bottom: 24upx;
 						
 						
+					}
+					.active {
+						background: #1370FF;
+						color: #F4F7FF;
+					}
+					.collapes_tag_stylle:nth-child(3n) {
+						margin-right: 0;
 					}
 				}
 				
@@ -164,7 +230,7 @@
 				.tag_style {
 					width: 160upx;
 					height: 80upx;
-					background: #1370FF;
+					background: #4B525E;
 					border-radius: 16upx;
 					line-height: 80upx;
 					margin-right: 30upx;
@@ -174,6 +240,10 @@
 					font-weight: 400;
 					color: #F4F7FF;
 				
+				}
+				.active {
+					background: #1370FF;
+					color: #F4F7FF;
 				}
 				
 			}

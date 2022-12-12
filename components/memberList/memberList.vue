@@ -7,98 +7,7 @@
 		            src="../../static/app-plus/mebrs/nomebers.png"
 		          ></image>
 				  <view class="quckliy_add_style">快去添加第一个学员吧</view>
-		        </view>
-				
-		<!-- 			<view  class="slide_stylle"
-		          v-for="(item, itemIndex) in meberList"
-		          :key="'itemIndex' + itemIndex">
-						<view class="add_student_style">
-						<SlideLeft :data_transit="item">
-							<template v-slot:left>
-								 <view class="need_loop_style" @click.stop="updateMember(item)">
-												    <view class="loop_top_style">
-												      <view class="top_left_style">
-												        <text class="top_left_name_style">{{
-												          item.traineeName
-												        }}</text>
-												        <image
-												          class="top_left_img_style"
-												          src="../../static/app-plus/mebrs/man.svg"
-												          v-if="item.gender == 1"
-												        ></image>
-												        <image
-												          class="top_left_img_style"
-												          src="../../static/app-plus/mebrs/woman.svg"
-												          v-if="item.gender == 2"
-												        ></image>
-												      </view>
-												      <view class="top_right_style" @click.stop="goToNewWorkout">
-												        <image
-												          class="top_right_img_style"
-												          src="../../static/app-plus/mebrs/trainingProgram.svg"
-												        ></image>
-												        <text>生产训练计划</text>
-												      </view>
-												    </view>
-												    <view class="loop_bottom_style">
-												      <view class="bottom_style">
-												        <image
-												          class="bootom_img_style"
-												          src="../../static/app-plus/mebrs/meberMessage.svg"
-												        ></image>
-												        <text class="message_style">会员信息</text>
-												      </view>
-												      <view class="bottom_style">
-												        <image
-												          class="bootom_img_style"
-												          src="../../static/app-plus/mebrs/evaluationInformation.svg"
-												        ></image>
-												        <text class="message_style">评测信息</text>
-												      </view>
-												      <view class="bottom_style" @click.stop="goToTrainingRecord">
-												        <image
-												          class="bootom_img_style"
-												          src="../../static/app-plus/mebrs/trainingLog.svg"
-												        ></image>
-												        <text class="message_style">训练记录</text>
-												      </view>
-												    </view>
-												  </view>
-							</template>
-							<template v-slot:delete>
-								<view class="slot-button" @click.stop="bindClick($event)">
-								  <image
-								    class="slot_btn_img_style"
-								    src="../../static/app-plus/mebrs/delete.svg"
-								  ></image>
-								</view>
-								<van-popup v-model:show="deleteRemarkFlag" teleport="body">
-								  <view class="confirm_dakuang_style">
-								    <view class="confirm_top_style">
-								      <text class="config_top_title_style">是否确认删除</text>
-								      <image
-								        class="delete_waring_style"
-								        src="../../static/app-plus/mebrs/delete.svg"
-								      ></image>
-								    </view>
-								    <view class="delet_remark"
-								      >确认删除该学员吗？删除后无法恢复</view
-								    >
-								    <view class="delete_btn_style">
-								      <view class="delete_cacel_style" @click.stop="deleteRemarkFlag=false">取消</view>
-								      <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm">确认</view>
-								    </view>
-								  </view>
-								</van-popup>
-							</template>
-						</SlideLeft>
-						 
-						</view>
-		</view> -->
-					
-				
-				
-				
+		        </view>				
 		       <uni-swipe-action
 		          class="slide_stylle"
 		          v-for="(item, itemIndex) in meberList"
@@ -169,7 +78,7 @@
 		                    ></image>
 		                    <text class="message_style">会员信息</text>
 		                  </view>
-		                  <view class="bottom_style">
+		                  <view class="bottom_style" @click.stop.native="jumpPhysicalAssessment(item)">
 		                    <image
 		                      class="bootom_img_style"
 		                      src="../../static/app-plus/mebrs/evaluationInformation.svg"
@@ -243,6 +152,15 @@
 			}
 		},
 		methods: {
+			jumpPhysicalAssessment(item) {
+				uni.navigateTo({
+				  url: '/pages/physicalAssessment/physicalAssessment' + '?traineeNo=' + item._id,
+				  // url: '/pages/physicalAssessment/physicalAssessment' + '?userId=' + item.userId,
+				  success: (res) => {},
+				  fail: () => {},
+				  complete: () => {}
+				})
+			},
 			searchMemberList(data) {
 				businessCloudObject
 				  .getMoreList(data)

@@ -253,9 +253,19 @@ export default {
               if (res.success) {
 				  console.log(type,'>>>>')
                if (type == 'body') {
-				uni.navigateTo({
-				  url: '/pages/physicalAssessment/physicalAssessment'
-				})
+			businessCloudObject.getOnlyList({traineeName: that.studentForm.traineeName, mobile: that.studentForm.mobile}).then(res => {
+				console.log(res, '即将发送的res')
+				if (res.success) {
+					let data = res.data
+					uni.navigateTo({
+					  url: '/pages/physicalAssessment/physicalAssessment' + '?traineeNo=' + data[0]._id
+					})
+					
+				}
+			}).catch((err)=> {
+				
+			})   
+
 			   } else {
                 uni.switchTab({
                   url: '/pages/myMebers/myMebers',
