@@ -24,25 +24,26 @@
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="12">姓名</van-col>
-							  <van-col span="12" class="textRight">2022年</van-col>
+							  <van-col span="12" class="textRight">{{personName}}</van-col>
 							</van-row>
 						</view>
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="12">性别</van-col>
-							  <van-col span="12" class="textRight">男</van-col>
+							  <van-col span="12" class="textRight" v-if="gender==1">男</van-col>
+							  <van-col span="12" class="textRight" v-if="gender==2">女</van-col>
 							</van-row>
 						</view>
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="12">年龄</van-col>
-							  <van-col span="12" class="textRight">27</van-col>
+							  <van-col span="12" class="textRight">{{age}}</van-col>
 							</van-row>
 						</view>
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="12">手机号码</van-col>
-							  <van-col span="12" class="textRight">18310349923</van-col>
+							  <van-col span="12" class="textRight">{{mobileNumber}}</van-col>
 							</van-row>
 						</view>
 					</view>
@@ -412,6 +413,10 @@ margin-top: 10upx;">82</van-col>
 		data() {
 			return {
 				currentRate:50,
+				personName:"未知",
+				gender:1,
+				age:0,
+				mobileNumber:0,
 				dynamicEvaluationdata: [
 					{
 						title: "俯卧撑耐力测试",
@@ -462,9 +467,12 @@ margin-top: 10upx;">82</van-col>
 			this.getUserInfo()
 		},
 		methods: {
-			getUserInfo(){
-				const u = user.getUserInfo();
-				console.log(u)
+			async getUserInfo(){
+				const res = await user.getUserInfo();
+				console.log(res.data)
+				this.name = res.data.name;
+				this.gender = res.data.gender;
+				this.mobileNumber = res.data.mobile;
 			}
 		},
 		components: {
