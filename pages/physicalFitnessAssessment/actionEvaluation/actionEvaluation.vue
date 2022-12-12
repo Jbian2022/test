@@ -68,11 +68,12 @@
 		},
 		methods: {
 			testResult(){
-				// const gender = this.gender;
-				// const age = this.age;
-				// const resValue = this.resultValue;
-				// const res = testOb.method1(gender,age,resValue)
-				// console.log(res)
+				const gender = this.gender;
+				const age = this.age;
+				const resValue = this.resultValue;
+				console.log(gender,age,resValue)
+				const res = testOb.method1(gender,age,resValue)
+				console.log(res.data)
 				// const type = (await res).data;
 				// if(type.length == 0){
 				// 	this.typeText = "待测";
