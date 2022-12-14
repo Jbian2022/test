@@ -91,7 +91,7 @@ export default {
 		},
         {
           title: '三分钟踏板测试',
-          type: 1,
+          type: 80,
           path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=三分钟踏板测试',
 		  typeColor: "#4B525E",
 		  typeText:"待测"
@@ -135,6 +135,7 @@ export default {
 		const resValue = this.resultValue;
 		console.log(gender+","+age+","+resValue)
 		const res = testOb.method1(gender,age,resValue)
+		// const res = testOb.method1("1",29,80)
 		console.log(res)
 		const type = (await res).data;
 		if(type.length == 0){
