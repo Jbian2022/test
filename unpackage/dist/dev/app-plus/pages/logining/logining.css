@@ -33,15 +33,18 @@
   height: 100vh;
 }
 .counter .text[data-v-10030aa6] {
-  padding-top: 13.875rem;
+  padding-top: 12.625rem;
   padding-left: 2.1875rem;
 }
 .counter .text .text1[data-v-10030aa6] {
-  height: 8.75rem;
+  width: 17.375rem;
+  height: 9.5625rem;
   font-size: 3.125rem;
   font-family: HarmonyOS_Sans_SC_Black;
   color: #ffffff;
   line-height: 4.375rem;
+  font-weight: 600;
+  object-fit: cover;
 }
 .counter .text .text2[data-v-10030aa6] {
   margin-top: 0.3125rem;

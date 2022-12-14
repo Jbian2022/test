@@ -182,11 +182,12 @@
   width: 100%;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .list_content_style .need_loop_style .check_box_style .need_collapse_style .collapes_conten_style .collapes_tag_stylle {
   width: 5.84375rem;
   height: 2.5rem;
-  background: #1370FF;
+  background: #4B525E;
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -194,6 +195,14 @@
   text-align: center;
   line-height: 2.5rem;
   margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.list_content_style .need_loop_style .check_box_style .need_collapse_style .collapes_conten_style .active {
+  background: #1370FF;
+  color: #F4F7FF;
+}
+.list_content_style .need_loop_style .check_box_style .need_collapse_style .collapes_conten_style .collapes_tag_stylle:nth-child(3n) {
+  margin-right: 0;
 }
 .list_content_style .need_loop_style .radio_style {
   width: 100%;
@@ -221,7 +230,7 @@
 .list_content_style .need_loop_style .radio_style .radio_tag_style .tag_style {
   width: 5rem;
   height: 2.5rem;
-  background: #1370FF;
+  background: #4B525E;
   border-radius: 0.5rem;
   line-height: 2.5rem;
   margin-right: 0.9375rem;
@@ -229,6 +238,10 @@
   font-size: 0.9375rem;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
+  color: #F4F7FF;
+}
+.list_content_style .need_loop_style .radio_style .radio_tag_style .active {
+  background: #1370FF;
   color: #F4F7FF;
 }
 .list_content_style .need_loop_style .radio_style .radio_remark_style {
