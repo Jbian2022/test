@@ -41,8 +41,8 @@
           <view v-else class="action-list-box">
             <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
               <view class="image">
-                <!-- <van-image round src="../../static/newWorkout/action.png" /> -->
-                <view class="van-image"></view>
+                <van-image v-if="i.url" round :src="i.url" />
+                <view v-else class="van-image"></view>
               </view>
               <view class="text">{{i.actionName}}</view>
             </view>

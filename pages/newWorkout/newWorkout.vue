@@ -12,7 +12,9 @@
 			<view v-for="(i,ix) in actionList" :key="ix" class="action-type-box">
 				<view v-if="i.type===0" class="action-tiem">
 					<view class="action-tiem-header">
-						<view class="img"></view>
+						<view class="img">
+							<van-image v-if="i.url" round :src="i.url"/>
+						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
@@ -54,7 +56,7 @@
 				<view v-if="i.type===1" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+							<van-image v-if="i.url" round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -64,7 +66,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
+							<view class="img"></view>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -98,7 +100,7 @@
 				<view v-if="i.type===2" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+							<van-image round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -107,7 +109,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
+							<view class="img"></view>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -136,7 +138,7 @@
 				<view v-if="i.type===3" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+							<van-image round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -145,7 +147,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
+							<view class="img"></view>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -179,7 +181,7 @@
 				<view v-if="i.type===4" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+							<van-image round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -189,7 +191,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
+							<view class="img"></view>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -222,7 +224,7 @@
 				<view v-if="i.type===5" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+							<van-image round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -232,7 +234,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
+							<view class="img"></view>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -268,7 +270,7 @@
 				<view v-if="i.type===6" class="action-tiem">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+							<van-image round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -277,7 +279,7 @@
 							</view>
 						</view>
 						<popover class="config" :list="actions" position="right" mode="click">
-							<van-image class="img"  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/9b0ae196-e026-4b57-9ebc-eb4ce7726b87.png"/>
+							<view class="img"></view>
 							<template  v-slot:item="{item}">
 								<text v-if="item.text==='删除动作项'" style="color:#F04242;" @click="deleteActionHandle(ix)">{{item.text}}</text>
 								<text v-else>{{item.text}}</text>
@@ -380,6 +382,7 @@
 						return {
 							type: item.actionType,
 							actionName: item.actionName,
+							url: item.url,
 							load: 0,
 							times: 0,
 							mileage: 0,
@@ -636,6 +639,10 @@ page{
 					background: url('../../static/newWorkout/action.png');
 					background-size: contain;
 					background-repeat: no-repeat;
+					.van-image{
+						width: 100%;
+						height: 100%;
+					}
 				}
 				.des-info{
 					margin-left: 30upx;
