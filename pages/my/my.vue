@@ -35,8 +35,24 @@
 			<view class="right"></view>
 		</view>
 		<view class="contact-customer">
-			<text>联系客服</text>
+			<view class="title">联系客服</view>
+			<view class="customer-info">
+				<view class="customer-item" @click="copyText('1234567890')">
+					<text>客服微信：1234567890</text>
+					<text>复制</text>
+				</view>
+				<view class="customer-item" @click="copyText('Kingtran12@aliyun.com')">
+					<text>客服邮箱：Kingtran12@aliyun.com</text>
+					<text>复制</text>
+				</view>
+			</view>
 		</view>
+		<view class="recommend">
+			<van-cell icon="contact" title="推荐人" is-link :value="referrer" @click="show = true" />
+		</view>
+		<van-action-sheet class="recommend-sheet" v-model:show="show">
+			<van-picker title="推荐人" :columns="columns" @confirm="onConfirm" @cancel="show = false"/>
+		</van-action-sheet>
 	</view>
 </template>
 
@@ -51,7 +67,16 @@
 					comment: null,
 					vipLevel: null,
 					vipEndDate: null,
-				}
+				},
+				referrer: null,
+				show: false,
+				columns: [
+					{ text: '杭州', value: 'Hangzhou' },
+					{ text: '宁波', value: 'Ningbo' },
+					{ text: '温州', value: 'Wenzhou' },
+					{ text: '绍兴', value: 'Shaoxing' },
+					{ text: '湖州', value: 'Huzhou' },
+				]
 			}
 		},
 		onShow () {
@@ -84,6 +109,22 @@
 				uni.navigateTo({
 					url: '/pages/personalInfo/personalInfo'
 				});
+			},
+			copyText(text){
+				uni.setClipboardData({
+					data: text,
+					success: function () {
+						console.log('success');
+						uni.showToast({
+							title: '复制成功',
+							duration: 2000
+						});
+					}
+				});
+			},
+			onConfirm(val){
+				this.referrer = val.text
+				this.show = false
 			}
 		}
 	}
@@ -221,26 +262,97 @@ page{
 		}
 	}
 	.contact-customer{
-		margin-top: 40upx;
-		display: flex;
-		align-items: center;
-		&::before{
-			content: '';
-			display: inline-block;
-			width: 36upx;
-			height: 36upx;
-			background: url('../../static/newWorkout/phone.png');
-			background-size: contain;
-			margin-right: 20upx;
-		}
-		font-size: 30upx;
-		font-weight: 400;
-		color: #BDC3CE;
+		margin-top: 30upx;
+		width: 670upx;
+		height: 346upx;
+		padding: 40upx;
+		box-sizing: border-box;
 		background: rgba(56, 61, 70, .6);
-		height: 120upx;
-		line-height: 120upx;
 		border-radius: 24upx;
-		padding: 0 40upx;
+		.title{
+			font-size: 30upx;
+			font-weight: 600;
+			color: #F4F7FF;
+			line-height: 42upx;
+		}
+		.customer-info{
+			.customer-item{
+				margin-top: 20upx;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background: #4B525E;
+				height: 90upx;
+				border-radius: 16upx;
+				padding: 0 30upx;
+				font-size: 26upx;
+				font-weight: 400;
+				color: #BDC3CE;
+				cursor: pointer;
+			}
+		}
+	}
+	.recommend{
+		margin-top: 30upx;
+		.van-cell {
+			background: rgba(56, 61, 70, .6);
+			border-radius: 24upx;
+			height: 120upx;
+			align-items: center;
+			color: #BDC3CE;
+			font-size: 30upx;
+			::v-deep .van-cell__value{
+				color: #BDC3CE;
+				font-size: 30upx;
+			}
+			::v-deep .van-icon{
+				color: #BDC3CE;
+				font-size: 30upx;
+			}
+		}
+	}
+	::v-deep .recommend-sheet{
+		background: #383D46;
+		.van-picker{
+			background-color: transparent;
+			.van-picker__mask{
+				background-image: none;
+			}
+			.van-picker__cancel{
+				font-size: 32upx;
+				font-weight: 600;
+				color: #7A7F89;
+				line-height: 44upx;
+			}
+			.van-picker__confirm{
+				font-size: 32upx;
+				font-weight: 600;
+				color: #F4F7FF;
+				line-height: 44upx;
+			}
+			.van-picker__title{
+				font-size: 32upx;
+				font-weight: 600;
+				color: #F4F7FF;
+				line-height: 44upx;
+			}
+			.van-picker-column__item{
+				font-size: 30upx;
+				color: #959aa2;
+			}
+			.van-picker-column__item--selected{
+				font-weight: 600;
+				color: #F4F7FF;
+			}
+			.van-picker__frame{
+				background: rgba(75, 82, 94, .5);
+				border-radius: 16upx;
+				z-index: -1;
+				&::after{
+					display: none;
+				}
+			}
+		}
 	}
 }
 </style>
