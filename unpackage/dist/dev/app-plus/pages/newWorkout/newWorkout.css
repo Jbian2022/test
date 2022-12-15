@@ -183,10 +183,12 @@ body {
   position: relative;
   display: flex;
 }
-.new-workout .action-list .action-tiem .action-tiem-header .img .van-image {
+.new-workout .action-list .action-tiem .action-tiem-header .img {
   width: 3.125rem;
   height: 3.125rem;
-  background: #C7C9CC;
+  background: url("../../static/newWorkout/action.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .new-workout .action-list .action-tiem .action-tiem-header .des-info {
   margin-left: 0.9375rem;
@@ -216,6 +218,9 @@ body {
 .new-workout .action-list .action-tiem .action-tiem-header .config .img {
   width: 1.25rem;
   height: 1.25rem;
+  background: url("../../static/newWorkout/trashcan.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .new-workout .action-list .action-tiem .action-tiem-des {
   margin-top: 1.5625rem;
@@ -294,6 +299,9 @@ body {
 .new-workout .action-list .action-tiem .action-tiem-des .project-item .delete .img {
   width: 1.25rem;
   height: 1.25rem;
+  background: url("../../static/newWorkout/trashcan.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .new-workout .action-list .action-tiem .action-tiem-des .project-item + .project-item {
   margin-top: 0.625rem;
@@ -359,6 +367,9 @@ body {
 .new-workout .footer-button .delete .img {
   width: 1.25rem;
   height: 1.25rem;
+  background: url("../../static/newWorkout/trashcan.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .new-workout .footer-button .delete + .van-button {
   margin-left: 0.625rem;

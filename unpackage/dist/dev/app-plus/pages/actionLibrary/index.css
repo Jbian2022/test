@@ -326,7 +326,7 @@ body {
   color: #a8adb6;
   line-height: 1.5rem;
 }
-.action-library .dialog-btn-box.van-button {
+.action-library .dialog-btn-box .van-button {
   width: 7.5rem;
   height: 2.8125rem;
   background: #454951;
@@ -336,10 +336,10 @@ body {
   font-weight: 600;
   color: #ffffff;
 }
-.action-library .dialog-btn-box.van-button + .van-button {
+.action-library .dialog-btn-box .van-button + .van-button {
   margin-left: 0.9375rem;
 }
-.action-library .dialog-btn-box.van-button.van-button--primary {
+.action-library .dialog-btn-box .van-button.van-button--primary {
   background: #1370ff;
 }
 .action-library .footer-seat {
@@ -372,7 +372,7 @@ body {
   width: 14.375rem;
   background: #1370ff;
 }
-.action-library.van-dialog {
+.action-library .van-dialog {
   background: #383d46;
   border-radius: 0.75rem;
 }

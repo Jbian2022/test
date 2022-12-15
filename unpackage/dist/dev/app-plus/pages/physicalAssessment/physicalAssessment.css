@@ -156,6 +156,8 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .dynamicshow[data-v-2a1dc5a6] {
   width: calc(100vw - 1.875rem);
@@ -208,6 +210,7 @@
   border-radius: 0.5rem;
   margin-left: 0.9375rem;
   margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
 }
 [data-v-2a1dc5a6] .van-icon-success:before {
   position: absolute;
@@ -226,10 +229,8 @@
   margin-left: 18.75rem;
   margin-top: 2.65625rem;
 }
-.need_scoll[data-v-2a1dc5a6] {
-  height: 74vh !important;
-  overflow-y: auto;
-}
 [data-v-2a1dc5a6] .van-row {
   background: none;
+  flex: 1;
+  overflow-y: auto;
 }

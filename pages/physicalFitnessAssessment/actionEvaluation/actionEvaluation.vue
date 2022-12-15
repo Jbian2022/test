@@ -15,7 +15,7 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video src="../../../static/app-plus/video/pedalTest.mp4" wid autoplay>
+					<video :src="pedalTestVideoUrl" wid autoplay>
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -107,7 +107,8 @@
 				typeText:"待测",
 				typeColor:"#4B525E",
 				imgUrl:'../../../static/app-plus/bg/pedalTest.png',
-				leftNavTitle:''
+				leftNavTitle:'',
+				pedalTestVideoUrl:"../../../static/app-plus/video/pedalTest.mp4"
 			}
 		},
 		methods: {

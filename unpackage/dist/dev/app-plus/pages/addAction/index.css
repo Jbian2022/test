@@ -57,19 +57,14 @@ body {
   background: #383D46;
   border-radius: 0.5rem;
   padding-left: 1.25rem;
-}
-.add-action .form .uni-input .van-field__control {
   color: #eff3fc;
   font-weight: 400;
 }
-.add-action .form .uni-input .van-field__control::-webkit-input-placeholder {
+.add-action .form .uni-input::-webkit-input-placeholder {
   color: #7A7F89;
 }
-.add-action .form .uni-input .van-field__control::placeholder {
+.add-action .form .uni-input::placeholder {
   color: #7A7F89;
-}
- .add-action .form .uni-input:after {
-  display: none;
 }
 .add-action .form .van-cell {
   margin-top: 1rem;

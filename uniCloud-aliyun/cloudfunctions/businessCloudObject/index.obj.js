@@ -181,12 +181,6 @@ module.exports = {
 				message: '编辑成功'
 			  }
 	   		   resolve(successMessage)
-	   		   db.collection('t_trainee').doc(data._id).update(resultParam).then(()=>{
-	   		   let successMessage = {
-							success: true,
-							message: '编辑成功'
-						  }
-	   		   resolve(successMessage)
 	   		   
 	   		   }).catch(err => {
 				   // console.log(err, 'err')

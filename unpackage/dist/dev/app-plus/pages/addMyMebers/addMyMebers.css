@@ -294,6 +294,19 @@
   text-align: center;
   line-height: 3.125rem;
 }
+.edit_save_style[data-v-60dc024c] {
+  background: #1370ff;
+  border-radius: 0.5rem;
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 3.125rem;
+  text-align: center;
+  justify-content: center;
+}
 .bar_content_style[data-v-60dc024c] {
   width: calc(100vw - 2.5rem);
   margin-left: 1.25rem;
@@ -305,7 +318,7 @@
   font-size: 1.125rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .bar_content_style .bar_right_style[data-v-60dc024c] {
   width: 1.5625rem;
@@ -317,28 +330,28 @@
   margin-left: 1.25rem;
   margin-bottom: 2.125rem;
   height: 3.125rem;
-  background: #1370FF;
+  background: #1370ff;
   border-radius: 0.5rem;
   font-size: 1rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   line-height: 3.125rem;
 }
 [data-v-60dc024c] .van-popup {
-  background: #383D46 !important;
+  background: #383d46 !important;
   border-radius: 0.75rem 0.75rem 0px 0px;
 }
 [data-v-60dc024c] .van-popup .van-picker__mask {
   background-image: none;
 }
 [data-v-60dc024c] .van-ellipsis {
-  color: #F4F7FF;
+  color: #f4f7ff;
   font-size: 1rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 [data-v-60dc024c] .van-hairline-unset--top-bottom:after {
   border-width: 0 !important;
@@ -351,22 +364,22 @@
   z-index: -1;
 }
 [data-v-60dc024c] .van-picker {
-  background: #383D46 !important;
+  background: #383d46 !important;
   z-index: -3;
 }
 [data-v-60dc024c] .van-picker__confirm {
-  color: #F4F7FF;
+  color: #f4f7ff;
   font-size: 1rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.5625rem;
 }
 [data-v-60dc024c] .van-picker__cancel {
   font-size: 1rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #7A7F89;
+  color: #7a7f89;
   line-height: 1.5625rem;
 }
 [data-v-60dc024c] .van-picker__toolbar {
