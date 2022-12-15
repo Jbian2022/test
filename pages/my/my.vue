@@ -48,7 +48,7 @@
 			</view>
 		</view>
 		<view class="recommend">
-			<van-cell icon="contact" title="推荐人" is-link :value="referrer" @click="show = true" />
+			<van-cell icon="contact" title="推荐人" :is-link="!userInfo.referrer" :value="userInfo.referrer" @click="openSheet" />
 		</view>
 		<van-action-sheet class="recommend-sheet" v-model:show="show">
 			<van-picker title="推荐人" :columns="columns" @confirm="onConfirm" @cancel="show = false"/>
@@ -67,15 +67,20 @@
 					comment: null,
 					vipLevel: null,
 					vipEndDate: null,
+					referrer: null
 				},
-				referrer: null,
 				show: false,
 				columns: [
-					{ text: '杭州', value: 'Hangzhou' },
-					{ text: '宁波', value: 'Ningbo' },
-					{ text: '温州', value: 'Wenzhou' },
-					{ text: '绍兴', value: 'Shaoxing' },
-					{ text: '湖州', value: 'Huzhou' },
+					{ text: '001', value: '001' },
+					{ text: '002', value: '002' },
+					{ text: '003', value: '003' },
+					{ text: '004', value: '004' },
+					{ text: '005', value: '005' },
+					{ text: '006', value: '006' },
+					{ text: '007', value: '007' },
+					{ text: '008', value: '008' },
+					{ text: '009', value: '009' },
+					{ text: '010', value: '010' },
 				]
 			}
 		},
@@ -85,15 +90,23 @@
 		methods: {
 			async getUserInfo(){
 				const res = await My.getUserInfo()
-				const {avatar,username,comment,vipLevel,vipEndDate} = res.data
+				const {avatar,username,comment,vipLevel,vipEndDate,referrer} = res.data
 				this.userInfo = {
 					avatar:avatar||null,
 					username:username||null,
 					comment:comment||null,
 					vipLevel:vipLevel||null,
-					vipEndDate:vipEndDate||null
+					vipEndDate:vipEndDate||null,
+					referrer:referrer || null
 				}
 				console.log(res,88888)
+			},
+			async setReferrer(){
+				await My.updateUserInfo({referrer:this.userInfo.referrer})
+				uni.showToast({
+					title: '设置成功',
+					duration: 2000
+				});
 			},
 			openCard(){
 				uni.navigateTo({
@@ -122,9 +135,16 @@
 					}
 				});
 			},
+			openSheet(){
+				if(this.userInfo.referrer){
+					return false
+				}
+				this.show = true
+			},
 			onConfirm(val){
-				this.referrer = val.text
+				this.userInfo.referrer = val.text
 				this.show = false
+				this.setReferrer()
 			}
 		}
 	}
