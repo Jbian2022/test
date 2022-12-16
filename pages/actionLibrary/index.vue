@@ -26,25 +26,35 @@
       <view class="action-list">
         <view class="action-list-title">{{actionClassName}}训练动作</view>
         <view class="action-list-view">
-          <view v-if="actionClass===19" class="action-list-box">
-            <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
-              <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick($event,i)">
-                <view class="action-name">{{i.actionName[0]}}</view>
-                <template v-slot:item="{item}">
-                  <text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
-                  <text v-else>{{item.text}}</text>
-                </template>
-              </popover>
-              <view class="text">{{i.actionName}}</view>
+          <view v-if="actionClass===19">
+            <view v-for="(classify,classifyi) in actionList" :key="classifyi" class="classify-box">
+              <view class="classify">{{actionTypeList[classify.actionType].title}}</view>
+              <view class="action-list-box">
+                <view v-for="i in classify.children" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
+                  <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick($event,i)">
+                    <view class="action-name">{{i.actionName[0]}}</view>
+                    <template v-slot:item="{item}">
+                      <text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
+                      <text v-else>{{item.text}}</text>
+                    </template>
+                  </popover>
+                  <view class="text">{{i.actionName}}</view>
+                </view>
+              </view>
             </view>
           </view>
           <view v-else class="action-list-box">
-            <view v-for="i in actionList" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
-              <view class="image">
-                <!-- <van-image round src="../../static/newWorkout/action.png" /> -->
-                <view class="van-image"></view>
+            <view v-for="(classify,classifyi) in actionList" :key="classifyi" class="classify-box">
+              <view class="classify">{{actionTypeList[classify.actionType].title}}</view>
+              <view class="action-list-box">
+                <view v-for="i in classify.children" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
+                  <view class="image">
+                    <van-image v-if="i.url" round :src="i.url" />
+                    <view v-else class="van-image"></view>
+                  </view>
+                  <view class="text">{{i.actionName}}</view>
+                </view>
               </view>
-              <view class="text">{{i.actionName}}</view>
             </view>
           </view>
           <view v-if="!showSaveButton" class="custom-action-button" @click="addActionHandle">
@@ -170,7 +180,51 @@ export default {
       showDialog: false,
       showSaveButton: false,
       actionList: [],
-      selectActionList:[]
+      selectActionList:[],
+      actionTypeList:[
+					{
+						type: 0,
+						title:'力量训练',
+						des:'力量训练的类型，可以为自定义动作提供记录次数和重量，其中重量的单位只能为公斤（kg）和磅（lbs）',
+						active:false
+					},
+					{
+						type: 1,
+						title:'有氧训练',
+						des:'有氧训练有多种记录形式，用户可以自行选择多种记录组合进行搭配',
+						active:false
+					},
+					{
+						type: 2,
+						title:'仅需要填写次数',
+						des:'有些动作既不会负重，也不需要重物，此时你可以选择这种记录方式',
+						active:false
+					},
+					{
+						type: 3,
+						title:'仅记录时间',
+						des:'有些动作你只想记录时间的，选择此类记录形式你可以自行选择用秒表还是计时器',
+						active:false
+					},
+					{
+						type: 4,
+						title:'自重训练',
+						des:'自重动作、自动负重动作，都适合这种训练类型。如果你不负重，那么你可以只填写次数；如果负重，那么可以填写附加的重量',
+						active:false
+					},
+					{
+						type: 5,
+						title:'自重辅助',
+						des:'例如辅助引体向上、辅助臂屈伸等等项目，需要用到辅助重量的动作，适合这种类型。这种类型可以自行设置体重。',
+						active:false
+					},
+					{
+						type: 6,
+						title:'放松训练',
+						des:'拉伸动作无需记录任何数据',
+						active:false
+					}
+				],
     }
   },
   onShow(){
@@ -197,8 +251,8 @@ export default {
         actionClass: this.actionClass,
         actionName: this.actionName,
       })
-      const actionList = res.data || []
-      this.actionList = actionList.map(item=>{
+      const actionTemp = res.data || []
+      const actionList = actionTemp.map(item=>{
         const flag = this.selectActionList.some(i=>item._id===i._id)
         if(flag){
           return {
@@ -212,7 +266,16 @@ export default {
           }
         }
       })
-      // console.log(res, 888)
+      const actionTypeTemp = actionList.map(item=>item.actionType)
+      const actionTypeList = [...new Set(actionTypeTemp)]
+      this.actionList = actionTypeList.map(item=>{
+        const children = actionList.filter(child=>child.actionType===item)
+        return {
+          actionType: item,
+          children: children
+        }
+      })
+      console.log(this.actionList, 888)
     },
     modeChangeHandle(val) {
       this.mode = val
@@ -395,6 +458,16 @@ page {
         height: calc(100% - 50upx);
         padding-right: 30upx;
         overflow-y: auto;
+        .classify-box{
+          width: 100%;
+          .classify{
+            margin-top: 20upx;
+            font-size: 28upx;
+            font-weight: 600;
+            color: #BDC3CE;
+            line-height: 40upx;
+          }
+        }
       }
       flex: 1;
       .custom-action-button {

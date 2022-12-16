@@ -17,7 +17,8 @@
 					<view v-if="j.type===0" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+								<van-image v-if="j.url" round :src="j.url"/>
+								<van-image v-else round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -49,7 +50,8 @@
 					<view v-if="j.type===1" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+								<van-image v-if="j.url" round :src="j.url"/>
+								<van-image v-else round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -75,7 +77,8 @@
 					<view v-if="j.type===2" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+								<van-image v-if="j.url" round :src="j.url"/>
+								<van-image v-else round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -99,7 +102,8 @@
 					<view v-if="j.type===3" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+								<van-image v-if="j.url" round :src="j.url"/>
+								<van-image v-else round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -122,7 +126,8 @@
 					<view v-if="j.type===4" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+								<van-image v-if="j.url" round :src="j.url"/>
+								<van-image v-else round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -154,7 +159,8 @@
 					<view v-if="j.type===5" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+								<van-image v-if="j.url" round :src="j.url"/>
+								<van-image v-else round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>
@@ -186,7 +192,8 @@
 					<view v-if="j.type===6" class="info-item">
 						<view class="item-header">
 							<view class="img">
-								<van-image round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
+								<van-image v-if="j.url" round :src="j.url"/>
+								<van-image v-else round src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f1ecf80b-cf75-4017-9ae2-622fe72717e9.png"/>
 							</view>
 							<view class="des-info">
 								<view class="des-title">{{j.actionName}}</view>

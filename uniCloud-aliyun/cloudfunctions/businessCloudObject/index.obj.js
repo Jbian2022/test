@@ -187,6 +187,7 @@ module.exports = {
 				    reject(err)
 			   })
 	   	   })
+		   })
    },
    
    // 身体评测

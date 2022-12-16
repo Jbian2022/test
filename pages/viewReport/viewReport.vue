@@ -453,7 +453,7 @@ margin-top: 10upx;">82</van-col>
 			const BodyTestReport = ref(['3']);
 			const bodyAssessment = ref(['4']);
 			const dynamicEvaluation = ref(['5']);
-			const physicalFitnessAssessment = ref(['5']);
+			const physicalFitnessAssessment = ref(['6']);
 			return { 
 				activeBasicInformation,
 				healthQA,

@@ -34,6 +34,7 @@
               class="dynamicshow_button"
               icon="../../static/app-plus/other/arrows.svg"
               icon-position="right"
+			  @click.native="jumpModular(item)"
               >开始测试</van-button
             >
           </view>
@@ -52,7 +53,7 @@
       </van-col>
     </van-row>
     <view>
-      <van-button type="primary" class="postureButton">确认</van-button>
+      <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">确认</van-button>
     </view>
   </view>
 </template>
@@ -61,6 +62,7 @@
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
 const testOb = uniCloud.importObject("testResults");
+const busOb = uniCloud.importObject("businessCloudObject");
 export default {
   components: {
     BgTheamCompontent,
@@ -76,28 +78,28 @@ export default {
 	  typeColor:"#4B525E",
       dynamicEvaluationdata: [
         {
-          title: '俯卧撑耐力测试',
-          type: 60,
+          title: '',
+          type: 0,
           path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=俯卧撑耐力测试',
 		  typeColor: "#4B525E",
 		  typeText:"待测"
 		},
         {
-          title: '卷腹测试',
-          type: 30,
+          title: '',
+          type: 0,
           path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=卷腹测试',
 		  typeColor: "#4B525E",
 		  typeText:"待测"
 		},
         {
-          title: '三分钟踏板测试',
-          type: 1,
+          title: '',
+          type: 0,
           path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=三分钟踏板测试',
 		  typeColor: "#4B525E",
 		  typeText:"待测"
 		},
         {
-          title: '自重深蹲测试',
+          title: '',
           type: 0,
           path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=自重深蹲测试',
           typeColor: "#4B525E",
@@ -107,6 +109,7 @@ export default {
     }
   },
   onShow () {
+	this.getdynamicEvaluationdata();
   	this.pedalTest();
   },
   methods: {
@@ -119,35 +122,47 @@ export default {
         complete: () => {}
       })
     },
+	async getdynamicEvaluationdata(){
+		const res = (await busOb.getPhysicalChildAssessmentList("A0005")).data
+		let i = 0;
+		console.log(res.length)
+		for(i; i < res.length; i++){
+			this.dynamicEvaluationdata[i].title = res[i].questionContent;
+			this.dynamicEvaluationdata[i].path = "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation" + "?pageName=" + res[i].questionContent
+		}
+	},
 	async pedalTest(){
 		const length = this.dynamicEvaluationdata.length;
 		let i = 0; 
 		for(i; i < length; i++){
-			if(this.dynamicEvaluationdata[i].title == '三分钟踏板测试'){
-				console.log(this.dynamicEvaluationdata[i].type)
-				this.resultValue = this.dynamicEvaluationdata[i].type;
-				break;
-			}
+			// if(this.dynamicEvaluationdata[i].title == '三分钟踏板测试'){
+			// 	console.log(this.dynamicEvaluationdata[i].type)
+			// 	this.resultValue = this.dynamicEvaluationdata[i].type;
+			// 	break;
+			// }
+			console.log(this.dynamicEvaluationdata[i].type)
+			this.resultValue = this.dynamicEvaluationdata[i].type;
 			// this.dynamicEvaluationdata[i]["typeColor"]=this.typeColor;
-		}
+		
 		const gender = this.gender;
 		const age = this.age;
 		const resValue = this.resultValue;
 		console.log(gender+","+age+","+resValue)
 		const res = testOb.method1(gender,age,resValue)
+		// const res = testOb.method1("1",29,80)
 		console.log(res)
 		const type = (await res).data;
 		if(type.length == 0){
 			this.typeText = "待测";
 		}else{
 		this.typeText = type[0].resultLevel;
+		}
 		this.dynamicEvaluationdata[i].typeText = this.typeText;
 		this.levelColor(this.typeText)
-		}
 		// this.dynamicEvaluationdata[i]["typeColor"]=this.typeColor;
 		this.dynamicEvaluationdata[i].typeColor = this.typeColor;
 		console.log(this.dynamicEvaluationdata[i])
-		console.log(type[0].resultLevel)
+		}
 	},
 	levelColor(levelType){
 		switch(levelType){
@@ -164,7 +179,7 @@ export default {
 			case "非常差":
 				this.typeColor = "#F04242";
 				break;
-			default:
+			case "待测":
 				this.typeColor = "#4B525E";
 				break;
 		}
@@ -236,7 +251,7 @@ export default {
   margin-bottom: 74upx;
   font-weight: 600;
   color: #ffffff;
-  line-height: 50px;
+  /* line-height: 50px; */
 }
 .postureButton {
   width: 690upx;
