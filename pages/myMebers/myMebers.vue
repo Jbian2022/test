@@ -47,6 +47,7 @@
     </scroll-view>
 
     <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
+      <button @click="goToTrainingRecord">888</button>
       <van-popover
         @click-overlay="clickOverlay"
         :overlay="true"
@@ -139,7 +140,12 @@ export default {
     },
     buyClick(type) {
       this.isActive = type
-    }
+    },
+    goToTrainingRecord() {
+      uni.navigateTo({
+        url: '/pages/trainingRecord/trainingRecord?traineeNo='+'63899b9ef5cf3a1773072cd4'
+      })
+    },
   }
 }
 </script>

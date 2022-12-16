@@ -6,7 +6,7 @@
 			<van-button class="btn" @click="showFinishDialog = true">完成</van-button>
 		</view>
 		<view class="workout-title">
-			<van-field v-model="workoutName" placeholder="请输入训练名称" />
+			<input v-model="workoutName" class="uni-input" focus placeholder="请输入训练名称" />
 		</view>
 		<view class="action-list">
 			<view v-for="(i,ix) in actionList" :key="ix" class="action-type-box">
@@ -36,11 +36,11 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
+								<input v-model="item.kg" class="uni-input" type="number" :disabled="item.active"/>
 								<text>kg</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<input v-model="item.time" class="uni-input" type="number" :disabled="item.active"/>
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
@@ -79,19 +79,19 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.km" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.km" class="uni-input" type="number" @blur="technicalData"/>
 								<text>km</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.hour" class="uni-input" type="number" @blur="technicalData"/>
 								<text>时</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.minute" class="uni-input" type="number" @blur="technicalData"/>
 								<text>分</text>
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -122,14 +122,14 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<input v-model="item.time" class="uni-input" type="number" :disabled="item.active"/>
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()">+ 新增一组</view>
@@ -160,19 +160,19 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.hour" class="uni-input" type="number" @blur="technicalData"/>
 								<text>时</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.minute" class="uni-input" type="number" @blur="technicalData"/>
 								<text>分</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.second" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.second" class="uni-input" type="number" @blur="technicalData"/>
 								<text>秒</text>
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/trashcan.png"  @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -204,18 +204,18 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
+								<input v-model="item.kg" class="uni-input" type="number" :disabled="item.active"/>
 								<text>kg</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<input v-model="item.time" class="uni-input" type="number" :disabled="item.active"/>
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -242,7 +242,7 @@
 						</popover>
 					</view>
 					<view class="weight">
-						<van-field v-model="i.weight" placeholder="请先设置当前体重" type="digit" @blur="technicalData"/>
+						<input v-model="i.weight" class="uni-input" type="number" placeholder="请先设置当前体重" @blur="technicalData"/>
 					</view>
 					<view class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
@@ -250,18 +250,18 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="kg">
-								<van-field v-model="item.kg" placeholder="" type="digit" :disabled="item.active"/>
+								<input v-model="item.kg" class="uni-input" type="number" :disabled="item.active"/>
 								<text>kg</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.time" placeholder="" type="digit" :disabled="item.active"/>
+								<input v-model="item.time" class="uni-input" type="number" :disabled="item.active"/>
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
 								<van-icon name="success" />
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -292,19 +292,19 @@
 								<text>{{index+1}}</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.hour" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.hour" class="uni-input" type="number"  @blur="technicalData"/>
 								<text>时</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.minute" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.minute" class="uni-input" type="number"  @blur="technicalData"/>
 								<text>分</text>
 							</view>
 							<view class="time">
-								<van-field v-model="item.second" placeholder="" type="digit" @blur="technicalData"/>
+								<input v-model="item.second" class="uni-input" type="number"  @blur="technicalData"/>
 								<text>秒</text>
 							</view>
 							<view class="delete">
-								<van-image class="img" src="../../static/newWorkout/trashcan.png" @click="deleteProjectItem(i.groupList,index),technicalData()"/>
+								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
@@ -603,21 +603,16 @@ page{
 		padding: 0 30upx;
 		padding-bottom: 30upx;
 		background: #212328;
-		.van-field{
+		.uni-input{
 			height: 100upx;
 			background: #383D46;
 			border-radius: 24upx;
-			display: flex;
-			align-items: center;
 			font-size: 30upx;
 			font-weight: 400;
+			color: #F4F7FF;
 			padding-left: 40upx;
-			::v-deep .van-field__control{
-				color: #F4F7FF;
-				padding: 0;
-				&::placeholder{
-					color:#7A7F89;
-				}
+			&::placeholder{
+				color:#7A7F89;
 			}
 		}
 	}
@@ -685,19 +680,14 @@ page{
 					color: #BDC3CE;
 					font-size: 26upx;
 					align-items: center;
-					.van-field{
+					.uni-input{
 						padding: 0;
 						background: transparent;
-						::v-deep .van-field__control{
-							font-size: 36upx;
-							font-weight: 500;
-							color: #F4F7FF;
-							&::placeholder{
-								color:#7A7F89;
-							}
-						}
-						&:after{
-							display: none;
+						font-size: 36upx;
+						font-weight: 500;
+						color: #F4F7FF;
+						&::placeholder{
+							color:#7A7F89;
 						}
 					}
 					&.active{
@@ -748,6 +738,7 @@ page{
 						flex: 1;
 						text-align: right;
 						.img{
+							display: inline-block;
 							width: 40upx;
 							height: 40upx;
 							background: url('../../static/newWorkout/trashcan.png');
@@ -763,21 +754,16 @@ page{
 			.weight{
 				margin-top: 15upx;
 				margin-bottom: -15upx;
-				.van-field{
+				.uni-input{
 					height: 80upx;
 					background: #454951;
 					border-radius: 16upx;
-					::v-deep .van-field__control{
-						text-align: center;
-						font-size: 26upx;
-						font-weight: 400;
-						color: #F4F7FF;
-						&::placeholder{
-							color:#BDC3CE;
-						}
-					}
-					&:after{
-						display: none;
+					text-align: center;
+					font-size: 26upx;
+					font-weight: 400;
+					color: #F4F7FF;
+					&::placeholder{
+						color:#BDC3CE;
 					}
 				}
 			}
