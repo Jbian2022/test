@@ -23,20 +23,80 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.uni-swipe[data-v-41bc30c0] {
+.bg_content[data-v-826f61a7] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -100;
+}
+.bg_content .currency_style[data-v-826f61a7] {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
+  width: 100%;
+  height: 11.625rem;
+  position: absolute;
+  object-fit: contain;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  opacity: 0.4;
+}
+.bg_content .currency_style .currency_img_style[data-v-826f61a7] {
+  width: 100%;
+  height: 11.625rem;
+  object-fit: contain;
+  z-index: -1;
+}
+.bg_content .currency_style .currency_content_style[data-v-826f61a7] {
+  width: 100%;
+  flex: 1;
+  background: #212328;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.uni-swipe[data-v-8ff2a577] {
   position: relative;
   overflow: hidden;
 }
-.uni-swipe_box[data-v-41bc30c0] {
+.uni-swipe_box[data-v-8ff2a577] {
   display: flex;
   flex-shrink: 0;
   position: relative;
 }
-.uni-swipe_text--center[data-v-41bc30c0] {
+.uni-swipe_text--center[data-v-8ff2a577] {
   width: 100%;
   cursor: grab;
 }
-.uni-swipe_button-group[data-v-41bc30c0] {
+.uni-swipe_button-group[data-v-8ff2a577] {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -44,26 +104,26 @@
   top: 0;
   bottom: 0;
 }
-.button-group--left[data-v-41bc30c0] {
+.button-group--left[data-v-8ff2a577] {
   left: 0;
   transform: translateX(-100%);
 }
-.button-group--right[data-v-41bc30c0] {
+.button-group--right[data-v-8ff2a577] {
   right: 0;
   transform: translateX(100%);
 }
-.uni-swipe_button[data-v-41bc30c0] {
+.uni-swipe_button[data-v-8ff2a577] {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
 }
-.uni-swipe_button-text[data-v-41bc30c0] {
+.uni-swipe_button-text[data-v-8ff2a577] {
   flex-shrink: 0;
   font-size: 14px;
 }
-.ani[data-v-41bc30c0] {
+.ani[data-v-8ff2a577] {
   transition-property: transform;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -93,39 +153,189 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.bg_content[data-v-7f0dda80] {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
-}
-.bg_content .currency_style[data-v-7f0dda80] {
-  width: 100%;
-  height: 100%;
+.mebers_content[data-v-fce7d226] {
+  width: 100vw;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  background: #212328;
 }
-.bg_content .currency_style .currency_gold_img_style[data-v-7f0dda80] {
+.mebers_content .no_data_style[data-v-fce7d226] {
   width: 100%;
-  height: 11.625rem;
-  position: absolute;
-  object-fit: contain;
-  left: 0;
-  top: 0;
-  z-index: 30;
-  opacity: 0.4;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: calc((100% - 11.875rem) / 2);
 }
-.bg_content .currency_style .currency_img_style[data-v-7f0dda80] {
-  width: 100%;
-  height: 11.625rem;
+.mebers_content .no_data_style .no_data_meber_img_style[data-v-fce7d226] {
+  width: 11.9375rem;
+  height: 11.9375rem;
   object-fit: contain;
 }
-.bg_content .currency_style .currency_content_style[data-v-7f0dda80] {
+.mebers_content .no_data_style .quckliy_add_style[data-v-fce7d226] {
+  margin-top: 0.625rem;
+  font-size: 0.875rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #7A7F89;
+}
+.mebers_content .slide_stylle[data-v-fce7d226] {
   width: 100%;
   flex: 1;
-  background: #212328;
+}
+.mebers_content .slide_stylle .add_student_style[data-v-fce7d226] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style[data-v-fce7d226] {
+  width: calc(100% - 1.875rem);
+  margin: 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: #383d46;
+  border-radius: 0.75rem;
+  height: 8.125rem;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style[data-v-fce7d226] {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style .top_left_style[data-v-fce7d226] {
+  width: 50%;
+  display: flex;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style .top_left_style .top_left_name_style[data-v-fce7d226] {
+  font-size: 1.25rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #f4f7ff;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style .top_left_style .top_left_img_style[data-v-fce7d226] {
+  width: 1.125rem;
+  height: 1.1875rem;
+  object-fit: contain;
+  margin-left: 0.3125rem;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style .top_right_style[data-v-fce7d226] {
+  width: 7.4375rem;
+  height: 1.875rem;
+  background: rgba(1, 224, 140, 0.1);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  text-align: center;
+  line-height: 1.875rem;
+  font-weight: 600;
+  color: #01e08c;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style .top_right_style .top_right_img_style[data-v-fce7d226] {
+  width: 0.625rem;
+  height: 0.6875rem;
+  object-fit: contain;
+  margin-right: 0.3125rem;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_bottom_style[data-v-fce7d226] {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_bottom_style .bottom_style[data-v-fce7d226] {
+  display: flex;
+  align-items: center;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_bottom_style .bottom_style .bootom_img_style[data-v-fce7d226] {
+  width: 0.875rem;
+  height: 0.9375rem;
+  margin-right: 0.25rem;
+  object-fit: contain;
+}
+.mebers_content .slide_stylle .add_student_style .need_loop_style .loop_bottom_style .bottom_style .message_style[data-v-fce7d226] {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #bdc3ce;
+}
+.slot-button[data-v-fce7d226] {
+  width: 3.125rem !important;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slot-button .slot_btn_img_style[data-v-fce7d226] {
+  width: 3.125rem;
+  height: 3.125rem;
+}
+.confirm_dakuang_style[data-v-fce7d226] {
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
+  height: 13.125rem;
+  background: #383d46;
+  border-radius: 24px;
+}
+.confirm_dakuang_style .confirm_top_style[data-v-fce7d226] {
+  width: calc(100% - 3.125rem);
+  margin-left: 1.5625rem;
+  padding-top: 1.5625rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.625rem;
+  color: #f4f7ff;
+}
+.confirm_dakuang_style .confirm_top_style .delete_waring_style[data-v-fce7d226] {
+  width: 1.78125rem;
+  height: 1.5rem;
+}
+.confirm_dakuang_style .delet_remark[data-v-fce7d226] {
+  width: calc(100% - 3.125rem);
+  margin-left: 1.5625rem;
+  font-size: 0.9375rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #bdc3ce;
+  margin-top: 0.9375rem;
+}
+.confirm_dakuang_style .delete_btn_style[data-v-fce7d226] {
+  width: calc(100% - 3.125rem);
+  margin-left: 1.5625rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+.confirm_dakuang_style .delete_btn_style .delete_cacel_style[data-v-fce7d226] {
+  width: 7.5rem;
+  height: 2.8125rem;
+  background: #454951;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  line-height: 2.8125rem;
+}
+.confirm_dakuang_style .delete_btn_style .delete_sure_style[data-v-fce7d226] {
+  width: 7.5rem;
+  height: 2.8125rem;
+  background: #1370ff;
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(18px);
+          backdrop-filter: blur(18px);
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  line-height: 2.8125rem;
+}
+[data-v-fce7d226] .van-popup {
+  background: none !important;
 }
 /**
  * 这里是uni-app内置的常用样式变量
@@ -156,7 +366,6 @@
   width: 100vw;
   height: 100%;
   overflow-x: hidden;
-  overflow-y: auto;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -165,10 +374,10 @@
   width: calc(100vw - 1.875rem);
   margin-left: 0.9375rem;
   height: 2.5rem;
-  margin-top: 0.9375rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2.75rem;
 }
 .content_style .header_style .header_left_style {
   height: 100%;
@@ -217,10 +426,6 @@
   display: flex;
   align-items: center;
   margin-top: 1.125rem;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 999;
 }
 .content_style .is_buy_style .buy_left {
   width: 50%;
@@ -379,6 +584,9 @@
  .van-popup {
   background: none !important;
 }
+ .van-overlay {
+  opacity: 0.2 !important;
+}
 .confirm_dakuang_style {
   width: calc(100vw - 1.875rem);
   margin-left: 0.9375rem;
@@ -485,7 +693,7 @@ uni-page-body {
   width: 100vw !important;
   background: #212328;
   margin-top: 0 !important;
-  padding-top: 1.125rem;
+  padding-top: 2.0625rem;
   padding-bottom: 1.125rem;
   animation-name: cellingAnmation;
   animation-duration: 0.3s;
@@ -499,7 +707,7 @@ uni-page-body {
 .search_anmition_style {
   position: fixed;
   right: 0.9375rem;
-  top: 1.75rem;
+  top: 2.6875rem;
   animation-name: seachAnmation;
   animation-duration: 0.3s;
   z-index: 30000;
@@ -509,7 +717,7 @@ uni-page-body {
     top: 0;
 }
 100% {
-    top: 1.75rem;
+    top: 2.6875rem;
 }
 }
 @keyframes cellingAnmation {
@@ -527,4 +735,7 @@ uni-page-body {
 }
 .tui-sticky-fixed {
   top: 0 !important;
+}
+uni-scroll-view {
+  height: 100%;
 }

@@ -1,5 +1,5 @@
 import type { Numeric } from '../utils';
-export declare type CascaderOption = {
+export type CascaderOption = {
     text?: string;
     value?: Numeric;
     color?: string;
@@ -8,12 +8,27 @@ export declare type CascaderOption = {
     className?: unknown;
     [key: PropertyKey]: any;
 };
-export declare type CascaderTab = {
+export type CascaderTab = {
     options: CascaderOption[];
     selected: CascaderOption | null;
 };
-export declare type CascaderFieldNames = {
+export type CascaderFieldNames = {
     text?: string;
     value?: string;
     children?: string;
+};
+export type CascaderThemeVars = {
+    cascaderHeaderHeight?: string;
+    cascaderHeaderPadding?: string;
+    cascaderTitleFontSize?: string;
+    cascaderTitleLineHeight?: number | string;
+    cascaderCloseIconSize?: string;
+    cascaderCloseIconColor?: string;
+    cascaderSelectedIconSize?: string;
+    cascaderTabsHeight?: string;
+    cascaderActiveColor?: string;
+    cascaderOptionsHeight?: string;
+    cascaderOptionDisabledColor?: string;
+    cascaderTabColor?: string;
+    cascaderUnselectedTabColor?: string;
 };

@@ -72,25 +72,49 @@
   background-image: url("../../static/newWorkout/open-card-vip-bg.png");
   background-size: contain;
   background-repeat: no-repeat;
+  position: relative;
 }
 .open-card .vip-card .left {
   padding-top: 1.25rem;
   padding-left: 1.25rem;
 }
-.open-card .vip-card .left .card-name {
-  font-size: 1.625rem;
+.open-card .vip-card .left .card-info {
+  display: flex;
+  align-items: center;
+}
+.open-card .vip-card .left .card-info .user-logo .van-image {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.open-card .vip-card .left .card-info .card-name {
+  margin-left: 0.625rem;
+  font-size: 1.5rem;
   color: #93653C;
-  line-height: 2.25rem;
-  text-shadow: 0px 2px 2px rgba(48, 29, 10, 0.4);
-  margin-bottom: 2.5rem;
-  font-weight: bold;
+  line-height: 2.125rem;
+  font-weight: 600;
+}
+.open-card .vip-card .left .card-info .card-status {
+  margin-left: 0.46875rem;
+  font-size: 0.75rem;
+  background: #FFF0C0;
+  border-radius: 0.78125rem;
+  padding: 0.3125rem 0.625rem;
+  height: 1.5625rem;
+  line-height: 1.5625rem;
+  font-weight: 600;
+  color: #95673D;
 }
 .open-card .vip-card .left .card-des {
+  margin-top: 2.65625rem;
   font-size: 0.8125rem;
   font-weight: 400;
   color: #90633A;
 }
 .open-card .vip-card .right {
+  position: absolute;
+  right: -0.9375rem;
+  top: 0;
+  z-index: 0;
   width: 8.125rem;
   height: 8.125rem;
   background: url("../../static/newWorkout/vip-logo.png");
@@ -129,76 +153,115 @@
 }
 .open-card .card-types-box {
   width: 100%;
-  overflow: auto;
 }
 .open-card .card-types {
   display: flex;
+  padding: 0 0.3125rem;
 }
 .open-card .card-types .type-item {
   flex-shrink: 0;
-  width: 7.1875rem;
-  height: 8.75rem;
+  width: 6.78125rem;
+  height: 8.9375rem;
   background: rgba(56, 61, 70, 0.2);
-  border-radius: 0.75rem;
+  border-radius: 16px;
   border: 0.0625rem solid rgba(122, 127, 137, 0.2);
-  margin-left: 0.9375rem;
-  padding: 0.9375rem;
+  margin-left: 0.625rem;
   box-sizing: border-box;
   text-align: center;
+  position: relative;
+}
+.open-card .card-types .type-item .hot-msg {
+  position: absolute;
+  top: -0.25rem;
+  left: -0.0625rem;
+  width: 4.0625rem;
+  height: 1.375rem;
+  line-height: 1.375rem;
+  background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
+  border-radius: 0.5rem 0.125rem 0.5rem 0.125rem;
+  color: #90633A;
+  font-size: 0.75rem;
 }
 .open-card .card-types .type-item .text {
+  margin-top: 1.625rem;
   font-size: 0.875rem;
   color: #F4F7FF;
   font-weight: bold;
 }
 .open-card .card-types .type-item .money {
-  margin-top: 0.3125rem;
+  margin-top: 0.375rem;
   font-size: 0.875rem;
   font-weight: bold;
   color: #FFE18F;
 }
 .open-card .card-types .type-item .money .num {
-  font-size: 1.75rem;
+  font-size: 1.625rem;
 }
 .open-card .card-types .type-item .des {
+  margin-top: 0.3125rem;
   font-size: 0.625rem;
   color: #BDC3CE;
+  text-decoration: line-through;
   margin-bottom: 0.6875rem;
 }
 .open-card .card-types .type-item .activity {
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  color: #90633A;
-  background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
-  border-radius: 0.625rem;
-  padding: 0.25rem 0.5rem;
+  color: #FFE18F;
 }
 .open-card .card-types .type-item.active {
   background: linear-gradient(180deg, #FFECB8 0%, #383D46 65%);
   border: 0.0625rem solid #ffe6a1;
-  overflow: hidden;
+}
+.open-card .equity-box {
+  margin-top: 1.25rem;
+  margin-bottom: 0.625rem;
+  padding: 0 0.9375rem;
 }
 .open-card .equity-list {
-  margin-top: 0.625rem;
-  margin-bottom: 2.1875rem;
   display: flex;
   flex-wrap: wrap;
-  padding: 0 2.25rem;
+  padding: 1.125rem 2.1875rem;
+  background: rgba(56, 61, 70, 0.2);
+  border-radius: 0.5rem;
+  border: 0.0625rem solid rgba(122, 127, 137, 0.2);
 }
 .open-card .equity-list .equity-item {
-  width: 25%;
+  width: 33%;
   text-align: center;
   margin-bottom: 0.9375rem;
 }
 .open-card .equity-list .equity-item .logo {
-  width: 2.8125rem;
-  height: 2.8125rem;
+  margin: 0 auto;
+  width: 3.125rem;
+  height: 3.125rem;
+  background: linear-gradient(180deg, #69707C 0%, #383D46 100%);
+  border-radius: 100%;
+  background-image: url("../../static/newWorkout/equity2.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .open-card .equity-list .equity-item .des {
   margin-top: 0.3125rem;
   font-size: 0.75rem;
-  color: #D1BA7D;
+  font-weight: 400;
+  color: #BDC3CE;
   line-height: 1.0625rem;
+}
+.open-card .equity-list .equity-item:nth-child(2) .logo {
+  background-image: url("../../static/newWorkout/equity1.svg");
+}
+.open-card .equity-list .equity-item:nth-child(3) .logo {
+  background-image: url("../../static/newWorkout/equity3.svg");
+}
+.open-card .equity-list .equity-item:nth-child(4) .logo {
+  background-image: url("../../static/newWorkout/equity4.svg");
+}
+.open-card .equity-list .equity-item:nth-child(5) .logo {
+  background-image: url("../../static/newWorkout/equity5.svg");
+}
+.open-card .equity-list .equity-item:nth-child(6) .logo {
+  background-image: url("../../static/newWorkout/equity6.svg");
 }
 .open-card .footer-button {
   position: fixed;
@@ -206,37 +269,42 @@
   left: 0;
   right: 0;
   z-index: 1;
-  padding: 0 1.25rem;
-  padding-bottom: 2.125rem;
+  padding: 0 0.9375rem;
+  padding-top: 0.625rem;
+  padding-bottom: 1.875rem;
+  background-color: #212328;
+  display: flex;
 }
-.open-card .footer-button .van-button {
-  background: linear-gradient(176deg, #5F6571 0%, #373C46 100%);
-  border-radius: 0.5rem;
-  border: 0.0625rem solid;
-  border-image: linear-gradient(179deg, #c6c6c6, #474d58) 2 2;
-  border: none;
+.open-card .footer-button .text-box {
+  text-align: center;
+  margin-right: 1.375rem;
+  width: 5rem;
+}
+.open-card .footer-button .text-box .yuan {
   font-size: 1rem;
   font-weight: 600;
   color: #FFE18F;
+  line-height: 1.375rem;
+}
+.open-card .footer-button .text-box .des {
+  margin-top: 0.3125rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #BDC3CE;
+  line-height: 0.875rem;
+  text-decoration: line-through;
+}
+.open-card .footer-button .van-button {
+  width: 14.6875rem;
+  height: 2.8125rem;
+  background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
+  border-radius: 0.5rem;
+  color: #90633A;
+  font-weight: 600;
 }
 .open-card .van-popup {
   background: #383D46;
-  border-radius: 0.75rem 0.75rem 0px 0px;
-}
-.open-card .open-card-btn {
-  margin-top: 1.875rem;
-  padding: 0 1.25rem;
-  padding-bottom: 2.125rem;
-}
-.open-card .open-card-btn .van-button {
-  background: linear-gradient(150deg, #FFF1C9 0%, #FFE5A1 100%);
-  border-radius: 0.5rem;
-  border: 0.0625rem solid;
-  border-image: linear-gradient(180deg, #fffbef, #b98550) 2 2;
-  border: none;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #90633A;
+  border-radius: 0.75rem 0.75rem 0 0;
 }
 .open-card .payment-action-sheet .title {
   padding: 1.25rem;

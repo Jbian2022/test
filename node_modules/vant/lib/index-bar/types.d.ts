@@ -1,10 +1,16 @@
 import type { ComponentPublicInstance } from 'vue';
 import type { Numeric } from '../utils';
 import type { IndexBarProps } from './IndexBar';
-export declare type IndexBarProvide = {
+export type IndexBarProvide = {
     props: IndexBarProps;
 };
-export declare type IndexBarExpose = {
+export type IndexBarExpose = {
     scrollTo: (index: Numeric) => void;
 };
-export declare type IndexBarInstance = ComponentPublicInstance<IndexBarProps, IndexBarExpose>;
+export type IndexBarInstance = ComponentPublicInstance<IndexBarProps, IndexBarExpose>;
+export type IndexBarThemeVars = {
+    indexBarSidebarZIndex?: number | string;
+    indexBarIndexFontSize?: string;
+    indexBarIndexLineHeight?: number | string;
+    indexBarIndexActiveColor?: string;
+};

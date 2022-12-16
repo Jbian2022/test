@@ -1,7 +1,11 @@
 <template>
+		<!-- 这里是状态栏 -->
+<!-- 	<view class="status_bar">
+	</view> -->
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <!--内容 start-->
+	
     <scroll-view @scroll="memberSrollTop" scroll-y="true">
       <view class="header_style">
         <view class="header_left_style">
@@ -47,7 +51,8 @@
     </scroll-view>
 
     <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
-      <van-popover
+     <van-popup
+	  ref="memberPopover"
         @click-overlay="clickOverlay"
         :overlay="true"
         v-model:show="showPopover"
@@ -63,7 +68,7 @@
             @click.stop="addClick"
           ></image>
         </template>
-      </van-popover>
+      </van-popup>
     </view>
   </view>
 </template>
@@ -71,13 +76,12 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import MemberList from '@/components/memberList/memberList.vue'
-// import SlideLeft from '@compontents/../../components/ay-operate/del_slideLeft.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject')
+
 export default {
   components: {
     BgTheamCompontent,
-    MemberList
-    // SlideLeft
+    MemberList,
+
   },
   data() {
     return {
@@ -91,9 +95,10 @@ export default {
       delteIndex: 0
     }
   },
-  onLoad(options) {},
+  onLoad() {},
   created() {},
-  mounted() {
+  mounted () {
+	 
     let self = this
     uni.getStorage({
       key: 'loginNum',
@@ -158,10 +163,11 @@ export default {
     width: calc(100vw - 60upx);
     margin-left: 30upx;
     height: 80upx;
-    margin-top: 30upx;
+    // margin-top: 30upx;
     display: flex;
     justify-content: space-between;
     align-items: center;
+	margin-top: 88upx;
     .header_left_style {
       // width: 50%;
       height: 100%;
@@ -497,7 +503,7 @@ uni-page-body {
   width: 100vw !important;
   background: #212328;
   margin-top: 0 !important;
-  padding-top: 36upx;
+  padding-top: 66upx;
   padding-bottom: 36upx;
   animation-name: cellingAnmation;
   animation-duration: 0.3s;
@@ -511,7 +517,7 @@ uni-page-body {
 .search_anmition_style {
   position: fixed;
   right: 30upx;
-  top: 56upx;
+  top: 86upx;
   animation-name: seachAnmation;
   animation-duration: 0.3s;
   z-index: 30000;
@@ -522,7 +528,7 @@ uni-page-body {
   }
 
   100% {
-    top: 56upx;
+    top: 86upx;
   }
 }
 @keyframes cellingAnmation {
@@ -546,4 +552,5 @@ uni-page-body {
 uni-scroll-view {
   height: 100%;
 }
+
 </style>

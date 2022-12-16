@@ -85,9 +85,10 @@
     }
   },
   "dependencies": {
+    "@vant/weapp": "^1.10.9",
     "moment": "^2.29.4",
     "qrcodejs2": "^0.0.2",
-    "vant": "^3.6.5"
+    "vant": "^4.0.3"
   },
   "name": "bodybuilding-app",
   "main": "main.js",

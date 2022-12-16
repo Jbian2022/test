@@ -1,102 +1,110 @@
 <template>
 
 		<view class="mebers_content">
-		        <view class="no_data_style" v-if="meberList.length === 0">
-		          <image
-		            class="no_data_meber_img_style"
-		            src="../../static/app-plus/mebrs/nomebers.png"
-		          ></image>
+			<template v-if="needFlag">
+				<view class="no_data_style" >
+				  <image
+				    class="no_data_meber_img_style"
+				    src="../../static/app-plus/mebrs/nomebers.png"
+				  ></image>
 				  <view class="quckliy_add_style">快去添加第一个学员吧</view>
-		        </view>				
-		       <uni-swipe-action
-		          class="slide_stylle"
-		          v-for="(item, itemIndex) in meberList"
-		          :key="'itemIndex' + itemIndex"
-		        >
-		          <uni-swipe-action-item
-		           :show="item.isOpened" 
-				   :auto-close="false"
-		            @change="swipeChange($event, itemIndex, item)"
-		          >
-		            <template v-slot:right>
-		              <view class="slot-button" @click.stop="bindClick($event)">
-		                <image
-		                  class="slot_btn_img_style"
-		                  src="../../static/app-plus/mebrs/delete.svg"
-		                ></image>
-		              </view>
-		              <van-popup v-model:show="deleteRemarkFlag" teleport="body">
-		                <view class="confirm_dakuang_style">
-		                  <view class="confirm_top_style">
-		                    <text class="config_top_title_style">是否确认删除</text>
-		                    <image
-		                      class="delete_waring_style"
-		                      src="../../static/app-plus/mebrs/delete.svg"
-		                    ></image>
-		                  </view>
-		                  <view class="delet_remark"
-		                    >确认删除该学员吗？删除后无法恢复</view
-		                  >
-		                  <view class="delete_btn_style">
-		                    <view class="delete_cacel_style" @click.stop="deleteRemarkFlag=false">取消</view>
-		                    <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm">确认</view>
-		                  </view>
-		                </view>
-		              </van-popup>
-		            </template>
-		            <view class="add_student_style">
-		              <view class="need_loop_style" @click.stop="updateMember(item)">
-		                <view class="loop_top_style">
-		                  <view class="top_left_style">
-		                    <text class="top_left_name_style">{{
-		                      item.traineeName
-		                    }}</text>
-		                    <image
-		                      class="top_left_img_style"
-		                      src="../../static/app-plus/mebrs/man.svg"
-		                      v-if="item.gender == 1"
-		                    ></image>
-		                    <image
-		                      class="top_left_img_style"
-		                      src="../../static/app-plus/mebrs/woman.svg"
-		                      v-if="item.gender == 2"
-		                    ></image>
-		                  </view>
-		                  <view class="top_right_style" @click.stop="goToNewWorkout">
-		                    <image
-		                      class="top_right_img_style"
-		                      src="../../static/app-plus/mebrs/trainingProgram.svg"
-		                    ></image>
-		                    <text>生产训练计划</text>
-		                  </view>
-		                </view>
-		                <view class="loop_bottom_style">
-		                  <view class="bottom_style">
-		                    <image
-		                      class="bootom_img_style"
-		                      src="../../static/app-plus/mebrs/meberMessage.svg"
-		                    ></image>
-		                    <text class="message_style">会员信息</text>
-		                  </view>
-		                  <view class="bottom_style" @click.stop.native="jumpPhysicalAssessment(item)">
-		                    <image
-		                      class="bootom_img_style"
-		                      src="../../static/app-plus/mebrs/evaluationInformation.svg"
-		                    ></image>
-		                    <text class="message_style">评测信息</text>
-		                  </view>
-		                  <view class="bottom_style" @click.stop="goToTrainingRecord">
-		                    <image
-		                      class="bootom_img_style"
-		                      src="../../static/app-plus/mebrs/trainingLog.svg"
-		                    ></image>
-		                    <text class="message_style">训练记录</text>
-		                  </view>
-		                </view>
-		              </view>
-		            </view>
-		          </uni-swipe-action-item>
-		        </uni-swipe-action>
+				</view>				
+			</template>
+			<template v-else>
+				<uni-swipe-action
+				   class="slide_stylle"
+				   v-for="(item, itemIndex) in meberList"
+				   :key="'itemIndex' + itemIndex"
+				 >
+				   <uni-swipe-action-item
+				    :show="item.isOpened" 
+								   :auto-close="false"
+				     @change="swipeChange($event, itemIndex, item)"
+				   >
+				     <template v-slot:right>
+				       <view class="slot-button" @click.stop="bindClick($event)">
+				         <image
+				           class="slot_btn_img_style"
+				           src="../../static/app-plus/mebrs/delete.svg"
+				         ></image>
+				       </view>
+		<!-- 		      <van-popup v-model="deleteRemarkFlag" teleport="body">
+				         <view class="confirm_dakuang_style">
+				           <view class="confirm_top_style">
+				             <text class="config_top_title_style">是否确认删除</text>
+				             <image
+				               class="delete_waring_style"
+				               src="../../static/app-plus/mebrs/delete.svg"
+				             ></image>
+				           </view>
+				           <view class="delet_remark"
+				             >确认删除该学员吗？删除后无法恢复</view
+				           >
+				           <view class="delete_btn_style">
+				             <view class="delete_cacel_style" @click.stop="deleteRemarkFlag=false">取消</view>
+				             <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm">确认</view>
+				           </view>
+				         </view>
+				       </van-popup> -->
+				     </template>
+				     <view class="add_student_style">
+				       <view class="need_loop_style" @click.stop="updateMember(item)">
+				         <view class="loop_top_style">
+				           <view class="top_left_style">
+				             <text class="top_left_name_style">{{
+				               item.traineeName
+				             }}</text>
+				             <image
+				               class="top_left_img_style"
+				               src="../../static/app-plus/mebrs/man.svg"
+				               v-if="item.gender == 1"
+				             ></image>
+				             <image
+				               class="top_left_img_style"
+				               src="../../static/app-plus/mebrs/woman.svg"
+				               v-if="item.gender == 2"
+				             ></image>
+				           </view>
+				           <view class="top_right_style" @click.stop="goToNewWorkout">
+				             <image
+				               class="top_right_img_style"
+				               src="../../static/app-plus/mebrs/trainingProgram.svg"
+				             ></image>
+				             <text>生产训练计划</text>
+				           </view>
+				         </view>
+				         <view class="loop_bottom_style">
+				           <view class="bottom_style">
+				             <image
+				               class="bootom_img_style"
+				               src="../../static/app-plus/mebrs/meberMessage.svg"
+				             ></image>
+				             <text class="message_style">会员信息</text>
+				           </view>
+				           <view class="bottom_style" @click.stop.native="jumpPhysicalAssessment(item)">
+				             <image
+				               class="bootom_img_style"
+				               src="../../static/app-plus/mebrs/evaluationInformation.svg"
+				             ></image>
+				             <text class="message_style">评测信息</text>
+				           </view>
+				           <view class="bottom_style" @click.stop="goToTrainingRecord">
+				             <image
+				               class="bootom_img_style"
+				               src="../../static/app-plus/mebrs/trainingLog.svg"
+				             ></image>
+				             <text class="message_style">训练记录</text>
+				           </view>
+				         </view>
+				       </view>
+				     </view>
+				   </uni-swipe-action-item>
+				 </uni-swipe-action>
+				
+				
+			</template>
+
+
 		      </view>
 
 </template>
@@ -108,12 +116,17 @@
 		data() {
 			return {
 				meberList: [],
-				deleteRemarkFlag: false,
+				deleteRemarkFlag: true,
 				delteIndex: 0,
 				
 			};
 		},
-		props: ['isActive', 'searchValue', 'type'],
+		// props: ['isActive', 'searchValue', 'type'],
+		props: {
+			isActive: Number,
+			searchValue: String,
+			type: String
+		},
 		created() {
 			switch(this.type) {
 				case 'home':
@@ -124,6 +137,17 @@
 		},
 		onShow() {
 
+		},
+
+		computed: {
+			needFlag() {
+				let flag = false
+				if (this.meberList.length === 0) {
+					flag = true
+				}
+				console.log(flag,' LLLLL')
+				return flag
+			}
 		},
 		watch: {
 			isActive: {
@@ -223,20 +247,30 @@
 		  },
 		
 		  getMemberList(buyStatus) {
-		    businessCloudObject
-		      .getMemberList(buyStatus)
-		      .then((meberListRes) => {
-		        console.log(meberListRes, 'meberListRes')
-		        this.meberList = meberListRes.data.map(item => {
-					  return {
-						  ...item,
-						  isOpened: 'none'
-					  }
-				  }) || []
-		      })
-		      .catch((err) => {})
+			  let self = this
+			  this.$nextTick(() => {
+				 businessCloudObject
+				   .getMemberList(buyStatus)
+				   .then((meberListRes) => {
+				     console.log(meberListRes, 'meberListRes')
+				     let meberList = meberListRes.data.map(item => {
+				 
+				 		  return {
+				 			  ...item,
+				 			  isOpened: 'none'
+				 		  }
+				 	  }) || []
+				 		
+				 	  self.$set(self , 'meberList', meberList)
+				 	  console.log(self.meberList,'?????')
+				 	  self.$forceUpdate()
+				   })
+				   .catch((err) => {}) 
+			  })
+
 		  },
 		  bindClick(e) {
+			  console.log('你好')
 		    this.deleteRemarkFlag = true
 		  },
 		  swipeChange(e, index) {

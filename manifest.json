@@ -134,5 +134,6 @@
         "enable" : false
     },
     "vueVersion" : "3",
-    "fallbackLocale" : "zh-Hans"
+    "fallbackLocale" : "zh-Hans",
+    "locale" : "zh-Hans"
 }

@@ -8,20 +8,19 @@
       <text class="text2">私人专属教练，扁平学员管理</text>
     </view>
     <view class="middle">
-      <van-field
-        v-model="phone"
-        readonly
-        clickable
+		
+	<input :value="phone" type="tel" :maxlength="11"  @input="phoneInput" class="phone" focus placeholder="请输入手机号" />
+	
+<!--   <van-field
+       v-model="phone"
         class="phone"
         placeholder="请输入手机号"
-        @touchstart.stop="show = true"
-      />
-      <van-number-keyboard
-        v-model="phone"
-        :show="show"
-        :maxlength="11"
-        @blur="show = false"
-      />
+		maxLength="11"
+		
+      /> -->
+
+	
+
       <button
         class="btn"
         :class="controlActiveFlag ? 'active_btn' : ''"
@@ -45,29 +44,33 @@
         <view class="ying_si_remark_dakuang_style">
           <text class="ying_si_remark">同意</text>
           <text class="ying_si_remark_middle">
-            <text class="ying_si_jump_style">《隐私政策》</text>
-            和
-            <text class="ying_si_jump_style">《用户协议》</text>
+            <text class="ying_si_jump_style">《用户隐私协议》</text>
+          
+           <!-- <text class="ying_si_jump_style">《用户协议》</text> -->
           </text>
           <text class="ying_si_remark">政策并使用本机号码登录</text>
         </view>
 
-        <view class="botter" v-if="needChecked">
-          <view class="botter-top">
-            <h1 class="botter-top1">欢迎使用本产品！</h1>
-            <h2 class="botter-top2">welcome</h2>
-            <p class="botter-top3">
-              为了更好的保障您的合法权益，在使用本应用之前，请您仔细阅读《隐私协议》和《用户协议》，点击同意即表示您已阅读并同意接受我们的服务，感谢您的信任！
-            </p>
-            <button class="botter-top4" @click="agreeContiute">
-              <span class="botter-top4-text">同意并继续</span>
-            </button>
-            <view class="botter-top5-text" @click.native="needChecked = false"
-              >不同意</view
-            >
-          </view>
-        </view>
-      </view>
+		<view class="botter_dakuang_style"  v-if="needChecked">
+			<view class="botter">
+			  <view class="botter-top">
+				<h1 class="botter-top1">欢迎使用本产品！</h1>
+				<h2 class="botter-top2">welcome</h2>
+				<p class="botter-top3">
+				  为了更好的保障您的合法权益，在使用本应用之前，请您仔细阅读《用户隐私协议》，点击同意即表示您已阅读并同意接受我们的服务，感谢您的信任！
+				</p>
+				<button class="botter-top4" @click="agreeContiute">
+				  <span class="botter-top4-text">同意并继续</span>
+				</button>
+				<view class="botter-top5-text" @click.native="needChecked = false"
+				  >不同意</view
+				>
+			  </view>
+			</view>
+		  </view>
+			
+		</view>
+	  
       <view class="wx_loging_style" @click.native="loginByWeixin">
         <image
           @click.native="loginByWeixin"
@@ -81,22 +84,25 @@
 
 <script>
 import { Toast } from 'vant'
+import { ref } from 'vue';
 let weixinAuthService
 export default {
+
   data() {
     return {
-      show: false,
-      phone: '',
+		phone: '17521791830',
       checkFlag: false,
       hasWeixinAuth: false,
       checkPhone: '',
       needChecked: false
     }
   },
+
   computed: {
     controlActiveFlag() {
+		console.log(this.phone,'????')
       let flag = false
-      if (this.phone.length === 11) {
+      if ( this.phone && this.phone.length === 11) {
         flag = true
       }
       return flag
@@ -117,6 +123,12 @@ export default {
     // #endif
   },
   methods: {
+
+	  phoneInput(event) {
+		  console.log(event, '你tm')
+		  this.phone = event.detail.value
+	  },
+
     async getSms() {
       if (this.controlActiveFlag && !this.checkFlag) {
         // Toast('请同意隐私政策')
@@ -130,7 +142,7 @@ export default {
           const smsRes = await login.sendSmsCode(this.phone)
           console.log(smsRes, '登录成功')
           if (smsRes.code == 0) {
-            uni.navigateTo({
+            uni.reLaunch({
               url:
                 '/pages/verificatioCode/verificatioCode?' +
                 'mobile=' +
@@ -166,7 +178,7 @@ export default {
       })
     },
     loginByWeixin() {
-      debugger
+
       this.getWeixinCode()
         .then((code) => {
           return uniCloud.callFunction({
@@ -238,11 +250,25 @@ export default {
       width: calc(100vw - 140upx);
       margin-left: 70upx;
       height: 100upx;
+	  display: inline-block;
+	  // line-height: 100upx;
       background-color: rgba(244, 247, 255, 0.15);
-      line-height: 100upx;
-      padding-bottom: 0;
-      padding-top: 0;
       border-radius: 16upx;
+	  ::v-deep .uni-input-wrapper {
+		  .uni-input-placeholder {
+			  left: 40upx;
+			  color: #BDC3CE;
+		  }
+	  }
+	  ::v-deep .uni-input-input {
+		  box-sizing: border-box;
+		  padding-left: 40upx;
+		  font-size: 32upx;
+		  font-family: PingFangSC-Semibold, PingFang SC;
+		  font-weight: 600;
+		  color: #F4F7FF;
+	  }
+	  
     }
     // 按钮
     .btn {
@@ -259,7 +285,7 @@ export default {
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #f4f7ff;
-        line-height: 44upx;
+        line-height: 100upx;
       }
     }
     .active_btn {
@@ -315,16 +341,26 @@ export default {
 }
 
 // 盒子
+.botter_dakuang_style {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(75, 82, 94, 0.2);
+  z-index: 10000;
+	
 .botter {
-  position: absolute;
-  display: flex;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	display: flex;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
   width: calc(100vw - 140upx);
   height: 752upx;
   background: #ffffff;
   border-radius: 24upx;
+
 
   .botter-top {
     width: calc(100% - 120upx);
@@ -353,6 +389,9 @@ export default {
         font-weight: 600;
         color: #ffffff;
         line-height: 44upx;
+		 // #ifdef APP-PLUS
+		  line-height: 100upx;
+		  // #endif
       }
     }
     .botter-top3 {
@@ -381,6 +420,7 @@ export default {
       line-height: 72upx;
     }
   }
+}
 }
 // 勾选
 

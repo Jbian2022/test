@@ -4,7 +4,7 @@
     <NavBarCompontent :leftNavTitle="'体侧报告填写'"></NavBarCompontent>
 
     <view class="contetnt_form_style">
-      <van-form @submit="onSubmit" ref="studentForm">
+<!--      <van-form @submit="onSubmit" ref="studentForm">
         <van-cell-group inset>
           <van-field
             v-model="studentForm.traineeName"
@@ -82,7 +82,7 @@
         >
           确认
         </view>
-      </van-form>
+      </van-form> -->
     </view>
   </view>
 </template>

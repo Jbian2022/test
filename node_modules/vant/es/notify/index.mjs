@@ -1,6 +1,20 @@
-import { Notify } from "./function-call.mjs";
+import { withInstall } from "../utils/index.mjs";
+import _Notify from "./Notify.mjs";
+const Notify = withInstall(_Notify);
 var stdin_default = Notify;
+import { notifyProps } from "./Notify.mjs";
+import {
+  showNotify,
+  closeNotify,
+  setNotifyDefaultOptions,
+  resetNotifyDefaultOptions
+} from "./function-call.mjs";
 export {
   Notify,
-  stdin_default as default
+  closeNotify,
+  stdin_default as default,
+  notifyProps,
+  resetNotifyDefaultOptions,
+  setNotifyDefaultOptions,
+  showNotify
 };

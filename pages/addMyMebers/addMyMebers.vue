@@ -4,7 +4,7 @@
     <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
 
     <view class="contetnt_form_style">
-      <van-form @submit="onSubmit" ref="studentForm">
+<!--      <van-form @submit="onSubmit" ref="studentForm">
         <van-cell-group inset>
           <van-field
             v-model="studentForm.traineeName"
@@ -107,15 +107,15 @@
         >
           保存
         </view>
-      </van-form>
+      </van-form> -->
     </view>
   </view>
 </template>
 
 <script>
-import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
-import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-import hadleDate from '@/common/timeUtil.js'
+import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompontent.vue'
+import NavBarCompontent from '../../components/navBarCompontent/navBarCompontent.vue'
+import hadleDate from '../../common/timeUtil.js'
 export default {
   components: {
     BgTheamCompontent,

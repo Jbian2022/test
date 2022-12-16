@@ -22,7 +22,7 @@ __export(stdin_exports, {
 });
 module.exports = __toCommonJS(stdin_exports);
 var import_vue = require("vue");
-var import_utils = require("../utils");
+var import_basic = require("./basic");
 var import_use_expose = require("../composables/use-expose");
 function usePopupState() {
   const state = (0, import_vue.reactive)({
@@ -32,7 +32,7 @@ function usePopupState() {
     state.show = show;
   };
   const open = (props) => {
-    (0, import_utils.extend)(state, props, { transitionAppear: true });
+    (0, import_basic.extend)(state, props, { transitionAppear: true });
     toggle(true);
   };
   const close = () => toggle(false);

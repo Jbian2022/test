@@ -11,14 +11,14 @@
           :key="index"
         >
           <view class="dynamicshow_left">
-            <view class="correct">
+            <view class="correct" v-if="item.isFinsh">
               <image
                 class="correct_img_style"
                 src="../../static/app-plus/other/yesActive.png"
               ></image>
             </view>
 
-            <view class="correct" v-if="!icon">
+            <view class="correct" v-else>
               <image
                 class="correct_img_style"
                 src="../../static/app-plus/other/yesNoActive.png"
@@ -119,11 +119,42 @@ export default {
 	  }
     },
 	requestDynamicEvaluationdata  (){
+		
 			  businessCloudObject
 			    .getPhysicalAssessmentList()
 			    .then((res) => {
-			      console.log(res, 'res')
-				  this.dynamicEvaluationdata = res.data
+			     
+				  let firstData = res.data
+				  businessCloudObject.opearConfigAllList(this.traineeNo).then(allRes => {
+					  // console.log(allRes, 'allRes')
+					 firstData = firstData.map(item => {
+						  let isFinsh = false
+						  // 查询结果表进行对应的过滤
+						  // console.log(item.code, '你是大傻逼')
+						if (allRes.affectedDocs > 0) {
+							allRes.data.forEach(v => {
+								console.log(v, '什么鬼')
+								if (v.questionCode === item.code) {
+									
+								 let needCompareData = v.testResult.filter(c => c.answer.length > 0)
+								 // console.log(needCompareData, '逆势')
+								 if (needCompareData.length > 0) {
+									 isFinsh = true
+								 }
+								}
+							})
+						}
+				
+						  
+						  return {
+							  ...item,
+							  isFinsh
+						  }
+					  })
+					  console.log(firstData, '我恒强')
+					  this.dynamicEvaluationdata = firstData
+					  
+				  })
 			      
 			    })
 			    .catch((err) => {})

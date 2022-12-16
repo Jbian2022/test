@@ -181,12 +181,6 @@ module.exports = {
 				message: '编辑成功'
 			  }
 	   		   resolve(successMessage)
-	   		   db.collection('t_trainee').doc(data._id).update(resultParam).then(()=>{
-	   		   let successMessage = {
-							success: true,
-							message: '编辑成功'
-						  }
-	   		   resolve(successMessage)
 	   		   
 	   		   }).catch(err => {
 				   // console.log(err, 'err')
@@ -268,6 +262,7 @@ module.exports = {
    opearConfigAdd: async function(data, type) { 
 	   const token = this.getUniIdToken()
 	   const detailInfo = await this.uniID.checkToken(token)
+	   data["userId"] = detailInfo.uid
 	   return new Promise((resolve, reject) => {
 		   let resultParam = {}
 		switch(type) {

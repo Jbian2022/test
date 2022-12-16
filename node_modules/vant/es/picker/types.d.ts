@@ -1,40 +1,26 @@
 import type { ComponentPublicInstance } from 'vue';
 import type { Numeric } from '../utils';
 import type { PickerProps } from './Picker';
-export declare type PickerToolbarPosition = 'top' | 'bottom';
-export declare type PickerFieldNames = {
+export type PickerToolbarPosition = 'top' | 'bottom';
+export type PickerFieldNames = {
     text?: string;
-    values?: string;
+    value?: string;
     children?: string;
 };
-export declare type PickerObjectOption = {
+export type PickerOption = {
     text?: Numeric;
+    value?: Numeric;
     disabled?: boolean;
-    [key: PropertyKey]: any;
-};
-export declare type PickerOption = Numeric | PickerObjectOption;
-export declare type PickerObjectColumn = {
-    values?: PickerOption[];
     children?: PickerColumn;
     className?: unknown;
-    defaultIndex?: number;
     [key: PropertyKey]: any;
 };
-export declare type PickerColumn = PickerOption[] | PickerObjectColumn;
-export declare type PickerExpose = {
+export type PickerColumn = PickerOption[];
+export type PickerExpose = {
     confirm: () => void;
-    getValues: <T = PickerOption>() => T[];
-    setValues: (values: string[]) => void;
-    getIndexes: () => number[];
-    setIndexes: (indexes: number[]) => void;
-    getColumnIndex: (index: number) => number;
-    setColumnIndex: (columnIndex: number, optionIndex: number) => void;
-    getColumnValue: <T = PickerOption>(index: number) => T;
-    setColumnValue: (index: number, value: string) => void;
-    getColumnValues: <T = PickerOption>(index: number) => T[];
-    setColumnValues: (index: number, options: PickerOption[]) => void;
+    getSelectedOptions: () => Array<PickerOption | undefined>;
 };
-export declare type PickerColumnProvide = {
+export type PickerColumnProvide = {
     state: {
         index: number;
         offset: number;
@@ -47,4 +33,30 @@ export declare type PickerColumnProvide = {
     setOptions: (options: PickerOption[]) => void;
     stopMomentum: () => void;
 };
-export declare type PickerInstance = ComponentPublicInstance<PickerProps, PickerExpose>;
+export type PickerInstance = ComponentPublicInstance<PickerProps, PickerExpose>;
+export type PickerConfirmEventParams = {
+    selectedValues: Numeric[];
+    selectedOptions: Array<PickerOption | undefined>;
+    selectedIndexes: number[];
+};
+export type PickerCancelEventParams = PickerConfirmEventParams;
+export type PickerChangeEventParams = PickerConfirmEventParams & {
+    columnIndex: number;
+};
+export type PickerThemeVars = {
+    pickerBackground?: string;
+    pickerToolbarHeight?: string;
+    pickerTitleFontSize?: string;
+    pickerTitleLineHeight?: number | string;
+    pickerActionPadding?: string;
+    pickerActionFontSize?: string;
+    pickerConfirmActionColor?: string;
+    pickerCancelActionColor?: string;
+    pickerOptionFontSize?: string;
+    pickerOptionPadding?: string;
+    pickerOptionTextColor?: string;
+    pickerOptionDisabledOpacity?: number | string;
+    pickerLoadingIconColor?: string;
+    pickerLoadingMaskColor?: string;
+    pickerMaskColor?: string;
+};

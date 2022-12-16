@@ -12,7 +12,11 @@
       <h1 class="code">请输入验证码</h1>
       <span class="phone">验证码已发送至 {{ mobile }}</span>
       <!-- 明文展示验证码 -->
-      <van-password-input
+	   <view class="main">
+	              <verification-code-style2 :latticeNum="4"   ref="verificationCodeStyle2" @inputVerificationChange="inputVerificationChange"></verification-code-style2>
+	       
+	      </view>
+  <!--    <van-password-input
         class="a-i-c"
         :mask="false"
         :length="4"
@@ -27,22 +31,27 @@
         :show="showKeyboard"
         @blur="showKeyboard = false"
         :maxlength="4"
-      />
+      /> -->
       <!-- 登录 -->
       <button class="btn" :class="sureLogin ? 'active' : ''" @click="smsLogin">
         <span class="btn-text">登录</span>
       </button>
       <p class="time" :class="isFinsh ? 'timeActive' : ''" @click="resend">
         重新发送（<view
-          ><van-count-down
+          >
+		  <uni-countdown :show-day="false" :color="isFinsh ? '#1370ff' : '#a8adb6'" :showColon="true" :hour="0" :minute="0" :second="timeupSecond" @timeup="timeup" />
+		  
+<!-- 		  <van-count-down
             ref="countDown"
             millisecond
             @finish="onFinsh"
             :time="countDown"
             :auto-start="true"
             :class="isFinsh ? 'countActive' : ''"
-            format="ss" /></view
-        >）
+            format="ss" /> -->
+			
+			</view
+        ><text>s</text>）
       </p>
     </view>
   </view>
@@ -56,7 +65,7 @@ export default {
       smsCode: '',
       errorInfoValue: '',
       showKeyboard: false,
-      countDown: 60 * 1000,
+      timeupSecond: 60,
       mobile: '',
       requestVerifyCode: '',
       sureLogin: false,
@@ -87,6 +96,26 @@ export default {
     }
   },
   methods: {
+	  timeup() {
+		this.isFinsh = true
+	  },
+	         getVal(){
+	              const val= this.$refs.verificationCodeStyle2.getValue()
+	              uni.showModal({
+	                  content:"获取到值："+val,
+	                  showCancel:false
+	              })
+	          },
+	          clearVal(){
+	              this.$refs.verificationCodeStyle2.cleanVal()
+	          },
+	          setVal(){
+	              this.$refs.verificationCodeStyle2.setVerificationCode('888')
+	          },
+	          inputVerificationChange(val){
+				  this.smsCode = val
+	              console.log('值改变了：'+val);
+	          },
     async resend() {
       if (this.isFinsh) {
         const login = uniCloud.importObject('login') //第一步导入云对象
@@ -224,6 +253,9 @@ export default {
         font-weight: 600;
         color: #ffffff;
         line-height: 44upx;
+		// #ifdef APP-PLUS
+		 line-height: 100upx;
+		 // #endif
       }
     }
     .active {
@@ -250,5 +282,23 @@ export default {
 }
 .countActive {
   color: #1370ff;
+}
+.main {
+	width: 100%;
+	margin-top: 64upx;
+}
+::v-deep.uni-countdown {
+	uni-text:nth-child(1)  {
+		display: none;
+	}
+	uni-text:nth-child(2)  {
+		display: none;
+	}
+	uni-text:nth-child(3)  {
+		display: none;
+	}
+	uni-text:nth-child(4)  {
+		display: none;
+	}
 }
 </style>

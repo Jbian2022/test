@@ -3,17 +3,19 @@
 		{
 			"path": "pages/myMebers/myMebers",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的会员",
 				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
 				"autoBackButton": false
 			}
 		},
 		{
 			"path": "pages/addMyMebers/addMyMebers",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "添加学员",
 				"enablePullDownRefresh": false,
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -21,7 +23,8 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -42,15 +45,15 @@
 				"autoBackButton": false
 			}
 		},
-		{
-			"path": "pages/dynamicEvaluation/dynamicEvaluation",
-			"style": {
-				"navigationBarTitleText": "动态评估",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
-				"autoBackButton": false
-			}
-		},
+		// {
+		// 	"path": "pages/dynamicEvaluation/dynamicEvaluation",
+		// 	"style": {
+		// 		"navigationBarTitleText": "动态评估",
+		// 		"enablePullDownRefresh": false,
+		// 		"navigationStyle": "custom",
+		// 		"autoBackButton": false
+		// 	}
+		// },
 		{
 			"path": "pages/physicalAssessment/physicalAssessment",
 			"style": {
@@ -217,8 +220,8 @@
 		}
 	],
 	"globalStyle": {
-		// #ifdef H5
-		"h5": {
+		// #ifdef APP-PLUS || H5
+		"app-plus": {
 			"titleNView": false
 		},
 		// #endif
@@ -230,8 +233,18 @@
 		// "maxWidth":375,
 		"rpxCalcMaxDeviceWidth": 375,
 		"rpxCalcBaseDeviceWidth": 375
+		// "usingComponents": {
+		// 	"van-button": "path/to/@vant/weapp/dist/button/index"
+		// }
 		// "rpxCalcIncludeWidth":0
 	},
+	//easycom配置
+	// "easycom": {
+	// 	"autoscan": true,
+	// 	"custom": {
+	// 		"van-(.*)": "@/wxcomponents/vant/$1/index"
+	// 	}
+	// },
 	"tabBar": {
 		"color": "#7A7E83",
 		"selectedColor": "#fff",
@@ -240,21 +253,31 @@
 		"list": [
 			{
 				"pagePath": "pages/myMebers/myMebers",
-				"iconPath": "static/tabbar/noactivemeber.svg",
-				"selectedIconPath": "static/tabbar/activemeber.svg",
+				"iconPath": "static/tabbar/noactivemeber.png",
+				"selectedIconPath": "static/tabbar/activemeber.png",
 				"text": "会员"
 			},
 			{
 				"pagePath": "pages/actionLibrary/index",
-				"iconPath": "static/tabbar/noactiveaction.svg",
-				"selectedIconPath": "static/tabbar/activeaction.svg",
+				"iconPath": "static/tabbar/noactiveaction.png",
+				"selectedIconPath": "static/tabbar/activeaction.png",
 				"text": "动作库"
 			},
 			{
 				"pagePath": "pages/my/my",
-				"iconPath": "static/tabbar/noactiveme.svg",
-				"selectedIconPath": "static/tabbar/activeMe.svg",
+				"iconPath": "static/tabbar/noactiveme.png",
+				"selectedIconPath": "static/tabbar/activeMe.png",
 				"text": "我的"
+			}
+		]
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "调试", //模式名称
+				"path": "pages/myMebers/myMebers", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]
 	}

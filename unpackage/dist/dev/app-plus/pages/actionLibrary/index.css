@@ -23,31 +23,31 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.popover[data-v-6e9947bd] {
+.popover[data-v-c68365de] {
   position: relative;
 }
-.popover .popover-list[data-v-6e9947bd] {
+.popover .popover-list[data-v-c68365de] {
   position: absolute;
   min-width: 6.3125rem;
   background: #212328;
   border-radius: 0.5rem;
 }
-.popover .popover-list.center[data-v-6e9947bd] {
+.popover .popover-list.center[data-v-c68365de] {
   bottom: 0;
   transform: translateY(100%) translateX(-50%);
   left: 50%;
 }
-.popover .popover-list.left[data-v-6e9947bd] {
+.popover .popover-list.left[data-v-c68365de] {
   bottom: 0;
   transform: translateY(100%);
   left: -0.78125rem;
 }
-.popover .popover-list.right[data-v-6e9947bd] {
+.popover .popover-list.right[data-v-c68365de] {
   bottom: 0;
   transform: translateY(100%);
   right: -0.78125rem;
 }
-.popover .popover-list .list-item[data-v-6e9947bd] {
+.popover .popover-list .list-item[data-v-c68365de] {
   height: 2.1875rem;
   line-height: 2.1875rem;
   text-align: center;
@@ -55,7 +55,7 @@
   font-weight: 600;
   color: #F4F7FF;
 }
-.popover .popover-list.center[data-v-6e9947bd]::before {
+.popover .popover-list.center[data-v-c68365de]::before {
   content: "";
   width: 0.375rem;
   height: 0.375rem;
@@ -65,7 +65,7 @@
   transform: translateX(-50%) rotate(45deg);
   top: -0.1875rem;
 }
-.popover .popover-list.right[data-v-6e9947bd]::before {
+.popover .popover-list.right[data-v-c68365de]::before {
   content: "";
   width: 0.375rem;
   height: 0.375rem;
@@ -75,7 +75,7 @@
   right: 1.25rem;
   transform: rotate(45deg);
 }
-.popover .popover-list.left[data-v-6e9947bd]::before {
+.popover .popover-list.left[data-v-c68365de]::before {
   content: "";
   width: 0.375rem;
   height: 0.375rem;
@@ -326,7 +326,7 @@ body {
   color: #a8adb6;
   line-height: 1.5rem;
 }
-.action-library .dialog-btn-box.van-button {
+.action-library .dialog-btn-box .van-button {
   width: 7.5rem;
   height: 2.8125rem;
   background: #454951;
@@ -336,10 +336,10 @@ body {
   font-weight: 600;
   color: #ffffff;
 }
-.action-library .dialog-btn-box.van-button + .van-button {
+.action-library .dialog-btn-box .van-button + .van-button {
   margin-left: 0.9375rem;
 }
-.action-library .dialog-btn-box.van-button.van-button--primary {
+.action-library .dialog-btn-box .van-button.van-button--primary {
   background: #1370ff;
 }
 .action-library .footer-seat {
@@ -372,7 +372,7 @@ body {
   width: 14.375rem;
   background: #1370ff;
 }
-.action-library.van-dialog {
+.action-library .van-dialog {
   background: #383d46;
   border-radius: 0.75rem;
 }
