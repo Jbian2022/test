@@ -51,7 +51,8 @@
     </scroll-view>
 
     <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
-     <van-popup
+		
+<!--     <van-popup
 	  ref="memberPopover"
         @click-overlay="clickOverlay"
         :overlay="true"
@@ -68,7 +69,29 @@
             @click.stop="addClick"
           ></image>
         </template>
-      </van-popup>
+      </van-popup> -->
+	  
+		<view class="add_style">
+		  <image
+			class="add_img_style"
+			src="../../static/app-plus/mebrs/add.svg"
+			@click.stop="addClick"
+		  ></image>
+		  <view>
+			  <ZbTooltip :visible="showPopover" :placement="'left'" :color="'linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)'" content="Hi～你来了
+			  点这里添加会员吧" :show="true"></ZbTooltip>
+			
+			
+		</view>
+	
+		  </view>
+
+		  
+
+	  
+	 <uni-popup class="updatePopup"  ref="first_popup" type="center" @change="change">
+	  	
+	   </uni-popup>
     </view>
   </view>
 </template>
@@ -76,11 +99,13 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import MemberList from '@/components/memberList/memberList.vue'
-
+import ZbTooltip from '@/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue'
 export default {
   components: {
     BgTheamCompontent,
     MemberList,
+	ZbTooltip
+
 
   },
   data() {
@@ -89,16 +114,18 @@ export default {
       isActive: 1,
       deleteRemarkFlag: false,
       loginNum: 0,
-      showPopover: false,
+      showPopover: true,
       scrollTop: 0,
       cellingFlag: false,
-      delteIndex: 0
+      delteIndex: 0,
+	  
+
     }
   },
   onLoad() {},
   created() {},
   mounted () {
-	 
+	 // this.$refs.first_popup.open()  
     let self = this
     uni.getStorage({
       key: 'loginNum',
@@ -106,6 +133,10 @@ export default {
         if (res.data) {
           self.loginNum = res.data
           self.showPopover = res.data == '0' ? true : false
+		  if (res.data == '0') {
+			  this.$refs.first_popup.open()  
+		  }
+		  
 
           // console.log(res, '次数',self.loginNum )
         }
@@ -114,6 +145,9 @@ export default {
     })
   },
   methods: {
+	  onClickPopMenu(item) {
+		  this.showMenuPop = false
+	  },
     jumpQuery() {
 		console.log(111)
       uni.navigateTo({
@@ -129,9 +163,13 @@ export default {
       // console.log( this.scrollTop)
     },
 
-    clickOverlay() {
+    change() {
       // console.log('拜拜')
       uni.setStorageSync('loginNum', '1')
+	  this.$refs.first_popup.close() 
+	  this.showPopover = false
+	  
+	  
     },
 
     addClick() {
@@ -367,12 +405,17 @@ export default {
     position: fixed;
     right: 30upx;
     bottom: calc(50px + 30upx);
-    .add_img_style {
-      width: 130upx;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: contain;
-    }
+	.add_style {
+		width: 130upx;
+		height: 100%;
+		.add_img_style {
+		  width: 130upx;
+		  height: 100%;
+		  border-radius: 50%;
+		  object-fit: contain;
+		  z-index: 1000000;
+		}
+	}
   }
   .guid_style {
     z-index: 2200;

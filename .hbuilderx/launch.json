@@ -19,7 +19,7 @@
         	"type" : "uniCloud",
         	"uniapp" : 
         	{
-        		"launchtype" : "local"
+        		"launchtype" : "remote"
         	}
         },
         {
