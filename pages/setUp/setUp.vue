@@ -7,6 +7,7 @@
 		<view class="title">设置</view>
 		<view class="form">
 			<van-cell title="注销账号" is-link @click="closeAccount"/>
+			<van-cell title="用户隐私协议" is-link/>
 		</view>
 		<van-button class="footer-btn" block @click="logout">退出登录</van-button>
 	</view>
@@ -76,6 +77,12 @@ page{
 			color: #BDC3CE;
 			align-items: center;
 			padding: 0 30upx;
+			&::after{
+				display: none;
+			}
+			& + .van-cell{
+				margin-top: 30upx;
+			}
 		}
 	}
 	.footer-btn{
