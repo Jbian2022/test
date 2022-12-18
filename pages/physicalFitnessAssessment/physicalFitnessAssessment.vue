@@ -155,9 +155,9 @@ export default {
 			for(let i=0;i<this.queryData.length;i++){
 				console.log(this.queryData[i].code===this.queryUserActionData[j].code)
 				if(this.queryData[i].code===this.queryUserActionData[j].code){
-					this.queryData[i].typeText=this.queryUserActionData[j].testResult.actionTypeText;
-					this.queryData[i].type=this.queryUserActionData[j].testResult.actionVlue;
-					this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].testResult.actionTypeText);
+					this.queryData[i].typeText=this.queryUserActionData[j].bodyTestReport.actionTypeText;
+					this.queryData[i].type=this.queryUserActionData[j].bodyTestReport.actionVlue;
+					this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].bodyTestReport.actionTypeText);
 					continue;
 				}
 			}

@@ -175,7 +175,8 @@
 				if(this.resultValue==0){
 					this.testResult();
 				}
-				data["testResult"] = actinData;
+				data["testDate"] = new Date();
+				data["bodyTestReport"] = actinData;
 				data["status"] = "0";
 				console.log(data)
 				const res = actionOb.opearConfig(data,"physical");
@@ -277,7 +278,7 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 125upx;
+	top: 180upx;
 	left: 60upx;
 	z-index: 1;
 	font-size: 26upx;
@@ -292,7 +293,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1500upx;
+	height: 1370upx;;
 	background: #383D46;
 	border-radius: 16upx;
 	backdrop-filter: blur(3upx);
@@ -300,7 +301,7 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	margin-top: 100upx;
+	margin-top: 160upx;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
 	border-radius: 32upx;
@@ -342,6 +343,7 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
+	margin-bottom: 40upx;
 }
 .clickActionEnd image{
 	width: 32upx;
