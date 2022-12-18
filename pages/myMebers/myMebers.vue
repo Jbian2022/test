@@ -139,7 +139,7 @@ export default {
     },
     buyClick(type) {
       this.isActive = type
-    }
+    },
   }
 }
 </script>
