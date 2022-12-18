@@ -1,7 +1,13 @@
 import type { ComponentPublicInstance } from 'vue';
 import type { ListProps } from './List';
-export declare type ListDirection = 'up' | 'down';
-export declare type ListExpose = {
+export type ListDirection = 'up' | 'down';
+export type ListExpose = {
     check: () => void;
 };
-export declare type ListInstance = ComponentPublicInstance<ListProps, ListExpose>;
+export type ListInstance = ComponentPublicInstance<ListProps, ListExpose>;
+export type ListThemeVars = {
+    listTextColor?: string;
+    listTextFontSize?: string;
+    listTextLineHeight?: number | string;
+    listLoadingIconSize?: string;
+};

@@ -60,6 +60,12 @@ body {
   align-items: center;
   padding: 0 0.9375rem;
 }
+.set-up .form .van-cell::after {
+  display: none;
+}
+.set-up .form .van-cell + .van-cell {
+  margin-top: 0.9375rem;
+}
 .set-up .footer-btn {
   position: fixed;
   bottom: 2.75rem;

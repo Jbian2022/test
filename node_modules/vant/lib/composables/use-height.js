@@ -22,6 +22,7 @@ __export(stdin_exports, {
 module.exports = __toCommonJS(stdin_exports);
 var import_use = require("@vant/use");
 var import_vue = require("vue");
+var import_utils = require("../utils");
 var import_on_popup_reopen = require("./on-popup-reopen");
 const useHeight = (element, withSafeArea) => {
   const height = (0, import_vue.ref)();
@@ -37,5 +38,6 @@ const useHeight = (element, withSafeArea) => {
     }
   });
   (0, import_on_popup_reopen.onPopupReopen)(() => (0, import_vue.nextTick)(setHeight));
+  (0, import_vue.watch)([import_utils.windowWidth, import_utils.windowHeight], setHeight);
   return height;
 };

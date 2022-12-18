@@ -150,24 +150,93 @@ body {
   background-position: center;
 }
 .my .contact-customer {
-  margin-top: 1.25rem;
-  display: flex;
-  align-items: center;
+  margin-top: 0.9375rem;
+  width: 20.9375rem;
+  height: 10.8125rem;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  background: rgba(56, 61, 70, 0.6);
+  border-radius: 0.75rem;
+}
+.my .contact-customer .title {
   font-size: 0.9375rem;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 1.3125rem;
+}
+.my .contact-customer .customer-info .customer-item {
+  margin-top: 0.625rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4B525E;
+  height: 2.8125rem;
+  border-radius: 0.5rem;
+  padding: 0 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 400;
   color: #BDC3CE;
-  background: rgba(56, 61, 70, 0.6);
-  height: 3.75rem;
-  line-height: 3.75rem;
-  border-radius: 0.75rem;
-  padding: 0 1.25rem;
+  cursor: pointer;
 }
-.my .contact-customer::before {
-  content: "";
-  display: inline-block;
-  width: 1.125rem;
-  height: 1.125rem;
-  background: url("../../static/newWorkout/phone.png");
-  background-size: contain;
-  margin-right: 0.625rem;
+.my .recommend {
+  margin-top: 0.9375rem;
+}
+.my .recommend .van-cell {
+  background: rgba(56, 61, 70, 0.6);
+  border-radius: 0.75rem;
+  height: 3.75rem;
+  align-items: center;
+  color: #BDC3CE;
+  font-size: 0.9375rem;
+}
+.my .recommend .van-cell .van-cell__value {
+  color: #BDC3CE;
+  font-size: 0.9375rem;
+}
+.my .recommend .van-cell .van-icon {
+  color: #BDC3CE;
+  font-size: 0.9375rem;
+}
+.my .recommend-sheet {
+  background: #383D46;
+}
+.my .recommend-sheet .van-picker {
+  background-color: transparent;
+}
+.my .recommend-sheet .van-picker .van-picker__mask {
+  background-image: none;
+}
+.my .recommend-sheet .van-picker .van-picker__cancel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7A7F89;
+  line-height: 1.375rem;
+}
+.my .recommend-sheet .van-picker .van-picker__confirm {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 1.375rem;
+}
+.my .recommend-sheet .van-picker .van-picker__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 1.375rem;
+}
+.my .recommend-sheet .van-picker .van-picker-column__item {
+  font-size: 0.9375rem;
+  color: #959aa2;
+}
+.my .recommend-sheet .van-picker .van-picker-column__item--selected {
+  font-weight: 600;
+  color: #F4F7FF;
+}
+.my .recommend-sheet .van-picker .van-picker__frame {
+  background: rgba(75, 82, 94, 0.5);
+  border-radius: 0.5rem;
+  z-index: -1;
+}
+.my .recommend-sheet .van-picker .van-picker__frame::after {
+  display: none;
 }

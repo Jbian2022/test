@@ -1,11 +1,10 @@
-import { Dialog } from './function-call';
 import type { CSSProperties, TeleportProps } from 'vue';
 import type { Interceptor, Numeric } from '../utils';
-export declare type DialogTheme = 'default' | 'round-button';
-export declare type DialogAction = 'confirm' | 'cancel';
-export declare type DialogMessage = string | (() => JSX.Element);
-export declare type DialogMessageAlign = 'left' | 'center' | 'right' | 'justify';
-export declare type DialogOptions = {
+export type DialogTheme = 'default' | 'round-button';
+export type DialogAction = 'confirm' | 'cancel';
+export type DialogMessage = string | (() => JSX.Element);
+export type DialogMessageAlign = 'left' | 'center' | 'right' | 'justify';
+export type DialogOptions = {
     title?: string;
     width?: Numeric;
     theme?: DialogTheme;
@@ -31,8 +30,24 @@ export declare type DialogOptions = {
     confirmButtonDisabled?: boolean;
     closeOnClickOverlay?: boolean;
 };
-declare module '@vue/runtime-core' {
-    interface ComponentCustomProperties {
-        $dialog: typeof Dialog;
-    }
-}
+export type DialogThemeVars = {
+    dialogWidth?: string;
+    dialogSmallScreenWidth?: string;
+    dialogFontSize?: string;
+    dialogTransition?: string;
+    dialogRadius?: string;
+    dialogBackground?: string;
+    dialogHeaderFontWeight?: string;
+    dialogHeaderLineHeight?: number | string;
+    dialogHeaderPaddingTop?: string;
+    dialogHeaderIsolatedPadding?: string;
+    dialogMessagePadding?: string;
+    dialogMessageFontSize?: string;
+    dialogMessageLineHeight?: number | string;
+    dialogMessageMaxHeight?: string;
+    dialogHasTitleMessageTextColor?: string;
+    dialogHasTitleMessagePaddingTop?: string;
+    dialogButtonHeight?: string;
+    dialogRoundButtonHeight?: string;
+    dialogConfirmButtonTextColor?: string;
+};

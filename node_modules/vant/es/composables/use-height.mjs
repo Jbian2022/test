@@ -1,5 +1,6 @@
 import { useRect } from "@vant/use";
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted, nextTick, watch } from "vue";
+import { windowHeight, windowWidth } from "../utils/index.mjs";
 import { onPopupReopen } from "./on-popup-reopen.mjs";
 const useHeight = (element, withSafeArea) => {
   const height = ref();
@@ -15,6 +16,7 @@ const useHeight = (element, withSafeArea) => {
     }
   });
   onPopupReopen(() => nextTick(setHeight));
+  watch([windowWidth, windowHeight], setHeight);
   return height;
 };
 export {

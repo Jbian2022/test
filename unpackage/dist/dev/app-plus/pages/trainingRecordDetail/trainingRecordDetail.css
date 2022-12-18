@@ -30,10 +30,15 @@
 .training-record-detail {
   position: relative;
 }
+.training-record-detail .canvas-box {
+  height: 0;
+  overflow: hidden;
+}
 .training-record-detail #training-detail {
   padding-bottom: 5.3125rem;
   padding-top: 2.75rem;
   min-height: 100vh;
+  box-sizing: border-box;
   position: relative;
 }
 .training-record-detail .backgroud-img {
