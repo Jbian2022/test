@@ -53,50 +53,49 @@ export default async function() {
 			// 	params // 参数列表
 			// });
 			// 接入自己逻辑
-				// console.log(objectName, 'objectName')
-				// console.log(methodName, 'methodName')
+				console.log(objectName, 'objectName')
+				console.log(methodName, 'methodName')
 				// 后台到前台
 		
 				   // 校验token的合法性每个接口都要加token
-				   // console.log(methodName,'methodName')
 				   // let whiteCloudName = ['']
 				if(objectName == "login") {
 					
 				} else {
 					
-				   // uni.getStorage({
-				   //   key: 'uni_id_token',
-				   //   success: function (res) {
-				   //     // console.log(res, '我是token')
-				   //     if (res.data) {
-				   //       let login = uniCloud.importObject('login')
-				   //       login
-				   //         .checkToken(res.data)
-				   //         .then((checkTokenRes) => {
-				   //           // console.log(checkTokenRes, 'token 换取')
-							//   plus.navigator.closeSplashscreen(); //关闭启动页，进入首页
-				   //         })
-				   //         .catch((err) => {
-				   //           console.log(err, '我是错误')
-				   //           uni.reLaunch({
-				   //             url: '/pages/logining/logining',
-				   //             success: (res) => {},
-				   //             fail: () => {},
-				   //             complete: () => {}
-				   //           })
-				   //           uni.clearStorage()
-				   //         })
-				   //     }
-				   //   },
-				   //   fail: function (err) {
-				   //     uni.reLaunch({
-				   //       url: '/pages/logining/logining',
-				   //       success: (res) => {},
-				   //       fail: () => {},
-				   //       complete: () => {}
-				   //     })
-				   //   }
-				   // })
+				   uni.getStorage({
+				     key: 'uni_id_token',
+				     success: function (res) {
+				       // console.log(res, '我是token')
+				       if (res.data) {
+				         let login = uniCloud.importObject('login')
+				         login
+				           .checkToken(res.data)
+				           .then((checkTokenRes) => {
+				             // console.log(checkTokenRes, 'token 换取')
+							  plus.navigator.closeSplashscreen(); //关闭启动页，进入首页
+				           })
+				           .catch((err) => {
+				             console.log(err, '我是错误')
+				             uni.reLaunch({
+				               url: '/pages/logining/logining',
+				               success: (res) => {},
+				               fail: () => {},
+				               complete: () => {}
+				             })
+				             uni.clearStorage()
+				           })
+				       }
+				     },
+				     fail: function (err) {
+				       uni.reLaunch({
+				         url: '/pages/logining/logining',
+				         success: (res) => {},
+				         fail: () => {},
+				         complete: () => {}
+				       })
+				     }
+				   })
 				}
 				 
 				

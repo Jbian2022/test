@@ -17,7 +17,8 @@
         },
         "modules" : {
             "Share" : {},
-            "Push" : {}
+            "Push" : {},
+            "OAuth" : {}
         },
         "distribute" : {
             "android" : {
@@ -60,7 +61,12 @@
                     }
                 },
                 "ad" : {},
-                "oauth" : {},
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wxc1a1c95912d3eca6",
+                        "UniversalLinks" : ""
+                    }
+                },
                 "payment" : {},
                 "share" : {
                     "weixin" : {

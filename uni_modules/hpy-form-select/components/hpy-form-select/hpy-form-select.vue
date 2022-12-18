@@ -2,17 +2,20 @@
 	<view>
 		<picker :mode="mode" @change="chagne" :value="selectValue" 
 			:range="range" :range-key="text" :start="start" :end="end" :fields="fields" :custom-item="customItem" :disabled="disabled">
-			<block v-if="islot">
-				<slot />
-			</block>
-			<block v-else>
-				<view class="select-picker" :class="hideBorder?'':'select-picker-border'">
-					<text class="placeholder" :class="selectValue === ''?'default':''">{{selectText}}</text>
-					<view class="select-picker-arrow-area" v-if="!hideArrow">
-						<view class="select-picker-arrow"></view>
+			<view>
+				<view v-if="islot">
+					<slot />
+				</view>
+				<view v-else>
+					<view class="select-picker" :class="hideBorder?'':'select-picker-border'">
+						<text class="placeholder" :class="selectValue === ''?'default':''">{{selectText}}</text>
+						<view class="select-picker-arrow-area" v-if="!hideArrow">
+							<view class="select-picker-arrow"></view>
+						</view>
 					</view>
 				</view>
-			</block>
+				
+			</view>
 		</picker>
 	</view>
 </template>
@@ -272,5 +275,61 @@
 	.select-picker-arrow{width:7px;height:7px;border-left:1px solid #7A7F89;border-bottom:1px solid #7A7F89;transform: rotate(-90deg);}
 	.placeholder.default{color:  #7A7F89;text-indent: 0px;}
 	.placeholder {color: #F4F7FF;}
+	::v-deep .uni-selector-select {
+		.uni-picker-custom {
+		  border-radius: 24upx 24upx 0px 0px;
+		  background: #383d46 !important;
+		  .uni-picker-header {
+		    background: transparent !important;
+		    border-bottom: none;
+		    .uni-picker-action-cancel {
+		      padding-left: 40upx;
+		      // padding-top: 40upx;
+		      font-size: 32upx;
+		      font-family: PingFangSC-Semibold, PingFang SC;
+		      font-weight: 600;
+		      color: #7a7f89;
+		    }
+		    .uni-picker-action-confirm {
+		      padding-right: 40upx;
+		      // padding-top: 40upx;
+		      font-size: 32upx;
+		      font-family: PingFangSC-Semibold, PingFang SC;
+		      font-weight: 600;
+		      color: #f4f7ff;
+		    }
+		  }
+		  .uni-picker-header::after {
+		    border-bottom: none !important;
+		  }
+		  .uni-picker-content {
+		    background: transparent !important;
+		    .uni-picker-item {
+		      color: #f4f7ff !important;
+		    }
+		  }
+		}
+		
+	}
+	
+	::v-deep.uni-picker-view-mask {
+	  background: transparent !important;
+	}
+	::v-deep.uni-picker-view-indicator {
+	  border: none !important;
+	  // width: 80%;
+	
+	  // margin-left: 40upx;
+	  background: rgba(75, 82, 94, 0.5) !important;
+	  border-radius: 16px;
+	  z-index: -1;
+	}
+	
+	::v-deep.uni-picker-view-indicator:before {
+	  border-top: none;
+	}
+	::v-deep.uni-picker-view-indicator::after {
+	  border-bottom: none;
+	}
 	
 </style>

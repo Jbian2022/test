@@ -1,7 +1,7 @@
 <template>
   <view class="content_style">
-   <bg-theam-compontent :theamType="'currency'"></bg-theam-compontent>
-    <nav-bar-compontent :leftNavTitle="'健康问答'"></nav-bar-compontent>
+   <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+    <NavBarCompontent :leftNavTitle="'健康问答'"></NavBarCompontent>
     <view class="list_content_style">
       <view
         class="need_loop_style"
@@ -44,15 +44,12 @@
             >
           </view>
           <view class="radio_remark_style" v-if="item.answer[0].checked">
- <!--          <van-field
-              class="supplement_style"
-              v-model="item.answer[0].remark"
-              :placeholder="
-                item.answerRemark && item.answerRemark.remarkTitle
-                  ? item.answerRemark.remarkTitle
-                  : '请补充信息'
-              "
-            /> -->
+<!-- 			  <input class="remark_style" type="textarea"  :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'" />
+ -->			  
+			<view class="uni-textarea">
+ 				<textarea v-model="item.answer[0].remark" placeholder-style="color:#BDC3CE" :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'"/>
+ 			</view>
+			  
           </view>
         </view>
       </view>
@@ -62,13 +59,13 @@
 </template>
 
 <script>
-// import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
-// import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
+import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
 var businessCloudObject = uniCloud.importObject('businessCloudObject')
 export default {
   components: {
-    // BgTheamCompontent,
-    // NavBarCompontent
+    BgTheamCompontent,
+    NavBarCompontent
   },
   data() {
     return {
@@ -234,7 +231,7 @@ export default {
                 answer
               }
             })
-            // console.log(healthList, 'hellow')
+            console.log(healthList, 'hellow')
             this.healthList = healthList
           }
         })
@@ -368,6 +365,7 @@ export default {
         width: calc(100% - 60upx);
         margin-left: 30upx;
         padding-bottom: 30upx;
+		
         .supplement_style {
           width: 100%;
           height: 160px;
@@ -446,5 +444,14 @@ export default {
       padding-right: 0;
     }
   }
+}
+
+::v-deep .uni-textarea {
+	// height: 160px;
+	background: #4B525E;
+	border-radius: 16upx;
+	padding: 30upx;
+	box-sizing: border-box;
+	color: #F4F7FF;
 }
 </style>

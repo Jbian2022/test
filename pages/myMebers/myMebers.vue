@@ -114,7 +114,7 @@ export default {
       isActive: 1,
       deleteRemarkFlag: false,
       loginNum: 0,
-      showPopover: true,
+      showPopover: false,
       scrollTop: 0,
       cellingFlag: false,
       delteIndex: 0,
