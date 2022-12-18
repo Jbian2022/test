@@ -5,7 +5,7 @@
 
     <view class="contetnt_form_style">
       <uni-forms
-        :modelValue="studentForm"
+        :modelValue="configForm"
         ref="studentForm"
         label-position="top"
       >
@@ -45,14 +45,10 @@ export default {
   },
   data() {
     return {
-      studentForm: {
+      configForm: {
     
       },
-      columns: [
-        { text: '未知', value: '0' },
-        { text: '男', value: '1' },
-        { text: '女', value: '2' }
-      ],
+
 	  traineeNo: '',
 	  questionCode: '',
 	  originList: [],
