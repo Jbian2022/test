@@ -9,28 +9,30 @@
         ref="studentForm"
         label-position="top"
       >
-		 <template  v-for="(item, itemIndex) in bodyTestReport" :key="itemIndex">
-			 <uni-forms-item
-			   class="outer_form_item_style"
-			   :label="item.questionContent"
-			   :name="item.code"
-			 >
-			   <view class="change_picker_style">
-				 <hpy-form-select
-				   :dataList="item.configList"
-				   :title="item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请选择'"
-				   text="text"
-				   name="value"
-				   
-				 />
-			   </view>
-			 </uni-forms-item>  
-		 </template>
-      
-      
-
+        <template v-for="(item, itemIndex) in bodyTestReport" :key="itemIndex">
+          <uni-forms-item
+            class="outer_form_item_style"
+            :label="item.questionContent"
+            :name="item.code"
+          >
+            <view class="change_picker_style">
+              <hpy-form-select
+                :dataList="item.configList"
+                :title="
+                  item.answerRemark && item.answerRemark.remarkTitle
+                    ? item.answerRemark.remarkTitle
+                    : '请选择'
+                "
+                text="text"
+                name="value"
+                v-model="configForm[item.key]"
+              />
+            </view>
+          </uni-forms-item>
+        </template>
       </uni-forms>
     </view>
+    <view class="bottom_style" @click.stop="saveBodyTestReport">保存</view>
   </view>
 </template>
 
@@ -38,6 +40,7 @@
 import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '../../components/navBarCompontent/navBarCompontent.vue'
 import hadleDate from '../../common/timeUtil.js'
+var businessCloudObject = uniCloud.importObject('businessCloudObject')
 export default {
   components: {
     BgTheamCompontent,
@@ -45,16 +48,12 @@ export default {
   },
   data() {
     return {
-      configForm: {
-    
-      },
+      configForm: {},
 
-	  traineeNo: '',
-	  questionCode: '',
-	  originList: [],
-	  bodyTestReport: [], //体测报告填写数组
-
-
+      traineeNo: '',
+      questionCode: '',
+      originList: [],
+      bodyTestReport: [] //体测报告填写数组
     }
   },
   onLoad(options) {
@@ -67,7 +66,7 @@ export default {
     ) {
       let originList = JSON.parse(options.childList)
       this.originList = originList
-      console.log(originList,'>>>')
+      console.log(originList, '>>>')
     }
     if (
       JSON.stringify(options) !== '{}' &&
@@ -77,22 +76,98 @@ export default {
     }
   },
   mounted() {
-	  this.requestList()
+    this.requestList()
   },
   methods: {
-	 requestList() {
-		 // 组装数据
-		 this.bodyTestReport = this.originList.map(item => {
-			 let configList = []
-			if (item.hasOwnProperty('configList') && item.configList.length > 0) {
-				configList = item.configList
-			}
-			return {
-				...item,
-				configList
-			}
-		 })
-	 } ,
+    saveBodyTestReport() {
+      // 参数封装
+      let saveParam = {
+        traineeNo: this.traineeNo,
+        questionCode: this.questionCode,
+        bodyTestReport: this.configForm
+      }
+      businessCloudObject
+        .opearConfig(saveParam, 'bodyTestReport')
+        .then((res) => {
+          console.log(res, '我要保存了')
+          if (res.success) {
+            uni.redirectTo({
+              url:
+                '/pages/physicalAssessment/physicalAssessment' +
+                '?traineeNo=' +
+                this.traineeNo +
+                '&questionCode=' +
+                this.questionCode
+            })
+            uni.showToast({
+              icon: 'success',
+              title: res.message,
+              duration: 800
+            })
+          }
+        })
+        .catch(() => {})
+    },
+    requestList() {
+      console.log(
+        this.traineeNo,
+        'this.traineeNo',
+        this.questionCode,
+        'this.questionCode'
+      )
+      var self = this
+      businessCloudObject
+        .opearConfigQuery({
+          traineeNo: this.traineeNo,
+          questionCode: this.questionCode
+        })
+        .then((res) => {
+          let opearConfigList = this.originList.map((item) => {
+            let configList = []
+            if (
+              item.hasOwnProperty('configList') &&
+              item.configList.length > 0
+            ) {
+              configList = item.configList
+            }
+            return {
+              ...item,
+              configList
+            }
+          })
+          console.log(res, 'kkkkk')
+          // 如果答案为空则表单为空
+          if (res.affectedDocs === 0) {
+            this.configForm = {}
+            this.bodyTestReport = opearConfigList
+          } else {
+            // 如果有数据则证明有答案
+            opearConfigList = opearConfigList.map((config) => {
+              var saveKey = null
+              res.data.forEach((v) => {
+                for (var key in v.bodyTestReport) {
+                  if (config.key === key) {
+                    saveKey = {
+                      [key]: v.bodyTestReport[key]
+                    }
+
+                    setTimeout(() => {
+                      Object.assign(self.configForm, saveKey)
+                    }, 500)
+                  }
+                }
+              })
+              return {
+                ...config
+              }
+            })
+            console.log(self.configForm, 'this.configForm', opearConfigList)
+
+            self.bodyTestReport = opearConfigList
+          }
+        })
+        .catch((err) => {})
+    },
     /**
      * 格式化日期
      * @param type
@@ -583,7 +658,21 @@ export default {
     }
   }
 }
-
+.bottom_style {
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  height: 100upx;
+  background: #1370ff;
+  border-radius: 16upx;
+  margin-top: 30upx;
+  margin-bottom: 30upx;
+  font-size: 32upx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 100upx;
+  text-align: center;
+}
 ::v-deep.uni-picker-view-mask {
   background: transparent !important;
 }
