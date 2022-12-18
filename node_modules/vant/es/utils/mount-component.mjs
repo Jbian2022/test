@@ -1,5 +1,5 @@
 import { createApp, reactive } from "vue";
-import { extend } from "../utils/index.mjs";
+import { extend } from "./basic.mjs";
 import { useExpose } from "../composables/use-expose.mjs";
 function usePopupState() {
   const state = reactive({

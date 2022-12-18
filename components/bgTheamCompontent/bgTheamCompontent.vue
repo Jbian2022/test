@@ -32,7 +32,7 @@
 		position: absolute;
 		left: 0;
 		top: 0;
-		z-index: -1;
+		z-index: -100;
 		.currency_style {
 			width: 100%;
 			height: 100%;
@@ -52,6 +52,7 @@
 				width: 100%;
 				height: 372upx;
 				object-fit: contain;
+				z-index: -1;
 			}
 			.currency_content_style {
 				width: 100%;

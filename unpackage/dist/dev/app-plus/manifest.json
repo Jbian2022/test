@@ -19,6 +19,7 @@
   "permissions": {
     "Share": {},
     "Push": {},
+    "OAuth": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -38,11 +39,6 @@
     "launchwebview": {
       "id": "1",
       "kernel": "WKWebview"
-    },
-    "statusbar": {
-      "immersed": "supportedDevice",
-      "style": "light",
-      "background": "#212328"
     },
     "usingComponents": true,
     "nvueStyleCompiler": "uni-app",
@@ -130,7 +126,12 @@
           }
         },
         "ad": {},
-        "oauth": {},
+        "oauth": {
+          "weixin": {
+            "appid": "wxc1a1c95912d3eca6",
+            "UniversalLinks": ""
+          }
+        },
         "payment": {},
         "share": {
           "weixin": {
@@ -145,6 +146,12 @@
         }
       }
     },
+    "statusbar": {
+      "immersed": "supportedDevice",
+      "style": "dark",
+      "background": "#212328"
+    },
+    "arguments": "{\"name\":\"调试\",\"path\":\"pages/myMebers/myMebers\",\"query\":\"\"}",
     "uniStatistics": {
       "enable": false
     },
@@ -158,13 +165,16 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "3.6.5",
+      "compilerVersion": "3.6.14",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {
         "flex-direction": "column"
       },
-      "nvueLaunchMode": "normal"
+      "nvueLaunchMode": "normal",
+      "webView": {
+        "minUserAgentVersion": "49.0"
+      }
     },
     "tabBar": {
       "position": "bottom",
@@ -180,20 +190,20 @@
       "list": [
         {
           "pagePath": "pages/myMebers/myMebers",
-          "iconPath": "/static/tabbar/noactivemeber.svg",
-          "selectedIconPath": "/static/tabbar/activemeber.svg",
+          "iconPath": "/static/tabbar/noactivemeber.png",
+          "selectedIconPath": "/static/tabbar/activemeber.png",
           "text": "会员"
         },
         {
           "pagePath": "pages/actionLibrary/index",
-          "iconPath": "/static/tabbar/noactiveaction.svg",
-          "selectedIconPath": "/static/tabbar/activeaction.svg",
+          "iconPath": "/static/tabbar/noactiveaction.png",
+          "selectedIconPath": "/static/tabbar/activeaction.png",
           "text": "动作库"
         },
         {
           "pagePath": "pages/my/my",
-          "iconPath": "/static/tabbar/noactiveme.svg",
-          "selectedIconPath": "/static/tabbar/activeMe.svg",
+          "iconPath": "/static/tabbar/noactiveme.png",
+          "selectedIconPath": "/static/tabbar/activeMe.png",
           "text": "我的"
         }
       ],
@@ -205,5 +215,6 @@
       "selected": 0
     }
   },
+  "locale": "zh-Hans",
   "launch_path": "__uniappview.html"
 }

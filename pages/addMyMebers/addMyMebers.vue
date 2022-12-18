@@ -4,94 +4,81 @@
     <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
 
     <view class="contetnt_form_style">
-      <van-form @submit="onSubmit" ref="studentForm">
-        <van-cell-group inset>
-          <van-field
+      <uni-forms
+        :modelValue="studentForm"
+        ref="studentForm"
+        :rules="rules"
+        label-position="top"
+      >
+        <uni-forms-item
+          class="outer_form_item_style"
+          :label="'真实姓名(必填)'"
+          name="traineeName"
+        >
+          <input
+            type="text"
+            clas="change_input_style"
             v-model="studentForm.traineeName"
-            name="traineeName"
-            label="真实姓名(必填)"
-            placeholder="请填写姓名"
-            :rules="[{ required: true, message: '请填写真实姓名' }]"
+            placeholder="请输入真实姓名"
           />
-        </van-cell-group>
-        <van-cell-group inset>
-          <van-field
-            v-model="gender"
-            is-link
-            readonly
-            name="gender"
-            label="性别(必填)"
-            placeholder="请选择性别"
-            @click="showPicker = true"
-            :rules="[{ required: true, message: '请选择性别' }]"
-          />
-          <van-popup v-model:show="showPicker" position="bottom">
-            <van-picker
-              :columns="columns"
-              ref="gendPicker"
-              @confirm="genderConfirm"
-              @cancel="showPicker = false"
-              :show-toolbar="true"
-              title="请选择性别"
-              :defaultIndex="gendDefaultIndex"
-            >
-            </van-picker>
-          </van-popup>
-        </van-cell-group>
-        <van-cell-group inset>
-          <van-field
-            v-model="studentForm.birthday"
-            is-link
-            readonly
-            name="picker"
-            label="生日(必填)"
-            placeholder="请选择生日"
-            @click="dateShowpicker = true"
-            :rules="[{ required: true, message: '请选择生日' }]"
-          />
-          <van-popup v-model:show="dateShowpicker" position="bottom">
-            <van-datetime-picker
-              v-model="currentDate"
-              type="date"
-              title="选择年月日"
-              :min-date="minDate"
-              :max-date="maxDate"
-              @confirm="birthConfirm"
-              @cancel="dateShowpicker = false"
-              :formatter="formatter"
+        </uni-forms-item>
+        <uni-forms-item
+          class="outer_form_item_style"
+          :label="'性别(必填)'"
+          name="gender"
+        >
+          <view class="change_picker_style">
+            <hpy-form-select
+              :dataList="columns"
+              text="text"
+              name="value"
+              v-model="studentForm.gender"
             />
-          </van-popup>
-        </van-cell-group>
-        <van-cell-group inset>
-          <van-field
-            v-model="studentForm.mobile"
-            name="pattern"
-            label="手机号码(必填)"
-            placeholder="请填写手机号码"
-            type="tel"
-            maxlength="11"
-            :rules="[{ pattern, message: '请输入正确的手机号码' }]"
-          />
-        </van-cell-group>
-        <van-cell-group inset>
-          <view class="is_buy_content_style van-cell">
-            <text class="buy_text_style">是否已购课</text>
-            <view class="is_buy_style">
-              <view
-                class="buy_left"
-                :class="studentForm.buyStatus == 0 ? 'active' : ''"
-                @click.native="buyClick(0)"
-                >无</view
-              >
-              <view
-                class="buy_right"
-                :class="studentForm.buyStatus == 1 ? 'active' : ''"
-                @click.native="buyClick(1)"
-                >有</view
-              >
-            </view>
           </view>
-        </van-cell-group>
+        </uni-forms-item>
+        <uni-forms-item
+          class="outer_form_item_style"
+          :label="'生日(必填)'"
+          name="birthday"
+        >
+          <hpy-form-select
+            mode="date"
+            start="1872-01-01"
+            end="2050-01-01"
+            v-model="studentForm.birthday"
+          />
+        </uni-forms-item>
+        <uni-forms-item
+          class="outer_form_item_style"
+          :label="'手机号码(必填)'"
+          name="mobile"
+        >
+          <input
+            type="tel"
+            clas="change_input_style"
+            v-model="studentForm.mobile"
+            placeholder="请输入真实姓名"
+          />
+        </uni-forms-item>
+
+        <view class="is_buy_content_style van-cell">
+          <text class="buy_text_style">是否已购课</text>
+          <view class="is_buy_style">
+            <view
+              class="buy_left"
+              :class="studentForm.buyStatus == 0 ? 'active' : ''"
+              @click.native="buyClick(0)"
+              >无</view
+            >
+            <view
+              class="buy_right"
+              :class="studentForm.buyStatus == 1 ? 'active' : ''"
+              @click.native="buyClick(1)"
+              >有</view
+            >
+          </view>
+        </view>
+
         <view class="add_method_style" v-if="leftNavTitle === '添加学员'">
           <view class="add_left_style" @click.native="addDirectly"
             >直接添加</view
@@ -107,15 +94,15 @@
         >
           保存
         </view>
-      </van-form>
+      </uni-forms>
     </view>
   </view>
 </template>
 
 <script>
-import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
-import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-import hadleDate from '@/common/timeUtil.js'
+import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompontent.vue'
+import NavBarCompontent from '../../components/navBarCompontent/navBarCompontent.vue'
+import hadleDate from '../../common/timeUtil.js'
 export default {
   components: {
     BgTheamCompontent,
@@ -126,7 +113,7 @@ export default {
       studentForm: {
         traineeName: '',
         gender: '0',
-        birthday: '',
+        birthday: '2022-12-01',
         mobile: '',
         buyStatus: 0
       },
@@ -146,7 +133,69 @@ export default {
       pattern:
         /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
       requestItem: null,
-      leftNavTitle: '添加学员'
+      leftNavTitle: '添加学员',
+      rules: {
+        // 对name字段进行必填验证
+        traineeName: {
+          // name 字段的校验规则
+          rules: [
+            // 校验 name 不能为空
+            {
+              required: true,
+              errorMessage: '请输入真实姓名'
+            }
+          ],
+          // 当前表单域的字段中文名，可不填写
+          label: '真实姓名',
+          validateTrigger: 'submit'
+        },
+        gender: {
+          // name 字段的校验规则
+          rules: [
+            // 校验 name 不能为空
+            {
+              required: true,
+              errorMessage: '请选择性别'
+            }
+          ],
+          // 当前表单域的字段中文名，可不填写
+          label: '性别',
+          validateTrigger: 'submit'
+        },
+        birthday: {
+          // name 字段的校验规则
+          rules: [
+            // 校验 name 不能为空
+            {
+              required: true,
+              errorMessage: '请选择生日'
+            }
+          ],
+          // 当前表单域的字段中文名，可不填写
+          label: '姓名',
+          validateTrigger: 'submit'
+        },
+        mobile: {
+          // name 字段的校验规则
+          rules: [
+            // 校验 name 不能为空
+            {
+              required: true,
+              errorMessage: '请输入手机号码'
+            },
+            // 对name字段进行长度验证
+            {
+              minLength: 11,
+              maxLength: 11,
+
+              errorMessage: '请输入正确的手机号码'
+            }
+          ],
+          // 当前表单域的字段中文名，可不填写
+          label: '手机号码',
+          validateTrigger: 'submit'
+        }
+      }
     }
   },
   onLoad(options) {
@@ -154,17 +203,18 @@ export default {
       let requestItem = options.hasOwnProperty('item')
         ? JSON.parse(options.item)
         : null
+		setTimeout(() => {
       this.studentForm = this.requestItem = requestItem
-      this.currentDate = new Date(requestItem.birthday)
+			
+		}, 1000)
+
       this.gender = this.columns.find(
         (v) => v.value === requestItem.gender
       ).text
       this.leftNavTitle = '基础信息'
     }
   },
-  mounted() {
-    // console.log(timeFormat.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss"))
-  },
+  mounted() {},
   methods: {
     /**
      * 格式化日期
@@ -204,8 +254,9 @@ export default {
       this.showPicker = false
     },
     addDirectly(type) {
+      debugger
       var that = this
-	  console.log(type,'nishi')
+      console.log(type, 'nishi')
       this.$refs.studentForm
         .validate()
         .then(() => {
@@ -239,7 +290,7 @@ export default {
               .catch((err) => {
                 uni.showToast({
                   icon: '编辑失败',
-                  title: res.message,
+                  title: err.message,
                   duration: 800
                 })
               })
@@ -251,30 +302,34 @@ export default {
             .addMember(that.studentForm)
             .then((res) => {
               if (res.success) {
-				  console.log(type,'>>>>')
-               if (type == 'body') {
-			businessCloudObject.getOnlyList({traineeName: that.studentForm.traineeName, mobile: that.studentForm.mobile}).then(res => {
-				console.log(res, '即将发送的res')
-				if (res.success) {
-					let data = res.data
-					uni.navigateTo({
-					  url: '/pages/physicalAssessment/physicalAssessment' + '?traineeNo=' + data[0]._id
-					})
-					
-				}
-			}).catch((err)=> {
-				
-			})   
-
-			   } else {
-                uni.switchTab({
-                  url: '/pages/myMebers/myMebers',
-                  success: (res) => {},
-                  fail: () => {},
-                  complete: () => {}
-                })
-				   
-			   }
+                console.log(type, '>>>>')
+                if (type == 'body') {
+                  businessCloudObject
+                    .getOnlyList({
+                      traineeName: that.studentForm.traineeName,
+                      mobile: that.studentForm.mobile
+                    })
+                    .then((res) => {
+                      console.log(res, '即将发送的res')
+                      if (res.success) {
+                        let data = res.data
+                        uni.navigateTo({
+                          url:
+                            '/pages/physicalAssessment/physicalAssessment' +
+                            '?traineeNo=' +
+                            data[0]._id
+                        })
+                      }
+                    })
+                    .catch((err) => {})
+                } else {
+                  uni.switchTab({
+                    url: '/pages/myMebers/myMebers',
+                    success: (res) => {},
+                    fail: () => {},
+                    complete: () => {}
+                  })
+                }
                 uni.showToast({
                   icon: 'success',
                   title: res.message,
@@ -298,8 +353,7 @@ export default {
     onSubmit() {},
     buyClick(type) {
       this.studentForm.buyStatus = type
-    },
-
+    }
   }
 }
 </script>
@@ -327,9 +381,13 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
   .contetnt_form_style {
     width: 100%;
+    flex: 1;
     margin-top: 30upx;
+    overflow-y: auto;
   }
 }
 
@@ -385,6 +443,7 @@ export default {
   flex-direction: row !important;
   align-items: center;
   justify-content: space-between;
+  border-radius: 16upx;
   .buy_text_style {
     font-size: 30upx;
     color: #f4f7ff !important;
@@ -422,8 +481,9 @@ export default {
 }
 
 .add_method_style {
+  box-sizing: border-box;
   width: calc(100vw - 60upx);
-  margin-left: 30upx;
+  // margin-left: 30upx;
   margin-top: 30upx;
   display: flex;
   align-items: center;
@@ -549,5 +609,121 @@ export default {
 }
 ::v-deep .van-picker__toolbar {
   margin-top: 10upx;
+}
+
+::v-deep .uni-forms {
+  width: calc(100vw - 80upx);
+  margin-left: 40upx;
+
+  uni-form {
+    span {
+      .uni-forms-item {
+        width: 100%;
+        min-height: 186upx;
+        padding: 30upx;
+        box-sizing: border-box;
+        display: block;
+        background: rgba(75, 82, 94, 0.5) !important;
+        border-radius: 16upx;
+
+        .uni-forms-item__label {
+          width: 100% !important;
+          uni-text {
+            width: 100% !important;
+            width: 100% !important;
+            font-size: 30upx;
+            height: 44upx;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: #f4f7ff;
+            span {
+              display: inline-block;
+              width: 100% !important;
+              font-size: 30upx;
+              height: 44upx;
+              font-family: PingFangSC-Regular, PingFang SC;
+              font-weight: 400;
+              color: #f4f7ff;
+            }
+          }
+        }
+
+        .uni-forms-item__content {
+          .uni-easyinput {
+            font-size: 32upx;
+            font-family: PingFangSC-Semibold, PingFang SC;
+            font-weight: 600;
+            color: #f4f7ff !important;
+            .uni-easyinput__content {
+              border-color: transparent !important;
+              background-color: transparent !important;
+            }
+          }
+          .uni-input-input {
+            font-size: 32upx;
+            font-family: PingFangSC-Semibold, PingFang SC;
+            font-weight: 600;
+            color: #f4f7ff !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+::v-deep .uni-picker-container {
+  .uni-picker-custom {
+    border-radius: 24upx 24upx 0px 0px;
+    background: #383d46 !important;
+    .uni-picker-header {
+      background: transparent !important;
+      border-bottom: none;
+      .uni-picker-action-cancel {
+        padding-left: 40upx;
+        // padding-top: 40upx;
+        font-size: 32upx;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #7a7f89;
+      }
+      .uni-picker-action-confirm {
+        padding-right: 40upx;
+        // padding-top: 40upx;
+        font-size: 32upx;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #f4f7ff;
+      }
+    }
+    .uni-picker-header::after {
+      border-bottom: none !important;
+    }
+    .uni-picker-content {
+      background: transparent !important;
+      .uni-picker-item {
+        color: #f4f7ff !important;
+      }
+    }
+  }
+}
+
+::v-deep.uni-picker-view-mask {
+  background: transparent !important;
+}
+::v-deep.uni-picker-view-indicator {
+  border: none !important;
+  // width: 80%;
+
+  // margin-left: 40upx;
+  background: rgba(75, 82, 94, 0.5) !important;
+  border-radius: 16px;
+  z-index: -1;
+}
+
+::v-deep.uni-picker-view-indicator:before {
+  border-top: none;
+}
+::v-deep.uni-picker-view-indicator::after {
+  border-bottom: none;
 }
 </style>

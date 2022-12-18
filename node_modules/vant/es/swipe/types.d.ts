@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ComputedRef } from 'vue';
 import type { SwipeProps } from './Swipe';
-export declare type SwipeState = {
+export type SwipeState = {
     rect: {
         width: number;
         height: number;
@@ -11,10 +11,10 @@ export declare type SwipeState = {
     active: number;
     swiping: boolean;
 };
-export declare type SwipeToOptions = {
+export type SwipeToOptions = {
     immediate?: boolean;
 };
-export declare type SwipeExpose = {
+export type SwipeExpose = {
     prev: () => void;
     next: () => void;
     resize: () => void;
@@ -22,10 +22,18 @@ export declare type SwipeExpose = {
     /** @private */
     state: SwipeState;
 };
-export declare type SwipeProvide = {
+export type SwipeProvide = {
     props: SwipeProps;
     size: ComputedRef<number>;
     count: ComputedRef<number>;
     activeIndicator: ComputedRef<number>;
 };
-export declare type SwipeInstance = ComponentPublicInstance<SwipeProps, SwipeExpose>;
+export type SwipeInstance = ComponentPublicInstance<SwipeProps, SwipeExpose>;
+export type SwipeThemeVars = {
+    swipeIndicatorSize?: string;
+    swipeIndicatorMargin?: string;
+    swipeIndicatorActiveOpacity?: number | string;
+    swipeIndicatorInactiveOpacity?: number | string;
+    swipeIndicatorActiveBackground?: string;
+    swipeIndicatorInactiveBackground?: string;
+};

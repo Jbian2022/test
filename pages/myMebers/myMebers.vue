@@ -1,7 +1,11 @@
 <template>
+		<!-- 这里是状态栏 -->
+<!-- 	<view class="status_bar">
+	</view> -->
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <!--内容 start-->
+	
     <scroll-view @scroll="memberSrollTop" scroll-y="true">
       <view class="header_style">
         <view class="header_left_style">
@@ -47,23 +51,28 @@
     </scroll-view>
 
     <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
-      <van-popover
-        @click-overlay="clickOverlay"
-        :overlay="true"
-        v-model:show="showPopover"
-        placement="left"
-      >
-        <view class="pop_tips_style pad_style">Hi～你来了</view>
-        <view class="pop_tips_style">点这里添加会员吧</view>
+		
+		<view class="add_style">
+		  <image
+			class="add_img_style"
+			src="../../static/app-plus/mebrs/add.svg"
+			@click.stop="addClick"
+		  ></image>
+		  <view>
+			  <ZbTooltip :visible="showPopover" :placement="'left'" :color="'linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)'" content="Hi～你来了
+			  点这里添加会员吧" :show="true"></ZbTooltip>
+			
+			
+		</view>
+	
+		  </view>
 
-        <template #reference>
-          <image
-            class="add_img_style"
-            src="../../static/app-plus/mebrs/add.svg"
-            @click.stop="addClick"
-          ></image>
-        </template>
-      </van-popover>
+		  
+
+	  
+	 <uni-popup class="updatePopup"  ref="first_popup" type="center" @change="change">
+	  	
+	   </uni-popup>
     </view>
   </view>
 </template>
@@ -71,13 +80,14 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import MemberList from '@/components/memberList/memberList.vue'
-// import SlideLeft from '@compontents/../../components/ay-operate/del_slideLeft.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject')
+import ZbTooltip from '@/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue'
 export default {
   components: {
     BgTheamCompontent,
-    MemberList
-    // SlideLeft
+    MemberList,
+	ZbTooltip
+
+
   },
   data() {
     return {
@@ -88,12 +98,15 @@ export default {
       showPopover: false,
       scrollTop: 0,
       cellingFlag: false,
-      delteIndex: 0
+      delteIndex: 0,
+	  
+
     }
   },
-  onLoad(options) {},
+  onLoad() {},
   created() {},
-  mounted() {
+  mounted () {
+	 // this.$refs.first_popup.open()  
     let self = this
     uni.getStorage({
       key: 'loginNum',
@@ -101,6 +114,10 @@ export default {
         if (res.data) {
           self.loginNum = res.data
           self.showPopover = res.data == '0' ? true : false
+		  if (res.data == '0') {
+			  this.$refs.first_popup.open()  
+		  }
+		  
 
           // console.log(res, '次数',self.loginNum )
         }
@@ -109,6 +126,9 @@ export default {
     })
   },
   methods: {
+	  onClickPopMenu(item) {
+		  this.showMenuPop = false
+	  },
     jumpQuery() {
 		console.log(111)
       uni.navigateTo({
@@ -124,9 +144,13 @@ export default {
       // console.log( this.scrollTop)
     },
 
-    clickOverlay() {
+    change() {
       // console.log('拜拜')
       uni.setStorageSync('loginNum', '1')
+	  this.$refs.first_popup.close() 
+	  this.showPopover = false
+	  
+	  
     },
 
     addClick() {
@@ -158,10 +182,11 @@ export default {
     width: calc(100vw - 60upx);
     margin-left: 30upx;
     height: 80upx;
-    margin-top: 30upx;
+    // margin-top: 30upx;
     display: flex;
     justify-content: space-between;
     align-items: center;
+	margin-top: 88upx;
     .header_left_style {
       // width: 50%;
       height: 100%;
@@ -361,12 +386,17 @@ export default {
     position: fixed;
     right: 30upx;
     bottom: calc(50px + 30upx);
-    .add_img_style {
-      width: 130upx;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: contain;
-    }
+	.add_style {
+		width: 130upx;
+		height: 100%;
+		.add_img_style {
+		  width: 130upx;
+		  height: 100%;
+		  border-radius: 50%;
+		  object-fit: contain;
+		  z-index: 1000000;
+		}
+	}
   }
   .guid_style {
     z-index: 2200;
@@ -497,7 +527,7 @@ uni-page-body {
   width: 100vw !important;
   background: #212328;
   margin-top: 0 !important;
-  padding-top: 36upx;
+  padding-top: 66upx;
   padding-bottom: 36upx;
   animation-name: cellingAnmation;
   animation-duration: 0.3s;
@@ -511,7 +541,7 @@ uni-page-body {
 .search_anmition_style {
   position: fixed;
   right: 30upx;
-  top: 56upx;
+  top: 86upx;
   animation-name: seachAnmation;
   animation-duration: 0.3s;
   z-index: 30000;
@@ -522,7 +552,7 @@ uni-page-body {
   }
 
   100% {
-    top: 56upx;
+    top: 86upx;
   }
 }
 @keyframes cellingAnmation {
@@ -546,4 +576,5 @@ uni-page-body {
 uni-scroll-view {
   height: 100%;
 }
+
 </style>

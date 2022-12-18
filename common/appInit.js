@@ -52,48 +52,98 @@ export default async function() {
 			// 	methodName, // 云对象的方法名称
 			// 	params // 参数列表
 			// });
-			if(objectName == "uni-id-co" && (methodName.includes('loginBy') ||  ['login','registerUser'].includes(methodName) )){
-				console.log('执行登录相关云对象');
-				params[0].inviteCode = await new Promise((callBack) => {
-					uni.getClipboardData({
-						success: function(res) {
-							console.log('剪切板内容：'+res.data);
-							if (res.data.slice(0, 18) == 'uniInvitationCode:') {
-								let uniInvitationCode = res.data.slice(18, 38)
-								console.log('当前用户是其他用户推荐下载的,推荐者的code是：' + uniInvitationCode);
-								// uni.showModal({
-								// 	content: '当前用户是其他用户推荐下载的,推荐者的code是：'+uniInvitationCode,
-								// 	showCancel: false
-								// });
-								callBack(uniInvitationCode)
-								//当前用户是其他用户推荐下载的。这里登记他的推荐者id 为当前用户的myInviteCode。判断如果是注册
-							} else {
-								callBack()
-							}
-						},
-						fail() {
-							console.log('error--');
-							callBack()
-						},
-						complete() {
-							// #ifdef MP-WEIXIN
-							uni.hideToast()
-							// #endif
-						}
-					});
-				})
-				// console.log(params);
-			}
+			// 接入自己逻辑
+				console.log(objectName, 'objectName')
+				console.log(methodName, 'methodName')
+				// 后台到前台
+		
+				   // 校验token的合法性每个接口都要加token
+				   // let whiteCloudName = ['']
+				if(objectName == "login") {
+					
+				} else {
+					
+				   uni.getStorage({
+				     key: 'uni_id_token',
+				     success: function (res) {
+				       // console.log(res, '我是token')
+				       if (res.data) {
+				         let login = uniCloud.importObject('login')
+				         login
+				           .checkToken(res.data)
+				           .then((checkTokenRes) => {
+				             // console.log(checkTokenRes, 'token 换取')
+							  plus.navigator.closeSplashscreen(); //关闭启动页，进入首页
+				           })
+				           .catch((err) => {
+				             console.log(err, '我是错误')
+				             uni.reLaunch({
+				               url: '/pages/logining/logining',
+				               success: (res) => {},
+				               fail: () => {},
+				               complete: () => {}
+				             })
+				             uni.clearStorage()
+				           })
+				       }
+				     },
+				     fail: function (err) {
+				       uni.reLaunch({
+				         url: '/pages/logining/logining',
+				         success: (res) => {},
+				         fail: () => {},
+				         complete: () => {}
+				       })
+				     }
+				   })
+				}
+				 
+				
+				
+			// 结束
+				
+			// if(objectName == "login" && (methodName.includes('loginBy') ||  ['login','registerUser'].includes(methodName) )){
+			// 	console.log('执行登录相关云对象');
+			// 	params[0].inviteCode = await new Promise((callBack) => {
+			// 		uni.getClipboardData({
+			// 			success: function(res) {
+			// 				console.log('剪切板内容：'+res.data);
+			// 				if (res.data.slice(0, 18) == 'uniInvitationCode:') {
+			// 					let uniInvitationCode = res.data.slice(18, 38)
+			// 					console.log('当前用户是其他用户推荐下载的,推荐者的code是：' + uniInvitationCode);
+			// 					// uni.showModal({
+			// 					// 	content: '当前用户是其他用户推荐下载的,推荐者的code是：'+uniInvitationCode,
+			// 					// 	showCancel: false
+			// 					// });
+			// 					callBack(uniInvitationCode)
+			// 					//当前用户是其他用户推荐下载的。这里登记他的推荐者id 为当前用户的myInviteCode。判断如果是注册
+			// 				} else {
+			// 					callBack()
+			// 				}
+			// 			},
+			// 			fail() {
+			// 				console.log('error--');
+			// 				callBack()
+			// 			},
+			// 			complete() {
+			// 				// #ifdef MP-WEIXIN
+			// 				uni.hideToast()
+			// 				// #endif
+			// 			}
+			// 		});
+			// 	})
+			// 	// console.log(params);
+			// }
 			// console.log(params);
 		},
 		success(e) {
-			console.log(e);
+			// console.log(e);
 		},
 		complete() {
 
 		},
 		fail(e){
-			console.error(e);
+			// console.error(e);
 			// if (debug) {
 			// 	uni.showModal({
 			// 		content: JSON.stringify(e),
@@ -112,8 +162,8 @@ export default async function() {
 	// #ifdef APP-PLUS
 	// 监听并提示设备网络状态变化
 	uni.onNetworkStatusChange(res => {
-		console.log(res.isConnected);
-		console.log(res.networkType);
+		// console.log(res.isConnected);
+		// console.log(res.networkType);
 		if (res.networkType != 'none') {
 			uni.showToast({
 				title: '当前网络类型：' + res.networkType,
@@ -137,6 +187,7 @@ export default async function() {
 function initAppVersion() {
 	// #ifdef APP-PLUS
 	let appid = plus.runtime.appid;
+	// console.log(plus.runtime.appid, 'plus.runtime.appid')
 	plus.runtime.getProperty(appid, (wgtInfo) => {
 		let appVersion = plus.runtime;
 		let currentVersion = appVersion.versionCode > wgtInfo.versionCode ? appVersion : wgtInfo;

@@ -187,7 +187,6 @@ module.exports = {
 				    reject(err)
 			   })
 	   	   })
-		   })
    },
    
    // 身体评测
@@ -212,6 +211,29 @@ module.exports = {
    		   
    	   })
    },
+   
+   // 查找所有的配置列表
+   opearConfigAllList:async function(traineeNo) {
+   	   const token = this.getUniIdToken()
+   	   	const detailInfo = await this.uniID.checkToken(token)
+   		// console.log(detailInfo,'detailInfo')
+   	   return new Promise((resolve, reject) => {
+   		   db.collection('t_questionaire_answer').where({
+   				traineeNo
+   		   }).get().then(physicalList => {
+   			   let successMessage = {
+   				   success: true,
+   				   ...physicalList
+   			   }
+   			   resolve(successMessage)
+   			   
+   		   }).catch(err => {
+   			   reject(err)
+   		   })
+   		   
+   	   })
+   },
+   
    
    // 配置表
    getPhysicalChildAssessmentList: async function(parentCode) {
@@ -259,10 +281,85 @@ module.exports = {
 	   })
    },
    
+   // 配置表保存
+   opearConfig:  async function(data, type) { 
+	   const token = this.getUniIdToken()
+	   const detailInfo = await this.uniID.checkToken(token)
+	   // 先查询是否存在如果没有就新增
+	   return new Promise((resolve, reject) => {
+		   db.collection('t_questionaire_answer').where({
+		   			   traineeNo: data.traineeNo,
+		   				 userId: detailInfo.uid, 
+		   				 questionCode: data.questionCode
+		   				
+		   }).get().then((compareRes) => {
+			   console.log(compareRes, '你是')
+			    if (compareRes.affectedDocs === 0) {
+					let resultParam = {}
+					switch(type) {
+						 case 'physical':
+						 resultParam = {
+						 	...data
+						 	
+						 }
+						break;
+							
+						 
+					}  
+					 db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+						  let successMessage = {
+							success: true,
+							message: '添加成功'
+					 			   			  }
+					 resolve(successMessage)
+					 }).catch(err => {
+							  console.log(err, 'err')
+							   
+					 })
+				} else {
+					console.log(data, '我是数据',type)
+					let resultParam = {}
+					switch(type) {
+						 case 'physical':
+						 resultParam = {
+						 	...data,
+							userId: detailInfo.uid
+						 	
+						 }
+						break; 
+					}  
+					delete resultParam['_id']
+					db.collection('t_questionaire_answer').doc(compareRes.data[0]._id).update(resultParam).then(() =>{
+						console.log('它是')
+						  let successMessage = {
+							success: true,
+							message: '编辑成功'
+						  }
+					resolve(successMessage)
+					}).catch(err => {
+					  console.log(err, 'err')
+					   
+					})
+					
+					
+				}
+		   }).catch(() => {
+			   
+		   })
+	   })
+	   
+	
+	   
+	  
+
+   },
+   
+   
    // 配置表添加
    opearConfigAdd: async function(data, type) { 
 	   const token = this.getUniIdToken()
 	   const detailInfo = await this.uniID.checkToken(token)
+	   data["userId"] = detailInfo.uid
 	   return new Promise((resolve, reject) => {
 		   let resultParam = {}
 		switch(type) {

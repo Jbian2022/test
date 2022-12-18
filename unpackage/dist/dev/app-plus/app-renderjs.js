@@ -22,12 +22,15 @@ __renderjsModules["19043a88"] = (() => {
     }
     return to;
   };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-  // ../../../../workproject/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js
+  // ../../../../studyUninApp/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js
   var require_html2canvas = __commonJS({
-    "../../../../workproject/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js"(exports, module) {
+    "../../../../studyUninApp/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js"(exports, module) {
       (function(global, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, global.html2canvas = factory());
       })(exports, function() {
@@ -7557,7 +7560,11 @@ __renderjsModules["5a1e922e"] = (() => {
     default: () => stdin_default
   });
 
+<<<<<<< .mine
   // ../../../../workproject/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/render.js
+=======
+  // ../../../../studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/render.js
+>>>>>>> .theirs
   var MIN_DISTANCE = 10;
   var render_default = {
     showWatch(newVal, oldVal, ownerInstance, instance, self) {

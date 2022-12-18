@@ -1,11 +1,10 @@
 import type { ComponentPublicInstance } from 'vue';
-import type { AreaColumnOption } from '../area';
 import type { AddressEditProps } from './AddressEdit';
-export declare type AddressEditSearchItem = {
-    name: string;
-    address: string;
+export type AddressEditSearchItem = {
+    name?: string;
+    address?: string;
 };
-export declare type AddressEditInfo = {
+export type AddressEditInfo = {
     tel: string;
     name: string;
     city: string;
@@ -14,12 +13,16 @@ export declare type AddressEditInfo = {
     province: string;
     areaCode: string;
     isDefault?: boolean;
-    postalCode?: string;
     addressDetail: string;
 };
-export declare type AddressEditExpose = {
-    getArea: () => AreaColumnOption[];
+export type AddressEditExpose = {
     setAreaCode: (code?: string | undefined) => void;
     setAddressDetail: (value: string) => void;
 };
-export declare type AddressEditInstance = ComponentPublicInstance<AddressEditProps, AddressEditExpose>;
+export type AddressEditInstance = ComponentPublicInstance<AddressEditProps, AddressEditExpose>;
+export type AddressEditThemeVars = {
+    addressEditPadding?: string;
+    addressEditButtonsPadding?: string;
+    addressEditButtonMarginBottom?: string;
+    addressEditButtonFontSize?: string;
+};
