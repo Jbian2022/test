@@ -52,25 +52,6 @@
 
     <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
 		
-<!--     <van-popup
-	  ref="memberPopover"
-        @click-overlay="clickOverlay"
-        :overlay="true"
-        v-model:show="showPopover"
-        placement="left"
-      >
-        <view class="pop_tips_style pad_style">Hi～你来了</view>
-        <view class="pop_tips_style">点这里添加会员吧</view>
-
-        <template #reference>
-          <image
-            class="add_img_style"
-            src="../../static/app-plus/mebrs/add.svg"
-            @click.stop="addClick"
-          ></image>
-        </template>
-      </van-popup> -->
-	  
 		<view class="add_style">
 		  <image
 			class="add_img_style"

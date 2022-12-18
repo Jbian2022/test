@@ -218,9 +218,8 @@ module.exports = {
    	   	const detailInfo = await this.uniID.checkToken(token)
    		// console.log(detailInfo,'detailInfo')
    	   return new Promise((resolve, reject) => {
-   		   db.collection('t_questionaire').where({
-   				traineeNo,
-				userId: detailInfo.uid 
+   		   db.collection('t_questionaire_answer').where({
+   				traineeNo
    		   }).get().then(physicalList => {
    			   let successMessage = {
    				   success: true,

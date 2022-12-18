@@ -119,7 +119,6 @@ export default {
 	  }
     },
 	requestDynamicEvaluationdata  (){
-		
 			  businessCloudObject
 			    .getPhysicalAssessmentList()
 			    .then((res) => {
