@@ -135,7 +135,7 @@
 				const resValue = this.resultValue;
 				// console.log(gender,age,resValue)
 				const res = testOb.method1(gender,age,resValue)
-				// console.log(res)
+				console.log(res)
 				const type = (await res).data;
 				if(type.length == 0){
 					this.typeText = "待测";
@@ -176,10 +176,10 @@
 					this.testResult();
 				}
 				data["testDate"] = new Date();
-				data["bodyTestReport"] = actinData;
+				data["physicalData"] = actinData;
 				data["status"] = "0";
 				console.log(data)
-				const res = actionOb.opearConfig(data,"physical");
+				const res = actionOb.opearConfig(data,"bodyTestReport");
 				console.log(res)
 			}
 		}
@@ -264,7 +264,7 @@
 	margin-top: 40upx;
 }
 .postureButton {
-  width: 690upx;
+  width: calc(100vw - 60upx);
   height: 100upx;
   background: #1370ff;
   border-radius: 16upx;

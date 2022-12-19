@@ -17,7 +17,7 @@
               round
               type="primary"
               class="dynamicshow_button"
-              icon="../../static/app-plus/other/arrows.svg"
+              icon="../../static/app-plus/other/arrows.png"
               icon-position="right"
               @click.native="jumpModular(item)"
               >重新测试</van-button
@@ -32,14 +32,14 @@
               type="primary"
               color="#1370FF"
               class="dynamicshow_button"
-              icon="../../static/app-plus/other/arrows.svg"
+              icon="../../static/app-plus/other/arrows.png"
               icon-position="right"
 			  @click.native="jumpModular(item)"
               >开始测试</van-button
             >
           </view>
           <view class="dynamicshow_right">
-            <van-circle
+            <!-- <van-circle
               v-model:current-rate="currentRate"
               :rate="100"
               :speed="400"
@@ -47,7 +47,10 @@
               :layer-color="item.typeColor"
               :color="item.typeColor"
               :style="'--van-circle-text-color:'+ item.typeColor"
-            />
+            /> -->
+			<view class="circle">
+				<view class="circleText">{{item.typeText}}</view>
+			</view>
           </view>
         </view>
       </van-col>
@@ -136,7 +139,8 @@ export default {
 		const data = {};
 		data["traineeNo"] = this.traineeNo;
 		data["questionCode"] = this.questionCode;
-		const res = busOb.opearConfigQuery(data);
+		console.log(data)
+		const res = testOb.opearConfigQuery(data);
 		return res;
 	},
 	//获取运动表
@@ -244,5 +248,21 @@ export default {
   border-radius: 16upx;
   margin-left: 30upx;
   margin-top: 40upx;
+}
+.circle{
+	width: 100px;
+	 height: 100px; 
+	 border: 4px solid #4B525E;    
+	 border-radius: 100px;
+	 opacity: 0.5;
+	 line-height: 100px;
+}
+.circleText{
+	width: 72upx;
+	height: 50upx;
+	font-size: 36upx;
+	font-weight: 600;
+	color: #BDC3CE;
+	margin: 0 auto;
 }
 </style>

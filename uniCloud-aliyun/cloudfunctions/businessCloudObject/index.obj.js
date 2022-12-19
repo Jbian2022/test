@@ -303,6 +303,12 @@ module.exports = {
 						 	
 						 }
 						break;
+						case 'bodyTestReport':
+						resultParam = {
+							...data
+							
+						}
+						break
 							
 						 
 					}  
@@ -327,6 +333,12 @@ module.exports = {
 						 	
 						 }
 						break; 
+						case 'bodyTestReport':
+						resultParam = {
+							...data
+							
+						}
+						break
 					}  
 					delete resultParam['_id']
 					db.collection('t_questionaire_answer').doc(compareRes.data[0]._id).update(resultParam).then(() =>{
