@@ -23,9 +23,9 @@
 							<p v-for="(item,index) in actionData.answerRemark.detailArray">{{item}}</p>
 						</view>
 					</view>
-				</view>
-				<view class="clickActionEnd" @click.native="closePopup">收起
-				<image src="../../../static/app-plus/other/close.png"></image>
+					<view class="clickActionEnd" @click.native="closePopup">收起
+					<image src="../../../static/app-plus/other/close.png"></image>
+					</view>
 				</view>
 			</van-popup>
 			<image :src="imgUrl" class="contentImg"></image>
@@ -36,11 +36,13 @@
 					  <view class="testText" v-else>请填写数量</view>
 					  <view class="testInput">
 						  <view>
-							  <van-field 
+							  
+							  <!-- <van-field 
 							  v-model.number="resultValue" 
 							  class="inputBlock"
 							  @blur="testResult()"
-							  type="number"/>
+							  type="number"/> -->
+							  <input class="inputBlock" type="number" v-model="resultValue" />
 						  </view>
 						  <view class="inputText" v-if="actionData.code=='F0001'">/分</view>
 						  <view class="inputText" v-else>/个</view>
@@ -48,7 +50,7 @@
 				  </van-col>
 				  <van-col span="8">
 					  <view class="dynamicshow_right">
-					    <van-circle
+					    <!-- <van-circle
 					      v-model:current-rate="currentRate"
 					      :rate="100"
 					      :speed="400"
@@ -56,7 +58,10 @@
 					      :layer-color="typeColor"
 					      :color="typeColor"
 					      :style="'--van-circle-text-color:'+ typeColor"
-					    />
+					    /> -->
+						<view class="circle" :style="'border: 4px solid '+typeColor+';'">
+							<view class="circleText" :style="'color:'+typeColor+';'">{{typeText}}</view>
+						</view>
 					  </view>
 				  </van-col>
 				</van-row>
@@ -74,6 +79,7 @@
 	import { ref } from 'vue';
 	const testOb = uniCloud.importObject("testResults");
 	const actionOb = uniCloud.importObject("businessCloudObject");
+	
 	export default {
 		setup() {
 			const show = ref(false);
@@ -101,6 +107,11 @@
 				this.traineeNo = item.traineeNo;
 				this.questionCode = item.questionCode;
 		},
+		watch:{
+			resultValue(newResultValue,oldResultValue){
+				this.testResult();
+			}
+		},
 		components: {
 			BgTheamCompontent,
 			NavBarCompontent
@@ -110,7 +121,7 @@
 				gender:"1",
 				age:29,
 				resValue:80,
-				resultValue:0,
+				resultValue:'0',
 				typeText:"待测",
 				actionData:[],
 				typeColor:"#4B525E",
@@ -132,10 +143,9 @@
 			async testResult(){
 				const gender = this.gender;
 				const age = this.age;
-				const resValue = this.resultValue;
+				const resValue = Number(this.resultValue);
 				// console.log(gender,age,resValue)
 				const res = testOb.method1(gender,age,resValue)
-				console.log(res)
 				const type = (await res).data;
 				if(type.length == 0){
 					this.typeText = "待测";
@@ -143,6 +153,7 @@
 				this.typeText = type[0].resultLevel;
 				this.levelColor(this.typeText)
 				}
+				console.log(resValue)
 			},
 			levelColor(levelType){
 				switch(levelType){
@@ -165,22 +176,31 @@
 				}
 			},
 			actionResDate(){
-				const data = {};
-				const actinData = {};
-				data["traineeNo"] = this.traineeNo;
-				data["questionCode"] = this.questionCode;
-				data["code"] = this.actionData.code;
-				actinData["actionVlue"] = this.resultValue;
-				actinData["actionTypeText"] = this.typeText
-				if(this.resultValue==0){
-					this.testResult();
-				}
-				data["testDate"] = new Date();
-				data["physicalData"] = actinData;
-				data["status"] = "0";
-				console.log(data)
-				const res = actionOb.opearConfig(data,"bodyTestReport");
-				console.log(res)
+					const data = {};
+					const actinData = {};
+					data["traineeNo"] = this.traineeNo;
+					data["questionCode"] = this.questionCode;
+					data["code"] = this.actionData.code;
+					actinData["actionVlue"] = this.resultValue;
+					actinData["actionTypeText"] = this.typeText
+					data["testDate"] = new Date();
+					data["physicalData"] = actinData;
+					data["status"] = "0";
+					console.log(data)
+					const res = actionOb.opearConfig(data,"bodyTestReport").then(res => {
+						console.log(res, '我要保存了')
+						if (res.success) {
+							uni.redirectTo({
+								url: '/pages/physicalFitnessAssessment/physicalFitnessAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
+							})
+							uni.showToast({
+							  icon: 'success',
+							  title: res.message,
+							  duration: 800
+							})
+						}
+					}).catch(() =>{})
+					console.log(res)
 			}
 		}
 	}
@@ -222,7 +242,6 @@
 	width: 180upx;
 	height: 50upx;
 	font-size: 36upx;
-	font-family: PingFangSC-Semibold, PingFang SC;
 	font-weight: 600;
 	color: #F4F7FF;
 	line-height: 50upx;
@@ -239,12 +258,14 @@
 	margin-left: 40upx;
 	position: relative;
 }
-::v-deep .inputBlock{
+.inputBlock{
 	width: 120upx;
 	background-color: #4B525E;
 	border-radius: 16upx;
 	position: absolute;
-	--van-field-input-text-color:#F4F7FF;
+	color: #F4F7FF;
+	top:20upx;
+	left: 40upx;
 }
 
 .inputText{
@@ -293,7 +314,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1370upx;;
+	height: 1490upx;
 	background: #383D46;
 	border-radius: 16upx;
 	backdrop-filter: blur(3upx);
@@ -301,6 +322,7 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
+	height: 1490upx;
 	margin-top: 160upx;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
@@ -343,11 +365,27 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
-	margin-bottom: 40upx;
+	margin-top: 666upx;
 }
 .clickActionEnd image{
 	width: 32upx;
 	height: 32upx;
 	top: 6upx;
+}
+.circle{
+	width: 100px;
+	 height: 100px; 
+	 border: 4px solid #4B525E;    
+	 border-radius: 100px;
+	 opacity: 0.5;
+	 line-height: 100px;
+}
+.circleText{
+	width: 72upx;
+	height: 50upx;
+	font-size: 36upx;
+	font-weight: 600;
+	color: #BDC3CE;
+	margin: 0 auto;
 }
 </style>
