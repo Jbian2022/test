@@ -160,7 +160,11 @@ export default {
 		console.log(this.queryData)
 		
 	},
-	
+	getdynamicEvaluationdata(){
+		uni.redirectTo({
+			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
+		})
+	}
 	// actionResDate(){
 		
 	// }
@@ -174,19 +178,21 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: #383d46;
+  background: rgba(33, 35, 40, 1);
 }
-.dynamicshow {
+/* .dynamicshow {
   width: calc(100vw - 220upx);
   overflow-y: auto;
-  background-color: #383d46;
+  background-color: rgba(33, 35, 40, 1);
   margin-left: 30upx;
   margin-top: 30upx;
   padding: 0 30upx 0 30upx;
   height: 280upx;
-  background: #383d46;
   border-radius: 24upx;
   position: relative;
+} */
+.need_scoll{
+	background-color: rgba(33, 35, 40, 1);
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
@@ -250,7 +256,7 @@ export default {
   /* line-height: 50px; */
 }
 .postureButton {
-  width: 690upx;
+  width: calc(100vw - 60upx);
   height: 100upx;
   background: #1370ff;
   border-radius: 16upx;

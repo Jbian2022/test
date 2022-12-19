@@ -42,7 +42,7 @@
 							  class="inputBlock"
 							  @blur="testResult()"
 							  type="number"/> -->
-							  <input class="inputBlock" type="number" v-model="resultValue" />
+							  <input class="inputBlock" type="number" v-model="resultValue" placeholder="请填写"/>
 						  </view>
 						  <view class="inputText" v-if="actionData.code=='F0001'">/分</view>
 						  <view class="inputText" v-else>/个</view>
@@ -121,7 +121,7 @@
 				gender:"1",
 				age:29,
 				resValue:80,
-				resultValue:'0',
+				resultValue:'',
 				typeText:"待测",
 				actionData:[],
 				typeColor:"#4B525E",
@@ -228,7 +228,9 @@
 	height: 1062upx;
 	margin-top: 20upx;
 	margin-left: 30upx;
+	margin-bottom: -10upx;
 	position: relative;
+	border-radius: 16px 16px 0px 0px;
 }
 .contentBlock{
 	width: calc(100vw - 60upx);
@@ -291,6 +293,9 @@
   border-radius: 16upx;
   margin-left: 30upx;
   margin-top: 40upx;
+  
+font-weight: 600;
+  font-size: 32upx;
 }
 .clickAction{
 	width: 260upx;
@@ -388,4 +393,7 @@
 	color: #BDC3CE;
 	margin: 0 auto;
 }
+/* ::-webkit-input-placeholder { 
+  color: white;
+} */
 </style>
