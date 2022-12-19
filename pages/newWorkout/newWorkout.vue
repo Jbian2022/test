@@ -3,7 +3,7 @@
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<view class="header">
 			<view class="title">新建训练</view>
-			<van-button class="btn" @click="showFinishDialog = true">完成</van-button>
+			<van-button class="btn" @click="openDialog('popupFinish')">完成</van-button>
 		</view>
 		<view class="workout-title">
 			<input v-model="workoutName" class="uni-input" focus placeholder="请输入训练名称" />
@@ -313,27 +313,31 @@
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button class="delete" @click="showDeleteDialog=true">
+			<van-button class="delete" @click="openDialog('popupDelete')">
 				<view class="img"></view>
 			</van-button>
 			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
-		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
-			<view class="first-level-title">完成训练</view>
-			<view class="second-level-title">是否已经完成训练了</view>
-			<view class="botton-box">
-				<van-button class="finish" block @click="finish">确认完成</van-button>
-				<van-button block @click="showFinishDialog=false">取消</van-button>
+		<uni-popup ref="popupFinish" type="center">
+			<view class="finish-dialog">
+				<view class="first-level-title">完成训练</view>
+				<view class="second-level-title">是否已经完成训练了</view>
+				<view class="botton-box">
+					<van-button class="finish" block @click="finish">确认完成</van-button>
+					<van-button block @click="closeDialog('popupFinish')">取消</van-button>
+				</view>
 			</view>
-		</van-dialog>
-		<van-dialog class="delete-dialog" v-model:show="showDeleteDialog" :showConfirmButton="false">
-			<view class="first-level-title">删除训练</view>
-			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
-			<view class="botton-box">
-				<van-button class="delete" block @click="deleteHandle">确认删除</van-button>
-				<van-button block @click="showDeleteDialog=false">取消</van-button>
+		</uni-popup>
+		<uni-popup ref="popupDelete" type="center">
+			<view class="delete-dialog">
+				<view class="first-level-title">删除训练</view>
+				<view class="second-level-title">是否删除训练，删除后无法恢复</view>
+				<view class="botton-box">
+					<van-button class="delete" block @click="deleteHandle">确认删除</van-button>
+					<van-button block @click="closeDialog('popupDelete')">取消</van-button>
+				</view>
 			</view>
-		</van-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -352,8 +356,6 @@
 					{ text: '删除动作项'}
 				],
 				traineeNo:null,
-				showFinishDialog: false,
-				showDeleteDialog: false,
 				isNoOldInfo:false
 			}
 		},
@@ -561,6 +563,12 @@
 				const minute = Math.floor((times-(hour*3600))/60);
 				const second = times-(hour*3600)-(minute*60);
 				return  type===3?hour+'时'+minute+'分'+second+'秒':hour+'时'+minute+'分'
+			},
+			openDialog(key){
+				this.$refs[key].open()
+			},
+			closeDialog(key){
+				this.$refs[key].close()
 			}
 		}
 	}
@@ -823,7 +831,9 @@ page{
 			color: #FFFFFF;
 		}
 	}
-	::v-deep .van-dialog{
+	::v-deep .finish-dialog,
+	::v-deep .delete-dialog
+	{
 		background: linear-gradient(180deg, #343A44 0%, #212328 100%);
 		width: 610upx;
 		height: 800upx;
