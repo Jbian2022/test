@@ -50,9 +50,9 @@
 		<view class="recommend">
 			<van-cell icon="contact" title="推荐人" :is-link="!userInfo.referrer" :value="userInfo.referrer" @click="openSheet" />
 		</view>
-		<van-action-sheet class="recommend-sheet" v-model:show="show">
-			<van-picker title="推荐人" :columns="columns" @confirm="onConfirm" @cancel="show = false"/>
-		</van-action-sheet>
+		<uni-popup ref="popup" type="bottom" class="recommend-sheet" @change="popupChange">
+			<van-picker title="推荐人" :columns="columns" @confirm="onConfirm" @cancel="onCancel"/>
+		</uni-popup>
 	</view>
 </template>
 
@@ -69,7 +69,6 @@
 					vipEndDate: null,
 					referrer: null
 				},
-				show: false,
 				columns: [
 					{ text: '001', value: '001' },
 					{ text: '002', value: '002' },
@@ -139,12 +138,25 @@
 				if(this.userInfo.referrer){
 					return false
 				}
-				this.show = true
+				this.$refs.popup.open()
+			},
+			popupChange(e){
+				if(e.show){
+					uni.hideTabBar()
+				} else {
+					const timer = setTimeout(()=>{
+						uni.showTabBar()
+						clearTimeout(timer)
+					},300)
+				}
 			},
 			onConfirm(val){
-				this.userInfo.referrer = val.text
-				this.show = false
+				this.userInfo.referrer = val.selectedValues[0]
+				this.$refs.popup.close()
 				this.setReferrer()
+			},
+			onCancel () {
+				this.$refs.popup.close()
 			}
 		}
 	}
@@ -283,7 +295,6 @@ page{
 	}
 	.contact-customer{
 		margin-top: 30upx;
-		width: 670upx;
 		height: 346upx;
 		padding: 40upx;
 		box-sizing: border-box;
@@ -332,9 +343,9 @@ page{
 		}
 	}
 	::v-deep .recommend-sheet{
-		background: #383D46;
 		.van-picker{
-			background-color: transparent;
+			background: #383D46;
+			border-radius: 24upx 24upx 0px 0px;
 			.van-picker__mask{
 				background-image: none;
 			}
@@ -343,12 +354,25 @@ page{
 				font-weight: 600;
 				color: #7A7F89;
 				line-height: 44upx;
+				margin: 0 40upx;
+				padding-top: 40upx;
+				&::after{
+					display: none;
+				}
 			}
 			.van-picker__confirm{
+				margin: 0 40upx;
+				padding-top: 40upx;
 				font-size: 32upx;
 				font-weight: 600;
 				color: #F4F7FF;
 				line-height: 44upx;
+				&::after{
+					display: none;
+				}
+			}
+			.van-picker__toolbar{
+				height: 124upx;
 			}
 			.van-picker__title{
 				font-size: 32upx;
@@ -363,11 +387,11 @@ page{
 			.van-picker-column__item--selected{
 				font-weight: 600;
 				color: #F4F7FF;
+				background: transparent;
 			}
 			.van-picker__frame{
 				background: rgba(75, 82, 94, .5);
 				border-radius: 16upx;
-				z-index: -1;
 				&::after{
 					display: none;
 				}

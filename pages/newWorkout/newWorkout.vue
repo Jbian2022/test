@@ -586,7 +586,7 @@ page{
 		color: #FFFFFF;
 		background: #212328;
 		.btn{
-			width: 120upx;
+			padding: 0 30upx;
 			height: 68upx;
 			background: #1370FF;
 			border-radius: 16upx;

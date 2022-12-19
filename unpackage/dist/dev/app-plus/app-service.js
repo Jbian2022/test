@@ -1,28 +1,12 @@
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 if (typeof Promise !== "undefined" && !Promise.prototype.finally) {
   Promise.prototype.finally = function(callback) {
     const promise = this.constructor;
-    return this.then((value) => promise.resolve(callback()).then(() => value), (reason) => promise.resolve(callback()).then(() => {
-      throw reason;
-    }));
+    return this.then(
+      (value) => promise.resolve(callback()).then(() => value),
+      (reason) => promise.resolve(callback()).then(() => {
+        throw reason;
+      })
+    );
   };
 }
 ;
@@ -98,14 +82,15 @@ if (uni.restoreGlobal) {
       if (!ref)
         return;
       return new Promise((resolve, reject) => {
-        nvueAnimation.transition(ref, __spreadValues({
-          styles
-        }, config), (res2) => {
+        nvueAnimation.transition(ref, {
+          styles,
+          ...config
+        }, (res2) => {
           resolve();
         });
       });
     }
-    _nvueNextAnimate(animates, step = 0, fn2) {
+    _nvueNextAnimate(animates, step = 0, fn) {
       let obj = animates[step];
       if (obj) {
         let {
@@ -114,11 +99,11 @@ if (uni.restoreGlobal) {
         } = obj;
         this._animateRun(styles, config).then(() => {
           step += 1;
-          this._nvueNextAnimate(animates, step, fn2);
+          this._nvueNextAnimate(animates, step, fn);
         });
       } else {
         this.currentStepAnimates = {};
-        typeof fn2 === "function" && fn2();
+        typeof fn === "function" && fn();
         this.isEnd = true;
       }
     }
@@ -126,10 +111,10 @@ if (uni.restoreGlobal) {
       this.animation.step(config);
       return this;
     }
-    run(fn2) {
+    run(fn) {
       this.$.animationData = this.animation.export();
       this.$.timer = setTimeout(() => {
-        typeof fn2 === "function" && fn2();
+        typeof fn === "function" && fn();
       }, this.$.durationTime);
     }
   }
@@ -169,14 +154,14 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  var _export_sfc = (sfc, props) => {
+  const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
       target[key] = val;
     }
     return target;
   };
-  const _sfc_main$G = {
+  const _sfc_main$H = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -231,9 +216,10 @@ if (uni.restoreGlobal) {
     },
     computed: {
       stylesObject() {
-        let styles = __spreadProps(__spreadValues({}, this.styles), {
+        let styles = {
+          ...this.styles,
           "transition-duration": this.duration / 1e3 + "s"
-        });
+        };
         let transform = "";
         for (let i2 in styles) {
           let line = this.toLine(i2);
@@ -283,10 +269,10 @@ if (uni.restoreGlobal) {
         this.animation.step(config);
         return this;
       },
-      run(fn2) {
+      run(fn) {
         if (!this.animation)
           return;
-        this.animation.run(fn2);
+        this.animation.run(fn);
       },
       open() {
         clearTimeout(this.timer);
@@ -401,7 +387,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     return $data.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       ref: "ani",
@@ -413,8 +399,8 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ], 14, ["animation"])) : vue.createCommentVNode("v-if", true);
   }
-  var __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$F = {
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$G = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -711,8 +697,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
+  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$6);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       class: vue.normalizeClass(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]])
@@ -752,15 +738,15 @@ if (uni.restoreGlobal) {
       ], 32)
     ], 2)) : vue.createCommentVNode("v-if", true);
   }
-  var __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-7c43d41b"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const _sfc_main$E = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-4dd3c44b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$F = {
     name: "bgTheamCompontent",
     props: ["theamType"],
     data() {
       return {};
     }
   };
-  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "bg_content" }, [
       $props.theamType === "currency" ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -788,7 +774,7 @@ if (uni.restoreGlobal) {
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  var BgTheamCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-7f0dda80"], ["__file", "E:/workproject/bodybuilding-app/components/bgTheamCompontent/bgTheamCompontent.vue"]]);
+  const BgTheamCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-826f61a7"], ["__file", "D:/studyUninApp/bodybuilding-app/components/bgTheamCompontent/bgTheamCompontent.vue"]]);
   const isObject$2 = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -947,8 +933,8 @@ if (uni.restoreGlobal) {
     getLocale() {
       return this.locale;
     }
-    watchLocale(fn2) {
-      const index = this.watchers.push(fn2) - 1;
+    watchLocale(fn) {
+      const index = this.watchers.push(fn) - 1;
       return () => {
         this.watchers.splice(index, 1);
       };
@@ -1058,8 +1044,8 @@ if (uni.restoreGlobal) {
       add(locale3, message, override = true) {
         return i18n.add(locale3, message, override);
       },
-      watch(fn2) {
-        return i18n.watchLocale(fn2);
+      watch(fn) {
+        return i18n.watchLocale(fn);
       },
       getLocale() {
         return i18n.getLocale();
@@ -1098,7 +1084,7 @@ if (uni.restoreGlobal) {
       }
     },
     {
-      path: "pages/postureAssessment/postureAssessment",
+      path: "pages/bodyAssessment/bodyAssessment",
       style: {
         navigationBarTitleText: "\u4F53\u6D4B\u8BC4\u4F30",
         enablePullDownRefresh: false,
@@ -1328,7 +1314,7 @@ if (uni.restoreGlobal) {
       }
     ]
   };
-  var t$m = {
+  const t$m = {
     pages,
     globalStyle,
     tabBar,
@@ -1341,10 +1327,10 @@ if (uni.restoreGlobal) {
     return e(n2 = { path: t2, exports: {}, require: function(e2, t3) {
       return function() {
         throw new Error("Dynamic requires are not currently supported by @rollup/plugin-commonjs");
-      }(t3 == null && n2.path);
+      }(null == t3 && n2.path);
     } }, n2.exports), n2.exports;
   }
-  var o = s(function(e, t2) {
+  var r = s(function(e, t2) {
     var n2;
     e.exports = (n2 = n2 || function(e2, t3) {
       var n3 = Object.create || function() {
@@ -1354,7 +1340,7 @@ if (uni.restoreGlobal) {
           var n4;
           return e3.prototype = t4, n4 = new e3(), e3.prototype = null, n4;
         };
-      }(), s2 = {}, o2 = s2.lib = {}, r2 = o2.Base = { extend: function(e3) {
+      }(), s2 = {}, r2 = s2.lib = {}, i2 = r2.Base = { extend: function(e3) {
         var t4 = n3(this);
         return e3 && t4.mixIn(e3), t4.hasOwnProperty("init") && this.init !== t4.init || (t4.init = function() {
           t4.$super.init.apply(this, arguments);
@@ -1369,60 +1355,60 @@ if (uni.restoreGlobal) {
         e3.hasOwnProperty("toString") && (this.toString = e3.toString);
       }, clone: function() {
         return this.init.prototype.extend(this);
-      } }, i2 = o2.WordArray = r2.extend({ init: function(e3, n4) {
+      } }, o2 = r2.WordArray = i2.extend({ init: function(e3, n4) {
         e3 = this.words = e3 || [], this.sigBytes = n4 != t3 ? n4 : 4 * e3.length;
       }, toString: function(e3) {
         return (e3 || c2).stringify(this);
       }, concat: function(e3) {
-        var t4 = this.words, n4 = e3.words, s3 = this.sigBytes, o3 = e3.sigBytes;
+        var t4 = this.words, n4 = e3.words, s3 = this.sigBytes, r3 = e3.sigBytes;
         if (this.clamp(), s3 % 4)
-          for (var r3 = 0; r3 < o3; r3++) {
-            var i3 = n4[r3 >>> 2] >>> 24 - r3 % 4 * 8 & 255;
-            t4[s3 + r3 >>> 2] |= i3 << 24 - (s3 + r3) % 4 * 8;
+          for (var i3 = 0; i3 < r3; i3++) {
+            var o3 = n4[i3 >>> 2] >>> 24 - i3 % 4 * 8 & 255;
+            t4[s3 + i3 >>> 2] |= o3 << 24 - (s3 + i3) % 4 * 8;
           }
         else
-          for (r3 = 0; r3 < o3; r3 += 4)
-            t4[s3 + r3 >>> 2] = n4[r3 >>> 2];
-        return this.sigBytes += o3, this;
+          for (i3 = 0; i3 < r3; i3 += 4)
+            t4[s3 + i3 >>> 2] = n4[i3 >>> 2];
+        return this.sigBytes += r3, this;
       }, clamp: function() {
         var t4 = this.words, n4 = this.sigBytes;
         t4[n4 >>> 2] &= 4294967295 << 32 - n4 % 4 * 8, t4.length = e2.ceil(n4 / 4);
       }, clone: function() {
-        var e3 = r2.clone.call(this);
+        var e3 = i2.clone.call(this);
         return e3.words = this.words.slice(0), e3;
       }, random: function(t4) {
-        for (var n4, s3 = [], o3 = function(t5) {
+        for (var n4, s3 = [], r3 = function(t5) {
           t5 = t5;
           var n5 = 987654321, s4 = 4294967295;
           return function() {
-            var o4 = ((n5 = 36969 * (65535 & n5) + (n5 >> 16) & s4) << 16) + (t5 = 18e3 * (65535 & t5) + (t5 >> 16) & s4) & s4;
-            return o4 /= 4294967296, (o4 += 0.5) * (e2.random() > 0.5 ? 1 : -1);
+            var r4 = ((n5 = 36969 * (65535 & n5) + (n5 >> 16) & s4) << 16) + (t5 = 18e3 * (65535 & t5) + (t5 >> 16) & s4) & s4;
+            return r4 /= 4294967296, (r4 += 0.5) * (e2.random() > 0.5 ? 1 : -1);
           };
-        }, r3 = 0; r3 < t4; r3 += 4) {
-          var a3 = o3(4294967296 * (n4 || e2.random()));
+        }, i3 = 0; i3 < t4; i3 += 4) {
+          var a3 = r3(4294967296 * (n4 || e2.random()));
           n4 = 987654071 * a3(), s3.push(4294967296 * a3() | 0);
         }
-        return new i2.init(s3, t4);
+        return new o2.init(s3, t4);
       } }), a2 = s2.enc = {}, c2 = a2.Hex = { stringify: function(e3) {
-        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], o3 = 0; o3 < n4; o3++) {
-          var r3 = t4[o3 >>> 2] >>> 24 - o3 % 4 * 8 & 255;
-          s3.push((r3 >>> 4).toString(16)), s3.push((15 & r3).toString(16));
+        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], r3 = 0; r3 < n4; r3++) {
+          var i3 = t4[r3 >>> 2] >>> 24 - r3 % 4 * 8 & 255;
+          s3.push((i3 >>> 4).toString(16)), s3.push((15 & i3).toString(16));
         }
         return s3.join("");
       }, parse: function(e3) {
         for (var t4 = e3.length, n4 = [], s3 = 0; s3 < t4; s3 += 2)
           n4[s3 >>> 3] |= parseInt(e3.substr(s3, 2), 16) << 24 - s3 % 8 * 4;
-        return new i2.init(n4, t4 / 2);
+        return new o2.init(n4, t4 / 2);
       } }, u2 = a2.Latin1 = { stringify: function(e3) {
-        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], o3 = 0; o3 < n4; o3++) {
-          var r3 = t4[o3 >>> 2] >>> 24 - o3 % 4 * 8 & 255;
-          s3.push(String.fromCharCode(r3));
+        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], r3 = 0; r3 < n4; r3++) {
+          var i3 = t4[r3 >>> 2] >>> 24 - r3 % 4 * 8 & 255;
+          s3.push(String.fromCharCode(i3));
         }
         return s3.join("");
       }, parse: function(e3) {
         for (var t4 = e3.length, n4 = [], s3 = 0; s3 < t4; s3++)
           n4[s3 >>> 2] |= (255 & e3.charCodeAt(s3)) << 24 - s3 % 4 * 8;
-        return new i2.init(n4, t4);
+        return new o2.init(n4, t4);
       } }, l2 = a2.Utf8 = { stringify: function(e3) {
         try {
           return decodeURIComponent(escape(u2.stringify(e3)));
@@ -1431,24 +1417,24 @@ if (uni.restoreGlobal) {
         }
       }, parse: function(e3) {
         return u2.parse(unescape(encodeURIComponent(e3)));
-      } }, h2 = o2.BufferedBlockAlgorithm = r2.extend({ reset: function() {
-        this._data = new i2.init(), this._nDataBytes = 0;
+      } }, h2 = r2.BufferedBlockAlgorithm = i2.extend({ reset: function() {
+        this._data = new o2.init(), this._nDataBytes = 0;
       }, _append: function(e3) {
-        typeof e3 == "string" && (e3 = l2.parse(e3)), this._data.concat(e3), this._nDataBytes += e3.sigBytes;
+        "string" == typeof e3 && (e3 = l2.parse(e3)), this._data.concat(e3), this._nDataBytes += e3.sigBytes;
       }, _process: function(t4) {
-        var n4 = this._data, s3 = n4.words, o3 = n4.sigBytes, r3 = this.blockSize, a3 = o3 / (4 * r3), c3 = (a3 = t4 ? e2.ceil(a3) : e2.max((0 | a3) - this._minBufferSize, 0)) * r3, u3 = e2.min(4 * c3, o3);
+        var n4 = this._data, s3 = n4.words, r3 = n4.sigBytes, i3 = this.blockSize, a3 = r3 / (4 * i3), c3 = (a3 = t4 ? e2.ceil(a3) : e2.max((0 | a3) - this._minBufferSize, 0)) * i3, u3 = e2.min(4 * c3, r3);
         if (c3) {
-          for (var l3 = 0; l3 < c3; l3 += r3)
+          for (var l3 = 0; l3 < c3; l3 += i3)
             this._doProcessBlock(s3, l3);
           var h3 = s3.splice(0, c3);
           n4.sigBytes -= u3;
         }
-        return new i2.init(h3, u3);
+        return new o2.init(h3, u3);
       }, clone: function() {
-        var e3 = r2.clone.call(this);
+        var e3 = i2.clone.call(this);
         return e3._data = this._data.clone(), e3;
       }, _minBufferSize: 0 });
-      o2.Hasher = h2.extend({ cfg: r2.extend(), init: function(e3) {
+      r2.Hasher = h2.extend({ cfg: i2.extend(), init: function(e3) {
         this.cfg = this.cfg.extend(e3), this.reset();
       }, reset: function() {
         h2.reset.call(this), this._doReset();
@@ -1468,220 +1454,222 @@ if (uni.restoreGlobal) {
       var d2 = s2.algo = {};
       return s2;
     }(Math), n2);
-  }), r = (s(function(e, t2) {
+  }), i = r, o = (s(function(e, t2) {
     var n2;
-    e.exports = (n2 = o, function(e2) {
-      var t3 = n2, s2 = t3.lib, o2 = s2.WordArray, r2 = s2.Hasher, i2 = t3.algo, a2 = [];
+    e.exports = (n2 = i, function(e2) {
+      var t3 = n2, s2 = t3.lib, r2 = s2.WordArray, i2 = s2.Hasher, o2 = t3.algo, a2 = [];
       !function() {
         for (var t4 = 0; t4 < 64; t4++)
           a2[t4] = 4294967296 * e2.abs(e2.sin(t4 + 1)) | 0;
       }();
-      var c2 = i2.MD5 = r2.extend({ _doReset: function() {
-        this._hash = new o2.init([1732584193, 4023233417, 2562383102, 271733878]);
+      var c2 = o2.MD5 = i2.extend({ _doReset: function() {
+        this._hash = new r2.init([1732584193, 4023233417, 2562383102, 271733878]);
       }, _doProcessBlock: function(e3, t4) {
         for (var n3 = 0; n3 < 16; n3++) {
-          var s3 = t4 + n3, o3 = e3[s3];
-          e3[s3] = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8);
+          var s3 = t4 + n3, r3 = e3[s3];
+          e3[s3] = 16711935 & (r3 << 8 | r3 >>> 24) | 4278255360 & (r3 << 24 | r3 >>> 8);
         }
-        var r3 = this._hash.words, i3 = e3[t4 + 0], c3 = e3[t4 + 1], f2 = e3[t4 + 2], p2 = e3[t4 + 3], g2 = e3[t4 + 4], m2 = e3[t4 + 5], y2 = e3[t4 + 6], _2 = e3[t4 + 7], w = e3[t4 + 8], v2 = e3[t4 + 9], k2 = e3[t4 + 10], T2 = e3[t4 + 11], S2 = e3[t4 + 12], A2 = e3[t4 + 13], P2 = e3[t4 + 14], I2 = e3[t4 + 15], b2 = r3[0], O2 = r3[1], C2 = r3[2], E2 = r3[3];
-        b2 = u2(b2, O2, C2, E2, i3, 7, a2[0]), E2 = u2(E2, b2, O2, C2, c3, 12, a2[1]), C2 = u2(C2, E2, b2, O2, f2, 17, a2[2]), O2 = u2(O2, C2, E2, b2, p2, 22, a2[3]), b2 = u2(b2, O2, C2, E2, g2, 7, a2[4]), E2 = u2(E2, b2, O2, C2, m2, 12, a2[5]), C2 = u2(C2, E2, b2, O2, y2, 17, a2[6]), O2 = u2(O2, C2, E2, b2, _2, 22, a2[7]), b2 = u2(b2, O2, C2, E2, w, 7, a2[8]), E2 = u2(E2, b2, O2, C2, v2, 12, a2[9]), C2 = u2(C2, E2, b2, O2, k2, 17, a2[10]), O2 = u2(O2, C2, E2, b2, T2, 22, a2[11]), b2 = u2(b2, O2, C2, E2, S2, 7, a2[12]), E2 = u2(E2, b2, O2, C2, A2, 12, a2[13]), C2 = u2(C2, E2, b2, O2, P2, 17, a2[14]), b2 = l2(b2, O2 = u2(O2, C2, E2, b2, I2, 22, a2[15]), C2, E2, c3, 5, a2[16]), E2 = l2(E2, b2, O2, C2, y2, 9, a2[17]), C2 = l2(C2, E2, b2, O2, T2, 14, a2[18]), O2 = l2(O2, C2, E2, b2, i3, 20, a2[19]), b2 = l2(b2, O2, C2, E2, m2, 5, a2[20]), E2 = l2(E2, b2, O2, C2, k2, 9, a2[21]), C2 = l2(C2, E2, b2, O2, I2, 14, a2[22]), O2 = l2(O2, C2, E2, b2, g2, 20, a2[23]), b2 = l2(b2, O2, C2, E2, v2, 5, a2[24]), E2 = l2(E2, b2, O2, C2, P2, 9, a2[25]), C2 = l2(C2, E2, b2, O2, p2, 14, a2[26]), O2 = l2(O2, C2, E2, b2, w, 20, a2[27]), b2 = l2(b2, O2, C2, E2, A2, 5, a2[28]), E2 = l2(E2, b2, O2, C2, f2, 9, a2[29]), C2 = l2(C2, E2, b2, O2, _2, 14, a2[30]), b2 = h2(b2, O2 = l2(O2, C2, E2, b2, S2, 20, a2[31]), C2, E2, m2, 4, a2[32]), E2 = h2(E2, b2, O2, C2, w, 11, a2[33]), C2 = h2(C2, E2, b2, O2, T2, 16, a2[34]), O2 = h2(O2, C2, E2, b2, P2, 23, a2[35]), b2 = h2(b2, O2, C2, E2, c3, 4, a2[36]), E2 = h2(E2, b2, O2, C2, g2, 11, a2[37]), C2 = h2(C2, E2, b2, O2, _2, 16, a2[38]), O2 = h2(O2, C2, E2, b2, k2, 23, a2[39]), b2 = h2(b2, O2, C2, E2, A2, 4, a2[40]), E2 = h2(E2, b2, O2, C2, i3, 11, a2[41]), C2 = h2(C2, E2, b2, O2, p2, 16, a2[42]), O2 = h2(O2, C2, E2, b2, y2, 23, a2[43]), b2 = h2(b2, O2, C2, E2, v2, 4, a2[44]), E2 = h2(E2, b2, O2, C2, S2, 11, a2[45]), C2 = h2(C2, E2, b2, O2, I2, 16, a2[46]), b2 = d2(b2, O2 = h2(O2, C2, E2, b2, f2, 23, a2[47]), C2, E2, i3, 6, a2[48]), E2 = d2(E2, b2, O2, C2, _2, 10, a2[49]), C2 = d2(C2, E2, b2, O2, P2, 15, a2[50]), O2 = d2(O2, C2, E2, b2, m2, 21, a2[51]), b2 = d2(b2, O2, C2, E2, S2, 6, a2[52]), E2 = d2(E2, b2, O2, C2, p2, 10, a2[53]), C2 = d2(C2, E2, b2, O2, k2, 15, a2[54]), O2 = d2(O2, C2, E2, b2, c3, 21, a2[55]), b2 = d2(b2, O2, C2, E2, w, 6, a2[56]), E2 = d2(E2, b2, O2, C2, I2, 10, a2[57]), C2 = d2(C2, E2, b2, O2, y2, 15, a2[58]), O2 = d2(O2, C2, E2, b2, A2, 21, a2[59]), b2 = d2(b2, O2, C2, E2, g2, 6, a2[60]), E2 = d2(E2, b2, O2, C2, T2, 10, a2[61]), C2 = d2(C2, E2, b2, O2, f2, 15, a2[62]), O2 = d2(O2, C2, E2, b2, v2, 21, a2[63]), r3[0] = r3[0] + b2 | 0, r3[1] = r3[1] + O2 | 0, r3[2] = r3[2] + C2 | 0, r3[3] = r3[3] + E2 | 0;
+        var i3 = this._hash.words, o3 = e3[t4 + 0], c3 = e3[t4 + 1], f2 = e3[t4 + 2], p2 = e3[t4 + 3], g2 = e3[t4 + 4], m2 = e3[t4 + 5], y = e3[t4 + 6], _2 = e3[t4 + 7], w2 = e3[t4 + 8], v2 = e3[t4 + 9], S2 = e3[t4 + 10], k = e3[t4 + 11], I2 = e3[t4 + 12], b2 = e3[t4 + 13], T2 = e3[t4 + 14], A2 = e3[t4 + 15], C2 = i3[0], P2 = i3[1], E2 = i3[2], O2 = i3[3];
+        C2 = u2(C2, P2, E2, O2, o3, 7, a2[0]), O2 = u2(O2, C2, P2, E2, c3, 12, a2[1]), E2 = u2(E2, O2, C2, P2, f2, 17, a2[2]), P2 = u2(P2, E2, O2, C2, p2, 22, a2[3]), C2 = u2(C2, P2, E2, O2, g2, 7, a2[4]), O2 = u2(O2, C2, P2, E2, m2, 12, a2[5]), E2 = u2(E2, O2, C2, P2, y, 17, a2[6]), P2 = u2(P2, E2, O2, C2, _2, 22, a2[7]), C2 = u2(C2, P2, E2, O2, w2, 7, a2[8]), O2 = u2(O2, C2, P2, E2, v2, 12, a2[9]), E2 = u2(E2, O2, C2, P2, S2, 17, a2[10]), P2 = u2(P2, E2, O2, C2, k, 22, a2[11]), C2 = u2(C2, P2, E2, O2, I2, 7, a2[12]), O2 = u2(O2, C2, P2, E2, b2, 12, a2[13]), E2 = u2(E2, O2, C2, P2, T2, 17, a2[14]), C2 = l2(C2, P2 = u2(P2, E2, O2, C2, A2, 22, a2[15]), E2, O2, c3, 5, a2[16]), O2 = l2(O2, C2, P2, E2, y, 9, a2[17]), E2 = l2(E2, O2, C2, P2, k, 14, a2[18]), P2 = l2(P2, E2, O2, C2, o3, 20, a2[19]), C2 = l2(C2, P2, E2, O2, m2, 5, a2[20]), O2 = l2(O2, C2, P2, E2, S2, 9, a2[21]), E2 = l2(E2, O2, C2, P2, A2, 14, a2[22]), P2 = l2(P2, E2, O2, C2, g2, 20, a2[23]), C2 = l2(C2, P2, E2, O2, v2, 5, a2[24]), O2 = l2(O2, C2, P2, E2, T2, 9, a2[25]), E2 = l2(E2, O2, C2, P2, p2, 14, a2[26]), P2 = l2(P2, E2, O2, C2, w2, 20, a2[27]), C2 = l2(C2, P2, E2, O2, b2, 5, a2[28]), O2 = l2(O2, C2, P2, E2, f2, 9, a2[29]), E2 = l2(E2, O2, C2, P2, _2, 14, a2[30]), C2 = h2(C2, P2 = l2(P2, E2, O2, C2, I2, 20, a2[31]), E2, O2, m2, 4, a2[32]), O2 = h2(O2, C2, P2, E2, w2, 11, a2[33]), E2 = h2(E2, O2, C2, P2, k, 16, a2[34]), P2 = h2(P2, E2, O2, C2, T2, 23, a2[35]), C2 = h2(C2, P2, E2, O2, c3, 4, a2[36]), O2 = h2(O2, C2, P2, E2, g2, 11, a2[37]), E2 = h2(E2, O2, C2, P2, _2, 16, a2[38]), P2 = h2(P2, E2, O2, C2, S2, 23, a2[39]), C2 = h2(C2, P2, E2, O2, b2, 4, a2[40]), O2 = h2(O2, C2, P2, E2, o3, 11, a2[41]), E2 = h2(E2, O2, C2, P2, p2, 16, a2[42]), P2 = h2(P2, E2, O2, C2, y, 23, a2[43]), C2 = h2(C2, P2, E2, O2, v2, 4, a2[44]), O2 = h2(O2, C2, P2, E2, I2, 11, a2[45]), E2 = h2(E2, O2, C2, P2, A2, 16, a2[46]), C2 = d2(C2, P2 = h2(P2, E2, O2, C2, f2, 23, a2[47]), E2, O2, o3, 6, a2[48]), O2 = d2(O2, C2, P2, E2, _2, 10, a2[49]), E2 = d2(E2, O2, C2, P2, T2, 15, a2[50]), P2 = d2(P2, E2, O2, C2, m2, 21, a2[51]), C2 = d2(C2, P2, E2, O2, I2, 6, a2[52]), O2 = d2(O2, C2, P2, E2, p2, 10, a2[53]), E2 = d2(E2, O2, C2, P2, S2, 15, a2[54]), P2 = d2(P2, E2, O2, C2, c3, 21, a2[55]), C2 = d2(C2, P2, E2, O2, w2, 6, a2[56]), O2 = d2(O2, C2, P2, E2, A2, 10, a2[57]), E2 = d2(E2, O2, C2, P2, y, 15, a2[58]), P2 = d2(P2, E2, O2, C2, b2, 21, a2[59]), C2 = d2(C2, P2, E2, O2, g2, 6, a2[60]), O2 = d2(O2, C2, P2, E2, k, 10, a2[61]), E2 = d2(E2, O2, C2, P2, f2, 15, a2[62]), P2 = d2(P2, E2, O2, C2, v2, 21, a2[63]), i3[0] = i3[0] + C2 | 0, i3[1] = i3[1] + P2 | 0, i3[2] = i3[2] + E2 | 0, i3[3] = i3[3] + O2 | 0;
       }, _doFinalize: function() {
-        var t4 = this._data, n3 = t4.words, s3 = 8 * this._nDataBytes, o3 = 8 * t4.sigBytes;
-        n3[o3 >>> 5] |= 128 << 24 - o3 % 32;
-        var r3 = e2.floor(s3 / 4294967296), i3 = s3;
-        n3[15 + (o3 + 64 >>> 9 << 4)] = 16711935 & (r3 << 8 | r3 >>> 24) | 4278255360 & (r3 << 24 | r3 >>> 8), n3[14 + (o3 + 64 >>> 9 << 4)] = 16711935 & (i3 << 8 | i3 >>> 24) | 4278255360 & (i3 << 24 | i3 >>> 8), t4.sigBytes = 4 * (n3.length + 1), this._process();
+        var t4 = this._data, n3 = t4.words, s3 = 8 * this._nDataBytes, r3 = 8 * t4.sigBytes;
+        n3[r3 >>> 5] |= 128 << 24 - r3 % 32;
+        var i3 = e2.floor(s3 / 4294967296), o3 = s3;
+        n3[15 + (r3 + 64 >>> 9 << 4)] = 16711935 & (i3 << 8 | i3 >>> 24) | 4278255360 & (i3 << 24 | i3 >>> 8), n3[14 + (r3 + 64 >>> 9 << 4)] = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8), t4.sigBytes = 4 * (n3.length + 1), this._process();
         for (var a3 = this._hash, c3 = a3.words, u3 = 0; u3 < 4; u3++) {
           var l3 = c3[u3];
           c3[u3] = 16711935 & (l3 << 8 | l3 >>> 24) | 4278255360 & (l3 << 24 | l3 >>> 8);
         }
         return a3;
       }, clone: function() {
-        var e3 = r2.clone.call(this);
+        var e3 = i2.clone.call(this);
         return e3._hash = this._hash.clone(), e3;
       } });
-      function u2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (t4 & n3 | ~t4 & s3) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function u2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (t4 & n3 | ~t4 & s3) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      function l2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (t4 & s3 | n3 & ~s3) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function l2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (t4 & s3 | n3 & ~s3) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      function h2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (t4 ^ n3 ^ s3) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function h2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (t4 ^ n3 ^ s3) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      function d2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (n3 ^ (t4 | ~s3)) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function d2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (n3 ^ (t4 | ~s3)) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      t3.MD5 = r2._createHelper(c2), t3.HmacMD5 = r2._createHmacHelper(c2);
+      t3.MD5 = i2._createHelper(c2), t3.HmacMD5 = i2._createHmacHelper(c2);
     }(Math), n2.MD5);
   }), s(function(e, t2) {
-    var n2, s2, r2;
-    e.exports = (s2 = (n2 = o).lib.Base, r2 = n2.enc.Utf8, void (n2.algo.HMAC = s2.extend({ init: function(e2, t3) {
-      e2 = this._hasher = new e2.init(), typeof t3 == "string" && (t3 = r2.parse(t3));
-      var n3 = e2.blockSize, s3 = 4 * n3;
-      t3.sigBytes > s3 && (t3 = e2.finalize(t3)), t3.clamp();
-      for (var o2 = this._oKey = t3.clone(), i2 = this._iKey = t3.clone(), a2 = o2.words, c2 = i2.words, u2 = 0; u2 < n3; u2++)
-        a2[u2] ^= 1549556828, c2[u2] ^= 909522486;
-      o2.sigBytes = i2.sigBytes = s3, this.reset();
-    }, reset: function() {
-      var e2 = this._hasher;
-      e2.reset(), e2.update(this._iKey);
-    }, update: function(e2) {
-      return this._hasher.update(e2), this;
-    }, finalize: function(e2) {
-      var t3 = this._hasher, n3 = t3.finalize(e2);
-      return t3.reset(), t3.finalize(this._oKey.clone().concat(n3));
-    } })));
-  }), s(function(e, t2) {
-    e.exports = o.HmacMD5;
-  })), i = s(function(e, t2) {
-    e.exports = o.enc.Utf8;
-  }), a = s(function(e, t2) {
     var n2;
-    e.exports = (n2 = o, function() {
+    e.exports = (n2 = i, void function() {
+      var e2 = n2, t3 = e2.lib.Base, s2 = e2.enc.Utf8;
+      e2.algo.HMAC = t3.extend({ init: function(e3, t4) {
+        e3 = this._hasher = new e3.init(), "string" == typeof t4 && (t4 = s2.parse(t4));
+        var n3 = e3.blockSize, r2 = 4 * n3;
+        t4.sigBytes > r2 && (t4 = e3.finalize(t4)), t4.clamp();
+        for (var i2 = this._oKey = t4.clone(), o2 = this._iKey = t4.clone(), a2 = i2.words, c2 = o2.words, u2 = 0; u2 < n3; u2++)
+          a2[u2] ^= 1549556828, c2[u2] ^= 909522486;
+        i2.sigBytes = o2.sigBytes = r2, this.reset();
+      }, reset: function() {
+        var e3 = this._hasher;
+        e3.reset(), e3.update(this._iKey);
+      }, update: function(e3) {
+        return this._hasher.update(e3), this;
+      }, finalize: function(e3) {
+        var t4 = this._hasher, n3 = t4.finalize(e3);
+        return t4.reset(), t4.finalize(this._oKey.clone().concat(n3));
+      } });
+    }());
+  }), s(function(e, t2) {
+    e.exports = i.HmacMD5;
+  })), a = s(function(e, t2) {
+    e.exports = i.enc.Utf8;
+  }), c = s(function(e, t2) {
+    var n2;
+    e.exports = (n2 = i, function() {
       var e2 = n2, t3 = e2.lib.WordArray;
       function s2(e3, n3, s3) {
-        for (var o2 = [], r2 = 0, i2 = 0; i2 < n3; i2++)
-          if (i2 % 4) {
-            var a2 = s3[e3.charCodeAt(i2 - 1)] << i2 % 4 * 2, c2 = s3[e3.charCodeAt(i2)] >>> 6 - i2 % 4 * 2;
-            o2[r2 >>> 2] |= (a2 | c2) << 24 - r2 % 4 * 8, r2++;
+        for (var r2 = [], i2 = 0, o2 = 0; o2 < n3; o2++)
+          if (o2 % 4) {
+            var a2 = s3[e3.charCodeAt(o2 - 1)] << o2 % 4 * 2, c2 = s3[e3.charCodeAt(o2)] >>> 6 - o2 % 4 * 2;
+            r2[i2 >>> 2] |= (a2 | c2) << 24 - i2 % 4 * 8, i2++;
           }
-        return t3.create(o2, r2);
+        return t3.create(r2, i2);
       }
       e2.enc.Base64 = { stringify: function(e3) {
         var t4 = e3.words, n3 = e3.sigBytes, s3 = this._map;
         e3.clamp();
-        for (var o2 = [], r2 = 0; r2 < n3; r2 += 3)
-          for (var i2 = (t4[r2 >>> 2] >>> 24 - r2 % 4 * 8 & 255) << 16 | (t4[r2 + 1 >>> 2] >>> 24 - (r2 + 1) % 4 * 8 & 255) << 8 | t4[r2 + 2 >>> 2] >>> 24 - (r2 + 2) % 4 * 8 & 255, a2 = 0; a2 < 4 && r2 + 0.75 * a2 < n3; a2++)
-            o2.push(s3.charAt(i2 >>> 6 * (3 - a2) & 63));
+        for (var r2 = [], i2 = 0; i2 < n3; i2 += 3)
+          for (var o2 = (t4[i2 >>> 2] >>> 24 - i2 % 4 * 8 & 255) << 16 | (t4[i2 + 1 >>> 2] >>> 24 - (i2 + 1) % 4 * 8 & 255) << 8 | t4[i2 + 2 >>> 2] >>> 24 - (i2 + 2) % 4 * 8 & 255, a2 = 0; a2 < 4 && i2 + 0.75 * a2 < n3; a2++)
+            r2.push(s3.charAt(o2 >>> 6 * (3 - a2) & 63));
         var c2 = s3.charAt(64);
         if (c2)
-          for (; o2.length % 4; )
-            o2.push(c2);
-        return o2.join("");
+          for (; r2.length % 4; )
+            r2.push(c2);
+        return r2.join("");
       }, parse: function(e3) {
-        var t4 = e3.length, n3 = this._map, o2 = this._reverseMap;
-        if (!o2) {
-          o2 = this._reverseMap = [];
-          for (var r2 = 0; r2 < n3.length; r2++)
-            o2[n3.charCodeAt(r2)] = r2;
+        var t4 = e3.length, n3 = this._map, r2 = this._reverseMap;
+        if (!r2) {
+          r2 = this._reverseMap = [];
+          for (var i2 = 0; i2 < n3.length; i2++)
+            r2[n3.charCodeAt(i2)] = i2;
         }
-        var i2 = n3.charAt(64);
-        if (i2) {
-          var a2 = e3.indexOf(i2);
-          a2 !== -1 && (t4 = a2);
+        var o2 = n3.charAt(64);
+        if (o2) {
+          var a2 = e3.indexOf(o2);
+          -1 !== a2 && (t4 = a2);
         }
-        return s2(e3, t4, o2);
+        return s2(e3, t4, r2);
       }, _map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" };
     }(), n2.enc.Base64);
   });
-  const c = "FUNCTION", u = "OBJECT", l = "CLIENT_DB";
-  function h(e) {
+  const u = "FUNCTION", l = "OBJECT", h = "CLIENT_DB";
+  function d(e) {
     return Object.prototype.toString.call(e).slice(8, -1).toLowerCase();
   }
-  function d(e) {
-    return h(e) === "object";
-  }
   function f(e) {
-    return e && typeof e == "string" ? JSON.parse(e) : e;
+    return "object" === d(e);
   }
-  const p = true, g = "app";
-  let m;
-  m = g;
-  const y = f('{\n    "address": [\n        "127.0.0.1",\n        "26.70.42.247",\n        "192.168.2.1",\n        "192.168.230.1",\n        "192.168.137.62"\n    ],\n    "debugPort": 9001,\n    "initialLaunchType": "remote",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "E:/Program/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), _ = f('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
-  let v = "";
+  function p(e) {
+    return e && "string" == typeof e ? JSON.parse(e) : e;
+  }
+  const g = true, m = "app", _ = p([]);
+  let w;
+  w = m;
+  const v = p('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.72"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), S = p('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  let I = "";
   try {
-    v = "__UNI__76A9E40";
+    I = "__UNI__76A9E40";
   } catch (e) {
   }
-  let k = {};
+  let b = {};
   function T(e, t2 = {}) {
     var n2, s2;
-    return n2 = k, s2 = e, Object.prototype.hasOwnProperty.call(n2, s2) || (k[e] = t2), k[e];
+    return n2 = b, s2 = e, Object.prototype.hasOwnProperty.call(n2, s2) || (b[e] = t2), b[e];
   }
-  m === "app" && (k = uni._globalUniCloudObj ? uni._globalUniCloudObj : uni._globalUniCloudObj = {});
-  const S = ["invoke", "success", "fail", "complete"], A = T("_globalUniCloudInterceptor");
+  "app" === w && (b = uni._globalUniCloudObj ? uni._globalUniCloudObj : uni._globalUniCloudObj = {});
+  const A = ["invoke", "success", "fail", "complete"], C = T("_globalUniCloudInterceptor");
   function P(e, t2) {
-    A[e] || (A[e] = {}), d(t2) && Object.keys(t2).forEach((n2) => {
-      S.indexOf(n2) > -1 && function(e2, t3, n3) {
-        let s2 = A[e2][t3];
-        s2 || (s2 = A[e2][t3] = []), s2.indexOf(n3) === -1 && typeof n3 == "function" && s2.push(n3);
+    C[e] || (C[e] = {}), f(t2) && Object.keys(t2).forEach((n2) => {
+      A.indexOf(n2) > -1 && function(e2, t3, n3) {
+        let s2 = C[e2][t3];
+        s2 || (s2 = C[e2][t3] = []), -1 === s2.indexOf(n3) && "function" == typeof n3 && s2.push(n3);
       }(e, n2, t2[n2]);
     });
   }
-  function I(e, t2) {
-    A[e] || (A[e] = {}), d(t2) ? Object.keys(t2).forEach((n2) => {
-      S.indexOf(n2) > -1 && function(e2, t3, n3) {
-        const s2 = A[e2][t3];
+  function E(e, t2) {
+    C[e] || (C[e] = {}), f(t2) ? Object.keys(t2).forEach((n2) => {
+      A.indexOf(n2) > -1 && function(e2, t3, n3) {
+        const s2 = C[e2][t3];
         if (!s2)
           return;
-        const o2 = s2.indexOf(n3);
-        o2 > -1 && s2.splice(o2, 1);
+        const r2 = s2.indexOf(n3);
+        r2 > -1 && s2.splice(r2, 1);
       }(e, n2, t2[n2]);
-    }) : delete A[e];
-  }
-  function b(e, t2) {
-    return e && e.length !== 0 ? e.reduce((e2, n2) => e2.then(() => n2(t2)), Promise.resolve()) : Promise.resolve();
+    }) : delete C[e];
   }
   function O(e, t2) {
-    return A[e] && A[e][t2] || [];
+    return e && 0 !== e.length ? e.reduce((e2, n2) => e2.then(() => n2(t2)), Promise.resolve()) : Promise.resolve();
   }
-  function C(e) {
+  function x(e, t2) {
+    return C[e] && C[e][t2] || [];
+  }
+  function U(e) {
     P("callObject", e);
   }
-  const E = T("_globalUniCloudListener"), R = "response", U = "needLogin", x = "refreshToken", L = "clientdb", D = "cloudfunction", N = "cloudobject";
-  function q(e) {
-    return E[e] || (E[e] = []), E[e];
-  }
-  function F(e, t2) {
-    const n2 = q(e);
-    n2.includes(t2) || n2.push(t2);
-  }
-  function M(e, t2) {
-    const n2 = q(e), s2 = n2.indexOf(t2);
-    s2 !== -1 && n2.splice(s2, 1);
+  const R = T("_globalUniCloudListener"), L = "response", N = "needLogin", D = "refreshToken", F = "clientdb", q = "cloudfunction", K = "cloudobject";
+  function M(e) {
+    return R[e] || (R[e] = []), R[e];
   }
   function j(e, t2) {
-    const n2 = q(e);
+    const n2 = M(e);
+    n2.includes(t2) || n2.push(t2);
+  }
+  function B(e, t2) {
+    const n2 = M(e), s2 = n2.indexOf(t2);
+    -1 !== s2 && n2.splice(s2, 1);
+  }
+  function $(e, t2) {
+    const n2 = M(e);
     for (let e2 = 0; e2 < n2.length; e2++) {
       (0, n2[e2])(t2);
     }
   }
-  let $ = false;
-  const B = new Promise((e) => {
-    $ && e(), function t2() {
-      if (typeof getCurrentPages == "function") {
-        const t3 = getCurrentPages();
-        t3 && t3[0] && ($ = true, e());
-      }
-      $ || setTimeout(() => {
-        t2();
-      }, 30);
-    }();
-  });
-  function K() {
-    return B;
+  let W, z = false;
+  function J() {
+    return W || (W = new Promise((e) => {
+      z && e(), function t2() {
+        if ("function" == typeof getCurrentPages) {
+          const t3 = getCurrentPages();
+          t3 && t3[0] && (z = true, e());
+        }
+        z || setTimeout(() => {
+          t2();
+        }, 30);
+      }();
+    }), W);
   }
-  function W(e, t2) {
+  function H(e, t2) {
     return t2 ? function(n2) {
       let s2 = false;
-      if (t2 === "callFunction") {
-        const e2 = n2 && n2.type || c;
-        s2 = e2 !== c;
+      if ("callFunction" === t2) {
+        const e2 = n2 && n2.type || u;
+        s2 = e2 !== u;
       }
-      const o2 = t2 === "callFunction" && !s2;
-      let r2;
-      r2 = this.isReady ? Promise.resolve() : this.initUniCloud, n2 = n2 || {};
-      const i2 = r2.then(() => s2 ? Promise.resolve() : b(O(t2, "invoke"), n2)).then(() => e.call(this, n2)).then((e2) => s2 ? Promise.resolve(e2) : b(O(t2, "success"), e2).then(() => b(O(t2, "complete"), e2)).then(() => (o2 && j(R, { type: D, content: e2 }), Promise.resolve(e2))), (e2) => s2 ? Promise.reject(e2) : b(O(t2, "fail"), e2).then(() => b(O(t2, "complete"), e2)).then(() => (j(R, { type: D, content: e2 }), Promise.reject(e2))));
+      const r2 = "callFunction" === t2 && !s2;
+      let i2;
+      i2 = this.isReady ? Promise.resolve() : this.initUniCloud, n2 = n2 || {};
+      const o2 = i2.then(() => s2 ? Promise.resolve() : O(x(t2, "invoke"), n2)).then(() => e.call(this, n2)).then((e2) => s2 ? Promise.resolve(e2) : O(x(t2, "success"), e2).then(() => O(x(t2, "complete"), e2)).then(() => (r2 && $(L, { type: q, content: e2 }), Promise.resolve(e2))), (e2) => s2 ? Promise.reject(e2) : O(x(t2, "fail"), e2).then(() => O(x(t2, "complete"), e2)).then(() => ($(L, { type: q, content: e2 }), Promise.reject(e2))));
       if (!(n2.success || n2.fail || n2.complete))
-        return i2;
-      i2.then((e2) => {
-        n2.success && n2.success(e2), n2.complete && n2.complete(e2), o2 && j(R, { type: D, content: e2 });
+        return o2;
+      o2.then((e2) => {
+        n2.success && n2.success(e2), n2.complete && n2.complete(e2), r2 && $(L, { type: q, content: e2 });
       }, (e2) => {
-        n2.fail && n2.fail(e2), n2.complete && n2.complete(e2), o2 && j(R, { type: D, content: e2 });
+        n2.fail && n2.fail(e2), n2.complete && n2.complete(e2), r2 && $(L, { type: q, content: e2 });
       });
     } : function(t3) {
       if (!((t3 = t3 || {}).success || t3.fail || t3.complete))
@@ -1693,13 +1681,35 @@ if (uni.restoreGlobal) {
       });
     };
   }
-  class H extends Error {
+  class G extends Error {
     constructor(e) {
-      const t2 = e.code || "SYSTEM_ERROR", n2 = e.message || "unknown system error";
-      super(n2), this.errMsg = n2, this.errCode = this.code = t2, this.requestId = e.requestId;
+      super(e.message), this.errMsg = e.message || "unknown system error", this.code = this.errCode = e.code || "SYSTEM_ERROR", this.errSubject = e.subject, this.cause = e.cause, this.requestId = e.requestId;
+    }
+    toJson(e = 0) {
+      if (!(e >= 10))
+        return e++, { errCode: this.errCode, errMsg: this.errMsg, errSubject: this.errSubject, cause: this.cause && this.cause.toJson ? this.cause.toJson(e) : this.cause };
     }
   }
-  function z() {
+  var V = { request: (e) => uni.request(e), uploadFile: (e) => uni.uploadFile(e), setStorageSync: (e, t2) => uni.setStorageSync(e, t2), getStorageSync: (e) => uni.getStorageSync(e), removeStorageSync: (e) => uni.removeStorageSync(e), clearStorageSync: () => uni.clearStorageSync() };
+  function Y(e) {
+    return e && Y(e.__v_raw) || e;
+  }
+  function Q() {
+    return { token: V.getStorageSync("uni_id_token") || V.getStorageSync("uniIdToken"), tokenExpired: V.getStorageSync("uni_id_token_expired") };
+  }
+  function X({ token: e, tokenExpired: t2 } = {}) {
+    e && V.setStorageSync("uni_id_token", e), t2 && V.setStorageSync("uni_id_token_expired", t2);
+  }
+  function Z() {
+    if ("web" !== w)
+      return;
+    uni.getStorageSync("__LAST_DCLOUD_APPID") !== I && (uni.setStorageSync("__LAST_DCLOUD_APPID", I), console.warn("\u68C0\u6D4B\u5230\u5F53\u524D\u9879\u76EE\u4E0E\u4E0A\u6B21\u8FD0\u884C\u5230\u6B64\u7AEF\u53E3\u7684\u9879\u76EE\u4E0D\u4E00\u81F4\uFF0C\u81EA\u52A8\u6E05\u7406uni-id\u4FDD\u5B58\u7684token\u4FE1\u606F\uFF08\u4EC5\u5F00\u53D1\u8C03\u8BD5\u65F6\u751F\u6548\uFF09"), V.removeStorageSync("uni_id_token"), V.removeStorageSync("uniIdToken"), V.removeStorageSync("uni_id_token_expired"));
+  }
+  let ee, te;
+  function ne() {
+    return ee || (ee = uni.getSystemInfoSync()), ee;
+  }
+  function se() {
     let e, t2;
     try {
       if (uni.getLaunchOptionsSync) {
@@ -1712,46 +1722,44 @@ if (uni.restoreGlobal) {
     }
     return { channel: e, scene: t2 };
   }
-  let J;
-  function V() {
+  function re() {
     const e = uni.getLocale && uni.getLocale() || "en";
-    if (J)
-      return __spreadProps(__spreadValues({}, J), { locale: e, LOCALE: e });
-    const t2 = uni.getSystemInfoSync(), { deviceId: n2, osName: s2, uniPlatform: o2, appId: r2 } = t2, i2 = ["pixelRatio", "brand", "model", "system", "language", "version", "platform", "host", "SDKVersion", "swanNativeVersion", "app", "AppPlatform", "fontSizeSetting"];
-    for (let e2 = 0; e2 < i2.length; e2++) {
-      delete t2[i2[e2]];
+    if (te)
+      return { ...te, locale: e, LOCALE: e };
+    const t2 = ne(), { deviceId: n2, osName: s2, uniPlatform: r2, appId: i2 } = t2, o2 = ["pixelRatio", "brand", "model", "system", "language", "version", "platform", "host", "SDKVersion", "swanNativeVersion", "app", "AppPlatform", "fontSizeSetting"];
+    for (let e2 = 0; e2 < o2.length; e2++) {
+      delete t2[o2[e2]];
     }
-    return J = __spreadValues(__spreadValues({ PLATFORM: o2, OS: s2, APPID: r2, DEVICEID: n2 }, z()), t2), __spreadProps(__spreadValues({}, J), { locale: e, LOCALE: e });
+    return te = { PLATFORM: r2, OS: s2, APPID: i2, DEVICEID: n2, ...se(), ...t2 }, { ...te, locale: e, LOCALE: e };
   }
-  var Y = { sign: function(e, t2) {
+  var ie = { sign: function(e, t2) {
     let n2 = "";
     return Object.keys(e).sort().forEach(function(t3) {
       e[t3] && (n2 = n2 + "&" + t3 + "=" + e[t3]);
-    }), n2 = n2.slice(1), r(n2, t2).toString();
+    }), n2 = n2.slice(1), o(n2, t2).toString();
   }, wrappedRequest: function(e, t2) {
     return new Promise((n2, s2) => {
       t2(Object.assign(e, { complete(e2) {
-        e2 || (e2 = {}), m === "web" && e2.errMsg && e2.errMsg.indexOf("request:fail") === 0 && console.warn("\u53D1\u5E03H5\uFF0C\u9700\u8981\u5728uniCloud\u540E\u53F0\u64CD\u4F5C\uFF0C\u7ED1\u5B9A\u5B89\u5168\u57DF\u540D\uFF0C\u5426\u5219\u4F1A\u56E0\u4E3A\u8DE8\u57DF\u95EE\u9898\u800C\u65E0\u6CD5\u8BBF\u95EE\u3002\u6559\u7A0B\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.io/uniCloud/quickstart?id=useinh5");
+        e2 || (e2 = {}), "web" === w && e2.errMsg && 0 === e2.errMsg.indexOf("request:fail") && console.warn("\u53D1\u5E03H5\uFF0C\u9700\u8981\u5728uniCloud\u540E\u53F0\u64CD\u4F5C\uFF0C\u7ED1\u5B9A\u5B89\u5168\u57DF\u540D\uFF0C\u5426\u5219\u4F1A\u56E0\u4E3A\u8DE8\u57DF\u95EE\u9898\u800C\u65E0\u6CD5\u8BBF\u95EE\u3002\u6559\u7A0B\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.io/uniCloud/quickstart?id=useinh5");
         const t3 = e2.data && e2.data.header && e2.data.header["x-serverless-request-id"] || e2.header && e2.header["request-id"];
         if (!e2.statusCode || e2.statusCode >= 400)
-          return s2(new H({ code: "SYS_ERR", message: e2.errMsg || "request:fail", requestId: t3 }));
-        const o2 = e2.data;
-        if (o2.error)
-          return s2(new H({ code: o2.error.code, message: o2.error.message, requestId: t3 }));
-        o2.result = o2.data, o2.requestId = t3, delete o2.data, n2(o2);
+          return s2(new G({ code: "SYS_ERR", message: e2.errMsg || "request:fail", requestId: t3 }));
+        const r2 = e2.data;
+        if (r2.error)
+          return s2(new G({ code: r2.error.code, message: r2.error.message, requestId: t3 }));
+        r2.result = r2.data, r2.requestId = t3, delete r2.data, n2(r2);
       } }));
     });
   }, toBase64: function(e) {
-    return a.stringify(i.parse(e));
-  } };
-  var X = { request: (e) => uni.request(e), uploadFile: (e) => uni.uploadFile(e), setStorageSync: (e, t2) => uni.setStorageSync(e, t2), getStorageSync: (e) => uni.getStorageSync(e), removeStorageSync: (e) => uni.removeStorageSync(e), clearStorageSync: () => uni.clearStorageSync() }, G = { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" };
-  const { t: Q } = initVueI18n({ "zh-Hans": { "uniCloud.init.paramRequired": "\u7F3A\u5C11\u53C2\u6570\uFF1A{param}", "uniCloud.uploadFile.fileError": "filePath\u5E94\u4E3AFile\u5BF9\u8C61" }, "zh-Hant": { "uniCloud.init.paramRequired": "\u7F3A\u5C11\u53C2\u6570\uFF1A{param}", "uniCloud.uploadFile.fileError": "filePath\u5E94\u4E3AFile\u5BF9\u8C61" }, en: G, fr: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, es: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, ja: G }, "zh-Hans");
-  var Z = class {
+    return c.stringify(a.parse(e));
+  } }, oe = { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" };
+  const { t: ae } = initVueI18n({ "zh-Hans": { "uniCloud.init.paramRequired": "\u7F3A\u5C11\u53C2\u6570\uFF1A{param}", "uniCloud.uploadFile.fileError": "filePath\u5E94\u4E3AFile\u5BF9\u8C61" }, "zh-Hant": { "uniCloud.init.paramRequired": "\u7F3A\u5C11\u53C2\u6570\uFF1A{param}", "uniCloud.uploadFile.fileError": "filePath\u5E94\u4E3AFile\u5BF9\u8C61" }, en: oe, fr: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, es: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, ja: oe }, "zh-Hans");
+  var ce = class {
     constructor(e) {
       ["spaceId", "clientSecret"].forEach((t2) => {
         if (!Object.prototype.hasOwnProperty.call(e, t2))
-          throw new Error(Q("uniCloud.init.paramRequired", { param: t2 }));
-      }), this.config = Object.assign({}, { endpoint: "https://api.bspapp.com" }, e), this.config.provider = "aliyun", this.config.requestUrl = this.config.endpoint + "/client", this.config.envType = this.config.envType || "public", this.config.accessTokenKey = "access_token_" + this.config.spaceId, this.adapter = X, this._getAccessTokenPromise = null, this._getAccessTokenPromiseStatus = null;
+          throw new Error(ae("uniCloud.init.paramRequired", { param: t2 }));
+      }), this.config = Object.assign({}, { endpoint: "https://api.bspapp.com" }, e), this.config.provider = "aliyun", this.config.requestUrl = this.config.endpoint + "/client", this.config.envType = this.config.envType || "public", this.config.accessTokenKey = "access_token_" + this.config.spaceId, this.adapter = V, this._getAccessTokenPromise = null, this._getAccessTokenPromiseStatus = null;
     }
     get hasAccessToken() {
       return !!this.accessToken;
@@ -1760,14 +1768,14 @@ if (uni.restoreGlobal) {
       this.accessToken = e;
     }
     requestWrapped(e) {
-      return Y.wrappedRequest(e, this.adapter.request);
+      return ie.wrappedRequest(e, this.adapter.request);
     }
     requestAuth(e) {
       return this.requestWrapped(e);
     }
     request(e, t2) {
       return Promise.resolve().then(() => this.hasAccessToken ? t2 ? this.requestWrapped(e) : this.requestWrapped(e).catch((t3) => new Promise((e2, n2) => {
-        !t3 || t3.code !== "GATEWAY_INVALID_TOKEN" && t3.code !== "InvalidParameter.InvalidToken" ? n2(t3) : e2();
+        !t3 || "GATEWAY_INVALID_TOKEN" !== t3.code && "InvalidParameter.InvalidToken" !== t3.code ? n2(t3) : e2();
       }).then(() => this.getAccessToken()).then(() => {
         const t4 = this.rebuildRequest(e);
         return this.request(t4, true);
@@ -1778,18 +1786,18 @@ if (uni.restoreGlobal) {
     }
     rebuildRequest(e) {
       const t2 = Object.assign({}, e);
-      return t2.data.token = this.accessToken, t2.header["x-basement-token"] = this.accessToken, t2.header["x-serverless-sign"] = Y.sign(t2.data, this.config.clientSecret), t2;
+      return t2.data.token = this.accessToken, t2.header["x-basement-token"] = this.accessToken, t2.header["x-serverless-sign"] = ie.sign(t2.data, this.config.clientSecret), t2;
     }
     setupRequest(e, t2) {
       const n2 = Object.assign({}, e, { spaceId: this.config.spaceId, timestamp: Date.now() }), s2 = { "Content-Type": "application/json" };
-      return t2 !== "auth" && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = Y.sign(n2, this.config.clientSecret), { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: s2 };
+      return "auth" !== t2 && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = ie.sign(n2, this.config.clientSecret), { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: s2 };
     }
     getAccessToken() {
-      if (this._getAccessTokenPromiseStatus === "pending")
+      if ("pending" === this._getAccessTokenPromiseStatus)
         return this._getAccessTokenPromise;
       this._getAccessTokenPromiseStatus = "pending";
       return this._getAccessTokenPromise = this.requestAuth(this.setupRequest({ method: "serverless.auth.user.anonymousAuthorize", params: "{}" }, "auth")).then((e) => new Promise((t2, n2) => {
-        e.result && e.result.accessToken ? (this.setAccessToken(e.result.accessToken), this._getAccessTokenPromiseStatus = "fulfilled", t2(this.accessToken)) : (this._getAccessTokenPromiseStatus = "rejected", n2(new H({ code: "AUTH_FAILED", message: "\u83B7\u53D6accessToken\u5931\u8D25" })));
+        e.result && e.result.accessToken ? (this.setAccessToken(e.result.accessToken), this._getAccessTokenPromiseStatus = "fulfilled", t2(this.accessToken)) : (this._getAccessTokenPromiseStatus = "rejected", n2(new G({ code: "AUTH_FAILED", message: "\u83B7\u53D6accessToken\u5931\u8D25" })));
       }), (e) => (this._getAccessTokenPromiseStatus = "rejected", Promise.reject(e))), this._getAccessTokenPromise;
     }
     authorize() {
@@ -1803,15 +1811,15 @@ if (uni.restoreGlobal) {
       const t2 = { method: "serverless.file.resource.generateProximalSign", params: JSON.stringify(e) };
       return this.request(this.setupRequest(t2));
     }
-    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, onUploadProgress: r2 }) {
-      return new Promise((i2, a2) => {
-        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, header: { "X-OSS-server-side-encrpytion": "AES256" }, success(e2) {
-          e2 && e2.statusCode < 400 ? i2(e2) : a2(new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, onUploadProgress: i2 }) {
+      return new Promise((o2, a2) => {
+        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, header: { "X-OSS-server-side-encrpytion": "AES256" }, success(e2) {
+          e2 && e2.statusCode < 400 ? o2(e2) : a2(new G({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
         }, fail(e2) {
-          a2(new H({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+          a2(new G({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
         } });
-        typeof r2 == "function" && c2 && typeof c2.onProgressUpdate == "function" && c2.onProgressUpdate((e2) => {
-          r2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
+        "function" == typeof i2 && c2 && "function" == typeof c2.onProgressUpdate && c2.onProgressUpdate((e2) => {
+          i2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
         });
       });
     }
@@ -1819,43 +1827,39 @@ if (uni.restoreGlobal) {
       const t2 = { method: "serverless.file.resource.report", params: JSON.stringify(e) };
       return this.request(this.setupRequest(t2));
     }
-    async uploadFile({ filePath: e, cloudPath: t2, fileType: n2 = "image", onUploadProgress: s2, config: o2 }) {
-      if (h(t2) !== "string")
-        throw new H({ code: "INVALID_PARAM", message: "cloudPath\u5FC5\u987B\u4E3A\u5B57\u7B26\u4E32\u7C7B\u578B" });
+    async uploadFile({ filePath: e, cloudPath: t2, fileType: n2 = "image", onUploadProgress: s2, config: r2 }) {
+      if ("string" !== d(t2))
+        throw new G({ code: "INVALID_PARAM", message: "cloudPath\u5FC5\u987B\u4E3A\u5B57\u7B26\u4E32\u7C7B\u578B" });
       if (!(t2 = t2.trim()))
-        throw new H({ code: "CLOUDPATH_REQUIRED", message: "cloudPath\u4E0D\u53EF\u4E3A\u7A7A" });
+        throw new G({ code: "CLOUDPATH_REQUIRED", message: "cloudPath\u4E0D\u53EF\u4E3A\u7A7A" });
       if (/:\/\//.test(t2))
-        throw new H({ code: "INVALID_PARAM", message: "cloudPath\u4E0D\u5408\u6CD5" });
-      const r2 = o2 && o2.envType || this.config.envType, i2 = (await this.getOSSUploadOptionsFromPath({ env: r2, filename: t2 })).result, a2 = "https://" + i2.cdnDomain + "/" + i2.ossPath, { securityToken: c2, accessKeyId: u2, signature: l2, host: d2, ossPath: f2, id: p2, policy: g2, ossCallbackUrl: m2 } = i2, y2 = { "Cache-Control": "max-age=2592000", "Content-Disposition": "attachment", OSSAccessKeyId: u2, Signature: l2, host: d2, id: p2, key: f2, policy: g2, success_action_status: 200 };
-      if (c2 && (y2["x-oss-security-token"] = c2), m2) {
+        throw new G({ code: "INVALID_PARAM", message: "cloudPath\u4E0D\u5408\u6CD5" });
+      const i2 = r2 && r2.envType || this.config.envType, o2 = (await this.getOSSUploadOptionsFromPath({ env: i2, filename: t2 })).result, a2 = "https://" + o2.cdnDomain + "/" + o2.ossPath, { securityToken: c2, accessKeyId: u2, signature: l2, host: h2, ossPath: f2, id: p2, policy: g2, ossCallbackUrl: m2 } = o2, y = { "Cache-Control": "max-age=2592000", "Content-Disposition": "attachment", OSSAccessKeyId: u2, Signature: l2, host: h2, id: p2, key: f2, policy: g2, success_action_status: 200 };
+      if (c2 && (y["x-oss-security-token"] = c2), m2) {
         const e2 = JSON.stringify({ callbackUrl: m2, callbackBody: JSON.stringify({ fileId: p2, spaceId: this.config.spaceId }), callbackBodyType: "application/json" });
-        y2.callback = Y.toBase64(e2);
+        y.callback = ie.toBase64(e2);
       }
-      const _2 = { url: "https://" + i2.host, formData: y2, fileName: "file", name: "file", filePath: e, fileType: n2 };
+      const _2 = { url: "https://" + o2.host, formData: y, fileName: "file", name: "file", filePath: e, fileType: n2 };
       if (await this.uploadFileToOSS(Object.assign({}, _2, { onUploadProgress: s2 })), m2)
         return { success: true, filePath: e, fileID: a2 };
       if ((await this.reportOSSUpload({ id: p2 })).success)
         return { success: true, filePath: e, fileID: a2 };
-      throw new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" });
-    }
-    deleteFile({ fileList: e }) {
-      const t2 = { method: "serverless.file.resource.delete", params: JSON.stringify({ id: e[0] }) };
-      return this.request(this.setupRequest(t2));
+      throw new G({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" });
     }
     getTempFileURL({ fileList: e } = {}) {
       return new Promise((t2, n2) => {
-        Array.isArray(e) && e.length !== 0 || n2(new H({ code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" })), t2({ fileList: e.map((e2) => ({ fileID: e2, tempFileURL: e2 })) });
+        Array.isArray(e) && 0 !== e.length || n2(new G({ code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" })), t2({ fileList: e.map((e2) => ({ fileID: e2, tempFileURL: e2 })) });
       });
     }
     async getFileInfo({ fileList: e } = {}) {
-      if (!Array.isArray(e) || e.length === 0)
-        throw new H({ code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" });
+      if (!Array.isArray(e) || 0 === e.length)
+        throw new G({ code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" });
       const t2 = { method: "serverless.file.resource.info", params: JSON.stringify({ id: e.map((e2) => e2.split("?")[0]).join(",") }) };
       return { fileList: (await this.request(this.setupRequest(t2))).result };
     }
   };
-  var ee = { init(e) {
-    const t2 = new Z(e), n2 = { signInAnonymously: function() {
+  var ue = { init(e) {
+    const t2 = new ce(e), n2 = { signInAnonymously: function() {
       return t2.authorize();
     }, getLoginState: function() {
       return Promise.resolve(false);
@@ -1864,20 +1868,20 @@ if (uni.restoreGlobal) {
       return n2;
     }, t2.customAuth = t2.auth, t2;
   } };
-  const te = typeof location != "undefined" && location.protocol === "http:" ? "http:" : "https:";
-  var ne;
+  const le = "undefined" != typeof location && "http:" === location.protocol ? "http:" : "https:";
+  var he;
   !function(e) {
     e.local = "local", e.none = "none", e.session = "session";
-  }(ne || (ne = {}));
-  var se = function() {
+  }(he || (he = {}));
+  var de = function() {
   };
-  const oe = () => {
+  const fe = () => {
     let e;
     if (!Promise) {
       e = () => {
       }, e.promise = {};
       const t3 = () => {
-        throw new H({ message: 'Your Node runtime does support ES6 Promises. Set "global.Promise" to your preferred implementation of promises.' });
+        throw new G({ message: 'Your Node runtime does support ES6 Promises. Set "global.Promise" to your preferred implementation of promises.' });
       };
       return Object.defineProperty(e.promise, "then", { get: t3 }), Object.defineProperty(e.promise, "catch", { get: t3 }), e;
     }
@@ -1886,15 +1890,15 @@ if (uni.restoreGlobal) {
     });
     return e.promise = t2, e;
   };
-  function re(e) {
-    return e === void 0;
+  function pe(e) {
+    return void 0 === e;
   }
-  function ie(e) {
-    return Object.prototype.toString.call(e) === "[object Null]";
+  function ge(e) {
+    return "[object Null]" === Object.prototype.toString.call(e);
   }
-  var ae;
-  function ce(e) {
-    const t2 = (n2 = e, Object.prototype.toString.call(n2) === "[object Array]" ? e : [e]);
+  var me;
+  function ye(e) {
+    const t2 = (n2 = e, "[object Array]" === Object.prototype.toString.call(n2) ? e : [e]);
     var n2;
     for (const e2 of t2) {
       const { isMatch: t3, genAdapter: n3, runtime: s2 } = e2;
@@ -1904,64 +1908,64 @@ if (uni.restoreGlobal) {
   }
   !function(e) {
     e.WEB = "web", e.WX_MP = "wx_mp";
-  }(ae || (ae = {}));
-  const ue = { adapter: null, runtime: void 0 }, le = ["anonymousUuidKey"];
-  class he extends se {
+  }(me || (me = {}));
+  const _e = { adapter: null, runtime: void 0 }, we = ["anonymousUuidKey"];
+  class ve extends de {
     constructor() {
-      super(), ue.adapter.root.tcbObject || (ue.adapter.root.tcbObject = {});
+      super(), _e.adapter.root.tcbObject || (_e.adapter.root.tcbObject = {});
     }
     setItem(e, t2) {
-      ue.adapter.root.tcbObject[e] = t2;
+      _e.adapter.root.tcbObject[e] = t2;
     }
     getItem(e) {
-      return ue.adapter.root.tcbObject[e];
+      return _e.adapter.root.tcbObject[e];
     }
     removeItem(e) {
-      delete ue.adapter.root.tcbObject[e];
+      delete _e.adapter.root.tcbObject[e];
     }
     clear() {
-      delete ue.adapter.root.tcbObject;
+      delete _e.adapter.root.tcbObject;
     }
   }
-  function de(e, t2) {
+  function Se(e, t2) {
     switch (e) {
       case "local":
-        return t2.localStorage || new he();
+        return t2.localStorage || new ve();
       case "none":
-        return new he();
+        return new ve();
       default:
-        return t2.sessionStorage || new he();
+        return t2.sessionStorage || new ve();
     }
   }
-  class fe {
+  class ke {
     constructor(e) {
       if (!this._storage) {
-        this._persistence = ue.adapter.primaryStorage || e.persistence, this._storage = de(this._persistence, ue.adapter);
-        const t2 = `access_token_${e.env}`, n2 = `access_token_expire_${e.env}`, s2 = `refresh_token_${e.env}`, o2 = `anonymous_uuid_${e.env}`, r2 = `login_type_${e.env}`, i2 = `user_info_${e.env}`;
-        this.keys = { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2, anonymousUuidKey: o2, loginTypeKey: r2, userInfoKey: i2 };
+        this._persistence = _e.adapter.primaryStorage || e.persistence, this._storage = Se(this._persistence, _e.adapter);
+        const t2 = `access_token_${e.env}`, n2 = `access_token_expire_${e.env}`, s2 = `refresh_token_${e.env}`, r2 = `anonymous_uuid_${e.env}`, i2 = `login_type_${e.env}`, o2 = `user_info_${e.env}`;
+        this.keys = { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2, anonymousUuidKey: r2, loginTypeKey: i2, userInfoKey: o2 };
       }
     }
     updatePersistence(e) {
       if (e === this._persistence)
         return;
-      const t2 = this._persistence === "local";
+      const t2 = "local" === this._persistence;
       this._persistence = e;
-      const n2 = de(e, ue.adapter);
+      const n2 = Se(e, _e.adapter);
       for (const e2 in this.keys) {
         const s2 = this.keys[e2];
-        if (t2 && le.includes(e2))
+        if (t2 && we.includes(e2))
           continue;
-        const o2 = this._storage.getItem(s2);
-        re(o2) || ie(o2) || (n2.setItem(s2, o2), this._storage.removeItem(s2));
+        const r2 = this._storage.getItem(s2);
+        pe(r2) || ge(r2) || (n2.setItem(s2, r2), this._storage.removeItem(s2));
       }
       this._storage = n2;
     }
     setStore(e, t2, n2) {
       if (!this._storage)
         return;
-      const s2 = { version: n2 || "localCachev1", content: t2 }, o2 = JSON.stringify(s2);
+      const s2 = { version: n2 || "localCachev1", content: t2 }, r2 = JSON.stringify(s2);
       try {
-        this._storage.setItem(e, o2);
+        this._storage.setItem(e, r2);
       } catch (e2) {
         throw e2;
       }
@@ -1986,21 +1990,21 @@ if (uni.restoreGlobal) {
       this._storage.removeItem(e);
     }
   }
-  const pe = {}, ge = {};
-  function me(e) {
-    return pe[e];
+  const Ie = {}, be = {};
+  function Te(e) {
+    return Ie[e];
   }
-  class ye {
+  class Ae {
     constructor(e, t2) {
       this.data = t2 || null, this.name = e;
     }
   }
-  class _e extends ye {
+  class Ce extends Ae {
     constructor(e, t2) {
       super("error", { error: e, data: t2 }), this.error = e;
     }
   }
-  const we = new class {
+  const Pe = new class {
     constructor() {
       this._listeners = {};
     }
@@ -2013,14 +2017,14 @@ if (uni.restoreGlobal) {
       return function(e2, t3, n2) {
         if (n2 && n2[e2]) {
           const s2 = n2[e2].indexOf(t3);
-          s2 !== -1 && n2[e2].splice(s2, 1);
+          -1 !== s2 && n2[e2].splice(s2, 1);
         }
       }(e, t2, this._listeners), this;
     }
     fire(e, t2) {
-      if (e instanceof _e)
+      if (e instanceof Ce)
         return console.error(e.error), this;
-      const n2 = typeof e == "string" ? new ye(e, t2 || {}) : e;
+      const n2 = "string" == typeof e ? new Ae(e, t2 || {}) : e;
       const s2 = n2.name;
       if (this._listens(s2)) {
         n2.target = this;
@@ -2034,48 +2038,48 @@ if (uni.restoreGlobal) {
       return this._listeners[e] && this._listeners[e].length > 0;
     }
   }();
-  function ve(e, t2) {
-    we.on(e, t2);
+  function Ee(e, t2) {
+    Pe.on(e, t2);
   }
-  function ke(e, t2 = {}) {
-    we.fire(e, t2);
+  function Oe(e, t2 = {}) {
+    Pe.fire(e, t2);
   }
-  function Te(e, t2) {
-    we.off(e, t2);
+  function xe(e, t2) {
+    Pe.off(e, t2);
   }
-  const Se = "loginStateChanged", Ae = "loginStateExpire", Pe = "loginTypeChanged", Ie = "anonymousConverted", be = "refreshAccessToken";
-  var Oe;
+  const Ue = "loginStateChanged", Re = "loginStateExpire", Le = "loginTypeChanged", Ne = "anonymousConverted", De = "refreshAccessToken";
+  var Fe;
   !function(e) {
     e.ANONYMOUS = "ANONYMOUS", e.WECHAT = "WECHAT", e.WECHAT_PUBLIC = "WECHAT-PUBLIC", e.WECHAT_OPEN = "WECHAT-OPEN", e.CUSTOM = "CUSTOM", e.EMAIL = "EMAIL", e.USERNAME = "USERNAME", e.NULL = "NULL";
-  }(Oe || (Oe = {}));
-  const Ce = ["auth.getJwt", "auth.logout", "auth.signInWithTicket", "auth.signInAnonymously", "auth.signIn", "auth.fetchAccessTokenWithRefreshToken", "auth.signUpWithEmailAndPassword", "auth.activateEndUserMail", "auth.sendPasswordResetEmail", "auth.resetPasswordWithToken", "auth.isUsernameRegistered"], Ee = { "X-SDK-Version": "1.3.5" };
-  function Re(e, t2, n2) {
+  }(Fe || (Fe = {}));
+  const qe = ["auth.getJwt", "auth.logout", "auth.signInWithTicket", "auth.signInAnonymously", "auth.signIn", "auth.fetchAccessTokenWithRefreshToken", "auth.signUpWithEmailAndPassword", "auth.activateEndUserMail", "auth.sendPasswordResetEmail", "auth.resetPasswordWithToken", "auth.isUsernameRegistered"], Ke = { "X-SDK-Version": "1.3.5" };
+  function Me(e, t2, n2) {
     const s2 = e[t2];
     e[t2] = function(t3) {
-      const o2 = {}, r2 = {};
+      const r2 = {}, i2 = {};
       n2.forEach((n3) => {
-        const { data: s3, headers: i3 } = n3.call(e, t3);
-        Object.assign(o2, s3), Object.assign(r2, i3);
+        const { data: s3, headers: o3 } = n3.call(e, t3);
+        Object.assign(r2, s3), Object.assign(i2, o3);
       });
-      const i2 = t3.data;
-      return i2 && (() => {
+      const o2 = t3.data;
+      return o2 && (() => {
         var e2;
-        if (e2 = i2, Object.prototype.toString.call(e2) !== "[object FormData]")
-          t3.data = __spreadValues(__spreadValues({}, i2), o2);
+        if (e2 = o2, "[object FormData]" !== Object.prototype.toString.call(e2))
+          t3.data = { ...o2, ...r2 };
         else
-          for (const e3 in o2)
-            i2.append(e3, o2[e3]);
-      })(), t3.headers = __spreadValues(__spreadValues({}, t3.headers || {}), r2), s2.call(e, t3);
+          for (const e3 in r2)
+            o2.append(e3, r2[e3]);
+      })(), t3.headers = { ...t3.headers || {}, ...i2 }, s2.call(e, t3);
     };
   }
-  function Ue() {
+  function je() {
     const e = Math.random().toString(16).slice(2);
-    return { data: { seqId: e }, headers: __spreadProps(__spreadValues({}, Ee), { "x-seqid": e }) };
+    return { data: { seqId: e }, headers: { ...Ke, "x-seqid": e } };
   }
-  class xe {
+  class Be {
     constructor(e = {}) {
       var t2;
-      this.config = e, this._reqClass = new ue.adapter.reqClass({ timeout: this.config.timeout, timeoutMsg: `\u8BF7\u6C42\u5728${this.config.timeout / 1e3}s\u5185\u672A\u5B8C\u6210\uFF0C\u5DF2\u4E2D\u65AD`, restrictedMethods: ["post"] }), this._cache = me(this.config.env), this._localCache = (t2 = this.config.env, ge[t2]), Re(this._reqClass, "post", [Ue]), Re(this._reqClass, "upload", [Ue]), Re(this._reqClass, "download", [Ue]);
+      this.config = e, this._reqClass = new _e.adapter.reqClass({ timeout: this.config.timeout, timeoutMsg: `\u8BF7\u6C42\u5728${this.config.timeout / 1e3}s\u5185\u672A\u5B8C\u6210\uFF0C\u5DF2\u4E2D\u65AD`, restrictedMethods: ["post"] }), this._cache = Te(this.config.env), this._localCache = (t2 = this.config.env, be[t2]), Me(this._reqClass, "post", [je]), Me(this._reqClass, "upload", [je]), Me(this._reqClass, "download", [je]);
     }
     async post(e) {
       return await this._reqClass.post(e);
@@ -2099,84 +2103,84 @@ if (uni.restoreGlobal) {
       return e;
     }
     async _refreshAccessToken() {
-      const { accessTokenKey: e, accessTokenExpireKey: t2, refreshTokenKey: n2, loginTypeKey: s2, anonymousUuidKey: o2 } = this._cache.keys;
+      const { accessTokenKey: e, accessTokenExpireKey: t2, refreshTokenKey: n2, loginTypeKey: s2, anonymousUuidKey: r2 } = this._cache.keys;
       this._cache.removeStore(e), this._cache.removeStore(t2);
-      let r2 = this._cache.getStore(n2);
-      if (!r2)
-        throw new H({ message: "\u672A\u767B\u5F55CloudBase" });
-      const i2 = { refresh_token: r2 }, a2 = await this.request("auth.fetchAccessTokenWithRefreshToken", i2);
+      let i2 = this._cache.getStore(n2);
+      if (!i2)
+        throw new G({ message: "\u672A\u767B\u5F55CloudBase" });
+      const o2 = { refresh_token: i2 }, a2 = await this.request("auth.fetchAccessTokenWithRefreshToken", o2);
       if (a2.data.code) {
         const { code: e2 } = a2.data;
-        if (e2 === "SIGN_PARAM_INVALID" || e2 === "REFRESH_TOKEN_EXPIRED" || e2 === "INVALID_REFRESH_TOKEN") {
-          if (this._cache.getStore(s2) === Oe.ANONYMOUS && e2 === "INVALID_REFRESH_TOKEN") {
-            const e3 = this._cache.getStore(o2), t3 = this._cache.getStore(n2), s3 = await this.send("auth.signInAnonymously", { anonymous_uuid: e3, refresh_token: t3 });
+        if ("SIGN_PARAM_INVALID" === e2 || "REFRESH_TOKEN_EXPIRED" === e2 || "INVALID_REFRESH_TOKEN" === e2) {
+          if (this._cache.getStore(s2) === Fe.ANONYMOUS && "INVALID_REFRESH_TOKEN" === e2) {
+            const e3 = this._cache.getStore(r2), t3 = this._cache.getStore(n2), s3 = await this.send("auth.signInAnonymously", { anonymous_uuid: e3, refresh_token: t3 });
             return this.setRefreshToken(s3.refresh_token), this._refreshAccessToken();
           }
-          ke(Ae), this._cache.removeStore(n2);
+          Oe(Re), this._cache.removeStore(n2);
         }
-        throw new H({ code: a2.data.code, message: `\u5237\u65B0access token\u5931\u8D25\uFF1A${a2.data.code}` });
+        throw new G({ code: a2.data.code, message: `\u5237\u65B0access token\u5931\u8D25\uFF1A${a2.data.code}` });
       }
       if (a2.data.access_token)
-        return ke(be), this._cache.setStore(e, a2.data.access_token), this._cache.setStore(t2, a2.data.access_token_expire + Date.now()), { accessToken: a2.data.access_token, accessTokenExpire: a2.data.access_token_expire };
+        return Oe(De), this._cache.setStore(e, a2.data.access_token), this._cache.setStore(t2, a2.data.access_token_expire + Date.now()), { accessToken: a2.data.access_token, accessTokenExpire: a2.data.access_token_expire };
       a2.data.refresh_token && (this._cache.removeStore(n2), this._cache.setStore(n2, a2.data.refresh_token), this._refreshAccessToken());
     }
     async getAccessToken() {
       const { accessTokenKey: e, accessTokenExpireKey: t2, refreshTokenKey: n2 } = this._cache.keys;
       if (!this._cache.getStore(n2))
-        throw new H({ message: "refresh token\u4E0D\u5B58\u5728\uFF0C\u767B\u5F55\u72B6\u6001\u5F02\u5E38" });
-      let s2 = this._cache.getStore(e), o2 = this._cache.getStore(t2), r2 = true;
-      return this._shouldRefreshAccessTokenHook && !await this._shouldRefreshAccessTokenHook(s2, o2) && (r2 = false), (!s2 || !o2 || o2 < Date.now()) && r2 ? this.refreshAccessToken() : { accessToken: s2, accessTokenExpire: o2 };
+        throw new G({ message: "refresh token\u4E0D\u5B58\u5728\uFF0C\u767B\u5F55\u72B6\u6001\u5F02\u5E38" });
+      let s2 = this._cache.getStore(e), r2 = this._cache.getStore(t2), i2 = true;
+      return this._shouldRefreshAccessTokenHook && !await this._shouldRefreshAccessTokenHook(s2, r2) && (i2 = false), (!s2 || !r2 || r2 < Date.now()) && i2 ? this.refreshAccessToken() : { accessToken: s2, accessTokenExpire: r2 };
     }
     async request(e, t2, n2) {
       const s2 = `x-tcb-trace_${this.config.env}`;
-      let o2 = "application/x-www-form-urlencoded";
-      const r2 = __spreadValues({ action: e, env: this.config.env, dataVersion: "2019-08-16" }, t2);
-      if (Ce.indexOf(e) === -1) {
+      let r2 = "application/x-www-form-urlencoded";
+      const i2 = { action: e, env: this.config.env, dataVersion: "2019-08-16", ...t2 };
+      if (-1 === qe.indexOf(e)) {
         const { refreshTokenKey: e2 } = this._cache.keys;
-        this._cache.getStore(e2) && (r2.access_token = (await this.getAccessToken()).accessToken);
+        this._cache.getStore(e2) && (i2.access_token = (await this.getAccessToken()).accessToken);
       }
-      let i2;
-      if (e === "storage.uploadFile") {
-        i2 = new FormData();
-        for (let e2 in i2)
-          i2.hasOwnProperty(e2) && i2[e2] !== void 0 && i2.append(e2, r2[e2]);
-        o2 = "multipart/form-data";
+      let o2;
+      if ("storage.uploadFile" === e) {
+        o2 = new FormData();
+        for (let e2 in o2)
+          o2.hasOwnProperty(e2) && void 0 !== o2[e2] && o2.append(e2, i2[e2]);
+        r2 = "multipart/form-data";
       } else {
-        o2 = "application/json", i2 = {};
-        for (let e2 in r2)
-          r2[e2] !== void 0 && (i2[e2] = r2[e2]);
+        r2 = "application/json", o2 = {};
+        for (let e2 in i2)
+          void 0 !== i2[e2] && (o2[e2] = i2[e2]);
       }
-      let a2 = { headers: { "content-type": o2 } };
+      let a2 = { headers: { "content-type": r2 } };
       n2 && n2.onUploadProgress && (a2.onUploadProgress = n2.onUploadProgress);
       const c2 = this._localCache.getStore(s2);
       c2 && (a2.headers["X-TCB-Trace"] = c2);
       const { parse: u2, inQuery: l2, search: h2 } = t2;
       let d2 = { env: this.config.env };
-      u2 && (d2.parse = true), l2 && (d2 = __spreadValues(__spreadValues({}, l2), d2));
+      u2 && (d2.parse = true), l2 && (d2 = { ...l2, ...d2 });
       let f2 = function(e2, t3, n3 = {}) {
         const s3 = /\?/.test(t3);
-        let o3 = "";
+        let r3 = "";
         for (let e3 in n3)
-          o3 === "" ? !s3 && (t3 += "?") : o3 += "&", o3 += `${e3}=${encodeURIComponent(n3[e3])}`;
-        return /^http(s)?\:\/\//.test(t3 += o3) ? t3 : `${e2}${t3}`;
-      }(te, "//tcb-api.tencentcloudapi.com/web", d2);
+          "" === r3 ? !s3 && (t3 += "?") : r3 += "&", r3 += `${e3}=${encodeURIComponent(n3[e3])}`;
+        return /^http(s)?\:\/\//.test(t3 += r3) ? t3 : `${e2}${t3}`;
+      }(le, "//tcb-api.tencentcloudapi.com/web", d2);
       h2 && (f2 += h2);
-      const p2 = await this.post(__spreadValues({ url: f2, data: i2 }, a2)), g2 = p2.header && p2.header["x-tcb-trace"];
-      if (g2 && this._localCache.setStore(s2, g2), Number(p2.status) !== 200 && Number(p2.statusCode) !== 200 || !p2.data)
-        throw new H({ code: "NETWORK_ERROR", message: "network request error" });
+      const p2 = await this.post({ url: f2, data: o2, ...a2 }), g2 = p2.header && p2.header["x-tcb-trace"];
+      if (g2 && this._localCache.setStore(s2, g2), 200 !== Number(p2.status) && 200 !== Number(p2.statusCode) || !p2.data)
+        throw new G({ code: "NETWORK_ERROR", message: "network request error" });
       return p2;
     }
     async send(e, t2 = {}) {
       const n2 = await this.request(e, t2, { onUploadProgress: t2.onUploadProgress });
-      if (n2.data.code === "ACCESS_TOKEN_EXPIRED" && Ce.indexOf(e) === -1) {
+      if ("ACCESS_TOKEN_EXPIRED" === n2.data.code && -1 === qe.indexOf(e)) {
         await this.refreshAccessToken();
         const n3 = await this.request(e, t2, { onUploadProgress: t2.onUploadProgress });
         if (n3.data.code)
-          throw new H({ code: n3.data.code, message: n3.data.message });
+          throw new G({ code: n3.data.code, message: n3.data.message });
         return n3.data;
       }
       if (n2.data.code)
-        throw new H({ code: n2.data.code, message: n2.data.message });
+        throw new G({ code: n2.data.code, message: n2.data.message });
       return n2.data;
     }
     setRefreshToken(e) {
@@ -2184,13 +2188,13 @@ if (uni.restoreGlobal) {
       this._cache.removeStore(t2), this._cache.removeStore(n2), this._cache.setStore(s2, e);
     }
   }
-  const Le = {};
-  function De(e) {
-    return Le[e];
+  const $e = {};
+  function We(e) {
+    return $e[e];
   }
-  class Ne {
+  class ze {
     constructor(e) {
-      this.config = e, this._cache = me(e.env), this._request = De(e.env);
+      this.config = e, this._cache = Te(e.env), this._request = We(e.env);
     }
     setRefreshToken(e) {
       const { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2 } = this._cache.keys;
@@ -2209,15 +2213,15 @@ if (uni.restoreGlobal) {
       this._cache.setStore(t2, e);
     }
   }
-  class qe {
+  class Je {
     constructor(e) {
       if (!e)
-        throw new H({ code: "PARAM_ERROR", message: "envId is not defined" });
-      this._envId = e, this._cache = me(this._envId), this._request = De(this._envId), this.setUserInfo();
+        throw new G({ code: "PARAM_ERROR", message: "envId is not defined" });
+      this._envId = e, this._cache = Te(this._envId), this._request = We(this._envId), this.setUserInfo();
     }
     linkWithTicket(e) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "ticket must be string" });
+      if ("string" != typeof e)
+        throw new G({ code: "PARAM_ERROR", message: "ticket must be string" });
       return this._request.send("auth.linkWithTicket", { ticket: e });
     }
     linkWithRedirect(e) {
@@ -2230,8 +2234,8 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.updateEmail", { newEmail: e });
     }
     updateUsername(e) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "username must be a string" });
+      if ("string" != typeof e)
+        throw new G({ code: "PARAM_ERROR", message: "username must be a string" });
       return this._request.send("auth.updateUsername", { username: e });
     }
     async getLinkedUidList() {
@@ -2249,7 +2253,7 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.unlink", { platform: e });
     }
     async update(e) {
-      const { nickName: t2, gender: n2, avatarUrl: s2, province: o2, country: r2, city: i2 } = e, { data: a2 } = await this._request.send("auth.updateUserInfo", { nickName: t2, gender: n2, avatarUrl: s2, province: o2, country: r2, city: i2 });
+      const { nickName: t2, gender: n2, avatarUrl: s2, province: r2, country: i2, city: o2 } = e, { data: a2 } = await this._request.send("auth.updateUserInfo", { nickName: t2, gender: n2, avatarUrl: s2, province: r2, country: i2, city: o2 });
       this.setLocalUserInfo(a2);
     }
     async refresh() {
@@ -2267,70 +2271,70 @@ if (uni.restoreGlobal) {
       this._cache.setStore(t2, e), this.setUserInfo();
     }
   }
-  class Fe {
+  class He {
     constructor(e) {
       if (!e)
-        throw new H({ code: "PARAM_ERROR", message: "envId is not defined" });
-      this._cache = me(e);
-      const { refreshTokenKey: t2, accessTokenKey: n2, accessTokenExpireKey: s2 } = this._cache.keys, o2 = this._cache.getStore(t2), r2 = this._cache.getStore(n2), i2 = this._cache.getStore(s2);
-      this.credential = { refreshToken: o2, accessToken: r2, accessTokenExpire: i2 }, this.user = new qe(e);
+        throw new G({ code: "PARAM_ERROR", message: "envId is not defined" });
+      this._cache = Te(e);
+      const { refreshTokenKey: t2, accessTokenKey: n2, accessTokenExpireKey: s2 } = this._cache.keys, r2 = this._cache.getStore(t2), i2 = this._cache.getStore(n2), o2 = this._cache.getStore(s2);
+      this.credential = { refreshToken: r2, accessToken: i2, accessTokenExpire: o2 }, this.user = new Je(e);
     }
     get isAnonymousAuth() {
-      return this.loginType === Oe.ANONYMOUS;
+      return this.loginType === Fe.ANONYMOUS;
     }
     get isCustomAuth() {
-      return this.loginType === Oe.CUSTOM;
+      return this.loginType === Fe.CUSTOM;
     }
     get isWeixinAuth() {
-      return this.loginType === Oe.WECHAT || this.loginType === Oe.WECHAT_OPEN || this.loginType === Oe.WECHAT_PUBLIC;
+      return this.loginType === Fe.WECHAT || this.loginType === Fe.WECHAT_OPEN || this.loginType === Fe.WECHAT_PUBLIC;
     }
     get loginType() {
       return this._cache.getStore(this._cache.keys.loginTypeKey);
     }
   }
-  class Me extends Ne {
+  class Ge extends ze {
     async signIn() {
       this._cache.updatePersistence("local");
-      const { anonymousUuidKey: e, refreshTokenKey: t2 } = this._cache.keys, n2 = this._cache.getStore(e) || void 0, s2 = this._cache.getStore(t2) || void 0, o2 = await this._request.send("auth.signInAnonymously", { anonymous_uuid: n2, refresh_token: s2 });
-      if (o2.uuid && o2.refresh_token) {
-        this._setAnonymousUUID(o2.uuid), this.setRefreshToken(o2.refresh_token), await this._request.refreshAccessToken(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.ANONYMOUS, persistence: "local" });
-        const e2 = new Fe(this.config.env);
+      const { anonymousUuidKey: e, refreshTokenKey: t2 } = this._cache.keys, n2 = this._cache.getStore(e) || void 0, s2 = this._cache.getStore(t2) || void 0, r2 = await this._request.send("auth.signInAnonymously", { anonymous_uuid: n2, refresh_token: s2 });
+      if (r2.uuid && r2.refresh_token) {
+        this._setAnonymousUUID(r2.uuid), this.setRefreshToken(r2.refresh_token), await this._request.refreshAccessToken(), Oe(Ue), Oe(Le, { env: this.config.env, loginType: Fe.ANONYMOUS, persistence: "local" });
+        const e2 = new He(this.config.env);
         return await e2.user.refresh(), e2;
       }
-      throw new H({ message: "\u533F\u540D\u767B\u5F55\u5931\u8D25" });
+      throw new G({ message: "\u533F\u540D\u767B\u5F55\u5931\u8D25" });
     }
     async linkAndRetrieveDataWithTicket(e) {
-      const { anonymousUuidKey: t2, refreshTokenKey: n2 } = this._cache.keys, s2 = this._cache.getStore(t2), o2 = this._cache.getStore(n2), r2 = await this._request.send("auth.linkAndRetrieveDataWithTicket", { anonymous_uuid: s2, refresh_token: o2, ticket: e });
-      if (r2.refresh_token)
-        return this._clearAnonymousUUID(), this.setRefreshToken(r2.refresh_token), await this._request.refreshAccessToken(), ke(Ie, { env: this.config.env }), ke(Pe, { loginType: Oe.CUSTOM, persistence: "local" }), { credential: { refreshToken: r2.refresh_token } };
-      throw new H({ message: "\u533F\u540D\u8F6C\u5316\u5931\u8D25" });
+      const { anonymousUuidKey: t2, refreshTokenKey: n2 } = this._cache.keys, s2 = this._cache.getStore(t2), r2 = this._cache.getStore(n2), i2 = await this._request.send("auth.linkAndRetrieveDataWithTicket", { anonymous_uuid: s2, refresh_token: r2, ticket: e });
+      if (i2.refresh_token)
+        return this._clearAnonymousUUID(), this.setRefreshToken(i2.refresh_token), await this._request.refreshAccessToken(), Oe(Ne, { env: this.config.env }), Oe(Le, { loginType: Fe.CUSTOM, persistence: "local" }), { credential: { refreshToken: i2.refresh_token } };
+      throw new G({ message: "\u533F\u540D\u8F6C\u5316\u5931\u8D25" });
     }
     _setAnonymousUUID(e) {
       const { anonymousUuidKey: t2, loginTypeKey: n2 } = this._cache.keys;
-      this._cache.removeStore(t2), this._cache.setStore(t2, e), this._cache.setStore(n2, Oe.ANONYMOUS);
+      this._cache.removeStore(t2), this._cache.setStore(t2, e), this._cache.setStore(n2, Fe.ANONYMOUS);
     }
     _clearAnonymousUUID() {
       this._cache.removeStore(this._cache.keys.anonymousUuidKey);
     }
   }
-  class je extends Ne {
+  class Ve extends ze {
     async signIn(e) {
-      if (typeof e != "string")
-        throw new H({ param: "PARAM_ERROR", message: "ticket must be a string" });
+      if ("string" != typeof e)
+        throw new G({ code: "PARAM_ERROR", message: "ticket must be a string" });
       const { refreshTokenKey: t2 } = this._cache.keys, n2 = await this._request.send("auth.signInWithTicket", { ticket: e, refresh_token: this._cache.getStore(t2) || "" });
       if (n2.refresh_token)
-        return this.setRefreshToken(n2.refresh_token), await this._request.refreshAccessToken(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.CUSTOM, persistence: this.config.persistence }), await this.refreshUserInfo(), new Fe(this.config.env);
-      throw new H({ message: "\u81EA\u5B9A\u4E49\u767B\u5F55\u5931\u8D25" });
+        return this.setRefreshToken(n2.refresh_token), await this._request.refreshAccessToken(), Oe(Ue), Oe(Le, { env: this.config.env, loginType: Fe.CUSTOM, persistence: this.config.persistence }), await this.refreshUserInfo(), new He(this.config.env);
+      throw new G({ message: "\u81EA\u5B9A\u4E49\u767B\u5F55\u5931\u8D25" });
     }
   }
-  class $e extends Ne {
+  class Ye extends ze {
     async signIn(e, t2) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "email must be a string" });
-      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: "EMAIL", email: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: o2, access_token: r2, access_token_expire: i2 } = s2;
-      if (o2)
-        return this.setRefreshToken(o2), r2 && i2 ? this.setAccessToken(r2, i2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.EMAIL, persistence: this.config.persistence }), new Fe(this.config.env);
-      throw s2.code ? new H({ code: s2.code, message: `\u90AE\u7BB1\u767B\u5F55\u5931\u8D25: ${s2.message}` }) : new H({ message: "\u90AE\u7BB1\u767B\u5F55\u5931\u8D25" });
+      if ("string" != typeof e)
+        throw new G({ code: "PARAM_ERROR", message: "email must be a string" });
+      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: "EMAIL", email: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: r2, access_token: i2, access_token_expire: o2 } = s2;
+      if (r2)
+        return this.setRefreshToken(r2), i2 && o2 ? this.setAccessToken(i2, o2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Oe(Ue), Oe(Le, { env: this.config.env, loginType: Fe.EMAIL, persistence: this.config.persistence }), new He(this.config.env);
+      throw s2.code ? new G({ code: s2.code, message: `\u90AE\u7BB1\u767B\u5F55\u5931\u8D25: ${s2.message}` }) : new G({ message: "\u90AE\u7BB1\u767B\u5F55\u5931\u8D25" });
     }
     async activate(e) {
       return this._request.send("auth.activateEndUserMail", { token: e });
@@ -2339,20 +2343,20 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.resetPasswordWithToken", { token: e, newPassword: t2 });
     }
   }
-  class Be extends Ne {
+  class Qe extends ze {
     async signIn(e, t2) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "username must be a string" });
-      typeof t2 != "string" && (t2 = "", console.warn("password is empty"));
-      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: Oe.USERNAME, username: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: o2, access_token_expire: r2, access_token: i2 } = s2;
-      if (o2)
-        return this.setRefreshToken(o2), i2 && r2 ? this.setAccessToken(i2, r2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.USERNAME, persistence: this.config.persistence }), new Fe(this.config.env);
-      throw s2.code ? new H({ code: s2.code, message: `\u7528\u6237\u540D\u5BC6\u7801\u767B\u5F55\u5931\u8D25: ${s2.message}` }) : new H({ message: "\u7528\u6237\u540D\u5BC6\u7801\u767B\u5F55\u5931\u8D25" });
+      if ("string" != typeof e)
+        throw new G({ code: "PARAM_ERROR", message: "username must be a string" });
+      "string" != typeof t2 && (t2 = "", console.warn("password is empty"));
+      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: Fe.USERNAME, username: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: r2, access_token_expire: i2, access_token: o2 } = s2;
+      if (r2)
+        return this.setRefreshToken(r2), o2 && i2 ? this.setAccessToken(o2, i2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Oe(Ue), Oe(Le, { env: this.config.env, loginType: Fe.USERNAME, persistence: this.config.persistence }), new He(this.config.env);
+      throw s2.code ? new G({ code: s2.code, message: `\u7528\u6237\u540D\u5BC6\u7801\u767B\u5F55\u5931\u8D25: ${s2.message}` }) : new G({ message: "\u7528\u6237\u540D\u5BC6\u7801\u767B\u5F55\u5931\u8D25" });
     }
   }
-  class Ke {
+  class Xe {
     constructor(e) {
-      this.config = e, this._cache = me(e.env), this._request = De(e.env), this._onAnonymousConverted = this._onAnonymousConverted.bind(this), this._onLoginTypeChanged = this._onLoginTypeChanged.bind(this), ve(Pe, this._onLoginTypeChanged);
+      this.config = e, this._cache = Te(e.env), this._request = We(e.env), this._onAnonymousConverted = this._onAnonymousConverted.bind(this), this._onLoginTypeChanged = this._onLoginTypeChanged.bind(this), Ee(Le, this._onLoginTypeChanged);
     }
     get currentUser() {
       const e = this.hasLoginState();
@@ -2362,38 +2366,38 @@ if (uni.restoreGlobal) {
       return this._cache.getStore(this._cache.keys.loginTypeKey);
     }
     anonymousAuthProvider() {
-      return new Me(this.config);
+      return new Ge(this.config);
     }
     customAuthProvider() {
-      return new je(this.config);
+      return new Ve(this.config);
     }
     emailAuthProvider() {
-      return new $e(this.config);
+      return new Ye(this.config);
     }
     usernameAuthProvider() {
-      return new Be(this.config);
+      return new Qe(this.config);
     }
     async signInAnonymously() {
-      return new Me(this.config).signIn();
+      return new Ge(this.config).signIn();
     }
     async signInWithEmailAndPassword(e, t2) {
-      return new $e(this.config).signIn(e, t2);
+      return new Ye(this.config).signIn(e, t2);
     }
     signInWithUsernameAndPassword(e, t2) {
-      return new Be(this.config).signIn(e, t2);
+      return new Qe(this.config).signIn(e, t2);
     }
     async linkAndRetrieveDataWithTicket(e) {
-      this._anonymousAuthProvider || (this._anonymousAuthProvider = new Me(this.config)), ve(Ie, this._onAnonymousConverted);
+      this._anonymousAuthProvider || (this._anonymousAuthProvider = new Ge(this.config)), Ee(Ne, this._onAnonymousConverted);
       return await this._anonymousAuthProvider.linkAndRetrieveDataWithTicket(e);
     }
     async signOut() {
-      if (this.loginType === Oe.ANONYMOUS)
-        throw new H({ message: "\u533F\u540D\u7528\u6237\u4E0D\u652F\u6301\u767B\u51FA\u64CD\u4F5C" });
+      if (this.loginType === Fe.ANONYMOUS)
+        throw new G({ message: "\u533F\u540D\u7528\u6237\u4E0D\u652F\u6301\u767B\u51FA\u64CD\u4F5C" });
       const { refreshTokenKey: e, accessTokenKey: t2, accessTokenExpireKey: n2 } = this._cache.keys, s2 = this._cache.getStore(e);
       if (!s2)
         return;
-      const o2 = await this._request.send("auth.logout", { refresh_token: s2 });
-      return this._cache.removeStore(e), this._cache.removeStore(t2), this._cache.removeStore(n2), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.NULL, persistence: this.config.persistence }), o2;
+      const r2 = await this._request.send("auth.logout", { refresh_token: s2 });
+      return this._cache.removeStore(e), this._cache.removeStore(t2), this._cache.removeStore(n2), Oe(Ue), Oe(Le, { env: this.config.env, loginType: Fe.NULL, persistence: this.config.persistence }), r2;
     }
     async signUpWithEmailAndPassword(e, t2) {
       return this._request.send("auth.signUpWithEmailAndPassword", { email: e, password: t2 });
@@ -2402,7 +2406,7 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.sendPasswordResetEmail", { email: e });
     }
     onLoginStateChanged(e) {
-      ve(Se, () => {
+      Ee(Ue, () => {
         const t3 = this.hasLoginState();
         e.call(this, t3);
       });
@@ -2410,16 +2414,16 @@ if (uni.restoreGlobal) {
       e.call(this, t2);
     }
     onLoginStateExpired(e) {
-      ve(Ae, e.bind(this));
+      Ee(Re, e.bind(this));
     }
     onAccessTokenRefreshed(e) {
-      ve(be, e.bind(this));
+      Ee(De, e.bind(this));
     }
     onAnonymousConverted(e) {
-      ve(Ie, e.bind(this));
+      Ee(Ne, e.bind(this));
     }
     onLoginTypeChanged(e) {
-      ve(Pe, () => {
+      Ee(Le, () => {
         const t2 = this.hasLoginState();
         e.call(this, t2);
       });
@@ -2429,11 +2433,11 @@ if (uni.restoreGlobal) {
     }
     hasLoginState() {
       const { refreshTokenKey: e } = this._cache.keys;
-      return this._cache.getStore(e) ? new Fe(this.config.env) : null;
+      return this._cache.getStore(e) ? new He(this.config.env) : null;
     }
     async isUsernameRegistered(e) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "username must be a string" });
+      if ("string" != typeof e)
+        throw new G({ code: "PARAM_ERROR", message: "username must be a string" });
       const { data: t2 } = await this._request.send("auth.isUsernameRegistered", { username: e });
       return t2 && t2.isRegistered;
     }
@@ -2441,13 +2445,13 @@ if (uni.restoreGlobal) {
       return Promise.resolve(this.hasLoginState());
     }
     async signInWithTicket(e) {
-      return new je(this.config).signIn(e);
+      return new Ve(this.config).signIn(e);
     }
     shouldRefreshAccessToken(e) {
       this._request._shouldRefreshAccessTokenHook = e.bind(this);
     }
     getUserInfo() {
-      return this._request.send("auth.getUserInfo", {}).then((e) => e.code ? e : __spreadProps(__spreadValues({}, e.data), { requestId: e.seqId }));
+      return this._request.send("auth.getUserInfo", {}).then((e) => e.code ? e : { ...e.data, requestId: e.seqId });
     }
     getAuthHeader() {
       const { refreshTokenKey: e, accessTokenKey: t2 } = this._cache.keys, n2 = this._cache.getStore(e);
@@ -2462,63 +2466,63 @@ if (uni.restoreGlobal) {
       s2 === this.config.env && (this._cache.updatePersistence(n2), this._cache.setStore(this._cache.keys.loginTypeKey, t2));
     }
   }
-  const We = function(e, t2) {
-    t2 = t2 || oe();
-    const n2 = De(this.config.env), { cloudPath: s2, filePath: o2, onUploadProgress: r2, fileType: i2 = "image" } = e;
+  const Ze = function(e, t2) {
+    t2 = t2 || fe();
+    const n2 = We(this.config.env), { cloudPath: s2, filePath: r2, onUploadProgress: i2, fileType: o2 = "image" } = e;
     return n2.send("storage.getUploadMetadata", { path: s2 }).then((e2) => {
       const { data: { url: a2, authorization: c2, token: u2, fileId: l2, cosFileId: h2 }, requestId: d2 } = e2, f2 = { key: s2, signature: c2, "x-cos-meta-fileid": h2, success_action_status: "201", "x-cos-security-token": u2 };
-      n2.upload({ url: a2, data: f2, file: o2, name: s2, fileType: i2, onUploadProgress: r2 }).then((e3) => {
-        e3.statusCode === 201 ? t2(null, { fileID: l2, requestId: d2 }) : t2(new H({ code: "STORAGE_REQUEST_FAIL", message: `STORAGE_REQUEST_FAIL: ${e3.data}` }));
+      n2.upload({ url: a2, data: f2, file: r2, name: s2, fileType: o2, onUploadProgress: i2 }).then((e3) => {
+        201 === e3.statusCode ? t2(null, { fileID: l2, requestId: d2 }) : t2(new G({ code: "STORAGE_REQUEST_FAIL", message: `STORAGE_REQUEST_FAIL: ${e3.data}` }));
       }).catch((e3) => {
         t2(e3);
       });
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, He = function(e, t2) {
-    t2 = t2 || oe();
-    const n2 = De(this.config.env), { cloudPath: s2 } = e;
+  }, et = function(e, t2) {
+    t2 = t2 || fe();
+    const n2 = We(this.config.env), { cloudPath: s2 } = e;
     return n2.send("storage.getUploadMetadata", { path: s2 }).then((e2) => {
       t2(null, e2);
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, ze = function({ fileList: e }, t2) {
-    if (t2 = t2 || oe(), !e || !Array.isArray(e))
+  }, tt$1 = function({ fileList: e }, t2) {
+    if (t2 = t2 || fe(), !e || !Array.isArray(e))
       return { code: "INVALID_PARAM", message: "fileList\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u6570\u7EC4" };
     for (let t3 of e)
-      if (!t3 || typeof t3 != "string")
+      if (!t3 || "string" != typeof t3)
         return { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" };
     const n2 = { fileid_list: e };
-    return De(this.config.env).send("storage.batchDeleteFile", n2).then((e2) => {
+    return We(this.config.env).send("storage.batchDeleteFile", n2).then((e2) => {
       e2.code ? t2(null, e2) : t2(null, { fileList: e2.data.delete_list, requestId: e2.requestId });
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, Je = function({ fileList: e }, t2) {
-    t2 = t2 || oe(), e && Array.isArray(e) || t2(null, { code: "INVALID_PARAM", message: "fileList\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u6570\u7EC4" });
+  }, nt = function({ fileList: e }, t2) {
+    t2 = t2 || fe(), e && Array.isArray(e) || t2(null, { code: "INVALID_PARAM", message: "fileList\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u6570\u7EC4" });
     let n2 = [];
     for (let s3 of e)
-      typeof s3 == "object" ? (s3.hasOwnProperty("fileID") && s3.hasOwnProperty("maxAge") || t2(null, { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u5305\u542BfileID\u548CmaxAge\u7684\u5BF9\u8C61" }), n2.push({ fileid: s3.fileID, max_age: s3.maxAge })) : typeof s3 == "string" ? n2.push({ fileid: s3 }) : t2(null, { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u5B57\u7B26\u4E32" });
+      "object" == typeof s3 ? (s3.hasOwnProperty("fileID") && s3.hasOwnProperty("maxAge") || t2(null, { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u5305\u542BfileID\u548CmaxAge\u7684\u5BF9\u8C61" }), n2.push({ fileid: s3.fileID, max_age: s3.maxAge })) : "string" == typeof s3 ? n2.push({ fileid: s3 }) : t2(null, { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u5B57\u7B26\u4E32" });
     const s2 = { file_list: n2 };
-    return De(this.config.env).send("storage.batchGetDownloadUrl", s2).then((e2) => {
+    return We(this.config.env).send("storage.batchGetDownloadUrl", s2).then((e2) => {
       e2.code ? t2(null, e2) : t2(null, { fileList: e2.data.download_list, requestId: e2.requestId });
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, Ve = async function({ fileID: e }, t2) {
-    const n2 = (await Je.call(this, { fileList: [{ fileID: e, maxAge: 600 }] })).fileList[0];
-    if (n2.code !== "SUCCESS")
+  }, st = async function({ fileID: e }, t2) {
+    const n2 = (await nt.call(this, { fileList: [{ fileID: e, maxAge: 600 }] })).fileList[0];
+    if ("SUCCESS" !== n2.code)
       return t2 ? t2(n2) : new Promise((e2) => {
         e2(n2);
       });
-    const s2 = De(this.config.env);
-    let o2 = n2.download_url;
-    if (o2 = encodeURI(o2), !t2)
-      return s2.download({ url: o2 });
-    t2(await s2.download({ url: o2 }));
-  }, Ye = function({ name: e, data: t2, query: n2, parse: s2, search: o2 }, r2) {
-    const i2 = r2 || oe();
+    const s2 = We(this.config.env);
+    let r2 = n2.download_url;
+    if (r2 = encodeURI(r2), !t2)
+      return s2.download({ url: r2 });
+    t2(await s2.download({ url: r2 }));
+  }, rt = function({ name: e, data: t2, query: n2, parse: s2, search: r2 }, i2) {
+    const o2 = i2 || fe();
     let a2;
     try {
       a2 = t2 ? JSON.stringify(t2) : "";
@@ -2526,164 +2530,150 @@ if (uni.restoreGlobal) {
       return Promise.reject(e2);
     }
     if (!e)
-      return Promise.reject(new H({ code: "PARAM_ERROR", message: "\u51FD\u6570\u540D\u4E0D\u80FD\u4E3A\u7A7A" }));
-    const c2 = { inQuery: n2, parse: s2, search: o2, function_name: e, request_data: a2 };
-    return De(this.config.env).send("functions.invokeFunction", c2).then((e2) => {
+      return Promise.reject(new G({ code: "PARAM_ERROR", message: "\u51FD\u6570\u540D\u4E0D\u80FD\u4E3A\u7A7A" }));
+    const c2 = { inQuery: n2, parse: s2, search: r2, function_name: e, request_data: a2 };
+    return We(this.config.env).send("functions.invokeFunction", c2).then((e2) => {
       if (e2.code)
-        i2(null, e2);
+        o2(null, e2);
       else {
         let t3 = e2.data.response_data;
         if (s2)
-          i2(null, { result: t3, requestId: e2.requestId });
+          o2(null, { result: t3, requestId: e2.requestId });
         else
           try {
-            t3 = JSON.parse(e2.data.response_data), i2(null, { result: t3, requestId: e2.requestId });
+            t3 = JSON.parse(e2.data.response_data), o2(null, { result: t3, requestId: e2.requestId });
           } catch (e3) {
-            i2(new H({ message: "response data must be json" }));
+            o2(new G({ message: "response data must be json" }));
           }
       }
-      return i2.promise;
+      return o2.promise;
     }).catch((e2) => {
-      i2(e2);
-    }), i2.promise;
-  }, Xe = { timeout: 15e3, persistence: "session" }, Ge = {};
-  class Qe {
+      o2(e2);
+    }), o2.promise;
+  }, it = { timeout: 15e3, persistence: "session" }, ot = {};
+  class at {
     constructor(e) {
       this.config = e || this.config, this.authObj = void 0;
     }
     init(e) {
-      switch (ue.adapter || (this.requestClient = new ue.adapter.reqClass({ timeout: e.timeout || 5e3, timeoutMsg: `\u8BF7\u6C42\u5728${(e.timeout || 5e3) / 1e3}s\u5185\u672A\u5B8C\u6210\uFF0C\u5DF2\u4E2D\u65AD` })), this.config = __spreadValues(__spreadValues({}, Xe), e), true) {
+      switch (_e.adapter || (this.requestClient = new _e.adapter.reqClass({ timeout: e.timeout || 5e3, timeoutMsg: `\u8BF7\u6C42\u5728${(e.timeout || 5e3) / 1e3}s\u5185\u672A\u5B8C\u6210\uFF0C\u5DF2\u4E2D\u65AD` })), this.config = { ...it, ...e }, true) {
         case this.config.timeout > 6e5:
           console.warn("timeout\u5927\u4E8E\u53EF\u914D\u7F6E\u4E0A\u9650[10\u5206\u949F]\uFF0C\u5DF2\u91CD\u7F6E\u4E3A\u4E0A\u9650\u6570\u503C"), this.config.timeout = 6e5;
           break;
         case this.config.timeout < 100:
           console.warn("timeout\u5C0F\u4E8E\u53EF\u914D\u7F6E\u4E0B\u9650[100ms]\uFF0C\u5DF2\u91CD\u7F6E\u4E3A\u4E0B\u9650\u6570\u503C"), this.config.timeout = 100;
       }
-      return new Qe(this.config);
+      return new at(this.config);
     }
     auth({ persistence: e } = {}) {
       if (this.authObj)
         return this.authObj;
-      const t2 = e || ue.adapter.primaryStorage || Xe.persistence;
+      const t2 = e || _e.adapter.primaryStorage || it.persistence;
       var n2;
       return t2 !== this.config.persistence && (this.config.persistence = t2), function(e2) {
         const { env: t3 } = e2;
-        pe[t3] = new fe(e2), ge[t3] = new fe(__spreadProps(__spreadValues({}, e2), { persistence: "local" }));
-      }(this.config), n2 = this.config, Le[n2.env] = new xe(n2), this.authObj = new Ke(this.config), this.authObj;
+        Ie[t3] = new ke(e2), be[t3] = new ke({ ...e2, persistence: "local" });
+      }(this.config), n2 = this.config, $e[n2.env] = new Be(n2), this.authObj = new Xe(this.config), this.authObj;
     }
     on(e, t2) {
-      return ve.apply(this, [e, t2]);
+      return Ee.apply(this, [e, t2]);
     }
     off(e, t2) {
-      return Te.apply(this, [e, t2]);
+      return xe.apply(this, [e, t2]);
     }
     callFunction(e, t2) {
-      return Ye.apply(this, [e, t2]);
+      return rt.apply(this, [e, t2]);
     }
     deleteFile(e, t2) {
-      return ze.apply(this, [e, t2]);
+      return tt$1.apply(this, [e, t2]);
     }
     getTempFileURL(e, t2) {
-      return Je.apply(this, [e, t2]);
+      return nt.apply(this, [e, t2]);
     }
     downloadFile(e, t2) {
-      return Ve.apply(this, [e, t2]);
+      return st.apply(this, [e, t2]);
     }
     uploadFile(e, t2) {
-      return We.apply(this, [e, t2]);
+      return Ze.apply(this, [e, t2]);
     }
     getUploadMetadata(e, t2) {
-      return He.apply(this, [e, t2]);
+      return et.apply(this, [e, t2]);
     }
     registerExtension(e) {
-      Ge[e.name] = e;
+      ot[e.name] = e;
     }
     async invokeExtension(e, t2) {
-      const n2 = Ge[e];
+      const n2 = ot[e];
       if (!n2)
-        throw new H({ message: `\u6269\u5C55${e} \u5FC5\u987B\u5148\u6CE8\u518C` });
+        throw new G({ message: `\u6269\u5C55${e} \u5FC5\u987B\u5148\u6CE8\u518C` });
       return await n2.invoke(t2, this);
     }
     useAdapters(e) {
-      const { adapter: t2, runtime: n2 } = ce(e) || {};
-      t2 && (ue.adapter = t2), n2 && (ue.runtime = n2);
+      const { adapter: t2, runtime: n2 } = ye(e) || {};
+      t2 && (_e.adapter = t2), n2 && (_e.runtime = n2);
     }
   }
-  var Ze = new Qe();
-  function et(e, t2, n2) {
-    n2 === void 0 && (n2 = {});
-    var s2 = /\?/.test(t2), o2 = "";
-    for (var r2 in n2)
-      o2 === "" ? !s2 && (t2 += "?") : o2 += "&", o2 += r2 + "=" + encodeURIComponent(n2[r2]);
-    return /^http(s)?:\/\//.test(t2 += o2) ? t2 : "" + e + t2;
+  var ct = new at();
+  function ut(e, t2, n2) {
+    void 0 === n2 && (n2 = {});
+    var s2 = /\?/.test(t2), r2 = "";
+    for (var i2 in n2)
+      "" === r2 ? !s2 && (t2 += "?") : r2 += "&", r2 += i2 + "=" + encodeURIComponent(n2[i2]);
+    return /^http(s)?:\/\//.test(t2 += r2) ? t2 : "" + e + t2;
   }
-  class tt$1 {
+  class lt {
     post(e) {
       const { url: t2, data: n2, headers: s2 } = e;
-      return new Promise((e2, o2) => {
-        X.request({ url: et("https:", t2), data: n2, method: "POST", header: s2, success(t3) {
+      return new Promise((e2, r2) => {
+        V.request({ url: ut("https:", t2), data: n2, method: "POST", header: s2, success(t3) {
           e2(t3);
         }, fail(e3) {
-          o2(e3);
+          r2(e3);
         } });
       });
     }
     upload(e) {
       return new Promise((t2, n2) => {
-        const { url: s2, file: o2, data: r2, headers: i2, fileType: a2 } = e, c2 = X.uploadFile({ url: et("https:", s2), name: "file", formData: Object.assign({}, r2), filePath: o2, fileType: a2, header: i2, success(e2) {
+        const { url: s2, file: r2, data: i2, headers: o2, fileType: a2 } = e, c2 = V.uploadFile({ url: ut("https:", s2), name: "file", formData: Object.assign({}, i2), filePath: r2, fileType: a2, header: o2, success(e2) {
           const n3 = { statusCode: e2.statusCode, data: e2.data || {} };
-          e2.statusCode === 200 && r2.success_action_status && (n3.statusCode = parseInt(r2.success_action_status, 10)), t2(n3);
+          200 === e2.statusCode && i2.success_action_status && (n3.statusCode = parseInt(i2.success_action_status, 10)), t2(n3);
         }, fail(e2) {
           n2(new Error(e2.errMsg || "uploadFile:fail"));
         } });
-        typeof e.onUploadProgress == "function" && c2 && typeof c2.onProgressUpdate == "function" && c2.onProgressUpdate((t3) => {
+        "function" == typeof e.onUploadProgress && c2 && "function" == typeof c2.onProgressUpdate && c2.onProgressUpdate((t3) => {
           e.onUploadProgress({ loaded: t3.totalBytesSent, total: t3.totalBytesExpectedToSend });
         });
       });
     }
   }
-  const nt = { setItem(e, t2) {
-    X.setStorageSync(e, t2);
-  }, getItem: (e) => X.getStorageSync(e), removeItem(e) {
-    X.removeStorageSync(e);
+  const ht = { setItem(e, t2) {
+    V.setStorageSync(e, t2);
+  }, getItem: (e) => V.getStorageSync(e), removeItem(e) {
+    V.removeStorageSync(e);
   }, clear() {
-    X.clearStorageSync();
+    V.clearStorageSync();
   } };
-  var st = { genAdapter: function() {
-    return { root: {}, reqClass: tt$1, localStorage: nt, primaryStorage: "local" };
+  var dt = { genAdapter: function() {
+    return { root: {}, reqClass: lt, localStorage: ht, primaryStorage: "local" };
   }, isMatch: function() {
     return true;
   }, runtime: "uni_app" };
-  Ze.useAdapters(st);
-  const ot = Ze, rt = ot.init;
-  ot.init = function(e) {
+  ct.useAdapters(dt);
+  const ft = ct, pt = ft.init;
+  ft.init = function(e) {
     e.env = e.spaceId;
-    const t2 = rt.call(this, e);
+    const t2 = pt.call(this, e);
     t2.config.provider = "tencent", t2.config.spaceId = e.spaceId;
     const n2 = t2.auth;
     return t2.auth = function(e2) {
       const t3 = n2.call(this, e2);
       return ["linkAndRetrieveDataWithTicket", "signInAnonymously", "signOut", "getAccessToken", "getLoginState", "signInWithTicket", "getUserInfo"].forEach((e3) => {
-        t3[e3] = W(t3[e3]).bind(t3);
+        t3[e3] = H(t3[e3]).bind(t3);
       }), t3;
     }, t2.customAuth = t2.auth, t2;
   };
-  var it = ot;
-  function at(e) {
-    return e && at(e.__v_raw) || e;
-  }
-  function ct() {
-    return { token: X.getStorageSync("uni_id_token") || X.getStorageSync("uniIdToken"), tokenExpired: X.getStorageSync("uni_id_token_expired") };
-  }
-  function ut({ token: e, tokenExpired: t2 } = {}) {
-    e && X.setStorageSync("uni_id_token", e), t2 && X.setStorageSync("uni_id_token_expired", t2);
-  }
-  function lt() {
-    if (m !== "web")
-      return;
-    uni.getStorageSync("__LAST_DCLOUD_APPID") !== v && (uni.setStorageSync("__LAST_DCLOUD_APPID", v), console.warn("\u68C0\u6D4B\u5230\u5F53\u524D\u9879\u76EE\u4E0E\u4E0A\u6B21\u8FD0\u884C\u5230\u6B64\u7AEF\u53E3\u7684\u9879\u76EE\u4E0D\u4E00\u81F4\uFF0C\u81EA\u52A8\u6E05\u7406uni-id\u4FDD\u5B58\u7684token\u4FE1\u606F\uFF08\u4EC5\u5F00\u53D1\u8C03\u8BD5\u65F6\u751F\u6548\uFF09"), X.removeStorageSync("uni_id_token"), X.removeStorageSync("uniIdToken"), X.removeStorageSync("uni_id_token_expired"));
-  }
-  var ht = class extends Z {
+  var gt = ft;
+  var mt = class extends ce {
     getAccessToken() {
       return new Promise((e, t2) => {
         const n2 = "Anonymous_Access_token";
@@ -2692,48 +2682,58 @@ if (uni.restoreGlobal) {
     }
     setupRequest(e, t2) {
       const n2 = Object.assign({}, e, { spaceId: this.config.spaceId, timestamp: Date.now() }), s2 = { "Content-Type": "application/json" };
-      t2 !== "auth" && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = Y.sign(n2, this.config.clientSecret);
-      const o2 = V();
-      s2["x-client-info"] = encodeURIComponent(JSON.stringify(o2));
-      const { token: r2 } = ct();
-      return s2["x-client-token"] = r2, { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: JSON.parse(JSON.stringify(s2)) };
+      "auth" !== t2 && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = ie.sign(n2, this.config.clientSecret);
+      const r2 = re();
+      s2["x-client-info"] = encodeURIComponent(JSON.stringify(r2));
+      const { token: i2 } = Q();
+      return s2["x-client-token"] = i2, { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: JSON.parse(JSON.stringify(s2)) };
     }
-    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, onUploadProgress: r2 }) {
-      return new Promise((i2, a2) => {
-        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, success(e2) {
-          e2 && e2.statusCode < 400 ? i2(e2) : a2(new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, onUploadProgress: i2 }) {
+      return new Promise((o2, a2) => {
+        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, success(e2) {
+          e2 && e2.statusCode < 400 ? o2(e2) : a2(new G({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
         }, fail(e2) {
-          a2(new H({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+          a2(new G({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
         } });
-        typeof r2 == "function" && c2 && typeof c2.onProgressUpdate == "function" && c2.onProgressUpdate((e2) => {
-          r2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
+        "function" == typeof i2 && c2 && "function" == typeof c2.onProgressUpdate && c2.onProgressUpdate((e2) => {
+          i2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
         });
       });
     }
     uploadFile({ filePath: e, cloudPath: t2, fileType: n2 = "image", onUploadProgress: s2 }) {
       if (!t2)
-        throw new H({ code: "CLOUDPATH_REQUIRED", message: "cloudPath\u4E0D\u53EF\u4E3A\u7A7A" });
-      let o2;
+        throw new G({ code: "CLOUDPATH_REQUIRED", message: "cloudPath\u4E0D\u53EF\u4E3A\u7A7A" });
+      let r2;
       return this.getOSSUploadOptionsFromPath({ cloudPath: t2 }).then((t3) => {
-        const { url: r2, formData: i2, name: a2 } = t3.result;
-        o2 = t3.result.fileUrl;
-        const c2 = { url: r2, formData: i2, name: a2, filePath: e, fileType: n2 };
+        const { url: i2, formData: o2, name: a2 } = t3.result;
+        r2 = t3.result.fileUrl;
+        const c2 = { url: i2, formData: o2, name: a2, filePath: e, fileType: n2 };
         return this.uploadFileToOSS(Object.assign({}, c2, { onUploadProgress: s2 }));
       }).then(() => this.reportOSSUpload({ cloudPath: t2 })).then((t3) => new Promise((n3, s3) => {
-        t3.success ? n3({ success: true, filePath: e, fileID: o2 }) : s3(new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+        t3.success ? n3({ success: true, filePath: e, fileID: r2 }) : s3(new G({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
       }));
     }
     deleteFile({ fileList: e }) {
       const t2 = { method: "serverless.file.resource.delete", params: JSON.stringify({ fileList: e }) };
-      return this.request(this.setupRequest(t2));
+      return this.request(this.setupRequest(t2)).then((e2) => {
+        if (e2.success)
+          return e2.result;
+        throw new G({ code: "DELETE_FILE_FAILED", message: "\u5220\u9664\u6587\u4EF6\u5931\u8D25" });
+      });
     }
     getTempFileURL({ fileList: e } = {}) {
+      if (!Array.isArray(e) || 0 === e.length)
+        throw new G({ code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" });
       const t2 = { method: "serverless.file.resource.getTempFileURL", params: JSON.stringify({ fileList: e }) };
-      return this.request(this.setupRequest(t2));
+      return this.request(this.setupRequest(t2)).then((e2) => {
+        if (e2.success)
+          return { fileList: e2.result.fileList.map((e3) => ({ fileID: e3.fileID, tempFileURL: e3.tempFileURL })) };
+        throw new G({ code: "GET_TEMP_FILE_URL_FAILED", message: "\u83B7\u53D6\u4E34\u65F6\u6587\u4EF6\u94FE\u63A5\u5931\u8D25" });
+      });
     }
   };
-  var dt = { init(e) {
-    const t2 = new ht(e), n2 = { signInAnonymously: function() {
+  var yt = { init(e) {
+    const t2 = new mt(e), n2 = { signInAnonymously: function() {
       return t2.authorize();
     }, getLoginState: function() {
       return Promise.resolve(false);
@@ -2742,29 +2742,29 @@ if (uni.restoreGlobal) {
       return n2;
     }, t2.customAuth = t2.auth, t2;
   } };
-  function ft({ data: e }) {
+  function _t({ data: e }) {
     let t2;
-    t2 = V();
+    t2 = re();
     const n2 = JSON.parse(JSON.stringify(e || {}));
     if (Object.assign(n2, { clientInfo: t2 }), !n2.uniIdToken) {
-      const { token: e2 } = ct();
+      const { token: e2 } = Q();
       e2 && (n2.uniIdToken = e2);
     }
     return n2;
   }
-  function pt({ name: e, data: t2 } = {}) {
-    const { localAddress: n2, localPort: s2 } = this.__dev__, o2 = { aliyun: "aliyun", tencent: "tcb" }[this.config.provider], r2 = this.config.spaceId, i2 = `http://${n2}:${s2}/system/check-function`, a2 = `http://${n2}:${s2}/cloudfunctions/${e}`;
+  function wt({ name: e, data: t2 } = {}) {
+    const { localAddress: n2, localPort: s2 } = this.__dev__, r2 = { aliyun: "aliyun", tencent: "tcb" }[this.config.provider], i2 = this.config.spaceId, o2 = `http://${n2}:${s2}/system/check-function`, a2 = `http://${n2}:${s2}/cloudfunctions/${e}`;
     return new Promise((t3, n3) => {
-      X.request({ method: "POST", url: i2, data: { name: e, platform: m, provider: o2, spaceId: r2 }, timeout: 3e3, success(e2) {
+      V.request({ method: "POST", url: o2, data: { name: e, platform: w, provider: r2, spaceId: i2 }, timeout: 3e3, success(e2) {
         t3(e2);
       }, fail() {
         t3({ data: { code: "NETWORK_ERROR", message: "\u8FDE\u63A5\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5\u5BA2\u6237\u7AEF\u662F\u5426\u548C\u4E3B\u673A\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\uFF0C\u81EA\u52A8\u5207\u6362\u4E3A\u5DF2\u90E8\u7F72\u7684\u4E91\u51FD\u6570\u3002" } });
       } });
     }).then(({ data: e2 } = {}) => {
       const { code: t3, message: n3 } = e2 || {};
-      return { code: t3 === 0 ? 0 : t3 || "SYS_ERR", message: n3 || "SYS_ERR" };
+      return { code: 0 === t3 ? 0 : t3 || "SYS_ERR", message: n3 || "SYS_ERR" };
     }).then(({ code: n3, message: s3 }) => {
-      if (n3 !== 0) {
+      if (0 !== n3) {
         switch (n3) {
           case "MODULE_ENCRYPTED":
             console.error(`\u6B64\u4E91\u51FD\u6570\uFF08${e}\uFF09\u4F9D\u8D56\u52A0\u5BC6\u516C\u5171\u6A21\u5757\u4E0D\u53EF\u672C\u5730\u8C03\u8BD5\uFF0C\u81EA\u52A8\u5207\u6362\u4E3A\u4E91\u7AEF\u5DF2\u90E8\u7F72\u7684\u4E91\u51FD\u6570`);
@@ -2789,84 +2789,152 @@ if (uni.restoreGlobal) {
         return this._callCloudFunction({ name: e, data: t2 });
       }
       return new Promise((e2, n4) => {
-        const s4 = ft.call(this, { data: t2 });
-        X.request({ method: "POST", url: a2, data: { provider: o2, platform: m, param: s4 }, success: ({ statusCode: t3, data: s5 } = {}) => !t3 || t3 >= 400 ? n4(new H({ code: s5.code || "SYS_ERR", message: s5.message || "request:fail" })) : e2({ result: s5 }), fail(e3) {
-          n4(new H({ code: e3.code || e3.errCode || "SYS_ERR", message: e3.message || e3.errMsg || "request:fail" }));
+        const s4 = _t.call(this, { data: t2 });
+        V.request({ method: "POST", url: a2, data: { provider: r2, platform: w, param: s4 }, success: ({ statusCode: t3, data: s5 } = {}) => !t3 || t3 >= 400 ? n4(new G({ code: s5.code || "SYS_ERR", message: s5.message || "request:fail" })) : e2({ result: s5 }), fail(e3) {
+          n4(new G({ code: e3.code || e3.errCode || "SYS_ERR", message: e3.message || e3.errMsg || "request:fail" }));
         } });
       });
     });
   }
-  const gt = [{ rule: /fc_function_not_found|FUNCTION_NOT_FOUND/, content: "\uFF0C\u4E91\u51FD\u6570[{functionName}]\u5728\u4E91\u7AEF\u4E0D\u5B58\u5728\uFF0C\u8BF7\u68C0\u67E5\u6B64\u4E91\u51FD\u6570\u540D\u79F0\u662F\u5426\u6B63\u786E\u4EE5\u53CA\u8BE5\u4E91\u51FD\u6570\u662F\u5426\u5DF2\u4E0A\u4F20\u5230\u670D\u52A1\u7A7A\u95F4", mode: "append" }];
-  var mt = /[\\^$.*+?()[\]{}|]/g, yt = RegExp(mt.source);
-  function _t(e, t2, n2) {
-    return e.replace(new RegExp((s2 = t2) && yt.test(s2) ? s2.replace(mt, "\\$&") : s2, "g"), n2);
+  const vt = [{ rule: /fc_function_not_found|FUNCTION_NOT_FOUND/, content: "\uFF0C\u4E91\u51FD\u6570[{functionName}]\u5728\u4E91\u7AEF\u4E0D\u5B58\u5728\uFF0C\u8BF7\u68C0\u67E5\u6B64\u4E91\u51FD\u6570\u540D\u79F0\u662F\u5426\u6B63\u786E\u4EE5\u53CA\u8BE5\u4E91\u51FD\u6570\u662F\u5426\u5DF2\u4E0A\u4F20\u5230\u670D\u52A1\u7A7A\u95F4", mode: "append" }];
+  var St = /[\\^$.*+?()[\]{}|]/g, kt = RegExp(St.source);
+  function It(e, t2, n2) {
+    return e.replace(new RegExp((s2 = t2) && kt.test(s2) ? s2.replace(St, "\\$&") : s2, "g"), n2);
     var s2;
   }
-  function wt({ functionName: e, result: t2, logPvd: n2 }) {
+  const Tt = "request", At = "response", Ct = "both";
+  const ln = { code: 2e4, message: "System error" }, hn = { code: 20101, message: "Invalid client" };
+  function pn(e) {
+    const { errSubject: t2, subject: n2, errCode: s2, errMsg: r2, code: i2, message: o2, cause: a2 } = e || {};
+    return new G({ subject: t2 || n2 || "uni-secure-network", code: s2 || i2 || ln.code, message: r2 || o2, cause: a2 });
+  }
+  let mn;
+  function Sn({ secretType: e } = {}) {
+    return e === Tt || e === At || e === Ct;
+  }
+  function kn({ name: e, data: t2 = {} } = {}) {
+    return "app" === w && "DCloud-clientDB" === e && "encryption" === t2.redirectTo && "getAppClientKey" === t2.action;
+  }
+  function In({ provider: e, spaceId: t2, functionName: n2 } = {}) {
+    const { appId: s2, uniPlatform: r2, osName: i2 } = ne();
+    let o2 = r2;
+    "app" === r2 && (o2 = i2);
+    const a2 = function({ provider: e2, spaceId: t3 } = {}) {
+      const n3 = _;
+      if (!n3)
+        return {};
+      e2 = function(e3) {
+        return "tencent" === e3 ? "tcb" : e3;
+      }(e2);
+      const s3 = n3.find((n4) => n4.provider === e2 && n4.spaceId === t3);
+      return s3 && s3.config;
+    }({ provider: e, spaceId: t2 });
+    if (!a2 || !a2.accessControl || !a2.accessControl.enable)
+      return false;
+    const c2 = a2.accessControl.function || {}, u2 = Object.keys(c2);
+    if (0 === u2.length)
+      return true;
+    const l2 = function(e2, t3) {
+      let n3, s3, r3;
+      for (let i3 = 0; i3 < e2.length; i3++) {
+        const o3 = e2[i3];
+        o3 !== t3 ? "*" !== o3 ? o3.split(",").map((e3) => e3.trim()).indexOf(t3) > -1 && (s3 = o3) : r3 = o3 : n3 = o3;
+      }
+      return n3 || s3 || r3;
+    }(u2, n2);
+    if (!l2)
+      return false;
+    if ((c2[l2] || []).find((e2 = {}) => e2.appId === s2 && (e2.platform || "").toLowerCase() === o2.toLowerCase()))
+      return true;
+    throw console.error(`\u6B64\u5E94\u7528[appId: ${s2}, platform: ${o2}]\u4E0D\u5728\u4E91\u7AEF\u914D\u7F6E\u7684\u5141\u8BB8\u8BBF\u95EE\u7684\u5E94\u7528\u5217\u8868\u5185\uFF0C\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/secure-network.html#verify-client`), pn(hn);
+  }
+  function bn({ functionName: e, result: t2, logPvd: n2 }) {
     if (this.__dev__.debugLog && t2 && t2.requestId) {
       const s2 = JSON.stringify({ spaceId: this.config.spaceId, functionName: e, requestId: t2.requestId });
       console.log(`[${n2}-request]${s2}[/${n2}-request]`);
     }
   }
-  function vt(e) {
+  function Tn(e) {
     const t2 = e.callFunction, n2 = function(n3) {
       const s2 = n3.name;
-      n3.data = ft.call(e, { data: n3.data });
-      const o2 = { aliyun: "aliyun", tencent: "tcb", tcb: "tcb" }[this.config.provider];
-      return t2.call(this, n3).then((e2) => (e2.errCode = 0, wt.call(this, { functionName: s2, result: e2, logPvd: o2 }), Promise.resolve(e2)), (e2) => (wt.call(this, { functionName: s2, result: e2, logPvd: o2 }), e2 && e2.message && (e2.message = function({ message: e3 = "", extraInfo: t3 = {}, formatter: n4 = [] } = {}) {
+      n3.data = _t.call(e, { data: n3.data });
+      const r2 = { aliyun: "aliyun", tencent: "tcb", tcb: "tcb" }[this.config.provider], i2 = Sn(n3), o2 = kn(n3), a2 = i2 || o2;
+      return t2.call(this, n3).then((e2) => (e2.errCode = 0, !a2 && bn.call(this, { functionName: s2, result: e2, logPvd: r2 }), Promise.resolve(e2)), (e2) => (!a2 && bn.call(this, { functionName: s2, result: e2, logPvd: r2 }), e2 && e2.message && (e2.message = function({ message: e3 = "", extraInfo: t3 = {}, formatter: n4 = [] } = {}) {
         for (let s3 = 0; s3 < n4.length; s3++) {
-          const { rule: o3, content: r2, mode: i2 } = n4[s3], a2 = e3.match(o3);
-          if (!a2)
+          const { rule: r3, content: i3, mode: o3 } = n4[s3], a3 = e3.match(r3);
+          if (!a3)
             continue;
-          let c2 = r2;
-          for (let e4 = 1; e4 < a2.length; e4++)
-            c2 = _t(c2, `{$${e4}}`, a2[e4]);
+          let c2 = i3;
+          for (let e4 = 1; e4 < a3.length; e4++)
+            c2 = It(c2, `{$${e4}}`, a3[e4]);
           for (const e4 in t3)
-            c2 = _t(c2, `{${e4}}`, t3[e4]);
-          return i2 === "replace" ? c2 : e3 + c2;
+            c2 = It(c2, `{${e4}}`, t3[e4]);
+          return "replace" === o3 ? c2 : e3 + c2;
         }
         return e3;
-      }({ message: `[${n3.name}]: ${e2.message}`, formatter: gt, extraInfo: { functionName: s2 } })), Promise.reject(e2)));
+      }({ message: `[${n3.name}]: ${e2.message}`, formatter: vt, extraInfo: { functionName: s2 } })), Promise.reject(e2)));
     };
     e.callFunction = function(t3) {
-      let s2;
-      e.__dev__.debugInfo && !e.__dev__.debugInfo.forceRemote && _ ? (e._callCloudFunction || (e._callCloudFunction = n2, e._callLocalFunction = pt), s2 = pt) : s2 = n2, s2 = s2.bind(e);
-      const o2 = s2(t3);
-      return Object.defineProperty(o2, "result", { get: () => (console.warn("\u5F53\u524D\u8FD4\u56DE\u7ED3\u679C\u4E3APromise\u7C7B\u578B\uFF0C\u4E0D\u53EF\u76F4\u63A5\u8BBF\u95EE\u5176result\u5C5E\u6027\uFF0C\u8BE6\u60C5\u8BF7\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/faq?id=promise"), {}) }), o2;
+      const { provider: s2, spaceId: r2 } = e.config, i2 = t3.name;
+      let o2, a2;
+      if (t3.data = t3.data || {}, e.__dev__.debugInfo && !e.__dev__.debugInfo.forceRemote && S ? (e._callCloudFunction || (e._callCloudFunction = n2, e._callLocalFunction = wt), o2 = wt) : o2 = n2, o2 = o2.bind(e), kn(t3))
+        a2 = n2.call(e, t3);
+      else if (function({ name: e2, data: t4 = {} }) {
+        return "mp-weixin" === w && "uni-id-co" === e2 && "secureNetworkHandshakeByWeixin" === t4.method;
+      }(t3))
+        a2 = o2.call(e, t3);
+      else if (Sn(t3)) {
+        a2 = new mn({ secretType: t3.secretType, uniCloudIns: e }).wrapEncryptDataCallFunction(n2.bind(e))(t3);
+      } else if (In({ provider: s2, spaceId: r2, functionName: i2 })) {
+        a2 = new mn({ secretType: t3.secretType, uniCloudIns: e }).wrapVerifyClientCallFunction(n2.bind(e))(t3);
+      } else
+        a2 = o2(t3);
+      return Object.defineProperty(a2, "result", { get: () => (console.warn("\u5F53\u524D\u8FD4\u56DE\u7ED3\u679C\u4E3APromise\u7C7B\u578B\uFF0C\u4E0D\u53EF\u76F4\u63A5\u8BBF\u95EE\u5176result\u5C5E\u6027\uFF0C\u8BE6\u60C5\u8BF7\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/faq?id=promise"), {}) }), a2;
     };
   }
-  const kt = Symbol("CLIENT_DB_INTERNAL");
-  function Tt(e, t2) {
-    return e.then = "DoNotReturnProxyWithAFunctionNamedThen", e._internalType = kt, e.__v_raw = void 0, new Proxy(e, { get(e2, n2, s2) {
-      if (n2 === "_uniClient")
+  mn = "mp-weixin" !== w && "app" !== w ? class {
+    constructor() {
+      throw pn({ message: `Platform ${w} is not supported by secure network` });
+    }
+  } : class {
+    constructor() {
+      throw pn({ message: `Platform ${w} is not enabled, please check whether secure network module is enabled in your manifest.json` });
+    }
+  };
+  const An = Symbol("CLIENT_DB_INTERNAL");
+  function Cn(e, t2) {
+    return e.then = "DoNotReturnProxyWithAFunctionNamedThen", e._internalType = An, e.inspect = null, e.__v_raw = void 0, new Proxy(e, { get(e2, n2, s2) {
+      if ("_uniClient" === n2)
         return null;
-      if (n2 in e2 || typeof n2 != "string") {
+      if ("symbol" == typeof n2)
+        return e2[n2];
+      if (n2 in e2 || "string" != typeof n2) {
         const t3 = e2[n2];
-        return typeof t3 == "function" ? t3.bind(e2) : t3;
+        return "function" == typeof t3 ? t3.bind(e2) : t3;
       }
       return t2.get(e2, n2, s2);
     } });
   }
-  function St(e) {
+  function Pn(e) {
     return { on: (t2, n2) => {
       e[t2] = e[t2] || [], e[t2].indexOf(n2) > -1 || e[t2].push(n2);
     }, off: (t2, n2) => {
       e[t2] = e[t2] || [];
       const s2 = e[t2].indexOf(n2);
-      s2 !== -1 && e[t2].splice(s2, 1);
+      -1 !== s2 && e[t2].splice(s2, 1);
     } };
   }
-  const At = ["db.Geo", "db.command", "command.aggregate"];
-  function Pt(e, t2) {
-    return At.indexOf(`${e}.${t2}`) > -1;
+  const En = ["db.Geo", "db.command", "command.aggregate"];
+  function On(e, t2) {
+    return En.indexOf(`${e}.${t2}`) > -1;
   }
-  function It(e) {
-    switch (h(e = at(e))) {
+  function xn(e) {
+    switch (d(e = Y(e))) {
       case "array":
-        return e.map((e2) => It(e2));
+        return e.map((e2) => xn(e2));
       case "object":
-        return e._internalType === kt || Object.keys(e).forEach((t2) => {
-          e[t2] = It(e[t2]);
+        return e._internalType === An || Object.keys(e).forEach((t2) => {
+          e[t2] = xn(e[t2]);
         }), e;
       case "regexp":
         return { $regexp: { source: e.source, flags: e.flags } };
@@ -2876,10 +2944,10 @@ if (uni.restoreGlobal) {
         return e;
     }
   }
-  function bt(e) {
+  function Un(e) {
     return e && e.content && e.content.$method;
   }
-  class Ot {
+  class Rn {
     constructor(e, t2, n2) {
       this.content = e, this.prevStage = t2 || null, this.udb = null, this._database = n2;
     }
@@ -2888,20 +2956,20 @@ if (uni.restoreGlobal) {
       const t2 = [e.content];
       for (; e.prevStage; )
         e = e.prevStage, t2.push(e.content);
-      return { $db: t2.reverse().map((e2) => ({ $method: e2.$method, $param: It(e2.$param) })) };
+      return { $db: t2.reverse().map((e2) => ({ $method: e2.$method, $param: xn(e2.$param) })) };
     }
     getAction() {
-      const e = this.toJSON().$db.find((e2) => e2.$method === "action");
+      const e = this.toJSON().$db.find((e2) => "action" === e2.$method);
       return e && e.$param && e.$param[0];
     }
     getCommand() {
-      return { $db: this.toJSON().$db.filter((e) => e.$method !== "action") };
+      return { $db: this.toJSON().$db.filter((e) => "action" !== e.$method) };
     }
     get isAggregate() {
       let e = this;
       for (; e; ) {
-        const t2 = bt(e), n2 = bt(e.prevStage);
-        if (t2 === "aggregate" && n2 === "collection" || t2 === "pipeline")
+        const t2 = Un(e), n2 = Un(e.prevStage);
+        if ("aggregate" === t2 && "collection" === n2 || "pipeline" === t2)
           return true;
         e = e.prevStage;
       }
@@ -2910,7 +2978,7 @@ if (uni.restoreGlobal) {
     get isCommand() {
       let e = this;
       for (; e; ) {
-        if (bt(e) === "command")
+        if ("command" === Un(e))
           return true;
         e = e.prevStage;
       }
@@ -2919,38 +2987,36 @@ if (uni.restoreGlobal) {
     get isAggregateCommand() {
       let e = this;
       for (; e; ) {
-        const t2 = bt(e), n2 = bt(e.prevStage);
-        if (t2 === "aggregate" && n2 === "command")
+        const t2 = Un(e), n2 = Un(e.prevStage);
+        if ("aggregate" === t2 && "command" === n2)
           return true;
         e = e.prevStage;
       }
       return false;
     }
-    get count() {
-      if (!this.isAggregate)
-        return function() {
-          return this._send("count", Array.from(arguments));
-        };
-      const e = this;
+    getNextStageFn(e) {
+      const t2 = this;
       return function() {
-        return Ct({ $method: "count", $param: It(Array.from(arguments)) }, e, this._database);
+        return Ln({ $method: e, $param: xn(Array.from(arguments)) }, t2, t2._database);
+      };
+    }
+    get count() {
+      return this.isAggregate ? this.getNextStageFn("count") : function() {
+        return this._send("count", Array.from(arguments));
       };
     }
     get remove() {
-      if (!this.isCommand)
-        return function() {
-          return this._send("remove", Array.from(arguments));
-        };
-      const e = this;
-      return function() {
-        return Ct({ $method: "remove", $param: It(Array.from(arguments)) }, e, this._database);
+      return this.isCommand ? this.getNextStageFn("remove") : function() {
+        return this._send("remove", Array.from(arguments));
       };
     }
     get() {
       return this._send("get", Array.from(arguments));
     }
-    add() {
-      return this._send("add", Array.from(arguments));
+    get add() {
+      return this.isCommand ? this.getNextStageFn("add") : function() {
+        return this._send("add", Array.from(arguments));
+      };
     }
     update() {
       return this._send("update", Array.from(arguments));
@@ -2959,33 +3025,28 @@ if (uni.restoreGlobal) {
       return this._send("end", Array.from(arguments));
     }
     get set() {
-      if (!this.isCommand)
-        return function() {
-          throw new Error("JQL\u7981\u6B62\u4F7F\u7528set\u65B9\u6CD5");
-        };
-      const e = this;
-      return function() {
-        return Ct({ $method: "set", $param: It(Array.from(arguments)) }, e, this._database);
+      return this.isCommand ? this.getNextStageFn("set") : function() {
+        throw new Error("JQL\u7981\u6B62\u4F7F\u7528set\u65B9\u6CD5");
       };
     }
     _send(e, t2) {
       const n2 = this.getAction(), s2 = this.getCommand();
-      if (s2.$db.push({ $method: e, $param: It(t2) }), p) {
-        const e2 = s2.$db.find((e3) => e3.$method === "collection"), t3 = e2 && e2.$param;
-        t3 && t3.length === 1 && typeof e2.$param[0] == "string" && e2.$param[0].indexOf(",") > -1 && console.warn("\u68C0\u6D4B\u5230\u4F7F\u7528JQL\u8BED\u6CD5\u8054\u8868\u67E5\u8BE2\u65F6\uFF0C\u672A\u4F7F\u7528getTemp\u5148\u8FC7\u6EE4\u4E3B\u8868\u6570\u636E\uFF0C\u5728\u4E3B\u8868\u6570\u636E\u91CF\u5927\u7684\u60C5\u51B5\u4E0B\u53EF\u80FD\u4F1A\u67E5\u8BE2\u7F13\u6162\u3002\n- \u5982\u4F55\u4F18\u5316\u8BF7\u53C2\u8003\u6B64\u6587\u6863\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/jql?id=lookup-with-temp \n- \u5982\u679C\u4E3B\u8868\u6570\u636E\u91CF\u5F88\u5C0F\u8BF7\u5FFD\u7565\u6B64\u4FE1\u606F\uFF0C\u9879\u76EE\u53D1\u884C\u65F6\u4E0D\u4F1A\u51FA\u73B0\u6B64\u63D0\u793A\u3002");
+      if (s2.$db.push({ $method: e, $param: xn(t2) }), g) {
+        const e2 = s2.$db.find((e3) => "collection" === e3.$method), t3 = e2 && e2.$param;
+        t3 && 1 === t3.length && "string" == typeof e2.$param[0] && e2.$param[0].indexOf(",") > -1 && console.warn("\u68C0\u6D4B\u5230\u4F7F\u7528JQL\u8BED\u6CD5\u8054\u8868\u67E5\u8BE2\u65F6\uFF0C\u672A\u4F7F\u7528getTemp\u5148\u8FC7\u6EE4\u4E3B\u8868\u6570\u636E\uFF0C\u5728\u4E3B\u8868\u6570\u636E\u91CF\u5927\u7684\u60C5\u51B5\u4E0B\u53EF\u80FD\u4F1A\u67E5\u8BE2\u7F13\u6162\u3002\n- \u5982\u4F55\u4F18\u5316\u8BF7\u53C2\u8003\u6B64\u6587\u6863\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/jql?id=lookup-with-temp \n- \u5982\u679C\u4E3B\u8868\u6570\u636E\u91CF\u5F88\u5C0F\u8BF7\u5FFD\u7565\u6B64\u4FE1\u606F\uFF0C\u9879\u76EE\u53D1\u884C\u65F6\u4E0D\u4F1A\u51FA\u73B0\u6B64\u63D0\u793A\u3002");
       }
       return this._database._callCloudFunction({ action: n2, command: s2 });
     }
   }
-  function Ct(e, t2, n2) {
-    return Tt(new Ot(e, t2, n2), { get(e2, t3) {
+  function Ln(e, t2, n2) {
+    return Cn(new Rn(e, t2, n2), { get(e2, t3) {
       let s2 = "db";
-      return e2 && e2.content && (s2 = e2.content.$method), Pt(s2, t3) ? Ct({ $method: t3 }, e2, n2) : function() {
-        return Ct({ $method: t3, $param: It(Array.from(arguments)) }, e2, n2);
+      return e2 && e2.content && (s2 = e2.content.$method), On(s2, t3) ? Ln({ $method: t3 }, e2, n2) : function() {
+        return Ln({ $method: t3, $param: xn(Array.from(arguments)) }, e2, n2);
       };
     } });
   }
-  function Et({ path: e, method: t2 }) {
+  function Nn({ path: e, method: t2 }) {
     return class {
       constructor() {
         this.param = Array.from(arguments);
@@ -2995,12 +3056,17 @@ if (uni.restoreGlobal) {
       }
     };
   }
-  class Rt extends class {
-    constructor({ uniClient: e = {} } = {}) {
-      this._uniClient = e, this._authCallBacks = {}, this._dbCallBacks = {}, e.isDefault && (this._dbCallBacks = T("_globalUniCloudDatabaseCallback")), this.auth = St(this._authCallBacks), Object.assign(this, St(this._dbCallBacks)), this.env = Tt({}, { get: (e2, t2) => ({ $env: t2 }) }), this.Geo = Tt({}, { get: (e2, t2) => Et({ path: ["Geo"], method: t2 }) }), this.serverDate = Et({ path: [], method: "serverDate" }), this.RegExp = Et({ path: [], method: "RegExp" });
+  function Dn(e, t2 = {}) {
+    return Cn(new e(t2), { get: (e2, t3) => On("db", t3) ? Ln({ $method: t3 }, null, e2) : function() {
+      return Ln({ $method: t3, $param: xn(Array.from(arguments)) }, null, e2);
+    } });
+  }
+  class Fn extends class {
+    constructor({ uniClient: e = {}, isJQL: t2 = false } = {}) {
+      this._uniClient = e, this._authCallBacks = {}, this._dbCallBacks = {}, e.isDefault && (this._dbCallBacks = T("_globalUniCloudDatabaseCallback")), t2 || (this.auth = Pn(this._authCallBacks)), this._isJQL = t2, Object.assign(this, Pn(this._dbCallBacks)), this.env = Cn({}, { get: (e2, t3) => ({ $env: t3 }) }), this.Geo = Cn({}, { get: (e2, t3) => Nn({ path: ["Geo"], method: t3 }) }), this.serverDate = Nn({ path: [], method: "serverDate" }), this.RegExp = Nn({ path: [], method: "RegExp" });
     }
     getCloudEnv(e) {
-      if (typeof e != "string" || !e.trim())
+      if ("string" != typeof e || !e.trim())
         throw new Error("getCloudEnv\u53C2\u6570\u9519\u8BEF");
       return { $env: e.replace("$cloudEnv_", "") };
     }
@@ -3019,188 +3085,184 @@ if (uni.restoreGlobal) {
     multiSend() {
       const e = Array.from(arguments), t2 = e.map((e2) => {
         const t3 = e2.getAction(), n2 = e2.getCommand();
-        if (n2.$db[n2.$db.length - 1].$method !== "getTemp")
+        if ("getTemp" !== n2.$db[n2.$db.length - 1].$method)
           throw new Error("multiSend\u53EA\u652F\u6301\u5B50\u547D\u4EE4\u5185\u4F7F\u7528getTemp");
         return { action: t3, command: n2 };
       });
       return this._callCloudFunction({ multiCommand: t2, queryList: e });
     }
   } {
+    _parseResult(e) {
+      return this._isJQL ? e.result : e;
+    }
     _callCloudFunction({ action: e, command: t2, multiCommand: n2, queryList: s2 }) {
-      function o2(e2, t3) {
+      function r2(e2, t3) {
         if (n2 && s2)
           for (let n3 = 0; n3 < s2.length; n3++) {
-            const o3 = s2[n3];
-            o3.udb && typeof o3.udb.setResult == "function" && (t3 ? o3.udb.setResult(t3) : o3.udb.setResult(e2.result.dataList[n3]));
+            const r3 = s2[n3];
+            r3.udb && "function" == typeof r3.udb.setResult && (t3 ? r3.udb.setResult(t3) : r3.udb.setResult(e2.result.dataList[n3]));
           }
       }
-      const r2 = this;
-      function i2(e2) {
-        return r2._callback("error", [e2]), b(O("database", "fail"), e2).then(() => b(O("database", "complete"), e2)).then(() => (o2(null, e2), j(R, { type: L, content: e2 }), Promise.reject(e2)));
+      const i2 = this, o2 = this._isJQL ? "databaseForJQL" : "database";
+      function a2(e2) {
+        return i2._callback("error", [e2]), O(x(o2, "fail"), e2).then(() => O(x(o2, "complete"), e2)).then(() => (r2(null, e2), $(L, { type: F, content: e2 }), Promise.reject(e2)));
       }
-      const a2 = b(O("database", "invoke")), c2 = this._uniClient;
-      return a2.then(() => c2.callFunction({ name: "DCloud-clientDB", type: l, data: { action: e, command: t2, multiCommand: n2 } })).then((e2) => {
-        const { code: t3, message: n3, token: s3, tokenExpired: r3, systemInfo: a3 = [] } = e2.result;
-        if (a3)
-          for (let e3 = 0; e3 < a3.length; e3++) {
-            const { level: t4, message: n4, detail: s4 } = a3[e3], o3 = console[m === "app" && t4 === "warn" ? "error" : t4] || console.log;
-            let r4 = "[System Info]" + n4;
-            s4 && (r4 = `${r4}
-\u8BE6\u7EC6\u4FE1\u606F\uFF1A${s4}`), o3(r4);
+      const c2 = O(x(o2, "invoke")), u2 = this._uniClient;
+      return c2.then(() => u2.callFunction({ name: "DCloud-clientDB", type: h, data: { action: e, command: t2, multiCommand: n2 } })).then((e2) => {
+        const { code: t3, message: n3, token: s3, tokenExpired: c3, systemInfo: u3 = [] } = e2.result;
+        if (u3)
+          for (let e3 = 0; e3 < u3.length; e3++) {
+            const { level: t4, message: n4, detail: s4 } = u3[e3], r3 = console["app" === w && "warn" === t4 ? "error" : t4] || console.log;
+            let i3 = "[System Info]" + n4;
+            s4 && (i3 = `${i3}
+\u8BE6\u7EC6\u4FE1\u606F\uFF1A${s4}`), r3(i3);
           }
         if (t3) {
-          return i2(new H({ code: t3, message: n3, requestId: e2.requestId }));
+          return a2(new G({ code: t3, message: n3, requestId: e2.requestId }));
         }
-        e2.result.errCode = e2.result.code, e2.result.errMsg = e2.result.message, s3 && r3 && (ut({ token: s3, tokenExpired: r3 }), this._callbackAuth("refreshToken", [{ token: s3, tokenExpired: r3 }]), this._callback("refreshToken", [{ token: s3, tokenExpired: r3 }]), j(x, { token: s3, tokenExpired: r3 }));
-        const c3 = [{ prop: "affectedDocs", tips: "affectedDocs\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528inserted/deleted/updated/data.length\u66FF\u4EE3" }, { prop: "code", tips: "code\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528errCode\u66FF\u4EE3" }, { prop: "message", tips: "message\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528errMsg\u66FF\u4EE3" }];
-        for (let t4 = 0; t4 < c3.length; t4++) {
-          const { prop: n4, tips: s4 } = c3[t4];
+        e2.result.errCode = e2.result.errCode || e2.result.code, e2.result.errMsg = e2.result.errMsg || e2.result.message, s3 && c3 && (X({ token: s3, tokenExpired: c3 }), this._callbackAuth("refreshToken", [{ token: s3, tokenExpired: c3 }]), this._callback("refreshToken", [{ token: s3, tokenExpired: c3 }]), $(D, { token: s3, tokenExpired: c3 }));
+        const l2 = [{ prop: "affectedDocs", tips: "affectedDocs\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528inserted/deleted/updated/data.length\u66FF\u4EE3" }, { prop: "code", tips: "code\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528errCode\u66FF\u4EE3" }, { prop: "message", tips: "message\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528errMsg\u66FF\u4EE3" }];
+        for (let t4 = 0; t4 < l2.length; t4++) {
+          const { prop: n4, tips: s4 } = l2[t4];
           if (n4 in e2.result) {
             const t5 = e2.result[n4];
             Object.defineProperty(e2.result, n4, { get: () => (console.warn(s4), t5) });
           }
         }
         return function(e3) {
-          return b(O("database", "success"), e3).then(() => b(O("database", "complete"), e3)).then(() => (o2(e3, null), j(R, { type: L, content: e3 }), Promise.resolve(e3)));
+          return O(x(o2, "success"), e3).then(() => O(x(o2, "complete"), e3)).then(() => {
+            r2(e3, null);
+            const t4 = i2._parseResult(e3);
+            return $(L, { type: F, content: t4 }), Promise.resolve(t4);
+          });
         }(e2);
       }, (e2) => {
         /fc_function_not_found|FUNCTION_NOT_FOUND/g.test(e2.message) && console.warn("clientDB\u672A\u521D\u59CB\u5316\uFF0C\u8BF7\u5728web\u63A7\u5236\u53F0\u4FDD\u5B58\u4E00\u6B21schema\u4EE5\u5F00\u542FclientDB");
-        return i2(new H({ code: e2.code || "SYSTEM_ERROR", message: e2.message, requestId: e2.requestId }));
+        return a2(new G({ code: e2.code || "SYSTEM_ERROR", message: e2.message, requestId: e2.requestId }));
       });
     }
   }
-  function Ut(e) {
-    e.database = function(t2) {
-      if (t2 && Object.keys(t2).length > 0)
-        return e.init(t2).database();
-      if (this._database)
-        return this._database;
-      const n2 = function(e2, t3 = {}) {
-        return Tt(new e2(t3), { get: (e3, t4) => Pt("db", t4) ? Ct({ $method: t4 }, null, e3) : function() {
-          return Ct({ $method: t4, $param: It(Array.from(arguments)) }, null, e3);
-        } });
-      }(Rt, { uniClient: e });
-      return this._database = n2, n2;
-    };
-  }
-  const xt = "token\u65E0\u6548\uFF0C\u8DF3\u8F6C\u767B\u5F55\u9875\u9762", Lt = "token\u8FC7\u671F\uFF0C\u8DF3\u8F6C\u767B\u5F55\u9875\u9762", Dt = { TOKEN_INVALID_TOKEN_EXPIRED: Lt, TOKEN_INVALID_INVALID_CLIENTID: xt, TOKEN_INVALID: xt, TOKEN_INVALID_WRONG_TOKEN: xt, TOKEN_INVALID_ANONYMOUS_USER: xt }, Nt = { "uni-id-token-expired": Lt, "uni-id-check-token-failed": xt, "uni-id-token-not-exist": xt, "uni-id-check-device-feature-failed": xt };
-  function qt(e, t2) {
+  const qn = "token\u65E0\u6548\uFF0C\u8DF3\u8F6C\u767B\u5F55\u9875\u9762", Kn = "token\u8FC7\u671F\uFF0C\u8DF3\u8F6C\u767B\u5F55\u9875\u9762", Mn = { TOKEN_INVALID_TOKEN_EXPIRED: Kn, TOKEN_INVALID_INVALID_CLIENTID: qn, TOKEN_INVALID: qn, TOKEN_INVALID_WRONG_TOKEN: qn, TOKEN_INVALID_ANONYMOUS_USER: qn }, jn = { "uni-id-token-expired": Kn, "uni-id-check-token-failed": qn, "uni-id-token-not-exist": qn, "uni-id-check-device-feature-failed": qn };
+  function Bn(e, t2) {
     let n2 = "";
     return n2 = e ? `${e}/${t2}` : t2, n2.replace(/^\//, "");
   }
-  function Ft(e = [], t2 = "") {
+  function $n(e = [], t2 = "") {
     const n2 = [], s2 = [];
     return e.forEach((e2) => {
-      e2.needLogin === true ? n2.push(qt(t2, e2.path)) : e2.needLogin === false && s2.push(qt(t2, e2.path));
+      true === e2.needLogin ? n2.push(Bn(t2, e2.path)) : false === e2.needLogin && s2.push(Bn(t2, e2.path));
     }), { needLoginPage: n2, notNeedLoginPage: s2 };
   }
-  function Mt(e) {
+  function Wn(e) {
     return e.split("?")[0].replace(/^\//, "");
   }
-  function jt() {
+  function zn() {
     return function(e) {
       let t2 = e && e.$page && e.$page.fullPath || "";
-      return t2 ? (t2.charAt(0) !== "/" && (t2 = "/" + t2), t2) : t2;
+      return t2 ? ("/" !== t2.charAt(0) && (t2 = "/" + t2), t2) : t2;
     }(function() {
       const e = getCurrentPages();
       return e[e.length - 1];
     }());
   }
-  function $t() {
-    return Mt(jt());
+  function Jn() {
+    return Wn(zn());
   }
-  function Bt(e = "", t2 = {}) {
+  function Hn(e = "", t2 = {}) {
     if (!e)
       return false;
     if (!(t2 && t2.list && t2.list.length))
       return false;
-    const n2 = t2.list, s2 = Mt(e);
+    const n2 = t2.list, s2 = Wn(e);
     return n2.some((e2) => e2.pagePath === s2);
   }
-  const Kt = !!t$m.uniIdRouter;
-  const { loginPage: Wt, routerNeedLogin: Ht, resToLogin: zt, needLoginPage: Jt, notNeedLoginPage: Vt, loginPageInTabBar: Yt } = function({ pages: e = [], subPackages: n2 = [], uniIdRouter: s2 = {}, tabBar: o2 = {} } = t$m) {
-    const { loginPage: r2, needLogin: i2 = [], resToLogin: a2 = true } = s2, { needLoginPage: c2, notNeedLoginPage: u2 } = Ft(e), { needLoginPage: l2, notNeedLoginPage: h2 } = function(e2 = []) {
+  const Gn = !!t$m.uniIdRouter;
+  const { loginPage: Vn, routerNeedLogin: Yn, resToLogin: Qn, needLoginPage: Xn, notNeedLoginPage: Zn, loginPageInTabBar: es } = function({ pages: e = [], subPackages: n2 = [], uniIdRouter: s2 = {}, tabBar: r2 = {} } = t$m) {
+    const { loginPage: i2, needLogin: o2 = [], resToLogin: a2 = true } = s2, { needLoginPage: c2, notNeedLoginPage: u2 } = $n(e), { needLoginPage: l2, notNeedLoginPage: h2 } = function(e2 = []) {
       const t2 = [], n3 = [];
       return e2.forEach((e3) => {
-        const { root: s3, pages: o3 = [] } = e3, { needLoginPage: r3, notNeedLoginPage: i3 } = Ft(o3, s3);
-        t2.push(...r3), n3.push(...i3);
+        const { root: s3, pages: r3 = [] } = e3, { needLoginPage: i3, notNeedLoginPage: o3 } = $n(r3, s3);
+        t2.push(...i3), n3.push(...o3);
       }), { needLoginPage: t2, notNeedLoginPage: n3 };
     }(n2);
-    return { loginPage: r2, routerNeedLogin: i2, resToLogin: a2, needLoginPage: [...c2, ...l2], notNeedLoginPage: [...u2, ...h2], loginPageInTabBar: Bt(r2, o2) };
+    return { loginPage: i2, routerNeedLogin: o2, resToLogin: a2, needLoginPage: [...c2, ...l2], notNeedLoginPage: [...u2, ...h2], loginPageInTabBar: Hn(i2, r2) };
   }();
-  if (Jt.indexOf(Wt) > -1)
-    throw new Error(`Login page [${Wt}] should not be "needLogin", please check your pages.json`);
-  function Xt(e) {
-    const t2 = Mt(function(e2) {
-      const t3 = $t(), n2 = e2.charAt(0), s2 = e2.split("?")[0];
-      if (n2 === "/")
-        return s2;
-      const o2 = s2.replace(/^\//, "").split("/"), r2 = t3.split("/");
-      r2.pop();
-      for (let e3 = 0; e3 < o2.length; e3++) {
-        const t4 = o2[e3];
-        t4 === ".." ? r2.pop() : t4 !== "." && r2.push(t4);
-      }
-      return r2[0] === "" && r2.shift(), r2.join("/");
-    }(e));
-    return !(Vt.indexOf(t2) > -1) && (Jt.indexOf(t2) > -1 || Ht.some((t3) => function(e2, t4) {
+  if (Xn.indexOf(Vn) > -1)
+    throw new Error(`Login page [${Vn}] should not be "needLogin", please check your pages.json`);
+  function ts(e) {
+    const t2 = Jn();
+    if ("/" === e.charAt(0))
+      return e;
+    const [n2, s2] = e.split("?"), r2 = n2.replace(/^\//, "").split("/"), i2 = t2.split("/");
+    i2.pop();
+    for (let e2 = 0; e2 < r2.length; e2++) {
+      const t3 = r2[e2];
+      ".." === t3 ? i2.pop() : "." !== t3 && i2.push(t3);
+    }
+    return "" === i2[0] && i2.shift(), "/" + i2.join("/") + (s2 ? "?" + s2 : "");
+  }
+  function ns(e) {
+    const t2 = Wn(ts(e));
+    return !(Zn.indexOf(t2) > -1) && (Xn.indexOf(t2) > -1 || Yn.some((t3) => function(e2, t4) {
       return new RegExp(t4).test(e2);
     }(e, t3)));
   }
-  function Gt({ redirect: e }) {
-    const t2 = Mt(e), n2 = Mt(Wt);
-    return $t() !== n2 && t2 !== n2;
+  function ss({ redirect: e }) {
+    const t2 = Wn(e), n2 = Wn(Vn);
+    return Jn() !== n2 && t2 !== n2;
   }
-  function Qt({ api: e, redirect: t2 } = {}) {
-    if (!t2 || !Gt({ redirect: t2 }))
+  function rs({ api: e, redirect: t2 } = {}) {
+    if (!t2 || !ss({ redirect: t2 }))
       return;
     const n2 = function(e2, t3) {
-      return e2.charAt(0) !== "/" && (e2 = "/" + e2), t3 ? e2.indexOf("?") > -1 ? e2 + `&uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2 + `?uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2;
-    }(Wt, t2);
-    Yt ? e !== "navigateTo" && e !== "redirectTo" || (e = "switchTab") : e === "switchTab" && (e = "navigateTo"), setTimeout(() => {
-      uni[e]({ url: n2 });
+      return "/" !== e2.charAt(0) && (e2 = "/" + e2), t3 ? e2.indexOf("?") > -1 ? e2 + `&uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2 + `?uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2;
+    }(Vn, t2);
+    es ? "navigateTo" !== e && "redirectTo" !== e || (e = "switchTab") : "switchTab" === e && (e = "navigateTo");
+    const s2 = { navigateTo: uni.navigateTo, redirectTo: uni.redirectTo, switchTab: uni.switchTab, reLaunch: uni.reLaunch };
+    setTimeout(() => {
+      s2[e]({ url: n2 });
     });
   }
-  function Zt({ url: e } = {}) {
+  function is({ url: e } = {}) {
     const t2 = { abortLoginPageJump: false, autoToLoginPage: false }, n2 = function() {
-      const { token: e2, tokenExpired: t3 } = ct();
+      const { token: e2, tokenExpired: t3 } = Q();
       let n3;
       if (e2) {
         if (t3 < Date.now()) {
           const e3 = "uni-id-token-expired";
-          n3 = { errCode: e3, errMsg: Nt[e3] };
+          n3 = { errCode: e3, errMsg: jn[e3] };
         }
       } else {
         const e3 = "uni-id-check-token-failed";
-        n3 = { errCode: e3, errMsg: Nt[e3] };
+        n3 = { errCode: e3, errMsg: jn[e3] };
       }
       return n3;
     }();
-    if (Xt(e) && n2) {
+    if (ns(e) && n2) {
       n2.uniIdRedirectUrl = e;
-      if (q(U).length > 0)
+      if (M(N).length > 0)
         return setTimeout(() => {
-          j(U, n2);
+          $(N, n2);
         }, 0), t2.abortLoginPageJump = true, t2;
       t2.autoToLoginPage = true;
     }
     return t2;
   }
-  function en$2() {
+  function os() {
     !function() {
-      const e2 = jt(), { abortLoginPageJump: t2, autoToLoginPage: n2 } = Zt({ url: e2 });
-      t2 || n2 && Qt({ api: "redirectTo", redirect: e2 });
+      const e2 = zn(), { abortLoginPageJump: t2, autoToLoginPage: n2 } = is({ url: e2 });
+      t2 || n2 && rs({ api: "redirectTo", redirect: e2 });
     }();
     const e = ["navigateTo", "redirectTo", "reLaunch", "switchTab"];
     for (let t2 = 0; t2 < e.length; t2++) {
       const n2 = e[t2];
       uni.addInterceptor(n2, { invoke(e2) {
-        const { abortLoginPageJump: t3, autoToLoginPage: s2 } = Zt({ url: e2.url });
-        return t3 ? e2 : s2 ? (Qt({ api: n2, redirect: e2.url }), false) : e2;
+        const { abortLoginPageJump: t3, autoToLoginPage: s2 } = is({ url: e2.url });
+        return t3 ? e2 : s2 ? (rs({ api: n2, redirect: ts(e2.url) }), false) : e2;
       } });
     }
   }
-  function tn() {
+  function as$1() {
     this.onResponse((e) => {
       const { type: t2, content: n2 } = e;
       let s2 = false;
@@ -3208,57 +3270,57 @@ if (uni.restoreGlobal) {
         case "cloudobject":
           s2 = function(e2) {
             const { errCode: t3 } = e2;
-            return t3 in Nt;
+            return t3 in jn;
           }(n2);
           break;
         case "clientdb":
           s2 = function(e2) {
             const { errCode: t3 } = e2;
-            return t3 in Dt;
+            return t3 in Mn;
           }(n2);
       }
       s2 && function(e2 = {}) {
-        const t3 = q(U);
-        K().then(() => {
-          const n3 = jt();
-          if (n3 && Gt({ redirect: n3 }))
-            return t3.length > 0 ? j(U, Object.assign({ uniIdRedirectUrl: n3 }, e2)) : void (Wt && Qt({ api: "navigateTo", redirect: n3 }));
+        const t3 = M(N);
+        J().then(() => {
+          const n3 = zn();
+          if (n3 && ss({ redirect: n3 }))
+            return t3.length > 0 ? $(N, Object.assign({ uniIdRedirectUrl: n3 }, e2)) : void (Vn && rs({ api: "navigateTo", redirect: n3 }));
         });
       }(n2);
     });
   }
-  function nn(e) {
+  function cs(e) {
     !function(e2) {
       e2.onResponse = function(e3) {
-        F(R, e3);
+        j(L, e3);
       }, e2.offResponse = function(e3) {
-        M(R, e3);
+        B(L, e3);
       };
     }(e), function(e2) {
       e2.onNeedLogin = function(e3) {
-        F(U, e3);
+        j(N, e3);
       }, e2.offNeedLogin = function(e3) {
-        M(U, e3);
-      }, Kt && (T("uni-cloud-status").needLoginInit || (T("uni-cloud-status").needLoginInit = true, K().then(() => {
-        en$2.call(e2);
-      }), zt && tn.call(e2)));
+        B(N, e3);
+      }, Gn && (T("_globalUniCloudStatus").needLoginInit || (T("_globalUniCloudStatus").needLoginInit = true, J().then(() => {
+        os.call(e2);
+      }), Qn && as$1.call(e2)));
     }(e), function(e2) {
       e2.onRefreshToken = function(e3) {
-        F(x, e3);
+        j(D, e3);
       }, e2.offRefreshToken = function(e3) {
-        M(x, e3);
+        B(D, e3);
       };
     }(e);
   }
-  let sn;
-  const on = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", rn = /^(?:[A-Za-z\d+/]{4})*?(?:[A-Za-z\d+/]{2}(?:==)?|[A-Za-z\d+/]{3}=?)?$/;
-  function an() {
-    const e = ct().token || "", t2 = e.split(".");
-    if (!e || t2.length !== 3)
+  let us;
+  const ls = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", hs = /^(?:[A-Za-z\d+/]{4})*?(?:[A-Za-z\d+/]{2}(?:==)?|[A-Za-z\d+/]{3}=?)?$/;
+  function ds() {
+    const e = Q().token || "", t2 = e.split(".");
+    if (!e || 3 !== t2.length)
       return { uid: null, role: [], permission: [], tokenExpired: 0 };
     let n2;
     try {
-      n2 = JSON.parse((s2 = t2[1], decodeURIComponent(sn(s2).split("").map(function(e2) {
+      n2 = JSON.parse((s2 = t2[1], decodeURIComponent(us(s2).split("").map(function(e2) {
         return "%" + ("00" + e2.charCodeAt(0).toString(16)).slice(-2);
       }).join(""))));
     } catch (e2) {
@@ -3267,93 +3329,93 @@ if (uni.restoreGlobal) {
     var s2;
     return n2.tokenExpired = 1e3 * n2.exp, delete n2.exp, delete n2.iat, n2;
   }
-  sn = typeof atob != "function" ? function(e) {
-    if (e = String(e).replace(/[\t\n\f\r ]+/g, ""), !rn.test(e))
+  us = "function" != typeof atob ? function(e) {
+    if (e = String(e).replace(/[\t\n\f\r ]+/g, ""), !hs.test(e))
       throw new Error("Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.");
     var t2;
     e += "==".slice(2 - (3 & e.length));
-    for (var n2, s2, o2 = "", r2 = 0; r2 < e.length; )
-      t2 = on.indexOf(e.charAt(r2++)) << 18 | on.indexOf(e.charAt(r2++)) << 12 | (n2 = on.indexOf(e.charAt(r2++))) << 6 | (s2 = on.indexOf(e.charAt(r2++))), o2 += n2 === 64 ? String.fromCharCode(t2 >> 16 & 255) : s2 === 64 ? String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255) : String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255, 255 & t2);
-    return o2;
+    for (var n2, s2, r2 = "", i2 = 0; i2 < e.length; )
+      t2 = ls.indexOf(e.charAt(i2++)) << 18 | ls.indexOf(e.charAt(i2++)) << 12 | (n2 = ls.indexOf(e.charAt(i2++))) << 6 | (s2 = ls.indexOf(e.charAt(i2++))), r2 += 64 === n2 ? String.fromCharCode(t2 >> 16 & 255) : 64 === s2 ? String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255) : String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255, 255 & t2);
+    return r2;
   } : atob;
-  var cn = s(function(e, t2) {
+  var fs = s(function(e, t2) {
     Object.defineProperty(t2, "__esModule", { value: true });
     const n2 = "chooseAndUploadFile:ok", s2 = "chooseAndUploadFile:fail";
-    function o2(e2, t3) {
+    function r2(e2, t3) {
       return e2.tempFiles.forEach((e3, n3) => {
         e3.name || (e3.name = e3.path.substring(e3.path.lastIndexOf("/") + 1)), t3 && (e3.fileType = t3), e3.cloudPath = Date.now() + "_" + n3 + e3.name.substring(e3.name.lastIndexOf("."));
       }), e2.tempFilePaths || (e2.tempFilePaths = e2.tempFiles.map((e3) => e3.path)), e2;
     }
-    function r2(e2, t3, { onChooseFile: s3, onUploadProgress: o3 }) {
+    function i2(e2, t3, { onChooseFile: s3, onUploadProgress: r3 }) {
       return t3.then((e3) => {
         if (s3) {
           const t4 = s3(e3);
-          if (t4 !== void 0)
-            return Promise.resolve(t4).then((t5) => t5 === void 0 ? e3 : t5);
+          if (void 0 !== t4)
+            return Promise.resolve(t4).then((t5) => void 0 === t5 ? e3 : t5);
         }
         return e3;
-      }).then((t4) => t4 === false ? { errMsg: n2, tempFilePaths: [], tempFiles: [] } : function(e3, t5, s4 = 5, o4) {
+      }).then((t4) => false === t4 ? { errMsg: n2, tempFilePaths: [], tempFiles: [] } : function(e3, t5, s4 = 5, r4) {
         (t5 = Object.assign({}, t5)).errMsg = n2;
-        const r3 = t5.tempFiles, i2 = r3.length;
+        const i3 = t5.tempFiles, o2 = i3.length;
         let a2 = 0;
         return new Promise((n3) => {
           for (; a2 < s4; )
             c2();
           function c2() {
             const s5 = a2++;
-            if (s5 >= i2)
-              return void (!r3.find((e4) => !e4.url && !e4.errMsg) && n3(t5));
-            const u2 = r3[s5];
+            if (s5 >= o2)
+              return void (!i3.find((e4) => !e4.url && !e4.errMsg) && n3(t5));
+            const u2 = i3[s5];
             e3.uploadFile({ filePath: u2.path, cloudPath: u2.cloudPath, fileType: u2.fileType, onUploadProgress(e4) {
-              e4.index = s5, e4.tempFile = u2, e4.tempFilePath = u2.path, o4 && o4(e4);
+              e4.index = s5, e4.tempFile = u2, e4.tempFilePath = u2.path, r4 && r4(e4);
             } }).then((e4) => {
-              u2.url = e4.fileID, s5 < i2 && c2();
+              u2.url = e4.fileID, s5 < o2 && c2();
             }).catch((e4) => {
-              u2.errMsg = e4.errMsg || e4.message, s5 < i2 && c2();
+              u2.errMsg = e4.errMsg || e4.message, s5 < o2 && c2();
             });
           }
         });
-      }(e2, t4, 5, o3));
+      }(e2, t4, 5, r3));
     }
     t2.initChooseAndUploadFile = function(e2) {
       return function(t3 = { type: "all" }) {
-        return t3.type === "image" ? r2(e2, function(e3) {
-          const { count: t4, sizeType: n3, sourceType: r3 = ["album", "camera"], extension: i2 } = e3;
+        return "image" === t3.type ? i2(e2, function(e3) {
+          const { count: t4, sizeType: n3, sourceType: i3 = ["album", "camera"], extension: o2 } = e3;
           return new Promise((e4, a2) => {
-            uni.chooseImage({ count: t4, sizeType: n3, sourceType: r3, extension: i2, success(t5) {
-              e4(o2(t5, "image"));
+            uni.chooseImage({ count: t4, sizeType: n3, sourceType: i3, extension: o2, success(t5) {
+              e4(r2(t5, "image"));
             }, fail(e5) {
               a2({ errMsg: e5.errMsg.replace("chooseImage:fail", s2) });
             } });
           });
-        }(t3), t3) : t3.type === "video" ? r2(e2, function(e3) {
-          const { camera: t4, compressed: n3, maxDuration: r3, sourceType: i2 = ["album", "camera"], extension: a2 } = e3;
+        }(t3), t3) : "video" === t3.type ? i2(e2, function(e3) {
+          const { camera: t4, compressed: n3, maxDuration: i3, sourceType: o2 = ["album", "camera"], extension: a2 } = e3;
           return new Promise((e4, c2) => {
-            uni.chooseVideo({ camera: t4, compressed: n3, maxDuration: r3, sourceType: i2, extension: a2, success(t5) {
-              const { tempFilePath: n4, duration: s3, size: r4, height: i3, width: a3 } = t5;
-              e4(o2({ errMsg: "chooseVideo:ok", tempFilePaths: [n4], tempFiles: [{ name: t5.tempFile && t5.tempFile.name || "", path: n4, size: r4, type: t5.tempFile && t5.tempFile.type || "", width: a3, height: i3, duration: s3, fileType: "video", cloudPath: "" }] }, "video"));
+            uni.chooseVideo({ camera: t4, compressed: n3, maxDuration: i3, sourceType: o2, extension: a2, success(t5) {
+              const { tempFilePath: n4, duration: s3, size: i4, height: o3, width: a3 } = t5;
+              e4(r2({ errMsg: "chooseVideo:ok", tempFilePaths: [n4], tempFiles: [{ name: t5.tempFile && t5.tempFile.name || "", path: n4, size: i4, type: t5.tempFile && t5.tempFile.type || "", width: a3, height: o3, duration: s3, fileType: "video", cloudPath: "" }] }, "video"));
             }, fail(e5) {
               c2({ errMsg: e5.errMsg.replace("chooseVideo:fail", s2) });
             } });
           });
-        }(t3), t3) : r2(e2, function(e3) {
+        }(t3), t3) : i2(e2, function(e3) {
           const { count: t4, extension: n3 } = e3;
-          return new Promise((e4, r3) => {
-            let i2 = uni.chooseFile;
-            if (typeof wx != "undefined" && typeof wx.chooseMessageFile == "function" && (i2 = wx.chooseMessageFile), typeof i2 != "function")
-              return r3({ errMsg: s2 + " \u8BF7\u6307\u5B9A type \u7C7B\u578B\uFF0C\u8BE5\u5E73\u53F0\u4EC5\u652F\u6301\u9009\u62E9 image \u6216 video\u3002" });
-            i2({ type: "all", count: t4, extension: n3, success(t5) {
-              e4(o2(t5));
+          return new Promise((e4, i3) => {
+            let o2 = uni.chooseFile;
+            if ("undefined" != typeof wx && "function" == typeof wx.chooseMessageFile && (o2 = wx.chooseMessageFile), "function" != typeof o2)
+              return i3({ errMsg: s2 + " \u8BF7\u6307\u5B9A type \u7C7B\u578B\uFF0C\u8BE5\u5E73\u53F0\u4EC5\u652F\u6301\u9009\u62E9 image \u6216 video\u3002" });
+            o2({ type: "all", count: t4, extension: n3, success(t5) {
+              e4(r2(t5));
             }, fail(e5) {
-              r3({ errMsg: e5.errMsg.replace("chooseFile:fail", s2) });
+              i3({ errMsg: e5.errMsg.replace("chooseFile:fail", s2) });
             } });
           });
         }(t3), t3);
       };
     };
-  }), un = n(cn);
-  const ln = "manual";
-  function hn(e) {
+  }), ps = n(fs);
+  const gs = "manual";
+  function ms(e) {
     return { props: { localdata: { type: Array, default: () => [] }, options: { type: [Object, Array], default: () => ({}) }, spaceInfo: { type: Object, default: () => ({}) }, collection: { type: [String, Array], default: "" }, action: { type: String, default: "" }, field: { type: String, default: "" }, orderby: { type: String, default: "" }, where: { type: [String, Object], default: "" }, pageData: { type: String, default: "add" }, pageCurrent: { type: Number, default: 1 }, pageSize: { type: Number, default: 20 }, getcount: { type: [Boolean, String], default: false }, gettree: { type: [Boolean, String], default: false }, gettreepath: { type: [Boolean, String], default: false }, startwith: { type: String, default: "" }, limitlevel: { type: Number, default: 10 }, groupby: { type: String, default: "" }, groupField: { type: String, default: "" }, distinct: { type: [Boolean, String], default: false }, foreignKey: { type: String, default: "" }, loadtime: { type: String, default: "auto" }, manual: { type: Boolean, default: false } }, data: () => ({ mixinDatacomLoading: false, mixinDatacomHasMore: false, mixinDatacomResData: [], mixinDatacomErrorMessage: "", mixinDatacomPage: {} }), created() {
       this.mixinDatacomPage = { current: this.pageCurrent, size: this.pageSize, count: 0 }, this.$watch(() => {
         var e2 = [];
@@ -3361,22 +3423,22 @@ if (uni.restoreGlobal) {
           e2.push(this[t2]);
         }), e2;
       }, (e2, t2) => {
-        if (this.loadtime === ln)
+        if (this.loadtime === gs)
           return;
         let n2 = false;
         const s2 = [];
-        for (let o2 = 2; o2 < e2.length; o2++)
-          e2[o2] !== t2[o2] && (s2.push(e2[o2]), n2 = true);
+        for (let r2 = 2; r2 < e2.length; r2++)
+          e2[r2] !== t2[r2] && (s2.push(e2[r2]), n2 = true);
         e2[0] !== t2[0] && (this.mixinDatacomPage.current = this.pageCurrent), this.mixinDatacomPage.size = this.pageSize, this.onMixinDatacomPropsChange(n2, s2);
       });
     }, methods: { onMixinDatacomPropsChange(e2, t2) {
     }, mixinDatacomEasyGet({ getone: e2 = false, success: t2, fail: n2 } = {}) {
       this.mixinDatacomLoading || (this.mixinDatacomLoading = true, this.mixinDatacomErrorMessage = "", this.mixinDatacomGet().then((n3) => {
         this.mixinDatacomLoading = false;
-        const { data: s2, count: o2 } = n3.result;
-        this.getcount && (this.mixinDatacomPage.count = o2), this.mixinDatacomHasMore = s2.length < this.pageSize;
-        const r2 = e2 ? s2.length ? s2[0] : void 0 : s2;
-        this.mixinDatacomResData = r2, t2 && t2(r2);
+        const { data: s2, count: r2 } = n3.result;
+        this.getcount && (this.mixinDatacomPage.count = r2), this.mixinDatacomHasMore = s2.length < this.pageSize;
+        const i2 = e2 ? s2.length ? s2[0] : void 0 : s2;
+        this.mixinDatacomResData = i2, t2 && t2(i2);
       }).catch((e3) => {
         this.mixinDatacomLoading = false, this.mixinDatacomErrorMessage = e3, n2 && n2(e3);
       }));
@@ -3384,119 +3446,149 @@ if (uni.restoreGlobal) {
       let n2 = e.database(this.spaceInfo);
       const s2 = t2.action || this.action;
       s2 && (n2 = n2.action(s2));
-      const o2 = t2.collection || this.collection;
-      n2 = Array.isArray(o2) ? n2.collection(...o2) : n2.collection(o2);
-      const r2 = t2.where || this.where;
-      r2 && Object.keys(r2).length && (n2 = n2.where(r2));
-      const i2 = t2.field || this.field;
-      i2 && (n2 = n2.field(i2));
+      const r2 = t2.collection || this.collection;
+      n2 = Array.isArray(r2) ? n2.collection(...r2) : n2.collection(r2);
+      const i2 = t2.where || this.where;
+      i2 && Object.keys(i2).length && (n2 = n2.where(i2));
+      const o2 = t2.field || this.field;
+      o2 && (n2 = n2.field(o2));
       const a2 = t2.foreignKey || this.foreignKey;
       a2 && (n2 = n2.foreignKey(a2));
       const c2 = t2.groupby || this.groupby;
       c2 && (n2 = n2.groupBy(c2));
       const u2 = t2.groupField || this.groupField;
       u2 && (n2 = n2.groupField(u2));
-      (t2.distinct !== void 0 ? t2.distinct : this.distinct) === true && (n2 = n2.distinct());
+      true === (void 0 !== t2.distinct ? t2.distinct : this.distinct) && (n2 = n2.distinct());
       const l2 = t2.orderby || this.orderby;
       l2 && (n2 = n2.orderBy(l2));
-      const h2 = t2.pageCurrent !== void 0 ? t2.pageCurrent : this.mixinDatacomPage.current, d2 = t2.pageSize !== void 0 ? t2.pageSize : this.mixinDatacomPage.size, f2 = t2.getcount !== void 0 ? t2.getcount : this.getcount, p2 = t2.gettree !== void 0 ? t2.gettree : this.gettree, g2 = t2.gettreepath !== void 0 ? t2.gettreepath : this.gettreepath, m2 = { getCount: f2 }, y2 = { limitLevel: t2.limitlevel !== void 0 ? t2.limitlevel : this.limitlevel, startWith: t2.startwith !== void 0 ? t2.startwith : this.startwith };
-      return p2 && (m2.getTree = y2), g2 && (m2.getTreePath = y2), n2 = n2.skip(d2 * (h2 - 1)).limit(d2).get(m2), n2;
+      const h2 = void 0 !== t2.pageCurrent ? t2.pageCurrent : this.mixinDatacomPage.current, d2 = void 0 !== t2.pageSize ? t2.pageSize : this.mixinDatacomPage.size, f2 = void 0 !== t2.getcount ? t2.getcount : this.getcount, p2 = void 0 !== t2.gettree ? t2.gettree : this.gettree, g2 = void 0 !== t2.gettreepath ? t2.gettreepath : this.gettreepath, m2 = { getCount: f2 }, y = { limitLevel: void 0 !== t2.limitlevel ? t2.limitlevel : this.limitlevel, startWith: void 0 !== t2.startwith ? t2.startwith : this.startwith };
+      return p2 && (m2.getTree = y), g2 && (m2.getTreePath = y), n2 = n2.skip(d2 * (h2 - 1)).limit(d2).get(m2), n2;
     } } };
   }
-  function dn(e) {
+  function ys(e) {
     return function(t2, n2 = {}) {
       n2 = function(e2, t3 = {}) {
-        return e2.customUI = t3.customUI || e2.customUI, Object.assign(e2.loadingOptions, t3.loadingOptions), Object.assign(e2.errorOptions, t3.errorOptions), typeof t3.secretMethods == "object" && (e2.secretMethods = t3.secretMethods), e2;
+        return e2.customUI = t3.customUI || e2.customUI, e2.parseSystemError = t3.parseSystemError || e2.parseSystemError, Object.assign(e2.loadingOptions, t3.loadingOptions), Object.assign(e2.errorOptions, t3.errorOptions), "object" == typeof t3.secretMethods && (e2.secretMethods = t3.secretMethods), e2;
       }({ customUI: false, loadingOptions: { title: "\u52A0\u8F7D\u4E2D...", mask: true }, errorOptions: { type: "modal", retry: false } }, n2);
-      const { customUI: s2, loadingOptions: o2, errorOptions: r2 } = n2, i2 = !s2;
-      return new Proxy({}, { get: (s3, a2) => function({ fn: e2, interceptorName: t3, getCallbackArgs: n3 } = {}) {
+      const { customUI: s2, loadingOptions: r2, errorOptions: i2, parseSystemError: o2 } = n2, a2 = !s2;
+      return new Proxy({}, { get: (s3, c2) => function({ fn: e2, interceptorName: t3, getCallbackArgs: n3 } = {}) {
         return async function(...s4) {
-          const o3 = n3 ? n3({ params: s4 }) : {};
-          let r3, i3;
+          const r3 = n3 ? n3({ params: s4 }) : {};
+          let i3, o3;
           try {
-            return await b(O(t3, "invoke"), __spreadValues({}, o3)), r3 = await e2(...s4), await b(O(t3, "success"), __spreadProps(__spreadValues({}, o3), { result: r3 })), r3;
+            return await O(x(t3, "invoke"), { ...r3 }), i3 = await e2(...s4), await O(x(t3, "success"), { ...r3, result: i3 }), i3;
           } catch (e3) {
-            throw i3 = e3, await b(O(t3, "fail"), __spreadProps(__spreadValues({}, o3), { error: i3 })), i3;
+            throw o3 = e3, await O(x(t3, "fail"), { ...r3, error: o3 }), o3;
           } finally {
-            await b(O(t3, "complete"), i3 ? __spreadProps(__spreadValues({}, o3), { error: i3 }) : __spreadProps(__spreadValues({}, o3), { result: r3 }));
+            await O(x(t3, "complete"), o3 ? { ...r3, error: o3 } : { ...r3, result: i3 });
           }
         };
-      }({ fn: async function s4(...c2) {
-        let l2;
-        i2 && uni.showLoading({ title: o2.title, mask: o2.mask });
-        const h2 = { name: t2, type: u, data: { method: a2, params: c2 } };
-        typeof n2.secretMethods == "object" && function(e2, t3) {
-          const n3 = t3.data.method, s5 = e2.secretMethods || {}, o3 = s5[n3] || s5["*"];
-          o3 && (t3.secret = o3);
-        }(n2, h2);
+      }({ fn: async function s4(...u2) {
+        let h2;
+        a2 && uni.showLoading({ title: r2.title, mask: r2.mask });
+        const d2 = { name: t2, type: l, data: { method: c2, params: u2 } };
+        "object" == typeof n2.secretMethods && function(e2, t3) {
+          const n3 = t3.data.method, s5 = e2.secretMethods || {}, r3 = s5[n3] || s5["*"];
+          r3 && (t3.secretType = r3);
+        }(n2, d2);
+        let f2 = false;
         try {
-          l2 = await e.callFunction(h2);
+          h2 = await e.callFunction(d2);
         } catch (e2) {
-          l2 = { result: e2 };
+          f2 = true, h2 = { result: new G(e2) };
         }
-        const { errCode: d2, errMsg: f2, newToken: p2 } = l2.result || {};
-        if (i2 && uni.hideLoading(), p2 && p2.token && p2.tokenExpired && (ut(p2), j(x, __spreadValues({}, p2))), d2) {
-          if (i2)
-            if (r2.type === "toast")
-              uni.showToast({ title: f2, icon: "none" });
+        const { errSubject: p2, errCode: g2, errMsg: m2, newToken: y } = h2.result || {};
+        if (a2 && uni.hideLoading(), y && y.token && y.tokenExpired && (X(y), $(D, { ...y })), g2) {
+          let e2 = m2;
+          if (f2 && o2) {
+            e2 = (await o2({ objectName: t2, methodName: c2, params: u2, errSubject: p2, errCode: g2, errMsg: m2 })).errMsg || m2;
+          }
+          if (a2)
+            if ("toast" === i2.type)
+              uni.showToast({ title: e2, icon: "none" });
             else {
-              if (r2.type !== "modal")
-                throw new Error(`Invalid errorOptions.type: ${r2.type}`);
+              if ("modal" !== i2.type)
+                throw new Error(`Invalid errorOptions.type: ${i2.type}`);
               {
-                const { confirm: e3 } = await async function({ title: e4, content: t3, showCancel: n3, cancelText: s5, confirmText: o3 } = {}) {
-                  return new Promise((r3, i3) => {
-                    uni.showModal({ title: e4, content: t3, showCancel: n3, cancelText: s5, confirmText: o3, success(e5) {
-                      r3(e5);
+                const { confirm: t3 } = await async function({ title: e3, content: t4, showCancel: n4, cancelText: s5, confirmText: r3 } = {}) {
+                  return new Promise((i3, o3) => {
+                    uni.showModal({ title: e3, content: t4, showCancel: n4, cancelText: s5, confirmText: r3, success(e4) {
+                      i3(e4);
                     }, fail() {
-                      r3({ confirm: false, cancel: true });
+                      i3({ confirm: false, cancel: true });
                     } });
                   });
-                }({ title: "\u63D0\u793A", content: f2, showCancel: r2.retry, cancelText: "\u53D6\u6D88", confirmText: r2.retry ? "\u91CD\u8BD5" : "\u786E\u5B9A" });
-                if (r2.retry && e3)
-                  return s4(...c2);
+                }({ title: "\u63D0\u793A", content: e2, showCancel: i2.retry, cancelText: "\u53D6\u6D88", confirmText: i2.retry ? "\u91CD\u8BD5" : "\u786E\u5B9A" });
+                if (i2.retry && t3)
+                  return s4(...u2);
               }
             }
-          const e2 = new H({ code: d2, message: f2, requestId: l2.requestId });
-          throw e2.detail = l2.result, j(R, { type: N, content: e2 }), e2;
+          const n3 = new G({ subject: p2, code: g2, message: m2, requestId: h2.requestId });
+          throw n3.detail = h2.result, $(L, { type: K, content: n3 }), n3;
         }
-        return j(R, { type: N, content: l2.result }), l2.result;
+        return $(L, { type: K, content: h2.result }), h2.result;
       }, interceptorName: "callObject", getCallbackArgs: function({ params: e2 } = {}) {
-        return { objectName: t2, methodName: a2, params: e2 };
+        return { objectName: t2, methodName: c2, params: e2 };
       } }) });
     };
   }
-  async function fn(e, t2) {
+  function _s(e) {
+    return T("_globalUniCloudSecureNetworkCache__{spaceId}".replace("{spaceId}", e.config.spaceId));
+  }
+  async function ws({ callLoginByWeixin: e = false } = {}) {
+    const t2 = _s(this);
+    if ("mp-weixin" !== w)
+      throw new Error(`[SecureNetwork] API \`initSecureNetworkByWeixin\` is not supported on platform \`${w}\``);
+    const n2 = await new Promise((e2, t3) => {
+      uni.login({ success(t4) {
+        e2(t4.code);
+      }, fail(e3) {
+        t3(new Error(e3.errMsg));
+      } });
+    }), s2 = this.importObject("uni-id-co", { customUI: true });
+    return await s2.secureNetworkHandshakeByWeixin({ code: n2, callLoginByWeixin: e }), t2.mpWeixinCode = n2, { code: n2 };
+  }
+  async function vs(e) {
+    const t2 = _s(this);
+    return t2.initPromise || (t2.initPromise = ws.call(this, e)), t2.initPromise;
+  }
+  function Ss(e) {
+    return function({ callLoginByWeixin: t2 = false } = {}) {
+      return vs.call(e, { callLoginByWeixin: t2 });
+    };
+  }
+  async function ks(e, t2) {
     const n2 = `http://${e}:${t2}/system/ping`;
     try {
       const e2 = await (s2 = { url: n2, timeout: 500 }, new Promise((e3, t3) => {
-        X.request(__spreadProps(__spreadValues({}, s2), { success(t4) {
+        V.request({ ...s2, success(t4) {
           e3(t4);
         }, fail(e4) {
           t3(e4);
-        } }));
+        } });
       }));
-      return !(!e2.data || e2.data.code !== 0);
+      return !(!e2.data || 0 !== e2.data.code);
     } catch (e2) {
       return false;
     }
     var s2;
   }
-  function pn(e) {
-    if (e.initUniCloudStatus && e.initUniCloudStatus !== "rejected")
+  function Is(e) {
+    if (e.initUniCloudStatus && "rejected" !== e.initUniCloudStatus)
       return;
     let t2 = Promise.resolve();
     var n2;
-    n2 = 1, t2 = new Promise((e2, t3) => {
+    n2 = 1, t2 = new Promise((e2) => {
       setTimeout(() => {
         e2();
       }, n2);
     }), e.isReady = false, e.isDefault = false;
     const s2 = e.auth();
     e.initUniCloudStatus = "pending", e.initUniCloud = t2.then(() => s2.getLoginState()).then((e2) => e2 ? Promise.resolve() : s2.signInAnonymously()).then(() => {
-      if (m === "app") {
-        const { osName: e2, osVersion: t3 } = uni.getSystemInfoSync();
-        e2 === "ios" && function(e3) {
-          if (!e3 || typeof e3 != "string")
+      if ("app" === w) {
+        const { osName: e2, osVersion: t3 } = ne();
+        "ios" === e2 && function(e3) {
+          if (!e3 || "string" != typeof e3)
             return 0;
           const t4 = e3.match(/^(\d+)./);
           return t4 && t4[1] ? parseInt(t4[1]) : 0;
@@ -3507,9 +3599,9 @@ if (uni.restoreGlobal) {
         return async function(e2, t4) {
           let n4;
           for (let s3 = 0; s3 < e2.length; s3++) {
-            const o2 = e2[s3];
-            if (await fn(o2, t4)) {
-              n4 = o2;
+            const r2 = e2[s3];
+            if (await ks(r2, t4)) {
+              n4 = r2;
               break;
             }
           }
@@ -3517,39 +3609,55 @@ if (uni.restoreGlobal) {
         }(t3, n3);
       }
     }).then(({ address: t3, port: n3 } = {}) => {
-      const s3 = console[m === "app" ? "error" : "warn"];
+      const s3 = console["app" === w ? "error" : "warn"];
       if (t3)
         e.__dev__.localAddress = t3, e.__dev__.localPort = n3;
       else if (e.__dev__.debugInfo) {
         let t4 = "";
-        e.__dev__.debugInfo.initialLaunchType === "remote" ? (e.__dev__.debugInfo.forceRemote = true, t4 = "\u5F53\u524D\u5BA2\u6237\u7AEF\u548CHBuilderX\u4E0D\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\uFF08\u6216\u5176\u4ED6\u7F51\u7EDC\u539F\u56E0\u65E0\u6CD5\u8FDE\u63A5HBuilderX\uFF09\uFF0CuniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u4E0D\u5BF9\u5F53\u524D\u5BA2\u6237\u7AEF\u751F\u6548\u3002\n- \u5982\u679C\u4E0D\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u76F4\u63A5\u5FFD\u7565\u6B64\u4FE1\u606F\u3002\n- \u5982\u9700\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u5C06\u5BA2\u6237\u7AEF\u4E0E\u4E3B\u673A\u8FDE\u63A5\u5230\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u5E76\u91CD\u65B0\u8FD0\u884C\u5230\u5BA2\u6237\u7AEF\u3002\n- \u5982\u679C\u5728HBuilderX\u5F00\u542F\u7684\u72B6\u6001\u4E0B\u5207\u6362\u8FC7\u7F51\u7EDC\u73AF\u5883\uFF0C\u8BF7\u91CD\u542FHBuilderX\u540E\u518D\u8BD5\n- \u68C0\u67E5\u7CFB\u7EDF\u9632\u706B\u5899\u662F\u5426\u62E6\u622A\u4E86HBuilderX\u81EA\u5E26\u7684nodejs") : t4 = "\u65E0\u6CD5\u8FDE\u63A5uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u68C0\u67E5\u5F53\u524D\u5BA2\u6237\u7AEF\u662F\u5426\u4E0E\u4E3B\u673A\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u3002\n- \u5982\u9700\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u5C06\u5BA2\u6237\u7AEF\u4E0E\u4E3B\u673A\u8FDE\u63A5\u5230\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u5E76\u91CD\u65B0\u8FD0\u884C\u5230\u5BA2\u6237\u7AEF\u3002\n- \u5982\u679C\u5728HBuilderX\u5F00\u542F\u7684\u72B6\u6001\u4E0B\u5207\u6362\u8FC7\u7F51\u7EDC\u73AF\u5883\uFF0C\u8BF7\u91CD\u542FHBuilderX\u540E\u518D\u8BD5\n- \u68C0\u67E5\u7CFB\u7EDF\u9632\u706B\u5899\u662F\u5426\u62E6\u622A\u4E86HBuilderX\u81EA\u5E26\u7684nodejs", m === "web" && (t4 += "\n- \u90E8\u5206\u6D4F\u89C8\u5668\u5F00\u542F\u8282\u6D41\u6A21\u5F0F\u4E4B\u540E\u8BBF\u95EE\u672C\u5730\u5730\u5740\u53D7\u9650\uFF0C\u8BF7\u68C0\u67E5\u662F\u5426\u542F\u7528\u4E86\u8282\u6D41\u6A21\u5F0F"), m.indexOf("mp-") === 0 && (t4 += "\n- \u5C0F\u7A0B\u5E8F\u4E2D\u5982\u4F55\u4F7F\u7528uniCloud\uFF0C\u8BF7\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp"), s3(t4);
+        "remote" === e.__dev__.debugInfo.initialLaunchType ? (e.__dev__.debugInfo.forceRemote = true, t4 = "\u5F53\u524D\u5BA2\u6237\u7AEF\u548CHBuilderX\u4E0D\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\uFF08\u6216\u5176\u4ED6\u7F51\u7EDC\u539F\u56E0\u65E0\u6CD5\u8FDE\u63A5HBuilderX\uFF09\uFF0CuniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u4E0D\u5BF9\u5F53\u524D\u5BA2\u6237\u7AEF\u751F\u6548\u3002\n- \u5982\u679C\u4E0D\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u76F4\u63A5\u5FFD\u7565\u6B64\u4FE1\u606F\u3002\n- \u5982\u9700\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u5C06\u5BA2\u6237\u7AEF\u4E0E\u4E3B\u673A\u8FDE\u63A5\u5230\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u5E76\u91CD\u65B0\u8FD0\u884C\u5230\u5BA2\u6237\u7AEF\u3002\n- \u5982\u679C\u5728HBuilderX\u5F00\u542F\u7684\u72B6\u6001\u4E0B\u5207\u6362\u8FC7\u7F51\u7EDC\u73AF\u5883\uFF0C\u8BF7\u91CD\u542FHBuilderX\u540E\u518D\u8BD5\n- \u68C0\u67E5\u7CFB\u7EDF\u9632\u706B\u5899\u662F\u5426\u62E6\u622A\u4E86HBuilderX\u81EA\u5E26\u7684nodejs") : t4 = "\u65E0\u6CD5\u8FDE\u63A5uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u68C0\u67E5\u5F53\u524D\u5BA2\u6237\u7AEF\u662F\u5426\u4E0E\u4E3B\u673A\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u3002\n- \u5982\u9700\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u5C06\u5BA2\u6237\u7AEF\u4E0E\u4E3B\u673A\u8FDE\u63A5\u5230\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u5E76\u91CD\u65B0\u8FD0\u884C\u5230\u5BA2\u6237\u7AEF\u3002\n- \u5982\u679C\u5728HBuilderX\u5F00\u542F\u7684\u72B6\u6001\u4E0B\u5207\u6362\u8FC7\u7F51\u7EDC\u73AF\u5883\uFF0C\u8BF7\u91CD\u542FHBuilderX\u540E\u518D\u8BD5\n- \u68C0\u67E5\u7CFB\u7EDF\u9632\u706B\u5899\u662F\u5426\u62E6\u622A\u4E86HBuilderX\u81EA\u5E26\u7684nodejs", "web" === w && (t4 += "\n- \u90E8\u5206\u6D4F\u89C8\u5668\u5F00\u542F\u8282\u6D41\u6A21\u5F0F\u4E4B\u540E\u8BBF\u95EE\u672C\u5730\u5730\u5740\u53D7\u9650\uFF0C\u8BF7\u68C0\u67E5\u662F\u5426\u542F\u7528\u4E86\u8282\u6D41\u6A21\u5F0F"), 0 === w.indexOf("mp-") && (t4 += "\n- \u5C0F\u7A0B\u5E8F\u4E2D\u5982\u4F55\u4F7F\u7528uniCloud\uFF0C\u8BF7\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp"), s3(t4);
       }
     }).then(() => {
-      lt(), e.isReady = true, e.initUniCloudStatus = "fulfilled";
+      Z(), e.isReady = true, e.initUniCloudStatus = "fulfilled";
     }).catch((t3) => {
       console.error(t3), e.initUniCloudStatus = "rejected";
     });
   }
-  const gn = { tcb: it, tencent: it, aliyun: ee, private: dt };
-  let mn = new class {
+  const bs = { tcb: gt, tencent: gt, aliyun: ue, private: yt };
+  let Ts = new class {
     init(e) {
       let t2 = {};
-      const n2 = gn[e.provider];
+      const n2 = bs[e.provider];
       if (!n2)
         throw new Error("\u672A\u63D0\u4F9B\u6B63\u786E\u7684provider\u53C2\u6570");
-      t2 = n2.init(e), t2.__dev__ = {}, t2.__dev__.debugLog = m === "web" && navigator.userAgent.indexOf("HBuilderX") > 0 || m === "app";
-      const s2 = y;
-      s2 && !s2.code && (t2.__dev__.debugInfo = s2), pn(t2), t2.reInit = function() {
-        pn(this);
-      }, vt(t2), function(e2) {
+      t2 = n2.init(e), t2.__dev__ = {}, t2.__dev__.debugLog = "web" === w && navigator.userAgent.indexOf("HBuilderX") > 0 || "app" === w;
+      const s2 = v;
+      s2 && !s2.code && (t2.__dev__.debugInfo = s2), Is(t2), t2.reInit = function() {
+        Is(this);
+      }, Tn(t2), function(e2) {
         const t3 = e2.uploadFile;
         e2.uploadFile = function(e3) {
           return t3.call(this, e3);
         };
-      }(t2), Ut(t2), function(e2) {
-        e2.getCurrentUserInfo = an, e2.chooseAndUploadFile = un.initChooseAndUploadFile(e2), Object.assign(e2, { get mixinDatacom() {
-          return hn(e2);
-        } }), e2.importObject = dn(e2);
+      }(t2), function(e2) {
+        e2.database = function(t3) {
+          if (t3 && Object.keys(t3).length > 0)
+            return e2.init(t3).database();
+          if (this._database)
+            return this._database;
+          const n3 = Dn(Fn, { uniClient: e2 });
+          return this._database = n3, n3;
+        }, e2.databaseForJQL = function(t3) {
+          if (t3 && Object.keys(t3).length > 0)
+            return e2.init(t3).databaseForJQL();
+          if (this._databaseForJQL)
+            return this._databaseForJQL;
+          const n3 = Dn(Fn, { uniClient: e2, isJQL: true });
+          return this._databaseForJQL = n3, n3;
+        };
+      }(t2), function(e2) {
+        e2.getCurrentUserInfo = ds, e2.chooseAndUploadFile = ps.initChooseAndUploadFile(e2), Object.assign(e2, { get mixinDatacom() {
+          return ms(e2);
+        } }), e2.importObject = ys(e2), e2.initSecureNetworkByWeixin = Ss(e2);
       }(t2);
       return ["callFunction", "uploadFile", "deleteFile", "getTempFileURL", "downloadFile", "chooseAndUploadFile"].forEach((e2) => {
         if (!t2[e2])
@@ -3557,29 +3665,29 @@ if (uni.restoreGlobal) {
         const n3 = t2[e2];
         t2[e2] = function() {
           return t2.reInit(), n3.apply(t2, Array.from(arguments));
-        }, t2[e2] = W(t2[e2], e2).bind(t2);
+        }, t2[e2] = H(t2[e2], e2).bind(t2);
       }), t2.init = this.init, t2;
     }
   }();
   (() => {
-    const e = _;
+    const e = S;
     let t2 = {};
-    if (e && e.length === 1)
-      t2 = e[0], mn = mn.init(t2), mn.isDefault = true;
+    if (e && 1 === e.length)
+      t2 = e[0], Ts = Ts.init(t2), Ts.isDefault = true;
     else {
       const t3 = ["auth", "callFunction", "uploadFile", "deleteFile", "getTempFileURL", "downloadFile", "database", "getCurrentUSerInfo", "importObject"];
       let n2;
       n2 = e && e.length > 0 ? "\u5E94\u7528\u6709\u591A\u4E2A\u670D\u52A1\u7A7A\u95F4\uFF0C\u8BF7\u901A\u8FC7uniCloud.init\u65B9\u6CD5\u6307\u5B9A\u8981\u4F7F\u7528\u7684\u670D\u52A1\u7A7A\u95F4" : "\u5E94\u7528\u672A\u5173\u8054\u670D\u52A1\u7A7A\u95F4\uFF0C\u8BF7\u5728uniCloud\u76EE\u5F55\u53F3\u952E\u5173\u8054\u670D\u52A1\u7A7A\u95F4", t3.forEach((e2) => {
-        mn[e2] = function() {
-          return console.error(n2), Promise.reject(new H({ code: "SYS_ERR", message: n2 }));
+        Ts[e2] = function() {
+          return console.error(n2), Promise.reject(new G({ code: "SYS_ERR", message: n2 }));
         };
       });
     }
-    Object.assign(mn, { get mixinDatacom() {
-      return hn(mn);
-    } }), nn(mn), mn.addInterceptor = P, mn.removeInterceptor = I, mn.interceptObject = C, m === "web" && (window.uniCloud = mn);
+    Object.assign(Ts, { get mixinDatacom() {
+      return ms(Ts);
+    } }), cs(Ts), Ts.addInterceptor = P, Ts.removeInterceptor = E, Ts.interceptObject = U, "web" === w && (window.uniCloud = Ts);
   })();
-  var yn = mn;
+  var As = Ts;
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -3639,18 +3747,18 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  var mpwxs = mpMixins;
+  const mpwxs = mpMixins;
   let bindIngXMixins = {};
   let otherMixins = {};
-  var block0$1 = (Comp) => {
+  const block0$1 = (Comp) => {
     (Comp.$wxs || (Comp.$wxs = [])).push("wxsswipe");
-    (Comp.$wxsModules || (Comp.$wxsModules = {}))["wxsswipe"] = "13d3b3b0";
+    (Comp.$wxsModules || (Comp.$wxsModules = {}))["wxsswipe"] = "afd46426";
   };
-  var block1 = (Comp) => {
+  const block1 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$D = {
+  const _sfc_main$E = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -3710,7 +3818,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u5728\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F app vue\u7AEF h5 \u4F7F\u7528wxs \u5B9E\u73B0"),
       vue.createElementVNode("view", { class: "uni-swipe" }, [
@@ -3777,11 +3885,11 @@ if (uni.restoreGlobal) {
     ], 2112);
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$D);
+    block0$1(_sfc_main$E);
   if (typeof block1 === "function")
-    block1(_sfc_main$D);
-  var __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-41bc30c0"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$C = {
+    block1(_sfc_main$E);
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-8ff2a577"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$D = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -3805,14 +3913,14 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  var __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
-  var businessCloudObject$2 = yn.importObject("businessCloudObject");
-  const _sfc_main$B = {
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  var businessCloudObject$2 = As.importObject("businessCloudObject");
+  const _sfc_main$C = {
     name: "memberList",
     data() {
       return {
@@ -3887,9 +3995,10 @@ if (uni.restoreGlobal) {
         businessCloudObject$2.getMoreList(data).then((meberListRes) => {
           formatAppLog("log", "at components/memberList/memberList.vue:215", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
-            return __spreadProps(__spreadValues({}, item), {
+            return {
+              ...item,
               isOpened: "none"
-            });
+            };
           }) || [];
         }).catch((err) => {
         });
@@ -3942,9 +4051,10 @@ if (uni.restoreGlobal) {
           businessCloudObject$2.getMemberList(buyStatus).then((meberListRes) => {
             formatAppLog("log", "at components/memberList/memberList.vue:279", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
-              return __spreadProps(__spreadValues({}, item), {
+              return {
+                ...item,
                 isOpened: "none"
-              });
+              };
             }) || [];
             self2.$set(self2, "meberList", meberList);
             formatAppLog("log", "at components/memberList/memberList.vue:289", self2.meberList, "?????");
@@ -3973,8 +4083,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$5);
     const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_1$3);
     const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_2$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "mebers_content" }, [
@@ -4112,8 +4222,8 @@ if (uni.restoreGlobal) {
       }), 128))
     ]);
   }
-  var MemberList = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-184b0cc4"], ["__file", "E:/workproject/bodybuilding-app/components/memberList/memberList.vue"]]);
-  const _sfc_main$A = {
+  const MemberList = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-fce7d226"], ["__file", "D:/studyUninApp/bodybuilding-app/components/memberList/memberList.vue"]]);
+  const _sfc_main$B = {
     props: {
       visible: Boolean,
       color: {
@@ -4263,7 +4373,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "zb-tooltip",
       style: vue.normalizeStyle({
@@ -4299,8 +4409,8 @@ if (uni.restoreGlobal) {
       ])
     ], 4);
   }
-  var ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-5c27e2dc"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
-  const _sfc_main$z = {
+  const ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-13dad3a2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
+  const _sfc_main$A = {
     components: {
       BgTheamCompontent,
       MemberList,
@@ -4344,7 +4454,7 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:133", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:152", 111);
         uni.navigateTo({
           url: "/pages/memberQuery/memberQuery",
           success: (res2) => {
@@ -4377,190 +4487,6 @@ if (uni.restoreGlobal) {
       },
       buyClick(type) {
         this.isActive = type;
-      }
-    }
-  };
-  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_MemberList = vue.resolveComponent("MemberList");
-    const _component_ZbTooltip = vue.resolveComponent("ZbTooltip");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
-      vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F "),
-      vue.createCommentVNode(' 	<view class="status_bar">\r\n	</view> '),
-      vue.createElementVNode("view", { class: "content_style" }, [
-        vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-        vue.createCommentVNode("\u5185\u5BB9 start"),
-        vue.createElementVNode("scroll-view", {
-          onScroll: _cache[3] || (_cache[3] = (...args) => $options.memberSrollTop && $options.memberSrollTop(...args)),
-          "scroll-y": "true"
-        }, [
-          vue.createElementVNode("view", { class: "header_style" }, [
-            vue.createElementVNode("view", { class: "header_left_style" }, [
-              vue.createElementVNode("view", { class: "left_content_style" }, [
-                vue.createElementVNode("image", {
-                  class: "left_content_img_style",
-                  src: "https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
-                }),
-                vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
-                vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
-              ])
-            ]),
-            vue.createElementVNode("view", {
-              class: vue.normalizeClass(["header_right_style", $data.cellingFlag ? "search_anmition_style" : ""])
-            }, [
-              vue.createElementVNode("image", {
-                class: "right_img_style",
-                src: "/static/app-plus/mebrs/fangdajing.svg",
-                onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
-              })
-            ], 2)
-          ]),
-          vue.createElementVNode("view", {
-            class: vue.normalizeClass(["is_buy_style", $data.cellingFlag ? "celling_animation_style" : ""])
-          }, [
-            vue.createElementVNode("view", {
-              class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
-              onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
-            }, "\u5DF2\u8D2D\u8BFE", 2),
-            vue.createElementVNode("view", {
-              class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
-              onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
-            }, "\u672A\u8D2D\u8BFE", 2)
-          ], 2),
-          vue.createVNode(_component_MemberList, {
-            isActive: $data.isActive,
-            type: "home"
-          }, null, 8, ["isActive"])
-        ], 32),
-        vue.createElementVNode("view", {
-          class: vue.normalizeClass(["btn_add", $data.loginNum == 0 ? "guid_style" : ""])
-        }, [
-          vue.createElementVNode("view", { class: "add_style" }, [
-            vue.createElementVNode("image", {
-              class: "add_img_style",
-              src: "/static/app-plus/mebrs/add.svg",
-              onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
-            }),
-            vue.createElementVNode("view", null, [
-              vue.createVNode(_component_ZbTooltip, {
-                visible: $data.showPopover,
-                placement: "left",
-                color: "linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)",
-                content: "Hi\uFF5E\u4F60\u6765\u4E86\r\n			  \u70B9\u8FD9\u91CC\u6DFB\u52A0\u4F1A\u5458\u5427",
-                show: true
-              }, null, 8, ["visible", "color"])
-            ])
-          ]),
-          vue.createVNode(_component_uni_popup, {
-            class: "updatePopup",
-            ref: "first_popup",
-            type: "center",
-            onChange: $options.change
-          }, null, 8, ["onChange"])
-        ], 2)
-      ])
-    ], 2112);
-  }
-  var PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__file", "E:/workproject/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
-  const _sfc_main$y = {
-    name: "uniFormsItem",
-    options: {
-      virtualHost: true
-    },
-    provide() {
-      return {
-        uniFormItem: this
-      };
-    },
-    inject: {
-      form: {
-        from: "uniForm",
-        default: null
-      }
-    },
-    props: {
-      rules: {
-        type: Array,
-        default() {
-          return null;
-        }
-      },
-      name: {
-        type: [String, Array],
-        default: ""
-      },
-      required: {
-        type: Boolean,
-        default: false
-      },
-      label: {
-        type: String,
-        default: ""
-      },
-      labelWidth: {
-        type: [String, Number],
-        default: ""
-      },
-      labelAlign: {
-        type: String,
-        default: ""
-      },
-      errorMessage: {
-        type: [String, Boolean],
-        default: ""
-      },
-      leftIcon: String,
-      iconColor: {
-        type: String,
-        default: "#606266"
-      }
-    },
-    data() {
-      return {
-        errMsg: "",
-        isRequired: false,
-        userRules: null,
-        localLabelAlign: "left",
-        localLabelWidth: "65px",
-        localLabelPos: "left",
-        border: false,
-        isFirstBorder: false
-      };
-    },
-    computed: {
-      msg() {
-        return this.errorMessage || this.errMsg;
-      }
-    },
-    watch: {
-      "form.formRules"(val) {
-        this.init();
-      },
-      "form.labelWidth"(val) {
-        this.localLabelWidth = this._labelWidthUnit(val);
-      },
-      "form.labelPosition"(val) {
-        this.localLabelPos = this._labelPosition();
-      },
-      "form.labelAlign"(val) {
-      }
-    },
-    created() {
-      this.init(true);
-      if (this.name && this.form) {
-        this.$watch(() => {
-          const val = this.form._getDataValue(this.name, this.form.localData);
-          return val;
-        }, (value, oldVal) => {
-          const isEqual2 = this.form._isEqual(value, oldVal);
-          if (!isEqual2) {
-            const val = this.itemSetValue(value);
-            this.onFieldChange(val, false);
-          }
-        }, {
-          immediate: false
-        });
       }
     },
     unmounted() {
@@ -4743,7 +4669,378 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_MemberList = vue.resolveComponent("MemberList");
+    const _component_ZbTooltip = vue.resolveComponent("ZbTooltip");
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$5);
+    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+      vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F "),
+      vue.createCommentVNode(' 	<view class="status_bar">\r\n	</view> '),
+      vue.createElementVNode("view", { class: "content_style" }, [
+        vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+        vue.createCommentVNode("\u5185\u5BB9 start"),
+        vue.createElementVNode("scroll-view", {
+          onScroll: _cache[3] || (_cache[3] = (...args) => $options.memberSrollTop && $options.memberSrollTop(...args)),
+          "scroll-y": "true"
+        }, [
+          vue.createElementVNode("view", { class: "header_style" }, [
+            vue.createElementVNode("view", { class: "header_left_style" }, [
+              vue.createElementVNode("view", { class: "left_content_style" }, [
+                vue.createElementVNode("image", {
+                  class: "left_content_img_style",
+                  src: "https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
+                }),
+                vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
+                vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: vue.normalizeClass(["header_right_style", $data.cellingFlag ? "search_anmition_style" : ""])
+            }, [
+              vue.createElementVNode("image", {
+                class: "right_img_style",
+                src: "/static/app-plus/mebrs/fangdajing.svg",
+                onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
+              })
+            ], 2)
+          ]),
+          vue.createElementVNode("view", {
+            class: vue.normalizeClass(["is_buy_style", $data.cellingFlag ? "celling_animation_style" : ""])
+          }, [
+            vue.createElementVNode("view", {
+              class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
+              onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
+            }, "\u5DF2\u8D2D\u8BFE", 2),
+            vue.createElementVNode("view", {
+              class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
+              onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
+            }, "\u672A\u8D2D\u8BFE", 2)
+          ], 2),
+          vue.createVNode(_component_MemberList, {
+            isActive: $data.isActive,
+            type: "home"
+          }, null, 8, ["isActive"])
+        ], 32),
+        vue.createElementVNode("view", {
+          class: vue.normalizeClass(["btn_add", $data.loginNum == 0 ? "guid_style" : ""])
+        }, [
+          vue.createCommentVNode('     <van-popup\r\n	  ref="memberPopover"\r\n        @click-overlay="clickOverlay"\r\n        :overlay="true"\r\n        v-model:show="showPopover"\r\n        placement="left"\r\n      >\r\n        <view class="pop_tips_style pad_style">Hi\uFF5E\u4F60\u6765\u4E86</view>\r\n        <view class="pop_tips_style">\u70B9\u8FD9\u91CC\u6DFB\u52A0\u4F1A\u5458\u5427</view>\r\n\r\n        <template #reference>\r\n          <image\r\n            class="add_img_style"\r\n            src="../../static/app-plus/mebrs/add.svg"\r\n            @click.stop="addClick"\r\n          ></image>\r\n        </template>\r\n      </van-popup> '),
+          vue.createElementVNode("view", { class: "add_style" }, [
+            vue.createElementVNode("image", {
+              class: "add_img_style",
+              src: "/static/app-plus/mebrs/add.svg",
+              onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
+            }),
+            vue.createElementVNode("view", null, [
+              vue.createVNode(_component_ZbTooltip, {
+                visible: $data.showPopover,
+                placement: "left",
+                color: "linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)",
+                content: "Hi\uFF5E\u4F60\u6765\u4E86\r\n			  \u70B9\u8FD9\u91CC\u6DFB\u52A0\u4F1A\u5458\u5427",
+                show: true
+              }, null, 8, ["visible", "color"])
+            ])
+          ]),
+          vue.createVNode(_component_uni_popup, {
+            class: "updatePopup",
+            ref: "first_popup",
+            type: "center",
+            onChange: $options.change
+          }, null, 8, ["onChange"])
+        ], 2)
+      ])
+    ], 2112);
+  }
+  const PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__file", "D:/studyUninApp/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
+  const _sfc_main$z = {
+    name: "uniFormsItem",
+    options: {
+      virtualHost: true
+    },
+    provide() {
+      return {
+        uniFormItem: this
+      };
+    },
+    inject: {
+      form: {
+        from: "uniForm",
+        default: null
+      }
+    },
+    props: {
+      rules: {
+        type: Array,
+        default() {
+          return null;
+        }
+      },
+      name: {
+        type: [String, Array],
+        default: ""
+      },
+      required: {
+        type: Boolean,
+        default: false
+      },
+      label: {
+        type: String,
+        default: ""
+      },
+      labelWidth: {
+        type: [String, Number],
+        default: ""
+      },
+      labelAlign: {
+        type: String,
+        default: ""
+      },
+      errorMessage: {
+        type: [String, Boolean],
+        default: ""
+      },
+      leftIcon: String,
+      iconColor: {
+        type: String,
+        default: "#606266"
+      }
+    },
+    data() {
+      return {
+        errMsg: "",
+        isRequired: false,
+        userRules: null,
+        localLabelAlign: "left",
+        localLabelWidth: "65px",
+        localLabelPos: "left",
+        border: false,
+        isFirstBorder: false
+      };
+    },
+    computed: {
+      msg() {
+        return this.errorMessage || this.errMsg;
+      }
+    },
+    watch: {
+      "form.formRules"(val) {
+        this.init();
+      },
+      "form.labelWidth"(val) {
+        this.localLabelWidth = this._labelWidthUnit(val);
+      },
+      "form.labelPosition"(val) {
+        this.localLabelPos = this._labelPosition();
+      },
+      "form.labelAlign"(val) {
+      }
+    },
+    created() {
+      this.init(true);
+      if (this.name && this.form) {
+        this.$watch(
+          () => {
+            const val = this.form._getDataValue(this.name, this.form.localData);
+            return val;
+          },
+          (value, oldVal) => {
+            const isEqual2 = this.form._isEqual(value, oldVal);
+            if (!isEqual2) {
+              const val = this.itemSetValue(value);
+              this.onFieldChange(val, false);
+            }
+          },
+          {
+            immediate: false
+          }
+        );
+      }
+    },
+    unmounted() {
+      this.__isUnmounted = true;
+      this.unInit();
+    },
+    methods: {
+      setRules(rules = null) {
+        this.userRules = rules;
+        this.init(false);
+      },
+      setValue() {
+      },
+      async onFieldChange(value, formtrigger = true) {
+        const {
+          formData,
+          localData,
+          errShowType,
+          validateCheck,
+          validateTrigger,
+          _isRequiredField,
+          _realName
+        } = this.form;
+        const name2 = _realName(this.name);
+        if (!value) {
+          value = this.form.formData[name2];
+        }
+        const ruleLen = this.itemRules.rules && this.itemRules.rules.length;
+        if (!this.validator || !ruleLen || ruleLen === 0)
+          return;
+        const isRequiredField2 = _isRequiredField(this.itemRules.rules || []);
+        let result = null;
+        if (validateTrigger === "bind" || formtrigger) {
+          result = await this.validator.validateUpdate(
+            {
+              [name2]: value
+            },
+            formData
+          );
+          if (!isRequiredField2 && (value === void 0 || value === "")) {
+            result = null;
+          }
+          if (result && result.errorMessage) {
+            if (errShowType === "undertext") {
+              this.errMsg = !result ? "" : result.errorMessage;
+            }
+            if (errShowType === "toast") {
+              uni.showToast({
+                title: result.errorMessage || "\u6821\u9A8C\u9519\u8BEF",
+                icon: "none"
+              });
+            }
+            if (errShowType === "modal") {
+              uni.showModal({
+                title: "\u63D0\u793A",
+                content: result.errorMessage || "\u6821\u9A8C\u9519\u8BEF"
+              });
+            }
+          } else {
+            this.errMsg = "";
+          }
+          validateCheck(result ? result : null);
+        } else {
+          this.errMsg = "";
+        }
+        return result ? result : null;
+      },
+      init(type = false) {
+        const {
+          validator,
+          formRules,
+          childrens,
+          formData,
+          localData,
+          _realName,
+          labelWidth,
+          _getDataValue,
+          _setDataValue
+        } = this.form || {};
+        this.localLabelAlign = this._justifyContent();
+        this.localLabelWidth = this._labelWidthUnit(labelWidth);
+        this.localLabelPos = this._labelPosition();
+        this.isRequired = this.required;
+        this.form && type && childrens.push(this);
+        if (!validator || !formRules)
+          return;
+        if (!this.form.isFirstBorder) {
+          this.form.isFirstBorder = true;
+          this.isFirstBorder = true;
+        }
+        if (this.group) {
+          if (!this.group.isFirstBorder) {
+            this.group.isFirstBorder = true;
+            this.isFirstBorder = true;
+          }
+        }
+        this.border = this.form.border;
+        const name2 = _realName(this.name);
+        const itemRule = this.userRules || this.rules;
+        if (typeof formRules === "object" && itemRule) {
+          formRules[name2] = {
+            rules: itemRule
+          };
+          validator.updateSchema(formRules);
+        }
+        const itemRules = formRules[name2] || {};
+        this.itemRules = itemRules;
+        this.validator = validator;
+        this.itemSetValue(_getDataValue(this.name, localData));
+        this.isRequired = this._isRequired();
+      },
+      unInit() {
+        if (this.form) {
+          const {
+            childrens,
+            formData,
+            _realName
+          } = this.form;
+          childrens.forEach((item, index) => {
+            if (item === this) {
+              this.form.childrens.splice(index, 1);
+              delete formData[_realName(item.name)];
+            }
+          });
+        }
+      },
+      itemSetValue(value) {
+        const name2 = this.form._realName(this.name);
+        const rules = this.itemRules.rules || [];
+        const val = this.form._getValue(name2, value, rules);
+        this.form._setDataValue(name2, this.form.formData, val);
+        return val;
+      },
+      clearValidate() {
+        this.errMsg = "";
+      },
+      _isRequired() {
+        return this.required;
+      },
+      _justifyContent() {
+        if (this.form) {
+          const {
+            labelAlign
+          } = this.form;
+          let labelAli = this.labelAlign ? this.labelAlign : labelAlign;
+          if (labelAli === "left")
+            return "flex-start";
+          if (labelAli === "center")
+            return "center";
+          if (labelAli === "right")
+            return "flex-end";
+        }
+        return "flex-start";
+      },
+      _labelWidthUnit(labelWidth) {
+        return this.num2px(this.labelWidth ? this.labelWidth : labelWidth || (this.label ? 65 : "auto"));
+      },
+      _labelPosition() {
+        if (this.form)
+          return this.form.labelPosition || "left";
+        return "left";
+      },
+      isTrigger(rule, itemRlue, parentRule) {
+        if (rule === "submit" || !rule) {
+          if (rule === void 0) {
+            if (itemRlue !== "bind") {
+              if (!itemRlue) {
+                return parentRule === "" ? "bind" : "submit";
+              }
+              return "submit";
+            }
+            return "bind";
+          }
+          return "submit";
+        }
+        return "bind";
+      },
+      num2px(num) {
+        if (typeof num === "number") {
+          return `${num}px`;
+        }
+        return num;
+      }
+    }
+  };
+  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["uni-forms-item", ["is-direction-" + $data.localLabelPos, $data.border ? "uni-forms-item--border" : "", $data.border && $data.isFirstBorder ? "is-first-border" : ""]])
     }, [
@@ -4769,8 +5066,8 @@ if (uni.restoreGlobal) {
       ])
     ], 2);
   }
-  var __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-61dfc0d0"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
-  const _sfc_main$x = {
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-462874dd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const _sfc_main$y = {
     name: "hpy-form-select",
     emits: ["click", "update:modelValue", "input", "change"],
     model: {
@@ -4905,7 +5202,7 @@ if (uni.restoreGlobal) {
         if (this.selectValue === "") {
           return this.title;
         }
-        if (this.mode == "date" || this.mode == "time") {
+        if ("date" == this.mode || "time" == this.mode) {
           return this.selectValue;
         } else {
           if (!this.dataList || this.dataList.length == 0) {
@@ -4940,7 +5237,7 @@ if (uni.restoreGlobal) {
           this.selectValue = "";
           return false;
         }
-        if (this.mode == "date" || this.mode == "time") {
+        if ("date" == this.mode || "time" == this.mode) {
           this.selectValue = value;
         } else {
           if (this.dataList.length > 0) {
@@ -4966,7 +5263,7 @@ if (uni.restoreGlobal) {
         const val = e.detail.value;
         this.selectValue = val;
         var inputVal = "", changeVal = "";
-        if (this.mode == "date" || this.mode == "time") {
+        if ("date" == this.mode || "time" == this.mode) {
           inputVal = val;
           changeVal = val;
         } else {
@@ -4992,7 +5289,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("picker", {
         mode: $props.mode,
@@ -5028,11 +5325,14 @@ if (uni.restoreGlobal) {
       ], 40, ["mode", "value", "range", "range-key", "start", "end", "fields", "custom-item", "disabled"])
     ]);
   }
-  var __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-7178c756"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/hpy-form-select/components/hpy-form-select/hpy-form-select.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-4c54e7cd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/hpy-form-select/components/hpy-form-select/hpy-form-select.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
-    url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$", "i")
+    url: new RegExp(
+      "^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$",
+      "i"
+    )
   };
   const FORMAT_MAPPING = {
     "int": "integer",
@@ -5502,15 +5802,15 @@ if (uni.restoreGlobal) {
   const objSet = (object, path, value) => {
     if (typeof object !== "object")
       return object;
-    _basePath(path).reduce((o2, k2, i2, _2) => {
+    _basePath(path).reduce((o2, k, i2, _2) => {
       if (i2 === _2.length - 1) {
-        o2[k2] = value;
+        o2[k] = value;
         return null;
-      } else if (k2 in o2) {
-        return o2[k2];
+      } else if (k in o2) {
+        return o2[k];
       } else {
-        o2[k2] = /^[0-9]{1,}$/.test(_2[i2 + 1]) ? [] : {};
-        return o2[k2];
+        o2[k] = /^[0-9]{1,}$/.test(_2[i2 + 1]) ? [] : {};
+        return o2[k];
       }
     }, object);
     return object;
@@ -5522,8 +5822,8 @@ if (uni.restoreGlobal) {
   }
   const objGet = (object, path, defaultVal = "undefined") => {
     let newPath = _basePath(path);
-    let val = newPath.reduce((o2, k2) => {
-      return (o2 || {})[k2];
+    let val = newPath.reduce((o2, k) => {
+      return (o2 || {})[k];
     }, object);
     return !val || val !== void 0 ? val : defaultVal;
   };
@@ -5588,7 +5888,7 @@ if (uni.restoreGlobal) {
       return false;
     }
   };
-  const _sfc_main$w = {
+  const _sfc_main$x = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -5830,15 +6130,15 @@ if (uni.restoreGlobal) {
       _isEqual: isEqual$1
     }
   };
-  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  var __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-7ae0e404"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$v = {
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-9a1e3c32"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$w = {
     name: "navBarCompontent",
     props: ["leftNavTitle", "contentTitle"],
     data() {
@@ -5850,7 +6150,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "nav_bar_style" }, [
       vue.createElementVNode("view", {
         class: "nav_left_style",
@@ -5867,7 +6167,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "nav_right_style" })
     ]);
   }
-  var NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-353bd1a4"], ["__file", "E:/workproject/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
+  const NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-d4dd2266"], ["__file", "D:/studyUninApp/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
   var util = {};
   util.getCommonTime = function(date = new Date(), targetTimezone = 8) {
     let res2 = {};
@@ -5938,9 +6238,9 @@ if (uni.restoreGlobal) {
     if (/(y+)/.test(fmt)) {
       fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
     }
-    for (let k2 in opt) {
-      if (new RegExp("(" + k2 + ")").test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k2] : ("00" + opt[k2]).substr(("" + opt[k2]).length));
+    for (let k in opt) {
+      if (new RegExp("(" + k + ")").test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k] : ("00" + opt[k]).substr(("" + opt[k]).length));
       }
     }
     return fmt;
@@ -5961,7 +6261,7 @@ if (uni.restoreGlobal) {
     let DD = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
     let hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
     let mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-    let ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    let ss2 = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
     if (type === 2) {
       return {
         YYYY: Number(YYYY),
@@ -5969,18 +6269,18 @@ if (uni.restoreGlobal) {
         DD: Number(DD),
         hh: Number(hh),
         mm: Number(mm),
-        ss: Number(ss),
+        ss: Number(ss2),
         year: Number(YYYY),
         month: Number(MM),
         day: Number(DD),
         hour: Number(hh),
         minute: Number(mm),
-        second: Number(ss)
+        second: Number(ss2)
       };
     } else if (type === 1) {
-      return YYYY + "" + MM + DD + hh + mm + ss;
+      return YYYY + "" + MM + DD + hh + mm + ss2;
     } else {
-      return YYYY + "-" + MM + "-" + DD + " " + hh + ":" + mm + ":" + ss;
+      return YYYY + "-" + MM + "-" + DD + " " + hh + ":" + mm + ":" + ss2;
     }
   };
   util.getWeekStartAndEnd = function(addWeekCount = 0, date = new Date(), targetTimezone = 8) {
@@ -6002,7 +6302,7 @@ if (uni.restoreGlobal) {
     res2.weekEnd = new Date(`${weekEndObj.year}/${weekEndObj.month}/${weekEndObj.day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
     return res2;
   };
-  const _sfc_main$u = {
+  const _sfc_main$v = {
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -6087,7 +6387,9 @@ if (uni.restoreGlobal) {
         setTimeout(() => {
           this.studentForm = this.requestItem = requestItem;
         }, 1e3);
-        this.gender = this.columns.find((v2) => v2.value === requestItem.gender).text;
+        this.gender = this.columns.find(
+          (v2) => v2.value === requestItem.gender
+        ).text;
         this.leftNavTitle = "\u57FA\u7840\u4FE1\u606F";
       }
     },
@@ -6111,7 +6413,10 @@ if (uni.restoreGlobal) {
       genderChange(value) {
       },
       birthConfirm() {
-        this.studentForm.birthday = util.timeFormat(this.currentDate, "yyyy-MM-dd");
+        this.studentForm.birthday = util.timeFormat(
+          this.currentDate,
+          "yyyy-MM-dd"
+        );
         this.dateShowpicker = false;
       },
       genderConfirm(e) {
@@ -6128,7 +6433,7 @@ if (uni.restoreGlobal) {
         var that = this;
         formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:259", type, "nishi");
         this.$refs.studentForm.validate().then(() => {
-          let businessCloudObject2 = yn.importObject("businessCloudObject");
+          let businessCloudObject2 = As.importObject("businessCloudObject");
           formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:264", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
@@ -6218,11 +6523,11 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
-    const _component_hpy_form_select = resolveEasycom(vue.resolveDynamicComponent("hpy-form-select"), __easycom_0$3);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$4);
+    const _component_hpy_form_select = resolveEasycom(vue.resolveDynamicComponent("hpy-form-select"), __easycom_1$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
@@ -6339,8 +6644,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  var PagesAddMyMebersAddMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-60dc024c"], ["__file", "E:/workproject/bodybuilding-app/pages/addMyMebers/addMyMebers.vue"]]);
-  var icons = {
+  const PagesAddMyMebersAddMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-67c2db77"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addMyMebers/addMyMebers.vue"]]);
+  const icons = {
     "id": "2852637",
     "name": "uniui\u56FE\u6807\u5E93",
     "font_family": "uniicons",
@@ -6353,6 +6658,1641 @@ if (uni.restoreGlobal) {
         "font_class": "color",
         "unicode": "e6cf",
         "unicode_decimal": 59087
+      },
+      {
+        "icon_id": "25027048",
+        "name": "wallet",
+        "font_class": "wallet",
+        "unicode": "e6b1",
+        "unicode_decimal": 59057
+      },
+      {
+        "icon_id": "25015720",
+        "name": "settings-filled",
+        "font_class": "settings-filled",
+        "unicode": "e6ce",
+        "unicode_decimal": 59086
+      },
+      {
+        "icon_id": "25015434",
+        "name": "shimingrenzheng-filled",
+        "font_class": "auth-filled",
+        "unicode": "e6cc",
+        "unicode_decimal": 59084
+      },
+      {
+        "icon_id": "24934246",
+        "name": "shop-filled",
+        "font_class": "shop-filled",
+        "unicode": "e6cd",
+        "unicode_decimal": 59085
+      },
+      {
+        "icon_id": "24934159",
+        "name": "staff-filled-01",
+        "font_class": "staff-filled",
+        "unicode": "e6cb",
+        "unicode_decimal": 59083
+      },
+      {
+        "icon_id": "24932461",
+        "name": "VIP-filled",
+        "font_class": "vip-filled",
+        "unicode": "e6c6",
+        "unicode_decimal": 59078
+      },
+      {
+        "icon_id": "24932462",
+        "name": "plus_circle_fill",
+        "font_class": "plus-filled",
+        "unicode": "e6c7",
+        "unicode_decimal": 59079
+      },
+      {
+        "icon_id": "24932463",
+        "name": "folder_add-filled",
+        "font_class": "folder-add-filled",
+        "unicode": "e6c8",
+        "unicode_decimal": 59080
+      },
+      {
+        "icon_id": "24932464",
+        "name": "yanse-filled",
+        "font_class": "color-filled",
+        "unicode": "e6c9",
+        "unicode_decimal": 59081
+      },
+      {
+        "icon_id": "24932465",
+        "name": "tune-filled",
+        "font_class": "tune-filled",
+        "unicode": "e6ca",
+        "unicode_decimal": 59082
+      },
+      {
+        "icon_id": "24932455",
+        "name": "a-rilidaka-filled",
+        "font_class": "calendar-filled",
+        "unicode": "e6c0",
+        "unicode_decimal": 59072
+      },
+      {
+        "icon_id": "24932456",
+        "name": "notification-filled",
+        "font_class": "notification-filled",
+        "unicode": "e6c1",
+        "unicode_decimal": 59073
+      },
+      {
+        "icon_id": "24932457",
+        "name": "wallet-filled",
+        "font_class": "wallet-filled",
+        "unicode": "e6c2",
+        "unicode_decimal": 59074
+      },
+      {
+        "icon_id": "24932458",
+        "name": "paihangbang-filled",
+        "font_class": "medal-filled",
+        "unicode": "e6c3",
+        "unicode_decimal": 59075
+      },
+      {
+        "icon_id": "24932459",
+        "name": "gift-filled",
+        "font_class": "gift-filled",
+        "unicode": "e6c4",
+        "unicode_decimal": 59076
+      },
+      {
+        "icon_id": "24932460",
+        "name": "fire-filled",
+        "font_class": "fire-filled",
+        "unicode": "e6c5",
+        "unicode_decimal": 59077
+      },
+      {
+        "icon_id": "24928001",
+        "name": "refreshempty",
+        "font_class": "refreshempty",
+        "unicode": "e6bf",
+        "unicode_decimal": 59071
+      },
+      {
+        "icon_id": "24926853",
+        "name": "location-ellipse",
+        "font_class": "location-filled",
+        "unicode": "e6af",
+        "unicode_decimal": 59055
+      },
+      {
+        "icon_id": "24926735",
+        "name": "person-filled",
+        "font_class": "person-filled",
+        "unicode": "e69d",
+        "unicode_decimal": 59037
+      },
+      {
+        "icon_id": "24926703",
+        "name": "personadd-filled",
+        "font_class": "personadd-filled",
+        "unicode": "e698",
+        "unicode_decimal": 59032
+      },
+      {
+        "icon_id": "24923351",
+        "name": "back",
+        "font_class": "back",
+        "unicode": "e6b9",
+        "unicode_decimal": 59065
+      },
+      {
+        "icon_id": "24923352",
+        "name": "forward",
+        "font_class": "forward",
+        "unicode": "e6ba",
+        "unicode_decimal": 59066
+      },
+      {
+        "icon_id": "24923353",
+        "name": "arrowthinright",
+        "font_class": "arrow-right",
+        "unicode": "e6bb",
+        "unicode_decimal": 59067
+      },
+      {
+        "icon_id": "24923353",
+        "name": "arrowthinright",
+        "font_class": "arrowthinright",
+        "unicode": "e6bb",
+        "unicode_decimal": 59067
+      },
+      {
+        "icon_id": "24923354",
+        "name": "arrowthinleft",
+        "font_class": "arrow-left",
+        "unicode": "e6bc",
+        "unicode_decimal": 59068
+      },
+      {
+        "icon_id": "24923354",
+        "name": "arrowthinleft",
+        "font_class": "arrowthinleft",
+        "unicode": "e6bc",
+        "unicode_decimal": 59068
+      },
+      {
+        "icon_id": "24923355",
+        "name": "arrowthinup",
+        "font_class": "arrow-up",
+        "unicode": "e6bd",
+        "unicode_decimal": 59069
+      },
+      {
+        "icon_id": "24923355",
+        "name": "arrowthinup",
+        "font_class": "arrowthinup",
+        "unicode": "e6bd",
+        "unicode_decimal": 59069
+      },
+      {
+        "icon_id": "24923356",
+        "name": "arrowthindown",
+        "font_class": "arrow-down",
+        "unicode": "e6be",
+        "unicode_decimal": 59070
+      },
+      {
+        "icon_id": "24923356",
+        "name": "arrowthindown",
+        "font_class": "arrowthindown",
+        "unicode": "e6be",
+        "unicode_decimal": 59070
+      },
+      {
+        "icon_id": "24923349",
+        "name": "arrowdown",
+        "font_class": "bottom",
+        "unicode": "e6b8",
+        "unicode_decimal": 59064
+      },
+      {
+        "icon_id": "24923349",
+        "name": "arrowdown",
+        "font_class": "arrowdown",
+        "unicode": "e6b8",
+        "unicode_decimal": 59064
+      },
+      {
+        "icon_id": "24923346",
+        "name": "arrowright",
+        "font_class": "right",
+        "unicode": "e6b5",
+        "unicode_decimal": 59061
+      },
+      {
+        "icon_id": "24923346",
+        "name": "arrowright",
+        "font_class": "arrowright",
+        "unicode": "e6b5",
+        "unicode_decimal": 59061
+      },
+      {
+        "icon_id": "24923347",
+        "name": "arrowup",
+        "font_class": "top",
+        "unicode": "e6b6",
+        "unicode_decimal": 59062
+      },
+      {
+        "icon_id": "24923347",
+        "name": "arrowup",
+        "font_class": "arrowup",
+        "unicode": "e6b6",
+        "unicode_decimal": 59062
+      },
+      {
+        "icon_id": "24923348",
+        "name": "arrowleft",
+        "font_class": "left",
+        "unicode": "e6b7",
+        "unicode_decimal": 59063
+      },
+      {
+        "icon_id": "24923348",
+        "name": "arrowleft",
+        "font_class": "arrowleft",
+        "unicode": "e6b7",
+        "unicode_decimal": 59063
+      },
+      {
+        "icon_id": "24923334",
+        "name": "eye",
+        "font_class": "eye",
+        "unicode": "e651",
+        "unicode_decimal": 58961
+      },
+      {
+        "icon_id": "24923335",
+        "name": "eye-filled",
+        "font_class": "eye-filled",
+        "unicode": "e66a",
+        "unicode_decimal": 58986
+      },
+      {
+        "icon_id": "24923336",
+        "name": "eye-slash",
+        "font_class": "eye-slash",
+        "unicode": "e6b3",
+        "unicode_decimal": 59059
+      },
+      {
+        "icon_id": "24923337",
+        "name": "eye-slash-filled",
+        "font_class": "eye-slash-filled",
+        "unicode": "e6b4",
+        "unicode_decimal": 59060
+      },
+      {
+        "icon_id": "24923305",
+        "name": "info-filled",
+        "font_class": "info-filled",
+        "unicode": "e649",
+        "unicode_decimal": 58953
+      },
+      {
+        "icon_id": "24923299",
+        "name": "reload-01",
+        "font_class": "reload",
+        "unicode": "e6b2",
+        "unicode_decimal": 59058
+      },
+      {
+        "icon_id": "24923195",
+        "name": "mic_slash_fill",
+        "font_class": "micoff-filled",
+        "unicode": "e6b0",
+        "unicode_decimal": 59056
+      },
+      {
+        "icon_id": "24923165",
+        "name": "map-pin-ellipse",
+        "font_class": "map-pin-ellipse",
+        "unicode": "e6ac",
+        "unicode_decimal": 59052
+      },
+      {
+        "icon_id": "24923166",
+        "name": "map-pin",
+        "font_class": "map-pin",
+        "unicode": "e6ad",
+        "unicode_decimal": 59053
+      },
+      {
+        "icon_id": "24923167",
+        "name": "location",
+        "font_class": "location",
+        "unicode": "e6ae",
+        "unicode_decimal": 59054
+      },
+      {
+        "icon_id": "24923064",
+        "name": "starhalf",
+        "font_class": "starhalf",
+        "unicode": "e683",
+        "unicode_decimal": 59011
+      },
+      {
+        "icon_id": "24923065",
+        "name": "star",
+        "font_class": "star",
+        "unicode": "e688",
+        "unicode_decimal": 59016
+      },
+      {
+        "icon_id": "24923066",
+        "name": "star-filled",
+        "font_class": "star-filled",
+        "unicode": "e68f",
+        "unicode_decimal": 59023
+      },
+      {
+        "icon_id": "24899646",
+        "name": "a-rilidaka",
+        "font_class": "calendar",
+        "unicode": "e6a0",
+        "unicode_decimal": 59040
+      },
+      {
+        "icon_id": "24899647",
+        "name": "fire",
+        "font_class": "fire",
+        "unicode": "e6a1",
+        "unicode_decimal": 59041
+      },
+      {
+        "icon_id": "24899648",
+        "name": "paihangbang",
+        "font_class": "medal",
+        "unicode": "e6a2",
+        "unicode_decimal": 59042
+      },
+      {
+        "icon_id": "24899649",
+        "name": "font",
+        "font_class": "font",
+        "unicode": "e6a3",
+        "unicode_decimal": 59043
+      },
+      {
+        "icon_id": "24899650",
+        "name": "gift",
+        "font_class": "gift",
+        "unicode": "e6a4",
+        "unicode_decimal": 59044
+      },
+      {
+        "icon_id": "24899651",
+        "name": "link",
+        "font_class": "link",
+        "unicode": "e6a5",
+        "unicode_decimal": 59045
+      },
+      {
+        "icon_id": "24899652",
+        "name": "notification",
+        "font_class": "notification",
+        "unicode": "e6a6",
+        "unicode_decimal": 59046
+      },
+      {
+        "icon_id": "24899653",
+        "name": "staff",
+        "font_class": "staff",
+        "unicode": "e6a7",
+        "unicode_decimal": 59047
+      },
+      {
+        "icon_id": "24899654",
+        "name": "VIP",
+        "font_class": "vip",
+        "unicode": "e6a8",
+        "unicode_decimal": 59048
+      },
+      {
+        "icon_id": "24899655",
+        "name": "folder_add",
+        "font_class": "folder-add",
+        "unicode": "e6a9",
+        "unicode_decimal": 59049
+      },
+      {
+        "icon_id": "24899656",
+        "name": "tune",
+        "font_class": "tune",
+        "unicode": "e6aa",
+        "unicode_decimal": 59050
+      },
+      {
+        "icon_id": "24899657",
+        "name": "shimingrenzheng",
+        "font_class": "auth",
+        "unicode": "e6ab",
+        "unicode_decimal": 59051
+      },
+      {
+        "icon_id": "24899565",
+        "name": "person",
+        "font_class": "person",
+        "unicode": "e699",
+        "unicode_decimal": 59033
+      },
+      {
+        "icon_id": "24899566",
+        "name": "email-filled",
+        "font_class": "email-filled",
+        "unicode": "e69a",
+        "unicode_decimal": 59034
+      },
+      {
+        "icon_id": "24899567",
+        "name": "phone-filled",
+        "font_class": "phone-filled",
+        "unicode": "e69b",
+        "unicode_decimal": 59035
+      },
+      {
+        "icon_id": "24899568",
+        "name": "phone",
+        "font_class": "phone",
+        "unicode": "e69c",
+        "unicode_decimal": 59036
+      },
+      {
+        "icon_id": "24899570",
+        "name": "email",
+        "font_class": "email",
+        "unicode": "e69e",
+        "unicode_decimal": 59038
+      },
+      {
+        "icon_id": "24899571",
+        "name": "personadd",
+        "font_class": "personadd",
+        "unicode": "e69f",
+        "unicode_decimal": 59039
+      },
+      {
+        "icon_id": "24899558",
+        "name": "chatboxes-filled",
+        "font_class": "chatboxes-filled",
+        "unicode": "e692",
+        "unicode_decimal": 59026
+      },
+      {
+        "icon_id": "24899559",
+        "name": "contact",
+        "font_class": "contact",
+        "unicode": "e693",
+        "unicode_decimal": 59027
+      },
+      {
+        "icon_id": "24899560",
+        "name": "chatbubble-filled",
+        "font_class": "chatbubble-filled",
+        "unicode": "e694",
+        "unicode_decimal": 59028
+      },
+      {
+        "icon_id": "24899561",
+        "name": "contact-filled",
+        "font_class": "contact-filled",
+        "unicode": "e695",
+        "unicode_decimal": 59029
+      },
+      {
+        "icon_id": "24899562",
+        "name": "chatboxes",
+        "font_class": "chatboxes",
+        "unicode": "e696",
+        "unicode_decimal": 59030
+      },
+      {
+        "icon_id": "24899563",
+        "name": "chatbubble",
+        "font_class": "chatbubble",
+        "unicode": "e697",
+        "unicode_decimal": 59031
+      },
+      {
+        "icon_id": "24881290",
+        "name": "upload-filled",
+        "font_class": "upload-filled",
+        "unicode": "e68e",
+        "unicode_decimal": 59022
+      },
+      {
+        "icon_id": "24881292",
+        "name": "upload",
+        "font_class": "upload",
+        "unicode": "e690",
+        "unicode_decimal": 59024
+      },
+      {
+        "icon_id": "24881293",
+        "name": "weixin",
+        "font_class": "weixin",
+        "unicode": "e691",
+        "unicode_decimal": 59025
+      },
+      {
+        "icon_id": "24881274",
+        "name": "compose",
+        "font_class": "compose",
+        "unicode": "e67f",
+        "unicode_decimal": 59007
+      },
+      {
+        "icon_id": "24881275",
+        "name": "qq",
+        "font_class": "qq",
+        "unicode": "e680",
+        "unicode_decimal": 59008
+      },
+      {
+        "icon_id": "24881276",
+        "name": "download-filled",
+        "font_class": "download-filled",
+        "unicode": "e681",
+        "unicode_decimal": 59009
+      },
+      {
+        "icon_id": "24881277",
+        "name": "pengyouquan",
+        "font_class": "pyq",
+        "unicode": "e682",
+        "unicode_decimal": 59010
+      },
+      {
+        "icon_id": "24881279",
+        "name": "sound",
+        "font_class": "sound",
+        "unicode": "e684",
+        "unicode_decimal": 59012
+      },
+      {
+        "icon_id": "24881280",
+        "name": "trash-filled",
+        "font_class": "trash-filled",
+        "unicode": "e685",
+        "unicode_decimal": 59013
+      },
+      {
+        "icon_id": "24881281",
+        "name": "sound-filled",
+        "font_class": "sound-filled",
+        "unicode": "e686",
+        "unicode_decimal": 59014
+      },
+      {
+        "icon_id": "24881282",
+        "name": "trash",
+        "font_class": "trash",
+        "unicode": "e687",
+        "unicode_decimal": 59015
+      },
+      {
+        "icon_id": "24881284",
+        "name": "videocam-filled",
+        "font_class": "videocam-filled",
+        "unicode": "e689",
+        "unicode_decimal": 59017
+      },
+      {
+        "icon_id": "24881285",
+        "name": "spinner-cycle",
+        "font_class": "spinner-cycle",
+        "unicode": "e68a",
+        "unicode_decimal": 59018
+      },
+      {
+        "icon_id": "24881286",
+        "name": "weibo",
+        "font_class": "weibo",
+        "unicode": "e68b",
+        "unicode_decimal": 59019
+      },
+      {
+        "icon_id": "24881288",
+        "name": "videocam",
+        "font_class": "videocam",
+        "unicode": "e68c",
+        "unicode_decimal": 59020
+      },
+      {
+        "icon_id": "24881289",
+        "name": "download",
+        "font_class": "download",
+        "unicode": "e68d",
+        "unicode_decimal": 59021
+      },
+      {
+        "icon_id": "24879601",
+        "name": "help",
+        "font_class": "help",
+        "unicode": "e679",
+        "unicode_decimal": 59001
+      },
+      {
+        "icon_id": "24879602",
+        "name": "navigate-filled",
+        "font_class": "navigate-filled",
+        "unicode": "e67a",
+        "unicode_decimal": 59002
+      },
+      {
+        "icon_id": "24879603",
+        "name": "plusempty",
+        "font_class": "plusempty",
+        "unicode": "e67b",
+        "unicode_decimal": 59003
+      },
+      {
+        "icon_id": "24879604",
+        "name": "smallcircle",
+        "font_class": "smallcircle",
+        "unicode": "e67c",
+        "unicode_decimal": 59004
+      },
+      {
+        "icon_id": "24879605",
+        "name": "minus-filled",
+        "font_class": "minus-filled",
+        "unicode": "e67d",
+        "unicode_decimal": 59005
+      },
+      {
+        "icon_id": "24879606",
+        "name": "micoff",
+        "font_class": "micoff",
+        "unicode": "e67e",
+        "unicode_decimal": 59006
+      },
+      {
+        "icon_id": "24879588",
+        "name": "closeempty",
+        "font_class": "closeempty",
+        "unicode": "e66c",
+        "unicode_decimal": 58988
+      },
+      {
+        "icon_id": "24879589",
+        "name": "clear",
+        "font_class": "clear",
+        "unicode": "e66d",
+        "unicode_decimal": 58989
+      },
+      {
+        "icon_id": "24879590",
+        "name": "navigate",
+        "font_class": "navigate",
+        "unicode": "e66e",
+        "unicode_decimal": 58990
+      },
+      {
+        "icon_id": "24879591",
+        "name": "minus",
+        "font_class": "minus",
+        "unicode": "e66f",
+        "unicode_decimal": 58991
+      },
+      {
+        "icon_id": "24879592",
+        "name": "image",
+        "font_class": "image",
+        "unicode": "e670",
+        "unicode_decimal": 58992
+      },
+      {
+        "icon_id": "24879593",
+        "name": "mic",
+        "font_class": "mic",
+        "unicode": "e671",
+        "unicode_decimal": 58993
+      },
+      {
+        "icon_id": "24879594",
+        "name": "paperplane",
+        "font_class": "paperplane",
+        "unicode": "e672",
+        "unicode_decimal": 58994
+      },
+      {
+        "icon_id": "24879595",
+        "name": "close",
+        "font_class": "close",
+        "unicode": "e673",
+        "unicode_decimal": 58995
+      },
+      {
+        "icon_id": "24879596",
+        "name": "help-filled",
+        "font_class": "help-filled",
+        "unicode": "e674",
+        "unicode_decimal": 58996
+      },
+      {
+        "icon_id": "24879597",
+        "name": "plus-filled",
+        "font_class": "paperplane-filled",
+        "unicode": "e675",
+        "unicode_decimal": 58997
+      },
+      {
+        "icon_id": "24879598",
+        "name": "plus",
+        "font_class": "plus",
+        "unicode": "e676",
+        "unicode_decimal": 58998
+      },
+      {
+        "icon_id": "24879599",
+        "name": "mic-filled",
+        "font_class": "mic-filled",
+        "unicode": "e677",
+        "unicode_decimal": 58999
+      },
+      {
+        "icon_id": "24879600",
+        "name": "image-filled",
+        "font_class": "image-filled",
+        "unicode": "e678",
+        "unicode_decimal": 59e3
+      },
+      {
+        "icon_id": "24855900",
+        "name": "locked-filled",
+        "font_class": "locked-filled",
+        "unicode": "e668",
+        "unicode_decimal": 58984
+      },
+      {
+        "icon_id": "24855901",
+        "name": "info",
+        "font_class": "info",
+        "unicode": "e669",
+        "unicode_decimal": 58985
+      },
+      {
+        "icon_id": "24855903",
+        "name": "locked",
+        "font_class": "locked",
+        "unicode": "e66b",
+        "unicode_decimal": 58987
+      },
+      {
+        "icon_id": "24855884",
+        "name": "camera-filled",
+        "font_class": "camera-filled",
+        "unicode": "e658",
+        "unicode_decimal": 58968
+      },
+      {
+        "icon_id": "24855885",
+        "name": "chat-filled",
+        "font_class": "chat-filled",
+        "unicode": "e659",
+        "unicode_decimal": 58969
+      },
+      {
+        "icon_id": "24855886",
+        "name": "camera",
+        "font_class": "camera",
+        "unicode": "e65a",
+        "unicode_decimal": 58970
+      },
+      {
+        "icon_id": "24855887",
+        "name": "circle",
+        "font_class": "circle",
+        "unicode": "e65b",
+        "unicode_decimal": 58971
+      },
+      {
+        "icon_id": "24855888",
+        "name": "checkmarkempty",
+        "font_class": "checkmarkempty",
+        "unicode": "e65c",
+        "unicode_decimal": 58972
+      },
+      {
+        "icon_id": "24855889",
+        "name": "chat",
+        "font_class": "chat",
+        "unicode": "e65d",
+        "unicode_decimal": 58973
+      },
+      {
+        "icon_id": "24855890",
+        "name": "circle-filled",
+        "font_class": "circle-filled",
+        "unicode": "e65e",
+        "unicode_decimal": 58974
+      },
+      {
+        "icon_id": "24855891",
+        "name": "flag",
+        "font_class": "flag",
+        "unicode": "e65f",
+        "unicode_decimal": 58975
+      },
+      {
+        "icon_id": "24855892",
+        "name": "flag-filled",
+        "font_class": "flag-filled",
+        "unicode": "e660",
+        "unicode_decimal": 58976
+      },
+      {
+        "icon_id": "24855893",
+        "name": "gear-filled",
+        "font_class": "gear-filled",
+        "unicode": "e661",
+        "unicode_decimal": 58977
+      },
+      {
+        "icon_id": "24855894",
+        "name": "home",
+        "font_class": "home",
+        "unicode": "e662",
+        "unicode_decimal": 58978
+      },
+      {
+        "icon_id": "24855895",
+        "name": "home-filled",
+        "font_class": "home-filled",
+        "unicode": "e663",
+        "unicode_decimal": 58979
+      },
+      {
+        "icon_id": "24855896",
+        "name": "gear",
+        "font_class": "gear",
+        "unicode": "e664",
+        "unicode_decimal": 58980
+      },
+      {
+        "icon_id": "24855897",
+        "name": "smallcircle-filled",
+        "font_class": "smallcircle-filled",
+        "unicode": "e665",
+        "unicode_decimal": 58981
+      },
+      {
+        "icon_id": "24855898",
+        "name": "map-filled",
+        "font_class": "map-filled",
+        "unicode": "e666",
+        "unicode_decimal": 58982
+      },
+      {
+        "icon_id": "24855899",
+        "name": "map",
+        "font_class": "map",
+        "unicode": "e667",
+        "unicode_decimal": 58983
+      },
+      {
+        "icon_id": "24855825",
+        "name": "refresh-filled",
+        "font_class": "refresh-filled",
+        "unicode": "e656",
+        "unicode_decimal": 58966
+      },
+      {
+        "icon_id": "24855826",
+        "name": "refresh",
+        "font_class": "refresh",
+        "unicode": "e657",
+        "unicode_decimal": 58967
+      },
+      {
+        "icon_id": "24855808",
+        "name": "cloud-upload",
+        "font_class": "cloud-upload",
+        "unicode": "e645",
+        "unicode_decimal": 58949
+      },
+      {
+        "icon_id": "24855809",
+        "name": "cloud-download-filled",
+        "font_class": "cloud-download-filled",
+        "unicode": "e646",
+        "unicode_decimal": 58950
+      },
+      {
+        "icon_id": "24855810",
+        "name": "cloud-download",
+        "font_class": "cloud-download",
+        "unicode": "e647",
+        "unicode_decimal": 58951
+      },
+      {
+        "icon_id": "24855811",
+        "name": "cloud-upload-filled",
+        "font_class": "cloud-upload-filled",
+        "unicode": "e648",
+        "unicode_decimal": 58952
+      },
+      {
+        "icon_id": "24855813",
+        "name": "redo",
+        "font_class": "redo",
+        "unicode": "e64a",
+        "unicode_decimal": 58954
+      },
+      {
+        "icon_id": "24855814",
+        "name": "images-filled",
+        "font_class": "images-filled",
+        "unicode": "e64b",
+        "unicode_decimal": 58955
+      },
+      {
+        "icon_id": "24855815",
+        "name": "undo-filled",
+        "font_class": "undo-filled",
+        "unicode": "e64c",
+        "unicode_decimal": 58956
+      },
+      {
+        "icon_id": "24855816",
+        "name": "more",
+        "font_class": "more",
+        "unicode": "e64d",
+        "unicode_decimal": 58957
+      },
+      {
+        "icon_id": "24855817",
+        "name": "more-filled",
+        "font_class": "more-filled",
+        "unicode": "e64e",
+        "unicode_decimal": 58958
+      },
+      {
+        "icon_id": "24855818",
+        "name": "undo",
+        "font_class": "undo",
+        "unicode": "e64f",
+        "unicode_decimal": 58959
+      },
+      {
+        "icon_id": "24855819",
+        "name": "images",
+        "font_class": "images",
+        "unicode": "e650",
+        "unicode_decimal": 58960
+      },
+      {
+        "icon_id": "24855821",
+        "name": "paperclip",
+        "font_class": "paperclip",
+        "unicode": "e652",
+        "unicode_decimal": 58962
+      },
+      {
+        "icon_id": "24855822",
+        "name": "settings",
+        "font_class": "settings",
+        "unicode": "e653",
+        "unicode_decimal": 58963
+      },
+      {
+        "icon_id": "24855823",
+        "name": "search",
+        "font_class": "search",
+        "unicode": "e654",
+        "unicode_decimal": 58964
+      },
+      {
+        "icon_id": "24855824",
+        "name": "redo-filled",
+        "font_class": "redo-filled",
+        "unicode": "e655",
+        "unicode_decimal": 58965
+      },
+      {
+        "icon_id": "24841702",
+        "name": "list",
+        "font_class": "list",
+        "unicode": "e644",
+        "unicode_decimal": 58948
+      },
+      {
+        "icon_id": "24841489",
+        "name": "mail-open-filled",
+        "font_class": "mail-open-filled",
+        "unicode": "e63a",
+        "unicode_decimal": 58938
+      },
+      {
+        "icon_id": "24841491",
+        "name": "hand-thumbsdown-filled",
+        "font_class": "hand-down-filled",
+        "unicode": "e63c",
+        "unicode_decimal": 58940
+      },
+      {
+        "icon_id": "24841492",
+        "name": "hand-thumbsdown",
+        "font_class": "hand-down",
+        "unicode": "e63d",
+        "unicode_decimal": 58941
+      },
+      {
+        "icon_id": "24841493",
+        "name": "hand-thumbsup-filled",
+        "font_class": "hand-up-filled",
+        "unicode": "e63e",
+        "unicode_decimal": 58942
+      },
+      {
+        "icon_id": "24841494",
+        "name": "hand-thumbsup",
+        "font_class": "hand-up",
+        "unicode": "e63f",
+        "unicode_decimal": 58943
+      },
+      {
+        "icon_id": "24841496",
+        "name": "heart-filled",
+        "font_class": "heart-filled",
+        "unicode": "e641",
+        "unicode_decimal": 58945
+      },
+      {
+        "icon_id": "24841498",
+        "name": "mail-open",
+        "font_class": "mail-open",
+        "unicode": "e643",
+        "unicode_decimal": 58947
+      },
+      {
+        "icon_id": "24841488",
+        "name": "heart",
+        "font_class": "heart",
+        "unicode": "e639",
+        "unicode_decimal": 58937
+      },
+      {
+        "icon_id": "24839963",
+        "name": "loop",
+        "font_class": "loop",
+        "unicode": "e633",
+        "unicode_decimal": 58931
+      },
+      {
+        "icon_id": "24839866",
+        "name": "pulldown",
+        "font_class": "pulldown",
+        "unicode": "e632",
+        "unicode_decimal": 58930
+      },
+      {
+        "icon_id": "24813798",
+        "name": "scan",
+        "font_class": "scan",
+        "unicode": "e62a",
+        "unicode_decimal": 58922
+      },
+      {
+        "icon_id": "24813786",
+        "name": "bars",
+        "font_class": "bars",
+        "unicode": "e627",
+        "unicode_decimal": 58919
+      },
+      {
+        "icon_id": "24813788",
+        "name": "cart-filled",
+        "font_class": "cart-filled",
+        "unicode": "e629",
+        "unicode_decimal": 58921
+      },
+      {
+        "icon_id": "24813790",
+        "name": "checkbox",
+        "font_class": "checkbox",
+        "unicode": "e62b",
+        "unicode_decimal": 58923
+      },
+      {
+        "icon_id": "24813791",
+        "name": "checkbox-filled",
+        "font_class": "checkbox-filled",
+        "unicode": "e62c",
+        "unicode_decimal": 58924
+      },
+      {
+        "icon_id": "24813794",
+        "name": "shop",
+        "font_class": "shop",
+        "unicode": "e62f",
+        "unicode_decimal": 58927
+      },
+      {
+        "icon_id": "24813795",
+        "name": "headphones",
+        "font_class": "headphones",
+        "unicode": "e630",
+        "unicode_decimal": 58928
+      },
+      {
+        "icon_id": "24813796",
+        "name": "cart",
+        "font_class": "cart",
+        "unicode": "e631",
+        "unicode_decimal": 58929
+      }
+    ]
+  };
+  const getVal = (val) => {
+    const reg = /^[0-9]*$/g;
+    return typeof val === "number" || reg.test(val) ? val + "px" : val;
+  };
+  const _sfc_main$u = {
+    name: "UniIcons",
+    emits: ["click"],
+    props: {
+      type: {
+        type: String,
+        default: ""
+      },
+      color: {
+        type: String,
+        default: "#333333"
+      },
+      size: {
+        type: [Number, String],
+        default: 16
+      },
+      customPrefix: {
+        type: String,
+        default: ""
+      }
+    },
+    data() {
+      return {
+        icons: icons.glyphs
+      };
+    },
+    computed: {
+      unicode() {
+        let code = this.icons.find((v2) => v2.font_class === this.type);
+        if (code) {
+          return unescape(`%u${code.unicode}`);
+        }
+        return "";
+      },
+      iconSize() {
+        return getVal(this.size);
+      }
+    },
+    methods: {
+      _onClick() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("text", {
+      style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
+      class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
+      onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
+    }, null, 6);
+  }
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const en$1 = {
+    "uni-search-bar.cancel": "cancel",
+    "uni-search-bar.placeholder": "Search enter content"
+  };
+  const zhHans$1 = {
+    "uni-search-bar.cancel": "cancel",
+    "uni-search-bar.placeholder": "\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9"
+  };
+  const zhHant$1 = {
+    "uni-search-bar.cancel": "cancel",
+    "uni-search-bar.placeholder": "\u8ACB\u8F38\u5165\u641C\u7D22\u5167\u5BB9"
+  };
+  const messages$2 = {
+    en: en$1,
+    "zh-Hans": zhHans$1,
+    "zh-Hant": zhHant$1
+  };
+  const {
+    t: t$l
+  } = initVueI18n(messages$2);
+  const _sfc_main$t = {
+    name: "UniSearchBar",
+    emits: ["input", "update:modelValue", "clear", "cancel", "confirm", "blur", "focus"],
+    props: {
+      placeholder: {
+        type: String,
+        default: ""
+      },
+      radius: {
+        type: [Number, String],
+        default: 5
+      },
+      clearButton: {
+        type: String,
+        default: "auto"
+      },
+      cancelButton: {
+        type: String,
+        default: "auto"
+      },
+      cancelText: {
+        type: String,
+        default: "\u53D6\u6D88"
+      },
+      bgColor: {
+        type: String,
+        default: "#F8F8F8"
+      },
+      maxlength: {
+        type: [Number, String],
+        default: 100
+      },
+      value: {
+        type: [Number, String],
+        default: ""
+      },
+      modelValue: {
+        type: [Number, String],
+        default: ""
+      },
+      focus: {
+        type: Boolean,
+        default: false
+      },
+      readonly: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        show: false,
+        showSync: false,
+        searchVal: ""
+      };
+    },
+    computed: {
+      cancelTextI18n() {
+        return this.cancelText || t$l("uni-search-bar.cancel");
+      },
+      placeholderText() {
+        return this.placeholder || t$l("uni-search-bar.placeholder");
+      }
+    },
+    watch: {
+      modelValue: {
+        immediate: true,
+        handler(newVal) {
+          this.searchVal = newVal;
+          if (newVal) {
+            this.show = true;
+          }
+        }
+      },
+      focus: {
+        immediate: true,
+        handler(newVal) {
+          if (newVal) {
+            if (this.readonly)
+              return;
+            this.show = true;
+            this.$nextTick(() => {
+              this.showSync = true;
+            });
+          }
+        }
+      },
+      searchVal(newVal, oldVal) {
+        this.$emit("input", newVal);
+        this.$emit("update:modelValue", newVal);
+      }
+    },
+    methods: {
+      searchClick() {
+        if (this.readonly)
+          return;
+        if (this.show) {
+          return;
+        }
+        this.show = true;
+        this.$nextTick(() => {
+          this.showSync = true;
+        });
+      },
+      clear() {
+        this.$emit("clear", {
+          value: this.searchVal
+        });
+        this.searchVal = "";
+      },
+      cancel() {
+        if (this.readonly)
+          return;
+        this.$emit("cancel", {
+          value: this.searchVal
+        });
+        this.searchVal = "";
+        this.show = false;
+        this.showSync = false;
+        plus.key.hideSoftKeybord();
+      },
+      confirm() {
+        plus.key.hideSoftKeybord();
+        this.$emit("confirm", {
+          value: this.searchVal
+        });
+      },
+      blur() {
+        plus.key.hideSoftKeybord();
+        this.$emit("blur", {
+          value: this.searchVal
+        });
+      },
+      emitFocus(e) {
+        this.$emit("focus", e.detail);
+      }
+    }
+  };
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$3);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-searchbar" }, [
+      vue.createElementVNode("view", {
+        style: vue.normalizeStyle({ borderRadius: $props.radius + "px", backgroundColor: $props.bgColor }),
+        class: "uni-searchbar__box",
+        onClick: _cache[5] || (_cache[5] = (...args) => $options.searchClick && $options.searchClick(...args))
+      }, [
+        vue.createElementVNode("view", { class: "uni-searchbar__box-icon-search" }, [
+          vue.renderSlot(_ctx.$slots, "searchIcon", {}, () => [
+            vue.createVNode(_component_uni_icons, {
+              color: "#c0c4cc",
+              size: "18",
+              type: "search"
+            })
+          ], true)
+        ]),
+        $data.show || $data.searchVal ? vue.withDirectives((vue.openBlock(), vue.createElementBlock("input", {
+          key: 0,
+          focus: $data.showSync,
+          disabled: $props.readonly,
+          placeholder: $options.placeholderText,
+          maxlength: $props.maxlength,
+          class: "uni-searchbar__box-search-input",
+          "confirm-type": "search",
+          type: "text",
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.searchVal = $event),
+          onConfirm: _cache[1] || (_cache[1] = (...args) => $options.confirm && $options.confirm(...args)),
+          onBlur: _cache[2] || (_cache[2] = (...args) => $options.blur && $options.blur(...args)),
+          onFocus: _cache[3] || (_cache[3] = (...args) => $options.emitFocus && $options.emitFocus(...args))
+        }, null, 40, ["focus", "disabled", "placeholder", "maxlength"])), [
+          [vue.vModelText, $data.searchVal]
+        ]) : (vue.openBlock(), vue.createElementBlock("text", {
+          key: 1,
+          class: "uni-searchbar__text-placeholder"
+        }, vue.toDisplayString($props.placeholder), 1)),
+        $data.show && ($props.clearButton === "always" || $props.clearButton === "auto" && $data.searchVal !== "") && !$props.readonly ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 2,
+          class: "uni-searchbar__box-icon-clear",
+          onClick: _cache[4] || (_cache[4] = (...args) => $options.clear && $options.clear(...args))
+        }, [
+          vue.renderSlot(_ctx.$slots, "clearIcon", {}, () => [
+            vue.createVNode(_component_uni_icons, {
+              color: "#c0c4cc",
+              size: "20",
+              type: "clear"
+            })
+          ], true)
+        ])) : vue.createCommentVNode("v-if", true)
+      ], 4),
+      $props.cancelButton === "always" || $data.show && $props.cancelButton === "auto" ? (vue.openBlock(), vue.createElementBlock("text", {
+        key: 0,
+        onClick: _cache[6] || (_cache[6] = (...args) => $options.cancel && $options.cancel(...args)),
+        class: "uni-searchbar__cancel"
+      }, vue.toDisplayString($options.cancelTextI18n), 1)) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-f07ef577"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue"]]);
+  const _sfc_main$s = {
+    name: "UniSection",
+    emits: ["click"],
+    props: {
+      type: {
+        type: String,
+        default: ""
+      },
+      title: {
+        type: String,
+        required: true,
+        default: ""
+      },
+      titleFontSize: {
+        type: String,
+        default: "14px"
+      },
+      titleColor: {
+        type: String,
+        default: "#333"
+      },
+      subTitle: {
+        type: String,
+        default: ""
+      },
+      subTitleFontSize: {
+        type: String,
+        default: "12px"
+      },
+      subTitleColor: {
+        type: String,
+        default: "#999"
+      },
+      padding: {
+        type: [Boolean, String],
+        default: false
+      }
+    },
+    computed: {
+      _padding() {
+        if (typeof this.padding === "string") {
+          return this.padding;
+        }
+        return this.padding ? "10px" : "";
+      }
+    },
+    watch: {
+      title(newVal) {
+        if (uni.report && newVal !== "") {
+          uni.report("title", newVal);
+        }
+      }
+    },
+    methods: {
+      onClick() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
+      vue.createElementVNode("view", {
+        class: "uni-section-header",
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
+      }, [
+        $props.type ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: vue.normalizeClass(["uni-section-header__decoration", $props.type])
+        }, null, 2)) : vue.renderSlot(_ctx.$slots, "decoration", { key: 1 }, void 0, true),
+        vue.createElementVNode("view", { class: "uni-section-header__content" }, [
+          vue.createElementVNode("text", {
+            style: vue.normalizeStyle({ "font-size": $props.titleFontSize, "color": $props.titleColor }),
+            class: vue.normalizeClass(["uni-section__content-title", { "distraction": !$props.subTitle }])
+          }, vue.toDisplayString($props.title), 7),
+          $props.subTitle ? (vue.openBlock(), vue.createElementBlock("text", {
+            key: 0,
+            style: vue.normalizeStyle({ "font-size": $props.subTitleFontSize, "color": $props.subTitleColor }),
+            class: "uni-section-header__content-sub"
+          }, vue.toDisplayString($props.subTitle), 5)) : vue.createCommentVNode("v-if", true)
+        ]),
+        vue.createElementVNode("view", { class: "uni-section-header__slot-right" }, [
+          vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
+        ])
+      ]),
+      vue.createElementVNode("view", {
+        class: "uni-section-content",
+        style: vue.normalizeStyle({ padding: $options._padding })
+      }, [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ], 4)
+    ]);
+  }
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-637fd36b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  const _sfc_main$r = {
+    components: {
+      BgTheamCompontent,
+      MemberList
+    },
+    data() {
+      return {
+        searchValue: "",
+        cellingFlag: false,
+        scrollTop: 0
+      };
+    },
+    methods: {
+      memberSrollTop(event) {
+        this.scrollTop = event.detail.scrollTop;
+        this.cellingFlag = event.detail.scrollTop > 50 ? true : false;
+        formatAppLog("log", "at pages/memberQuery/memberQuery.vue:58", this.scrollTop);
+      },
+      goBack() {
+        uni.switchTab({
+          url: "/pages/myMebers/myMebers"
+        });
+      },
+      searchFun(res2) {
+        this.searchValue = res2.value;
+      },
+      input(res2) {
+        formatAppLog("log", "at pages/memberQuery/memberQuery.vue:70", "----input:", res2);
+      },
+      clear(res2) {
+        uni.showToast({
+          title: "clear\u4E8B\u4EF6\uFF0C\u6E05\u9664\u503C\u4E3A\uFF1A" + res2.value,
+          icon: "none"
+        });
+      },
+      blur(res2) {
+        uni.showToast({
+          title: "blur\u4E8B\u4EF6\uFF0C\u8F93\u5165\u503C\u4E3A\uFF1A" + res2.value,
+          icon: "none"
+        });
+      },
+      focus(e) {
+        uni.showToast({
+          title: "focus\u4E8B\u4EF6\uFF0C\u8F93\u51FA\u503C\u4E3A\uFF1A" + e.value,
+          icon: "none"
+        });
+      },
+      cancel(res2) {
+        uni.showToast({
+          title: "\u70B9\u51FB\u53D6\u6D88\uFF0C\u8F93\u5165\u503C\u4E3A\uFF1A" + res2.value,
+          icon: "none"
+        });
+      }
+    }
+  };
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_uni_search_bar = resolveEasycom(vue.resolveDynamicComponent("uni-search-bar"), __easycom_0$2);
+    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$1);
+    const _component_MemberList = vue.resolveComponent("MemberList");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+      vue.createElementVNode("scroll-view", {
+        onScroll: _cache[2] || (_cache[2] = (...args) => $options.memberSrollTop && $options.memberSrollTop(...args)),
+        "scroll-y": "true"
+      }, [
+        vue.createElementVNode("view", {
+          class: vue.normalizeClass(["nav_bar_style", $data.cellingFlag ? "nav_antimation_style" : ""])
+        }, [
+          vue.createElementVNode("view", {
+            class: "nav_left_style",
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
+          }, [
+            vue.createElementVNode("image", {
+              class: "back_img_style",
+              src: "/static/app-plus/mebrs/back.png"
+            }),
+            vue.createElementVNode("view", { class: "nav_title_style" })
+          ]),
+          vue.createElementVNode("text", { class: "nav_content_style" }, "\u4F1A\u5458\u67E5\u8BE2"),
+          vue.createCommentVNode(" \u53EF\u80FD\u4F1A\u6709\u56FE\u7247 "),
+          vue.createElementVNode("view", { class: "nav_right_style" })
+        ], 2),
+        vue.createVNode(_component_uni_section, { title: "" }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_search_bar, {
+              modelValue: $data.searchValue,
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.searchValue = $event),
+              class: vue.normalizeClass(["uni-mt-10", $data.cellingFlag ? "search_antimation_style" : ""]),
+              radius: "100",
+              placeholder: "\u8BF7\u8F93\u5165\u59D3\u540D\u6216\u624B\u673A\u53F7\u7801\u67E5\u8BE2",
+              clearButton: "none",
+              cancelButton: "none",
+              onConfirm: $options.searchFun
+            }, null, 8, ["modelValue", "class", "onConfirm"])
+          ]),
+          _: 1
+        }),
+        vue.createVNode(_component_MemberList, {
+          searchValue: $data.searchValue,
+          type: "detail"
+        }, null, 8, ["searchValue"])
+      ], 32)
+    ]);
+  }
+  const PagesMemberQueryMemberQuery = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__file", "D:/studyUninApp/bodybuilding-app/pages/memberQuery/memberQuery.vue"]]);
+  const _sfc_main$q = {
+    props: {
+      value: Array,
+      column: {
+        type: [String, Number],
+        default: 2
       },
       {
         "icon_id": "25027048",
@@ -7549,51 +9489,28 @@ if (uni.restoreGlobal) {
         }
         return "";
       },
-      iconSize() {
-        return getVal(this.size);
+      m() {
+        const column_margin = `${(100 - (100 / this.data.column - +this.data.columnSpace).toFixed(5) * this.data.column) / (this.data.column - 1)}%`;
+        return column_margin;
+      },
+      s1() {
+        return { ...this.listInitStyle, ...this.listStyle };
       }
     },
     methods: {
-      _onClick() {
-        this.$emit("click");
-      }
-    }
-  };
-  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("text", {
-      style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
-      class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
-      onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
-    }, null, 6);
-  }
-  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-a2e81f6e"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-  var en$1 = {
-    "uni-search-bar.cancel": "cancel",
-    "uni-search-bar.placeholder": "Search enter content"
-  };
-  var zhHans$1 = {
-    "uni-search-bar.cancel": "cancel",
-    "uni-search-bar.placeholder": "\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9"
-  };
-  var zhHant$1 = {
-    "uni-search-bar.cancel": "cancel",
-    "uni-search-bar.placeholder": "\u8ACB\u8F38\u5165\u641C\u7D22\u5167\u5BB9"
-  };
-  var messages$2 = {
-    en: en$1,
-    "zh-Hans": zhHans$1,
-    "zh-Hant": zhHant$1
-  };
-  const {
-    t: t$l
-  } = initVueI18n(messages$2);
-  const _sfc_main$s = {
-    name: "UniSearchBar",
-    emits: ["input", "update:modelValue", "clear", "cancel", "confirm", "blur", "focus"],
-    props: {
-      placeholder: {
-        type: String,
-        default: ""
+      loadImages(idx = 0) {
+        let count = 0;
+        const newList = this.data.list.filter((item, index) => index >= idx);
+        for (let i2 = 0; i2 < newList.length; i2++) {
+          plus.io.getImageInfo({
+            src: `${newList[i2][this.imageKey]}.jpg`,
+            complete: (res2) => {
+              count++;
+              if (count == newList.length)
+                this.initValue(idx);
+            }
+          });
+        }
       },
       radius: {
         type: [Number, String],
@@ -7674,22 +9591,18 @@ if (uni.restoreGlobal) {
           }
         }
       },
-      searchVal(newVal, oldVal) {
-        this.$emit("input", newVal);
-        this.$emit("update:modelValue", newVal);
-      }
-    },
-    methods: {
-      searchClick() {
-        if (this.readonly)
-          return;
-        if (this.show) {
-          return;
+      async initValue(i2, from2) {
+        this.isLoaded = false;
+        if (i2 >= this.data.list.length || this.refreshDatas.length) {
+          this.msg++;
+          this.loaded();
+          return false;
         }
-        this.show = true;
-        this.$nextTick(() => {
-          this.showSync = true;
-        });
+        const minHeightRes = await this.getMinColumnHeight();
+        const c2 = this.data[`column_${minHeightRes.column}_values`];
+        this.data.list[i2].column = minHeightRes.column;
+        c2.push({ ...this.data.list[i2], cIndex: c2.length, index: i2, o: 0 });
+        this.msg++;
       },
       clear() {
         this.$emit("clear", {
@@ -7842,44 +9755,57 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
-      vue.createElementVNode("view", {
-        class: "uni-section-header",
-        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
-      }, [
-        $props.type ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: vue.normalizeClass(["uni-section-header__decoration", $props.type])
-        }, null, 2)) : vue.renderSlot(_ctx.$slots, "decoration", { key: 1 }, void 0, true),
-        vue.createElementVNode("view", { class: "uni-section-header__content" }, [
-          vue.createElementVNode("text", {
-            style: vue.normalizeStyle({ "font-size": $props.titleFontSize, "color": $props.titleColor }),
-            class: vue.normalizeClass(["uni-section__content-title", { "distraction": !$props.subTitle }])
-          }, vue.toDisplayString($props.title), 7),
-          $props.subTitle ? (vue.openBlock(), vue.createElementBlock("text", {
-            key: 0,
-            style: vue.normalizeStyle({ "font-size": $props.subTitleFontSize, "color": $props.subTitleColor }),
-            class: "uni-section-header__content-sub"
-          }, vue.toDisplayString($props.subTitle), 5)) : vue.createCommentVNode("v-if", true)
-        ]),
-        vue.createElementVNode("view", { class: "uni-section-header__slot-right" }, [
-          vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
-        ])
-      ]),
-      vue.createElementVNode("view", {
-        class: "uni-section-content",
-        style: vue.normalizeStyle({ padding: $options._padding })
-      }, [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-      ], 4)
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "waterfalls-flow" }, [
+      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.data.column, (item, index) => {
+        return vue.openBlock(), vue.createElementBlock("view", {
+          key: index,
+          class: "waterfalls-flow-column",
+          id: `waterfalls_flow_column_${index + 1}`,
+          msg: $data.msg,
+          style: vue.normalizeStyle({ "width": $options.w, "margin-left": index == 0 ? 0 : $options.m })
+        }, [
+          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($options.columnValue(index), (item2, index2) => {
+            return vue.openBlock(), vue.createElementBlock("view", {
+              class: vue.normalizeClass(["column-value", { "column-value-show": item2.o }]),
+              key: index2,
+              style: vue.normalizeStyle([$options.s1]),
+              onClick: vue.withModifiers(($event) => $options.wapperClick(item2), ["stop"])
+            }, [
+              $data.data.seat == 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "inner"
+              }, [
+                vue.renderSlot(_ctx.$slots, "default", vue.normalizeProps(vue.guardReactiveProps(item2)), void 0, true)
+              ])) : vue.createCommentVNode("v-if", true),
+              vue.withDirectives(vue.createElementVNode("image", {
+                class: vue.normalizeClass(["img", { "img-hide": item2[$props.hideImageKey] == true || item2[$props.hideImageKey] == 1 }, { "img-error": !item2[$data.data.imageKey] }]),
+                src: item2[$data.data.imageKey],
+                mode: "widthFix",
+                onLoad: ($event) => $options.imgLoad(item2, index + 1),
+                onError: ($event) => $options.imgError(item2, index + 1),
+                onClick: vue.withModifiers(($event) => $options.imageClick(item2), ["stop"])
+              }, null, 42, ["src", "onLoad", "onError", "onClick"]), [
+                [vue.vShow, false]
+              ]),
+              $data.data.seat == 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 1,
+                class: "inner"
+              }, [
+                vue.renderSlot(_ctx.$slots, "default", vue.normalizeProps(vue.guardReactiveProps(item2)), void 0, true)
+              ])) : vue.createCommentVNode("v-if", true)
+            ], 14, ["onClick"]);
+          }), 128))
+        ], 12, ["id", "msg"]);
+      }), 128))
     ]);
   }
-  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-f7ca1098"], ["__file", "E:/workproject/bodybuilding-app/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
-  const _sfc_main$q = {
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-6aaf0fae"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/custom-waterfalls-flow/components/custom-waterfalls-flow/custom-waterfalls-flow.vue"]]);
+  const _sfc_main$p = {
     components: {
       BgTheamCompontent,
-      MemberList
+      NavBarCompontent,
+      CustomWaterfallsFlow: __easycom_0$1
     },
     data() {
       return {
@@ -7931,11 +9857,10 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_uni_search_bar = resolveEasycom(vue.resolveDynamicComponent("uni-search-bar"), __easycom_0$1);
-    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$1);
-    const _component_MemberList = vue.resolveComponent("MemberList");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+    const _component_custom_waterfalls_flow = resolveEasycom(vue.resolveDynamicComponent("custom-waterfalls-flow"), __easycom_0$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createElementVNode("scroll-view", {
@@ -7981,346 +9906,7 @@ if (uni.restoreGlobal) {
       ], 32)
     ]);
   }
-  var PagesMemberQueryMemberQuery = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__file", "E:/workproject/bodybuilding-app/pages/memberQuery/memberQuery.vue"]]);
-  const _sfc_main$p = {
-    data() {
-      return {
-        c: 0,
-        bindex: -1,
-        textShow1: true,
-        textShow2: true,
-        textShow3: true,
-        textShow4: true,
-        textShow5: true,
-        textShow6: true,
-        textShow7: true,
-        textShow8: true,
-        textShow9: true,
-        textShow10: true,
-        textShow11: true,
-        assessmentData: [
-          {
-            title1: "\u9888\u90E8\u524D\u5F15",
-            text1: "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow1: true,
-            title2: "\u9AD8\u4F4E\u80A9",
-            text2: "\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow2: true
-          },
-          {
-            title1: "\u9888\u90E8\u524D\u5F15",
-            text1: "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow1: true,
-            title2: "\u9AD8\u4F4E\u80A9",
-            text2: "\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow2: true
-          },
-          {
-            title1: "\u9888\u90E8\u524D\u5F15",
-            text1: "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow1: true,
-            title2: "\u9AD8\u4F4E\u80A9",
-            text2: "\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow2: true
-          },
-          {
-            title1: "\u9888\u90E8\u524D\u5F15",
-            text1: "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow1: true
-          },
-          {
-            title1: "\u9888\u90E8\u524D\u5F15",
-            text1: "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow1: true,
-            title2: "\u9AD8\u4F4E\u80A9",
-            text2: "\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002",
-            textShow2: true
-          }
-        ]
-      };
-    },
-    components: {
-      BgTheamCompontent,
-      NavBarCompontent
-    },
-    methods: {
-      isonclick(a2) {
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:257", a2);
-        switch (a2) {
-          case 1:
-            this.textShow1 = !this.textShow1;
-            break;
-          case 2:
-            this.textShow2 = !this.textShow2;
-            break;
-          case 3:
-            this.textShow3 = !this.textShow3;
-            break;
-          case 4:
-            this.textShow4 = !this.textShow4;
-            break;
-          case 5:
-            this.textShow5 = !this.textShow5;
-            break;
-          case 6:
-            this.textShow6 = !this.textShow6;
-            break;
-          case 7:
-            this.textShow7 = !this.textShow7;
-            break;
-          case 8:
-            this.textShow8 = !this.textShow8;
-            break;
-          case 9:
-            this.textShow9 = !this.textShow9;
-            break;
-        }
-      }
-    }
-  };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    const _component_van_col = vue.resolveComponent("van-col");
-    const _component_van_row = vue.resolveComponent("van-row");
-    const _component_van_button = vue.resolveComponent("van-button");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
-      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u4F53\u6001\u8BC4\u4F30" }),
-      vue.createElementVNode("view", { class: "bgimg" }),
-      vue.createElementVNode("view", { class: "content" }, [
-        vue.createVNode(_component_van_row, null, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentLeftBlock",
-                  onClick: _cache[0] || (_cache[0] = ($event) => $options.isonclick(1)),
-                  style: { "margin-top": "80upx" }
-                }, " \u9888\u90E8\u524D\u5F15 ", 512), [
-                  [vue.vShow, $data.textShow1]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[1] || (_cache[1] = ($event) => $options.isonclick(1))
-                }, [
-                  vue.createElementVNode("view", null, "\u9888\u90E8\u524D\u5F15"),
-                  vue.createElementVNode("view", null, "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002")
-                ], 512), [
-                  [vue.vShow, !$data.textShow1]
-                ])
-              ]),
-              _: 1
-            }),
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentRightBlock",
-                  onClick: _cache[2] || (_cache[2] = ($event) => $options.isonclick(2)),
-                  style: { "margin-top": "80upx" }
-                }, " \u9AD8\u4F4E\u80A9 ", 512), [
-                  [vue.vShow, $data.textShow2]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[3] || (_cache[3] = ($event) => $options.isonclick(2))
-                }, [
-                  vue.createElementVNode("view", null, "\u9AD8\u4F4E\u80A9"),
-                  vue.createElementVNode("view", null, '"\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002"')
-                ], 512), [
-                  [vue.vShow, !$data.textShow2]
-                ])
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }),
-        vue.createVNode(_component_van_row, null, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentLeftBlock",
-                  onClick: _cache[4] || (_cache[4] = ($event) => $options.isonclick(3)),
-                  style: { "margin-top": "80upx" }
-                }, " \u5706\u80A9 ", 512), [
-                  [vue.vShow, $data.textShow3]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[5] || (_cache[5] = ($event) => $options.isonclick(3))
-                }, [
-                  vue.createElementVNode("view", null, "\u5706\u80A9"),
-                  vue.createElementVNode("view", null, "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002")
-                ], 512), [
-                  [vue.vShow, !$data.textShow3]
-                ])
-              ]),
-              _: 1
-            }),
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentRightBlock",
-                  onClick: _cache[6] || (_cache[6] = ($event) => $options.isonclick(4)),
-                  style: { "margin-top": "80upx" }
-                }, " \u9A7C\u80CC ", 512), [
-                  [vue.vShow, $data.textShow4]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[7] || (_cache[7] = ($event) => $options.isonclick(4))
-                }, [
-                  vue.createElementVNode("view", null, "\u9A7C\u80CC"),
-                  vue.createElementVNode("view", null, '"\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002"')
-                ], 512), [
-                  [vue.vShow, !$data.textShow4]
-                ])
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }),
-        vue.createVNode(_component_van_row, null, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentLeftBlock",
-                  onClick: _cache[8] || (_cache[8] = ($event) => $options.isonclick(5)),
-                  style: { "margin-top": "260upx" }
-                }, " \u9AA8\u76C6\u524D\u503E ", 512), [
-                  [vue.vShow, $data.textShow5]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[9] || (_cache[9] = ($event) => $options.isonclick(5))
-                }, [
-                  vue.createElementVNode("view", null, "\u9AA8\u76C6\u524D\u503E"),
-                  vue.createElementVNode("view", null, "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002")
-                ], 512), [
-                  [vue.vShow, !$data.textShow5]
-                ])
-              ]),
-              _: 1
-            }),
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentRightBlock",
-                  onClick: _cache[10] || (_cache[10] = ($event) => $options.isonclick(6)),
-                  style: { "margin-top": "260upx" }
-                }, " \u9AA8\u76C6\u540E\u503E ", 512), [
-                  [vue.vShow, $data.textShow6]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[11] || (_cache[11] = ($event) => $options.isonclick(6))
-                }, [
-                  vue.createElementVNode("view", null, "\u9AA8\u76C6\u540E\u503E"),
-                  vue.createElementVNode("view", null, '"\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002"')
-                ], 512), [
-                  [vue.vShow, !$data.textShow6]
-                ])
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }),
-        vue.createVNode(_component_van_row, null, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentLeftBlock",
-                  onClick: _cache[12] || (_cache[12] = ($event) => $options.isonclick(7)),
-                  style: { "margin-top": "160upx" }
-                }, " \u819D\u5173\u8282\u5185\u6263 ", 512), [
-                  [vue.vShow, $data.textShow7]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[13] || (_cache[13] = ($event) => $options.isonclick(7))
-                }, [
-                  vue.createElementVNode("view", null, "\u819D\u5173\u8282\u5185\u6263"),
-                  vue.createElementVNode("view", null, "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002")
-                ], 512), [
-                  [vue.vShow, !$data.textShow7]
-                ])
-              ]),
-              _: 1
-            }),
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentRightBlock",
-                  onClick: _cache[14] || (_cache[14] = ($event) => $options.isonclick(8)),
-                  style: { "margin-top": "160upx" }
-                }, " \u8DB3\u90E8\u5916\u7FFB ", 512), [
-                  [vue.vShow, $data.textShow8]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[15] || (_cache[15] = ($event) => $options.isonclick(8))
-                }, [
-                  vue.createElementVNode("view", null, "\u8DB3\u90E8\u5916\u7FFB"),
-                  vue.createElementVNode("view", null, '"\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002"')
-                ], 512), [
-                  [vue.vShow, !$data.textShow8]
-                ])
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }),
-        vue.createVNode(_component_van_row, null, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_van_col, { span: "12" }, {
-              default: vue.withCtx(() => [
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "contentLeftBlock",
-                  onClick: _cache[16] || (_cache[16] = ($event) => $options.isonclick(9)),
-                  style: { "margin-top": "280upx" }
-                }, " \u8DB3\u90E8\u5185\u7FFB ", 512), [
-                  [vue.vShow, $data.textShow9]
-                ]),
-                vue.withDirectives(vue.createElementVNode("view", {
-                  class: "clickBlock",
-                  onClick: _cache[17] || (_cache[17] = ($event) => $options.isonclick(9))
-                }, [
-                  vue.createElementVNode("view", null, "\u8DB3\u90E8\u5185\u7FFB"),
-                  vue.createElementVNode("view", null, "\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002")
-                ], 512), [
-                  [vue.vShow, !$data.textShow9]
-                ])
-              ]),
-              _: 1
-            }),
-            vue.createVNode(_component_van_col, { span: "12" })
-          ]),
-          _: 1
-        }),
-        vue.createCommentVNode(' <van-row \r\n			v-for="(item,index) in assessmentData" :key="index">\r\n			  <van-col span="12">\r\n				  <view class="contentLeftBlock" @click.native="isonclick(item,1)" v-show="item.textShow1">\r\n					  {{item.title1}}\r\n				  </view>\r\n				  <view class="clickBlock" v-show="!item.textShow1" @click.native="isonclick(item,1)">\r\n					  <view>{{item.title1}}</view>\r\n					  <view>{{item.text1}}</view>\r\n				  </view>\r\n			  </van-col>\r\n			  <van-col span="12">\r\n				  <view class="contentRightBlock" @click.native="isonclick(item,2)" v-show="item.textShow2">\r\n					  {{item.title2}}\r\n				  </view>\r\n				  <view class="clickBlock" v-show="!item.textShow2" @click.native="isonclick(item,2)">\r\n				  		<view>{{item.title2}}</view>\r\n				  		<view>{{item.text2}}</view>\r\n				  </view>\r\n			  </van-col>\r\n			</van-row> '),
-        vue.createElementVNode("view", { class: "contentText" }, "\u70B9\u51FB\u6807\u7B7E\u9009\u62E9\u95EE\u9898\u90E8\u4F4D")
-      ]),
-      vue.createElementVNode("view", null, [
-        vue.createVNode(_component_van_button, {
-          type: "primary",
-          class: "postureButton"
-        }, {
-          default: vue.withCtx(() => [
-            vue.createTextVNode("\u786E\u8BA4")
-          ]),
-          _: 1
-        })
-      ])
-    ]);
-  }
-  var PagesPostureAssessmentPostureAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__file", "E:/workproject/bodybuilding-app/pages/postureAssessment/postureAssessment.vue"]]);
+  const PagesBodyAssessmentBodyAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bodyAssessment/bodyAssessment.vue"]]);
   const _sfc_main$o = {
     components: {
       BgTheamCompontent,
@@ -8328,41 +9914,44 @@ if (uni.restoreGlobal) {
     },
     data() {
       return {
-        configForm: {},
-        traineeNo: "",
-        questionCode: "",
-        originList: [],
-        bodyTestReport: []
+        studentForm: {
+          traineeName: "",
+          gender: "0",
+          birthday: "",
+          mobile: "",
+          buyStatus: 0
+        },
+        gender: "",
+        columns: [
+          { text: "\u672A\u77E5", value: "0" },
+          { text: "\u7537", value: "1" },
+          { text: "\u5973", value: "2" }
+        ],
+        showPicker: false,
+        minDate: new Date(1888, 1, 1),
+        maxDate: new Date(2025, 10, 1),
+        dateShowpicker: false,
+        currentDate: new Date(),
+        customFieldName: { text: "text", value: "value" },
+        gendDefaultIndex: 0,
+        pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+        requestItem: null
       };
     },
     onLoad(options) {
-      if (JSON.stringify(options) !== "{}" && options.traineeNo) {
-        this.traineeNo = options.traineeNo;
-      }
-      if (JSON.stringify(options) !== "{}" && options.hasOwnProperty("childList")) {
-        let originList = JSON.parse(options.childList);
-        this.originList = originList;
-        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:70", originList, ">>>");
-      }
-      if (JSON.stringify(options) !== "{}" && options.hasOwnProperty("questionCode")) {
-        this.questionCode = options.questionCode;
+      if (JSON.stringify(options) !== "{}") {
+        let requestItem = options.hasOwnProperty("item") ? JSON.parse(options.item) : null;
+        this.studentForm = this.requestItem = requestItem;
+        this.currentDate = new Date(requestItem.birthday);
+        this.gender = this.columns.find(
+          (v2) => v2.value === requestItem.gender
+        ).text;
+        this.leftNavTitle = "\u57FA\u7840\u4FE1\u606F";
       }
     },
     mounted() {
-      this.requestList();
     },
     methods: {
-      requestList() {
-        this.bodyTestReport = this.originList.map((item) => {
-          let configList = [];
-          if (item.hasOwnProperty("configList") && item.configList.length > 0) {
-            configList = item.configList;
-          }
-          return __spreadProps(__spreadValues({}, item), {
-            configList
-          });
-        });
-      },
       formatter(type, val) {
         if (type === "year") {
           return `${val}\u5E74`;
@@ -8380,7 +9969,10 @@ if (uni.restoreGlobal) {
       genderChange(value) {
       },
       birthConfirm() {
-        this.studentForm.birthday = util.timeFormat(this.currentDate, "yyyy-MM-dd");
+        this.studentForm.birthday = util.timeFormat(
+          this.currentDate,
+          "yyyy-MM-dd"
+        );
         this.dateShowpicker = false;
       },
       genderConfirm(e) {
@@ -8393,12 +9985,11 @@ if (uni.restoreGlobal) {
         this.showPicker = false;
       },
       addDirectly(type) {
-        debugger;
         var that = this;
-        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:136", type, "nishi");
+        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:182", type, "nishi");
         this.$refs.studentForm.validate().then(() => {
-          let businessCloudObject2 = yn.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:141", that.requestItem, "that.requestItem");
+          let businessCloudObject2 = As.importObject("businessCloudObject");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:187", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -8426,7 +10017,7 @@ if (uni.restoreGlobal) {
             }).catch((err) => {
               uni.showToast({
                 icon: "\u7F16\u8F91\u5931\u8D25",
-                title: err.message,
+                title: res.message,
                 duration: 800
               });
             });
@@ -8434,20 +10025,10 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:182", type, ">>>>");
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:228", type, ">>>>");
               if (type == "body") {
-                businessCloudObject2.getOnlyList({
-                  traineeName: that.studentForm.traineeName,
-                  mobile: that.studentForm.mobile
-                }).then((res3) => {
-                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:190", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
-                  if (res3.success) {
-                    let data = res3.data;
-                    uni.navigateTo({
-                      url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + data[0]._id
-                    });
-                  }
-                }).catch((err) => {
+                uni.navigateTo({
+                  url: "/pages/physicalAssessment/physicalAssessment"
                 });
               } else {
                 uni.switchTab({
@@ -8466,7 +10047,7 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             } else {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:216", 2);
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:248", 2);
               uni.showToast({
                 icon: "fail",
                 title: res2.message,
@@ -8481,56 +10062,100 @@ if (uni.restoreGlobal) {
       onConfirm() {
       },
       onSubmit() {
-      },
-      buyClick(type) {
-        this.studentForm.buyStatus = type;
       }
     }
   };
   function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    const _component_hpy_form_select = resolveEasycom(vue.resolveDynamicComponent("hpy-form-select"), __easycom_0$3);
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
-    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u4F53\u6D4B\u62A5\u544A\u586B\u5199" }),
+      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u4F53\u4FA7\u62A5\u544A\u586B\u5199" }),
       vue.createElementVNode("view", { class: "contetnt_form_style" }, [
-        vue.createVNode(_component_uni_forms, {
-          modelValue: $data.configForm,
-          ref: "studentForm",
-          "label-position": "top"
-        }, {
-          default: vue.withCtx(() => [
-            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.bodyTestReport, (item, itemIndex) => {
-              return vue.openBlock(), vue.createBlock(_component_uni_forms_item, {
-                key: itemIndex,
-                class: "outer_form_item_style",
-                label: item.questionContent,
-                name: item.code
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createElementVNode("view", { class: "change_picker_style" }, [
-                    vue.createVNode(_component_hpy_form_select, {
-                      dataList: item.configList,
-                      title: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u9009\u62E9",
-                      text: "text",
-                      name: "value"
-                    }, null, 8, ["dataList", "title"])
-                  ])
-                ]),
-                _: 2
-              }, 1032, ["label", "name"]);
-            }), 128))
-          ]),
-          _: 1
-        }, 8, ["modelValue"])
+        vue.createCommentVNode(`      <van-form @submit="onSubmit" ref="studentForm">\r
+        <van-cell-group inset>\r
+          <van-field\r
+            v-model="studentForm.traineeName"\r
+            name="traineeName"\r
+            label="\u771F\u5B9E\u59D3\u540D(\u5FC5\u586B)"\r
+            placeholder="\u8BF7\u586B\u5199\u59D3\u540D"\r
+            :rules="[{ required: true, message: '\u8BF7\u586B\u5199\u771F\u5B9E\u59D3\u540D' }]"\r
+          />\r
+        </van-cell-group>\r
+        <van-cell-group inset>\r
+          <van-field\r
+            v-model="gender"\r
+            is-link\r
+            readonly\r
+            name="gender"\r
+            label="\u6027\u522B(\u5FC5\u586B)"\r
+            placeholder="\u8BF7\u9009\u62E9\u6027\u522B"\r
+            @click="showPicker = true"\r
+            :rules="[{ required: true, message: '\u8BF7\u9009\u62E9\u6027\u522B' }]"\r
+          />\r
+          <van-popup v-model:show="showPicker" position="bottom">\r
+            <van-picker\r
+              :columns="columns"\r
+              ref="gendPicker"\r
+              @confirm="genderConfirm"\r
+              @cancel="showPicker = false"\r
+              :show-toolbar="true"\r
+              title="\u8BF7\u9009\u62E9\u6027\u522B"\r
+              :defaultIndex="gendDefaultIndex"\r
+            >\r
+            </van-picker>\r
+          </van-popup>\r
+        </van-cell-group>\r
+        <van-cell-group inset>\r
+          <van-field\r
+            v-model="studentForm.birthday"\r
+            is-link\r
+            readonly\r
+            name="picker"\r
+            label="\u751F\u65E5(\u5FC5\u586B)"\r
+            placeholder="\u8BF7\u9009\u62E9\u751F\u65E5"\r
+            @click="dateShowpicker = true"\r
+            :rules="[{ required: true, message: '\u8BF7\u9009\u62E9\u751F\u65E5' }]"\r
+          />\r
+          <van-popup v-model:show="dateShowpicker" position="bottom">\r
+            <van-datetime-picker\r
+              v-model="currentDate"\r
+              type="date"\r
+              title="\u9009\u62E9\u5E74\u6708\u65E5"\r
+              :min-date="minDate"\r
+              :max-date="maxDate"\r
+              @confirm="birthConfirm"\r
+              @cancel="dateShowpicker = false"\r
+              :formatter="formatter"\r
+            />\r
+          </van-popup>\r
+        </van-cell-group>\r
+        <van-cell-group inset>\r
+          <van-field\r
+            v-model="studentForm.mobile"\r
+            name="pattern"\r
+            label="\u624B\u673A\u53F7\u7801(\u5FC5\u586B)"\r
+            placeholder="\u8BF7\u586B\u5199\u624B\u673A\u53F7\u7801"\r
+            type="tel"\r
+            maxlength="11"\r
+            :rules="[{ pattern, message: '\u8BF7\u8F93\u5165\u6B63\u786E\u7684\u624B\u673A\u53F7\u7801' }]"\r
+          />\r
+        </van-cell-group>\r
+\r
+\r
+        <view\r
+          class="add_method_style edit_save_style"\r
+          @click.native="addDirectly('edit')"\r
+        \r
+        >\r
+          \u786E\u8BA4\r
+        </view>\r
+      </van-form> `)
       ])
     ]);
   }
-  var PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-aabe2874"], ["__file", "E:/workproject/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
-  var businessCloudObject$1 = yn.importObject("businessCloudObject");
+  const PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-641854c1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
+  var businessCloudObject$1 = As.importObject("businessCloudObject");
   const _sfc_main$n = {
     components: {
       BgTheamCompontent,
@@ -8567,11 +10192,331 @@ if (uni.restoreGlobal) {
                 }
               });
             }
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:111", res2, "\u6211\u662F\u5B50\u9009\u9879");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:112", res2, "\u6211\u662F\u5B50\u9009\u9879");
           }).catch((err) => {
           });
         }
       },
+      requestDynamicEvaluationdata() {
+        businessCloudObject$1.getPhysicalAssessmentList().then((res2) => {
+          let firstData = res2.data;
+          businessCloudObject$1.opearConfigAllList(this.traineeNo).then((allRes) => {
+            firstData = firstData.map((item) => {
+              let isFinsh = false;
+              if (allRes.affectedDocs > 0) {
+                allRes.data.forEach((v2) => {
+                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:136", v2, "\u4EC0\u4E48\u9B3C");
+                  if (v2.questionCode === item.code) {
+                    let needCompareData = v2.testResult.filter((c2) => c2.answer.length > 0);
+                    if (needCompareData.length > 0) {
+                      isFinsh = true;
+                    }
+                  }
+                });
+              }
+              return {
+                ...item,
+                isFinsh
+              };
+            });
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:154", firstData, "\u6211\u6052\u5F3A");
+            this.dynamicEvaluationdata = firstData;
+          });
+        }).catch((err) => {
+        });
+      }
+    }
+  };
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+    const _component_hpy_form_select = resolveEasycom(vue.resolveDynamicComponent("hpy-form-select"), __easycom_0$3);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+<<<<<<< .mine
+      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u4F53\u6D4B\u62A5\u544A\u586B\u5199" }),
+      vue.createElementVNode("view", { class: "contetnt_form_style" }, [
+        vue.createVNode(_component_uni_forms, {
+          modelValue: $data.configForm,
+          ref: "studentForm",
+          "label-position": "top"
+        }, {
+          default: vue.withCtx(() => [
+            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.bodyTestReport, (item, itemIndex) => {
+              return vue.openBlock(), vue.createBlock(_component_uni_forms_item, {
+                key: itemIndex,
+                class: "outer_form_item_style",
+                label: item.questionContent,
+                name: item.code
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "change_picker_style" }, [
+                    vue.createVNode(_component_hpy_form_select, {
+                      dataList: item.configList,
+                      title: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u9009\u62E9",
+                      text: "text",
+                      name: "value"
+                    }, null, 8, ["dataList", "title"])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u8EAB\u4F53\u8BC4\u6D4B" }),
+      vue.createVNode(_component_van_row, null, {
+        default: vue.withCtx(() => [
+          vue.createVNode(_component_van_col, {
+            class: "need_scoll",
+            span: "24"
+          }, {
+            default: vue.withCtx(() => [
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.dynamicEvaluationdata, (item, index) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  class: "dynamicshow",
+                  onClick: vue.withModifiers(($event) => $options.jumpModular(item), ["stop"]),
+                  key: index
+                }, [
+                  vue.createElementVNode("view", { class: "dynamicshow_left" }, [
+                    item.isFinsh ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      class: "correct"
+                    }, [
+                      vue.createElementVNode("image", {
+                        class: "correct_img_style",
+                        src: "/static/app-plus/other/yesActive.png"
+                      })
+                    ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 1,
+                      class: "correct"
+                    }, [
+                      vue.createElementVNode("image", {
+                        class: "correct_img_style",
+                        src: "/static/app-plus/other/yesNoActive.png"
+                      })
+                    ])),
+                    vue.createElementVNode("text", { class: "evaluationdata" }, vue.toDisplayString(item.questionContent), 1)
+                  ]),
+                  vue.createElementVNode("view", { class: "dynamicshow_right" }, [
+                    vue.createElementVNode("image", {
+                      class: "back_img_style",
+                      src: "/static/app-plus/mebrs/backRight.png"
+                    })
+>>>>>>> .theirs
+                  ])
+<<<<<<< .mine
+                ]),
+                _: 2
+              }, 1032, ["label", "name"]);
+            }), 128))
+          ]),
+          _: 1
+        }, 8, ["modelValue"])
+      ])
+
+
+
+
+
+
+
+
+
+
+=======
+                ], 8, ["onClick"]);
+              }), 128))
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      }),
+      vue.createVNode(_component_van_button, {
+        type: "primary",
+        block: "",
+        class: "buttontrue"
+      }, {
+        default: vue.withCtx(() => [
+          vue.createTextVNode("\u751F\u6210\u62A5\u544A")
+        ]),
+        _: 1
+      })
+>>>>>>> .theirs
+    ]);
+  }
+<<<<<<< .mine
+  var PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-aabe2874"], ["__file", "E:/workproject/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
+  var businessCloudObject$1 = yn.importObject("businessCloudObject");
+  const _sfc_main$n = {
+    components: {
+      BgTheamCompontent,
+      NavBarCompontent
+    },
+=======
+  const PagesPhysicalAssessmentPhysicalAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-fc7c2e74"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalAssessment/physicalAssessment.vue"]]);
+  var businessCloudObject = As.importObject("businessCloudObject");
+  const _sfc_main$m = {
+    components: {},
+
+
+
+>>>>>>> .theirs
+    data() {
+      return {
+<<<<<<< .mine
+        dynamicEvaluationdata: [],
+        icon: true,
+        traineeNo: ""
+
+
+=======
+        healthList: [],
+        activeName: [0],
+        traineeNo: "",
+        originList: [],
+        questionCode: ""
+>>>>>>> .theirs
+      };
+    },
+<<<<<<< .mine
+    created() {
+      this.requestDynamicEvaluationdata();
+    },
+    onLoad(options) {
+      if (JSON.stringify(options) !== "{}" && options.traineeNo) {
+        this.traineeNo = options.traineeNo;
+      }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+    onLoad(options) {
+      if (JSON.stringify(options) !== "{}" && options.traineeNo) {
+        this.traineeNo = options.traineeNo;
+      }
+      if (JSON.stringify(options) !== "{}" && options.hasOwnProperty("childList")) {
+        let originList = JSON.parse(options.childList);
+        this.originList = originList;
+      }
+      if (JSON.stringify(options) !== "{}" && options.hasOwnProperty("questionCode")) {
+        this.questionCode = options.questionCode;
+      }
+    },
+    computed: {
+      handlerData() {
+        return function(item) {
+          let remark = "";
+          if (item.answer.length > 0) {
+            remark = item.answer[0].remark;
+          }
+          return {
+            remark
+          };
+        };
+      }
+    },
+    mounted() {
+      this.requestList();
+    },
+>>>>>>> .theirs
+    methods: {
+<<<<<<< .mine
+      jumpModular(item) {
+        if (item.hasOwnProperty("path") && item.path && this.traineeNo) {
+          businessCloudObject$1.getPhysicalChildAssessmentList(item.code).then((res2) => {
+            if (res2.success) {
+              let childList = res2.data;
+              uni.navigateTo({
+                url: item.path + "?childList=" + JSON.stringify(childList) + "&traineeNo=" + this.traineeNo + "&questionCode=" + item.code,
+                success: (res3) => {
+                },
+                fail: () => {
+                },
+                complete: () => {
+                }
+              });
+            }
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:111", res2, "\u6211\u662F\u5B50\u9009\u9879");
+          }).catch((err) => {
+          });
+        }
+
+
+
+
+=======
+      saveHealthQuession() {
+        let testResult = [];
+        let newList = JSON.parse(JSON.stringify(this.healthList));
+        newList.forEach((item) => {
+          if (item.questionType == 2) {
+            delete item["remark"];
+          }
+          let resetList = item.answer.length > 0 ? item.answer.filter((k) => k.checked).map((z2) => {
+            return z2;
+          }) : [];
+          let findResultChecked = resetList.find((k) => k.checked);
+          let result = {
+            code: item.code,
+            answer: resetList.map((c2) => c2.answerTitle),
+            remark: resetList.length > 0 ? findResultChecked.answerTitle === "\u662F" ? resetList[0].remark : "" : ""
+          };
+          testResult.push(result);
+        });
+        let saveParam = {
+          traineeNo: this.traineeNo,
+          questionCode: this.questionCode,
+          testResult
+        };
+>>>>>>> .theirs
+        businessCloudObject.opearConfig(saveParam, "physical").then((res2) => {
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:154", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          if (res2.success) {
+            uni.redirectTo({
+              url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
+            });
+            uni.showToast({
+              icon: "success",
+              title: res2.message,
+              duration: 800
+            });
+          }
+        }).catch(() => {
+        });
+      },
+<<<<<<< .mine
       requestDynamicEvaluationdata() {
         businessCloudObject$1.getPhysicalAssessmentList().then((res2) => {
           let firstData = res2.data;
@@ -8597,10 +10542,111 @@ if (uni.restoreGlobal) {
             this.dynamicEvaluationdata = firstData;
           });
         }).catch((err) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+      requestList() {
+        businessCloudObject.opearConfigQuery({
+          traineeNo: this.traineeNo,
+          questionCode: this.questionCode
+        }).then((res2) => {
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:176", res2, "kkkkk");
+          if (res2.affectedDocs === 0) {
+            let healthList = this.originList.map((item) => {
+              let answer = item.answer.length > 0 ? item.answer.map((config) => {
+                return {
+                  ...config,
+                  checked: false
+                };
+              }) : [];
+              return {
+                ...item,
+                answer
+              };
+            });
+            this.healthList = healthList;
+          } else {
+            let list = JSON.parse(JSON.stringify(this.originList));
+            let healthList = list.map((item) => {
+              let answer = item.answer.length > 0 ? item.answer.map((config) => {
+                let compareData = res2.data[0];
+                var checked = false;
+                var remark = "";
+                compareData.testResult.forEach((k) => {
+                  if (item.code === k.code) {
+                    if (item.questionType === 1) {
+                      remark = k.remark || "";
+                    }
+                    k.answer.length > 0 ? k.answer.map((z2) => {
+                      if (config.answerTitle === z2) {
+                        checked = true;
+                      }
+                    }) : checked = false;
+                  }
+                });
+                return {
+                  ...config,
+                  checked,
+                  remark
+                };
+              }) : [];
+              return {
+                ...item,
+                answer
+              };
+            });
+            this.healthList = healthList;
+          }
+>>>>>>> .theirs
+        }).catch((err) => {
+        });
+      },
+      quesionClick(item, itemIndex, itemChild, itemChildIndex) {
+        itemChild.checked = !itemChild.checked;
+      },
+      quesionChildClick(item, itemIndex, radioItem, radioItemIndex) {
+        item.answer = item.answer.map((config, conifgIndex) => {
+          if (conifgIndex === radioItemIndex) {
+            return {
+              ...config,
+              checked: true
+            };
+          } else {
+            return {
+              ...config,
+              checked: false
+            };
+          }
         });
       }
     }
   };
+<<<<<<< .mine
   function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
@@ -8802,11 +10848,214 @@ if (uni.restoreGlobal) {
   function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+=======
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_bg_theam_compontent = vue.resolveComponent("bg-theam-compontent");
+    const _component_nav_bar_compontent = vue.resolveComponent("nav-bar-compontent");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
     const _component_van_collapse_item = vue.resolveComponent("van-collapse-item");
     const _component_van_collapse = vue.resolveComponent("van-collapse");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
-      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u5065\u5EB7\u95EE\u7B54" }),
+      vue.createVNode(_component_bg_theam_compontent, { theamType: "currency" }),
+      vue.createVNode(_component_nav_bar_compontent, { leftNavTitle: "\u5065\u5EB7\u95EE\u7B54" }),
       vue.createElementVNode("view", { class: "list_content_style" }, [
         (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.healthList, (item, itemIndex) => {
           return vue.openBlock(), vue.createElementBlock("view", {
@@ -8858,6 +11107,7 @@ if (uni.restoreGlobal) {
                   }, vue.toDisplayString(radioItem.answerTitle), 11, ["onClick"]);
                 }), 128))
               ]),
+<<<<<<< .mine
               item.answer[0].checked ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 0,
                 class: "radio_remark_style"
@@ -8874,6 +11124,24 @@ if (uni.restoreGlobal) {
                   ])
                 ])
               ])) : vue.createCommentVNode("v-if", true)
+=======
+              item.answer[0].checked ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "radio_remark_style"
+              }, [
+                vue.createCommentVNode(`          <van-field\r
+              class="supplement_style"\r
+              v-model="item.answer[0].remark"\r
+              :placeholder="\r
+                item.answerRemark && item.answerRemark.remarkTitle\r
+                  ? item.answerRemark.remarkTitle\r
+                  : '\u8BF7\u8865\u5145\u4FE1\u606F'\r
+              "\r
+            /> `)
+              ])) : vue.createCommentVNode("v-if", true)
+
+
+>>>>>>> .theirs
             ])) : vue.createCommentVNode("v-if", true)
           ]);
         }), 128))
@@ -8884,10 +11152,17 @@ if (uni.restoreGlobal) {
       }, "\u4FDD\u5B58")
     ]);
   }
+<<<<<<< .mine
   var PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "E:/workproject/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
   const testOb$1 = yn.importObject("testResults");
   const busOb = yn.importObject("businessCloudObject");
   const _sfc_main$l = {
+=======
+  const PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "D:/studyUninApp/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
+  const testOb$1 = As.importObject("testResults");
+  const busOb = As.importObject("businessCloudObject");
+  const _sfc_main$l = {
+>>>>>>> .theirs
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -8897,6 +11172,7 @@ if (uni.restoreGlobal) {
         traineeNo: "",
         questionCode: "",
         currentRate: 50,
+<<<<<<< .mine
         age: 29,
         gender: "1",
         resultValue: 0,
@@ -8904,8 +11180,74 @@ if (uni.restoreGlobal) {
         typeColor: "#4B525E",
         queryData: {},
         queryUserActionData: {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+        age: 29,
+        gender: "1",
+        resultValue: 0,
+        typeText: "\u5F85\u6D4B",
+        typeColor: "#4B525E",
+        dynamicEvaluationdata: [
+          {
+            title: "",
+            type: 0,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u4FEF\u5367\u6491\u8010\u529B\u6D4B\u8BD5",
+            typeColor: "#4B525E",
+            typeText: "\u5F85\u6D4B"
+          },
+          {
+            title: "",
+            type: 0,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u5377\u8179\u6D4B\u8BD5",
+            typeColor: "#4B525E",
+            typeText: "\u5F85\u6D4B"
+          },
+          {
+            title: "",
+            type: 0,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u4E09\u5206\u949F\u8E0F\u677F\u6D4B\u8BD5",
+            typeColor: "#4B525E",
+            typeText: "\u5F85\u6D4B"
+          },
+          {
+            title: "",
+            type: 0,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u81EA\u91CD\u6DF1\u8E72\u6D4B\u8BD5",
+            typeColor: "#4B525E",
+            typeText: "\u5F85\u6D4B"
+          }
+        ]
+>>>>>>> .theirs
       };
     },
+<<<<<<< .mine
     onShow() {
       this.getconfingActionName();
     },
@@ -8915,18 +11257,39 @@ if (uni.restoreGlobal) {
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
     },
+=======
+    onShow() {
+      this.getdynamicEvaluationdata();
+      this.pedalTest();
+    },
+
+
+
+
+
+>>>>>>> .theirs
     methods: {
       jumpModular(item) {
+<<<<<<< .mine
         formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:103", item.path, ">>>>");
+=======
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:117", item.path, ">>>>");
+>>>>>>> .theirs
         uni.navigateTo({
+<<<<<<< .mine
           url: item.path + "?data=" + JSON.stringify(item) + "&traineeNo=" + this.traineeNo + "&questionCode=" + item.parentCode,
           success: (res2) => {
+=======
+          url: item.path,
+          success: (res2) => {
+>>>>>>> .theirs
           },
           fail: () => {
           },
           complete: () => {
           }
         });
+<<<<<<< .mine
       },
       async pedalTest() {
         const datas = (await this.findConfigData()).data;
@@ -8979,6 +11342,62 @@ if (uni.restoreGlobal) {
             }
           }
         }
+
+=======
+      },
+      async getdynamicEvaluationdata() {
+        const res2 = (await busOb.getPhysicalChildAssessmentList("A0005")).data;
+        let i2 = 0;
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:128", res2.length);
+        for (i2; i2 < res2.length; i2++) {
+          this.dynamicEvaluationdata[i2].title = res2[i2].questionContent;
+          this.dynamicEvaluationdata[i2].path = "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=" + res2[i2].questionContent;
+        }
+      },
+      async pedalTest() {
+        const length = this.dynamicEvaluationdata.length;
+        let i2 = 0;
+        for (i2; i2 < length; i2++) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:143", this.dynamicEvaluationdata[i2].type);
+          this.resultValue = this.dynamicEvaluationdata[i2].type;
+          const gender = this.gender;
+          const age = this.age;
+          const resValue = this.resultValue;
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:150", gender + "," + age + "," + resValue);
+          const res2 = testOb$1.method1(gender, age, resValue);
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:153", res2);
+          const type = (await res2).data;
+          if (type.length == 0) {
+            this.typeText = "\u5F85\u6D4B";
+          } else {
+            this.typeText = type[0].resultLevel;
+          }
+          this.dynamicEvaluationdata[i2].typeText = this.typeText;
+          this.levelColor(this.typeText);
+          this.dynamicEvaluationdata[i2].typeColor = this.typeColor;
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:164", this.dynamicEvaluationdata[i2]);
+        }
+      },
+      levelColor(levelType) {
+        switch (levelType) {
+          case "\u4F18\u79C0":
+          case "\u826F\u597D":
+            this.typeColor = "#01E08C";
+            break;
+          case "\u4E2D\u7B49":
+          case "\u4E2D\u4E0A\u7B49":
+          case "\u4E2D\u4E0B\u7B49":
+            this.typeColor = "#FFC13C";
+            break;
+          case "\u8F83\u5DEE":
+          case "\u975E\u5E38\u5DEE":
+            this.typeColor = "#F04242";
+            break;
+          case "\u5F85\u6D4B":
+            this.typeColor = "#4B525E";
+            break;
+        }
+>>>>>>> .theirs
       }
     }
   };
@@ -9031,9 +11450,15 @@ if (uni.restoreGlobal) {
                       type: "primary",
                       color: "#1370FF",
                       class: "dynamicshow_button",
+<<<<<<< .mine
                       icon: "../../static/app-plus/other/arrows.png",
                       "icon-position": "right",
                       onClick: ($event) => $options.jumpModular(item)
+=======
+                      icon: "../../static/app-plus/other/arrows.svg",
+                      "icon-position": "right",
+                      onClick: ($event) => $options.jumpModular(item)
+>>>>>>> .theirs
                     }, {
                       default: vue.withCtx(() => [
                         vue.createTextVNode("\u5F00\u59CB\u6D4B\u8BD5")
@@ -9041,6 +11466,7 @@ if (uni.restoreGlobal) {
                       _: 2
                     }, 1032, ["onClick"])
                   ])),
+<<<<<<< .mine
                   vue.createElementVNode("view", { class: "dynamicshow_right" }, [
                     vue.createCommentVNode(` <van-circle\r
               v-model:current-rate="currentRate"\r
@@ -9055,6 +11481,22 @@ if (uni.restoreGlobal) {
                       vue.createElementVNode("view", { class: "circleText" }, vue.toDisplayString(item.typeText), 1)
                     ])
                   ])
+=======
+                  vue.createElementVNode("view", { class: "dynamicshow_right" }, [
+                    vue.createVNode(_component_van_circle, {
+                      "current-rate": $data.currentRate,
+                      "onUpdate:current-rate": _cache[0] || (_cache[0] = ($event) => $data.currentRate = $event),
+                      rate: 100,
+                      speed: 400,
+                      text: item.typeText,
+                      "layer-color": item.typeColor,
+                      color: item.typeColor,
+                      style: vue.normalizeStyle("--van-circle-text-color:" + item.typeColor)
+                    }, null, 8, ["current-rate", "text", "layer-color", "color", "style"])
+                  ])
+
+
+>>>>>>> .theirs
                 ]);
               }), 128))
             ]),
@@ -9066,8 +11508,13 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", null, [
         vue.createVNode(_component_van_button, {
           type: "primary",
+<<<<<<< .mine
           class: "postureButton",
           onClick: _cache[0] || (_cache[0] = ($event) => _ctx.getdynamicEvaluationdata())
+=======
+          class: "postureButton",
+          onClick: _cache[1] || (_cache[1] = ($event) => $options.getdynamicEvaluationdata())
+>>>>>>> .theirs
         }, {
           default: vue.withCtx(() => [
             vue.createTextVNode("\u786E\u8BA4")
@@ -9077,7 +11524,11 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
+<<<<<<< .mine
   var PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "E:/workproject/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
+=======
+  const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
+>>>>>>> .theirs
   const isDef = (val) => val !== void 0 && val !== null;
   const isFunction$1 = (val) => typeof val === "function";
   const isObject$1 = (val) => val !== null && typeof val === "object";
@@ -9139,16 +11590,16 @@ if (uni.restoreGlobal) {
     default: defaultVal
   });
   var inBrowser = typeof window !== "undefined";
-  function raf(fn2) {
-    return inBrowser ? requestAnimationFrame(fn2) : -1;
+  function raf(fn) {
+    return inBrowser ? requestAnimationFrame(fn) : -1;
   }
   function cancelRaf(id) {
     if (inBrowser) {
       cancelAnimationFrame(id);
     }
   }
-  function doubleRaf(fn2) {
-    raf(() => raf(fn2));
+  function doubleRaf(fn) {
+    raf(() => raf(fn));
   }
   var isWindow = (val) => val === window;
   var makeDOMRect = (width2, height2) => ({
@@ -9220,7 +11671,9 @@ if (uni.restoreGlobal) {
   }
   function sortChildren(parent, publicChildren, internalChildren) {
     const vnodes = flattenVNodes(parent.subTree.children);
-    internalChildren.sort((a2, b2) => vnodes.indexOf(a2.vnode) - vnodes.indexOf(b2.vnode));
+    internalChildren.sort(
+      (a2, b2) => vnodes.indexOf(a2.vnode) - vnodes.indexOf(b2.vnode)
+    );
     const orderedPublicChildren = internalChildren.map((item) => item.proxy);
     publicChildren.sort((a2, b2) => {
       const indexA = orderedPublicChildren.indexOf(a2);
@@ -9245,12 +11698,18 @@ if (uni.restoreGlobal) {
         publicChildren.splice(index, 1);
         internalChildren.splice(index, 1);
       };
-      vue.provide(key, Object.assign({
-        link,
-        unlink,
-        children: publicChildren,
-        internalChildren
-      }, value));
+      vue.provide(
+        key,
+        Object.assign(
+          {
+            link,
+            unlink,
+            children: publicChildren,
+            internalChildren
+          },
+          value
+        )
+      );
     };
     return {
       children: publicChildren,
@@ -9766,9 +12225,15 @@ if (uni.restoreGlobal) {
       return ` ${name2}--${mods}`;
     }
     if (Array.isArray(mods)) {
-      return mods.reduce((ret, item) => ret + genBem(name2, item), "");
+      return mods.reduce(
+        (ret, item) => ret + genBem(name2, item),
+        ""
+      );
     }
-    return Object.keys(mods).reduce((ret, key) => ret + (mods[key] ? genBem(name2, key) : ""), "");
+    return Object.keys(mods).reduce(
+      (ret, key) => ret + (mods[key] ? genBem(name2, key) : ""),
+      ""
+    );
   }
   function createBEM(name2) {
     return (el, mods) => {
@@ -9980,16 +12445,16 @@ if (uni.restoreGlobal) {
           background: props.color
         };
         if (props.offset) {
-          const [x2, y2] = props.offset;
+          const [x2, y] = props.offset;
           if (slots.default) {
-            style2.top = addUnit(y2);
+            style2.top = addUnit(y);
             if (typeof x2 === "number") {
               style2.right = addUnit(-x2);
             } else {
               style2.right = x2.startsWith("-") ? x2.replace("-", "") : `-${x2}`;
             }
           } else {
-            style2.marginTop = addUnit(y2);
+            style2.marginTop = addUnit(y);
             style2.marginLeft = addUnit(x2);
           }
         }
@@ -10480,12 +12945,14 @@ if (uni.restoreGlobal) {
     transitionAppear: Boolean,
     closeOnClickOverlay: truthProp
   };
-  const popupSharedPropKeys = Object.keys(popupSharedProps);
-  function getDirection(x2, y2) {
-    if (x2 > y2) {
+  const popupSharedPropKeys = Object.keys(
+    popupSharedProps
+  );
+  function getDirection(x2, y) {
+    if (x2 > y) {
       return "horizontal";
     }
-    if (y2 > x2) {
+    if (y > x2) {
       return "vertical";
     }
     return "";
@@ -10547,7 +13014,10 @@ if (uni.restoreGlobal) {
     const onTouchMove = (event) => {
       touch.move(event);
       const direction = touch.deltaY.value > 0 ? DIRECTION_DOWN : DIRECTION_UP;
-      const el = getScrollParent$1(event.target, rootRef.value);
+      const el = getScrollParent$1(
+        event.target,
+        rootRef.value
+      );
       const { scrollHeight, offsetHeight, scrollTop } = el;
       let status = "11";
       if (scrollTop === 0) {
@@ -10588,11 +13058,15 @@ if (uni.restoreGlobal) {
   }
   function useLazyRender(show) {
     const inited = vue.ref(false);
-    vue.watch(show, (value) => {
-      if (value) {
-        inited.value = value;
-      }
-    }, { immediate: true });
+    vue.watch(
+      show,
+      (value) => {
+        if (value) {
+          inited.value = value;
+        }
+      },
+      { immediate: true }
+    );
     return (render) => () => inited.value ? render() : null;
   }
   const [name$1t, bem$1o] = createNamespace("overlay");
@@ -11012,6 +13486,7 @@ if (uni.restoreGlobal) {
     const translateY = transform.slice(7, transform.length - 1).split(", ")[5];
     return Number(translateY);
   }
+<<<<<<< .mine
   function assignDefaultFields(fields) {
     return extend$1({
       text: "text",
@@ -11026,6 +13501,28 @@ if (uni.restoreGlobal) {
   const PICKER_KEY = Symbol(name$1p);
   var stdin_default$1u = vue.defineComponent({
     name: name$1p,
+
+
+
+=======
+  function assignDefaultFields(fields) {
+    return extend$1(
+      {
+        text: "text",
+        value: "value",
+        children: "children"
+      },
+      fields
+    );
+  }
+  const DEFAULT_DURATION = 200;
+  const MOMENTUM_TIME = 300;
+  const MOMENTUM_DISTANCE = 15;
+  const [name$1p, bem$1k] = createNamespace("picker-column");
+  const PICKER_KEY = Symbol(name$1p);
+  var stdin_default$1u = vue.defineComponent({
+    name: name$1p,
+>>>>>>> .theirs
     props: {
       value: numericProp,
       fields: makeRequiredProp(Object),
@@ -11260,6 +13757,7 @@ if (uni.restoreGlobal) {
       if (++count < frames) {
         raf(animate);
       }
+<<<<<<< .mine
     }
     animate();
   }
@@ -11351,6 +13849,105 @@ if (uni.restoreGlobal) {
       });
       const offset2 = vue.computed(() => unitToPx(props.position === "top" ? props.offsetTop : props.offsetBottom));
       const rootStyle = vue.computed(() => {
+
+
+
+=======
+    }
+    animate();
+  }
+  function scrollTopTo(scroller, to2, duration, callback) {
+    let current2 = getScrollTop(scroller);
+    const isDown = current2 < to2;
+    const frames = duration === 0 ? 1 : Math.round(duration * 1e3 / 16);
+    const step = (to2 - current2) / frames;
+    function animate() {
+      current2 += step;
+      if (isDown && current2 > to2 || !isDown && current2 < to2) {
+        current2 = to2;
+      }
+      setScrollTop(scroller, current2);
+      if (isDown && current2 < to2 || !isDown && current2 > to2) {
+        raf(animate);
+      } else if (callback) {
+        raf(callback);
+      }
+    }
+    animate();
+  }
+  let current = 0;
+  function useId() {
+    const vm = vue.getCurrentInstance();
+    const { name: name2 = "unknown" } = (vm == null ? void 0 : vm.type) || {};
+    return `${name2}-${++current}`;
+  }
+  function useRefs() {
+    const refs = vue.ref([]);
+    const cache = [];
+    vue.onBeforeUpdate(() => {
+      refs.value = [];
+    });
+    const setRefs = (index) => {
+      if (!cache[index]) {
+        cache[index] = (el) => {
+          refs.value[index] = el;
+        };
+      }
+      return cache[index];
+    };
+    return [refs, setRefs];
+  }
+  function useVisibilityChange(target, onChange) {
+    if (!inBrowser$1 || !window.IntersectionObserver) {
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        onChange(entries[0].intersectionRatio > 0);
+      },
+      { root: document.body }
+    );
+    const observe = () => {
+      if (target.value) {
+        observer.observe(target.value);
+      }
+    };
+    const unobserve = () => {
+      if (target.value) {
+        observer.unobserve(target.value);
+      }
+    };
+    vue.onDeactivated(unobserve);
+    vue.onBeforeUnmount(unobserve);
+    onMountedOrActivated(observe);
+  }
+  const [name$1n, bem$1j] = createNamespace("sticky");
+  const stickyProps = {
+    zIndex: numericProp,
+    position: makeStringProp("top"),
+    container: Object,
+    offsetTop: makeNumericProp(0),
+    offsetBottom: makeNumericProp(0)
+  };
+  var stdin_default$1s = vue.defineComponent({
+    name: name$1n,
+    props: stickyProps,
+    emits: ["scroll", "change"],
+    setup(props, {
+      emit,
+      slots
+    }) {
+      const root = vue.ref();
+      const scrollParent = useScrollParent(root);
+      const state = vue.reactive({
+        fixed: false,
+        width: 0,
+        height: 0,
+        transform: 0
+      });
+      const offset2 = vue.computed(() => unitToPx(props.position === "top" ? props.offsetTop : props.offsetBottom));
+      const rootStyle = vue.computed(() => {
+>>>>>>> .theirs
         const {
           fixed,
           height: height2,
@@ -12696,6 +15293,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
+<<<<<<< .mine
   const AREA_EMPTY_CODE = "000000";
   const INHERIT_SLOTS = [
     "title",
@@ -12779,6 +15377,105 @@ if (uni.restoreGlobal) {
   const [name$1f, bem$1b] = createNamespace("area");
   const areaProps = extend$1({}, pickerSharedProps, {
     modelValue: String,
+
+
+
+
+
+
+
+=======
+  const AREA_EMPTY_CODE = "000000";
+  const INHERIT_SLOTS = [
+    "title",
+    "cancel",
+    "confirm",
+    "toolbar",
+    "columns-top",
+    "columns-bottom"
+  ];
+  const INHERIT_PROPS = [
+    "title",
+    "loading",
+    "readonly",
+    "optionHeight",
+    "swipeDuration",
+    "visibleOptionNum",
+    "cancelButtonText",
+    "confirmButtonText"
+  ];
+  const makeOption = (text = "", value = AREA_EMPTY_CODE, children = void 0) => ({
+    text,
+    value,
+    children
+  });
+  function formatDataForCascade({
+    areaList,
+    columnsNum,
+    columnsPlaceholder: placeholder
+  }) {
+    const {
+      city_list: city = {},
+      county_list: county = {},
+      province_list: province = {}
+    } = areaList;
+    const showCity = columnsNum > 1;
+    const showCounty = columnsNum > 2;
+    const getProvinceChildren = () => {
+      if (showCity) {
+        return placeholder.length ? [
+          makeOption(
+            placeholder[0],
+            AREA_EMPTY_CODE,
+            showCounty ? [] : void 0
+          )
+        ] : [];
+      }
+    };
+    const provinceMap = /* @__PURE__ */ new Map();
+    Object.keys(province).forEach((code) => {
+      provinceMap.set(
+        code.slice(0, 2),
+        makeOption(province[code], code, getProvinceChildren())
+      );
+    });
+    const cityMap = /* @__PURE__ */ new Map();
+    if (showCity) {
+      const getCityChildren = () => {
+        if (showCounty) {
+          return placeholder.length ? [makeOption(placeholder[1])] : [];
+        }
+      };
+      Object.keys(city).forEach((code) => {
+        const option = makeOption(city[code], code, getCityChildren());
+        cityMap.set(code.slice(0, 4), option);
+        const province2 = provinceMap.get(code.slice(0, 2));
+        if (province2) {
+          province2.children.push(option);
+        }
+      });
+    }
+    if (showCounty) {
+      Object.keys(county).forEach((code) => {
+        const city2 = cityMap.get(code.slice(0, 4));
+        if (city2) {
+          city2.children.push(makeOption(county[code], code));
+        }
+      });
+    }
+    const options = Array.from(provinceMap.values());
+    if (placeholder.length) {
+      const county2 = showCounty ? [makeOption(placeholder[2])] : void 0;
+      const city2 = showCity ? [makeOption(placeholder[1], AREA_EMPTY_CODE, county2)] : void 0;
+      options.unshift(makeOption(placeholder[0], AREA_EMPTY_CODE, city2));
+    }
+    return options;
+  }
+  const Picker = withInstall(stdin_default$1k);
+  const [name$1f, bem$1b] = createNamespace("area");
+  const areaProps = extend$1({}, pickerSharedProps, {
+    modelValue: String,
+>>>>>>> .theirs
     columnsNum: makeNumericProp(3),
     columnsPlaceholder: makeArrayProp(),
     areaList: {
@@ -17119,13 +19816,17 @@ if (uni.restoreGlobal) {
       milliseconds2 += seconds2 * 1e3;
     }
     if (format2.includes("S")) {
+<<<<<<< .mine
       const ms = padZero(milliseconds2, 3);
+=======
+      const ms2 = padZero(milliseconds2, 3);
+>>>>>>> .theirs
       if (format2.includes("SSS")) {
-        format2 = format2.replace("SSS", ms);
+        format2 = format2.replace("SSS", ms2);
       } else if (format2.includes("SS")) {
-        format2 = format2.replace("SS", ms.slice(0, 2));
+        format2 = format2.replace("SS", ms2.slice(0, 2));
       } else {
-        format2 = format2.replace("S", ms.charAt(0));
+        format2 = format2.replace("S", ms2.charAt(0));
       }
     }
     return format2;
@@ -17180,7 +19881,9 @@ if (uni.restoreGlobal) {
   const CountDown = withInstall(stdin_default$O);
   function getDate(timeStamp) {
     const date = new Date(timeStamp * 1e3);
-    return `${date.getFullYear()}.${padZero(date.getMonth() + 1)}.${padZero(date.getDate())}`;
+    return `${date.getFullYear()}.${padZero(date.getMonth() + 1)}.${padZero(
+      date.getDate()
+    )}`;
   }
   const formatDiscount = (discount) => (discount / 10).toFixed(discount % 10 === 0 ? 0 : 1);
   const formatAmount = (amount) => (amount / 100).toFixed(amount % 100 === 0 ? 0 : amount % 10 === 0 ? 1 : 2);
@@ -19691,7 +22394,7 @@ if (uni.restoreGlobal) {
           speed,
           scrollable
         } = props;
-        const ms = isDef(delay) ? +delay * 1e3 : 0;
+        const ms2 = isDef(delay) ? +delay * 1e3 : 0;
         wrapWidth = 0;
         contentWidth = 0;
         state.offset = 0;
@@ -19711,7 +22414,7 @@ if (uni.restoreGlobal) {
               state.duration = contentWidth / +speed;
             });
           }
-        }, ms);
+        }, ms2);
       };
       onPopupReopen(reset);
       onMountedOrActivated(reset);
@@ -20355,18 +23058,18 @@ if (uni.restoreGlobal) {
     var _ref = isElement(element) ? getWindow(element) : window, visualViewport = _ref.visualViewport;
     var addVisualOffsets = !isLayoutViewport() && isFixedStrategy;
     var x2 = (clientRect.left + (addVisualOffsets && visualViewport ? visualViewport.offsetLeft : 0)) / scaleX;
-    var y2 = (clientRect.top + (addVisualOffsets && visualViewport ? visualViewport.offsetTop : 0)) / scaleY;
+    var y = (clientRect.top + (addVisualOffsets && visualViewport ? visualViewport.offsetTop : 0)) / scaleY;
     var width2 = clientRect.width / scaleX;
     var height2 = clientRect.height / scaleY;
     return {
       width: width2,
       height: height2,
-      top: y2,
+      top: y,
       right: x2 + width2,
-      bottom: y2 + height2,
+      bottom: y + height2,
       left: x2,
       x: x2,
-      y: y2
+      y
     };
   }
   function getWindowScroll(node) {
@@ -20959,7 +23662,7 @@ if (uni.restoreGlobal) {
     name: "eventListeners",
     enabled: true,
     phase: "write",
-    fn: function fn2() {
+    fn: function fn() {
     },
     effect,
     data: {}
@@ -20987,27 +23690,32 @@ if (uni.restoreGlobal) {
     left: "auto"
   };
   function roundOffsetsByDPR(_ref) {
-    var x2 = _ref.x, y2 = _ref.y;
+    var x2 = _ref.x, y = _ref.y;
     var win = window;
     var dpr = win.devicePixelRatio || 1;
     return {
+<<<<<<< .mine
       x: round$1(x2 * dpr) / dpr || 0,
       y: round$1(y2 * dpr) / dpr || 0
+=======
+      x: round$1(x2 * dpr) / dpr || 0,
+      y: round$1(y * dpr) / dpr || 0
+>>>>>>> .theirs
     };
   }
   function mapToStyles(_ref2) {
     var _Object$assign2;
     var popper = _ref2.popper, popperRect = _ref2.popperRect, placement = _ref2.placement, variation = _ref2.variation, offsets = _ref2.offsets, position = _ref2.position, gpuAcceleration = _ref2.gpuAcceleration, adaptive = _ref2.adaptive, roundOffsets = _ref2.roundOffsets, isFixed = _ref2.isFixed;
-    var _offsets$x = offsets.x, x2 = _offsets$x === void 0 ? 0 : _offsets$x, _offsets$y = offsets.y, y2 = _offsets$y === void 0 ? 0 : _offsets$y;
+    var _offsets$x = offsets.x, x2 = _offsets$x === void 0 ? 0 : _offsets$x, _offsets$y = offsets.y, y = _offsets$y === void 0 ? 0 : _offsets$y;
     var _ref3 = typeof roundOffsets === "function" ? roundOffsets({
       x: x2,
-      y: y2
+      y
     }) : {
       x: x2,
-      y: y2
+      y
     };
     x2 = _ref3.x;
-    y2 = _ref3.y;
+    y = _ref3.y;
     var hasX = offsets.hasOwnProperty("x");
     var hasY = offsets.hasOwnProperty("y");
     var sideX = left;
@@ -21028,8 +23736,8 @@ if (uni.restoreGlobal) {
       if (placement === top || (placement === left || placement === right) && variation === end) {
         sideY = bottom;
         var offsetY = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.height : offsetParent[heightProp];
-        y2 -= offsetY - popperRect.height;
-        y2 *= gpuAcceleration ? 1 : -1;
+        y -= offsetY - popperRect.height;
+        y *= gpuAcceleration ? 1 : -1;
       }
       if (placement === left || (placement === top || placement === bottom) && variation === end) {
         sideX = right;
@@ -21043,18 +23751,18 @@ if (uni.restoreGlobal) {
     }, adaptive && unsetSides);
     var _ref4 = roundOffsets === true ? roundOffsetsByDPR({
       x: x2,
-      y: y2
+      y
     }) : {
       x: x2,
-      y: y2
+      y
     };
     x2 = _ref4.x;
-    y2 = _ref4.y;
+    y = _ref4.y;
     if (gpuAcceleration) {
       var _Object$assign;
-      return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "", _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x2 + "px, " + y2 + "px)" : "translate3d(" + x2 + "px, " + y2 + "px, 0)", _Object$assign));
+      return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "", _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x2 + "px, " + y + "px)" : "translate3d(" + x2 + "px, " + y + "px, 0)", _Object$assign));
     }
-    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y2 + "px" : "", _Object$assign2[sideX] = hasX ? x2 + "px" : "", _Object$assign2.transform = "", _Object$assign2));
+    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : "", _Object$assign2[sideX] = hasX ? x2 + "px" : "", _Object$assign2.transform = "", _Object$assign2));
   }
   function computeStyles(_ref5) {
     var state = _ref5.state, options = _ref5.options;
@@ -21195,10 +23903,10 @@ if (uni.restoreGlobal) {
       acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset2);
       return acc;
     }, {});
-    var _data$state$placement = data[state.placement], x2 = _data$state$placement.x, y2 = _data$state$placement.y;
+    var _data$state$placement = data[state.placement], x2 = _data$state$placement.x, y = _data$state$placement.y;
     if (state.modifiersData.popperOffsets != null) {
       state.modifiersData.popperOffsets.x += x2;
-      state.modifiersData.popperOffsets.y += y2;
+      state.modifiersData.popperOffsets.y += y;
     }
     state.modifiersData[name2] = data;
   }
@@ -21739,14 +24447,14 @@ if (uni.restoreGlobal) {
           }
         });
       };
-      const getScoreByPosition = (x2, y2) => {
+      const getScoreByPosition = (x2, y) => {
         for (let i2 = ranges.length - 1; i2 > 0; i2--) {
-          if (y2 >= groupRefRect.top && y2 <= groupRefRect.bottom) {
-            if (x2 > ranges[i2].left && y2 >= ranges[i2].top && y2 <= ranges[i2].top + ranges[i2].height) {
+          if (y >= groupRefRect.top && y <= groupRefRect.bottom) {
+            if (x2 > ranges[i2].left && y >= ranges[i2].top && y <= ranges[i2].top + ranges[i2].height) {
               return ranges[i2].score;
             }
           } else {
-            const curTop = y2 < groupRefRect.top ? minRectTop : maxRectTop;
+            const curTop = y < groupRefRect.top ? minRectTop : maxRectTop;
             if (x2 > ranges[i2].left && ranges[i2].top === curTop) {
               return ranges[i2].score;
             }
@@ -24207,7 +26915,11 @@ if (uni.restoreGlobal) {
     install,
     version
   };
+<<<<<<< .mine
   var _imports_0 = "/static/app-plus/other/coach.png";
+=======
+  const _imports_0 = "/static/app-plus/other/coach.png";
+>>>>>>> .theirs
   let weixinAuthService;
   const _sfc_main$k = {
     data() {
@@ -24251,7 +26963,7 @@ if (uni.restoreGlobal) {
           return;
         }
         if (this.controlActiveFlag) {
-          const login = yn.importObject("login");
+          const login = As.importObject("login");
           try {
             const smsRes = await login.sendSmsCode(this.phone);
             formatAppLog("log", "at pages/logining/logining.vue:145", smsRes, "\u767B\u5F55\u6210\u529F");
@@ -24277,17 +26989,32 @@ if (uni.restoreGlobal) {
       },
       getWeixinCode() {
         return new Promise((resolve, reject) => {
+<<<<<<< .mine
           weixinAuthService.authorize(function(res2) {
             resolve(res2.code);
           }, function(err) {
             formatAppLog("log", "at pages/logining/logining.vue:175", err);
             reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
           });
+
+
+
+=======
+          weixinAuthService.authorize(
+            function(res2) {
+              resolve(res2.code);
+            },
+            function(err) {
+              formatAppLog("log", "at pages/logining/logining.vue:175", err);
+              reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
+            }
+          );
+>>>>>>> .theirs
         });
       },
       loginByWeixin() {
         this.getWeixinCode().then((code) => {
-          return yn.callFunction({
+          return As.callFunction({
             name: "login-by-weixin",
             data: {
               code
@@ -24399,6 +27126,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
+<<<<<<< .mine
   var PagesLoginingLogining = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-10030aa6"], ["__file", "E:/workproject/bodybuilding-app/pages/logining/logining.vue"]]);
   const _sfc_main$j = {
     props: {
@@ -24435,8 +27163,47 @@ if (uni.restoreGlobal) {
         default: false
       }
     },
+=======
+  const PagesLoginingLogining = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-62a93864"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/logining/logining.vue"]]);
+  const _sfc_main$j = {
+    props: {
+      latticeNum: {
+        type: Number,
+        default: 4
+      },
+      latticeSize: {
+        type: Number,
+        default: 100
+      },
+      borderStyle: {
+        type: String,
+        default: "border-bottom:1px solid gray;"
+      },
+      borderCheckStyle: {
+        type: String,
+        default: "border: 1px solid red !important;"
+      },
+      inputType: {
+        type: String,
+        default: "number"
+      },
+      blurShow: {
+        type: Boolean,
+        default: false
+      },
+      ciphertextSty: {
+        type: Number,
+        default: 0
+      },
+      updateOne: {
+        type: Boolean,
+        default: false
+      }
+    },
+>>>>>>> .theirs
     data() {
       return {
+<<<<<<< .mine
         inputValues: "",
         blurShowLocal: true
       };
@@ -24784,6 +27551,355 @@ if (uni.restoreGlobal) {
   const _sfc_main$h = {
     data() {
       return {
+=======
+        inputValues: "",
+        blurShowLocal: true
+      };
+    },
+    mounted() {
+      this.blurShowLocal = this.blurShow;
+    },
+    methods: {
+      latticeSty(index) {
+        let str = this.blurShowLocal && (this.inputValues.length == index || this.inputValues.length == this.latticeNum && index == this.latticeNum - 1) ? this.borderCheckStyle : this.borderStyle;
+        str += `;width:${this.latticeSize}rpx;height:${this.latticeSize}rpx`;
+        return str;
+      },
+      getValue() {
+        return this.inputValues;
+      },
+      inputVal(e) {
+        formatAppLog("log", "at components/verification-code-style2/verification-code-style2.vue:90", e);
+        this.$emit("inputVerificationChange", this.inputValues);
+      },
+      setVerificationCode(verificationCodeValue) {
+        if (!verificationCodeValue)
+          return;
+        this.inputValues = verificationCodeValue;
+      },
+      cleanVal() {
+        this.inputValues = "";
+      },
+      latticeFoc(index) {
+      },
+      blur() {
+        !this.blurShow ? this.blurShowLocal = false : "";
+      },
+      focus() {
+        !this.blurShow ? this.blurShowLocal = true : "";
+      }
+    }
+  };
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "acqui_verification_code" }, [
+      vue.createElementVNode("view", { class: "verification_code_continor" }, [
+        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.latticeNum, (item, index) => {
+          return vue.openBlock(), vue.createElementBlock("view", {
+            key: index,
+            class: "verification_code_item",
+            onClick: ($event) => $options.latticeFoc(index)
+          }, [
+            $data.inputValues[index] ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 0 }, [
+              $props.ciphertextSty == 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "point"
+              })) : (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 1 }, [
+                vue.createTextVNode(vue.toDisplayString($props.ciphertextSty == 2 ? "*" : $data.inputValues[index]), 1)
+              ], 64))
+            ], 64)) : vue.createCommentVNode("v-if", true)
+          ], 8, ["onClick"]);
+        }), 128))
+      ]),
+      vue.createElementVNode("div", { class: "input_info" }, [
+        vue.withDirectives(vue.createElementVNode("input", {
+          type: $props.inputType,
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.inputValues = $event),
+          focus: "",
+          maxlength: $props.latticeNum,
+          onInput: _cache[1] || (_cache[1] = (...args) => $options.inputVal && $options.inputVal(...args)),
+          onBlur: _cache[2] || (_cache[2] = (...args) => $options.blur && $options.blur(...args)),
+          onFocus: _cache[3] || (_cache[3] = (...args) => $options.focus && $options.focus(...args))
+        }, null, 40, ["type", "maxlength"]), [
+          [vue.vModelDynamic, $data.inputValues]
+        ])
+      ])
+    ]);
+  }
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-e5158781"], ["__file", "D:/studyUninApp/bodybuilding-app/components/verification-code-style2/verification-code-style2.vue"]]);
+  const en = {
+    "uni-countdown.day": "day",
+    "uni-countdown.h": "h",
+    "uni-countdown.m": "m",
+    "uni-countdown.s": "s"
+  };
+  const zhHans = {
+    "uni-countdown.day": "\u5929",
+    "uni-countdown.h": "\u65F6",
+    "uni-countdown.m": "\u5206",
+    "uni-countdown.s": "\u79D2"
+  };
+  const zhHant = {
+    "uni-countdown.day": "\u5929",
+    "uni-countdown.h": "\u6642",
+    "uni-countdown.m": "\u5206",
+    "uni-countdown.s": "\u79D2"
+  };
+  const messages = {
+    en,
+    "zh-Hans": zhHans,
+    "zh-Hant": zhHant
+  };
+  const {
+    t
+  } = initVueI18n(messages);
+  const _sfc_main$i = {
+    name: "UniCountdown",
+    emits: ["timeup"],
+    props: {
+      showDay: {
+        type: Boolean,
+        default: true
+      },
+      showColon: {
+        type: Boolean,
+        default: true
+      },
+      start: {
+        type: Boolean,
+        default: true
+      },
+      backgroundColor: {
+        type: String,
+        default: ""
+      },
+      color: {
+        type: String,
+        default: "#333"
+      },
+      fontSize: {
+        type: Number,
+        default: 14
+      },
+      splitorColor: {
+        type: String,
+        default: "#333"
+      },
+      day: {
+        type: Number,
+        default: 0
+      },
+      hour: {
+        type: Number,
+        default: 0
+      },
+      minute: {
+        type: Number,
+        default: 0
+      },
+      second: {
+        type: Number,
+        default: 0
+      },
+      timestamp: {
+        type: Number,
+        default: 0
+      }
+    },
+    data() {
+      return {
+        timer: null,
+        syncFlag: false,
+        d: "00",
+        h: "00",
+        i: "00",
+        s: "00",
+        leftTime: 0,
+        seconds: 0
+      };
+    },
+    computed: {
+      dayText() {
+        return t("uni-countdown.day");
+      },
+      hourText(val) {
+        return t("uni-countdown.h");
+      },
+      minuteText(val) {
+        return t("uni-countdown.m");
+      },
+      secondText(val) {
+        return t("uni-countdown.s");
+      },
+      timeStyle() {
+        const {
+          color,
+          backgroundColor,
+          fontSize
+        } = this;
+        return {
+          color,
+          backgroundColor,
+          fontSize: `${fontSize}px`,
+          width: `${fontSize * 22 / 14}px`,
+          lineHeight: `${fontSize * 20 / 14}px`,
+          borderRadius: `${fontSize * 3 / 14}px`
+        };
+      },
+      splitorStyle() {
+        const { splitorColor, fontSize, backgroundColor } = this;
+        return {
+          color: splitorColor,
+          fontSize: `${fontSize * 12 / 14}px`,
+          margin: backgroundColor ? `${fontSize * 4 / 14}px` : ""
+        };
+      }
+    },
+    watch: {
+      day(val) {
+        this.changeFlag();
+      },
+      hour(val) {
+        this.changeFlag();
+      },
+      minute(val) {
+        this.changeFlag();
+      },
+      second(val) {
+        this.changeFlag();
+      },
+      start: {
+        immediate: true,
+        handler(newVal, oldVal) {
+          if (newVal) {
+            this.startData();
+          } else {
+            if (!oldVal)
+              return;
+            clearInterval(this.timer);
+          }
+        }
+      }
+    },
+    created: function(e) {
+      this.seconds = this.toSeconds(this.timestamp, this.day, this.hour, this.minute, this.second);
+      this.countDown();
+    },
+    unmounted() {
+      clearInterval(this.timer);
+    },
+    methods: {
+      toSeconds(timestamp, day, hours2, minutes2, seconds2) {
+        if (timestamp) {
+          return timestamp - parseInt(new Date().getTime() / 1e3, 10);
+        }
+        return day * 60 * 60 * 24 + hours2 * 60 * 60 + minutes2 * 60 + seconds2;
+      },
+      timeUp() {
+        clearInterval(this.timer);
+        this.$emit("timeup");
+      },
+      countDown() {
+        let seconds2 = this.seconds;
+        let [day, hour, minute, second] = [0, 0, 0, 0];
+        if (seconds2 > 0) {
+          day = Math.floor(seconds2 / (60 * 60 * 24));
+          hour = Math.floor(seconds2 / (60 * 60)) - day * 24;
+          minute = Math.floor(seconds2 / 60) - day * 24 * 60 - hour * 60;
+          second = Math.floor(seconds2) - day * 24 * 60 * 60 - hour * 60 * 60 - minute * 60;
+        } else {
+          this.timeUp();
+        }
+        if (day < 10) {
+          day = "0" + day;
+        }
+        if (hour < 10) {
+          hour = "0" + hour;
+        }
+        if (minute < 10) {
+          minute = "0" + minute;
+        }
+        if (second < 10) {
+          second = "0" + second;
+        }
+        this.d = day;
+        this.h = hour;
+        this.i = minute;
+        this.s = second;
+      },
+      startData() {
+        this.seconds = this.toSeconds(this.timestamp, this.day, this.hour, this.minute, this.second);
+        if (this.seconds <= 0) {
+          this.seconds = this.toSeconds(0, 0, 0, 0, 0);
+          this.countDown();
+          return;
+        }
+        clearInterval(this.timer);
+        this.countDown();
+        this.timer = setInterval(() => {
+          this.seconds--;
+          if (this.seconds < 0) {
+            this.timeUp();
+            return;
+          }
+          this.countDown();
+        }, 1e3);
+      },
+      update() {
+        this.startData();
+      },
+      changeFlag() {
+        if (!this.syncFlag) {
+          this.seconds = this.toSeconds(this.timestamp, this.day, this.hour, this.minute, this.second);
+          this.startData();
+          this.syncFlag = true;
+        }
+      }
+    }
+  };
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-countdown" }, [
+      $props.showDay ? (vue.openBlock(), vue.createElementBlock("text", {
+        key: 0,
+        style: vue.normalizeStyle([$options.timeStyle]),
+        class: "uni-countdown__number"
+      }, vue.toDisplayString($data.d), 5)) : vue.createCommentVNode("v-if", true),
+      $props.showDay ? (vue.openBlock(), vue.createElementBlock("text", {
+        key: 1,
+        style: vue.normalizeStyle([$options.splitorStyle]),
+        class: "uni-countdown__splitor"
+      }, vue.toDisplayString($options.dayText), 5)) : vue.createCommentVNode("v-if", true),
+      vue.createElementVNode("text", {
+        style: vue.normalizeStyle([$options.timeStyle]),
+        class: "uni-countdown__number"
+      }, vue.toDisplayString($data.h), 5),
+      vue.createElementVNode("text", {
+        style: vue.normalizeStyle([$options.splitorStyle]),
+        class: "uni-countdown__splitor"
+      }, vue.toDisplayString($props.showColon ? ":" : $options.hourText), 5),
+      vue.createElementVNode("text", {
+        style: vue.normalizeStyle([$options.timeStyle]),
+        class: "uni-countdown__number"
+      }, vue.toDisplayString($data.i), 5),
+      vue.createElementVNode("text", {
+        style: vue.normalizeStyle([$options.splitorStyle]),
+        class: "uni-countdown__splitor"
+      }, vue.toDisplayString($props.showColon ? ":" : $options.minuteText), 5),
+      vue.createElementVNode("text", {
+        style: vue.normalizeStyle([$options.timeStyle]),
+        class: "uni-countdown__number"
+      }, vue.toDisplayString($data.s), 5),
+      !$props.showColon ? (vue.openBlock(), vue.createElementBlock("text", {
+        key: 2,
+        style: vue.normalizeStyle([$options.splitorStyle]),
+        class: "uni-countdown__splitor"
+      }, vue.toDisplayString($options.secondText), 5)) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-c592f7f2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
+  const _sfc_main$h = {
+    data() {
+      return {
+>>>>>>> .theirs
         smsCode: "",
         errorInfoValue: "",
         showKeyboard: false,
@@ -24837,7 +27953,7 @@ if (uni.restoreGlobal) {
       },
       async resend() {
         if (this.isFinsh) {
-          const login = yn.importObject("login");
+          const login = As.importObject("login");
           try {
             const smsRes = await login.sendSmsCode(this.mobile);
             formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:124", smsRes, "\u53D1\u9001\u6210\u529F");
@@ -24855,7 +27971,7 @@ if (uni.restoreGlobal) {
         this.isFinsh = true;
       },
       async verifyCode() {
-        let login = yn.importObject("login");
+        let login = As.importObject("login");
         const getVerifyRes = await login.getVerifySchema();
         try {
           this.requestVerifyCode = getVerifyRes.length > 0 ? getVerifyRes[0].code : "0000";
@@ -24863,7 +27979,7 @@ if (uni.restoreGlobal) {
         }
       },
       async smsLogin() {
-        const vefiryLogin = yn.importObject("login");
+        const vefiryLogin = As.importObject("login");
         try {
           let param = {
             mobile: this.mobile,
@@ -24877,7 +27993,7 @@ if (uni.restoreGlobal) {
               uni.setStorageSync("uni_id_token", loginRes.token);
               uni.setStorageSync("uid", loginRes.uid);
               uni.setStorageSync("tokenExpired", loginRes.tokenExpired);
-              let userLogin = yn.importObject("login");
+              let userLogin = As.importObject("login");
               const getUseRes = await userLogin.getUserSchema(this.mobile);
               if (getUseRes) {
                 uni.setStorageSync("loginNum", getUseRes.affectedDocs);
@@ -24958,8 +28074,13 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
+<<<<<<< .mine
   var PagesVerificatioCodeVerificatioCode = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-8600eef0"], ["__file", "E:/workproject/bodybuilding-app/pages/verificatioCode/verificatioCode.vue"]]);
   const _sfc_main$g = {
+=======
+  const PagesVerificatioCodeVerificatioCode = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-1bfd51d6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/verificatioCode/verificatioCode.vue"]]);
+  const _sfc_main$g = {
+>>>>>>> .theirs
     setup() {
       const result = vue.ref("");
       const showPicker = vue.ref(false);
@@ -25040,8 +28161,13 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
+<<<<<<< .mine
   var PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-77747d66"], ["__file", "E:/workproject/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
   const _sfc_main$f = {
+=======
+  const PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-4422acd1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
+  const _sfc_main$f = {
+>>>>>>> .theirs
     props: {
       disabled: {
         type: Boolean,
@@ -25101,9 +28227,9 @@ if (uni.restoreGlobal) {
         key: 0,
         class: vue.normalizeClass(["popover-list", { center: $props.position === "center", left: $props.position === "left", right: $props.position === "right" }])
       }, [
-        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.list, (i2, k2) => {
+        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.list, (i2, k) => {
           return vue.openBlock(), vue.createElementBlock("view", {
-            key: k2,
+            key: k,
             class: "list-item",
             onClick: ($event) => $options.selectHandle(i2)
           }, [
@@ -25115,9 +28241,15 @@ if (uni.restoreGlobal) {
       ], 2)) : vue.createCommentVNode("v-if", true)
     ], 34);
   }
+<<<<<<< .mine
   var popover = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-6e9947bd"], ["__file", "E:/workproject/bodybuilding-app/components/popover/index.vue"]]);
   const actionLibrary$1 = yn.importObject("actionLibrary");
   const _sfc_main$e = {
+=======
+  const popover = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
+  const actionLibrary$1 = As.importObject("actionLibrary");
+  const _sfc_main$e = {
+>>>>>>> .theirs
     components: {
       popover
     },
@@ -25288,13 +28420,15 @@ if (uni.restoreGlobal) {
         const actionList = actionTemp.map((item) => {
           const flag = this.selectActionList.some((i2) => item._id === i2._id);
           if (flag) {
-            return __spreadProps(__spreadValues({}, item), {
+            return {
+              ...item,
               active: true
-            });
+            };
           } else {
-            return __spreadProps(__spreadValues({}, item), {
+            return {
+              ...item,
               active: false
-            });
+            };
           }
         });
         const actionTypeTemp = actionList.map((item) => item.actionType);
@@ -25588,9 +28722,15 @@ if (uni.restoreGlobal) {
       }, 8, ["show"])
     ]);
   }
+<<<<<<< .mine
   var PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "E:/workproject/bodybuilding-app/pages/actionLibrary/index.vue"]]);
   const actionLibrary = yn.importObject("actionLibrary");
   const _sfc_main$d = {
+=======
+  const PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "D:/studyUninApp/bodybuilding-app/pages/actionLibrary/index.vue"]]);
+  const actionLibrary = As.importObject("actionLibrary");
+  const _sfc_main$d = {
+>>>>>>> .theirs
     data() {
       return {
         show: false,
@@ -25743,9 +28883,15 @@ if (uni.restoreGlobal) {
       }, 8, ["show"])
     ]);
   }
+<<<<<<< .mine
   var PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "E:/workproject/bodybuilding-app/pages/addAction/index.vue"]]);
   const train$2 = yn.importObject("train");
   const _sfc_main$c = {
+=======
+  const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
+  const train$2 = As.importObject("train");
+  const _sfc_main$c = {
+>>>>>>> .theirs
     components: {
       popover
     },
@@ -26760,6 +29906,7 @@ if (uni.restoreGlobal) {
       }, 8, ["show"])
     ]);
   }
+<<<<<<< .mine
   var PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/workproject/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
   //! moment.js
   //! version : 2.29.4
@@ -30680,6 +33827,4143 @@ if (uni.restoreGlobal) {
     components: {
       calendar
     },
+
+
+
+
+=======
+  const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
+  //! moment.js
+  //! version : 2.29.4
+  //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+  //! license : MIT
+  //! momentjs.com
+  var hookCallback;
+  function hooks() {
+    return hookCallback.apply(null, arguments);
+  }
+  function setHookCallback(callback) {
+    hookCallback = callback;
+  }
+  function isArray(input) {
+    return input instanceof Array || Object.prototype.toString.call(input) === "[object Array]";
+  }
+  function isObject(input) {
+    return input != null && Object.prototype.toString.call(input) === "[object Object]";
+  }
+  function hasOwnProp(a2, b2) {
+    return Object.prototype.hasOwnProperty.call(a2, b2);
+  }
+  function isObjectEmpty(obj) {
+    if (Object.getOwnPropertyNames) {
+      return Object.getOwnPropertyNames(obj).length === 0;
+    } else {
+      var k;
+      for (k in obj) {
+        if (hasOwnProp(obj, k)) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+  function isUndefined(input) {
+    return input === void 0;
+  }
+  function isNumber(input) {
+    return typeof input === "number" || Object.prototype.toString.call(input) === "[object Number]";
+  }
+  function isDate(input) {
+    return input instanceof Date || Object.prototype.toString.call(input) === "[object Date]";
+  }
+  function map(arr, fn) {
+    var res2 = [], i2, arrLen = arr.length;
+    for (i2 = 0; i2 < arrLen; ++i2) {
+      res2.push(fn(arr[i2], i2));
+    }
+    return res2;
+  }
+  function extend(a2, b2) {
+    for (var i2 in b2) {
+      if (hasOwnProp(b2, i2)) {
+        a2[i2] = b2[i2];
+      }
+    }
+    if (hasOwnProp(b2, "toString")) {
+      a2.toString = b2.toString;
+    }
+    if (hasOwnProp(b2, "valueOf")) {
+      a2.valueOf = b2.valueOf;
+    }
+    return a2;
+  }
+  function createUTC(input, format2, locale2, strict) {
+    return createLocalOrUTC(input, format2, locale2, strict, true).utc();
+  }
+  function defaultParsingFlags() {
+    return {
+      empty: false,
+      unusedTokens: [],
+      unusedInput: [],
+      overflow: -2,
+      charsLeftOver: 0,
+      nullInput: false,
+      invalidEra: null,
+      invalidMonth: null,
+      invalidFormat: false,
+      userInvalidated: false,
+      iso: false,
+      parsedDateParts: [],
+      era: null,
+      meridiem: null,
+      rfc2822: false,
+      weekdayMismatch: false
+    };
+  }
+  function getParsingFlags(m2) {
+    if (m2._pf == null) {
+      m2._pf = defaultParsingFlags();
+    }
+    return m2._pf;
+  }
+  var some;
+  if (Array.prototype.some) {
+    some = Array.prototype.some;
+  } else {
+    some = function(fun) {
+      var t2 = Object(this), len = t2.length >>> 0, i2;
+      for (i2 = 0; i2 < len; i2++) {
+        if (i2 in t2 && fun.call(this, t2[i2], i2, t2)) {
+          return true;
+        }
+      }
+      return false;
+    };
+  }
+  function isValid(m2) {
+    if (m2._isValid == null) {
+      var flags = getParsingFlags(m2), parsedParts = some.call(flags.parsedDateParts, function(i2) {
+        return i2 != null;
+      }), isNowValid = !isNaN(m2._d.getTime()) && flags.overflow < 0 && !flags.empty && !flags.invalidEra && !flags.invalidMonth && !flags.invalidWeekday && !flags.weekdayMismatch && !flags.nullInput && !flags.invalidFormat && !flags.userInvalidated && (!flags.meridiem || flags.meridiem && parsedParts);
+      if (m2._strict) {
+        isNowValid = isNowValid && flags.charsLeftOver === 0 && flags.unusedTokens.length === 0 && flags.bigHour === void 0;
+      }
+      if (Object.isFrozen == null || !Object.isFrozen(m2)) {
+        m2._isValid = isNowValid;
+      } else {
+        return isNowValid;
+      }
+    }
+    return m2._isValid;
+  }
+  function createInvalid(flags) {
+    var m2 = createUTC(NaN);
+    if (flags != null) {
+      extend(getParsingFlags(m2), flags);
+    } else {
+      getParsingFlags(m2).userInvalidated = true;
+    }
+    return m2;
+  }
+  var momentProperties = hooks.momentProperties = [], updateInProgress = false;
+  function copyConfig(to2, from2) {
+    var i2, prop, val, momentPropertiesLen = momentProperties.length;
+    if (!isUndefined(from2._isAMomentObject)) {
+      to2._isAMomentObject = from2._isAMomentObject;
+    }
+    if (!isUndefined(from2._i)) {
+      to2._i = from2._i;
+    }
+    if (!isUndefined(from2._f)) {
+      to2._f = from2._f;
+    }
+    if (!isUndefined(from2._l)) {
+      to2._l = from2._l;
+    }
+    if (!isUndefined(from2._strict)) {
+      to2._strict = from2._strict;
+    }
+    if (!isUndefined(from2._tzm)) {
+      to2._tzm = from2._tzm;
+    }
+    if (!isUndefined(from2._isUTC)) {
+      to2._isUTC = from2._isUTC;
+    }
+    if (!isUndefined(from2._offset)) {
+      to2._offset = from2._offset;
+    }
+    if (!isUndefined(from2._pf)) {
+      to2._pf = getParsingFlags(from2);
+    }
+    if (!isUndefined(from2._locale)) {
+      to2._locale = from2._locale;
+    }
+    if (momentPropertiesLen > 0) {
+      for (i2 = 0; i2 < momentPropertiesLen; i2++) {
+        prop = momentProperties[i2];
+        val = from2[prop];
+        if (!isUndefined(val)) {
+          to2[prop] = val;
+        }
+      }
+    }
+    return to2;
+  }
+  function Moment(config) {
+    copyConfig(this, config);
+    this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+    if (!this.isValid()) {
+      this._d = new Date(NaN);
+    }
+    if (updateInProgress === false) {
+      updateInProgress = true;
+      hooks.updateOffset(this);
+      updateInProgress = false;
+    }
+  }
+  function isMoment(obj) {
+    return obj instanceof Moment || obj != null && obj._isAMomentObject != null;
+  }
+  function warn(msg) {
+    if (hooks.suppressDeprecationWarnings === false && typeof console !== "undefined" && console.warn) {
+      formatAppLog("warn", "at node_modules/moment/dist/moment.js:281", "Deprecation warning: " + msg);
+    }
+  }
+  function deprecate(msg, fn) {
+    var firstTime = true;
+    return extend(function() {
+      if (hooks.deprecationHandler != null) {
+        hooks.deprecationHandler(null, msg);
+      }
+      if (firstTime) {
+        var args = [], arg, i2, key, argLen = arguments.length;
+        for (i2 = 0; i2 < argLen; i2++) {
+          arg = "";
+          if (typeof arguments[i2] === "object") {
+            arg += "\n[" + i2 + "] ";
+            for (key in arguments[0]) {
+              if (hasOwnProp(arguments[0], key)) {
+                arg += key + ": " + arguments[0][key] + ", ";
+              }
+            }
+            arg = arg.slice(0, -2);
+          } else {
+            arg = arguments[i2];
+          }
+          args.push(arg);
+        }
+        warn(
+          msg + "\nArguments: " + Array.prototype.slice.call(args).join("") + "\n" + new Error().stack
+        );
+        firstTime = false;
+      }
+      return fn.apply(this, arguments);
+    }, fn);
+  }
+  var deprecations = {};
+  function deprecateSimple(name2, msg) {
+    if (hooks.deprecationHandler != null) {
+      hooks.deprecationHandler(name2, msg);
+    }
+    if (!deprecations[name2]) {
+      warn(msg);
+      deprecations[name2] = true;
+    }
+  }
+  hooks.suppressDeprecationWarnings = false;
+  hooks.deprecationHandler = null;
+  function isFunction(input) {
+    return typeof Function !== "undefined" && input instanceof Function || Object.prototype.toString.call(input) === "[object Function]";
+  }
+  function set(config) {
+    var prop, i2;
+    for (i2 in config) {
+      if (hasOwnProp(config, i2)) {
+        prop = config[i2];
+        if (isFunction(prop)) {
+          this[i2] = prop;
+        } else {
+          this["_" + i2] = prop;
+        }
+      }
+    }
+    this._config = config;
+    this._dayOfMonthOrdinalParseLenient = new RegExp(
+      (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) + "|" + /\d{1,2}/.source
+    );
+  }
+  function mergeConfigs(parentConfig, childConfig) {
+    var res2 = extend({}, parentConfig), prop;
+    for (prop in childConfig) {
+      if (hasOwnProp(childConfig, prop)) {
+        if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
+          res2[prop] = {};
+          extend(res2[prop], parentConfig[prop]);
+          extend(res2[prop], childConfig[prop]);
+        } else if (childConfig[prop] != null) {
+          res2[prop] = childConfig[prop];
+        } else {
+          delete res2[prop];
+        }
+      }
+    }
+    for (prop in parentConfig) {
+      if (hasOwnProp(parentConfig, prop) && !hasOwnProp(childConfig, prop) && isObject(parentConfig[prop])) {
+        res2[prop] = extend({}, res2[prop]);
+      }
+    }
+    return res2;
+  }
+  function Locale(config) {
+    if (config != null) {
+      this.set(config);
+    }
+  }
+  var keys;
+  if (Object.keys) {
+    keys = Object.keys;
+  } else {
+    keys = function(obj) {
+      var i2, res2 = [];
+      for (i2 in obj) {
+        if (hasOwnProp(obj, i2)) {
+          res2.push(i2);
+        }
+      }
+      return res2;
+    };
+  }
+  var defaultCalendar = {
+    sameDay: "[Today at] LT",
+    nextDay: "[Tomorrow at] LT",
+    nextWeek: "dddd [at] LT",
+    lastDay: "[Yesterday at] LT",
+    lastWeek: "[Last] dddd [at] LT",
+    sameElse: "L"
+  };
+  function calendar$1(key, mom, now2) {
+    var output = this._calendar[key] || this._calendar["sameElse"];
+    return isFunction(output) ? output.call(mom, now2) : output;
+  }
+  function zeroFill(number, targetLength, forceSign) {
+    var absNumber = "" + Math.abs(number), zerosToFill = targetLength - absNumber.length, sign2 = number >= 0;
+    return (sign2 ? forceSign ? "+" : "" : "-") + Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
+  }
+  var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g, localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, formatFunctions = {}, formatTokenFunctions = {};
+  function addFormatToken(token2, padded, ordinal2, callback) {
+    var func = callback;
+    if (typeof callback === "string") {
+      func = function() {
+        return this[callback]();
+      };
+    }
+    if (token2) {
+      formatTokenFunctions[token2] = func;
+    }
+    if (padded) {
+      formatTokenFunctions[padded[0]] = function() {
+        return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
+      };
+    }
+    if (ordinal2) {
+      formatTokenFunctions[ordinal2] = function() {
+        return this.localeData().ordinal(
+          func.apply(this, arguments),
+          token2
+        );
+      };
+    }
+  }
+  function removeFormattingTokens(input) {
+    if (input.match(/\[[\s\S]/)) {
+      return input.replace(/^\[|\]$/g, "");
+    }
+    return input.replace(/\\/g, "");
+  }
+  function makeFormatFunction(format2) {
+    var array = format2.match(formattingTokens), i2, length;
+    for (i2 = 0, length = array.length; i2 < length; i2++) {
+      if (formatTokenFunctions[array[i2]]) {
+        array[i2] = formatTokenFunctions[array[i2]];
+      } else {
+        array[i2] = removeFormattingTokens(array[i2]);
+      }
+    }
+    return function(mom) {
+      var output = "", i3;
+      for (i3 = 0; i3 < length; i3++) {
+        output += isFunction(array[i3]) ? array[i3].call(mom, format2) : array[i3];
+      }
+      return output;
+    };
+  }
+  function formatMoment(m2, format2) {
+    if (!m2.isValid()) {
+      return m2.localeData().invalidDate();
+    }
+    format2 = expandFormat(format2, m2.localeData());
+    formatFunctions[format2] = formatFunctions[format2] || makeFormatFunction(format2);
+    return formatFunctions[format2](m2);
+  }
+  function expandFormat(format2, locale2) {
+    var i2 = 5;
+    function replaceLongDateFormatTokens(input) {
+      return locale2.longDateFormat(input) || input;
+    }
+    localFormattingTokens.lastIndex = 0;
+    while (i2 >= 0 && localFormattingTokens.test(format2)) {
+      format2 = format2.replace(
+        localFormattingTokens,
+        replaceLongDateFormatTokens
+      );
+      localFormattingTokens.lastIndex = 0;
+      i2 -= 1;
+    }
+    return format2;
+  }
+  var defaultLongDateFormat = {
+    LTS: "h:mm:ss A",
+    LT: "h:mm A",
+    L: "MM/DD/YYYY",
+    LL: "MMMM D, YYYY",
+    LLL: "MMMM D, YYYY h:mm A",
+    LLLL: "dddd, MMMM D, YYYY h:mm A"
+  };
+  function longDateFormat(key) {
+    var format2 = this._longDateFormat[key], formatUpper = this._longDateFormat[key.toUpperCase()];
+    if (format2 || !formatUpper) {
+      return format2;
+    }
+    this._longDateFormat[key] = formatUpper.match(formattingTokens).map(function(tok) {
+      if (tok === "MMMM" || tok === "MM" || tok === "DD" || tok === "dddd") {
+        return tok.slice(1);
+      }
+      return tok;
+    }).join("");
+    return this._longDateFormat[key];
+  }
+  var defaultInvalidDate = "Invalid date";
+  function invalidDate() {
+    return this._invalidDate;
+  }
+  var defaultOrdinal = "%d", defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+  function ordinal(number) {
+    return this._ordinal.replace("%d", number);
+  }
+  var defaultRelativeTime = {
+    future: "in %s",
+    past: "%s ago",
+    s: "a few seconds",
+    ss: "%d seconds",
+    m: "a minute",
+    mm: "%d minutes",
+    h: "an hour",
+    hh: "%d hours",
+    d: "a day",
+    dd: "%d days",
+    w: "a week",
+    ww: "%d weeks",
+    M: "a month",
+    MM: "%d months",
+    y: "a year",
+    yy: "%d years"
+  };
+  function relativeTime(number, withoutSuffix, string, isFuture) {
+    var output = this._relativeTime[string];
+    return isFunction(output) ? output(number, withoutSuffix, string, isFuture) : output.replace(/%d/i, number);
+  }
+  function pastFuture(diff2, output) {
+    var format2 = this._relativeTime[diff2 > 0 ? "future" : "past"];
+    return isFunction(format2) ? format2(output) : format2.replace(/%s/i, output);
+  }
+  var aliases = {};
+  function addUnitAlias(unit, shorthand) {
+    var lowerCase = unit.toLowerCase();
+    aliases[lowerCase] = aliases[lowerCase + "s"] = aliases[shorthand] = unit;
+  }
+  function normalizeUnits(units) {
+    return typeof units === "string" ? aliases[units] || aliases[units.toLowerCase()] : void 0;
+  }
+  function normalizeObjectUnits(inputObject) {
+    var normalizedInput = {}, normalizedProp, prop;
+    for (prop in inputObject) {
+      if (hasOwnProp(inputObject, prop)) {
+        normalizedProp = normalizeUnits(prop);
+        if (normalizedProp) {
+          normalizedInput[normalizedProp] = inputObject[prop];
+        }
+      }
+    }
+    return normalizedInput;
+  }
+  var priorities = {};
+  function addUnitPriority(unit, priority) {
+    priorities[unit] = priority;
+  }
+  function getPrioritizedUnits(unitsObj) {
+    var units = [], u2;
+    for (u2 in unitsObj) {
+      if (hasOwnProp(unitsObj, u2)) {
+        units.push({ unit: u2, priority: priorities[u2] });
+      }
+    }
+    units.sort(function(a2, b2) {
+      return a2.priority - b2.priority;
+    });
+    return units;
+  }
+  function isLeapYear(year) {
+    return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
+  }
+  function absFloor(number) {
+    if (number < 0) {
+      return Math.ceil(number) || 0;
+    } else {
+      return Math.floor(number);
+    }
+  }
+  function toInt(argumentForCoercion) {
+    var coercedNumber = +argumentForCoercion, value = 0;
+    if (coercedNumber !== 0 && isFinite(coercedNumber)) {
+      value = absFloor(coercedNumber);
+    }
+    return value;
+  }
+  function makeGetSet(unit, keepTime) {
+    return function(value) {
+      if (value != null) {
+        set$1(this, unit, value);
+        hooks.updateOffset(this, keepTime);
+        return this;
+      } else {
+        return get(this, unit);
+      }
+    };
+  }
+  function get(mom, unit) {
+    return mom.isValid() ? mom._d["get" + (mom._isUTC ? "UTC" : "") + unit]() : NaN;
+  }
+  function set$1(mom, unit, value) {
+    if (mom.isValid() && !isNaN(value)) {
+      if (unit === "FullYear" && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
+        value = toInt(value);
+        mom._d["set" + (mom._isUTC ? "UTC" : "") + unit](
+          value,
+          mom.month(),
+          daysInMonth(value, mom.month())
+        );
+      } else {
+        mom._d["set" + (mom._isUTC ? "UTC" : "") + unit](value);
+      }
+    }
+  }
+  function stringGet(units) {
+    units = normalizeUnits(units);
+    if (isFunction(this[units])) {
+      return this[units]();
+    }
+    return this;
+  }
+  function stringSet(units, value) {
+    if (typeof units === "object") {
+      units = normalizeObjectUnits(units);
+      var prioritized = getPrioritizedUnits(units), i2, prioritizedLen = prioritized.length;
+      for (i2 = 0; i2 < prioritizedLen; i2++) {
+        this[prioritized[i2].unit](units[prioritized[i2].unit]);
+      }
+    } else {
+      units = normalizeUnits(units);
+      if (isFunction(this[units])) {
+        return this[units](value);
+      }
+    }
+    return this;
+  }
+  var match1 = /\d/, match2 = /\d\d/, match3 = /\d{3}/, match4 = /\d{4}/, match6 = /[+-]?\d{6}/, match1to2 = /\d\d?/, match3to4 = /\d\d\d\d?/, match5to6 = /\d\d\d\d\d\d?/, match1to3 = /\d{1,3}/, match1to4 = /\d{1,4}/, match1to6 = /[+-]?\d{1,6}/, matchUnsigned = /\d+/, matchSigned = /[+-]?\d+/, matchOffset = /Z|[+-]\d\d:?\d\d/gi, matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi, matchTimestamp = /[+-]?\d+(\.\d{1,3})?/, matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i, regexes;
+  regexes = {};
+  function addRegexToken(token2, regex, strictRegex) {
+    regexes[token2] = isFunction(regex) ? regex : function(isStrict, localeData2) {
+      return isStrict && strictRegex ? strictRegex : regex;
+    };
+  }
+  function getParseRegexForToken(token2, config) {
+    if (!hasOwnProp(regexes, token2)) {
+      return new RegExp(unescapeFormat(token2));
+    }
+    return regexes[token2](config._strict, config._locale);
+  }
+  function unescapeFormat(s2) {
+    return regexEscape(
+      s2.replace("\\", "").replace(
+        /\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g,
+        function(matched, p1, p2, p3, p4) {
+          return p1 || p2 || p3 || p4;
+        }
+      )
+    );
+  }
+  function regexEscape(s2) {
+    return s2.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+  }
+  var tokens = {};
+  function addParseToken(token2, callback) {
+    var i2, func = callback, tokenLen;
+    if (typeof token2 === "string") {
+      token2 = [token2];
+    }
+    if (isNumber(callback)) {
+      func = function(input, array) {
+        array[callback] = toInt(input);
+      };
+    }
+    tokenLen = token2.length;
+    for (i2 = 0; i2 < tokenLen; i2++) {
+      tokens[token2[i2]] = func;
+    }
+  }
+  function addWeekParseToken(token2, callback) {
+    addParseToken(token2, function(input, array, config, token3) {
+      config._w = config._w || {};
+      callback(input, config._w, config, token3);
+    });
+  }
+  function addTimeToArrayFromToken(token2, input, config) {
+    if (input != null && hasOwnProp(tokens, token2)) {
+      tokens[token2](input, config._a, config, token2);
+    }
+  }
+  var YEAR = 0, MONTH = 1, DATE = 2, HOUR = 3, MINUTE = 4, SECOND = 5, MILLISECOND = 6, WEEK = 7, WEEKDAY = 8;
+  function mod(n2, x2) {
+    return (n2 % x2 + x2) % x2;
+  }
+  var indexOf;
+  if (Array.prototype.indexOf) {
+    indexOf = Array.prototype.indexOf;
+  } else {
+    indexOf = function(o2) {
+      var i2;
+      for (i2 = 0; i2 < this.length; ++i2) {
+        if (this[i2] === o2) {
+          return i2;
+        }
+      }
+      return -1;
+    };
+  }
+  function daysInMonth(year, month) {
+    if (isNaN(year) || isNaN(month)) {
+      return NaN;
+    }
+    var modMonth = mod(month, 12);
+    year += (month - modMonth) / 12;
+    return modMonth === 1 ? isLeapYear(year) ? 29 : 28 : 31 - modMonth % 7 % 2;
+  }
+  addFormatToken("M", ["MM", 2], "Mo", function() {
+    return this.month() + 1;
+  });
+  addFormatToken("MMM", 0, 0, function(format2) {
+    return this.localeData().monthsShort(this, format2);
+  });
+  addFormatToken("MMMM", 0, 0, function(format2) {
+    return this.localeData().months(this, format2);
+  });
+  addUnitAlias("month", "M");
+  addUnitPriority("month", 8);
+  addRegexToken("M", match1to2);
+  addRegexToken("MM", match1to2, match2);
+  addRegexToken("MMM", function(isStrict, locale2) {
+    return locale2.monthsShortRegex(isStrict);
+  });
+  addRegexToken("MMMM", function(isStrict, locale2) {
+    return locale2.monthsRegex(isStrict);
+  });
+  addParseToken(["M", "MM"], function(input, array) {
+    array[MONTH] = toInt(input) - 1;
+  });
+  addParseToken(["MMM", "MMMM"], function(input, array, config, token2) {
+    var month = config._locale.monthsParse(input, token2, config._strict);
+    if (month != null) {
+      array[MONTH] = month;
+    } else {
+      getParsingFlags(config).invalidMonth = input;
+    }
+  });
+  var defaultLocaleMonths = "January_February_March_April_May_June_July_August_September_October_November_December".split(
+    "_"
+  ), defaultLocaleMonthsShort = "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"), MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/, defaultMonthsShortRegex = matchWord, defaultMonthsRegex = matchWord;
+  function localeMonths(m2, format2) {
+    if (!m2) {
+      return isArray(this._months) ? this._months : this._months["standalone"];
+    }
+    return isArray(this._months) ? this._months[m2.month()] : this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format2) ? "format" : "standalone"][m2.month()];
+  }
+  function localeMonthsShort(m2, format2) {
+    if (!m2) {
+      return isArray(this._monthsShort) ? this._monthsShort : this._monthsShort["standalone"];
+    }
+    return isArray(this._monthsShort) ? this._monthsShort[m2.month()] : this._monthsShort[MONTHS_IN_FORMAT.test(format2) ? "format" : "standalone"][m2.month()];
+  }
+  function handleStrictParse(monthName, format2, strict) {
+    var i2, ii, mom, llc = monthName.toLocaleLowerCase();
+    if (!this._monthsParse) {
+      this._monthsParse = [];
+      this._longMonthsParse = [];
+      this._shortMonthsParse = [];
+      for (i2 = 0; i2 < 12; ++i2) {
+        mom = createUTC([2e3, i2]);
+        this._shortMonthsParse[i2] = this.monthsShort(
+          mom,
+          ""
+        ).toLocaleLowerCase();
+        this._longMonthsParse[i2] = this.months(mom, "").toLocaleLowerCase();
+      }
+    }
+    if (strict) {
+      if (format2 === "MMM") {
+        ii = indexOf.call(this._shortMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._longMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    } else {
+      if (format2 === "MMM") {
+        ii = indexOf.call(this._shortMonthsParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._longMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._longMonthsParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._shortMonthsParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    }
+  }
+  function localeMonthsParse(monthName, format2, strict) {
+    var i2, mom, regex;
+    if (this._monthsParseExact) {
+      return handleStrictParse.call(this, monthName, format2, strict);
+    }
+    if (!this._monthsParse) {
+      this._monthsParse = [];
+      this._longMonthsParse = [];
+      this._shortMonthsParse = [];
+    }
+    for (i2 = 0; i2 < 12; i2++) {
+      mom = createUTC([2e3, i2]);
+      if (strict && !this._longMonthsParse[i2]) {
+        this._longMonthsParse[i2] = new RegExp(
+          "^" + this.months(mom, "").replace(".", "") + "$",
+          "i"
+        );
+        this._shortMonthsParse[i2] = new RegExp(
+          "^" + this.monthsShort(mom, "").replace(".", "") + "$",
+          "i"
+        );
+      }
+      if (!strict && !this._monthsParse[i2]) {
+        regex = "^" + this.months(mom, "") + "|^" + this.monthsShort(mom, "");
+        this._monthsParse[i2] = new RegExp(regex.replace(".", ""), "i");
+      }
+      if (strict && format2 === "MMMM" && this._longMonthsParse[i2].test(monthName)) {
+        return i2;
+      } else if (strict && format2 === "MMM" && this._shortMonthsParse[i2].test(monthName)) {
+        return i2;
+      } else if (!strict && this._monthsParse[i2].test(monthName)) {
+        return i2;
+      }
+    }
+  }
+  function setMonth(mom, value) {
+    var dayOfMonth;
+    if (!mom.isValid()) {
+      return mom;
+    }
+    if (typeof value === "string") {
+      if (/^\d+$/.test(value)) {
+        value = toInt(value);
+      } else {
+        value = mom.localeData().monthsParse(value);
+        if (!isNumber(value)) {
+          return mom;
+        }
+      }
+    }
+    dayOfMonth = Math.min(mom.date(), daysInMonth(mom.year(), value));
+    mom._d["set" + (mom._isUTC ? "UTC" : "") + "Month"](value, dayOfMonth);
+    return mom;
+  }
+  function getSetMonth(value) {
+    if (value != null) {
+      setMonth(this, value);
+      hooks.updateOffset(this, true);
+      return this;
+    } else {
+      return get(this, "Month");
+    }
+  }
+  function getDaysInMonth() {
+    return daysInMonth(this.year(), this.month());
+  }
+  function monthsShortRegex(isStrict) {
+    if (this._monthsParseExact) {
+      if (!hasOwnProp(this, "_monthsRegex")) {
+        computeMonthsParse.call(this);
+      }
+      if (isStrict) {
+        return this._monthsShortStrictRegex;
+      } else {
+        return this._monthsShortRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, "_monthsShortRegex")) {
+        this._monthsShortRegex = defaultMonthsShortRegex;
+      }
+      return this._monthsShortStrictRegex && isStrict ? this._monthsShortStrictRegex : this._monthsShortRegex;
+    }
+  }
+  function monthsRegex(isStrict) {
+    if (this._monthsParseExact) {
+      if (!hasOwnProp(this, "_monthsRegex")) {
+        computeMonthsParse.call(this);
+      }
+      if (isStrict) {
+        return this._monthsStrictRegex;
+      } else {
+        return this._monthsRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, "_monthsRegex")) {
+        this._monthsRegex = defaultMonthsRegex;
+      }
+      return this._monthsStrictRegex && isStrict ? this._monthsStrictRegex : this._monthsRegex;
+    }
+  }
+  function computeMonthsParse() {
+    function cmpLenRev(a2, b2) {
+      return b2.length - a2.length;
+    }
+    var shortPieces = [], longPieces = [], mixedPieces = [], i2, mom;
+    for (i2 = 0; i2 < 12; i2++) {
+      mom = createUTC([2e3, i2]);
+      shortPieces.push(this.monthsShort(mom, ""));
+      longPieces.push(this.months(mom, ""));
+      mixedPieces.push(this.months(mom, ""));
+      mixedPieces.push(this.monthsShort(mom, ""));
+    }
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+    for (i2 = 0; i2 < 12; i2++) {
+      shortPieces[i2] = regexEscape(shortPieces[i2]);
+      longPieces[i2] = regexEscape(longPieces[i2]);
+    }
+    for (i2 = 0; i2 < 24; i2++) {
+      mixedPieces[i2] = regexEscape(mixedPieces[i2]);
+    }
+    this._monthsRegex = new RegExp("^(" + mixedPieces.join("|") + ")", "i");
+    this._monthsShortRegex = this._monthsRegex;
+    this._monthsStrictRegex = new RegExp(
+      "^(" + longPieces.join("|") + ")",
+      "i"
+    );
+    this._monthsShortStrictRegex = new RegExp(
+      "^(" + shortPieces.join("|") + ")",
+      "i"
+    );
+  }
+  addFormatToken("Y", 0, 0, function() {
+    var y = this.year();
+    return y <= 9999 ? zeroFill(y, 4) : "+" + y;
+  });
+  addFormatToken(0, ["YY", 2], 0, function() {
+    return this.year() % 100;
+  });
+  addFormatToken(0, ["YYYY", 4], 0, "year");
+  addFormatToken(0, ["YYYYY", 5], 0, "year");
+  addFormatToken(0, ["YYYYYY", 6, true], 0, "year");
+  addUnitAlias("year", "y");
+  addUnitPriority("year", 1);
+  addRegexToken("Y", matchSigned);
+  addRegexToken("YY", match1to2, match2);
+  addRegexToken("YYYY", match1to4, match4);
+  addRegexToken("YYYYY", match1to6, match6);
+  addRegexToken("YYYYYY", match1to6, match6);
+  addParseToken(["YYYYY", "YYYYYY"], YEAR);
+  addParseToken("YYYY", function(input, array) {
+    array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+  });
+  addParseToken("YY", function(input, array) {
+    array[YEAR] = hooks.parseTwoDigitYear(input);
+  });
+  addParseToken("Y", function(input, array) {
+    array[YEAR] = parseInt(input, 10);
+  });
+  function daysInYear(year) {
+    return isLeapYear(year) ? 366 : 365;
+  }
+  hooks.parseTwoDigitYear = function(input) {
+    return toInt(input) + (toInt(input) > 68 ? 1900 : 2e3);
+  };
+  var getSetYear = makeGetSet("FullYear", true);
+  function getIsLeapYear() {
+    return isLeapYear(this.year());
+  }
+  function createDate(y, m2, d2, h2, M2, s2, ms2) {
+    var date;
+    if (y < 100 && y >= 0) {
+      date = new Date(y + 400, m2, d2, h2, M2, s2, ms2);
+      if (isFinite(date.getFullYear())) {
+        date.setFullYear(y);
+      }
+    } else {
+      date = new Date(y, m2, d2, h2, M2, s2, ms2);
+    }
+    return date;
+  }
+  function createUTCDate(y) {
+    var date, args;
+    if (y < 100 && y >= 0) {
+      args = Array.prototype.slice.call(arguments);
+      args[0] = y + 400;
+      date = new Date(Date.UTC.apply(null, args));
+      if (isFinite(date.getUTCFullYear())) {
+        date.setUTCFullYear(y);
+      }
+    } else {
+      date = new Date(Date.UTC.apply(null, arguments));
+    }
+    return date;
+  }
+  function firstWeekOffset(year, dow, doy) {
+    var fwd = 7 + dow - doy, fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
+    return -fwdlw + fwd - 1;
+  }
+  function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
+    var localWeekday = (7 + weekday - dow) % 7, weekOffset = firstWeekOffset(year, dow, doy), dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset, resYear, resDayOfYear;
+    if (dayOfYear <= 0) {
+      resYear = year - 1;
+      resDayOfYear = daysInYear(resYear) + dayOfYear;
+    } else if (dayOfYear > daysInYear(year)) {
+      resYear = year + 1;
+      resDayOfYear = dayOfYear - daysInYear(year);
+    } else {
+      resYear = year;
+      resDayOfYear = dayOfYear;
+    }
+    return {
+      year: resYear,
+      dayOfYear: resDayOfYear
+    };
+  }
+  function weekOfYear(mom, dow, doy) {
+    var weekOffset = firstWeekOffset(mom.year(), dow, doy), week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1, resWeek, resYear;
+    if (week < 1) {
+      resYear = mom.year() - 1;
+      resWeek = week + weeksInYear(resYear, dow, doy);
+    } else if (week > weeksInYear(mom.year(), dow, doy)) {
+      resWeek = week - weeksInYear(mom.year(), dow, doy);
+      resYear = mom.year() + 1;
+    } else {
+      resYear = mom.year();
+      resWeek = week;
+    }
+    return {
+      week: resWeek,
+      year: resYear
+    };
+  }
+  function weeksInYear(year, dow, doy) {
+    var weekOffset = firstWeekOffset(year, dow, doy), weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
+    return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
+  }
+  addFormatToken("w", ["ww", 2], "wo", "week");
+  addFormatToken("W", ["WW", 2], "Wo", "isoWeek");
+  addUnitAlias("week", "w");
+  addUnitAlias("isoWeek", "W");
+  addUnitPriority("week", 5);
+  addUnitPriority("isoWeek", 5);
+  addRegexToken("w", match1to2);
+  addRegexToken("ww", match1to2, match2);
+  addRegexToken("W", match1to2);
+  addRegexToken("WW", match1to2, match2);
+  addWeekParseToken(
+    ["w", "ww", "W", "WW"],
+    function(input, week, config, token2) {
+      week[token2.substr(0, 1)] = toInt(input);
+    }
+  );
+  function localeWeek(mom) {
+    return weekOfYear(mom, this._week.dow, this._week.doy).week;
+  }
+  var defaultLocaleWeek = {
+    dow: 0,
+    doy: 6
+  };
+  function localeFirstDayOfWeek() {
+    return this._week.dow;
+  }
+  function localeFirstDayOfYear() {
+    return this._week.doy;
+  }
+  function getSetWeek(input) {
+    var week = this.localeData().week(this);
+    return input == null ? week : this.add((input - week) * 7, "d");
+  }
+  function getSetISOWeek(input) {
+    var week = weekOfYear(this, 1, 4).week;
+    return input == null ? week : this.add((input - week) * 7, "d");
+  }
+  addFormatToken("d", 0, "do", "day");
+  addFormatToken("dd", 0, 0, function(format2) {
+    return this.localeData().weekdaysMin(this, format2);
+  });
+  addFormatToken("ddd", 0, 0, function(format2) {
+    return this.localeData().weekdaysShort(this, format2);
+  });
+  addFormatToken("dddd", 0, 0, function(format2) {
+    return this.localeData().weekdays(this, format2);
+  });
+  addFormatToken("e", 0, 0, "weekday");
+  addFormatToken("E", 0, 0, "isoWeekday");
+  addUnitAlias("day", "d");
+  addUnitAlias("weekday", "e");
+  addUnitAlias("isoWeekday", "E");
+  addUnitPriority("day", 11);
+  addUnitPriority("weekday", 11);
+  addUnitPriority("isoWeekday", 11);
+  addRegexToken("d", match1to2);
+  addRegexToken("e", match1to2);
+  addRegexToken("E", match1to2);
+  addRegexToken("dd", function(isStrict, locale2) {
+    return locale2.weekdaysMinRegex(isStrict);
+  });
+  addRegexToken("ddd", function(isStrict, locale2) {
+    return locale2.weekdaysShortRegex(isStrict);
+  });
+  addRegexToken("dddd", function(isStrict, locale2) {
+    return locale2.weekdaysRegex(isStrict);
+  });
+  addWeekParseToken(["dd", "ddd", "dddd"], function(input, week, config, token2) {
+    var weekday = config._locale.weekdaysParse(input, token2, config._strict);
+    if (weekday != null) {
+      week.d = weekday;
+    } else {
+      getParsingFlags(config).invalidWeekday = input;
+    }
+  });
+  addWeekParseToken(["d", "e", "E"], function(input, week, config, token2) {
+    week[token2] = toInt(input);
+  });
+  function parseWeekday(input, locale2) {
+    if (typeof input !== "string") {
+      return input;
+    }
+    if (!isNaN(input)) {
+      return parseInt(input, 10);
+    }
+    input = locale2.weekdaysParse(input);
+    if (typeof input === "number") {
+      return input;
+    }
+    return null;
+  }
+  function parseIsoWeekday(input, locale2) {
+    if (typeof input === "string") {
+      return locale2.weekdaysParse(input) % 7 || 7;
+    }
+    return isNaN(input) ? null : input;
+  }
+  function shiftWeekdays(ws2, n2) {
+    return ws2.slice(n2, 7).concat(ws2.slice(0, n2));
+  }
+  var defaultLocaleWeekdays = "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), defaultLocaleWeekdaysShort = "Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"), defaultLocaleWeekdaysMin = "Su_Mo_Tu_We_Th_Fr_Sa".split("_"), defaultWeekdaysRegex = matchWord, defaultWeekdaysShortRegex = matchWord, defaultWeekdaysMinRegex = matchWord;
+  function localeWeekdays(m2, format2) {
+    var weekdays = isArray(this._weekdays) ? this._weekdays : this._weekdays[m2 && m2 !== true && this._weekdays.isFormat.test(format2) ? "format" : "standalone"];
+    return m2 === true ? shiftWeekdays(weekdays, this._week.dow) : m2 ? weekdays[m2.day()] : weekdays;
+  }
+  function localeWeekdaysShort(m2) {
+    return m2 === true ? shiftWeekdays(this._weekdaysShort, this._week.dow) : m2 ? this._weekdaysShort[m2.day()] : this._weekdaysShort;
+  }
+  function localeWeekdaysMin(m2) {
+    return m2 === true ? shiftWeekdays(this._weekdaysMin, this._week.dow) : m2 ? this._weekdaysMin[m2.day()] : this._weekdaysMin;
+  }
+  function handleStrictParse$1(weekdayName, format2, strict) {
+    var i2, ii, mom, llc = weekdayName.toLocaleLowerCase();
+    if (!this._weekdaysParse) {
+      this._weekdaysParse = [];
+      this._shortWeekdaysParse = [];
+      this._minWeekdaysParse = [];
+      for (i2 = 0; i2 < 7; ++i2) {
+        mom = createUTC([2e3, 1]).day(i2);
+        this._minWeekdaysParse[i2] = this.weekdaysMin(
+          mom,
+          ""
+        ).toLocaleLowerCase();
+        this._shortWeekdaysParse[i2] = this.weekdaysShort(
+          mom,
+          ""
+        ).toLocaleLowerCase();
+        this._weekdaysParse[i2] = this.weekdays(mom, "").toLocaleLowerCase();
+      }
+    }
+    if (strict) {
+      if (format2 === "dddd") {
+        ii = indexOf.call(this._weekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else if (format2 === "ddd") {
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    } else {
+      if (format2 === "dddd") {
+        ii = indexOf.call(this._weekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else if (format2 === "ddd") {
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._weekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      } else {
+        ii = indexOf.call(this._minWeekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._weekdaysParse, llc);
+        if (ii !== -1) {
+          return ii;
+        }
+        ii = indexOf.call(this._shortWeekdaysParse, llc);
+        return ii !== -1 ? ii : null;
+      }
+    }
+  }
+  function localeWeekdaysParse(weekdayName, format2, strict) {
+    var i2, mom, regex;
+    if (this._weekdaysParseExact) {
+      return handleStrictParse$1.call(this, weekdayName, format2, strict);
+    }
+    if (!this._weekdaysParse) {
+      this._weekdaysParse = [];
+      this._minWeekdaysParse = [];
+      this._shortWeekdaysParse = [];
+      this._fullWeekdaysParse = [];
+    }
+    for (i2 = 0; i2 < 7; i2++) {
+      mom = createUTC([2e3, 1]).day(i2);
+      if (strict && !this._fullWeekdaysParse[i2]) {
+        this._fullWeekdaysParse[i2] = new RegExp(
+          "^" + this.weekdays(mom, "").replace(".", "\\.?") + "$",
+          "i"
+        );
+        this._shortWeekdaysParse[i2] = new RegExp(
+          "^" + this.weekdaysShort(mom, "").replace(".", "\\.?") + "$",
+          "i"
+        );
+        this._minWeekdaysParse[i2] = new RegExp(
+          "^" + this.weekdaysMin(mom, "").replace(".", "\\.?") + "$",
+          "i"
+        );
+      }
+      if (!this._weekdaysParse[i2]) {
+        regex = "^" + this.weekdays(mom, "") + "|^" + this.weekdaysShort(mom, "") + "|^" + this.weekdaysMin(mom, "");
+        this._weekdaysParse[i2] = new RegExp(regex.replace(".", ""), "i");
+      }
+      if (strict && format2 === "dddd" && this._fullWeekdaysParse[i2].test(weekdayName)) {
+        return i2;
+      } else if (strict && format2 === "ddd" && this._shortWeekdaysParse[i2].test(weekdayName)) {
+        return i2;
+      } else if (strict && format2 === "dd" && this._minWeekdaysParse[i2].test(weekdayName)) {
+        return i2;
+      } else if (!strict && this._weekdaysParse[i2].test(weekdayName)) {
+        return i2;
+      }
+    }
+  }
+  function getSetDayOfWeek(input) {
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+    var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+    if (input != null) {
+      input = parseWeekday(input, this.localeData());
+      return this.add(input - day, "d");
+    } else {
+      return day;
+    }
+  }
+  function getSetLocaleDayOfWeek(input) {
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+    var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
+    return input == null ? weekday : this.add(input - weekday, "d");
+  }
+  function getSetISODayOfWeek(input) {
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+    if (input != null) {
+      var weekday = parseIsoWeekday(input, this.localeData());
+      return this.day(this.day() % 7 ? weekday : weekday - 7);
+    } else {
+      return this.day() || 7;
+    }
+  }
+  function weekdaysRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+      if (!hasOwnProp(this, "_weekdaysRegex")) {
+        computeWeekdaysParse.call(this);
+      }
+      if (isStrict) {
+        return this._weekdaysStrictRegex;
+      } else {
+        return this._weekdaysRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, "_weekdaysRegex")) {
+        this._weekdaysRegex = defaultWeekdaysRegex;
+      }
+      return this._weekdaysStrictRegex && isStrict ? this._weekdaysStrictRegex : this._weekdaysRegex;
+    }
+  }
+  function weekdaysShortRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+      if (!hasOwnProp(this, "_weekdaysRegex")) {
+        computeWeekdaysParse.call(this);
+      }
+      if (isStrict) {
+        return this._weekdaysShortStrictRegex;
+      } else {
+        return this._weekdaysShortRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, "_weekdaysShortRegex")) {
+        this._weekdaysShortRegex = defaultWeekdaysShortRegex;
+      }
+      return this._weekdaysShortStrictRegex && isStrict ? this._weekdaysShortStrictRegex : this._weekdaysShortRegex;
+    }
+  }
+  function weekdaysMinRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+      if (!hasOwnProp(this, "_weekdaysRegex")) {
+        computeWeekdaysParse.call(this);
+      }
+      if (isStrict) {
+        return this._weekdaysMinStrictRegex;
+      } else {
+        return this._weekdaysMinRegex;
+      }
+    } else {
+      if (!hasOwnProp(this, "_weekdaysMinRegex")) {
+        this._weekdaysMinRegex = defaultWeekdaysMinRegex;
+      }
+      return this._weekdaysMinStrictRegex && isStrict ? this._weekdaysMinStrictRegex : this._weekdaysMinRegex;
+    }
+  }
+  function computeWeekdaysParse() {
+    function cmpLenRev(a2, b2) {
+      return b2.length - a2.length;
+    }
+    var minPieces = [], shortPieces = [], longPieces = [], mixedPieces = [], i2, mom, minp, shortp, longp;
+    for (i2 = 0; i2 < 7; i2++) {
+      mom = createUTC([2e3, 1]).day(i2);
+      minp = regexEscape(this.weekdaysMin(mom, ""));
+      shortp = regexEscape(this.weekdaysShort(mom, ""));
+      longp = regexEscape(this.weekdays(mom, ""));
+      minPieces.push(minp);
+      shortPieces.push(shortp);
+      longPieces.push(longp);
+      mixedPieces.push(minp);
+      mixedPieces.push(shortp);
+      mixedPieces.push(longp);
+    }
+    minPieces.sort(cmpLenRev);
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+    this._weekdaysRegex = new RegExp("^(" + mixedPieces.join("|") + ")", "i");
+    this._weekdaysShortRegex = this._weekdaysRegex;
+    this._weekdaysMinRegex = this._weekdaysRegex;
+    this._weekdaysStrictRegex = new RegExp(
+      "^(" + longPieces.join("|") + ")",
+      "i"
+    );
+    this._weekdaysShortStrictRegex = new RegExp(
+      "^(" + shortPieces.join("|") + ")",
+      "i"
+    );
+    this._weekdaysMinStrictRegex = new RegExp(
+      "^(" + minPieces.join("|") + ")",
+      "i"
+    );
+  }
+  function hFormat() {
+    return this.hours() % 12 || 12;
+  }
+  function kFormat() {
+    return this.hours() || 24;
+  }
+  addFormatToken("H", ["HH", 2], 0, "hour");
+  addFormatToken("h", ["hh", 2], 0, hFormat);
+  addFormatToken("k", ["kk", 2], 0, kFormat);
+  addFormatToken("hmm", 0, 0, function() {
+    return "" + hFormat.apply(this) + zeroFill(this.minutes(), 2);
+  });
+  addFormatToken("hmmss", 0, 0, function() {
+    return "" + hFormat.apply(this) + zeroFill(this.minutes(), 2) + zeroFill(this.seconds(), 2);
+  });
+  addFormatToken("Hmm", 0, 0, function() {
+    return "" + this.hours() + zeroFill(this.minutes(), 2);
+  });
+  addFormatToken("Hmmss", 0, 0, function() {
+    return "" + this.hours() + zeroFill(this.minutes(), 2) + zeroFill(this.seconds(), 2);
+  });
+  function meridiem(token2, lowercase) {
+    addFormatToken(token2, 0, 0, function() {
+      return this.localeData().meridiem(
+        this.hours(),
+        this.minutes(),
+        lowercase
+      );
+    });
+  }
+  meridiem("a", true);
+  meridiem("A", false);
+  addUnitAlias("hour", "h");
+  addUnitPriority("hour", 13);
+  function matchMeridiem(isStrict, locale2) {
+    return locale2._meridiemParse;
+  }
+  addRegexToken("a", matchMeridiem);
+  addRegexToken("A", matchMeridiem);
+  addRegexToken("H", match1to2);
+  addRegexToken("h", match1to2);
+  addRegexToken("k", match1to2);
+  addRegexToken("HH", match1to2, match2);
+  addRegexToken("hh", match1to2, match2);
+  addRegexToken("kk", match1to2, match2);
+  addRegexToken("hmm", match3to4);
+  addRegexToken("hmmss", match5to6);
+  addRegexToken("Hmm", match3to4);
+  addRegexToken("Hmmss", match5to6);
+  addParseToken(["H", "HH"], HOUR);
+  addParseToken(["k", "kk"], function(input, array, config) {
+    var kInput = toInt(input);
+    array[HOUR] = kInput === 24 ? 0 : kInput;
+  });
+  addParseToken(["a", "A"], function(input, array, config) {
+    config._isPm = config._locale.isPM(input);
+    config._meridiem = input;
+  });
+  addParseToken(["h", "hh"], function(input, array, config) {
+    array[HOUR] = toInt(input);
+    getParsingFlags(config).bigHour = true;
+  });
+  addParseToken("hmm", function(input, array, config) {
+    var pos = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos));
+    array[MINUTE] = toInt(input.substr(pos));
+    getParsingFlags(config).bigHour = true;
+  });
+  addParseToken("hmmss", function(input, array, config) {
+    var pos1 = input.length - 4, pos2 = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos1));
+    array[MINUTE] = toInt(input.substr(pos1, 2));
+    array[SECOND] = toInt(input.substr(pos2));
+    getParsingFlags(config).bigHour = true;
+  });
+  addParseToken("Hmm", function(input, array, config) {
+    var pos = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos));
+    array[MINUTE] = toInt(input.substr(pos));
+  });
+  addParseToken("Hmmss", function(input, array, config) {
+    var pos1 = input.length - 4, pos2 = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos1));
+    array[MINUTE] = toInt(input.substr(pos1, 2));
+    array[SECOND] = toInt(input.substr(pos2));
+  });
+  function localeIsPM(input) {
+    return (input + "").toLowerCase().charAt(0) === "p";
+  }
+  var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i, getSetHour = makeGetSet("Hours", true);
+  function localeMeridiem(hours2, minutes2, isLower) {
+    if (hours2 > 11) {
+      return isLower ? "pm" : "PM";
+    } else {
+      return isLower ? "am" : "AM";
+    }
+  }
+  var baseConfig = {
+    calendar: defaultCalendar,
+    longDateFormat: defaultLongDateFormat,
+    invalidDate: defaultInvalidDate,
+    ordinal: defaultOrdinal,
+    dayOfMonthOrdinalParse: defaultDayOfMonthOrdinalParse,
+    relativeTime: defaultRelativeTime,
+    months: defaultLocaleMonths,
+    monthsShort: defaultLocaleMonthsShort,
+    week: defaultLocaleWeek,
+    weekdays: defaultLocaleWeekdays,
+    weekdaysMin: defaultLocaleWeekdaysMin,
+    weekdaysShort: defaultLocaleWeekdaysShort,
+    meridiemParse: defaultLocaleMeridiemParse
+  };
+  var locales = {}, localeFamilies = {}, globalLocale;
+  function commonPrefix(arr1, arr2) {
+    var i2, minl = Math.min(arr1.length, arr2.length);
+    for (i2 = 0; i2 < minl; i2 += 1) {
+      if (arr1[i2] !== arr2[i2]) {
+        return i2;
+      }
+    }
+    return minl;
+  }
+  function normalizeLocale(key) {
+    return key ? key.toLowerCase().replace("_", "-") : key;
+  }
+  function chooseLocale(names) {
+    var i2 = 0, j2, next, locale2, split;
+    while (i2 < names.length) {
+      split = normalizeLocale(names[i2]).split("-");
+      j2 = split.length;
+      next = normalizeLocale(names[i2 + 1]);
+      next = next ? next.split("-") : null;
+      while (j2 > 0) {
+        locale2 = loadLocale(split.slice(0, j2).join("-"));
+        if (locale2) {
+          return locale2;
+        }
+        if (next && next.length >= j2 && commonPrefix(split, next) >= j2 - 1) {
+          break;
+        }
+        j2--;
+      }
+      i2++;
+    }
+    return globalLocale;
+  }
+  function isLocaleNameSane(name2) {
+    return name2.match("^[^/\\\\]*$") != null;
+  }
+  function loadLocale(name2) {
+    var oldLocale = null, aliasedRequire;
+    if (locales[name2] === void 0 && typeof module !== "undefined" && module && module.exports && isLocaleNameSane(name2)) {
+      try {
+        oldLocale = globalLocale._abbr;
+        aliasedRequire = require;
+        aliasedRequire("./locale/" + name2);
+        getSetGlobalLocale(oldLocale);
+      } catch (e) {
+        locales[name2] = null;
+      }
+    }
+    return locales[name2];
+  }
+  function getSetGlobalLocale(key, values) {
+    var data;
+    if (key) {
+      if (isUndefined(values)) {
+        data = getLocale(key);
+      } else {
+        data = defineLocale(key, values);
+      }
+      if (data) {
+        globalLocale = data;
+      } else {
+        if (typeof console !== "undefined" && console.warn) {
+          formatAppLog(
+            "warn",
+            "at node_modules/moment/dist/moment.js:2125",
+            "Locale " + key + " not found. Did you forget to load it?"
+          );
+        }
+      }
+    }
+    return globalLocale._abbr;
+  }
+  function defineLocale(name2, config) {
+    if (config !== null) {
+      var locale2, parentConfig = baseConfig;
+      config.abbr = name2;
+      if (locales[name2] != null) {
+        deprecateSimple(
+          "defineLocaleOverride",
+          "use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info."
+        );
+        parentConfig = locales[name2]._config;
+      } else if (config.parentLocale != null) {
+        if (locales[config.parentLocale] != null) {
+          parentConfig = locales[config.parentLocale]._config;
+        } else {
+          locale2 = loadLocale(config.parentLocale);
+          if (locale2 != null) {
+            parentConfig = locale2._config;
+          } else {
+            if (!localeFamilies[config.parentLocale]) {
+              localeFamilies[config.parentLocale] = [];
+            }
+            localeFamilies[config.parentLocale].push({
+              name: name2,
+              config
+            });
+            return null;
+          }
+        }
+      }
+      locales[name2] = new Locale(mergeConfigs(parentConfig, config));
+      if (localeFamilies[name2]) {
+        localeFamilies[name2].forEach(function(x2) {
+          defineLocale(x2.name, x2.config);
+        });
+      }
+      getSetGlobalLocale(name2);
+      return locales[name2];
+    } else {
+      delete locales[name2];
+      return null;
+    }
+  }
+  function updateLocale(name2, config) {
+    if (config != null) {
+      var locale2, tmpLocale, parentConfig = baseConfig;
+      if (locales[name2] != null && locales[name2].parentLocale != null) {
+        locales[name2].set(mergeConfigs(locales[name2]._config, config));
+      } else {
+        tmpLocale = loadLocale(name2);
+        if (tmpLocale != null) {
+          parentConfig = tmpLocale._config;
+        }
+        config = mergeConfigs(parentConfig, config);
+        if (tmpLocale == null) {
+          config.abbr = name2;
+        }
+        locale2 = new Locale(config);
+        locale2.parentLocale = locales[name2];
+        locales[name2] = locale2;
+      }
+      getSetGlobalLocale(name2);
+    } else {
+      if (locales[name2] != null) {
+        if (locales[name2].parentLocale != null) {
+          locales[name2] = locales[name2].parentLocale;
+          if (name2 === getSetGlobalLocale()) {
+            getSetGlobalLocale(name2);
+          }
+        } else if (locales[name2] != null) {
+          delete locales[name2];
+        }
+      }
+    }
+    return locales[name2];
+  }
+  function getLocale(key) {
+    var locale2;
+    if (key && key._locale && key._locale._abbr) {
+      key = key._locale._abbr;
+    }
+    if (!key) {
+      return globalLocale;
+    }
+    if (!isArray(key)) {
+      locale2 = loadLocale(key);
+      if (locale2) {
+        return locale2;
+      }
+      key = [key];
+    }
+    return chooseLocale(key);
+  }
+  function listLocales() {
+    return keys(locales);
+  }
+  function checkOverflow(m2) {
+    var overflow, a2 = m2._a;
+    if (a2 && getParsingFlags(m2).overflow === -2) {
+      overflow = a2[MONTH] < 0 || a2[MONTH] > 11 ? MONTH : a2[DATE] < 1 || a2[DATE] > daysInMonth(a2[YEAR], a2[MONTH]) ? DATE : a2[HOUR] < 0 || a2[HOUR] > 24 || a2[HOUR] === 24 && (a2[MINUTE] !== 0 || a2[SECOND] !== 0 || a2[MILLISECOND] !== 0) ? HOUR : a2[MINUTE] < 0 || a2[MINUTE] > 59 ? MINUTE : a2[SECOND] < 0 || a2[SECOND] > 59 ? SECOND : a2[MILLISECOND] < 0 || a2[MILLISECOND] > 999 ? MILLISECOND : -1;
+      if (getParsingFlags(m2)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
+        overflow = DATE;
+      }
+      if (getParsingFlags(m2)._overflowWeeks && overflow === -1) {
+        overflow = WEEK;
+      }
+      if (getParsingFlags(m2)._overflowWeekday && overflow === -1) {
+        overflow = WEEKDAY;
+      }
+      getParsingFlags(m2).overflow = overflow;
+    }
+    return m2;
+  }
+  var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/, basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/, tzRegex = /Z|[+-]\d\d(?::?\d\d)?/, isoDates = [
+    ["YYYYYY-MM-DD", /[+-]\d{6}-\d\d-\d\d/],
+    ["YYYY-MM-DD", /\d{4}-\d\d-\d\d/],
+    ["GGGG-[W]WW-E", /\d{4}-W\d\d-\d/],
+    ["GGGG-[W]WW", /\d{4}-W\d\d/, false],
+    ["YYYY-DDD", /\d{4}-\d{3}/],
+    ["YYYY-MM", /\d{4}-\d\d/, false],
+    ["YYYYYYMMDD", /[+-]\d{10}/],
+    ["YYYYMMDD", /\d{8}/],
+    ["GGGG[W]WWE", /\d{4}W\d{3}/],
+    ["GGGG[W]WW", /\d{4}W\d{2}/, false],
+    ["YYYYDDD", /\d{7}/],
+    ["YYYYMM", /\d{6}/, false],
+    ["YYYY", /\d{4}/, false]
+  ], isoTimes = [
+    ["HH:mm:ss.SSSS", /\d\d:\d\d:\d\d\.\d+/],
+    ["HH:mm:ss,SSSS", /\d\d:\d\d:\d\d,\d+/],
+    ["HH:mm:ss", /\d\d:\d\d:\d\d/],
+    ["HH:mm", /\d\d:\d\d/],
+    ["HHmmss.SSSS", /\d\d\d\d\d\d\.\d+/],
+    ["HHmmss,SSSS", /\d\d\d\d\d\d,\d+/],
+    ["HHmmss", /\d\d\d\d\d\d/],
+    ["HHmm", /\d\d\d\d/],
+    ["HH", /\d\d/]
+  ], aspNetJsonRegex = /^\/?Date\((-?\d+)/i, rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/, obsOffsets = {
+    UT: 0,
+    GMT: 0,
+    EDT: -4 * 60,
+    EST: -5 * 60,
+    CDT: -5 * 60,
+    CST: -6 * 60,
+    MDT: -6 * 60,
+    MST: -7 * 60,
+    PDT: -7 * 60,
+    PST: -8 * 60
+  };
+  function configFromISO(config) {
+    var i2, l2, string = config._i, match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string), allowTime, dateFormat, timeFormat, tzFormat, isoDatesLen = isoDates.length, isoTimesLen = isoTimes.length;
+    if (match) {
+      getParsingFlags(config).iso = true;
+      for (i2 = 0, l2 = isoDatesLen; i2 < l2; i2++) {
+        if (isoDates[i2][1].exec(match[1])) {
+          dateFormat = isoDates[i2][0];
+          allowTime = isoDates[i2][2] !== false;
+          break;
+        }
+      }
+      if (dateFormat == null) {
+        config._isValid = false;
+        return;
+      }
+      if (match[3]) {
+        for (i2 = 0, l2 = isoTimesLen; i2 < l2; i2++) {
+          if (isoTimes[i2][1].exec(match[3])) {
+            timeFormat = (match[2] || " ") + isoTimes[i2][0];
+            break;
+          }
+        }
+        if (timeFormat == null) {
+          config._isValid = false;
+          return;
+        }
+      }
+      if (!allowTime && timeFormat != null) {
+        config._isValid = false;
+        return;
+      }
+      if (match[4]) {
+        if (tzRegex.exec(match[4])) {
+          tzFormat = "Z";
+        } else {
+          config._isValid = false;
+          return;
+        }
+      }
+      config._f = dateFormat + (timeFormat || "") + (tzFormat || "");
+      configFromStringAndFormat(config);
+    } else {
+      config._isValid = false;
+    }
+  }
+  function extractFromRFC2822Strings(yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr) {
+    var result = [
+      untruncateYear(yearStr),
+      defaultLocaleMonthsShort.indexOf(monthStr),
+      parseInt(dayStr, 10),
+      parseInt(hourStr, 10),
+      parseInt(minuteStr, 10)
+    ];
+    if (secondStr) {
+      result.push(parseInt(secondStr, 10));
+    }
+    return result;
+  }
+  function untruncateYear(yearStr) {
+    var year = parseInt(yearStr, 10);
+    if (year <= 49) {
+      return 2e3 + year;
+    } else if (year <= 999) {
+      return 1900 + year;
+    }
+    return year;
+  }
+  function preprocessRFC2822(s2) {
+    return s2.replace(/\([^()]*\)|[\n\t]/g, " ").replace(/(\s\s+)/g, " ").replace(/^\s\s*/, "").replace(/\s\s*$/, "");
+  }
+  function checkWeekday(weekdayStr, parsedInput, config) {
+    if (weekdayStr) {
+      var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr), weekdayActual = new Date(
+        parsedInput[0],
+        parsedInput[1],
+        parsedInput[2]
+      ).getDay();
+      if (weekdayProvided !== weekdayActual) {
+        getParsingFlags(config).weekdayMismatch = true;
+        config._isValid = false;
+        return false;
+      }
+    }
+    return true;
+  }
+  function calculateOffset(obsOffset, militaryOffset, numOffset) {
+    if (obsOffset) {
+      return obsOffsets[obsOffset];
+    } else if (militaryOffset) {
+      return 0;
+    } else {
+      var hm = parseInt(numOffset, 10), m2 = hm % 100, h2 = (hm - m2) / 100;
+      return h2 * 60 + m2;
+    }
+  }
+  function configFromRFC2822(config) {
+    var match = rfc2822.exec(preprocessRFC2822(config._i)), parsedArray;
+    if (match) {
+      parsedArray = extractFromRFC2822Strings(
+        match[4],
+        match[3],
+        match[2],
+        match[5],
+        match[6],
+        match[7]
+      );
+      if (!checkWeekday(match[1], parsedArray, config)) {
+        return;
+      }
+      config._a = parsedArray;
+      config._tzm = calculateOffset(match[8], match[9], match[10]);
+      config._d = createUTCDate.apply(null, config._a);
+      config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+      getParsingFlags(config).rfc2822 = true;
+    } else {
+      config._isValid = false;
+    }
+  }
+  function configFromString(config) {
+    var matched = aspNetJsonRegex.exec(config._i);
+    if (matched !== null) {
+      config._d = new Date(+matched[1]);
+      return;
+    }
+    configFromISO(config);
+    if (config._isValid === false) {
+      delete config._isValid;
+    } else {
+      return;
+    }
+    configFromRFC2822(config);
+    if (config._isValid === false) {
+      delete config._isValid;
+    } else {
+      return;
+    }
+    if (config._strict) {
+      config._isValid = false;
+    } else {
+      hooks.createFromInputFallback(config);
+    }
+  }
+  hooks.createFromInputFallback = deprecate(
+    "value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.",
+    function(config) {
+      config._d = new Date(config._i + (config._useUTC ? " UTC" : ""));
+    }
+  );
+  function defaults(a2, b2, c2) {
+    if (a2 != null) {
+      return a2;
+    }
+    if (b2 != null) {
+      return b2;
+    }
+    return c2;
+  }
+  function currentDateArray(config) {
+    var nowValue = new Date(hooks.now());
+    if (config._useUTC) {
+      return [
+        nowValue.getUTCFullYear(),
+        nowValue.getUTCMonth(),
+        nowValue.getUTCDate()
+      ];
+    }
+    return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
+  }
+  function configFromArray(config) {
+    var i2, date, input = [], currentDate, expectedWeekday, yearToUse;
+    if (config._d) {
+      return;
+    }
+    currentDate = currentDateArray(config);
+    if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+      dayOfYearFromWeekInfo(config);
+    }
+    if (config._dayOfYear != null) {
+      yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+      if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
+        getParsingFlags(config)._overflowDayOfYear = true;
+      }
+      date = createUTCDate(yearToUse, 0, config._dayOfYear);
+      config._a[MONTH] = date.getUTCMonth();
+      config._a[DATE] = date.getUTCDate();
+    }
+    for (i2 = 0; i2 < 3 && config._a[i2] == null; ++i2) {
+      config._a[i2] = input[i2] = currentDate[i2];
+    }
+    for (; i2 < 7; i2++) {
+      config._a[i2] = input[i2] = config._a[i2] == null ? i2 === 2 ? 1 : 0 : config._a[i2];
+    }
+    if (config._a[HOUR] === 24 && config._a[MINUTE] === 0 && config._a[SECOND] === 0 && config._a[MILLISECOND] === 0) {
+      config._nextDay = true;
+      config._a[HOUR] = 0;
+    }
+    config._d = (config._useUTC ? createUTCDate : createDate).apply(
+      null,
+      input
+    );
+    expectedWeekday = config._useUTC ? config._d.getUTCDay() : config._d.getDay();
+    if (config._tzm != null) {
+      config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+    }
+    if (config._nextDay) {
+      config._a[HOUR] = 24;
+    }
+    if (config._w && typeof config._w.d !== "undefined" && config._w.d !== expectedWeekday) {
+      getParsingFlags(config).weekdayMismatch = true;
+    }
+  }
+  function dayOfYearFromWeekInfo(config) {
+    var w2, weekYear, week, weekday, dow, doy, temp, weekdayOverflow, curWeek;
+    w2 = config._w;
+    if (w2.GG != null || w2.W != null || w2.E != null) {
+      dow = 1;
+      doy = 4;
+      weekYear = defaults(
+        w2.GG,
+        config._a[YEAR],
+        weekOfYear(createLocal(), 1, 4).year
+      );
+      week = defaults(w2.W, 1);
+      weekday = defaults(w2.E, 1);
+      if (weekday < 1 || weekday > 7) {
+        weekdayOverflow = true;
+      }
+    } else {
+      dow = config._locale._week.dow;
+      doy = config._locale._week.doy;
+      curWeek = weekOfYear(createLocal(), dow, doy);
+      weekYear = defaults(w2.gg, config._a[YEAR], curWeek.year);
+      week = defaults(w2.w, curWeek.week);
+      if (w2.d != null) {
+        weekday = w2.d;
+        if (weekday < 0 || weekday > 6) {
+          weekdayOverflow = true;
+        }
+      } else if (w2.e != null) {
+        weekday = w2.e + dow;
+        if (w2.e < 0 || w2.e > 6) {
+          weekdayOverflow = true;
+        }
+      } else {
+        weekday = dow;
+      }
+    }
+    if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+      getParsingFlags(config)._overflowWeeks = true;
+    } else if (weekdayOverflow != null) {
+      getParsingFlags(config)._overflowWeekday = true;
+    } else {
+      temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+      config._a[YEAR] = temp.year;
+      config._dayOfYear = temp.dayOfYear;
+    }
+  }
+  hooks.ISO_8601 = function() {
+  };
+  hooks.RFC_2822 = function() {
+  };
+  function configFromStringAndFormat(config) {
+    if (config._f === hooks.ISO_8601) {
+      configFromISO(config);
+      return;
+    }
+    if (config._f === hooks.RFC_2822) {
+      configFromRFC2822(config);
+      return;
+    }
+    config._a = [];
+    getParsingFlags(config).empty = true;
+    var string = "" + config._i, i2, parsedInput, tokens2, token2, skipped, stringLength = string.length, totalParsedInputLength = 0, era, tokenLen;
+    tokens2 = expandFormat(config._f, config._locale).match(formattingTokens) || [];
+    tokenLen = tokens2.length;
+    for (i2 = 0; i2 < tokenLen; i2++) {
+      token2 = tokens2[i2];
+      parsedInput = (string.match(getParseRegexForToken(token2, config)) || [])[0];
+      if (parsedInput) {
+        skipped = string.substr(0, string.indexOf(parsedInput));
+        if (skipped.length > 0) {
+          getParsingFlags(config).unusedInput.push(skipped);
+        }
+        string = string.slice(
+          string.indexOf(parsedInput) + parsedInput.length
+        );
+        totalParsedInputLength += parsedInput.length;
+      }
+      if (formatTokenFunctions[token2]) {
+        if (parsedInput) {
+          getParsingFlags(config).empty = false;
+        } else {
+          getParsingFlags(config).unusedTokens.push(token2);
+        }
+        addTimeToArrayFromToken(token2, parsedInput, config);
+      } else if (config._strict && !parsedInput) {
+        getParsingFlags(config).unusedTokens.push(token2);
+      }
+    }
+    getParsingFlags(config).charsLeftOver = stringLength - totalParsedInputLength;
+    if (string.length > 0) {
+      getParsingFlags(config).unusedInput.push(string);
+    }
+    if (config._a[HOUR] <= 12 && getParsingFlags(config).bigHour === true && config._a[HOUR] > 0) {
+      getParsingFlags(config).bigHour = void 0;
+    }
+    getParsingFlags(config).parsedDateParts = config._a.slice(0);
+    getParsingFlags(config).meridiem = config._meridiem;
+    config._a[HOUR] = meridiemFixWrap(
+      config._locale,
+      config._a[HOUR],
+      config._meridiem
+    );
+    era = getParsingFlags(config).era;
+    if (era !== null) {
+      config._a[YEAR] = config._locale.erasConvertYear(era, config._a[YEAR]);
+    }
+    configFromArray(config);
+    checkOverflow(config);
+  }
+  function meridiemFixWrap(locale2, hour, meridiem2) {
+    var isPm;
+    if (meridiem2 == null) {
+      return hour;
+    }
+    if (locale2.meridiemHour != null) {
+      return locale2.meridiemHour(hour, meridiem2);
+    } else if (locale2.isPM != null) {
+      isPm = locale2.isPM(meridiem2);
+      if (isPm && hour < 12) {
+        hour += 12;
+      }
+      if (!isPm && hour === 12) {
+        hour = 0;
+      }
+      return hour;
+    } else {
+      return hour;
+    }
+  }
+  function configFromStringAndArray(config) {
+    var tempConfig, bestMoment, scoreToBeat, i2, currentScore, validFormatFound, bestFormatIsValid = false, configfLen = config._f.length;
+    if (configfLen === 0) {
+      getParsingFlags(config).invalidFormat = true;
+      config._d = new Date(NaN);
+      return;
+    }
+    for (i2 = 0; i2 < configfLen; i2++) {
+      currentScore = 0;
+      validFormatFound = false;
+      tempConfig = copyConfig({}, config);
+      if (config._useUTC != null) {
+        tempConfig._useUTC = config._useUTC;
+      }
+      tempConfig._f = config._f[i2];
+      configFromStringAndFormat(tempConfig);
+      if (isValid(tempConfig)) {
+        validFormatFound = true;
+      }
+      currentScore += getParsingFlags(tempConfig).charsLeftOver;
+      currentScore += getParsingFlags(tempConfig).unusedTokens.length * 10;
+      getParsingFlags(tempConfig).score = currentScore;
+      if (!bestFormatIsValid) {
+        if (scoreToBeat == null || currentScore < scoreToBeat || validFormatFound) {
+          scoreToBeat = currentScore;
+          bestMoment = tempConfig;
+          if (validFormatFound) {
+            bestFormatIsValid = true;
+          }
+        }
+      } else {
+        if (currentScore < scoreToBeat) {
+          scoreToBeat = currentScore;
+          bestMoment = tempConfig;
+        }
+      }
+    }
+    extend(config, bestMoment || tempConfig);
+  }
+  function configFromObject(config) {
+    if (config._d) {
+      return;
+    }
+    var i2 = normalizeObjectUnits(config._i), dayOrDate = i2.day === void 0 ? i2.date : i2.day;
+    config._a = map(
+      [i2.year, i2.month, dayOrDate, i2.hour, i2.minute, i2.second, i2.millisecond],
+      function(obj) {
+        return obj && parseInt(obj, 10);
+      }
+    );
+    configFromArray(config);
+  }
+  function createFromConfig(config) {
+    var res2 = new Moment(checkOverflow(prepareConfig(config)));
+    if (res2._nextDay) {
+      res2.add(1, "d");
+      res2._nextDay = void 0;
+    }
+    return res2;
+  }
+  function prepareConfig(config) {
+    var input = config._i, format2 = config._f;
+    config._locale = config._locale || getLocale(config._l);
+    if (input === null || format2 === void 0 && input === "") {
+      return createInvalid({ nullInput: true });
+    }
+    if (typeof input === "string") {
+      config._i = input = config._locale.preparse(input);
+    }
+    if (isMoment(input)) {
+      return new Moment(checkOverflow(input));
+    } else if (isDate(input)) {
+      config._d = input;
+    } else if (isArray(format2)) {
+      configFromStringAndArray(config);
+    } else if (format2) {
+      configFromStringAndFormat(config);
+    } else {
+      configFromInput(config);
+    }
+    if (!isValid(config)) {
+      config._d = null;
+    }
+    return config;
+  }
+  function configFromInput(config) {
+    var input = config._i;
+    if (isUndefined(input)) {
+      config._d = new Date(hooks.now());
+    } else if (isDate(input)) {
+      config._d = new Date(input.valueOf());
+    } else if (typeof input === "string") {
+      configFromString(config);
+    } else if (isArray(input)) {
+      config._a = map(input.slice(0), function(obj) {
+        return parseInt(obj, 10);
+      });
+      configFromArray(config);
+    } else if (isObject(input)) {
+      configFromObject(config);
+    } else if (isNumber(input)) {
+      config._d = new Date(input);
+    } else {
+      hooks.createFromInputFallback(config);
+    }
+  }
+  function createLocalOrUTC(input, format2, locale2, strict, isUTC) {
+    var c2 = {};
+    if (format2 === true || format2 === false) {
+      strict = format2;
+      format2 = void 0;
+    }
+    if (locale2 === true || locale2 === false) {
+      strict = locale2;
+      locale2 = void 0;
+    }
+    if (isObject(input) && isObjectEmpty(input) || isArray(input) && input.length === 0) {
+      input = void 0;
+    }
+    c2._isAMomentObject = true;
+    c2._useUTC = c2._isUTC = isUTC;
+    c2._l = locale2;
+    c2._i = input;
+    c2._f = format2;
+    c2._strict = strict;
+    return createFromConfig(c2);
+  }
+  function createLocal(input, format2, locale2, strict) {
+    return createLocalOrUTC(input, format2, locale2, strict, false);
+  }
+  var prototypeMin = deprecate(
+    "moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/",
+    function() {
+      var other = createLocal.apply(null, arguments);
+      if (this.isValid() && other.isValid()) {
+        return other < this ? this : other;
+      } else {
+        return createInvalid();
+      }
+    }
+  ), prototypeMax = deprecate(
+    "moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/",
+    function() {
+      var other = createLocal.apply(null, arguments);
+      if (this.isValid() && other.isValid()) {
+        return other > this ? this : other;
+      } else {
+        return createInvalid();
+      }
+    }
+  );
+  function pickBy(fn, moments) {
+    var res2, i2;
+    if (moments.length === 1 && isArray(moments[0])) {
+      moments = moments[0];
+    }
+    if (!moments.length) {
+      return createLocal();
+    }
+    res2 = moments[0];
+    for (i2 = 1; i2 < moments.length; ++i2) {
+      if (!moments[i2].isValid() || moments[i2][fn](res2)) {
+        res2 = moments[i2];
+      }
+    }
+    return res2;
+  }
+  function min() {
+    var args = [].slice.call(arguments, 0);
+    return pickBy("isBefore", args);
+  }
+  function max() {
+    var args = [].slice.call(arguments, 0);
+    return pickBy("isAfter", args);
+  }
+  var now = function() {
+    return Date.now ? Date.now() : +new Date();
+  };
+  var ordering = [
+    "year",
+    "quarter",
+    "month",
+    "week",
+    "day",
+    "hour",
+    "minute",
+    "second",
+    "millisecond"
+  ];
+  function isDurationValid(m2) {
+    var key, unitHasDecimal = false, i2, orderLen = ordering.length;
+    for (key in m2) {
+      if (hasOwnProp(m2, key) && !(indexOf.call(ordering, key) !== -1 && (m2[key] == null || !isNaN(m2[key])))) {
+        return false;
+      }
+    }
+    for (i2 = 0; i2 < orderLen; ++i2) {
+      if (m2[ordering[i2]]) {
+        if (unitHasDecimal) {
+          return false;
+        }
+        if (parseFloat(m2[ordering[i2]]) !== toInt(m2[ordering[i2]])) {
+          unitHasDecimal = true;
+        }
+      }
+    }
+    return true;
+  }
+  function isValid$1() {
+    return this._isValid;
+  }
+  function createInvalid$1() {
+    return createDuration(NaN);
+  }
+  function Duration(duration) {
+    var normalizedInput = normalizeObjectUnits(duration), years2 = normalizedInput.year || 0, quarters = normalizedInput.quarter || 0, months2 = normalizedInput.month || 0, weeks2 = normalizedInput.week || normalizedInput.isoWeek || 0, days2 = normalizedInput.day || 0, hours2 = normalizedInput.hour || 0, minutes2 = normalizedInput.minute || 0, seconds2 = normalizedInput.second || 0, milliseconds2 = normalizedInput.millisecond || 0;
+    this._isValid = isDurationValid(normalizedInput);
+    this._milliseconds = +milliseconds2 + seconds2 * 1e3 + minutes2 * 6e4 + hours2 * 1e3 * 60 * 60;
+    this._days = +days2 + weeks2 * 7;
+    this._months = +months2 + quarters * 3 + years2 * 12;
+    this._data = {};
+    this._locale = getLocale();
+    this._bubble();
+  }
+  function isDuration(obj) {
+    return obj instanceof Duration;
+  }
+  function absRound(number) {
+    if (number < 0) {
+      return Math.round(-1 * number) * -1;
+    } else {
+      return Math.round(number);
+    }
+  }
+  function compareArrays(array1, array2, dontConvert) {
+    var len = Math.min(array1.length, array2.length), lengthDiff = Math.abs(array1.length - array2.length), diffs = 0, i2;
+    for (i2 = 0; i2 < len; i2++) {
+      if (dontConvert && array1[i2] !== array2[i2] || !dontConvert && toInt(array1[i2]) !== toInt(array2[i2])) {
+        diffs++;
+      }
+    }
+    return diffs + lengthDiff;
+  }
+  function offset(token2, separator) {
+    addFormatToken(token2, 0, 0, function() {
+      var offset2 = this.utcOffset(), sign2 = "+";
+      if (offset2 < 0) {
+        offset2 = -offset2;
+        sign2 = "-";
+      }
+      return sign2 + zeroFill(~~(offset2 / 60), 2) + separator + zeroFill(~~offset2 % 60, 2);
+    });
+  }
+  offset("Z", ":");
+  offset("ZZ", "");
+  addRegexToken("Z", matchShortOffset);
+  addRegexToken("ZZ", matchShortOffset);
+  addParseToken(["Z", "ZZ"], function(input, array, config) {
+    config._useUTC = true;
+    config._tzm = offsetFromString(matchShortOffset, input);
+  });
+  var chunkOffset = /([\+\-]|\d\d)/gi;
+  function offsetFromString(matcher, string) {
+    var matches = (string || "").match(matcher), chunk, parts, minutes2;
+    if (matches === null) {
+      return null;
+    }
+    chunk = matches[matches.length - 1] || [];
+    parts = (chunk + "").match(chunkOffset) || ["-", 0, 0];
+    minutes2 = +(parts[1] * 60) + toInt(parts[2]);
+    return minutes2 === 0 ? 0 : parts[0] === "+" ? minutes2 : -minutes2;
+  }
+  function cloneWithOffset(input, model) {
+    var res2, diff2;
+    if (model._isUTC) {
+      res2 = model.clone();
+      diff2 = (isMoment(input) || isDate(input) ? input.valueOf() : createLocal(input).valueOf()) - res2.valueOf();
+      res2._d.setTime(res2._d.valueOf() + diff2);
+      hooks.updateOffset(res2, false);
+      return res2;
+    } else {
+      return createLocal(input).local();
+    }
+  }
+  function getDateOffset(m2) {
+    return -Math.round(m2._d.getTimezoneOffset());
+  }
+  hooks.updateOffset = function() {
+  };
+  function getSetOffset(input, keepLocalTime, keepMinutes) {
+    var offset2 = this._offset || 0, localAdjust;
+    if (!this.isValid()) {
+      return input != null ? this : NaN;
+    }
+    if (input != null) {
+      if (typeof input === "string") {
+        input = offsetFromString(matchShortOffset, input);
+        if (input === null) {
+          return this;
+        }
+      } else if (Math.abs(input) < 16 && !keepMinutes) {
+        input = input * 60;
+      }
+      if (!this._isUTC && keepLocalTime) {
+        localAdjust = getDateOffset(this);
+      }
+      this._offset = input;
+      this._isUTC = true;
+      if (localAdjust != null) {
+        this.add(localAdjust, "m");
+      }
+      if (offset2 !== input) {
+        if (!keepLocalTime || this._changeInProgress) {
+          addSubtract(
+            this,
+            createDuration(input - offset2, "m"),
+            1,
+            false
+          );
+        } else if (!this._changeInProgress) {
+          this._changeInProgress = true;
+          hooks.updateOffset(this, true);
+          this._changeInProgress = null;
+        }
+      }
+      return this;
+    } else {
+      return this._isUTC ? offset2 : getDateOffset(this);
+    }
+  }
+  function getSetZone(input, keepLocalTime) {
+    if (input != null) {
+      if (typeof input !== "string") {
+        input = -input;
+      }
+      this.utcOffset(input, keepLocalTime);
+      return this;
+    } else {
+      return -this.utcOffset();
+    }
+  }
+  function setOffsetToUTC(keepLocalTime) {
+    return this.utcOffset(0, keepLocalTime);
+  }
+  function setOffsetToLocal(keepLocalTime) {
+    if (this._isUTC) {
+      this.utcOffset(0, keepLocalTime);
+      this._isUTC = false;
+      if (keepLocalTime) {
+        this.subtract(getDateOffset(this), "m");
+      }
+    }
+    return this;
+  }
+  function setOffsetToParsedOffset() {
+    if (this._tzm != null) {
+      this.utcOffset(this._tzm, false, true);
+    } else if (typeof this._i === "string") {
+      var tZone = offsetFromString(matchOffset, this._i);
+      if (tZone != null) {
+        this.utcOffset(tZone);
+      } else {
+        this.utcOffset(0, true);
+      }
+    }
+    return this;
+  }
+  function hasAlignedHourOffset(input) {
+    if (!this.isValid()) {
+      return false;
+    }
+    input = input ? createLocal(input).utcOffset() : 0;
+    return (this.utcOffset() - input) % 60 === 0;
+  }
+  function isDaylightSavingTime() {
+    return this.utcOffset() > this.clone().month(0).utcOffset() || this.utcOffset() > this.clone().month(5).utcOffset();
+  }
+  function isDaylightSavingTimeShifted() {
+    if (!isUndefined(this._isDSTShifted)) {
+      return this._isDSTShifted;
+    }
+    var c2 = {}, other;
+    copyConfig(c2, this);
+    c2 = prepareConfig(c2);
+    if (c2._a) {
+      other = c2._isUTC ? createUTC(c2._a) : createLocal(c2._a);
+      this._isDSTShifted = this.isValid() && compareArrays(c2._a, other.toArray()) > 0;
+    } else {
+      this._isDSTShifted = false;
+    }
+    return this._isDSTShifted;
+  }
+  function isLocal() {
+    return this.isValid() ? !this._isUTC : false;
+  }
+  function isUtcOffset() {
+    return this.isValid() ? this._isUTC : false;
+  }
+  function isUtc() {
+    return this.isValid() ? this._isUTC && this._offset === 0 : false;
+  }
+  var aspNetRegex = /^(-|\+)?(?:(\d*)[. ])?(\d+):(\d+)(?::(\d+)(\.\d*)?)?$/, isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+  function createDuration(input, key) {
+    var duration = input, match = null, sign2, ret, diffRes;
+    if (isDuration(input)) {
+      duration = {
+        ms: input._milliseconds,
+        d: input._days,
+        M: input._months
+      };
+    } else if (isNumber(input) || !isNaN(+input)) {
+      duration = {};
+      if (key) {
+        duration[key] = +input;
+      } else {
+        duration.milliseconds = +input;
+      }
+    } else if (match = aspNetRegex.exec(input)) {
+      sign2 = match[1] === "-" ? -1 : 1;
+      duration = {
+        y: 0,
+        d: toInt(match[DATE]) * sign2,
+        h: toInt(match[HOUR]) * sign2,
+        m: toInt(match[MINUTE]) * sign2,
+        s: toInt(match[SECOND]) * sign2,
+        ms: toInt(absRound(match[MILLISECOND] * 1e3)) * sign2
+      };
+    } else if (match = isoRegex.exec(input)) {
+      sign2 = match[1] === "-" ? -1 : 1;
+      duration = {
+        y: parseIso(match[2], sign2),
+        M: parseIso(match[3], sign2),
+        w: parseIso(match[4], sign2),
+        d: parseIso(match[5], sign2),
+        h: parseIso(match[6], sign2),
+        m: parseIso(match[7], sign2),
+        s: parseIso(match[8], sign2)
+      };
+    } else if (duration == null) {
+      duration = {};
+    } else if (typeof duration === "object" && ("from" in duration || "to" in duration)) {
+      diffRes = momentsDifference(
+        createLocal(duration.from),
+        createLocal(duration.to)
+      );
+      duration = {};
+      duration.ms = diffRes.milliseconds;
+      duration.M = diffRes.months;
+    }
+    ret = new Duration(duration);
+    if (isDuration(input) && hasOwnProp(input, "_locale")) {
+      ret._locale = input._locale;
+    }
+    if (isDuration(input) && hasOwnProp(input, "_isValid")) {
+      ret._isValid = input._isValid;
+    }
+    return ret;
+  }
+  createDuration.fn = Duration.prototype;
+  createDuration.invalid = createInvalid$1;
+  function parseIso(inp, sign2) {
+    var res2 = inp && parseFloat(inp.replace(",", "."));
+    return (isNaN(res2) ? 0 : res2) * sign2;
+  }
+  function positiveMomentsDifference(base, other) {
+    var res2 = {};
+    res2.months = other.month() - base.month() + (other.year() - base.year()) * 12;
+    if (base.clone().add(res2.months, "M").isAfter(other)) {
+      --res2.months;
+    }
+    res2.milliseconds = +other - +base.clone().add(res2.months, "M");
+    return res2;
+  }
+  function momentsDifference(base, other) {
+    var res2;
+    if (!(base.isValid() && other.isValid())) {
+      return { milliseconds: 0, months: 0 };
+    }
+    other = cloneWithOffset(other, base);
+    if (base.isBefore(other)) {
+      res2 = positiveMomentsDifference(base, other);
+    } else {
+      res2 = positiveMomentsDifference(other, base);
+      res2.milliseconds = -res2.milliseconds;
+      res2.months = -res2.months;
+    }
+    return res2;
+  }
+  function createAdder(direction, name2) {
+    return function(val, period) {
+      var dur, tmp;
+      if (period !== null && !isNaN(+period)) {
+        deprecateSimple(
+          name2,
+          "moment()." + name2 + "(period, number) is deprecated. Please use moment()." + name2 + "(number, period). See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info."
+        );
+        tmp = val;
+        val = period;
+        period = tmp;
+      }
+      dur = createDuration(val, period);
+      addSubtract(this, dur, direction);
+      return this;
+    };
+  }
+  function addSubtract(mom, duration, isAdding, updateOffset) {
+    var milliseconds2 = duration._milliseconds, days2 = absRound(duration._days), months2 = absRound(duration._months);
+    if (!mom.isValid()) {
+      return;
+    }
+    updateOffset = updateOffset == null ? true : updateOffset;
+    if (months2) {
+      setMonth(mom, get(mom, "Month") + months2 * isAdding);
+    }
+    if (days2) {
+      set$1(mom, "Date", get(mom, "Date") + days2 * isAdding);
+    }
+    if (milliseconds2) {
+      mom._d.setTime(mom._d.valueOf() + milliseconds2 * isAdding);
+    }
+    if (updateOffset) {
+      hooks.updateOffset(mom, days2 || months2);
+    }
+  }
+  var add = createAdder(1, "add"), subtract = createAdder(-1, "subtract");
+  function isString(input) {
+    return typeof input === "string" || input instanceof String;
+  }
+  function isMomentInput(input) {
+    return isMoment(input) || isDate(input) || isString(input) || isNumber(input) || isNumberOrStringArray(input) || isMomentInputObject(input) || input === null || input === void 0;
+  }
+  function isMomentInputObject(input) {
+    var objectTest = isObject(input) && !isObjectEmpty(input), propertyTest = false, properties = [
+      "years",
+      "year",
+      "y",
+      "months",
+      "month",
+      "M",
+      "days",
+      "day",
+      "d",
+      "dates",
+      "date",
+      "D",
+      "hours",
+      "hour",
+      "h",
+      "minutes",
+      "minute",
+      "m",
+      "seconds",
+      "second",
+      "s",
+      "milliseconds",
+      "millisecond",
+      "ms"
+    ], i2, property, propertyLen = properties.length;
+    for (i2 = 0; i2 < propertyLen; i2 += 1) {
+      property = properties[i2];
+      propertyTest = propertyTest || hasOwnProp(input, property);
+    }
+    return objectTest && propertyTest;
+  }
+  function isNumberOrStringArray(input) {
+    var arrayTest = isArray(input), dataTypeTest = false;
+    if (arrayTest) {
+      dataTypeTest = input.filter(function(item) {
+        return !isNumber(item) && isString(input);
+      }).length === 0;
+    }
+    return arrayTest && dataTypeTest;
+  }
+  function isCalendarSpec(input) {
+    var objectTest = isObject(input) && !isObjectEmpty(input), propertyTest = false, properties = [
+      "sameDay",
+      "nextDay",
+      "lastDay",
+      "nextWeek",
+      "lastWeek",
+      "sameElse"
+    ], i2, property;
+    for (i2 = 0; i2 < properties.length; i2 += 1) {
+      property = properties[i2];
+      propertyTest = propertyTest || hasOwnProp(input, property);
+    }
+    return objectTest && propertyTest;
+  }
+  function getCalendarFormat(myMoment, now2) {
+    var diff2 = myMoment.diff(now2, "days", true);
+    return diff2 < -6 ? "sameElse" : diff2 < -1 ? "lastWeek" : diff2 < 0 ? "lastDay" : diff2 < 1 ? "sameDay" : diff2 < 2 ? "nextDay" : diff2 < 7 ? "nextWeek" : "sameElse";
+  }
+  function calendar$1$1(time, formats) {
+    if (arguments.length === 1) {
+      if (!arguments[0]) {
+        time = void 0;
+        formats = void 0;
+      } else if (isMomentInput(arguments[0])) {
+        time = arguments[0];
+        formats = void 0;
+      } else if (isCalendarSpec(arguments[0])) {
+        formats = arguments[0];
+        time = void 0;
+      }
+    }
+    var now2 = time || createLocal(), sod = cloneWithOffset(now2, this).startOf("day"), format2 = hooks.calendarFormat(this, sod) || "sameElse", output = formats && (isFunction(formats[format2]) ? formats[format2].call(this, now2) : formats[format2]);
+    return this.format(
+      output || this.localeData().calendar(format2, this, createLocal(now2))
+    );
+  }
+  function clone() {
+    return new Moment(this);
+  }
+  function isAfter(input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input);
+    if (!(this.isValid() && localInput.isValid())) {
+      return false;
+    }
+    units = normalizeUnits(units) || "millisecond";
+    if (units === "millisecond") {
+      return this.valueOf() > localInput.valueOf();
+    } else {
+      return localInput.valueOf() < this.clone().startOf(units).valueOf();
+    }
+  }
+  function isBefore(input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input);
+    if (!(this.isValid() && localInput.isValid())) {
+      return false;
+    }
+    units = normalizeUnits(units) || "millisecond";
+    if (units === "millisecond") {
+      return this.valueOf() < localInput.valueOf();
+    } else {
+      return this.clone().endOf(units).valueOf() < localInput.valueOf();
+    }
+  }
+  function isBetween(from2, to2, units, inclusivity) {
+    var localFrom = isMoment(from2) ? from2 : createLocal(from2), localTo = isMoment(to2) ? to2 : createLocal(to2);
+    if (!(this.isValid() && localFrom.isValid() && localTo.isValid())) {
+      return false;
+    }
+    inclusivity = inclusivity || "()";
+    return (inclusivity[0] === "(" ? this.isAfter(localFrom, units) : !this.isBefore(localFrom, units)) && (inclusivity[1] === ")" ? this.isBefore(localTo, units) : !this.isAfter(localTo, units));
+  }
+  function isSame(input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input), inputMs;
+    if (!(this.isValid() && localInput.isValid())) {
+      return false;
+    }
+    units = normalizeUnits(units) || "millisecond";
+    if (units === "millisecond") {
+      return this.valueOf() === localInput.valueOf();
+    } else {
+      inputMs = localInput.valueOf();
+      return this.clone().startOf(units).valueOf() <= inputMs && inputMs <= this.clone().endOf(units).valueOf();
+    }
+  }
+  function isSameOrAfter(input, units) {
+    return this.isSame(input, units) || this.isAfter(input, units);
+  }
+  function isSameOrBefore(input, units) {
+    return this.isSame(input, units) || this.isBefore(input, units);
+  }
+  function diff(input, units, asFloat) {
+    var that, zoneDelta, output;
+    if (!this.isValid()) {
+      return NaN;
+    }
+    that = cloneWithOffset(input, this);
+    if (!that.isValid()) {
+      return NaN;
+    }
+    zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4;
+    units = normalizeUnits(units);
+    switch (units) {
+      case "year":
+        output = monthDiff(this, that) / 12;
+        break;
+      case "month":
+        output = monthDiff(this, that);
+        break;
+      case "quarter":
+        output = monthDiff(this, that) / 3;
+        break;
+      case "second":
+        output = (this - that) / 1e3;
+        break;
+      case "minute":
+        output = (this - that) / 6e4;
+        break;
+      case "hour":
+        output = (this - that) / 36e5;
+        break;
+      case "day":
+        output = (this - that - zoneDelta) / 864e5;
+        break;
+      case "week":
+        output = (this - that - zoneDelta) / 6048e5;
+        break;
+      default:
+        output = this - that;
+    }
+    return asFloat ? output : absFloor(output);
+  }
+  function monthDiff(a2, b2) {
+    if (a2.date() < b2.date()) {
+      return -monthDiff(b2, a2);
+    }
+    var wholeMonthDiff = (b2.year() - a2.year()) * 12 + (b2.month() - a2.month()), anchor = a2.clone().add(wholeMonthDiff, "months"), anchor2, adjust;
+    if (b2 - anchor < 0) {
+      anchor2 = a2.clone().add(wholeMonthDiff - 1, "months");
+      adjust = (b2 - anchor) / (anchor - anchor2);
+    } else {
+      anchor2 = a2.clone().add(wholeMonthDiff + 1, "months");
+      adjust = (b2 - anchor) / (anchor2 - anchor);
+    }
+    return -(wholeMonthDiff + adjust) || 0;
+  }
+  hooks.defaultFormat = "YYYY-MM-DDTHH:mm:ssZ";
+  hooks.defaultFormatUtc = "YYYY-MM-DDTHH:mm:ss[Z]";
+  function toString$1() {
+    return this.clone().locale("en").format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ");
+  }
+  function toISOString(keepOffset) {
+    if (!this.isValid()) {
+      return null;
+    }
+    var utc2 = keepOffset !== true, m2 = utc2 ? this.clone().utc() : this;
+    if (m2.year() < 0 || m2.year() > 9999) {
+      return formatMoment(
+        m2,
+        utc2 ? "YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]" : "YYYYYY-MM-DD[T]HH:mm:ss.SSSZ"
+      );
+    }
+    if (isFunction(Date.prototype.toISOString)) {
+      if (utc2) {
+        return this.toDate().toISOString();
+      } else {
+        return new Date(this.valueOf() + this.utcOffset() * 60 * 1e3).toISOString().replace("Z", formatMoment(m2, "Z"));
+      }
+    }
+    return formatMoment(
+      m2,
+      utc2 ? "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]" : "YYYY-MM-DD[T]HH:mm:ss.SSSZ"
+    );
+  }
+  function inspect() {
+    if (!this.isValid()) {
+      return "moment.invalid(/* " + this._i + " */)";
+    }
+    var func = "moment", zone = "", prefix, year, datetime, suffix;
+    if (!this.isLocal()) {
+      func = this.utcOffset() === 0 ? "moment.utc" : "moment.parseZone";
+      zone = "Z";
+    }
+    prefix = "[" + func + '("]';
+    year = 0 <= this.year() && this.year() <= 9999 ? "YYYY" : "YYYYYY";
+    datetime = "-MM-DD[T]HH:mm:ss.SSS";
+    suffix = zone + '[")]';
+    return this.format(prefix + year + datetime + suffix);
+  }
+  function format(inputString) {
+    if (!inputString) {
+      inputString = this.isUtc() ? hooks.defaultFormatUtc : hooks.defaultFormat;
+    }
+    var output = formatMoment(this, inputString);
+    return this.localeData().postformat(output);
+  }
+  function from(time, withoutSuffix) {
+    if (this.isValid() && (isMoment(time) && time.isValid() || createLocal(time).isValid())) {
+      return createDuration({ to: this, from: time }).locale(this.locale()).humanize(!withoutSuffix);
+    } else {
+      return this.localeData().invalidDate();
+    }
+  }
+  function fromNow(withoutSuffix) {
+    return this.from(createLocal(), withoutSuffix);
+  }
+  function to(time, withoutSuffix) {
+    if (this.isValid() && (isMoment(time) && time.isValid() || createLocal(time).isValid())) {
+      return createDuration({ from: this, to: time }).locale(this.locale()).humanize(!withoutSuffix);
+    } else {
+      return this.localeData().invalidDate();
+    }
+  }
+  function toNow(withoutSuffix) {
+    return this.to(createLocal(), withoutSuffix);
+  }
+  function locale(key) {
+    var newLocaleData;
+    if (key === void 0) {
+      return this._locale._abbr;
+    } else {
+      newLocaleData = getLocale(key);
+      if (newLocaleData != null) {
+        this._locale = newLocaleData;
+      }
+      return this;
+    }
+  }
+  var lang = deprecate(
+    "moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.",
+    function(key) {
+      if (key === void 0) {
+        return this.localeData();
+      } else {
+        return this.locale(key);
+      }
+    }
+  );
+  function localeData() {
+    return this._locale;
+  }
+  var MS_PER_SECOND = 1e3, MS_PER_MINUTE = 60 * MS_PER_SECOND, MS_PER_HOUR = 60 * MS_PER_MINUTE, MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
+  function mod$1(dividend, divisor) {
+    return (dividend % divisor + divisor) % divisor;
+  }
+  function localStartOfDate(y, m2, d2) {
+    if (y < 100 && y >= 0) {
+      return new Date(y + 400, m2, d2) - MS_PER_400_YEARS;
+    } else {
+      return new Date(y, m2, d2).valueOf();
+    }
+  }
+  function utcStartOfDate(y, m2, d2) {
+    if (y < 100 && y >= 0) {
+      return Date.UTC(y + 400, m2, d2) - MS_PER_400_YEARS;
+    } else {
+      return Date.UTC(y, m2, d2);
+    }
+  }
+  function startOf(units) {
+    var time, startOfDate;
+    units = normalizeUnits(units);
+    if (units === void 0 || units === "millisecond" || !this.isValid()) {
+      return this;
+    }
+    startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+    switch (units) {
+      case "year":
+        time = startOfDate(this.year(), 0, 1);
+        break;
+      case "quarter":
+        time = startOfDate(
+          this.year(),
+          this.month() - this.month() % 3,
+          1
+        );
+        break;
+      case "month":
+        time = startOfDate(this.year(), this.month(), 1);
+        break;
+      case "week":
+        time = startOfDate(
+          this.year(),
+          this.month(),
+          this.date() - this.weekday()
+        );
+        break;
+      case "isoWeek":
+        time = startOfDate(
+          this.year(),
+          this.month(),
+          this.date() - (this.isoWeekday() - 1)
+        );
+        break;
+      case "day":
+      case "date":
+        time = startOfDate(this.year(), this.month(), this.date());
+        break;
+      case "hour":
+        time = this._d.valueOf();
+        time -= mod$1(
+          time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
+          MS_PER_HOUR
+        );
+        break;
+      case "minute":
+        time = this._d.valueOf();
+        time -= mod$1(time, MS_PER_MINUTE);
+        break;
+      case "second":
+        time = this._d.valueOf();
+        time -= mod$1(time, MS_PER_SECOND);
+        break;
+    }
+    this._d.setTime(time);
+    hooks.updateOffset(this, true);
+    return this;
+  }
+  function endOf(units) {
+    var time, startOfDate;
+    units = normalizeUnits(units);
+    if (units === void 0 || units === "millisecond" || !this.isValid()) {
+      return this;
+    }
+    startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+    switch (units) {
+      case "year":
+        time = startOfDate(this.year() + 1, 0, 1) - 1;
+        break;
+      case "quarter":
+        time = startOfDate(
+          this.year(),
+          this.month() - this.month() % 3 + 3,
+          1
+        ) - 1;
+        break;
+      case "month":
+        time = startOfDate(this.year(), this.month() + 1, 1) - 1;
+        break;
+      case "week":
+        time = startOfDate(
+          this.year(),
+          this.month(),
+          this.date() - this.weekday() + 7
+        ) - 1;
+        break;
+      case "isoWeek":
+        time = startOfDate(
+          this.year(),
+          this.month(),
+          this.date() - (this.isoWeekday() - 1) + 7
+        ) - 1;
+        break;
+      case "day":
+      case "date":
+        time = startOfDate(this.year(), this.month(), this.date() + 1) - 1;
+        break;
+      case "hour":
+        time = this._d.valueOf();
+        time += MS_PER_HOUR - mod$1(
+          time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
+          MS_PER_HOUR
+        ) - 1;
+        break;
+      case "minute":
+        time = this._d.valueOf();
+        time += MS_PER_MINUTE - mod$1(time, MS_PER_MINUTE) - 1;
+        break;
+      case "second":
+        time = this._d.valueOf();
+        time += MS_PER_SECOND - mod$1(time, MS_PER_SECOND) - 1;
+        break;
+    }
+    this._d.setTime(time);
+    hooks.updateOffset(this, true);
+    return this;
+  }
+  function valueOf() {
+    return this._d.valueOf() - (this._offset || 0) * 6e4;
+  }
+  function unix() {
+    return Math.floor(this.valueOf() / 1e3);
+  }
+  function toDate() {
+    return new Date(this.valueOf());
+  }
+  function toArray() {
+    var m2 = this;
+    return [
+      m2.year(),
+      m2.month(),
+      m2.date(),
+      m2.hour(),
+      m2.minute(),
+      m2.second(),
+      m2.millisecond()
+    ];
+  }
+  function toObject() {
+    var m2 = this;
+    return {
+      years: m2.year(),
+      months: m2.month(),
+      date: m2.date(),
+      hours: m2.hours(),
+      minutes: m2.minutes(),
+      seconds: m2.seconds(),
+      milliseconds: m2.milliseconds()
+    };
+  }
+  function toJSON() {
+    return this.isValid() ? this.toISOString() : null;
+  }
+  function isValid$2() {
+    return isValid(this);
+  }
+  function parsingFlags() {
+    return extend({}, getParsingFlags(this));
+  }
+  function invalidAt() {
+    return getParsingFlags(this).overflow;
+  }
+  function creationData() {
+    return {
+      input: this._i,
+      format: this._f,
+      locale: this._locale,
+      isUTC: this._isUTC,
+      strict: this._strict
+    };
+  }
+  addFormatToken("N", 0, 0, "eraAbbr");
+  addFormatToken("NN", 0, 0, "eraAbbr");
+  addFormatToken("NNN", 0, 0, "eraAbbr");
+  addFormatToken("NNNN", 0, 0, "eraName");
+  addFormatToken("NNNNN", 0, 0, "eraNarrow");
+  addFormatToken("y", ["y", 1], "yo", "eraYear");
+  addFormatToken("y", ["yy", 2], 0, "eraYear");
+  addFormatToken("y", ["yyy", 3], 0, "eraYear");
+  addFormatToken("y", ["yyyy", 4], 0, "eraYear");
+  addRegexToken("N", matchEraAbbr);
+  addRegexToken("NN", matchEraAbbr);
+  addRegexToken("NNN", matchEraAbbr);
+  addRegexToken("NNNN", matchEraName);
+  addRegexToken("NNNNN", matchEraNarrow);
+  addParseToken(
+    ["N", "NN", "NNN", "NNNN", "NNNNN"],
+    function(input, array, config, token2) {
+      var era = config._locale.erasParse(input, token2, config._strict);
+      if (era) {
+        getParsingFlags(config).era = era;
+      } else {
+        getParsingFlags(config).invalidEra = input;
+      }
+    }
+  );
+  addRegexToken("y", matchUnsigned);
+  addRegexToken("yy", matchUnsigned);
+  addRegexToken("yyy", matchUnsigned);
+  addRegexToken("yyyy", matchUnsigned);
+  addRegexToken("yo", matchEraYearOrdinal);
+  addParseToken(["y", "yy", "yyy", "yyyy"], YEAR);
+  addParseToken(["yo"], function(input, array, config, token2) {
+    var match;
+    if (config._locale._eraYearOrdinalRegex) {
+      match = input.match(config._locale._eraYearOrdinalRegex);
+    }
+    if (config._locale.eraYearOrdinalParse) {
+      array[YEAR] = config._locale.eraYearOrdinalParse(input, match);
+    } else {
+      array[YEAR] = parseInt(input, 10);
+    }
+  });
+  function localeEras(m2, format2) {
+    var i2, l2, date, eras = this._eras || getLocale("en")._eras;
+    for (i2 = 0, l2 = eras.length; i2 < l2; ++i2) {
+      switch (typeof eras[i2].since) {
+        case "string":
+          date = hooks(eras[i2].since).startOf("day");
+          eras[i2].since = date.valueOf();
+          break;
+      }
+      switch (typeof eras[i2].until) {
+        case "undefined":
+          eras[i2].until = Infinity;
+          break;
+        case "string":
+          date = hooks(eras[i2].until).startOf("day").valueOf();
+          eras[i2].until = date.valueOf();
+          break;
+      }
+    }
+    return eras;
+  }
+  function localeErasParse(eraName, format2, strict) {
+    var i2, l2, eras = this.eras(), name2, abbr, narrow;
+    eraName = eraName.toUpperCase();
+    for (i2 = 0, l2 = eras.length; i2 < l2; ++i2) {
+      name2 = eras[i2].name.toUpperCase();
+      abbr = eras[i2].abbr.toUpperCase();
+      narrow = eras[i2].narrow.toUpperCase();
+      if (strict) {
+        switch (format2) {
+          case "N":
+          case "NN":
+          case "NNN":
+            if (abbr === eraName) {
+              return eras[i2];
+            }
+            break;
+          case "NNNN":
+            if (name2 === eraName) {
+              return eras[i2];
+            }
+            break;
+          case "NNNNN":
+            if (narrow === eraName) {
+              return eras[i2];
+            }
+            break;
+        }
+      } else if ([name2, abbr, narrow].indexOf(eraName) >= 0) {
+        return eras[i2];
+      }
+    }
+  }
+  function localeErasConvertYear(era, year) {
+    var dir = era.since <= era.until ? 1 : -1;
+    if (year === void 0) {
+      return hooks(era.since).year();
+    } else {
+      return hooks(era.since).year() + (year - era.offset) * dir;
+    }
+  }
+  function getEraName() {
+    var i2, l2, val, eras = this.localeData().eras();
+    for (i2 = 0, l2 = eras.length; i2 < l2; ++i2) {
+      val = this.clone().startOf("day").valueOf();
+      if (eras[i2].since <= val && val <= eras[i2].until) {
+        return eras[i2].name;
+      }
+      if (eras[i2].until <= val && val <= eras[i2].since) {
+        return eras[i2].name;
+      }
+    }
+    return "";
+  }
+  function getEraNarrow() {
+    var i2, l2, val, eras = this.localeData().eras();
+    for (i2 = 0, l2 = eras.length; i2 < l2; ++i2) {
+      val = this.clone().startOf("day").valueOf();
+      if (eras[i2].since <= val && val <= eras[i2].until) {
+        return eras[i2].narrow;
+      }
+      if (eras[i2].until <= val && val <= eras[i2].since) {
+        return eras[i2].narrow;
+      }
+    }
+    return "";
+  }
+  function getEraAbbr() {
+    var i2, l2, val, eras = this.localeData().eras();
+    for (i2 = 0, l2 = eras.length; i2 < l2; ++i2) {
+      val = this.clone().startOf("day").valueOf();
+      if (eras[i2].since <= val && val <= eras[i2].until) {
+        return eras[i2].abbr;
+      }
+      if (eras[i2].until <= val && val <= eras[i2].since) {
+        return eras[i2].abbr;
+      }
+    }
+    return "";
+  }
+  function getEraYear() {
+    var i2, l2, dir, val, eras = this.localeData().eras();
+    for (i2 = 0, l2 = eras.length; i2 < l2; ++i2) {
+      dir = eras[i2].since <= eras[i2].until ? 1 : -1;
+      val = this.clone().startOf("day").valueOf();
+      if (eras[i2].since <= val && val <= eras[i2].until || eras[i2].until <= val && val <= eras[i2].since) {
+        return (this.year() - hooks(eras[i2].since).year()) * dir + eras[i2].offset;
+      }
+    }
+    return this.year();
+  }
+  function erasNameRegex(isStrict) {
+    if (!hasOwnProp(this, "_erasNameRegex")) {
+      computeErasParse.call(this);
+    }
+    return isStrict ? this._erasNameRegex : this._erasRegex;
+  }
+  function erasAbbrRegex(isStrict) {
+    if (!hasOwnProp(this, "_erasAbbrRegex")) {
+      computeErasParse.call(this);
+    }
+    return isStrict ? this._erasAbbrRegex : this._erasRegex;
+  }
+  function erasNarrowRegex(isStrict) {
+    if (!hasOwnProp(this, "_erasNarrowRegex")) {
+      computeErasParse.call(this);
+    }
+    return isStrict ? this._erasNarrowRegex : this._erasRegex;
+  }
+  function matchEraAbbr(isStrict, locale2) {
+    return locale2.erasAbbrRegex(isStrict);
+  }
+  function matchEraName(isStrict, locale2) {
+    return locale2.erasNameRegex(isStrict);
+  }
+  function matchEraNarrow(isStrict, locale2) {
+    return locale2.erasNarrowRegex(isStrict);
+  }
+  function matchEraYearOrdinal(isStrict, locale2) {
+    return locale2._eraYearOrdinalRegex || matchUnsigned;
+  }
+  function computeErasParse() {
+    var abbrPieces = [], namePieces = [], narrowPieces = [], mixedPieces = [], i2, l2, eras = this.eras();
+    for (i2 = 0, l2 = eras.length; i2 < l2; ++i2) {
+      namePieces.push(regexEscape(eras[i2].name));
+      abbrPieces.push(regexEscape(eras[i2].abbr));
+      narrowPieces.push(regexEscape(eras[i2].narrow));
+      mixedPieces.push(regexEscape(eras[i2].name));
+      mixedPieces.push(regexEscape(eras[i2].abbr));
+      mixedPieces.push(regexEscape(eras[i2].narrow));
+    }
+    this._erasRegex = new RegExp("^(" + mixedPieces.join("|") + ")", "i");
+    this._erasNameRegex = new RegExp("^(" + namePieces.join("|") + ")", "i");
+    this._erasAbbrRegex = new RegExp("^(" + abbrPieces.join("|") + ")", "i");
+    this._erasNarrowRegex = new RegExp(
+      "^(" + narrowPieces.join("|") + ")",
+      "i"
+    );
+  }
+  addFormatToken(0, ["gg", 2], 0, function() {
+    return this.weekYear() % 100;
+  });
+  addFormatToken(0, ["GG", 2], 0, function() {
+    return this.isoWeekYear() % 100;
+  });
+  function addWeekYearFormatToken(token2, getter) {
+    addFormatToken(0, [token2, token2.length], 0, getter);
+  }
+  addWeekYearFormatToken("gggg", "weekYear");
+  addWeekYearFormatToken("ggggg", "weekYear");
+  addWeekYearFormatToken("GGGG", "isoWeekYear");
+  addWeekYearFormatToken("GGGGG", "isoWeekYear");
+  addUnitAlias("weekYear", "gg");
+  addUnitAlias("isoWeekYear", "GG");
+  addUnitPriority("weekYear", 1);
+  addUnitPriority("isoWeekYear", 1);
+  addRegexToken("G", matchSigned);
+  addRegexToken("g", matchSigned);
+  addRegexToken("GG", match1to2, match2);
+  addRegexToken("gg", match1to2, match2);
+  addRegexToken("GGGG", match1to4, match4);
+  addRegexToken("gggg", match1to4, match4);
+  addRegexToken("GGGGG", match1to6, match6);
+  addRegexToken("ggggg", match1to6, match6);
+  addWeekParseToken(
+    ["gggg", "ggggg", "GGGG", "GGGGG"],
+    function(input, week, config, token2) {
+      week[token2.substr(0, 2)] = toInt(input);
+    }
+  );
+  addWeekParseToken(["gg", "GG"], function(input, week, config, token2) {
+    week[token2] = hooks.parseTwoDigitYear(input);
+  });
+  function getSetWeekYear(input) {
+    return getSetWeekYearHelper.call(
+      this,
+      input,
+      this.week(),
+      this.weekday(),
+      this.localeData()._week.dow,
+      this.localeData()._week.doy
+    );
+  }
+  function getSetISOWeekYear(input) {
+    return getSetWeekYearHelper.call(
+      this,
+      input,
+      this.isoWeek(),
+      this.isoWeekday(),
+      1,
+      4
+    );
+  }
+  function getISOWeeksInYear() {
+    return weeksInYear(this.year(), 1, 4);
+  }
+  function getISOWeeksInISOWeekYear() {
+    return weeksInYear(this.isoWeekYear(), 1, 4);
+  }
+  function getWeeksInYear() {
+    var weekInfo = this.localeData()._week;
+    return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
+  }
+  function getWeeksInWeekYear() {
+    var weekInfo = this.localeData()._week;
+    return weeksInYear(this.weekYear(), weekInfo.dow, weekInfo.doy);
+  }
+  function getSetWeekYearHelper(input, week, weekday, dow, doy) {
+    var weeksTarget;
+    if (input == null) {
+      return weekOfYear(this, dow, doy).year;
+    } else {
+      weeksTarget = weeksInYear(input, dow, doy);
+      if (week > weeksTarget) {
+        week = weeksTarget;
+      }
+      return setWeekAll.call(this, input, week, weekday, dow, doy);
+    }
+  }
+  function setWeekAll(weekYear, week, weekday, dow, doy) {
+    var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy), date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
+    this.year(date.getUTCFullYear());
+    this.month(date.getUTCMonth());
+    this.date(date.getUTCDate());
+    return this;
+  }
+  addFormatToken("Q", 0, "Qo", "quarter");
+  addUnitAlias("quarter", "Q");
+  addUnitPriority("quarter", 7);
+  addRegexToken("Q", match1);
+  addParseToken("Q", function(input, array) {
+    array[MONTH] = (toInt(input) - 1) * 3;
+  });
+  function getSetQuarter(input) {
+    return input == null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
+  }
+  addFormatToken("D", ["DD", 2], "Do", "date");
+  addUnitAlias("date", "D");
+  addUnitPriority("date", 9);
+  addRegexToken("D", match1to2);
+  addRegexToken("DD", match1to2, match2);
+  addRegexToken("Do", function(isStrict, locale2) {
+    return isStrict ? locale2._dayOfMonthOrdinalParse || locale2._ordinalParse : locale2._dayOfMonthOrdinalParseLenient;
+  });
+  addParseToken(["D", "DD"], DATE);
+  addParseToken("Do", function(input, array) {
+    array[DATE] = toInt(input.match(match1to2)[0]);
+  });
+  var getSetDayOfMonth = makeGetSet("Date", true);
+  addFormatToken("DDD", ["DDDD", 3], "DDDo", "dayOfYear");
+  addUnitAlias("dayOfYear", "DDD");
+  addUnitPriority("dayOfYear", 4);
+  addRegexToken("DDD", match1to3);
+  addRegexToken("DDDD", match3);
+  addParseToken(["DDD", "DDDD"], function(input, array, config) {
+    config._dayOfYear = toInt(input);
+  });
+  function getSetDayOfYear(input) {
+    var dayOfYear = Math.round(
+      (this.clone().startOf("day") - this.clone().startOf("year")) / 864e5
+    ) + 1;
+    return input == null ? dayOfYear : this.add(input - dayOfYear, "d");
+  }
+  addFormatToken("m", ["mm", 2], 0, "minute");
+  addUnitAlias("minute", "m");
+  addUnitPriority("minute", 14);
+  addRegexToken("m", match1to2);
+  addRegexToken("mm", match1to2, match2);
+  addParseToken(["m", "mm"], MINUTE);
+  var getSetMinute = makeGetSet("Minutes", false);
+  addFormatToken("s", ["ss", 2], 0, "second");
+  addUnitAlias("second", "s");
+  addUnitPriority("second", 15);
+  addRegexToken("s", match1to2);
+  addRegexToken("ss", match1to2, match2);
+  addParseToken(["s", "ss"], SECOND);
+  var getSetSecond = makeGetSet("Seconds", false);
+  addFormatToken("S", 0, 0, function() {
+    return ~~(this.millisecond() / 100);
+  });
+  addFormatToken(0, ["SS", 2], 0, function() {
+    return ~~(this.millisecond() / 10);
+  });
+  addFormatToken(0, ["SSS", 3], 0, "millisecond");
+  addFormatToken(0, ["SSSS", 4], 0, function() {
+    return this.millisecond() * 10;
+  });
+  addFormatToken(0, ["SSSSS", 5], 0, function() {
+    return this.millisecond() * 100;
+  });
+  addFormatToken(0, ["SSSSSS", 6], 0, function() {
+    return this.millisecond() * 1e3;
+  });
+  addFormatToken(0, ["SSSSSSS", 7], 0, function() {
+    return this.millisecond() * 1e4;
+  });
+  addFormatToken(0, ["SSSSSSSS", 8], 0, function() {
+    return this.millisecond() * 1e5;
+  });
+  addFormatToken(0, ["SSSSSSSSS", 9], 0, function() {
+    return this.millisecond() * 1e6;
+  });
+  addUnitAlias("millisecond", "ms");
+  addUnitPriority("millisecond", 16);
+  addRegexToken("S", match1to3, match1);
+  addRegexToken("SS", match1to3, match2);
+  addRegexToken("SSS", match1to3, match3);
+  var token, getSetMillisecond;
+  for (token = "SSSS"; token.length <= 9; token += "S") {
+    addRegexToken(token, matchUnsigned);
+  }
+  function parseMs(input, array) {
+    array[MILLISECOND] = toInt(("0." + input) * 1e3);
+  }
+  for (token = "S"; token.length <= 9; token += "S") {
+    addParseToken(token, parseMs);
+  }
+  getSetMillisecond = makeGetSet("Milliseconds", false);
+  addFormatToken("z", 0, 0, "zoneAbbr");
+  addFormatToken("zz", 0, 0, "zoneName");
+  function getZoneAbbr() {
+    return this._isUTC ? "UTC" : "";
+  }
+  function getZoneName() {
+    return this._isUTC ? "Coordinated Universal Time" : "";
+  }
+  var proto = Moment.prototype;
+  proto.add = add;
+  proto.calendar = calendar$1$1;
+  proto.clone = clone;
+  proto.diff = diff;
+  proto.endOf = endOf;
+  proto.format = format;
+  proto.from = from;
+  proto.fromNow = fromNow;
+  proto.to = to;
+  proto.toNow = toNow;
+  proto.get = stringGet;
+  proto.invalidAt = invalidAt;
+  proto.isAfter = isAfter;
+  proto.isBefore = isBefore;
+  proto.isBetween = isBetween;
+  proto.isSame = isSame;
+  proto.isSameOrAfter = isSameOrAfter;
+  proto.isSameOrBefore = isSameOrBefore;
+  proto.isValid = isValid$2;
+  proto.lang = lang;
+  proto.locale = locale;
+  proto.localeData = localeData;
+  proto.max = prototypeMax;
+  proto.min = prototypeMin;
+  proto.parsingFlags = parsingFlags;
+  proto.set = stringSet;
+  proto.startOf = startOf;
+  proto.subtract = subtract;
+  proto.toArray = toArray;
+  proto.toObject = toObject;
+  proto.toDate = toDate;
+  proto.toISOString = toISOString;
+  proto.inspect = inspect;
+  if (typeof Symbol !== "undefined" && Symbol.for != null) {
+    proto[Symbol.for("nodejs.util.inspect.custom")] = function() {
+      return "Moment<" + this.format() + ">";
+    };
+  }
+  proto.toJSON = toJSON;
+  proto.toString = toString$1;
+  proto.unix = unix;
+  proto.valueOf = valueOf;
+  proto.creationData = creationData;
+  proto.eraName = getEraName;
+  proto.eraNarrow = getEraNarrow;
+  proto.eraAbbr = getEraAbbr;
+  proto.eraYear = getEraYear;
+  proto.year = getSetYear;
+  proto.isLeapYear = getIsLeapYear;
+  proto.weekYear = getSetWeekYear;
+  proto.isoWeekYear = getSetISOWeekYear;
+  proto.quarter = proto.quarters = getSetQuarter;
+  proto.month = getSetMonth;
+  proto.daysInMonth = getDaysInMonth;
+  proto.week = proto.weeks = getSetWeek;
+  proto.isoWeek = proto.isoWeeks = getSetISOWeek;
+  proto.weeksInYear = getWeeksInYear;
+  proto.weeksInWeekYear = getWeeksInWeekYear;
+  proto.isoWeeksInYear = getISOWeeksInYear;
+  proto.isoWeeksInISOWeekYear = getISOWeeksInISOWeekYear;
+  proto.date = getSetDayOfMonth;
+  proto.day = proto.days = getSetDayOfWeek;
+  proto.weekday = getSetLocaleDayOfWeek;
+  proto.isoWeekday = getSetISODayOfWeek;
+  proto.dayOfYear = getSetDayOfYear;
+  proto.hour = proto.hours = getSetHour;
+  proto.minute = proto.minutes = getSetMinute;
+  proto.second = proto.seconds = getSetSecond;
+  proto.millisecond = proto.milliseconds = getSetMillisecond;
+  proto.utcOffset = getSetOffset;
+  proto.utc = setOffsetToUTC;
+  proto.local = setOffsetToLocal;
+  proto.parseZone = setOffsetToParsedOffset;
+  proto.hasAlignedHourOffset = hasAlignedHourOffset;
+  proto.isDST = isDaylightSavingTime;
+  proto.isLocal = isLocal;
+  proto.isUtcOffset = isUtcOffset;
+  proto.isUtc = isUtc;
+  proto.isUTC = isUtc;
+  proto.zoneAbbr = getZoneAbbr;
+  proto.zoneName = getZoneName;
+  proto.dates = deprecate(
+    "dates accessor is deprecated. Use date instead.",
+    getSetDayOfMonth
+  );
+  proto.months = deprecate(
+    "months accessor is deprecated. Use month instead",
+    getSetMonth
+  );
+  proto.years = deprecate(
+    "years accessor is deprecated. Use year instead",
+    getSetYear
+  );
+  proto.zone = deprecate(
+    "moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/",
+    getSetZone
+  );
+  proto.isDSTShifted = deprecate(
+    "isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information",
+    isDaylightSavingTimeShifted
+  );
+  function createUnix(input) {
+    return createLocal(input * 1e3);
+  }
+  function createInZone() {
+    return createLocal.apply(null, arguments).parseZone();
+  }
+  function preParsePostFormat(string) {
+    return string;
+  }
+  var proto$1 = Locale.prototype;
+  proto$1.calendar = calendar$1;
+  proto$1.longDateFormat = longDateFormat;
+  proto$1.invalidDate = invalidDate;
+  proto$1.ordinal = ordinal;
+  proto$1.preparse = preParsePostFormat;
+  proto$1.postformat = preParsePostFormat;
+  proto$1.relativeTime = relativeTime;
+  proto$1.pastFuture = pastFuture;
+  proto$1.set = set;
+  proto$1.eras = localeEras;
+  proto$1.erasParse = localeErasParse;
+  proto$1.erasConvertYear = localeErasConvertYear;
+  proto$1.erasAbbrRegex = erasAbbrRegex;
+  proto$1.erasNameRegex = erasNameRegex;
+  proto$1.erasNarrowRegex = erasNarrowRegex;
+  proto$1.months = localeMonths;
+  proto$1.monthsShort = localeMonthsShort;
+  proto$1.monthsParse = localeMonthsParse;
+  proto$1.monthsRegex = monthsRegex;
+  proto$1.monthsShortRegex = monthsShortRegex;
+  proto$1.week = localeWeek;
+  proto$1.firstDayOfYear = localeFirstDayOfYear;
+  proto$1.firstDayOfWeek = localeFirstDayOfWeek;
+  proto$1.weekdays = localeWeekdays;
+  proto$1.weekdaysMin = localeWeekdaysMin;
+  proto$1.weekdaysShort = localeWeekdaysShort;
+  proto$1.weekdaysParse = localeWeekdaysParse;
+  proto$1.weekdaysRegex = weekdaysRegex;
+  proto$1.weekdaysShortRegex = weekdaysShortRegex;
+  proto$1.weekdaysMinRegex = weekdaysMinRegex;
+  proto$1.isPM = localeIsPM;
+  proto$1.meridiem = localeMeridiem;
+  function get$1(format2, index, field, setter) {
+    var locale2 = getLocale(), utc2 = createUTC().set(setter, index);
+    return locale2[field](utc2, format2);
+  }
+  function listMonthsImpl(format2, index, field) {
+    if (isNumber(format2)) {
+      index = format2;
+      format2 = void 0;
+    }
+    format2 = format2 || "";
+    if (index != null) {
+      return get$1(format2, index, field, "month");
+    }
+    var i2, out = [];
+    for (i2 = 0; i2 < 12; i2++) {
+      out[i2] = get$1(format2, i2, field, "month");
+    }
+    return out;
+  }
+  function listWeekdaysImpl(localeSorted, format2, index, field) {
+    if (typeof localeSorted === "boolean") {
+      if (isNumber(format2)) {
+        index = format2;
+        format2 = void 0;
+      }
+      format2 = format2 || "";
+    } else {
+      format2 = localeSorted;
+      index = format2;
+      localeSorted = false;
+      if (isNumber(format2)) {
+        index = format2;
+        format2 = void 0;
+      }
+      format2 = format2 || "";
+    }
+    var locale2 = getLocale(), shift = localeSorted ? locale2._week.dow : 0, i2, out = [];
+    if (index != null) {
+      return get$1(format2, (index + shift) % 7, field, "day");
+    }
+    for (i2 = 0; i2 < 7; i2++) {
+      out[i2] = get$1(format2, (i2 + shift) % 7, field, "day");
+    }
+    return out;
+  }
+  function listMonths(format2, index) {
+    return listMonthsImpl(format2, index, "months");
+  }
+  function listMonthsShort(format2, index) {
+    return listMonthsImpl(format2, index, "monthsShort");
+  }
+  function listWeekdays(localeSorted, format2, index) {
+    return listWeekdaysImpl(localeSorted, format2, index, "weekdays");
+  }
+  function listWeekdaysShort(localeSorted, format2, index) {
+    return listWeekdaysImpl(localeSorted, format2, index, "weekdaysShort");
+  }
+  function listWeekdaysMin(localeSorted, format2, index) {
+    return listWeekdaysImpl(localeSorted, format2, index, "weekdaysMin");
+  }
+  getSetGlobalLocale("en", {
+    eras: [
+      {
+        since: "0001-01-01",
+        until: Infinity,
+        offset: 1,
+        name: "Anno Domini",
+        narrow: "AD",
+        abbr: "AD"
+      },
+      {
+        since: "0000-12-31",
+        until: -Infinity,
+        offset: 1,
+        name: "Before Christ",
+        narrow: "BC",
+        abbr: "BC"
+      }
+    ],
+    dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
+    ordinal: function(number) {
+      var b2 = number % 10, output = toInt(number % 100 / 10) === 1 ? "th" : b2 === 1 ? "st" : b2 === 2 ? "nd" : b2 === 3 ? "rd" : "th";
+      return number + output;
+    }
+  });
+  hooks.lang = deprecate(
+    "moment.lang is deprecated. Use moment.locale instead.",
+    getSetGlobalLocale
+  );
+  hooks.langData = deprecate(
+    "moment.langData is deprecated. Use moment.localeData instead.",
+    getLocale
+  );
+  var mathAbs = Math.abs;
+  function abs() {
+    var data = this._data;
+    this._milliseconds = mathAbs(this._milliseconds);
+    this._days = mathAbs(this._days);
+    this._months = mathAbs(this._months);
+    data.milliseconds = mathAbs(data.milliseconds);
+    data.seconds = mathAbs(data.seconds);
+    data.minutes = mathAbs(data.minutes);
+    data.hours = mathAbs(data.hours);
+    data.months = mathAbs(data.months);
+    data.years = mathAbs(data.years);
+    return this;
+  }
+  function addSubtract$1(duration, input, value, direction) {
+    var other = createDuration(input, value);
+    duration._milliseconds += direction * other._milliseconds;
+    duration._days += direction * other._days;
+    duration._months += direction * other._months;
+    return duration._bubble();
+  }
+  function add$1(input, value) {
+    return addSubtract$1(this, input, value, 1);
+  }
+  function subtract$1(input, value) {
+    return addSubtract$1(this, input, value, -1);
+  }
+  function absCeil(number) {
+    if (number < 0) {
+      return Math.floor(number);
+    } else {
+      return Math.ceil(number);
+    }
+  }
+  function bubble() {
+    var milliseconds2 = this._milliseconds, days2 = this._days, months2 = this._months, data = this._data, seconds2, minutes2, hours2, years2, monthsFromDays;
+    if (!(milliseconds2 >= 0 && days2 >= 0 && months2 >= 0 || milliseconds2 <= 0 && days2 <= 0 && months2 <= 0)) {
+      milliseconds2 += absCeil(monthsToDays(months2) + days2) * 864e5;
+      days2 = 0;
+      months2 = 0;
+    }
+    data.milliseconds = milliseconds2 % 1e3;
+    seconds2 = absFloor(milliseconds2 / 1e3);
+    data.seconds = seconds2 % 60;
+    minutes2 = absFloor(seconds2 / 60);
+    data.minutes = minutes2 % 60;
+    hours2 = absFloor(minutes2 / 60);
+    data.hours = hours2 % 24;
+    days2 += absFloor(hours2 / 24);
+    monthsFromDays = absFloor(daysToMonths(days2));
+    months2 += monthsFromDays;
+    days2 -= absCeil(monthsToDays(monthsFromDays));
+    years2 = absFloor(months2 / 12);
+    months2 %= 12;
+    data.days = days2;
+    data.months = months2;
+    data.years = years2;
+    return this;
+  }
+  function daysToMonths(days2) {
+    return days2 * 4800 / 146097;
+  }
+  function monthsToDays(months2) {
+    return months2 * 146097 / 4800;
+  }
+  function as(units) {
+    if (!this.isValid()) {
+      return NaN;
+    }
+    var days2, months2, milliseconds2 = this._milliseconds;
+    units = normalizeUnits(units);
+    if (units === "month" || units === "quarter" || units === "year") {
+      days2 = this._days + milliseconds2 / 864e5;
+      months2 = this._months + daysToMonths(days2);
+      switch (units) {
+        case "month":
+          return months2;
+        case "quarter":
+          return months2 / 3;
+        case "year":
+          return months2 / 12;
+      }
+    } else {
+      days2 = this._days + Math.round(monthsToDays(this._months));
+      switch (units) {
+        case "week":
+          return days2 / 7 + milliseconds2 / 6048e5;
+        case "day":
+          return days2 + milliseconds2 / 864e5;
+        case "hour":
+          return days2 * 24 + milliseconds2 / 36e5;
+        case "minute":
+          return days2 * 1440 + milliseconds2 / 6e4;
+        case "second":
+          return days2 * 86400 + milliseconds2 / 1e3;
+        case "millisecond":
+          return Math.floor(days2 * 864e5) + milliseconds2;
+        default:
+          throw new Error("Unknown unit " + units);
+      }
+    }
+  }
+  function valueOf$1() {
+    if (!this.isValid()) {
+      return NaN;
+    }
+    return this._milliseconds + this._days * 864e5 + this._months % 12 * 2592e6 + toInt(this._months / 12) * 31536e6;
+  }
+  function makeAs(alias) {
+    return function() {
+      return this.as(alias);
+    };
+  }
+  var asMilliseconds = makeAs("ms"), asSeconds = makeAs("s"), asMinutes = makeAs("m"), asHours = makeAs("h"), asDays = makeAs("d"), asWeeks = makeAs("w"), asMonths = makeAs("M"), asQuarters = makeAs("Q"), asYears = makeAs("y");
+  function clone$1() {
+    return createDuration(this);
+  }
+  function get$2(units) {
+    units = normalizeUnits(units);
+    return this.isValid() ? this[units + "s"]() : NaN;
+  }
+  function makeGetter(name2) {
+    return function() {
+      return this.isValid() ? this._data[name2] : NaN;
+    };
+  }
+  var milliseconds = makeGetter("milliseconds"), seconds = makeGetter("seconds"), minutes = makeGetter("minutes"), hours = makeGetter("hours"), days = makeGetter("days"), months = makeGetter("months"), years = makeGetter("years");
+  function weeks() {
+    return absFloor(this.days() / 7);
+  }
+  var round = Math.round, thresholds = {
+    ss: 44,
+    s: 45,
+    m: 45,
+    h: 22,
+    d: 26,
+    w: null,
+    M: 11
+  };
+  function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale2) {
+    return locale2.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
+  }
+  function relativeTime$1(posNegDuration, withoutSuffix, thresholds2, locale2) {
+    var duration = createDuration(posNegDuration).abs(), seconds2 = round(duration.as("s")), minutes2 = round(duration.as("m")), hours2 = round(duration.as("h")), days2 = round(duration.as("d")), months2 = round(duration.as("M")), weeks2 = round(duration.as("w")), years2 = round(duration.as("y")), a2 = seconds2 <= thresholds2.ss && ["s", seconds2] || seconds2 < thresholds2.s && ["ss", seconds2] || minutes2 <= 1 && ["m"] || minutes2 < thresholds2.m && ["mm", minutes2] || hours2 <= 1 && ["h"] || hours2 < thresholds2.h && ["hh", hours2] || days2 <= 1 && ["d"] || days2 < thresholds2.d && ["dd", days2];
+    if (thresholds2.w != null) {
+      a2 = a2 || weeks2 <= 1 && ["w"] || weeks2 < thresholds2.w && ["ww", weeks2];
+    }
+    a2 = a2 || months2 <= 1 && ["M"] || months2 < thresholds2.M && ["MM", months2] || years2 <= 1 && ["y"] || ["yy", years2];
+    a2[2] = withoutSuffix;
+    a2[3] = +posNegDuration > 0;
+    a2[4] = locale2;
+    return substituteTimeAgo.apply(null, a2);
+  }
+  function getSetRelativeTimeRounding(roundingFunction) {
+    if (roundingFunction === void 0) {
+      return round;
+    }
+    if (typeof roundingFunction === "function") {
+      round = roundingFunction;
+      return true;
+    }
+    return false;
+  }
+  function getSetRelativeTimeThreshold(threshold, limit) {
+    if (thresholds[threshold] === void 0) {
+      return false;
+    }
+    if (limit === void 0) {
+      return thresholds[threshold];
+    }
+    thresholds[threshold] = limit;
+    if (threshold === "s") {
+      thresholds.ss = limit - 1;
+    }
+    return true;
+  }
+  function humanize(argWithSuffix, argThresholds) {
+    if (!this.isValid()) {
+      return this.localeData().invalidDate();
+    }
+    var withSuffix = false, th = thresholds, locale2, output;
+    if (typeof argWithSuffix === "object") {
+      argThresholds = argWithSuffix;
+      argWithSuffix = false;
+    }
+    if (typeof argWithSuffix === "boolean") {
+      withSuffix = argWithSuffix;
+    }
+    if (typeof argThresholds === "object") {
+      th = Object.assign({}, thresholds, argThresholds);
+      if (argThresholds.s != null && argThresholds.ss == null) {
+        th.ss = argThresholds.s - 1;
+      }
+    }
+    locale2 = this.localeData();
+    output = relativeTime$1(this, !withSuffix, th, locale2);
+    if (withSuffix) {
+      output = locale2.pastFuture(+this, output);
+    }
+    return locale2.postformat(output);
+  }
+  var abs$1 = Math.abs;
+  function sign(x2) {
+    return (x2 > 0) - (x2 < 0) || +x2;
+  }
+  function toISOString$1() {
+    if (!this.isValid()) {
+      return this.localeData().invalidDate();
+    }
+    var seconds2 = abs$1(this._milliseconds) / 1e3, days2 = abs$1(this._days), months2 = abs$1(this._months), minutes2, hours2, years2, s2, total = this.asSeconds(), totalSign, ymSign, daysSign, hmsSign;
+    if (!total) {
+      return "P0D";
+    }
+    minutes2 = absFloor(seconds2 / 60);
+    hours2 = absFloor(minutes2 / 60);
+    seconds2 %= 60;
+    minutes2 %= 60;
+    years2 = absFloor(months2 / 12);
+    months2 %= 12;
+    s2 = seconds2 ? seconds2.toFixed(3).replace(/\.?0+$/, "") : "";
+    totalSign = total < 0 ? "-" : "";
+    ymSign = sign(this._months) !== sign(total) ? "-" : "";
+    daysSign = sign(this._days) !== sign(total) ? "-" : "";
+    hmsSign = sign(this._milliseconds) !== sign(total) ? "-" : "";
+    return totalSign + "P" + (years2 ? ymSign + years2 + "Y" : "") + (months2 ? ymSign + months2 + "M" : "") + (days2 ? daysSign + days2 + "D" : "") + (hours2 || minutes2 || seconds2 ? "T" : "") + (hours2 ? hmsSign + hours2 + "H" : "") + (minutes2 ? hmsSign + minutes2 + "M" : "") + (seconds2 ? hmsSign + s2 + "S" : "");
+  }
+  var proto$2 = Duration.prototype;
+  proto$2.isValid = isValid$1;
+  proto$2.abs = abs;
+  proto$2.add = add$1;
+  proto$2.subtract = subtract$1;
+  proto$2.as = as;
+  proto$2.asMilliseconds = asMilliseconds;
+  proto$2.asSeconds = asSeconds;
+  proto$2.asMinutes = asMinutes;
+  proto$2.asHours = asHours;
+  proto$2.asDays = asDays;
+  proto$2.asWeeks = asWeeks;
+  proto$2.asMonths = asMonths;
+  proto$2.asQuarters = asQuarters;
+  proto$2.asYears = asYears;
+  proto$2.valueOf = valueOf$1;
+  proto$2._bubble = bubble;
+  proto$2.clone = clone$1;
+  proto$2.get = get$2;
+  proto$2.milliseconds = milliseconds;
+  proto$2.seconds = seconds;
+  proto$2.minutes = minutes;
+  proto$2.hours = hours;
+  proto$2.days = days;
+  proto$2.weeks = weeks;
+  proto$2.months = months;
+  proto$2.years = years;
+  proto$2.humanize = humanize;
+  proto$2.toISOString = toISOString$1;
+  proto$2.toString = toISOString$1;
+  proto$2.toJSON = toISOString$1;
+  proto$2.locale = locale;
+  proto$2.localeData = localeData;
+  proto$2.toIsoString = deprecate(
+    "toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)",
+    toISOString$1
+  );
+  proto$2.lang = lang;
+  addFormatToken("X", 0, 0, "unix");
+  addFormatToken("x", 0, 0, "valueOf");
+  addRegexToken("x", matchSigned);
+  addRegexToken("X", matchTimestamp);
+  addParseToken("X", function(input, array, config) {
+    config._d = new Date(parseFloat(input) * 1e3);
+  });
+  addParseToken("x", function(input, array, config) {
+    config._d = new Date(toInt(input));
+  });
+  //! moment.js
+  hooks.version = "2.29.4";
+  setHookCallback(createLocal);
+  hooks.fn = proto;
+  hooks.min = min;
+  hooks.max = max;
+  hooks.now = now;
+  hooks.utc = createUTC;
+  hooks.unix = createUnix;
+  hooks.months = listMonths;
+  hooks.isDate = isDate;
+  hooks.locale = getSetGlobalLocale;
+  hooks.invalid = createInvalid;
+  hooks.duration = createDuration;
+  hooks.isMoment = isMoment;
+  hooks.weekdays = listWeekdays;
+  hooks.parseZone = createInZone;
+  hooks.localeData = getLocale;
+  hooks.isDuration = isDuration;
+  hooks.monthsShort = listMonthsShort;
+  hooks.weekdaysMin = listWeekdaysMin;
+  hooks.defineLocale = defineLocale;
+  hooks.updateLocale = updateLocale;
+  hooks.locales = listLocales;
+  hooks.weekdaysShort = listWeekdaysShort;
+  hooks.normalizeUnits = normalizeUnits;
+  hooks.relativeTimeRounding = getSetRelativeTimeRounding;
+  hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
+  hooks.calendarFormat = getCalendarFormat;
+  hooks.prototype = proto;
+  hooks.HTML5_FMT = {
+    DATETIME_LOCAL: "YYYY-MM-DDTHH:mm",
+    DATETIME_LOCAL_SECONDS: "YYYY-MM-DDTHH:mm:ss",
+    DATETIME_LOCAL_MS: "YYYY-MM-DDTHH:mm:ss.SSS",
+    DATE: "YYYY-MM-DD",
+    TIME: "HH:mm",
+    TIME_SECONDS: "HH:mm:ss",
+    TIME_MS: "HH:mm:ss.SSS",
+    WEEK: "GGGG-[W]WW",
+    MONTH: "YYYY-MM"
+  };
+  const _sfc_main$b = {
+    name: "calendar",
+    props: {
+      value: {
+        required: true,
+        type: [Number, String, Date],
+        default: () => {
+          return new Date();
+        }
+      },
+      format: {
+        type: [String],
+        default: "YYYY\u5E74MM\u6708DD\u65E5"
+      },
+      mode: {
+        type: String,
+        default: "single"
+      }
+    },
+>>>>>>> .theirs
+    data() {
+      return {
+        dataList: [],
+        weekList: ["\u4E00", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D", "\u65E5"],
+        touchStartX: 0,
+        touchStartY: 0,
+        transitionClass: ""
+      };
+    },
+    onShow() {
+      this.transitionClass = "";
+    },
+    methods: {
+      render() {
+        const prevDaysInMonth = hooks(new Date(this.value)).subtract(1, "months").daysInMonth();
+        const firstDayWeekday = hooks(new Date(this.value)).date(1).weekday();
+        let weekDayNum = firstDayWeekday;
+        if (firstDayWeekday === 1) {
+          weekDayNum = 6;
+        }
+        if (firstDayWeekday === 0) {
+          weekDayNum = 7;
+        }
+        const daysInMonth2 = hooks(new Date(this.value)).daysInMonth();
+        const list = [];
+        for (let i3 = prevDaysInMonth; i3 > prevDaysInMonth - weekDayNum + 1; i3--) {
+          const day = hooks(new Date(this.value)).subtract(1, "months").date(i3).format("YYYY-MM-DD");
+          const week = hooks(new Date(this.value)).subtract(1, "months").date(i3).format("dddd");
+          list.unshift({ key: i3, type: "prev", isSelected: false, day, week });
+        }
+        for (let i3 = 1; i3 < daysInMonth2 + 1; i3++) {
+          const day = hooks(new Date(this.value)).date(i3).format("YYYY-MM-DD");
+          const week = hooks(new Date(this.value)).date(i3).format("dddd");
+          list.push({ key: i3, type: "current", isSelected: false, day, week });
+        }
+        const nextDays = 42 - list.length;
+        for (var i2 = 1; i2 < nextDays + 1; i2++) {
+          const day = hooks(new Date(this.value)).add(1, "months").date(i2).format("YYYY-MM-DD");
+          const week = hooks(new Date(this.value)).add(1, "months").date(i2).format("dddd");
+          list.push({ key: i2, type: "next", isSelected: false, day, week });
+        }
+        this.dataList = list;
+      },
+      prevMonth() {
+        const date = hooks(new Date(this.value)).subtract(1, "months").toDate();
+        this.$emit("update:value", date);
+      },
+      nextMonth() {
+        const date = hooks(new Date(this.value)).add(1, "months").toDate();
+        this.$emit("update:value", date);
+      },
+      currentMonth() {
+        this.$emit("update:value", new Date());
+      },
+      select(list) {
+        if (list.typeof !== "object") {
+          const index = this.dataList.findIndex((item) => item.day === this.formatDate(list));
+          if (index > -1) {
+            this.dataList[index].isSelected = true;
+          }
+          return false;
+        } else {
+          list.forEach((child) => {
+            const index = this.dataList.findIndex((item) => item.day === this.formatDate(child));
+            if (index > -1) {
+              this.dataList[index].isSelected = true;
+            }
+          });
+          return false;
+        }
+      },
+      selectHandle(item) {
+        if (item.type === "current") {
+          if (this.mode === "single") {
+            this.dataList.forEach((item2) => {
+              item2.isSelected = false;
+            });
+          }
+          item.isSelected = true;
+        }
+        this.$emit("select", item);
+      },
+      getSelection() {
+        return this.dataList.filter((item) => item.isSelected);
+      },
+      formatDate(value, format2 = "YYYY-MM-DD") {
+        return hooks(new Date(value)).format(format2);
+      },
+      getCurrentData() {
+        return this.dataList;
+      },
+      touchStart(e) {
+        formatAppLog("log", "at components/calendar/index.vue:153", "\u89E6\u6478\u5F00\u59CB");
+        this.touchStartX = e.touches[0].clientX;
+        this.touchStartY = e.touches[0].clientY;
+      },
+      touchEnd(e) {
+        formatAppLog("log", "at components/calendar/index.vue:161", "\u89E6\u6478\u7ED3\u675F");
+        let deltaX = e.changedTouches[0].clientX - this.touchStartX;
+        let deltaY = e.changedTouches[0].clientY - this.touchStartY;
+        if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX >= 0) {
+            formatAppLog("log", "at components/calendar/index.vue:166", "\u5DE6\u6ED1");
+            this.leftMove();
+          } else {
+            formatAppLog("log", "at components/calendar/index.vue:169", "\u53F3\u6ED1");
+            this.rightMove();
+          }
+        } else if (Math.abs(deltaY) > 50 && Math.abs(deltaX) < Math.abs(deltaY)) {
+          if (deltaY < 0) {
+            formatAppLog("log", "at components/calendar/index.vue:174", "\u4E0A\u6ED1");
+          } else {
+            formatAppLog("log", "at components/calendar/index.vue:176", "\u4E0B\u6ED1");
+          }
+        } else {
+          formatAppLog("log", "at components/calendar/index.vue:179", "\u53EF\u80FD\u662F\u8BEF\u89E6\uFF01");
+        }
+      },
+      rightMove() {
+        this.transitionClass = "left-start";
+        const time1 = setTimeout(() => {
+          this.nextMonth();
+          this.transitionClass = "left-end";
+          clearTimeout(time1);
+        }, 300);
+      },
+      leftMove() {
+        this.transitionClass = "right-start";
+        const time1 = setTimeout(() => {
+          this.prevMonth();
+          this.transitionClass = "right-end";
+          clearTimeout(time1);
+        }, 300);
+      }
+    },
+    watch: {
+      value: {
+        immediate: true,
+        handler: function() {
+          this.render();
+        }
+      }
+    }
+  };
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "calendar" }, [
+      vue.createElementVNode("view", { class: "calendar-operation" }, [
+        vue.createElementVNode("view", { class: "left" }, [
+          vue.renderSlot(_ctx.$slots, "operation-left", { item: $props.value }, () => [
+            vue.createTextVNode(vue.toDisplayString($options.formatDate($props.value, "YYYY\u5E74MM\u6708")), 1)
+          ], true)
+        ]),
+        vue.createElementVNode("view", { class: "right" }, [
+          vue.renderSlot(_ctx.$slots, "operation-right", { item: $props.value }, () => [
+            vue.createElementVNode("button", {
+              class: "operation-right-btn",
+              onClick: _cache[0] || (_cache[0] = (...args) => $options.prevMonth && $options.prevMonth(...args))
+            }, "\u4E0A\u4E2A\u6708"),
+            vue.createElementVNode("button", {
+              class: "operation-right-btn",
+              onClick: _cache[1] || (_cache[1] = (...args) => $options.currentMonth && $options.currentMonth(...args))
+            }, "\u4ECA\u5929"),
+            vue.createElementVNode("button", {
+              class: "operation-right-btn",
+              onClick: _cache[2] || (_cache[2] = (...args) => $options.nextMonth && $options.nextMonth(...args))
+            }, "\u4E0B\u4E2A\u6708")
+          ], true)
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "calendar-header" }, [
+        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.weekList, (item, i2) => {
+          return vue.openBlock(), vue.createElementBlock("view", { key: i2 }, [
+            vue.renderSlot(_ctx.$slots, "header", {}, () => [
+              vue.createElementVNode("span", { class: "calendar-header-title" }, vue.toDisplayString(item), 1)
+            ], true)
+          ]);
+        }), 128))
+      ]),
+      vue.createElementVNode("view", { class: "transition" }, [
+        vue.createElementVNode("view", {
+          class: vue.normalizeClass(["calendar-content", [$data.transitionClass]]),
+          onTouchstart: _cache[3] || (_cache[3] = (...args) => $options.touchStart && $options.touchStart(...args)),
+          onTouchend: _cache[4] || (_cache[4] = (...args) => $options.touchEnd && $options.touchEnd(...args))
+        }, [
+          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.dataList, (item, i2) => {
+            return vue.openBlock(), vue.createElementBlock("view", {
+              key: i2,
+              class: vue.normalizeClass([item.type]),
+              onClick: ($event) => $options.selectHandle(item)
+            }, [
+              vue.renderSlot(_ctx.$slots, "default", { cell: item }, () => [
+                vue.createElementVNode("view", {
+                  class: vue.normalizeClass(["calendar-data-item", { "is-selected": item.isSelected }])
+                }, vue.toDisplayString(item.key), 3)
+              ], true)
+            ], 10, ["onClick"]);
+          }), 128))
+        ], 34)
+      ])
+    ]);
+  }
+  const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
+  const train$1 = As.importObject("train");
+  const _sfc_main$a = {
+    components: {
+      calendar
+    },
     data() {
       return {
         trainListInfo: {},
@@ -30791,13 +38075,23 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
+<<<<<<< .mine
   var PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "E:/workproject/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
   var block0 = (Comp) => {
+=======
+  const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
+  const block0 = (Comp) => {
+>>>>>>> .theirs
     (Comp.$renderjs || (Comp.$renderjs = [])).push("canvasImage");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["canvasImage"] = "19043a88";
   };
+<<<<<<< .mine
   const train = yn.importObject("train");
   const _sfc_main$9 = {
+=======
+  const train = As.importObject("train");
+  const _sfc_main$9 = {
+>>>>>>> .theirs
     data() {
       return {
         showShare: false,
@@ -31308,10 +38602,17 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0 === "function")
+<<<<<<< .mine
     block0(_sfc_main$9);
   var PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/workproject/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
   const My$3 = yn.importObject("my");
   const _sfc_main$8 = {
+=======
+    block0(_sfc_main$9);
+  const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
+  const My$3 = As.importObject("my");
+  const _sfc_main$8 = {
+>>>>>>> .theirs
     data() {
       return {
         userInfo: {
@@ -31504,9 +38805,15 @@ if (uni.restoreGlobal) {
       }, 8, ["show"])
     ]);
   }
+<<<<<<< .mine
   var PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/workproject/bodybuilding-app/pages/my/my.vue"]]);
   const My$2 = yn.importObject("my");
   const _sfc_main$7 = {
+=======
+  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "D:/studyUninApp/bodybuilding-app/pages/my/my.vue"]]);
+  const My$2 = As.importObject("my");
+  const _sfc_main$7 = {
+>>>>>>> .theirs
     data() {
       return {
         show: false,
@@ -31703,9 +39010,15 @@ if (uni.restoreGlobal) {
       }, 8, ["show"])
     ]);
   }
+<<<<<<< .mine
   var PagesOpenCardOpenCard = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/workproject/bodybuilding-app/pages/openCard/openCard.vue"]]);
   yn.importObject("login");
   const _sfc_main$6 = {
+=======
+  const PagesOpenCardOpenCard = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "D:/studyUninApp/bodybuilding-app/pages/openCard/openCard.vue"]]);
+  As.importObject("login");
+  const _sfc_main$6 = {
+>>>>>>> .theirs
     data() {
       return {};
     },
@@ -31762,9 +39075,15 @@ if (uni.restoreGlobal) {
       }, 8, ["onClick"])
     ]);
   }
+<<<<<<< .mine
   var PagesSetUpSetUp = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/workproject/bodybuilding-app/pages/setUp/setUp.vue"]]);
   const My$1 = yn.importObject("my");
   const _sfc_main$5 = {
+=======
+  const PagesSetUpSetUp = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "D:/studyUninApp/bodybuilding-app/pages/setUp/setUp.vue"]]);
+  const My$1 = As.importObject("my");
+  const _sfc_main$5 = {
+>>>>>>> .theirs
     data() {
       return {
         show: false,
@@ -31813,11 +39132,19 @@ if (uni.restoreGlobal) {
         }
       },
       uploadImage(sourceType) {
+<<<<<<< .mine
         const success = async (res2) => {
           if (res2.tempFiles && res2.tempFiles.length > 0) {
             const result = await yn.uploadFile({
               cloudPath: Date.now() + "-" + res2.tempFiles[0].name,
               filePath: res2.tempFilePaths[0]
+=======
+        const success = async (res2) => {
+          if (res2.tempFiles && res2.tempFiles.length > 0) {
+            const result = await As.uploadFile({
+              cloudPath: Date.now() + "-" + res2.tempFiles[0].name,
+              filePath: res2.tempFilePaths[0]
+>>>>>>> .theirs
             });
             const res1 = await My$1.updateUserInfo({
               avatar: result.fileID
@@ -31896,9 +39223,15 @@ if (uni.restoreGlobal) {
       }, null, 8, ["show", "actions", "onSelect"])
     ]);
   }
+<<<<<<< .mine
   var PagesPersonalInfoPersonalInfo = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/workproject/bodybuilding-app/pages/personalInfo/personalInfo.vue"]]);
   const My = yn.importObject("my");
   const _sfc_main$4 = {
+=======
+  const PagesPersonalInfoPersonalInfo = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalInfo/personalInfo.vue"]]);
+  const My = As.importObject("my");
+  const _sfc_main$4 = {
+>>>>>>> .theirs
     data() {
       return {
         title: "\u7B7E\u540D",
@@ -32033,6 +39366,7 @@ if (uni.restoreGlobal) {
       }, null, 8, ["show", "actions", "onSelect"])
     ]);
   }
+<<<<<<< .mine
   var PagesUpdateSignatureUpdateSignature = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "E:/workproject/bodybuilding-app/pages/updateSignature/updateSignature.vue"]]);
   const _sfc_main$3 = {
     components: {
@@ -32086,7 +39420,63 @@ if (uni.restoreGlobal) {
           this.FrontVideoUrl = this.pushUpTestUrl;
           break;
       }
+=======
+  const PagesUpdateSignatureUpdateSignature = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "D:/studyUninApp/bodybuilding-app/pages/updateSignature/updateSignature.vue"]]);
+  const _sfc_main$3 = {
+    components: {
+      BgTheamCompontent,
+      NavBarCompontent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
     },
+<<<<<<< .mine
     data() {
       return {
         actionobs: [
@@ -32135,6 +39525,56 @@ if (uni.restoreGlobal) {
           this.num = index;
         }
       }
+=======
+    setup() {
+      const show = vue.ref(false);
+      const showPopup = () => {
+        show.value = true;
+      };
+      const closePopup = () => {
+        show.value = false;
+      };
+      return {
+        show,
+        showPopup,
+        closePopup
+      };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
@@ -32288,6 +39728,7 @@ if (uni.restoreGlobal) {
         closePopup
       };
     },
+<<<<<<< .mine
     onLoad: function(item) {
       let data = JSON.parse(item.data);
       this.actionData = data;
@@ -32297,6 +39738,17 @@ if (uni.restoreGlobal) {
       this.videoUrl = this.actionData.answerRemark.url;
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
+=======
+    onLoad: function(item) {
+      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:115", item.pageTitle);
+      let leftNavTitle = item.pageTitle;
+      this.leftNavTitle = leftNavTitle;
+
+
+
+
+
+>>>>>>> .theirs
     },
     components: {
       BgTheamCompontent,
@@ -32304,6 +39756,7 @@ if (uni.restoreGlobal) {
     },
     data() {
       return {
+<<<<<<< .mine
         gender: "1",
         age: 29,
         resValue: 80,
@@ -32323,9 +39776,31 @@ if (uni.restoreGlobal) {
           userId: "",
           status: "0"
         }]
+=======
+        actionobs: [
+          { name: "\u6B63\u9762\u89C2" },
+          { name: "\u4FA7\u9762\u89C2" }
+        ],
+        icon: true,
+        backimg1: "../../static/app-plus/bg/positiveAction.jpg",
+        backimg2: "../../static/app-plus/bg/positiveAction2.jpg",
+        changeValue: true,
+        num: 0,
+        squatFrontVideoUrl: "../../../static/app-plus/video/squatFront.mp4",
+        squatSideVideoUrl: "../../../static/app-plus/video/squatSide.mp4"
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
       };
     },
     methods: {
+<<<<<<< .mine
       async testResult() {
         const gender = this.gender;
         const age = this.age;
@@ -32339,7 +39814,23 @@ if (uni.restoreGlobal) {
           this.typeText = type[0].resultLevel;
           this.levelColor(this.typeText);
         }
+=======
+      setup() {
+        const onClickLeft = () => history.back();
+        return {
+          onClickLeft
+        };
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
       },
+<<<<<<< .mine
       levelColor(levelType) {
         switch (levelType) {
           case "\u4F18\u79C0":
@@ -32358,7 +39849,28 @@ if (uni.restoreGlobal) {
           default:
             this.typeColor = "#4B525E";
             break;
+=======
+      changeFunction(index) {
+        if (index == 0) {
+          this.changeValue = true;
+          this.num = index;
+        } else {
+          this.changeValue = false;
+          this.num = index;
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
         }
+<<<<<<< .mine
       },
       actionResDate() {
         const data = {};
@@ -32377,9 +39889,30 @@ if (uni.restoreGlobal) {
         formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:181", data);
         const res2 = actionOb.opearConfig(data, "bodyTestReport");
         formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:183", res2);
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
       }
     }
   };
+<<<<<<< .mine
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
@@ -32395,7 +39928,37 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", {
         class: "body_content",
         id: "bodycontent"
+
+
+
+
+
+
+=======
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+    const _component_van_popup = vue.resolveComponent("van-popup");
+    const _component_van_image = vue.resolveComponent("van-image");
+    const _component_van_button = vue.resolveComponent("van-button");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: _ctx.leftNavTitle }, null, 8, ["leftNavTitle"]),
+      vue.createElementVNode("view", { class: "headBox" }, [
+        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.actionobs, (item, index) => {
+          return vue.openBlock(), vue.createElementBlock("view", {
+            class: vue.normalizeClass(["block", $data.num == index ? "block0" : ""]),
+            key: index,
+            onClick: ($event) => $options.changeFunction(index)
+          }, vue.toDisplayString(item.name), 11, ["onClick"]);
+        }), 128))
+      ]),
+      $data.changeValue ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "contentBody"
+>>>>>>> .theirs
       }, [
+<<<<<<< .mine
         vue.createElementVNode("view", {
           class: "clickAction",
           onClick: _cache[0] || (_cache[0] = (...args) => $setup.showPopup && $setup.showPopup(...args))
@@ -32509,10 +40072,750 @@ if (uni.restoreGlobal) {
           _: 1
         })
       ])
+=======
+        vue.createElementVNode("view", {
+          class: "clickAction",
+          onClick: _cache[0] || (_cache[0] = (...args) => $setup.showPopup && $setup.showPopup(...args))
+        }, [
+          vue.createTextVNode("\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
+          vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
+        ]),
+        vue.createVNode(_component_van_popup, {
+          show: $setup.show,
+          "onUpdate:show": _cache[2] || (_cache[2] = ($event) => $setup.show = $event),
+          position: "top",
+          round: "",
+          overlay: false,
+          class: "clickActionContent"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "clickActionBody" }, [
+              vue.createElementVNode("video", {
+                src: $data.squatFrontVideoUrl,
+                wid: "",
+                autoplay: ""
+              }, null, 8, ["src"]),
+              vue.createElementVNode("view", { class: "clickActionText" }, [
+                vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
+                vue.createElementVNode("view", null, [
+                  vue.createElementVNode("p", null, "1.\u53CC\u811A\u4E0E\u80A9\u540C\u5BBD\u53CC\u81C2\u81EA\u7136\u4E0B\u5782\u3002"),
+                  vue.createElementVNode("p", null, "2.\u4E0D\u63D0\u9192\u4F1A\u5458\u4EFB\u4F55\u6280\u5DE7\uFF0C\u81EA\u7136\u4E0B\u8E72n\u6B21\u3002"),
+                  vue.createElementVNode("p", null, "3.\u6BCF\u6B21\u4E0B\u8E72\u9891\u7387\u57285\u79D2\u5DE6\u53F3\u3002"),
+                  vue.createElementVNode("p", null, "4.\u4E0B\u8E72\u8FC7\u7A0B\u4E2D\uFF0C\u6559\u7EC3\u9700\u89C2\u5BDF\u4F1A\u5458\uFF0C\u6B63\u9762\u80A2\u4F53\u72B6\u6001\uFF0C\u4FA7\u9762\u80A2\u4F53\u72B6\u6001\u3002")
+                ])
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: "clickActionEnd",
+              onClick: _cache[1] || (_cache[1] = (...args) => $setup.closePopup && $setup.closePopup(...args))
+            }, [
+              vue.createTextVNode("\u6536\u8D77 "),
+              vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
+            ])
+          ]),
+          _: 1
+        }, 8, ["show"]),
+        vue.createVNode(_component_van_image, {
+          class: "imagebg",
+          src: $data.backimg1
+        }, null, 8, ["src"]),
+        vue.createCommentVNode(' <image\r\n			  src="../../static/app-plus/bg/actionImg.png"\r\n			></image> ')
+      ])) : (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "contentBody"
+      }, [
+        vue.createElementVNode("view", {
+          class: "clickAction",
+          onClick: _cache[3] || (_cache[3] = (...args) => $setup.showPopup && $setup.showPopup(...args))
+        }, [
+          vue.createTextVNode("\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
+          vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
+        ]),
+        vue.createVNode(_component_van_popup, {
+          show: $setup.show,
+          "onUpdate:show": _cache[5] || (_cache[5] = ($event) => $setup.show = $event),
+          position: "top",
+          round: "",
+          overlay: false,
+          class: "clickActionContent"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "clickActionBody" }, [
+              vue.createElementVNode("video", {
+                src: $data.squatSideVideoUrl,
+                wid: "",
+                autoplay: ""
+              }, null, 8, ["src"]),
+              vue.createElementVNode("view", { class: "clickActionText" }, [
+                vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
+                vue.createElementVNode("view", null, [
+                  vue.createElementVNode("p", null, "1.\u53CC\u811A\u4E0E\u80A9\u540C\u5BBD\u53CC\u81C2\u81EA\u7136\u4E0B\u5782\u3002"),
+                  vue.createElementVNode("p", null, "2.\u4E0D\u63D0\u9192\u4F1A\u5458\u4EFB\u4F55\u6280\u5DE7\uFF0C\u81EA\u7136\u4E0B\u8E72n\u6B21\u3002"),
+                  vue.createElementVNode("p", null, "3.\u6BCF\u6B21\u4E0B\u8E72\u9891\u7387\u57285\u79D2\u5DE6\u53F3\u3002"),
+                  vue.createElementVNode("p", null, "4.\u4E0B\u8E72\u8FC7\u7A0B\u4E2D\uFF0C\u6559\u7EC3\u9700\u89C2\u5BDF\u4F1A\u5458\uFF0C\u6B63\u9762\u80A2\u4F53\u72B6\u6001\uFF0C\u4FA7\u9762\u80A2\u4F53\u72B6\u6001\u3002")
+                ])
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: "clickActionEnd",
+              onClick: _cache[4] || (_cache[4] = (...args) => $setup.closePopup && $setup.closePopup(...args))
+            }, [
+              vue.createTextVNode("\u6536\u8D77 "),
+              vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
+            ])
+          ]),
+          _: 1
+        }, 8, ["show"]),
+        vue.createVNode(_component_van_image, {
+          class: "imagebg",
+          src: $data.backimg2
+        }, null, 8, ["src"]),
+        vue.createCommentVNode(' <image\r\n			  src="../../static/app-plus/bg/actionImg.png"\r\n			></image> ')
+      ])),
+      vue.createVNode(_component_van_button, {
+        type: "primary",
+        block: "",
+        class: "buttontrue"
+      }, {
+        default: vue.withCtx(() => [
+          vue.createTextVNode("\u786E\u8BA4")
+        ]),
+        _: 1
+      })
+
+
+
+
+>>>>>>> .theirs
     ]);
   }
+<<<<<<< .mine
   var PagesPhysicalFitnessAssessmentActionEvaluationActionEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "E:/workproject/bodybuilding-app/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue"]]);
   const user = yn.importObject("my");
+  const _sfc_main$1 = {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+  const PagesDynamicEvaluationActionEvaluationActionEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/studyUninApp/bodybuilding-app/pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue"]]);
+  const testOb = As.importObject("testResults");
+  const _sfc_main$2 = {
+    setup() {
+      const show = vue.ref(false);
+      const showPopup = () => {
+        show.value = true;
+      };
+      const closePopup = () => {
+        show.value = false;
+      };
+      return {
+        show,
+        showPopup,
+        closePopup
+      };
+    },
+    onLoad: function(item) {
+      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:93", item.pageName);
+      let leftNavTitle = item.pageName;
+      this.leftNavTitle = leftNavTitle;
+    },
+>>>>>>> .theirs
+<<<<<<< .mine
+
+
+
+
+=======
+    components: {
+      BgTheamCompontent,
+      NavBarCompontent
+    },
+>>>>>>> .theirs
+    data() {
+      return {
+<<<<<<< .mine
+        currentRate: 50,
+        personName: "\u672A\u77E5",
+        gender: 1,
+        age: 0,
+        mobileNumber: 0,
+        dynamicEvaluationdata: [
+          {
+            title: "\u4FEF\u5367\u6491\u8010\u529B\u6D4B\u8BD5",
+            type: 60,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u4FEF\u5367\u6491\u8010\u529B\u6D4B\u8BD5"
+          },
+          {
+            title: "\u5377\u8179\u6D4B\u8BD5",
+            type: 30,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u5377\u8179\u6D4B\u8BD5"
+          },
+          {
+            title: "\u4E09\u5206\u949F\u8E0F\u677F\u6D4B\u8BD5",
+            type: 100,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u4E09\u5206\u949F\u8E0F\u677F\u6D4B\u8BD5"
+          },
+          {
+            title: "\u81EA\u91CD\u6DF1\u8E72\u6D4B\u8BD5",
+            type: 0,
+            path: "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=\u81EA\u91CD\u6DF1\u8E72\u6D4B\u8BD5"
+          }
+        ],
+        showShare: false,
+        options: [
+          { name: "\u5206\u4EAB\u5230\u5FAE\u4FE1", icon: "../../static/app-plus/other/saveWechat.svg" },
+          { name: "\u5206\u4EAB\u5230\u670B\u53CB\u5708", icon: "../../static/app-plus/other/wechatMoments.svg" },
+          { name: "\u4FDD\u5B58\u5230\u76F8\u518C", icon: "../../static/app-plus/other/savePhone.svg" }
+        ]
+=======
+        gender: "1",
+        age: 29,
+        resValue: 80,
+        resultValue: 0,
+        typeText: "\u5F85\u6D4B",
+        typeColor: "#4B525E",
+        imgUrl: "../../../static/app-plus/bg/pedalTest.png",
+        leftNavTitle: ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+      };
+    },
+    setup() {
+      const activeBasicInformation = vue.ref(["1"]);
+      const healthQA = vue.ref(["2"]);
+      const BodyTestReport = vue.ref(["3"]);
+      const bodyAssessment = vue.ref(["4"]);
+      const dynamicEvaluation = vue.ref(["5"]);
+      const physicalFitnessAssessment = vue.ref(["6"]);
+      return {
+        activeBasicInformation,
+        healthQA,
+        BodyTestReport,
+        bodyAssessment,
+        dynamicEvaluation,
+        physicalFitnessAssessment
+      };
+    },
+    onShow() {
+      this.getUserInfo();
+    },
+    methods: {
+<<<<<<< .mine
+      async getUserInfo() {
+        const res2 = await user.getUserInfo();
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:472", res2.data);
+        this.name = res2.data.name;
+        this.gender = res2.data.gender;
+        this.mobileNumber = res2.data.mobile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+      async testResult() {
+        const gender = this.gender;
+        const age = this.age;
+        const resValue = this.resultValue;
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:118", gender, age, resValue);
+        const res2 = testOb.method1(gender, age, resValue);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:120", res2);
+        const type = (await res2).data;
+        if (type.length == 0) {
+          this.typeText = "\u5F85\u6D4B";
+        } else {
+          this.typeText = type[0].resultLevel;
+          this.levelColor(this.typeText);
+        }
+      },
+      levelColor(levelType) {
+        switch (levelType) {
+          case "\u4F18\u79C0":
+          case "\u826F\u597D":
+            this.typeColor = "#01E08C";
+            break;
+          case "\u4E2D\u7B49":
+          case "\u4E2D\u4E0A\u7B49":
+          case "\u4E2D\u4E0B\u7B49":
+            this.typeColor = "#FFC13C";
+            break;
+          case "\u8F83\u5DEE":
+          case "\u975E\u5E38\u5DEE":
+            this.typeColor = "#F04242";
+            break;
+          default:
+            this.typeColor = "#4B525E";
+            break;
+        }
+>>>>>>> .theirs
+      }
+<<<<<<< .mine
+    },
+    components: {
+      BgTheamCompontent,
+      NavBarCompontent
+=======
+
+
+
+
+>>>>>>> .theirs
+    }
+  };
+<<<<<<< .mine
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+    const _component_van_col = vue.resolveComponent("van-col");
+    const _component_van_row = vue.resolveComponent("van-row");
+    const _component_van_collapse_item = vue.resolveComponent("van-collapse-item");
+    const _component_van_collapse = vue.resolveComponent("van-collapse");
+    const _component_van_progress = vue.resolveComponent("van-progress");
+    const _component_van_circle = vue.resolveComponent("van-circle");
+    const _component_van_button = vue.resolveComponent("van-button");
+    const _component_van_share_sheet = vue.resolveComponent("van-share-sheet");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "" }),
+      vue.createElementVNode("view", { class: "titleText" }, [
+        vue.createVNode(_component_van_row, { class: "titleTopText" }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_col, { span: "12" }, {
+              default: vue.withCtx(() => [
+                vue.createTextVNode("\u4F53\u6D4B\u62A5\u544A")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+    const _component_van_popup = vue.resolveComponent("van-popup");
+    const _component_van_field = vue.resolveComponent("van-field");
+    const _component_van_col = vue.resolveComponent("van-col");
+    const _component_van_circle = vue.resolveComponent("van-circle");
+    const _component_van_row = vue.resolveComponent("van-row");
+    const _component_van_button = vue.resolveComponent("van-button");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: $data.leftNavTitle }, null, 8, ["leftNavTitle"]),
+      vue.createElementVNode("view", {
+        class: "body_content",
+        id: "bodycontent"
+      }, [
+        vue.createElementVNode("view", {
+          class: "clickAction",
+          onClick: _cache[0] || (_cache[0] = (...args) => $setup.showPopup && $setup.showPopup(...args))
+        }, [
+          vue.createTextVNode("\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
+          vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
+        ]),
+        vue.createVNode(_component_van_popup, {
+          show: $setup.show,
+          "onUpdate:show": _cache[2] || (_cache[2] = ($event) => $setup.show = $event),
+          position: "top",
+          round: "",
+          overlay: false,
+          class: "clickActionContent"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "clickActionBody" }, [
+              vue.createElementVNode("video", {
+                src: "/static/app-plus/video/pedalTest.mp4",
+                wid: "",
+                autoplay: ""
+              }),
+              vue.createElementVNode("view", { class: "clickActionText" }, [
+                vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
+                vue.createElementVNode("view", null, [
+                  vue.createElementVNode("p", null, "1.\u8E0F\u677F\u9AD8\u5EA6\uFF0C30\u5398\u7C73\u9AD8\u5EA6\u30024\u5757\u652F\u6491\u5373\u53EF\u3002"),
+                  vue.createElementVNode("p", null, "2.\u5728\u505A\u6D4B\u8BD5\u524D\uFF0C\u70ED\u8EAB\u653E\u677E5\u5206\u949F\u3002"),
+                  vue.createElementVNode("p", null, "3.\u8E0F\u6B65\u9891\u7387\uFF0C\u6B63\u5E38\u4E0A\u4E0B\u697C\u68AF\u9891\u7387\u3002\u5927\u6982\u6BCF\u5206\u949F96\u6B65\u3002"),
+                  vue.createElementVNode("p", null, "4.\u5728\u8BC4\u4F30\u7ED3\u675F\u540E\uFF0C\u7ACB\u523B\u68C0\u6D4B\u5FC3\u7387\u3002\u8BB0\u5F55\u4E0B\u6765\u3002")
+                ])
+>>>>>>> .theirs
+<<<<<<< .mine
+              ]),
+              _: 1
+            }),
+            vue.createVNode(_component_van_col, { span: "12" }, {
+              default: vue.withCtx(() => [
+                vue.createTextVNode("10.04")
+              ]),
+              _: 1
+            })
+          ]),
+          _: 1
+        }),
+        vue.createVNode(_component_van_row, { class: "titleBottomText" }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_col, { span: "12" }, {
+              default: vue.withCtx(() => [
+                vue.createTextVNode("\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784")
+              ]),
+              _: 1
+            }),
+            vue.createVNode(_component_van_col, { span: "12" }, {
+              default: vue.withCtx(() => [
+                vue.createTextVNode("2022\u5E74")
+              ]),
+              _: 1
+            })
+=======
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: "clickActionEnd",
+              onClick: _cache[1] || (_cache[1] = (...args) => $setup.closePopup && $setup.closePopup(...args))
+            }, [
+              vue.createTextVNode("\u6536\u8D77 "),
+              vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
+            ])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+          ]),
+<<<<<<< .mine
+          _: 1
+        })
+      ]),
+      vue.createElementVNode("view", { class: "basicInformation" }, [
+        vue.createVNode(_component_van_collapse, {
+          modelValue: $setup.activeBasicInformation,
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.activeBasicInformation = $event),
+          border: false
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_collapse_item, {
+              title: "\u57FA\u7840\u4FE1\u606F",
+              name: "1",
+              "title-class": "informationTitleText",
+              class: "informationCard"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "basicInformationContent" }, [
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "12" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u59D3\u540D")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "12",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode(vue.toDisplayString($data.personName), 1)
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "12" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u6027\u522B")
+                          ]),
+                          _: 1
+                        }),
+                        $data.gender == 1 ? (vue.openBlock(), vue.createBlock(_component_van_col, {
+                          key: 0,
+                          span: "12",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u7537")
+                          ]),
+                          _: 1
+                        })) : vue.createCommentVNode("v-if", true),
+                        $data.gender == 2 ? (vue.openBlock(), vue.createBlock(_component_van_col, {
+                          key: 1,
+                          span: "12",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u5973")
+                          ]),
+                          _: 1
+                        })) : vue.createCommentVNode("v-if", true)
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "12" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u5E74\u9F84")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "12",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode(vue.toDisplayString($data.age), 1)
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "12" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u624B\u673A\u53F7\u7801")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "12",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode(vue.toDisplayString($data.mobileNumber), 1)
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ])
+              ]),
+              _: 1
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue"])
+      ]),
+      vue.createElementVNode("view", { class: "basicInformation" }, [
+        vue.createVNode(_component_van_collapse, {
+          modelValue: $setup.healthQA,
+          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.healthQA = $event),
+          border: false
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_collapse_item, {
+              title: "\u5065\u5EB7\u95EE\u7B54",
+              name: "2",
+              "title-class": "informationTitleText",
+              class: "informationCard"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "basicInformationContent healthBlocks" }, [
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u9AD8\u8840\u538B "),
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u652F\u6C14\u7BA1\u708E "),
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u652F\u6C14\u7BA1\u708E ")
+                ]),
+                vue.createElementVNode("view", { class: "healthBlocks" }, [
+                  vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                    vue.createElementVNode("view", { class: "greenBlock" }),
+                    vue.createTextVNode(" \u5176\u4ED6\u88AB\u786E\u8BCA\u7684\u75BE\u75C5 ")
+                  ]),
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u652F\u6C14\u7BA1\u708E ")
+                ]),
+                vue.createElementVNode("view", { class: "healthBlocks" }, [
+                  vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                    vue.createElementVNode("view", { class: "greenBlock" }),
+                    vue.createTextVNode(" \u5173\u8282\u3001\u97E7\u5E26\u548C\u808C\u8089\u662F\u5426\u53D7\u8FC7\u4EFB\u4F55\u635F\u4F24 ")
+                  ]),
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u8DDF\u8171\u635F\u4F24 "),
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u624B\u81C2\u62C9\u4F24 ")
+                ]),
+                vue.createElementVNode("view", { class: "healthBlocks" }, [
+                  vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                    vue.createElementVNode("view", { class: "greenBlock" }),
+                    vue.createTextVNode(" \u662F\u5426\u66FE\u7ECF\u9AA8\u6298 ")
+                  ]),
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u8098\u90E8\u9AA8\u6298 ")
+                ]),
+                vue.createElementVNode("view", { class: "healthBlocks" }, [
+                  vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                    vue.createElementVNode("view", { class: "greenBlock" }),
+                    vue.createTextVNode(" \u6700\u8FD1\u7684\u4F53\u91CD\u662F\u5426\u6709\u5927\u5E45\u5EA6\u7684\u53D8\u5316 ")
+                  ]),
+                  vue.createElementVNode("view", { class: "healthBlock" }, " \u91CD\u4E8615\u516C\u65A4 ")
+                ])
+=======
+          _: 1
+        }, 8, ["show"]),
+        vue.createElementVNode("image", {
+          src: $data.imgUrl,
+          class: "contentImg"
+        }, null, 8, ["src"]),
+        vue.createElementVNode("view", { class: "contentBlock" }, [
+          vue.createVNode(_component_van_row, null, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_van_col, { span: "16" }, {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "testText" }, "\u8BF7\u586B\u5199\u5FC3\u7387"),
+                  vue.createElementVNode("view", { class: "testInput" }, [
+                    vue.createElementVNode("view", null, [
+                      vue.createVNode(_component_van_field, {
+                        modelValue: $data.resultValue,
+                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.resultValue = $event),
+                        modelModifiers: { number: true },
+                        class: "inputBlock",
+                        onBlur: _cache[4] || (_cache[4] = ($event) => $options.testResult()),
+                        type: "number"
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    vue.createElementVNode("view", { class: "inputText" }, "/\u5206")
+                  ])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_van_col, { span: "8" }, {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "dynamicshow_right" }, [
+                    vue.createVNode(_component_van_circle, {
+                      "current-rate": _ctx.currentRate,
+                      "onUpdate:current-rate": _cache[5] || (_cache[5] = ($event) => _ctx.currentRate = $event),
+                      rate: 100,
+                      speed: 400,
+                      text: $data.typeText,
+                      "layer-color": $data.typeColor,
+                      color: $data.typeColor,
+                      style: vue.normalizeStyle("--van-circle-text-color:" + $data.typeColor)
+                    }, null, 8, ["current-rate", "text", "layer-color", "color", "style"])
+                  ])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })
+        ])
+      ]),
+      vue.createElementVNode("view", null, [
+        vue.createVNode(_component_van_button, {
+          type: "primary",
+          class: "postureButton"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createTextVNode("\u786E\u8BA4")
+          ]),
+          _: 1
+        })
+      ])
+    ]);
+  }
+  const PagesPhysicalFitnessAssessmentActionEvaluationActionEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue"]]);
+  const user = As.importObject("my");
   const _sfc_main$1 = {
     data() {
       return {
@@ -32604,16 +40907,630 @@ if (uni.restoreGlobal) {
             vue.createVNode(_component_van_col, { span: "12" }, {
               default: vue.withCtx(() => [
                 vue.createTextVNode("\u4F53\u6D4B\u62A5\u544A")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
               ]),
+<<<<<<< .mine
+              _: 1
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue"])
+      ]),
+      vue.createElementVNode("view", { class: "basicInformation" }, [
+        vue.createVNode(_component_van_collapse, {
+          modelValue: $setup.BodyTestReport,
+          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.BodyTestReport = $event),
+          border: false
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_collapse_item, {
+              title: "\u4F53\u6D4B\u62A5\u544A",
+              name: "3",
+              "title-class": "informationTitleText",
+              class: "informationCard"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "countNumBlock" }, [
+                  vue.createVNode(_component_van_row, null, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_van_col, {
+                        span: "12",
+                        style: { "font-size": "32upx", "font-weight": "600", "color": "#F4F7FF", "line-height": "44upx", "margin-top": "20upx" }
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createTextVNode("\u4F60\u5F88\u68D2\uFF01")
+                        ]),
+                        _: 1
+                      }),
+                      vue.createVNode(_component_van_col, {
+                        span: "12",
+                        style: { "font-size": "60upx", "font-weight": "600", "color": "#FFFFFF", "line-height": "72upx", "text-align": "right", "margin-top": "10upx" }
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createTextVNode("82")
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_van_row, null, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_van_col, { span: "24" }, {
+                        default: vue.withCtx(() => [
+                          vue.createTextVNode("\u518D\u52AA\u529B\u4E00\u70B9\u4F1A\u66F4\u597D\u54E6\uFF01")
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createElementVNode("view", { style: { "margin-top": "44upx" } }, [
+                    vue.createVNode(_component_van_progress, {
+                      percentage: 82,
+                      "stroke-width": "8",
+                      color: "#01E08C",
+                      "show-pivot": false,
+                      "track-color": "#454951"
+                    })
+                  ])
+                ]),
+                vue.createElementVNode("view", { class: "basicInformationContent" }, [
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "12" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u8EAB\u9AD8")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "12",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("180cm")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "17" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u4F53\u91CD\uFF08\u6807\u51C6\uFF1A70kg\uFF09")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "7",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("80kg")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "17" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u808C\u8089\u91CF\uFF08\u6807\u51C6\uFF1A60kg\uFF09")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "7",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("50kg")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "17" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u4F53\u8102\u91CF\uFF08\u6807\u51C6\uFF1A30kg\uFF09")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "7",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("15kg")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "17" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u4F53\u8102\u767E\u5206\u6BD4\uFF08\u6807\u51C6\uFF1A18%\uFF09")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "7",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("30%")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "17" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u8170\u81C0\u767E\u5206\u6BD4\uFF08\u6807\u51C6\uFF1A15%\uFF09")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "7",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("25%")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "17" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u57FA\u7840\u4EE3\u8C22\uFF08\u6807\u51C6\uFF1A2200cal\uFF09")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "7",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("1800cal")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("view", { class: "textContent" }, [
+                    vue.createVNode(_component_van_row, { class: "text" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_van_col, { span: "17" }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("\u4F53\u6C34\u5206\uFF08\u6807\u51C6\uFF1A40%\uFF09")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_col, {
+                          span: "7",
+                          class: "textRight"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("20%")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ])
+=======
               _: 1
             }),
             vue.createVNode(_component_van_col, { span: "12" }, {
               default: vue.withCtx(() => [
                 vue.createTextVNode("10.04")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
               ]),
+<<<<<<< .mine
               _: 1
             })
           ]),
+          _: 1
+        }, 8, ["modelValue"])
+      ]),
+      vue.createElementVNode("view", { class: "basicInformation" }, [
+        vue.createVNode(_component_van_collapse, {
+          modelValue: $setup.bodyAssessment,
+          "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.bodyAssessment = $event),
+          border: false
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_collapse_item, {
+              title: "\u4F53\u6001\u8BC4\u4F30",
+              name: "4",
+              "title-class": "informationTitleText",
+              class: "informationCard"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "bodyAssessment" }, [
+                  vue.createElementVNode("view", { style: { "width": "10px", "height": "10px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
+                  vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, "\u9888\u90E8\u524D\u5F15"),
+                  vue.createElementVNode("view", { class: "assessmentContent" }, [
+                    vue.createElementVNode("p", null, " \u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002 "),
+                    vue.createElementVNode("p", { style: { "margin-top": "20upx" } }, " \u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002 ")
+                  ])
+                ]),
+                vue.createElementVNode("view", { class: "bodyAssessment" }, [
+                  vue.createElementVNode("view", { style: { "width": "10px", "height": "10px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
+                  vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, "\u9AD8\u4F4E\u80A9"),
+                  vue.createElementVNode("view", { class: "assessmentContent" }, [
+                    vue.createElementVNode("p", null, " \u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002 "),
+                    vue.createElementVNode("p", { style: { "margin-top": "20upx" } }, " \u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002 ")
+                  ])
+                ])
+              ]),
+              _: 1
+            })
+=======
+              _: 1
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+          ]),
+<<<<<<< .mine
+          _: 1
+        }, 8, ["modelValue"])
+      ]),
+      vue.createElementVNode("view", { class: "basicInformation" }, [
+        vue.createVNode(_component_van_collapse, {
+          modelValue: $setup.dynamicEvaluation,
+          "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.dynamicEvaluation = $event),
+          border: false
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_collapse_item, {
+              title: "\u52A8\u6001\u8BC4\u4F30",
+              name: "5",
+              "title-class": "informationTitleText",
+              class: "informationCard"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "bodyAssessment" }, [
+                  vue.createElementVNode("view", { style: { "width": "10px", "height": "10px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
+                  vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, "\u6B63\u9762\u89C2\uFF1A\u5148\u5C48\u819D\u4E0B\u8E72"),
+                  vue.createElementVNode("view", { class: "assessmentContent" }, [
+                    vue.createElementVNode("p", null, " \u95EE\u9898\u63CF\u8FF0\uFF1A\u80A1\u56DB\u5934\u808C\u548C\u9ACB\u5173\u8282\u5C48\u808C\u6D3B\u8DC3\uFF0C\u81C0\u90E8\u808C\u7FA4\u4E0D\u591F\u6D3B\u8DC3\u3002 ")
+                  ])
+                ]),
+                vue.createElementVNode("view", { class: "bodyAssessment" }, [
+                  vue.createElementVNode("view", { style: { "width": "10px", "height": "10px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
+                  vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, "\u4FA7\u9762\u89C2\uFF1A\u80EB\u9AA8\u548C\u8EAF\u5E72\u4E0D\u5E73\u8861"),
+                  vue.createElementVNode("view", { class: "assessmentContent" }, [
+                    vue.createElementVNode("p", null, " \u95EE\u9898\u63CF\u8FF0\uFF1A\u8DD6\u5C48\u808C\u7D27\u5F20\uFF0C\u5BFC\u81F4\u80CC\u5C48\u8DB3\u80CC\u5C48\u4E0D\u8DB3\uFF0C\u8FD0\u52A8\u529B\u5B66\u4E0D\u826F\u3002 ")
+                  ])
+                ])
+=======
           _: 1
         }),
         vue.createVNode(_component_van_row, { class: "titleBottomText" }, {
@@ -32621,13 +41538,864 @@ if (uni.restoreGlobal) {
             vue.createVNode(_component_van_col, { span: "12" }, {
               default: vue.withCtx(() => [
                 vue.createTextVNode("\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
               ]),
+<<<<<<< .mine
+              _: 1
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue"])
+      ]),
+      vue.createElementVNode("view", { class: "basicInformation" }, [
+        vue.createVNode(_component_van_collapse, {
+          modelValue: $setup.physicalFitnessAssessment,
+          "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => $setup.physicalFitnessAssessment = $event),
+          border: false
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_van_collapse_item, {
+              title: "\u4F53\u80FD\u8BC4\u4F30",
+              name: "6",
+              "title-class": "informationTitleText",
+              class: "informationCard"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_van_row, { style: { "background-color": "#343A44" } }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_van_col, {
+                      class: "need_scoll",
+                      span: "24"
+                    }, {
+                      default: vue.withCtx(() => [
+                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.dynamicEvaluationdata, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock("view", {
+                            class: "dynamicshow",
+                            key: index
+                          }, [
+                            item.type > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 0,
+                              class: "dynamicshow_left"
+                            }, [
+                              vue.createElementVNode("text", { class: "evaluationdata" }, vue.toDisplayString(item.title), 1),
+                              index == 0 ? (vue.openBlock(), vue.createElementBlock("text", { key: 0 }, " \u5FC3\u7387\uFF1A" + vue.toDisplayString(item.type) + "/\u5206 ", 1)) : index == 1 ? (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, " \u6570\u91CF\uFF1A" + vue.toDisplayString(item.type) + "\u4E2A ", 1)) : index == 2 ? (vue.openBlock(), vue.createElementBlock("text", { key: 2 }, " \u6570\u91CF\uFF1A" + vue.toDisplayString(item.type) + "\u4E2A ", 1)) : vue.createCommentVNode("v-if", true)
+                            ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 1,
+                              class: "dynamicshow_left"
+                            }, [
+                              vue.createElementVNode("text", { class: "evaluationdata" }, vue.toDisplayString(item.title), 1),
+                              vue.createElementVNode("text", null, " \u6682\u672A\u6D4B\u8BD5\uFF0C\u5FEB\u53BB\u6D4B\u8BD5\u5427 ")
+                            ])),
+                            item.type >= 90 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 2,
+                              class: "dynamicshow_right"
+                            }, [
+                              vue.createVNode(_component_van_circle, {
+                                "current-rate": $data.currentRate,
+                                "onUpdate:current-rate": _cache[5] || (_cache[5] = ($event) => $data.currentRate = $event),
+                                rate: 100,
+                                speed: 400,
+                                text: "\u4F18\u79C0",
+                                "layer-color": "#383D46",
+                                color: "#01E08C",
+                                style: { "--van-circle-text-color": "#01E08C" }
+                              }, null, 8, ["current-rate"])
+                            ])) : item.type >= 60 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 3,
+                              class: "dynamicshow_right"
+                            }, [
+                              vue.createVNode(_component_van_circle, {
+                                "current-rate": $data.currentRate,
+                                "onUpdate:current-rate": _cache[6] || (_cache[6] = ($event) => $data.currentRate = $event),
+                                rate: 100,
+                                speed: 400,
+                                text: "\u4E2D\u4E0A",
+                                "layer-color": "#383D46",
+                                color: "#FFC13C",
+                                style: { "--van-circle-text-color": "#FFC13C" }
+                              }, null, 8, ["current-rate"])
+                            ])) : item.type > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 4,
+                              class: "dynamicshow_right"
+                            }, [
+                              vue.createVNode(_component_van_circle, {
+                                "current-rate": $data.currentRate,
+                                "onUpdate:current-rate": _cache[7] || (_cache[7] = ($event) => $data.currentRate = $event),
+                                rate: 100,
+                                speed: 400,
+                                text: "\u8F83\u5DEE",
+                                "layer-color": "#383D46",
+                                color: "#F04242",
+                                style: { "--van-circle-text-color": "#F04242" }
+                              }, null, 8, ["current-rate"])
+                            ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 5,
+                              class: "dynamicshow_right"
+                            }, [
+                              vue.createVNode(_component_van_circle, {
+                                "current-rate": $data.currentRate,
+                                "onUpdate:current-rate": _cache[8] || (_cache[8] = ($event) => $data.currentRate = $event),
+                                rate: 100,
+                                speed: 400,
+                                text: "\u5F85\u6D4B",
+                                "layer-color": "#383D46",
+                                color: "#4B525E",
+                                style: { "--van-circle-text-color": "#4B525E" }
+                              }, null, 8, ["current-rate"])
+                            ]))
+                          ]);
+                        }), 128))
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                })
+=======
               _: 1
             }),
             vue.createVNode(_component_van_col, { span: "12" }, {
               default: vue.withCtx(() => [
                 vue.createTextVNode("2022\u5E74")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
               ]),
+<<<<<<< .mine
+              _: 1
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
               _: 1
             })
           ]),
@@ -33234,6 +43002,7 @@ if (uni.restoreGlobal) {
               ]),
               _: 1
             })
+>>>>>>> .theirs
           ]),
           _: 1
         }, 8, ["modelValue"])
@@ -33259,11 +43028,20 @@ if (uni.restoreGlobal) {
       }, null, 8, ["show", "options", "onSelect"])
     ]);
   }
+<<<<<<< .mine
   var PagesViewReportViewReport = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/workproject/bodybuilding-app/pages/viewReport/viewReport.vue"]]);
+=======
+  const PagesViewReportViewReport = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "D:/studyUninApp/bodybuilding-app/pages/viewReport/viewReport.vue"]]);
+>>>>>>> .theirs
   __definePage("pages/myMebers/myMebers", PagesMyMebersMyMebers);
   __definePage("pages/addMyMebers/addMyMebers", PagesAddMyMebersAddMyMebers);
+<<<<<<< .mine
   __definePage("pages/memberQuery/memberQuery", PagesMemberQueryMemberQuery);
   __definePage("pages/postureAssessment/postureAssessment", PagesPostureAssessmentPostureAssessment);
+=======
+  __definePage("pages/memberQuery/memberQuery", PagesMemberQueryMemberQuery);
+  __definePage("pages/bodyAssessment/bodyAssessment", PagesBodyAssessmentBodyAssessment);
+>>>>>>> .theirs
   __definePage("pages/bodyTestReport/bodyTestReport", PagesBodyTestReportBodyTestReport);
   __definePage("pages/physicalAssessment/physicalAssessment", PagesPhysicalAssessmentPhysicalAssessment);
   __definePage("pages/healthQuesson/healthQuesson", PagesHealthQuessonHealthQuesson);
@@ -33281,6 +43059,7 @@ if (uni.restoreGlobal) {
   __definePage("pages/setUp/setUp", PagesSetUpSetUp);
   __definePage("pages/personalInfo/personalInfo", PagesPersonalInfoPersonalInfo);
   __definePage("pages/updateSignature/updateSignature", PagesUpdateSignatureUpdateSignature);
+<<<<<<< .mine
   __definePage("pages/dynamicEvaluation/actionEvaluation/actionEvaluation", PagesDynamicEvaluationActionEvaluationActionEvaluation);
   __definePage("pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation", PagesPhysicalFitnessAssessmentActionEvaluationActionEvaluation);
   __definePage("pages/viewReport/viewReport", PagesViewReportViewReport);
@@ -33855,7 +43634,592 @@ if (uni.restoreGlobal) {
                   } else {
                     c3[h3 + y3] = d3;
                     d3 = 1;
+
+
+
+
+=======
+  __definePage("pages/dynamicEvaluation/actionEvaluation/actionEvaluation", PagesDynamicEvaluationActionEvaluationActionEvaluation);
+  __definePage("pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation", PagesPhysicalFitnessAssessmentActionEvaluationActionEvaluation);
+  __definePage("pages/viewReport/viewReport", PagesViewReportViewReport);
+  var lookup = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    62,
+    0,
+    62,
+    0,
+    63,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    0,
+    0,
+    0,
+    0,
+    63,
+    0,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ];
+  function base64Decode(source, target) {
+    var sourceLength = source.length;
+    var paddingLength = source[sourceLength - 2] === "=" ? 2 : source[sourceLength - 1] === "=" ? 1 : 0;
+    var tmp;
+    var byteIndex = 0;
+    var baseLength = sourceLength - paddingLength & 4294967292;
+    for (var i2 = 0; i2 < baseLength; i2 += 4) {
+      tmp = lookup[source.charCodeAt(i2)] << 18 | lookup[source.charCodeAt(i2 + 1)] << 12 | lookup[source.charCodeAt(i2 + 2)] << 6 | lookup[source.charCodeAt(i2 + 3)];
+      target[byteIndex++] = tmp >> 16 & 255;
+      target[byteIndex++] = tmp >> 8 & 255;
+      target[byteIndex++] = tmp & 255;
+    }
+    if (paddingLength === 1) {
+      tmp = lookup[source.charCodeAt(i2)] << 10 | lookup[source.charCodeAt(i2 + 1)] << 4 | lookup[source.charCodeAt(i2 + 2)] >> 2;
+      target[byteIndex++] = tmp >> 8 & 255;
+      target[byteIndex++] = tmp & 255;
+    }
+    if (paddingLength === 2) {
+      tmp = lookup[source.charCodeAt(i2)] << 2 | lookup[source.charCodeAt(i2 + 1)] >> 4;
+      target[byteIndex++] = tmp & 255;
+    }
+  }
+  const $inject_window_crypto = {
+    getRandomValues(arr) {
+      if (!(arr instanceof Int8Array || arr instanceof Uint8Array || arr instanceof Int16Array || arr instanceof Uint16Array || arr instanceof Int32Array || arr instanceof Uint32Array || arr instanceof Uint8ClampedArray)) {
+        throw new Error("Expected an integer array");
+      }
+      if (arr.byteLength > 65536) {
+        throw new Error("Can only request a maximum of 65536 bytes");
+      }
+      var crypto = requireNativePlugin("DCloud-Crypto");
+      base64Decode(crypto.getRandomValues(arr.byteLength), new Uint8Array(
+        arr.buffer,
+        arr.byteOffset,
+        arr.byteLength
+      ));
+      return arr;
+    }
+  };
+  function getDefaultExportFromCjs(x2) {
+    return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
+  }
+  function createCommonjsModule(fn) {
+    var module2 = { exports: {} };
+    return fn(module2, module2.exports), module2.exports;
+  }
+  /*! For license information please see gtpush-min.js.LICENSE.txt */
+  var gtpushMin = createCommonjsModule(function(module2, exports) {
+    (function t2(e, r2) {
+      module2.exports = r2();
+    })(self, () => (() => {
+      var t2 = { 4736: (t3, e2, r3) => {
+        t3 = r3.nmd(t3);
+        var i3;
+        var n2 = function(t4) {
+          var e3 = 1e7, r4 = 7, i4 = 9007199254740992, s2 = d2(i4), a2 = "0123456789abcdefghijklmnopqrstuvwxyz";
+          var o2 = "function" === typeof BigInt;
+          function u2(t5, e4, r5, i5) {
+            if ("undefined" === typeof t5)
+              return u2[0];
+            if ("undefined" !== typeof e4)
+              return 10 === +e4 && !r5 ? st2(t5) : X2(t5, e4, r5, i5);
+            return st2(t5);
+          }
+          function c2(t5, e4) {
+            this.value = t5;
+            this.sign = e4;
+            this.isSmall = false;
+          }
+          c2.prototype = Object.create(u2.prototype);
+          function l2(t5) {
+            this.value = t5;
+            this.sign = t5 < 0;
+            this.isSmall = true;
+          }
+          l2.prototype = Object.create(u2.prototype);
+          function f2(t5) {
+            this.value = t5;
+          }
+          f2.prototype = Object.create(u2.prototype);
+          function h2(t5) {
+            return -i4 < t5 && t5 < i4;
+          }
+          function d2(t5) {
+            if (t5 < 1e7)
+              return [t5];
+            if (t5 < 1e14)
+              return [t5 % 1e7, Math.floor(t5 / 1e7)];
+            return [t5 % 1e7, Math.floor(t5 / 1e7) % 1e7, Math.floor(t5 / 1e14)];
+          }
+          function p2(t5) {
+            v2(t5);
+            var r5 = t5.length;
+            if (r5 < 4 && N2(t5, s2) < 0)
+              switch (r5) {
+                case 0:
+                  return 0;
+                case 1:
+                  return t5[0];
+                case 2:
+                  return t5[0] + t5[1] * e3;
+                default:
+                  return t5[0] + (t5[1] + t5[2] * e3) * e3;
+              }
+            return t5;
+          }
+          function v2(t5) {
+            var e4 = t5.length;
+            while (0 === t5[--e4])
+              ;
+            t5.length = e4 + 1;
+          }
+          function g2(t5) {
+            var e4 = new Array(t5);
+            var r5 = -1;
+            while (++r5 < t5)
+              e4[r5] = 0;
+            return e4;
+          }
+          function y(t5) {
+            if (t5 > 0)
+              return Math.floor(t5);
+            return Math.ceil(t5);
+          }
+          function m2(t5, r5) {
+            var i5 = t5.length, n3 = r5.length, s3 = new Array(i5), a3 = 0, o3 = e3, u3, c3;
+            for (c3 = 0; c3 < n3; c3++) {
+              u3 = t5[c3] + r5[c3] + a3;
+              a3 = u3 >= o3 ? 1 : 0;
+              s3[c3] = u3 - a3 * o3;
+            }
+            while (c3 < i5) {
+              u3 = t5[c3] + a3;
+              a3 = u3 === o3 ? 1 : 0;
+              s3[c3++] = u3 - a3 * o3;
+            }
+            if (a3 > 0)
+              s3.push(a3);
+            return s3;
+          }
+          function w2(t5, e4) {
+            if (t5.length >= e4.length)
+              return m2(t5, e4);
+            return m2(e4, t5);
+          }
+          function S2(t5, r5) {
+            var i5 = t5.length, n3 = new Array(i5), s3 = e3, a3, o3;
+            for (o3 = 0; o3 < i5; o3++) {
+              a3 = t5[o3] - s3 + r5;
+              r5 = Math.floor(a3 / s3);
+              n3[o3] = a3 - r5 * s3;
+              r5 += 1;
+            }
+            while (r5 > 0) {
+              n3[o3++] = r5 % s3;
+              r5 = Math.floor(r5 / s3);
+            }
+            return n3;
+          }
+          c2.prototype.add = function(t5) {
+            var e4 = st2(t5);
+            if (this.sign !== e4.sign)
+              return this.subtract(e4.negate());
+            var r5 = this.value, i5 = e4.value;
+            if (e4.isSmall)
+              return new c2(S2(r5, Math.abs(i5)), this.sign);
+            return new c2(w2(r5, i5), this.sign);
+          };
+          c2.prototype.plus = c2.prototype.add;
+          l2.prototype.add = function(t5) {
+            var e4 = st2(t5);
+            var r5 = this.value;
+            if (r5 < 0 !== e4.sign)
+              return this.subtract(e4.negate());
+            var i5 = e4.value;
+            if (e4.isSmall) {
+              if (h2(r5 + i5))
+                return new l2(r5 + i5);
+              i5 = d2(Math.abs(i5));
+            }
+            return new c2(S2(i5, Math.abs(r5)), r5 < 0);
+          };
+          l2.prototype.plus = l2.prototype.add;
+          f2.prototype.add = function(t5) {
+            return new f2(this.value + st2(t5).value);
+          };
+          f2.prototype.plus = f2.prototype.add;
+          function _2(t5, r5) {
+            var i5 = t5.length, n3 = r5.length, s3 = new Array(i5), a3 = 0, o3 = e3, u3, c3;
+            for (u3 = 0; u3 < n3; u3++) {
+              c3 = t5[u3] - a3 - r5[u3];
+              if (c3 < 0) {
+                c3 += o3;
+                a3 = 1;
+              } else
+                a3 = 0;
+              s3[u3] = c3;
+            }
+            for (u3 = n3; u3 < i5; u3++) {
+              c3 = t5[u3] - a3;
+              if (c3 < 0)
+                c3 += o3;
+              else {
+                s3[u3++] = c3;
+                break;
+              }
+              s3[u3] = c3;
+            }
+            for (; u3 < i5; u3++)
+              s3[u3] = t5[u3];
+            v2(s3);
+            return s3;
+          }
+          function b2(t5, e4, r5) {
+            var i5;
+            if (N2(t5, e4) >= 0)
+              i5 = _2(t5, e4);
+            else {
+              i5 = _2(e4, t5);
+              r5 = !r5;
+            }
+            i5 = p2(i5);
+            if ("number" === typeof i5) {
+              if (r5)
+                i5 = -i5;
+              return new l2(i5);
+            }
+            return new c2(i5, r5);
+          }
+          function E2(t5, r5, i5) {
+            var n3 = t5.length, s3 = new Array(n3), a3 = -r5, o3 = e3, u3, f3;
+            for (u3 = 0; u3 < n3; u3++) {
+              f3 = t5[u3] + a3;
+              a3 = Math.floor(f3 / o3);
+              f3 %= o3;
+              s3[u3] = f3 < 0 ? f3 + o3 : f3;
+            }
+            s3 = p2(s3);
+            if ("number" === typeof s3) {
+              if (i5)
+                s3 = -s3;
+              return new l2(s3);
+            }
+            return new c2(s3, i5);
+          }
+          c2.prototype.subtract = function(t5) {
+            var e4 = st2(t5);
+            if (this.sign !== e4.sign)
+              return this.add(e4.negate());
+            var r5 = this.value, i5 = e4.value;
+            if (e4.isSmall)
+              return E2(r5, Math.abs(i5), this.sign);
+            return b2(r5, i5, this.sign);
+          };
+          c2.prototype.minus = c2.prototype.subtract;
+          l2.prototype.subtract = function(t5) {
+            var e4 = st2(t5);
+            var r5 = this.value;
+            if (r5 < 0 !== e4.sign)
+              return this.add(e4.negate());
+            var i5 = e4.value;
+            if (e4.isSmall)
+              return new l2(r5 - i5);
+            return E2(i5, Math.abs(r5), r5 >= 0);
+          };
+          l2.prototype.minus = l2.prototype.subtract;
+          f2.prototype.subtract = function(t5) {
+            return new f2(this.value - st2(t5).value);
+          };
+          f2.prototype.minus = f2.prototype.subtract;
+          c2.prototype.negate = function() {
+            return new c2(this.value, !this.sign);
+          };
+          l2.prototype.negate = function() {
+            var t5 = this.sign;
+            var e4 = new l2(-this.value);
+            e4.sign = !t5;
+            return e4;
+          };
+          f2.prototype.negate = function() {
+            return new f2(-this.value);
+          };
+          c2.prototype.abs = function() {
+            return new c2(this.value, false);
+          };
+          l2.prototype.abs = function() {
+            return new l2(Math.abs(this.value));
+          };
+          f2.prototype.abs = function() {
+            return new f2(this.value >= 0 ? this.value : -this.value);
+          };
+          function D2(t5, r5) {
+            var i5 = t5.length, n3 = r5.length, s3 = i5 + n3, a3 = g2(s3), o3 = e3, u3, c3, l3, f3, h3;
+            for (l3 = 0; l3 < i5; ++l3) {
+              f3 = t5[l3];
+              for (var d3 = 0; d3 < n3; ++d3) {
+                h3 = r5[d3];
+                u3 = f3 * h3 + a3[l3 + d3];
+                c3 = Math.floor(u3 / o3);
+                a3[l3 + d3] = u3 - c3 * o3;
+                a3[l3 + d3 + 1] += c3;
+              }
+            }
+            v2(a3);
+            return a3;
+          }
+          function M2(t5, r5) {
+            var i5 = t5.length, n3 = new Array(i5), s3 = e3, a3 = 0, o3, u3;
+            for (u3 = 0; u3 < i5; u3++) {
+              o3 = t5[u3] * r5 + a3;
+              a3 = Math.floor(o3 / s3);
+              n3[u3] = o3 - a3 * s3;
+            }
+            while (a3 > 0) {
+              n3[u3++] = a3 % s3;
+              a3 = Math.floor(a3 / s3);
+            }
+            return n3;
+          }
+          function T2(t5, e4) {
+            var r5 = [];
+            while (e4-- > 0)
+              r5.push(0);
+            return r5.concat(t5);
+          }
+          function I2(t5, e4) {
+            var r5 = Math.max(t5.length, e4.length);
+            if (r5 <= 30)
+              return D2(t5, e4);
+            r5 = Math.ceil(r5 / 2);
+            var i5 = t5.slice(r5), n3 = t5.slice(0, r5), s3 = e4.slice(r5), a3 = e4.slice(0, r5);
+            var o3 = I2(n3, a3), u3 = I2(i5, s3), c3 = I2(w2(n3, i5), w2(a3, s3));
+            var l3 = w2(w2(o3, T2(_2(_2(c3, o3), u3), r5)), T2(u3, 2 * r5));
+            v2(l3);
+            return l3;
+          }
+          function A2(t5, e4) {
+            return -0.012 * t5 - 0.012 * e4 + 15e-6 * t5 * e4 > 0;
+          }
+          c2.prototype.multiply = function(t5) {
+            var r5 = st2(t5), i5 = this.value, n3 = r5.value, s3 = this.sign !== r5.sign, a3;
+            if (r5.isSmall) {
+              if (0 === n3)
+                return u2[0];
+              if (1 === n3)
+                return this;
+              if (-1 === n3)
+                return this.negate();
+              a3 = Math.abs(n3);
+              if (a3 < e3)
+                return new c2(M2(i5, a3), s3);
+              n3 = d2(a3);
+            }
+            if (A2(i5.length, n3.length))
+              return new c2(I2(i5, n3), s3);
+            return new c2(D2(i5, n3), s3);
+          };
+          c2.prototype.times = c2.prototype.multiply;
+          function x2(t5, r5, i5) {
+            if (t5 < e3)
+              return new c2(M2(r5, t5), i5);
+            return new c2(D2(r5, d2(t5)), i5);
+          }
+          l2.prototype._multiplyBySmall = function(t5) {
+            if (h2(t5.value * this.value))
+              return new l2(t5.value * this.value);
+            return x2(Math.abs(t5.value), d2(Math.abs(this.value)), this.sign !== t5.sign);
+          };
+          c2.prototype._multiplyBySmall = function(t5) {
+            if (0 === t5.value)
+              return u2[0];
+            if (1 === t5.value)
+              return this;
+            if (-1 === t5.value)
+              return this.negate();
+            return x2(Math.abs(t5.value), this.value, this.sign !== t5.sign);
+          };
+          l2.prototype.multiply = function(t5) {
+            return st2(t5)._multiplyBySmall(this);
+          };
+          l2.prototype.times = l2.prototype.multiply;
+          f2.prototype.multiply = function(t5) {
+            return new f2(this.value * st2(t5).value);
+          };
+          f2.prototype.times = f2.prototype.multiply;
+          function R2(t5) {
+            var r5 = t5.length, i5 = g2(r5 + r5), n3 = e3, s3, a3, o3, u3, c3;
+            for (o3 = 0; o3 < r5; o3++) {
+              u3 = t5[o3];
+              a3 = 0 - u3 * u3;
+              for (var l3 = o3; l3 < r5; l3++) {
+                c3 = t5[l3];
+                s3 = 2 * (u3 * c3) + i5[o3 + l3] + a3;
+                a3 = Math.floor(s3 / n3);
+                i5[o3 + l3] = s3 - a3 * n3;
+              }
+              i5[o3 + r5] = a3;
+            }
+            v2(i5);
+            return i5;
+          }
+          c2.prototype.square = function() {
+            return new c2(R2(this.value), false);
+          };
+          l2.prototype.square = function() {
+            var t5 = this.value * this.value;
+            if (h2(t5))
+              return new l2(t5);
+            return new c2(R2(d2(Math.abs(this.value))), false);
+          };
+          f2.prototype.square = function(t5) {
+            return new f2(this.value * this.value);
+          };
+          function B2(t5, r5) {
+            var i5 = t5.length, n3 = r5.length, s3 = e3, a3 = g2(r5.length), o3 = r5[n3 - 1], u3 = Math.ceil(s3 / (2 * o3)), c3 = M2(t5, u3), l3 = M2(r5, u3), f3, h3, d3, v3, y2, m3, w3;
+            if (c3.length <= i5)
+              c3.push(0);
+            l3.push(0);
+            o3 = l3[n3 - 1];
+            for (h3 = i5 - n3; h3 >= 0; h3--) {
+              f3 = s3 - 1;
+              if (c3[h3 + n3] !== o3)
+                f3 = Math.floor((c3[h3 + n3] * s3 + c3[h3 + n3 - 1]) / o3);
+              d3 = 0;
+              v3 = 0;
+              m3 = l3.length;
+              for (y2 = 0; y2 < m3; y2++) {
+                d3 += f3 * l3[y2];
+                w3 = Math.floor(d3 / s3);
+                v3 += c3[h3 + y2] - (d3 - w3 * s3);
+                d3 = w3;
+                if (v3 < 0) {
+                  c3[h3 + y2] = v3 + s3;
+                  v3 = -1;
+                } else {
+                  c3[h3 + y2] = v3;
+                  v3 = 0;
+                }
+              }
+              while (0 !== v3) {
+                f3 -= 1;
+                d3 = 0;
+                for (y2 = 0; y2 < m3; y2++) {
+                  d3 += c3[h3 + y2] - s3 + l3[y2];
+                  if (d3 < 0) {
+                    c3[h3 + y2] = d3 + s3;
+                    d3 = 0;
+                  } else {
+                    c3[h3 + y2] = d3;
+                    d3 = 1;
+>>>>>>> .theirs
                   }
+<<<<<<< .mine
                 }
                 v3 += d3;
               }
@@ -41649,7 +52013,7803 @@ if (uni.restoreGlobal) {
                     else
                       setTimeout(u3, 0);
                   });
+=======
+                }
+                v3 += d3;
+              }
+              a3[h3] = f3;
+            }
+            c3 = k(c3, u3)[0];
+            return [p2(a3), p2(c3)];
+          }
+          function O2(t5, r5) {
+            var i5 = t5.length, n3 = r5.length, s3 = [], a3 = [], o3 = e3, u3, c3, l3, f3, h3;
+            while (i5) {
+              a3.unshift(t5[--i5]);
+              v2(a3);
+              if (N2(a3, r5) < 0) {
+                s3.push(0);
+                continue;
+              }
+              c3 = a3.length;
+              l3 = a3[c3 - 1] * o3 + a3[c3 - 2];
+              f3 = r5[n3 - 1] * o3 + r5[n3 - 2];
+              if (c3 > n3)
+                l3 = (l3 + 1) * o3;
+              u3 = Math.ceil(l3 / f3);
+              do {
+                h3 = M2(r5, u3);
+                if (N2(h3, a3) <= 0)
+                  break;
+                u3--;
+              } while (u3);
+              s3.push(u3);
+              a3 = _2(a3, h3);
+            }
+            s3.reverse();
+            return [p2(s3), p2(a3)];
+          }
+          function k(t5, r5) {
+            var i5 = t5.length, n3 = g2(i5), s3 = e3, a3, o3, u3, c3;
+            u3 = 0;
+            for (a3 = i5 - 1; a3 >= 0; --a3) {
+              c3 = u3 * s3 + t5[a3];
+              o3 = y(c3 / r5);
+              u3 = c3 - o3 * r5;
+              n3[a3] = 0 | o3;
+            }
+            return [n3, 0 | u3];
+          }
+          function C2(t5, r5) {
+            var i5, n3 = st2(r5);
+            if (o2)
+              return [new f2(t5.value / n3.value), new f2(t5.value % n3.value)];
+            var s3 = t5.value, a3 = n3.value;
+            var h3;
+            if (0 === a3)
+              throw new Error("Cannot divide by zero");
+            if (t5.isSmall) {
+              if (n3.isSmall)
+                return [new l2(y(s3 / a3)), new l2(s3 % a3)];
+              return [u2[0], t5];
+            }
+            if (n3.isSmall) {
+              if (1 === a3)
+                return [t5, u2[0]];
+              if (-1 == a3)
+                return [t5.negate(), u2[0]];
+              var v3 = Math.abs(a3);
+              if (v3 < e3) {
+                i5 = k(s3, v3);
+                h3 = p2(i5[0]);
+                var g3 = i5[1];
+                if (t5.sign)
+                  g3 = -g3;
+                if ("number" === typeof h3) {
+                  if (t5.sign !== n3.sign)
+                    h3 = -h3;
+                  return [new l2(h3), new l2(g3)];
+                }
+                return [new c2(h3, t5.sign !== n3.sign), new l2(g3)];
+              }
+              a3 = d2(v3);
+            }
+            var m3 = N2(s3, a3);
+            if (-1 === m3)
+              return [u2[0], t5];
+            if (0 === m3)
+              return [u2[t5.sign === n3.sign ? 1 : -1], u2[0]];
+            if (s3.length + a3.length <= 200)
+              i5 = B2(s3, a3);
+            else
+              i5 = O2(s3, a3);
+            h3 = i5[0];
+            var w3 = t5.sign !== n3.sign, S3 = i5[1], _3 = t5.sign;
+            if ("number" === typeof h3) {
+              if (w3)
+                h3 = -h3;
+              h3 = new l2(h3);
+            } else
+              h3 = new c2(h3, w3);
+            if ("number" === typeof S3) {
+              if (_3)
+                S3 = -S3;
+              S3 = new l2(S3);
+            } else
+              S3 = new c2(S3, _3);
+            return [h3, S3];
+          }
+          c2.prototype.divmod = function(t5) {
+            var e4 = C2(this, t5);
+            return { quotient: e4[0], remainder: e4[1] };
+          };
+          f2.prototype.divmod = l2.prototype.divmod = c2.prototype.divmod;
+          c2.prototype.divide = function(t5) {
+            return C2(this, t5)[0];
+          };
+          f2.prototype.over = f2.prototype.divide = function(t5) {
+            return new f2(this.value / st2(t5).value);
+          };
+          l2.prototype.over = l2.prototype.divide = c2.prototype.over = c2.prototype.divide;
+          c2.prototype.mod = function(t5) {
+            return C2(this, t5)[1];
+          };
+          f2.prototype.mod = f2.prototype.remainder = function(t5) {
+            return new f2(this.value % st2(t5).value);
+          };
+          l2.prototype.remainder = l2.prototype.mod = c2.prototype.remainder = c2.prototype.mod;
+          c2.prototype.pow = function(t5) {
+            var e4 = st2(t5), r5 = this.value, i5 = e4.value, n3, s3, a3;
+            if (0 === i5)
+              return u2[1];
+            if (0 === r5)
+              return u2[0];
+            if (1 === r5)
+              return u2[1];
+            if (-1 === r5)
+              return e4.isEven() ? u2[1] : u2[-1];
+            if (e4.sign)
+              return u2[0];
+            if (!e4.isSmall)
+              throw new Error("The exponent " + e4.toString() + " is too large.");
+            if (this.isSmall) {
+              if (h2(n3 = Math.pow(r5, i5)))
+                return new l2(y(n3));
+            }
+            s3 = this;
+            a3 = u2[1];
+            while (true) {
+              if (i5 & true) {
+                a3 = a3.times(s3);
+                --i5;
+              }
+              if (0 === i5)
+                break;
+              i5 /= 2;
+              s3 = s3.square();
+            }
+            return a3;
+          };
+          l2.prototype.pow = c2.prototype.pow;
+          f2.prototype.pow = function(t5) {
+            var e4 = st2(t5);
+            var r5 = this.value, i5 = e4.value;
+            var n3 = BigInt(0), s3 = BigInt(1), a3 = BigInt(2);
+            if (i5 === n3)
+              return u2[1];
+            if (r5 === n3)
+              return u2[0];
+            if (r5 === s3)
+              return u2[1];
+            if (r5 === BigInt(-1))
+              return e4.isEven() ? u2[1] : u2[-1];
+            if (e4.isNegative())
+              return new f2(n3);
+            var o3 = this;
+            var c3 = u2[1];
+            while (true) {
+              if ((i5 & s3) === s3) {
+                c3 = c3.times(o3);
+                --i5;
+              }
+              if (i5 === n3)
+                break;
+              i5 /= a3;
+              o3 = o3.square();
+            }
+            return c3;
+          };
+          c2.prototype.modPow = function(t5, e4) {
+            t5 = st2(t5);
+            e4 = st2(e4);
+            if (e4.isZero())
+              throw new Error("Cannot take modPow with modulus 0");
+            var r5 = u2[1], i5 = this.mod(e4);
+            if (t5.isNegative()) {
+              t5 = t5.multiply(u2[-1]);
+              i5 = i5.modInv(e4);
+            }
+            while (t5.isPositive()) {
+              if (i5.isZero())
+                return u2[0];
+              if (t5.isOdd())
+                r5 = r5.multiply(i5).mod(e4);
+              t5 = t5.divide(2);
+              i5 = i5.square().mod(e4);
+            }
+            return r5;
+          };
+          f2.prototype.modPow = l2.prototype.modPow = c2.prototype.modPow;
+          function N2(t5, e4) {
+            if (t5.length !== e4.length)
+              return t5.length > e4.length ? 1 : -1;
+            for (var r5 = t5.length - 1; r5 >= 0; r5--)
+              if (t5[r5] !== e4[r5])
+                return t5[r5] > e4[r5] ? 1 : -1;
+            return 0;
+          }
+          c2.prototype.compareAbs = function(t5) {
+            var e4 = st2(t5), r5 = this.value, i5 = e4.value;
+            if (e4.isSmall)
+              return 1;
+            return N2(r5, i5);
+          };
+          l2.prototype.compareAbs = function(t5) {
+            var e4 = st2(t5), r5 = Math.abs(this.value), i5 = e4.value;
+            if (e4.isSmall) {
+              i5 = Math.abs(i5);
+              return r5 === i5 ? 0 : r5 > i5 ? 1 : -1;
+            }
+            return -1;
+          };
+          f2.prototype.compareAbs = function(t5) {
+            var e4 = this.value;
+            var r5 = st2(t5).value;
+            e4 = e4 >= 0 ? e4 : -e4;
+            r5 = r5 >= 0 ? r5 : -r5;
+            return e4 === r5 ? 0 : e4 > r5 ? 1 : -1;
+          };
+          c2.prototype.compare = function(t5) {
+            if (t5 === 1 / 0)
+              return -1;
+            if (t5 === -1 / 0)
+              return 1;
+            var e4 = st2(t5), r5 = this.value, i5 = e4.value;
+            if (this.sign !== e4.sign)
+              return e4.sign ? 1 : -1;
+            if (e4.isSmall)
+              return this.sign ? -1 : 1;
+            return N2(r5, i5) * (this.sign ? -1 : 1);
+          };
+          c2.prototype.compareTo = c2.prototype.compare;
+          l2.prototype.compare = function(t5) {
+            if (t5 === 1 / 0)
+              return -1;
+            if (t5 === -1 / 0)
+              return 1;
+            var e4 = st2(t5), r5 = this.value, i5 = e4.value;
+            if (e4.isSmall)
+              return r5 == i5 ? 0 : r5 > i5 ? 1 : -1;
+            if (r5 < 0 !== e4.sign)
+              return r5 < 0 ? -1 : 1;
+            return r5 < 0 ? 1 : -1;
+          };
+          l2.prototype.compareTo = l2.prototype.compare;
+          f2.prototype.compare = function(t5) {
+            if (t5 === 1 / 0)
+              return -1;
+            if (t5 === -1 / 0)
+              return 1;
+            var e4 = this.value;
+            var r5 = st2(t5).value;
+            return e4 === r5 ? 0 : e4 > r5 ? 1 : -1;
+          };
+          f2.prototype.compareTo = f2.prototype.compare;
+          c2.prototype.equals = function(t5) {
+            return 0 === this.compare(t5);
+          };
+          f2.prototype.eq = f2.prototype.equals = l2.prototype.eq = l2.prototype.equals = c2.prototype.eq = c2.prototype.equals;
+          c2.prototype.notEquals = function(t5) {
+            return 0 !== this.compare(t5);
+          };
+          f2.prototype.neq = f2.prototype.notEquals = l2.prototype.neq = l2.prototype.notEquals = c2.prototype.neq = c2.prototype.notEquals;
+          c2.prototype.greater = function(t5) {
+            return this.compare(t5) > 0;
+          };
+          f2.prototype.gt = f2.prototype.greater = l2.prototype.gt = l2.prototype.greater = c2.prototype.gt = c2.prototype.greater;
+          c2.prototype.lesser = function(t5) {
+            return this.compare(t5) < 0;
+          };
+          f2.prototype.lt = f2.prototype.lesser = l2.prototype.lt = l2.prototype.lesser = c2.prototype.lt = c2.prototype.lesser;
+          c2.prototype.greaterOrEquals = function(t5) {
+            return this.compare(t5) >= 0;
+          };
+          f2.prototype.geq = f2.prototype.greaterOrEquals = l2.prototype.geq = l2.prototype.greaterOrEquals = c2.prototype.geq = c2.prototype.greaterOrEquals;
+          c2.prototype.lesserOrEquals = function(t5) {
+            return this.compare(t5) <= 0;
+          };
+          f2.prototype.leq = f2.prototype.lesserOrEquals = l2.prototype.leq = l2.prototype.lesserOrEquals = c2.prototype.leq = c2.prototype.lesserOrEquals;
+          c2.prototype.isEven = function() {
+            return 0 === (1 & this.value[0]);
+          };
+          l2.prototype.isEven = function() {
+            return 0 === (1 & this.value);
+          };
+          f2.prototype.isEven = function() {
+            return (this.value & BigInt(1)) === BigInt(0);
+          };
+          c2.prototype.isOdd = function() {
+            return 1 === (1 & this.value[0]);
+          };
+          l2.prototype.isOdd = function() {
+            return 1 === (1 & this.value);
+          };
+          f2.prototype.isOdd = function() {
+            return (this.value & BigInt(1)) === BigInt(1);
+          };
+          c2.prototype.isPositive = function() {
+            return !this.sign;
+          };
+          l2.prototype.isPositive = function() {
+            return this.value > 0;
+          };
+          f2.prototype.isPositive = l2.prototype.isPositive;
+          c2.prototype.isNegative = function() {
+            return this.sign;
+          };
+          l2.prototype.isNegative = function() {
+            return this.value < 0;
+          };
+          f2.prototype.isNegative = l2.prototype.isNegative;
+          c2.prototype.isUnit = function() {
+            return false;
+          };
+          l2.prototype.isUnit = function() {
+            return 1 === Math.abs(this.value);
+          };
+          f2.prototype.isUnit = function() {
+            return this.abs().value === BigInt(1);
+          };
+          c2.prototype.isZero = function() {
+            return false;
+          };
+          l2.prototype.isZero = function() {
+            return 0 === this.value;
+          };
+          f2.prototype.isZero = function() {
+            return this.value === BigInt(0);
+          };
+          c2.prototype.isDivisibleBy = function(t5) {
+            var e4 = st2(t5);
+            if (e4.isZero())
+              return false;
+            if (e4.isUnit())
+              return true;
+            if (0 === e4.compareAbs(2))
+              return this.isEven();
+            return this.mod(e4).isZero();
+          };
+          f2.prototype.isDivisibleBy = l2.prototype.isDivisibleBy = c2.prototype.isDivisibleBy;
+          function P2(t5) {
+            var e4 = t5.abs();
+            if (e4.isUnit())
+              return false;
+            if (e4.equals(2) || e4.equals(3) || e4.equals(5))
+              return true;
+            if (e4.isEven() || e4.isDivisibleBy(3) || e4.isDivisibleBy(5))
+              return false;
+            if (e4.lesser(49))
+              return true;
+          }
+          function V2(t5, e4) {
+            var r5 = t5.prev(), i5 = r5, s3 = 0, a3, u3, c3;
+            while (i5.isEven())
+              i5 = i5.divide(2), s3++;
+            t:
+              for (u3 = 0; u3 < e4.length; u3++) {
+                if (t5.lesser(e4[u3]))
+                  continue;
+                c3 = n2(e4[u3]).modPow(i5, t5);
+                if (c3.isUnit() || c3.equals(r5))
+                  continue;
+                for (a3 = s3 - 1; 0 != a3; a3--) {
+                  c3 = c3.square().mod(t5);
+                  if (c3.isUnit())
+                    return false;
+                  if (c3.equals(r5))
+                    continue t;
+                }
+                return false;
+              }
+            return true;
+          }
+          c2.prototype.isPrime = function(e4) {
+            var r5 = P2(this);
+            if (r5 !== t4)
+              return r5;
+            var i5 = this.abs();
+            var s3 = i5.bitLength();
+            if (s3 <= 64)
+              return V2(i5, [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]);
+            var a3 = Math.log(2) * s3.toJSNumber();
+            var o3 = Math.ceil(true === e4 ? 2 * Math.pow(a3, 2) : a3);
+            for (var u3 = [], c3 = 0; c3 < o3; c3++)
+              u3.push(n2(c3 + 2));
+            return V2(i5, u3);
+          };
+          f2.prototype.isPrime = l2.prototype.isPrime = c2.prototype.isPrime;
+          c2.prototype.isProbablePrime = function(e4, r5) {
+            var i5 = P2(this);
+            if (i5 !== t4)
+              return i5;
+            var s3 = this.abs();
+            var a3 = e4 === t4 ? 5 : e4;
+            for (var o3 = [], u3 = 0; u3 < a3; u3++)
+              o3.push(n2.randBetween(2, s3.minus(2), r5));
+            return V2(s3, o3);
+          };
+          f2.prototype.isProbablePrime = l2.prototype.isProbablePrime = c2.prototype.isProbablePrime;
+          c2.prototype.modInv = function(t5) {
+            var e4 = n2.zero, r5 = n2.one, i5 = st2(t5), s3 = this.abs(), a3, o3, u3;
+            while (!s3.isZero()) {
+              a3 = i5.divide(s3);
+              o3 = e4;
+              u3 = i5;
+              e4 = r5;
+              i5 = s3;
+              r5 = o3.subtract(a3.multiply(r5));
+              s3 = u3.subtract(a3.multiply(s3));
+            }
+            if (!i5.isUnit())
+              throw new Error(this.toString() + " and " + t5.toString() + " are not co-prime");
+            if (-1 === e4.compare(0))
+              e4 = e4.add(t5);
+            if (this.isNegative())
+              return e4.negate();
+            return e4;
+          };
+          f2.prototype.modInv = l2.prototype.modInv = c2.prototype.modInv;
+          c2.prototype.next = function() {
+            var t5 = this.value;
+            if (this.sign)
+              return E2(t5, 1, this.sign);
+            return new c2(S2(t5, 1), this.sign);
+          };
+          l2.prototype.next = function() {
+            var t5 = this.value;
+            if (t5 + 1 < i4)
+              return new l2(t5 + 1);
+            return new c2(s2, false);
+          };
+          f2.prototype.next = function() {
+            return new f2(this.value + BigInt(1));
+          };
+          c2.prototype.prev = function() {
+            var t5 = this.value;
+            if (this.sign)
+              return new c2(S2(t5, 1), true);
+            return E2(t5, 1, this.sign);
+          };
+          l2.prototype.prev = function() {
+            var t5 = this.value;
+            if (t5 - 1 > -i4)
+              return new l2(t5 - 1);
+            return new c2(s2, true);
+          };
+          f2.prototype.prev = function() {
+            return new f2(this.value - BigInt(1));
+          };
+          var L2 = [1];
+          while (2 * L2[L2.length - 1] <= e3)
+            L2.push(2 * L2[L2.length - 1]);
+          var H2 = L2.length, K2 = L2[H2 - 1];
+          function U2(t5) {
+            return Math.abs(t5) <= e3;
+          }
+          c2.prototype.shiftLeft = function(t5) {
+            var e4 = st2(t5).toJSNumber();
+            if (!U2(e4))
+              throw new Error(String(e4) + " is too large for shifting.");
+            if (e4 < 0)
+              return this.shiftRight(-e4);
+            var r5 = this;
+            if (r5.isZero())
+              return r5;
+            while (e4 >= H2) {
+              r5 = r5.multiply(K2);
+              e4 -= H2 - 1;
+            }
+            return r5.multiply(L2[e4]);
+          };
+          f2.prototype.shiftLeft = l2.prototype.shiftLeft = c2.prototype.shiftLeft;
+          c2.prototype.shiftRight = function(t5) {
+            var e4;
+            var r5 = st2(t5).toJSNumber();
+            if (!U2(r5))
+              throw new Error(String(r5) + " is too large for shifting.");
+            if (r5 < 0)
+              return this.shiftLeft(-r5);
+            var i5 = this;
+            while (r5 >= H2) {
+              if (i5.isZero() || i5.isNegative() && i5.isUnit())
+                return i5;
+              e4 = C2(i5, K2);
+              i5 = e4[1].isNegative() ? e4[0].prev() : e4[0];
+              r5 -= H2 - 1;
+            }
+            e4 = C2(i5, L2[r5]);
+            return e4[1].isNegative() ? e4[0].prev() : e4[0];
+          };
+          f2.prototype.shiftRight = l2.prototype.shiftRight = c2.prototype.shiftRight;
+          function j2(t5, e4, r5) {
+            e4 = st2(e4);
+            var i5 = t5.isNegative(), s3 = e4.isNegative();
+            var a3 = i5 ? t5.not() : t5, o3 = s3 ? e4.not() : e4;
+            var u3 = 0, c3 = 0;
+            var l3 = null, f3 = null;
+            var h3 = [];
+            while (!a3.isZero() || !o3.isZero()) {
+              l3 = C2(a3, K2);
+              u3 = l3[1].toJSNumber();
+              if (i5)
+                u3 = K2 - 1 - u3;
+              f3 = C2(o3, K2);
+              c3 = f3[1].toJSNumber();
+              if (s3)
+                c3 = K2 - 1 - c3;
+              a3 = l3[0];
+              o3 = f3[0];
+              h3.push(r5(u3, c3));
+            }
+            var d3 = 0 !== r5(i5 ? 1 : 0, s3 ? 1 : 0) ? n2(-1) : n2(0);
+            for (var p3 = h3.length - 1; p3 >= 0; p3 -= 1)
+              d3 = d3.multiply(K2).add(n2(h3[p3]));
+            return d3;
+          }
+          c2.prototype.not = function() {
+            return this.negate().prev();
+          };
+          f2.prototype.not = l2.prototype.not = c2.prototype.not;
+          c2.prototype.and = function(t5) {
+            return j2(this, t5, function(t6, e4) {
+              return t6 & e4;
+            });
+          };
+          f2.prototype.and = l2.prototype.and = c2.prototype.and;
+          c2.prototype.or = function(t5) {
+            return j2(this, t5, function(t6, e4) {
+              return t6 | e4;
+            });
+          };
+          f2.prototype.or = l2.prototype.or = c2.prototype.or;
+          c2.prototype.xor = function(t5) {
+            return j2(this, t5, function(t6, e4) {
+              return t6 ^ e4;
+            });
+          };
+          f2.prototype.xor = l2.prototype.xor = c2.prototype.xor;
+          var q2 = 1 << 30, F2 = (e3 & -e3) * (e3 & -e3) | q2;
+          function z2(t5) {
+            var r5 = t5.value, i5 = "number" === typeof r5 ? r5 | q2 : "bigint" === typeof r5 ? r5 | BigInt(q2) : r5[0] + r5[1] * e3 | F2;
+            return i5 & -i5;
+          }
+          function G2(t5, e4) {
+            if (e4.compareTo(t5) <= 0) {
+              var r5 = G2(t5, e4.square(e4));
+              var i5 = r5.p;
+              var s3 = r5.e;
+              var a3 = i5.multiply(e4);
+              return a3.compareTo(t5) <= 0 ? { p: a3, e: 2 * s3 + 1 } : { p: i5, e: 2 * s3 };
+            }
+            return { p: n2(1), e: 0 };
+          }
+          c2.prototype.bitLength = function() {
+            var t5 = this;
+            if (t5.compareTo(n2(0)) < 0)
+              t5 = t5.negate().subtract(n2(1));
+            if (0 === t5.compareTo(n2(0)))
+              return n2(0);
+            return n2(G2(t5, n2(2)).e).add(n2(1));
+          };
+          f2.prototype.bitLength = l2.prototype.bitLength = c2.prototype.bitLength;
+          function Y2(t5, e4) {
+            t5 = st2(t5);
+            e4 = st2(e4);
+            return t5.greater(e4) ? t5 : e4;
+          }
+          function W2(t5, e4) {
+            t5 = st2(t5);
+            e4 = st2(e4);
+            return t5.lesser(e4) ? t5 : e4;
+          }
+          function J2(t5, e4) {
+            t5 = st2(t5).abs();
+            e4 = st2(e4).abs();
+            if (t5.equals(e4))
+              return t5;
+            if (t5.isZero())
+              return e4;
+            if (e4.isZero())
+              return t5;
+            var r5 = u2[1], i5, n3;
+            while (t5.isEven() && e4.isEven()) {
+              i5 = W2(z2(t5), z2(e4));
+              t5 = t5.divide(i5);
+              e4 = e4.divide(i5);
+              r5 = r5.multiply(i5);
+            }
+            while (t5.isEven())
+              t5 = t5.divide(z2(t5));
+            do {
+              while (e4.isEven())
+                e4 = e4.divide(z2(e4));
+              if (t5.greater(e4)) {
+                n3 = e4;
+                e4 = t5;
+                t5 = n3;
+              }
+              e4 = e4.subtract(t5);
+            } while (!e4.isZero());
+            return r5.isUnit() ? t5 : t5.multiply(r5);
+          }
+          function Z2(t5, e4) {
+            t5 = st2(t5).abs();
+            e4 = st2(e4).abs();
+            return t5.divide(J2(t5, e4)).multiply(e4);
+          }
+          function $2(t5, r5, i5) {
+            t5 = st2(t5);
+            r5 = st2(r5);
+            var n3 = i5 || Math.random;
+            var s3 = W2(t5, r5), a3 = Y2(t5, r5);
+            var o3 = a3.subtract(s3).add(1);
+            if (o3.isSmall)
+              return s3.add(Math.floor(n3() * o3));
+            var c3 = et2(o3, e3).value;
+            var l3 = [], f3 = true;
+            for (var h3 = 0; h3 < c3.length; h3++) {
+              var d3 = f3 ? c3[h3] + (h3 + 1 < c3.length ? c3[h3 + 1] / e3 : 0) : e3;
+              var p3 = y(n3() * d3);
+              l3.push(p3);
+              if (p3 < c3[h3])
+                f3 = false;
+            }
+            return s3.add(u2.fromArray(l3, e3, false));
+          }
+          var X2 = function(t5, e4, r5, i5) {
+            r5 = r5 || a2;
+            t5 = String(t5);
+            if (!i5) {
+              t5 = t5.toLowerCase();
+              r5 = r5.toLowerCase();
+            }
+            var n3 = t5.length;
+            var s3;
+            var o3 = Math.abs(e4);
+            var u3 = {};
+            for (s3 = 0; s3 < r5.length; s3++)
+              u3[r5[s3]] = s3;
+            for (s3 = 0; s3 < n3; s3++) {
+              var c3 = t5[s3];
+              if ("-" === c3)
+                continue;
+              if (c3 in u3) {
+                if (u3[c3] >= o3) {
+                  if ("1" === c3 && 1 === o3)
+                    continue;
+                  throw new Error(c3 + " is not a valid digit in base " + e4 + ".");
+                }
+              }
+            }
+            e4 = st2(e4);
+            var l3 = [];
+            var f3 = "-" === t5[0];
+            for (s3 = f3 ? 1 : 0; s3 < t5.length; s3++) {
+              var c3 = t5[s3];
+              if (c3 in u3)
+                l3.push(st2(u3[c3]));
+              else if ("<" === c3) {
+                var h3 = s3;
+                do {
+                  s3++;
+                } while (">" !== t5[s3] && s3 < t5.length);
+                l3.push(st2(t5.slice(h3 + 1, s3)));
+              } else
+                throw new Error(c3 + " is not a valid character");
+            }
+            return Q2(l3, e4, f3);
+          };
+          function Q2(t5, e4, r5) {
+            var i5 = u2[0], n3 = u2[1], s3;
+            for (s3 = t5.length - 1; s3 >= 0; s3--) {
+              i5 = i5.add(t5[s3].times(n3));
+              n3 = n3.times(e4);
+            }
+            return r5 ? i5.negate() : i5;
+          }
+          function tt2(t5, e4) {
+            e4 = e4 || a2;
+            if (t5 < e4.length)
+              return e4[t5];
+            return "<" + t5 + ">";
+          }
+          function et2(t5, e4) {
+            e4 = n2(e4);
+            if (e4.isZero()) {
+              if (t5.isZero())
+                return { value: [0], isNegative: false };
+              throw new Error("Cannot convert nonzero numbers to base 0.");
+            }
+            if (e4.equals(-1)) {
+              if (t5.isZero())
+                return { value: [0], isNegative: false };
+              if (t5.isNegative())
+                return { value: [].concat.apply([], Array.apply(null, Array(-t5.toJSNumber())).map(Array.prototype.valueOf, [1, 0])), isNegative: false };
+              var r5 = Array.apply(null, Array(t5.toJSNumber() - 1)).map(Array.prototype.valueOf, [0, 1]);
+              r5.unshift([1]);
+              return { value: [].concat.apply([], r5), isNegative: false };
+            }
+            var i5 = false;
+            if (t5.isNegative() && e4.isPositive()) {
+              i5 = true;
+              t5 = t5.abs();
+            }
+            if (e4.isUnit()) {
+              if (t5.isZero())
+                return { value: [0], isNegative: false };
+              return { value: Array.apply(null, Array(t5.toJSNumber())).map(Number.prototype.valueOf, 1), isNegative: i5 };
+            }
+            var s3 = [];
+            var a3 = t5, o3;
+            while (a3.isNegative() || a3.compareAbs(e4) >= 0) {
+              o3 = a3.divmod(e4);
+              a3 = o3.quotient;
+              var u3 = o3.remainder;
+              if (u3.isNegative()) {
+                u3 = e4.minus(u3).abs();
+                a3 = a3.next();
+              }
+              s3.push(u3.toJSNumber());
+            }
+            s3.push(a3.toJSNumber());
+            return { value: s3.reverse(), isNegative: i5 };
+          }
+          function rt2(t5, e4, r5) {
+            var i5 = et2(t5, e4);
+            return (i5.isNegative ? "-" : "") + i5.value.map(function(t6) {
+              return tt2(t6, r5);
+            }).join("");
+          }
+          c2.prototype.toArray = function(t5) {
+            return et2(this, t5);
+          };
+          l2.prototype.toArray = function(t5) {
+            return et2(this, t5);
+          };
+          f2.prototype.toArray = function(t5) {
+            return et2(this, t5);
+          };
+          c2.prototype.toString = function(e4, r5) {
+            if (e4 === t4)
+              e4 = 10;
+            if (10 !== e4)
+              return rt2(this, e4, r5);
+            var i5 = this.value, n3 = i5.length, s3 = String(i5[--n3]), a3 = "0000000", o3;
+            while (--n3 >= 0) {
+              o3 = String(i5[n3]);
+              s3 += a3.slice(o3.length) + o3;
+            }
+            var u3 = this.sign ? "-" : "";
+            return u3 + s3;
+          };
+          l2.prototype.toString = function(e4, r5) {
+            if (e4 === t4)
+              e4 = 10;
+            if (10 != e4)
+              return rt2(this, e4, r5);
+            return String(this.value);
+          };
+          f2.prototype.toString = l2.prototype.toString;
+          f2.prototype.toJSON = c2.prototype.toJSON = l2.prototype.toJSON = function() {
+            return this.toString();
+          };
+          c2.prototype.valueOf = function() {
+            return parseInt(this.toString(), 10);
+          };
+          c2.prototype.toJSNumber = c2.prototype.valueOf;
+          l2.prototype.valueOf = function() {
+            return this.value;
+          };
+          l2.prototype.toJSNumber = l2.prototype.valueOf;
+          f2.prototype.valueOf = f2.prototype.toJSNumber = function() {
+            return parseInt(this.toString(), 10);
+          };
+          function it2(t5) {
+            if (h2(+t5)) {
+              var e4 = +t5;
+              if (e4 === y(e4))
+                return o2 ? new f2(BigInt(e4)) : new l2(e4);
+              throw new Error("Invalid integer: " + t5);
+            }
+            var i5 = "-" === t5[0];
+            if (i5)
+              t5 = t5.slice(1);
+            var n3 = t5.split(/e/i);
+            if (n3.length > 2)
+              throw new Error("Invalid integer: " + n3.join("e"));
+            if (2 === n3.length) {
+              var s3 = n3[1];
+              if ("+" === s3[0])
+                s3 = s3.slice(1);
+              s3 = +s3;
+              if (s3 !== y(s3) || !h2(s3))
+                throw new Error("Invalid integer: " + s3 + " is not a valid exponent.");
+              var a3 = n3[0];
+              var u3 = a3.indexOf(".");
+              if (u3 >= 0) {
+                s3 -= a3.length - u3 - 1;
+                a3 = a3.slice(0, u3) + a3.slice(u3 + 1);
+              }
+              if (s3 < 0)
+                throw new Error("Cannot include negative exponent part for integers");
+              a3 += new Array(s3 + 1).join("0");
+              t5 = a3;
+            }
+            var d3 = /^([0-9][0-9]*)$/.test(t5);
+            if (!d3)
+              throw new Error("Invalid integer: " + t5);
+            if (o2)
+              return new f2(BigInt(i5 ? "-" + t5 : t5));
+            var p3 = [], g3 = t5.length, m3 = r4, w3 = g3 - m3;
+            while (g3 > 0) {
+              p3.push(+t5.slice(w3, g3));
+              w3 -= m3;
+              if (w3 < 0)
+                w3 = 0;
+              g3 -= m3;
+            }
+            v2(p3);
+            return new c2(p3, i5);
+          }
+          function nt2(t5) {
+            if (o2)
+              return new f2(BigInt(t5));
+            if (h2(t5)) {
+              if (t5 !== y(t5))
+                throw new Error(t5 + " is not an integer.");
+              return new l2(t5);
+            }
+            return it2(t5.toString());
+          }
+          function st2(t5) {
+            if ("number" === typeof t5)
+              return nt2(t5);
+            if ("string" === typeof t5)
+              return it2(t5);
+            if ("bigint" === typeof t5)
+              return new f2(t5);
+            return t5;
+          }
+          for (var at2 = 0; at2 < 1e3; at2++) {
+            u2[at2] = st2(at2);
+            if (at2 > 0)
+              u2[-at2] = st2(-at2);
+          }
+          u2.one = u2[1];
+          u2.zero = u2[0];
+          u2.minusOne = u2[-1];
+          u2.max = Y2;
+          u2.min = W2;
+          u2.gcd = J2;
+          u2.lcm = Z2;
+          u2.isInstance = function(t5) {
+            return t5 instanceof c2 || t5 instanceof l2 || t5 instanceof f2;
+          };
+          u2.randBetween = $2;
+          u2.fromArray = function(t5, e4, r5) {
+            return Q2(t5.map(st2), st2(e4 || 10), r5);
+          };
+          return u2;
+        }();
+        if (t3.hasOwnProperty("exports"))
+          t3.exports = n2;
+        i3 = function() {
+          return n2;
+        }.call(e2, r3, e2, t3), void 0 !== i3 && (t3.exports = i3);
+      }, 452: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(8269), r3(8214), r3(888), r3(5109));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.BlockCipher;
+            var n2 = e3.algo;
+            var s2 = [];
+            var a2 = [];
+            var o2 = [];
+            var u2 = [];
+            var c2 = [];
+            var l2 = [];
+            var f2 = [];
+            var h2 = [];
+            var d2 = [];
+            var p2 = [];
+            (function() {
+              var t5 = [];
+              for (var e4 = 0; e4 < 256; e4++)
+                if (e4 < 128)
+                  t5[e4] = e4 << 1;
+                else
+                  t5[e4] = e4 << 1 ^ 283;
+              var r5 = 0;
+              var i4 = 0;
+              for (var e4 = 0; e4 < 256; e4++) {
+                var n3 = i4 ^ i4 << 1 ^ i4 << 2 ^ i4 << 3 ^ i4 << 4;
+                n3 = n3 >>> 8 ^ 255 & n3 ^ 99;
+                s2[r5] = n3;
+                a2[n3] = r5;
+                var v3 = t5[r5];
+                var g3 = t5[v3];
+                var y = t5[g3];
+                var m2 = 257 * t5[n3] ^ 16843008 * n3;
+                o2[r5] = m2 << 24 | m2 >>> 8;
+                u2[r5] = m2 << 16 | m2 >>> 16;
+                c2[r5] = m2 << 8 | m2 >>> 24;
+                l2[r5] = m2;
+                var m2 = 16843009 * y ^ 65537 * g3 ^ 257 * v3 ^ 16843008 * r5;
+                f2[n3] = m2 << 24 | m2 >>> 8;
+                h2[n3] = m2 << 16 | m2 >>> 16;
+                d2[n3] = m2 << 8 | m2 >>> 24;
+                p2[n3] = m2;
+                if (!r5)
+                  r5 = i4 = 1;
+                else {
+                  r5 = v3 ^ t5[t5[t5[y ^ v3]]];
+                  i4 ^= t5[t5[i4]];
+                }
+              }
+            })();
+            var v2 = [0, 1, 2, 4, 8, 16, 32, 64, 128, 27, 54];
+            var g2 = n2.AES = i3.extend({ _doReset: function() {
+              var t5;
+              if (this._nRounds && this._keyPriorReset === this._key)
+                return;
+              var e4 = this._keyPriorReset = this._key;
+              var r5 = e4.words;
+              var i4 = e4.sigBytes / 4;
+              var n3 = this._nRounds = i4 + 6;
+              var a3 = 4 * (n3 + 1);
+              var o3 = this._keySchedule = [];
+              for (var u3 = 0; u3 < a3; u3++)
+                if (u3 < i4)
+                  o3[u3] = r5[u3];
+                else {
+                  t5 = o3[u3 - 1];
+                  if (!(u3 % i4)) {
+                    t5 = t5 << 8 | t5 >>> 24;
+                    t5 = s2[t5 >>> 24] << 24 | s2[t5 >>> 16 & 255] << 16 | s2[t5 >>> 8 & 255] << 8 | s2[255 & t5];
+                    t5 ^= v2[u3 / i4 | 0] << 24;
+                  } else if (i4 > 6 && u3 % i4 == 4)
+                    t5 = s2[t5 >>> 24] << 24 | s2[t5 >>> 16 & 255] << 16 | s2[t5 >>> 8 & 255] << 8 | s2[255 & t5];
+                  o3[u3] = o3[u3 - i4] ^ t5;
+                }
+              var c3 = this._invKeySchedule = [];
+              for (var l3 = 0; l3 < a3; l3++) {
+                var u3 = a3 - l3;
+                if (l3 % 4)
+                  var t5 = o3[u3];
+                else
+                  var t5 = o3[u3 - 4];
+                if (l3 < 4 || u3 <= 4)
+                  c3[l3] = t5;
+                else
+                  c3[l3] = f2[s2[t5 >>> 24]] ^ h2[s2[t5 >>> 16 & 255]] ^ d2[s2[t5 >>> 8 & 255]] ^ p2[s2[255 & t5]];
+              }
+            }, encryptBlock: function(t5, e4) {
+              this._doCryptBlock(t5, e4, this._keySchedule, o2, u2, c2, l2, s2);
+            }, decryptBlock: function(t5, e4) {
+              var r5 = t5[e4 + 1];
+              t5[e4 + 1] = t5[e4 + 3];
+              t5[e4 + 3] = r5;
+              this._doCryptBlock(t5, e4, this._invKeySchedule, f2, h2, d2, p2, a2);
+              var r5 = t5[e4 + 1];
+              t5[e4 + 1] = t5[e4 + 3];
+              t5[e4 + 3] = r5;
+            }, _doCryptBlock: function(t5, e4, r5, i4, n3, s3, a3, o3) {
+              var u3 = this._nRounds;
+              var c3 = t5[e4] ^ r5[0];
+              var l3 = t5[e4 + 1] ^ r5[1];
+              var f3 = t5[e4 + 2] ^ r5[2];
+              var h3 = t5[e4 + 3] ^ r5[3];
+              var d3 = 4;
+              for (var p3 = 1; p3 < u3; p3++) {
+                var v3 = i4[c3 >>> 24] ^ n3[l3 >>> 16 & 255] ^ s3[f3 >>> 8 & 255] ^ a3[255 & h3] ^ r5[d3++];
+                var g3 = i4[l3 >>> 24] ^ n3[f3 >>> 16 & 255] ^ s3[h3 >>> 8 & 255] ^ a3[255 & c3] ^ r5[d3++];
+                var y = i4[f3 >>> 24] ^ n3[h3 >>> 16 & 255] ^ s3[c3 >>> 8 & 255] ^ a3[255 & l3] ^ r5[d3++];
+                var m2 = i4[h3 >>> 24] ^ n3[c3 >>> 16 & 255] ^ s3[l3 >>> 8 & 255] ^ a3[255 & f3] ^ r5[d3++];
+                c3 = v3;
+                l3 = g3;
+                f3 = y;
+                h3 = m2;
+              }
+              var v3 = (o3[c3 >>> 24] << 24 | o3[l3 >>> 16 & 255] << 16 | o3[f3 >>> 8 & 255] << 8 | o3[255 & h3]) ^ r5[d3++];
+              var g3 = (o3[l3 >>> 24] << 24 | o3[f3 >>> 16 & 255] << 16 | o3[h3 >>> 8 & 255] << 8 | o3[255 & c3]) ^ r5[d3++];
+              var y = (o3[f3 >>> 24] << 24 | o3[h3 >>> 16 & 255] << 16 | o3[c3 >>> 8 & 255] << 8 | o3[255 & l3]) ^ r5[d3++];
+              var m2 = (o3[h3 >>> 24] << 24 | o3[c3 >>> 16 & 255] << 16 | o3[l3 >>> 8 & 255] << 8 | o3[255 & f3]) ^ r5[d3++];
+              t5[e4] = v3;
+              t5[e4 + 1] = g3;
+              t5[e4 + 2] = y;
+              t5[e4 + 3] = m2;
+            }, keySize: 256 / 32 });
+            e3.AES = i3._createHelper(g2);
+          })();
+          return t4.AES;
+        });
+      }, 5109: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(888));
+        })(this, function(t4) {
+          t4.lib.Cipher || function(e3) {
+            var r4 = t4;
+            var i3 = r4.lib;
+            var n2 = i3.Base;
+            var s2 = i3.WordArray;
+            var a2 = i3.BufferedBlockAlgorithm;
+            var o2 = r4.enc;
+            o2.Utf8;
+            var c2 = o2.Base64;
+            var l2 = r4.algo;
+            var f2 = l2.EvpKDF;
+            var h2 = i3.Cipher = a2.extend({ cfg: n2.extend(), createEncryptor: function(t5, e4) {
+              return this.create(this._ENC_XFORM_MODE, t5, e4);
+            }, createDecryptor: function(t5, e4) {
+              return this.create(this._DEC_XFORM_MODE, t5, e4);
+            }, init: function(t5, e4, r5) {
+              this.cfg = this.cfg.extend(r5);
+              this._xformMode = t5;
+              this._key = e4;
+              this.reset();
+            }, reset: function() {
+              a2.reset.call(this);
+              this._doReset();
+            }, process: function(t5) {
+              this._append(t5);
+              return this._process();
+            }, finalize: function(t5) {
+              if (t5)
+                this._append(t5);
+              var e4 = this._doFinalize();
+              return e4;
+            }, keySize: 128 / 32, ivSize: 128 / 32, _ENC_XFORM_MODE: 1, _DEC_XFORM_MODE: 2, _createHelper: function() {
+              function t5(t6) {
+                if ("string" == typeof t6)
+                  return T2;
+                else
+                  return E2;
+              }
+              return function(e4) {
+                return { encrypt: function(r5, i4, n3) {
+                  return t5(i4).encrypt(e4, r5, i4, n3);
+                }, decrypt: function(r5, i4, n3) {
+                  return t5(i4).decrypt(e4, r5, i4, n3);
+                } };
+              };
+            }() });
+            i3.StreamCipher = h2.extend({ _doFinalize: function() {
+              var t5 = this._process(true);
+              return t5;
+            }, blockSize: 1 });
+            var p2 = r4.mode = {};
+            var v2 = i3.BlockCipherMode = n2.extend({ createEncryptor: function(t5, e4) {
+              return this.Encryptor.create(t5, e4);
+            }, createDecryptor: function(t5, e4) {
+              return this.Decryptor.create(t5, e4);
+            }, init: function(t5, e4) {
+              this._cipher = t5;
+              this._iv = e4;
+            } });
+            var g2 = p2.CBC = function() {
+              var t5 = v2.extend();
+              t5.Encryptor = t5.extend({ processBlock: function(t6, e4) {
+                var i4 = this._cipher;
+                var n3 = i4.blockSize;
+                r5.call(this, t6, e4, n3);
+                i4.encryptBlock(t6, e4);
+                this._prevBlock = t6.slice(e4, e4 + n3);
+              } });
+              t5.Decryptor = t5.extend({ processBlock: function(t6, e4) {
+                var i4 = this._cipher;
+                var n3 = i4.blockSize;
+                var s3 = t6.slice(e4, e4 + n3);
+                i4.decryptBlock(t6, e4);
+                r5.call(this, t6, e4, n3);
+                this._prevBlock = s3;
+              } });
+              function r5(t6, r6, i4) {
+                var n3;
+                var s3 = this._iv;
+                if (s3) {
+                  n3 = s3;
+                  this._iv = e3;
+                } else
+                  n3 = this._prevBlock;
+                for (var a3 = 0; a3 < i4; a3++)
+                  t6[r6 + a3] ^= n3[a3];
+              }
+              return t5;
+            }();
+            var y = r4.pad = {};
+            var m2 = y.Pkcs7 = { pad: function(t5, e4) {
+              var r5 = 4 * e4;
+              var i4 = r5 - t5.sigBytes % r5;
+              var n3 = i4 << 24 | i4 << 16 | i4 << 8 | i4;
+              var a3 = [];
+              for (var o3 = 0; o3 < i4; o3 += 4)
+                a3.push(n3);
+              var u2 = s2.create(a3, i4);
+              t5.concat(u2);
+            }, unpad: function(t5) {
+              var e4 = 255 & t5.words[t5.sigBytes - 1 >>> 2];
+              t5.sigBytes -= e4;
+            } };
+            i3.BlockCipher = h2.extend({ cfg: h2.cfg.extend({ mode: g2, padding: m2 }), reset: function() {
+              var t5;
+              h2.reset.call(this);
+              var e4 = this.cfg;
+              var r5 = e4.iv;
+              var i4 = e4.mode;
+              if (this._xformMode == this._ENC_XFORM_MODE)
+                t5 = i4.createEncryptor;
+              else {
+                t5 = i4.createDecryptor;
+                this._minBufferSize = 1;
+              }
+              if (this._mode && this._mode.__creator == t5)
+                this._mode.init(this, r5 && r5.words);
+              else {
+                this._mode = t5.call(i4, this, r5 && r5.words);
+                this._mode.__creator = t5;
+              }
+            }, _doProcessBlock: function(t5, e4) {
+              this._mode.processBlock(t5, e4);
+            }, _doFinalize: function() {
+              var t5;
+              var e4 = this.cfg.padding;
+              if (this._xformMode == this._ENC_XFORM_MODE) {
+                e4.pad(this._data, this.blockSize);
+                t5 = this._process(true);
+              } else {
+                t5 = this._process(true);
+                e4.unpad(t5);
+              }
+              return t5;
+            }, blockSize: 128 / 32 });
+            var S2 = i3.CipherParams = n2.extend({ init: function(t5) {
+              this.mixIn(t5);
+            }, toString: function(t5) {
+              return (t5 || this.formatter).stringify(this);
+            } });
+            var _2 = r4.format = {};
+            var b2 = _2.OpenSSL = { stringify: function(t5) {
+              var e4;
+              var r5 = t5.ciphertext;
+              var i4 = t5.salt;
+              if (i4)
+                e4 = s2.create([1398893684, 1701076831]).concat(i4).concat(r5);
+              else
+                e4 = r5;
+              return e4.toString(c2);
+            }, parse: function(t5) {
+              var e4;
+              var r5 = c2.parse(t5);
+              var i4 = r5.words;
+              if (1398893684 == i4[0] && 1701076831 == i4[1]) {
+                e4 = s2.create(i4.slice(2, 4));
+                i4.splice(0, 4);
+                r5.sigBytes -= 16;
+              }
+              return S2.create({ ciphertext: r5, salt: e4 });
+            } };
+            var E2 = i3.SerializableCipher = n2.extend({ cfg: n2.extend({ format: b2 }), encrypt: function(t5, e4, r5, i4) {
+              i4 = this.cfg.extend(i4);
+              var n3 = t5.createEncryptor(r5, i4);
+              var s3 = n3.finalize(e4);
+              var a3 = n3.cfg;
+              return S2.create({ ciphertext: s3, key: r5, iv: a3.iv, algorithm: t5, mode: a3.mode, padding: a3.padding, blockSize: t5.blockSize, formatter: i4.format });
+            }, decrypt: function(t5, e4, r5, i4) {
+              i4 = this.cfg.extend(i4);
+              e4 = this._parse(e4, i4.format);
+              var n3 = t5.createDecryptor(r5, i4).finalize(e4.ciphertext);
+              return n3;
+            }, _parse: function(t5, e4) {
+              if ("string" == typeof t5)
+                return e4.parse(t5, this);
+              else
+                return t5;
+            } });
+            var D2 = r4.kdf = {};
+            var M2 = D2.OpenSSL = { execute: function(t5, e4, r5, i4) {
+              if (!i4)
+                i4 = s2.random(64 / 8);
+              var n3 = f2.create({ keySize: e4 + r5 }).compute(t5, i4);
+              var a3 = s2.create(n3.words.slice(e4), 4 * r5);
+              n3.sigBytes = 4 * e4;
+              return S2.create({ key: n3, iv: a3, salt: i4 });
+            } };
+            var T2 = i3.PasswordBasedCipher = E2.extend({ cfg: E2.cfg.extend({ kdf: M2 }), encrypt: function(t5, e4, r5, i4) {
+              i4 = this.cfg.extend(i4);
+              var n3 = i4.kdf.execute(r5, t5.keySize, t5.ivSize);
+              i4.iv = n3.iv;
+              var s3 = E2.encrypt.call(this, t5, e4, n3.key, i4);
+              s3.mixIn(n3);
+              return s3;
+            }, decrypt: function(t5, e4, r5, i4) {
+              i4 = this.cfg.extend(i4);
+              e4 = this._parse(e4, i4.format);
+              var n3 = i4.kdf.execute(r5, t5.keySize, t5.ivSize, e4.salt);
+              i4.iv = n3.iv;
+              var s3 = E2.decrypt.call(this, t5, e4, n3.key, i4);
+              return s3;
+            } });
+          }();
+        });
+      }, 8249: function(t3, e2, r3) {
+        (function(r4, i3) {
+          t3.exports = i3();
+        })(this, function() {
+          var t4 = t4 || function(t5, e3) {
+            var i3;
+            if ("undefined" !== typeof window && $inject_window_crypto)
+              i3 = $inject_window_crypto;
+            if ("undefined" !== typeof self && self.crypto)
+              i3 = self.crypto;
+            if ("undefined" !== typeof globalThis && globalThis.crypto)
+              i3 = globalThis.crypto;
+            if (!i3 && "undefined" !== typeof window && window.msCrypto)
+              i3 = window.msCrypto;
+            if (!i3 && "undefined" !== typeof r3.g && r3.g.crypto)
+              i3 = r3.g.crypto;
+            if (!i3 && true)
+              try {
+                i3 = r3(2480);
+              } catch (t6) {
+              }
+            var n2 = function() {
+              if (i3) {
+                if ("function" === typeof i3.getRandomValues)
+                  try {
+                    return i3.getRandomValues(new Uint32Array(1))[0];
+                  } catch (t6) {
+                  }
+                if ("function" === typeof i3.randomBytes)
+                  try {
+                    return i3.randomBytes(4).readInt32LE();
+                  } catch (t6) {
+                  }
+              }
+              throw new Error("Native crypto module could not be used to get secure random number.");
+            };
+            var s2 = Object.create || function() {
+              function t6() {
+              }
+              return function(e4) {
+                var r4;
+                t6.prototype = e4;
+                r4 = new t6();
+                t6.prototype = null;
+                return r4;
+              };
+            }();
+            var a2 = {};
+            var o2 = a2.lib = {};
+            var u2 = o2.Base = function() {
+              return { extend: function(t6) {
+                var e4 = s2(this);
+                if (t6)
+                  e4.mixIn(t6);
+                if (!e4.hasOwnProperty("init") || this.init === e4.init)
+                  e4.init = function() {
+                    e4.$super.init.apply(this, arguments);
+                  };
+                e4.init.prototype = e4;
+                e4.$super = this;
+                return e4;
+              }, create: function() {
+                var t6 = this.extend();
+                t6.init.apply(t6, arguments);
+                return t6;
+              }, init: function() {
+              }, mixIn: function(t6) {
+                for (var e4 in t6)
+                  if (t6.hasOwnProperty(e4))
+                    this[e4] = t6[e4];
+                if (t6.hasOwnProperty("toString"))
+                  this.toString = t6.toString;
+              }, clone: function() {
+                return this.init.prototype.extend(this);
+              } };
+            }();
+            var c2 = o2.WordArray = u2.extend({ init: function(t6, r4) {
+              t6 = this.words = t6 || [];
+              if (r4 != e3)
+                this.sigBytes = r4;
+              else
+                this.sigBytes = 4 * t6.length;
+            }, toString: function(t6) {
+              return (t6 || f2).stringify(this);
+            }, concat: function(t6) {
+              var e4 = this.words;
+              var r4 = t6.words;
+              var i4 = this.sigBytes;
+              var n3 = t6.sigBytes;
+              this.clamp();
+              if (i4 % 4)
+                for (var s3 = 0; s3 < n3; s3++) {
+                  var a3 = r4[s3 >>> 2] >>> 24 - s3 % 4 * 8 & 255;
+                  e4[i4 + s3 >>> 2] |= a3 << 24 - (i4 + s3) % 4 * 8;
+                }
+              else
+                for (var o3 = 0; o3 < n3; o3 += 4)
+                  e4[i4 + o3 >>> 2] = r4[o3 >>> 2];
+              this.sigBytes += n3;
+              return this;
+            }, clamp: function() {
+              var e4 = this.words;
+              var r4 = this.sigBytes;
+              e4[r4 >>> 2] &= 4294967295 << 32 - r4 % 4 * 8;
+              e4.length = t5.ceil(r4 / 4);
+            }, clone: function() {
+              var t6 = u2.clone.call(this);
+              t6.words = this.words.slice(0);
+              return t6;
+            }, random: function(t6) {
+              var e4 = [];
+              for (var r4 = 0; r4 < t6; r4 += 4)
+                e4.push(n2());
+              return new c2.init(e4, t6);
+            } });
+            var l2 = a2.enc = {};
+            var f2 = l2.Hex = { stringify: function(t6) {
+              var e4 = t6.words;
+              var r4 = t6.sigBytes;
+              var i4 = [];
+              for (var n3 = 0; n3 < r4; n3++) {
+                var s3 = e4[n3 >>> 2] >>> 24 - n3 % 4 * 8 & 255;
+                i4.push((s3 >>> 4).toString(16));
+                i4.push((15 & s3).toString(16));
+              }
+              return i4.join("");
+            }, parse: function(t6) {
+              var e4 = t6.length;
+              var r4 = [];
+              for (var i4 = 0; i4 < e4; i4 += 2)
+                r4[i4 >>> 3] |= parseInt(t6.substr(i4, 2), 16) << 24 - i4 % 8 * 4;
+              return new c2.init(r4, e4 / 2);
+            } };
+            var h2 = l2.Latin1 = { stringify: function(t6) {
+              var e4 = t6.words;
+              var r4 = t6.sigBytes;
+              var i4 = [];
+              for (var n3 = 0; n3 < r4; n3++) {
+                var s3 = e4[n3 >>> 2] >>> 24 - n3 % 4 * 8 & 255;
+                i4.push(String.fromCharCode(s3));
+              }
+              return i4.join("");
+            }, parse: function(t6) {
+              var e4 = t6.length;
+              var r4 = [];
+              for (var i4 = 0; i4 < e4; i4++)
+                r4[i4 >>> 2] |= (255 & t6.charCodeAt(i4)) << 24 - i4 % 4 * 8;
+              return new c2.init(r4, e4);
+            } };
+            var d2 = l2.Utf8 = { stringify: function(t6) {
+              try {
+                return decodeURIComponent(escape(h2.stringify(t6)));
+              } catch (t7) {
+                throw new Error("Malformed UTF-8 data");
+              }
+            }, parse: function(t6) {
+              return h2.parse(unescape(encodeURIComponent(t6)));
+            } };
+            var p2 = o2.BufferedBlockAlgorithm = u2.extend({ reset: function() {
+              this._data = new c2.init();
+              this._nDataBytes = 0;
+            }, _append: function(t6) {
+              if ("string" == typeof t6)
+                t6 = d2.parse(t6);
+              this._data.concat(t6);
+              this._nDataBytes += t6.sigBytes;
+            }, _process: function(e4) {
+              var r4;
+              var i4 = this._data;
+              var n3 = i4.words;
+              var s3 = i4.sigBytes;
+              var a3 = this.blockSize;
+              var o3 = 4 * a3;
+              var u3 = s3 / o3;
+              if (e4)
+                u3 = t5.ceil(u3);
+              else
+                u3 = t5.max((0 | u3) - this._minBufferSize, 0);
+              var l3 = u3 * a3;
+              var f3 = t5.min(4 * l3, s3);
+              if (l3) {
+                for (var h3 = 0; h3 < l3; h3 += a3)
+                  this._doProcessBlock(n3, h3);
+                r4 = n3.splice(0, l3);
+                i4.sigBytes -= f3;
+              }
+              return new c2.init(r4, f3);
+            }, clone: function() {
+              var t6 = u2.clone.call(this);
+              t6._data = this._data.clone();
+              return t6;
+            }, _minBufferSize: 0 });
+            o2.Hasher = p2.extend({ cfg: u2.extend(), init: function(t6) {
+              this.cfg = this.cfg.extend(t6);
+              this.reset();
+            }, reset: function() {
+              p2.reset.call(this);
+              this._doReset();
+            }, update: function(t6) {
+              this._append(t6);
+              this._process();
+              return this;
+            }, finalize: function(t6) {
+              if (t6)
+                this._append(t6);
+              var e4 = this._doFinalize();
+              return e4;
+            }, blockSize: 512 / 32, _createHelper: function(t6) {
+              return function(e4, r4) {
+                return new t6.init(r4).finalize(e4);
+              };
+            }, _createHmacHelper: function(t6) {
+              return function(e4, r4) {
+                return new g2.HMAC.init(t6, r4).finalize(e4);
+              };
+            } });
+            var g2 = a2.algo = {};
+            return a2;
+          }(Math);
+          return t4;
+        });
+      }, 8269: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.WordArray;
+            var n2 = e3.enc;
+            n2.Base64 = { stringify: function(t5) {
+              var e4 = t5.words;
+              var r5 = t5.sigBytes;
+              var i4 = this._map;
+              t5.clamp();
+              var n3 = [];
+              for (var s2 = 0; s2 < r5; s2 += 3) {
+                var a3 = e4[s2 >>> 2] >>> 24 - s2 % 4 * 8 & 255;
+                var o2 = e4[s2 + 1 >>> 2] >>> 24 - (s2 + 1) % 4 * 8 & 255;
+                var u2 = e4[s2 + 2 >>> 2] >>> 24 - (s2 + 2) % 4 * 8 & 255;
+                var c2 = a3 << 16 | o2 << 8 | u2;
+                for (var l2 = 0; l2 < 4 && s2 + 0.75 * l2 < r5; l2++)
+                  n3.push(i4.charAt(c2 >>> 6 * (3 - l2) & 63));
+              }
+              var f2 = i4.charAt(64);
+              if (f2)
+                while (n3.length % 4)
+                  n3.push(f2);
+              return n3.join("");
+            }, parse: function(t5) {
+              var e4 = t5.length;
+              var r5 = this._map;
+              var i4 = this._reverseMap;
+              if (!i4) {
+                i4 = this._reverseMap = [];
+                for (var n3 = 0; n3 < r5.length; n3++)
+                  i4[r5.charCodeAt(n3)] = n3;
+              }
+              var s2 = r5.charAt(64);
+              if (s2) {
+                var o2 = t5.indexOf(s2);
+                if (-1 !== o2)
+                  e4 = o2;
+              }
+              return a2(t5, e4, i4);
+            }, _map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" };
+            function a2(t5, e4, r5) {
+              var n3 = [];
+              var s2 = 0;
+              for (var a3 = 0; a3 < e4; a3++)
+                if (a3 % 4) {
+                  var o2 = r5[t5.charCodeAt(a3 - 1)] << a3 % 4 * 2;
+                  var u2 = r5[t5.charCodeAt(a3)] >>> 6 - a3 % 4 * 2;
+                  var c2 = o2 | u2;
+                  n3[s2 >>> 2] |= c2 << 24 - s2 % 4 * 8;
+                  s2++;
+                }
+              return i3.create(n3, s2);
+            }
+          })();
+          return t4.enc.Base64;
+        });
+      }, 3786: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.WordArray;
+            var n2 = e3.enc;
+            n2.Base64url = { stringify: function(t5, e4 = true) {
+              var r5 = t5.words;
+              var i4 = t5.sigBytes;
+              var n3 = e4 ? this._safe_map : this._map;
+              t5.clamp();
+              var s2 = [];
+              for (var a3 = 0; a3 < i4; a3 += 3) {
+                var o2 = r5[a3 >>> 2] >>> 24 - a3 % 4 * 8 & 255;
+                var u2 = r5[a3 + 1 >>> 2] >>> 24 - (a3 + 1) % 4 * 8 & 255;
+                var c2 = r5[a3 + 2 >>> 2] >>> 24 - (a3 + 2) % 4 * 8 & 255;
+                var l2 = o2 << 16 | u2 << 8 | c2;
+                for (var f2 = 0; f2 < 4 && a3 + 0.75 * f2 < i4; f2++)
+                  s2.push(n3.charAt(l2 >>> 6 * (3 - f2) & 63));
+              }
+              var h2 = n3.charAt(64);
+              if (h2)
+                while (s2.length % 4)
+                  s2.push(h2);
+              return s2.join("");
+            }, parse: function(t5, e4 = true) {
+              var r5 = t5.length;
+              var i4 = e4 ? this._safe_map : this._map;
+              var n3 = this._reverseMap;
+              if (!n3) {
+                n3 = this._reverseMap = [];
+                for (var s2 = 0; s2 < i4.length; s2++)
+                  n3[i4.charCodeAt(s2)] = s2;
+              }
+              var o2 = i4.charAt(64);
+              if (o2) {
+                var u2 = t5.indexOf(o2);
+                if (-1 !== u2)
+                  r5 = u2;
+              }
+              return a2(t5, r5, n3);
+            }, _map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", _safe_map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_" };
+            function a2(t5, e4, r5) {
+              var n3 = [];
+              var s2 = 0;
+              for (var a3 = 0; a3 < e4; a3++)
+                if (a3 % 4) {
+                  var o2 = r5[t5.charCodeAt(a3 - 1)] << a3 % 4 * 2;
+                  var u2 = r5[t5.charCodeAt(a3)] >>> 6 - a3 % 4 * 2;
+                  var c2 = o2 | u2;
+                  n3[s2 >>> 2] |= c2 << 24 - s2 % 4 * 8;
+                  s2++;
+                }
+              return i3.create(n3, s2);
+            }
+          })();
+          return t4.enc.Base64url;
+        });
+      }, 298: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.WordArray;
+            var n2 = e3.enc;
+            n2.Utf16 = n2.Utf16BE = { stringify: function(t5) {
+              var e4 = t5.words;
+              var r5 = t5.sigBytes;
+              var i4 = [];
+              for (var n3 = 0; n3 < r5; n3 += 2) {
+                var s2 = e4[n3 >>> 2] >>> 16 - n3 % 4 * 8 & 65535;
+                i4.push(String.fromCharCode(s2));
+              }
+              return i4.join("");
+            }, parse: function(t5) {
+              var e4 = t5.length;
+              var r5 = [];
+              for (var n3 = 0; n3 < e4; n3++)
+                r5[n3 >>> 1] |= t5.charCodeAt(n3) << 16 - n3 % 2 * 16;
+              return i3.create(r5, 2 * e4);
+            } };
+            n2.Utf16LE = { stringify: function(t5) {
+              var e4 = t5.words;
+              var r5 = t5.sigBytes;
+              var i4 = [];
+              for (var n3 = 0; n3 < r5; n3 += 2) {
+                var s2 = a2(e4[n3 >>> 2] >>> 16 - n3 % 4 * 8 & 65535);
+                i4.push(String.fromCharCode(s2));
+              }
+              return i4.join("");
+            }, parse: function(t5) {
+              var e4 = t5.length;
+              var r5 = [];
+              for (var n3 = 0; n3 < e4; n3++)
+                r5[n3 >>> 1] |= a2(t5.charCodeAt(n3) << 16 - n3 % 2 * 16);
+              return i3.create(r5, 2 * e4);
+            } };
+            function a2(t5) {
+              return t5 << 8 & 4278255360 | t5 >>> 8 & 16711935;
+            }
+          })();
+          return t4.enc.Utf16;
+        });
+      }, 888: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(2783), r3(9824));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.Base;
+            var n2 = r4.WordArray;
+            var s2 = e3.algo;
+            var a2 = s2.MD5;
+            var o2 = s2.EvpKDF = i3.extend({ cfg: i3.extend({ keySize: 128 / 32, hasher: a2, iterations: 1 }), init: function(t5) {
+              this.cfg = this.cfg.extend(t5);
+            }, compute: function(t5, e4) {
+              var r5;
+              var i4 = this.cfg;
+              var s3 = i4.hasher.create();
+              var a3 = n2.create();
+              var o3 = a3.words;
+              var u2 = i4.keySize;
+              var c2 = i4.iterations;
+              while (o3.length < u2) {
+                if (r5)
+                  s3.update(r5);
+                r5 = s3.update(t5).finalize(e4);
+                s3.reset();
+                for (var l2 = 1; l2 < c2; l2++) {
+                  r5 = s3.finalize(r5);
+                  s3.reset();
+                }
+                a3.concat(r5);
+              }
+              a3.sigBytes = 4 * u2;
+              return a3;
+            } });
+            e3.EvpKDF = function(t5, e4, r5) {
+              return o2.create(r5).compute(t5, e4);
+            };
+          })();
+          return t4.EvpKDF;
+        });
+      }, 2209: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          (function(e3) {
+            var r4 = t4;
+            var i3 = r4.lib;
+            var n2 = i3.CipherParams;
+            var s2 = r4.enc;
+            var a2 = s2.Hex;
+            var o2 = r4.format;
+            o2.Hex = { stringify: function(t5) {
+              return t5.ciphertext.toString(a2);
+            }, parse: function(t5) {
+              var e4 = a2.parse(t5);
+              return n2.create({ ciphertext: e4 });
+            } };
+          })();
+          return t4.format.Hex;
+        });
+      }, 9824: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.Base;
+            var n2 = e3.enc;
+            var s2 = n2.Utf8;
+            var a2 = e3.algo;
+            a2.HMAC = i3.extend({ init: function(t5, e4) {
+              t5 = this._hasher = new t5.init();
+              if ("string" == typeof e4)
+                e4 = s2.parse(e4);
+              var r5 = t5.blockSize;
+              var i4 = 4 * r5;
+              if (e4.sigBytes > i4)
+                e4 = t5.finalize(e4);
+              e4.clamp();
+              var n3 = this._oKey = e4.clone();
+              var a3 = this._iKey = e4.clone();
+              var o2 = n3.words;
+              var u2 = a3.words;
+              for (var c2 = 0; c2 < r5; c2++) {
+                o2[c2] ^= 1549556828;
+                u2[c2] ^= 909522486;
+              }
+              n3.sigBytes = a3.sigBytes = i4;
+              this.reset();
+            }, reset: function() {
+              var t5 = this._hasher;
+              t5.reset();
+              t5.update(this._iKey);
+            }, update: function(t5) {
+              this._hasher.update(t5);
+              return this;
+            }, finalize: function(t5) {
+              var e4 = this._hasher;
+              var r5 = e4.finalize(t5);
+              e4.reset();
+              var i4 = e4.finalize(this._oKey.clone().concat(r5));
+              return i4;
+            } });
+          })();
+        });
+      }, 1354: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(4938), r3(4433), r3(298), r3(8269), r3(3786), r3(8214), r3(2783), r3(2153), r3(7792), r3(34), r3(7460), r3(3327), r3(706), r3(9824), r3(2112), r3(888), r3(5109), r3(8568), r3(4242), r3(9968), r3(7660), r3(1148), r3(3615), r3(2807), r3(1077), r3(6475), r3(6991), r3(2209), r3(452), r3(4253), r3(1857), r3(4454), r3(3974));
+        })(this, function(t4) {
+          return t4;
+        });
+      }, 4433: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function() {
+            if ("function" != typeof ArrayBuffer)
+              return;
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.WordArray;
+            var n2 = i3.init;
+            var s2 = i3.init = function(t5) {
+              if (t5 instanceof ArrayBuffer)
+                t5 = new Uint8Array(t5);
+              if (t5 instanceof Int8Array || "undefined" !== typeof Uint8ClampedArray && t5 instanceof Uint8ClampedArray || t5 instanceof Int16Array || t5 instanceof Uint16Array || t5 instanceof Int32Array || t5 instanceof Uint32Array || t5 instanceof Float32Array || t5 instanceof Float64Array)
+                t5 = new Uint8Array(t5.buffer, t5.byteOffset, t5.byteLength);
+              if (t5 instanceof Uint8Array) {
+                var e4 = t5.byteLength;
+                var r5 = [];
+                for (var i4 = 0; i4 < e4; i4++)
+                  r5[i4 >>> 2] |= t5[i4] << 24 - i4 % 4 * 8;
+                n2.call(this, r5, e4);
+              } else
+                n2.apply(this, arguments);
+            };
+            s2.prototype = i3;
+          })();
+          return t4.lib.WordArray;
+        });
+      }, 8214: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function(e3) {
+            var r4 = t4;
+            var i3 = r4.lib;
+            var n2 = i3.WordArray;
+            var s2 = i3.Hasher;
+            var a2 = r4.algo;
+            var o2 = [];
+            (function() {
+              for (var t5 = 0; t5 < 64; t5++)
+                o2[t5] = 4294967296 * e3.abs(e3.sin(t5 + 1)) | 0;
+            })();
+            var u2 = a2.MD5 = s2.extend({ _doReset: function() {
+              this._hash = new n2.init([1732584193, 4023233417, 2562383102, 271733878]);
+            }, _doProcessBlock: function(t5, e4) {
+              for (var r5 = 0; r5 < 16; r5++) {
+                var i4 = e4 + r5;
+                var n3 = t5[i4];
+                t5[i4] = 16711935 & (n3 << 8 | n3 >>> 24) | 4278255360 & (n3 << 24 | n3 >>> 8);
+              }
+              var s3 = this._hash.words;
+              var a3 = t5[e4 + 0];
+              var u3 = t5[e4 + 1];
+              var d2 = t5[e4 + 2];
+              var p2 = t5[e4 + 3];
+              var v2 = t5[e4 + 4];
+              var g2 = t5[e4 + 5];
+              var y = t5[e4 + 6];
+              var m2 = t5[e4 + 7];
+              var w2 = t5[e4 + 8];
+              var S2 = t5[e4 + 9];
+              var _2 = t5[e4 + 10];
+              var b2 = t5[e4 + 11];
+              var E2 = t5[e4 + 12];
+              var D2 = t5[e4 + 13];
+              var M2 = t5[e4 + 14];
+              var T2 = t5[e4 + 15];
+              var I2 = s3[0];
+              var A2 = s3[1];
+              var x2 = s3[2];
+              var R2 = s3[3];
+              I2 = c2(I2, A2, x2, R2, a3, 7, o2[0]);
+              R2 = c2(R2, I2, A2, x2, u3, 12, o2[1]);
+              x2 = c2(x2, R2, I2, A2, d2, 17, o2[2]);
+              A2 = c2(A2, x2, R2, I2, p2, 22, o2[3]);
+              I2 = c2(I2, A2, x2, R2, v2, 7, o2[4]);
+              R2 = c2(R2, I2, A2, x2, g2, 12, o2[5]);
+              x2 = c2(x2, R2, I2, A2, y, 17, o2[6]);
+              A2 = c2(A2, x2, R2, I2, m2, 22, o2[7]);
+              I2 = c2(I2, A2, x2, R2, w2, 7, o2[8]);
+              R2 = c2(R2, I2, A2, x2, S2, 12, o2[9]);
+              x2 = c2(x2, R2, I2, A2, _2, 17, o2[10]);
+              A2 = c2(A2, x2, R2, I2, b2, 22, o2[11]);
+              I2 = c2(I2, A2, x2, R2, E2, 7, o2[12]);
+              R2 = c2(R2, I2, A2, x2, D2, 12, o2[13]);
+              x2 = c2(x2, R2, I2, A2, M2, 17, o2[14]);
+              A2 = c2(A2, x2, R2, I2, T2, 22, o2[15]);
+              I2 = l2(I2, A2, x2, R2, u3, 5, o2[16]);
+              R2 = l2(R2, I2, A2, x2, y, 9, o2[17]);
+              x2 = l2(x2, R2, I2, A2, b2, 14, o2[18]);
+              A2 = l2(A2, x2, R2, I2, a3, 20, o2[19]);
+              I2 = l2(I2, A2, x2, R2, g2, 5, o2[20]);
+              R2 = l2(R2, I2, A2, x2, _2, 9, o2[21]);
+              x2 = l2(x2, R2, I2, A2, T2, 14, o2[22]);
+              A2 = l2(A2, x2, R2, I2, v2, 20, o2[23]);
+              I2 = l2(I2, A2, x2, R2, S2, 5, o2[24]);
+              R2 = l2(R2, I2, A2, x2, M2, 9, o2[25]);
+              x2 = l2(x2, R2, I2, A2, p2, 14, o2[26]);
+              A2 = l2(A2, x2, R2, I2, w2, 20, o2[27]);
+              I2 = l2(I2, A2, x2, R2, D2, 5, o2[28]);
+              R2 = l2(R2, I2, A2, x2, d2, 9, o2[29]);
+              x2 = l2(x2, R2, I2, A2, m2, 14, o2[30]);
+              A2 = l2(A2, x2, R2, I2, E2, 20, o2[31]);
+              I2 = f2(I2, A2, x2, R2, g2, 4, o2[32]);
+              R2 = f2(R2, I2, A2, x2, w2, 11, o2[33]);
+              x2 = f2(x2, R2, I2, A2, b2, 16, o2[34]);
+              A2 = f2(A2, x2, R2, I2, M2, 23, o2[35]);
+              I2 = f2(I2, A2, x2, R2, u3, 4, o2[36]);
+              R2 = f2(R2, I2, A2, x2, v2, 11, o2[37]);
+              x2 = f2(x2, R2, I2, A2, m2, 16, o2[38]);
+              A2 = f2(A2, x2, R2, I2, _2, 23, o2[39]);
+              I2 = f2(I2, A2, x2, R2, D2, 4, o2[40]);
+              R2 = f2(R2, I2, A2, x2, a3, 11, o2[41]);
+              x2 = f2(x2, R2, I2, A2, p2, 16, o2[42]);
+              A2 = f2(A2, x2, R2, I2, y, 23, o2[43]);
+              I2 = f2(I2, A2, x2, R2, S2, 4, o2[44]);
+              R2 = f2(R2, I2, A2, x2, E2, 11, o2[45]);
+              x2 = f2(x2, R2, I2, A2, T2, 16, o2[46]);
+              A2 = f2(A2, x2, R2, I2, d2, 23, o2[47]);
+              I2 = h2(I2, A2, x2, R2, a3, 6, o2[48]);
+              R2 = h2(R2, I2, A2, x2, m2, 10, o2[49]);
+              x2 = h2(x2, R2, I2, A2, M2, 15, o2[50]);
+              A2 = h2(A2, x2, R2, I2, g2, 21, o2[51]);
+              I2 = h2(I2, A2, x2, R2, E2, 6, o2[52]);
+              R2 = h2(R2, I2, A2, x2, p2, 10, o2[53]);
+              x2 = h2(x2, R2, I2, A2, _2, 15, o2[54]);
+              A2 = h2(A2, x2, R2, I2, u3, 21, o2[55]);
+              I2 = h2(I2, A2, x2, R2, w2, 6, o2[56]);
+              R2 = h2(R2, I2, A2, x2, T2, 10, o2[57]);
+              x2 = h2(x2, R2, I2, A2, y, 15, o2[58]);
+              A2 = h2(A2, x2, R2, I2, D2, 21, o2[59]);
+              I2 = h2(I2, A2, x2, R2, v2, 6, o2[60]);
+              R2 = h2(R2, I2, A2, x2, b2, 10, o2[61]);
+              x2 = h2(x2, R2, I2, A2, d2, 15, o2[62]);
+              A2 = h2(A2, x2, R2, I2, S2, 21, o2[63]);
+              s3[0] = s3[0] + I2 | 0;
+              s3[1] = s3[1] + A2 | 0;
+              s3[2] = s3[2] + x2 | 0;
+              s3[3] = s3[3] + R2 | 0;
+            }, _doFinalize: function() {
+              var t5 = this._data;
+              var r5 = t5.words;
+              var i4 = 8 * this._nDataBytes;
+              var n3 = 8 * t5.sigBytes;
+              r5[n3 >>> 5] |= 128 << 24 - n3 % 32;
+              var s3 = e3.floor(i4 / 4294967296);
+              var a3 = i4;
+              r5[(n3 + 64 >>> 9 << 4) + 15] = 16711935 & (s3 << 8 | s3 >>> 24) | 4278255360 & (s3 << 24 | s3 >>> 8);
+              r5[(n3 + 64 >>> 9 << 4) + 14] = 16711935 & (a3 << 8 | a3 >>> 24) | 4278255360 & (a3 << 24 | a3 >>> 8);
+              t5.sigBytes = 4 * (r5.length + 1);
+              this._process();
+              var o3 = this._hash;
+              var u3 = o3.words;
+              for (var c3 = 0; c3 < 4; c3++) {
+                var l3 = u3[c3];
+                u3[c3] = 16711935 & (l3 << 8 | l3 >>> 24) | 4278255360 & (l3 << 24 | l3 >>> 8);
+              }
+              return o3;
+            }, clone: function() {
+              var t5 = s2.clone.call(this);
+              t5._hash = this._hash.clone();
+              return t5;
+            } });
+            function c2(t5, e4, r5, i4, n3, s3, a3) {
+              var o3 = t5 + (e4 & r5 | ~e4 & i4) + n3 + a3;
+              return (o3 << s3 | o3 >>> 32 - s3) + e4;
+            }
+            function l2(t5, e4, r5, i4, n3, s3, a3) {
+              var o3 = t5 + (e4 & i4 | r5 & ~i4) + n3 + a3;
+              return (o3 << s3 | o3 >>> 32 - s3) + e4;
+            }
+            function f2(t5, e4, r5, i4, n3, s3, a3) {
+              var o3 = t5 + (e4 ^ r5 ^ i4) + n3 + a3;
+              return (o3 << s3 | o3 >>> 32 - s3) + e4;
+            }
+            function h2(t5, e4, r5, i4, n3, s3, a3) {
+              var o3 = t5 + (r5 ^ (e4 | ~i4)) + n3 + a3;
+              return (o3 << s3 | o3 >>> 32 - s3) + e4;
+            }
+            r4.MD5 = s2._createHelper(u2);
+            r4.HmacMD5 = s2._createHmacHelper(u2);
+          })(Math);
+          return t4.MD5;
+        });
+      }, 8568: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.mode.CFB = function() {
+            var e3 = t4.lib.BlockCipherMode.extend();
+            e3.Encryptor = e3.extend({ processBlock: function(t5, e4) {
+              var i3 = this._cipher;
+              var n2 = i3.blockSize;
+              r4.call(this, t5, e4, n2, i3);
+              this._prevBlock = t5.slice(e4, e4 + n2);
+            } });
+            e3.Decryptor = e3.extend({ processBlock: function(t5, e4) {
+              var i3 = this._cipher;
+              var n2 = i3.blockSize;
+              var s2 = t5.slice(e4, e4 + n2);
+              r4.call(this, t5, e4, n2, i3);
+              this._prevBlock = s2;
+            } });
+            function r4(t5, e4, r5, i3) {
+              var n2;
+              var s2 = this._iv;
+              if (s2) {
+                n2 = s2.slice(0);
+                this._iv = void 0;
+              } else
+                n2 = this._prevBlock;
+              i3.encryptBlock(n2, 0);
+              for (var a2 = 0; a2 < r5; a2++)
+                t5[e4 + a2] ^= n2[a2];
+            }
+            return e3;
+          }();
+          return t4.mode.CFB;
+        });
+      }, 9968: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.mode.CTRGladman = function() {
+            var e3 = t4.lib.BlockCipherMode.extend();
+            function r4(t5) {
+              if (255 === (t5 >> 24 & 255)) {
+                var e4 = t5 >> 16 & 255;
+                var r5 = t5 >> 8 & 255;
+                var i4 = 255 & t5;
+                if (255 === e4) {
+                  e4 = 0;
+                  if (255 === r5) {
+                    r5 = 0;
+                    if (255 === i4)
+                      i4 = 0;
+                    else
+                      ++i4;
+                  } else
+                    ++r5;
+                } else
+                  ++e4;
+                t5 = 0;
+                t5 += e4 << 16;
+                t5 += r5 << 8;
+                t5 += i4;
+              } else
+                t5 += 1 << 24;
+              return t5;
+            }
+            function i3(t5) {
+              if (0 === (t5[0] = r4(t5[0])))
+                t5[1] = r4(t5[1]);
+              return t5;
+            }
+            var n2 = e3.Encryptor = e3.extend({ processBlock: function(t5, e4) {
+              var r5 = this._cipher;
+              var n3 = r5.blockSize;
+              var s2 = this._iv;
+              var a2 = this._counter;
+              if (s2) {
+                a2 = this._counter = s2.slice(0);
+                this._iv = void 0;
+              }
+              i3(a2);
+              var o2 = a2.slice(0);
+              r5.encryptBlock(o2, 0);
+              for (var u2 = 0; u2 < n3; u2++)
+                t5[e4 + u2] ^= o2[u2];
+            } });
+            e3.Decryptor = n2;
+            return e3;
+          }();
+          return t4.mode.CTRGladman;
+        });
+      }, 4242: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.mode.CTR = function() {
+            var e3 = t4.lib.BlockCipherMode.extend();
+            var r4 = e3.Encryptor = e3.extend({ processBlock: function(t5, e4) {
+              var r5 = this._cipher;
+              var i3 = r5.blockSize;
+              var n2 = this._iv;
+              var s2 = this._counter;
+              if (n2) {
+                s2 = this._counter = n2.slice(0);
+                this._iv = void 0;
+              }
+              var a2 = s2.slice(0);
+              r5.encryptBlock(a2, 0);
+              s2[i3 - 1] = s2[i3 - 1] + 1 | 0;
+              for (var o2 = 0; o2 < i3; o2++)
+                t5[e4 + o2] ^= a2[o2];
+            } });
+            e3.Decryptor = r4;
+            return e3;
+          }();
+          return t4.mode.CTR;
+        });
+      }, 1148: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.mode.ECB = function() {
+            var e3 = t4.lib.BlockCipherMode.extend();
+            e3.Encryptor = e3.extend({ processBlock: function(t5, e4) {
+              this._cipher.encryptBlock(t5, e4);
+            } });
+            e3.Decryptor = e3.extend({ processBlock: function(t5, e4) {
+              this._cipher.decryptBlock(t5, e4);
+            } });
+            return e3;
+          }();
+          return t4.mode.ECB;
+        });
+      }, 7660: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.mode.OFB = function() {
+            var e3 = t4.lib.BlockCipherMode.extend();
+            var r4 = e3.Encryptor = e3.extend({ processBlock: function(t5, e4) {
+              var r5 = this._cipher;
+              var i3 = r5.blockSize;
+              var n2 = this._iv;
+              var s2 = this._keystream;
+              if (n2) {
+                s2 = this._keystream = n2.slice(0);
+                this._iv = void 0;
+              }
+              r5.encryptBlock(s2, 0);
+              for (var a2 = 0; a2 < i3; a2++)
+                t5[e4 + a2] ^= s2[a2];
+            } });
+            e3.Decryptor = r4;
+            return e3;
+          }();
+          return t4.mode.OFB;
+        });
+      }, 3615: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.pad.AnsiX923 = { pad: function(t5, e3) {
+            var r4 = t5.sigBytes;
+            var i3 = 4 * e3;
+            var n2 = i3 - r4 % i3;
+            var s2 = r4 + n2 - 1;
+            t5.clamp();
+            t5.words[s2 >>> 2] |= n2 << 24 - s2 % 4 * 8;
+            t5.sigBytes += n2;
+          }, unpad: function(t5) {
+            var e3 = 255 & t5.words[t5.sigBytes - 1 >>> 2];
+            t5.sigBytes -= e3;
+          } };
+          return t4.pad.Ansix923;
+        });
+      }, 2807: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.pad.Iso10126 = { pad: function(e3, r4) {
+            var i3 = 4 * r4;
+            var n2 = i3 - e3.sigBytes % i3;
+            e3.concat(t4.lib.WordArray.random(n2 - 1)).concat(t4.lib.WordArray.create([n2 << 24], 1));
+          }, unpad: function(t5) {
+            var e3 = 255 & t5.words[t5.sigBytes - 1 >>> 2];
+            t5.sigBytes -= e3;
+          } };
+          return t4.pad.Iso10126;
+        });
+      }, 1077: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.pad.Iso97971 = { pad: function(e3, r4) {
+            e3.concat(t4.lib.WordArray.create([2147483648], 1));
+            t4.pad.ZeroPadding.pad(e3, r4);
+          }, unpad: function(e3) {
+            t4.pad.ZeroPadding.unpad(e3);
+            e3.sigBytes--;
+          } };
+          return t4.pad.Iso97971;
+        });
+      }, 6991: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.pad.NoPadding = { pad: function() {
+          }, unpad: function() {
+          } };
+          return t4.pad.NoPadding;
+        });
+      }, 6475: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(5109));
+        })(this, function(t4) {
+          t4.pad.ZeroPadding = { pad: function(t5, e3) {
+            var r4 = 4 * e3;
+            t5.clamp();
+            t5.sigBytes += r4 - (t5.sigBytes % r4 || r4);
+          }, unpad: function(t5) {
+            var e3 = t5.words;
+            var r4 = t5.sigBytes - 1;
+            for (var r4 = t5.sigBytes - 1; r4 >= 0; r4--)
+              if (e3[r4 >>> 2] >>> 24 - r4 % 4 * 8 & 255) {
+                t5.sigBytes = r4 + 1;
+                break;
+              }
+          } };
+          return t4.pad.ZeroPadding;
+        });
+      }, 2112: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(2783), r3(9824));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.Base;
+            var n2 = r4.WordArray;
+            var s2 = e3.algo;
+            var a2 = s2.SHA1;
+            var o2 = s2.HMAC;
+            var u2 = s2.PBKDF2 = i3.extend({ cfg: i3.extend({ keySize: 128 / 32, hasher: a2, iterations: 1 }), init: function(t5) {
+              this.cfg = this.cfg.extend(t5);
+            }, compute: function(t5, e4) {
+              var r5 = this.cfg;
+              var i4 = o2.create(r5.hasher, t5);
+              var s3 = n2.create();
+              var a3 = n2.create([1]);
+              var u3 = s3.words;
+              var c2 = a3.words;
+              var l2 = r5.keySize;
+              var f2 = r5.iterations;
+              while (u3.length < l2) {
+                var h2 = i4.update(e4).finalize(a3);
+                i4.reset();
+                var d2 = h2.words;
+                var p2 = d2.length;
+                var v2 = h2;
+                for (var g2 = 1; g2 < f2; g2++) {
+                  v2 = i4.finalize(v2);
+                  i4.reset();
+                  var y = v2.words;
+                  for (var m2 = 0; m2 < p2; m2++)
+                    d2[m2] ^= y[m2];
+                }
+                s3.concat(h2);
+                c2[0]++;
+              }
+              s3.sigBytes = 4 * l2;
+              return s3;
+            } });
+            e3.PBKDF2 = function(t5, e4, r5) {
+              return u2.create(r5).compute(t5, e4);
+            };
+          })();
+          return t4.PBKDF2;
+        });
+      }, 3974: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(8269), r3(8214), r3(888), r3(5109));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.StreamCipher;
+            var n2 = e3.algo;
+            var s2 = [];
+            var a2 = [];
+            var o2 = [];
+            var u2 = n2.RabbitLegacy = i3.extend({ _doReset: function() {
+              var t5 = this._key.words;
+              var e4 = this.cfg.iv;
+              var r5 = this._X = [t5[0], t5[3] << 16 | t5[2] >>> 16, t5[1], t5[0] << 16 | t5[3] >>> 16, t5[2], t5[1] << 16 | t5[0] >>> 16, t5[3], t5[2] << 16 | t5[1] >>> 16];
+              var i4 = this._C = [t5[2] << 16 | t5[2] >>> 16, 4294901760 & t5[0] | 65535 & t5[1], t5[3] << 16 | t5[3] >>> 16, 4294901760 & t5[1] | 65535 & t5[2], t5[0] << 16 | t5[0] >>> 16, 4294901760 & t5[2] | 65535 & t5[3], t5[1] << 16 | t5[1] >>> 16, 4294901760 & t5[3] | 65535 & t5[0]];
+              this._b = 0;
+              for (var n3 = 0; n3 < 4; n3++)
+                c2.call(this);
+              for (var n3 = 0; n3 < 8; n3++)
+                i4[n3] ^= r5[n3 + 4 & 7];
+              if (e4) {
+                var s3 = e4.words;
+                var a3 = s3[0];
+                var o3 = s3[1];
+                var u3 = 16711935 & (a3 << 8 | a3 >>> 24) | 4278255360 & (a3 << 24 | a3 >>> 8);
+                var l2 = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8);
+                var f2 = u3 >>> 16 | 4294901760 & l2;
+                var h2 = l2 << 16 | 65535 & u3;
+                i4[0] ^= u3;
+                i4[1] ^= f2;
+                i4[2] ^= l2;
+                i4[3] ^= h2;
+                i4[4] ^= u3;
+                i4[5] ^= f2;
+                i4[6] ^= l2;
+                i4[7] ^= h2;
+                for (var n3 = 0; n3 < 4; n3++)
+                  c2.call(this);
+              }
+            }, _doProcessBlock: function(t5, e4) {
+              var r5 = this._X;
+              c2.call(this);
+              s2[0] = r5[0] ^ r5[5] >>> 16 ^ r5[3] << 16;
+              s2[1] = r5[2] ^ r5[7] >>> 16 ^ r5[5] << 16;
+              s2[2] = r5[4] ^ r5[1] >>> 16 ^ r5[7] << 16;
+              s2[3] = r5[6] ^ r5[3] >>> 16 ^ r5[1] << 16;
+              for (var i4 = 0; i4 < 4; i4++) {
+                s2[i4] = 16711935 & (s2[i4] << 8 | s2[i4] >>> 24) | 4278255360 & (s2[i4] << 24 | s2[i4] >>> 8);
+                t5[e4 + i4] ^= s2[i4];
+              }
+            }, blockSize: 128 / 32, ivSize: 64 / 32 });
+            function c2() {
+              var t5 = this._X;
+              var e4 = this._C;
+              for (var r5 = 0; r5 < 8; r5++)
+                a2[r5] = e4[r5];
+              e4[0] = e4[0] + 1295307597 + this._b | 0;
+              e4[1] = e4[1] + 3545052371 + (e4[0] >>> 0 < a2[0] >>> 0 ? 1 : 0) | 0;
+              e4[2] = e4[2] + 886263092 + (e4[1] >>> 0 < a2[1] >>> 0 ? 1 : 0) | 0;
+              e4[3] = e4[3] + 1295307597 + (e4[2] >>> 0 < a2[2] >>> 0 ? 1 : 0) | 0;
+              e4[4] = e4[4] + 3545052371 + (e4[3] >>> 0 < a2[3] >>> 0 ? 1 : 0) | 0;
+              e4[5] = e4[5] + 886263092 + (e4[4] >>> 0 < a2[4] >>> 0 ? 1 : 0) | 0;
+              e4[6] = e4[6] + 1295307597 + (e4[5] >>> 0 < a2[5] >>> 0 ? 1 : 0) | 0;
+              e4[7] = e4[7] + 3545052371 + (e4[6] >>> 0 < a2[6] >>> 0 ? 1 : 0) | 0;
+              this._b = e4[7] >>> 0 < a2[7] >>> 0 ? 1 : 0;
+              for (var r5 = 0; r5 < 8; r5++) {
+                var i4 = t5[r5] + e4[r5];
+                var n3 = 65535 & i4;
+                var s3 = i4 >>> 16;
+                var u3 = ((n3 * n3 >>> 17) + n3 * s3 >>> 15) + s3 * s3;
+                var c3 = ((4294901760 & i4) * i4 | 0) + ((65535 & i4) * i4 | 0);
+                o2[r5] = u3 ^ c3;
+              }
+              t5[0] = o2[0] + (o2[7] << 16 | o2[7] >>> 16) + (o2[6] << 16 | o2[6] >>> 16) | 0;
+              t5[1] = o2[1] + (o2[0] << 8 | o2[0] >>> 24) + o2[7] | 0;
+              t5[2] = o2[2] + (o2[1] << 16 | o2[1] >>> 16) + (o2[0] << 16 | o2[0] >>> 16) | 0;
+              t5[3] = o2[3] + (o2[2] << 8 | o2[2] >>> 24) + o2[1] | 0;
+              t5[4] = o2[4] + (o2[3] << 16 | o2[3] >>> 16) + (o2[2] << 16 | o2[2] >>> 16) | 0;
+              t5[5] = o2[5] + (o2[4] << 8 | o2[4] >>> 24) + o2[3] | 0;
+              t5[6] = o2[6] + (o2[5] << 16 | o2[5] >>> 16) + (o2[4] << 16 | o2[4] >>> 16) | 0;
+              t5[7] = o2[7] + (o2[6] << 8 | o2[6] >>> 24) + o2[5] | 0;
+            }
+            e3.RabbitLegacy = i3._createHelper(u2);
+          })();
+          return t4.RabbitLegacy;
+        });
+      }, 4454: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(8269), r3(8214), r3(888), r3(5109));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.StreamCipher;
+            var n2 = e3.algo;
+            var s2 = [];
+            var a2 = [];
+            var o2 = [];
+            var u2 = n2.Rabbit = i3.extend({ _doReset: function() {
+              var t5 = this._key.words;
+              var e4 = this.cfg.iv;
+              for (var r5 = 0; r5 < 4; r5++)
+                t5[r5] = 16711935 & (t5[r5] << 8 | t5[r5] >>> 24) | 4278255360 & (t5[r5] << 24 | t5[r5] >>> 8);
+              var i4 = this._X = [t5[0], t5[3] << 16 | t5[2] >>> 16, t5[1], t5[0] << 16 | t5[3] >>> 16, t5[2], t5[1] << 16 | t5[0] >>> 16, t5[3], t5[2] << 16 | t5[1] >>> 16];
+              var n3 = this._C = [t5[2] << 16 | t5[2] >>> 16, 4294901760 & t5[0] | 65535 & t5[1], t5[3] << 16 | t5[3] >>> 16, 4294901760 & t5[1] | 65535 & t5[2], t5[0] << 16 | t5[0] >>> 16, 4294901760 & t5[2] | 65535 & t5[3], t5[1] << 16 | t5[1] >>> 16, 4294901760 & t5[3] | 65535 & t5[0]];
+              this._b = 0;
+              for (var r5 = 0; r5 < 4; r5++)
+                c2.call(this);
+              for (var r5 = 0; r5 < 8; r5++)
+                n3[r5] ^= i4[r5 + 4 & 7];
+              if (e4) {
+                var s3 = e4.words;
+                var a3 = s3[0];
+                var o3 = s3[1];
+                var u3 = 16711935 & (a3 << 8 | a3 >>> 24) | 4278255360 & (a3 << 24 | a3 >>> 8);
+                var l2 = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8);
+                var f2 = u3 >>> 16 | 4294901760 & l2;
+                var h2 = l2 << 16 | 65535 & u3;
+                n3[0] ^= u3;
+                n3[1] ^= f2;
+                n3[2] ^= l2;
+                n3[3] ^= h2;
+                n3[4] ^= u3;
+                n3[5] ^= f2;
+                n3[6] ^= l2;
+                n3[7] ^= h2;
+                for (var r5 = 0; r5 < 4; r5++)
+                  c2.call(this);
+              }
+            }, _doProcessBlock: function(t5, e4) {
+              var r5 = this._X;
+              c2.call(this);
+              s2[0] = r5[0] ^ r5[5] >>> 16 ^ r5[3] << 16;
+              s2[1] = r5[2] ^ r5[7] >>> 16 ^ r5[5] << 16;
+              s2[2] = r5[4] ^ r5[1] >>> 16 ^ r5[7] << 16;
+              s2[3] = r5[6] ^ r5[3] >>> 16 ^ r5[1] << 16;
+              for (var i4 = 0; i4 < 4; i4++) {
+                s2[i4] = 16711935 & (s2[i4] << 8 | s2[i4] >>> 24) | 4278255360 & (s2[i4] << 24 | s2[i4] >>> 8);
+                t5[e4 + i4] ^= s2[i4];
+              }
+            }, blockSize: 128 / 32, ivSize: 64 / 32 });
+            function c2() {
+              var t5 = this._X;
+              var e4 = this._C;
+              for (var r5 = 0; r5 < 8; r5++)
+                a2[r5] = e4[r5];
+              e4[0] = e4[0] + 1295307597 + this._b | 0;
+              e4[1] = e4[1] + 3545052371 + (e4[0] >>> 0 < a2[0] >>> 0 ? 1 : 0) | 0;
+              e4[2] = e4[2] + 886263092 + (e4[1] >>> 0 < a2[1] >>> 0 ? 1 : 0) | 0;
+              e4[3] = e4[3] + 1295307597 + (e4[2] >>> 0 < a2[2] >>> 0 ? 1 : 0) | 0;
+              e4[4] = e4[4] + 3545052371 + (e4[3] >>> 0 < a2[3] >>> 0 ? 1 : 0) | 0;
+              e4[5] = e4[5] + 886263092 + (e4[4] >>> 0 < a2[4] >>> 0 ? 1 : 0) | 0;
+              e4[6] = e4[6] + 1295307597 + (e4[5] >>> 0 < a2[5] >>> 0 ? 1 : 0) | 0;
+              e4[7] = e4[7] + 3545052371 + (e4[6] >>> 0 < a2[6] >>> 0 ? 1 : 0) | 0;
+              this._b = e4[7] >>> 0 < a2[7] >>> 0 ? 1 : 0;
+              for (var r5 = 0; r5 < 8; r5++) {
+                var i4 = t5[r5] + e4[r5];
+                var n3 = 65535 & i4;
+                var s3 = i4 >>> 16;
+                var u3 = ((n3 * n3 >>> 17) + n3 * s3 >>> 15) + s3 * s3;
+                var c3 = ((4294901760 & i4) * i4 | 0) + ((65535 & i4) * i4 | 0);
+                o2[r5] = u3 ^ c3;
+              }
+              t5[0] = o2[0] + (o2[7] << 16 | o2[7] >>> 16) + (o2[6] << 16 | o2[6] >>> 16) | 0;
+              t5[1] = o2[1] + (o2[0] << 8 | o2[0] >>> 24) + o2[7] | 0;
+              t5[2] = o2[2] + (o2[1] << 16 | o2[1] >>> 16) + (o2[0] << 16 | o2[0] >>> 16) | 0;
+              t5[3] = o2[3] + (o2[2] << 8 | o2[2] >>> 24) + o2[1] | 0;
+              t5[4] = o2[4] + (o2[3] << 16 | o2[3] >>> 16) + (o2[2] << 16 | o2[2] >>> 16) | 0;
+              t5[5] = o2[5] + (o2[4] << 8 | o2[4] >>> 24) + o2[3] | 0;
+              t5[6] = o2[6] + (o2[5] << 16 | o2[5] >>> 16) + (o2[4] << 16 | o2[4] >>> 16) | 0;
+              t5[7] = o2[7] + (o2[6] << 8 | o2[6] >>> 24) + o2[5] | 0;
+            }
+            e3.Rabbit = i3._createHelper(u2);
+          })();
+          return t4.Rabbit;
+        });
+      }, 1857: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(8269), r3(8214), r3(888), r3(5109));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.StreamCipher;
+            var n2 = e3.algo;
+            var s2 = n2.RC4 = i3.extend({ _doReset: function() {
+              var t5 = this._key;
+              var e4 = t5.words;
+              var r5 = t5.sigBytes;
+              var i4 = this._S = [];
+              for (var n3 = 0; n3 < 256; n3++)
+                i4[n3] = n3;
+              for (var n3 = 0, s3 = 0; n3 < 256; n3++) {
+                var a3 = n3 % r5;
+                var o3 = e4[a3 >>> 2] >>> 24 - a3 % 4 * 8 & 255;
+                s3 = (s3 + i4[n3] + o3) % 256;
+                var u2 = i4[n3];
+                i4[n3] = i4[s3];
+                i4[s3] = u2;
+              }
+              this._i = this._j = 0;
+            }, _doProcessBlock: function(t5, e4) {
+              t5[e4] ^= a2.call(this);
+            }, keySize: 256 / 32, ivSize: 0 });
+            function a2() {
+              var t5 = this._S;
+              var e4 = this._i;
+              var r5 = this._j;
+              var i4 = 0;
+              for (var n3 = 0; n3 < 4; n3++) {
+                e4 = (e4 + 1) % 256;
+                r5 = (r5 + t5[e4]) % 256;
+                var s3 = t5[e4];
+                t5[e4] = t5[r5];
+                t5[r5] = s3;
+                i4 |= t5[(t5[e4] + t5[r5]) % 256] << 24 - 8 * n3;
+              }
+              this._i = e4;
+              this._j = r5;
+              return i4;
+            }
+            e3.RC4 = i3._createHelper(s2);
+            var o2 = n2.RC4Drop = s2.extend({ cfg: s2.cfg.extend({ drop: 192 }), _doReset: function() {
+              s2._doReset.call(this);
+              for (var t5 = this.cfg.drop; t5 > 0; t5--)
+                a2.call(this);
+            } });
+            e3.RC4Drop = i3._createHelper(o2);
+          })();
+          return t4.RC4;
+        });
+      }, 706: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function(e3) {
+            var r4 = t4;
+            var i3 = r4.lib;
+            var n2 = i3.WordArray;
+            var s2 = i3.Hasher;
+            var a2 = r4.algo;
+            var o2 = n2.create([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 7, 4, 13, 1, 10, 6, 15, 3, 12, 0, 9, 5, 2, 14, 11, 8, 3, 10, 14, 4, 9, 15, 8, 1, 2, 7, 0, 6, 13, 11, 5, 12, 1, 9, 11, 10, 0, 8, 12, 4, 13, 3, 7, 15, 14, 5, 6, 2, 4, 0, 5, 9, 7, 12, 2, 10, 14, 1, 3, 8, 11, 6, 15, 13]);
+            var u2 = n2.create([5, 14, 7, 0, 9, 2, 11, 4, 13, 6, 15, 8, 1, 10, 3, 12, 6, 11, 3, 7, 0, 13, 5, 10, 14, 15, 8, 12, 4, 9, 1, 2, 15, 5, 1, 3, 7, 14, 6, 9, 11, 8, 12, 2, 10, 0, 4, 13, 8, 6, 4, 1, 3, 11, 15, 0, 5, 12, 2, 13, 9, 7, 10, 14, 12, 15, 10, 4, 1, 5, 8, 7, 6, 2, 13, 14, 0, 3, 9, 11]);
+            var c2 = n2.create([11, 14, 15, 12, 5, 8, 7, 9, 11, 13, 14, 15, 6, 7, 9, 8, 7, 6, 8, 13, 11, 9, 7, 15, 7, 12, 15, 9, 11, 7, 13, 12, 11, 13, 6, 7, 14, 9, 13, 15, 14, 8, 13, 6, 5, 12, 7, 5, 11, 12, 14, 15, 14, 15, 9, 8, 9, 14, 5, 6, 8, 6, 5, 12, 9, 15, 5, 11, 6, 8, 13, 12, 5, 12, 13, 14, 11, 8, 5, 6]);
+            var l2 = n2.create([8, 9, 9, 11, 13, 15, 15, 5, 7, 7, 8, 11, 14, 14, 12, 6, 9, 13, 15, 7, 12, 8, 9, 11, 7, 7, 12, 7, 6, 15, 13, 11, 9, 7, 15, 11, 8, 6, 6, 14, 12, 13, 5, 14, 13, 13, 7, 5, 15, 5, 8, 11, 14, 14, 6, 14, 6, 9, 12, 9, 12, 5, 15, 8, 8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11]);
+            var f2 = n2.create([0, 1518500249, 1859775393, 2400959708, 2840853838]);
+            var h2 = n2.create([1352829926, 1548603684, 1836072691, 2053994217, 0]);
+            var d2 = a2.RIPEMD160 = s2.extend({ _doReset: function() {
+              this._hash = n2.create([1732584193, 4023233417, 2562383102, 271733878, 3285377520]);
+            }, _doProcessBlock: function(t5, e4) {
+              for (var r5 = 0; r5 < 16; r5++) {
+                var i4 = e4 + r5;
+                var n3 = t5[i4];
+                t5[i4] = 16711935 & (n3 << 8 | n3 >>> 24) | 4278255360 & (n3 << 24 | n3 >>> 8);
+              }
+              var s3 = this._hash.words;
+              var a3 = f2.words;
+              var d3 = h2.words;
+              var S2 = o2.words;
+              var _2 = u2.words;
+              var b2 = c2.words;
+              var E2 = l2.words;
+              var D2, M2, T2, I2, A2;
+              var x2, R2, B2, O2, k;
+              x2 = D2 = s3[0];
+              R2 = M2 = s3[1];
+              B2 = T2 = s3[2];
+              O2 = I2 = s3[3];
+              k = A2 = s3[4];
+              var C2;
+              for (var r5 = 0; r5 < 80; r5 += 1) {
+                C2 = D2 + t5[e4 + S2[r5]] | 0;
+                if (r5 < 16)
+                  C2 += p2(M2, T2, I2) + a3[0];
+                else if (r5 < 32)
+                  C2 += v2(M2, T2, I2) + a3[1];
+                else if (r5 < 48)
+                  C2 += g2(M2, T2, I2) + a3[2];
+                else if (r5 < 64)
+                  C2 += y(M2, T2, I2) + a3[3];
+                else
+                  C2 += m2(M2, T2, I2) + a3[4];
+                C2 |= 0;
+                C2 = w2(C2, b2[r5]);
+                C2 = C2 + A2 | 0;
+                D2 = A2;
+                A2 = I2;
+                I2 = w2(T2, 10);
+                T2 = M2;
+                M2 = C2;
+                C2 = x2 + t5[e4 + _2[r5]] | 0;
+                if (r5 < 16)
+                  C2 += m2(R2, B2, O2) + d3[0];
+                else if (r5 < 32)
+                  C2 += y(R2, B2, O2) + d3[1];
+                else if (r5 < 48)
+                  C2 += g2(R2, B2, O2) + d3[2];
+                else if (r5 < 64)
+                  C2 += v2(R2, B2, O2) + d3[3];
+                else
+                  C2 += p2(R2, B2, O2) + d3[4];
+                C2 |= 0;
+                C2 = w2(C2, E2[r5]);
+                C2 = C2 + k | 0;
+                x2 = k;
+                k = O2;
+                O2 = w2(B2, 10);
+                B2 = R2;
+                R2 = C2;
+              }
+              C2 = s3[1] + T2 + O2 | 0;
+              s3[1] = s3[2] + I2 + k | 0;
+              s3[2] = s3[3] + A2 + x2 | 0;
+              s3[3] = s3[4] + D2 + R2 | 0;
+              s3[4] = s3[0] + M2 + B2 | 0;
+              s3[0] = C2;
+            }, _doFinalize: function() {
+              var t5 = this._data;
+              var e4 = t5.words;
+              var r5 = 8 * this._nDataBytes;
+              var i4 = 8 * t5.sigBytes;
+              e4[i4 >>> 5] |= 128 << 24 - i4 % 32;
+              e4[(i4 + 64 >>> 9 << 4) + 14] = 16711935 & (r5 << 8 | r5 >>> 24) | 4278255360 & (r5 << 24 | r5 >>> 8);
+              t5.sigBytes = 4 * (e4.length + 1);
+              this._process();
+              var n3 = this._hash;
+              var s3 = n3.words;
+              for (var a3 = 0; a3 < 5; a3++) {
+                var o3 = s3[a3];
+                s3[a3] = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8);
+              }
+              return n3;
+            }, clone: function() {
+              var t5 = s2.clone.call(this);
+              t5._hash = this._hash.clone();
+              return t5;
+            } });
+            function p2(t5, e4, r5) {
+              return t5 ^ e4 ^ r5;
+            }
+            function v2(t5, e4, r5) {
+              return t5 & e4 | ~t5 & r5;
+            }
+            function g2(t5, e4, r5) {
+              return (t5 | ~e4) ^ r5;
+            }
+            function y(t5, e4, r5) {
+              return t5 & r5 | e4 & ~r5;
+            }
+            function m2(t5, e4, r5) {
+              return t5 ^ (e4 | ~r5);
+            }
+            function w2(t5, e4) {
+              return t5 << e4 | t5 >>> 32 - e4;
+            }
+            r4.RIPEMD160 = s2._createHelper(d2);
+            r4.HmacRIPEMD160 = s2._createHmacHelper(d2);
+          })();
+          return t4.RIPEMD160;
+        });
+      }, 2783: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.WordArray;
+            var n2 = r4.Hasher;
+            var s2 = e3.algo;
+            var a2 = [];
+            var o2 = s2.SHA1 = n2.extend({ _doReset: function() {
+              this._hash = new i3.init([1732584193, 4023233417, 2562383102, 271733878, 3285377520]);
+            }, _doProcessBlock: function(t5, e4) {
+              var r5 = this._hash.words;
+              var i4 = r5[0];
+              var n3 = r5[1];
+              var s3 = r5[2];
+              var o3 = r5[3];
+              var u2 = r5[4];
+              for (var c2 = 0; c2 < 80; c2++) {
+                if (c2 < 16)
+                  a2[c2] = 0 | t5[e4 + c2];
+                else {
+                  var l2 = a2[c2 - 3] ^ a2[c2 - 8] ^ a2[c2 - 14] ^ a2[c2 - 16];
+                  a2[c2] = l2 << 1 | l2 >>> 31;
+                }
+                var f2 = (i4 << 5 | i4 >>> 27) + u2 + a2[c2];
+                if (c2 < 20)
+                  f2 += (n3 & s3 | ~n3 & o3) + 1518500249;
+                else if (c2 < 40)
+                  f2 += (n3 ^ s3 ^ o3) + 1859775393;
+                else if (c2 < 60)
+                  f2 += (n3 & s3 | n3 & o3 | s3 & o3) - 1894007588;
+                else
+                  f2 += (n3 ^ s3 ^ o3) - 899497514;
+                u2 = o3;
+                o3 = s3;
+                s3 = n3 << 30 | n3 >>> 2;
+                n3 = i4;
+                i4 = f2;
+              }
+              r5[0] = r5[0] + i4 | 0;
+              r5[1] = r5[1] + n3 | 0;
+              r5[2] = r5[2] + s3 | 0;
+              r5[3] = r5[3] + o3 | 0;
+              r5[4] = r5[4] + u2 | 0;
+            }, _doFinalize: function() {
+              var t5 = this._data;
+              var e4 = t5.words;
+              var r5 = 8 * this._nDataBytes;
+              var i4 = 8 * t5.sigBytes;
+              e4[i4 >>> 5] |= 128 << 24 - i4 % 32;
+              e4[(i4 + 64 >>> 9 << 4) + 14] = Math.floor(r5 / 4294967296);
+              e4[(i4 + 64 >>> 9 << 4) + 15] = r5;
+              t5.sigBytes = 4 * e4.length;
+              this._process();
+              return this._hash;
+            }, clone: function() {
+              var t5 = n2.clone.call(this);
+              t5._hash = this._hash.clone();
+              return t5;
+            } });
+            e3.SHA1 = n2._createHelper(o2);
+            e3.HmacSHA1 = n2._createHmacHelper(o2);
+          })();
+          return t4.SHA1;
+        });
+      }, 7792: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(2153));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.WordArray;
+            var n2 = e3.algo;
+            var s2 = n2.SHA256;
+            var a2 = n2.SHA224 = s2.extend({ _doReset: function() {
+              this._hash = new i3.init([3238371032, 914150663, 812702999, 4144912697, 4290775857, 1750603025, 1694076839, 3204075428]);
+            }, _doFinalize: function() {
+              var t5 = s2._doFinalize.call(this);
+              t5.sigBytes -= 4;
+              return t5;
+            } });
+            e3.SHA224 = s2._createHelper(a2);
+            e3.HmacSHA224 = s2._createHmacHelper(a2);
+          })();
+          return t4.SHA224;
+        });
+      }, 2153: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function(e3) {
+            var r4 = t4;
+            var i3 = r4.lib;
+            var n2 = i3.WordArray;
+            var s2 = i3.Hasher;
+            var a2 = r4.algo;
+            var o2 = [];
+            var u2 = [];
+            (function() {
+              function t5(t6) {
+                var r6 = e3.sqrt(t6);
+                for (var i5 = 2; i5 <= r6; i5++)
+                  if (!(t6 % i5))
+                    return false;
+                return true;
+              }
+              function r5(t6) {
+                return 4294967296 * (t6 - (0 | t6)) | 0;
+              }
+              var i4 = 2;
+              var n3 = 0;
+              while (n3 < 64) {
+                if (t5(i4)) {
+                  if (n3 < 8)
+                    o2[n3] = r5(e3.pow(i4, 1 / 2));
+                  u2[n3] = r5(e3.pow(i4, 1 / 3));
+                  n3++;
+                }
+                i4++;
+              }
+            })();
+            var c2 = [];
+            var l2 = a2.SHA256 = s2.extend({ _doReset: function() {
+              this._hash = new n2.init(o2.slice(0));
+            }, _doProcessBlock: function(t5, e4) {
+              var r5 = this._hash.words;
+              var i4 = r5[0];
+              var n3 = r5[1];
+              var s3 = r5[2];
+              var a3 = r5[3];
+              var o3 = r5[4];
+              var l3 = r5[5];
+              var f2 = r5[6];
+              var h2 = r5[7];
+              for (var d2 = 0; d2 < 64; d2++) {
+                if (d2 < 16)
+                  c2[d2] = 0 | t5[e4 + d2];
+                else {
+                  var p2 = c2[d2 - 15];
+                  var v2 = (p2 << 25 | p2 >>> 7) ^ (p2 << 14 | p2 >>> 18) ^ p2 >>> 3;
+                  var g2 = c2[d2 - 2];
+                  var y = (g2 << 15 | g2 >>> 17) ^ (g2 << 13 | g2 >>> 19) ^ g2 >>> 10;
+                  c2[d2] = v2 + c2[d2 - 7] + y + c2[d2 - 16];
+                }
+                var m2 = o3 & l3 ^ ~o3 & f2;
+                var w2 = i4 & n3 ^ i4 & s3 ^ n3 & s3;
+                var S2 = (i4 << 30 | i4 >>> 2) ^ (i4 << 19 | i4 >>> 13) ^ (i4 << 10 | i4 >>> 22);
+                var _2 = (o3 << 26 | o3 >>> 6) ^ (o3 << 21 | o3 >>> 11) ^ (o3 << 7 | o3 >>> 25);
+                var b2 = h2 + _2 + m2 + u2[d2] + c2[d2];
+                var E2 = S2 + w2;
+                h2 = f2;
+                f2 = l3;
+                l3 = o3;
+                o3 = a3 + b2 | 0;
+                a3 = s3;
+                s3 = n3;
+                n3 = i4;
+                i4 = b2 + E2 | 0;
+              }
+              r5[0] = r5[0] + i4 | 0;
+              r5[1] = r5[1] + n3 | 0;
+              r5[2] = r5[2] + s3 | 0;
+              r5[3] = r5[3] + a3 | 0;
+              r5[4] = r5[4] + o3 | 0;
+              r5[5] = r5[5] + l3 | 0;
+              r5[6] = r5[6] + f2 | 0;
+              r5[7] = r5[7] + h2 | 0;
+            }, _doFinalize: function() {
+              var t5 = this._data;
+              var r5 = t5.words;
+              var i4 = 8 * this._nDataBytes;
+              var n3 = 8 * t5.sigBytes;
+              r5[n3 >>> 5] |= 128 << 24 - n3 % 32;
+              r5[(n3 + 64 >>> 9 << 4) + 14] = e3.floor(i4 / 4294967296);
+              r5[(n3 + 64 >>> 9 << 4) + 15] = i4;
+              t5.sigBytes = 4 * r5.length;
+              this._process();
+              return this._hash;
+            }, clone: function() {
+              var t5 = s2.clone.call(this);
+              t5._hash = this._hash.clone();
+              return t5;
+            } });
+            r4.SHA256 = s2._createHelper(l2);
+            r4.HmacSHA256 = s2._createHmacHelper(l2);
+          })(Math);
+          return t4.SHA256;
+        });
+      }, 3327: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(4938));
+        })(this, function(t4) {
+          (function(e3) {
+            var r4 = t4;
+            var i3 = r4.lib;
+            var n2 = i3.WordArray;
+            var s2 = i3.Hasher;
+            var a2 = r4.x64;
+            var o2 = a2.Word;
+            var u2 = r4.algo;
+            var c2 = [];
+            var l2 = [];
+            var f2 = [];
+            (function() {
+              var t5 = 1, e4 = 0;
+              for (var r5 = 0; r5 < 24; r5++) {
+                c2[t5 + 5 * e4] = (r5 + 1) * (r5 + 2) / 2 % 64;
+                var i4 = e4 % 5;
+                var n3 = (2 * t5 + 3 * e4) % 5;
+                t5 = i4;
+                e4 = n3;
+              }
+              for (var t5 = 0; t5 < 5; t5++)
+                for (var e4 = 0; e4 < 5; e4++)
+                  l2[t5 + 5 * e4] = e4 + (2 * t5 + 3 * e4) % 5 * 5;
+              var s3 = 1;
+              for (var a3 = 0; a3 < 24; a3++) {
+                var u3 = 0;
+                var h3 = 0;
+                for (var d3 = 0; d3 < 7; d3++) {
+                  if (1 & s3) {
+                    var p2 = (1 << d3) - 1;
+                    if (p2 < 32)
+                      h3 ^= 1 << p2;
+                    else
+                      u3 ^= 1 << p2 - 32;
+                  }
+                  if (128 & s3)
+                    s3 = s3 << 1 ^ 113;
+                  else
+                    s3 <<= 1;
+                }
+                f2[a3] = o2.create(u3, h3);
+              }
+            })();
+            var h2 = [];
+            (function() {
+              for (var t5 = 0; t5 < 25; t5++)
+                h2[t5] = o2.create();
+            })();
+            var d2 = u2.SHA3 = s2.extend({ cfg: s2.cfg.extend({ outputLength: 512 }), _doReset: function() {
+              var t5 = this._state = [];
+              for (var e4 = 0; e4 < 25; e4++)
+                t5[e4] = new o2.init();
+              this.blockSize = (1600 - 2 * this.cfg.outputLength) / 32;
+            }, _doProcessBlock: function(t5, e4) {
+              var r5 = this._state;
+              var i4 = this.blockSize / 2;
+              for (var n3 = 0; n3 < i4; n3++) {
+                var s3 = t5[e4 + 2 * n3];
+                var a3 = t5[e4 + 2 * n3 + 1];
+                s3 = 16711935 & (s3 << 8 | s3 >>> 24) | 4278255360 & (s3 << 24 | s3 >>> 8);
+                a3 = 16711935 & (a3 << 8 | a3 >>> 24) | 4278255360 & (a3 << 24 | a3 >>> 8);
+                var o3 = r5[n3];
+                o3.high ^= a3;
+                o3.low ^= s3;
+              }
+              for (var u3 = 0; u3 < 24; u3++) {
+                for (var d3 = 0; d3 < 5; d3++) {
+                  var p2 = 0, v2 = 0;
+                  for (var g2 = 0; g2 < 5; g2++) {
+                    var o3 = r5[d3 + 5 * g2];
+                    p2 ^= o3.high;
+                    v2 ^= o3.low;
+                  }
+                  var y = h2[d3];
+                  y.high = p2;
+                  y.low = v2;
+                }
+                for (var d3 = 0; d3 < 5; d3++) {
+                  var m2 = h2[(d3 + 4) % 5];
+                  var w2 = h2[(d3 + 1) % 5];
+                  var S2 = w2.high;
+                  var _2 = w2.low;
+                  var p2 = m2.high ^ (S2 << 1 | _2 >>> 31);
+                  var v2 = m2.low ^ (_2 << 1 | S2 >>> 31);
+                  for (var g2 = 0; g2 < 5; g2++) {
+                    var o3 = r5[d3 + 5 * g2];
+                    o3.high ^= p2;
+                    o3.low ^= v2;
+                  }
+                }
+                for (var b2 = 1; b2 < 25; b2++) {
+                  var p2;
+                  var v2;
+                  var o3 = r5[b2];
+                  var E2 = o3.high;
+                  var D2 = o3.low;
+                  var M2 = c2[b2];
+                  if (M2 < 32) {
+                    p2 = E2 << M2 | D2 >>> 32 - M2;
+                    v2 = D2 << M2 | E2 >>> 32 - M2;
+                  } else {
+                    p2 = D2 << M2 - 32 | E2 >>> 64 - M2;
+                    v2 = E2 << M2 - 32 | D2 >>> 64 - M2;
+                  }
+                  var T2 = h2[l2[b2]];
+                  T2.high = p2;
+                  T2.low = v2;
+                }
+                var I2 = h2[0];
+                var A2 = r5[0];
+                I2.high = A2.high;
+                I2.low = A2.low;
+                for (var d3 = 0; d3 < 5; d3++)
+                  for (var g2 = 0; g2 < 5; g2++) {
+                    var b2 = d3 + 5 * g2;
+                    var o3 = r5[b2];
+                    var x2 = h2[b2];
+                    var R2 = h2[(d3 + 1) % 5 + 5 * g2];
+                    var B2 = h2[(d3 + 2) % 5 + 5 * g2];
+                    o3.high = x2.high ^ ~R2.high & B2.high;
+                    o3.low = x2.low ^ ~R2.low & B2.low;
+                  }
+                var o3 = r5[0];
+                var O2 = f2[u3];
+                o3.high ^= O2.high;
+                o3.low ^= O2.low;
+              }
+            }, _doFinalize: function() {
+              var t5 = this._data;
+              var r5 = t5.words;
+              8 * this._nDataBytes;
+              var s3 = 8 * t5.sigBytes;
+              var a3 = 32 * this.blockSize;
+              r5[s3 >>> 5] |= 1 << 24 - s3 % 32;
+              r5[(e3.ceil((s3 + 1) / a3) * a3 >>> 5) - 1] |= 128;
+              t5.sigBytes = 4 * r5.length;
+              this._process();
+              var o3 = this._state;
+              var u3 = this.cfg.outputLength / 8;
+              var c3 = u3 / 8;
+              var l3 = [];
+              for (var f3 = 0; f3 < c3; f3++) {
+                var h3 = o3[f3];
+                var d3 = h3.high;
+                var p2 = h3.low;
+                d3 = 16711935 & (d3 << 8 | d3 >>> 24) | 4278255360 & (d3 << 24 | d3 >>> 8);
+                p2 = 16711935 & (p2 << 8 | p2 >>> 24) | 4278255360 & (p2 << 24 | p2 >>> 8);
+                l3.push(p2);
+                l3.push(d3);
+              }
+              return new n2.init(l3, u3);
+            }, clone: function() {
+              var t5 = s2.clone.call(this);
+              var e4 = t5._state = this._state.slice(0);
+              for (var r5 = 0; r5 < 25; r5++)
+                e4[r5] = e4[r5].clone();
+              return t5;
+            } });
+            r4.SHA3 = s2._createHelper(d2);
+            r4.HmacSHA3 = s2._createHmacHelper(d2);
+          })(Math);
+          return t4.SHA3;
+        });
+      }, 7460: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(4938), r3(34));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.x64;
+            var i3 = r4.Word;
+            var n2 = r4.WordArray;
+            var s2 = e3.algo;
+            var a2 = s2.SHA512;
+            var o2 = s2.SHA384 = a2.extend({ _doReset: function() {
+              this._hash = new n2.init([new i3.init(3418070365, 3238371032), new i3.init(1654270250, 914150663), new i3.init(2438529370, 812702999), new i3.init(355462360, 4144912697), new i3.init(1731405415, 4290775857), new i3.init(2394180231, 1750603025), new i3.init(3675008525, 1694076839), new i3.init(1203062813, 3204075428)]);
+            }, _doFinalize: function() {
+              var t5 = a2._doFinalize.call(this);
+              t5.sigBytes -= 16;
+              return t5;
+            } });
+            e3.SHA384 = a2._createHelper(o2);
+            e3.HmacSHA384 = a2._createHmacHelper(o2);
+          })();
+          return t4.SHA384;
+        });
+      }, 34: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(4938));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.Hasher;
+            var n2 = e3.x64;
+            var s2 = n2.Word;
+            var a2 = n2.WordArray;
+            var o2 = e3.algo;
+            function u2() {
+              return s2.create.apply(s2, arguments);
+            }
+            var c2 = [u2(1116352408, 3609767458), u2(1899447441, 602891725), u2(3049323471, 3964484399), u2(3921009573, 2173295548), u2(961987163, 4081628472), u2(1508970993, 3053834265), u2(2453635748, 2937671579), u2(2870763221, 3664609560), u2(3624381080, 2734883394), u2(310598401, 1164996542), u2(607225278, 1323610764), u2(1426881987, 3590304994), u2(1925078388, 4068182383), u2(2162078206, 991336113), u2(2614888103, 633803317), u2(3248222580, 3479774868), u2(3835390401, 2666613458), u2(4022224774, 944711139), u2(264347078, 2341262773), u2(604807628, 2007800933), u2(770255983, 1495990901), u2(1249150122, 1856431235), u2(1555081692, 3175218132), u2(1996064986, 2198950837), u2(2554220882, 3999719339), u2(2821834349, 766784016), u2(2952996808, 2566594879), u2(3210313671, 3203337956), u2(3336571891, 1034457026), u2(3584528711, 2466948901), u2(113926993, 3758326383), u2(338241895, 168717936), u2(666307205, 1188179964), u2(773529912, 1546045734), u2(1294757372, 1522805485), u2(1396182291, 2643833823), u2(1695183700, 2343527390), u2(1986661051, 1014477480), u2(2177026350, 1206759142), u2(2456956037, 344077627), u2(2730485921, 1290863460), u2(2820302411, 3158454273), u2(3259730800, 3505952657), u2(3345764771, 106217008), u2(3516065817, 3606008344), u2(3600352804, 1432725776), u2(4094571909, 1467031594), u2(275423344, 851169720), u2(430227734, 3100823752), u2(506948616, 1363258195), u2(659060556, 3750685593), u2(883997877, 3785050280), u2(958139571, 3318307427), u2(1322822218, 3812723403), u2(1537002063, 2003034995), u2(1747873779, 3602036899), u2(1955562222, 1575990012), u2(2024104815, 1125592928), u2(2227730452, 2716904306), u2(2361852424, 442776044), u2(2428436474, 593698344), u2(2756734187, 3733110249), u2(3204031479, 2999351573), u2(3329325298, 3815920427), u2(3391569614, 3928383900), u2(3515267271, 566280711), u2(3940187606, 3454069534), u2(4118630271, 4000239992), u2(116418474, 1914138554), u2(174292421, 2731055270), u2(289380356, 3203993006), u2(460393269, 320620315), u2(685471733, 587496836), u2(852142971, 1086792851), u2(1017036298, 365543100), u2(1126000580, 2618297676), u2(1288033470, 3409855158), u2(1501505948, 4234509866), u2(1607167915, 987167468), u2(1816402316, 1246189591)];
+            var l2 = [];
+            (function() {
+              for (var t5 = 0; t5 < 80; t5++)
+                l2[t5] = u2();
+            })();
+            var f2 = o2.SHA512 = i3.extend({ _doReset: function() {
+              this._hash = new a2.init([new s2.init(1779033703, 4089235720), new s2.init(3144134277, 2227873595), new s2.init(1013904242, 4271175723), new s2.init(2773480762, 1595750129), new s2.init(1359893119, 2917565137), new s2.init(2600822924, 725511199), new s2.init(528734635, 4215389547), new s2.init(1541459225, 327033209)]);
+            }, _doProcessBlock: function(t5, e4) {
+              var r5 = this._hash.words;
+              var i4 = r5[0];
+              var n3 = r5[1];
+              var s3 = r5[2];
+              var a3 = r5[3];
+              var o3 = r5[4];
+              var u3 = r5[5];
+              var f3 = r5[6];
+              var h2 = r5[7];
+              var d2 = i4.high;
+              var p2 = i4.low;
+              var v2 = n3.high;
+              var g2 = n3.low;
+              var y = s3.high;
+              var m2 = s3.low;
+              var w2 = a3.high;
+              var S2 = a3.low;
+              var _2 = o3.high;
+              var b2 = o3.low;
+              var E2 = u3.high;
+              var D2 = u3.low;
+              var M2 = f3.high;
+              var T2 = f3.low;
+              var I2 = h2.high;
+              var A2 = h2.low;
+              var x2 = d2;
+              var R2 = p2;
+              var B2 = v2;
+              var O2 = g2;
+              var k = y;
+              var C2 = m2;
+              var N2 = w2;
+              var P2 = S2;
+              var V2 = _2;
+              var L2 = b2;
+              var H2 = E2;
+              var K2 = D2;
+              var U2 = M2;
+              var j2 = T2;
+              var q2 = I2;
+              var F2 = A2;
+              for (var z2 = 0; z2 < 80; z2++) {
+                var G2;
+                var Y2;
+                var W2 = l2[z2];
+                if (z2 < 16) {
+                  Y2 = W2.high = 0 | t5[e4 + 2 * z2];
+                  G2 = W2.low = 0 | t5[e4 + 2 * z2 + 1];
+                } else {
+                  var J2 = l2[z2 - 15];
+                  var Z2 = J2.high;
+                  var $2 = J2.low;
+                  var X2 = (Z2 >>> 1 | $2 << 31) ^ (Z2 >>> 8 | $2 << 24) ^ Z2 >>> 7;
+                  var Q2 = ($2 >>> 1 | Z2 << 31) ^ ($2 >>> 8 | Z2 << 24) ^ ($2 >>> 7 | Z2 << 25);
+                  var tt2 = l2[z2 - 2];
+                  var et2 = tt2.high;
+                  var rt2 = tt2.low;
+                  var it2 = (et2 >>> 19 | rt2 << 13) ^ (et2 << 3 | rt2 >>> 29) ^ et2 >>> 6;
+                  var nt2 = (rt2 >>> 19 | et2 << 13) ^ (rt2 << 3 | et2 >>> 29) ^ (rt2 >>> 6 | et2 << 26);
+                  var st2 = l2[z2 - 7];
+                  var at2 = st2.high;
+                  var ot2 = st2.low;
+                  var ut2 = l2[z2 - 16];
+                  var ct2 = ut2.high;
+                  var lt2 = ut2.low;
+                  G2 = Q2 + ot2;
+                  Y2 = X2 + at2 + (G2 >>> 0 < Q2 >>> 0 ? 1 : 0);
+                  G2 += nt2;
+                  Y2 = Y2 + it2 + (G2 >>> 0 < nt2 >>> 0 ? 1 : 0);
+                  G2 += lt2;
+                  Y2 = Y2 + ct2 + (G2 >>> 0 < lt2 >>> 0 ? 1 : 0);
+                  W2.high = Y2;
+                  W2.low = G2;
+                }
+                var ft2 = V2 & H2 ^ ~V2 & U2;
+                var ht2 = L2 & K2 ^ ~L2 & j2;
+                var dt2 = x2 & B2 ^ x2 & k ^ B2 & k;
+                var pt2 = R2 & O2 ^ R2 & C2 ^ O2 & C2;
+                var vt2 = (x2 >>> 28 | R2 << 4) ^ (x2 << 30 | R2 >>> 2) ^ (x2 << 25 | R2 >>> 7);
+                var gt2 = (R2 >>> 28 | x2 << 4) ^ (R2 << 30 | x2 >>> 2) ^ (R2 << 25 | x2 >>> 7);
+                var yt2 = (V2 >>> 14 | L2 << 18) ^ (V2 >>> 18 | L2 << 14) ^ (V2 << 23 | L2 >>> 9);
+                var mt2 = (L2 >>> 14 | V2 << 18) ^ (L2 >>> 18 | V2 << 14) ^ (L2 << 23 | V2 >>> 9);
+                var wt2 = c2[z2];
+                var St2 = wt2.high;
+                var _t2 = wt2.low;
+                var bt = F2 + mt2;
+                var Et = q2 + yt2 + (bt >>> 0 < F2 >>> 0 ? 1 : 0);
+                var bt = bt + ht2;
+                var Et = Et + ft2 + (bt >>> 0 < ht2 >>> 0 ? 1 : 0);
+                var bt = bt + _t2;
+                var Et = Et + St2 + (bt >>> 0 < _t2 >>> 0 ? 1 : 0);
+                var bt = bt + G2;
+                var Et = Et + Y2 + (bt >>> 0 < G2 >>> 0 ? 1 : 0);
+                var Dt = gt2 + pt2;
+                var Mt = vt2 + dt2 + (Dt >>> 0 < gt2 >>> 0 ? 1 : 0);
+                q2 = U2;
+                F2 = j2;
+                U2 = H2;
+                j2 = K2;
+                H2 = V2;
+                K2 = L2;
+                L2 = P2 + bt | 0;
+                V2 = N2 + Et + (L2 >>> 0 < P2 >>> 0 ? 1 : 0) | 0;
+                N2 = k;
+                P2 = C2;
+                k = B2;
+                C2 = O2;
+                B2 = x2;
+                O2 = R2;
+                R2 = bt + Dt | 0;
+                x2 = Et + Mt + (R2 >>> 0 < bt >>> 0 ? 1 : 0) | 0;
+              }
+              p2 = i4.low = p2 + R2;
+              i4.high = d2 + x2 + (p2 >>> 0 < R2 >>> 0 ? 1 : 0);
+              g2 = n3.low = g2 + O2;
+              n3.high = v2 + B2 + (g2 >>> 0 < O2 >>> 0 ? 1 : 0);
+              m2 = s3.low = m2 + C2;
+              s3.high = y + k + (m2 >>> 0 < C2 >>> 0 ? 1 : 0);
+              S2 = a3.low = S2 + P2;
+              a3.high = w2 + N2 + (S2 >>> 0 < P2 >>> 0 ? 1 : 0);
+              b2 = o3.low = b2 + L2;
+              o3.high = _2 + V2 + (b2 >>> 0 < L2 >>> 0 ? 1 : 0);
+              D2 = u3.low = D2 + K2;
+              u3.high = E2 + H2 + (D2 >>> 0 < K2 >>> 0 ? 1 : 0);
+              T2 = f3.low = T2 + j2;
+              f3.high = M2 + U2 + (T2 >>> 0 < j2 >>> 0 ? 1 : 0);
+              A2 = h2.low = A2 + F2;
+              h2.high = I2 + q2 + (A2 >>> 0 < F2 >>> 0 ? 1 : 0);
+            }, _doFinalize: function() {
+              var t5 = this._data;
+              var e4 = t5.words;
+              var r5 = 8 * this._nDataBytes;
+              var i4 = 8 * t5.sigBytes;
+              e4[i4 >>> 5] |= 128 << 24 - i4 % 32;
+              e4[(i4 + 128 >>> 10 << 5) + 30] = Math.floor(r5 / 4294967296);
+              e4[(i4 + 128 >>> 10 << 5) + 31] = r5;
+              t5.sigBytes = 4 * e4.length;
+              this._process();
+              var n3 = this._hash.toX32();
+              return n3;
+            }, clone: function() {
+              var t5 = i3.clone.call(this);
+              t5._hash = this._hash.clone();
+              return t5;
+            }, blockSize: 1024 / 32 });
+            e3.SHA512 = i3._createHelper(f2);
+            e3.HmacSHA512 = i3._createHmacHelper(f2);
+          })();
+          return t4.SHA512;
+        });
+      }, 4253: function(t3, e2, r3) {
+        (function(i3, n2, s2) {
+          t3.exports = n2(r3(8249), r3(8269), r3(8214), r3(888), r3(5109));
+        })(this, function(t4) {
+          (function() {
+            var e3 = t4;
+            var r4 = e3.lib;
+            var i3 = r4.WordArray;
+            var n2 = r4.BlockCipher;
+            var s2 = e3.algo;
+            var a2 = [57, 49, 41, 33, 25, 17, 9, 1, 58, 50, 42, 34, 26, 18, 10, 2, 59, 51, 43, 35, 27, 19, 11, 3, 60, 52, 44, 36, 63, 55, 47, 39, 31, 23, 15, 7, 62, 54, 46, 38, 30, 22, 14, 6, 61, 53, 45, 37, 29, 21, 13, 5, 28, 20, 12, 4];
+            var o2 = [14, 17, 11, 24, 1, 5, 3, 28, 15, 6, 21, 10, 23, 19, 12, 4, 26, 8, 16, 7, 27, 20, 13, 2, 41, 52, 31, 37, 47, 55, 30, 40, 51, 45, 33, 48, 44, 49, 39, 56, 34, 53, 46, 42, 50, 36, 29, 32];
+            var u2 = [1, 2, 4, 6, 8, 10, 12, 14, 15, 17, 19, 21, 23, 25, 27, 28];
+            var c2 = [{ 0: 8421888, 268435456: 32768, 536870912: 8421378, 805306368: 2, 1073741824: 512, 1342177280: 8421890, 1610612736: 8389122, 1879048192: 8388608, 2147483648: 514, 2415919104: 8389120, 2684354560: 33280, 2952790016: 8421376, 3221225472: 32770, 3489660928: 8388610, 3758096384: 0, 4026531840: 33282, 134217728: 0, 402653184: 8421890, 671088640: 33282, 939524096: 32768, 1207959552: 8421888, 1476395008: 512, 1744830464: 8421378, 2013265920: 2, 2281701376: 8389120, 2550136832: 33280, 2818572288: 8421376, 3087007744: 8389122, 3355443200: 8388610, 3623878656: 32770, 3892314112: 514, 4160749568: 8388608, 1: 32768, 268435457: 2, 536870913: 8421888, 805306369: 8388608, 1073741825: 8421378, 1342177281: 33280, 1610612737: 512, 1879048193: 8389122, 2147483649: 8421890, 2415919105: 8421376, 2684354561: 8388610, 2952790017: 33282, 3221225473: 514, 3489660929: 8389120, 3758096385: 32770, 4026531841: 0, 134217729: 8421890, 402653185: 8421376, 671088641: 8388608, 939524097: 512, 1207959553: 32768, 1476395009: 8388610, 1744830465: 2, 2013265921: 33282, 2281701377: 32770, 2550136833: 8389122, 2818572289: 514, 3087007745: 8421888, 3355443201: 8389120, 3623878657: 0, 3892314113: 33280, 4160749569: 8421378 }, { 0: 1074282512, 16777216: 16384, 33554432: 524288, 50331648: 1074266128, 67108864: 1073741840, 83886080: 1074282496, 100663296: 1073758208, 117440512: 16, 134217728: 540672, 150994944: 1073758224, 167772160: 1073741824, 184549376: 540688, 201326592: 524304, 218103808: 0, 234881024: 16400, 251658240: 1074266112, 8388608: 1073758208, 25165824: 540688, 41943040: 16, 58720256: 1073758224, 75497472: 1074282512, 92274688: 1073741824, 109051904: 524288, 125829120: 1074266128, 142606336: 524304, 159383552: 0, 176160768: 16384, 192937984: 1074266112, 209715200: 1073741840, 226492416: 540672, 243269632: 1074282496, 260046848: 16400, 268435456: 0, 285212672: 1074266128, 301989888: 1073758224, 318767104: 1074282496, 335544320: 1074266112, 352321536: 16, 369098752: 540688, 385875968: 16384, 402653184: 16400, 419430400: 524288, 436207616: 524304, 452984832: 1073741840, 469762048: 540672, 486539264: 1073758208, 503316480: 1073741824, 520093696: 1074282512, 276824064: 540688, 293601280: 524288, 310378496: 1074266112, 327155712: 16384, 343932928: 1073758208, 360710144: 1074282512, 377487360: 16, 394264576: 1073741824, 411041792: 1074282496, 427819008: 1073741840, 444596224: 1073758224, 461373440: 524304, 478150656: 0, 494927872: 16400, 511705088: 1074266128, 528482304: 540672 }, { 0: 260, 1048576: 0, 2097152: 67109120, 3145728: 65796, 4194304: 65540, 5242880: 67108868, 6291456: 67174660, 7340032: 67174400, 8388608: 67108864, 9437184: 67174656, 10485760: 65792, 11534336: 67174404, 12582912: 67109124, 13631488: 65536, 14680064: 4, 15728640: 256, 524288: 67174656, 1572864: 67174404, 2621440: 0, 3670016: 67109120, 4718592: 67108868, 5767168: 65536, 6815744: 65540, 7864320: 260, 8912896: 4, 9961472: 256, 11010048: 67174400, 12058624: 65796, 13107200: 65792, 14155776: 67109124, 15204352: 67174660, 16252928: 67108864, 16777216: 67174656, 17825792: 65540, 18874368: 65536, 19922944: 67109120, 20971520: 256, 22020096: 67174660, 23068672: 67108868, 24117248: 0, 25165824: 67109124, 26214400: 67108864, 27262976: 4, 28311552: 65792, 29360128: 67174400, 30408704: 260, 31457280: 65796, 32505856: 67174404, 17301504: 67108864, 18350080: 260, 19398656: 67174656, 20447232: 0, 21495808: 65540, 22544384: 67109120, 23592960: 256, 24641536: 67174404, 25690112: 65536, 26738688: 67174660, 27787264: 65796, 28835840: 67108868, 29884416: 67109124, 30932992: 67174400, 31981568: 4, 33030144: 65792 }, { 0: 2151682048, 65536: 2147487808, 131072: 4198464, 196608: 2151677952, 262144: 0, 327680: 4198400, 393216: 2147483712, 458752: 4194368, 524288: 2147483648, 589824: 4194304, 655360: 64, 720896: 2147487744, 786432: 2151678016, 851968: 4160, 917504: 4096, 983040: 2151682112, 32768: 2147487808, 98304: 64, 163840: 2151678016, 229376: 2147487744, 294912: 4198400, 360448: 2151682112, 425984: 0, 491520: 2151677952, 557056: 4096, 622592: 2151682048, 688128: 4194304, 753664: 4160, 819200: 2147483648, 884736: 4194368, 950272: 4198464, 1015808: 2147483712, 1048576: 4194368, 1114112: 4198400, 1179648: 2147483712, 1245184: 0, 1310720: 4160, 1376256: 2151678016, 1441792: 2151682048, 1507328: 2147487808, 1572864: 2151682112, 1638400: 2147483648, 1703936: 2151677952, 1769472: 4198464, 1835008: 2147487744, 1900544: 4194304, 1966080: 64, 2031616: 4096, 1081344: 2151677952, 1146880: 2151682112, 1212416: 0, 1277952: 4198400, 1343488: 4194368, 1409024: 2147483648, 1474560: 2147487808, 1540096: 64, 1605632: 2147483712, 1671168: 4096, 1736704: 2147487744, 1802240: 2151678016, 1867776: 4160, 1933312: 2151682048, 1998848: 4194304, 2064384: 4198464 }, { 0: 128, 4096: 17039360, 8192: 262144, 12288: 536870912, 16384: 537133184, 20480: 16777344, 24576: 553648256, 28672: 262272, 32768: 16777216, 36864: 537133056, 40960: 536871040, 45056: 553910400, 49152: 553910272, 53248: 0, 57344: 17039488, 61440: 553648128, 2048: 17039488, 6144: 553648256, 10240: 128, 14336: 17039360, 18432: 262144, 22528: 537133184, 26624: 553910272, 30720: 536870912, 34816: 537133056, 38912: 0, 43008: 553910400, 47104: 16777344, 51200: 536871040, 55296: 553648128, 59392: 16777216, 63488: 262272, 65536: 262144, 69632: 128, 73728: 536870912, 77824: 553648256, 81920: 16777344, 86016: 553910272, 90112: 537133184, 94208: 16777216, 98304: 553910400, 102400: 553648128, 106496: 17039360, 110592: 537133056, 114688: 262272, 118784: 536871040, 122880: 0, 126976: 17039488, 67584: 553648256, 71680: 16777216, 75776: 17039360, 79872: 537133184, 83968: 536870912, 88064: 17039488, 92160: 128, 96256: 553910272, 100352: 262272, 104448: 553910400, 108544: 0, 112640: 553648128, 116736: 16777344, 120832: 262144, 124928: 537133056, 129024: 536871040 }, { 0: 268435464, 256: 8192, 512: 270532608, 768: 270540808, 1024: 268443648, 1280: 2097152, 1536: 2097160, 1792: 268435456, 2048: 0, 2304: 268443656, 2560: 2105344, 2816: 8, 3072: 270532616, 3328: 2105352, 3584: 8200, 3840: 270540800, 128: 270532608, 384: 270540808, 640: 8, 896: 2097152, 1152: 2105352, 1408: 268435464, 1664: 268443648, 1920: 8200, 2176: 2097160, 2432: 8192, 2688: 268443656, 2944: 270532616, 3200: 0, 3456: 270540800, 3712: 2105344, 3968: 268435456, 4096: 268443648, 4352: 270532616, 4608: 270540808, 4864: 8200, 5120: 2097152, 5376: 268435456, 5632: 268435464, 5888: 2105344, 6144: 2105352, 6400: 0, 6656: 8, 6912: 270532608, 7168: 8192, 7424: 268443656, 7680: 270540800, 7936: 2097160, 4224: 8, 4480: 2105344, 4736: 2097152, 4992: 268435464, 5248: 268443648, 5504: 8200, 5760: 270540808, 6016: 270532608, 6272: 270540800, 6528: 270532616, 6784: 8192, 7040: 2105352, 7296: 2097160, 7552: 0, 7808: 268435456, 8064: 268443656 }, { 0: 1048576, 16: 33555457, 32: 1024, 48: 1049601, 64: 34604033, 80: 0, 96: 1, 112: 34603009, 128: 33555456, 144: 1048577, 160: 33554433, 176: 34604032, 192: 34603008, 208: 1025, 224: 1049600, 240: 33554432, 8: 34603009, 24: 0, 40: 33555457, 56: 34604032, 72: 1048576, 88: 33554433, 104: 33554432, 120: 1025, 136: 1049601, 152: 33555456, 168: 34603008, 184: 1048577, 200: 1024, 216: 34604033, 232: 1, 248: 1049600, 256: 33554432, 272: 1048576, 288: 33555457, 304: 34603009, 320: 1048577, 336: 33555456, 352: 34604032, 368: 1049601, 384: 1025, 400: 34604033, 416: 1049600, 432: 1, 448: 0, 464: 34603008, 480: 33554433, 496: 1024, 264: 1049600, 280: 33555457, 296: 34603009, 312: 1, 328: 33554432, 344: 1048576, 360: 1025, 376: 34604032, 392: 33554433, 408: 34603008, 424: 0, 440: 34604033, 456: 1049601, 472: 1024, 488: 33555456, 504: 1048577 }, { 0: 134219808, 1: 131072, 2: 134217728, 3: 32, 4: 131104, 5: 134350880, 6: 134350848, 7: 2048, 8: 134348800, 9: 134219776, 10: 133120, 11: 134348832, 12: 2080, 13: 0, 14: 134217760, 15: 133152, 2147483648: 2048, 2147483649: 134350880, 2147483650: 134219808, 2147483651: 134217728, 2147483652: 134348800, 2147483653: 133120, 2147483654: 133152, 2147483655: 32, 2147483656: 134217760, 2147483657: 2080, 2147483658: 131104, 2147483659: 134350848, 2147483660: 0, 2147483661: 134348832, 2147483662: 134219776, 2147483663: 131072, 16: 133152, 17: 134350848, 18: 32, 19: 2048, 20: 134219776, 21: 134217760, 22: 134348832, 23: 131072, 24: 0, 25: 131104, 26: 134348800, 27: 134219808, 28: 134350880, 29: 133120, 30: 2080, 31: 134217728, 2147483664: 131072, 2147483665: 2048, 2147483666: 134348832, 2147483667: 133152, 2147483668: 32, 2147483669: 134348800, 2147483670: 134217728, 2147483671: 134219808, 2147483672: 134350880, 2147483673: 134217760, 2147483674: 134219776, 2147483675: 0, 2147483676: 133120, 2147483677: 2080, 2147483678: 131104, 2147483679: 134350848 }];
+            var l2 = [4160749569, 528482304, 33030144, 2064384, 129024, 8064, 504, 2147483679];
+            var f2 = s2.DES = n2.extend({ _doReset: function() {
+              var t5 = this._key;
+              var e4 = t5.words;
+              var r5 = [];
+              for (var i4 = 0; i4 < 56; i4++) {
+                var n3 = a2[i4] - 1;
+                r5[i4] = e4[n3 >>> 5] >>> 31 - n3 % 32 & 1;
+              }
+              var s3 = this._subKeys = [];
+              for (var c3 = 0; c3 < 16; c3++) {
+                var l3 = s3[c3] = [];
+                var f3 = u2[c3];
+                for (var i4 = 0; i4 < 24; i4++) {
+                  l3[i4 / 6 | 0] |= r5[(o2[i4] - 1 + f3) % 28] << 31 - i4 % 6;
+                  l3[4 + (i4 / 6 | 0)] |= r5[28 + (o2[i4 + 24] - 1 + f3) % 28] << 31 - i4 % 6;
+                }
+                l3[0] = l3[0] << 1 | l3[0] >>> 31;
+                for (var i4 = 1; i4 < 7; i4++)
+                  l3[i4] = l3[i4] >>> 4 * (i4 - 1) + 3;
+                l3[7] = l3[7] << 5 | l3[7] >>> 27;
+              }
+              var h3 = this._invSubKeys = [];
+              for (var i4 = 0; i4 < 16; i4++)
+                h3[i4] = s3[15 - i4];
+            }, encryptBlock: function(t5, e4) {
+              this._doCryptBlock(t5, e4, this._subKeys);
+            }, decryptBlock: function(t5, e4) {
+              this._doCryptBlock(t5, e4, this._invSubKeys);
+            }, _doCryptBlock: function(t5, e4, r5) {
+              this._lBlock = t5[e4];
+              this._rBlock = t5[e4 + 1];
+              h2.call(this, 4, 252645135);
+              h2.call(this, 16, 65535);
+              d2.call(this, 2, 858993459);
+              d2.call(this, 8, 16711935);
+              h2.call(this, 1, 1431655765);
+              for (var i4 = 0; i4 < 16; i4++) {
+                var n3 = r5[i4];
+                var s3 = this._lBlock;
+                var a3 = this._rBlock;
+                var o3 = 0;
+                for (var u3 = 0; u3 < 8; u3++)
+                  o3 |= c2[u3][((a3 ^ n3[u3]) & l2[u3]) >>> 0];
+                this._lBlock = a3;
+                this._rBlock = s3 ^ o3;
+              }
+              var f3 = this._lBlock;
+              this._lBlock = this._rBlock;
+              this._rBlock = f3;
+              h2.call(this, 1, 1431655765);
+              d2.call(this, 8, 16711935);
+              d2.call(this, 2, 858993459);
+              h2.call(this, 16, 65535);
+              h2.call(this, 4, 252645135);
+              t5[e4] = this._lBlock;
+              t5[e4 + 1] = this._rBlock;
+            }, keySize: 64 / 32, ivSize: 64 / 32, blockSize: 64 / 32 });
+            function h2(t5, e4) {
+              var r5 = (this._lBlock >>> t5 ^ this._rBlock) & e4;
+              this._rBlock ^= r5;
+              this._lBlock ^= r5 << t5;
+            }
+            function d2(t5, e4) {
+              var r5 = (this._rBlock >>> t5 ^ this._lBlock) & e4;
+              this._lBlock ^= r5;
+              this._rBlock ^= r5 << t5;
+            }
+            e3.DES = n2._createHelper(f2);
+            var p2 = s2.TripleDES = n2.extend({ _doReset: function() {
+              var t5 = this._key;
+              var e4 = t5.words;
+              if (2 !== e4.length && 4 !== e4.length && e4.length < 6)
+                throw new Error("Invalid key length - 3DES requires the key length to be 64, 128, 192 or >192.");
+              var r5 = e4.slice(0, 2);
+              var n3 = e4.length < 4 ? e4.slice(0, 2) : e4.slice(2, 4);
+              var s3 = e4.length < 6 ? e4.slice(0, 2) : e4.slice(4, 6);
+              this._des1 = f2.createEncryptor(i3.create(r5));
+              this._des2 = f2.createEncryptor(i3.create(n3));
+              this._des3 = f2.createEncryptor(i3.create(s3));
+            }, encryptBlock: function(t5, e4) {
+              this._des1.encryptBlock(t5, e4);
+              this._des2.decryptBlock(t5, e4);
+              this._des3.encryptBlock(t5, e4);
+            }, decryptBlock: function(t5, e4) {
+              this._des3.decryptBlock(t5, e4);
+              this._des2.encryptBlock(t5, e4);
+              this._des1.decryptBlock(t5, e4);
+            }, keySize: 192 / 32, ivSize: 64 / 32, blockSize: 64 / 32 });
+            e3.TripleDES = n2._createHelper(p2);
+          })();
+          return t4.TripleDES;
+        });
+      }, 4938: function(t3, e2, r3) {
+        (function(i3, n2) {
+          t3.exports = n2(r3(8249));
+        })(this, function(t4) {
+          (function(e3) {
+            var r4 = t4;
+            var i3 = r4.lib;
+            var n2 = i3.Base;
+            var s2 = i3.WordArray;
+            var a2 = r4.x64 = {};
+            a2.Word = n2.extend({ init: function(t5, e4) {
+              this.high = t5;
+              this.low = e4;
+            } });
+            a2.WordArray = n2.extend({ init: function(t5, r5) {
+              t5 = this.words = t5 || [];
+              if (r5 != e3)
+                this.sigBytes = r5;
+              else
+                this.sigBytes = 8 * t5.length;
+            }, toX32: function() {
+              var t5 = this.words;
+              var e4 = t5.length;
+              var r5 = [];
+              for (var i4 = 0; i4 < e4; i4++) {
+                var n3 = t5[i4];
+                r5.push(n3.high);
+                r5.push(n3.low);
+              }
+              return s2.create(r5, this.sigBytes);
+            }, clone: function() {
+              var t5 = n2.clone.call(this);
+              var e4 = t5.words = this.words.slice(0);
+              var r5 = e4.length;
+              for (var i4 = 0; i4 < r5; i4++)
+                e4[i4] = e4[i4].clone();
+              return t5;
+            } });
+          })();
+          return t4;
+        });
+      }, 3118: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        e2.ErrorCode = void 0;
+        (function(t4) {
+          t4[t4["SUCCESS"] = 0] = "SUCCESS";
+          t4[t4["CLIENT_ID_NOT_FOUND"] = 1] = "CLIENT_ID_NOT_FOUND";
+          t4[t4["OPERATION_TOO_OFTEN"] = 2] = "OPERATION_TOO_OFTEN";
+          t4[t4["REPEAT_MESSAGE"] = 3] = "REPEAT_MESSAGE";
+          t4[t4["TIME_OUT"] = 4] = "TIME_OUT";
+        })(e2.ErrorCode || (e2.ErrorCode = {}));
+      }, 5987: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        const n2 = i3(r3(127));
+        const s2 = i3(r3(1901));
+        const a2 = i3(r3(1754));
+        const o2 = i3(r3(1237));
+        var u2;
+        (function(t4) {
+          function e3(t5) {
+            o2.default.debugMode = t5;
+            o2.default.info(`setDebugMode: ${t5}`);
+          }
+          t4.setDebugMode = e3;
+          function r4(t5) {
+            try {
+              s2.default.init(t5);
+            } catch (t6) {
+              o2.default.error(`init error`, t6);
+            }
+          }
+          t4.init = r4;
+          function i4(t5) {
+            try {
+              if (!t5.url)
+                throw new Error("invalid url");
+              if (!t5.key || !t5.keyId)
+                throw new Error("invalid key or keyId");
+              a2.default.socketUrl = t5.url;
+              a2.default.publicKeyId = t5.keyId;
+              a2.default.publicKey = t5.key;
+            } catch (t6) {
+              o2.default.error(`setSocketServer error`, t6);
+            }
+          }
+          t4.setSocketServer = i4;
+          function u3(t5) {
+            try {
+              s2.default.enableSocket(t5);
+            } catch (t6) {
+              o2.default.error(`enableSocket error`, t6);
+            }
+          }
+          t4.enableSocket = u3;
+          function c2() {
+            return n2.default.SDK_VERSION;
+          }
+          t4.getVersion = c2;
+        })(u2 || (u2 = {}));
+        t3.exports = u2;
+      }, 2852: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(4806));
+        const s2 = i3(r3(3396));
+        const a2 = i3(r3(6565));
+        const o2 = i3(r3(5912));
+        const u2 = i3(r3(3174));
+        const c2 = i3(r3(4698));
+        const l2 = i3(r3(87));
+        const f2 = i3(r3(523));
+        const h2 = i3(r3(7252));
+        const d2 = i3(r3(4668));
+        const p2 = i3(r3(3072));
+        const v2 = i3(r3(1996));
+        const g2 = i3(r3(9342));
+        const y = i3(r3(155));
+        const m2 = i3(r3(3751));
+        var w2;
+        (function(t4) {
+          let e3;
+          let r4;
+          let i4;
+          function w3() {
+            if ("undefined" != typeof uni) {
+              e3 = new d2.default();
+              r4 = new p2.default();
+              i4 = new v2.default();
+            } else if ("undefined" != typeof tt) {
+              e3 = new l2.default();
+              r4 = new f2.default();
+              i4 = new h2.default();
+            } else if ("undefined" != typeof my) {
+              e3 = new n2.default();
+              r4 = new s2.default();
+              i4 = new a2.default();
+            } else if ("undefined" != typeof wx) {
+              e3 = new g2.default();
+              r4 = new y.default();
+              i4 = new m2.default();
+            } else if ("undefined" != typeof window) {
+              e3 = new o2.default();
+              r4 = new u2.default();
+              i4 = new c2.default();
+            }
+          }
+          function S2() {
+            if (!e3)
+              w3();
+            return e3;
+          }
+          t4.getDevice = S2;
+          function _2() {
+            if (!r4)
+              w3();
+            return r4;
+          }
+          t4.getStorage = _2;
+          function b2() {
+            if (!i4)
+              w3();
+            return i4;
+          }
+          t4.getWebSocket = b2;
+        })(w2 || (w2 = {}));
+        e2["default"] = w2;
+      }, 7406: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(2852));
+        var s2;
+        (function(t4) {
+          function e3() {
+            return n2.default.getDevice().os();
+          }
+          t4.os = e3;
+          function r4() {
+            return n2.default.getDevice().osVersion();
+          }
+          t4.osVersion = r4;
+          function i4() {
+            return n2.default.getDevice().model();
+          }
+          t4.model = i4;
+          function s3() {
+            return n2.default.getDevice().brand();
+          }
+          t4.brand = s3;
+          function a2() {
+            return n2.default.getDevice().platform();
+          }
+          t4.platform = a2;
+          function o2() {
+            return n2.default.getDevice().platformVersion();
+          }
+          t4.platformVersion = o2;
+          function u2() {
+            return n2.default.getDevice().platformId();
+          }
+          t4.platformId = u2;
+          function c2() {
+            return n2.default.getDevice().language();
+          }
+          t4.language = c2;
+          function l2() {
+            let t5 = n2.default.getDevice().userAgent;
+            if (t5)
+              return t5();
+            return "";
+          }
+          t4.userAgent = l2;
+          function f2(t5) {
+            n2.default.getDevice().getNetworkType(t5);
+          }
+          t4.getNetworkType = f2;
+          function h2(t5) {
+            n2.default.getDevice().onNetworkStatusChange(t5);
+          }
+          t4.onNetworkStatusChange = h2;
+        })(s2 || (s2 = {}));
+        e2["default"] = s2;
+      }, 7071: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(1754));
+        const s2 = i3(r3(358));
+        const a2 = i3(r3(1236));
+        const o2 = r3(53);
+        const u2 = i3(r3(1571));
+        const c2 = i3(r3(1237));
+        const l2 = i3(r3(2852));
+        const f2 = i3(r3(9934));
+        var h2;
+        (function(t4) {
+          let e3;
+          let r4 = false;
+          let i4 = false;
+          t4.allowReconnect = true;
+          function h3() {
+            return r4 && i4;
+          }
+          t4.isAvailable = h3;
+          function d2(e4) {
+            if (!t4.allowReconnect)
+              return;
+            setTimeout(function() {
+              p2();
+            }, e4);
+          }
+          t4.reconnect = d2;
+          function p2() {
+            t4.allowReconnect = true;
+            if (!n2.default.networkConnected) {
+              c2.default.info(`connect failed, network is not available`);
+              return;
+            }
+            if (i4 || r4)
+              return;
+            let s3 = n2.default.socketUrl;
+            try {
+              let t5 = f2.default.getSync(f2.default.KEY_REDIRECT_SERVER, "");
+              if (t5) {
+                let e4 = o2.RedirectServerData.parse(t5);
+                let r5 = e4.addressList[0].split(",");
+                let i5 = r5[0];
+                let n3 = Number(r5[1]);
+                let a3 = new Date().getTime();
+                if (a3 - e4.time < 1e3 * n3)
+                  s3 = i5;
+              }
+            } catch (t5) {
+            }
+            e3 = l2.default.getWebSocket().connect({ url: s3, success: function() {
+              i4 = true;
+              v2();
+            }, fail: function() {
+              i4 = false;
+              m2();
+            } });
+            e3.onOpen(w2);
+            e3.onClose(b2);
+            e3.onError(_2);
+            e3.onMessage(S2);
+          }
+          t4.connect = p2;
+          function v2() {
+            if (i4 && r4) {
+              s2.default.create().send();
+              u2.default.getInstance().start();
+            }
+          }
+          function g2(t5) {
+            e3 == null ? void 0 : e3.close({ reason: t5, success: function(t6) {
+            }, fail: function(t6) {
+              m2();
+            } });
+          }
+          t4.close = g2;
+          function y(t5) {
+            if (r4 && r4)
+              e3 == null ? void 0 : e3.send({ data: t5, success: function(t6) {
+              }, fail: function(t6) {
+              } });
+            else
+              throw new Error(`socket not connect`);
+          }
+          t4.send = y;
+          function m2(t5) {
+            var _a, _b;
+            i4 = false;
+            r4 = false;
+            u2.default.getInstance().cancel();
+            if (n2.default.online) {
+              n2.default.online = false;
+              (_a = n2.default.onlineState) == null ? void 0 : _a.call(n2.default.onlineState, { online: n2.default.online });
+            }
+            if (n2.default.online) {
+              n2.default.online = false;
+              (_b = n2.default.onlineState) == null ? void 0 : _b.call(n2.default.onlineState, { online: n2.default.online });
+            }
+            d2(1e3);
+          }
+          let w2 = function(t5) {
+            r4 = true;
+            v2();
+          };
+          let S2 = function(t5) {
+            try {
+              t5.data;
+              u2.default.getInstance().refresh();
+              a2.default.receiveMessage(t5.data);
+            } catch (t6) {
+            }
+          };
+          let _2 = function(t5) {
+            g2(`socket error`);
+          };
+          let b2 = function(t5) {
+            m2();
+          };
+        })(h2 || (h2 = {}));
+        e2["default"] = h2;
+      }, 9934: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(2852));
+        var s2;
+        (function(t4) {
+          t4.KEY_APPID = "getui_appid";
+          t4.KEY_CID = "getui_cid";
+          t4.KEY_SESSION = "getui_session";
+          t4.KEY_REGID = "getui_regid";
+          t4.KEY_SOCKET_URL = "getui_socket_url";
+          t4.KEY_DEVICE_ID = "getui_deviceid";
+          t4.KEY_ADD_PHONE_INFO_TIME = "getui_api_time";
+          t4.KEY_BIND_ALIAS_TIME = "getui_ba_time";
+          t4.KEY_SET_TAG_TIME = "getui_st_time";
+          t4.KEY_REDIRECT_SERVER = "getui_redirect_server";
+          function e3(t5) {
+            n2.default.getStorage().set(t5);
+          }
+          t4.set = e3;
+          function r4(t5, e4) {
+            n2.default.getStorage().setSync(t5, e4);
+          }
+          t4.setSync = r4;
+          function i4(t5) {
+            n2.default.getStorage().get(t5);
+          }
+          t4.get = i4;
+          function s3(t5, e4) {
+            let r5 = n2.default.getStorage().getSync(t5);
+            return r5 ? r5 : e4;
+          }
+          t4.getSync = s3;
+        })(s2 || (s2 = {}));
+        e2["default"] = s2;
+      }, 4806: (t3) => {
+        class e2 {
+          constructor() {
+            this.systemInfo = my.getSystemInfoSync();
+          }
+          os() {
+            var _a;
+            return (_a = this.systemInfo) == null ? void 0 : _a.platform;
+          }
+          osVersion() {
+            var _a;
+            return (_a = this.systemInfo) == null ? void 0 : _a.system;
+          }
+          model() {
+            var _a;
+            return (_a = this.systemInfo) == null ? void 0 : _a.model;
+          }
+          brand() {
+            var _a;
+            return (_a = this.systemInfo) == null ? void 0 : _a.brand;
+          }
+          platform() {
+            return "MP-ALIPAY";
+          }
+          platformVersion() {
+            return this.systemInfo.app + " " + this.systemInfo.version;
+          }
+          platformId() {
+            return my.getAppIdSync();
+          }
+          language() {
+            var _a;
+            return (_a = this.systemInfo) == null ? void 0 : _a.language;
+          }
+          getNetworkType(t4) {
+            my.getNetworkType({ success: (e3) => {
+              var _a;
+              (_a = t4.success) == null ? void 0 : _a.call(t4.success, { networkType: e3.networkType });
+            }, fail: () => {
+              var _a;
+              (_a = t4.fail) == null ? void 0 : _a.call(t4.fail, "");
+            } });
+          }
+          onNetworkStatusChange(t4) {
+            my.onNetworkStatusChange(t4);
+          }
+        }
+        t3.exports = e2;
+      }, 3396: (t3) => {
+        class e2 {
+          set(t4) {
+            my.setStorage({ key: t4.key, data: t4.data, success: t4.success, fail: t4.fail });
+          }
+          setSync(t4, e3) {
+            my.setStorageSync({ key: t4, data: e3 });
+          }
+          get(t4) {
+            my.getStorage({ key: t4.key, success: t4.success, fail: t4.fail, complete: t4.complete });
+          }
+          getSync(t4) {
+            return my.getStorageSync({ key: t4 }).data;
+          }
+        }
+        t3.exports = e2;
+      }, 6565: (t3) => {
+        class e2 {
+          connect(t4) {
+            my.connectSocket({ url: t4.url, header: t4.header, method: t4.method, success: t4.success, fail: t4.fail, complete: t4.complete });
+            return { onOpen: my.onSocketOpen, send: my.sendSocketMessage, onMessage: (t5) => {
+              my.onSocketMessage.call(my.onSocketMessage, (e3) => {
+                t5.call(t5, { data: e3 ? e3.data : "" });
+              });
+            }, onError: my.onSocketError, onClose: my.onSocketClose, close: my.closeSocket };
+          }
+        }
+        t3.exports = e2;
+      }, 5912: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          os() {
+            let t4 = window.navigator.userAgent.toLowerCase();
+            if (t4.indexOf("android") > 0 || t4.indexOf("adr") > 0)
+              return "android";
+            if (!!t4.match(/\(i[^;]+;( u;)? cpu.+mac os x/))
+              return "ios";
+            if (t4.indexOf("windows") > 0 || t4.indexOf("win32") > 0 || t4.indexOf("win64") > 0)
+              return "windows";
+            if (t4.indexOf("macintosh") > 0 || t4.indexOf("mac os") > 0)
+              return "mac os";
+            if (t4.indexOf("linux") > 0)
+              return "linux";
+            if (t4.indexOf("unix") > 0)
+              return "linux";
+            return "other";
+          }
+          osVersion() {
+            let t4 = window.navigator.userAgent.toLowerCase();
+            let e3 = t4.substring(t4.indexOf(";") + 1).trim();
+            if (e3.indexOf(";") > 0)
+              return e3.substring(0, e3.indexOf(";")).trim();
+            return e3.substring(0, e3.indexOf(")")).trim();
+          }
+          model() {
+            return "";
+          }
+          brand() {
+            return "";
+          }
+          platform() {
+            return "H5";
+          }
+          platformVersion() {
+            return "";
+          }
+          platformId() {
+            return "";
+          }
+          language() {
+            return window.navigator.language;
+          }
+          userAgent() {
+            return window.navigator.userAgent;
+          }
+          getNetworkType(t4) {
+            var _a;
+            (_a = t4.success) == null ? void 0 : _a.call(t4.success, { networkType: window.navigator.connection.type });
+          }
+          onNetworkStatusChange(t4) {
+          }
+        }
+        e2["default"] = r3;
+      }, 3174: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          set(t4) {
+            var _a;
+            window.localStorage.setItem(t4.key, t4.data);
+            (_a = t4.success) == null ? void 0 : _a.call(t4.success, "");
+          }
+          setSync(t4, e3) {
+            window.localStorage.setItem(t4, e3);
+          }
+          get(t4) {
+            var _a;
+            let e3 = window.localStorage.getItem(t4.key);
+            (_a = t4.success) == null ? void 0 : _a.call(t4.success, e3);
+          }
+          getSync(t4) {
+            return window.localStorage.getItem(t4);
+          }
+        }
+        e2["default"] = r3;
+      }, 4698: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          connect(t4) {
+            let e3 = new WebSocket(t4.url);
+            return { send: (t5) => {
+              var _a, _b;
+              try {
+                e3.send(t5.data);
+                (_a = t5.success) == null ? void 0 : _a.call(t5.success, { errMsg: "" });
+              } catch (e4) {
+                (_b = t5.fail) == null ? void 0 : _b.call(t5.fail, { errMsg: e4 + "" });
+              }
+            }, close: (t5) => {
+              var _a, _b;
+              try {
+                e3.close(t5.code, t5.reason);
+                (_a = t5.success) == null ? void 0 : _a.call(t5.success, { errMsg: "" });
+              } catch (e4) {
+                (_b = t5.fail) == null ? void 0 : _b.call(t5.fail, { errMsg: e4 + "" });
+              }
+            }, onOpen: (r4) => {
+              e3.onopen = (e4) => {
+                var _a;
+                (_a = t4.success) == null ? void 0 : _a.call(t4.success, "");
+                r4({ header: "" });
+              };
+            }, onError: (r4) => {
+              e3.onerror = (e4) => {
+                var _a;
+                (_a = t4.fail) == null ? void 0 : _a.call(t4.fail, "");
+                r4({ errMsg: "" });
+              };
+            }, onMessage: (t5) => {
+              e3.onmessage = (e4) => {
+                t5({ data: e4.data });
+              };
+            }, onClose: (t5) => {
+              e3.onclose = (e4) => {
+                t5(e4);
+              };
+            } };
+          }
+        }
+        e2["default"] = r3;
+      }, 87: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          constructor() {
+            this.systemInfo = tt.getSystemInfoSync();
+          }
+          os() {
+            return this.systemInfo.platform;
+          }
+          osVersion() {
+            return this.systemInfo.system;
+          }
+          model() {
+            return this.systemInfo.model;
+          }
+          brand() {
+            return this.systemInfo.brand;
+          }
+          platform() {
+            return "MP-TOUTIAO";
+          }
+          platformVersion() {
+            return this.systemInfo.appName + " " + this.systemInfo.version;
+          }
+          language() {
+            return "";
+          }
+          platformId() {
+            return "";
+          }
+          getNetworkType(t4) {
+            tt.getNetworkType(t4);
+          }
+          onNetworkStatusChange(t4) {
+            tt.onNetworkStatusChange(t4);
+          }
+        }
+        e2["default"] = r3;
+      }, 523: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          set(t4) {
+            tt.setStorage(t4);
+          }
+          setSync(t4, e3) {
+            tt.setStorageSync(t4, e3);
+          }
+          get(t4) {
+            tt.getStorage(t4);
+          }
+          getSync(t4) {
+            return tt.getStorageSync(t4);
+          }
+        }
+        e2["default"] = r3;
+      }, 7252: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          connect(t4) {
+            let e3 = tt.connectSocket({ url: t4.url, header: t4.header, protocols: t4.protocols, success: t4.success, fail: t4.fail, complete: t4.complete });
+            return { onOpen: e3.onOpen, send: e3.send, onMessage: e3.onMessage, onError: e3.onError, onClose: e3.onClose, close: e3.close };
+          }
+        }
+        e2["default"] = r3;
+      }, 4668: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          constructor() {
+            try {
+              this.systemInfo = uni.getSystemInfoSync();
+              this.accountInfo = uni.getAccountInfoSync();
+            } catch (t4) {
+            }
+          }
+          os() {
+            return this.systemInfo ? this.systemInfo.platform : "";
+          }
+          model() {
+            return this.systemInfo ? this.systemInfo.model : "";
+          }
+          brand() {
+            var _a;
+            return ((_a = this.systemInfo) == null ? void 0 : _a.brand) ? this.systemInfo.brand : "";
+          }
+          osVersion() {
+            return this.systemInfo ? this.systemInfo.system : "";
+          }
+          platform() {
+            let t4 = "";
+            t4 = "APP-PLUS";
+            return t4;
+          }
+          platformVersion() {
+            return this.systemInfo ? this.systemInfo.version : "";
+          }
+          platformId() {
+            return this.accountInfo ? this.accountInfo.miniProgram.appId : "";
+          }
+          language() {
+            var _a;
+            return ((_a = this.systemInfo) == null ? void 0 : _a.language) ? this.systemInfo.language : "";
+          }
+          userAgent() {
+            return window ? window.navigator.userAgent : "";
+          }
+          getNetworkType(t4) {
+            uni.getNetworkType(t4);
+          }
+          onNetworkStatusChange(t4) {
+            uni.onNetworkStatusChange(t4);
+          }
+        }
+        e2["default"] = r3;
+      }, 3072: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          set(t4) {
+            uni.setStorage(t4);
+          }
+          setSync(t4, e3) {
+            uni.setStorageSync(t4, e3);
+          }
+          get(t4) {
+            uni.getStorage(t4);
+          }
+          getSync(t4) {
+            return uni.getStorageSync(t4);
+          }
+        }
+        e2["default"] = r3;
+      }, 1996: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          connect(t4) {
+            let e3 = uni.connectSocket(t4);
+            return { send: (t5) => {
+              e3 == null ? void 0 : e3.send(t5);
+            }, close: (t5) => {
+              e3 == null ? void 0 : e3.close(t5);
+            }, onOpen: (t5) => {
+              e3 == null ? void 0 : e3.onOpen(t5);
+            }, onError: (t5) => {
+              e3 == null ? void 0 : e3.onError(t5);
+            }, onMessage: (t5) => {
+              e3 == null ? void 0 : e3.onMessage(t5);
+            }, onClose: (t5) => {
+              e3 == null ? void 0 : e3.onClose(t5);
+            } };
+          }
+        }
+        e2["default"] = r3;
+      }, 9342: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          constructor() {
+            this.systemInfo = wx.getSystemInfoSync();
+          }
+          os() {
+            return this.systemInfo.platform;
+          }
+          osVersion() {
+            return this.systemInfo.system;
+          }
+          model() {
+            return this.systemInfo.model;
+          }
+          brand() {
+            return this.systemInfo.brand;
+          }
+          platform() {
+            return "MP-WEIXIN";
+          }
+          platformVersion() {
+            return this.systemInfo.version;
+          }
+          language() {
+            return this.systemInfo.language;
+          }
+          platformId() {
+            if (wx.canIUse("getAccountInfoSync"))
+              return wx.getAccountInfoSync().miniProgram.appId;
+            return "";
+          }
+          getNetworkType(t4) {
+            wx.getNetworkType({ success: (e3) => {
+              var _a;
+              (_a = t4.success) == null ? void 0 : _a.call(t4.success, { networkType: e3.networkType });
+            }, fail: t4.fail });
+          }
+          onNetworkStatusChange(t4) {
+            wx.onNetworkStatusChange(t4);
+          }
+        }
+        e2["default"] = r3;
+      }, 155: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          set(t4) {
+            wx.setStorage(t4);
+          }
+          setSync(t4, e3) {
+            wx.setStorageSync(t4, e3);
+          }
+          get(t4) {
+            wx.getStorage(t4);
+          }
+          getSync(t4) {
+            return wx.getStorageSync(t4);
+          }
+        }
+        e2["default"] = r3;
+      }, 3751: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          connect(t4) {
+            let e3 = wx.connectSocket({ url: t4.url, header: t4.header, protocols: t4.protocols, success: t4.success, fail: t4.fail, complete: t4.complete });
+            return { onOpen: e3.onOpen, send: e3.send, onMessage: e3.onMessage, onError: e3.onError, onClose: e3.onClose, close: e3.close };
+          }
+        }
+        e2["default"] = r3;
+      }, 127: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        var r3;
+        (function(t4) {
+          t4.SDK_VERSION = "GTMP-2.0.1.dcloud";
+          t4.DEFAULT_SOCKET_URL = "wss://wshz.getui.net:5223/nws";
+          t4.SOCKET_PROTOCOL_VERSION = "1.0";
+          t4.SERVER_PUBLIC_KEY = "MHwwDQYJKoZIhvcNAQEBBQADawAwaAJhAJp1rROuvBF7sBSnvLaesj2iFhMcY8aXyLvpnNLKs2wjL3JmEnyr++SlVa35liUlzi83tnAFkn3A9GB7pHBNzawyUkBh8WUhq5bnFIkk2RaDa6+5MpG84DEv52p7RR+aWwIDAQAB";
+          t4.SERVER_PUBLIC_KEY_ID = "69d747c4b9f641baf4004be4297e9f3b";
+        })(r3 || (r3 = {}));
+        e2["default"] = r3;
+      }, 1901: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(7071));
+        const s2 = i3(r3(1237));
+        const a2 = i3(r3(1754));
+        class o2 {
+          static init(t4) {
+            var _a;
+            if (this.inited)
+              return;
+            try {
+              this.checkAppid(t4.appid);
+              this.inited = true;
+              s2.default.info(`init: appid=${t4.appid}`);
+              a2.default.init(t4);
+              n2.default.connect();
+            } catch (e3) {
+              this.inited = false;
+              (_a = t4.onError) == null ? void 0 : _a.call(t4.onError, { error: e3 });
+              throw e3;
+            }
+          }
+          static enableSocket(t4) {
+            this.checkInit();
+            n2.default.allowReconnect = t4;
+            if (t4)
+              n2.default.reconnect(0);
+            else
+              n2.default.close(`enableSocket ${t4}`);
+          }
+          static checkInit() {
+            if (!this.inited)
+              throw new Error(`not init, please invoke init method firstly`);
+          }
+          static checkAppid(t4) {
+            if (null == t4 || void 0 == t4 || "" == t4.trim())
+              throw new Error(`invalid appid ${t4}`);
+          }
+        }
+        o2.inited = false;
+        e2["default"] = o2;
+      }, 1754: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(323));
+        const s2 = i3(r3(9934));
+        const a2 = i3(r3(127));
+        const o2 = i3(r3(7071));
+        const u2 = i3(r3(1237));
+        const c2 = i3(r3(5574));
+        const l2 = i3(r3(7406));
+        class f2 {
+          static init(t4) {
+            var _a;
+            this.appid = c2.default.to_getui(t4.appid);
+            u2.default.info(`getui appid: ${this.appid}`);
+            this.onError = t4.onError;
+            this.onClientId = t4.onClientId;
+            this.onlineState = t4.onlineState;
+            this.onPushMsg = t4.onPushMsg;
+            if (this.appid != s2.default.getSync(s2.default.KEY_APPID, this.appid)) {
+              u2.default.info("appid changed, clear session and cid");
+              s2.default.setSync(s2.default.KEY_CID, "");
+              s2.default.setSync(s2.default.KEY_SESSION, "");
+            }
+            s2.default.setSync(s2.default.KEY_APPID, this.appid);
+            this.cid = s2.default.getSync(s2.default.KEY_CID, this.cid);
+            if (this.cid)
+              (_a = this.onClientId) == null ? void 0 : _a.call(this.onClientId, { cid: f2.cid });
+            this.session = s2.default.getSync(s2.default.KEY_SESSION, this.session);
+            this.deviceId = s2.default.getSync(s2.default.KEY_DEVICE_ID, this.deviceId);
+            this.regId = s2.default.getSync(s2.default.KEY_REGID, this.regId);
+            if (!this.regId) {
+              this.regId = this.createRegId();
+              s2.default.set({ key: s2.default.KEY_REGID, data: this.regId });
+            }
+            this.socketUrl = s2.default.getSync(s2.default.KEY_SOCKET_URL, this.socketUrl);
+            let e3 = this;
+            l2.default.getNetworkType({ success: (t5) => {
+              e3.networkType = t5.networkType;
+              e3.networkConnected = "none" != e3.networkType && "" != e3.networkType;
+            } });
+            l2.default.onNetworkStatusChange((t5) => {
+              e3.networkConnected = t5.isConnected;
+              e3.networkType = t5.networkType;
+              if (e3.networkConnected)
+                o2.default.reconnect(0);
+            });
+          }
+          static createRegId() {
+            return `M-V${n2.default.md5Hex(this.getUuid())}-${new Date().getTime()}`;
+          }
+          static getUuid() {
+            return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(t4) {
+              let e3 = 16 * Math.random() | 0, r4 = "x" === t4 ? e3 : 3 & e3 | 8;
+              return r4.toString(16);
+            });
+          }
+        }
+        f2.appid = "";
+        f2.cid = "";
+        f2.regId = "";
+        f2.session = "";
+        f2.deviceId = "";
+        f2.packetId = 1;
+        f2.online = false;
+        f2.socketUrl = a2.default.DEFAULT_SOCKET_URL;
+        f2.publicKeyId = a2.default.SERVER_PUBLIC_KEY_ID;
+        f2.publicKey = a2.default.SERVER_PUBLIC_KEY;
+        f2.lastAliasTime = 0;
+        f2.networkConnected = true;
+        f2.networkType = "none";
+        e2["default"] = f2;
+      }, 9214: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        var n2, s2;
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const a2 = i3(r3(9800));
+        const o2 = r3(3118);
+        const u2 = i3(r3(1754));
+        class c2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.actionMsgData = new l2();
+          }
+          static initActionMsg(t4, ...e3) {
+            super.initMsg(t4);
+            t4.command = a2.default.Command.CLIENT_MSG;
+            t4.data = t4.actionMsgData = l2.create();
+            return t4;
+          }
+          static parseActionMsg(t4, e3) {
+            super.parseMsg(t4, e3);
+            t4.actionMsgData = l2.parse(t4.data);
+            return t4;
+          }
+          send() {
+            setTimeout(() => {
+              var _a;
+              if (c2.waitingLoginMsgMap.has(this.actionMsgData.msgId) || c2.waitingResponseMsgMap.has(this.actionMsgData.msgId)) {
+                c2.waitingLoginMsgMap.delete(this.actionMsgData.msgId);
+                c2.waitingResponseMsgMap.delete(this.actionMsgData.msgId);
+                (_a = this.callback) == null ? void 0 : _a.call(this.callback, { resultCode: o2.ErrorCode.TIME_OUT, message: "waiting time out" });
+              }
+            }, 1e4);
+            if (!u2.default.online) {
+              c2.waitingLoginMsgMap.set(this.actionMsgData.msgId, this);
+              return;
+            }
+            if (this.actionMsgData.msgAction != c2.ClientAction.RECEIVED)
+              c2.waitingResponseMsgMap.set(this.actionMsgData.msgId, this);
+            super.send();
+          }
+          receive() {
+          }
+          static sendWaitingMessages() {
+            let t4 = this.waitingLoginMsgMap.keys();
+            let e3;
+            while (e3 = t4.next(), !e3.done) {
+              let t5 = this.waitingLoginMsgMap.get(e3.value);
+              this.waitingLoginMsgMap.delete(e3.value);
+              t5 == null ? void 0 : t5.send();
+            }
+          }
+          static getWaitingResponseMessage(t4) {
+            return c2.waitingResponseMsgMap.get(t4);
+          }
+          static removeWaitingResponseMessage(t4) {
+            let e3 = c2.waitingResponseMsgMap.get(t4);
+            if (e3)
+              c2.waitingResponseMsgMap.delete(t4);
+            return e3;
+          }
+        }
+        c2.ServerAction = (n2 = class {
+        }, n2.PUSH_MESSAGE = "pushmessage", n2.REDIRECT_SERVER = "redirect_server", n2.ADD_PHONE_INFO_RESULT = "addphoneinfo", n2.SET_MODE_RESULT = "set_mode_result", n2.SET_TAG_RESULT = "settag_result", n2.BIND_ALIAS_RESULT = "response_bind", n2.UNBIND_ALIAS_RESULT = "response_unbind", n2.FEED_BACK_RESULT = "pushmessage_feedback", n2.RECEIVED = "received", n2);
+        c2.ClientAction = (s2 = class {
+        }, s2.ADD_PHONE_INFO = "addphoneinfo", s2.SET_MODE = "set_mode", s2.FEED_BACK = "pushmessage_feedback", s2.SET_TAGS = "set_tag", s2.BIND_ALIAS = "bind_alias", s2.UNBIND_ALIAS = "unbind_alias", s2.RECEIVED = "received", s2);
+        c2.waitingLoginMsgMap = /* @__PURE__ */ new Map();
+        c2.waitingResponseMsgMap = /* @__PURE__ */ new Map();
+        class l2 {
+          constructor() {
+            this.appId = "";
+            this.cid = "";
+            this.msgId = "";
+            this.msgAction = "";
+            this.msgData = "";
+            this.msgExtraData = "";
+          }
+          static create() {
+            let t4 = new l2();
+            t4.appId = u2.default.appid;
+            t4.cid = u2.default.cid;
+            t4.msgId = (2147483647 & new Date().getTime()).toString();
+            return t4;
+          }
+          static parse(t4) {
+            let e3 = new l2();
+            let r4 = JSON.parse(t4);
+            e3.appId = r4.appId;
+            e3.cid = r4.cid;
+            e3.msgId = r4.msgId;
+            e3.msgAction = r4.msgAction;
+            e3.msgData = r4.msgData;
+            e3.msgExtraData = r4.msgExtraData;
+            return e3;
+          }
+        }
+        e2["default"] = c2;
+      }, 708: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(7406));
+        const s2 = i3(r3(9934));
+        const a2 = i3(r3(127));
+        const o2 = r3(3118);
+        const u2 = i3(r3(9214));
+        const c2 = i3(r3(1754));
+        class l2 extends u2.default {
+          constructor() {
+            super(...arguments);
+            this.addPhoneInfoData = new f2();
+          }
+          static create() {
+            let t4 = new l2();
+            super.initActionMsg(t4);
+            t4.callback = (e3) => {
+              if (e3.resultCode != o2.ErrorCode.SUCCESS && e3.resultCode != o2.ErrorCode.REPEAT_MESSAGE)
+                setTimeout(function() {
+                  t4.send();
+                }, 30 * 1e3);
+              else
+                s2.default.set({ key: s2.default.KEY_ADD_PHONE_INFO_TIME, data: new Date().getTime() });
+            };
+            t4.actionMsgData.msgAction = u2.default.ClientAction.ADD_PHONE_INFO;
+            t4.addPhoneInfoData = f2.create();
+            t4.actionMsgData.msgData = JSON.stringify(t4.addPhoneInfoData);
+            return t4;
+          }
+          send() {
+            let t4 = new Date().getTime();
+            let e3 = s2.default.getSync(s2.default.KEY_ADD_PHONE_INFO_TIME, 0);
+            if (t4 - e3 < 24 * 60 * 60 * 1e3)
+              return;
+            super.send();
+          }
+        }
+        class f2 {
+          constructor() {
+            this.model = "";
+            this.brand = "";
+            this.system_version = "";
+            this.version = "";
+            this.deviceid = "";
+            this.type = "";
+          }
+          static create() {
+            let t4 = new f2();
+            t4.model = n2.default.model();
+            t4.brand = n2.default.brand();
+            t4.system_version = n2.default.osVersion();
+            t4.version = a2.default.SDK_VERSION;
+            t4.device_token = "";
+            t4.imei = "";
+            t4.oaid = "";
+            t4.mac = "";
+            t4.idfa = "";
+            t4.type = "MINIPROGRAM";
+            t4.deviceid = `${t4.type}-${c2.default.deviceId}`;
+            t4.extra = { os: n2.default.os(), platform: n2.default.platform(), platformVersion: n2.default.platformVersion(), platformId: n2.default.platformId(), language: n2.default.language(), userAgent: n2.default.userAgent() };
+            return t4;
+          }
+        }
+        e2["default"] = l2;
+      }, 652: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        var n2, s2;
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const a2 = i3(r3(1754));
+        const o2 = r3(3118);
+        const u2 = i3(r3(9214));
+        class c2 extends u2.default {
+          constructor() {
+            super(...arguments);
+            this.feedbackData = new l2();
+          }
+          static create(t4, e3) {
+            let r4 = new c2();
+            super.initActionMsg(r4);
+            r4.callback = (t5) => {
+              if (t5.resultCode != o2.ErrorCode.SUCCESS && t5.resultCode != o2.ErrorCode.REPEAT_MESSAGE)
+                setTimeout(function() {
+                  r4.send();
+                }, 30 * 1e3);
+            };
+            r4.feedbackData = l2.create(t4, e3);
+            r4.actionMsgData.msgAction = u2.default.ClientAction.FEED_BACK;
+            r4.actionMsgData.msgData = JSON.stringify(r4.feedbackData);
+            return r4;
+          }
+          send() {
+            super.send();
+          }
+        }
+        c2.ActionId = (n2 = class {
+        }, n2.RECEIVE = "0", n2.MP_RECEIVE = "210000", n2.WEB_RECEIVE = "220000", n2.BEGIN = "1", n2);
+        c2.RESULT = (s2 = class {
+        }, s2.OK = "ok", s2);
+        class l2 {
+          constructor() {
+            this.messageid = "";
+            this.appkey = "";
+            this.appid = "";
+            this.taskid = "";
+            this.actionid = "";
+            this.result = "";
+            this.timestamp = "";
+          }
+          static create(t4, e3) {
+            let r4 = new l2();
+            r4.messageid = t4.pushMessageData.messageid;
+            r4.appkey = t4.pushMessageData.appKey;
+            r4.appid = a2.default.appid;
+            r4.taskid = t4.pushMessageData.taskId;
+            r4.actionid = e3;
+            r4.result = c2.RESULT.OK;
+            r4.timestamp = new Date().getTime().toString();
+            return r4;
+          }
+        }
+        e2["default"] = c2;
+      }, 6561: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9800));
+        class s2 extends n2.default {
+          static create() {
+            let t4 = new s2();
+            super.initMsg(t4);
+            t4.command = n2.default.Command.HEART_BEAT;
+            return t4;
+          }
+        }
+        e2["default"] = s2;
+      }, 358: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(323));
+        const s2 = i3(r3(1754));
+        const a2 = i3(r3(9800));
+        class o2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.keyNegotiateData = new u2();
+          }
+          static create() {
+            let t4 = new o2();
+            super.initMsg(t4);
+            t4.command = a2.default.Command.KEY_NEGOTIATE;
+            n2.default.resetKey();
+            t4.data = t4.keyNegotiateData = u2.create();
+            return t4;
+          }
+          send() {
+            super.send();
+          }
+        }
+        class u2 {
+          constructor() {
+            this.appId = "";
+            this.rsaPublicKeyId = "";
+            this.algorithm = "";
+            this.secretKey = "";
+            this.iv = "";
+          }
+          static create() {
+            let t4 = new u2();
+            t4.appId = s2.default.appid;
+            t4.rsaPublicKeyId = s2.default.publicKeyId;
+            t4.algorithm = "AES";
+            t4.secretKey = n2.default.getEncryptedSecretKey();
+            t4.iv = n2.default.getEncryptedIV();
+            return t4;
+          }
+        }
+        e2["default"] = o2;
+      }, 5301: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9800));
+        const s2 = i3(r3(323));
+        const a2 = i3(r3(2544));
+        const o2 = i3(r3(1237));
+        const u2 = i3(r3(1754));
+        class c2 extends n2.default {
+          constructor() {
+            super(...arguments);
+            this.keyNegotiateResultData = new l2();
+          }
+          static parse(t4) {
+            let e3 = new c2();
+            super.parseMsg(e3, t4);
+            e3.keyNegotiateResultData = l2.parse(e3.data);
+            return e3;
+          }
+          receive() {
+            var _a, _b;
+            if (0 != this.keyNegotiateResultData.errorCode) {
+              o2.default.error(`key negotiate fail: ${this.data}`);
+              (_a = u2.default.onError) == null ? void 0 : _a.call(u2.default.onError, { error: `key negotiate fail: ${this.data}` });
+              return;
+            }
+            let t4 = this.keyNegotiateResultData.encryptType.split("/");
+            if (!s2.default.algorithmMap.has(t4[0].trim().toLowerCase()) || !s2.default.modeMap.has(t4[1].trim().toLowerCase()) || !s2.default.paddingMap.has(t4[2].trim().toLowerCase())) {
+              o2.default.error(`key negotiate fail: ${this.data}`);
+              (_b = u2.default.onError) == null ? void 0 : _b.call(u2.default.onError, { error: `key negotiate fail: ${this.data}` });
+              return;
+            }
+            s2.default.setEncryptParams(t4[0].trim().toLowerCase(), t4[1].trim().toLowerCase(), t4[2].trim().toLowerCase());
+            a2.default.create().send();
+          }
+        }
+        class l2 {
+          constructor() {
+            this.errorCode = -1;
+            this.errorMsg = "";
+            this.encryptType = "";
+          }
+          static parse(t4) {
+            let e3 = new l2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            e3.encryptType = r4.encryptType;
+            return e3;
+          }
+        }
+        e2["default"] = c2;
+      }, 2544: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(1754));
+        const s2 = i3(r3(323));
+        const a2 = i3(r3(9800));
+        const o2 = i3(r3(3527));
+        class u2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.loginData = new c2();
+          }
+          static create() {
+            let t4 = new u2();
+            super.initMsg(t4);
+            t4.command = a2.default.Command.LOGIN;
+            t4.data = t4.loginData = c2.create();
+            return t4;
+          }
+          send() {
+            if (!this.loginData.session || n2.default.cid != s2.default.md5Hex(this.loginData.session)) {
+              o2.default.create().send();
+              return;
+            }
+            super.send();
+          }
+        }
+        class c2 {
+          constructor() {
+            this.appId = "";
+            this.session = "";
+          }
+          static create() {
+            let t4 = new c2();
+            t4.appId = n2.default.appid;
+            t4.session = n2.default.session;
+            return t4;
+          }
+        }
+        e2["default"] = u2;
+      }, 8734: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9934));
+        const s2 = i3(r3(9800));
+        const a2 = i3(r3(1754));
+        const o2 = i3(r3(9214));
+        const u2 = i3(r3(708));
+        const c2 = i3(r3(2544));
+        class l2 extends s2.default {
+          constructor() {
+            super(...arguments);
+            this.loginResultData = new f2();
+          }
+          static parse(t4) {
+            let e3 = new l2();
+            super.parseMsg(e3, t4);
+            e3.loginResultData = f2.parse(e3.data);
+            return e3;
+          }
+          receive() {
+            var _a;
+            if (0 != this.loginResultData.errorCode) {
+              this.data;
+              a2.default.session = a2.default.cid = "";
+              n2.default.setSync(n2.default.KEY_CID, "");
+              n2.default.setSync(n2.default.KEY_SESSION, "");
+              c2.default.create().send();
+              return;
+            }
+            if (!a2.default.online) {
+              a2.default.online = true;
+              (_a = a2.default.onlineState) == null ? void 0 : _a.call(a2.default.onlineState, { online: a2.default.online });
+            }
+            o2.default.sendWaitingMessages();
+            u2.default.create().send();
+          }
+        }
+        class f2 {
+          constructor() {
+            this.errorCode = -1;
+            this.errorMsg = "";
+            this.session = "";
+          }
+          static parse(t4) {
+            let e3 = new f2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            e3.session = r4.session;
+            return e3;
+          }
+        }
+        e2["default"] = l2;
+      }, 9800: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        var n2;
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const s2 = i3(r3(350));
+        const a2 = i3(r3(7071));
+        const o2 = i3(r3(127));
+        const u2 = i3(r3(1754));
+        class c2 {
+          constructor() {
+            this.version = "";
+            this.command = 0;
+            this.packetId = 0;
+            this.timeStamp = 0;
+            this.data = "";
+            this.signature = "";
+          }
+          static initMsg(t4, ...e3) {
+            t4.version = o2.default.SOCKET_PROTOCOL_VERSION;
+            t4.command = 0;
+            t4.timeStamp = new Date().getTime();
+            return t4;
+          }
+          static parseMsg(t4, e3) {
+            let r4 = JSON.parse(e3);
+            t4.version = r4.version;
+            t4.command = r4.command;
+            t4.packetId = r4.packetId;
+            t4.timeStamp = r4.timeStamp;
+            t4.data = r4.data;
+            t4.signature = r4.signature;
+            return t4;
+          }
+          stringify() {
+            return JSON.stringify(this, ["version", "command", "packetId", "timeStamp", "data", "signature"]);
+          }
+          send() {
+            if (!a2.default.isAvailable())
+              return;
+            this.packetId = u2.default.packetId++;
+            this.data = JSON.stringify(this.data);
+            this.stringify();
+            if (this.command != c2.Command.HEART_BEAT) {
+              s2.default.sign(this);
+              if (this.data && this.command != c2.Command.KEY_NEGOTIATE)
+                s2.default.encrypt(this);
+            }
+            a2.default.send(this.stringify());
+          }
+        }
+        c2.Command = (n2 = class {
+        }, n2.HEART_BEAT = 0, n2.KEY_NEGOTIATE = 1, n2.KEY_NEGOTIATE_RESULT = 16, n2.REGISTER = 2, n2.REGISTER_RESULT = 32, n2.LOGIN = 3, n2.LOGIN_RESULT = 48, n2.LOGOUT = 4, n2.LOGOUT_RESULT = 64, n2.CLIENT_MSG = 5, n2.SERVER_MSG = 80, n2.SERVER_CLOSE = 96, n2.REDIRECT_SERVER = 112, n2);
+        e2["default"] = c2;
+      }, 350: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(323));
+        var s2;
+        (function(t4) {
+          function e3(t5) {
+            t5.data = n2.default.encrypt(t5.data);
+          }
+          t4.encrypt = e3;
+          function r4(t5) {
+            t5.data = n2.default.decrypt(t5.data);
+          }
+          t4.decrypt = r4;
+          function i4(t5) {
+            t5.signature = n2.default.sha256(`${t5.timeStamp}${t5.packetId}${t5.command}${t5.data}`);
+          }
+          t4.sign = i4;
+          function s3(t5) {
+            let e4 = n2.default.sha256(`${t5.timeStamp}${t5.packetId}${t5.command}${t5.data}`);
+            if (t5.signature != e4)
+              throw new Error(`msg signature vierfy failed`);
+          }
+          t4.verify = s3;
+        })(s2 || (s2 = {}));
+        e2["default"] = s2;
+      }, 1236: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(5301));
+        const s2 = i3(r3(8734));
+        const a2 = i3(r3(9800));
+        const o2 = i3(r3(7078));
+        const u2 = i3(r3(538));
+        const c2 = i3(r3(7821));
+        const l2 = i3(r3(217));
+        const f2 = i3(r3(7156));
+        const h2 = i3(r3(53));
+        const d2 = i3(r3(9214));
+        const p2 = i3(r3(7303));
+        const v2 = i3(r3(6063));
+        const g2 = i3(r3(7923));
+        const y = i3(r3(350));
+        const m2 = i3(r3(9214));
+        const w2 = i3(r3(6254));
+        const S2 = i3(r3(5035));
+        class _2 {
+          static receiveMessage(t4) {
+            let e3 = a2.default.parseMsg(new a2.default(), t4);
+            if (e3.command == a2.default.Command.HEART_BEAT)
+              return;
+            if (e3.command != a2.default.Command.KEY_NEGOTIATE_RESULT && e3.command != a2.default.Command.SERVER_CLOSE && e3.command != a2.default.Command.REDIRECT_SERVER)
+              y.default.decrypt(e3);
+            if (e3.command != a2.default.Command.SERVER_CLOSE && e3.command != a2.default.Command.REDIRECT_SERVER)
+              y.default.verify(e3);
+            switch (e3.command) {
+              case a2.default.Command.KEY_NEGOTIATE_RESULT:
+                n2.default.parse(e3.stringify()).receive();
+                break;
+              case a2.default.Command.REGISTER_RESULT:
+                o2.default.parse(e3.stringify()).receive();
+                break;
+              case a2.default.Command.LOGIN_RESULT:
+                s2.default.parse(e3.stringify()).receive();
+                break;
+              case a2.default.Command.SERVER_MSG:
+                this.receiveActionMsg(e3.stringify());
+                break;
+              case a2.default.Command.SERVER_CLOSE:
+                S2.default.parse(e3.stringify()).receive();
+                break;
+              case a2.default.Command.REDIRECT_SERVER:
+                h2.default.parse(e3.stringify()).receive();
+                break;
+            }
+          }
+          static receiveActionMsg(t4) {
+            let e3 = m2.default.parseActionMsg(new m2.default(), t4);
+            if (e3.actionMsgData.msgAction != d2.default.ServerAction.RECEIVED && e3.actionMsgData.msgAction != d2.default.ServerAction.REDIRECT_SERVER) {
+              let t5 = JSON.parse(e3.actionMsgData.msgData);
+              w2.default.create(t5.id).send();
+            }
+            switch (e3.actionMsgData.msgAction) {
+              case d2.default.ServerAction.PUSH_MESSAGE:
+                f2.default.parse(t4).receive();
+                break;
+              case d2.default.ServerAction.ADD_PHONE_INFO_RESULT:
+                u2.default.parse(t4).receive();
+                break;
+              case d2.default.ServerAction.SET_MODE_RESULT:
+                p2.default.parse(t4).receive();
+                break;
+              case d2.default.ServerAction.SET_TAG_RESULT:
+                v2.default.parse(t4).receive();
+                break;
+              case d2.default.ServerAction.BIND_ALIAS_RESULT:
+                c2.default.parse(t4).receive();
+                break;
+              case d2.default.ServerAction.UNBIND_ALIAS_RESULT:
+                g2.default.parse(t4).receive();
+                break;
+              case d2.default.ServerAction.FEED_BACK_RESULT:
+                l2.default.parse(t4).receive();
+                break;
+              case d2.default.ServerAction.RECEIVED:
+                w2.default.parse(t4).receive();
+                break;
+            }
+          }
+        }
+        e2["default"] = _2;
+      }, 6254: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = r3(3118);
+        const s2 = i3(r3(1754));
+        const a2 = i3(r3(9214));
+        class o2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.receivedData = new u2();
+          }
+          static create(t4) {
+            let e3 = new o2();
+            super.initActionMsg(e3);
+            e3.callback = (t5) => {
+              if (t5.resultCode != n2.ErrorCode.SUCCESS && t5.resultCode != n2.ErrorCode.REPEAT_MESSAGE)
+                setTimeout(function() {
+                  e3.send();
+                }, 3 * 1e3);
+            };
+            e3.actionMsgData.msgAction = a2.default.ClientAction.RECEIVED;
+            e3.receivedData = u2.create(t4);
+            e3.actionMsgData.msgData = JSON.stringify(e3.receivedData);
+            return e3;
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            super.parseActionMsg(e3, t4);
+            e3.receivedData = u2.parse(e3.data);
+            return e3;
+          }
+          receive() {
+            var _a;
+            let t4 = a2.default.getWaitingResponseMessage(this.actionMsgData.msgId);
+            if (t4 && t4.actionMsgData.msgAction == a2.default.ClientAction.ADD_PHONE_INFO || t4 && t4.actionMsgData.msgAction == a2.default.ClientAction.FEED_BACK) {
+              a2.default.removeWaitingResponseMessage(t4.actionMsgData.msgId);
+              (_a = t4.callback) == null ? void 0 : _a.call(t4.callback, { resultCode: n2.ErrorCode.SUCCESS, message: "received" });
+            }
+          }
+          send() {
+            super.send();
+          }
+        }
+        class u2 {
+          constructor() {
+            this.msgId = "";
+            this.cid = "";
+          }
+          static create(t4) {
+            let e3 = new u2();
+            e3.cid = s2.default.cid;
+            e3.msgId = t4;
+            return e3;
+          }
+          static parse(t4) {
+            let e3 = new u2();
+            let r4 = JSON.parse(t4);
+            e3.cid = r4.cid;
+            e3.msgId = r4.msgId;
+            return e3;
+          }
+        }
+        e2["default"] = o2;
+      }, 53: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        e2.RedirectServerData = void 0;
+        const n2 = i3(r3(7071));
+        const s2 = i3(r3(9934));
+        const a2 = i3(r3(9800));
+        class o2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.redirectServerData = new u2();
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            super.parseMsg(e3, t4);
+            e3.redirectServerData = u2.parse(e3.data);
+            return e3;
+          }
+          receive() {
+            this.redirectServerData;
+            s2.default.setSync(s2.default.KEY_REDIRECT_SERVER, JSON.stringify(this.redirectServerData));
+            n2.default.close("redirect server");
+            n2.default.reconnect(this.redirectServerData.delay);
+          }
+        }
+        class u2 {
+          constructor() {
+            this.addressList = [];
+            this.delay = 0;
+            this.loc = "";
+            this.conf = "";
+            this.time = 0;
+          }
+          static parse(t4) {
+            let e3 = new u2();
+            let r4 = JSON.parse(t4);
+            e3.addressList = r4.addressList;
+            e3.delay = r4.delay;
+            e3.loc = r4.loc;
+            e3.conf = r4.conf;
+            e3.time = r4.time ? r4.time : new Date().getTime();
+            return e3;
+          }
+        }
+        e2.RedirectServerData = u2;
+        e2["default"] = o2;
+      }, 3527: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(1754));
+        const s2 = i3(r3(9800));
+        class a2 extends s2.default {
+          constructor() {
+            super(...arguments);
+            this.registerData = new o2();
+          }
+          static create() {
+            let t4 = new a2();
+            super.initMsg(t4);
+            t4.command = s2.default.Command.REGISTER;
+            t4.data = t4.registerData = o2.create();
+            return t4;
+          }
+          send() {
+            super.send();
+          }
+        }
+        class o2 {
+          constructor() {
+            this.appId = "";
+            this.regId = "";
+          }
+          static create() {
+            let t4 = new o2();
+            t4.appId = n2.default.appid;
+            t4.regId = n2.default.regId;
+            return t4;
+          }
+        }
+        e2["default"] = a2;
+      }, 7078: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9800));
+        const s2 = i3(r3(9934));
+        const a2 = i3(r3(1754));
+        const o2 = i3(r3(2544));
+        const u2 = i3(r3(1237));
+        class c2 extends n2.default {
+          constructor() {
+            super(...arguments);
+            this.registerResultData = new l2();
+          }
+          static parse(t4) {
+            let e3 = new c2();
+            super.parseMsg(e3, t4);
+            e3.registerResultData = l2.parse(e3.data);
+            return e3;
+          }
+          receive() {
+            var _a, _b;
+            if (0 != this.registerResultData.errorCode || !this.registerResultData.cid || !this.registerResultData.session) {
+              u2.default.error(`register fail: ${this.data}`);
+              (_a = a2.default.onError) == null ? void 0 : _a.call(a2.default.onError, { error: `register fail: ${this.data}` });
+              return;
+            }
+            if (a2.default.cid != this.registerResultData.cid)
+              s2.default.setSync(s2.default.KEY_ADD_PHONE_INFO_TIME, 0);
+            a2.default.cid = this.registerResultData.cid;
+            (_b = a2.default.onClientId) == null ? void 0 : _b.call(a2.default.onClientId, { cid: a2.default.cid });
+            s2.default.set({ key: s2.default.KEY_CID, data: a2.default.cid });
+            a2.default.session = this.registerResultData.session;
+            s2.default.set({ key: s2.default.KEY_SESSION, data: a2.default.session });
+            a2.default.deviceId = this.registerResultData.deviceId;
+            s2.default.set({ key: s2.default.KEY_DEVICE_ID, data: a2.default.deviceId });
+            o2.default.create().send();
+          }
+        }
+        class l2 {
+          constructor() {
+            this.errorCode = -1;
+            this.errorMsg = "";
+            this.cid = "";
+            this.session = "";
+            this.deviceId = "";
+            this.regId = "";
+          }
+          static parse(t4) {
+            let e3 = new l2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            e3.cid = r4.cid;
+            e3.session = r4.session;
+            e3.deviceId = r4.deviceId;
+            e3.regId = r4.regId;
+            return e3;
+          }
+        }
+        e2["default"] = c2;
+      }, 5035: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(7071));
+        const s2 = i3(r3(9800));
+        class a2 extends s2.default {
+          constructor() {
+            super(...arguments);
+            this.serverCloseData = new o2();
+          }
+          static parse(t4) {
+            let e3 = new a2();
+            super.parseMsg(e3, t4);
+            e3.serverCloseData = o2.parse(e3.data);
+            return e3;
+          }
+          receive() {
+            this.data;
+            if (20 == this.serverCloseData.code || 23 == this.serverCloseData.code || 24 == this.serverCloseData.code)
+              n2.default.allowReconnect = false;
+            n2.default.close();
+          }
+        }
+        class o2 {
+          constructor() {
+            this.code = -1;
+            this.msg = "";
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            let r4 = JSON.parse(t4);
+            e3.code = r4.code;
+            e3.msg = r4.msg;
+            return e3;
+          }
+        }
+        e2["default"] = a2;
+      }, 538: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9934));
+        const s2 = i3(r3(9214));
+        class a2 extends s2.default {
+          constructor() {
+            super(...arguments);
+            this.addPhoneInfoResultData = new o2();
+          }
+          static parse(t4) {
+            let e3 = new a2();
+            super.parseActionMsg(e3, t4);
+            e3.addPhoneInfoResultData = o2.parse(e3.actionMsgData.msgData);
+            return e3;
+          }
+          receive() {
+            var _a;
+            this.addPhoneInfoResultData;
+            let t4 = s2.default.removeWaitingResponseMessage(this.actionMsgData.msgId);
+            if (t4)
+              (_a = t4.callback) == null ? void 0 : _a.call(t4.callback, { resultCode: this.addPhoneInfoResultData.errorCode, message: this.addPhoneInfoResultData.errorMsg });
+            n2.default.set({ key: n2.default.KEY_ADD_PHONE_INFO_TIME, data: new Date().getTime() });
+          }
+        }
+        class o2 {
+          constructor() {
+            this.errorCode = -1;
+            this.errorMsg = "";
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            return e3;
+          }
+        }
+        e2["default"] = a2;
+      }, 7821: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9934));
+        const s2 = i3(r3(1237));
+        const a2 = i3(r3(9214));
+        class o2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.bindAliasResultData = new u2();
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            super.parseActionMsg(e3, t4);
+            e3.bindAliasResultData = u2.parse(e3.actionMsgData.msgData);
+            return e3;
+          }
+          receive() {
+            var _a;
+            s2.default.info(`bind alias result`, this.bindAliasResultData);
+            let t4 = a2.default.removeWaitingResponseMessage(this.actionMsgData.msgId);
+            if (t4)
+              (_a = t4.callback) == null ? void 0 : _a.call(t4.callback, { resultCode: this.bindAliasResultData.errorCode, message: this.bindAliasResultData.errorMsg });
+            n2.default.set({ key: n2.default.KEY_BIND_ALIAS_TIME, data: new Date().getTime() });
+          }
+        }
+        class u2 {
+          constructor() {
+            this.errorCode = -1;
+            this.errorMsg = "";
+          }
+          static parse(t4) {
+            let e3 = new u2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            return e3;
+          }
+        }
+        e2["default"] = o2;
+      }, 217: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = r3(3118);
+        const s2 = i3(r3(9214));
+        class a2 extends s2.default {
+          constructor() {
+            super(...arguments);
+            this.feedbackResultData = new o2();
+          }
+          static parse(t4) {
+            let e3 = new a2();
+            super.parseActionMsg(e3, t4);
+            e3.feedbackResultData = o2.parse(e3.actionMsgData.msgData);
+            return e3;
+          }
+          receive() {
+            var _a;
+            this.feedbackResultData;
+            let t4 = s2.default.removeWaitingResponseMessage(this.actionMsgData.msgId);
+            if (t4)
+              (_a = t4.callback) == null ? void 0 : _a.call(t4.callback, { resultCode: n2.ErrorCode.SUCCESS, message: "received" });
+          }
+        }
+        class o2 {
+          constructor() {
+            this.actionId = "";
+            this.taskId = "";
+            this.result = "";
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            let r4 = JSON.parse(t4);
+            e3.actionId = r4.actionId;
+            e3.taskId = r4.taskId;
+            e3.result = r4.result;
+            return e3;
+          }
+        }
+        e2["default"] = a2;
+      }, 7156: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        var n2;
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const s2 = i3(r3(1754));
+        const a2 = i3(r3(9214));
+        const o2 = i3(r3(652));
+        class u2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.pushMessageData = new c2();
+          }
+          static parse(t4) {
+            let e3 = new u2();
+            super.parseActionMsg(e3, t4);
+            e3.pushMessageData = c2.parse(e3.actionMsgData.msgData);
+            return e3;
+          }
+          receive() {
+            var _a;
+            this.pushMessageData;
+            if (this.pushMessageData.appId != s2.default.appid || !this.pushMessageData.messageid || !this.pushMessageData.taskId)
+              this.stringify();
+            o2.default.create(this, o2.default.ActionId.RECEIVE).send();
+            o2.default.create(this, o2.default.ActionId.MP_RECEIVE).send();
+            if (this.actionMsgData.msgExtraData && s2.default.onPushMsg)
+              (_a = s2.default.onPushMsg) == null ? void 0 : _a.call(s2.default.onPushMsg, { message: this.actionMsgData.msgExtraData });
+          }
+        }
+        class c2 {
+          constructor() {
+            this.id = "";
+            this.appKey = "";
+            this.appId = "";
+            this.messageid = "";
+            this.taskId = "";
+            this.actionChain = [];
+            this.cdnType = "";
+          }
+          static parse(t4) {
+            let e3 = new c2();
+            let r4 = JSON.parse(t4);
+            e3.id = r4.id;
+            e3.appKey = r4.appKey;
+            e3.appId = r4.appId;
+            e3.messageid = r4.messageid;
+            e3.taskId = r4.taskId;
+            e3.actionChain = r4.actionChain;
+            e3.cdnType = r4.cdnType;
+            return e3;
+          }
+        }
+        n2 = class {
+        }, n2.GO_TO = "goto", n2.TRANSMIT = "transmit";
+        e2["default"] = u2;
+      }, 7303: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9214));
+        class s2 extends n2.default {
+          constructor() {
+            super(...arguments);
+            this.setModeResultData = new a2();
+          }
+          static parse(t4) {
+            let e3 = new s2();
+            super.parseActionMsg(e3, t4);
+            e3.setModeResultData = a2.parse(e3.actionMsgData.msgData);
+            return e3;
+          }
+          receive() {
+            var _a;
+            this.setModeResultData;
+            let t4 = n2.default.removeWaitingResponseMessage(this.actionMsgData.msgId);
+            if (t4)
+              (_a = t4.callback) == null ? void 0 : _a.call(t4.callback, { resultCode: this.setModeResultData.errorCode, message: this.setModeResultData.errorMsg });
+          }
+        }
+        class a2 {
+          constructor() {
+            this.errorCode = -1;
+            this.errorMsg = "";
+          }
+          static parse(t4) {
+            let e3 = new a2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            return e3;
+          }
+        }
+        e2["default"] = s2;
+      }, 6063: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9934));
+        const s2 = i3(r3(1237));
+        const a2 = i3(r3(9214));
+        class o2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.setTagResultData = new u2();
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            super.parseActionMsg(e3, t4);
+            e3.setTagResultData = u2.parse(e3.actionMsgData.msgData);
+            return e3;
+          }
+          receive() {
+            var _a;
+            s2.default.info(`set tag result`, this.setTagResultData);
+            let t4 = a2.default.removeWaitingResponseMessage(this.actionMsgData.msgId);
+            if (t4)
+              (_a = t4.callback) == null ? void 0 : _a.call(t4.callback, { resultCode: this.setTagResultData.errorCode, message: this.setTagResultData.errorMsg });
+            n2.default.set({ key: n2.default.KEY_SET_TAG_TIME, data: new Date().getTime() });
+          }
+        }
+        class u2 {
+          constructor() {
+            this.errorCode = 0;
+            this.errorMsg = "";
+          }
+          static parse(t4) {
+            let e3 = new u2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            return e3;
+          }
+        }
+        e2["default"] = o2;
+      }, 7923: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(9934));
+        const s2 = i3(r3(1237));
+        const a2 = i3(r3(9214));
+        class o2 extends a2.default {
+          constructor() {
+            super(...arguments);
+            this.unbindAliasResultData = new u2();
+          }
+          static parse(t4) {
+            let e3 = new o2();
+            super.parseActionMsg(e3, t4);
+            e3.unbindAliasResultData = u2.parse(e3.actionMsgData.msgData);
+            return e3;
+          }
+          receive() {
+            var _a;
+            s2.default.info(`unbind alias result`, this.unbindAliasResultData);
+            let t4 = a2.default.removeWaitingResponseMessage(this.actionMsgData.msgId);
+            if (t4)
+              (_a = t4.callback) == null ? void 0 : _a.call(t4.callback, { resultCode: this.unbindAliasResultData.errorCode, message: this.unbindAliasResultData.errorMsg });
+            n2.default.set({ key: n2.default.KEY_BIND_ALIAS_TIME, data: new Date().getTime() });
+          }
+        }
+        class u2 {
+          constructor() {
+            this.errorCode = -1;
+            this.errorMsg = "";
+          }
+          static parse(t4) {
+            let e3 = new u2();
+            let r4 = JSON.parse(t4);
+            e3.errorCode = r4.errorCode;
+            e3.errorMsg = r4.errorMsg;
+            return e3;
+          }
+        }
+        e2["default"] = o2;
+      }, 9285: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          constructor(t4) {
+            this.delay = 10;
+            this.delay = t4;
+          }
+          start() {
+            this.cancel();
+            let t4 = this;
+            this.timer = setInterval(function() {
+              t4.run();
+            }, this.delay);
+          }
+          cancel() {
+            if (this.timer)
+              clearInterval(this.timer);
+          }
+        }
+        e2["default"] = r3;
+      }, 1571: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        var n2;
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const s2 = i3(r3(6561));
+        const a2 = i3(r3(9285));
+        class o2 extends a2.default {
+          static getInstance() {
+            return o2.InstanceHolder.instance;
+          }
+          run() {
+            s2.default.create().send();
+          }
+          refresh() {
+            this.delay = 60 * 1e3;
+            this.start();
+          }
+        }
+        o2.INTERVAL = 60 * 1e3;
+        o2.InstanceHolder = (n2 = class {
+        }, n2.instance = new o2(o2.INTERVAL), n2);
+        e2["default"] = o2;
+      }, 5574: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(4736));
+        const s2 = i3(r3(323));
+        var a2;
+        (function(t4) {
+          let e3 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+          let r4 = (0, n2.default)("9223372036854775808");
+          function i4(t5) {
+            let e4 = a3(t5);
+            let r5 = o2(e4);
+            let i5 = r5[1];
+            let n3 = r5[0];
+            return u2(i5) + u2(n3);
+          }
+          t4.to_getui = i4;
+          function a3(t5) {
+            let e4 = s2.default.md5Hex(t5);
+            let r5 = c2(e4);
+            r5[6] &= 15;
+            r5[6] |= 48;
+            r5[8] &= 63;
+            r5[8] |= 128;
+            return r5;
+          }
+          function o2(t5) {
+            let e4 = (0, n2.default)(0);
+            let r5 = (0, n2.default)(0);
+            for (let r6 = 0; r6 < 8; r6++)
+              e4 = e4.multiply(256).plus((0, n2.default)(255 & t5[r6]));
+            for (let e5 = 8; e5 < 16; e5++)
+              r5 = r5.multiply(256).plus((0, n2.default)(255 & t5[e5]));
+            return [e4, r5];
+          }
+          function u2(t5) {
+            if (t5 >= r4)
+              t5 = r4.multiply(2).minus(t5);
+            let i5 = "";
+            for (; t5 > (0, n2.default)(0); t5 = t5.divide(62))
+              i5 += e3.charAt(Number(t5.divmod(62).remainder));
+            return i5;
+          }
+          function c2(t5) {
+            let e4 = t5.length;
+            if (e4 % 2 != 0)
+              return [];
+            let r5 = new Array();
+            for (let i5 = 0; i5 < e4; i5 += 2)
+              r5.push(parseInt(t5.substring(i5, i5 + 2), 16));
+            return r5;
+          }
+        })(a2 || (a2 = {}));
+        e2["default"] = a2;
+      }, 323: function(t3, e2, r3) {
+        var i3 = this && this.__importDefault || function(t4) {
+          return t4 && t4.__esModule ? t4 : { default: t4 };
+        };
+        Object.defineProperty(e2, "__esModule", { value: true });
+        const n2 = i3(r3(2620));
+        const s2 = i3(r3(1354));
+        const a2 = i3(r3(1754));
+        var o2;
+        (function(t4) {
+          let e3;
+          let r4;
+          let i4;
+          let o3;
+          let u2 = new n2.default();
+          let c2 = s2.default.mode.CBC;
+          let l2 = s2.default.pad.Pkcs7;
+          let f2 = s2.default.AES;
+          t4.algorithmMap = /* @__PURE__ */ new Map([["aes", s2.default.AES]]);
+          t4.modeMap = /* @__PURE__ */ new Map([["cbc", s2.default.mode.CBC], ["cfb", s2.default.mode.CFB], ["cfb128", s2.default.mode.CFB], ["ecb", s2.default.mode.ECB], ["ofb", s2.default.mode.OFB]]);
+          t4.paddingMap = /* @__PURE__ */ new Map([["nopadding", s2.default.pad.NoPadding], ["pkcs7", s2.default.pad.Pkcs7]]);
+          function h2() {
+            e3 = s2.default.MD5(new Date().getTime().toString());
+            r4 = s2.default.MD5(e3);
+            u2.setPublicKey(a2.default.publicKey);
+            e3.toString(s2.default.enc.Hex);
+            r4.toString(s2.default.enc.Hex);
+            i4 = u2.encrypt(e3.toString(s2.default.enc.Hex));
+            o3 = u2.encrypt(r4.toString(s2.default.enc.Hex));
+          }
+          t4.resetKey = h2;
+          function d2(e4, r5, i5) {
+            f2 = t4.algorithmMap.get(e4);
+            c2 = t4.modeMap.get(r5);
+            l2 = t4.paddingMap.get(i5);
+          }
+          t4.setEncryptParams = d2;
+          function p2(t5) {
+            return f2.encrypt(t5, e3, { iv: r4, mode: c2, padding: l2 }).toString();
+          }
+          t4.encrypt = p2;
+          function v2(t5) {
+            return f2.decrypt(t5, e3, { iv: r4, mode: c2, padding: l2 }).toString(s2.default.enc.Utf8);
+          }
+          t4.decrypt = v2;
+          function g2(t5) {
+            return s2.default.SHA256(t5).toString(s2.default.enc.Base64);
+          }
+          t4.sha256 = g2;
+          function y(t5) {
+            return s2.default.MD5(t5).toString(s2.default.enc.Hex);
+          }
+          t4.md5Hex = y;
+          function m2() {
+            return i4 ? i4 : "";
+          }
+          t4.getEncryptedSecretKey = m2;
+          function w2() {
+            return o3 ? o3 : "";
+          }
+          t4.getEncryptedIV = w2;
+        })(o2 || (o2 = {}));
+        e2["default"] = o2;
+      }, 1237: (t3, e2) => {
+        Object.defineProperty(e2, "__esModule", { value: true });
+        class r3 {
+          static info(...t4) {
+            if (this.debugMode)
+              console.info(`[GtPush]`, t4);
+          }
+          static error(...t4) {
+            console.error(`[GtPush]`, t4);
+          }
+        }
+        r3.debugMode = false;
+        e2["default"] = r3;
+      }, 2620: (t3, e2, r3) => {
+        r3.r(e2);
+        r3.d(e2, { JSEncrypt: () => wt2, default: () => St2 });
+        var i3 = "0123456789abcdefghijklmnopqrstuvwxyz";
+        function n2(t4) {
+          return i3.charAt(t4);
+        }
+        function s2(t4, e3) {
+          return t4 & e3;
+        }
+        function a2(t4, e3) {
+          return t4 | e3;
+        }
+        function o2(t4, e3) {
+          return t4 ^ e3;
+        }
+        function u2(t4, e3) {
+          return t4 & ~e3;
+        }
+        function c2(t4) {
+          if (0 == t4)
+            return -1;
+          var e3 = 0;
+          if (0 == (65535 & t4)) {
+            t4 >>= 16;
+            e3 += 16;
+          }
+          if (0 == (255 & t4)) {
+            t4 >>= 8;
+            e3 += 8;
+          }
+          if (0 == (15 & t4)) {
+            t4 >>= 4;
+            e3 += 4;
+          }
+          if (0 == (3 & t4)) {
+            t4 >>= 2;
+            e3 += 2;
+          }
+          if (0 == (1 & t4))
+            ++e3;
+          return e3;
+        }
+        function l2(t4) {
+          var e3 = 0;
+          while (0 != t4) {
+            t4 &= t4 - 1;
+            ++e3;
+          }
+          return e3;
+        }
+        var f2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        var h2 = "=";
+        function d2(t4) {
+          var e3;
+          var r4;
+          var i4 = "";
+          for (e3 = 0; e3 + 3 <= t4.length; e3 += 3) {
+            r4 = parseInt(t4.substring(e3, e3 + 3), 16);
+            i4 += f2.charAt(r4 >> 6) + f2.charAt(63 & r4);
+          }
+          if (e3 + 1 == t4.length) {
+            r4 = parseInt(t4.substring(e3, e3 + 1), 16);
+            i4 += f2.charAt(r4 << 2);
+          } else if (e3 + 2 == t4.length) {
+            r4 = parseInt(t4.substring(e3, e3 + 2), 16);
+            i4 += f2.charAt(r4 >> 2) + f2.charAt((3 & r4) << 4);
+          }
+          while ((3 & i4.length) > 0)
+            i4 += h2;
+          return i4;
+        }
+        function p2(t4) {
+          var e3 = "";
+          var r4;
+          var i4 = 0;
+          var s3 = 0;
+          for (r4 = 0; r4 < t4.length; ++r4) {
+            if (t4.charAt(r4) == h2)
+              break;
+            var a3 = f2.indexOf(t4.charAt(r4));
+            if (a3 < 0)
+              continue;
+            if (0 == i4) {
+              e3 += n2(a3 >> 2);
+              s3 = 3 & a3;
+              i4 = 1;
+            } else if (1 == i4) {
+              e3 += n2(s3 << 2 | a3 >> 4);
+              s3 = 15 & a3;
+              i4 = 2;
+            } else if (2 == i4) {
+              e3 += n2(s3);
+              e3 += n2(a3 >> 2);
+              s3 = 3 & a3;
+              i4 = 3;
+            } else {
+              e3 += n2(s3 << 2 | a3 >> 4);
+              e3 += n2(15 & a3);
+              i4 = 0;
+            }
+          }
+          if (1 == i4)
+            e3 += n2(s3 << 2);
+          return e3;
+        }
+        var g2;
+        var y = { decode: function(t4) {
+          var e3;
+          if (void 0 === g2) {
+            var r4 = "0123456789ABCDEF";
+            var i4 = " \f\n\r	\xA0\u2028\u2029";
+            g2 = {};
+            for (e3 = 0; e3 < 16; ++e3)
+              g2[r4.charAt(e3)] = e3;
+            r4 = r4.toLowerCase();
+            for (e3 = 10; e3 < 16; ++e3)
+              g2[r4.charAt(e3)] = e3;
+            for (e3 = 0; e3 < i4.length; ++e3)
+              g2[i4.charAt(e3)] = -1;
+          }
+          var n3 = [];
+          var s3 = 0;
+          var a3 = 0;
+          for (e3 = 0; e3 < t4.length; ++e3) {
+            var o3 = t4.charAt(e3);
+            if ("=" == o3)
+              break;
+            o3 = g2[o3];
+            if (-1 == o3)
+              continue;
+            if (void 0 === o3)
+              throw new Error("Illegal character at offset " + e3);
+            s3 |= o3;
+            if (++a3 >= 2) {
+              n3[n3.length] = s3;
+              s3 = 0;
+              a3 = 0;
+            } else
+              s3 <<= 4;
+          }
+          if (a3)
+            throw new Error("Hex encoding incomplete: 4 bits missing");
+          return n3;
+        } };
+        var m2;
+        var w2 = { decode: function(t4) {
+          var e3;
+          if (void 0 === m2) {
+            var r4 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+            var i4 = "= \f\n\r	\xA0\u2028\u2029";
+            m2 = /* @__PURE__ */ Object.create(null);
+            for (e3 = 0; e3 < 64; ++e3)
+              m2[r4.charAt(e3)] = e3;
+            m2["-"] = 62;
+            m2["_"] = 63;
+            for (e3 = 0; e3 < i4.length; ++e3)
+              m2[i4.charAt(e3)] = -1;
+          }
+          var n3 = [];
+          var s3 = 0;
+          var a3 = 0;
+          for (e3 = 0; e3 < t4.length; ++e3) {
+            var o3 = t4.charAt(e3);
+            if ("=" == o3)
+              break;
+            o3 = m2[o3];
+            if (-1 == o3)
+              continue;
+            if (void 0 === o3)
+              throw new Error("Illegal character at offset " + e3);
+            s3 |= o3;
+            if (++a3 >= 4) {
+              n3[n3.length] = s3 >> 16;
+              n3[n3.length] = s3 >> 8 & 255;
+              n3[n3.length] = 255 & s3;
+              s3 = 0;
+              a3 = 0;
+            } else
+              s3 <<= 6;
+          }
+          switch (a3) {
+            case 1:
+              throw new Error("Base64 encoding incomplete: at least 2 bits missing");
+            case 2:
+              n3[n3.length] = s3 >> 10;
+              break;
+            case 3:
+              n3[n3.length] = s3 >> 16;
+              n3[n3.length] = s3 >> 8 & 255;
+              break;
+          }
+          return n3;
+        }, re: /-----BEGIN [^-]+-----([A-Za-z0-9+\/=\s]+)-----END [^-]+-----|begin-base64[^\n]+\n([A-Za-z0-9+\/=\s]+)====/, unarmor: function(t4) {
+          var e3 = w2.re.exec(t4);
+          if (e3)
+            if (e3[1])
+              t4 = e3[1];
+            else if (e3[2])
+              t4 = e3[2];
+            else
+              throw new Error("RegExp out of sync");
+          return w2.decode(t4);
+        } };
+        var S2 = 1e13;
+        var _2 = function() {
+          function t4(t5) {
+            this.buf = [+t5 || 0];
+          }
+          t4.prototype.mulAdd = function(t5, e3) {
+            var r4 = this.buf;
+            var i4 = r4.length;
+            var n3;
+            var s3;
+            for (n3 = 0; n3 < i4; ++n3) {
+              s3 = r4[n3] * t5 + e3;
+              if (s3 < S2)
+                e3 = 0;
+              else {
+                e3 = 0 | s3 / S2;
+                s3 -= e3 * S2;
+              }
+              r4[n3] = s3;
+            }
+            if (e3 > 0)
+              r4[n3] = e3;
+          };
+          t4.prototype.sub = function(t5) {
+            var e3 = this.buf;
+            var r4 = e3.length;
+            var i4;
+            var n3;
+            for (i4 = 0; i4 < r4; ++i4) {
+              n3 = e3[i4] - t5;
+              if (n3 < 0) {
+                n3 += S2;
+                t5 = 1;
+              } else
+                t5 = 0;
+              e3[i4] = n3;
+            }
+            while (0 === e3[e3.length - 1])
+              e3.pop();
+          };
+          t4.prototype.toString = function(t5) {
+            if (10 != (t5 || 10))
+              throw new Error("only base 10 is supported");
+            var e3 = this.buf;
+            var r4 = e3[e3.length - 1].toString();
+            for (var i4 = e3.length - 2; i4 >= 0; --i4)
+              r4 += (S2 + e3[i4]).toString().substring(1);
+            return r4;
+          };
+          t4.prototype.valueOf = function() {
+            var t5 = this.buf;
+            var e3 = 0;
+            for (var r4 = t5.length - 1; r4 >= 0; --r4)
+              e3 = e3 * S2 + t5[r4];
+            return e3;
+          };
+          t4.prototype.simplify = function() {
+            var t5 = this.buf;
+            return 1 == t5.length ? t5[0] : this;
+          };
+          return t4;
+        }();
+        var b2 = "\u2026";
+        var E2 = /^(\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/;
+        var D2 = /^(\d\d\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/;
+        function M2(t4, e3) {
+          if (t4.length > e3)
+            t4 = t4.substring(0, e3) + b2;
+          return t4;
+        }
+        var T2 = function() {
+          function t4(e3, r4) {
+            this.hexDigits = "0123456789ABCDEF";
+            if (e3 instanceof t4) {
+              this.enc = e3.enc;
+              this.pos = e3.pos;
+            } else {
+              this.enc = e3;
+              this.pos = r4;
+            }
+          }
+          t4.prototype.get = function(t5) {
+            if (void 0 === t5)
+              t5 = this.pos++;
+            if (t5 >= this.enc.length)
+              throw new Error("Requesting byte offset " + t5 + " on a stream of length " + this.enc.length);
+            return "string" === typeof this.enc ? this.enc.charCodeAt(t5) : this.enc[t5];
+          };
+          t4.prototype.hexByte = function(t5) {
+            return this.hexDigits.charAt(t5 >> 4 & 15) + this.hexDigits.charAt(15 & t5);
+          };
+          t4.prototype.hexDump = function(t5, e3, r4) {
+            var i4 = "";
+            for (var n3 = t5; n3 < e3; ++n3) {
+              i4 += this.hexByte(this.get(n3));
+              if (true !== r4)
+                switch (15 & n3) {
+                  case 7:
+                    i4 += "  ";
+                    break;
+                  case 15:
+                    i4 += "\n";
+                    break;
+                  default:
+                    i4 += " ";
+                }
+            }
+            return i4;
+          };
+          t4.prototype.isASCII = function(t5, e3) {
+            for (var r4 = t5; r4 < e3; ++r4) {
+              var i4 = this.get(r4);
+              if (i4 < 32 || i4 > 176)
+                return false;
+            }
+            return true;
+          };
+          t4.prototype.parseStringISO = function(t5, e3) {
+            var r4 = "";
+            for (var i4 = t5; i4 < e3; ++i4)
+              r4 += String.fromCharCode(this.get(i4));
+            return r4;
+          };
+          t4.prototype.parseStringUTF = function(t5, e3) {
+            var r4 = "";
+            for (var i4 = t5; i4 < e3; ) {
+              var n3 = this.get(i4++);
+              if (n3 < 128)
+                r4 += String.fromCharCode(n3);
+              else if (n3 > 191 && n3 < 224)
+                r4 += String.fromCharCode((31 & n3) << 6 | 63 & this.get(i4++));
+              else
+                r4 += String.fromCharCode((15 & n3) << 12 | (63 & this.get(i4++)) << 6 | 63 & this.get(i4++));
+            }
+            return r4;
+          };
+          t4.prototype.parseStringBMP = function(t5, e3) {
+            var r4 = "";
+            var i4;
+            var n3;
+            for (var s3 = t5; s3 < e3; ) {
+              i4 = this.get(s3++);
+              n3 = this.get(s3++);
+              r4 += String.fromCharCode(i4 << 8 | n3);
+            }
+            return r4;
+          };
+          t4.prototype.parseTime = function(t5, e3, r4) {
+            var i4 = this.parseStringISO(t5, e3);
+            var n3 = (r4 ? E2 : D2).exec(i4);
+            if (!n3)
+              return "Unrecognized time: " + i4;
+            if (r4) {
+              n3[1] = +n3[1];
+              n3[1] += +n3[1] < 70 ? 2e3 : 1900;
+            }
+            i4 = n3[1] + "-" + n3[2] + "-" + n3[3] + " " + n3[4];
+            if (n3[5]) {
+              i4 += ":" + n3[5];
+              if (n3[6]) {
+                i4 += ":" + n3[6];
+                if (n3[7])
+                  i4 += "." + n3[7];
+              }
+            }
+            if (n3[8]) {
+              i4 += " UTC";
+              if ("Z" != n3[8]) {
+                i4 += n3[8];
+                if (n3[9])
+                  i4 += ":" + n3[9];
+              }
+            }
+            return i4;
+          };
+          t4.prototype.parseInteger = function(t5, e3) {
+            var r4 = this.get(t5);
+            var i4 = r4 > 127;
+            var n3 = i4 ? 255 : 0;
+            var s3;
+            var a3 = "";
+            while (r4 == n3 && ++t5 < e3)
+              r4 = this.get(t5);
+            s3 = e3 - t5;
+            if (0 === s3)
+              return i4 ? -1 : 0;
+            if (s3 > 4) {
+              a3 = r4;
+              s3 <<= 3;
+              while (0 == (128 & (+a3 ^ n3))) {
+                a3 = +a3 << 1;
+                --s3;
+              }
+              a3 = "(" + s3 + " bit)\n";
+            }
+            if (i4)
+              r4 -= 256;
+            var o3 = new _2(r4);
+            for (var u3 = t5 + 1; u3 < e3; ++u3)
+              o3.mulAdd(256, this.get(u3));
+            return a3 + o3.toString();
+          };
+          t4.prototype.parseBitString = function(t5, e3, r4) {
+            var i4 = this.get(t5);
+            var n3 = (e3 - t5 - 1 << 3) - i4;
+            var s3 = "(" + n3 + " bit)\n";
+            var a3 = "";
+            for (var o3 = t5 + 1; o3 < e3; ++o3) {
+              var u3 = this.get(o3);
+              var c3 = o3 == e3 - 1 ? i4 : 0;
+              for (var l3 = 7; l3 >= c3; --l3)
+                a3 += u3 >> l3 & 1 ? "1" : "0";
+              if (a3.length > r4)
+                return s3 + M2(a3, r4);
+            }
+            return s3 + a3;
+          };
+          t4.prototype.parseOctetString = function(t5, e3, r4) {
+            if (this.isASCII(t5, e3))
+              return M2(this.parseStringISO(t5, e3), r4);
+            var i4 = e3 - t5;
+            var n3 = "(" + i4 + " byte)\n";
+            r4 /= 2;
+            if (i4 > r4)
+              e3 = t5 + r4;
+            for (var s3 = t5; s3 < e3; ++s3)
+              n3 += this.hexByte(this.get(s3));
+            if (i4 > r4)
+              n3 += b2;
+            return n3;
+          };
+          t4.prototype.parseOID = function(t5, e3, r4) {
+            var i4 = "";
+            var n3 = new _2();
+            var s3 = 0;
+            for (var a3 = t5; a3 < e3; ++a3) {
+              var o3 = this.get(a3);
+              n3.mulAdd(128, 127 & o3);
+              s3 += 7;
+              if (!(128 & o3)) {
+                if ("" === i4) {
+                  n3 = n3.simplify();
+                  if (n3 instanceof _2) {
+                    n3.sub(80);
+                    i4 = "2." + n3.toString();
+                  } else {
+                    var u3 = n3 < 80 ? n3 < 40 ? 0 : 1 : 2;
+                    i4 = u3 + "." + (n3 - 40 * u3);
+                  }
+                } else
+                  i4 += "." + n3.toString();
+                if (i4.length > r4)
+                  return M2(i4, r4);
+                n3 = new _2();
+                s3 = 0;
+              }
+            }
+            if (s3 > 0)
+              i4 += ".incomplete";
+            return i4;
+          };
+          return t4;
+        }();
+        var I2 = function() {
+          function t4(t5, e3, r4, i4, n3) {
+            if (!(i4 instanceof A2))
+              throw new Error("Invalid tag value.");
+            this.stream = t5;
+            this.header = e3;
+            this.length = r4;
+            this.tag = i4;
+            this.sub = n3;
+          }
+          t4.prototype.typeName = function() {
+            switch (this.tag.tagClass) {
+              case 0:
+                switch (this.tag.tagNumber) {
+                  case 0:
+                    return "EOC";
+                  case 1:
+                    return "BOOLEAN";
+                  case 2:
+                    return "INTEGER";
+                  case 3:
+                    return "BIT_STRING";
+                  case 4:
+                    return "OCTET_STRING";
+                  case 5:
+                    return "NULL";
+                  case 6:
+                    return "OBJECT_IDENTIFIER";
+                  case 7:
+                    return "ObjectDescriptor";
+                  case 8:
+                    return "EXTERNAL";
+                  case 9:
+                    return "REAL";
+                  case 10:
+                    return "ENUMERATED";
+                  case 11:
+                    return "EMBEDDED_PDV";
+                  case 12:
+                    return "UTF8String";
+                  case 16:
+                    return "SEQUENCE";
+                  case 17:
+                    return "SET";
+                  case 18:
+                    return "NumericString";
+                  case 19:
+                    return "PrintableString";
+                  case 20:
+                    return "TeletexString";
+                  case 21:
+                    return "VideotexString";
+                  case 22:
+                    return "IA5String";
+                  case 23:
+                    return "UTCTime";
+                  case 24:
+                    return "GeneralizedTime";
+                  case 25:
+                    return "GraphicString";
+                  case 26:
+                    return "VisibleString";
+                  case 27:
+                    return "GeneralString";
+                  case 28:
+                    return "UniversalString";
+                  case 30:
+                    return "BMPString";
+                }
+                return "Universal_" + this.tag.tagNumber.toString();
+              case 1:
+                return "Application_" + this.tag.tagNumber.toString();
+              case 2:
+                return "[" + this.tag.tagNumber.toString() + "]";
+              case 3:
+                return "Private_" + this.tag.tagNumber.toString();
+            }
+          };
+          t4.prototype.content = function(t5) {
+            if (void 0 === this.tag)
+              return null;
+            if (void 0 === t5)
+              t5 = 1 / 0;
+            var e3 = this.posContent();
+            var r4 = Math.abs(this.length);
+            if (!this.tag.isUniversal()) {
+              if (null !== this.sub)
+                return "(" + this.sub.length + " elem)";
+              return this.stream.parseOctetString(e3, e3 + r4, t5);
+            }
+            switch (this.tag.tagNumber) {
+              case 1:
+                return 0 === this.stream.get(e3) ? "false" : "true";
+              case 2:
+                return this.stream.parseInteger(e3, e3 + r4);
+              case 3:
+                return this.sub ? "(" + this.sub.length + " elem)" : this.stream.parseBitString(e3, e3 + r4, t5);
+              case 4:
+                return this.sub ? "(" + this.sub.length + " elem)" : this.stream.parseOctetString(e3, e3 + r4, t5);
+              case 6:
+                return this.stream.parseOID(e3, e3 + r4, t5);
+              case 16:
+              case 17:
+                if (null !== this.sub)
+                  return "(" + this.sub.length + " elem)";
+                else
+                  return "(no elem)";
+              case 12:
+                return M2(this.stream.parseStringUTF(e3, e3 + r4), t5);
+              case 18:
+              case 19:
+              case 20:
+              case 21:
+              case 22:
+              case 26:
+                return M2(this.stream.parseStringISO(e3, e3 + r4), t5);
+              case 30:
+                return M2(this.stream.parseStringBMP(e3, e3 + r4), t5);
+              case 23:
+              case 24:
+                return this.stream.parseTime(e3, e3 + r4, 23 == this.tag.tagNumber);
+            }
+            return null;
+          };
+          t4.prototype.toString = function() {
+            return this.typeName() + "@" + this.stream.pos + "[header:" + this.header + ",length:" + this.length + ",sub:" + (null === this.sub ? "null" : this.sub.length) + "]";
+          };
+          t4.prototype.toPrettyString = function(t5) {
+            if (void 0 === t5)
+              t5 = "";
+            var e3 = t5 + this.typeName() + " @" + this.stream.pos;
+            if (this.length >= 0)
+              e3 += "+";
+            e3 += this.length;
+            if (this.tag.tagConstructed)
+              e3 += " (constructed)";
+            else if (this.tag.isUniversal() && (3 == this.tag.tagNumber || 4 == this.tag.tagNumber) && null !== this.sub)
+              e3 += " (encapsulates)";
+            e3 += "\n";
+            if (null !== this.sub) {
+              t5 += "  ";
+              for (var r4 = 0, i4 = this.sub.length; r4 < i4; ++r4)
+                e3 += this.sub[r4].toPrettyString(t5);
+            }
+            return e3;
+          };
+          t4.prototype.posStart = function() {
+            return this.stream.pos;
+          };
+          t4.prototype.posContent = function() {
+            return this.stream.pos + this.header;
+          };
+          t4.prototype.posEnd = function() {
+            return this.stream.pos + this.header + Math.abs(this.length);
+          };
+          t4.prototype.toHexString = function() {
+            return this.stream.hexDump(this.posStart(), this.posEnd(), true);
+          };
+          t4.decodeLength = function(t5) {
+            var e3 = t5.get();
+            var r4 = 127 & e3;
+            if (r4 == e3)
+              return r4;
+            if (r4 > 6)
+              throw new Error("Length over 48 bits not supported at position " + (t5.pos - 1));
+            if (0 === r4)
+              return null;
+            e3 = 0;
+            for (var i4 = 0; i4 < r4; ++i4)
+              e3 = 256 * e3 + t5.get();
+            return e3;
+          };
+          t4.prototype.getHexStringValue = function() {
+            var t5 = this.toHexString();
+            var e3 = 2 * this.header;
+            var r4 = 2 * this.length;
+            return t5.substr(e3, r4);
+          };
+          t4.decode = function(e3) {
+            var r4;
+            if (!(e3 instanceof T2))
+              r4 = new T2(e3, 0);
+            else
+              r4 = e3;
+            var i4 = new T2(r4);
+            var n3 = new A2(r4);
+            var s3 = t4.decodeLength(r4);
+            var a3 = r4.pos;
+            var o3 = a3 - i4.pos;
+            var u3 = null;
+            var c3 = function() {
+              var e4 = [];
+              if (null !== s3) {
+                var i5 = a3 + s3;
+                while (r4.pos < i5)
+                  e4[e4.length] = t4.decode(r4);
+                if (r4.pos != i5)
+                  throw new Error("Content size is not correct for container starting at offset " + a3);
+              } else
+                try {
+                  for (; ; ) {
+                    var n4 = t4.decode(r4);
+                    if (n4.tag.isEOC())
+                      break;
+                    e4[e4.length] = n4;
+                  }
+                  s3 = a3 - r4.pos;
+                } catch (t5) {
+                  throw new Error("Exception while decoding undefined length content: " + t5);
+                }
+              return e4;
+            };
+            if (n3.tagConstructed)
+              u3 = c3();
+            else if (n3.isUniversal() && (3 == n3.tagNumber || 4 == n3.tagNumber))
+              try {
+                if (3 == n3.tagNumber) {
+                  if (0 != r4.get())
+                    throw new Error("BIT STRINGs with unused bits cannot encapsulate.");
+                }
+                u3 = c3();
+                for (var l3 = 0; l3 < u3.length; ++l3)
+                  if (u3[l3].tag.isEOC())
+                    throw new Error("EOC is not supposed to be actual content.");
+              } catch (t5) {
+                u3 = null;
+              }
+            if (null === u3) {
+              if (null === s3)
+                throw new Error("We can't skip over an invalid tag with undefined length at offset " + a3);
+              r4.pos = a3 + Math.abs(s3);
+            }
+            return new t4(i4, o3, s3, n3, u3);
+          };
+          return t4;
+        }();
+        var A2 = function() {
+          function t4(t5) {
+            var e3 = t5.get();
+            this.tagClass = e3 >> 6;
+            this.tagConstructed = 0 !== (32 & e3);
+            this.tagNumber = 31 & e3;
+            if (31 == this.tagNumber) {
+              var r4 = new _2();
+              do {
+                e3 = t5.get();
+                r4.mulAdd(128, 127 & e3);
+              } while (128 & e3);
+              this.tagNumber = r4.simplify();
+            }
+          }
+          t4.prototype.isUniversal = function() {
+            return 0 === this.tagClass;
+          };
+          t4.prototype.isEOC = function() {
+            return 0 === this.tagClass && 0 === this.tagNumber;
+          };
+          return t4;
+        }();
+        var x2;
+        var R2 = 244837814094590;
+        var B2 = 15715070 == (16777215 & R2);
+        var O2 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997];
+        var k = (1 << 26) / O2[O2.length - 1];
+        var C2 = function() {
+          function t4(t5, e3, r4) {
+            if (null != t5)
+              if ("number" == typeof t5)
+                this.fromNumber(t5, e3, r4);
+              else if (null == e3 && "string" != typeof t5)
+                this.fromString(t5, 256);
+              else
+                this.fromString(t5, e3);
+          }
+          t4.prototype.toString = function(t5) {
+            if (this.s < 0)
+              return "-" + this.negate().toString(t5);
+            var e3;
+            if (16 == t5)
+              e3 = 4;
+            else if (8 == t5)
+              e3 = 3;
+            else if (2 == t5)
+              e3 = 1;
+            else if (32 == t5)
+              e3 = 5;
+            else if (4 == t5)
+              e3 = 2;
+            else
+              return this.toRadix(t5);
+            var r4 = (1 << e3) - 1;
+            var i4;
+            var s3 = false;
+            var a3 = "";
+            var o3 = this.t;
+            var u3 = this.DB - o3 * this.DB % e3;
+            if (o3-- > 0) {
+              if (u3 < this.DB && (i4 = this[o3] >> u3) > 0) {
+                s3 = true;
+                a3 = n2(i4);
+              }
+              while (o3 >= 0) {
+                if (u3 < e3) {
+                  i4 = (this[o3] & (1 << u3) - 1) << e3 - u3;
+                  i4 |= this[--o3] >> (u3 += this.DB - e3);
+                } else {
+                  i4 = this[o3] >> (u3 -= e3) & r4;
+                  if (u3 <= 0) {
+                    u3 += this.DB;
+                    --o3;
+                  }
+                }
+                if (i4 > 0)
+                  s3 = true;
+                if (s3)
+                  a3 += n2(i4);
+              }
+            }
+            return s3 ? a3 : "0";
+          };
+          t4.prototype.negate = function() {
+            var e3 = H2();
+            t4.ZERO.subTo(this, e3);
+            return e3;
+          };
+          t4.prototype.abs = function() {
+            return this.s < 0 ? this.negate() : this;
+          };
+          t4.prototype.compareTo = function(t5) {
+            var e3 = this.s - t5.s;
+            if (0 != e3)
+              return e3;
+            var r4 = this.t;
+            e3 = r4 - t5.t;
+            if (0 != e3)
+              return this.s < 0 ? -e3 : e3;
+            while (--r4 >= 0)
+              if (0 != (e3 = this[r4] - t5[r4]))
+                return e3;
+            return 0;
+          };
+          t4.prototype.bitLength = function() {
+            if (this.t <= 0)
+              return 0;
+            return this.DB * (this.t - 1) + W2(this[this.t - 1] ^ this.s & this.DM);
+          };
+          t4.prototype.mod = function(e3) {
+            var r4 = H2();
+            this.abs().divRemTo(e3, null, r4);
+            if (this.s < 0 && r4.compareTo(t4.ZERO) > 0)
+              e3.subTo(r4, r4);
+            return r4;
+          };
+          t4.prototype.modPowInt = function(t5, e3) {
+            var r4;
+            if (t5 < 256 || e3.isEven())
+              r4 = new P2(e3);
+            else
+              r4 = new V2(e3);
+            return this.exp(t5, r4);
+          };
+          t4.prototype.clone = function() {
+            var t5 = H2();
+            this.copyTo(t5);
+            return t5;
+          };
+          t4.prototype.intValue = function() {
+            if (this.s < 0) {
+              if (1 == this.t)
+                return this[0] - this.DV;
+              else if (0 == this.t)
+                return -1;
+            } else if (1 == this.t)
+              return this[0];
+            else if (0 == this.t)
+              return 0;
+            return (this[1] & (1 << 32 - this.DB) - 1) << this.DB | this[0];
+          };
+          t4.prototype.byteValue = function() {
+            return 0 == this.t ? this.s : this[0] << 24 >> 24;
+          };
+          t4.prototype.shortValue = function() {
+            return 0 == this.t ? this.s : this[0] << 16 >> 16;
+          };
+          t4.prototype.signum = function() {
+            if (this.s < 0)
+              return -1;
+            else if (this.t <= 0 || 1 == this.t && this[0] <= 0)
+              return 0;
+            else
+              return 1;
+          };
+          t4.prototype.toByteArray = function() {
+            var t5 = this.t;
+            var e3 = [];
+            e3[0] = this.s;
+            var r4 = this.DB - t5 * this.DB % 8;
+            var i4;
+            var n3 = 0;
+            if (t5-- > 0) {
+              if (r4 < this.DB && (i4 = this[t5] >> r4) != (this.s & this.DM) >> r4)
+                e3[n3++] = i4 | this.s << this.DB - r4;
+              while (t5 >= 0) {
+                if (r4 < 8) {
+                  i4 = (this[t5] & (1 << r4) - 1) << 8 - r4;
+                  i4 |= this[--t5] >> (r4 += this.DB - 8);
+                } else {
+                  i4 = this[t5] >> (r4 -= 8) & 255;
+                  if (r4 <= 0) {
+                    r4 += this.DB;
+                    --t5;
+                  }
+                }
+                if (0 != (128 & i4))
+                  i4 |= -256;
+                if (0 == n3 && (128 & this.s) != (128 & i4))
+                  ++n3;
+                if (n3 > 0 || i4 != this.s)
+                  e3[n3++] = i4;
+              }
+            }
+            return e3;
+          };
+          t4.prototype.equals = function(t5) {
+            return 0 == this.compareTo(t5);
+          };
+          t4.prototype.min = function(t5) {
+            return this.compareTo(t5) < 0 ? this : t5;
+          };
+          t4.prototype.max = function(t5) {
+            return this.compareTo(t5) > 0 ? this : t5;
+          };
+          t4.prototype.and = function(t5) {
+            var e3 = H2();
+            this.bitwiseTo(t5, s2, e3);
+            return e3;
+          };
+          t4.prototype.or = function(t5) {
+            var e3 = H2();
+            this.bitwiseTo(t5, a2, e3);
+            return e3;
+          };
+          t4.prototype.xor = function(t5) {
+            var e3 = H2();
+            this.bitwiseTo(t5, o2, e3);
+            return e3;
+          };
+          t4.prototype.andNot = function(t5) {
+            var e3 = H2();
+            this.bitwiseTo(t5, u2, e3);
+            return e3;
+          };
+          t4.prototype.not = function() {
+            var t5 = H2();
+            for (var e3 = 0; e3 < this.t; ++e3)
+              t5[e3] = this.DM & ~this[e3];
+            t5.t = this.t;
+            t5.s = ~this.s;
+            return t5;
+          };
+          t4.prototype.shiftLeft = function(t5) {
+            var e3 = H2();
+            if (t5 < 0)
+              this.rShiftTo(-t5, e3);
+            else
+              this.lShiftTo(t5, e3);
+            return e3;
+          };
+          t4.prototype.shiftRight = function(t5) {
+            var e3 = H2();
+            if (t5 < 0)
+              this.lShiftTo(-t5, e3);
+            else
+              this.rShiftTo(t5, e3);
+            return e3;
+          };
+          t4.prototype.getLowestSetBit = function() {
+            for (var t5 = 0; t5 < this.t; ++t5)
+              if (0 != this[t5])
+                return t5 * this.DB + c2(this[t5]);
+            if (this.s < 0)
+              return this.t * this.DB;
+            return -1;
+          };
+          t4.prototype.bitCount = function() {
+            var t5 = 0;
+            var e3 = this.s & this.DM;
+            for (var r4 = 0; r4 < this.t; ++r4)
+              t5 += l2(this[r4] ^ e3);
+            return t5;
+          };
+          t4.prototype.testBit = function(t5) {
+            var e3 = Math.floor(t5 / this.DB);
+            if (e3 >= this.t)
+              return 0 != this.s;
+            return 0 != (this[e3] & 1 << t5 % this.DB);
+          };
+          t4.prototype.setBit = function(t5) {
+            return this.changeBit(t5, a2);
+          };
+          t4.prototype.clearBit = function(t5) {
+            return this.changeBit(t5, u2);
+          };
+          t4.prototype.flipBit = function(t5) {
+            return this.changeBit(t5, o2);
+          };
+          t4.prototype.add = function(t5) {
+            var e3 = H2();
+            this.addTo(t5, e3);
+            return e3;
+          };
+          t4.prototype.subtract = function(t5) {
+            var e3 = H2();
+            this.subTo(t5, e3);
+            return e3;
+          };
+          t4.prototype.multiply = function(t5) {
+            var e3 = H2();
+            this.multiplyTo(t5, e3);
+            return e3;
+          };
+          t4.prototype.divide = function(t5) {
+            var e3 = H2();
+            this.divRemTo(t5, e3, null);
+            return e3;
+          };
+          t4.prototype.remainder = function(t5) {
+            var e3 = H2();
+            this.divRemTo(t5, null, e3);
+            return e3;
+          };
+          t4.prototype.divideAndRemainder = function(t5) {
+            var e3 = H2();
+            var r4 = H2();
+            this.divRemTo(t5, e3, r4);
+            return [e3, r4];
+          };
+          t4.prototype.modPow = function(t5, e3) {
+            var r4 = t5.bitLength();
+            var i4;
+            var n3 = Y2(1);
+            var s3;
+            if (r4 <= 0)
+              return n3;
+            else if (r4 < 18)
+              i4 = 1;
+            else if (r4 < 48)
+              i4 = 3;
+            else if (r4 < 144)
+              i4 = 4;
+            else if (r4 < 768)
+              i4 = 5;
+            else
+              i4 = 6;
+            if (r4 < 8)
+              s3 = new P2(e3);
+            else if (e3.isEven())
+              s3 = new L2(e3);
+            else
+              s3 = new V2(e3);
+            var a3 = [];
+            var o3 = 3;
+            var u3 = i4 - 1;
+            var c3 = (1 << i4) - 1;
+            a3[1] = s3.convert(this);
+            if (i4 > 1) {
+              var l3 = H2();
+              s3.sqrTo(a3[1], l3);
+              while (o3 <= c3) {
+                a3[o3] = H2();
+                s3.mulTo(l3, a3[o3 - 2], a3[o3]);
+                o3 += 2;
+              }
+            }
+            var f3 = t5.t - 1;
+            var h3;
+            var d3 = true;
+            var p3 = H2();
+            var v2;
+            r4 = W2(t5[f3]) - 1;
+            while (f3 >= 0) {
+              if (r4 >= u3)
+                h3 = t5[f3] >> r4 - u3 & c3;
+              else {
+                h3 = (t5[f3] & (1 << r4 + 1) - 1) << u3 - r4;
+                if (f3 > 0)
+                  h3 |= t5[f3 - 1] >> this.DB + r4 - u3;
+              }
+              o3 = i4;
+              while (0 == (1 & h3)) {
+                h3 >>= 1;
+                --o3;
+              }
+              if ((r4 -= o3) < 0) {
+                r4 += this.DB;
+                --f3;
+              }
+              if (d3) {
+                a3[h3].copyTo(n3);
+                d3 = false;
+              } else {
+                while (o3 > 1) {
+                  s3.sqrTo(n3, p3);
+                  s3.sqrTo(p3, n3);
+                  o3 -= 2;
+                }
+                if (o3 > 0)
+                  s3.sqrTo(n3, p3);
+                else {
+                  v2 = n3;
+                  n3 = p3;
+                  p3 = v2;
+                }
+                s3.mulTo(p3, a3[h3], n3);
+              }
+              while (f3 >= 0 && 0 == (t5[f3] & 1 << r4)) {
+                s3.sqrTo(n3, p3);
+                v2 = n3;
+                n3 = p3;
+                p3 = v2;
+                if (--r4 < 0) {
+                  r4 = this.DB - 1;
+                  --f3;
+                }
+              }
+            }
+            return s3.revert(n3);
+          };
+          t4.prototype.modInverse = function(e3) {
+            var r4 = e3.isEven();
+            if (this.isEven() && r4 || 0 == e3.signum())
+              return t4.ZERO;
+            var i4 = e3.clone();
+            var n3 = this.clone();
+            var s3 = Y2(1);
+            var a3 = Y2(0);
+            var o3 = Y2(0);
+            var u3 = Y2(1);
+            while (0 != i4.signum()) {
+              while (i4.isEven()) {
+                i4.rShiftTo(1, i4);
+                if (r4) {
+                  if (!s3.isEven() || !a3.isEven()) {
+                    s3.addTo(this, s3);
+                    a3.subTo(e3, a3);
+                  }
+                  s3.rShiftTo(1, s3);
+                } else if (!a3.isEven())
+                  a3.subTo(e3, a3);
+                a3.rShiftTo(1, a3);
+              }
+              while (n3.isEven()) {
+                n3.rShiftTo(1, n3);
+                if (r4) {
+                  if (!o3.isEven() || !u3.isEven()) {
+                    o3.addTo(this, o3);
+                    u3.subTo(e3, u3);
+                  }
+                  o3.rShiftTo(1, o3);
+                } else if (!u3.isEven())
+                  u3.subTo(e3, u3);
+                u3.rShiftTo(1, u3);
+              }
+              if (i4.compareTo(n3) >= 0) {
+                i4.subTo(n3, i4);
+                if (r4)
+                  s3.subTo(o3, s3);
+                a3.subTo(u3, a3);
+              } else {
+                n3.subTo(i4, n3);
+                if (r4)
+                  o3.subTo(s3, o3);
+                u3.subTo(a3, u3);
+              }
+            }
+            if (0 != n3.compareTo(t4.ONE))
+              return t4.ZERO;
+            if (u3.compareTo(e3) >= 0)
+              return u3.subtract(e3);
+            if (u3.signum() < 0)
+              u3.addTo(e3, u3);
+            else
+              return u3;
+            if (u3.signum() < 0)
+              return u3.add(e3);
+            else
+              return u3;
+          };
+          t4.prototype.pow = function(t5) {
+            return this.exp(t5, new N2());
+          };
+          t4.prototype.gcd = function(t5) {
+            var e3 = this.s < 0 ? this.negate() : this.clone();
+            var r4 = t5.s < 0 ? t5.negate() : t5.clone();
+            if (e3.compareTo(r4) < 0) {
+              var i4 = e3;
+              e3 = r4;
+              r4 = i4;
+            }
+            var n3 = e3.getLowestSetBit();
+            var s3 = r4.getLowestSetBit();
+            if (s3 < 0)
+              return e3;
+            if (n3 < s3)
+              s3 = n3;
+            if (s3 > 0) {
+              e3.rShiftTo(s3, e3);
+              r4.rShiftTo(s3, r4);
+            }
+            while (e3.signum() > 0) {
+              if ((n3 = e3.getLowestSetBit()) > 0)
+                e3.rShiftTo(n3, e3);
+              if ((n3 = r4.getLowestSetBit()) > 0)
+                r4.rShiftTo(n3, r4);
+              if (e3.compareTo(r4) >= 0) {
+                e3.subTo(r4, e3);
+                e3.rShiftTo(1, e3);
+              } else {
+                r4.subTo(e3, r4);
+                r4.rShiftTo(1, r4);
+              }
+            }
+            if (s3 > 0)
+              r4.lShiftTo(s3, r4);
+            return r4;
+          };
+          t4.prototype.isProbablePrime = function(t5) {
+            var e3;
+            var r4 = this.abs();
+            if (1 == r4.t && r4[0] <= O2[O2.length - 1]) {
+              for (e3 = 0; e3 < O2.length; ++e3)
+                if (r4[0] == O2[e3])
+                  return true;
+              return false;
+            }
+            if (r4.isEven())
+              return false;
+            e3 = 1;
+            while (e3 < O2.length) {
+              var i4 = O2[e3];
+              var n3 = e3 + 1;
+              while (n3 < O2.length && i4 < k)
+                i4 *= O2[n3++];
+              i4 = r4.modInt(i4);
+              while (e3 < n3)
+                if (i4 % O2[e3++] == 0)
+                  return false;
+            }
+            return r4.millerRabin(t5);
+          };
+          t4.prototype.copyTo = function(t5) {
+            for (var e3 = this.t - 1; e3 >= 0; --e3)
+              t5[e3] = this[e3];
+            t5.t = this.t;
+            t5.s = this.s;
+          };
+          t4.prototype.fromInt = function(t5) {
+            this.t = 1;
+            this.s = t5 < 0 ? -1 : 0;
+            if (t5 > 0)
+              this[0] = t5;
+            else if (t5 < -1)
+              this[0] = t5 + this.DV;
+            else
+              this.t = 0;
+          };
+          t4.prototype.fromString = function(e3, r4) {
+            var i4;
+            if (16 == r4)
+              i4 = 4;
+            else if (8 == r4)
+              i4 = 3;
+            else if (256 == r4)
+              i4 = 8;
+            else if (2 == r4)
+              i4 = 1;
+            else if (32 == r4)
+              i4 = 5;
+            else if (4 == r4)
+              i4 = 2;
+            else {
+              this.fromRadix(e3, r4);
+              return;
+            }
+            this.t = 0;
+            this.s = 0;
+            var n3 = e3.length;
+            var s3 = false;
+            var a3 = 0;
+            while (--n3 >= 0) {
+              var o3 = 8 == i4 ? 255 & +e3[n3] : G2(e3, n3);
+              if (o3 < 0) {
+                if ("-" == e3.charAt(n3))
+                  s3 = true;
+                continue;
+              }
+              s3 = false;
+              if (0 == a3)
+                this[this.t++] = o3;
+              else if (a3 + i4 > this.DB) {
+                this[this.t - 1] |= (o3 & (1 << this.DB - a3) - 1) << a3;
+                this[this.t++] = o3 >> this.DB - a3;
+              } else
+                this[this.t - 1] |= o3 << a3;
+              a3 += i4;
+              if (a3 >= this.DB)
+                a3 -= this.DB;
+            }
+            if (8 == i4 && 0 != (128 & +e3[0])) {
+              this.s = -1;
+              if (a3 > 0)
+                this[this.t - 1] |= (1 << this.DB - a3) - 1 << a3;
+            }
+            this.clamp();
+            if (s3)
+              t4.ZERO.subTo(this, this);
+          };
+          t4.prototype.clamp = function() {
+            var t5 = this.s & this.DM;
+            while (this.t > 0 && this[this.t - 1] == t5)
+              --this.t;
+          };
+          t4.prototype.dlShiftTo = function(t5, e3) {
+            var r4;
+            for (r4 = this.t - 1; r4 >= 0; --r4)
+              e3[r4 + t5] = this[r4];
+            for (r4 = t5 - 1; r4 >= 0; --r4)
+              e3[r4] = 0;
+            e3.t = this.t + t5;
+            e3.s = this.s;
+          };
+          t4.prototype.drShiftTo = function(t5, e3) {
+            for (var r4 = t5; r4 < this.t; ++r4)
+              e3[r4 - t5] = this[r4];
+            e3.t = Math.max(this.t - t5, 0);
+            e3.s = this.s;
+          };
+          t4.prototype.lShiftTo = function(t5, e3) {
+            var r4 = t5 % this.DB;
+            var i4 = this.DB - r4;
+            var n3 = (1 << i4) - 1;
+            var s3 = Math.floor(t5 / this.DB);
+            var a3 = this.s << r4 & this.DM;
+            for (var o3 = this.t - 1; o3 >= 0; --o3) {
+              e3[o3 + s3 + 1] = this[o3] >> i4 | a3;
+              a3 = (this[o3] & n3) << r4;
+            }
+            for (var o3 = s3 - 1; o3 >= 0; --o3)
+              e3[o3] = 0;
+            e3[s3] = a3;
+            e3.t = this.t + s3 + 1;
+            e3.s = this.s;
+            e3.clamp();
+          };
+          t4.prototype.rShiftTo = function(t5, e3) {
+            e3.s = this.s;
+            var r4 = Math.floor(t5 / this.DB);
+            if (r4 >= this.t) {
+              e3.t = 0;
+              return;
+            }
+            var i4 = t5 % this.DB;
+            var n3 = this.DB - i4;
+            var s3 = (1 << i4) - 1;
+            e3[0] = this[r4] >> i4;
+            for (var a3 = r4 + 1; a3 < this.t; ++a3) {
+              e3[a3 - r4 - 1] |= (this[a3] & s3) << n3;
+              e3[a3 - r4] = this[a3] >> i4;
+            }
+            if (i4 > 0)
+              e3[this.t - r4 - 1] |= (this.s & s3) << n3;
+            e3.t = this.t - r4;
+            e3.clamp();
+          };
+          t4.prototype.subTo = function(t5, e3) {
+            var r4 = 0;
+            var i4 = 0;
+            var n3 = Math.min(t5.t, this.t);
+            while (r4 < n3) {
+              i4 += this[r4] - t5[r4];
+              e3[r4++] = i4 & this.DM;
+              i4 >>= this.DB;
+            }
+            if (t5.t < this.t) {
+              i4 -= t5.s;
+              while (r4 < this.t) {
+                i4 += this[r4];
+                e3[r4++] = i4 & this.DM;
+                i4 >>= this.DB;
+              }
+              i4 += this.s;
+            } else {
+              i4 += this.s;
+              while (r4 < t5.t) {
+                i4 -= t5[r4];
+                e3[r4++] = i4 & this.DM;
+                i4 >>= this.DB;
+              }
+              i4 -= t5.s;
+            }
+            e3.s = i4 < 0 ? -1 : 0;
+            if (i4 < -1)
+              e3[r4++] = this.DV + i4;
+            else if (i4 > 0)
+              e3[r4++] = i4;
+            e3.t = r4;
+            e3.clamp();
+          };
+          t4.prototype.multiplyTo = function(e3, r4) {
+            var i4 = this.abs();
+            var n3 = e3.abs();
+            var s3 = i4.t;
+            r4.t = s3 + n3.t;
+            while (--s3 >= 0)
+              r4[s3] = 0;
+            for (s3 = 0; s3 < n3.t; ++s3)
+              r4[s3 + i4.t] = i4.am(0, n3[s3], r4, s3, 0, i4.t);
+            r4.s = 0;
+            r4.clamp();
+            if (this.s != e3.s)
+              t4.ZERO.subTo(r4, r4);
+          };
+          t4.prototype.squareTo = function(t5) {
+            var e3 = this.abs();
+            var r4 = t5.t = 2 * e3.t;
+            while (--r4 >= 0)
+              t5[r4] = 0;
+            for (r4 = 0; r4 < e3.t - 1; ++r4) {
+              var i4 = e3.am(r4, e3[r4], t5, 2 * r4, 0, 1);
+              if ((t5[r4 + e3.t] += e3.am(r4 + 1, 2 * e3[r4], t5, 2 * r4 + 1, i4, e3.t - r4 - 1)) >= e3.DV) {
+                t5[r4 + e3.t] -= e3.DV;
+                t5[r4 + e3.t + 1] = 1;
+              }
+            }
+            if (t5.t > 0)
+              t5[t5.t - 1] += e3.am(r4, e3[r4], t5, 2 * r4, 0, 1);
+            t5.s = 0;
+            t5.clamp();
+          };
+          t4.prototype.divRemTo = function(e3, r4, i4) {
+            var n3 = e3.abs();
+            if (n3.t <= 0)
+              return;
+            var s3 = this.abs();
+            if (s3.t < n3.t) {
+              if (null != r4)
+                r4.fromInt(0);
+              if (null != i4)
+                this.copyTo(i4);
+              return;
+            }
+            if (null == i4)
+              i4 = H2();
+            var a3 = H2();
+            var o3 = this.s;
+            var u3 = e3.s;
+            var c3 = this.DB - W2(n3[n3.t - 1]);
+            if (c3 > 0) {
+              n3.lShiftTo(c3, a3);
+              s3.lShiftTo(c3, i4);
+            } else {
+              n3.copyTo(a3);
+              s3.copyTo(i4);
+            }
+            var l3 = a3.t;
+            var f3 = a3[l3 - 1];
+            if (0 == f3)
+              return;
+            var h3 = f3 * (1 << this.F1) + (l3 > 1 ? a3[l3 - 2] >> this.F2 : 0);
+            var d3 = this.FV / h3;
+            var p3 = (1 << this.F1) / h3;
+            var v2 = 1 << this.F2;
+            var g3 = i4.t;
+            var y2 = g3 - l3;
+            var m3 = null == r4 ? H2() : r4;
+            a3.dlShiftTo(y2, m3);
+            if (i4.compareTo(m3) >= 0) {
+              i4[i4.t++] = 1;
+              i4.subTo(m3, i4);
+            }
+            t4.ONE.dlShiftTo(l3, m3);
+            m3.subTo(a3, a3);
+            while (a3.t < l3)
+              a3[a3.t++] = 0;
+            while (--y2 >= 0) {
+              var w3 = i4[--g3] == f3 ? this.DM : Math.floor(i4[g3] * d3 + (i4[g3 - 1] + v2) * p3);
+              if ((i4[g3] += a3.am(0, w3, i4, y2, 0, l3)) < w3) {
+                a3.dlShiftTo(y2, m3);
+                i4.subTo(m3, i4);
+                while (i4[g3] < --w3)
+                  i4.subTo(m3, i4);
+              }
+            }
+            if (null != r4) {
+              i4.drShiftTo(l3, r4);
+              if (o3 != u3)
+                t4.ZERO.subTo(r4, r4);
+            }
+            i4.t = l3;
+            i4.clamp();
+            if (c3 > 0)
+              i4.rShiftTo(c3, i4);
+            if (o3 < 0)
+              t4.ZERO.subTo(i4, i4);
+          };
+          t4.prototype.invDigit = function() {
+            if (this.t < 1)
+              return 0;
+            var t5 = this[0];
+            if (0 == (1 & t5))
+              return 0;
+            var e3 = 3 & t5;
+            e3 = e3 * (2 - (15 & t5) * e3) & 15;
+            e3 = e3 * (2 - (255 & t5) * e3) & 255;
+            e3 = e3 * (2 - ((65535 & t5) * e3 & 65535)) & 65535;
+            e3 = e3 * (2 - t5 * e3 % this.DV) % this.DV;
+            return e3 > 0 ? this.DV - e3 : -e3;
+          };
+          t4.prototype.isEven = function() {
+            return 0 == (this.t > 0 ? 1 & this[0] : this.s);
+          };
+          t4.prototype.exp = function(e3, r4) {
+            if (e3 > 4294967295 || e3 < 1)
+              return t4.ONE;
+            var i4 = H2();
+            var n3 = H2();
+            var s3 = r4.convert(this);
+            var a3 = W2(e3) - 1;
+            s3.copyTo(i4);
+            while (--a3 >= 0) {
+              r4.sqrTo(i4, n3);
+              if ((e3 & 1 << a3) > 0)
+                r4.mulTo(n3, s3, i4);
+              else {
+                var o3 = i4;
+                i4 = n3;
+                n3 = o3;
+              }
+            }
+            return r4.revert(i4);
+          };
+          t4.prototype.chunkSize = function(t5) {
+            return Math.floor(Math.LN2 * this.DB / Math.log(t5));
+          };
+          t4.prototype.toRadix = function(t5) {
+            if (null == t5)
+              t5 = 10;
+            if (0 == this.signum() || t5 < 2 || t5 > 36)
+              return "0";
+            var e3 = this.chunkSize(t5);
+            var r4 = Math.pow(t5, e3);
+            var i4 = Y2(r4);
+            var n3 = H2();
+            var s3 = H2();
+            var a3 = "";
+            this.divRemTo(i4, n3, s3);
+            while (n3.signum() > 0) {
+              a3 = (r4 + s3.intValue()).toString(t5).substr(1) + a3;
+              n3.divRemTo(i4, n3, s3);
+            }
+            return s3.intValue().toString(t5) + a3;
+          };
+          t4.prototype.fromRadix = function(e3, r4) {
+            this.fromInt(0);
+            if (null == r4)
+              r4 = 10;
+            var i4 = this.chunkSize(r4);
+            var n3 = Math.pow(r4, i4);
+            var s3 = false;
+            var a3 = 0;
+            var o3 = 0;
+            for (var u3 = 0; u3 < e3.length; ++u3) {
+              var c3 = G2(e3, u3);
+              if (c3 < 0) {
+                if ("-" == e3.charAt(u3) && 0 == this.signum())
+                  s3 = true;
+                continue;
+              }
+              o3 = r4 * o3 + c3;
+              if (++a3 >= i4) {
+                this.dMultiply(n3);
+                this.dAddOffset(o3, 0);
+                a3 = 0;
+                o3 = 0;
+              }
+            }
+            if (a3 > 0) {
+              this.dMultiply(Math.pow(r4, a3));
+              this.dAddOffset(o3, 0);
+            }
+            if (s3)
+              t4.ZERO.subTo(this, this);
+          };
+          t4.prototype.fromNumber = function(e3, r4, i4) {
+            if ("number" == typeof r4)
+              if (e3 < 2)
+                this.fromInt(1);
+              else {
+                this.fromNumber(e3, i4);
+                if (!this.testBit(e3 - 1))
+                  this.bitwiseTo(t4.ONE.shiftLeft(e3 - 1), a2, this);
+                if (this.isEven())
+                  this.dAddOffset(1, 0);
+                while (!this.isProbablePrime(r4)) {
+                  this.dAddOffset(2, 0);
+                  if (this.bitLength() > e3)
+                    this.subTo(t4.ONE.shiftLeft(e3 - 1), this);
+                }
+              }
+            else {
+              var n3 = [];
+              var s3 = 7 & e3;
+              n3.length = (e3 >> 3) + 1;
+              r4.nextBytes(n3);
+              if (s3 > 0)
+                n3[0] &= (1 << s3) - 1;
+              else
+                n3[0] = 0;
+              this.fromString(n3, 256);
+            }
+          };
+          t4.prototype.bitwiseTo = function(t5, e3, r4) {
+            var i4;
+            var n3;
+            var s3 = Math.min(t5.t, this.t);
+            for (i4 = 0; i4 < s3; ++i4)
+              r4[i4] = e3(this[i4], t5[i4]);
+            if (t5.t < this.t) {
+              n3 = t5.s & this.DM;
+              for (i4 = s3; i4 < this.t; ++i4)
+                r4[i4] = e3(this[i4], n3);
+              r4.t = this.t;
+            } else {
+              n3 = this.s & this.DM;
+              for (i4 = s3; i4 < t5.t; ++i4)
+                r4[i4] = e3(n3, t5[i4]);
+              r4.t = t5.t;
+            }
+            r4.s = e3(this.s, t5.s);
+            r4.clamp();
+          };
+          t4.prototype.changeBit = function(e3, r4) {
+            var i4 = t4.ONE.shiftLeft(e3);
+            this.bitwiseTo(i4, r4, i4);
+            return i4;
+          };
+          t4.prototype.addTo = function(t5, e3) {
+            var r4 = 0;
+            var i4 = 0;
+            var n3 = Math.min(t5.t, this.t);
+            while (r4 < n3) {
+              i4 += this[r4] + t5[r4];
+              e3[r4++] = i4 & this.DM;
+              i4 >>= this.DB;
+            }
+            if (t5.t < this.t) {
+              i4 += t5.s;
+              while (r4 < this.t) {
+                i4 += this[r4];
+                e3[r4++] = i4 & this.DM;
+                i4 >>= this.DB;
+              }
+              i4 += this.s;
+            } else {
+              i4 += this.s;
+              while (r4 < t5.t) {
+                i4 += t5[r4];
+                e3[r4++] = i4 & this.DM;
+                i4 >>= this.DB;
+              }
+              i4 += t5.s;
+            }
+            e3.s = i4 < 0 ? -1 : 0;
+            if (i4 > 0)
+              e3[r4++] = i4;
+            else if (i4 < -1)
+              e3[r4++] = this.DV + i4;
+            e3.t = r4;
+            e3.clamp();
+          };
+          t4.prototype.dMultiply = function(t5) {
+            this[this.t] = this.am(0, t5 - 1, this, 0, 0, this.t);
+            ++this.t;
+            this.clamp();
+          };
+          t4.prototype.dAddOffset = function(t5, e3) {
+            if (0 == t5)
+              return;
+            while (this.t <= e3)
+              this[this.t++] = 0;
+            this[e3] += t5;
+            while (this[e3] >= this.DV) {
+              this[e3] -= this.DV;
+              if (++e3 >= this.t)
+                this[this.t++] = 0;
+              ++this[e3];
+            }
+          };
+          t4.prototype.multiplyLowerTo = function(t5, e3, r4) {
+            var i4 = Math.min(this.t + t5.t, e3);
+            r4.s = 0;
+            r4.t = i4;
+            while (i4 > 0)
+              r4[--i4] = 0;
+            for (var n3 = r4.t - this.t; i4 < n3; ++i4)
+              r4[i4 + this.t] = this.am(0, t5[i4], r4, i4, 0, this.t);
+            for (var n3 = Math.min(t5.t, e3); i4 < n3; ++i4)
+              this.am(0, t5[i4], r4, i4, 0, e3 - i4);
+            r4.clamp();
+          };
+          t4.prototype.multiplyUpperTo = function(t5, e3, r4) {
+            --e3;
+            var i4 = r4.t = this.t + t5.t - e3;
+            r4.s = 0;
+            while (--i4 >= 0)
+              r4[i4] = 0;
+            for (i4 = Math.max(e3 - this.t, 0); i4 < t5.t; ++i4)
+              r4[this.t + i4 - e3] = this.am(e3 - i4, t5[i4], r4, 0, 0, this.t + i4 - e3);
+            r4.clamp();
+            r4.drShiftTo(1, r4);
+          };
+          t4.prototype.modInt = function(t5) {
+            if (t5 <= 0)
+              return 0;
+            var e3 = this.DV % t5;
+            var r4 = this.s < 0 ? t5 - 1 : 0;
+            if (this.t > 0)
+              if (0 == e3)
+                r4 = this[0] % t5;
+              else
+                for (var i4 = this.t - 1; i4 >= 0; --i4)
+                  r4 = (e3 * r4 + this[i4]) % t5;
+            return r4;
+          };
+          t4.prototype.millerRabin = function(e3) {
+            var r4 = this.subtract(t4.ONE);
+            var i4 = r4.getLowestSetBit();
+            if (i4 <= 0)
+              return false;
+            var n3 = r4.shiftRight(i4);
+            e3 = e3 + 1 >> 1;
+            if (e3 > O2.length)
+              e3 = O2.length;
+            var s3 = H2();
+            for (var a3 = 0; a3 < e3; ++a3) {
+              s3.fromInt(O2[Math.floor(Math.random() * O2.length)]);
+              var o3 = s3.modPow(n3, this);
+              if (0 != o3.compareTo(t4.ONE) && 0 != o3.compareTo(r4)) {
+                var u3 = 1;
+                while (u3++ < i4 && 0 != o3.compareTo(r4)) {
+                  o3 = o3.modPowInt(2, this);
+                  if (0 == o3.compareTo(t4.ONE))
+                    return false;
+                }
+                if (0 != o3.compareTo(r4))
+                  return false;
+              }
+            }
+            return true;
+          };
+          t4.prototype.square = function() {
+            var t5 = H2();
+            this.squareTo(t5);
+            return t5;
+          };
+          t4.prototype.gcda = function(t5, e3) {
+            var r4 = this.s < 0 ? this.negate() : this.clone();
+            var i4 = t5.s < 0 ? t5.negate() : t5.clone();
+            if (r4.compareTo(i4) < 0) {
+              var n3 = r4;
+              r4 = i4;
+              i4 = n3;
+            }
+            var s3 = r4.getLowestSetBit();
+            var a3 = i4.getLowestSetBit();
+            if (a3 < 0) {
+              e3(r4);
+              return;
+            }
+            if (s3 < a3)
+              a3 = s3;
+            if (a3 > 0) {
+              r4.rShiftTo(a3, r4);
+              i4.rShiftTo(a3, i4);
+            }
+            var o3 = function() {
+              if ((s3 = r4.getLowestSetBit()) > 0)
+                r4.rShiftTo(s3, r4);
+              if ((s3 = i4.getLowestSetBit()) > 0)
+                i4.rShiftTo(s3, i4);
+              if (r4.compareTo(i4) >= 0) {
+                r4.subTo(i4, r4);
+                r4.rShiftTo(1, r4);
+              } else {
+                i4.subTo(r4, i4);
+                i4.rShiftTo(1, i4);
+              }
+              if (!(r4.signum() > 0)) {
+                if (a3 > 0)
+                  i4.lShiftTo(a3, i4);
+                setTimeout(function() {
+                  e3(i4);
+                }, 0);
+              } else
+                setTimeout(o3, 0);
+            };
+            setTimeout(o3, 10);
+          };
+          t4.prototype.fromNumberAsync = function(e3, r4, i4, n3) {
+            if ("number" == typeof r4)
+              if (e3 < 2)
+                this.fromInt(1);
+              else {
+                this.fromNumber(e3, i4);
+                if (!this.testBit(e3 - 1))
+                  this.bitwiseTo(t4.ONE.shiftLeft(e3 - 1), a2, this);
+                if (this.isEven())
+                  this.dAddOffset(1, 0);
+                var s3 = this;
+                var o3 = function() {
+                  s3.dAddOffset(2, 0);
+                  if (s3.bitLength() > e3)
+                    s3.subTo(t4.ONE.shiftLeft(e3 - 1), s3);
+                  if (s3.isProbablePrime(r4))
+                    setTimeout(function() {
+                      n3();
+                    }, 0);
+                  else
+                    setTimeout(o3, 0);
+                };
+                setTimeout(o3, 0);
+              }
+            else {
+              var u3 = [];
+              var c3 = 7 & e3;
+              u3.length = (e3 >> 3) + 1;
+              r4.nextBytes(u3);
+              if (c3 > 0)
+                u3[0] &= (1 << c3) - 1;
+              else
+                u3[0] = 0;
+              this.fromString(u3, 256);
+            }
+          };
+          return t4;
+        }();
+        var N2 = function() {
+          function t4() {
+          }
+          t4.prototype.convert = function(t5) {
+            return t5;
+          };
+          t4.prototype.revert = function(t5) {
+            return t5;
+          };
+          t4.prototype.mulTo = function(t5, e3, r4) {
+            t5.multiplyTo(e3, r4);
+          };
+          t4.prototype.sqrTo = function(t5, e3) {
+            t5.squareTo(e3);
+          };
+          return t4;
+        }();
+        var P2 = function() {
+          function t4(t5) {
+            this.m = t5;
+          }
+          t4.prototype.convert = function(t5) {
+            if (t5.s < 0 || t5.compareTo(this.m) >= 0)
+              return t5.mod(this.m);
+            else
+              return t5;
+          };
+          t4.prototype.revert = function(t5) {
+            return t5;
+          };
+          t4.prototype.reduce = function(t5) {
+            t5.divRemTo(this.m, null, t5);
+          };
+          t4.prototype.mulTo = function(t5, e3, r4) {
+            t5.multiplyTo(e3, r4);
+            this.reduce(r4);
+          };
+          t4.prototype.sqrTo = function(t5, e3) {
+            t5.squareTo(e3);
+            this.reduce(e3);
+          };
+          return t4;
+        }();
+        var V2 = function() {
+          function t4(t5) {
+            this.m = t5;
+            this.mp = t5.invDigit();
+            this.mpl = 32767 & this.mp;
+            this.mph = this.mp >> 15;
+            this.um = (1 << t5.DB - 15) - 1;
+            this.mt2 = 2 * t5.t;
+          }
+          t4.prototype.convert = function(t5) {
+            var e3 = H2();
+            t5.abs().dlShiftTo(this.m.t, e3);
+            e3.divRemTo(this.m, null, e3);
+            if (t5.s < 0 && e3.compareTo(C2.ZERO) > 0)
+              this.m.subTo(e3, e3);
+            return e3;
+          };
+          t4.prototype.revert = function(t5) {
+            var e3 = H2();
+            t5.copyTo(e3);
+            this.reduce(e3);
+            return e3;
+          };
+          t4.prototype.reduce = function(t5) {
+            while (t5.t <= this.mt2)
+              t5[t5.t++] = 0;
+            for (var e3 = 0; e3 < this.m.t; ++e3) {
+              var r4 = 32767 & t5[e3];
+              var i4 = r4 * this.mpl + ((r4 * this.mph + (t5[e3] >> 15) * this.mpl & this.um) << 15) & t5.DM;
+              r4 = e3 + this.m.t;
+              t5[r4] += this.m.am(0, i4, t5, e3, 0, this.m.t);
+              while (t5[r4] >= t5.DV) {
+                t5[r4] -= t5.DV;
+                t5[++r4]++;
+              }
+            }
+            t5.clamp();
+            t5.drShiftTo(this.m.t, t5);
+            if (t5.compareTo(this.m) >= 0)
+              t5.subTo(this.m, t5);
+          };
+          t4.prototype.mulTo = function(t5, e3, r4) {
+            t5.multiplyTo(e3, r4);
+            this.reduce(r4);
+          };
+          t4.prototype.sqrTo = function(t5, e3) {
+            t5.squareTo(e3);
+            this.reduce(e3);
+          };
+          return t4;
+        }();
+        var L2 = function() {
+          function t4(t5) {
+            this.m = t5;
+            this.r2 = H2();
+            this.q3 = H2();
+            C2.ONE.dlShiftTo(2 * t5.t, this.r2);
+            this.mu = this.r2.divide(t5);
+          }
+          t4.prototype.convert = function(t5) {
+            if (t5.s < 0 || t5.t > 2 * this.m.t)
+              return t5.mod(this.m);
+            else if (t5.compareTo(this.m) < 0)
+              return t5;
+            else {
+              var e3 = H2();
+              t5.copyTo(e3);
+              this.reduce(e3);
+              return e3;
+            }
+          };
+          t4.prototype.revert = function(t5) {
+            return t5;
+          };
+          t4.prototype.reduce = function(t5) {
+            t5.drShiftTo(this.m.t - 1, this.r2);
+            if (t5.t > this.m.t + 1) {
+              t5.t = this.m.t + 1;
+              t5.clamp();
+            }
+            this.mu.multiplyUpperTo(this.r2, this.m.t + 1, this.q3);
+            this.m.multiplyLowerTo(this.q3, this.m.t + 1, this.r2);
+            while (t5.compareTo(this.r2) < 0)
+              t5.dAddOffset(1, this.m.t + 1);
+            t5.subTo(this.r2, t5);
+            while (t5.compareTo(this.m) >= 0)
+              t5.subTo(this.m, t5);
+          };
+          t4.prototype.mulTo = function(t5, e3, r4) {
+            t5.multiplyTo(e3, r4);
+            this.reduce(r4);
+          };
+          t4.prototype.sqrTo = function(t5, e3) {
+            t5.squareTo(e3);
+            this.reduce(e3);
+          };
+          return t4;
+        }();
+        function H2() {
+          return new C2(null);
+        }
+        function K2(t4, e3) {
+          return new C2(t4, e3);
+        }
+        var U2 = "undefined" !== typeof navigator;
+        if (U2 && B2 && "Microsoft Internet Explorer" == navigator.appName) {
+          C2.prototype.am = function t4(e3, r4, i4, n3, s3, a3) {
+            var o3 = 32767 & r4;
+            var u3 = r4 >> 15;
+            while (--a3 >= 0) {
+              var c3 = 32767 & this[e3];
+              var l3 = this[e3++] >> 15;
+              var f3 = u3 * c3 + l3 * o3;
+              c3 = o3 * c3 + ((32767 & f3) << 15) + i4[n3] + (1073741823 & s3);
+              s3 = (c3 >>> 30) + (f3 >>> 15) + u3 * l3 + (s3 >>> 30);
+              i4[n3++] = 1073741823 & c3;
+            }
+            return s3;
+          };
+          x2 = 30;
+        } else if (U2 && B2 && "Netscape" != navigator.appName) {
+          C2.prototype.am = function t4(e3, r4, i4, n3, s3, a3) {
+            while (--a3 >= 0) {
+              var o3 = r4 * this[e3++] + i4[n3] + s3;
+              s3 = Math.floor(o3 / 67108864);
+              i4[n3++] = 67108863 & o3;
+            }
+            return s3;
+          };
+          x2 = 26;
+        } else {
+          C2.prototype.am = function t4(e3, r4, i4, n3, s3, a3) {
+            var o3 = 16383 & r4;
+            var u3 = r4 >> 14;
+            while (--a3 >= 0) {
+              var c3 = 16383 & this[e3];
+              var l3 = this[e3++] >> 14;
+              var f3 = u3 * c3 + l3 * o3;
+              c3 = o3 * c3 + ((16383 & f3) << 14) + i4[n3] + s3;
+              s3 = (c3 >> 28) + (f3 >> 14) + u3 * l3;
+              i4[n3++] = 268435455 & c3;
+            }
+            return s3;
+          };
+          x2 = 28;
+        }
+        C2.prototype.DB = x2;
+        C2.prototype.DM = (1 << x2) - 1;
+        C2.prototype.DV = 1 << x2;
+        var j2 = 52;
+        C2.prototype.FV = Math.pow(2, j2);
+        C2.prototype.F1 = j2 - x2;
+        C2.prototype.F2 = 2 * x2 - j2;
+        var q2 = [];
+        var F2;
+        var z2;
+        F2 = "0".charCodeAt(0);
+        for (z2 = 0; z2 <= 9; ++z2)
+          q2[F2++] = z2;
+        F2 = "a".charCodeAt(0);
+        for (z2 = 10; z2 < 36; ++z2)
+          q2[F2++] = z2;
+        F2 = "A".charCodeAt(0);
+        for (z2 = 10; z2 < 36; ++z2)
+          q2[F2++] = z2;
+        function G2(t4, e3) {
+          var r4 = q2[t4.charCodeAt(e3)];
+          return null == r4 ? -1 : r4;
+        }
+        function Y2(t4) {
+          var e3 = H2();
+          e3.fromInt(t4);
+          return e3;
+        }
+        function W2(t4) {
+          var e3 = 1;
+          var r4;
+          if (0 != (r4 = t4 >>> 16)) {
+            t4 = r4;
+            e3 += 16;
+          }
+          if (0 != (r4 = t4 >> 8)) {
+            t4 = r4;
+            e3 += 8;
+          }
+          if (0 != (r4 = t4 >> 4)) {
+            t4 = r4;
+            e3 += 4;
+          }
+          if (0 != (r4 = t4 >> 2)) {
+            t4 = r4;
+            e3 += 2;
+          }
+          if (0 != (r4 = t4 >> 1)) {
+            t4 = r4;
+            e3 += 1;
+          }
+          return e3;
+        }
+        C2.ZERO = Y2(0);
+        C2.ONE = Y2(1);
+        var J2 = function() {
+          function t4() {
+            this.i = 0;
+            this.j = 0;
+            this.S = [];
+          }
+          t4.prototype.init = function(t5) {
+            var e3;
+            var r4;
+            var i4;
+            for (e3 = 0; e3 < 256; ++e3)
+              this.S[e3] = e3;
+            r4 = 0;
+            for (e3 = 0; e3 < 256; ++e3) {
+              r4 = r4 + this.S[e3] + t5[e3 % t5.length] & 255;
+              i4 = this.S[e3];
+              this.S[e3] = this.S[r4];
+              this.S[r4] = i4;
+            }
+            this.i = 0;
+            this.j = 0;
+          };
+          t4.prototype.next = function() {
+            var t5;
+            this.i = this.i + 1 & 255;
+            this.j = this.j + this.S[this.i] & 255;
+            t5 = this.S[this.i];
+            this.S[this.i] = this.S[this.j];
+            this.S[this.j] = t5;
+            return this.S[t5 + this.S[this.i] & 255];
+          };
+          return t4;
+        }();
+        function Z2() {
+          return new J2();
+        }
+        var $2 = 256;
+        var X2;
+        var Q2 = null;
+        var tt2;
+        if (null == Q2) {
+          Q2 = [];
+          tt2 = 0;
+        }
+        function nt2() {
+          if (null == X2) {
+            X2 = Z2();
+            while (tt2 < $2) {
+              var t4 = Math.floor(65536 * Math.random());
+              Q2[tt2++] = 255 & t4;
+            }
+            X2.init(Q2);
+            for (tt2 = 0; tt2 < Q2.length; ++tt2)
+              Q2[tt2] = 0;
+            tt2 = 0;
+          }
+          return X2.next();
+        }
+        var st2 = function() {
+          function t4() {
+          }
+          t4.prototype.nextBytes = function(t5) {
+            for (var e3 = 0; e3 < t5.length; ++e3)
+              t5[e3] = nt2();
+          };
+          return t4;
+        }();
+        function at2(t4, e3) {
+          if (e3 < t4.length + 22) {
+            console.error("Message too long for RSA");
+            return null;
+          }
+          var r4 = e3 - t4.length - 6;
+          var i4 = "";
+          for (var n3 = 0; n3 < r4; n3 += 2)
+            i4 += "ff";
+          var s3 = "0001" + i4 + "00" + t4;
+          return K2(s3, 16);
+        }
+        function ot2(t4, e3) {
+          if (e3 < t4.length + 11) {
+            console.error("Message too long for RSA");
+            return null;
+          }
+          var r4 = [];
+          var i4 = t4.length - 1;
+          while (i4 >= 0 && e3 > 0) {
+            var n3 = t4.charCodeAt(i4--);
+            if (n3 < 128)
+              r4[--e3] = n3;
+            else if (n3 > 127 && n3 < 2048) {
+              r4[--e3] = 63 & n3 | 128;
+              r4[--e3] = n3 >> 6 | 192;
+            } else {
+              r4[--e3] = 63 & n3 | 128;
+              r4[--e3] = n3 >> 6 & 63 | 128;
+              r4[--e3] = n3 >> 12 | 224;
+            }
+          }
+          r4[--e3] = 0;
+          var s3 = new st2();
+          var a3 = [];
+          while (e3 > 2) {
+            a3[0] = 0;
+            while (0 == a3[0])
+              s3.nextBytes(a3);
+            r4[--e3] = a3[0];
+          }
+          r4[--e3] = 2;
+          r4[--e3] = 0;
+          return new C2(r4);
+        }
+        var ut2 = function() {
+          function t4() {
+            this.n = null;
+            this.e = 0;
+            this.d = null;
+            this.p = null;
+            this.q = null;
+            this.dmp1 = null;
+            this.dmq1 = null;
+            this.coeff = null;
+          }
+          t4.prototype.doPublic = function(t5) {
+            return t5.modPowInt(this.e, this.n);
+          };
+          t4.prototype.doPrivate = function(t5) {
+            if (null == this.p || null == this.q)
+              return t5.modPow(this.d, this.n);
+            var e3 = t5.mod(this.p).modPow(this.dmp1, this.p);
+            var r4 = t5.mod(this.q).modPow(this.dmq1, this.q);
+            while (e3.compareTo(r4) < 0)
+              e3 = e3.add(this.p);
+            return e3.subtract(r4).multiply(this.coeff).mod(this.p).multiply(this.q).add(r4);
+          };
+          t4.prototype.setPublic = function(t5, e3) {
+            if (null != t5 && null != e3 && t5.length > 0 && e3.length > 0) {
+              this.n = K2(t5, 16);
+              this.e = parseInt(e3, 16);
+            } else
+              console.error("Invalid RSA public key");
+          };
+          t4.prototype.encrypt = function(t5) {
+            var e3 = this.n.bitLength() + 7 >> 3;
+            var r4 = ot2(t5, e3);
+            if (null == r4)
+              return null;
+            var i4 = this.doPublic(r4);
+            if (null == i4)
+              return null;
+            var n3 = i4.toString(16);
+            var s3 = n3.length;
+            for (var a3 = 0; a3 < 2 * e3 - s3; a3++)
+              n3 = "0" + n3;
+            return n3;
+          };
+          t4.prototype.setPrivate = function(t5, e3, r4) {
+            if (null != t5 && null != e3 && t5.length > 0 && e3.length > 0) {
+              this.n = K2(t5, 16);
+              this.e = parseInt(e3, 16);
+              this.d = K2(r4, 16);
+            } else
+              console.error("Invalid RSA private key");
+          };
+          t4.prototype.setPrivateEx = function(t5, e3, r4, i4, n3, s3, a3, o3) {
+            if (null != t5 && null != e3 && t5.length > 0 && e3.length > 0) {
+              this.n = K2(t5, 16);
+              this.e = parseInt(e3, 16);
+              this.d = K2(r4, 16);
+              this.p = K2(i4, 16);
+              this.q = K2(n3, 16);
+              this.dmp1 = K2(s3, 16);
+              this.dmq1 = K2(a3, 16);
+              this.coeff = K2(o3, 16);
+            } else
+              console.error("Invalid RSA private key");
+          };
+          t4.prototype.generate = function(t5, e3) {
+            var r4 = new st2();
+            var i4 = t5 >> 1;
+            this.e = parseInt(e3, 16);
+            var n3 = new C2(e3, 16);
+            for (; ; ) {
+              for (; ; ) {
+                this.p = new C2(t5 - i4, 1, r4);
+                if (0 == this.p.subtract(C2.ONE).gcd(n3).compareTo(C2.ONE) && this.p.isProbablePrime(10))
+                  break;
+              }
+              for (; ; ) {
+                this.q = new C2(i4, 1, r4);
+                if (0 == this.q.subtract(C2.ONE).gcd(n3).compareTo(C2.ONE) && this.q.isProbablePrime(10))
+                  break;
+              }
+              if (this.p.compareTo(this.q) <= 0) {
+                var s3 = this.p;
+                this.p = this.q;
+                this.q = s3;
+              }
+              var a3 = this.p.subtract(C2.ONE);
+              var o3 = this.q.subtract(C2.ONE);
+              var u3 = a3.multiply(o3);
+              if (0 == u3.gcd(n3).compareTo(C2.ONE)) {
+                this.n = this.p.multiply(this.q);
+                this.d = n3.modInverse(u3);
+                this.dmp1 = this.d.mod(a3);
+                this.dmq1 = this.d.mod(o3);
+                this.coeff = this.q.modInverse(this.p);
+                break;
+              }
+            }
+          };
+          t4.prototype.decrypt = function(t5) {
+            var e3 = K2(t5, 16);
+            var r4 = this.doPrivate(e3);
+            if (null == r4)
+              return null;
+            return ct2(r4, this.n.bitLength() + 7 >> 3);
+          };
+          t4.prototype.generateAsync = function(t5, e3, r4) {
+            var i4 = new st2();
+            var n3 = t5 >> 1;
+            this.e = parseInt(e3, 16);
+            var s3 = new C2(e3, 16);
+            var a3 = this;
+            var o3 = function() {
+              var e4 = function() {
+                if (a3.p.compareTo(a3.q) <= 0) {
+                  var t6 = a3.p;
+                  a3.p = a3.q;
+                  a3.q = t6;
+                }
+                var e5 = a3.p.subtract(C2.ONE);
+                var i5 = a3.q.subtract(C2.ONE);
+                var n4 = e5.multiply(i5);
+                if (0 == n4.gcd(s3).compareTo(C2.ONE)) {
+                  a3.n = a3.p.multiply(a3.q);
+                  a3.d = s3.modInverse(n4);
+                  a3.dmp1 = a3.d.mod(e5);
+                  a3.dmq1 = a3.d.mod(i5);
+                  a3.coeff = a3.q.modInverse(a3.p);
+                  setTimeout(function() {
+                    r4();
+                  }, 0);
+                } else
+                  setTimeout(o3, 0);
+              };
+              var u3 = function() {
+                a3.q = H2();
+                a3.q.fromNumberAsync(n3, 1, i4, function() {
+                  a3.q.subtract(C2.ONE).gcda(s3, function(t6) {
+                    if (0 == t6.compareTo(C2.ONE) && a3.q.isProbablePrime(10))
+                      setTimeout(e4, 0);
+                    else
+                      setTimeout(u3, 0);
+                  });
+>>>>>>> .theirs
                 });
+<<<<<<< .mine
               };
               var c3 = function() {
                 a3.p = H2();
@@ -42836,10 +60996,1199 @@ if (uni.restoreGlobal) {
                 fail(res3) {
                   console.error(res3.errMsg);
                 }
+=======
+              };
+              var c3 = function() {
+                a3.p = H2();
+                a3.p.fromNumberAsync(t5 - n3, 1, i4, function() {
+                  a3.p.subtract(C2.ONE).gcda(s3, function(t6) {
+                    if (0 == t6.compareTo(C2.ONE) && a3.p.isProbablePrime(10))
+                      setTimeout(u3, 0);
+                    else
+                      setTimeout(c3, 0);
+                  });
+                });
+              };
+              setTimeout(c3, 0);
+            };
+            setTimeout(o3, 0);
+          };
+          t4.prototype.sign = function(t5, e3, r4) {
+            var i4 = ht2(r4);
+            var n3 = i4 + e3(t5).toString();
+            var s3 = at2(n3, this.n.bitLength() / 4);
+            if (null == s3)
+              return null;
+            var a3 = this.doPrivate(s3);
+            if (null == a3)
+              return null;
+            var o3 = a3.toString(16);
+            if (0 == (1 & o3.length))
+              return o3;
+            else
+              return "0" + o3;
+          };
+          t4.prototype.verify = function(t5, e3, r4) {
+            var i4 = K2(e3, 16);
+            var n3 = this.doPublic(i4);
+            if (null == n3)
+              return null;
+            var s3 = n3.toString(16).replace(/^1f+00/, "");
+            var a3 = dt2(s3);
+            return a3 == r4(t5).toString();
+          };
+          t4.prototype.encryptLong = function(t5) {
+            var e3 = this;
+            var r4 = "";
+            var i4 = (this.n.bitLength() + 7 >> 3) - 11;
+            var n3 = this.setSplitChn(t5, i4);
+            n3.forEach(function(t6) {
+              r4 += e3.encrypt(t6);
+            });
+            return r4;
+          };
+          t4.prototype.decryptLong = function(t5) {
+            var e3 = "";
+            var r4 = this.n.bitLength() + 7 >> 3;
+            var i4 = 2 * r4;
+            if (t5.length > i4) {
+              var n3 = t5.match(new RegExp(".{1," + i4 + "}", "g")) || [];
+              var s3 = [];
+              for (var a3 = 0; a3 < n3.length; a3++) {
+                var o3 = K2(n3[a3], 16);
+                var u3 = this.doPrivate(o3);
+                if (null == u3)
+                  return null;
+                s3.push(u3);
+              }
+              e3 = lt2(s3, r4);
+            } else
+              e3 = this.decrypt(t5);
+            return e3;
+          };
+          t4.prototype.setSplitChn = function(t5, e3, r4) {
+            if (void 0 === r4)
+              r4 = [];
+            var i4 = t5.split("");
+            var n3 = 0;
+            for (var s3 = 0; s3 < i4.length; s3++) {
+              var a3 = i4[s3].charCodeAt(0);
+              if (a3 <= 127)
+                n3 += 1;
+              else if (a3 <= 2047)
+                n3 += 2;
+              else if (a3 <= 65535)
+                n3 += 3;
+              else
+                n3 += 4;
+              if (n3 > e3) {
+                var o3 = t5.substring(0, s3);
+                r4.push(o3);
+                return this.setSplitChn(t5.substring(s3), e3, r4);
+              }
+            }
+            r4.push(t5);
+            return r4;
+          };
+          return t4;
+        }();
+        function ct2(t4, e3) {
+          var r4 = t4.toByteArray();
+          var i4 = 0;
+          while (i4 < r4.length && 0 == r4[i4])
+            ++i4;
+          if (r4.length - i4 != e3 - 1 || 2 != r4[i4])
+            return null;
+          ++i4;
+          while (0 != r4[i4])
+            if (++i4 >= r4.length)
+              return null;
+          var n3 = "";
+          while (++i4 < r4.length) {
+            var s3 = 255 & r4[i4];
+            if (s3 < 128)
+              n3 += String.fromCharCode(s3);
+            else if (s3 > 191 && s3 < 224) {
+              n3 += String.fromCharCode((31 & s3) << 6 | 63 & r4[i4 + 1]);
+              ++i4;
+            } else {
+              n3 += String.fromCharCode((15 & s3) << 12 | (63 & r4[i4 + 1]) << 6 | 63 & r4[i4 + 2]);
+              i4 += 2;
+            }
+          }
+          return n3;
+        }
+        function lt2(t4, e3) {
+          var r4 = [];
+          for (var i4 = 0; i4 < t4.length; i4++) {
+            var n3 = t4[i4];
+            var s3 = n3.toByteArray();
+            var a3 = 0;
+            while (a3 < s3.length && 0 == s3[a3])
+              ++a3;
+            if (s3.length - a3 != e3 - 1 || 2 != s3[a3])
+              return null;
+            ++a3;
+            while (0 != s3[a3])
+              if (++a3 >= s3.length)
+                return null;
+            r4 = r4.concat(s3.slice(a3 + 1));
+          }
+          var o3 = r4;
+          var u3 = -1;
+          var c3 = "";
+          while (++u3 < o3.length) {
+            var l3 = 255 & o3[u3];
+            if (l3 < 128)
+              c3 += String.fromCharCode(l3);
+            else if (l3 > 191 && l3 < 224) {
+              c3 += String.fromCharCode((31 & l3) << 6 | 63 & o3[u3 + 1]);
+              ++u3;
+            } else {
+              c3 += String.fromCharCode((15 & l3) << 12 | (63 & o3[u3 + 1]) << 6 | 63 & o3[u3 + 2]);
+              u3 += 2;
+            }
+          }
+          return c3;
+        }
+        var ft2 = { md2: "3020300c06082a864886f70d020205000410", md5: "3020300c06082a864886f70d020505000410", sha1: "3021300906052b0e03021a05000414", sha224: "302d300d06096086480165030402040500041c", sha256: "3031300d060960864801650304020105000420", sha384: "3041300d060960864801650304020205000430", sha512: "3051300d060960864801650304020305000440", ripemd160: "3021300906052b2403020105000414" };
+        function ht2(t4) {
+          return ft2[t4] || "";
+        }
+        function dt2(t4) {
+          for (var e3 in ft2)
+            if (ft2.hasOwnProperty(e3)) {
+              var r4 = ft2[e3];
+              var i4 = r4.length;
+              if (t4.substr(0, i4) == r4)
+                return t4.substr(i4);
+            }
+          return t4;
+        }
+        var pt2 = {};
+        pt2.lang = { extend: function(t4, e3, r4) {
+          if (!e3 || !t4)
+            throw new Error("YAHOO.lang.extend failed, please check that all dependencies are included.");
+          var i4 = function() {
+          };
+          i4.prototype = e3.prototype;
+          t4.prototype = new i4();
+          t4.prototype.constructor = t4;
+          t4.superclass = e3.prototype;
+          if (e3.prototype.constructor == Object.prototype.constructor)
+            e3.prototype.constructor = e3;
+          if (r4) {
+            var n3;
+            for (n3 in r4)
+              t4.prototype[n3] = r4[n3];
+            var s3 = function() {
+            }, a3 = ["toString", "valueOf"];
+            try {
+              if (/MSIE/.test(navigator.userAgent))
+                s3 = function(t5, e4) {
+                  for (n3 = 0; n3 < a3.length; n3 += 1) {
+                    var r5 = a3[n3], i5 = e4[r5];
+                    if ("function" === typeof i5 && i5 != Object.prototype[r5])
+                      t5[r5] = i5;
+                  }
+                };
+            } catch (t5) {
+            }
+            s3(t4.prototype, r4);
+          }
+        } };
+        var vt2 = {};
+        if ("undefined" == typeof vt2.asn1 || !vt2.asn1)
+          vt2.asn1 = {};
+        vt2.asn1.ASN1Util = new function() {
+          this.integerToByteHex = function(t4) {
+            var e3 = t4.toString(16);
+            if (e3.length % 2 == 1)
+              e3 = "0" + e3;
+            return e3;
+          };
+          this.bigIntToMinTwosComplementsHex = function(t4) {
+            var e3 = t4.toString(16);
+            if ("-" != e3.substr(0, 1)) {
+              if (e3.length % 2 == 1)
+                e3 = "0" + e3;
+              else if (!e3.match(/^[0-7]/))
+                e3 = "00" + e3;
+            } else {
+              var r4 = e3.substr(1);
+              var i4 = r4.length;
+              if (i4 % 2 == 1)
+                i4 += 1;
+              else if (!e3.match(/^[0-7]/))
+                i4 += 2;
+              var n3 = "";
+              for (var s3 = 0; s3 < i4; s3++)
+                n3 += "f";
+              var a3 = new C2(n3, 16);
+              var o3 = a3.xor(t4).add(C2.ONE);
+              e3 = o3.toString(16).replace(/^-/, "");
+            }
+            return e3;
+          };
+          this.getPEMStringFromHex = function(t4, e3) {
+            return hextopem(t4, e3);
+          };
+          this.newObject = function(t4) {
+            var e3 = vt2, r4 = e3.asn1, i4 = r4.DERBoolean, n3 = r4.DERInteger, s3 = r4.DERBitString, a3 = r4.DEROctetString, o3 = r4.DERNull, u3 = r4.DERObjectIdentifier, c3 = r4.DEREnumerated, l3 = r4.DERUTF8String, f3 = r4.DERNumericString, h3 = r4.DERPrintableString, d3 = r4.DERTeletexString, p3 = r4.DERIA5String, v2 = r4.DERUTCTime, g3 = r4.DERGeneralizedTime, y2 = r4.DERSequence, m3 = r4.DERSet, w3 = r4.DERTaggedObject, S3 = r4.ASN1Util.newObject;
+            var _3 = Object.keys(t4);
+            if (1 != _3.length)
+              throw "key of param shall be only one.";
+            var b3 = _3[0];
+            if (-1 == ":bool:int:bitstr:octstr:null:oid:enum:utf8str:numstr:prnstr:telstr:ia5str:utctime:gentime:seq:set:tag:".indexOf(":" + b3 + ":"))
+              throw "undefined key: " + b3;
+            if ("bool" == b3)
+              return new i4(t4[b3]);
+            if ("int" == b3)
+              return new n3(t4[b3]);
+            if ("bitstr" == b3)
+              return new s3(t4[b3]);
+            if ("octstr" == b3)
+              return new a3(t4[b3]);
+            if ("null" == b3)
+              return new o3(t4[b3]);
+            if ("oid" == b3)
+              return new u3(t4[b3]);
+            if ("enum" == b3)
+              return new c3(t4[b3]);
+            if ("utf8str" == b3)
+              return new l3(t4[b3]);
+            if ("numstr" == b3)
+              return new f3(t4[b3]);
+            if ("prnstr" == b3)
+              return new h3(t4[b3]);
+            if ("telstr" == b3)
+              return new d3(t4[b3]);
+            if ("ia5str" == b3)
+              return new p3(t4[b3]);
+            if ("utctime" == b3)
+              return new v2(t4[b3]);
+            if ("gentime" == b3)
+              return new g3(t4[b3]);
+            if ("seq" == b3) {
+              var E3 = t4[b3];
+              var D3 = [];
+              for (var M3 = 0; M3 < E3.length; M3++) {
+                var T3 = S3(E3[M3]);
+                D3.push(T3);
+              }
+              return new y2({ array: D3 });
+            }
+            if ("set" == b3) {
+              var E3 = t4[b3];
+              var D3 = [];
+              for (var M3 = 0; M3 < E3.length; M3++) {
+                var T3 = S3(E3[M3]);
+                D3.push(T3);
+              }
+              return new m3({ array: D3 });
+            }
+            if ("tag" == b3) {
+              var I3 = t4[b3];
+              if ("[object Array]" === Object.prototype.toString.call(I3) && 3 == I3.length) {
+                var A3 = S3(I3[2]);
+                return new w3({ tag: I3[0], explicit: I3[1], obj: A3 });
+              } else {
+                var x3 = {};
+                if (void 0 !== I3.explicit)
+                  x3.explicit = I3.explicit;
+                if (void 0 !== I3.tag)
+                  x3.tag = I3.tag;
+                if (void 0 === I3.obj)
+                  throw "obj shall be specified for 'tag'.";
+                x3.obj = S3(I3.obj);
+                return new w3(x3);
+              }
+            }
+          };
+          this.jsonToASN1HEX = function(t4) {
+            var e3 = this.newObject(t4);
+            return e3.getEncodedHex();
+          };
+        }();
+        vt2.asn1.ASN1Util.oidHexToInt = function(t4) {
+          var e3 = "";
+          var r4 = parseInt(t4.substr(0, 2), 16);
+          var i4 = Math.floor(r4 / 40);
+          var n3 = r4 % 40;
+          var e3 = i4 + "." + n3;
+          var s3 = "";
+          for (var a3 = 2; a3 < t4.length; a3 += 2) {
+            var o3 = parseInt(t4.substr(a3, 2), 16);
+            var u3 = ("00000000" + o3.toString(2)).slice(-8);
+            s3 += u3.substr(1, 7);
+            if ("0" == u3.substr(0, 1)) {
+              var c3 = new C2(s3, 2);
+              e3 = e3 + "." + c3.toString(10);
+              s3 = "";
+            }
+          }
+          return e3;
+        };
+        vt2.asn1.ASN1Util.oidIntToHex = function(t4) {
+          var e3 = function(t5) {
+            var e4 = t5.toString(16);
+            if (1 == e4.length)
+              e4 = "0" + e4;
+            return e4;
+          };
+          var r4 = function(t5) {
+            var r5 = "";
+            var i5 = new C2(t5, 10);
+            var n4 = i5.toString(2);
+            var s4 = 7 - n4.length % 7;
+            if (7 == s4)
+              s4 = 0;
+            var a4 = "";
+            for (var o3 = 0; o3 < s4; o3++)
+              a4 += "0";
+            n4 = a4 + n4;
+            for (var o3 = 0; o3 < n4.length - 1; o3 += 7) {
+              var u3 = n4.substr(o3, 7);
+              if (o3 != n4.length - 7)
+                u3 = "1" + u3;
+              r5 += e3(parseInt(u3, 2));
+            }
+            return r5;
+          };
+          if (!t4.match(/^[0-9.]+$/))
+            throw "malformed oid string: " + t4;
+          var i4 = "";
+          var n3 = t4.split(".");
+          var s3 = 40 * parseInt(n3[0]) + parseInt(n3[1]);
+          i4 += e3(s3);
+          n3.splice(0, 2);
+          for (var a3 = 0; a3 < n3.length; a3++)
+            i4 += r4(n3[a3]);
+          return i4;
+        };
+        vt2.asn1.ASN1Object = function() {
+          var n3 = "";
+          this.getLengthHexFromValue = function() {
+            if ("undefined" == typeof this.hV || null == this.hV)
+              throw "this.hV is null or undefined.";
+            if (this.hV.length % 2 == 1)
+              throw "value hex must be even length: n=" + n3.length + ",v=" + this.hV;
+            var t4 = this.hV.length / 2;
+            var e3 = t4.toString(16);
+            if (e3.length % 2 == 1)
+              e3 = "0" + e3;
+            if (t4 < 128)
+              return e3;
+            else {
+              var r4 = e3.length / 2;
+              if (r4 > 15)
+                throw "ASN.1 length too long to represent by 8x: n = " + t4.toString(16);
+              var i4 = 128 + r4;
+              return i4.toString(16) + e3;
+            }
+          };
+          this.getEncodedHex = function() {
+            if (null == this.hTLV || this.isModified) {
+              this.hV = this.getFreshValueHex();
+              this.hL = this.getLengthHexFromValue();
+              this.hTLV = this.hT + this.hL + this.hV;
+              this.isModified = false;
+            }
+            return this.hTLV;
+          };
+          this.getValueHex = function() {
+            this.getEncodedHex();
+            return this.hV;
+          };
+          this.getFreshValueHex = function() {
+            return "";
+          };
+        };
+        vt2.asn1.DERAbstractString = function(t4) {
+          vt2.asn1.DERAbstractString.superclass.constructor.call(this);
+          this.getString = function() {
+            return this.s;
+          };
+          this.setString = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.s = t5;
+            this.hV = stohex(this.s);
+          };
+          this.setStringHex = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.s = null;
+            this.hV = t5;
+          };
+          this.getFreshValueHex = function() {
+            return this.hV;
+          };
+          if ("undefined" != typeof t4) {
+            if ("string" == typeof t4)
+              this.setString(t4);
+            else if ("undefined" != typeof t4["str"])
+              this.setString(t4["str"]);
+            else if ("undefined" != typeof t4["hex"])
+              this.setStringHex(t4["hex"]);
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERAbstractString, vt2.asn1.ASN1Object);
+        vt2.asn1.DERAbstractTime = function(t4) {
+          vt2.asn1.DERAbstractTime.superclass.constructor.call(this);
+          this.localDateToUTC = function(t5) {
+            utc = t5.getTime() + 6e4 * t5.getTimezoneOffset();
+            var e3 = new Date(utc);
+            return e3;
+          };
+          this.formatDate = function(t5, e3, r4) {
+            var i4 = this.zeroPadding;
+            var n3 = this.localDateToUTC(t5);
+            var s3 = String(n3.getFullYear());
+            if ("utc" == e3)
+              s3 = s3.substr(2, 2);
+            var a3 = i4(String(n3.getMonth() + 1), 2);
+            var o3 = i4(String(n3.getDate()), 2);
+            var u3 = i4(String(n3.getHours()), 2);
+            var c3 = i4(String(n3.getMinutes()), 2);
+            var l3 = i4(String(n3.getSeconds()), 2);
+            var f3 = s3 + a3 + o3 + u3 + c3 + l3;
+            if (true === r4) {
+              var h3 = n3.getMilliseconds();
+              if (0 != h3) {
+                var d3 = i4(String(h3), 3);
+                d3 = d3.replace(/[0]+$/, "");
+                f3 = f3 + "." + d3;
+              }
+            }
+            return f3 + "Z";
+          };
+          this.zeroPadding = function(t5, e3) {
+            if (t5.length >= e3)
+              return t5;
+            return new Array(e3 - t5.length + 1).join("0") + t5;
+          };
+          this.getString = function() {
+            return this.s;
+          };
+          this.setString = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.s = t5;
+            this.hV = stohex(t5);
+          };
+          this.setByDateValue = function(t5, e3, r4, i4, n3, s3) {
+            var a3 = new Date(Date.UTC(t5, e3 - 1, r4, i4, n3, s3, 0));
+            this.setByDate(a3);
+          };
+          this.getFreshValueHex = function() {
+            return this.hV;
+          };
+        };
+        pt2.lang.extend(vt2.asn1.DERAbstractTime, vt2.asn1.ASN1Object);
+        vt2.asn1.DERAbstractStructured = function(t4) {
+          vt2.asn1.DERAbstractString.superclass.constructor.call(this);
+          this.setByASN1ObjectArray = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.asn1Array = t5;
+          };
+          this.appendASN1Object = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.asn1Array.push(t5);
+          };
+          this.asn1Array = new Array();
+          if ("undefined" != typeof t4) {
+            if ("undefined" != typeof t4["array"])
+              this.asn1Array = t4["array"];
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERAbstractStructured, vt2.asn1.ASN1Object);
+        vt2.asn1.DERBoolean = function() {
+          vt2.asn1.DERBoolean.superclass.constructor.call(this);
+          this.hT = "01";
+          this.hTLV = "0101ff";
+        };
+        pt2.lang.extend(vt2.asn1.DERBoolean, vt2.asn1.ASN1Object);
+        vt2.asn1.DERInteger = function(t4) {
+          vt2.asn1.DERInteger.superclass.constructor.call(this);
+          this.hT = "02";
+          this.setByBigInteger = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.hV = vt2.asn1.ASN1Util.bigIntToMinTwosComplementsHex(t5);
+          };
+          this.setByInteger = function(t5) {
+            var e3 = new C2(String(t5), 10);
+            this.setByBigInteger(e3);
+          };
+          this.setValueHex = function(t5) {
+            this.hV = t5;
+          };
+          this.getFreshValueHex = function() {
+            return this.hV;
+          };
+          if ("undefined" != typeof t4) {
+            if ("undefined" != typeof t4["bigint"])
+              this.setByBigInteger(t4["bigint"]);
+            else if ("undefined" != typeof t4["int"])
+              this.setByInteger(t4["int"]);
+            else if ("number" == typeof t4)
+              this.setByInteger(t4);
+            else if ("undefined" != typeof t4["hex"])
+              this.setValueHex(t4["hex"]);
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERInteger, vt2.asn1.ASN1Object);
+        vt2.asn1.DERBitString = function(t4) {
+          if (void 0 !== t4 && "undefined" !== typeof t4.obj) {
+            var e3 = vt2.asn1.ASN1Util.newObject(t4.obj);
+            t4.hex = "00" + e3.getEncodedHex();
+          }
+          vt2.asn1.DERBitString.superclass.constructor.call(this);
+          this.hT = "03";
+          this.setHexValueIncludingUnusedBits = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.hV = t5;
+          };
+          this.setUnusedBitsAndHexValue = function(t5, e4) {
+            if (t5 < 0 || 7 < t5)
+              throw "unused bits shall be from 0 to 7: u = " + t5;
+            var r4 = "0" + t5;
+            this.hTLV = null;
+            this.isModified = true;
+            this.hV = r4 + e4;
+          };
+          this.setByBinaryString = function(t5) {
+            t5 = t5.replace(/0+$/, "");
+            var e4 = 8 - t5.length % 8;
+            if (8 == e4)
+              e4 = 0;
+            for (var r4 = 0; r4 <= e4; r4++)
+              t5 += "0";
+            var i4 = "";
+            for (var r4 = 0; r4 < t5.length - 1; r4 += 8) {
+              var n3 = t5.substr(r4, 8);
+              var s3 = parseInt(n3, 2).toString(16);
+              if (1 == s3.length)
+                s3 = "0" + s3;
+              i4 += s3;
+            }
+            this.hTLV = null;
+            this.isModified = true;
+            this.hV = "0" + e4 + i4;
+          };
+          this.setByBooleanArray = function(t5) {
+            var e4 = "";
+            for (var r4 = 0; r4 < t5.length; r4++)
+              if (true == t5[r4])
+                e4 += "1";
+              else
+                e4 += "0";
+            this.setByBinaryString(e4);
+          };
+          this.newFalseArray = function(t5) {
+            var e4 = new Array(t5);
+            for (var r4 = 0; r4 < t5; r4++)
+              e4[r4] = false;
+            return e4;
+          };
+          this.getFreshValueHex = function() {
+            return this.hV;
+          };
+          if ("undefined" != typeof t4) {
+            if ("string" == typeof t4 && t4.toLowerCase().match(/^[0-9a-f]+$/))
+              this.setHexValueIncludingUnusedBits(t4);
+            else if ("undefined" != typeof t4["hex"])
+              this.setHexValueIncludingUnusedBits(t4["hex"]);
+            else if ("undefined" != typeof t4["bin"])
+              this.setByBinaryString(t4["bin"]);
+            else if ("undefined" != typeof t4["array"])
+              this.setByBooleanArray(t4["array"]);
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERBitString, vt2.asn1.ASN1Object);
+        vt2.asn1.DEROctetString = function(t4) {
+          if (void 0 !== t4 && "undefined" !== typeof t4.obj) {
+            var e3 = vt2.asn1.ASN1Util.newObject(t4.obj);
+            t4.hex = e3.getEncodedHex();
+          }
+          vt2.asn1.DEROctetString.superclass.constructor.call(this, t4);
+          this.hT = "04";
+        };
+        pt2.lang.extend(vt2.asn1.DEROctetString, vt2.asn1.DERAbstractString);
+        vt2.asn1.DERNull = function() {
+          vt2.asn1.DERNull.superclass.constructor.call(this);
+          this.hT = "05";
+          this.hTLV = "0500";
+        };
+        pt2.lang.extend(vt2.asn1.DERNull, vt2.asn1.ASN1Object);
+        vt2.asn1.DERObjectIdentifier = function(t4) {
+          var e3 = function(t5) {
+            var e4 = t5.toString(16);
+            if (1 == e4.length)
+              e4 = "0" + e4;
+            return e4;
+          };
+          var r4 = function(t5) {
+            var r5 = "";
+            var i4 = new C2(t5, 10);
+            var n3 = i4.toString(2);
+            var s3 = 7 - n3.length % 7;
+            if (7 == s3)
+              s3 = 0;
+            var a3 = "";
+            for (var o3 = 0; o3 < s3; o3++)
+              a3 += "0";
+            n3 = a3 + n3;
+            for (var o3 = 0; o3 < n3.length - 1; o3 += 7) {
+              var u3 = n3.substr(o3, 7);
+              if (o3 != n3.length - 7)
+                u3 = "1" + u3;
+              r5 += e3(parseInt(u3, 2));
+            }
+            return r5;
+          };
+          vt2.asn1.DERObjectIdentifier.superclass.constructor.call(this);
+          this.hT = "06";
+          this.setValueHex = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.s = null;
+            this.hV = t5;
+          };
+          this.setValueOidString = function(t5) {
+            if (!t5.match(/^[0-9.]+$/))
+              throw "malformed oid string: " + t5;
+            var i4 = "";
+            var n3 = t5.split(".");
+            var s3 = 40 * parseInt(n3[0]) + parseInt(n3[1]);
+            i4 += e3(s3);
+            n3.splice(0, 2);
+            for (var a3 = 0; a3 < n3.length; a3++)
+              i4 += r4(n3[a3]);
+            this.hTLV = null;
+            this.isModified = true;
+            this.s = null;
+            this.hV = i4;
+          };
+          this.setValueName = function(t5) {
+            var e4 = vt2.asn1.x509.OID.name2oid(t5);
+            if ("" !== e4)
+              this.setValueOidString(e4);
+            else
+              throw "DERObjectIdentifier oidName undefined: " + t5;
+          };
+          this.getFreshValueHex = function() {
+            return this.hV;
+          };
+          if (void 0 !== t4) {
+            if ("string" === typeof t4)
+              if (t4.match(/^[0-2].[0-9.]+$/))
+                this.setValueOidString(t4);
+              else
+                this.setValueName(t4);
+            else if (void 0 !== t4.oid)
+              this.setValueOidString(t4.oid);
+            else if (void 0 !== t4.hex)
+              this.setValueHex(t4.hex);
+            else if (void 0 !== t4.name)
+              this.setValueName(t4.name);
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERObjectIdentifier, vt2.asn1.ASN1Object);
+        vt2.asn1.DEREnumerated = function(t4) {
+          vt2.asn1.DEREnumerated.superclass.constructor.call(this);
+          this.hT = "0a";
+          this.setByBigInteger = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.hV = vt2.asn1.ASN1Util.bigIntToMinTwosComplementsHex(t5);
+          };
+          this.setByInteger = function(t5) {
+            var e3 = new C2(String(t5), 10);
+            this.setByBigInteger(e3);
+          };
+          this.setValueHex = function(t5) {
+            this.hV = t5;
+          };
+          this.getFreshValueHex = function() {
+            return this.hV;
+          };
+          if ("undefined" != typeof t4) {
+            if ("undefined" != typeof t4["int"])
+              this.setByInteger(t4["int"]);
+            else if ("number" == typeof t4)
+              this.setByInteger(t4);
+            else if ("undefined" != typeof t4["hex"])
+              this.setValueHex(t4["hex"]);
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DEREnumerated, vt2.asn1.ASN1Object);
+        vt2.asn1.DERUTF8String = function(t4) {
+          vt2.asn1.DERUTF8String.superclass.constructor.call(this, t4);
+          this.hT = "0c";
+        };
+        pt2.lang.extend(vt2.asn1.DERUTF8String, vt2.asn1.DERAbstractString);
+        vt2.asn1.DERNumericString = function(t4) {
+          vt2.asn1.DERNumericString.superclass.constructor.call(this, t4);
+          this.hT = "12";
+        };
+        pt2.lang.extend(vt2.asn1.DERNumericString, vt2.asn1.DERAbstractString);
+        vt2.asn1.DERPrintableString = function(t4) {
+          vt2.asn1.DERPrintableString.superclass.constructor.call(this, t4);
+          this.hT = "13";
+        };
+        pt2.lang.extend(vt2.asn1.DERPrintableString, vt2.asn1.DERAbstractString);
+        vt2.asn1.DERTeletexString = function(t4) {
+          vt2.asn1.DERTeletexString.superclass.constructor.call(this, t4);
+          this.hT = "14";
+        };
+        pt2.lang.extend(vt2.asn1.DERTeletexString, vt2.asn1.DERAbstractString);
+        vt2.asn1.DERIA5String = function(t4) {
+          vt2.asn1.DERIA5String.superclass.constructor.call(this, t4);
+          this.hT = "16";
+        };
+        pt2.lang.extend(vt2.asn1.DERIA5String, vt2.asn1.DERAbstractString);
+        vt2.asn1.DERUTCTime = function(t4) {
+          vt2.asn1.DERUTCTime.superclass.constructor.call(this, t4);
+          this.hT = "17";
+          this.setByDate = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.date = t5;
+            this.s = this.formatDate(this.date, "utc");
+            this.hV = stohex(this.s);
+          };
+          this.getFreshValueHex = function() {
+            if ("undefined" == typeof this.date && "undefined" == typeof this.s) {
+              this.date = new Date();
+              this.s = this.formatDate(this.date, "utc");
+              this.hV = stohex(this.s);
+            }
+            return this.hV;
+          };
+          if (void 0 !== t4) {
+            if (void 0 !== t4.str)
+              this.setString(t4.str);
+            else if ("string" == typeof t4 && t4.match(/^[0-9]{12}Z$/))
+              this.setString(t4);
+            else if (void 0 !== t4.hex)
+              this.setStringHex(t4.hex);
+            else if (void 0 !== t4.date)
+              this.setByDate(t4.date);
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERUTCTime, vt2.asn1.DERAbstractTime);
+        vt2.asn1.DERGeneralizedTime = function(t4) {
+          vt2.asn1.DERGeneralizedTime.superclass.constructor.call(this, t4);
+          this.hT = "18";
+          this.withMillis = false;
+          this.setByDate = function(t5) {
+            this.hTLV = null;
+            this.isModified = true;
+            this.date = t5;
+            this.s = this.formatDate(this.date, "gen", this.withMillis);
+            this.hV = stohex(this.s);
+          };
+          this.getFreshValueHex = function() {
+            if (void 0 === this.date && void 0 === this.s) {
+              this.date = new Date();
+              this.s = this.formatDate(this.date, "gen", this.withMillis);
+              this.hV = stohex(this.s);
+            }
+            return this.hV;
+          };
+          if (void 0 !== t4) {
+            if (void 0 !== t4.str)
+              this.setString(t4.str);
+            else if ("string" == typeof t4 && t4.match(/^[0-9]{14}Z$/))
+              this.setString(t4);
+            else if (void 0 !== t4.hex)
+              this.setStringHex(t4.hex);
+            else if (void 0 !== t4.date)
+              this.setByDate(t4.date);
+            if (true === t4.millis)
+              this.withMillis = true;
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERGeneralizedTime, vt2.asn1.DERAbstractTime);
+        vt2.asn1.DERSequence = function(t4) {
+          vt2.asn1.DERSequence.superclass.constructor.call(this, t4);
+          this.hT = "30";
+          this.getFreshValueHex = function() {
+            var t5 = "";
+            for (var e3 = 0; e3 < this.asn1Array.length; e3++) {
+              var r4 = this.asn1Array[e3];
+              t5 += r4.getEncodedHex();
+            }
+            this.hV = t5;
+            return this.hV;
+          };
+        };
+        pt2.lang.extend(vt2.asn1.DERSequence, vt2.asn1.DERAbstractStructured);
+        vt2.asn1.DERSet = function(t4) {
+          vt2.asn1.DERSet.superclass.constructor.call(this, t4);
+          this.hT = "31";
+          this.sortFlag = true;
+          this.getFreshValueHex = function() {
+            var t5 = new Array();
+            for (var e3 = 0; e3 < this.asn1Array.length; e3++) {
+              var r4 = this.asn1Array[e3];
+              t5.push(r4.getEncodedHex());
+            }
+            if (true == this.sortFlag)
+              t5.sort();
+            this.hV = t5.join("");
+            return this.hV;
+          };
+          if ("undefined" != typeof t4) {
+            if ("undefined" != typeof t4.sortflag && false == t4.sortflag)
+              this.sortFlag = false;
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERSet, vt2.asn1.DERAbstractStructured);
+        vt2.asn1.DERTaggedObject = function(t4) {
+          vt2.asn1.DERTaggedObject.superclass.constructor.call(this);
+          this.hT = "a0";
+          this.hV = "";
+          this.isExplicit = true;
+          this.asn1Object = null;
+          this.setASN1Object = function(t5, e3, r4) {
+            this.hT = e3;
+            this.isExplicit = t5;
+            this.asn1Object = r4;
+            if (this.isExplicit) {
+              this.hV = this.asn1Object.getEncodedHex();
+              this.hTLV = null;
+              this.isModified = true;
+            } else {
+              this.hV = null;
+              this.hTLV = r4.getEncodedHex();
+              this.hTLV = this.hTLV.replace(/^../, e3);
+              this.isModified = false;
+            }
+          };
+          this.getFreshValueHex = function() {
+            return this.hV;
+          };
+          if ("undefined" != typeof t4) {
+            if ("undefined" != typeof t4["tag"])
+              this.hT = t4["tag"];
+            if ("undefined" != typeof t4["explicit"])
+              this.isExplicit = t4["explicit"];
+            if ("undefined" != typeof t4["obj"]) {
+              this.asn1Object = t4["obj"];
+              this.setASN1Object(this.isExplicit, this.hT, this.asn1Object);
+            }
+          }
+        };
+        pt2.lang.extend(vt2.asn1.DERTaggedObject, vt2.asn1.ASN1Object);
+        var gt2 = function() {
+          var t4 = function(e3, r4) {
+            t4 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t5, e4) {
+              t5.__proto__ = e4;
+            } || function(t5, e4) {
+              for (var r5 in e4)
+                if (Object.prototype.hasOwnProperty.call(e4, r5))
+                  t5[r5] = e4[r5];
+            };
+            return t4(e3, r4);
+          };
+          return function(e3, r4) {
+            if ("function" !== typeof r4 && null !== r4)
+              throw new TypeError("Class extends value " + String(r4) + " is not a constructor or null");
+            t4(e3, r4);
+            function i4() {
+              this.constructor = e3;
+            }
+            e3.prototype = null === r4 ? Object.create(r4) : (i4.prototype = r4.prototype, new i4());
+          };
+        }();
+        var yt2 = function(t4) {
+          gt2(e3, t4);
+          function e3(r4) {
+            var i4 = t4.call(this) || this;
+            if (r4) {
+              if ("string" === typeof r4)
+                i4.parseKey(r4);
+              else if (e3.hasPrivateKeyProperty(r4) || e3.hasPublicKeyProperty(r4))
+                i4.parsePropertiesFrom(r4);
+            }
+            return i4;
+          }
+          e3.prototype.parseKey = function(t5) {
+            try {
+              var e4 = 0;
+              var r4 = 0;
+              var i4 = /^\s*(?:[0-9A-Fa-f][0-9A-Fa-f]\s*)+$/;
+              var n3 = i4.test(t5) ? y.decode(t5) : w2.unarmor(t5);
+              var s3 = I2.decode(n3);
+              if (3 === s3.sub.length)
+                s3 = s3.sub[2].sub[0];
+              if (9 === s3.sub.length) {
+                e4 = s3.sub[1].getHexStringValue();
+                this.n = K2(e4, 16);
+                r4 = s3.sub[2].getHexStringValue();
+                this.e = parseInt(r4, 16);
+                var a3 = s3.sub[3].getHexStringValue();
+                this.d = K2(a3, 16);
+                var o3 = s3.sub[4].getHexStringValue();
+                this.p = K2(o3, 16);
+                var u3 = s3.sub[5].getHexStringValue();
+                this.q = K2(u3, 16);
+                var c3 = s3.sub[6].getHexStringValue();
+                this.dmp1 = K2(c3, 16);
+                var l3 = s3.sub[7].getHexStringValue();
+                this.dmq1 = K2(l3, 16);
+                var f3 = s3.sub[8].getHexStringValue();
+                this.coeff = K2(f3, 16);
+              } else if (2 === s3.sub.length) {
+                var h3 = s3.sub[1];
+                var d3 = h3.sub[0];
+                e4 = d3.sub[0].getHexStringValue();
+                this.n = K2(e4, 16);
+                r4 = d3.sub[1].getHexStringValue();
+                this.e = parseInt(r4, 16);
+              } else
+                return false;
+              return true;
+            } catch (t6) {
+              return false;
+            }
+          };
+          e3.prototype.getPrivateBaseKey = function() {
+            var t5 = { array: [new vt2.asn1.DERInteger({ int: 0 }), new vt2.asn1.DERInteger({ bigint: this.n }), new vt2.asn1.DERInteger({ int: this.e }), new vt2.asn1.DERInteger({ bigint: this.d }), new vt2.asn1.DERInteger({ bigint: this.p }), new vt2.asn1.DERInteger({ bigint: this.q }), new vt2.asn1.DERInteger({ bigint: this.dmp1 }), new vt2.asn1.DERInteger({ bigint: this.dmq1 }), new vt2.asn1.DERInteger({ bigint: this.coeff })] };
+            var e4 = new vt2.asn1.DERSequence(t5);
+            return e4.getEncodedHex();
+          };
+          e3.prototype.getPrivateBaseKeyB64 = function() {
+            return d2(this.getPrivateBaseKey());
+          };
+          e3.prototype.getPublicBaseKey = function() {
+            var t5 = new vt2.asn1.DERSequence({ array: [new vt2.asn1.DERObjectIdentifier({ oid: "1.2.840.113549.1.1.1" }), new vt2.asn1.DERNull()] });
+            var e4 = new vt2.asn1.DERSequence({ array: [new vt2.asn1.DERInteger({ bigint: this.n }), new vt2.asn1.DERInteger({ int: this.e })] });
+            var r4 = new vt2.asn1.DERBitString({ hex: "00" + e4.getEncodedHex() });
+            var i4 = new vt2.asn1.DERSequence({ array: [t5, r4] });
+            return i4.getEncodedHex();
+          };
+          e3.prototype.getPublicBaseKeyB64 = function() {
+            return d2(this.getPublicBaseKey());
+          };
+          e3.wordwrap = function(t5, e4) {
+            e4 = e4 || 64;
+            if (!t5)
+              return t5;
+            var r4 = "(.{1," + e4 + "})( +|$\n?)|(.{1," + e4 + "})";
+            return t5.match(RegExp(r4, "g")).join("\n");
+          };
+          e3.prototype.getPrivateKey = function() {
+            var t5 = "-----BEGIN RSA PRIVATE KEY-----\n";
+            t5 += e3.wordwrap(this.getPrivateBaseKeyB64()) + "\n";
+            t5 += "-----END RSA PRIVATE KEY-----";
+            return t5;
+          };
+          e3.prototype.getPublicKey = function() {
+            var t5 = "-----BEGIN PUBLIC KEY-----\n";
+            t5 += e3.wordwrap(this.getPublicBaseKeyB64()) + "\n";
+            t5 += "-----END PUBLIC KEY-----";
+            return t5;
+          };
+          e3.hasPublicKeyProperty = function(t5) {
+            t5 = t5 || {};
+            return t5.hasOwnProperty("n") && t5.hasOwnProperty("e");
+          };
+          e3.hasPrivateKeyProperty = function(t5) {
+            t5 = t5 || {};
+            return t5.hasOwnProperty("n") && t5.hasOwnProperty("e") && t5.hasOwnProperty("d") && t5.hasOwnProperty("p") && t5.hasOwnProperty("q") && t5.hasOwnProperty("dmp1") && t5.hasOwnProperty("dmq1") && t5.hasOwnProperty("coeff");
+          };
+          e3.prototype.parsePropertiesFrom = function(t5) {
+            this.n = t5.n;
+            this.e = t5.e;
+            if (t5.hasOwnProperty("d")) {
+              this.d = t5.d;
+              this.p = t5.p;
+              this.q = t5.q;
+              this.dmp1 = t5.dmp1;
+              this.dmq1 = t5.dmq1;
+              this.coeff = t5.coeff;
+            }
+          };
+          return e3;
+        }(ut2);
+        const mt2 = { i: "3.2.1" };
+        var wt2 = function() {
+          function t4(t5) {
+            if (void 0 === t5)
+              t5 = {};
+            t5 = t5 || {};
+            this.default_key_size = t5.default_key_size ? parseInt(t5.default_key_size, 10) : 1024;
+            this.default_public_exponent = t5.default_public_exponent || "010001";
+            this.log = t5.log || false;
+            this.key = null;
+          }
+          t4.prototype.setKey = function(t5) {
+            if (this.log && this.key)
+              console.warn("A key was already set, overriding existing.");
+            this.key = new yt2(t5);
+          };
+          t4.prototype.setPrivateKey = function(t5) {
+            this.setKey(t5);
+          };
+          t4.prototype.setPublicKey = function(t5) {
+            this.setKey(t5);
+          };
+          t4.prototype.decrypt = function(t5) {
+            try {
+              return this.getKey().decrypt(p2(t5));
+            } catch (t6) {
+              return false;
+            }
+          };
+          t4.prototype.encrypt = function(t5) {
+            try {
+              return this.getKey().encrypt(t5);
+            } catch (t6) {
+              return false;
+            }
+          };
+          t4.prototype.encryptLong = function(t5) {
+            try {
+              return d2(this.getKey().encryptLong(t5));
+            } catch (t6) {
+              return false;
+            }
+          };
+          t4.prototype.decryptLong = function(t5) {
+            try {
+              return this.getKey().decryptLong(t5);
+            } catch (t6) {
+              return false;
+            }
+          };
+          t4.prototype.sign = function(t5, e3, r4) {
+            try {
+              return d2(this.getKey().sign(t5, e3, r4));
+            } catch (t6) {
+              return false;
+            }
+          };
+          t4.prototype.verify = function(t5, e3, r4) {
+            try {
+              return this.getKey().verify(t5, p2(e3), r4);
+            } catch (t6) {
+              return false;
+            }
+          };
+          t4.prototype.getKey = function(t5) {
+            if (!this.key) {
+              this.key = new yt2();
+              if (t5 && "[object Function]" === {}.toString.call(t5)) {
+                this.key.generateAsync(this.default_key_size, this.default_public_exponent, t5);
+                return;
+              }
+              this.key.generate(this.default_key_size, this.default_public_exponent);
+            }
+            return this.key;
+          };
+          t4.prototype.getPrivateKey = function() {
+            return this.getKey().getPrivateKey();
+          };
+          t4.prototype.getPrivateKeyB64 = function() {
+            return this.getKey().getPrivateBaseKeyB64();
+          };
+          t4.prototype.getPublicKey = function() {
+            return this.getKey().getPublicKey();
+          };
+          t4.prototype.getPublicKeyB64 = function() {
+            return this.getKey().getPublicBaseKeyB64();
+          };
+          t4.version = mt2.i;
+          return t4;
+        }();
+        const St2 = wt2;
+      }, 2480: () => {
+      } };
+      var e = {};
+      function r2(i3) {
+        var n2 = e[i3];
+        if (void 0 !== n2)
+          return n2.exports;
+        var s2 = e[i3] = { id: i3, loaded: false, exports: {} };
+        t2[i3].call(s2.exports, s2, s2.exports, r2);
+        s2.loaded = true;
+        return s2.exports;
+      }
+      (() => {
+        r2.d = (t3, e2) => {
+          for (var i3 in e2)
+            if (r2.o(e2, i3) && !r2.o(t3, i3))
+              Object.defineProperty(t3, i3, { enumerable: true, get: e2[i3] });
+        };
+      })();
+      (() => {
+        r2.g = function() {
+          if ("object" === typeof globalThis)
+            return globalThis;
+          try {
+            return this || new Function("return this")();
+          } catch (t3) {
+            if ("object" === typeof window)
+              return window;
+          }
+        }();
+      })();
+      (() => {
+        r2.o = (t3, e2) => Object.prototype.hasOwnProperty.call(t3, e2);
+      })();
+      (() => {
+        r2.r = (t3) => {
+          if ("undefined" !== typeof Symbol && Symbol.toStringTag)
+            Object.defineProperty(t3, Symbol.toStringTag, { value: "Module" });
+          Object.defineProperty(t3, "__esModule", { value: true });
+        };
+      })();
+      (() => {
+        r2.nmd = (t3) => {
+          t3.paths = [];
+          if (!t3.children)
+            t3.children = [];
+          return t3;
+        };
+      })();
+      var i2 = r2(5987);
+      return i2;
+    })());
+  });
+  var GtPush = /* @__PURE__ */ getDefaultExportFromCjs(gtpushMin);
+  function initPushNotification() {
+    if (typeof plus !== "undefined" && plus.push) {
+      plus.globalEvent.addEventListener("newPath", ({ path }) => {
+        if (!path) {
+          return;
+        }
+        const pages2 = getCurrentPages();
+        const currentPage = pages2[pages2.length - 1];
+        if (currentPage && currentPage.$page && currentPage.$page.fullPath === path) {
+          return;
+        }
+        uni.navigateTo({
+          url: path,
+          fail(res2) {
+            if (res2.errMsg.indexOf("tabbar") > -1) {
+              uni.switchTab({
+                url: path,
+                fail(res3) {
+                  console.error(res3.errMsg);
+                }
+>>>>>>> .theirs
               });
             } else {
               console.error(res2.errMsg);
             }
+<<<<<<< .mine
           }
         });
       });
@@ -42933,6 +62282,101 @@ if (uni.restoreGlobal) {
           success: (e) => {
             formatAppLog("log", "at uni_modules/uni-upgrade-center-app/utils/call-check-version.js:16", "e: ", e);
             resolve(e);
+=======
+          }
+        });
+      });
+    }
+  }
+  uni.invokePushCallback({
+    type: "enabled"
+  });
+  const appid = "__UNI__76A9E40";
+  {
+    initPushNotification();
+    GtPush.init({
+      appid,
+      onError: (res2) => {
+        console.error(res2.error);
+        uni.invokePushCallback({
+          type: "clientId",
+          cid: "",
+          errMsg: res2.error
+        });
+      },
+      onClientId: (res2) => {
+        uni.invokePushCallback({
+          type: "clientId",
+          cid: res2.cid
+        });
+      },
+      onlineState: (res2) => {
+        uni.invokePushCallback({
+          type: "lineState",
+          online: res2.online
+        });
+      },
+      onPushMsg: (res2) => {
+        uni.invokePushCallback({
+          type: "pushMsg",
+          message: res2.message
+        });
+      }
+    });
+    uni.onPushMessage((res2) => {
+      if (res2.type === "receive" && res2.data && res2.data.force_notification) {
+        uni.createPushMessage(res2.data);
+        res2.stopped = true;
+      }
+    });
+  }
+  const uniStarterConfig = {
+    "h5": {
+      "url": "https://uni-starter.dcloud.net.cn",
+      "openApp": {}
+    },
+    "mp": {
+      "weixin": {
+        "id": ""
+      }
+    },
+    "about": {
+      "appName": "uni-starter",
+      "logo": "/static/logo.png",
+      "company": "\u5317\u4EACxx\u7F51\u7EDC\u6280\u672F\u6709\u9650\u516C\u53F8",
+      "slogan": "\u4E91\u7AEF\u4E00\u4F53\u5E94\u7528\u5FEB\u901F\u5F00\u53D1\u6A21\u7248",
+      "download": "https://itunes.apple.com/cn/app/hello-uni-app/id1417078253?mt=8",
+      "version": "1.0.0"
+    },
+    "download": {
+      "ios": "https://itunes.apple.com/cn/app/hello-uni-app/id1417078253?mt=8",
+      "android": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-97fca9f2-41f6-449f-a35e-3f135d4c3875/6d754387-a6c3-48ed-8ad2-e8f39b40fc01.apk"
+    },
+    "marketId": {
+      "ios": "",
+      "android": ""
+    },
+    "i18n": {
+      "enable": false
+    }
+  };
+  function callCheckVersion() {
+    return new Promise((resolve, reject) => {
+      plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
+        const data = {
+          action: "checkVersion",
+          appid: plus.runtime.appid,
+          appVersion: plus.runtime.version,
+          wgtVersion: widgetInfo.version
+        };
+        formatAppLog("log", "at uni_modules/uni-upgrade-center-app/utils/call-check-version.js:11", "data: ", data);
+        As.callFunction({
+          name: "uni-upgrade-center",
+          data,
+          success: (e) => {
+            formatAppLog("log", "at uni_modules/uni-upgrade-center-app/utils/call-check-version.js:16", "e: ", e);
+            resolve(e);
+>>>>>>> .theirs
           },
           fail: (error) => {
             reject(error);
@@ -42969,6 +62413,7 @@ if (uni.restoreGlobal) {
               }
             });
           }
+<<<<<<< .mine
         } else if (e.errCode === 2 && e.errMsg == "chooseImage:fail No filming permission") {
           formatAppLog("log", "at uni_modules/json-interceptor-chooseImage/js_sdk/main.js:31", "e.errMsg === 2  ios\u65E0\u6CD5\u62CD\u7167\u6743\u9650 ");
           uni.showModal({
@@ -43088,6 +62533,127 @@ if (uni.restoreGlobal) {
           title: "\u5F53\u524D\u7F51\u7EDC\u7C7B\u578B\uFF1A" + res2.networkType,
           icon: "none",
           duration: 3e3
+=======
+        } else if (e.errCode === 2 && e.errMsg == "chooseImage:fail No filming permission") {
+          formatAppLog("log", "at uni_modules/json-interceptor-chooseImage/js_sdk/main.js:31", "e.errMsg === 2  ios\u65E0\u6CD5\u62CD\u7167\u6743\u9650 ");
+          uni.showModal({
+            title: "\u65E0\u6CD5\u8BBF\u95EE\u6444\u50CF\u5934",
+            content: "\u5F53\u524D\u65E0\u6444\u50CF\u5934\u8BBF\u95EE\u6743\u9650\uFF0C\u5EFA\u8BAE\u524D\u5F80\u8BBE\u7F6E",
+            confirmText: "\u524D\u5F80\u8BBE\u7F6E",
+            success(e2) {
+              if (e2.confirm) {
+                gotoAppPermissionSetting();
+              }
+            }
+          });
+        }
+      }
+    });
+    function gotoAppPermissionSetting() {
+      if (uni.getSystemInfoSync().platform == "ios") {
+        var UIApplication = plus.ios.import("UIApplication");
+        var application2 = UIApplication.sharedApplication();
+        var NSURL2 = plus.ios.import("NSURL");
+        var setting2 = NSURL2.URLWithString("app-settings:");
+        application2.openURL(setting2);
+        plus.ios.deleteObject(setting2);
+        plus.ios.deleteObject(NSURL2);
+        plus.ios.deleteObject(application2);
+      } else {
+        var Intent = plus.android.importClass("android.content.Intent");
+        var Settings = plus.android.importClass("android.provider.Settings");
+        var Uri = plus.android.importClass("android.net.Uri");
+        var mainActivity = plus.android.runtimeMainActivity();
+        var intent = new Intent();
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        var uri = Uri.fromParts("package", mainActivity.getPackageName(), null);
+        intent.setData(uri);
+        mainActivity.startActivity(intent);
+      }
+    }
+  }
+  interceptorChooseImage();
+  const db = As.database();
+  async function initApp() {
+    uniStarterConfig.debug;
+    setTimeout(() => {
+      getApp({
+        allowDefault: true
+      }).globalData.config = uniStarterConfig;
+    }, 1);
+    initAppVersion();
+    function onDBError({
+      code,
+      message
+    }) {
+      formatAppLog("log", "at common/appInit.js:32", "onDBError", {
+        code,
+        message
+      });
+      formatAppLog("error", "at common/appInit.js:37", code, message);
+    }
+    db.on("error", onDBError);
+    As.interceptObject({
+      async invoke({
+        objectName,
+        methodName,
+        params
+      }) {
+        formatAppLog("log", "at common/appInit.js:56", objectName, "objectName");
+        formatAppLog("log", "at common/appInit.js:57", methodName, "methodName");
+        if (objectName == "login")
+          ;
+        else {
+          uni.getStorage({
+            key: "uni_id_token",
+            success: function(res2) {
+              if (res2.data) {
+                let login = As.importObject("login");
+                login.checkToken(res2.data).then((checkTokenRes) => {
+                  plus.navigator.closeSplashscreen();
+                }).catch((err) => {
+                  formatAppLog("log", "at common/appInit.js:79", err, "\u6211\u662F\u9519\u8BEF");
+                  uni.reLaunch({
+                    url: "/pages/logining/logining",
+                    success: (res3) => {
+                    },
+                    fail: () => {
+                    },
+                    complete: () => {
+                    }
+                  });
+                  uni.clearStorage();
+                });
+              }
+            },
+            fail: function(err) {
+              uni.reLaunch({
+                url: "/pages/logining/logining",
+                success: (res2) => {
+                },
+                fail: () => {
+                },
+                complete: () => {
+                }
+              });
+            }
+          });
+        }
+      },
+      success(e) {
+      },
+      complete() {
+      },
+      fail(e) {
+      }
+    });
+    uni.onNetworkStatusChange((res2) => {
+      if (res2.networkType != "none") {
+        uni.showToast({
+          title: "\u5F53\u524D\u7F51\u7EDC\u7C7B\u578B\uFF1A" + res2.networkType,
+          icon: "none",
+          duration: 3e3
+>>>>>>> .theirs
         });
       } else {
         uni.showToast({
@@ -43096,6 +62662,7 @@ if (uni.restoreGlobal) {
           duration: 3e3
         });
       }
+<<<<<<< .mine
     });
   }
   function initAppVersion() {
@@ -43122,6 +62689,36 @@ if (uni.restoreGlobal) {
     onLaunch: function() {
       formatAppLog("log", "at App.vue:16", "onLaunch");
       initApp();
+
+=======
+    });
+  }
+  function initAppVersion() {
+    let appid2 = plus.runtime.appid;
+    plus.runtime.getProperty(appid2, (wgtInfo) => {
+      let appVersion = plus.runtime;
+      let currentVersion = appVersion.versionCode > wgtInfo.versionCode ? appVersion : wgtInfo;
+      getApp({
+        allowDefault: true
+      }).appVersion = {
+        ...currentVersion,
+        appid: appid2,
+        hasNew: false
+      };
+      callCheckVersion().then((res2) => {
+        if (res2.result.code > 0) {
+          getApp({
+            allowDefault: true
+          }).appVersion.hasNew = true;
+        }
+      });
+    });
+  }
+  const _sfc_main = {
+    onLaunch: function() {
+      formatAppLog("log", "at App.vue:16", "onLaunch");
+      initApp();
+>>>>>>> .theirs
     },
     onShow: function() {
     },
@@ -43129,7 +62726,11 @@ if (uni.restoreGlobal) {
       formatAppLog("log", "at App.vue:72", "onHide");
     }
   };
+<<<<<<< .mine
   var App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "E:/workproject/bodybuilding-app/App.vue"]]);
+=======
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "D:/studyUninApp/bodybuilding-app/App.vue"]]);
+>>>>>>> .theirs
   function createApp() {
     const app = vue.createVueApp(App);
     app.use(stdin_default);

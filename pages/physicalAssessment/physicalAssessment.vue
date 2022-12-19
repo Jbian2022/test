@@ -134,7 +134,7 @@ export default {
 								console.log(v, '什么鬼')
 								if (v.questionCode === item.code) {
 									
-								 let needCompareData = v.testResult.filter(c => c.answer.length > 0)
+								 let needCompareData = v.hasOwnProperty('testResult') ? v.testResult.filter(c => c.answer.length > 0) : []
 								 // console.log(needCompareData, '逆势')
 								 if (needCompareData.length > 0) {
 									 isFinsh = true
