@@ -851,6 +851,9 @@ page{
 				font-weight: 600;
 				border-radius: 16upx;
 				color: #BDC3CE;
+				&::after{
+					display: none;
+				}
 			}
 		}
 	}
