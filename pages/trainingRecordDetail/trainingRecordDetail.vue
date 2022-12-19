@@ -1,6 +1,6 @@
 <template>
 	<view class="training-record-detail">
-		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
+		<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view id="training-detail">
 			<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 			<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
@@ -217,17 +217,19 @@
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button block @click="showShare=true"><van-icon name="share-o" />炫耀一下</van-button>
+			<van-button block @click="openPopup"><van-icon name="share-o" />炫耀一下</van-button>
 		</view>
 		<!-- #ifdef APP-PLUS || H5 -->
 		<view :prop="canvasImageMsg" :change:prop="canvasImage.updateEcharts" id="canvasImage"></view>
 		<!-- #endif -->
-		<van-share-sheet
-			v-model:show="showShare"
-			:options="options"
-			@select="onSelect"
-			cancel-text=""
-		/>
+		<uni-popup ref="popup" type="bottom">
+			<view class="share-sheet">
+				<view class="item" v-for="(item,index) in options" :key="index" @click="onSelect(item)">
+					<van-image class="img" round :src="item.icon"/>
+					<view class="text">{{item.name}}</view>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -236,7 +238,6 @@
 	export default {
 		data() {
 			return {
-				showShare: false,
 				options: [
 					{ name: '分享到微信', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png' },
 					{ name: '分享到朋友圈', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png' },
@@ -248,7 +249,8 @@
 				trainInfoList: [],
 				baseUrl: null,
 				url: null,
-				canvasImageMsg: null
+				canvasImageMsg: null,
+				isFixedTop:false
 			}
 		},
 		onLoad: function (option) { 
@@ -256,6 +258,14 @@
 				this.traineeNo = option.traineeNo
 				this.trainDate = option.trainDate
 				this.getTrainInfo()
+			}
+		},
+		//监测页面滑动
+		onPageScroll(e) {
+			if(e.scrollTop > uni.getWindowInfo().statusBarHeight){
+				this.isFixedTop = true
+			}else{
+				this.isFixedTop = false
 			}
 		},
 		methods: {
@@ -343,7 +353,7 @@
 				});
 			},
 			receiveRenderData(option) {
-				this.showShare = false
+				this.$refs.popup.close()
                 console.log(option.name, 8888)
 				this.baseUrl = option.base64;
 				this.uploadImage((url)=>{
@@ -385,6 +395,9 @@
 					// #endif
 				})
             },
+			openPopup(){
+				this.$refs.popup.open()
+			}
 		}
 	}
 </script>
@@ -459,6 +472,12 @@ export default {
 			.van-icon{
 				font-size: 40upx;
 				color: #bdc3ce;
+			}
+			&.show{
+				position: sticky;
+				background: #212328;
+				top: 0;
+				padding-top: var(--status-bar-height);
 			}
 		}
 		.first-title-times{
@@ -613,17 +632,27 @@ export default {
 				}
 			}
 		}
-		::v-deep .van-popup {
+		.share-sheet{
+			display: flex;
+			align-items: center;
+			height: 388upx;
 			background: #383D46;
 			border-radius: 24upx 24upx 0px 0px;
-		}
-		::v-deep .van-share-sheet__options{
 			justify-content: space-around;
-			.van-share-sheet__name{
-				font-size: 28upx;
-				font-weight: 400;
-				color: #F4F7FF;
-				line-height: 40tpx;
+			.item {
+				text-align: center;
+				.img{
+					margin: 0 auto;
+					width: 100upx;
+					height: 100upx;
+					padding-bottom: 20upx;
+				}
+				.text{
+					font-size: 28upx;
+					font-weight: 400;
+					color: #F4F7FF;
+					line-height: 40tpx;
+				}
 			}
 		}
 	}
