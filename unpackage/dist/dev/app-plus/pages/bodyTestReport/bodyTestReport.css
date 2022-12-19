@@ -174,10 +174,14 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .content_style .contetnt_form_style[data-v-641854c1] {
   width: 100%;
+  flex: 1;
   margin-top: 0.9375rem;
+  overflow-y: auto;
 }
 [data-v-641854c1] .van-cell {
   display: flex;
@@ -228,6 +232,7 @@
   flex-direction: row !important;
   align-items: center;
   justify-content: space-between;
+  border-radius: 0.5rem;
 }
 .is_buy_content_style .buy_text_style[data-v-641854c1] {
   font-size: 0.9375rem;
@@ -263,8 +268,8 @@
   color: #fff;
 }
 .add_method_style[data-v-641854c1] {
+  box-sizing: border-box;
   width: calc(100vw - 1.875rem);
-  margin-left: 0.9375rem;
   margin-top: 0.9375rem;
   display: flex;
   align-items: center;

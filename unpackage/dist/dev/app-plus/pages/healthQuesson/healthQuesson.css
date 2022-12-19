@@ -200,3 +200,10 @@
   padding-left: 0;
   padding-right: 0;
 }
+ .uni-textarea {
+  background: #4B525E;
+  border-radius: 0.5rem;
+  padding: 0.9375rem;
+  box-sizing: border-box;
+  color: #F4F7FF;
+}

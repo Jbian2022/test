@@ -28,7 +28,7 @@
 			}
 		},
 		{
-			"path": "pages/bodyAssessment/bodyAssessment",
+			"path": "pages/postureAssessment/postureAssessment",
 			"style": {
 				"navigationBarTitleText": "体测评估",
 				"enablePullDownRefresh": false,
