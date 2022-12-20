@@ -3,40 +3,40 @@
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent :leftNavTitle="'身体评测'"></NavBarCompontent>
 
-      <view class="need_scoll list_style">
-        <view
-          class="dynamicshow"
-          @click.native.stop="jumpModular(item)"
-          v-for="(item, index) in dynamicEvaluationdata"
-          :key="index"
-        >
-          <view class="dynamicshow_left">
-            <view class="correct" v-if="item.isFinsh">
-              <image
-                class="correct_img_style"
-                src="../../static/app-plus/other/yesActive.png"
-              ></image>
-            </view>
-
-            <view class="correct" v-else>
-              <image
-                class="correct_img_style"
-                src="../../static/app-plus/other/yesNoActive.png"
-              ></image>
-            </view>
-            <text class="evaluationdata">
-              {{ item.questionContent }}
-            </text>
-          </view>
-
-          <view class="dynamicshow_right">
+    <view class="need_scoll list_style">
+      <view
+        class="dynamicshow"
+        @click.native.stop="jumpModular(item)"
+        v-for="(item, index) in dynamicEvaluationdata"
+        :key="index"
+      >
+        <view class="dynamicshow_left">
+          <view class="correct" v-if="item.isFinsh">
             <image
-              class="back_img_style"
-              src="../../static/app-plus/mebrs/backRight.png"
+              class="correct_img_style"
+              src="../../static/app-plus/other/yesActive.png"
             ></image>
           </view>
+
+          <view class="correct" v-else>
+            <image
+              class="correct_img_style"
+              src="../../static/app-plus/other/yesNoActive.png"
+            ></image>
+          </view>
+          <text class="evaluationdata">
+            {{ item.questionContent }}
+          </text>
+        </view>
+
+        <view class="dynamicshow_right">
+          <image
+            class="back_img_style"
+            src="../../static/app-plus/mebrs/backRight.png"
+          ></image>
         </view>
       </view>
+    </view>
     <view class="buttontrue">生成报告</view>
   </view>
 </template>
@@ -76,88 +76,96 @@ export default {
         // { title: '体能评估', type: 'fwcwdxcs' }
       ],
       icon: true,
-	  traineeNo: ''
+      traineeNo: ''
     }
   },
   created() {
-  	this.requestDynamicEvaluationdata()
+    this.requestDynamicEvaluationdata()
   },
   onLoad(options) {
-  	if (JSON.stringify(options) !== '{}' && options.traineeNo) {
-		this.traineeNo = options.traineeNo
-	}
+    if (JSON.stringify(options) !== '{}' && options.traineeNo) {
+      this.traineeNo = options.traineeNo
+    }
   },
   methods: {
-
-
     jumpModular(item) {
       // console.log(item.path,'>>>>')
 
-		  
-	  if (item.hasOwnProperty('path') && item.path && this.traineeNo) {
-		  // 请求下级数据并携带过去
-		  businessCloudObject
-		    .getPhysicalChildAssessmentList(item.code)
-		    .then((res) => {
-		  			if (res.success) {
-		  				let childList = res.data
-						uni.navigateTo({
-							url: item.path + '?' + 'childList=' + JSON.stringify(childList) + '&traineeNo=' + this.traineeNo + '&questionCode=' + item.code ,
-							success: (res) => {},
-							fail: () => {},
-							complete: () => {}
-						})
-		  			}
-		      console.log(res, '我是子选项')
-		  				  // this.dynamicEvaluationdata = res.data
-		      
-		    })
-		    .catch((err) => {})
-		  
-		 
-	  }
+      if (item.hasOwnProperty('path') && item.path && this.traineeNo) {
+        // 请求下级数据并携带过去
+        businessCloudObject
+          .getPhysicalChildAssessmentList(item.code)
+          .then((res) => {
+            if (res.success) {
+              let childList = res.data
+              uni.navigateTo({
+                url:
+                  item.path +
+                  '?' +
+                  'childList=' +
+                  JSON.stringify(childList) +
+                  '&traineeNo=' +
+                  this.traineeNo +
+                  '&questionCode=' +
+                  item.code,
+                success: (res) => {},
+                fail: () => {},
+                complete: () => {}
+              })
+            }
+            console.log(res, '我是子选项')
+            // this.dynamicEvaluationdata = res.data
+          })
+          .catch((err) => {})
+      }
     },
-	requestDynamicEvaluationdata  (){
-			  businessCloudObject
-			    .getPhysicalAssessmentList()
-			    .then((res) => {
-			     
-				  let firstData = res.data
-				  businessCloudObject.opearConfigAllList(this.traineeNo).then(allRes => {
-					  // console.log(allRes, 'allRes')
-					 firstData = firstData.map(item => {
-						  let isFinsh = false
-						  // 查询结果表进行对应的过滤
-						  // console.log(item.code, '你是大傻逼')
-						if (allRes.affectedDocs > 0) {
-							allRes.data.forEach(v => {
-								console.log(v, '什么鬼')
-								if (v.questionCode === item.code) {
-									
-								 let needCompareData = v.hasOwnProperty('testResult') ? v.testResult.filter(c => c.answer.length > 0) : []
-								 // console.log(needCompareData, '逆势')
-								 if (needCompareData.length > 0) {
-									 isFinsh = true
-								 }
-								}
-							})
-						}
-				
-						  
-						  return {
-							  ...item,
-							  isFinsh
-						  }
-					  })
-					  console.log(firstData, '我恒强')
-					  this.dynamicEvaluationdata = firstData
-					  
-				  })
-			      
-			    })
-			    .catch((err) => {})
-	}
-	
+    requestDynamicEvaluationdata() {
+      businessCloudObject
+        .getPhysicalAssessmentList()
+        .then((res) => {
+          let firstData = res.data
+          businessCloudObject
+            .opearConfigAllList(this.traineeNo)
+            .then((allRes) => {
+              console.log(allRes, 'allRes')
+              firstData = firstData.map((item) => {
+                let isFinsh = false
+                // 查询结果表进行对应的过滤
+                // console.log(item.code, '你是大傻逼')
+                if (allRes.affectedDocs > 0) {
+                  allRes.data.forEach((v) => {
+                    console.log(v, '什么鬼')
+                    if (v.questionCode === item.code) {
+                      let needCompareData = v.hasOwnProperty('testResult')
+                        ? v.testResult.filter((c) => c.answer.length > 0)
+                        : []
+                      let compareBodyTestResport =
+                        v.hasOwnProperty('bodyTestReport') &&
+                        JSON.stringify(v.bodyTestReport) !== '{}'
+                          ? true
+                          : false
+                      // console.log(needCompareData, '逆势')
+                      if (needCompareData.length > 0) {
+                        isFinsh = true
+                      }
+                      if (compareBodyTestResport) {
+                        isFinsh = true
+                      }
+                    }
+                  })
+                }
+
+                return {
+                  ...item,
+                  isFinsh
+                }
+              })
+              console.log(firstData, '我恒强')
+              this.dynamicEvaluationdata = firstData
+            })
+        })
+        .catch((err) => {})
+    }
   }
 }
 </script>
@@ -172,9 +180,8 @@ export default {
   flex-direction: column;
 }
 .list_style {
-	flex: 1;
-	overflow-y: auto;
-	
+  flex: 1;
+  overflow-y: auto;
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
@@ -237,10 +244,10 @@ export default {
   line-height: 100upx;
   text-align: center;
   justify-content: center;
-  
+
   width: calc(100vw - 80upx);
   margin-left: 40upx;
- 
+
   display: flex;
 }
 
@@ -263,7 +270,6 @@ export default {
 }
 .need_scoll {
   // height: 74vh !important;
-
 }
 ::v-deep .van-row {
   background: none;
