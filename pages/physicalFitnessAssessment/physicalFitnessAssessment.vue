@@ -13,21 +13,13 @@
             <text class="evaluationdata">
               {{ item.questionContent }}
             </text>
-            <van-button
-              round
-              type="primary"
-              class="dynamicshow_button"
-              icon="../../static/app-plus/other/arrows.png"
-              icon-position="right"
-              @click.native="jumpModular(item)"
-              >重新测试</van-button
-            >
+			<button class="dynamicshow_button buttonYes" @click.native="jumpModular(item)">重新测试<image src="../../static/app-plus/other/arrows.png"/></button>
           </view>
           <view class="dynamicshow_left" v-else>
             <text class="evaluationdata">
               {{ item.questionContent }}
             </text>
-            <van-button
+            <!-- <van-button
               round
               type="primary"
               color="#1370FF"
@@ -36,7 +28,8 @@
               icon-position="right"
 			  @click.native="jumpModular(item)"
               >开始测试</van-button
-            >
+            > -->
+			<button class="dynamicshow_button buttonNo" @click.native="jumpModular(item)">开始测试<image src="../../static/app-plus/other/arrows.png"/></button>
           </view>
           <view class="dynamicshow_right">
             <!-- <van-circle
@@ -48,8 +41,8 @@
               :color="item.typeColor"
               :style="'--van-circle-text-color:'+ item.typeColor"
             /> -->
-			<view class="circle">
-				<view class="circleText">{{item.typeText}}</view>
+			<view class="circle" :style="'border: 4px solid '+item.typeColor+';'">
+				<view class="circleText" :style="'color:'+item.typeColor+';'">{{item.typeText}}</view>
 			</view>
           </view>
         </view>
@@ -93,7 +86,7 @@ export default {
 		console.log(item)
 		this.traineeNo = item.traineeNo;
 		this.questionCode = item.questionCode;
-		
+		this.pedalTest();
 		// const actionData = 
 		// const res1 = this.queryData.find((datas) => datas.code+'' == 'F0002' );
 		// console.log(res1);
@@ -119,7 +112,7 @@ export default {
 		switch(levelType){
 			case "优秀":
 			case "良好":
-				return "#01E08C";
+				return "rgba(1, 224, 140, 1)";
 				break;
 			case "中等":
 			case "中上等":
@@ -145,7 +138,6 @@ export default {
 	},
 	//获取运动表
 	async getconfingActionName(){
-		this.pedalTest();
 		const res = await busOb.getPhysicalChildAssessmentList("A0005");
 		this.queryData = res.data;
 		for(let z=0;z<this.queryData.length;z++){
@@ -154,21 +146,25 @@ export default {
 			this.queryData[z]['typeColor'] = this.levelColor(this.queryData[z].typeText);
 			this.queryData[z]['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
 		}
-		console.log(this.queryData)
 		for(let j = 0;j<this.queryUserActionData.length;j++){
 			for(let i=0;i<this.queryData.length;i++){
 				console.log(this.queryData[i].code===this.queryUserActionData[j].code)
 				if(this.queryData[i].code===this.queryUserActionData[j].code){
-					this.queryData[i].typeText=this.queryUserActionData[j].bodyTestReport.actionTypeText;
-					this.queryData[i].type=this.queryUserActionData[j].bodyTestReport.actionVlue;
-					this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].bodyTestReport.actionTypeText);
+					this.queryData[i].typeText=this.queryUserActionData[j].physicalData.actionTypeText;
+					this.queryData[i].type=this.queryUserActionData[j].physicalData.actionVlue;
+					this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].physicalData.actionTypeText);
 					continue;
 				}
 			}
 		}
+		console.log(this.queryData)
 		
 	},
-	
+	getdynamicEvaluationdata(){
+		uni.redirectTo({
+			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
+		})
+	}
 	// actionResDate(){
 		
 	// }
@@ -182,19 +178,21 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: #383d46;
+  background: rgba(33, 35, 40, 1);
 }
-.dynamicshow {
+/* .dynamicshow {
   width: calc(100vw - 220upx);
   overflow-y: auto;
-  background-color: #383d46;
+  background-color: rgba(33, 35, 40, 1);
   margin-left: 30upx;
   margin-top: 30upx;
   padding: 0 30upx 0 30upx;
   height: 280upx;
-  background: #383d46;
   border-radius: 24upx;
   position: relative;
+} */
+.need_scoll{
+	background-color: rgba(33, 35, 40, 1);
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
@@ -216,12 +214,28 @@ export default {
   margin-left: 30upx;
   align-items: center;
 }
+.buttonNo{
+	background: #1370FF;
+}
+.buttonYes{
+	background: #4B525E;
+}
 .dynamicshow_button {
   width: 220upx;
   height: 80upx;
-  background: #4b525e;
+  
   border-radius: 42px;
   border: 0px none;
+  line-height: 80upx;
+  font-size: 30upx;
+  font-weight: 600;
+  color: #F4F7FF;
+  margin: 0;
+}
+.dynamicshow_button image{
+	width: 30upx;
+	height: 32upx;
+	top: 7upx;
 }
 .dynamicshow_right {
   margin-right: 70upx;
@@ -242,7 +256,7 @@ export default {
   /* line-height: 50px; */
 }
 .postureButton {
-  width: 690upx;
+  width: calc(100vw - 60upx);
   height: 100upx;
   background: #1370ff;
   border-radius: 16upx;
