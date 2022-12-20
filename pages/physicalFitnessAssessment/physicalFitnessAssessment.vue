@@ -6,18 +6,18 @@
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
-          v-for="(item, index) in dynamicEvaluationdata"
+          v-for="(item, index) in queryData"
           :key="index"
         >
           <view class="dynamicshow_left" v-if="item.type > 0">
             <text class="evaluationdata">
-              {{ item.title }}
+              {{ item.questionContent }}
             </text>
             <van-button
               round
               type="primary"
               class="dynamicshow_button"
-              icon="../../static/app-plus/other/arrows.svg"
+              icon="../../static/app-plus/other/arrows.png"
               icon-position="right"
               @click.native="jumpModular(item)"
               >重新测试</van-button
@@ -25,21 +25,21 @@
           </view>
           <view class="dynamicshow_left" v-else>
             <text class="evaluationdata">
-              {{ item.title }}
+              {{ item.questionContent }}
             </text>
             <van-button
               round
               type="primary"
               color="#1370FF"
               class="dynamicshow_button"
-              icon="../../static/app-plus/other/arrows.svg"
+              icon="../../static/app-plus/other/arrows.png"
               icon-position="right"
 			  @click.native="jumpModular(item)"
               >开始测试</van-button
             >
           </view>
           <view class="dynamicshow_right">
-            <van-circle
+            <!-- <van-circle
               v-model:current-rate="currentRate"
               :rate="100"
               :speed="400"
@@ -47,7 +47,10 @@
               :layer-color="item.typeColor"
               :color="item.typeColor"
               :style="'--van-circle-text-color:'+ item.typeColor"
-            />
+            /> -->
+			<view class="circle">
+				<view class="circleText">{{item.typeText}}</view>
+			</view>
           </view>
         </view>
       </van-col>
@@ -70,120 +73,105 @@ export default {
   },
   data() {
     return {
+	  traineeNo:'',
+	  questionCode:'',
       currentRate: 50,
 	  age:29,
 	  gender:"1",
 	  resultValue:0,
 	  typeText:"待测",
 	  typeColor:"#4B525E",
-      dynamicEvaluationdata: [
-        {
-          title: '',
-          type: 0,
-          path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=俯卧撑耐力测试',
-		  typeColor: "#4B525E",
-		  typeText:"待测"
-		},
-        {
-          title: '',
-          type: 0,
-          path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=卷腹测试',
-		  typeColor: "#4B525E",
-		  typeText:"待测"
-		},
-        {
-          title: '',
-          type: 0,
-          path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=三分钟踏板测试',
-		  typeColor: "#4B525E",
-		  typeText:"待测"
-		},
-        {
-          title: '',
-          type: 0,
-          path: '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation?pageName=自重深蹲测试',
-          typeColor: "#4B525E",
-		  typeText:"待测"
-		}
-      ]
+	  queryData:{},
+      queryUserActionData:{}
     }
   },
-  onShow () {
-	this.getdynamicEvaluationdata();
-  	this.pedalTest();
+  onShow() {
+  	this.getconfingActionName();
+  },
+  onLoad:function(item){
+		const res = JSON.parse(item.childList);
+		console.log(item)
+		this.traineeNo = item.traineeNo;
+		this.questionCode = item.questionCode;
+		
+		// const actionData = 
+		// const res1 = this.queryData.find((datas) => datas.code+'' == 'F0002' );
+		// console.log(res1);
   },
   methods: {
     jumpModular(item) {
       console.log(item.path, '>>>>')
       uni.navigateTo({
-        url: item.path,
+        url: item.path + '?' + 'data=' + JSON.stringify(item) + '&traineeNo=' + this.traineeNo + '&questionCode=' + item.parentCode ,
         success: (res) => {},
         fail: () => {},
         complete: () => {}
       })
     },
-	async getdynamicEvaluationdata(){
-		const res = (await busOb.getPhysicalChildAssessmentList("A0005")).data
-		let i = 0;
-		console.log(res.length)
-		for(i; i < res.length; i++){
-			this.dynamicEvaluationdata[i].title = res[i].questionContent;
-			this.dynamicEvaluationdata[i].path = "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation" + "?pageName=" + res[i].questionContent
-		}
-	},
+	//获取当前用户已有锻炼数据
 	async pedalTest(){
-		const length = this.dynamicEvaluationdata.length;
-		let i = 0; 
-		for(i; i < length; i++){
-			// if(this.dynamicEvaluationdata[i].title == '三分钟踏板测试'){
-			// 	console.log(this.dynamicEvaluationdata[i].type)
-			// 	this.resultValue = this.dynamicEvaluationdata[i].type;
-			// 	break;
-			// }
-			console.log(this.dynamicEvaluationdata[i].type)
-			this.resultValue = this.dynamicEvaluationdata[i].type;
-			// this.dynamicEvaluationdata[i]["typeColor"]=this.typeColor;
-		
-		const gender = this.gender;
-		const age = this.age;
-		const resValue = this.resultValue;
-		console.log(gender+","+age+","+resValue)
-		const res = testOb.method1(gender,age,resValue)
-		// const res = testOb.method1("1",29,80)
-		console.log(res)
-		const type = (await res).data;
-		if(type.length == 0){
-			this.typeText = "待测";
-		}else{
-		this.typeText = type[0].resultLevel;
-		}
-		this.dynamicEvaluationdata[i].typeText = this.typeText;
-		this.levelColor(this.typeText)
-		// this.dynamicEvaluationdata[i]["typeColor"]=this.typeColor;
-		this.dynamicEvaluationdata[i].typeColor = this.typeColor;
-		console.log(this.dynamicEvaluationdata[i])
-		}
+		const datas = (await this.findConfigData()).data;
+		this.queryUserActionData = datas;
+		console.log(this.queryUserActionData)
 	},
+	//通过传入的type值来更新等级颜色
 	levelColor(levelType){
 		switch(levelType){
 			case "优秀":
 			case "良好":
-				this.typeColor = "#01E08C";
+				return "#01E08C";
 				break;
 			case "中等":
 			case "中上等":
 			case "中下等":
-				this.typeColor = "#FFC13C";
+				return "#FFC13C";
 				break;
 			case "较差":
 			case "非常差":
-				this.typeColor = "#F04242";
+				return "#F04242";
 				break;
-			case "待测":
-				this.typeColor = "#4B525E";
+			default:
+				return "#4B525E";
 				break;
 		}
-	}
+	},
+	findConfigData(){
+		const data = {};
+		data["traineeNo"] = this.traineeNo;
+		data["questionCode"] = this.questionCode;
+		console.log(data)
+		const res = testOb.opearConfigQuery(data);
+		return res;
+	},
+	//获取运动表
+	async getconfingActionName(){
+		this.pedalTest();
+		const res = await busOb.getPhysicalChildAssessmentList("A0005");
+		this.queryData = res.data;
+		for(let z=0;z<this.queryData.length;z++){
+			this.queryData[z]['typeText']='待测';
+			this.queryData[z]['type']=0;
+			this.queryData[z]['typeColor'] = this.levelColor(this.queryData[z].typeText);
+			this.queryData[z]['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
+		}
+		console.log(this.queryData)
+		for(let j = 0;j<this.queryUserActionData.length;j++){
+			for(let i=0;i<this.queryData.length;i++){
+				console.log(this.queryData[i].code===this.queryUserActionData[j].code)
+				if(this.queryData[i].code===this.queryUserActionData[j].code){
+					this.queryData[i].typeText=this.queryUserActionData[j].bodyTestReport.actionTypeText;
+					this.queryData[i].type=this.queryUserActionData[j].bodyTestReport.actionVlue;
+					this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].bodyTestReport.actionTypeText);
+					continue;
+				}
+			}
+		}
+		
+	},
+	
+	// actionResDate(){
+		
+	// }
   }
 }
 </script>
@@ -260,5 +248,21 @@ export default {
   border-radius: 16upx;
   margin-left: 30upx;
   margin-top: 40upx;
+}
+.circle{
+	width: 100px;
+	 height: 100px; 
+	 border: 4px solid #4B525E;    
+	 border-radius: 100px;
+	 opacity: 0.5;
+	 line-height: 100px;
+}
+.circleText{
+	width: 72upx;
+	height: 50upx;
+	font-size: 36upx;
+	font-weight: 600;
+	color: #BDC3CE;
+	margin: 0 auto;
 }
 </style>

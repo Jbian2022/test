@@ -131,7 +131,7 @@ body {
   background: #212328;
 }
 .new-workout .header .btn {
-  width: 3.75rem;
+  padding: 0 0.9375rem;
   height: 2.125rem;
   background: #1370FF;
   border-radius: 0.5rem;

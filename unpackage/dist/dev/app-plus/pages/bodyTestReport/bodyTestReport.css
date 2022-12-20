@@ -48,62 +48,16 @@
 .select-picker-arrow[data-v-4c54e7cd] {
   width: 7px;
   height: 7px;
-  border-left: 1px solid #7A7F89;
-  border-bottom: 1px solid #7A7F89;
+  border-left: 1px solid #7a7f89;
+  border-bottom: 1px solid #7a7f89;
   transform: rotate(-90deg);
 }
 .placeholder.default[data-v-4c54e7cd] {
-  color: #7A7F89;
+  color: #7a7f89;
   text-indent: 0px;
 }
 .placeholder[data-v-4c54e7cd] {
-  color: #F4F7FF;
-}
-[data-v-4c54e7cd] .uni-selector-select .uni-picker-custom {
-  border-radius: 0.75rem 0.75rem 0px 0px;
-  background: #383d46 !important;
-}
-[data-v-4c54e7cd] .uni-selector-select .uni-picker-custom .uni-picker-header {
-  background: transparent !important;
-  border-bottom: none;
-}
-[data-v-4c54e7cd] .uni-selector-select .uni-picker-custom .uni-picker-header .uni-picker-action-cancel {
-  padding-left: 1.25rem;
-  font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
-  color: #7a7f89;
-}
-[data-v-4c54e7cd] .uni-selector-select .uni-picker-custom .uni-picker-header .uni-picker-action-confirm {
-  padding-right: 1.25rem;
-  font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
   color: #f4f7ff;
-}
-[data-v-4c54e7cd] .uni-selector-select .uni-picker-custom .uni-picker-header::after {
-  border-bottom: none !important;
-}
-[data-v-4c54e7cd] .uni-selector-select .uni-picker-custom .uni-picker-content {
-  background: transparent !important;
-}
-[data-v-4c54e7cd] .uni-selector-select .uni-picker-custom .uni-picker-content .uni-picker-item {
-  color: #f4f7ff !important;
-}
-[data-v-4c54e7cd] .uni-picker-view-mask {
-  background: transparent !important;
-}
-[data-v-4c54e7cd] .uni-picker-view-indicator {
-  border: none !important;
-  background: rgba(75, 82, 94, 0.5) !important;
-  border-radius: 16px;
-  z-index: -1;
-}
-[data-v-4c54e7cd] .uni-picker-view-indicator:before {
-  border-top: none;
-}
-[data-v-4c54e7cd] .uni-picker-view-indicator::after {
-  border-bottom: none;
 }
 /**
  * 这里是uni-app内置的常用样式变量

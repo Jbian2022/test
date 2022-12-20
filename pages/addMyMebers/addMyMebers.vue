@@ -27,13 +27,22 @@
           :label="'性别(必填)'"
           name="gender"
         >
-          <view class="change_picker_style">
-            <hpy-form-select
-              :dataList="columns"
-              text="text"
-              name="value"
-              v-model="studentForm.gender"
-            />
+            <Mpicker
+              mode="bottom"
+              :show.sync="sexShow"
+              :range="range"
+              :rangeKey="'text'"
+              @confirm="sexConfirm"
+			  @cancel="sexCancel"
+              :pickerType="'ordinary'"
+              :defaultIndex="0"
+            ></Mpicker>
+          <view class="change_picker_style" @click.stop="openDialog">
+			  <view class="label_style" :class="studentForm.gender ? '' : 'student_label_style'">{{ !studentForm.gender ? '请选择性别' :  genderLabel}}</view>
+			<image
+			  class="back_img_style"
+			  src="../../static/app-plus/mebrs/back.png"
+			></image>
           </view>
         </uni-forms-item>
         <uni-forms-item
@@ -41,12 +50,34 @@
           :label="'生日(必填)'"
           name="birthday"
         >
-          <hpy-form-select
+		
+		<Mpicker
+		    mode="bottom"
+			:range="range"
+		    :show.sync="birthShow"
+		    @confirm="dateConfirm"
+			  @cancel="dateCancel"
+		    :pickerType="'date'"
+		    :defaultIndex="0"
+			:distinguishModel="studentForm.birthday"
+		  ></Mpicker>
+		<view class="change_picker_style" @click.stop="birthShow = true">
+		  <view class="label_style" :class="studentForm.birthday ? '' : 'student_label_style'">{{ !studentForm.birthday ? '请选生日' :  studentForm.birthday}}</view>
+		<image
+		  class="back_img_style"
+		  src="../../static/app-plus/mebrs/back.png"
+		></image>
+		</view>
+		
+	  <!-- 		<DatePicker></DatePicker> -->
+<!--         <hpy-form-select
             mode="date"
             start="1872-01-01"
             end="2050-01-01"
             v-model="studentForm.birthday"
-          />
+          /> -->
+		  
+		  
         </uni-forms-item>
         <uni-forms-item
           class="outer_form_item_style"
@@ -103,22 +134,27 @@
 import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '../../components/navBarCompontent/navBarCompontent.vue'
 import hadleDate from '../../common/timeUtil.js'
+import Mpicker from '../../components/mPicker.vue/mPicker.vue'
+
 export default {
   components: {
     BgTheamCompontent,
-    NavBarCompontent
+    NavBarCompontent,
+    Mpicker
   },
   data() {
     return {
       studentForm: {
         traineeName: '',
-        gender: '0',
-        birthday: '2022-12-01',
+        gender: '',
+        birthday: '',
         mobile: '',
         buyStatus: 0
       },
+      sexShow: false,
+	  birthShow: false,
       gender: '',
-      columns: [
+     range: [
         { text: '未知', value: '0' },
         { text: '男', value: '1' },
         { text: '女', value: '2' }
@@ -203,19 +239,45 @@ export default {
       let requestItem = options.hasOwnProperty('item')
         ? JSON.parse(options.item)
         : null
-		setTimeout(() => {
-      this.studentForm = this.requestItem = requestItem
-			
-		}, 1000)
-
-      this.gender = this.columns.find(
+        this.studentForm = this.requestItem = requestItem
+      this.gender = this.range.find(
         (v) => v.value === requestItem.gender
       ).text
       this.leftNavTitle = '基础信息'
     }
   },
+  computed: {
+  genderLabel() {
+	let label = '';
+	let findData = this.range.find(item => item.value === this.studentForm.gender )
+	if (findData) {
+		label = findData.text || ''
+	}
+	return label
+  }
+	  
+  },
   mounted() {},
   methods: {
+	  openDialog() {
+	  this.sexShow = true
+	  },
+    sexConfirm(e) {
+      this.studentForm.gender = this.range[e[0]].value
+	  this.sexShow = false
+	  
+    },
+	dateConfirm(e) {
+		console.log(e, '我是日期')
+		this.studentForm.birthday = e
+		 this.birthShow = false
+	},
+	dateCancel() {
+		this.birthShow = false
+	},
+	sexCancel() {
+		 this.sexShow = false
+	},
     /**
      * 格式化日期
      * @param type
@@ -247,14 +309,13 @@ export default {
     genderConfirm(e) {
       this.studentForm.gender = e.value
       this.gender = e.text
-      let defaultIndex = this.columns.findIndex((item) => {
+      let defaultIndex = this.range.findIndex((item) => {
         item.value = e.value
       })
       this.defaultIndex = defaultIndex
       this.showPicker = false
     },
     addDirectly(type) {
-      debugger
       var that = this
       console.log(type, 'nishi')
       this.$refs.studentForm
@@ -707,23 +768,30 @@ export default {
   }
 }
 
-::v-deep.uni-picker-view-mask {
-  background: transparent !important;
+.change_picker_style {
+	display: flex;
+	width: 100%;
+	height: 80upx;
+	align-items: center;
+	justify-content: space-between;
+	.label_style {
+		font-size: 32upx;
+		font-family: PingFangSC-Semibold, PingFang SC;
+		font-weight: 600;
+		color: #F4F7FF;
+		line-height: 44upx;
+	}
+	.back_img_style {
+		width: 30upx;
+		height: 32upx;
+		object-fit: contain;
+		transform:rotate(180deg);
+	}
 }
-::v-deep.uni-picker-view-indicator {
-  border: none !important;
-  // width: 80%;
-
-  // margin-left: 40upx;
-  background: rgba(75, 82, 94, 0.5) !important;
-  border-radius: 16px;
-  z-index: -1;
-}
-
-::v-deep.uni-picker-view-indicator:before {
-  border-top: none;
-}
-::v-deep.uni-picker-view-indicator::after {
-  border-bottom: none;
+.student_label_style {
+	font-size: 32upx !important;
+	font-family: PingFangSC-Regular, PingFang SC;
+	font-weight: 400 !important;
+	color: #7A7F89 !important;
 }
 </style>

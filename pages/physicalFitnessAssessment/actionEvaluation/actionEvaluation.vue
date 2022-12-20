@@ -15,15 +15,12 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video src="../../../static/app-plus/video/pedalTest.mp4" wid autoplay>
+					<video :src="videoUrl" wid autoplay>
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
 						<view>
-							<p>1.踏板高度，30厘米高度。4块支撑即可。</p>
-							<p>2.在做测试前，热身放松5分钟。</p>
-							<p>3.踏步频率，正常上下楼梯频率。大概每分钟96步。</p>
-							<p>4.在评估结束后，立刻检测心率。记录下来。</p>
+							<p v-for="(item,index) in actionData.answerRemark.detailArray">{{item}}</p>
 						</view>
 					</view>
 				</view>
@@ -35,7 +32,8 @@
 			<view class="contentBlock">
 				<van-row>
 				  <van-col span="16">
-					  <view class="testText">请填写心率</view>
+					  <view class="testText" v-if="actionData.code=='F0001'">请填写心率</view>
+					  <view class="testText" v-else>请填写数量</view>
 					  <view class="testInput">
 						  <view>
 							  <van-field 
@@ -44,7 +42,8 @@
 							  @blur="testResult()"
 							  type="number"/>
 						  </view>
-						  <view class="inputText">/分</view>
+						  <view class="inputText" v-if="actionData.code=='F0001'">/分</view>
+						  <view class="inputText" v-else>/个</view>
 					  </view>
 				  </van-col>
 				  <van-col span="8">
@@ -64,7 +63,7 @@
 			</view>
 		</view>
 		<view>
-		  <van-button type="primary" class="postureButton">确认</van-button>
+		  <van-button type="primary" class="postureButton" @click.native="actionResDate()">确认</van-button>
 		</view>
 	</view>
 </template>
@@ -74,6 +73,7 @@
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
 	import { ref } from 'vue';
 	const testOb = uniCloud.importObject("testResults");
+	const actionOb = uniCloud.importObject("businessCloudObject");
 	export default {
 		setup() {
 			const show = ref(false);
@@ -90,9 +90,16 @@
 			    };
 		  },
 		onLoad: function (item) {
-				console.log(item.pageName);
-				let leftNavTitle = item.pageName
-				this.leftNavTitle = leftNavTitle
+				// console.log(JSON.parse(item.data));
+				let data = JSON.parse(item.data);
+				this.actionData = data
+				console.log(this.actionData)
+				this.leftNavTitle = this.actionData.questionContent
+				this.imgUrl = this.actionData.url;
+				this.videoUrl = this.actionData.answerRemark.url;
+				// console.log(this.imgUrl+"||"+this.videoUrl)
+				this.traineeNo = item.traineeNo;
+				this.questionCode = item.questionCode;
 		},
 		components: {
 			BgTheamCompontent,
@@ -105,9 +112,20 @@
 				resValue:80,
 				resultValue:0,
 				typeText:"待测",
+				actionData:[],
 				typeColor:"#4B525E",
-				imgUrl:'../../../static/app-plus/bg/pedalTest.png',
-				leftNavTitle:''
+				imgUrl:'',
+				leftNavTitle:'',
+				videoUrl:'',
+				traineeNo:'',
+				questionCode:'',
+				restData:[{
+					traineeNo:'',
+					questionCode:'',
+					testResult:[],
+					userId:'',
+					status:"0"
+				}],
 			}
 		},
 		methods: {
@@ -115,7 +133,7 @@
 				const gender = this.gender;
 				const age = this.age;
 				const resValue = this.resultValue;
-				console.log(gender,age,resValue)
+				// console.log(gender,age,resValue)
 				const res = testOb.method1(gender,age,resValue)
 				console.log(res)
 				const type = (await res).data;
@@ -145,6 +163,24 @@
 						this.typeColor = "#4B525E";
 						break;
 				}
+			},
+			actionResDate(){
+				const data = {};
+				const actinData = {};
+				data["traineeNo"] = this.traineeNo;
+				data["questionCode"] = this.questionCode;
+				data["code"] = this.actionData.code;
+				actinData["actionVlue"] = this.resultValue;
+				actinData["actionTypeText"] = this.typeText
+				if(this.resultValue==0){
+					this.testResult();
+				}
+				data["testDate"] = new Date();
+				data["physicalData"] = actinData;
+				data["status"] = "0";
+				console.log(data)
+				const res = actionOb.opearConfig(data,"bodyTestReport");
+				console.log(res)
 			}
 		}
 	}
@@ -228,7 +264,7 @@
 	margin-top: 40upx;
 }
 .postureButton {
-  width: 690upx;
+  width: calc(100vw - 60upx);
   height: 100upx;
   background: #1370ff;
   border-radius: 16upx;
@@ -242,7 +278,7 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 125upx;
+	top: 180upx;
 	left: 60upx;
 	z-index: 1;
 	font-size: 26upx;
@@ -257,7 +293,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1500upx;
+	height: 1370upx;;
 	background: #383D46;
 	border-radius: 16upx;
 	backdrop-filter: blur(3upx);
@@ -265,7 +301,7 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	margin-top: 100upx;
+	margin-top: 160upx;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
 	border-radius: 32upx;
@@ -307,6 +343,7 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
+	margin-bottom: 40upx;
 }
 .clickActionEnd image{
 	width: 32upx;

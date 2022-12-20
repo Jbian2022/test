@@ -1,20 +1,29 @@
 <template>
 	<view class="update-signature">
+		<view class="status_bar">
+            <!-- 这里是状态栏 -->
+        </view>
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="title">修改{{title}}</view>
-		<van-cell-group class="form" inset>
-			<van-field  v-if="title==='性别'" class="input"  v-model="genderName"  is-link  readonly  name="picker"  placeholder="点击选择性别" @click="showPicker = true"/>
-			<van-field v-else class="input" v-model="text" :placeholder="'请输入'+title"/>
-		</van-cell-group>
+		<view class="group">
+			<view v-if="title==='性别'" class="input" @click="open">
+				<text>{{genderName}}</text>
+				<van-icon name="arrow" />
+			</view>
+			<input v-else class="uni-input" type="text" v-model="text" :placeholder="'请输入'+title" />
+		</view>
 		<view class="footer-button">
 			<van-button block @click="updateUserInfo">确认</van-button>
 		</view>
-		<van-action-sheet
-			v-model:show="showPicker"
-			:actions="columns"
-			close-on-click-action
-			@select="selectHandle"
-		/>
+		<uni-popup ref="popup" type="bottom">
+			<view class="select-box">
+				<view class="list">
+					<view class="list-item" v-for="(item,index) in columns" :key="index" @click="selectHandle(item)">{{item.name}}</view>
+				</view>
+				<div class="butn" @click="close">取消</div>
+			</view>
+			
+		</uni-popup>
 	</view>
 </template>
 
@@ -94,16 +103,27 @@
 					this.text = 2
 					this.genderName = '女'
 				}
+				this.$refs.popup.close()
 			},
 			onClickLeft(){
 				// uni.navigateBack()
 				uni.navigateTo({url:'/pages/personalInfo/personalInfo'})
+			},
+			open(){
+				this.$refs.popup.open()
+			},
+			close(){
+				this.$refs.popup.close()
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+.status_bar {
+	height: var(--status-bar-height);
+	width: 100%;
+}
 page{
 	background: #212328;
 }
@@ -125,21 +145,28 @@ page{
 		color: #FFFFFF;
 		line-height: 66upx;
 	}
-	.form{
-		background: rgba(56, 61, 70,.5);
-		border-radius: 24upx;
+	.group{
+		padding: 30upx 40upx;
 		.input{
+			background: rgba(56, 61, 70,.5);
+			border-radius: 24upx;
+			height: 122upx;
+			display: flex;
 			align-items: center;
-			background: transparent;
 			padding: 0 30upx;
+			color: #BDC3CE;
+			justify-content: space-between;
 		}
-	}
-	::v-deep .van-field__control{
-		height: 122upx;
-		background: transparent;
-		font-size: 30upx;
-		color: #BDC3CE;
-		line-height: 122upx;
+		.uni-input{
+			background: rgba(56, 61, 70,.5);
+			border-radius: 24upx;
+			color: #BDC3CE;
+			height: 122upx;
+			padding: 0 30upx;
+			&::placeholder{
+				color: #7a7f89;
+			}
+		}
 	}
 	.footer-button{
 		position: fixed;
@@ -157,22 +184,34 @@ page{
 			height: 100upx;
 		}
 	}
-	::v-deep .van-popup{
-		padding: 30upx;
+	.select-box{
+		padding: 40upx;
+		border-radius: 24px 24px 0px 0px;
 		background: #212328;
-		border-radius: 0;
-		box-sizing: border-box;
-		.van-action-sheet__gap{
-			background: transparent;
-		}
-		.van-action-sheet__content,.van-action-sheet__cancel{
+		.list{
+			margin: 0 auto;
+			padding: 20upx 0;
+			width: 690upx;
+			background: #383D46;
 			border-radius: 16upx;
-			background: #454951;
-			color: #FFFFFF;
+			.list-item{
+				color: #FFFFFF;
+				text-align: center;
+				line-height: 100upx;
+				font-size: 30upx;
+			}
 		}
-		.van-action-sheet__item{
-			background: #454951;
+		.butn{
+			margin: 20upx auto;
+			width: 692upx;
+			height: 100upx;
+			background: #383D46;
+			border-radius: 16upx;
+			font-size: 32upx;
+			font-weight: 600;
 			color: #FFFFFF;
+			line-height: 100upx;
+			text-align: center;
 		}
 	}
 }

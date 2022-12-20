@@ -205,7 +205,7 @@
 	margin-top: 1.25rem;
 }
 .postureButton {
-  width: 21.5625rem;
+  width: calc(100vw - 1.875rem);
   height: 3.125rem;
   background: #1370ff;
   border-radius: 0.5rem;
@@ -219,7 +219,7 @@
 	border-radius: 1.125rem;
 	opacity: 0.5;
 	position:absolute;
-	top: 3.90625rem;
+	top: 5.625rem;
 	left: 1.875rem;
 	z-index: 1;
 	font-size: 0.8125rem;
@@ -234,7 +234,7 @@
 	top: 0.1875rem;
 }
 .clickActionBody{
-	height: 46.875rem;
+	height: 42.8125rem;;
 	background: #383D46;
 	border-radius: 0.5rem;
 	-webkit-backdrop-filter: blur(0.09375rem);
@@ -243,7 +243,7 @@
 }
  .clickActionContent{
 	width: calc(100vw - 1.875rem);
-	margin-top: 3.125rem;
+	margin-top: 5rem;
 	margin-left: 0.9375rem;
 	--van-popup-background-color: #383D46;
 	border-radius: 1rem;
@@ -285,6 +285,7 @@
 	line-height: 2.1875rem;
 	text-align: center;
 	margin: 0 auto;
+	margin-bottom: 1.25rem;
 }
 .clickActionEnd uni-image{
 	width: 1rem;

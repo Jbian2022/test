@@ -87,8 +87,6 @@
 </template>
 
 <script>
-import { Toast } from 'vant'
-import { ref } from 'vue'
 let weixinAuthService
 export default {
   data() {
