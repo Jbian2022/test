@@ -33,15 +33,12 @@
 							<p>4.下蹲过程中，教练需观察会员，正面肢体状态，侧面肢体状态。</p>
 						</view>
 					</view>
-				</view>
-				<view class="clickActionEnd" @click.native="closePopup">收起
-				<image src="../../../static/app-plus/other/close.png"></image>
+					<view class="clickActionEnd" @click.native="closePopup">收起
+					<image src="../../../static/app-plus/other/close.png"></image>
+					</view>
 				</view>
 			</van-popup>
-			<van-image
-			  class="imagebg"
-			  :src="backimgFront"
-			/>
+			<image class="imagebg" :src="backimgFront"/>
 			<!-- <image
 			  src="../../static/app-plus/bg/actionImg.png"
 			></image> -->
@@ -70,15 +67,13 @@
 							<p>4.下蹲过程中，教练需观察会员，正面肢体状态，侧面肢体状态。</p>
 						</view>
 					</view>
-				</view>
-				<view class="clickActionEnd" @click.native="closePopup">收起
-				<image src="../../../static/app-plus/other/close.png"></image>
+					<view class="clickActionEnd" @click.native="closePopup">收起
+					<image src="../../../static/app-plus/other/close.png"></image>
+					</view>
 				</view>
 			</van-popup>
 			
-			<van-image
-			  class="imagebg"
-			  :src="backimgSide"
+			<image class="imagebg" :src="backimgSide"
 			/>
 			<!-- <image
 			  src="../../static/app-plus/bg/actionImg.png"
@@ -156,15 +151,15 @@
 				backimgSide:"",
 				FrontVideoUrl:"",
 				SideVideoUrl:"",
-				backimg1: "../../static/app-plus/bg/positiveAction.jpg",
-				backimg2: "../../static/app-plus/bg/positiveAction2.jpg",
-				thoracicSpineActivityimg:"../../static/app-plus/bg/thoracicSpineActivity.jpg",
-				thoracicSpineActivity2img:"../../static/app-plus/bg/thoracicSpineActivity2.jpg",
-				thomasimg: "../../static/app-plus/bg/Thomas.jpg",
-				straightLegLiftimg: "../../static/app-plus/bg/StraightLegLift.jpg",
-				shoulderTest1img: "../../static/app-plus/bg/shoulderTest1.jpg",
-				shoulderTest2img: "../../static/app-plus/bg/shoulderTest2.jpg",
-				pushUpTestimg:"../../static/app-plus/bg/pushUpTest.jpg",
+				backimg1: "../../../static/app-plus/bg/positiveAction.jpg",
+				backimg2: "../../../static/app-plus/bg/positiveAction2.jpg",
+				thoracicSpineActivityimg:"../../../static/app-plus/bg/thoracicSpineActivity.jpg",
+				thoracicSpineActivity2img:"../../../static/app-plus/bg/thoracicSpineActivity2.jpg",
+				thomasimg: "../../../static/app-plus/bg/Thomas.jpg",
+				straightLegLiftimg: "../../../static/app-plus/bg/StraightLegLift.jpg",
+				shoulderTest1img: "../../../static/app-plus/bg/shoulderTest1.jpg",
+				shoulderTest2img: "../../../static/app-plus/bg/shoulderTest2.jpg",
+				pushUpTestimg:"../../../static/app-plus/bg/pushUpTest.jpg",
 				changeValue: true,
 				num: 0,
 				squatFrontVideoUrl: "../../../static/app-plus/video/squatFront.mp4",
@@ -245,8 +240,8 @@
 .imagebg {
       width: 100%;
       height: 1130upx;
-	  border-radius: 120px;
-    }
+	  border-radius: 16upx;
+}
 .buttontrue {
   width: calc(100vw - 60upx);
   height: 100upx;
@@ -263,7 +258,7 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 240upx;
+	top: 310upx;
 	left: 60upx;
 	z-index: 1;
 	font-size: 26upx;
@@ -278,7 +273,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1500upx;
+	height: 1490upx;
 	background: #383D46;
 	border-radius: 16upx;
 	backdrop-filter: blur(3upx);
@@ -286,10 +281,11 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	margin-top: 100upx;
+	height: 1490upx;
+	margin-top: 270upx;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
-	border-radius: 32upx;
+	border-radius: 16upx;
 }
 .clickActionBody video{
 	width: calc(100vw - 140upx);
@@ -328,7 +324,7 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
-	margin-bottom: 40upx;
+	margin-top: 666upx;
 }
 .clickActionEnd image{
 	width: 32upx;
