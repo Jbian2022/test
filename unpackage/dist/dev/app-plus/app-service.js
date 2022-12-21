@@ -1593,12 +1593,12 @@ if (uni.restoreGlobal) {
     I = "__UNI__76A9E40";
   } catch (e) {
   }
-  let b$1 = {};
+  let b = {};
   function T(e, t2 = {}) {
     var n2, s2;
-    return n2 = b$1, s2 = e, Object.prototype.hasOwnProperty.call(n2, s2) || (b$1[e] = t2), b$1[e];
+    return n2 = b, s2 = e, Object.prototype.hasOwnProperty.call(n2, s2) || (b[e] = t2), b[e];
   }
-  "app" === w && (b$1 = uni._globalUniCloudObj ? uni._globalUniCloudObj : uni._globalUniCloudObj = {});
+  "app" === w && (b = uni._globalUniCloudObj ? uni._globalUniCloudObj : uni._globalUniCloudObj = {});
   const A = ["invoke", "success", "fail", "complete"], C = T("_globalUniCloudInterceptor");
   function P(e, t2) {
     C[e] || (C[e] = {}), f(t2) && Object.keys(t2).forEach((n2) => {
@@ -3926,6 +3926,21 @@ if (uni.restoreGlobal) {
     ]);
   }
   const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const debounce$1 = (fn, delay) => {
+    var delays = delay || 200;
+    var timer;
+    return function() {
+      var th = this;
+      var args = arguments;
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(function() {
+        timer = null;
+        fn.apply(th, args);
+      }, delays);
+    };
+  };
   var businessCloudObject$3 = As.importObject("businessCloudObject");
   const _sfc_main$D = {
     name: "memberList",
@@ -3956,14 +3971,14 @@ if (uni.restoreGlobal) {
         if (this.meberList.length === 0) {
           flag = true;
         }
-        formatAppLog("log", "at components/memberList/memberList.vue:167", flag, " LLLLL");
+        formatAppLog("log", "at components/memberList/memberList.vue:156", flag, " LLLLL");
         return flag;
       }
     },
     watch: {
       meberList: {
         handler: function(n2, o2) {
-          this.$emit("getMemberList", b);
+          this.$emit("getMemberList", n2);
         },
         immediate: true
       },
@@ -3980,9 +3995,9 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:191", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:180", n2, ">>>>");
             if (n2) {
-              this.searchMemberList();
+              debounce$1(this.searchMemberList(n2), 300);
             }
           }
         },
@@ -4006,7 +4021,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:221", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:211", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4062,7 +4077,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:285", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:275", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4070,28 +4085,28 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:295", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:285", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e) {
-        formatAppLog("log", "at components/memberList/memberList.vue:302", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:292", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e, index) {
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:307", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:297", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
-      goToTrainingRecord() {
+      goToTrainingRecord(item) {
         uni.navigateTo({
-          url: `/pages/trainingRecord/trainingRecord?traineeNo=${"63899b9ef5cf3a1773072cd4"}&memberName=${"\u5F20\u96EA\u5CF0"}`
+          url: `/pages/trainingRecord/trainingRecord?traineeNo=${item._id}&memberName=${item.traineeName}`
         });
       },
-      goToNewWorkout() {
+      goToNewWorkout(item) {
         uni.navigateTo({
-          url: "/pages/newWorkout/newWorkout?traineeNo=63899b9ef5cf3a1773072cd4"
+          url: "/pages/newWorkout/newWorkout?traineeNo=" + item._id
         });
       }
     }
@@ -4136,11 +4151,17 @@ if (uni.restoreGlobal) {
         key: 0,
         class: "no_data_style"
       }, [
-        vue.createElementVNode("image", {
+        $props.type === "home" ? (vue.openBlock(), vue.createElementBlock("image", {
+          key: 0,
           class: "no_data_meber_img_style",
           src: "/static/app-plus/mebrs/nomebers.png"
-        }),
-        vue.createElementVNode("view", { class: "quckliy_add_style" }, "\u5FEB\u53BB\u6DFB\u52A0\u7B2C\u4E00\u4E2A\u5B66\u5458\u5427")
+        })) : vue.createCommentVNode("v-if", true),
+        $props.type === "detail" ? (vue.openBlock(), vue.createElementBlock("image", {
+          key: 1,
+          class: "no_data_meber_img_style",
+          src: "/static/app-plus/mebrs/searchNoData.png"
+        })) : vue.createCommentVNode("v-if", true),
+        vue.createElementVNode("view", { class: "quckliy_add_style" }, vue.toDisplayString($props.type === "home" ? "\u5FEB\u53BB\u6DFB\u52A0\u7B2C\u4E00\u4E2A\u5B66\u5458\u5427" : "\u4EC0\u4E48\u5185\u5BB9\u90FD\u6CA1\u641C\u5230"), 1)
       ])) : (vue.openBlock(true), vue.createElementBlock(vue.Fragment, { key: 1 }, vue.renderList($data.meberList, (item, itemIndex) => {
         return vue.openBlock(), vue.createBlock(_component_uni_swipe_action, {
           class: "slide_stylle",
@@ -4161,8 +4182,7 @@ if (uni.restoreGlobal) {
                     class: "slot_btn_img_style",
                     src: "/static/app-plus/mebrs/delete.svg"
                   })
-                ]),
-                vue.createCommentVNode(' 		      <van-popup v-model="deleteRemarkFlag" teleport="body">\r\n				         <view class="confirm_dakuang_style">\r\n				           <view class="confirm_top_style">\r\n				             <text class="config_top_title_style">\u662F\u5426\u786E\u8BA4\u5220\u9664</text>\r\n				             <image\r\n				               class="delete_waring_style"\r\n				               src="../../static/app-plus/mebrs/delete.svg"\r\n				             ></image>\r\n				           </view>\r\n				           <view class="delet_remark"\r\n				             >\u786E\u8BA4\u5220\u9664\u8BE5\u5B66\u5458\u5417\uFF1F\u5220\u9664\u540E\u65E0\u6CD5\u6062\u590D</view\r\n				           >\r\n				           <view class="delete_btn_style">\r\n				             <view class="delete_cacel_style" @click.stop="deleteRemarkFlag=false">\u53D6\u6D88</view>\r\n				             <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm">\u786E\u8BA4</view>\r\n				           </view>\r\n				         </view>\r\n				       </van-popup> ')
+                ])
               ]),
               default: vue.withCtx(() => [
                 vue.createElementVNode("view", { class: "add_student_style" }, [
@@ -4186,14 +4206,14 @@ if (uni.restoreGlobal) {
                       ]),
                       vue.createElementVNode("view", {
                         class: "top_right_style",
-                        onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.goToNewWorkout && $options.goToNewWorkout(...args), ["stop"]))
+                        onClick: vue.withModifiers(($event) => $options.goToNewWorkout(item), ["stop"])
                       }, [
                         vue.createElementVNode("image", {
                           class: "top_right_img_style",
                           src: "/static/app-plus/mebrs/trainingProgram.svg"
                         }),
-                        vue.createElementVNode("text", null, "\u751F\u4EA7\u8BAD\u7EC3\u8BA1\u5212")
-                      ])
+                        vue.createElementVNode("text", null, "\u751F\u6210\u8BAD\u7EC3\u8BA1\u5212")
+                      ], 8, ["onClick"])
                     ]),
                     vue.createElementVNode("view", { class: "loop_bottom_style" }, [
                       vue.createElementVNode("view", { class: "bottom_style" }, [
@@ -4215,14 +4235,14 @@ if (uni.restoreGlobal) {
                       ], 8, ["onClick"]),
                       vue.createElementVNode("view", {
                         class: "bottom_style",
-                        onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.goToTrainingRecord && $options.goToTrainingRecord(...args), ["stop"]))
+                        onClick: vue.withModifiers(($event) => $options.goToTrainingRecord(item), ["stop"])
                       }, [
                         vue.createElementVNode("image", {
                           class: "bootom_img_style",
                           src: "/static/app-plus/mebrs/trainingLog.svg"
                         }),
                         vue.createElementVNode("text", { class: "message_style" }, "\u8BAD\u7EC3\u8BB0\u5F55")
-                      ])
+                      ], 8, ["onClick"])
                     ])
                   ], 8, ["onClick"])
                 ])
@@ -4441,6 +4461,9 @@ if (uni.restoreGlobal) {
         delteIndex: 0
       };
     },
+    watch: {
+      scrollTop: {}
+    },
     onLoad() {
     },
     created() {
@@ -4470,7 +4493,7 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:136", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:146", 111);
         uni.navigateTo({
           url: "/pages/memberQuery/memberQuery",
           success: (res2) => {
@@ -4514,77 +4537,87 @@ if (uni.restoreGlobal) {
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F "),
       vue.createCommentVNode(' 	<view class="status_bar">\r\n	</view> '),
-      vue.createElementVNode("view", { class: "content_style" }, [
-        vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-        vue.createCommentVNode("\u5185\u5BB9 start"),
-        vue.createElementVNode("scroll-view", {
-          onScroll: _cache[3] || (_cache[3] = (...args) => $options.memberSrollTop && $options.memberSrollTop(...args)),
-          "scroll-y": "true"
-        }, [
-          vue.createElementVNode("view", { class: "header_style" }, [
-            vue.createElementVNode("view", { class: "header_left_style" }, [
-              vue.createElementVNode("view", { class: "left_content_style" }, [
-                vue.createElementVNode("image", {
-                  class: "left_content_img_style",
-                  src: "https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
-                }),
-                vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
-                vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
-              ])
-            ]),
-            vue.createElementVNode("view", {
-              class: vue.normalizeClass(["header_right_style", $data.cellingFlag ? "search_anmition_style" : ""])
+      vue.createElementVNode("view", { class: "move_area_style" }, [
+        vue.createElementVNode("movable-area", null, [
+          vue.createElementVNode("view", { class: "content_style" }, [
+            vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+            vue.createCommentVNode("\u5185\u5BB9 start"),
+            vue.createElementVNode("scroll-view", {
+              onScroll: _cache[3] || (_cache[3] = (...args) => $options.memberSrollTop && $options.memberSrollTop(...args)),
+              "scroll-y": "true"
             }, [
-              vue.createElementVNode("image", {
-                class: "right_img_style",
-                src: "/static/app-plus/mebrs/fangdajing.svg",
-                onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
-              })
-            ], 2)
+              vue.createElementVNode("view", { class: "header_style" }, [
+                vue.createElementVNode("view", { class: "header_left_style" }, [
+                  vue.createElementVNode("view", { class: "left_content_style" }, [
+                    vue.createElementVNode("image", {
+                      class: "left_content_img_style",
+                      src: "https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
+                    }),
+                    vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
+                    vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
+                  ])
+                ]),
+                vue.createElementVNode("view", {
+                  class: vue.normalizeClass(["header_right_style", $data.cellingFlag ? "search_anmition_style" : ""])
+                }, [
+                  vue.createElementVNode("image", {
+                    class: "right_img_style",
+                    src: "/static/app-plus/mebrs/fangdajing.svg",
+                    onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
+                  })
+                ], 2)
+              ]),
+              vue.createElementVNode("view", {
+                class: vue.normalizeClass(["is_buy_style", $data.cellingFlag ? "celling_animation_style" : ""])
+              }, [
+                vue.createElementVNode("view", {
+                  class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
+                  onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
+                }, "\u5DF2\u8D2D\u8BFE", 2),
+                vue.createElementVNode("view", {
+                  class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
+                  onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
+                }, "\u672A\u8D2D\u8BFE", 2)
+              ], 2),
+              vue.createVNode(_component_MemberList, {
+                onGetMemberList: $options.getMemberList,
+                isActive: $data.isActive,
+                type: "home"
+              }, null, 8, ["onGetMemberList", "isActive"])
+            ], 32)
           ]),
-          vue.createElementVNode("view", {
-            class: vue.normalizeClass(["is_buy_style", $data.cellingFlag ? "celling_animation_style" : ""])
+          vue.createElementVNode("movable-view", {
+            direction: "all",
+            inertia: ""
           }, [
             vue.createElementVNode("view", {
-              class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
-              onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
-            }, "\u5DF2\u8D2D\u8BFE", 2),
-            vue.createElementVNode("view", {
-              class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
-              onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
-            }, "\u672A\u8D2D\u8BFE", 2)
-          ], 2),
-          vue.createVNode(_component_MemberList, {
-            isActive: $data.isActive,
-            type: "home"
-          }, null, 8, ["isActive"])
-        ], 32),
-        vue.createElementVNode("view", {
-          class: vue.normalizeClass(["btn_add", $data.loginNum == 0 ? "guid_style" : ""])
-        }, [
-          vue.createElementVNode("view", { class: "add_style" }, [
-            vue.createElementVNode("image", {
-              class: "add_img_style",
-              src: "/static/app-plus/mebrs/add.svg",
-              onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
-            }),
-            vue.createElementVNode("view", null, [
-              vue.createVNode(_component_ZbTooltip, {
-                visible: $data.showPopover,
-                placement: "left",
-                color: "linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)",
-                content: "Hi\uFF5E\u4F60\u6765\u4E86\r\n			  \u70B9\u8FD9\u91CC\u6DFB\u52A0\u4F1A\u5458\u5427",
-                show: true
-              }, null, 8, ["visible", "color"])
-            ])
-          ]),
-          vue.createVNode(_component_uni_popup, {
-            class: "updatePopup",
-            ref: "first_popup",
-            type: "center",
-            onChange: $options.change
-          }, null, 8, ["onChange"])
-        ], 2)
+              class: vue.normalizeClass(["btn_add", $data.loginNum == 0 ? "guid_style" : ""])
+            }, [
+              vue.createElementVNode("view", { class: "add_style" }, [
+                vue.createElementVNode("image", {
+                  class: "add_img_style",
+                  src: "/static/app-plus/mebrs/add.svg",
+                  onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
+                }),
+                vue.createElementVNode("view", null, [
+                  vue.createVNode(_component_ZbTooltip, {
+                    visible: $data.showPopover,
+                    placement: "left",
+                    color: "linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)",
+                    content: "Hi\uFF5E\u4F60\u6765\u4E86\r\n			  \u70B9\u8FD9\u91CC\u6DFB\u52A0\u4F1A\u5458\u5427",
+                    show: true
+                  }, null, 8, ["visible", "color"])
+                ])
+              ]),
+              vue.createVNode(_component_uni_popup, {
+                class: "updatePopup",
+                ref: "first_popup",
+                type: "center",
+                onChange: $options.change
+              }, null, 8, ["onChange"])
+            ], 2)
+          ])
+        ])
       ])
     ], 2112);
   }
@@ -5976,7 +6009,7 @@ if (uni.restoreGlobal) {
   const month = date.getMonth() + 1;
   const days$1 = [];
   const day = date.getDate();
-  for (let i2 = 1990; i2 <= date.getFullYear(); i2++) {
+  for (let i2 = 1770; i2 <= date.getFullYear(); i2++) {
     years$1.push(i2);
   }
   for (let i2 = 1; i2 <= 12; i2++) {
@@ -6298,7 +6331,6 @@ if (uni.restoreGlobal) {
         birthShow: false,
         gender: "",
         range: [
-          { text: "\u672A\u77E5", value: "0" },
           { text: "\u7537", value: "1" },
           { text: "\u5973", value: "2" }
         ],
@@ -6365,16 +6397,16 @@ if (uni.restoreGlobal) {
       if (JSON.stringify(options) !== "{}") {
         let requestItem = options.hasOwnProperty("item") ? JSON.parse(options.item) : null;
         this.studentForm = this.requestItem = requestItem;
-        this.gender = this.range.find(
-          (v2) => v2.value === requestItem.gender
-        ).text;
+        this.gender = this.range.find((v2) => v2.value === requestItem.gender).text;
         this.leftNavTitle = "\u57FA\u7840\u4FE1\u606F";
       }
     },
     computed: {
       genderLabel() {
         let label = "";
-        let findData = this.range.find((item) => item.value === this.studentForm.gender);
+        let findData = this.range.find(
+          (item) => item.value === this.studentForm.gender
+        );
         if (findData) {
           label = findData.text || "";
         }
@@ -6392,7 +6424,7 @@ if (uni.restoreGlobal) {
         this.sexShow = false;
       },
       dateConfirm(e) {
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:271", e, "\u6211\u662F\u65E5\u671F");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:275", e, "\u6211\u662F\u65E5\u671F");
         this.studentForm.birthday = e;
         this.birthShow = false;
       },
@@ -6436,10 +6468,10 @@ if (uni.restoreGlobal) {
       },
       addDirectly(type) {
         var that = this;
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:320", type, "nishi");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:324", type, "nishi");
         this.$refs.studentForm.validate().then(() => {
           let businessCloudObject2 = As.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:325", that.requestItem, "that.requestItem");
+          formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:329", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -6475,13 +6507,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:366", type, ">>>>");
+              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:370", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:374", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
+                  formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:378", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -6507,7 +6539,7 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             } else {
-              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:400", 2);
+              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:404", 2);
               uni.showToast({
                 icon: "fail",
                 title: res2.message,
@@ -6636,7 +6668,7 @@ if (uni.restoreGlobal) {
                   type: "tel",
                   clas: "change_input_style",
                   "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.studentForm.mobile = $event),
-                  placeholder: "\u8BF7\u8F93\u5165\u771F\u5B9E\u59D3\u540D"
+                  placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7\u7801"
                 }, null, 512), [
                   [vue.vModelText, $data.studentForm.mobile]
                 ])
@@ -6649,11 +6681,11 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("view", {
                   class: vue.normalizeClass(["buy_left", $data.studentForm.buyStatus == 0 ? "active" : ""]),
                   onClick: _cache[4] || (_cache[4] = ($event) => $options.buyClick(0))
-                }, "\u65E0", 2),
+                }, "\u5426", 2),
                 vue.createElementVNode("view", {
                   class: vue.normalizeClass(["buy_right", $data.studentForm.buyStatus == 1 ? "active" : ""]),
                   onClick: _cache[5] || (_cache[5] = ($event) => $options.buyClick(1))
-                }, "\u6709", 2)
+                }, "\u662F", 2)
               ])
             ]),
             $data.leftNavTitle === "\u6DFB\u52A0\u5B66\u5458" ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -10531,7 +10563,6 @@ if (uni.restoreGlobal) {
         },
         sexShow: false,
         range: [
-          { text: "\u672A\u77E5", value: "0" },
           { text: "\u7537", value: "1" },
           { text: "\u5973", value: "2" }
         ]
@@ -10552,20 +10583,23 @@ if (uni.restoreGlobal) {
       }
     },
     methods: {
+      goBack() {
+        uni.navigateBack();
+      },
       jump() {
         uni.reLaunch({
           url: "/pages/myMebers/myMebers"
         });
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:115", "1111");
+        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:117", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
           const login = As.importObject("login");
           try {
             let param = {
               ...this.coachForm
             };
-            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:123", param, "param");
+            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:125", param, "param");
             login.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();
@@ -10599,7 +10633,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "nav_style" }, [
         vue.createElementVNode("view", {
           class: "nav_left_style",
-          onClick: _cache[0] || (_cache[0] = (...args) => _ctx.goBack && _ctx.goBack(...args))
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
         }, [
           vue.createElementVNode("image", {
             class: "back_img_style",

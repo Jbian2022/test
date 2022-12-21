@@ -1,79 +1,91 @@
 <template>
-		<!-- 这里是状态栏 -->
-<!-- 	<view class="status_bar">
+  <!-- 这里是状态栏 -->
+  <!-- 	<view class="status_bar">
 	</view> -->
-  <view class="content_style">
-    <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <!--内容 start-->
-	
-    <scroll-view @scroll="memberSrollTop" scroll-y="true">
-      <view class="header_style">
-        <view class="header_left_style">
-          <view class="left_content_style">
-            <image
-              class="left_content_img_style"
-              src="https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
-            ></image>
-            <view class="left_header_style">我的会员</view>
-            <view class="left_num_style">{{ meberList.length }}</view>
+  <view class="move_area_style">
+    <movable-area>
+      <view class="content_style">
+        <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+        <!--内容 start-->
+        <scroll-view @scroll="memberSrollTop" scroll-y="true">
+          <view class="header_style">
+            <view class="header_left_style">
+              <view class="left_content_style">
+                <image
+                  class="left_content_img_style"
+                  src="https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
+                ></image>
+                <view class="left_header_style">我的会员</view>
+                <view class="left_num_style">{{ meberList.length }}</view>
+              </view>
+            </view>
+            <view
+              class="header_right_style"
+              :class="cellingFlag ? 'search_anmition_style' : ''"
+            >
+              <image
+                class="right_img_style"
+                src="../../static/app-plus/mebrs/fangdajing.svg"
+                @click.native="jumpQuery"
+              ></image>
+            </view>
           </view>
-        </view>
-        <view
-          class="header_right_style"
-          :class="cellingFlag ? 'search_anmition_style' : ''"
-        >
-          <image
-            class="right_img_style"
-            src="../../static/app-plus/mebrs/fangdajing.svg"
-            @click.native="jumpQuery"
-          ></image>
-        </view>
+
+          <view
+            class="is_buy_style"
+            :class="cellingFlag ? 'celling_animation_style' : ''"
+          >
+            <view
+              class="buy_left"
+              :class="isActive === 1 ? 'active' : ''"
+              @click.native.stop="buyClick(1)"
+              >已购课</view
+            >
+            <view
+              class="buy_right"
+              :class="isActive === 0 ? 'active' : ''"
+              @click.native="buyClick(0)"
+              >未购课</view
+            >
+          </view>
+          <MemberList
+            @getMemberList="getMemberList"
+            :isActive="isActive"
+            :type="'home'"
+          ></MemberList>
+        </scroll-view>
       </view>
 
-      <view
-        class="is_buy_style"
-        :class="cellingFlag ? 'celling_animation_style' : ''"
-      >
-        <view
-          class="buy_left"
-          :class="isActive === 1 ? 'active' : ''"
-          @click.native.stop="buyClick(1)"
-          >已购课</view
-        >
-        <view
-          class="buy_right"
-          :class="isActive === 0 ? 'active' : ''"
-          @click.native="buyClick(0)"
-          >未购课</view
-        >
-      </view>
-      <MemberList :isActive="isActive" :type="'home'"></MemberList>
-    </scroll-view>
+      <movable-view direction="all" inertia>
+        <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
+          <view class="add_style">
+            <image
+              class="add_img_style"
+              src="../../static/app-plus/mebrs/add.svg"
+              @click.stop="addClick"
+            ></image>
 
-    <view class="btn_add" :class="loginNum == 0 ? 'guid_style' : ''">
-		
-		<view class="add_style">
-		  <image
-			class="add_img_style"
-			src="../../static/app-plus/mebrs/add.svg"
-			@click.stop="addClick"
-		  ></image>
-		  <view>
-			  <ZbTooltip :visible="showPopover" :placement="'left'" :color="'linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)'" content="Hi～你来了
-			  点这里添加会员吧" :show="true"></ZbTooltip>
-			
-			
-		</view>
-	
-		  </view>
+            <view>
+              <ZbTooltip
+                :visible="showPopover"
+                :placement="'left'"
+                :color="'linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)'"
+                content="Hi～你来了
+			  点这里添加会员吧"
+                :show="true"
+              ></ZbTooltip>
+            </view>
+          </view>
 
-		  
-
-	  
-	 <uni-popup class="updatePopup"  ref="first_popup" type="center" @change="change">
-	  	
-	   </uni-popup>
-    </view>
+          <uni-popup
+            class="updatePopup"
+            ref="first_popup"
+            type="center"
+            @change="change"
+          ></uni-popup>
+        </view>
+      </movable-view>
+    </movable-area>
   </view>
 </template>
 
@@ -85,9 +97,7 @@ export default {
   components: {
     BgTheamCompontent,
     MemberList,
-	ZbTooltip
-
-
+    ZbTooltip
   },
   data() {
     return {
@@ -98,15 +108,16 @@ export default {
       showPopover: false,
       scrollTop: 0,
       cellingFlag: false,
-      delteIndex: 0,
-	  
-
+      delteIndex: 0
     }
+  },
+  watch: {
+    scrollTop: {}
   },
   onLoad() {},
   created() {},
-  mounted () {
-	 // this.$refs.first_popup.open()  
+  mounted() {
+    // this.$refs.first_popup.open()
     let self = this
     uni.getStorage({
       key: 'loginNum',
@@ -114,10 +125,9 @@ export default {
         if (res.data) {
           self.loginNum = res.data
           self.showPopover = res.data == '0' ? true : false
-		  if (res.data == '0') {
-			  this.$refs.first_popup.open()  
-		  }
-		  
+          if (res.data == '0') {
+            this.$refs.first_popup.open()
+          }
 
           // console.log(res, '次数',self.loginNum )
         }
@@ -126,14 +136,14 @@ export default {
     })
   },
   methods: {
-	  getMemberList(list) {
-		  this.meberList = list
-	  },
-	  onClickPopMenu(item) {
-		  this.showMenuPop = false
-	  },
+    getMemberList(list) {
+      this.meberList = list
+    },
+    onClickPopMenu(item) {
+      this.showMenuPop = false
+    },
     jumpQuery() {
-		console.log(111)
+      console.log(111)
       uni.navigateTo({
         url: '/pages/memberQuery/memberQuery',
         success: (res) => {},
@@ -150,10 +160,8 @@ export default {
     change() {
       // console.log('拜拜')
       uni.setStorageSync('loginNum', '1')
-	  this.$refs.first_popup.close() 
-	  this.showPopover = false
-	  
-	  
+      this.$refs.first_popup.close()
+      this.showPopover = false
     },
 
     addClick() {
@@ -166,7 +174,7 @@ export default {
     },
     buyClick(type) {
       this.isActive = type
-    },
+    }
   }
 }
 </script>
@@ -189,7 +197,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-	margin-top: 88upx;
+    margin-top: 88upx;
     .header_left_style {
       // width: 50%;
       height: 100%;
@@ -248,7 +256,7 @@ export default {
       width: 50%;
       height: 100%;
       text-align: center;
-      background: linear-gradient(180deg, #343a44 0%, #212328 100%);
+      background: #383d46;
       line-height: 82upx;
       color: #a8adb6;
 
@@ -260,7 +268,7 @@ export default {
       color: #a8adb6;
       line-height: 82upx;
       text-align: center;
-      background: linear-gradient(180deg, #343a44 0%, #212328 100%);
+      background: #383d46;
       border-radius: 0px 200upx 200upx 0px;
     }
     .active {
@@ -307,7 +315,7 @@ export default {
         flex-direction: column;
         .need_loop_style {
           width: calc(100% - 60upx);
-          margin: 30upx;
+          // margin: 30upx;
 
           display: flex;
 
@@ -383,24 +391,7 @@ export default {
       }
     }
   }
-  .btn_add {
-    width: 130upx;
-    height: 130upx;
-    position: fixed;
-    right: 30upx;
-    bottom: calc(50px + 30upx);
-	.add_style {
-		width: 130upx;
-		height: 100%;
-		.add_img_style {
-		  width: 130upx;
-		  height: 100%;
-		  border-radius: 50%;
-		  object-fit: contain;
-		  z-index: 1000000;
-		}
-	}
-  }
+
   .guid_style {
     z-index: 2200;
   }
@@ -421,9 +412,9 @@ export default {
   // width: 100vw;
   background: none !important;
 }
-	::v-deep .van-overlay {
-		opacity: 0.2 !important;
-	}
+::v-deep .van-overlay {
+  opacity: 0.2 !important;
+}
 .confirm_dakuang_style {
   width: calc(100vw - 60upx);
   margin-left: 30upx;
@@ -579,5 +570,36 @@ uni-page-body {
 uni-scroll-view {
   height: 100%;
 }
-
+.move_area_style {
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+::v-deep uni-movable-area {
+  width: calc(100vw - 80upx);
+  height: 100%;
+}
+::v-deep uni-movable-view {
+  left: calc(100vw - 150upx) !important;
+  top: calc(100vh - (50px + 30upx + 130upx));
+}
+.btn_add {
+  width: 130upx;
+  height: 130upx;
+  // position: absolute;
+  // right: 30upx;
+  // bottom: calc(50px + 30upx);
+  .add_style {
+    width: 130upx;
+    height: 100%;
+    .add_img_style {
+      width: 130upx;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: contain;
+      z-index: 1000000;
+    }
+  }
+}
 </style>
