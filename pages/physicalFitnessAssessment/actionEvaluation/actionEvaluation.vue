@@ -106,6 +106,7 @@
 				// console.log(this.imgUrl+"||"+this.videoUrl)
 				this.traineeNo = item.traineeNo;
 				this.questionCode = item.questionCode;
+				this.getTraineeInfo();
 		},
 		watch:{
 			resultValue(newResultValue,oldResultValue){
@@ -155,6 +156,12 @@
 				}
 				console.log(resValue)
 			},
+			async getTraineeInfo(){
+				const data = {};
+				data["traineeId"] = this.traineeNo;
+				const res = testOb.getOnlyList(data);
+				console.log(res)
+			},
 			levelColor(levelType){
 				switch(levelType){
 					case "优秀":
@@ -187,7 +194,7 @@
 					data["physicalData"] = actinData;
 					data["status"] = "0";
 					console.log(data)
-					const res = actionOb.opearConfig(data,"bodyTestReport").then(res => {
+					const res = testOb.opearConfig(data,"bodyTestReport").then(res => {
 						console.log(res, '我要保存了')
 						if (res.success) {
 							uni.redirectTo({
@@ -386,11 +393,12 @@ font-weight: 600;
 	 line-height: 100px;
 }
 .circleText{
-	width: 72upx;
+	width: 120upx;
 	height: 50upx;
 	font-size: 36upx;
 	font-weight: 600;
 	color: #BDC3CE;
+	text-align: center;
 	margin: 0 auto;
 }
 /* ::-webkit-input-placeholder { 
