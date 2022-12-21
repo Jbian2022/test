@@ -179,7 +179,7 @@
 		data() {
 			return {
 				c:0,
-				bindex:-1,
+				bindex:-1, 
 				textShow1:true,
 				textShow2:true,
 				textShow3:true,
