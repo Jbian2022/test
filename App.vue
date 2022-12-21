@@ -30,7 +30,6 @@ export default {
     } else {
       // console.log(this.$route, '我是路由名称')
       // 校验token的合法性每个接口都要加token
-
       uni.getStorage({
         key: 'uni_id_token',
         success: function (res) {

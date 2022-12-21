@@ -128,7 +128,7 @@ import props from './props.js'
     const month = date.getMonth() + 1
     const days = []
     const day = date.getDate()
-    for (let i = 1990; i <= date.getFullYear(); i++) {
+    for (let i = 1770; i <= date.getFullYear(); i++) {
       years.push(i)
     }
     for (let i = 1; i <= 12; i++) {
