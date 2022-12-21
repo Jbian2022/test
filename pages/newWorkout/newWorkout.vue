@@ -44,13 +44,13 @@
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
-								<van-icon name="success" />
+								<view class="true-icon"></view>
 							</view>
 							<view class="delete">
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 				<view v-if="i.type===1" class="action-tiem" @click="changeOpen(i)">
@@ -94,7 +94,7 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 				<view v-if="i.type===2" class="action-tiem" @click="changeOpen(i)">
@@ -132,7 +132,7 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 				<view v-if="i.type===3" class="action-tiem" @click="changeOpen(i)">
@@ -175,7 +175,7 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 				<view v-if="i.type===4" class="action-tiem" @click="changeOpen(i)">
@@ -218,7 +218,7 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 				<view v-if="i.type===5" class="action-tiem" @click="changeOpen(i)">
@@ -264,7 +264,7 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 				<view v-if="i.type===6" class="action-tiem" @click="changeOpen(i)">
@@ -307,7 +307,7 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 			</view>
@@ -318,7 +318,7 @@
 			</van-button>
 			<van-button block class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
-		<uni-popup ref="popupFinish" type="center">
+		<uni-popup ref="popupFinish" type="center" mask-background-color="rgba(20, 21, 23, 0.6)">
 			<view class="finish-dialog">
 				<view class="first-level-title">完成训练</view>
 				<view class="second-level-title">是否已经完成训练了</view>
@@ -328,7 +328,7 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="popupDelete" type="center">
+		<uni-popup ref="popupDelete" type="center" mask-background-color="rgba(20, 21, 23, 0.6)">
 			<view class="delete-dialog">
 				<view class="first-level-title">删除训练</view>
 				<view class="second-level-title">是否删除训练，删除后无法恢复</view>
@@ -715,7 +715,7 @@ page{
 						padding: 0;
 						background: transparent;
 						font-size: 36upx;
-						font-weight: 500;
+						font-weight: 600;
 						color: #F4F7FF;
 						&::placeholder{
 							color:#7A7F89;
@@ -764,6 +764,13 @@ page{
 						width: 100upx;
 						color: #F4F7FF;
 						box-sizing: border-box;
+						.true-icon{
+							width: 40upx;
+							height: 40upx;
+							background: url('../../static/newWorkout/true.png');
+							background-size: contain;
+							background-repeat: no-repeat;
+						}
 					}
 					.delete{
 						flex: 1;
@@ -805,9 +812,13 @@ page{
 		.add-project-item{
 			margin-top: 40upx;
 			font-size: 30upx;
-			font-weight: 500;
+			font-weight: 600;
 			color: #FFFFFF;
 			text-align: center;
+			.add-text{
+				font-size: 34upx;
+				font-weight: 600;
+			}
 		}
 	}
 	.footer-button{
@@ -845,8 +856,8 @@ page{
 			}
 		}
 		.add{
+			flex: 1;
 			height: 100upx;
-			width: 570upx;
 			background: #454951;
 			border-radius: 16upx;
 			border: none;
@@ -854,6 +865,9 @@ page{
 			font-weight: 600;
 			color: #FFFFFF;
 		}
+	}
+	::v-deep.uni-popup [name="mask"]{
+		backdrop-filter: blur(3px);
 	}
 	::v-deep .finish-dialog,
 	::v-deep .delete-dialog
@@ -867,6 +881,7 @@ page{
 			font-size: 88upx;
 			color: #F4F7FF;
 			line-height: 124upx;
+			font-weight: 600;
 		}
 		.second-level-title{
 			padding-top: 20upx;
@@ -880,11 +895,13 @@ page{
 			padding: 0 70upx;
 			.van-button{
 				border: none;
+				height: 100upx;
 				background: transparent;
 				font-size: 32upx;
 				font-weight: 600;
 				border-radius: 16upx;
 				color: #BDC3CE;
+				margin-bottom: 8upx;
 				&::after{
 					display: none;
 				}

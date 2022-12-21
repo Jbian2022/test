@@ -4,29 +4,29 @@
     <view class="header">
       <view class="all-action" :class="{active:mode===0}" @click="modeChangeHandle(0)">全部动作库</view>
       <view class="problem-action" :class="{active:mode===1}" @click="modeChangeHandle(1)">问题动作库</view>
-      <view class="custom-action" :class="{show:showSaveButton}" @click="addActionHandle(19)">+ 自定义动作</view>
+      <view class="custom-action" @click="addActionHandle(19)">+ 自定义动作</view>
     </view>
     <view class="search">
       <view class="uni-search">
-        <van-icon name="search" />
+        <view class="image"></view>
         <input class="uni-input" v-model="actionName" @confirm="getActionList" confirm-type="search" placeholder="输入动作名称搜索" />
       </view>
     </view>
     <view class="content" :class="{'select-page':showSaveButton}">
       <view class="sidebar">
-        <van-sidebar v-model="actionClass" @change="getActionList">
+        <van-sidebar v-model="actionIndex">
           <template v-if="!showSaveButton">
-            <van-sidebar-item v-for="item in actionClassList" :key="item.value" :title="item.text" />
+            <van-sidebar-item v-for="item in actionClassList" :key="item.value" :title="item.text"  @click="sidebarClick(item)"/>
           </template>
           <template v-else>
-            <van-sidebar-item v-for="item in actionClassList" :key="item.value" :title="item.text" :badge="item.badge" />
+            <van-sidebar-item v-for="item in actionClassList" :key="item.value" :title="item.text" :badge="item.badge" @click="sidebarClick(item)" />
           </template>
         </van-sidebar>
       </view>
       <view class="action-list">
         <view class="action-list-title">{{actionClassName}}训练动作</view>
         <view class="action-list-view">
-          <view v-if="actionClass===19">
+          <view v-if="actionClass===10||actionClass===20">
             <view v-for="(classify,classifyi) in actionList" :key="classifyi" class="classify-box">
               <view class="classify">{{actionTypeList[classify.actionType].title}}</view>
               <view class="action-list-box">
@@ -57,7 +57,7 @@
               </view>
             </view>
           </view>
-          <view v-if="!showSaveButton" class="custom-action-button" @click="addActionHandle">
+          <view class="custom-action-button" @click="addActionHandle">
             <text> + 自定义动作</text>
           </view>
         </view>
@@ -66,7 +66,7 @@
     <view v-if="showSaveButton" class="footer-seat"></view>
     <view v-if="showSaveButton" class="footer-button">
       <van-button type="default" @click="goBack">取消</van-button>
-      <van-button type="primary" @click="goNewWorkout">确认添加（{{selectNum}}）</van-button>
+      <van-button block type="primary" @click="goNewWorkout">确认添加（{{selectNum}}）</van-button>
     </view>
     <van-dialog v-model:show="showDialog" :showConfirmButton="false">
       <view class="dialog-section">
@@ -92,89 +92,46 @@ export default {
     return {
       mode: 0,
       actionName: null,
+      actionIndex: 0,
       actionClass: 0,
       actionClassName: '胸',
       actionClassList: [
-        {
-          text: '胸',
-          value: 0,
-        },
-        {
-          text: '背',
-          value: 1,
-        },
-        {
-          text: '腿',
-          value: 2,
-        },
-        {
-          text: '肩',
-          value: 3,
-        },
-        {
-          text: '斜方肌',
-          value: 4,
-        },
-        {
-          text: '二头',
-          value: 5,
-        },
-        {
-          text: '三头',
-          value: 6,
-        },
-        {
-          text: '小腿',
-          value: 7,
-        },
-        {
-          text: '前臂',
-          value: 8,
-        },
-        {
-          text: '臀部',
-          value: 9,
-        },
-        {
-          text: '颈前引',
-          value: 10,
-        },
-        {
-          text: '圆肩',
-          value: 11,
-        },
-        {
-          text: '驼背',
-          value: 12,
-        },
-        {
-          text: '翼状肩胛',
-          value: 13,
-        },
-        {
-          text: '骨盆前倾',
-          value: 14,
-        },
-        {
-          text: '骨盆后倾',
-          value: 15,
-        },
-        {
-          text: '膝内扣',
-          value: 16,
-        },
-        {
-          text: '足外翻',
-          value: 17,
-        },
-        {
-          text: '足内翻',
-          value: 18,
-        },
-        {
-          text: '自定义动作',
-          value: 19,
-        },
+        {text: '胸部', value: 0, },
+        {text: '背部', value: 1, },
+        {text: '腿部', value: 2, },
+        {text: '臀部', value: 3, },
+        {text: '肩部', value: 4, },
+        {text: '二头肌', value: 5, },
+        {text: '三头肌', value: 6, },
+        {text: '腹部', value: 7, },
+        {text: '小腿', value: 8, },
+        {text: '斜方肌', value: 9 },
+        {text: '自定义动作', value: 10}
+      ],
+      actionClassListAll: [
+        {text: '胸部', value: 0, },
+        {text: '背部', value: 1, },
+        {text: '腿部', value: 2, },
+        {text: '臀部', value: 3, },
+        {text: '肩部', value: 4, },
+        {text: '二头肌', value: 5, },
+        {text: '三头肌', value: 6, },
+        {text: '腹部', value: 7, },
+        {text: '小腿', value: 8, },
+        {text: '斜方肌', value: 9 },
+        {text: '自定义动作', value: 10}
+      ],
+      actionClassListPro: [
+        {text:'颈前引', value: 11},
+        {text:'圆肩', value: 12},
+        {text:'驼背', value: 13},
+        {text:'骨盆前倾', value: 14},
+        {text:'骨盆后倾', value: 15},
+        {text:'膝内扣', value: 16},
+        {text:'足外翻', value: 17},
+        {text:'足内翻', value: 18},
+        {text:'翼状肩胛', value: 19},
+        {text: '自定义动作', value: 20}
       ],
       actions: [{ text: '修改动作' }, { text: '删除动作' }],
       showDialog: false,
@@ -224,7 +181,7 @@ export default {
 						des:'拉伸动作无需记录任何数据',
 						active:false
 					}
-				],
+			],
     }
   },
   onShow(){
@@ -244,8 +201,13 @@ export default {
     this.getActionList()
   },
   methods: {
+    sidebarClick(item){
+      this.actionClass = item.value
+      this.actionClassName = item.text
+      this.getActionList()
+    },
     async getActionList() {
-      this.actionClassName = this.actionClassList[this.actionClass].text
+      this.actionList = []
       const res = await actionLibrary.getActionList({
         type: this.mode,
         actionClass: this.actionClass,
@@ -279,6 +241,11 @@ export default {
     },
     modeChangeHandle(val) {
       this.mode = val
+      if(val===0){
+        this.actionClassList = JSON.parse(JSON.stringify(this.actionClassListAll))
+      } else {
+        this.actionClassList = JSON.parse(JSON.stringify(this.actionClassListPro))
+      }
       this.getActionList()
     },
     selectAction(i){
@@ -381,8 +348,9 @@ page {
     }
   }
   .search {
-    height: 140upx;
+    height: 120upx;
     padding: 30upx;
+    padding-top: 0upx;
     box-sizing: border-box;
     .uni-search{
       background: #383d46;
@@ -390,11 +358,14 @@ page {
       height: 80upx;
       display: flex;
       align-items: center;
-      .van-icon{
-        font-size: 28upx;
-        color: #BDC3CE;
+      .image{
+        width: 28upx;
+        height: 28upx;
         margin-right: 14upx;
         margin-left: 28upx;
+        background-image: url('../../static/newWorkout/search.png');
+        background-size: contain;
+        background-repeat: no-repeat;
       }
       .uni-input{
         flex: 1;
@@ -407,7 +378,7 @@ page {
     }
   }
   .content {
-    height: calc(100vh - 240upx - var(--status-bar-height));
+    height: calc(100vh - 210upx - var(--status-bar-height));
     box-sizing: border-box;
     display: flex;
     .sidebar {
@@ -461,7 +432,8 @@ page {
         .classify-box{
           width: 100%;
           .classify{
-            margin-top: 20upx;
+            margin-top: 12upx;
+            transform: translateY(8upx);
             font-size: 28upx;
             font-weight: 600;
             color: #BDC3CE;
@@ -594,13 +566,13 @@ page {
   }
   .footer-button {
     position: fixed;
-    padding: 68upx 30upx;
-    padding-top: 30upx;
+    padding: 30upx;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 1;
     background: #212328;
+    display: flex;
     .van-button {
       background: #454951;
       border-radius: 16upx;
@@ -614,7 +586,7 @@ page {
         margin-left: 30upx;
       }
       &.van-button--primary {
-        width: 460upx;
+        flex: 1;
         background: #1370ff;
       }
     }

@@ -13,7 +13,7 @@
 				<template #default="{cell}">
 					<view class="cell-box">
 						<view class="cell-key" :class="{active:cell.isSelected}">{{cell.key}}</view>
-						<view v-if="getTrainTitle(cell.day)" class="cell-label" @click.stop="sharePage(cell.day)">{{getTrainTitle(cell.day)}}</view>
+						<view v-if="getTrainTitle(cell.day)" class="cell-label">{{getTrainTitle(cell.day)}}</view>
 					</view>
 				</template>
 			</calendar>
@@ -74,6 +74,10 @@
 				});
 			},
 			selectHandle(item){
+				if(item.disabled||item.day===this.getDay(new Date())){
+					this.sharePage(item.day)
+					return
+				}
 				uni.navigateTo({
 					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${item.day}`
 				})
@@ -173,6 +177,9 @@ page{
 			line-height: 52upx;
 			margin: 0 auto;
 			&.active{
+				width: 62upx;
+				height: 62upx;
+				line-height: 62upx;
 				background: #1370FF;
 				font-weight: 600;
 				border-radius: 100%;

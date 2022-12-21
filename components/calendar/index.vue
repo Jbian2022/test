@@ -148,6 +148,7 @@ export default {
     },
     selectHandle (item) {
       if(item.disabled){
+        this.$emit('select', item)
         return
       }
       if (item.type === 'current') {
