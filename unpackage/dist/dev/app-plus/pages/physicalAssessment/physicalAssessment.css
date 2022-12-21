@@ -161,6 +161,10 @@
   display: flex;
   flex-direction: column;
 }
+.list_style[data-v-fc7c2e74] {
+  flex: 1;
+  overflow-y: auto;
+}
 .dynamicshow[data-v-fc7c2e74] {
   width: calc(100vw - 1.875rem);
   overflow-y: auto;
@@ -206,13 +210,20 @@
   height: 1.25rem;
 }
 .buttontrue[data-v-fc7c2e74] {
-  width: calc(100vw - 1.875rem);
-  height: 3.125rem;
   background: #1370ff;
   border-radius: 0.5rem;
-  margin-left: 0.9375rem;
   margin-top: 0.9375rem;
   margin-bottom: 0.9375rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 3.125rem;
+  text-align: center;
+  justify-content: center;
+  width: calc(100vw - 2.5rem);
+  margin-left: 1.25rem;
+  display: flex;
 }
 [data-v-fc7c2e74] .van-icon-success:before {
   position: absolute;

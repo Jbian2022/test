@@ -373,6 +373,32 @@ module.exports = {
 	
 	},
 	
+	// 完善个人信息
+	perfectInfo: async function(data) {
+		// 这里反解信息
+		const token = this.getUniIdToken()
+		const detailInfo = await this.uniID.checkToken(token)
+		  // console.log(detailInfo.userInfo)
+		return new Promise((resolve, reject) => {
+			let resultParam = {
+				...detailInfo.userInfo,
+				...data
+			}
+		  delete resultParam['_id']
+		   db.collection('uni-id-users').doc(detailInfo.userInfo._id).update(resultParam).then(()=>{
+		   let successMessage = {
+				success: true,
+				message: '编辑成功'
+			  }
+		   resolve(successMessage)
+		   
+		   }).catch(err => {
+				   // console.log(err, 'err')
+					reject(err)
+			   })
+	   })
+	}
+	
 	
 	
 	

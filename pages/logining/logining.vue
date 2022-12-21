@@ -87,13 +87,11 @@
 </template>
 
 <script>
-import { Toast } from 'vant'
-import { ref } from 'vue'
 let weixinAuthService
 export default {
   data() {
     return {
-      phone: '17521791830',
+      phone: '',
       checkFlag: false,
       hasWeixinAuth: false,
       checkPhone: '',

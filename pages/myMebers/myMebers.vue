@@ -126,6 +126,9 @@ export default {
     })
   },
   methods: {
+	  getMemberList(list) {
+		  this.meberList = list
+	  },
 	  onClickPopMenu(item) {
 		  this.showMenuPop = false
 	  },

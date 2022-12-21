@@ -190,6 +190,7 @@ page{
 				width: 28upx;
 				height: 28upx;
 				background-size: contain;
+				background-repeat: no-repeat;
 			}
 		}
 		.user-name{
@@ -228,6 +229,7 @@ page{
 			height: 44upx;
 			background: url('../../static/newWorkout/config.png');
 			background-size: contain;
+			background-repeat: no-repeat;
 		}
 	}
 	.vip-info{
