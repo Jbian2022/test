@@ -107,6 +107,7 @@
 			    };
 		  },
 		onLoad: function (item) {
+					console.log(item);
 					let leftNavTitle = item.pageTitle
 					this.leftNavTitle = leftNavTitle
 					switch(leftNavTitle){

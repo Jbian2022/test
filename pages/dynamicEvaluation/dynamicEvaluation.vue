@@ -45,6 +45,8 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+const busOb = uniCloud.importObject("businessCloudObject")
+const testOb = uniCloud.importObject("testResults")
 export default {
   components: {
     BgTheamCompontent,
@@ -53,14 +55,17 @@ export default {
   data() {
     return {
       dynamicEvaluationdata: [
-        { title: '自重深蹲评估', type: 'zzsdpg',path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估'},
-        { title: '胸椎活动评估', type: 'xzhdpg' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估'},
-        { title: '柔韧性测试', type: 'rrxcs' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试'},
-        { title: '关节灵活测试', type: 'gjlhcs' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=关节灵活测试'},
-        { title: '俯卧撑稳定性测试', type: 'fwcwdxcs' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试'}
+        { title: '自重深蹲评估', type: 'E0001',path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估'},
+        { title: '胸椎活动评估', type: 'E0002' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估'},
+        { title: '柔韧性测试', type: 'E0003' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试'},
+        { title: '肩关节灵活测试', type: 'E0004' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=关节灵活测试'},
+        { title: '俯卧撑稳定性测试', type: 'E0005' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试'}
       ],
       icon: true
     }
+  },
+  onLoad: function (item) {
+  		this.getPageData()
   },
   methods: {
     setup() {
@@ -72,11 +77,16 @@ export default {
 	jumpModular(item) {
 	  // console.log(item.path,'>>>>')
 	  uni.navigateTo({
-	    url: item.path,
+	    url: item.path+"?type="+item.type,
 	    success: (res) => {},
 	    fail: () => {},
 	    complete: () => {}
 	  })
+	},
+	getPageData(){
+		testOb.getPhysicalChildAssessmentList("dynamicEvaluation").then((res)=>{
+			console.log(res)
+		})
 	}
   }
 }
