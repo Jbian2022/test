@@ -48,7 +48,11 @@ export default {
     mode: {
       type: String,
       default: 'single' // multiple
-    }
+    },
+    todayDisabled: {
+      type: Boolean,
+      default: false
+    } 
   },
   data () {
     return {
@@ -61,6 +65,7 @@ export default {
   },
   onShow(){
     this.transitionClass = ''
+    
   },
   methods: {
     render () {
@@ -89,7 +94,7 @@ export default {
       for (let i = 1; i < daysInMonth + 1; i++) {
         const day = moment(new Date(this.value)).date(i).format('YYYY-MM-DD')
         const week = moment(new Date(this.value)).date(i).format('dddd')
-        list.push({ key: i, type: 'current', isSelected: false, day, week })
+        list.push({ key: i, type: 'current', isSelected: false, day, week, disabled: false })
       }
       // 补齐下个月的日期
       const nextDays = 42 - list.length
@@ -97,6 +102,19 @@ export default {
         const day = moment(new Date(this.value)).add(1, 'months').date(i).format('YYYY-MM-DD')
         const week = moment(new Date(this.value)).add(1, 'months').date(i).format('dddd')
         list.push({ key: i, type: 'next', isSelected: false, day, week })
+      }
+      if(this.todayDisabled){
+        list.forEach(item=>{
+          if(item.type==='current'&& +new Date(item.day) < +new Date(this.formatDate(this.value))){
+            item.disabled = true
+          }
+        })
+      }
+      if(this.formatDate(this.value)===this.formatDate(new Date())){
+        const index = list.findIndex(item => this.formatDate(new Date()) === item.day)
+        if (index > -1) {
+          list[index].isSelected = true
+        }
       }
       this.dataList = list
     },
@@ -129,6 +147,9 @@ export default {
       }
     },
     selectHandle (item) {
+      if(item.disabled){
+        return
+      }
       if (item.type === 'current') {
         if (this.mode === 'single') {
           this.dataList.forEach(item => { item.isSelected = false })

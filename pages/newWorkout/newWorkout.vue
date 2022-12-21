@@ -10,10 +10,10 @@
 		</view>
 		<view class="action-list">
 			<view v-for="(i,ix) in actionList" :key="ix" class="action-type-box">
-				<view v-if="i.type===0" class="action-tiem">
+				<view v-if="i.type===0" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image v-if="i.url" round :src="i.url"/>
+							<image class="van-image" v-if="i.url" round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -30,7 +30,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -53,12 +53,12 @@
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===1" class="action-tiem">
+				<view v-if="i.type===1" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image v-if="i.url" round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" v-if="i.url" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>总里程：{{i.mileage}}km</text>
@@ -73,7 +73,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -97,12 +97,12 @@
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===2" class="action-tiem">
+				<view v-if="i.type===2" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>已完成：{{i.frequency}}次</text>
@@ -116,7 +116,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -135,12 +135,12 @@
 						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()">+ 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===3" class="action-tiem">
+				<view v-if="i.type===3" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>用时：{{formaterTimes(i.times)}}</text>
@@ -154,7 +154,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -178,12 +178,12 @@
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===4" class="action-tiem">
+				<view v-if="i.type===4" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>负荷量：{{i.load}}kg</text>
@@ -198,7 +198,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -221,12 +221,12 @@
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===5" class="action-tiem">
+				<view v-if="i.type===5" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>负荷量：{{i.load}}kg</text>
@@ -244,7 +244,7 @@
 					<view class="weight">
 						<input v-model="i.weight" class="uni-input" type="number" placeholder="请先设置当前体重" @blur="technicalData"/>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -267,12 +267,12 @@
 						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===6" class="action-tiem">
+				<view v-if="i.type===6" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>总用时：{{formaterTimes(i.times)}}</text>
@@ -286,7 +286,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -316,7 +316,7 @@
 			<van-button class="delete" @click="openDialog('popupDelete')">
 				<view class="img"></view>
 			</van-button>
-			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
+			<van-button block class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
 		<uni-popup ref="popupFinish" type="center">
 			<view class="finish-dialog">
@@ -390,23 +390,45 @@
 							mileage: 0,
 							frequency: 0,
 							weight: null,
-							groupList: []
+							groupList: [],
+							open: false
 						}
 					})
 					this.actionList.push(...tempList)
 					// console.log(list);
+				}
+				if(this.actionList&&this.actionList.length>0){
+					this.actionList.forEach((item,i)=>{
+						if(i>0){
+							item.open = false
+						} else {
+							item.open = true
+						}
+					})
 				}
 			} catch (e) {
 				// error
 			}
 		},
 		methods: {
+			changeOpen(item){
+				this.actionList.forEach(item=>item.open=false)
+				item.open = true
+			},
 			async getOldInfo(){
 				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.trainDate})
 				if(res.data&&res.data.length>0){
 					const {trainContent,traineeTitle}  = res.data[0]
 					this.workoutName = traineeTitle
-					this.actionList = JSON.parse(trainContent)
+					const actionList = JSON.parse(trainContent) || []
+					actionList.forEach((item,i)=>{
+						if(i>0){
+							item.open = false
+						} else {
+							item.open = true
+						}
+					})
+					this.actionList = actionList
 					this.isNoOldInfo = true
 				} else {
 					this.isNoOldInfo = false
@@ -645,6 +667,7 @@ page{
 					.van-image{
 						width: 100%;
 						height: 100%;
+						border-radius: 100%;
 					}
 				}
 				.des-info{
@@ -674,7 +697,7 @@ page{
 					.img{
 						width: 40upx;
 						height: 40upx;
-						background: url('../../static/newWorkout/trashcan.png');
+						background: url('../../static/newWorkout/config.png');
 						background-size: contain;
 						background-repeat: no-repeat;
 					}
@@ -799,6 +822,7 @@ page{
 		right: 0;
 		z-index: 1;
 		background: #212328;
+		display: flex;
 		.delete{
 			background: #454951;
 			height: 100upx;
