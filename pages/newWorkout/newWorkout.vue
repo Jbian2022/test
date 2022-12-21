@@ -826,8 +826,7 @@ page{
 		overflow: hidden;
 		box-sizing: border-box;
 		position: fixed;
-		padding: 68upx 30upx;
-		padding-top: 30upx;
+		padding: 30upx;
 		bottom: 0;
 		left: 0;
 		right: 0;
