@@ -22,7 +22,7 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video :src="squatFrontVideoUrl" wid autoplay>
+					<video :src="FrontVideoUrl" wid autoplay>
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -33,15 +33,12 @@
 							<p>4.下蹲过程中，教练需观察会员，正面肢体状态，侧面肢体状态。</p>
 						</view>
 					</view>
-				</view>
-				<view class="clickActionEnd" @click.native="closePopup">收起
-				<image src="../../../static/app-plus/other/close.png"></image>
+					<view class="clickActionEnd" @click.native="closePopup">收起
+					<image src="../../../static/app-plus/other/close.png"></image>
+					</view>
 				</view>
 			</van-popup>
-			<van-image
-			  class="imagebg"
-			  :src="backimg1"
-			/>
+			<image class="imagebg" :src="backimgFront"/>
 			<!-- <image
 			  src="../../static/app-plus/bg/actionImg.png"
 			></image> -->
@@ -59,7 +56,7 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video :src="squatSideVideoUrl" wid autoplay>
+					<video :src="SideVideoUrl" wid autoplay>
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -70,15 +67,13 @@
 							<p>4.下蹲过程中，教练需观察会员，正面肢体状态，侧面肢体状态。</p>
 						</view>
 					</view>
-				</view>
-				<view class="clickActionEnd" @click.native="closePopup">收起
-				<image src="../../../static/app-plus/other/close.png"></image>
+					<view class="clickActionEnd" @click.native="closePopup">收起
+					<image src="../../../static/app-plus/other/close.png"></image>
+					</view>
 				</view>
 			</van-popup>
 			
-			<van-image
-			  class="imagebg"
-			  :src="backimg2"
+			<image class="imagebg" :src="backimgSide"
 			/>
 			<!-- <image
 			  src="../../static/app-plus/bg/actionImg.png"
@@ -112,9 +107,38 @@
 			    };
 		  },
 		onLoad: function (item) {
-			console.log(item.pageTitle);
-						let leftNavTitle = item.pageTitle
-						this.leftNavTitle = leftNavTitle
+					let leftNavTitle = item.pageTitle
+					this.leftNavTitle = leftNavTitle
+					switch(leftNavTitle){
+						case "胸椎活动评估":
+							this.backimgFront = this.thoracicSpineActivityimg;
+							this.backimgSide = this.thoracicSpineActivity2img;
+							this.FrontVideoUrl = this.thoracicSpineActivityUrl;
+							this.SideVideoUrl = this.thoracicSpineActivityUrl;
+							break;
+						case "自重深蹲评估" :
+							this.backimgFront = this.backimg1;
+							this.backimgSide = this.backimg2;
+							this.FrontVideoUrl = this.squatFrontVideoUrl;
+							this.SideVideoUrl = this.squatSideVideoUrl;
+							break;
+						case "柔韧性测试" :
+							this.backimgFront = this.thomasimg;
+							this.backimgSide = this.straightLegLiftimg;
+							this.FrontVideoUrl = this.StraightLegLiftUrl;
+							this.SideVideoUrl = this.ThomasUrl;
+							break;
+						case "关节灵活测试" :
+							this.backimgFront = this.shoulderTest1img;
+							this.backimgSide = this.shoulderTest2img;
+							this.FrontVideoUrl = this.shoulderTest1Url;
+							this.SideVideoUrl = this.shoulderTest2Url;
+							break;
+						case "俯卧撑稳定性测试" :
+							this.backimgFront = this.pushUpTestimg;
+							this.FrontVideoUrl = this.pushUpTestUrl;
+							break;
+					}
 				},
 		data() {
 			return {
@@ -123,12 +147,35 @@
 					{name:'侧面观'}
 				],
 				icon: true,
-				backimg1: "../../static/app-plus/bg/positiveAction.jpg",
-				backimg2: "../../static/app-plus/bg/positiveAction2.jpg",
+				backimgFront:"",
+				backimgSide:"",
+				FrontVideoUrl:"",
+				SideVideoUrl:"",
+				backimg1: "../../../static/app-plus/bg/positiveAction.jpg",
+				backimg2: "../../../static/app-plus/bg/positiveAction2.jpg",
+				thoracicSpineActivityimg:"../../../static/app-plus/bg/thoracicSpineActivity.jpg",
+				thoracicSpineActivity2img:"../../../static/app-plus/bg/thoracicSpineActivity2.jpg",
+				thomasimg: "../../../static/app-plus/bg/Thomas.jpg",
+				straightLegLiftimg: "../../../static/app-plus/bg/StraightLegLift.jpg",
+				shoulderTest1img: "../../../static/app-plus/bg/shoulderTest1.jpg",
+				shoulderTest2img: "../../../static/app-plus/bg/shoulderTest2.jpg",
+				pushUpTestimg:"../../../static/app-plus/bg/pushUpTest.jpg",
 				changeValue: true,
 				num: 0,
 				squatFrontVideoUrl: "../../../static/app-plus/video/squatFront.mp4",
-				squatSideVideoUrl: "../../../static/app-plus/video/squatSide.mp4"
+				squatSideVideoUrl: "../../../static/app-plus/video/squatSide.mp4",
+				//胸椎活动视频
+				thoracicSpineActivityUrl:"../../../static/app-plus/video/thoracicSpineActivity.mp4",
+				//直抬腿
+				StraightLegLiftUrl:"../../../static/app-plus/video/StraightLegLift.mp4",
+				//托马斯
+				ThomasUrl:"../../../static/app-plus/video/Thomas.mp4",
+				//肩关节灵活性测试1
+				shoulderTest1Url:"../../../static/app-plus/video/shoulderTest1.mp4",
+				//肩关节灵活性测试2
+				shoulderTest2Url:"../../../static/app-plus/video/shoulderTest2.mp4",
+				//五，俯卧撑稳定性测试
+				pushUpTestUrl:"../../../static/app-plus/video/pushUpTest.mp4"
 			}
 		},
 		methods: {
@@ -193,8 +240,8 @@
 .imagebg {
       width: 100%;
       height: 1130upx;
-	  border-radius: 120px;
-    }
+	  border-radius: 16upx;
+}
 .buttontrue {
   width: calc(100vw - 60upx);
   height: 100upx;
@@ -211,7 +258,7 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 240upx;
+	top: 310upx;
 	left: 60upx;
 	z-index: 1;
 	font-size: 26upx;
@@ -226,7 +273,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1500upx;
+	height: 1490upx;
 	background: #383D46;
 	border-radius: 16upx;
 	backdrop-filter: blur(3upx);
@@ -234,10 +281,11 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	margin-top: 100upx;
+	height: 1490upx;
+	margin-top: 270upx;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
-	border-radius: 32upx;
+	border-radius: 16upx;
 }
 .clickActionBody video{
 	width: calc(100vw - 140upx);
@@ -276,7 +324,7 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
-	margin-bottom: 40upx;
+	margin-top: 666upx;
 }
 .clickActionEnd image{
 	width: 32upx;

@@ -28,7 +28,7 @@
 			}
 		},
 		{
-			"path": "pages/bodyAssessment/bodyAssessment",
+			"path": "pages/postureAssessment/postureAssessment",
 			"style": {
 				"navigationBarTitleText": "体测评估",
 				"enablePullDownRefresh": false,
@@ -199,6 +199,13 @@
 		},
 		{
 			"path": "pages/dynamicEvaluation/actionEvaluation/actionEvaluation",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/dynamicEvaluation/dynamicEvaluation",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false

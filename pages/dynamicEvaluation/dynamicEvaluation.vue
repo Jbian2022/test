@@ -88,6 +88,10 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  background-color: rgba(33, 35, 40, 1);
+}
+.need_scoll{
+	background-color: rgba(33, 35, 40, 1);
 }
 .dynamicshow {
   width: calc(100vw - 60upx);

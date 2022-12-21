@@ -30,8 +30,16 @@
         <image
           class="no_data_meber_img_style"
           src="../../static/app-plus/mebrs/nomebers.png"
+		  v-if="type==='home'"
         ></image>
-        <view class="quckliy_add_style">快去添加第一个学员吧</view>
+		<image
+		  class="no_data_meber_img_style"
+		  src="../../static/app-plus/mebrs/searchNoData.png"
+		  v-if="type==='detail'"
+		></image>
+		
+		
+        <view class="quckliy_add_style">{{ type === 'home' ?  '快去添加第一个学员吧' : '什么内容都没搜到'}}</view>
       </view>
     </template>
     <template v-else>
@@ -52,25 +60,6 @@
                 src="../../static/app-plus/mebrs/delete.svg"
               ></image>
             </view>
-
-            <!-- 		      <van-popup v-model="deleteRemarkFlag" teleport="body">
-				         <view class="confirm_dakuang_style">
-				           <view class="confirm_top_style">
-				             <text class="config_top_title_style">是否确认删除</text>
-				             <image
-				               class="delete_waring_style"
-				               src="../../static/app-plus/mebrs/delete.svg"
-				             ></image>
-				           </view>
-				           <view class="delet_remark"
-				             >确认删除该学员吗？删除后无法恢复</view
-				           >
-				           <view class="delete_btn_style">
-				             <view class="delete_cacel_style" @click.stop="deleteRemarkFlag=false">取消</view>
-				             <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm">确认</view>
-				           </view>
-				         </view>
-				       </van-popup> -->
           </template>
           <view class="add_student_style">
             <view class="need_loop_style" @click.stop="updateMember(item)">
@@ -90,12 +79,12 @@
                     v-if="item.gender == 2"
                   ></image>
                 </view>
-                <view class="top_right_style" @click.stop="goToNewWorkout">
+                <view class="top_right_style" @click.stop="goToNewWorkout(item)">
                   <image
                     class="top_right_img_style"
                     src="../../static/app-plus/mebrs/trainingProgram.svg"
                   ></image>
-                  <text>生产训练计划</text>
+                  <text>生成训练计划</text>
                 </view>
               </view>
               <view class="loop_bottom_style">
@@ -116,7 +105,7 @@
                   ></image>
                   <text class="message_style">评测信息</text>
                 </view>
-                <view class="bottom_style" @click.stop="goToTrainingRecord">
+                <view class="bottom_style" @click.stop="goToTrainingRecord(item)">
                   <image
                     class="bootom_img_style"
                     src="../../static/app-plus/mebrs/trainingLog.svg"
@@ -134,6 +123,7 @@
 
 <script>
 var businessCloudObject = uniCloud.importObject('businessCloudObject')
+import { debounce } from '../../common/util.js'
 export default {
   name: 'memberList',
   data() {
@@ -143,7 +133,6 @@ export default {
       delteIndex: 0
     }
   },
-  // props: ['isActive', 'searchValue', 'type'],
   props: {
     isActive: Number,
     searchValue: String,
@@ -169,6 +158,12 @@ export default {
     }
   },
   watch: {
+	 meberList: {
+		handler: function(n, o) {
+			this.$emit('getMemberList', n)
+		},
+		 immediate: true 
+	 }, 
     isActive: {
       handler: function (n, o) {
         this.type === 'home' ? this.getMemberList(n) : ''
@@ -184,7 +179,8 @@ export default {
           }
           console.log(n, '>>>>')
           if (n) {
-            this.searchMemberList()
+			  debounce(this.searchMemberList(n), 300)
+            
           }
         }
       },
@@ -301,17 +297,17 @@ export default {
       console.log('当前状态：' + e + '，下标：' + index)
     },
 
-    goToTrainingRecord() {
+    goToTrainingRecord(item) {
       uni.navigateTo({
         url:
           '/pages/trainingRecord/trainingRecord' +
-          `?traineeNo=${'63899b9ef5cf3a1773072cd4'}&memberName=${'张雪峰'}`
+          `?traineeNo=${item._id}&memberName=${item.traineeName}`
       })
     },
-    goToNewWorkout() {
+    goToNewWorkout(item) {
       uni.navigateTo({
         url:
-          '/pages/newWorkout/newWorkout?traineeNo=' + '63899b9ef5cf3a1773072cd4'
+          '/pages/newWorkout/newWorkout?traineeNo=' + item._id
       })
     }
   }
