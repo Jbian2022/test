@@ -355,7 +355,7 @@ export default {
       flex-direction: column;
       .need_loop_style {
         width: calc(100% - 60upx);
-        margin: 30upx;
+        margin-top: 30upx;
 
         display: flex;
 
@@ -428,6 +428,9 @@ export default {
           }
         }
       }
+	  // .need_loop_style:last-child {
+		 //  margin-bottom: 40upx;
+	  // }
     }
   }
 }

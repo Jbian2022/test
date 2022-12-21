@@ -676,7 +676,7 @@
   width: 100% !important;
   font-size: 0.9375rem;
   height: 1.375rem;
-  font-family: PingFangSC-Regular, PingFang SC;
+  font-family: PingFangSC-Semibold !important;
   font-weight: 400;
   color: #f4f7ff;
 }
@@ -685,13 +685,13 @@
   width: 100% !important;
   font-size: 0.9375rem;
   height: 1.375rem;
-  font-family: PingFangSC-Regular, PingFang SC;
+  font-family: PingFangSC-Semibold !important;
   font-weight: 400;
   color: #f4f7ff;
 }
 [data-v-67c2db77] .uni-forms uni-form span .uni-forms-item .uni-forms-item__content .uni-easyinput {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
+  font-family: PingFangSC-Semibold !important;
   font-weight: 600;
   color: #f4f7ff !important;
 }
@@ -701,7 +701,7 @@
 }
 [data-v-67c2db77] .uni-forms uni-form span .uni-forms-item .uni-forms-item__content .uni-input-input {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
+  font-family: PingFangSC-Semibold !important;
   font-weight: 600;
   color: #f4f7ff !important;
 }
@@ -747,7 +747,7 @@
   font-size: 1rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.375rem;
 }
 .change_picker_style .back_img_style[data-v-67c2db77] {
@@ -760,5 +760,5 @@
   font-size: 1rem !important;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400 !important;
-  color: #7A7F89 !important;
+  color: #7a7f89 !important;
 }

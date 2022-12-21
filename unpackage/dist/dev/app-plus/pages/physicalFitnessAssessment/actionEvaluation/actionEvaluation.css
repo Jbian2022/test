@@ -308,11 +308,12 @@ font-weight: 600;
 	 line-height: 100px;
 }
 .circleText{
-	width: 2.25rem;
+	width: 3.75rem;
 	height: 1.5625rem;
 	font-size: 1.125rem;
 	font-weight: 600;
 	color: #BDC3CE;
+	text-align: center;
 	margin: 0 auto;
 }
 /* ::-webkit-input-placeholder { 

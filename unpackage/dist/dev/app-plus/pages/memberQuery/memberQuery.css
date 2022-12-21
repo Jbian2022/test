@@ -920,7 +920,7 @@
 }
 .mebers_content .slide_stylle .add_student_style .need_loop_style[data-v-fce7d226] {
   width: calc(100% - 1.875rem);
-  margin: 0.9375rem;
+  margin-top: 0.9375rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -1139,6 +1139,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 0.9375rem;
 }
 .nav_bar_style .nav_left_style {
   height: 100%;
