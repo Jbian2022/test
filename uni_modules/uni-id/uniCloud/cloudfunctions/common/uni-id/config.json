@@ -3,7 +3,7 @@
   "tokenSecret": "iqwetgbkiuslopikdnjks",
   "passwordStrength": "medium",
   "tokenExpiresIn": 7200,
-  "tokenExpiresThreshold": 600,
+  "tokenExpiresThreshold": 3600,
   "passwordErrorLimit": 6,
   "bindTokenToDevice": false,
   "passwordErrorRetryTime": 3600,

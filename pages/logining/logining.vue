@@ -91,7 +91,7 @@ let weixinAuthService
 export default {
   data() {
     return {
-      phone: '17521791830',
+      phone: '',
       checkFlag: false,
       hasWeixinAuth: false,
       checkPhone: '',

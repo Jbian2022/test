@@ -150,7 +150,9 @@
 	height: 33.1875rem;
 	margin-top: 0.625rem;
 	margin-left: 0.9375rem;
+	margin-bottom: -0.3125rem;
 	position: relative;
+	border-radius: 16px 16px 0px 0px;
 }
 .contentBlock{
 	width: calc(100vw - 1.875rem);
@@ -164,7 +166,6 @@
 	width: 5.625rem;
 	height: 1.5625rem;
 	font-size: 1.125rem;
-	font-family: PingFangSC-Semibold, PingFang SC;
 	font-weight: 600;
 	color: #F4F7FF;
 	line-height: 1.5625rem;
@@ -181,12 +182,14 @@
 	margin-left: 1.25rem;
 	position: relative;
 }
- .inputBlock{
+.inputBlock{
 	width: 3.75rem;
 	background-color: #4B525E;
 	border-radius: 0.5rem;
 	position: absolute;
-	--van-field-input-text-color:#F4F7FF;
+	color: #F4F7FF;
+	top:0.625rem;
+	left: 1.25rem;
 }
 .inputText{
 	width: 1.4375rem;
@@ -211,6 +214,9 @@
   border-radius: 0.5rem;
   margin-left: 0.9375rem;
   margin-top: 1.25rem;
+  
+font-weight: 600;
+  font-size: 1rem;
 }
 .clickAction{
 	width: 8.125rem;
@@ -234,7 +240,7 @@
 	top: 0.1875rem;
 }
 .clickActionBody{
-	height: 42.8125rem;;
+	height: 46.5625rem;
 	background: #383D46;
 	border-radius: 0.5rem;
 	-webkit-backdrop-filter: blur(0.09375rem);
@@ -243,6 +249,7 @@
 }
  .clickActionContent{
 	width: calc(100vw - 1.875rem);
+	height: 46.5625rem;
 	margin-top: 5rem;
 	margin-left: 0.9375rem;
 	--van-popup-background-color: #383D46;
@@ -285,10 +292,29 @@
 	line-height: 2.1875rem;
 	text-align: center;
 	margin: 0 auto;
-	margin-bottom: 1.25rem;
+	margin-top: 20.8125rem;
 }
 .clickActionEnd uni-image{
 	width: 1rem;
 	height: 1rem;
 	top: 0.1875rem;
 }
+.circle{
+	width: 100px;
+	 height: 100px; 
+	 border: 4px solid #4B525E;    
+	 border-radius: 100px;
+	 opacity: 0.5;
+	 line-height: 100px;
+}
+.circleText{
+	width: 2.25rem;
+	height: 1.5625rem;
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #BDC3CE;
+	margin: 0 auto;
+}
+/* ::-webkit-input-placeholder { 
+  color: white;
+} */
