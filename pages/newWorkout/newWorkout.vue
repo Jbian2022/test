@@ -822,7 +822,7 @@ page{
 		}
 	}
 	.footer-button{
-		height: 198upx;
+		height: 160upx;
 		overflow: hidden;
 		box-sizing: border-box;
 		position: fixed;
