@@ -3,17 +3,17 @@
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<view class="header">
 			<view class="title">新建训练</view>
-			<van-button class="btn" @click="showFinishDialog = true">完成</van-button>
+			<van-button class="btn" @click="openDialog('popupFinish')">完成</van-button>
 		</view>
 		<view class="workout-title">
 			<input v-model="workoutName" class="uni-input" focus placeholder="请输入训练名称" />
 		</view>
 		<view class="action-list">
 			<view v-for="(i,ix) in actionList" :key="ix" class="action-type-box">
-				<view v-if="i.type===0" class="action-tiem">
+				<view v-if="i.type===0" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
 						<view class="img">
-							<van-image v-if="i.url" round :src="i.url"/>
+							<image class="van-image" v-if="i.url" round :src="i.url"/>
 						</view>
 						<view class="des-info">
 							<view class="des-title">{{i.actionName}}</view>
@@ -30,7 +30,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -44,21 +44,21 @@
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
-								<van-icon name="success" />
+								<view class="true-icon"></view>
 							</view>
 							<view class="delete">
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===1" class="action-tiem">
+				<view v-if="i.type===1" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image v-if="i.url" round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" v-if="i.url" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>总里程：{{i.mileage}}km</text>
@@ -73,7 +73,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -94,15 +94,15 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===2" class="action-tiem">
+				<view v-if="i.type===2" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>已完成：{{i.frequency}}次</text>
@@ -116,7 +116,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -132,15 +132,15 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList),technicalData()"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===3" class="action-tiem">
+				<view v-if="i.type===3" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>用时：{{formaterTimes(i.times)}}</text>
@@ -154,7 +154,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -175,15 +175,15 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===4" class="action-tiem">
+				<view v-if="i.type===4" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>负荷量：{{i.load}}kg</text>
@@ -198,7 +198,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -218,15 +218,15 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===5" class="action-tiem">
+				<view v-if="i.type===5" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>负荷量：{{i.load}}kg</text>
@@ -244,7 +244,7 @@
 					<view class="weight">
 						<input v-model="i.weight" class="uni-input" type="number" placeholder="请先设置当前体重" @blur="technicalData"/>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -264,15 +264,15 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
-				<view v-if="i.type===6" class="action-tiem">
+				<view v-if="i.type===6" class="action-tiem" @click="changeOpen(i)">
 					<view class="action-tiem-header">
-						<view class="img">
-							<van-image round :src="i.url"/>
+						<view class="img" >
+							<image class="van-image" round :src="i.url"/>
 						</view>
-						<view class="des-info">
+						<view class="des-info" >
 							<view class="des-title">{{i.actionName}}</view>
 							<view class="info-text">
 								<text>总用时：{{formaterTimes(i.times)}}</text>
@@ -286,7 +286,7 @@
 							</template>
 						</popover>
 					</view>
-					<view class="action-tiem-des">
+					<view v-show="i.open" class="action-tiem-des">
 						<view v-for="(item,index) in i.groupList" :key="index" class="project-item" :class="{active:item.active}">
 							<view class="index">
 								<text>{{index+1}}</text>
@@ -307,33 +307,37 @@
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
 							</view>
 						</view>
-						<view class="add-project-item" @click="addProjectItem(i.groupList)">+ 新增一组</view>
+						<view class="add-project-item" @click="addProjectItem(i.groupList)"><text class="add-text">+</text> 新增一组</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="footer-button">
-			<van-button class="delete" @click="showDeleteDialog=true">
+			<van-button class="delete" @click="openDialog('popupDelete')">
 				<view class="img"></view>
 			</van-button>
-			<van-button class="add" @click="addActionHandle">+ 添加动作</van-button>
+			<van-button block class="add" @click="addActionHandle">+ 添加动作</van-button>
 		</view>
-		<van-dialog class="finish-dialog" v-model:show="showFinishDialog" :showConfirmButton="false">
-			<view class="first-level-title">完成训练</view>
-			<view class="second-level-title">是否已经完成训练了</view>
-			<view class="botton-box">
-				<van-button class="finish" block @click="finish">确认完成</van-button>
-				<van-button block @click="showFinishDialog=false">取消</van-button>
+		<uni-popup ref="popupFinish" type="center" mask-background-color="rgba(20, 21, 23, 0.6)">
+			<view class="finish-dialog">
+				<view class="first-level-title">完成训练</view>
+				<view class="second-level-title">是否已经完成训练了</view>
+				<view class="botton-box">
+					<van-button class="finish" block @click="finish">确认完成</van-button>
+					<van-button block @click="closeDialog('popupFinish')">取消</van-button>
+				</view>
 			</view>
-		</van-dialog>
-		<van-dialog class="delete-dialog" v-model:show="showDeleteDialog" :showConfirmButton="false">
-			<view class="first-level-title">删除训练</view>
-			<view class="second-level-title">是否删除训练，删除后无法恢复</view>
-			<view class="botton-box">
-				<van-button class="delete" block @click="deleteHandle">确认删除</van-button>
-				<van-button block @click="showDeleteDialog=false">取消</van-button>
+		</uni-popup>
+		<uni-popup ref="popupDelete" type="center" mask-background-color="rgba(20, 21, 23, 0.6)">
+			<view class="delete-dialog">
+				<view class="first-level-title">删除训练</view>
+				<view class="second-level-title">是否删除训练，删除后无法恢复</view>
+				<view class="botton-box">
+					<van-button class="delete" block @click="deleteHandle">确认删除</van-button>
+					<van-button block @click="closeDialog('popupDelete')">取消</van-button>
+				</view>
 			</view>
-		</van-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -352,8 +356,6 @@
 					{ text: '删除动作项'}
 				],
 				traineeNo:null,
-				showFinishDialog: false,
-				showDeleteDialog: false,
 				isNoOldInfo:false
 			}
 		},
@@ -388,23 +390,45 @@
 							mileage: 0,
 							frequency: 0,
 							weight: null,
-							groupList: []
+							groupList: [],
+							open: false
 						}
 					})
 					this.actionList.push(...tempList)
 					// console.log(list);
+				}
+				if(this.actionList&&this.actionList.length>0){
+					this.actionList.forEach((item,i)=>{
+						if(i>0){
+							item.open = false
+						} else {
+							item.open = true
+						}
+					})
 				}
 			} catch (e) {
 				// error
 			}
 		},
 		methods: {
+			changeOpen(item){
+				this.actionList.forEach(item=>item.open=false)
+				item.open = true
+			},
 			async getOldInfo(){
 				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.trainDate})
 				if(res.data&&res.data.length>0){
 					const {trainContent,traineeTitle}  = res.data[0]
 					this.workoutName = traineeTitle
-					this.actionList = JSON.parse(trainContent)
+					const actionList = JSON.parse(trainContent) || []
+					actionList.forEach((item,i)=>{
+						if(i>0){
+							item.open = false
+						} else {
+							item.open = true
+						}
+					})
+					this.actionList = actionList
 					this.isNoOldInfo = true
 				} else {
 					this.isNoOldInfo = false
@@ -561,6 +585,12 @@
 				const minute = Math.floor((times-(hour*3600))/60);
 				const second = times-(hour*3600)-(minute*60);
 				return  type===3?hour+'时'+minute+'分'+second+'秒':hour+'时'+minute+'分'
+			},
+			openDialog(key){
+				this.$refs[key].open()
+			},
+			closeDialog(key){
+				this.$refs[key].close()
 			}
 		}
 	}
@@ -637,6 +667,7 @@ page{
 					.van-image{
 						width: 100%;
 						height: 100%;
+						border-radius: 100%;
 					}
 				}
 				.des-info{
@@ -666,7 +697,7 @@ page{
 					.img{
 						width: 40upx;
 						height: 40upx;
-						background: url('../../static/newWorkout/trashcan.png');
+						background: url('../../static/newWorkout/config.png');
 						background-size: contain;
 						background-repeat: no-repeat;
 					}
@@ -684,7 +715,7 @@ page{
 						padding: 0;
 						background: transparent;
 						font-size: 36upx;
-						font-weight: 500;
+						font-weight: 600;
 						color: #F4F7FF;
 						&::placeholder{
 							color:#7A7F89;
@@ -733,6 +764,13 @@ page{
 						width: 100upx;
 						color: #F4F7FF;
 						box-sizing: border-box;
+						.true-icon{
+							width: 40upx;
+							height: 40upx;
+							background: url('../../static/newWorkout/true.png');
+							background-size: contain;
+							background-repeat: no-repeat;
+						}
 					}
 					.delete{
 						flex: 1;
@@ -774,23 +812,27 @@ page{
 		.add-project-item{
 			margin-top: 40upx;
 			font-size: 30upx;
-			font-weight: 500;
+			font-weight: 600;
 			color: #FFFFFF;
 			text-align: center;
+			.add-text{
+				font-size: 34upx;
+				font-weight: 600;
+			}
 		}
 	}
 	.footer-button{
-		height: 198upx;
+		height: 160upx;
 		overflow: hidden;
 		box-sizing: border-box;
 		position: fixed;
-		padding: 68upx 30upx;
-		padding-top: 30upx;
+		padding: 30upx;
 		bottom: 0;
 		left: 0;
 		right: 0;
 		z-index: 1;
 		background: #212328;
+		display: flex;
 		.delete{
 			background: #454951;
 			height: 100upx;
@@ -813,8 +855,8 @@ page{
 			}
 		}
 		.add{
+			flex: 1;
 			height: 100upx;
-			width: 570upx;
 			background: #454951;
 			border-radius: 16upx;
 			border: none;
@@ -823,7 +865,12 @@ page{
 			color: #FFFFFF;
 		}
 	}
-	::v-deep .van-dialog{
+	::v-deep.uni-popup [name="mask"]{
+		backdrop-filter: blur(3px);
+	}
+	::v-deep .finish-dialog,
+	::v-deep .delete-dialog
+	{
 		background: linear-gradient(180deg, #343A44 0%, #212328 100%);
 		width: 610upx;
 		height: 800upx;
@@ -833,6 +880,7 @@ page{
 			font-size: 88upx;
 			color: #F4F7FF;
 			line-height: 124upx;
+			font-weight: 600;
 		}
 		.second-level-title{
 			padding-top: 20upx;
@@ -846,11 +894,16 @@ page{
 			padding: 0 70upx;
 			.van-button{
 				border: none;
+				height: 100upx;
 				background: transparent;
 				font-size: 32upx;
 				font-weight: 600;
 				border-radius: 16upx;
 				color: #BDC3CE;
+				margin-bottom: 8upx;
+				&::after{
+					display: none;
+				}
 			}
 		}
 	}
