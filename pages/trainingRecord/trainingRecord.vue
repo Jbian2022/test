@@ -3,7 +3,7 @@
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<van-nav-bar :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
 		<view class="calendar">
-			<calendar v-model:value="value" ref="calendar">
+			<calendar v-model:value="value" ref="calendar" todayDisabled @select="selectHandle">
 				<template #operation-left>
 					<view class="calendar-title">训练记录</view>
 				</template>
@@ -13,12 +13,15 @@
 				<template #default="{cell}">
 					<view class="cell-box">
 						<view class="cell-key" :class="{active:cell.isSelected}">{{cell.key}}</view>
-						<view v-if="getTrainTitle(cell.day)" class="cell-label" @click.stop="sharePage(cell.day)">{{getTrainTitle(cell.day)}}</view>
+						<view v-if="getTrainTitle(cell.day)" class="cell-label">{{getTrainTitle(cell.day)}}</view>
 					</view>
 				</template>
 			</calendar>
 		</view>
 		<view class="footer-button">
+			<view class="tipes" v-if="showTipes">
+				开始今日训练吧
+			</view>
 			<view class="add-button" @click="addWorkout"></view>
 		</view>
 	</view>
@@ -36,7 +39,8 @@
 				trainListInfo:{},
 				trainDate: null,
 				memberName: '',
-				value: new Date()
+				value: new Date(),
+				showTipes: true
 			}
 		},
 		onLoad: function (option) { 
@@ -45,6 +49,13 @@
 				this.memberName =option.memberName
 				this.getTrainList()
 			}
+		},
+		onShow(){
+			this.showTipes = true
+			const timer = setTimeout(()=>{
+				this.showTipes = false
+				clearTimeout(timer)
+			},3000)
 		},
 		methods: {
 			async getTrainList(){
@@ -62,12 +73,18 @@
 					url: '/pages/myMebers/myMebers'
 				});
 			},
-			addWorkout(){
-				const list = this.$refs.calendar.getSelection()
-				const item = list.find(item=>item.isSelected)
-				if(!item) return
+			selectHandle(item){
+				if(item.disabled||item.day===this.getDay(new Date())){
+					this.sharePage(item.day)
+					return
+				}
 				uni.navigateTo({
 					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${item.day}`
+				})
+			},
+			addWorkout(){
+				uni.navigateTo({
+					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${this.getDay(new Date())}`
 				})
 			},
 			sharePage(date){
@@ -87,6 +104,20 @@
 				const year = d.getFullYear();
 				const month=formater(d.getMonth()+1);
 				return year+'.'+month
+			},
+			getDay(val){
+				const formater = (temp) =>{
+				　　if(temp<10){
+				　　　　return "0"+temp;
+				　　}else{
+				　　　　return temp;
+				　　}
+				}
+				const d=new Date(val);
+				const year = d.getFullYear();
+				const month=formater(d.getMonth()+1);
+				const date=formater(d.getDate());
+				return year+'-'+month+'-'+date
 			},
 			getTrainTitle(day){
 				return this.trainListInfo[day] || ''
@@ -146,6 +177,9 @@ page{
 			line-height: 52upx;
 			margin: 0 auto;
 			&.active{
+				width: 62upx;
+				height: 62upx;
+				line-height: 62upx;
 				background: #1370FF;
 				font-weight: 600;
 				border-radius: 100%;
@@ -176,6 +210,32 @@ page{
 		height: 180upx;
 		background: url('../../static/newWorkout/add.png') center center no-repeat;
 		background-size: contain;
+		.tipes{
+			position: absolute;
+			top: -92upx;
+			left: 50%;
+			transform: translateX(-50%);
+			height: 80upx;
+			width: 242upx;
+			border-radius: 16upx;
+			background: #4B525E;
+			font-size: 28upx;
+			font-weight: 600;
+			color: #FFFFFF;
+			line-height: 80upx;
+			text-align: center;
+			z-index: 88;
+			&::after{
+				content: '';
+				position: absolute;
+				bottom: -14upx;
+				width: 24upx;
+				height: 24upx;
+				background: #4B525E;
+				left: 50%;
+				transform: rotate(45deg) translateX(-50%);
+			}
+		}
 		.add-button{
 			height: 120upx;
 			width: 120upx;

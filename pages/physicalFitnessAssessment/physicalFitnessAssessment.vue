@@ -78,18 +78,11 @@ export default {
       queryUserActionData:{}
     }
   },
-  onShow() {
-  	this.getconfingActionName();
-  },
   onLoad:function(item){
-		const res = JSON.parse(item.childList);
 		console.log(item)
 		this.traineeNo = item.traineeNo;
 		this.questionCode = item.questionCode;
-		this.pedalTest();
-		// const actionData = 
-		// const res1 = this.queryData.find((datas) => datas.code+'' == 'F0002' );
-		// console.log(res1);
+		this.getconfingActionName();
   },
   methods: {
     jumpModular(item) {
@@ -101,12 +94,6 @@ export default {
         complete: () => {}
       })
     },
-	//获取当前用户已有锻炼数据
-	async pedalTest(){
-		const datas = (await this.findConfigData()).data;
-		this.queryUserActionData = datas;
-		console.log(this.queryUserActionData)
-	},
 	//通过传入的type值来更新等级颜色
 	levelColor(levelType){
 		switch(levelType){
@@ -128,36 +115,40 @@ export default {
 				break;
 		}
 	},
-	findConfigData(){
+	//获取运动表
+	getconfingActionName(){
 		const data = {};
 		data["traineeNo"] = this.traineeNo;
 		data["questionCode"] = this.questionCode;
-		console.log(data)
-		const res = testOb.opearConfigQuery(data);
-		return res;
-	},
-	//获取运动表
-	async getconfingActionName(){
-		const res = await busOb.getPhysicalChildAssessmentList("A0005");
-		this.queryData = res.data;
-		for(let z=0;z<this.queryData.length;z++){
-			this.queryData[z]['typeText']='待测';
-			this.queryData[z]['type']=0;
-			this.queryData[z]['typeColor'] = this.levelColor(this.queryData[z].typeText);
-			this.queryData[z]['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
-		}
-		for(let j = 0;j<this.queryUserActionData.length;j++){
-			for(let i=0;i<this.queryData.length;i++){
-				console.log(this.queryData[i].code===this.queryUserActionData[j].code)
-				if(this.queryData[i].code===this.queryUserActionData[j].code){
-					this.queryData[i].typeText=this.queryUserActionData[j].physicalData.actionTypeText;
-					this.queryData[i].type=this.queryUserActionData[j].physicalData.actionVlue;
-					this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].physicalData.actionTypeText);
-					continue;
-				}
+		testOb.opearConfigQuery(data).then((res)=>{
+			console.log(res)
+			if(res.success){
+				this.queryUserActionData = res.data
+				busOb.getPhysicalChildAssessmentList("A0005").then((res)=>{
+					this.queryData = res.data;
+					this.queryData.forEach((item)=>{
+						item['typeText']='待测';
+						item['type']=0;
+						item['typeColor'] = this.levelColor(item.typeText);
+						item['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
+						console.log(item)
+					})
+					for(let j = 0;j<this.queryUserActionData.length;j++){
+						for(let i=0;i<this.queryData.length;i++){
+							console.log(this.queryData[i].code===this.queryUserActionData[j].code)
+							if(this.queryData[i].code===this.queryUserActionData[j].code){
+								this.queryData[i].typeText=this.queryUserActionData[j].physicalData.actionTypeText;
+								this.queryData[i].type=this.queryUserActionData[j].physicalData.actionVlue;
+								this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].physicalData.actionTypeText);
+								continue;
+							}
+						}
+					}
+					console.log(this.queryData)
+				}).catch((err)=>{
+				});
 			}
-		}
-		console.log(this.queryData)
+		}).catch();
 		
 	},
 	getdynamicEvaluationdata(){
@@ -272,11 +263,12 @@ export default {
 	 line-height: 100px;
 }
 .circleText{
-	width: 72upx;
+	width: 120upx;
 	height: 50upx;
 	font-size: 36upx;
 	font-weight: 600;
 	color: #BDC3CE;
 	margin: 0 auto;
+	text-align: center;
 }
 </style>

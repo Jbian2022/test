@@ -1,5 +1,5 @@
 <template>
-    <view tabindex = "-1" class="popover" :class="className" @longpress="longpressHandle()" @click="clickHandle" @blur="showList=false">
+    <view tabindex = "-1" class="popover" :class="className" @longpress="longpressHandle()" @click.stop="clickHandle" @blur="showList=false">
         <slot></slot>
         <view v-if="showList" class="popover-list" :class="{center:position==='center',left:position==='left',right:position==='right',}">
             <view v-for="(i,k) in list" :key="k" class="list-item" @click="selectHandle(i)">
