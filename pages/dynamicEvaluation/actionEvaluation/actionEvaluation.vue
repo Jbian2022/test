@@ -7,7 +7,7 @@
 			v-for="(item, index) in actionobs"
 			:key="index"
 			:class="num==index?'block0': ''"
-			@click.native="changeFunction(index)">{{item.name}}</view>
+			@click.native="changeFunction(index)">{{item.questionContent}}</view>
 		</view>
 		<view class="contentBody" v-if="changeValue">
 			<view
@@ -87,6 +87,8 @@
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
 	import { ref } from 'vue';
+	const tesOb = uniCloud.importObject("testResults");
+	const busOb = uniCloud.importObject("businessCloudObject");
 	export default {
 		components: {
 		  BgTheamCompontent,
@@ -109,6 +111,7 @@
 		onLoad: function (item) {
 					console.log(item);
 					let leftNavTitle = item.pageTitle
+					this.type = item.type;
 					this.leftNavTitle = leftNavTitle
 					switch(leftNavTitle){
 						case "胸椎活动评估":
@@ -140,6 +143,7 @@
 							this.FrontVideoUrl = this.pushUpTestUrl;
 							break;
 					}
+					this.getActionInfo();
 				},
 		data() {
 			return {
@@ -147,6 +151,7 @@
 					{name:'正面观'},
 					{name:'侧面观'}
 				],
+				type:'',
 				icon: true,
 				backimgFront:"",
 				backimgSide:"",
@@ -193,6 +198,17 @@
 				}else{
 					this.changeValue = false
 					this.num = index
+				}
+			},
+			getActionInfo(){
+				if(this.type!==''){
+					busOb.getPhysicalChildAssessmentList(this.type).then((res)=>{
+						console.log(res);
+						if(res.success){
+							this.actionobs = res.data
+						}
+						console.log(this.actionobs);
+					})
 				}
 			}
 		}

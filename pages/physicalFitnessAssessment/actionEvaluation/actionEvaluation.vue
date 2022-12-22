@@ -59,7 +59,7 @@
 					      :color="typeColor"
 					      :style="'--van-circle-text-color:'+ typeColor"
 					    /> -->
-						<view class="circle" :style="'border: 4px solid '+typeColor+';'">
+						<view class="circle" :style="'border: 4px solid '+typeColor+';'+'background-color:'+backgroundColor+';'">
 							<view class="circleText" :style="'color:'+typeColor+';'">{{typeText}}</view>
 						</view>
 					  </view>
@@ -68,7 +68,7 @@
 			</view>
 		</view>
 		<view>
-		  <van-button type="primary" class="postureButton" @click.native="actionResDate()">确认</van-button>
+		  <button class="postureButton" @click.native="actionResDate()">确认</button>
 		</view>
 	</view>
 </template>
@@ -138,6 +138,7 @@
 					userId:'',
 					status:"0"
 				}],
+				backgroundColor:'rgba(56,61,70, 1)'
 			}
 		},
 		methods: {
@@ -166,19 +167,22 @@
 				switch(levelType){
 					case "优秀":
 					case "良好":
-						this.typeColor = "#01E08C";
+						this.typeColor = "rgba(1, 224, 140, 1)";
+						this.backgroundColor = "rgba(53, 68, 73, 0.5)"
 						break;
 					case "中等":
-					case "中上等":
-					case "中下等":
-						this.typeColor = "#FFC13C";
+					case "中上":
+					case "中下":
+						this.typeColor = "rgba(255, 193, 60, 1)";
+						this.backgroundColor = "rgba(66, 67, 69, 0.5)"
 						break;
 					case "较差":
 					case "非常差":
-						this.typeColor = "#F04242";
+						this.typeColor = "rgba(240, 66, 66, 1)";
+						this.backgroundColor = "rgba(65, 60, 69, 0.5)"
 						break;
 					default:
-						this.typeColor = "#4B525E";
+						this.typeColor = "rgba(75, 82, 94, 1)";
 						break;
 				}
 			},
@@ -294,15 +298,22 @@
 	margin-top: 40upx;
 }
 .postureButton {
-  width: calc(100vw - 60upx);
-  height: 100upx;
   background: #1370ff;
   border-radius: 16upx;
-  margin-left: 30upx;
-  margin-top: 40upx;
-  
-font-weight: 600;
+  margin-top: 30upx;
+  margin-bottom: 30upx;
   font-size: 32upx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 100upx;
+  text-align: center;
+  justify-content: center;
+  
+  width: calc(100vw - 80upx);
+  margin-left: 40upx;
+  
+  display: flex;
 }
 .clickAction{
 	width: 260upx;
@@ -326,10 +337,9 @@ font-weight: 600;
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1490upx;
+	height: 1491upx;
 	background: #383D46;
 	border-radius: 16upx;
-	backdrop-filter: blur(3upx);
 	z-index: 999;
 }
 ::v-deep .clickActionContent{
