@@ -1,7 +1,7 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'体测报告填写'"></NavBarCompontent>
+    <NavBarCompontent :leftNavTitle="'体测报告填写'" :jumpType="'TCBGTX'"></NavBarCompontent>
 
     <view class="contetnt_form_style">
       <uni-forms
@@ -10,23 +10,51 @@
         label-position="top"
       >
         <template v-for="(item, itemIndex) in bodyTestReport" :key="itemIndex">
+		  <uni-forms-item
+		    class="outer_form_item_style"
+		    :label="item.questionContent"
+		    :name="item.code"
+			v-if="item.isInput && item.isInput === 'y'"
+		  >
+		 
+		  <input
+		   type="number"
+		    clas="change_input_style"
+		    :value="item.value"
+			@input="changeInputValue($event, item)"
+		    :placeholder="item.answerRemark.remarkTitle"
+		  />
+		  </uni-forms-item>
           <uni-forms-item
             class="outer_form_item_style"
             :label="item.questionContent"
             :name="item.code"
+			v-else
           >
             <view class="change_picker_style">
-              <hpy-form-select
-                :dataList="item.configList"
-                :title="
-                  item.answerRemark && item.answerRemark.remarkTitle
-                    ? item.answerRemark.remarkTitle
-                    : '请选择'
-                "
-                text="text"
-                name="value"
-                v-model="configForm[item.key]"
-              />
+              <Mpicker
+                mode="bottom"
+                :show.sync="item.flag"
+                :range="item.configList"
+                :rangeKey="'text'"
+                @confirm="pickeConfirm($event, item, itemIndex)"
+                @cancel="pickCancel(item)"
+                :pickerType="'ordinary'"
+                :defaultIndex="handleIndex(item)"
+              ></Mpicker>
+              <view class="change_picker_style" @click.stop="openDialog(item)">
+                <view
+                  class="label_style"
+                  :class="item.hasOwnProperty('value') && item.value ? '' : 'student_label_style'"
+                  >{{
+                  item.hasOwnProperty('value') && item.value  ? item.value : item.answerRemark.remarkTitle
+                  }}</view
+                >
+                <image
+                  class="back_img_style"
+                  src="../../static/app-plus/mebrs/back.png"
+                ></image>
+              </view>
             </view>
           </uni-forms-item>
         </template>
@@ -40,20 +68,23 @@
 import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '../../components/navBarCompontent/navBarCompontent.vue'
 import hadleDate from '../../common/timeUtil.js'
+import Mpicker from '../../components/mPicker.vue/mPicker.vue'
 var businessCloudObject = uniCloud.importObject('businessCloudObject')
 export default {
   components: {
     BgTheamCompontent,
-    NavBarCompontent
+    NavBarCompontent,
+    Mpicker
   },
   data() {
     return {
       configForm: {},
-
+      pickerShow: false,
       traineeNo: '',
       questionCode: '',
       originList: [],
-      bodyTestReport: [] //体测报告填写数组
+      bodyTestReport: [], //体测报告填写数组
+      range: []
     }
   },
   onLoad(options) {
@@ -66,7 +97,7 @@ export default {
     ) {
       let originList = JSON.parse(options.childList)
       this.originList = originList
-      console.log(originList, '>>>')
+      // console.log(originList, '>>>')
     }
     if (
       JSON.stringify(options) !== '{}' &&
@@ -78,13 +109,61 @@ export default {
   mounted() {
     this.requestList()
   },
+  computed: {
+	  handleIndex() {
+		return function(item) {
+			let index = 0
+			index = item.configList.findIndex(k => k.value === item.defaultValue)
+			return index
+		}  
+	  },
+	  handleFormValue() {
+		  return function(item) {
+			  debugger
+			  let value = ''
+			  if (item.hasOwnProperty('value')) {
+				  value = item.value || ''
+			  }
+			  return {value}
+		  }
+	  }
+
+  },
   methods: {
+	  changeInputValue(event, item) {
+		  item['value'] = event.detail.value
+	  },
+    pickeConfirm(event, item, itemIndex) {
+		console.log(item, '我平时', itemIndex)
+		item.flag = false
+		item['value'] = item.configList[event].text || ''
+	
+
+    },
+    pickCancel(item) {
+      item.flag = false
+    },
+    openDialog(item) {
+	  item.flag = true
+    },
     saveBodyTestReport() {
       // 参数封装
+	  
+	 var resultParam = {}
+	 this.bodyTestReport.forEach(value => {
+		 // console.log(value, 'kdjkafj')
+		 let readyParam = {
+			 [value.key]: value.hasOwnProperty('value') ? value.value : ''
+		 }
+		 console.log(readyParam, 'readyParam')
+		 Object.assign(resultParam, readyParam)
+	 })
+	 // console.log(resultParam, '>>>')
+	  
       let saveParam = {
         traineeNo: this.traineeNo,
         questionCode: this.questionCode,
-        bodyTestReport: this.configForm
+        bodyTestReport: resultParam
       }
       businessCloudObject
         .opearConfig(saveParam, 'bodyTestReport')
@@ -132,7 +211,8 @@ export default {
             }
             return {
               ...item,
-              configList
+              configList,
+			  flag: false
             }
           })
           console.log(res, 'kkkkk')
@@ -144,21 +224,26 @@ export default {
             // 如果有数据则证明有答案
             opearConfigList = opearConfigList.map((config) => {
               var saveKey = null
+			  let resultValue = ''
               res.data.forEach((v) => {
                 for (var key in v.bodyTestReport) {
                   if (config.key === key) {
                     saveKey = {
                       [key]: v.bodyTestReport[key]
                     }
+					resultValue = v.bodyTestReport[key]
 
-                    setTimeout(() => {
+                
                       Object.assign(self.configForm, saveKey)
-                    }, 500)
+            
                   }
                 }
               })
               return {
-                ...config
+                ...config,
+				flag: false,
+				value: resultValue
+				
               }
             })
             console.log(self.configForm, 'this.configForm', opearConfigList)
@@ -206,9 +291,8 @@ export default {
       this.showPicker = false
     },
     addDirectly(type) {
-      debugger
       var that = this
-      console.log(type, 'nishi')
+      // console.log(type, 'nishi')
       this.$refs.studentForm
         .validate()
         .then(() => {
@@ -673,23 +757,31 @@ export default {
   line-height: 100upx;
   text-align: center;
 }
-::v-deep.uni-picker-view-mask {
-  background: transparent !important;
-}
-::v-deep.uni-picker-view-indicator {
-  border: none !important;
-  // width: 80%;
 
-  // margin-left: 40upx;
-  background: rgba(75, 82, 94, 0.5) !important;
-  border-radius: 16px;
-  z-index: -1;
+.change_picker_style {
+  display: flex;
+  width: 100%;
+  height: 80upx;
+  align-items: center;
+  justify-content: space-between;
+  .label_style {
+    font-size: 32upx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #f4f7ff;
+    line-height: 44upx;
+  }
+  .back_img_style {
+    width: 30upx;
+    height: 32upx;
+    object-fit: contain;
+    transform: rotate(180deg);
+  }
 }
-
-::v-deep.uni-picker-view-indicator:before {
-  border-top: none;
-}
-::v-deep.uni-picker-view-indicator::after {
-  border-bottom: none;
+.student_label_style {
+  font-size: 32upx !important;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400 !important;
+  color: #7a7f89 !important;
 }
 </style>

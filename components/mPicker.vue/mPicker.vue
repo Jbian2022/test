@@ -242,7 +242,7 @@ export default {
   },
   mounted() {
 	  this.$nextTick(() => {
-	  console.log(this.range,'>>>>')
+	  // console.log(this.range,'>>>>')
 	  if (this.pickerType === 'ordinary') {
 		this.pickerValue = [this.defaultIndex ] 
 	  } else {  
