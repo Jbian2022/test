@@ -35,7 +35,7 @@
             @confirm="sexConfirm"
             @cancel="sexCancel"
             :pickerType="'ordinary'"
-            :defaultIndex="0"
+            :defaultIndex="handleSexDefaultIndex"
           ></Mpicker>
           <view class="change_picker_style" @click.stop="openDialog">
             <view
@@ -92,10 +92,11 @@
           name="mobile"
         >
           <input
-            type="tel"
+           type="number"
             clas="change_input_style"
             v-model="studentForm.mobile"
             placeholder="请输入手机号码"
+			maxlength="11"
           />
         </uni-forms-item>
 
@@ -237,11 +238,12 @@ export default {
           label: '手机号码',
           validateTrigger: 'submit'
         }
-      }
+      },
+	  isActive: ''
     }
   },
   onLoad(options) {
-    if (JSON.stringify(options) !== '{}') {
+    if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('item')) {
       let requestItem = options.hasOwnProperty('item')
         ? JSON.parse(options.item)
         : null
@@ -249,8 +251,16 @@ export default {
       this.gender = this.range.find((v) => v.value === requestItem.gender).text
       this.leftNavTitle = '基础信息'
     }
+	if (JSON.stringify(options) !== '{}') {
+		let isActive = options.hasOwnProperty('isActive') ? options.isActive : '1'
+		this.isActive = isActive
+	}
   },
   computed: {
+	handleSexDefaultIndex() {
+		let sexIndex = this.range.findIndex(k => k.value === this.studentForm.gender)
+		return sexIndex
+	},
     genderLabel() {
       let label = ''
       let findData = this.range.find(
@@ -332,8 +342,8 @@ export default {
               .updateMember(that.studentForm)
               .then((updateRes) => {
                 if (updateRes.success) {
-                  uni.switchTab({
-                    url: '/pages/myMebers/myMebers',
+                  uni.reLaunch({
+                    url: '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -388,8 +398,8 @@ export default {
                     })
                     .catch((err) => {})
                 } else {
-                  uni.switchTab({
-                    url: '/pages/myMebers/myMebers',
+                  uni.reLaunch({
+                     url: '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -690,6 +700,7 @@ export default {
         display: block;
         background: rgba(75, 82, 94, 0.5) !important;
         border-radius: 16upx;
+		margin-bottom: 30upx !important;
 
         .uni-forms-item__label {
           width: 100% !important;

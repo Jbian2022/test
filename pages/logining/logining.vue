@@ -161,6 +161,8 @@ export default {
     agreeContiute() {
       this.checkFlag = true
       this.needChecked = false
+	  this.getSms()
+	  
     },
     getWeixinCode() {
       return new Promise((resolve, reject) => {
