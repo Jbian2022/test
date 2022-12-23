@@ -167,7 +167,7 @@
 						this.gender = res.data[0].gender;
 						birth = res.data[0].birthday
 						this.age = Number(this.getAge(birth));
-						console.log(this.age+"-----"+this.gender)
+						// console.log(this.age+"-----"+this.gender)
 					}
 				});
 			},
