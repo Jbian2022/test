@@ -1,6 +1,10 @@
 <template>
 	<view class="training-record-detail">
-		<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickLeft"><van-icon name="arrow-left" /></view>
+		<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickLeft">
+			<van-icon name="arrow-left" />
+			<view class="title">训练记录</view>
+			<view class="z" style="opacity: 0;">8888</view>
+		</view>
 		<view id="training-detail">
 			<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 			<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
@@ -469,6 +473,7 @@ export default {
 			display: flex;
 			align-items: center;
 			padding-left: 30upx;
+			justify-content: space-between;
 			.van-icon{
 				font-size: 40upx;
 				color: #bdc3ce;
