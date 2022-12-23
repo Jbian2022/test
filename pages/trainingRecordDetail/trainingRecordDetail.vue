@@ -289,7 +289,7 @@
 				const second = times-(hour*3600)-(minute*60);
 				return  type===3?hour+'时'+minute+'分'+second+'秒':hour+'时'+minute+'分'
 			},
-			getMonthDay(){
+			getMonthDay(val){
 				const formater = (temp) =>{
 				　　if(temp<10){
 				　　　　return "0"+temp;
@@ -297,7 +297,7 @@
 				　　　　return temp;
 				　　}
 				}
-				const d=new Date();
+				const d=new Date(val);
 				const year=d.getFullYear();
 				const month=formater(d.getMonth()+1);
 				const date=formater(d.getDate());
