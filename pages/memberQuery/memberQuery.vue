@@ -106,6 +106,7 @@ export default {
   left: 0;
   top: 0;
   z-index: 500;
+  margin-top: 0 !important;
 }
 
 .search_antimation_style {
