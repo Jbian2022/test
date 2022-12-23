@@ -19,22 +19,6 @@
           @inputVerificationChange="inputVerificationChange"
         ></verification-code-style2>
       </view>
-      <!--    <van-password-input
-        class="a-i-c"
-        :mask="false"
-        :length="4"
-        :gutter="10"
-        :value="smsCode"
-        :error-info="errorInfoValue"
-        :focused="showKeyboard"
-        @focus="showKeyboard = true"
-      />
-      <van-number-keyboard
-        v-model="smsCode"
-        :show="showKeyboard"
-        @blur="showKeyboard = false"
-        :maxlength="4"
-      /> -->
       <!-- 登录 -->
       <button class="btn" :class="sureLogin ? 'active' : ''" @click="smsLogin">
         <span class="btn-text">登录</span>
@@ -50,15 +34,7 @@
             :second="timeupSecond"
             @timeup="timeup"
           />
-
-          <!-- 		  <van-count-down
-            ref="countDown"
-            millisecond
-            @finish="onFinsh"
-            :time="countDown"
-            :auto-start="true"
-            :class="isFinsh ? 'countActive' : ''"
-            format="ss" /> --> </view
+		  </view
         ><text>s</text>）
       </p>
     </view>
@@ -66,7 +42,7 @@
 </template>
 
 <script>
-// import loginVue from './login/login.vue';
+
 export default {
   data() {
     return {

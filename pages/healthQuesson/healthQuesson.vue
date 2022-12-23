@@ -108,7 +108,11 @@ export default {
       }
     }
   },
+  created() {
+  	uni.hideLoading();
+  },
   mounted() {
+	
     this.requestList()
   },
   methods: {

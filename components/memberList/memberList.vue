@@ -138,12 +138,30 @@ export default {
     searchValue: String,
     type: String
   },
+  onLoad(options) {
+  // 	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
+		//  this.getMemberList(options.isActive)
+		 
+	 // }
+  },
   created() {
     switch (this.type) {
       case 'home':
         this.getMemberList(this.isActive)
         break
     }
+	uni.getStorage({
+	  key: 'isActive',
+	  success: function (res) {
+	    // console.log(res, '我是token')
+	    if (res.data) {
+	     this.getMemberList(res.data)
+	    }
+	  },
+	  fail: function (err) {
+
+	  }
+	})
   },
   onShow() {},
 
@@ -254,11 +272,16 @@ export default {
     // 编辑会员信息
     updateMember(item) {
       uni.navigateTo({
-        url: '/pages/addMyMebers/addMyMebers?item=' + JSON.stringify(item),
+        url: '/pages/addMyMebers/addMyMebers?item=' + JSON.stringify(item) + '&isActive=' + this.isActive,
         success: (res) => {},
         fail: () => {},
         complete: () => {}
       })
+	  try {
+	    uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
+	  } catch (e) {
+	    // error
+	  }
     },
     memberSrollTop(event) {
       this.scrollTop = event.detail.scrollTop
@@ -320,7 +343,7 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #212328;
+  // background: #212328;
   .no_data_style {
     width: 100%;
     display: flex;

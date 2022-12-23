@@ -165,8 +165,13 @@ export default {
     },
 
     addClick() {
+		try {
+		  uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
       uni.navigateTo({
-        url: '/pages/addMyMebers/addMyMebers',
+        url: '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
         success: (res) => {},
         fail: () => {},
         complete: () => {}
@@ -288,7 +293,7 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: #212328;
+    // background: #212328;
     .no_data_style {
       width: 100%;
       display: flex;
@@ -525,8 +530,10 @@ uni-page-body {
   padding-bottom: 36upx;
   animation-name: cellingAnmation;
   animation-duration: 0.3s;
+  margin-left: 0 !important;
   .buy_left {
     width: 40% !important;
+	margin-left: 30upx;
   }
   .buy_right {
     width: 40% !important;
@@ -577,7 +584,7 @@ uni-scroll-view {
   box-sizing: border-box;
 }
 ::v-deep uni-movable-area {
-  width: calc(100vw - 80upx);
+  width: calc(100vw - 130upx);
   height: 100%;
 }
 ::v-deep uni-movable-view {

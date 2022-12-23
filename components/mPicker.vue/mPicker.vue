@@ -234,6 +234,8 @@ export default {
 				let findDatyIndex = this.days.findIndex(c =>  c == resultInde[2])
 				this.pickerValue = [findYearIndex, findMonthIndex, findDatyIndex]
 				
+			} else {
+				 this.pickerValue = [9999, this.month - 1, this.day - 1 ]  
 			}
 		},
 		deep: true,
@@ -245,8 +247,6 @@ export default {
 	  // console.log(this.range,'>>>>')
 	  if (this.pickerType === 'ordinary') {
 		this.pickerValue = [this.defaultIndex ] 
-	  } else {  
-		 this.pickerValue = [9999, this.month - 1, this.day - 1 ]  
 	  }
 		  
 	  })

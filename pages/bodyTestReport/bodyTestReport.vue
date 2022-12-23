@@ -188,12 +188,7 @@ export default {
         .catch(() => {})
     },
     requestList() {
-      console.log(
-        this.traineeNo,
-        'this.traineeNo',
-        this.questionCode,
-        'this.questionCode'
-      )
+
       var self = this
       businessCloudObject
         .opearConfigQuery({

@@ -1,14 +1,14 @@
 <template>
 	<view class="bg_content">
 		<view v-if="theamType==='currency'" class="currency_style">
-			<image class="currency_img_style" src="../../static/app-plus/bg/currency.png"></image>
-			<view class="currency_content_style"></view>
+			<!-- <image class="currency_img_style" src="../../static/app-plus/bg/currency.png"></image> -->
 		</view>
-		<view v-if="theamType==='goldenCard'" class="currency_style">
+		<view class="currency_content_style"></view>
+<!-- 		<view v-if="theamType==='goldenCard'" class="currency_style">
 			<image class="currency_gold_img_style" src="../../static/app-plus/bg/goldenCard.png"></image>
 			<image class="currency_img_style" src="../../static/app-plus/bg/currency.png"></image>
 			<view class="currency_content_style"></view>
-		</view>
+		</view> -->
 		
 	</view>
 </template>
@@ -33,11 +33,12 @@
 		left: 0;
 		top: 0;
 		z-index: -100;
+		display: flex;
+		flex-direction: column;
 		.currency_style {
 			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
+			height: 460upx;
+			background-image: linear-gradient(to bottom, rgba(52, 58, 68, 1), rgba(33, 35, 50, 1));
 			.currency_gold_img_style {
 				width: 100%;
 				height: 372upx;
@@ -54,12 +55,12 @@
 				object-fit: contain;
 				z-index: -1;
 			}
+		}
 			.currency_content_style {
 				width: 100%;
 				flex: 1;
 				background: #212328;
 			}
-		}
 	}
 
 </style>
