@@ -38,7 +38,7 @@
 		.currency_style {
 			width: 100%;
 			height: 460upx;
-			background-image: linear-gradient(to bottom, rgba(52, 58, 68, 1), rgba(33, 35, 50, 1));
+			background-image: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
 			.currency_gold_img_style {
 				width: 100%;
 				height: 372upx;
