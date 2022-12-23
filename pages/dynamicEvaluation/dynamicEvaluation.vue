@@ -77,7 +77,7 @@ export default {
 	jumpModular(item) {
 	  // console.log(item.path,'>>>>')
 	  uni.navigateTo({
-	    url: item.path+"?type="+item.type,
+	    url: item.path+"&type="+item.type,
 	    success: (res) => {},
 	    fail: () => {},
 	    complete: () => {}

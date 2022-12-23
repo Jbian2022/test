@@ -7,7 +7,7 @@
 			v-for="(item, index) in actionobs"
 			:key="index"
 			:class="num==index?'block0': ''"
-			@click.native="changeFunction(index)">{{item.name}}</view>
+			@click.native="changeFunction(index)">{{item.questionContent}}</view>
 		</view>
 		<view class="contentBody" v-if="changeValue">
 			<view
@@ -39,9 +39,6 @@
 				</view>
 			</van-popup>
 			<image class="imagebg" :src="backimgFront"/>
-			<!-- <image
-			  src="../../static/app-plus/bg/actionImg.png"
-			></image> -->
 		</view>
 		<view class="contentBody" v-else>
 			<view
@@ -87,6 +84,8 @@
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
 	import { ref } from 'vue';
+	const tesOb = uniCloud.importObject("testResults");
+	const busOb = uniCloud.importObject("businessCloudObject");
 	export default {
 		components: {
 		  BgTheamCompontent,
@@ -109,6 +108,7 @@
 		onLoad: function (item) {
 					console.log(item);
 					let leftNavTitle = item.pageTitle
+					this.type = item.type;
 					this.leftNavTitle = leftNavTitle
 					switch(leftNavTitle){
 						case "胸椎活动评估":
@@ -140,6 +140,7 @@
 							this.FrontVideoUrl = this.pushUpTestUrl;
 							break;
 					}
+					this.getActionInfo();
 				},
 		data() {
 			return {
@@ -147,6 +148,7 @@
 					{name:'正面观'},
 					{name:'侧面观'}
 				],
+				type:'',
 				icon: true,
 				backimgFront:"",
 				backimgSide:"",
@@ -194,6 +196,17 @@
 					this.changeValue = false
 					this.num = index
 				}
+			},
+			getActionInfo(){
+				if(this.type!==''){
+					busOb.getPhysicalChildAssessmentList(this.type).then((res)=>{
+						console.log(res);
+						if(res.success){
+							this.actionobs = res.data
+						}
+						console.log(this.actionobs);
+					})
+				}
 			}
 		}
 	}
@@ -212,6 +225,7 @@
 	margin: 0 auto;
 	margin-top: 20upx;
 	margin-left: 30upx;
+	overflow-x: hidden;
 }
 .block{
 	width: 335upx;
@@ -225,12 +239,10 @@
 	line-height: 90upx;
 	text-align: center;
 	background: #383D46;
+	margin-right: 25upx;
 }
 .block0{
 	background: #195BC2;
-}
-.headBox :last-child{
-	float: right;
 }
 .contentBody{
 	width: calc(100vw - 60upx);
