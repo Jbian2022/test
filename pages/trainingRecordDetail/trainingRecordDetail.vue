@@ -474,6 +474,7 @@ export default {
 			align-items: center;
 			padding-left: 30upx;
 			justify-content: space-between;
+			color: #bdc3ce;
 			.van-icon{
 				font-size: 40upx;
 				color: #bdc3ce;

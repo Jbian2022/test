@@ -592,6 +592,14 @@
 			closeDialog(key){
 				this.$refs[key].close()
 			}
+		},
+		onBackPress(){
+			if(this.workoutName&&this.actionList.length>0){
+				this.openDialog('popupFinish')
+			} else {
+				this.openDialog('popupDelete')
+			}
+			return true
 		}
 	}
 </script>
