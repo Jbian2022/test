@@ -39,9 +39,6 @@
 				</view>
 			</van-popup>
 			<image class="imagebg" :src="backimgFront"/>
-			<!-- <image
-			  src="../../static/app-plus/bg/actionImg.png"
-			></image> -->
 		</view>
 		<view class="contentBody" v-else>
 			<view
@@ -228,6 +225,7 @@
 	margin: 0 auto;
 	margin-top: 20upx;
 	margin-left: 30upx;
+	overflow-x: hidden;
 }
 .block{
 	width: 335upx;
@@ -241,12 +239,10 @@
 	line-height: 90upx;
 	text-align: center;
 	background: #383D46;
+	margin-right: 25upx;
 }
 .block0{
 	background: #195BC2;
-}
-.headBox :last-child{
-	float: right;
 }
 .contentBody{
 	width: calc(100vw - 60upx);
