@@ -261,6 +261,7 @@ module.exports = {
    opearConfigQuery: async function(data) {
 	   const token = this.getUniIdToken()
 	   const detailInfo = await this.uniID.checkToken(token)
+	   console.log(detailInfo.uid, '我是谁')
 	   return new Promise((resolve, reject) => {
 		   db.collection('t_questionaire_answer').where({
 			   traineeNo: data.traineeNo,
@@ -299,13 +300,15 @@ module.exports = {
 					switch(type) {
 						 case 'physical':
 						 resultParam = {
-						 	...data
+						 	...data,
+							userId: detailInfo.uid
 						 	
 						 }
 						break;
 						case 'bodyTestReport':
 						resultParam = {
-							...data
+							...data,
+							userId: detailInfo.uid
 							
 						}
 						break
@@ -335,7 +338,8 @@ module.exports = {
 						break; 
 						case 'bodyTestReport':
 						resultParam = {
-							...data
+							...data,
+							userId: detailInfo.uid
 							
 						}
 						break

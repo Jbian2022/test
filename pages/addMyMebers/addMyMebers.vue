@@ -27,22 +27,26 @@
           :label="'性别(必填)'"
           name="gender"
         >
-            <Mpicker
-              mode="bottom"
-              :show.sync="sexShow"
-              :range="range"
-              :rangeKey="'text'"
-              @confirm="sexConfirm"
-			  @cancel="sexCancel"
-              :pickerType="'ordinary'"
-              :defaultIndex="0"
-            ></Mpicker>
+          <Mpicker
+            mode="bottom"
+            :show.sync="sexShow"
+            :range="range"
+            :rangeKey="'text'"
+            @confirm="sexConfirm"
+            @cancel="sexCancel"
+            :pickerType="'ordinary'"
+            :defaultIndex="handleSexDefaultIndex"
+          ></Mpicker>
           <view class="change_picker_style" @click.stop="openDialog">
-			  <view class="label_style" :class="studentForm.gender ? '' : 'student_label_style'">{{ !studentForm.gender ? '请选择性别' :  genderLabel}}</view>
-			<image
-			  class="back_img_style"
-			  src="../../static/app-plus/mebrs/back.png"
-			></image>
+            <view
+              class="label_style"
+              :class="studentForm.gender ? '' : 'student_label_style'"
+              >{{ !studentForm.gender ? '请选择性别' : genderLabel }}</view
+            >
+            <image
+              class="back_img_style"
+              src="../../static/app-plus/mebrs/back.png"
+            ></image>
           </view>
         </uni-forms-item>
         <uni-forms-item
@@ -50,34 +54,37 @@
           :label="'生日(必填)'"
           name="birthday"
         >
-		
-		<Mpicker
-		    mode="bottom"
-			:range="range"
-		    :show.sync="birthShow"
-		    @confirm="dateConfirm"
-			  @cancel="dateCancel"
-		    :pickerType="'date'"
-		    :defaultIndex="0"
-			:distinguishModel="studentForm.birthday"
-		  ></Mpicker>
-		<view class="change_picker_style" @click.stop="birthShow = true">
-		  <view class="label_style" :class="studentForm.birthday ? '' : 'student_label_style'">{{ !studentForm.birthday ? '请选生日' :  studentForm.birthday}}</view>
-		<image
-		  class="back_img_style"
-		  src="../../static/app-plus/mebrs/back.png"
-		></image>
-		</view>
-		
-	  <!-- 		<DatePicker></DatePicker> -->
-<!--         <hpy-form-select
+          <Mpicker
+            mode="bottom"
+            :range="range"
+            :show.sync="birthShow"
+            @confirm="dateConfirm"
+            @cancel="dateCancel"
+            :pickerType="'date'"
+            :defaultIndex="0"
+            :distinguishModel="studentForm.birthday"
+          ></Mpicker>
+          <view class="change_picker_style" @click.stop="birthShow = true">
+            <view
+              class="label_style"
+              :class="studentForm.birthday ? '' : 'student_label_style'"
+              >{{
+                !studentForm.birthday ? '请选生日' : studentForm.birthday
+              }}</view
+            >
+            <image
+              class="back_img_style"
+              src="../../static/app-plus/mebrs/back.png"
+            ></image>
+          </view>
+
+          <!-- 		<DatePicker></DatePicker> -->
+          <!--         <hpy-form-select
             mode="date"
             start="1872-01-01"
             end="2050-01-01"
             v-model="studentForm.birthday"
           /> -->
-		  
-		  
         </uni-forms-item>
         <uni-forms-item
           class="outer_form_item_style"
@@ -85,10 +92,11 @@
           name="mobile"
         >
           <input
-            type="tel"
+           type="number"
             clas="change_input_style"
             v-model="studentForm.mobile"
-            placeholder="请输入真实姓名"
+            placeholder="请输入手机号码"
+			maxlength="11"
           />
         </uni-forms-item>
 
@@ -99,13 +107,13 @@
               class="buy_left"
               :class="studentForm.buyStatus == 0 ? 'active' : ''"
               @click.native="buyClick(0)"
-              >无</view
+              >否</view
             >
             <view
               class="buy_right"
               :class="studentForm.buyStatus == 1 ? 'active' : ''"
               @click.native="buyClick(1)"
-              >有</view
+              >是</view
             >
           </view>
         </view>
@@ -152,10 +160,9 @@ export default {
         buyStatus: 0
       },
       sexShow: false,
-	  birthShow: false,
+      birthShow: false,
       gender: '',
-     range: [
-        { text: '未知', value: '0' },
+      range: [
         { text: '男', value: '1' },
         { text: '女', value: '2' }
       ],
@@ -231,53 +238,60 @@ export default {
           label: '手机号码',
           validateTrigger: 'submit'
         }
-      }
+      },
+	  isActive: ''
     }
   },
   onLoad(options) {
-    if (JSON.stringify(options) !== '{}') {
+    if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('item')) {
       let requestItem = options.hasOwnProperty('item')
         ? JSON.parse(options.item)
         : null
-        this.studentForm = this.requestItem = requestItem
-      this.gender = this.range.find(
-        (v) => v.value === requestItem.gender
-      ).text
+      this.studentForm = this.requestItem = requestItem
+      this.gender = this.range.find((v) => v.value === requestItem.gender).text
       this.leftNavTitle = '基础信息'
     }
+	if (JSON.stringify(options) !== '{}') {
+		let isActive = options.hasOwnProperty('isActive') ? options.isActive : '1'
+		this.isActive = isActive
+	}
   },
   computed: {
-  genderLabel() {
-	let label = '';
-	let findData = this.range.find(item => item.value === this.studentForm.gender )
-	if (findData) {
-		label = findData.text || ''
-	}
-	return label
-  }
-	  
+	handleSexDefaultIndex() {
+		let sexIndex = this.range.findIndex(k => k.value === this.studentForm.gender)
+		return sexIndex
+	},
+    genderLabel() {
+      let label = ''
+      let findData = this.range.find(
+        (item) => item.value === this.studentForm.gender
+      )
+      if (findData) {
+        label = findData.text || ''
+      }
+      return label
+    }
   },
   mounted() {},
   methods: {
-	  openDialog() {
-	  this.sexShow = true
-	  },
+    openDialog() {
+      this.sexShow = true
+    },
     sexConfirm(e) {
       this.studentForm.gender = this.range[e[0]].value
-	  this.sexShow = false
-	  
+      this.sexShow = false
     },
-	dateConfirm(e) {
-		console.log(e, '我是日期')
-		this.studentForm.birthday = e
-		 this.birthShow = false
-	},
-	dateCancel() {
-		this.birthShow = false
-	},
-	sexCancel() {
-		 this.sexShow = false
-	},
+    dateConfirm(e) {
+      console.log(e, '我是日期')
+      this.studentForm.birthday = e
+      this.birthShow = false
+    },
+    dateCancel() {
+      this.birthShow = false
+    },
+    sexCancel() {
+      this.sexShow = false
+    },
     /**
      * 格式化日期
      * @param type
@@ -328,8 +342,8 @@ export default {
               .updateMember(that.studentForm)
               .then((updateRes) => {
                 if (updateRes.success) {
-                  uni.switchTab({
-                    url: '/pages/myMebers/myMebers',
+                  uni.reLaunch({
+                    url: '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -384,8 +398,8 @@ export default {
                     })
                     .catch((err) => {})
                 } else {
-                  uni.switchTab({
-                    url: '/pages/myMebers/myMebers',
+                  uni.reLaunch({
+                     url: '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -686,6 +700,7 @@ export default {
         display: block;
         background: rgba(75, 82, 94, 0.5) !important;
         border-radius: 16upx;
+		margin-bottom: 30upx !important;
 
         .uni-forms-item__label {
           width: 100% !important;
@@ -694,7 +709,7 @@ export default {
             width: 100% !important;
             font-size: 30upx;
             height: 44upx;
-            font-family: PingFangSC-Regular, PingFang SC;
+            font-family: PingFangSC-Semibold !important;
             font-weight: 400;
             color: #f4f7ff;
             span {
@@ -702,7 +717,7 @@ export default {
               width: 100% !important;
               font-size: 30upx;
               height: 44upx;
-              font-family: PingFangSC-Regular, PingFang SC;
+               font-family: PingFangSC-Semibold !important;
               font-weight: 400;
               color: #f4f7ff;
             }
@@ -712,7 +727,7 @@ export default {
         .uni-forms-item__content {
           .uni-easyinput {
             font-size: 32upx;
-            font-family: PingFangSC-Semibold, PingFang SC;
+            font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
             .uni-easyinput__content {
@@ -722,7 +737,7 @@ export default {
           }
           .uni-input-input {
             font-size: 32upx;
-            font-family: PingFangSC-Semibold, PingFang SC;
+           font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
           }
@@ -769,29 +784,29 @@ export default {
 }
 
 .change_picker_style {
-	display: flex;
-	width: 100%;
-	height: 80upx;
-	align-items: center;
-	justify-content: space-between;
-	.label_style {
-		font-size: 32upx;
-		font-family: PingFangSC-Semibold, PingFang SC;
-		font-weight: 600;
-		color: #F4F7FF;
-		line-height: 44upx;
-	}
-	.back_img_style {
-		width: 30upx;
-		height: 32upx;
-		object-fit: contain;
-		transform:rotate(180deg);
-	}
+  display: flex;
+  width: 100%;
+  height: 80upx;
+  align-items: center;
+  justify-content: space-between;
+  .label_style {
+    font-size: 32upx;
+    font-family: PingFangSC-Semibold, PingFang SC; 
+    font-weight: 600;
+    color: #f4f7ff;
+    line-height: 44upx;
+  }
+  .back_img_style {
+    width: 30upx;
+    height: 32upx;
+    object-fit: contain;
+    transform: rotate(180deg);
+  }
 }
 .student_label_style {
-	font-size: 32upx !important;
-	font-family: PingFangSC-Regular, PingFang SC;
-	font-weight: 400 !important;
-	color: #7A7F89 !important;
+  font-size: 32upx !important;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400 !important;
+  color: #7a7f89 !important;
 }
 </style>

@@ -16,7 +16,7 @@
 <script>
 	export default {
 		name:"navBarCompontent",
-		props: ['leftNavTitle', 'contentTitle'],
+		props: ['leftNavTitle', 'contentTitle', 'jumpType'],
 		data() {
 			return {
 				
@@ -24,7 +24,18 @@
 		},
 		methods: {
 			goBack() {
-				uni.navigateBack();
+				switch(this.jumpType) {
+					case 'TCBGTX':
+					uni.reLaunch({
+					  url: '/pages/myMebers/myMebers'
+					})  
+					break;
+					default:
+					uni.navigateBack();
+					break;
+					
+				}
+				
 			}
 		}
 	}

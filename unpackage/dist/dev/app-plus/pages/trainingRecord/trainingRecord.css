@@ -200,6 +200,9 @@ body {
   margin: 0 auto;
 }
 .training-record .calendar .cell-key.active {
+  width: 1.9375rem;
+  height: 1.9375rem;
+  line-height: 1.9375rem;
   background: #1370FF;
   font-weight: 600;
   border-radius: 100%;
@@ -226,6 +229,32 @@ body {
   height: 5.625rem;
   background: url("../../static/newWorkout/add.png") center center no-repeat;
   background-size: contain;
+}
+.training-record .footer-button .tipes {
+  position: absolute;
+  top: -2.875rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2.5rem;
+  width: 7.5625rem;
+  border-radius: 0.5rem;
+  background: #4B525E;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 2.5rem;
+  text-align: center;
+  z-index: 88;
+}
+.training-record .footer-button .tipes::after {
+  content: "";
+  position: absolute;
+  bottom: -0.4375rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: #4B525E;
+  left: 50%;
+  transform: rotate(45deg) translateX(-50%);
 }
 .training-record .footer-button .add-button {
   height: 3.75rem;

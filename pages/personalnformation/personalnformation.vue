@@ -84,7 +84,6 @@ export default {
 		  sexShow: false,
 		  
 		  range: [
-		     { text: '未知', value: '0' },
 		     { text: '男', value: '1' },
 		     { text: '女', value: '2' }
 		   ]
@@ -106,6 +105,9 @@ export default {
   	  
   },
   methods: {
+	  goBack() {
+		uni.navigateBack();  
+	  },
 	  jump() {
 		uni.reLaunch({
 		  url: '/pages/myMebers/myMebers'
@@ -288,6 +290,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-top: 30upx;
 }
 .nav_left_style {
 	width: 40upx;
@@ -327,7 +330,7 @@ export default {
             width: 100% !important;
             font-size: 30upx;
             height: 44upx;
-            font-family: PingFangSC-Regular, PingFang SC;
+             font-family: PingFangSC-Semibold !important;
             font-weight: 400;
             color: #f4f7ff;
             span {
@@ -335,7 +338,7 @@ export default {
               width: 100% !important;
               font-size: 30upx;
               height: 44upx;
-              font-family: PingFangSC-Regular, PingFang SC;
+               font-family: PingFangSC-Semibold !important;
               font-weight: 400;
               color: #f4f7ff;
             }
@@ -345,7 +348,7 @@ export default {
         .uni-forms-item__content {
           .uni-easyinput {
             font-size: 32upx;
-            font-family: PingFangSC-Semibold, PingFang SC;
+            font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
             .uni-easyinput__content {
@@ -355,7 +358,7 @@ export default {
           }
           .uni-input-input {
             font-size: 32upx;
-            font-family: PingFangSC-Semibold, PingFang SC;
+            font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
           }
