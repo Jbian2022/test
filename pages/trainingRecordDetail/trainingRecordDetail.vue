@@ -656,7 +656,7 @@ export default {
 				}
 			}
 		}
-		::v-deep.uni-popup [name="mask"]{
+		::v-deep .uni-popup [name="mask"]{
 			backdrop-filter: blur(3px);
 		}
 		.share-sheet{

@@ -4,7 +4,7 @@
     <view class="header">
       <view class="all-action" :class="{active:mode===0}" @click="modeChangeHandle(0)">全部动作库</view>
       <view class="problem-action" :class="{active:mode===1}" @click="modeChangeHandle(1)">问题动作库</view>
-      <view class="custom-action" @click="addActionHandle(19)">+ 自定义动作</view>
+      <view class="custom-action" @click="addActionHandle('z')">+ 自定义动作</view>
     </view>
     <view class="search">
       <view class="uni-search">
@@ -26,12 +26,12 @@
       <view class="action-list">
         <view class="action-list-title">{{actionClassName}}训练动作</view>
         <view class="action-list-view">
-          <view v-if="actionClass===10||actionClass===20">
-            <view v-for="(classify,classifyi) in actionList" :key="classifyi" class="classify-box">
-              <view class="classify">{{actionTypeList[classify.actionType].title}}</view>
-              <view class="action-list-box">
-                <view v-for="i in classify.children" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
-                  <popover className="image" :list="actions" mode="longpress" :disabled="showSaveButton" @selctClick="selectClick($event,i)">
+          <view v-for="(classify,classifyi) in actionList" :key="classifyi" class="classify-box">
+            <view class="classify">{{actionTypeList[classify.actionType].title}}</view>
+            <view class="action-list-box">
+              <template v-for="i in classify.children" :key="i._id">
+                <view v-if="i.userId" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
+                  <popover className="image" :list="actions" mode="longpress" @selctClick="selectClick($event,i)">
                     <view class="action-name">{{i.actionName[0]}}</view>
                     <template v-slot:item="{item}">
                       <text v-if="item.text==='删除动作'" style="color:#F04242;">{{item.text}}</text>
@@ -40,21 +40,14 @@
                   </popover>
                   <view class="text">{{i.actionName}}</view>
                 </view>
-              </view>
-            </view>
-          </view>
-          <view v-else class="action-list-box">
-            <view v-for="(classify,classifyi) in actionList" :key="classifyi" class="classify-box">
-              <view class="classify">{{actionTypeList[classify.actionType].title}}</view>
-              <view class="action-list-box">
-                <view v-for="i in classify.children" :key="i._id" class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
+                <view v-else class="action-list-item" :class="{active:i.active}" @click="selectAction(i)">
                   <view class="image">
                     <van-image v-if="i.url" round :src="i.url" />
                     <view v-else class="van-image"></view>
                   </view>
                   <view class="text">{{i.actionName}}</view>
                 </view>
-              </view>
+              </template>
             </view>
           </view>
           <view class="custom-action-button" @click="addActionHandle">
@@ -242,8 +235,12 @@ export default {
     modeChangeHandle(val) {
       this.mode = val
       if(val===0){
+        this.actionIndex = 0
+        this.actionClass = 0
         this.actionClassList = JSON.parse(JSON.stringify(this.actionClassListAll))
       } else {
+        this.actionIndex = 0
+        this.actionClass = 11
         this.actionClassList = JSON.parse(JSON.stringify(this.actionClassListPro))
       }
       this.getActionList()
@@ -262,18 +259,25 @@ export default {
         const list = this.selectActionList.filter(child => child.actionClass === item.value)
         item.badge = list.length || null
       })
-      // console.log(this.actionClassList,888)
     },
     selectClick(item,info) {
       if (item.text === '删除动作') {
-        this.showDialog = true
         this.currentAction = info
+        this.showDialog = true
+      } else if(item.text === '修改动作'){
+        uni.navigateTo({
+          url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${this.actionClass}&update=1&id=${info._id}&actionName=${info.actionName}&actionType=${info.actionType}`,
+        })
       }
     },
-    addActionHandle(index) {
-      if(index===19){
+    addActionHandle(z) {
+      if(this.mode===0&&z==='z') {
         uni.navigateTo({
-          url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${index}`,
+          url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=10`,
+        })
+      } else if(this.mode===1&&z==='z') {
+        uni.navigateTo({
+          url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=20`,
         })
       } else {
         uni.navigateTo({

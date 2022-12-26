@@ -70,13 +70,23 @@
 					}
 				],
 				actionType: '',
-				actionTypeName: ''
+				actionTypeName: '',
+				update: false,
+				actionId: null
 			}
 		},
 		onLoad: function (option) {
 			console.log(option)
 			this.type = option.type
 			this.actionClass = option.actionClass
+			if(option.update==='1'){
+				this.update = true
+				this.actionId = option.id
+				this.actionType = +option.actionType
+				this.actionName = option.actionName
+				const item = this.actionTypeList.find(item=>item.type === this.actionType)
+				this.actionTypeName = item.title
+			}
 		},
 		methods: {
 			actionTypeListSelect(child){
@@ -99,14 +109,23 @@
 				if(!this.actionType&&this.actionType!==0){
 					return uni.showToast({icon:'error', title: '请选择动作类型', duration: 2000});
 				}
-				const res = await actionLibrary.addAction({
-					type: this.type,
-					actionClass: this.actionClass,
-					actionName: this.actionName,
-					actionType: this.actionType
-				})
+				if(this.update){
+					const res = await actionLibrary.updateAction({
+						id: this.actionId,
+						type: this.type,
+						actionClass: this.actionClass,
+						actionName: this.actionName,
+						actionType: this.actionType
+					})
+				} else {
+					const res = await actionLibrary.addAction({
+						type: this.type,
+						actionClass: this.actionClass,
+						actionName: this.actionName,
+						actionType: this.actionType
+					})
+				}
 				this.onClickLeft()
-				console.log(res,8888)
 			}
 		}
 	}
