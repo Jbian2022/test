@@ -355,13 +355,15 @@ export default {
                   uni.showToast({
                     icon: 'success',
                     title: res.message,
-                    duration: 800
+                    duration: 800,
+					width: 220
                   })
                 } else {
                   uni.showToast({
                     icon: 'fail',
                     title: res.message,
-                    duration: 800
+                    duration: 800,
+					width: 220
                   })
                 }
               })
@@ -369,7 +371,8 @@ export default {
                 uni.showToast({
                   icon: '编辑失败',
                   title: err.message,
-                  duration: 800
+                  duration: 800,
+				  width: 220
                 })
               })
 
@@ -411,14 +414,16 @@ export default {
                 uni.showToast({
                   icon: 'success',
                   title: res.message,
-                  duration: 800
+                  duration: 800,
+				  width: 220
                 })
               } else {
                 console.log(2)
                 uni.showToast({
                   icon: 'fail',
                   title: res.message,
-                  duration: 800
+                  duration: 800,
+				  width: 220
                 })
               }
             })

@@ -1,45 +1,48 @@
 <template>
   <view class="mebers_content">
-    
-	<uni-popup class="updatePopup"  ref="popup" type="center"> 
-		<view class="mask_popup_style">
-		  <view class="confirm_dakuang_style">
-		    <view class="confirm_top_style">
-		      <text class="config_top_title_style">是否确认删除</text>
-		      <image
-		        class="delete_waring_style"
-		        src="../../static/app-plus/mebrs/delete.svg"
-		      ></image>
-		    </view>
-		    <view class="delet_remark">确认删除该学员吗？删除后无法恢复</view>
-		    <view class="delete_btn_style">
-		      <view
-		        class="delete_cacel_style"
-		        @click.stop="close"
-		        >取消</view
-		      >
-		      <view class="delete_sure_style" @click.stop.native="sureDeleteConfirm"
-		        >确认</view
-		      >
-		    </view>
-		  </view>
-		</view>
-	 </uni-popup>
+    <uni-popup class="updatePopup" ref="popup" type="center">
+      <view class="mask_popup_style">
+        <view class="confirm_dakuang_style">
+          <view class="confirm_top_style">
+            <text class="config_top_title_style">是否确认删除</text>
+            <image
+              class="delete_waring_style"
+              src="../../static/app-plus/mebrs/delete.svg"
+            ></image>
+          </view>
+          <view class="delet_remark">确认删除该学员吗？删除后无法恢复</view>
+          <view class="delete_btn_style">
+            <view class="delete_cacel_style" @click.stop="close">取消</view>
+            <view
+              class="delete_sure_style"
+              @click.stop.native="sureDeleteConfirm"
+              >确认</view
+            >
+          </view>
+        </view>
+      </view>
+    </uni-popup>
+
     <template v-if="needFlag">
       <view class="no_data_style">
         <image
           class="no_data_meber_img_style"
           src="../../static/app-plus/mebrs/nomebers.png"
-		  v-if="type==='home'"
+          v-if="type === 'home'"
         ></image>
-		<image
-		  class="no_data_meber_img_style"
-		  src="../../static/app-plus/mebrs/searchNoData.png"
-		  v-if="type==='detail'"
-		></image>
-		
-		
-        <view class="quckliy_add_style">{{ type === 'home' ?  '快去添加第一个学员吧' : '什么内容都没搜到'}}</view>
+        <image
+          class="no_data_meber_img_style"
+          src="../../static/app-plus/mebrs/searchNoData.png"
+          v-if="type === 'detail' && isFirstFlag"
+        ></image>
+
+        <view class="quckliy_add_style">{{
+          type === 'home'
+            ? '快去添加第一个学员吧'
+            : isFirstFlag
+            ? '什么内容都没搜到'
+            : ''
+        }}</view>
       </view>
     </template>
     <template v-else>
@@ -79,7 +82,10 @@
                     v-if="item.gender == 2"
                   ></image>
                 </view>
-                <view class="top_right_style" @click.stop="goToNewWorkout(item)">
+                <view
+                  class="top_right_style"
+                  @click.stop="goToNewWorkout(item)"
+                >
                   <image
                     class="top_right_img_style"
                     src="../../static/app-plus/mebrs/trainingProgram.svg"
@@ -105,7 +111,10 @@
                   ></image>
                   <text class="message_style">评测信息</text>
                 </view>
-                <view class="bottom_style" @click.stop="goToTrainingRecord(item)">
+                <view
+                  class="bottom_style"
+                  @click.stop="goToTrainingRecord(item)"
+                >
                   <image
                     class="bootom_img_style"
                     src="../../static/app-plus/mebrs/trainingLog.svg"
@@ -136,13 +145,13 @@ export default {
   props: {
     isActive: Number,
     searchValue: String,
-    type: String
+    type: String,
+    isFirstFlag: Boolean
   },
   onLoad(options) {
-  // 	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
-		//  this.getMemberList(options.isActive)
-		 
-	 // }
+    // 	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
+    //  this.getMemberList(options.isActive)
+    // }
   },
   created() {
     switch (this.type) {
@@ -150,18 +159,17 @@ export default {
         this.getMemberList(this.isActive)
         break
     }
-	uni.getStorage({
-	  key: 'isActive',
-	  success: function (res) {
-	    // console.log(res, '我是token')
-	    if (res.data) {
-	     this.getMemberList(res.data)
-	    }
-	  },
-	  fail: function (err) {
-
-	  }
-	})
+    let _this = this
+    uni.getStorage({
+      key: 'isActive',
+      success: function (res) {
+        // console.log(res, '我是token')
+        if (res.data) {
+          _this.getMemberList(res.data)
+        }
+      },
+      fail: function (err) {}
+    })
   },
   onShow() {},
 
@@ -176,12 +184,12 @@ export default {
     }
   },
   watch: {
-	 meberList: {
-		handler: function(n, o) {
-			this.$emit('getMemberList', n)
-		},
-		 immediate: true 
-	 }, 
+    meberList: {
+      handler: function (n, o) {
+        this.$emit('getMemberList', n)
+      },
+      immediate: true
+    },
     isActive: {
       handler: function (n, o) {
         this.type === 'home' ? this.getMemberList(n) : ''
@@ -197,8 +205,7 @@ export default {
           }
           console.log(n, '>>>>')
           if (n) {
-			  debounce(this.searchMemberList(n), 300)
-            
+            debounce(this.searchMemberList(n), 300)
           }
         }
       },
@@ -207,9 +214,9 @@ export default {
     }
   },
   methods: {
-	  close() {
-		this.$refs.popup.close()  
-	  },
+    close() {
+      this.$refs.popup.close()
+    },
     jumpPhysicalAssessment(item) {
       uni.navigateTo({
         url:
@@ -248,7 +255,7 @@ export default {
               title: res.message,
               duration: 800
             })
-          
+
             if (this.type === 'detail') {
               if (!this.searchValue) {
                 this.meberList = []
@@ -258,7 +265,7 @@ export default {
             } else {
               this.getMemberList(this.isActive)
             }
-			 this.$refs.popup.close()
+            this.$refs.popup.close()
           }
         })
         .catch((err) => {
@@ -272,16 +279,20 @@ export default {
     // 编辑会员信息
     updateMember(item) {
       uni.navigateTo({
-        url: '/pages/addMyMebers/addMyMebers?item=' + JSON.stringify(item) + '&isActive=' + this.isActive,
+        url:
+          '/pages/addMyMebers/addMyMebers?item=' +
+          JSON.stringify(item) +
+          '&isActive=' +
+          this.isActive,
         success: (res) => {},
         fail: () => {},
         complete: () => {}
       })
-	  try {
-	    uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
-	  } catch (e) {
-	    // error
-	  }
+      try {
+        uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
+      } catch (e) {
+        // error
+      }
     },
     memberSrollTop(event) {
       this.scrollTop = event.detail.scrollTop
@@ -329,8 +340,7 @@ export default {
     },
     goToNewWorkout(item) {
       uni.navigateTo({
-        url:
-          '/pages/newWorkout/newWorkout?traineeNo=' + item._id
+        url: '/pages/newWorkout/newWorkout?traineeNo=' + item._id
       })
     }
   }
@@ -451,9 +461,9 @@ export default {
           }
         }
       }
-	  // .need_loop_style:last-child {
-		 //  margin-bottom: 40upx;
-	  // }
+      // .need_loop_style:last-child {
+      //  margin-bottom: 40upx;
+      // }
     }
   }
 }
@@ -470,10 +480,7 @@ export default {
 }
 
 .mask_popup_style {
- 
-
   .confirm_dakuang_style {
-
     width: calc(100vw - 60upx);
     margin-left: 30upx;
 

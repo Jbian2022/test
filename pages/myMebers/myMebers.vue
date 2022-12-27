@@ -1,6 +1,6 @@
 <template>
   <!-- 这里是状态栏 -->
-<!--  	<view class="status_bar" style="background: red;">
+  <!--  	<view class="status_bar" style="background: red;">
 	</view> -->
   <view class="move_area_style">
     <movable-area>
@@ -13,7 +13,8 @@
               <view class="left_content_style">
                 <image
                   class="left_content_img_style"
-                  src="https://img2.baidu.com/it/u=2490939159,251868101&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750"
+                  v-if="avatar"
+                  :src="avatar"
                 ></image>
                 <view class="left_header_style">我的会员</view>
                 <view class="left_num_style">{{ meberList.length }}</view>
@@ -108,7 +109,8 @@ export default {
       showPopover: false,
       scrollTop: 0,
       cellingFlag: false,
-      delteIndex: 0
+      delteIndex: 0,
+      avatar: null
     }
   },
   watch: {
@@ -134,8 +136,27 @@ export default {
       },
       fail: function (err) {}
     })
+    this.getUserInfor()
+  },
+  onShow() {
+  	this.getUserInfor()
   },
   methods: {
+    // 获取用户信息
+    getUserInfor() {
+      const login = uniCloud.importObject('login') //第一步导入云对象
+      try {
+        login
+          .getUserInfoMessage()
+          .then((res) => {
+            console.log(res, '....')
+            this.avatar = res.userInfo.avatar || null
+          })
+          .catch((err) => {})
+      } catch (e) {
+        //TODO handle the exception
+      }
+    },
     getMemberList(list) {
       this.meberList = list
     },
@@ -144,12 +165,12 @@ export default {
     },
     jumpQuery() {
       console.log(111)
-	  uni.removeStorage({
-	  	key: 'isActive',
-	  	success: function (res) {
-	  		console.log('success');
-	  	}
-	  });
+      uni.removeStorage({
+        key: 'isActive',
+        success: function (res) {
+          console.log('success')
+        }
+      })
       uni.navigateTo({
         url: '/pages/memberQuery/memberQuery',
         success: (res) => {},
@@ -256,7 +277,7 @@ export default {
   }
 
   .is_buy_style {
-    // width: calc(100vw - 60upx);
+    width: calc(100vw - 60upx);
     height: 82upx;
     margin-left: 30upx;
     display: flex;
@@ -581,7 +602,7 @@ uni-page-body {
   top: 0 !important;
 }
 uni-scroll-view {
-  height: 99%;
+  height: 98%;
 }
 .move_area_style {
   width: 100vw;
