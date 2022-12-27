@@ -295,7 +295,7 @@
 	}
 	.card-types{
 		display: flex;
-		padding: 0 10upx;
+		padding: 0 20upx;
 		.type-item-box{
 			flex-shrink: 0;
 			width: 33.333%;

@@ -1,6 +1,8 @@
 <template>
 	<view class="add-action">
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
+		<view class="background-header"></view>
+		<view class="background"></view>
 		<van-nav-bar title="新增动作" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="form">
 			<input class="uni-input"  v-model="actionName" placeholder="请输入动作名称" />
@@ -147,7 +149,22 @@
 </script>
 
 <style lang="scss">
-	page{
+	.background-header{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: -1;
+		height: 460upx;
+		background: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
+	}
+	.background{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: -2;
+		height: 100vh;
 		background: #212328;
 	}
 	.status_bar {
@@ -155,8 +172,9 @@
 		width: 100%;
 	}
 	.add-action{
+		position: relative;
 		::v-deep .van-nav-bar{
-			background: #212328;
+			background: transparent;
 			height: 88upx;
 			.van-nav-bar__content{
 				height: 88upx;

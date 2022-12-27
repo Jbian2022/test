@@ -117,6 +117,9 @@ export default {
     scrollTop: {}
   },
   onLoad() {},
+  onShow() {
+    uni.showTabBar();
+  },
   created() {},
   mounted() {
     // this.$refs.first_popup.open()

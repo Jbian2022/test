@@ -1,9 +1,9 @@
 <template>
 	<view class="my">
+		<view class="background"></view>
 		<view class="status_bar">
             <!-- 这里是状态栏 -->
         </view>
-		<view class="background"></view>
 		<view class="header">
 			<view class="logo" @click="personalInfo">
 				<van-image round :src="userInfo.avatar"/>
@@ -191,8 +191,18 @@
 	height: var(--status-bar-height);
 	width: 100%;
 }
-page{
-	background: #212328;
+.background{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	min-height: 100vh;
+	height: 100%;
+	background-color: #212328;
+	background-image: url('../../static/newWorkout/mybackgroud.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: -1;
 }
 .my{
 	position: relative;
@@ -325,7 +335,7 @@ page{
 		height: 346upx;
 		padding: 40upx;
 		box-sizing: border-box;
-		background: rgba(56, 61, 70, .6);
+		background: rgba(56, 61, 70, .5);
 		border-radius: 24upx;
 		.title{
 			font-size: 30upx;

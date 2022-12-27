@@ -3,6 +3,8 @@
 		<view class="status_bar">
             <!-- 这里是状态栏 -->
         </view>
+		<view class="background-header"></view>
+		<view class="background"></view>
 		<view class="arrow-left" @click="onClickLeft"><van-icon name="arrow-left" /></view>
 		<view class="title">设置</view>
 		<view class="form">
@@ -48,10 +50,26 @@
 	height: var(--status-bar-height);
 	width: 100%;
 }
-page{
+.background-header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	height: 460upx;
+	background: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
+}
+.background{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -2;
+	height: 100vh;
 	background: #212328;
 }
 .set-up{
+	position: relative;
 	.arrow-left{
 		height: 88upx;
 		display: flex;

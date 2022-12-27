@@ -2,7 +2,7 @@
 	<view class="content_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="''"></NavBarCompontent>
-		<view class="titleText">
+		<view class="titleText" v-if="openKey">
 			<van-row class="titleTopText">
 			  <van-col span="12">体测报告</van-col>
 			  <van-col span="12">10.04</van-col>
@@ -11,6 +11,24 @@
 			  <van-col span="12">数据评测来源于世界权威机构</van-col>
 			  <van-col span="12">2022年</van-col>
 			</van-row>
+		</view>
+		<view class="titleText" v-if="!openKey">
+			<van-row class="titleTopText">
+			  <van-col span="12">{{personName}}
+				<view class="titleType">已购课</view>
+			  </van-col>
+			  <van-col span="12">
+				  <!-- <input type="button" value="重新测试" class="titleButton"/> -->
+				  <button class="titleButton">重新测试</button>
+			  </van-col>
+			</van-row>
+			<van-row class="titleBottomText">
+				<van-col span="12">2022年</van-col>
+			  <van-col span="12">数据评测来源于世界权威机构</van-col>
+			</van-row>
+		</view>
+		<view class="bgImg">
+			<!-- <image src="../../static/app-plus/bg/bodysideReport.png"></image> -->
 		</view>
 		<view class="basicInformation">
 			<van-collapse v-model="activeBasicInformation"
@@ -409,6 +427,7 @@ margin-top: 10upx;">82</van-col>
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
 	const user = uniCloud.importObject('my');
+	const testOb = uniCloud.importObject("testResults");
 	export default {
 		data() {
 			return {
@@ -417,6 +436,8 @@ margin-top: 10upx;">82</van-col>
 				gender:1,
 				age:0,
 				mobileNumber:0,
+				openKey:true,
+				key:'',
 				dynamicEvaluationdata: [
 					{
 						title: "俯卧撑耐力测试",
@@ -444,7 +465,9 @@ margin-top: 10upx;">82</van-col>
 				  { name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.svg' },
 				  { name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.svg' },
 				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.svg' }
-				]
+				],
+				getOnlyLists:{},
+				traineeNo:''
 			}
 		},
 		setup() {
@@ -465,15 +488,115 @@ margin-top: 10upx;">82</van-col>
 		},
 		onShow() {
 			this.getUserInfo()
+			this.getconfingActionName();
+		},
+		onLoad(options) {
+		  if (JSON.stringify(options) !== '{}' && options.traineeNo) {
+		    this.traineeNo = options.traineeNo
+			this.key = options.key
+			switch(this.key){
+				case "1":
+					this.openKey = true;
+					break;
+				case "2":
+					this.openKey = false;
+					break;
+			}
+		  }
 		},
 		methods: {
 			async getUserInfo(){
-				const res = await user.getUserInfo();
-				console.log(res.data)
-				this.name = res.data.name;
-				this.gender = res.data.gender;
-				this.mobileNumber = res.data.mobile;
-			}
+				const data ={};
+				data["traineeId"] = this.traineeNo;
+				testOb.getOnlyList(data).then((res)=>{
+					console.log(res.data)
+					this.personName =  res.data[0].traineeName;
+					this.gender = res.data[0].gender
+					this.mobileNumber = res.data[0].mobile
+					this.age = this.getAge(res.data[0].birthday)
+				})
+			},
+			getAge(birthday){//根据日期算年龄
+			          birthday=birthday.split('-');
+			          // 新建日期对象
+			          let date = new Date();
+			          // 今天日期，数组，同 birthday
+			          let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+			          // 分别计算年月日差值
+			          let age = today.map((val, index) => {
+			              return val - birthday[index]
+			          })
+			          // 当天数为负数时，月减 1，天数加上月总天数
+			          if (age[2] < 0) {
+			              // 简单获取上个月总天数的方法，不会错
+			              let lastMonth = new Date(today[0], today[1], 0)
+			              age[1]--
+			              age[2] += lastMonth.getDate()
+			          }
+			          // 当月数为负数时，年减 1，月数加上 12
+			          if (age[1] < 0) {
+			              age[0]--
+			              age[1] += 12
+			          }
+			          console.log(age[0]+'岁'+age[1]+'月'+age[2]+'天');
+					  return age[0];
+			},
+			//通过传入的type值来更新等级颜色
+			levelColor(levelType){
+				switch(levelType){
+					case "优秀":
+					case "良好":
+						return "rgba(1, 224, 140, 1)";
+						break;
+					case "中等":
+					case "中上等":
+					case "中下等":
+						return "#FFC13C";
+						break;
+					case "较差":
+					case "非常差":
+						return "#F04242";
+						break;
+					default:
+						return "#4B525E";
+						break;
+				}
+			},
+			//获取运动表
+			getconfingActionName(){
+				const data = {};
+				data["traineeNo"] = this.traineeNo;
+				data["questionCode"] = this.questionCode;
+			testOb.opearConfigQuery(data).then((res)=>{
+					console.log(res)
+					if(res.success){
+			// 			// this.queryUserActionData = res.data
+			// 			// busOb.getPhysicalChildAssessmentList("A0005").then((res)=>{
+			// 			// 	this.queryData = res.data;
+			// 			// 	this.queryData.forEach((item)=>{
+			// 			// 		item['typeText']='待测';
+			// 			// 		item['type']=0;
+			// 			// 		item['typeColor'] = this.levelColor(item.typeText);
+			// 			// 		item['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
+			// 			// 		console.log(item)
+			// 			// 	})
+			// 			// 	for(let j = 0;j<this.queryUserActionData.length;j++){
+			// 			// 		for(let i=0;i<this.queryData.length;i++){
+			// 			// 			console.log(this.queryData[i].code===this.queryUserActionData[j].code)
+			// 			// 			if(this.queryData[i].code===this.queryUserActionData[j].code){
+			// 			// 				this.queryData[i].typeText=this.queryUserActionData[j].physicalData.actionTypeText;
+			// 			// 				this.queryData[i].type=this.queryUserActionData[j].physicalData.actionVlue;
+			// 			// 				this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].physicalData.actionTypeText);
+			// 			// 				continue;
+			// 			// 			}
+			// 			// 		}
+			// 			// 	}
+			// 			// 	console.log(this.queryData)
+			// 			}).catch((err)=>{
+			// 			});
+					}
+				}).catch();
+			},
 		},
 		components: {
 			BgTheamCompontent,
@@ -489,6 +612,9 @@ margin-top: 10upx;">82</van-col>
 		overflow: auto;
 		position: relative;
 		background-color: #212328;
+		background-image: url('../../static/app-plus/bg/bodysideReport.png');
+		background-repeat:no-repeat;
+		background-size: 100%;
 	}
 	.titleText{
 		margin: 10upx 30upx 0 30upx;
@@ -524,7 +650,7 @@ margin-top: 10upx;">82</van-col>
 		width: calc(100vw - 60upx);
 		/* background: #383D46; */
 		border-radius: 24upx;
-		opacity: 0.6;
+		/* opacity: 0.6; */
 		margin: 30upx 30upx 0 30upx;
 	}
 	.basicInformationContent{
@@ -678,5 +804,31 @@ margin-top: 10upx;">82</van-col>
 	::v-deep .van-share-sheet__option{
 		margin-left: 94upx;
 		margin-right: -44upx;
+	}
+	.titleButton{
+		width: 190upx;
+		height: 68upx;
+		background: #454951;
+		border-radius: 16upx;
+		font-size: 30upx;
+		font-weight: 600;
+		color: #F4F7FF;
+		line-height: 68upx;
+		margin-right: 0upx;
+	}
+	.titleType{
+		width: 100upx;
+		height: 50upx;
+		background: #1370FF;
+		border-radius: 8upx;
+		font-size: 24upx;
+		font-weight: 600;
+		color: #F4F7FF;
+		line-height: 50upx;
+		text-align: center;
+		float: right;
+		margin-right: 90upx;
+		margin-top: 15upx;
+		padding-right: 20upx;
 	}
 </style>

@@ -74,12 +74,12 @@
 </template>
 
 <script>
-	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
-	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
+	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
 	const testOb = uniCloud.importObject("testResults");
 	const actionOb = uniCloud.importObject("businessCloudObject");
-	
+	import { debounce } from '@/common/util.js';
 	export default {
 		setup() {
 			const show = ref(false);
@@ -110,7 +110,7 @@
 		},
 		watch:{
 			resultValue(newResultValue,oldResultValue){
-				this.testResult();
+				debounce(this.testResult(),300)
 			}
 		},
 		components: {
@@ -432,7 +432,6 @@
 	 height: 100px; 
 	 border: 4px solid #4B525E;    
 	 border-radius: 100px;
-	 opacity: 0.5;
 	 line-height: 100px;
 }
 .circleText{

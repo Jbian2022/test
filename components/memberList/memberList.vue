@@ -65,7 +65,7 @@
             </view>
           </template>
           <view class="add_student_style">
-            <view class="need_loop_style" @click.stop="updateMember(item)">
+            <view class="need_loop_style">
               <view class="loop_top_style">
                 <view class="top_left_style">
                   <text class="top_left_name_style">{{
@@ -94,7 +94,7 @@
                 </view>
               </view>
               <view class="loop_bottom_style">
-                <view class="bottom_style">
+                <view class="bottom_style" @click.stop="updateMember(item)">
                   <image
                     class="bootom_img_style"
                     src="../../static/app-plus/mebrs/meberMessage.svg"
@@ -340,7 +340,9 @@ export default {
     },
     goToNewWorkout(item) {
       uni.navigateTo({
-        url: '/pages/newWorkout/newWorkout?traineeNo=' + item._id
+        url:
+          '/pages/newWorkout/newWorkout' +
+          `?traineeNo=${item._id}&memberName=${item.traineeName}`
       })
     }
   }
