@@ -1,6 +1,10 @@
 <template>
 	<view class="training-record-detail">
-		<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickLeft"><van-icon name="arrow-left" /></view>
+		<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickLeft">
+			<van-icon name="arrow-left" />
+			<view class="title">训练记录</view>
+			<view class="z" style="opacity: 0;">8888</view>
+		</view>
 		<view id="training-detail">
 			<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 			<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
@@ -289,7 +293,7 @@
 				const second = times-(hour*3600)-(minute*60);
 				return  type===3?hour+'时'+minute+'分'+second+'秒':hour+'时'+minute+'分'
 			},
-			getMonthDay(){
+			getMonthDay(val){
 				const formater = (temp) =>{
 				　　if(temp<10){
 				　　　　return "0"+temp;
@@ -297,7 +301,7 @@
 				　　　　return temp;
 				　　}
 				}
-				const d=new Date();
+				const d=new Date(val);
 				const year=d.getFullYear();
 				const month=formater(d.getMonth()+1);
 				const date=formater(d.getDate());
@@ -469,6 +473,8 @@ export default {
 			display: flex;
 			align-items: center;
 			padding-left: 30upx;
+			justify-content: space-between;
+			color: #bdc3ce;
 			.van-icon{
 				font-size: 40upx;
 				color: #bdc3ce;
@@ -650,7 +656,7 @@ export default {
 				}
 			}
 		}
-		::v-deep.uni-popup [name="mask"]{
+		::v-deep .uni-popup [name="mask"]{
 			backdrop-filter: blur(3px);
 		}
 		.share-sheet{

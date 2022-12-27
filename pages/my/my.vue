@@ -48,10 +48,26 @@
 			</view>
 		</view>
 		<view class="recommend">
-			<van-cell icon="contact" title="推荐人" :is-link="!userInfo.referrer" :value="userInfo.referrer" @click="openSheet" />
+			<van-cell title="推荐人" :is-link="!userInfo.referrer" :value="userInfo.referrer" @click="openSheet">
+				<template #icon>
+					<view class="icon"></view>
+				</template>
+			</van-cell>
 		</view>
 		<uni-popup ref="popup" type="bottom" class="recommend-sheet" @change="popupChange">
-			<van-picker title="推荐人" :columns="columns" @confirm="onConfirm" @cancel="onCancel"/>
+			<view class="picker-box">
+				<view class="picker-header">
+					<view class="cancel-btn" @click="onCancel">取消</view>
+					<view class="title">推荐人</view>
+					<view class="success-btn" @click="onConfirm">确认</view>
+				</view>
+				<view class="message">
+					<view class="text">请注意：推荐人选择之后不可更改</view>
+				</view>
+				<view class="picker-content">
+					<view class="picker-item" :class="{active:item.active}" v-for="(item,index) in columns" :key="index" @click="pickerSelect(item)">{{item.text}}</view>
+				</view>
+			</view>
 		</uni-popup>
 	</view>
 </template>
@@ -87,6 +103,10 @@
 			this.getUserInfo()
 		},
 		methods: {
+			pickerSelect(val){
+				this.columns.forEach(item=>item.active=false)
+				val.active = true
+			},
 			async getUserInfo(){
 				const res = await My.getUserInfo()
 				const {avatar,username,comment,vipLevel,vipEndDate,referrer} = res.data
@@ -150,8 +170,12 @@
 					},300)
 				}
 			},
-			onConfirm(val){
-				this.userInfo.referrer = val.selectedValues[0]
+			onConfirm(){
+				if(this.columns.every(item=>!item.active)){
+					return
+				}
+				const item = this.columns.find(item=>item.active)
+				this.userInfo.referrer = item.text
 				this.$refs.popup.close()
 				this.setReferrer()
 			},
@@ -271,8 +295,8 @@ page{
 		.right{
 			width: 260upx;
 			height: 260upx;
-			background: url('../../static/newWorkout/vip-logo.png');
-			background-size: 160upx 160upx;
+			background: url('../../static/newWorkout/glod.png');
+			background-size: 180upx 180upx;
 			background-repeat: no-repeat;
 			background-position: center;
 		}
@@ -289,7 +313,8 @@ page{
 			.right{
 				width: 260upx;
 				height: 260upx;
-				background: url('../../static/newWorkout/ordinary.png');
+				background: url('../../static/newWorkout/blue.png');
+				background-size: 180upx 180upx;
 				background-repeat: no-repeat;
 				background-position: center;
 			}
@@ -338,9 +363,13 @@ page{
 				color: #BDC3CE;
 				font-size: 30upx;
 			}
-			::v-deep .van-icon{
-				color: #BDC3CE;
-				font-size: 30upx;
+			.icon{
+				margin-right: 22upx;
+				width: 32upx;
+				height: 32upx;
+				background: url('../../static/newWorkout/user.svg');
+				background-size: contain;
+				background-repeat: no-repeat;
 			}
 		}
 	}
@@ -396,6 +425,69 @@ page{
 				border-radius: 16upx;
 				&::after{
 					display: none;
+				}
+			}
+		}
+	}
+	.picker-box{
+		background: #383D46;
+		border-radius: 24upx 24upx 0upx 0upx;
+		.picker-header{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 40upx;
+			.cancel-btn{
+				font-size: 32upx;
+				font-weight: 600;
+				color: #7A7F89;
+				line-height: 44upx;
+			}
+			.title{
+				font-size: 32upx;
+				font-weight: 600;
+				color: #F4F7FF;
+				line-height: 44upx;
+			}
+			.success-btn{
+				font-size: 32upx;
+				font-weight: 600;
+				color: #F4F7FF;
+				line-height: 44upx;
+			}
+		}
+		.message{
+			padding: 0 40upx;
+			height: 80upx;
+			margin-bottom: 10upx;
+			margin-top: 10upx;
+			.text{
+				background: rgba(75, 82, 94, .5);
+				border-radius: 16upx;
+				font-size: 26upx;
+				font-weight: 400;
+				color: #BDC3CE;
+				line-height: 80upx;
+				text-align: center;
+			}
+		}
+		.picker-content{
+			height: 478upx;
+			overflow-y: auto;
+			padding: 0 40upx;
+			.picker-item{
+				height: 110upx;
+				border-radius: 16upx;
+				font-size: 30upx;
+				font-weight: 400;
+				color: #F4F7FF;
+				line-height: 110upx;
+				text-align: center;
+				&.active{
+					background: rgba(75, 82, 94, .5);
+					font-size: 36upx;
+					font-weight: 600;
+					color: #F4F7FF;
 				}
 			}
 		}

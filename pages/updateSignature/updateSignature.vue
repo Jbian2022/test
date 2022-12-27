@@ -22,7 +22,6 @@
 				</view>
 				<div class="butn" @click="close">取消</div>
 			</view>
-			
 		</uni-popup>
 	</view>
 </template>
@@ -37,7 +36,6 @@
 				genderName: null,
 				showPicker: false,
 				columns:[
-					{ name: '未知', value: 0 },
 					{ name: '男', value: 1 },
 					{ name: '女', value: 2 }
 				]
@@ -114,7 +112,11 @@
 			},
 			close(){
 				this.$refs.popup.close()
-			}
+			},
+		},
+		onBackPress(){
+			uni.navigateTo({url:'/pages/personalInfo/personalInfo'})
+			return true
 		}
 	}
 </script>

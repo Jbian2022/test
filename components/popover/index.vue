@@ -69,8 +69,10 @@ export default {
         min-width: 202upx;
         background: #212328;
         border-radius: 16upx;
+        padding: 10upx 0;
+        z-index: 8;
         &.center{
-            bottom: 0;
+            bottom: -10upx;
             transform: translateY(100%) translateX(-50%);
             left: 50%;
         }
@@ -85,8 +87,8 @@ export default {
             right: -25upx;
         }
         .list-item{
-            height: 70upx;
-            line-height: 70upx;
+            height: 85upx;
+            line-height: 85upx;
             text-align: center;
             font-size: 28upx;
             font-weight: 600;
