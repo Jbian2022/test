@@ -38,7 +38,7 @@
         </view>
       </van-col>
     </van-row>
-    <van-button type="primary" block class="buttontrue">生成报告</van-button>
+    <van-button type="primary" block class="buttontrue" @click.native="getdynamicEvaluationdata()">确认</van-button>
   </view>
 </template>
 
@@ -86,6 +86,11 @@ export default {
 	getPageData(){
 		testOb.getPhysicalChildAssessmentList("dynamicEvaluation").then((res)=>{
 			console.log(res)
+		})
+	},
+	getdynamicEvaluationdata(){
+		uni.redirectTo({
+			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
 		})
 	}
   }

@@ -9,13 +9,13 @@
 				  <view class="contentLeftBlock"  
 				  @click.native="isonclick(1)" 
 				  v-show="textShow1"
-				  style="top: 26upx;">
+				  style="top: 64upx;position: relative;">
 					  颈部前引
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(1)" 
 				  v-show="!textShow1"
-				  style="top: 26upx;">
+				  style="top: 42upx;position: relative;">
 					  <view>颈部前引</view>
 					  <view>紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。</view>
 				  </view>
@@ -24,10 +24,13 @@
 				  <view class="contentRightBlock"
 				   @click.native="isonclick(2)" 
 				   v-show="textShow2"
-				   style="top: 26upx;">
+				   style="top: 64upx;position: relative;">
 					  高低肩
 				  </view>
-				  <view class="clickBlock" @click.native="isonclick(2)" v-show="!textShow2" style="top: 26upx;">
+				  <view class="clickBlock" 
+				  @click.native="isonclick(2)" 
+				  v-show="!textShow2" 
+				  style="top: 42upx;position: relative;">
 				  		<view>高低肩</view>
 				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
 				  </view>
@@ -38,13 +41,13 @@
 				  <view class="contentLeftBlock"  
 				  @click.native="isonclick(3)" 
 				  v-show="textShow3"
-				  style="top: 120upx;">
+				  style="top: 120upx;position: relative;">
 					  圆肩
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(3)" 
 				  v-show="!textShow3"
-				  style="top: 120upx;">
+				  style="top: 60upx;position: relative;">
 					  <view>圆肩</view>
 					  <view>紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。</view>
 				  </view>
@@ -53,13 +56,13 @@
 				  <view class="contentRightBlock" 
 				  @click.native="isonclick(4)" 
 				  v-show="textShow4"
-				  style="top: 120upx;">
+				  style="top: 120upx;position: relative;">
 					  驼背
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(4)" 
 				  v-show="!textShow4"
-				  style="top: 120upx;">
+				  style="top: 60upx;position: relative;">
 				  		<view>驼背</view>
 				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
 				  </view>
@@ -70,13 +73,13 @@
 				  <view class="contentLeftBlock"  
 				  @click.native="isonclick(5)" 
 				  v-show="textShow5"
-				  style="top: 450upx;">
+				  style="top: 744upx;">
 					  骨盆前倾
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(5)" 
 				  v-show="!textShow5"
-				  style="top: 450upx;">
+				  style="top: 740upx;">
 					  <view>骨盆前倾</view>
 					  <view>紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。</view>
 				  </view>
@@ -85,13 +88,13 @@
 				  <view class="contentRightBlock" 
 				  @click.native="isonclick(6)" 
 				  v-show="textShow6"
-				  style="top: 450upx;">
+				  style="top: 744upx;">
 					  骨盆后倾
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(6)" 
 				  v-show="!textShow6"
-				  style="top: 450upx;">
+				  style="top: 740upx;">
 				  		<view>骨盆后倾</view>
 				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
 				  </view>
@@ -102,13 +105,13 @@
 				  <view class="contentLeftBlock"  
 				  @click.native="isonclick(7)" 
 				  v-show="textShow7"
-				  style="top: 642upx;">
+				  style="top: 1032upx;">
 					  膝关节内扣
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(7)" 
 				  v-show="!textShow7"
-				  style="top: 642upx;">
+				  style="top: 1000upx;">
 					  <view>膝关节内扣</view>
 					  <view>紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。</view>
 				  </view>
@@ -117,13 +120,13 @@
 				  <view class="contentRightBlock" 
 				  @click.native="isonclick(8)" 
 				  v-show="textShow8"
-				  style="top: 900upx;">
+				  style="top: 1400upx;">
 					  足部外翻
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(8)" 
 				  v-show="!textShow8"
-				  style="top: 900upx;">
+				  style="top: 1300upx;">
 				  		<view>足部外翻</view>
 				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
 				  </view>
@@ -134,13 +137,13 @@
 				  <view class="contentLeftBlock" 
 				   @click.native="isonclick(9)" 
 				   v-show="textShow9"
-				   style="top: 820upx;">
+				   style="top: 1400upx;">
 					  足部内翻
 				  </view>
 				  <view class="clickBlock" 
 				  @click.native="isonclick(9)" 
 				  v-show="!textShow9"
-				  style="top: 820upx;">
+				  style="top: 1300upx;">
 					  <view>足部内翻</view>
 					  <view>紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。</view>
 				  </view>
@@ -176,7 +179,7 @@
 		<view>
 			<button 
 			type="primary"
-			class="postureButton">确认</button>
+			class="postureButton"  @click.native="backPage()" >确认</button>
 		</view>
 	</view>
 </template>
@@ -184,6 +187,7 @@
 <script>
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
+	const testOb = uniCloud.importObject("testResults");
 	export default {
 		data() {
 			return {
@@ -204,47 +208,62 @@
 					{
 						title1: "颈部前引",
 						text1: "紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。",
-						textShow1:true,
-						title2: "高低肩",
-						text2: "紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。",
-						textShow2:true
-					},
-					{
-						title1: "颈部前引",
-						text1: "紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。",
-						textShow1:true,
-						title2: "高低肩",
-						text2: "紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。",
-						textShow2:true
-					},
-					{
-						title1: "颈部前引",
-						text1: "紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。",
-						textShow1:true,
-						title2: "高低肩",
-						text2: "紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。",
-						textShow2:true
-					},
-					{
-						title1: "颈部前引",
-						text1: "紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。",
 						textShow1:true
 					},
 					{
-						title1: "颈部前引",
-						text1: "紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。",
-						textShow1:true,
 						title2: "高低肩",
 						text2: "紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。",
 						textShow2:true
+					},
+					{
+						title1: "圆肩",
+						text1: "紧张肌肉：胸大肌，胸小肌，上斜方肌，肩胛下肌，三角肌前束，大圆肌，肩胛提肌。 无力肌肉：中下斜方肌，菱形肌，三角肌后束，小圆肌，岗下肌。",
+						textShow3:true
+					},
+					{
+						title2: "驼背",
+						text2: "紧张肌肉：胸大肌，胸小肌，三角肌前束，颈伸肌群，上斜方肌，肩胛提肌，髋关节区肌。 无力肌肉：中下斜方肌，大圆肌，小圆肌，菱形肌，颈屈肌群，髋关节伸肌。",
+						textShow4:true
+					},
+					{
+						title1: "骨盆前倾",
+						text1: "紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。",
+						textShow5:true
+					},
+					{
+						title2: "骨盆后倾",
+						text2: "紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。",
+						textShow6:true
+					},
+					{
+						title1: "膝关节内扣",
+						text1: "紧张肌肉：肩胛提肌，颈伸肌，前斜角肌，头后大直肌，头半棘肌，胸锁乳突形肌。无力肌肉：深层颈屈肌，菱形肌，中下斜方肌，小圆肌，岗下肌。",
+						textShow7:true
+					},
+					{
+						title1: "足部外翻",
+						text1: "紧张肌肉：腓骨长肌，腓骨短肌，伸趾长肌。 无力肌肉：胫骨前肌，胫骨短肌，屈趾长肌，屈拇长肌，伸拇长肌。",
+						textShow8:true
+					},
+					{
+						title2: "足部内翻",
+						text2: "紧张肌肉：胫骨前肌，胫骨后肌，屈趾长肌，屈拇长肌，伸拇长肌。 无力肌肉：腓骨长肌，腓骨短肌，伸拇长肌。",
+						textShow9:true
 					}
 				],
-				
+				assessmentNewData:{},
+				traineeNo:'',
+				questionCode:''
 			}
 		},
 		components: {
 			BgTheamCompontent,
 			NavBarCompontent
+		},
+		onLoad:function(item){
+				console.log(item)
+				this.traineeNo = item.traineeNo;
+				this.questionCode = item.questionCode;
 		},
 		methods: {
 			// isonclick(item,a){
@@ -267,33 +286,90 @@
 				switch(a){
 					case 1:
 						this.textShow1 = !this.textShow1;
+						if(!this.textShow1){
+							this.assessmentData[0].textShow1 = this.textShow1;
+						}
 						break;
 					case 2:
 						this.textShow2 = !this.textShow2;
+						if(!this.textShow2){
+							this.assessmentData[1].textShow2 = this.textShow2;
+						}
 						break;
 					case 3:
 						this.textShow3 = !this.textShow3;
+						if(!this.textShow3){
+							this.assessmentData[2].textShow3 = this.textShow3;
+						}
 						break;
 					case 4:
 						this.textShow4 = !this.textShow4;
+						if(!this.textShow4){
+							this.assessmentData[3].textShow4 = this.textShow4;
+						}
 						break;
 					case 5:
 						this.textShow5 = !this.textShow5;
+						if(!this.textShow5){
+							this.assessmentData[4].textShow5 = this.textShow5;
+						}
 						break;
 					case 6:
 						this.textShow6 = !this.textShow6;
+						if(!this.textShow6){
+							this.assessmentData[5].textShow6 = this.textShow6;
+						}
 						break;
 					case 7:
 						this.textShow7 = !this.textShow7;
+						if(!this.textShow7){
+							this.assessmentData[6].textShow7 = this.textShow7;
+						}
 						break;
 					case 8:
 						this.textShow8 = !this.textShow8;
+						if(!this.textShow8){
+							this.assessmentData[7].textShow8 = this.textShow8;
+						}
 						break;
 					case 9:
 						this.textShow9 = !this.textShow9;
+						if(!this.textShow9){
+							this.assessmentData[8].textShow9 = this.textShow9;
+						}
 						break;
 				}
 				
+			},
+			backPage(){
+				// uni.redirectTo({
+				// 	url: '/pages/physicalAssessment/physicalAssessment'
+				// })
+				console.log(this.assessmentData)
+				this.assessmentNewData["postData"] = this.assessmentData;
+				this.assessmentNewData["traineeNo"] = this.traineeNo;
+				this.assessmentNewData["questionCode"] = this.questionCode;
+				this.assessmentNewData["key"] = "posture";
+				console.log(this.assessmentNewData);
+				const res = testOb.postConfig(this.assessmentNewData,"postureTest").then(res => {
+					console.log(res, '我要保存了')
+					if (res.success) {
+						uni.redirectTo({
+							url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
+						})
+						uni.showToast({
+						  icon: 'success',
+						  title: res.message,
+						  duration: 800
+						})
+					}
+				}).catch(() =>{})
+				console.log(res)
+				// uni.showToast({
+				//   icon: 'success',
+				//   title: res.message,
+				//   duration: 800
+				// })
 			}
 		}
 	}
@@ -319,7 +395,7 @@
 	margin-top: 88upx;
 	margin-left: 180upx;
 	margin-right: 192upx;
-	opacity: 0.25;
+	opacity: 1.25;
 	position: absolute;
 }
 .content{
@@ -337,8 +413,9 @@
 	color: #F4F7FF;
 	line-height: 80upx;
 	text-align: center;
+	float: left;
 	margin-left: 30upx;
-	position: relative;
+	position: absolute;
 }
 .contentRightBlock{
 	width: 200upx;
@@ -351,7 +428,8 @@
 	line-height: 80upx;
 	text-align: center;
 	margin-right: 30upx;
-	position: relative;
+	right: 30upx;
+	position: absolute;
 }
 .clickBlock{
 	width: 280upx;
@@ -360,7 +438,7 @@
 	border: 2upx solid #1370FF;
 	padding: 20upx;
 	margin-left: 30upx;
-	position: relative;
+	position: absolute;
 }
 .clickBlock :first-child{
 	font-size: 26upx;

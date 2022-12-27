@@ -432,7 +432,6 @@
 	 height: 100px; 
 	 border: 4px solid #4B525E;    
 	 border-radius: 100px;
-	 opacity: 0.5;
 	 line-height: 100px;
 }
 .circleText{
