@@ -258,7 +258,8 @@ export default {
   },
   computed: {
 	handleSexDefaultIndex() {
-		let sexIndex = this.range.findIndex(k => k.value === this.studentForm.gender)
+		let sexIndex = 0
+		sexIndex = this.range.findIndex(k => k.value === this.studentForm.gender)
 		return sexIndex
 	},
     genderLabel() {
@@ -278,7 +279,9 @@ export default {
       this.sexShow = true
     },
     sexConfirm(e) {
-      this.studentForm.gender = this.range[e[0]].value
+		console.log(e,'???')
+		
+      this.studentForm.gender = e[0] ===-1 ? this.range[0].value :  this.range[e[0]].value
       this.sexShow = false
     },
     dateConfirm(e) {

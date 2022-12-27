@@ -6,7 +6,11 @@
 				"navigationBarTitleText": "我的会员",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"app-plus": {
+					"titleNView": false
+				},
+				"navigationBarTextStyle": "white"
 			}
 		},
 		{
@@ -15,7 +19,11 @@
 				"navigationBarTitleText": "添加学员",
 				"enablePullDownRefresh": false,
 				"autoBackButton": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -24,7 +32,11 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
 				"autoBackButton": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -33,7 +45,11 @@
 				"navigationBarTitleText": "体测评估",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -42,7 +58,11 @@
 				"navigationBarTitleText": "体测报告",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		// {
@@ -60,7 +80,11 @@
 				"navigationBarTitleText": "身体评测",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -69,7 +93,11 @@
 				"navigationBarTitleText": "健康问答",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -78,7 +106,11 @@
 				"navigationBarTitleText": "体能评估",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -96,7 +128,11 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -104,7 +140,11 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -113,7 +153,11 @@
 				"navigationBarTitleText": "动作库",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -122,7 +166,11 @@
 				"navigationBarTitleText": "新增动作",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -131,7 +179,11 @@
 				"navigationBarTitleText": "新建训练",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -140,7 +192,11 @@
 				"navigationBarTitleText": "训练记录",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -149,7 +205,11 @@
 				"navigationBarTitleText": "训练记录详情",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -158,7 +218,11 @@
 				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -167,7 +231,11 @@
 				"navigationBarTitleText": "开卡",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -176,7 +244,11 @@
 				"navigationBarTitleText": "设置",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -185,7 +257,11 @@
 				"navigationBarTitleText": "个人信息",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -194,35 +270,55 @@
 				"navigationBarTitleText": "修改签名",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
 			"path": "pages/dynamicEvaluation/actionEvaluation/actionEvaluation",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
 			"path": "pages/dynamicEvaluation/dynamicEvaluation",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
 			"path": "pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
 			"path": "pages/viewReport/viewReport",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+			"navigationBarTextStyle": "white",
+			"app-plus": {
+				"titleNView": false
+			}
 			}
 		}
 	    ,{
