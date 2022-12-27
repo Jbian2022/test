@@ -12,7 +12,7 @@
 						<van-image round :src="userInfo.avatar"/>
 					</view>
 					<view class="card-name">金卡教练</view>
-					<view class="card-status">{{userInfo.vipEndDate?'生效中':'失效中'}}</view>
+					<view class="card-status" v-if="userInfo.vipLevel">{{userInfo.vipEndDate?'生效中':'失效中'}}</view>
 				</view>
 				<view class="card-des">{{userInfo.vipEndDate?userInfo.vipEndDate:'立即续费金卡教练，畅享多项特权~'}}</view>
 			</view>
@@ -21,12 +21,14 @@
 		<view class="vip-title">开通金卡教练</view>
 		<view class="card-types-box">
 			<view class="card-types">
-				<view v-for="(item,index) in cardList" :key="index" class="type-item" :class="{active:item.active}" @click="selectCard(item)">
-					<view class="hot-msg">{{item.hotMsg}}</view>
-					<view class="text">{{item.text}}</view>
-					<view class="money">¥<text class="num">{{item.money}}</text></view>
-					<view class="des">{{item.des}}{{item.unit}}</view>
-					<div class="activity">{{item.activity}}</div>
+				<view v-for="(item,index) in cardList" :key="index" class="type-item-box">
+					<view class="type-item" :class="{active:item.active}" @click="selectCard(item)">
+						<view class="hot-msg">{{item.hotMsg}}</view>
+						<view class="text">{{item.text}}</view>
+						<view class="money">¥<text class="num">{{item.money}}</text></view>
+						<view class="des">{{item.des}}{{item.unit}}</view>
+						<div class="activity">{{item.activity}}</div>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -90,7 +92,8 @@
 				show:false,
 				showPayment: false,
 				userInfo:{
-					avatar: null
+					avatar: null,
+					vipLevel: null
 				},
 				cardList:[
 					{
@@ -229,12 +232,10 @@
 				}
 				.card-status{
 					margin-left: 15upx;
-					font-size: 24upx;
+					font-size: 2upx;
 					background: #FFF0C0;
-					border-radius: 25upx;
-					padding: 10upx 20upx;
-					height: 50upx;
-					line-height: 50upx;
+					border-radius: 20upx;
+					padding: 4upx 10upx;
 					font-weight: 600;
 					color: #95673D;
 				}
@@ -253,8 +254,8 @@
 			z-index: 0;
 			width: 260upx;
 			height: 260upx;
-			background: url('../../static/newWorkout/vip-logo.png');
-			background-size: 160upx 160upx;
+			background: url('../../static/newWorkout/glod.png');
+			background-size: 180upx 180upx;
 			background-repeat: no-repeat;
 			background-position: center;
 		}
@@ -295,14 +296,17 @@
 	.card-types{
 		display: flex;
 		padding: 0 10upx;
-		.type-item{
+		.type-item-box{
 			flex-shrink: 0;
-			width: 217upx;
-			height: 286upx;
+			width: 33.333%;
+			padding: 0 10upx;
+			box-sizing: border-box;
+		}
+		.type-item{
+			height: 300upx;
 			background: rgba(56, 61, 70, .2);
 			border-radius: 16px;
 			border: 2upx solid rgba(122, 127, 137, .2);
-			margin-left: 20upx;
 			box-sizing: border-box;
 			text-align: center;
 			position: relative;
@@ -346,7 +350,7 @@
 				color: #FFE18F;
 			}
 			&.active{
-				background: linear-gradient(180deg, #FFECB8 0%, #383D46 65%);
+				background: linear-gradient(180deg, #FFECB8 30%, #383D46 65%);
 				border: 2upx solid #ffe6a1;
 			}
 		}
@@ -359,7 +363,8 @@
 	.equity-list{
 		display: flex;
 		flex-wrap: wrap;
-		padding: 36upx 70upx;
+		padding: 36upx;
+		padding-bottom: 26upx;
 		background: rgba(56, 61, 70, .2);;
 		border-radius: 16upx;
 		border: 2upx solid rgba(122, 127, 137, .2);
@@ -412,6 +417,7 @@
 		padding-bottom: 60upx;
 		background-color: #212328;
 		display: flex;
+		justify-content: space-between;
 		.text-box{
 			text-align: center;
 			margin-right: 44upx;
@@ -432,12 +438,14 @@
 			}
 		}
 		.van-button{
-			width: 470upx;
+			width: 485upx;
 			height: 90upx;
 			background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
 			border-radius: 16upx;
 			color: #90633A;
 			font-weight: 600;
+			border: none;
+			font-size: 32upx;
 		}
 	}
 	::v-deep .van-popup{

@@ -23,11 +23,14 @@
 		},
 		methods: {
 			onClickLeft(){
-				uni.navigateBack()
+				uni.switchTab({
+					url: '/pages/my/my'
+				})
 			},
 			async closeAccount () {
-				// await login.closeAccount();
-				this.logout();
+				uni.navigateTo({
+					url: '/pages/cancel/cancel'
+				})
 			},
 			async logout(){
 				// await login.logout();

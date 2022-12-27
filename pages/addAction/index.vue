@@ -4,17 +4,25 @@
 		<van-nav-bar title="新增动作" left-text="" left-arrow @click-left="onClickLeft"/>
 		<view class="form">
 			<input class="uni-input"  v-model="actionName" placeholder="请输入动作名称" />
-			<van-cell is-link title="动作类型" :value="actionTypeName" @click="show = true" />
+			<van-cell is-link title="动作类型" :value="actionTypeName" @click="open" />
 		</view>
 		<view class="footer-button">
 			<van-button type="primary" block @click="saveAction">保存</van-button>
 		</view>
-		<van-action-sheet v-model:show="show" title="选择动作类型">
-			<view v-for="(item,index) in actionTypeList" :key="index" class="action-type-item" :class="{active:item.active}" @click="actionTypeListSelect(item)">
-				<view class="title">{{item.title}}</view>
-				<view class="des">{{item.des}}</view>
+		<uni-popup ref="popup" type="bottom" mask-background-color="rgba(20, 21, 23, 0.6)">
+			<view class="select-box">
+				<view class="box-header">
+					<view class="title">选择动作类型</view>
+					<view class="close-btn" @click="closeHandle">×</view>
+				</view>
+				<view class="content">
+					<view v-for="(item,index) in actionTypeList" :key="index" class="action-type-item" :class="{active:item.active}" @click="actionTypeListSelect(item)">
+						<view class="title">{{item.title}}</view>
+						<view class="des">{{item.des}}</view>
+					</view>
+				</view>
 			</view>
-		</van-action-sheet>
+		</uni-popup>
 	</view>
 </template>
 
@@ -89,6 +97,12 @@
 			}
 		},
 		methods: {
+			open(){
+				this.$refs.popup.open()
+			},
+			closeHandle(){
+				this.$refs.popup.close()
+			},
 			actionTypeListSelect(child){
 				this.actionTypeList.forEach(item => {
 					item.active = false
@@ -96,6 +110,7 @@
 				child.active = true
 				this.actionType = child.type
 				this.actionTypeName = child.title
+				this.closeHandle()
 			},
 			onClickLeft(){
 				uni.switchTab({
@@ -209,56 +224,66 @@
 				color: #FFFFFF;
 			}
 		}
-		::v-deep .van-action-sheet__header{
-			text-align: left;
-			font-size: 36upx;
-			font-weight: 600;
-			color: #F4F7FF;
-			line-height: normal;
-			padding: 40upx;
-			& .van-icon{
-				top: 40upx;
-				right: 40upx;
-				/* width: 50upx;
-				height: 50upx; */
-				border-radius: 50%;
-				background: #4B525E;
-				font-size: 14upx;
-				padding: 18upx;
-			}
-		}
-		::v-deep .van-popup{
+		.select-box{
+			// height: 1000upx;
 			background: #383D46;
-			border-radius: 24px 24px 0px 0px;
+			border-radius: 24upx 24upx 0px 0px;
+			padding: 40upx;
+			padding-bottom: 0;
+			position: relative;
+			.box-header{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-bottom: 40upx;
+				.title{
+					font-size: 36upx;
+					font-weight: 600;
+					color: #F4F7FF;
+				}
+				.close-btn{
+					width: 50upx;
+					height: 50upx;
+					line-height: 50upx;
+					text-align: center;
+					background: #4B525E;
+					border-radius: 100%;
+					color: #F4F7FF;
+				}
+			}
+			.content{
+				height: 880upx;
+				overflow-y:  auto;
+			}
+			.action-type-item{
+				background: #4B525E;
+				border-radius: 16upx;
+				padding: 30upx 40upx;
+				.title{
+					font-size: 36upx;
+					font-weight: 600;
+					color: #F4F7FF;
+					margin-bottom: 30upx;
+				}
+				.des{
+					font-size: 24upx;
+					font-weight: 400;
+					color: #F4F7FF;
+					line-height: 34upx;
+				}
+				&.active{
+					background: #1370FF;
+				}
+				& + .action-type-item{
+					margin-top: 30upx;
+				}
+				&:last-child{
+					margin-bottom: 30upx;
+				}
+			}
 		}
-		::v-deep .van-action-sheet__content{
-			padding: 0 40upx;
-		}
-		.action-type-item{
-			background: #4B525E;
-			border-radius: 16upx;
-			padding: 30upx 40upx;
-			.title{
-				font-size: 36upx;
-				font-weight: 600;
-				color: #F4F7FF;
-				margin-bottom: 30upx;
-			}
-			.des{
-				font-size: 24upx;
-				font-weight: 400;
-				color: #F4F7FF;
-				line-height: 34upx;
-			}
-			&.active{
-				background: #1370FF;
-			}
-			& + .action-type-item{
-				margin-top: 30upx;
-			}
-			&:last-child{
-				margin-bottom: 30upx;
-			}
+		::v-deep .uni-popup [name="mask"]{
+			backdrop-filter: blur(3px);
 		}
 	}
 </style>
