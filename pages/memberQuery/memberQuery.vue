@@ -17,8 +17,23 @@
         <!-- 可能会有图片 -->
         <view class="nav_right_style"></view>
       </view>
+      <view
+        class="search"
+        :class="cellingFlag ? 'search_antimation_style' : ''"
+      >
+        <view class="uni-search">
+          <view class="image"></view>
+          <input
+            class="uni-input"
+            v-model="searchValue"
+            confirm-type="search"
+            @input="searchInput"
+            placeholder="请输入姓名或手机号码查询"
+          />
+        </view>
+      </view>
 
-      <uni-section title="">
+      <!-- <uni-section title="">
         <uni-search-bar
           v-model="searchValue"
           class="uni-mt-10"
@@ -29,8 +44,12 @@
           cancelButton="none"
           @confirm="searchFun"
         />
-      </uni-section>
-      <MemberList :searchValue="searchValue" :type="'detail'"></MemberList>
+      </uni-section> -->
+      <MemberList
+        :searchValue="searchValue"
+        :isFirstFlag="isFirstFlag"
+        :type="'detail'"
+      ></MemberList>
     </scroll-view>
   </view>
 </template>
@@ -48,10 +67,14 @@ export default {
     return {
       searchValue: '',
       cellingFlag: false,
-      scrollTop: 0
+      scrollTop: 0,
+      isFirstFlag: false
     }
   },
   methods: {
+    searchInput() {
+      this.isFirstFlag = true
+    },
     memberSrollTop(event) {
       this.scrollTop = event.detail.scrollTop
       this.cellingFlag = event.detail.scrollTop > 50 ? true : false
@@ -100,7 +123,7 @@ export default {
 <style lang="scss">
 .nav_antimation_style {
   width: 100vw;
-  height: 104upx !important;
+  height: 202upx !important;
   background: #212328;
   position: fixed;
   left: 0;
@@ -116,7 +139,7 @@ export default {
   animation-name: searchAnmation;
   animation-duration: 0.3s;
   z-index: 500;
-  top: 0upx;
+  top: 50upx;
 }
 @keyframes searchAnmation {
   0% {
@@ -124,7 +147,7 @@ export default {
   }
 
   100% {
-    top: 0upx;
+    top: 50upx;
   }
 }
 
@@ -154,7 +177,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 30upx;
+  margin-top: 88upx;
 
   .nav_left_style {
     height: 100%;
@@ -189,6 +212,36 @@ export default {
   }
   .nav_right_style {
     width: 10%;
+  }
+}
+.search {
+  height: 120upx;
+  padding: 30upx;
+  padding-top: 30upx;
+  box-sizing: border-box;
+  .uni-search {
+    background: #383d46;
+    border-radius: 40upx;
+    height: 80upx;
+    display: flex;
+    align-items: center;
+    .image {
+      width: 28upx;
+      height: 28upx;
+      margin-right: 14upx;
+      margin-left: 28upx;
+      background-image: url('../../static/newWorkout/search.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .uni-input {
+      flex: 1;
+      color: #f4f7ff;
+      font-size: 28upx;
+      &::placeholder {
+        color: #7a7f89;
+      }
+    }
   }
 }
 ::v-deep.van-icon {

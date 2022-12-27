@@ -148,7 +148,7 @@
     },
     "statusbar": {
       "immersed": "supportedDevice",
-      "style": "dark",
+      "style": "light",
       "background": "#212328"
     },
     "uniStatistics": {
