@@ -515,7 +515,6 @@ margin-top: 10upx;">82</van-col>
 					this.mobileNumber = res.data[0].mobile
 					this.age = this.getAge(res.data[0].birthday)
 				})
-				
 			},
 			getAge(birthday){//根据日期算年龄
 			          birthday=birthday.split('-');
