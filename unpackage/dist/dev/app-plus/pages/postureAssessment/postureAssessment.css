@@ -30,12 +30,13 @@
   left: 0;
   top: 0;
   z-index: -100;
+  display: flex;
+  flex-direction: column;
 }
 .bg_content .currency_style[data-v-826f61a7] {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 14.375rem;
+  background-image: linear-gradient(to bottom, #343a44, #212328);
 }
 .bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
   width: 100%;
@@ -53,7 +54,7 @@
   object-fit: contain;
   z-index: -1;
 }
-.bg_content .currency_style .currency_content_style[data-v-826f61a7] {
+.bg_content .currency_content_style[data-v-826f61a7] {
   width: 100%;
   flex: 1;
   background: #212328;
@@ -135,10 +136,9 @@
 .content_style{
 	width: 100vw;
 	height: 100vh;
-	overflow-y: auto;
-	overflow-x: hidden;
+	overflow: hidden;
 	position: relative;
-	background: #212328;
+	background: rgba(33, 35, 40, 1);
 }
 .bgimg{
 	width: calc(100vw - 9.375rem);
@@ -149,11 +149,12 @@
 	margin-top: 2.75rem;
 	margin-left: 5.625rem;
 	margin-right: 6rem;
-	opacity: 0.12;
+	opacity: 0.25;
 	position: absolute;
 }
 .content{
 	width: calc(100vw - 0.46875rem);
+	height: 40rem;
 	margin-top: 1.3125rem;
 }
 .contentLeftBlock{
@@ -167,6 +168,7 @@
 	line-height: 2.5rem;
 	text-align: center;
 	margin-left: 0.9375rem;
+	position: relative;
 }
 .contentRightBlock{
 	width: 6.25rem;
@@ -179,6 +181,7 @@
 	line-height: 2.5rem;
 	text-align: center;
 	margin-right: 0.9375rem;
+	position: relative;
 }
 .clickBlock{
 	width: 8.75rem;
@@ -186,9 +189,8 @@
 	border-radius: 0.5rem;
 	border: 0.0625rem solid #1370FF;
 	padding: 0.625rem;
-	margin-top: 0.625rem;
-	margin-bottom: 0.3125rem;
 	margin-left: 0.9375rem;
+	position: relative;
 }
 .clickBlock :first-child{
 	font-size: 0.8125rem;
@@ -217,8 +219,9 @@
 .postureButton{
 	width: calc(100vw - 1.875rem);
 	height: 3.125rem;
-	background: #1370FF;
+	background: #1370ff;
 	border-radius: 0.5rem;
 	margin-left: 0.9375rem;
 	margin-top: 1.25rem;
+	line-height: 3.125rem;
 }

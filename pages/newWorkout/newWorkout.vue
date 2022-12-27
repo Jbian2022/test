@@ -126,7 +126,7 @@
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
-								<van-icon name="success" />
+								<view class="true-icon"></view>
 							</view>
 							<view class="delete">
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
@@ -212,7 +212,7 @@
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
-								<van-icon name="success" />
+								<view class="true-icon"></view>
 							</view>
 							<view class="delete">
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
@@ -258,7 +258,7 @@
 								<text>次</text>
 							</view>
 							<view class="yes" @click="item.active = !item.active,technicalData()">
-								<van-icon name="success" />
+								<view class="true-icon"></view>
 							</view>
 							<view class="delete">
 								<view class="img" @click="deleteProjectItem(i.groupList,index),technicalData()"></view>
@@ -592,6 +592,14 @@
 			closeDialog(key){
 				this.$refs[key].close()
 			}
+		},
+		onBackPress(){
+			if(this.workoutName&&this.actionList.length>0){
+				this.openDialog('popupFinish')
+			} else {
+				this.openDialog('popupDelete')
+			}
+			return true
 		}
 	}
 </script>
@@ -615,6 +623,9 @@ page{
 		font-size: 48upx;
 		color: #FFFFFF;
 		background: #212328;
+		.title {
+			font-weight: 600;
+		}
 		.btn{
 			padding: 0 30upx;
 			height: 68upx;
@@ -695,8 +706,8 @@ page{
 					top: 0;
 					color: #FFFFFF;
 					.img{
-						width: 40upx;
-						height: 40upx;
+						width: 32upx;
+						height: 32upx;
 						background: url('../../static/newWorkout/config.png');
 						background-size: contain;
 						background-repeat: no-repeat;
@@ -765,8 +776,8 @@ page{
 						color: #F4F7FF;
 						box-sizing: border-box;
 						.true-icon{
-							width: 40upx;
-							height: 40upx;
+							width: 32upx;
+							height: 32upx;
 							background: url('../../static/newWorkout/true.png');
 							background-size: contain;
 							background-repeat: no-repeat;
@@ -777,8 +788,8 @@ page{
 						text-align: right;
 						.img{
 							display: inline-block;
-							width: 40upx;
-							height: 40upx;
+							width: 32upx;
+							height: 32upx;
 							background: url('../../static/newWorkout/trashcan.png');
 							background-size: contain;
 							background-repeat: no-repeat;
@@ -844,8 +855,8 @@ page{
 			border: none;
 			padding: 0;
 			.img{
-				width: 40upx;
-				height: 40upx;
+				width: 32upx;
+				height: 32upx;
 				background: url('../../static/newWorkout/trashcan.png');
 				background-size: contain;
 				background-repeat: no-repeat;
@@ -865,7 +876,7 @@ page{
 			color: #FFFFFF;
 		}
 	}
-	::v-deep.uni-popup [name="mask"]{
+	::v-deep .uni-popup [name="mask"]{
 		backdrop-filter: blur(3px);
 	}
 	::v-deep .finish-dialog,

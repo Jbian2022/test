@@ -710,12 +710,13 @@
   left: 0;
   top: 0;
   z-index: -100;
+  display: flex;
+  flex-direction: column;
 }
 .bg_content .currency_style[data-v-826f61a7] {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 14.375rem;
+  background-image: linear-gradient(to bottom, #343a44, #212328);
 }
 .bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
   width: 100%;
@@ -733,7 +734,7 @@
   object-fit: contain;
   z-index: -1;
 }
-.bg_content .currency_style .currency_content_style[data-v-826f61a7] {
+.bg_content .currency_content_style[data-v-826f61a7] {
   width: 100%;
   flex: 1;
   background: #212328;
@@ -885,7 +886,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #212328;
 }
 .mebers_content .no_data_style[data-v-fce7d226] {
   width: 100%;
@@ -1097,6 +1097,7 @@
   left: 0;
   top: 0;
   z-index: 500;
+  margin-top: 0 !important;
 }
 .search_antimation_style {
   position: fixed;

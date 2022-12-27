@@ -77,12 +77,13 @@
   left: 0;
   top: 0;
   z-index: -100;
+  display: flex;
+  flex-direction: column;
 }
 .bg_content .currency_style[data-v-826f61a7] {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 14.375rem;
+  background-image: linear-gradient(to bottom, #343a44, #212328);
 }
 .bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
   width: 100%;
@@ -100,7 +101,7 @@
   object-fit: contain;
   z-index: -1;
 }
-.bg_content .currency_style .currency_content_style[data-v-826f61a7] {
+.bg_content .currency_content_style[data-v-826f61a7] {
   width: 100%;
   flex: 1;
   background: #212328;
@@ -205,7 +206,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #212328;
 }
 .mebers_content .no_data_style[data-v-fce7d226] {
   width: 100%;
@@ -605,7 +605,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #212328;
 }
 .content_style .mebers_content .no_data_style {
   width: 100%;
@@ -828,9 +827,11 @@ uni-page-body {
   padding-bottom: 1.125rem;
   animation-name: cellingAnmation;
   animation-duration: 0.3s;
+  margin-left: 0 !important;
 }
 .celling_animation_style .buy_left {
   width: 40% !important;
+  margin-left: 0.9375rem;
 }
 .celling_animation_style .buy_right {
   width: 40% !important;
@@ -868,7 +869,7 @@ uni-page-body {
   top: 0 !important;
 }
 uni-scroll-view {
-  height: 100%;
+  height: 99%;
 }
 .move_area_style {
   width: 100vw;
@@ -877,7 +878,7 @@ uni-scroll-view {
   box-sizing: border-box;
 }
  uni-movable-area {
-  width: calc(100vw - 2.5rem);
+  width: calc(100vw - 4.0625rem);
   height: 100%;
 }
  uni-movable-view {

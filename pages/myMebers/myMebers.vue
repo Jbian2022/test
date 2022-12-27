@@ -1,6 +1,6 @@
 <template>
   <!-- 这里是状态栏 -->
-  <!-- 	<view class="status_bar">
+<!--  	<view class="status_bar" style="background: red;">
 	</view> -->
   <view class="move_area_style">
     <movable-area>
@@ -144,6 +144,12 @@ export default {
     },
     jumpQuery() {
       console.log(111)
+	  uni.removeStorage({
+	  	key: 'isActive',
+	  	success: function (res) {
+	  		console.log('success');
+	  	}
+	  });
       uni.navigateTo({
         url: '/pages/memberQuery/memberQuery',
         success: (res) => {},
@@ -165,11 +171,11 @@ export default {
     },
 
     addClick() {
-		try {
-		  uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
-		} catch (e) {
-		  // error
-		}
+      try {
+        uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
+      } catch (e) {
+        // error
+      }
       uni.navigateTo({
         url: '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
         success: (res) => {},
@@ -533,7 +539,7 @@ uni-page-body {
   margin-left: 0 !important;
   .buy_left {
     width: 40% !important;
-	margin-left: 30upx;
+    margin-left: 30upx;
   }
   .buy_right {
     width: 40% !important;
@@ -575,7 +581,7 @@ uni-page-body {
   top: 0 !important;
 }
 uni-scroll-view {
-  height: 100%;
+  height: 99%;
 }
 .move_area_style {
   width: 100vw;
