@@ -210,6 +210,7 @@
 				font-size: 52upx;
 				color: #f4f7ff;
 				line-height: 72upx;
+				font-weight: 600;
 				&::after {
 					content: '';
 					margin-left: 20upx;
