@@ -264,7 +264,7 @@ export default {
     // 确定
     confirm() {
 	 if (this.pickerType === 'ordinary') {
-		 console.log(this.pickerValue, 'this.pickerValue')
+		 console.log(this.pickerValue.Target, 'this.pickerValue')
 		  this.$emit('confirm', this.pickerValue)
 		  if (this.btnClose) this.close() 
 	 } else {

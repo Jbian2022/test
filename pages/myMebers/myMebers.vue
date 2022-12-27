@@ -1,6 +1,6 @@
 <template>
   <!-- 这里是状态栏 -->
-  <!-- 	<view class="status_bar">
+<!--  	<view class="status_bar" style="background: red;">
 	</view> -->
   <view class="move_area_style">
     <movable-area>

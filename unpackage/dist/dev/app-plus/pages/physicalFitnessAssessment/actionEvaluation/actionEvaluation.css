@@ -30,12 +30,13 @@
   left: 0;
   top: 0;
   z-index: -100;
+  display: flex;
+  flex-direction: column;
 }
 .bg_content .currency_style[data-v-826f61a7] {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 14.375rem;
+  background-image: linear-gradient(to bottom, #343a44, #212328);
 }
 .bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
   width: 100%;
@@ -53,7 +54,7 @@
   object-fit: contain;
   z-index: -1;
 }
-.bg_content .currency_style .currency_content_style[data-v-826f61a7] {
+.bg_content .currency_content_style[data-v-826f61a7] {
   width: 100%;
   flex: 1;
   background: #212328;
@@ -208,15 +209,22 @@
 	margin-top: 1.25rem;
 }
 .postureButton {
-  width: calc(100vw - 1.875rem);
-  height: 3.125rem;
   background: #1370ff;
   border-radius: 0.5rem;
-  margin-left: 0.9375rem;
-  margin-top: 1.25rem;
-  
-font-weight: 600;
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
   font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 3.125rem;
+  text-align: center;
+  justify-content: center;
+  
+  width: calc(100vw - 2.5rem);
+  margin-left: 1.25rem;
+  
+  display: flex;
 }
 .clickAction{
 	width: 8.125rem;
@@ -240,11 +248,9 @@ font-weight: 600;
 	top: 0.1875rem;
 }
 .clickActionBody{
-	height: 46.5625rem;
+	height: 46.59375rem;
 	background: #383D46;
 	border-radius: 0.5rem;
-	-webkit-backdrop-filter: blur(0.09375rem);
-	        backdrop-filter: blur(0.09375rem);
 	z-index: 999;
 }
  .clickActionContent{
