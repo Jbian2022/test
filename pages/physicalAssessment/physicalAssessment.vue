@@ -37,7 +37,7 @@
         </view>
       </view>
     </view>
-    <view class="buttontrue">生成报告</view>
+    <view class="buttontrue" @click.native="getReport()">生成报告</view>
   </view>
 </template>
 
@@ -88,6 +88,11 @@ export default {
     }
   },
   methods: {
+	getReport(){
+		uni.redirectTo({
+			url: '/pages/viewReport/viewReport'+"?traineeNo="+this.traineeNo+"&key=1"
+		})
+	},
     jumpModular(item) {
       // console.log(item.path,'>>>>')
 
@@ -144,6 +149,12 @@ export default {
                         JSON.stringify(v.bodyTestReport) !== '{}'
                           ? true
                           : false
+					  let postureAssessment =
+					    v.hasOwnProperty('postData') &&
+					    JSON.stringify(v.postData) !== '{}'
+					      ? true
+					      : false
+						  console.log(v.bodyTestReport)
                       // console.log(needCompareData, '逆势')
                       if (needCompareData.length > 0) {
                         isFinsh = true
@@ -151,6 +162,9 @@ export default {
                       if (compareBodyTestResport) {
                         isFinsh = true
                       }
+					  if (postureAssessment) {
+					    isFinsh = true
+					  }
                     }
                   })
                 }
