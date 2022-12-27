@@ -1,6 +1,8 @@
 <template>
   <view class="action-library">
     <view class="status_bar"> <!-- 这里是状态栏 --> </view>
+    <view class="background-header"></view>
+		<view class="background"></view>
     <view class="header">
       <view class="all-action" :class="{active:mode===0}" @click="modeChangeHandle(0)">全部动作库</view>
       <view class="problem-action" :class="{active:mode===1}" @click="modeChangeHandle(1)">问题动作库</view>
@@ -319,7 +321,22 @@ export default {
 </script>
 
 <style lang="scss">
-page {
+.background-header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 460upx;
+  background: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
+}
+.background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  height: 100vh;
   background: #212328;
 }
 .status_bar {
@@ -327,6 +344,7 @@ page {
     width: 100%;
 }
 .action-library {
+  position: relative;
   .header {
     height: 100upx;
     display: flex;
