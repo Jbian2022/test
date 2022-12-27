@@ -397,9 +397,16 @@ module.exports = {
 					reject(err)
 			   })
 	   })
+	},
+	
+	// 注销信息
+	closeAccount: function(data){
+		return new Promise( async(resolve,reject)=>{
+			const {uid} = await this.uniID.checkToken(this.getUniIdToken());
+			const res = await uniID.closeAccount({uid});
+			resolve(res)
+		})
 	}
-	
-	
 	
 	
 	
