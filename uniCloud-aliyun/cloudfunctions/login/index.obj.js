@@ -399,6 +399,20 @@ module.exports = {
 	   })
 	},
 	
+	// 获取用户个人信息
+	 getUserInfoMessage: async function() {
+	  const token = this.getUniIdToken()
+	  const detailInfo = await this.uniID.checkToken(token)
+	  
+	  return new Promise((resolve, reject) => {
+	   let userInfo = {
+	    success: true,
+	    ...detailInfo
+	   }
+	   resolve(userInfo)
+	  })
+	 },
+	 
 	// 注销信息
 	closeAccount: function(data){
 		return new Promise( async(resolve,reject)=>{
@@ -406,7 +420,8 @@ module.exports = {
 			const res = await uniID.closeAccount({uid});
 			resolve(res)
 		})
-	}
+	},
+	
 	
 	
 	

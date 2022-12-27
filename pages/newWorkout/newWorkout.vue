@@ -362,6 +362,7 @@
 		onLoad: function (option) { 
 			if(option.traineeNo){
 				this.traineeNo = option.traineeNo
+				this.traineeName = option.traineeName
 				this.trainDate = option.trainDate || this.getCurTimestamp()
 				this.getOldInfo()
 			}
@@ -444,6 +445,7 @@
 					trainDate:this.trainDate
 				}))
 				uni.setStorageSync('traineeNo', this.traineeNo)
+				uni.setStorageSync('traineeName', this.traineeName)
 				uni.switchTab({
 					url: '/pages/actionLibrary/index'
 				});
@@ -486,7 +488,12 @@
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')
-				uni.switchTab({url:'/pages/myMebers/myMebers'})
+				uni.removeStorageSync('traineeName')
+				uni.navigateTo({
+					url:
+					'/pages/trainingRecord/trainingRecord' +
+					`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+				})
 			},
 			async deleteHandle(){
 				const params = {
@@ -499,7 +506,12 @@
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')
-				uni.switchTab({url:'/pages/myMebers/myMebers'})
+				uni.removeStorageSync('traineeName')
+				uni.navigateTo({
+					url:
+					'/pages/trainingRecord/trainingRecord' +
+					`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+				})
 			},
 			getCurTimestamp(){
 				const formater = (temp) =>{

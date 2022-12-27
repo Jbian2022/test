@@ -307,7 +307,8 @@ export default {
     goToNewWorkout(item) {
       uni.navigateTo({
         url:
-          '/pages/newWorkout/newWorkout?traineeNo=' + item._id
+          '/pages/newWorkout/newWorkout' +
+          `?traineeNo=${item._id}&memberName=${item.traineeName}`
       })
     }
   }
