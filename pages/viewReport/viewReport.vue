@@ -230,7 +230,24 @@ margin-top: 10upx;">82</van-col>
 				name="4" 
 				title-class="informationTitleText"
 				class="informationCard">
-				    <view class="bodyAssessment">
+				<view class="bodyAssessment" v-for="(item,index) in assessmentTrueData">
+					<view style="width: 10px;
+								height: 10px;
+								background: #FFC13C;
+								border-radius: 100%;
+								display: inline-flex;
+								margin-right: 20upx;"
+								></view><span style="font-size: 30upx;
+								font-weight: 400;
+								color: #F4F7FF;
+								line-height: 42upx;">{{item.title}}</span>
+						<view class="assessmentContent">
+							<p>
+								{{item.text}}
+							</p>
+						</view>
+				</view>
+				    <!-- <view class="bodyAssessment">
 						<view style="width: 10px;
 								height: 10px;
 								background: #FFC13C;
@@ -270,7 +287,7 @@ margin-top: 10upx;">82</van-col>
 								无力肌肉：中下斜方肌，菱形肌，岗下肌。
 							</p>
 						</view>
-					</view>
+					</view> -->
 				</van-collapse-item>
 			</van-collapse>
 		</view>
@@ -332,7 +349,56 @@ margin-top: 10upx;">82</van-col>
 				class="informationCard">
 					<van-row style="background-color: #343A44;">
 						<van-col class="need_scoll" span="24">
-							<view class="dynamicshow"
+							<view
+							  class="dynamicshow"
+							  v-for="(item, index) in queryData"
+							  :key="index"
+							>
+							  <view class="dynamicshow_left" v-if="item.type > 0">
+							    <text class="evaluationdata">
+							      {{ item.questionContent }}
+							    </text>
+								<text v-if="item.code=='F0001'">
+									心率：{{item.type}}/分
+								</text>
+								<text v-else>
+									数量：{{item.type}}个
+								</text>
+							  </view>
+							  <view class="dynamicshow_left" v-else>
+							    <text class="evaluationdata">
+							      {{ item.questionContent }}
+							    </text>
+								<text class="noEvaText">
+									暂未测试，快去测试吧
+								</text>
+							    <!-- <van-button
+							      round
+							      type="primary"
+							      color="#1370FF"
+							      class="dynamicshow_button"
+							      icon="../../static/app-plus/other/arrows.png"
+							      icon-position="right"
+								  @click.native="jumpModular(item)"
+							      >开始测试</van-button
+							    > -->
+							  </view>
+							  <view class="dynamicshow_right">
+							    <!-- <van-circle
+							      v-model:current-rate="currentRate"
+							      :rate="100"
+							      :speed="400"
+							      :text="item.typeText"
+							      :layer-color="item.typeColor"
+							      :color="item.typeColor"
+							      :style="'--van-circle-text-color:'+ item.typeColor"
+							    /> -->
+								<view class="circle" :style="'border: 4px solid '+item.typeColor+';'">
+									<view class="circleText" :style="'color:'+item.typeColor+';'">{{item.typeText}}</view>
+								</view>
+							  </view>
+							</view>
+							<!-- <view class="dynamicshow"
 								v-for="(item,index) in dynamicEvaluationdata" :key="index">
 								<view class="dynamicshow_left" v-if="item.type>0">
 									<text class="evaluationdata">
@@ -400,7 +466,7 @@ margin-top: 10upx;">82</van-col>
 									  style="--van-circle-text-color: #4B525E;"
 									/>
 								</view>
-							</view>
+							</view> -->
 						</van-col>
 					</van-row>
 				</van-collapse-item>
@@ -428,6 +494,7 @@ margin-top: 10upx;">82</van-col>
 	import { ref } from 'vue';
 	const user = uniCloud.importObject('my');
 	const testOb = uniCloud.importObject("testResults");
+	const busOb = uniCloud.importObject('businessCloudObject');
 	export default {
 		data() {
 			return {
@@ -467,7 +534,14 @@ margin-top: 10upx;">82</van-col>
 				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.svg' }
 				],
 				getOnlyLists:{},
-				traineeNo:''
+				traineeNo:'',
+				resultValue:0,
+				typeText:"待测",
+				typeColor:"#4B525E",
+				queryData:{},
+				queryUserActionData:{},
+				assessmentNewData:{},
+				assessmentTrueData:[],
 			}
 		},
 		setup() {
@@ -503,6 +577,7 @@ margin-top: 10upx;">82</van-col>
 					break;
 			}
 		  }
+		  this.getPosture();
 		},
 		methods: {
 			async getUserInfo(){
@@ -566,37 +641,106 @@ margin-top: 10upx;">82</van-col>
 			getconfingActionName(){
 				const data = {};
 				data["traineeNo"] = this.traineeNo;
-				data["questionCode"] = this.questionCode;
+				data["questionCode"] = "A0005";
+				console.log(data)
 			testOb.opearConfigQuery(data).then((res)=>{
 					console.log(res)
 					if(res.success){
-			// 			// this.queryUserActionData = res.data
-			// 			// busOb.getPhysicalChildAssessmentList("A0005").then((res)=>{
-			// 			// 	this.queryData = res.data;
-			// 			// 	this.queryData.forEach((item)=>{
-			// 			// 		item['typeText']='待测';
-			// 			// 		item['type']=0;
-			// 			// 		item['typeColor'] = this.levelColor(item.typeText);
-			// 			// 		item['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
-			// 			// 		console.log(item)
-			// 			// 	})
-			// 			// 	for(let j = 0;j<this.queryUserActionData.length;j++){
-			// 			// 		for(let i=0;i<this.queryData.length;i++){
-			// 			// 			console.log(this.queryData[i].code===this.queryUserActionData[j].code)
-			// 			// 			if(this.queryData[i].code===this.queryUserActionData[j].code){
-			// 			// 				this.queryData[i].typeText=this.queryUserActionData[j].physicalData.actionTypeText;
-			// 			// 				this.queryData[i].type=this.queryUserActionData[j].physicalData.actionVlue;
-			// 			// 				this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].physicalData.actionTypeText);
-			// 			// 				continue;
-			// 			// 			}
-			// 			// 		}
-			// 			// 	}
-			// 			// 	console.log(this.queryData)
-			// 			}).catch((err)=>{
-			// 			});
+						this.queryUserActionData = res.data
+						busOb.getPhysicalChildAssessmentList("A0005").then((res)=>{
+							this.queryData = res.data;
+							this.queryData.forEach((item)=>{
+								item['typeText']='待测';
+								item['type']=0;
+								item['typeColor'] = this.levelColor(item.typeText);
+								item['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
+								console.log(item)
+							})
+							for(let j = 0;j<this.queryUserActionData.length;j++){
+								for(let i=0;i<this.queryData.length;i++){
+									console.log(this.queryData[i].code===this.queryUserActionData[j].code)
+									if(this.queryData[i].code===this.queryUserActionData[j].code){
+										this.queryData[i].typeText=this.queryUserActionData[j].physicalData.actionTypeText;
+										this.queryData[i].type=this.queryUserActionData[j].physicalData.actionVlue;
+										this.queryData[i].typeColor = this.levelColor(this.queryUserActionData[j].physicalData.actionTypeText);
+										continue;
+									}
+								}
+							}
+							console.log(this.queryData)
+						}).catch((err)=>{
+						});
 					}
 				}).catch();
 			},
+			//获取用户的体态评估
+			getPosture(){
+				const data = {};
+				data["traineeNo"] = this.traineeNo;
+				data["questionCode"] = "A0003";
+				console.log(data);
+				testOb.opearConfigQuery(data).then((res)=>{
+						if(res.success){
+							this.assessmentNewData = res.data[0].postData
+							let trueData = {}
+							if(!this.assessmentNewData[0].textShow1){
+								trueData["title"] = this.assessmentNewData[0].title1;
+								trueData["text"] = this.assessmentNewData[0].text1;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[1].textShow2){
+								trueData["title"] = this.assessmentNewData[1].title2;
+								trueData["text"] = this.assessmentNewData[1].text2;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[2].textShow3){
+								trueData["title"] = this.assessmentNewData[2].title1;
+								trueData["text"] = this.assessmentNewData[2].text1;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[3].textShow4){
+								trueData["title"] = this.assessmentNewData[3].title2;
+								trueData["text"] = this.assessmentNewData[3].text2;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[4].textShow5){
+								trueData["title"] = this.assessmentNewData[4].title1;
+								trueData["text"] = this.assessmentNewData[4].text1;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[5].textShow6){
+								trueData["title"] = this.assessmentNewData[5].title2;
+								trueData["text"] = this.assessmentNewData[5].text2;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[6].textShow7){
+								trueData["title"] = this.assessmentNewData[6].title1;
+								trueData["text"] = this.assessmentNewData[6].text1;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[7].textShow8){
+								trueData["title"] = this.assessmentNewData[7].title1;
+								trueData["text"] = this.assessmentNewData[7].text1;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							if(!this.assessmentNewData[8].textShow9){
+								trueData["title"] = this.assessmentNewData[8].title2;
+								trueData["text"] = this.assessmentNewData[8].text2;
+								this.assessmentTrueData.push(trueData)
+								trueData = {}
+							}
+							console.log(this.assessmentTrueData)
+						}
+					}).catch();
+			}
 		},
 		components: {
 			BgTheamCompontent,
@@ -830,5 +974,29 @@ margin-top: 10upx;">82</van-col>
 		margin-right: 90upx;
 		margin-top: 15upx;
 		padding-right: 20upx;
+	}
+	.circle{
+		width: 100px;
+		 height: 100px; 
+		 border: 4px solid #4B525E;    
+		 border-radius: 100px;
+		 line-height: 100px;
+	}
+	.circleText{
+		width: 120upx;
+		height: 50upx;
+		font-size: 36upx;
+		font-weight: 600;
+		color: #BDC3CE;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.noEvaText{
+		width: 300upx;
+		height: 42upx;
+		font-size: 30upx;
+		font-weight: 400;
+		color: #BDC3CE;
+		line-height: 42upx;
 	}
 </style>
