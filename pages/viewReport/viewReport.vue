@@ -1,5 +1,5 @@
 <template>
-	<view class="content_style">
+	<view class="content_style" id="viewReport">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="''"></NavBarCompontent>
 		<view class="titleText" v-if="openKey">
@@ -154,13 +154,13 @@ font-weight: 600;
 color: #FFFFFF;
 line-height: 72upx;
 text-align: right;
-margin-top: 10upx;">82</van-col>
+margin-top: 10upx;">{{bodyFraction}}</van-col>
 					</van-row>
 					<van-row >
 					  <van-col span="24">再努力一点会更好哦！</van-col>
 					</van-row>
 					<view style="margin-top: 44upx;">
-						<van-progress :percentage="82" 
+						<van-progress :percentage="bodyFraction" 
 						stroke-width="8"  
 						color="#01E08C"
 						:show-pivot="false"
@@ -172,49 +172,49 @@ margin-top: 10upx;">82</van-col>
 				    	<view class="textContent">
 				    		<van-row class="text">
 				    		  <van-col span="12">身高</van-col>
-				    		  <van-col span="12" class="textRight">180cm</van-col>
+				    		  <van-col span="12" class="textRight">{{bodyTestData.height}}cm</van-col>
 				    		</van-row>
 				    	</view>
 				    	<view class="textContent">
 				    		<van-row class="text">
 				    		  <van-col span="17">体重（标准：70kg）</van-col>
-				    		  <van-col span="7" class="textRight">80kg</van-col>
+				    		  <van-col span="7" class="textRight">{{bodyTestData.weight}}kg</van-col>
 				    		</van-row>
 				    	</view>
 				    	<view class="textContent">
 				    		<van-row class="text">
 				    		  <van-col span="17">肌肉量（标准：60kg）</van-col>
-				    		  <van-col span="7" class="textRight">50kg</van-col>
+				    		  <van-col span="7" class="textRight">{{bodyTestData.muscleMass}}kg</van-col>
 				    		</van-row>
 				    	</view>
 				    	<view class="textContent">
 				    		<van-row class="text">
 				    		  <van-col span="17">体脂量（标准：30kg）</van-col>
-				    		  <van-col span="7" class="textRight">15kg</van-col>
+				    		  <van-col span="7" class="textRight">{{bodyTestData.fatMass}}kg</van-col>
 				    		</van-row>
 				    	</view>
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="17">体脂百分比（标准：18%）</van-col>
-							  <van-col span="7" class="textRight">30%</van-col>
+							  <van-col span="7" class="textRight">{{bodyTestData.fatPer}}%</van-col>
 							</van-row>
 						</view>
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="17">腰臀百分比（标准：15%）</van-col>
-							  <van-col span="7" class="textRight">25%</van-col>
+							  <van-col span="7" class="textRight">{{bodyTestData.buttockPer}}%</van-col>
 							</van-row>
 						</view>
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="17">基础代谢（标准：2200cal）</van-col>
-							  <van-col span="7" class="textRight">1800cal</van-col>
+							  <van-col span="7" class="textRight">{{bodyTestData.basal}}cal</van-col>
 							</van-row>
 						</view>
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="17">体水分（标准：40%）</van-col>
-							  <van-col span="7" class="textRight">20%</van-col>
+							  <van-col span="7" class="textRight">{{bodyTestData.bodyMisture}}%</van-col>
 							</van-row>
 						</view>
 				    </view>
@@ -492,6 +492,7 @@ margin-top: 10upx;">82</van-col>
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
+	import html2canvas from 'html2canvas'
 	const user = uniCloud.importObject('my');
 	const testOb = uniCloud.importObject("testResults");
 	const busOb = uniCloud.importObject('businessCloudObject');
@@ -505,6 +506,8 @@ margin-top: 10upx;">82</van-col>
 				mobileNumber:0,
 				openKey:true,
 				key:'',
+				bodyTestData:[],
+				bodyFraction:0,
 				dynamicEvaluationdata: [
 					{
 						title: "俯卧撑耐力测试",
@@ -578,13 +581,14 @@ margin-top: 10upx;">82</van-col>
 			}
 		  }
 		  this.getPosture();
+		  this.getBodyTestData();
 		},
 		methods: {
 			async getUserInfo(){
 				const data ={};
 				data["traineeId"] = this.traineeNo;
 				testOb.getOnlyList(data).then((res)=>{
-					console.log(res.data)
+					// console.log(res.data)
 					this.personName =  res.data[0].traineeName;
 					this.gender = res.data[0].gender
 					this.mobileNumber = res.data[0].mobile
@@ -613,7 +617,7 @@ margin-top: 10upx;">82</van-col>
 			              age[0]--
 			              age[1] += 12
 			          }
-			          console.log(age[0]+'岁'+age[1]+'月'+age[2]+'天');
+			          // console.log(age[0]+'岁'+age[1]+'月'+age[2]+'天');
 					  return age[0];
 			},
 			//通过传入的type值来更新等级颜色
@@ -642,9 +646,9 @@ margin-top: 10upx;">82</van-col>
 				const data = {};
 				data["traineeNo"] = this.traineeNo;
 				data["questionCode"] = "A0005";
-				console.log(data)
+				// console.log(data)
 			testOb.opearConfigQuery(data).then((res)=>{
-					console.log(res)
+					// console.log(res)
 					if(res.success){
 						this.queryUserActionData = res.data
 						busOb.getPhysicalChildAssessmentList("A0005").then((res)=>{
@@ -654,7 +658,7 @@ margin-top: 10upx;">82</van-col>
 								item['type']=0;
 								item['typeColor'] = this.levelColor(item.typeText);
 								item['path'] = '/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation';
-								console.log(item)
+								// console.log(item)
 							})
 							for(let j = 0;j<this.queryUserActionData.length;j++){
 								for(let i=0;i<this.queryData.length;i++){
@@ -667,7 +671,7 @@ margin-top: 10upx;">82</van-col>
 									}
 								}
 							}
-							console.log(this.queryData)
+							// console.log(this.queryData)
 						}).catch((err)=>{
 						});
 					}
@@ -678,7 +682,7 @@ margin-top: 10upx;">82</van-col>
 				const data = {};
 				data["traineeNo"] = this.traineeNo;
 				data["questionCode"] = "A0003";
-				console.log(data);
+				// console.log(data);
 				testOb.opearConfigQuery(data).then((res)=>{
 						if(res.success){
 							this.assessmentNewData = res.data[0].postData
@@ -737,9 +741,19 @@ margin-top: 10upx;">82</van-col>
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
-							console.log(this.assessmentTrueData)
+							// console.log(this.assessmentTrueData)
 						}
 					}).catch();
+			},
+			getBodyTestData(){
+				const data = {};
+				data["traineeNo"] = this.traineeNo;
+				data["questionCode"] = "A0002";
+				testOb.opearConfigQuery(data).then((res)=>{
+					this.bodyTestData = res.data[0].bodyTestReport;
+					console.log(this.bodyTestData)
+					this.bodyFraction = Number(this.bodyTestData.bodyFraction)
+				})
 			}
 		},
 		components: {
@@ -747,6 +761,37 @@ margin-top: 10upx;">82</van-col>
 			NavBarCompontent
 		},
 	}
+</script>
+<script lang="renderjs" module="canvasImage">
+import html2canvas from 'html2canvas'
+export default {
+	methods: {
+		generateImage(callback) {
+			setTimeout(() => {
+				const dom = document.getElementById('viewReport'); // 需要生成图片内容的 dom 节点
+				html2canvas(dom, {
+					width: dom.clientWidth, //dom 原始宽度
+					height: dom.clientHeight,
+					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
+					scrollX: 0,
+					useCORS: true, //支持跨域
+					// scale: 1, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
+				}).then((canvas) => {
+					const base64 = canvas.toDataURL('image/png');
+					callback&&callback(base64);
+				}).catch(err=>{})
+			}, 300);
+		},
+		updateEcharts(newValue, oldValue, ownerInstance, instance) {
+			// 监听 service 层数据变更
+			if(newValue){
+				this.generateImage((base64)=>{
+					ownerInstance.callMethod('receiveRenderData', {name:newValue,base64});
+				})
+			}
+		}
+	}
+}
 </script>
 
 <style>
