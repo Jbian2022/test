@@ -63,16 +63,18 @@
       <van-button type="default" @click="goBack">取消</van-button>
       <van-button block type="primary" @click="goNewWorkout">确认添加（{{selectNum}}）</van-button>
     </view>
-    <van-dialog v-model:show="showDialog" :showConfirmButton="false">
-      <view class="dialog-section">
-        <view class="dialog-title">是否确认删除</view>
-        <view class="dialog-content">确认删除该动作吗？删除后无法恢复</view>
-        <view class="dialog-btn-box">
-          <van-button type="default" @click="showDialog=false">取消</van-button>
-          <van-button type="primary" @click="deleteHandle">确认</van-button>
+    <uni-popup ref="popup" type="center" mask-background-color="rgba(20, 21, 23, 0.6)">
+      <view class="dialog">
+        <view class="dialog-section">
+          <view class="dialog-title">是否确认删除</view>
+          <view class="dialog-content">确认删除该动作吗？删除后无法恢复</view>
+          <view class="dialog-btn-box">
+            <van-button type="default" @click="closePopup">取消</van-button>
+            <van-button type="primary" @click="deleteHandle">确认</van-button>
+          </view>
         </view>
       </view>
-    </van-dialog>
+    </uni-popup>
   </view>
 </template>
 
@@ -265,38 +267,41 @@ export default {
     selectClick(item,info) {
       if (item.text === '删除动作') {
         this.currentAction = info
-        this.showDialog = true
+        this.$refs.popup.open()
       } else if(item.text === '修改动作'){
-        uni.navigateTo({
+        uni.reLaunch({
           url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${this.actionClass}&update=1&id=${info._id}&actionName=${info.actionName}&actionType=${info.actionType}`,
         })
       }
     },
     addActionHandle(z) {
       if(this.mode===0&&z==='z') {
-        uni.navigateTo({
+        uni.reLaunch({
           url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=10`,
         })
       } else if(this.mode===1&&z==='z') {
-        uni.navigateTo({
+        uni.reLaunch({
           url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=20`,
         })
       } else {
-        uni.navigateTo({
+        uni.reLaunch({
           url: '/pages/addAction/index'+`?type=${this.mode}&actionClass=${this.actionClass}`,
         })
       }
     },
     async deleteHandle(){
-      this.showDialog = false
+      this.$refs.popup.close()
       const res = await actionLibrary.deleteAction({id:this.currentAction._id})
       uni.showToast({	title: '删除成功',	duration: 1000});
       this.getActionList()
     },
+    closePopup(){
+      this.$refs.popup.close()
+    },
     goBack(){
       uni.setStorageSync('actionLibraryType', 'show')
       uni.setStorageSync('actionList', JSON.stringify([]))
-      uni.navigateTo({
+      uni.reLaunch({
         url: '/pages/newWorkout/newWorkout'
       });
       this.actionList = []
@@ -305,7 +310,7 @@ export default {
     goNewWorkout(){
       uni.setStorageSync('actionLibraryType', 'show')
       uni.setStorageSync('actionList', JSON.stringify(this.selectActionList))
-      uni.navigateTo({
+      uni.reLaunch({
         url: '/pages/newWorkout/newWorkout'
       });
       this.actionList = []
@@ -400,7 +405,7 @@ export default {
     }
   }
   .content {
-    height: calc(100vh - 210upx - var(--status-bar-height));
+    height: calc(100vh - 250upx - var(--status-bar-height));
     box-sizing: border-box;
     display: flex;
     .sidebar {
@@ -448,7 +453,7 @@ export default {
     }
     .action-list {
       .action-list-view {
-        height: calc(100% - 50upx);
+        height: calc(100% - 20upx);
         padding-right: 30upx;
         overflow-y: auto;
         .classify-box{
@@ -537,6 +542,10 @@ export default {
       height: calc(100vh - 380upx);
     }
   }
+  .dialog {
+    background: #383d46;
+    border-radius: 24upx;
+  }
   .dialog-section {
     padding: 50upx;
     .dialog-title {
@@ -545,6 +554,7 @@ export default {
       font-size: 52upx;
       color: #f4f7ff;
       line-height: 72upx;
+      font-weight: 600;
       &::after {
         content: '';
         margin-left: 20upx;

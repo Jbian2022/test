@@ -407,6 +407,10 @@
 						}
 					})
 				}
+				const traineeName = uni.getStorageSync('traineeName');
+				if(traineeName){
+					this.traineeName = traineeName
+				}
 			} catch (e) {
 				// error
 			}
