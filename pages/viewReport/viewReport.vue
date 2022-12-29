@@ -844,7 +844,7 @@ import { now } from 'moment';
 				});
 			},
 			receiveRenderData(option) {
-				this.$refs.popup.close()
+				this.showShare = false;
 			    console.log(option.name, 8888)
 				this.baseUrl = option.base64;
 				this.uploadImage((url)=>{
