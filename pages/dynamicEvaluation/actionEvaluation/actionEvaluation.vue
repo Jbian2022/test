@@ -2,7 +2,7 @@
 	<view class="content_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
-		<view class="headBox">
+		<view class="headBox" v-if="actionobs.length==1 ? false:true">
 			<view class="block"
 			v-for="(item, index) in actionobs"
 			:key="index"

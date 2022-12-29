@@ -1,7 +1,8 @@
 <template>
-	<view class="content_style" id="viewReport">
+	<view class="content_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="''"></NavBarCompontent>
+		<view id="viewReport">
 		<view class="titleText" v-if="openKey">
 			<van-row class="titleTopText">
 			  <van-col span="12">体测报告</van-col>
@@ -472,12 +473,16 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				</van-collapse-item>
 			</van-collapse>
 		</view>
+		</view>
 		<view v-if="openKey">
+			<!-- #ifdef APP-PLUS || H5 -->
+			<view :prop="canvasImageMsg" :change:prop="canvasImage.updateEcharts" id="canvasImage"></view>
+			<!-- #endif -->
 			<van-button
 			type="primary" 
 			class="shareButton" 
 			icon="../../static/app-plus/other/share.png"
-			@click="showShare = true">分享报告</van-button>
+			@click="saveReport">分享报告</van-button>
 			<van-share-sheet
 			  v-model:show="showShare"
 			  :options="options"
@@ -514,6 +519,7 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
 	import html2canvas from 'html2canvas'
+import { now } from 'moment';
 	const user = uniCloud.importObject('my');
 	const testOb = uniCloud.importObject("testResults");
 	const busOb = uniCloud.importObject('businessCloudObject');
@@ -572,6 +578,10 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				queryUserActionData:{},
 				assessmentNewData:{},
 				assessmentTrueData:[],
+				baseUrl: null,
+				url: null,
+				canvasImageMsg: null,
+				isFixedTop:false
 			}
 		},
 		setup() {
@@ -784,9 +794,102 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 			},
 			saveReport(){
 				const data = {};
+				let date = new Date();
 				data["traineeNo"] = this.traineeNo;
-				
-			}
+				data["bodyTestData"] = this.bodyTestData;
+				data["assessmentTrueData"] = this.assessmentTrueData;
+				data["queryData"] = this.queryData;
+				data["saveDate"] = date;
+				console.log(data)
+				this.showShare = true;
+			},
+			async uploadImage(callback){
+				const result = await train.uploadBase64({
+					base64: this.baseUrl
+				});
+				this.url =  result.fileID;
+				this.canvasImageMsg = null;
+				callback&&callback(this.url);
+			},
+			downloadFile(){
+				uni.downloadFile({
+					url: this.url, //仅为示例，并非真实的资源
+					success: (res) => {
+						if (res.statusCode === 200) {
+							console.log('下载成功',res);
+							uni.saveImageToPhotosAlbum({
+								filePath: res.tempFilePath,
+								success: (res) => {
+									console.log('保存成功！',res);
+									uni.hideLoading();
+									uni.showModal({
+										showCancel: false,
+										title: '提示',
+										content: '图片已经保存到相册请查看',
+										success: function (res) {
+											if (res.confirm) {
+												console.log('用户点击确定');
+											} else if (res.cancel) {
+												console.log('用户点击取消');
+											}
+										}
+									});
+								},
+								fail:(err)=>{
+									console.log('err',err);
+								}
+							});
+						}
+					},
+				});
+			},
+			receiveRenderData(option) {
+				this.$refs.popup.close()
+			    console.log(option.name, 8888)
+				this.baseUrl = option.base64;
+				this.uploadImage((url)=>{
+					uni.showLoading({ title: '加载中'});
+					// #ifndef H5
+					if(option.name==='保存到相册'){
+						this.downloadFile()
+					} else {
+						if(option.name==='分享到微信'){
+							uni.share({
+								provider: "weixin",
+								scene: "WXSceneSession",
+								type: 2,
+								imageUrl: url,
+								success: function (res) {
+									console.log("success:" + JSON.stringify(res));
+									uni.hideLoading();
+								},
+								fail: function (err) {
+									console.log("fail:" + JSON.stringify(err));
+								}
+							});
+						} else if (option.name==='分享到朋友圈') {
+							uni.share({
+								provider: "weixin",
+								scene: "WXSceneTimeline",
+								type: 2,
+								imageUrl: url,
+								success: function (res) {
+									console.log("success:" + JSON.stringify(res));
+									uni.hideLoading();
+								},
+								fail: function (err) {
+									console.log("fail:" + JSON.stringify(err));
+								}
+							});
+						}
+					}
+					// #endif
+				})
+			},
+			onSelect(option) {
+				console.log(option,88)
+				this.canvasImageMsg = option.name
+			},
 		},
 		components: {
 			BgTheamCompontent,
