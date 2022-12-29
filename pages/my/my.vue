@@ -335,7 +335,7 @@
 		height: 346upx;
 		padding: 40upx;
 		box-sizing: border-box;
-		background: rgba(56, 61, 70, .5);
+		background: rgba(56, 61, 70, .6);
 		border-radius: 24upx;
 		.title{
 			font-size: 30upx;
@@ -349,7 +349,7 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				background: #4B525E;
+				background: rgba(75, 82, 94, .5);
 				height: 90upx;
 				border-radius: 16upx;
 				padding: 0 30upx;
