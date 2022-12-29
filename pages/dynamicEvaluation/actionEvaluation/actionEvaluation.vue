@@ -22,7 +22,7 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video :src="FrontVideoUrl" wid autoplay>
+					<video :src="FrontVideoUrl" wid autoplay loop :controls="false">
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -53,7 +53,7 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video :src="SideVideoUrl" wid autoplay>
+					<video :src="SideVideoUrl" wid autoplay loop :controls="false">
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -286,15 +286,15 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1490upx;
+	height: 1400upx;
 	background: #383D46;
 	border-radius: 16upx;
-	backdrop-filter: blur(3upx);
+	/* backdrop-filter: blur(3upx); */
 	z-index: 999;
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	height: 1490upx;
+	height: 1400upx;
 	margin-top: 270upx;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
@@ -327,7 +327,7 @@
 	line-height: 36upx;
 }
 .clickActionEnd{
-	width: 240upx;
+	width: 230upx;
 	height: 80upx;
 	background: #000000;
 	border-radius: 40upx;
@@ -337,7 +337,7 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 666upx;
+	margin-top: 600upx;
 }
 .clickActionEnd image{
 	width: 32upx;

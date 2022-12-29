@@ -15,30 +15,37 @@
 		<view class="footer-button">
 			<van-button block @click="updateUserInfo">确认</van-button>
 		</view>
-		<uni-popup ref="popup" type="bottom">
-			<view class="select-box">
-				<view class="list">
-					<view class="list-item" v-for="(item,index) in columns" :key="index" @click="selectHandle(item)">{{item.name}}</view>
-				</view>
-				<div class="butn" @click="close">取消</div>
-			</view>
-		</uni-popup>
+		<Mpicker
+			mode="bottom"
+			:show.sync="sexShow"
+			:range="range"
+			:rangeKey="'text'"
+			@confirm="sexConfirm"
+			@cancel="sexShow = false"
+			:pickerType="'ordinary'"
+			:defaultIndex="0"
+		></Mpicker>
 	</view>
 </template>
 
 <script>
 	const My = uniCloud.importObject('my')
+	import Mpicker from '../../components/mPicker.vue/mPicker.vue'
 	export default {
+		components: {
+			Mpicker
+		},
 		data() {
 			return {
 				title:"签名",
 				text: null,
 				genderName: null,
-				showPicker: false,
-				columns:[
-					{ name: '男', value: 1 },
-					{ name: '女', value: 2 }
-				]
+				sexShow: false,
+				range: [
+					{ text: '未知', value: '0' },
+					{ text: '男', value: '1' },
+					{ text: '女', value: '2' }
+				],
 			}
 		},
 		onLoad: function (option) {
@@ -90,29 +97,27 @@
 				console.log(res,88)
 				this.onClickLeft()
 			},
-			selectHandle(val){
-				if(val.name==='未知'){
+			sexConfirm(e) {
+				const val = this.range[e[0]].value
+				if(val==='0'){
 					this.text = 0
 					this.genderName = '未知'
-				} else if (val.name==='男') {
+				} else if (val==='1') {
 					this.text = 1
 					this.genderName = '男'
-				} else if (val.name==='女') {
+				} else if (val==='2') {
 					this.text = 2
 					this.genderName = '女'
 				}
-				this.$refs.popup.close()
+				this.sexShow = false
 			},
 			onClickLeft(){
 				// uni.navigateBack()
 				uni.navigateTo({url:'/pages/personalInfo/personalInfo'})
 			},
 			open(){
-				this.$refs.popup.open()
-			},
-			close(){
-				this.$refs.popup.close()
-			},
+				this.sexShow = true
+			}
 		},
 		onBackPress(){
 			uni.navigateTo({url:'/pages/personalInfo/personalInfo'})
