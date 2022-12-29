@@ -231,8 +231,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				title-class="informationTitleText"
 				class="informationCard">
 				<view class="bodyAssessment" v-for="(item,index) in assessmentTrueData">
-					<view style="width: 10px;
-								height: 10px;
+					<view style="width: 5px;
+								height: 5px;
 								background: #FFC13C;
 								border-radius: 100%;
 								display: inline-flex;
@@ -301,8 +301,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				title-class="informationTitleText"
 				class="informationCard">
 				    <view class="bodyAssessment">
-						<view style="width: 10px;
-								height: 10px;
+						<view style="width: 5px;
+								height: 5px;
 								background: #FFC13C;
 								border-radius: 100%;
 								display: inline-flex;
@@ -318,8 +318,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 						</view>
 					</view>
 					<view class="bodyAssessment">
-						<view style="width: 10px;
-								height: 10px;
+						<view style="width: 5px;
+								height: 5px;
 								background: #FFC13C;
 								border-radius: 100%;
 								display: inline-flex;
@@ -472,19 +472,40 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				</van-collapse-item>
 			</van-collapse>
 		</view>
-		
-		<van-button
-		type="primary" 
-		class="shareButton" 
-		icon="../../static/app-plus/other/share.svg"
-		@click="showShare = true">分享报告</van-button>
-		<van-share-sheet
-		  v-model:show="showShare"
-		  :options="options"
-		  @select="onSelect"
-		  cancel-text=""
-		  class="shareBlock"
-		/>
+		<view v-if="openKey">
+			<van-button
+			type="primary" 
+			class="shareButton" 
+			icon="../../static/app-plus/other/share.png"
+			@click="showShare = true">分享报告</van-button>
+			<van-share-sheet
+			  v-model:show="showShare"
+			  :options="options"
+			  @select="onSelect"
+			  cancel-text=""
+			  class="shareBlock"
+			/>
+		</view>
+		<view v-if="!openKey">
+			<view 
+			class="buttontrue"
+			@click="showHistory = true">历史评测记录
+			<!-- <image src="../../../static/app-plus/mebrs/openarrit.png"></image> -->
+			<image src="../../static/app-plus/mebrs/openarrit.png"></image>
+			</view>
+<!-- 			<van-button
+			type="primary" 
+			class="historyView" 
+			icon="../../static/app-plus/other/share.png"
+			@click="showShare = true">历史评测记录</van-button> -->
+			<van-share-sheet
+			  v-model:show="showHistory"
+			  :options="history"
+			  @select="onSelect"
+			  cancel-text=""
+			  class="shareBlock"
+			/>
+		</view>
 	</view>
 </template>
 
@@ -531,10 +552,16 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 					}
 				],
 				showShare:false,
+				showHistory:false,
 				options:[
-				  { name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.svg' },
-				  { name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.svg' },
-				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.svg' }
+				  { name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.png' },
+				  { name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.png' },
+				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.png' }
+				],
+				history:[
+					{ name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.svg' },
+					{ name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.svg' },
+					{ name: '保存到相册', icon: '../../static/app-plus/other/savePhone.svg' }
 				],
 				getOnlyLists:{},
 				traineeNo:'',
@@ -754,6 +781,11 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 					console.log(this.bodyTestData)
 					this.bodyFraction = Number(this.bodyTestData.bodyFraction)
 				})
+			},
+			saveReport(){
+				const data = {};
+				data["traineeNo"] = this.traineeNo;
+				
 			}
 		},
 		components: {
@@ -1016,7 +1048,7 @@ export default {
 		line-height: 50upx;
 		text-align: center;
 		float: right;
-		margin-right: 90upx;
+		margin-right: 20upx;
 		margin-top: 15upx;
 		padding-right: 20upx;
 	}
@@ -1043,5 +1075,35 @@ export default {
 		font-weight: 400;
 		color: #BDC3CE;
 		line-height: 42upx;
+	}
+	.historyView{
+		width: 690px;
+		height: 100px;
+		background: #454951;
+		border-radius: 16px;
+	}
+	.buttontrue{
+	background: #454951;
+	  border-radius: 16upx;
+	  margin-top: 30upx;
+	  margin-bottom: 30upx;
+	  font-size: 32upx;
+	  font-family: PingFangSC-Semibold, PingFang SC;
+	  font-weight: 600;
+	  color: #ffffff;
+	  line-height: 100upx;
+	  text-align: center;
+	  justify-content: center;
+	
+	  width: calc(100vw - 80upx);
+	  margin-left: 40upx;
+	
+	  display: flex;
+	}
+	.buttontrue image{
+		width: 32upx;
+		height: 32upx;
+		top: 34upx;
+		left: 20upx;
 	}
 </style>
