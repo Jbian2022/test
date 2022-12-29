@@ -2,6 +2,7 @@
 	<view class="content_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="'体态评估'"></NavBarCompontent>
+		<view class="watermark">数据评测来源于世界权威机构</view>
 		<view class="bgimg"></view>
 		<view class="content">
 			<van-row>
@@ -32,7 +33,7 @@
 				  v-show="!textShow2" 
 				  style="top: 42upx;position: relative;">
 				  		<view>高低肩</view>
-				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
+				  		<view>紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。</view>
 				  </view>
 			  </van-col>
 			</van-row>
@@ -64,7 +65,7 @@
 				  v-show="!textShow4"
 				  style="top: 60upx;position: relative;">
 				  		<view>驼背</view>
-				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
+				  		<view>紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。</view>
 				  </view>
 			  </van-col>
 			</van-row>
@@ -96,7 +97,7 @@
 				  v-show="!textShow6"
 				  style="top: 740upx;">
 				  		<view>骨盆后倾</view>
-				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
+				  		<view>紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。</view>
 				  </view>
 			  </van-col>
 			</van-row>
@@ -128,7 +129,7 @@
 				  v-show="!textShow8"
 				  style="top: 1300upx;">
 				  		<view>足部外翻</view>
-				  		<view>"紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。"</view>
+				  		<view>紧张肌肉：上斜方肌，肩胛提肌，菱形肌。无力肌肉：中下斜方肌，菱形肌，岗下肌。</view>
 				  </view>
 			  </van-col>
 			</van-row>
@@ -471,6 +472,16 @@
 	border-radius: 16upx;
 	margin-left: 30upx;
 	margin-top: 40upx;
+	font-weight: 600;
 	line-height: 100upx;
+}
+.watermark{
+	position: absolute;
+	font-size: 24upx;
+	font-family: PingFangSC-Regular, PingFang SC;
+	font-weight: 400;
+	color: #7A7F89;
+	top: 90upx;
+	right: 30upx;
 }
 </style>

@@ -2,6 +2,7 @@
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent :leftNavTitle="'动态评估'"></NavBarCompontent>
+	<view class="watermark">数据评测来源于世界权威机构</view>
     <van-row style="background-color: #343a44">
       <van-col class="need_scoll" span="24">
         <view
@@ -61,11 +62,16 @@ export default {
         { title: '肩关节灵活测试', type: 'E0004' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=关节灵活测试'},
         { title: '俯卧撑稳定性测试', type: 'E0005' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试'}
       ],
-      icon: true
+      icon: true,
+	  traineeNo:'',
+	  questionCode:''
     }
   },
   onLoad: function (item) {
   		this.getPageData()
+		console.log(item)
+		this.traineeNo = item.traineeNo;
+		this.questionCode = item.questionCode;
   },
   methods: {
     setup() {
@@ -75,9 +81,9 @@ export default {
       }
     },
 	jumpModular(item) {
-	  // console.log(item.path,'>>>>')
+	  console.log(item.path,'>>>>')
 	  uni.navigateTo({
-	    url: item.path+"&type="+item.type,
+	    url: item.path+"&type=" + item.type+'&traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode,
 	    success: (res) => {},
 	    fail: () => {},
 	    complete: () => {}
@@ -89,6 +95,7 @@ export default {
 		})
 	},
 	getdynamicEvaluationdata(){
+		console.log(this.traineeNo)
 		uni.redirectTo({
 			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
 		})
@@ -186,5 +193,14 @@ export default {
 .need_scoll {
   height: 82vh !important;
   overflow-y: auto;
+}
+.watermark{
+	position: absolute;
+	font-size: 24upx;
+	font-family: PingFangSC-Regular, PingFang SC;
+	font-weight: 400;
+	color: #7A7F89;
+	top: 90upx;
+	right: 30upx;
 }
 </style>
