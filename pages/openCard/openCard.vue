@@ -155,7 +155,9 @@
 				this.payMoney = item.money
 			},
 			onClickLeft(){
-				uni.navigateBack()
+				uni.switchTab({
+					url: '/pages/my/my'
+				});
 			},
 		}
 	}
