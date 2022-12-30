@@ -38,11 +38,60 @@
 					</view>
 				</view>
 			</van-popup>
+			<view class="actinQuessonContent">
+				<view
+				 v-for="(item,index) in quession1"
+				 :style="item.style">
+					<view class="quessonName" v-if="item.status" @click.stop="clickQ(item)">
+						<p>{{item.answerTitle}}</p>
+					</view>
+					<view class="clickQuessonName" v-if="!item.status" @click.stop="clickQ(item)">
+						<view class="quessonTitle">
+							{{item.answerTitle}}
+						</view>
+						<view class="quessonText">
+							{{item.answeerContent}}
+						</view>
+					</view>
+				</view>
+				<!-- <view style="position: absolute;
+							z-index: 2;
+							top: 670upx;
+							left: 530upx;">
+					<view class="quessonName" v-if="true">
+						<p>躯干一侧偏移</p>
+					</view>
+					<view class="clickQuessonName" v-if="false">
+						<view class="quessonTitle">
+							躯干一侧偏移
+						</view>
+						<view class="quessonText">
+							问题描述：股四头肌和髋关节屈肌活跃，臀部
+						</view>
+					</view>
+				</view>
+				<view style="position: absolute;
+							z-index: 2;
+							top: 1040upx;
+							left: 530upx;">
+					<view class="quessonName" v-if="true">
+						<p>足背屈不足</p>
+					</view>
+					<view class="clickQuessonName" v-if="false">
+						<view class="quessonTitle">
+							足背屈不足
+						</view>
+						<view class="quessonText">
+							问题描述：股四头肌和髋关节屈肌活跃，臀部
+						</view>
+					</view>
+				</view> -->
+			</view>
 			<image class="imagebg" :src="backimgFront"/>
 		</view>
 		<view class="contentBody" v-else>
 			<view
-			class="clickAction" 
+			class="clickAction"  
 			@click.native="showPopup">标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
@@ -69,6 +118,72 @@
 					</view>
 				</view>
 			</van-popup>
+			
+			<view class="actinQuessonContent">
+				<view
+				 v-for="(item,index) in quession2"
+				 :style="item.style">
+					<view class="quessonName" v-if="item.status" @click.stop="clickQ(item)">
+						<p>{{item.answerTitle}}</p>
+					</view>
+					<view class="clickQuessonName" v-if="!item.status" @click.stop="clickQ(item)">
+						<view class="quessonTitle">
+							{{item.answerTitle}}
+						</view>
+						<view class="quessonText">
+							{{item.answeerContent}}
+						</view>
+					</view>
+				</view>
+				<!-- <view style="position: absolute;
+							z-index: 2;
+							top: 800upx;
+							left: 60upx;">
+					<view class="quessonName" v-if="false">
+						<p>背部过度拱起</p>
+					</view>
+					<view class="clickQuessonName" v-if="true">
+						<view class="quessonTitle">
+							背部过度拱起
+						</view>
+						<view class="quessonText">
+							问题描述：股四头肌和髋关节屈肌活跃，臀部
+						</view>
+					</view>
+				</view>
+				<view style="position: absolute;
+							z-index: 2;
+							top: 670upx;
+							left: 530upx;">
+					<view class="quessonName" v-if="true">
+						<p>头部过度抬起</p>
+					</view>
+					<view class="clickQuessonName" v-if="false">
+						<view class="quessonTitle">
+							头部过度抬起
+						</view>
+						<view class="quessonText">
+							问题描述：股四头肌和髋关节屈肌活跃，臀部
+						</view>
+					</view>
+				</view>
+				<view style="position: absolute;
+							z-index: 2;
+							top: 1040upx;
+							left: 530upx;">
+					<view class="quessonName" v-if="true">
+						<p>胫骨和躯干不平衡</p>
+					</view>
+					<view class="clickQuessonName" v-if="false">
+						<view class="quessonTitle">
+							胫骨和躯干不平衡
+						</view>
+						<view class="quessonText">
+							问题描述：股四头肌和髋关节屈肌活跃，臀部
+						</view>
+					</view>
+				</view> -->
+			</view>
 			
 			<image class="imagebg" :src="backimgSide"
 			/>
@@ -157,6 +272,8 @@
 				traineeNo:'',
 				questionCode:'',
 				icon: true,
+				clickQuession1:true,
+				clickQuession2:true,
 				backimgFront:"",
 				backimgSide:"",
 				FrontVideoUrl:"",
@@ -185,7 +302,10 @@
 				//肩关节灵活性测试2
 				shoulderTest2Url:"../../../static/app-plus/video/shoulderTest2.mp4",
 				//五，俯卧撑稳定性测试
-				pushUpTestUrl:"../../../static/app-plus/video/pushUpTest.mp4"
+				pushUpTestUrl:"../../../static/app-plus/video/pushUpTest.mp4",
+				quession1:[],
+				quession2:[],
+				quession3:[]
 			}
 		},
 		methods: {
@@ -210,38 +330,42 @@
 						console.log(res);
 						if(res.success){
 							this.actionobs = res.data
+							this.quession1 = this.actionobs[0].answer
+							this.quession2 = this.actionobs[1].answer
+							this.quession3 = this.actionobs[2].answer
 						}
-						console.log(this.actionobs);
 					})
 				}
 			},
 			actionResDate(){
-				console.log(this.traineeNo)
-					// const data = {};
-					// const actinData = {};
-					// data["traineeNo"] = this.traineeNo;
-					// data["questionCode"] = this.questionCode;
-					// data["code"] = this.actionData.code;
-					// actinData["actionVlue"] = this.resultValue;
-					// actinData["actionTypeText"] = this.typeText
-					// data["testDate"] = new Date();
-					// data["physicalData"] = actinData;
-					// data["status"] = "0";
-					// console.log(data)
-					// const res = testOb.opearConfig(data,"bodyTestReport").then(res => {
-					// 	console.log(res, '我要保存了')
-					// 	if (res.success) {
+				console.log(this.actionobs)
+					const data = {};
+					data["traineeNo"] = this.traineeNo;
+					data["questionCode"] = this.questionCode;
+					data["code"] = this.type;
+					data["actionTestResult"] = this.actionobs;
+					data["status"] = "0";
+					console.log(data)
+					tesOb.opearConfig(data,"bodyTestReport").then(res => {
+						console.log(res, '我要保存了')
+						if (res.success) {
 							uni.redirectTo({
 								url: '/pages/dynamicEvaluation/dynamicEvaluation' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
 							})
-					// 		uni.showToast({
-					// 		  icon: 'success',
-					// 		  title: res.message,
-					// 		  duration: 800
-					// 		})
-					// 	}
-					// }).catch(() =>{})
-					// console.log(res)
+							uni.showToast({
+							  icon: 'success',
+							  title: res.message,
+							  duration: 800
+							})
+						}
+					}).catch(() =>{})
+			},
+			clickQ(item){
+				if(item.status){
+					item.status = 0;
+				}else{
+					item.status = 1;
+				}				
 			}
 		}
 	}
@@ -263,7 +387,7 @@
 	overflow-x: hidden;
 }
 .block{
-	width: 335upx;
+	width: 348upx;
 	height: 90upx;
 	border-radius: 16upx;
 	float: left;
@@ -274,7 +398,7 @@
 	line-height: 90upx;
 	text-align: center;
 	background: #383D46;
-	margin-right: 45upx;
+	margin-right: 22upx;
 }
 .block0{
 	background: #195BC2;
@@ -372,7 +496,7 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 600upx;
+	margin-top: 620upx;
 }
 .clickActionEnd image{
 	width: 32upx;
@@ -393,5 +517,48 @@
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
+}
+.actinQuesson1{
+	position: absolute;
+	z-index: 2;
+	top: 800upx;
+	left: 80upx;
+}
+.quessonName{
+	width: 180upx;
+	/* height: 80upx; */
+	background: #212328;
+	border-radius: 16upx;
+	font-size: 26upx;
+	font-weight: 600;
+	color: #F4F7FF;
+	/* line-height: 80upx; */
+	padding-top: 20upx;
+	padding-bottom: 24upx;
+	padding-left: 15upx;
+	padding-right: 10upx;
+	/* text-align: center; */
+}
+.clickQuessonName{
+	width: 200upx;
+	/* height: 164upx; */
+	background: rgba(19,112,255,0.9);
+	border-radius: 16upx;
+	border: 2upx solid #1370FF;
+	padding: 20upx;
+}
+.quessonTitle{
+	font-size: 26upx;
+	font-weight: 600;
+	color: #F4F7FF;
+}
+.quessonText{
+	font-size: 18upx;
+	font-weight: 400;
+	color: #FFFFFF;
+	margin-top: 20upx;
+}
+::v-deep .van-popup{
+	background: #383D46;
 }
 </style>

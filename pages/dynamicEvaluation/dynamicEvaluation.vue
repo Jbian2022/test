@@ -12,14 +12,14 @@
           :key="index"
         >
           <view class="dynamicshow_left">
-            <view class="correct">
+            <view class="correct" v-if="!item.icon">
               <image
                 class="correct_img_style"
                 src="../../static/app-plus/other/yesActive.png"
               ></image>
             </view>
 
-            <view class="correct" v-if="!icon">
+            <view class="correct" v-if="item.icon">
               <image
                 class="correct_img_style"
                 src="../../static/app-plus/other/yesNoActive.png"
@@ -56,11 +56,11 @@ export default {
   data() {
     return {
       dynamicEvaluationdata: [
-        { title: '自重深蹲评估', type: 'E0001',path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估'},
-        { title: '胸椎活动评估', type: 'E0002' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估'},
-        { title: '柔韧性测试', type: 'E0003' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试'},
-        { title: '肩关节灵活测试', type: 'E0004' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=关节灵活测试'},
-        { title: '俯卧撑稳定性测试', type: 'E0005' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试'}
+        { title: '自重深蹲评估', type: 'E0001',path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估',icon:true},
+        { title: '胸椎活动评估', type: 'E0002' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估',icon:true},
+        { title: '柔韧性测试', type: 'E0003' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试',icon:true},
+        { title: '肩关节灵活测试', type: 'E0004' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=关节灵活测试',icon:true},
+        { title: '俯卧撑稳定性测试', type: 'E0005' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试',icon:true}
       ],
       icon: true,
 	  traineeNo:'',
@@ -68,10 +68,10 @@ export default {
     }
   },
   onLoad: function (item) {
-  		this.getPageData()
 		console.log(item)
 		this.traineeNo = item.traineeNo;
 		this.questionCode = item.questionCode;
+		this.getPageData()
   },
   methods: {
     setup() {
@@ -90,8 +90,21 @@ export default {
 	  })
 	},
 	getPageData(){
-		testOb.getPhysicalChildAssessmentList("dynamicEvaluation").then((res)=>{
-			console.log(res)
+		const data = {};
+		data["traineeNo"] = this.traineeNo;
+		data["questionCode"] = this.questionCode;
+		console.log(data)
+		busOb.opearConfigQuery(data).then((res)=>{
+			console.log(res.data)
+			res.data.forEach((item)=>{
+				this.dynamicEvaluationdata.filter((v)=>{
+					let resq = item.code == v.type;
+					console.log(resq)
+					if(resq){
+						v.icon = false;
+					}
+				})
+			})
 		})
 	},
 	getdynamicEvaluationdata(){
@@ -150,7 +163,7 @@ export default {
       // width: 216upx;
       height: 50upx;
       font-size: 36upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
+	  font-weight: 600;
       color: #f4f7ff;
       text-align: center;
       // margin: 80upx 130upx;
