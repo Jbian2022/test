@@ -620,6 +620,14 @@ import { now } from 'moment';
 		  this.getPosture();
 		  this.getBodyTestData();
 		},
+		//监测页面滑动
+		onPageScroll(e) {
+			if(e.scrollTop > uni.getWindowInfo().statusBarHeight){
+				this.isFixedTop = true
+			}else{
+				this.isFixedTop = false
+			}
+		},
 		methods: {
 			async getUserInfo(){
 				const data ={};
@@ -801,6 +809,9 @@ import { now } from 'moment';
 				data["queryData"] = this.queryData;
 				data["saveDate"] = date;
 				console.log(data)
+				testOb.saveReport(data).then((res)=>{
+					console.log(res)
+				})
 				this.showShare = true;
 			},
 			async uploadImage(callback){
@@ -978,7 +989,7 @@ export default {
 		margin: 30upx 30upx 0 30upx;
 	}
 	.basicInformationContent{
-		margin: 30upx 30upx 40upx 30upx;
+		/* margin: 30upx 30upx 40upx 30upx; */
 	}
 	.textContent{
 		margin-bottom: 30upx;

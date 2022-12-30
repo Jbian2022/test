@@ -255,7 +255,7 @@
 	position: relative;
 }
 .headBox{
-	width: calc(100vw - 60upx);
+	width: calc(100vw - 20upx);
 	height: 90upx;
 	margin: 0 auto;
 	margin-top: 20upx;
@@ -274,7 +274,7 @@
 	line-height: 90upx;
 	text-align: center;
 	background: #383D46;
-	margin-right: 25upx;
+	margin-right: 45upx;
 }
 .block0{
 	background: #195BC2;
