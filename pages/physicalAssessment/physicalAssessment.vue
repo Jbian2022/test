@@ -154,7 +154,14 @@ export default {
 					    JSON.stringify(v.postData) !== '{}'
 					      ? true
 					      : false
-						  console.log(v.bodyTestReport)
+					  let dynamicEvaluation = v.hasOwnProperty('actionTestResult')
+					    ? v.actionTestResult.filter((c) => c.length > 0)
+					    : []
+					  let physicalFitnessAssessment =
+					    v.hasOwnProperty('physicalData') &&
+					    JSON.stringify(v.physicalData) !== '{}'
+					      ? true
+					      : false
                       // console.log(needCompareData, '逆势')
                       if (needCompareData.length > 0) {
                         isFinsh = true
@@ -164,6 +171,12 @@ export default {
                       }
 					  if (postureAssessment) {
 					    isFinsh = true
+					  }
+					  if (dynamicEvaluation){
+						  isFinsh = true
+					  }
+					  if (physicalFitnessAssessment){
+						  isFinsh = true
 					  }
                     }
                   })

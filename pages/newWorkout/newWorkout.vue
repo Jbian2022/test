@@ -1,5 +1,7 @@
 <template>
 	<view class="new-workout">
+		<view class="background-header"></view>
+		<view class="background"></view>
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<view class="header">
 			<view class="title">新建训练</view>
@@ -493,7 +495,7 @@
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')
 				uni.removeStorageSync('traineeName')
-				uni.navigateTo({
+				uni.reLaunch({
 					url:
 					'/pages/trainingRecord/trainingRecord' +
 					`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
@@ -511,7 +513,7 @@
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')
 				uni.removeStorageSync('traineeName')
-				uni.navigateTo({
+				uni.reLaunch({
 					url:
 					'/pages/trainingRecord/trainingRecord' +
 					`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
@@ -648,7 +650,22 @@
 </script>
 
 <style lang="scss">
-page{
+.background-header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	height: 460upx;
+	background: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
+}
+.background{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -2;
+	height: 100vh;
 	background: #212328;
 }
 .status_bar {
@@ -656,6 +673,7 @@ page{
 	width: 100%;
 }
 .new-workout{
+	position: relative;
 	padding-bottom: 175upx;
 	.header{
 		height: 126upx;
@@ -665,7 +683,7 @@ page{
 		padding: 30upx;
 		font-size: 48upx;
 		color: #FFFFFF;
-		background: #212328;
+		background: transparent;
 		.title {
 			font-weight: 600;
 		}
@@ -686,7 +704,7 @@ page{
 		box-sizing: border-box;
 		padding: 0 30upx;
 		padding-bottom: 30upx;
-		background: #212328;
+		background: transparent;
 		.uni-input{
 			height: 100upx;
 			background: #383D46;
