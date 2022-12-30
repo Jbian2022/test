@@ -171,11 +171,12 @@
   z-index: -100;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 .bg_content .currency_style[data-v-826f61a7] {
   width: 100%;
   height: 14.375rem;
-  background-image: linear-gradient(to bottom, #343a44, #212328);
+  background: linear-gradient(to bottom, #343a44, #212328);
 }
 .bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
   width: 100%;
@@ -262,7 +263,14 @@
   color: #FFFFFF;
 }
 .nav_bar_style .nav_right_style[data-v-d4dd2266] {
-  width: 10%;
+  margin-right: 0.9375rem;
+  margin-top: 0.625rem;
+}
+.nav_bar_style .nav_right_style .authority_style[data-v-d4dd2266] {
+  font-size: 0.75rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #7A7F89;
 }
 [data-v-d4dd2266] .van-icon {
   font-size: 0.75rem !important;
@@ -657,8 +665,8 @@
   margin-top: 0.3125rem;
 }
 [data-v-67c2db77] .uni-forms {
-  width: calc(100vw - 2.5rem);
-  margin-left: 1.25rem;
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
 }
 [data-v-67c2db77] .uni-forms uni-form span .uni-forms-item {
   width: 100%;

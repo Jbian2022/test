@@ -4,7 +4,8 @@
 			"path": "pages/myMebers/myMebers",
 			"style": {
 				"navigationBarTitleText": "我的会员",
-				"enablePullDownRefresh": false,
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 100,
 				"navigationStyle": "custom",
 				"autoBackButton": false,
 				"app-plus": {
@@ -315,31 +316,27 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
-			"navigationBarTextStyle": "white",
-			"app-plus": {
-				"titleNView": false
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
+		},
+		{
+			"path": "pages/cancel/cancel",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/cancelAgreement/cancelAgreement",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
 			}
 		}
-	    ,{
-            "path" : "pages/cancel/cancel",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/cancelAgreement/cancelAgreement",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		// #ifdef APP-PLUS || H5
 		"app-plus": {

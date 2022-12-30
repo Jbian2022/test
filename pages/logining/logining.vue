@@ -332,7 +332,7 @@ export default {
     justify-content: center;
     align-items: center;
     .wx_img_style {
-      margin-top: 80upx;
+      margin-top: 116upx;
       width: 100upx;
       height: 100upx;
       object-fit: contain;

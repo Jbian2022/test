@@ -177,6 +177,7 @@ body {
 }
 .training-record .calendar {
   padding: 0 0.46875rem;
+  margin-top: 1.5625rem;
 }
 .training-record .calendar .calendar-title {
   font-size: 1.5rem;

@@ -32,11 +32,12 @@
   z-index: -100;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 .bg_content .currency_style[data-v-826f61a7] {
   width: 100%;
   height: 14.375rem;
-  background-image: linear-gradient(to bottom, #343a44, #212328);
+  background: linear-gradient(to bottom, #343a44, #212328);
 }
 .bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
   width: 100%;
@@ -123,7 +124,14 @@
   color: #FFFFFF;
 }
 .nav_bar_style .nav_right_style[data-v-d4dd2266] {
-  width: 10%;
+  margin-right: 0.9375rem;
+  margin-top: 0.625rem;
+}
+.nav_bar_style .nav_right_style .authority_style[data-v-d4dd2266] {
+  font-size: 0.75rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #7A7F89;
 }
 [data-v-d4dd2266] .van-icon {
   font-size: 0.75rem !important;
@@ -136,6 +144,9 @@
 		overflow: auto;
 		position: relative;
 		background-color: #212328;
+		background-image: url('../../static/app-plus/bg/bodysideReport.png');
+		background-repeat:no-repeat;
+		background-size: 100%;
 }
 .titleText{
 		margin: 0.3125rem 0.9375rem 0 0.9375rem;
@@ -171,7 +182,7 @@
 		width: calc(100vw - 1.875rem);
 		/* background: #383D46; */
 		border-radius: 0.75rem;
-		opacity: 0.6;
+		/* opacity: 0.6; */
 		margin: 0.9375rem 0.9375rem 0 0.9375rem;
 }
 .basicInformationContent{
@@ -325,4 +336,54 @@
  .van-share-sheet__option{
 		margin-left: 2.9375rem;
 		margin-right: -1.375rem;
+}
+.titleButton{
+		width: 5.9375rem;
+		height: 2.125rem;
+		background: #454951;
+		border-radius: 0.5rem;
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: #F4F7FF;
+		line-height: 2.125rem;
+		margin-right: 0;
+}
+.titleType{
+		width: 3.125rem;
+		height: 1.5625rem;
+		background: #1370FF;
+		border-radius: 0.25rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: #F4F7FF;
+		line-height: 1.5625rem;
+		text-align: center;
+		float: right;
+		margin-right: 2.8125rem;
+		margin-top: 0.46875rem;
+		padding-right: 0.625rem;
+}
+.circle{
+		width: 100px;
+		 height: 100px; 
+		 border: 4px solid #4B525E;    
+		 border-radius: 100px;
+		 line-height: 100px;
+}
+.circleText{
+		width: 3.75rem;
+		height: 1.5625rem;
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: #BDC3CE;
+		margin: 0 auto;
+		text-align: center;
+}
+.noEvaText{
+		width: 9.375rem;
+		height: 1.3125rem;
+		font-size: 0.9375rem;
+		font-weight: 400;
+		color: #BDC3CE;
+		line-height: 1.3125rem;
 }

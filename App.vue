@@ -35,11 +35,12 @@ export default {
         success: function (res) {
           // console.log(res, '我是token')
           if (res.data) {
+			  
             let login = uniCloud.importObject('login')
             login
               .checkToken(res.data)
               .then((checkTokenRes) => {
-                // console.log(checkTokenRes, 'token 换取')
+                console.log(checkTokenRes, 'token 换取')
               })
               .catch((err) => {
                 console.log(err, '我是错误')
@@ -60,6 +61,7 @@ export default {
             fail: () => {},
             complete: () => {}
           })
+		  uni.clearStorage()
         }
       })
     }

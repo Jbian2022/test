@@ -50,9 +50,12 @@
             >
           </view>
           <MemberList
+            ref="memberList"
             @getMemberList="getMemberList"
             :isActive="isActive"
             :type="'home'"
+            :page="page"
+            :currentNum="currentNum"
           ></MemberList>
         </scroll-view>
       </view>
@@ -110,15 +113,23 @@ export default {
       scrollTop: 0,
       cellingFlag: false,
       delteIndex: 0,
-      avatar: null
+      avatar: null,
+      addUpperLimit: null, // 添加限制
+      cocahMemberLimit: 0, //该教练下的学员数量
+      page: 10, // 10条
+      currentNum: 1 //第一页
     }
   },
   watch: {
     scrollTop: {}
   },
   onLoad() {},
-  onShow() {
-    uni.showTabBar();
+  onPullDownRefresh() {
+    this.$refs.memberList.getMemberList(this.isActive)
+    uni.stopPullDownRefresh()
+  },
+  onReachBottom() {
+    console.log(2222)
   },
   created() {},
   mounted() {
@@ -142,7 +153,7 @@ export default {
     this.getUserInfor()
   },
   onShow() {
-  	this.getUserInfor()
+    this.getUserInfor()
   },
   methods: {
     // 获取用户信息
@@ -154,11 +165,23 @@ export default {
           .then((res) => {
             console.log(res, '....')
             this.avatar = res.userInfo.avatar || null
+            this.addUpperLimit = res.userInfo.addUpperLimit || null
           })
           .catch((err) => {})
       } catch (e) {
         //TODO handle the exception
       }
+    },
+    // 获取该教练的会员数量
+    getCocachList() {
+      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      businessCloudObject
+        .getCoachMemberList()
+        .then((res) => {
+          console.log(res, '腻')
+          this.cocahMemberLimit = res.affectedDocs
+        })
+        .catch((err) => {})
     },
     getMemberList(list) {
       this.meberList = list
@@ -200,12 +223,37 @@ export default {
       } catch (e) {
         // error
       }
-      uni.navigateTo({
-        url: '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
-        success: (res) => {},
-        fail: () => {},
-        complete: () => {}
-      })
+      // 判断蓝卡会员还是金卡会员
+	  let businessCloudObject = uniCloud.importObject('businessCloudObject')
+	  businessCloudObject
+	    .getCoachMemberList()
+	    .then((res) => {
+	      console.log(res, '腻')
+	      this.cocahMemberLimit = res.affectedDocs
+		  
+		  if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
+		    uni.showToast({
+		      title: '普通教练限添加7名学员,升级金卡教练获取更多权益~',
+		      duration: 1000,
+		      width: 180,
+		      icon: 'none'
+		    })
+		    return
+		  }
+		  if (this.addUpperLimit || this.cocahMemberLimit < 7) {
+			  //
+			  uni.navigateTo({
+			    url: '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
+			    success: (res) => {},
+			    fail: () => {},
+			    complete: () => {}
+			  })
+		  }
+	    })
+	    .catch((err) => {})
+
+
+
     },
     buyClick(type) {
       this.isActive = type
@@ -323,6 +371,8 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    padding-bottom: 180upx;
     // background: #212328;
     .no_data_style {
       width: 100%;
@@ -605,7 +655,10 @@ uni-page-body {
   top: 0 !important;
 }
 uni-scroll-view {
-  height: 98%;
+  height: 100%;
+}
+::v-deep.uni-scroll-view-content {
+  height: auto !important;
 }
 .move_area_style {
   width: 100vw;

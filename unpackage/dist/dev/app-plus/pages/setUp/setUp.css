@@ -27,8 +27,26 @@
   height: var(--status-bar-height);
   width: 100%;
 }
-body {
+.background-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 14.375rem;
+  background: linear-gradient(to bottom, #343a44, #212328);
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  height: 100vh;
   background: #212328;
+}
+.set-up {
+  position: relative;
 }
 .set-up .arrow-left {
   height: 2.75rem;
