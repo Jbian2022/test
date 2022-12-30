@@ -252,6 +252,11 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 							<p>
 								{{item.text}}
 							</p>
+							<view class = "warningText">
+								<p>
+									{{item.warningMessage}}
+								</p>
+							</view>
 						</view>
 				</view>
 				    <!-- <view class="bodyAssessment">
@@ -307,7 +312,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				name="5" 
 				title-class="informationTitleText"
 				class="informationCard">
-				    <view class="bodyAssessment">
+					<view class="bodyAssessment"
+						v-for="(item,index) in physicalFitnessAssessmentData">
 						<view style="width: 5px;
 								height: 5px;
 								background: #FFC13C;
@@ -317,14 +323,15 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 								></view><span style="font-size: 30upx;
 								font-weight: 400;
 								color: #F4F7FF;
-								line-height: 42upx;">正面观：先屈膝下蹲</span>
+								line-height: 42upx;">{{item.answerTitle}}</span>
 						<view class="assessmentContent">
 							<p>
-								问题描述：股四头肌和髋关节屈肌活跃，臀部肌群不够活跃。
+								{{item.answeerContent}}
 							</p>
 						</view>
-					</view>
-					<view class="bodyAssessment">
+				</view>
+				    
+					<!-- <view class="bodyAssessment">
 						<view style="width: 5px;
 								height: 5px;
 								background: #FFC13C;
@@ -341,7 +348,7 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 								问题描述：跖屈肌紧张，导致背屈足背屈不足，运动力学不良。
 							</p>
 						</view>
-					</view>
+					</view> -->
 				</van-collapse-item>
 			</van-collapse>
 		</view>
@@ -541,6 +548,7 @@ import { now } from 'moment';
 				openKey:true,
 				key:'',
 				bodyTestData:[],
+				physicalFitnessAssessmentData:[],
 				bodyFraction:0,
 				dynamicEvaluationdata: [
 					{
@@ -636,6 +644,7 @@ import { now } from 'moment';
 		  }
 		  this.getPosture();
 		  this.getBodyTestData();
+		  this.getDynameEvaluation();
 		},
 		methods: {
 			async getUserInfo(){
@@ -744,54 +753,63 @@ import { now } from 'moment';
 							if(!this.assessmentNewData[0].textShow1){
 								trueData["title"] = this.assessmentNewData[0].title1;
 								trueData["text"] = this.assessmentNewData[0].text1;
+								trueData["warningMessage"] = this.assessmentNewData[0].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[1].textShow2){
 								trueData["title"] = this.assessmentNewData[1].title2;
 								trueData["text"] = this.assessmentNewData[1].text2;
+								trueData["warningMessage"] = this.assessmentNewData[1].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[2].textShow3){
 								trueData["title"] = this.assessmentNewData[2].title1;
 								trueData["text"] = this.assessmentNewData[2].text1;
+								trueData["warningMessage"] = this.assessmentNewData[2].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[3].textShow4){
 								trueData["title"] = this.assessmentNewData[3].title2;
 								trueData["text"] = this.assessmentNewData[3].text2;
+								trueData["warningMessage"] = this.assessmentNewData[3].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[4].textShow5){
 								trueData["title"] = this.assessmentNewData[4].title1;
 								trueData["text"] = this.assessmentNewData[4].text1;
+								trueData["warningMessage"] = this.assessmentNewData[4].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[5].textShow6){
 								trueData["title"] = this.assessmentNewData[5].title2;
 								trueData["text"] = this.assessmentNewData[5].text2;
+								trueData["warningMessage"] = this.assessmentNewData[5].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[6].textShow7){
 								trueData["title"] = this.assessmentNewData[6].title1;
 								trueData["text"] = this.assessmentNewData[6].text1;
+								trueData["warningMessage"] = this.assessmentNewData[6].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[7].textShow8){
 								trueData["title"] = this.assessmentNewData[7].title1;
 								trueData["text"] = this.assessmentNewData[7].text1;
+								trueData["warningMessage"] = this.assessmentNewData[7].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
 							if(!this.assessmentNewData[8].textShow9){
 								trueData["title"] = this.assessmentNewData[8].title2;
 								trueData["text"] = this.assessmentNewData[8].text2;
+								trueData["warningMessage"] = this.assessmentNewData[8].warningMessage;
 								this.assessmentTrueData.push(trueData)
 								trueData = {}
 							}
@@ -807,6 +825,34 @@ import { now } from 'moment';
 					this.bodyTestData = res.data[0].bodyTestReport;
 					console.log(this.bodyTestData)
 					this.bodyFraction = Number(this.bodyTestData.bodyFraction)
+				})
+			},
+			getDynameEvaluation(){
+				const data = {};
+				data["traineeNo"] = this.traineeNo;
+				data["questionCode"] = "A0004";
+				const resData = [];
+				testOb.opearConfigQuery(data).then((res)=>{
+					console.log(res)
+					res.data.forEach((r)=>{
+						console.log(r)
+						let rq = r.actionTestResult
+						console.log(rq)
+						rq.forEach((rqs)=>{
+							console.log(rqs)
+							resData.push(rqs.answer)
+						})
+						// 
+					})
+					resData.forEach((d)=>{
+						d.forEach((a)=>{
+							if(a.status == 0){
+								this.physicalFitnessAssessmentData.push(a)
+							}
+							
+						})
+					})
+					console.log(this.physicalFitnessAssessmentData)
 				})
 			},
 			saveReport(){
@@ -1274,5 +1320,19 @@ export default {
 		height: 32upx;
 		top: 34upx;
 		left: 20upx;
+	}
+	.warningText{
+		width: 600upx;
+		background: #3e444e;
+		border-radius: 24upx;
+		font-size: 26upx;
+		font-weight: 400;
+		color: #FFC13C;
+		margin-top: 60upx;
+		margin-left: -15px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-left: 15px;
+		padding-right: 15px;
 	}
 </style>
