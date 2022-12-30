@@ -94,7 +94,7 @@
                 </view>
               </view>
               <view class="loop_bottom_style">
-                <view class="bottom_style" @click.stop="updateMember(item)">
+                <view class="bottom_style" @click.stop="getReport(item)">
                   <image
                     class="bootom_img_style"
                     src="../../static/app-plus/mebrs/meberMessage.svg"
@@ -348,7 +348,12 @@ export default {
           '/pages/newWorkout/newWorkout' +
           `?traineeNo=${item._id}&memberName=${item.traineeName}`
       })
-    }
+    },
+	getReport(item){
+		uni.redirectTo({
+			url: '/pages/viewReport/viewReport'+"?traineeNo="+item._id+"&key=2"
+		})
+	}
   }
 }
 </script>

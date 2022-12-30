@@ -115,7 +115,7 @@
   z-index: 0;
   width: 8.125rem;
   height: 8.125rem;
-  background: url("../../static/newWorkout/glod.png");
+  background: url("../../static/newWorkout/open-card-vip.png");
   background-size: 5.625rem 5.625rem;
   background-repeat: no-repeat;
   background-position: center;
@@ -211,7 +211,7 @@
   color: #FFE18F;
 }
 .open-card .card-types .type-item.active {
-  background: linear-gradient(180deg, #FFECB8 30%, #383D46 65%);
+  background: linear-gradient(180deg, #FFECB8 0%, #383D46 100%);
   border: 0.0625rem solid #ffe6a1;
 }
 .open-card .equity-box {

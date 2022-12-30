@@ -24,18 +24,18 @@
 		},
 		methods: {
 			back(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/cancel/cancel'
 				})
 			},
 			goPage(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/cancel/cancel?agree=1'
 				})
 			}
 		},
 		onBackPress(){
-			uni.navigateTo({
+			uni.reLaunch({
 					url: '/pages/cancel/cancel'
 				})
 			return true

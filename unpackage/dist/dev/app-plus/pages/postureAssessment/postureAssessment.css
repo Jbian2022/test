@@ -233,5 +233,15 @@
 	border-radius: 0.5rem;
 	margin-left: 0.9375rem;
 	margin-top: 1.25rem;
+	font-weight: 600;
 	line-height: 3.125rem;
+}
+.watermark{
+	position: absolute;
+	font-size: 0.75rem;
+	font-family: PingFangSC-Regular, PingFang SC;
+	font-weight: 400;
+	color: #7A7F89;
+	top: 2.8125rem;
+	right: 0.9375rem;
 }

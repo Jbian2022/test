@@ -149,15 +149,33 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-body {
-  background: #212328;
-}
 .status_bar {
   height: var(--status-bar-height);
   width: 100%;
 }
-.training-record .van-nav-bar {
+.background-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 14.375rem;
+  background: linear-gradient(to bottom, #343a44, #212328);
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  height: 100vh;
   background: #212328;
+}
+.training-record {
+  position: relative;
+}
+.training-record .van-nav-bar {
+  background: transparent;
   height: 2.75rem;
 }
 .training-record .van-nav-bar .van-nav-bar__content {

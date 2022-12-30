@@ -245,3 +245,12 @@
   height: 82vh !important;
   overflow-y: auto;
 }
+.watermark[data-v-517c7f12] {
+  position: absolute;
+  font-size: 0.75rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #7A7F89;
+  top: 2.8125rem;
+  right: 0.9375rem;
+}

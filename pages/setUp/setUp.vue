@@ -30,7 +30,7 @@
 				})
 			},
 			async closeAccount () {
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/cancel/cancel'
 				})
 			},

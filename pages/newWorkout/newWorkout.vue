@@ -407,6 +407,10 @@
 						}
 					})
 				}
+				const traineeName = uni.getStorageSync('traineeName');
+				if(traineeName){
+					this.traineeName = traineeName
+				}
 			} catch (e) {
 				// error
 			}
@@ -458,12 +462,12 @@
 			},
 			addProjectItem(list){
 				list.push({
-					kg: 0,
-					km: 0,
-					time: 0,
-					hour: 0,
-					minute: 0,
-					second: 0,
+					kg: null,
+					km: null,
+					time: null,
+					hour: null,
+					minute: null,
+					second: null,
 					active: false
 				})
 			},
@@ -531,63 +535,90 @@
 				this.actionList.forEach((item)=>{
 					if(item.type===0){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {cur.kg = 0}
-							return cur.active ? +cur.kg + +prev : prev; 
+							if(!cur.kg) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.kg + +prev : prev; 
+							}
 						}, 0)
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===1){
 						item.mileage = item.groupList.reduce( function (prev, cur) {
-							if(!cur.km) {cur.km = 0} 
-							return  +cur.km + +prev; 
+							if(!cur.km) {
+								return  0 + +prev; 
+							} else {
+								return  +cur.km + +prev; 
+							}
 						}, 0)
 						item.times = item.groupList.reduce( function (prev, cur) {
-							if(!cur.hour) {cur.hour = 0}  
-							if(!cur.minute) {cur.minute = 0}  
-							if(!cur.second) {cur.second = 0}  
-							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							if(!cur.hour||!cur.minute||!cur.second) {
+								return 0 + +prev;
+							} else {
+								return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							}
 						}, 0)
 					} else if(item.type===2){
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===3){
 						item.times = item.groupList.reduce( function (prev, cur) {
-							if(!cur.hour) {cur.hour = 0}  
-							if(!cur.minute) {cur.minute = 0}  
-							if(!cur.second) {cur.second = 0}  
-							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							if(!cur.hour||!cur.minute||!cur.second) {
+								return 0 + +prev;
+							} else {
+								return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							}
 						}, 0)
 					} else if(item.type===4){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {cur.kg = 0}
-							return cur.active ? +cur.kg + +prev : prev; 
+							if(!cur.kg) {
+								return cur.active ? 0 + +prev : prev;
+							} else {
+								return cur.active ? +cur.kg + +prev : prev; 
+							}
 						}, 0)
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===5){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {cur.kg = 0}
-							return cur.active ? +cur.kg + +prev : prev; 
+							if(!cur.kg) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.kg + +prev : prev; 
+							}
 						}, 0)
 						if(item.weight){
 							item.load = item.load + +item.weight
 						}
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===6){
 						item.times = item.groupList.reduce( function (prev, cur) {
-							if(!cur.hour) {cur.hour = 0}  
-							if(!cur.minute) {cur.minute = 0}  
-							if(!cur.second) {cur.second = 0}  
-							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							if(!cur.hour||!cur.minute||!cur.second) {
+								return 0 + +prev;
+							} else {
+								return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							} 
 						}, 0)
 					}
 				})

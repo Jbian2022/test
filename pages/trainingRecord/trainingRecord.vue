@@ -1,5 +1,7 @@
 <template>
 	<view class="training-record">
+		<view class="background-header"></view>
+		<view class="background"></view>
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<van-nav-bar :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
 		<view class="calendar">
@@ -69,7 +71,7 @@
 				}
 			},
 			onClickLeft(){
-				uni.switchTab({
+				uni.reLaunch({
 					url: '/pages/myMebers/myMebers'
 				});
 			},
@@ -79,17 +81,17 @@
 					return
 				}
 				uni.navigateTo({
-					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${item.day}`
+					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${item.day}&traineeName=${this.memberName}`
 				})
 			},
 			addWorkout(){
 				uni.navigateTo({
-					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${this.getDay(new Date())}`
+					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${this.getDay(new Date())}&traineeName=${this.memberName}`
 				})
 			},
 			sharePage(date){
 				uni.navigateTo({
-					url: '/pages/trainingRecordDetail/trainingRecordDetail'+`?traineeNo=${this.traineeNo}&trainDate=${date}`
+					url: '/pages/trainingRecordDetail/trainingRecordDetail'+`?traineeNo=${this.traineeNo}&trainDate=${date}&traineeName=${this.memberName}`
 				});
 			},
 			getYearMonth(val){
@@ -127,16 +129,32 @@
 </script>
 
 <style lang="scss">
-page{
-	background: #212328;
-}
 .status_bar {
 	height: var(--status-bar-height);
 	width: 100%;
 }
+.background-header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	height: 460upx;
+	background: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
+}
+.background{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -2;
+	height: 100vh;
+	background: #212328;
+}
 .training-record{
+	position: relative;
 	::v-deep .van-nav-bar{
-		background: #212328;
+		background: transparent;
 		height: 88upx;
 		.van-nav-bar__content{
 			height: 88upx;

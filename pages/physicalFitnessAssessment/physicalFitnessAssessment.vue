@@ -2,6 +2,7 @@
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent :leftNavTitle="'体能评估'"></NavBarCompontent>
+	<view class="watermark">数据评测来源于世界权威机构</view>
     <van-row style="background-color: #343a44">
       <van-col class="need_scoll" span="24">
         <view
@@ -269,5 +270,14 @@ export default {
 	color: #BDC3CE;
 	margin: 0 auto;
 	text-align: center;
+}
+.watermark{
+	position: absolute;
+	font-size: 24upx;
+	font-family: PingFangSC-Regular, PingFang SC;
+	font-weight: 400;
+	color: #7A7F89;
+	top: 90upx;
+	right: 30upx;
 }
 </style>

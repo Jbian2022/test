@@ -76,7 +76,8 @@
 			  src="../../static/app-plus/bg/actionImg.png"
 			></image> -->
 		</view>
-		<van-button type="primary" block class="buttontrue">确认</van-button>
+		
+		<view class="bottom_style" @click.stop="actionResDate">确认</view>
 	</view>
 </template>
 
@@ -107,6 +108,8 @@
 		  },
 		onLoad: function (item) {
 					console.log(item);
+					this.traineeNo = item.traineeNo;
+					this.questionCode = item.questionCode;
 					let leftNavTitle = item.pageTitle
 					this.type = item.type;
 					this.leftNavTitle = leftNavTitle
@@ -141,6 +144,8 @@
 							break;
 					}
 					this.getActionInfo();
+					this.traineeNo = item.traineeNo;
+					this.questionCode = item.questionCode;
 				},
 		data() {
 			return {
@@ -149,6 +154,8 @@
 					{name:'侧面观'}
 				],
 				type:'',
+				traineeNo:'',
+				questionCode:'',
 				icon: true,
 				backimgFront:"",
 				backimgSide:"",
@@ -207,6 +214,34 @@
 						console.log(this.actionobs);
 					})
 				}
+			},
+			actionResDate(){
+				console.log(this.traineeNo)
+					// const data = {};
+					// const actinData = {};
+					// data["traineeNo"] = this.traineeNo;
+					// data["questionCode"] = this.questionCode;
+					// data["code"] = this.actionData.code;
+					// actinData["actionVlue"] = this.resultValue;
+					// actinData["actionTypeText"] = this.typeText
+					// data["testDate"] = new Date();
+					// data["physicalData"] = actinData;
+					// data["status"] = "0";
+					// console.log(data)
+					// const res = testOb.opearConfig(data,"bodyTestReport").then(res => {
+					// 	console.log(res, '我要保存了')
+					// 	if (res.success) {
+							uni.redirectTo({
+								url: '/pages/dynamicEvaluation/dynamicEvaluation' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
+							})
+					// 		uni.showToast({
+					// 		  icon: 'success',
+					// 		  title: res.message,
+					// 		  duration: 800
+					// 		})
+					// 	}
+					// }).catch(() =>{})
+					// console.log(res)
 			}
 		}
 	}
@@ -220,7 +255,7 @@
 	position: relative;
 }
 .headBox{
-	width: calc(100vw - 60upx);
+	width: calc(100vw - 20upx);
 	height: 90upx;
 	margin: 0 auto;
 	margin-top: 20upx;
@@ -239,7 +274,7 @@
 	line-height: 90upx;
 	text-align: center;
 	background: #383D46;
-	margin-right: 25upx;
+	margin-right: 45upx;
 }
 .block0{
 	background: #195BC2;
@@ -343,5 +378,20 @@
 	width: 32upx;
 	height: 32upx;
 	top: 6upx;
+}
+.bottom_style {
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  height: 100upx;
+  background: #1370ff;
+  border-radius: 16upx;
+  margin-top: 30upx;
+  margin-bottom: 30upx;
+  font-size: 32upx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 100upx;
+  text-align: center;
 }
 </style>

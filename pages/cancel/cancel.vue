@@ -67,12 +67,12 @@
 		},
 		methods: {
 			back(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/setUp/setUp'
 				})
 			},
 			goto(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/cancelAgreement/cancelAgreement'
 				})
 			},
@@ -93,7 +93,7 @@
 			}
 		},
 		onBackPress(){
-			uni.navigateTo({
+			uni.reLaunch({
 					url: '/pages/setUp/setUp'
 				})
 			return true

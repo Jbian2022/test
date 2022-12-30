@@ -224,36 +224,34 @@ export default {
         // error
       }
       // 判断蓝卡会员还是金卡会员
-	  let businessCloudObject = uniCloud.importObject('businessCloudObject')
-	  businessCloudObject
-	    .getCoachMemberList()
-	    .then((res) => {
-	      console.log(res, '腻')
-	      this.cocahMemberLimit = res.affectedDocs
-		  
-		  if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
-		    uni.showToast({
-		      title: '普通教练限添加7名学员,升级金卡教练获取更多权益~',
-		      duration: 1000,
-		      width: 180,
-		      icon: 'none'
-		    })
-		    return
-		  }
-		  if (this.addUpperLimit || this.cocahMemberLimit < 7) {
-			  //
-			  uni.navigateTo({
-			    url: '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
-			    success: (res) => {},
-			    fail: () => {},
-			    complete: () => {}
-			  })
-		  }
-	    })
-	    .catch((err) => {})
+      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      businessCloudObject
+        .getCoachMemberList()
+        .then((res) => {
+          console.log(res, '腻')
+          this.cocahMemberLimit = res.affectedDocs
 
-
-
+          if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
+            uni.showToast({
+              title: '普通教练限添加7名学员,升级金卡教练获取更多权益~',
+              duration: 1000,
+              width: 180,
+              icon: 'none'
+            })
+            return
+          }
+          if (this.addUpperLimit || this.cocahMemberLimit < 7) {
+            //
+            uni.navigateTo({
+              url:
+                '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
+              success: (res) => {},
+              fail: () => {},
+              complete: () => {}
+            })
+          }
+        })
+        .catch((err) => {})
     },
     buyClick(type) {
       this.isActive = type

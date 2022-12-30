@@ -71,7 +71,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .status_bar {
-  height: var(--status-bar-height);
+  height: calc(var(--status-bar-height) + 2.75rem);
   width: 100%;
 }
 .training-record-detail {
@@ -102,8 +102,9 @@
   background: transparent;
 }
 .training-record-detail .arrow-left {
-  position: absolute;
-  top: var(--status-bar-height);
+  position: fixed;
+  padding-top: var(--status-bar-height);
+  top: 0;
   left: 0;
   right: 0;
   z-index: 88;
@@ -119,11 +120,7 @@
   color: #bdc3ce;
 }
 .training-record-detail .arrow-left.show {
-  position: -webkit-sticky;
-  position: sticky;
   background: #212328;
-  top: 0;
-  padding-top: var(--status-bar-height);
 }
 .training-record-detail .first-title-times {
   padding: 0.3125rem 0.9375rem;
