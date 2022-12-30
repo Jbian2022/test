@@ -49,6 +49,7 @@
               >未购课</view
             >
           </view>
+		  <view class="zhan_wei_style" v-if="cellingFlag"></view>
           <MemberList
             ref="memberList"
             @getMemberList="getMemberList"
@@ -123,7 +124,9 @@ export default {
   watch: {
     scrollTop: {}
   },
-  onLoad() {},
+  onLoad() {
+	   uni.showTabBar()
+  },
   onPullDownRefresh() {
     this.$refs.memberList.getMemberList(this.isActive)
     uni.stopPullDownRefresh()
@@ -689,5 +692,9 @@ uni-scroll-view {
       z-index: 1000000;
     }
   }
+}
+.zhan_wei_style {
+	height: 82upx;
+	width: 100%;
 }
 </style>

@@ -290,9 +290,10 @@
   margin-right: 0.3125rem;
 }
 .mebers_content .slide_stylle .add_student_style .need_loop_style .loop_bottom_style[data-v-fce7d226] {
-  width: 100%;
+  width: calc(100% - 1.875rem);
+  margin-left: 0.9375rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 .mebers_content .slide_stylle .add_student_style .need_loop_style .loop_bottom_style .bottom_style[data-v-fce7d226] {

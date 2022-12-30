@@ -665,8 +665,8 @@
   margin-top: 0.3125rem;
 }
 [data-v-641854c1] .uni-forms {
-  width: calc(100vw - 2.5rem);
-  margin-left: 1.25rem;
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
 }
 [data-v-641854c1] .uni-forms uni-form span .uni-forms-item {
   width: 100%;
@@ -676,6 +676,7 @@
   display: block;
   background: rgba(75, 82, 94, 0.5) !important;
   border-radius: 0.5rem;
+  margin-bottom: 0.9375rem !important;
 }
 [data-v-641854c1] .uni-forms uni-form span .uni-forms-item .uni-forms-item__label {
   width: 100% !important;

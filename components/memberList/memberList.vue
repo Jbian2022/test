@@ -453,9 +453,10 @@ export default {
           }
         }
         .loop_bottom_style {
-          width: 100%;
+          width: calc(100% - 60upx);
+		  margin-left: 30upx;
           display: flex;
-          justify-content: space-around;
+          justify-content: space-between;
           align-items: center;
           .bottom_style {
             display: flex;

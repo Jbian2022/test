@@ -61,7 +61,7 @@ export default {
 		// 是否允许修改/填写某一个框框的值
 		updateOne: {
 			type: Boolean,
-			default: false
+			default: true
 		}
 	},
 	data() {
