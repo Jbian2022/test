@@ -68,7 +68,7 @@
 			</view>
 		</view>
 		<view>
-		  <button class="postureButton" @click.native="actionResDate()">确认</button>
+		  <view class="postureButton" @click.native="actionResDate()">确认</view>
 		</view>
 	</view>
 </template>
@@ -94,6 +94,9 @@
 			      showPopup,
 				  closePopup,
 			    };
+		  },
+		  created() {
+		  	uni.hideLoading();
 		  },
 		onLoad: function (item) {
 				// console.log(JSON.parse(item.data));

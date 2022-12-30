@@ -1,7 +1,14 @@
 <template>
-	<view class="content_style" id="viewReport">
-		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-		<NavBarCompontent :leftNavTitle="''"></NavBarCompontent>
+	<view class="content_style">
+	<!-- 	<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+		<NavBarCompontent :leftNavTitle="pageName"></NavBarCompontent> -->
+		<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickLeft">
+			<van-icon name="arrow-left" />
+			<view class="title">{{pageName}}</view>
+			<view class="z" style="opacity: 0;">8888</view>
+		</view>
+		<view v-show="isFixedTop" class="arrow-box"></view>
+		<view id="viewReport">
 		<view class="titleText" v-if="openKey">
 			<van-row class="titleTopText">
 			  <van-col span="12">体测报告</van-col>
@@ -231,8 +238,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				title-class="informationTitleText"
 				class="informationCard">
 				<view class="bodyAssessment" v-for="(item,index) in assessmentTrueData">
-					<view style="width: 10px;
-								height: 10px;
+					<view style="width: 5px;
+								height: 5px;
 								background: #FFC13C;
 								border-radius: 100%;
 								display: inline-flex;
@@ -301,8 +308,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				title-class="informationTitleText"
 				class="informationCard">
 				    <view class="bodyAssessment">
-						<view style="width: 10px;
-								height: 10px;
+						<view style="width: 5px;
+								height: 5px;
 								background: #FFC13C;
 								border-radius: 100%;
 								display: inline-flex;
@@ -318,8 +325,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 						</view>
 					</view>
 					<view class="bodyAssessment">
-						<view style="width: 10px;
-								height: 10px;
+						<view style="width: 5px;
+								height: 5px;
 								background: #FFC13C;
 								border-radius: 100%;
 								display: inline-flex;
@@ -472,27 +479,53 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				</van-collapse-item>
 			</van-collapse>
 		</view>
-		
-		<van-button
-		type="primary" 
-		class="shareButton" 
-		icon="../../static/app-plus/other/share.svg"
-		@click="showShare = true">分享报告</van-button>
-		<van-share-sheet
-		  v-model:show="showShare"
-		  :options="options"
-		  @select="onSelect"
-		  cancel-text=""
-		  class="shareBlock"
-		/>
+		</view>
+		<view v-if="openKey">
+			<!-- #ifdef APP-PLUS || H5 -->
+			<view :prop="canvasImageMsg" :change:prop="canvasImage.updateEcharts" id="canvasImage"></view>
+			<!-- #endif -->
+			<van-button
+			type="primary" 
+			class="shareButton" 
+			icon="../../static/app-plus/other/share.png"
+			@click="saveReport">分享报告</van-button>
+			<van-share-sheet
+			  v-model:show="showShare"
+			  :options="options"
+			  @select="onSelect"
+			  cancel-text=""
+			  class="shareBlock"
+			/>
+		</view>
+		<view v-if="!openKey">
+			<view 
+			class="buttontrue"
+			@click="showHistory = true">历史评测记录
+			<!-- <image src="../../../static/app-plus/mebrs/openarrit.png"></image> -->
+			<image src="../../static/app-plus/mebrs/openarrit.png"></image>
+			</view>
+<!-- 			<van-button
+			type="primary" 
+			class="historyView" 
+			icon="../../static/app-plus/other/share.png"
+			@click="showShare = true">历史评测记录</van-button> -->
+			<van-share-sheet
+			  v-model:show="showHistory"
+			  :options="history"
+			  @select="onSelect"
+			  cancel-text=""
+			  class="shareBlock"
+			/>
+		</view>
 	</view>
 </template>
 
 <script>
-	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
-	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
+	// import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
+	// import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
 	import html2canvas from 'html2canvas'
+import { now } from 'moment';
 	const user = uniCloud.importObject('my');
 	const testOb = uniCloud.importObject("testResults");
 	const busOb = uniCloud.importObject('businessCloudObject');
@@ -500,6 +533,7 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 		data() {
 			return {
 				currentRate:50,
+				pageName:'',
 				personName:"未知",
 				gender:1,
 				age:0,
@@ -531,10 +565,16 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 					}
 				],
 				showShare:false,
+				showHistory:false,
 				options:[
-				  { name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.svg' },
-				  { name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.svg' },
-				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.svg' }
+				  { name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.png' },
+				  { name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.png' },
+				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.png' }
+				],
+				history:[
+					{ name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.svg' },
+					{ name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.svg' },
+					{ name: '保存到相册', icon: '../../static/app-plus/other/savePhone.svg' }
 				],
 				getOnlyLists:{},
 				traineeNo:'',
@@ -545,6 +585,19 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 				queryUserActionData:{},
 				assessmentNewData:{},
 				assessmentTrueData:[],
+				baseUrl: null,
+				url: null,
+				canvasImageMsg: null,
+				isFixedTop:false
+			}
+		},
+		//监测页面滑动
+		onPageScroll(e) {
+			console.log(uni.getWindowInfo().statusBarHeight)
+			if(e.scrollTop > uni.getWindowInfo().statusBarHeight){
+				this.isFixedTop = true
+			}else{
+				this.isFixedTop = false
 			}
 		},
 		setup() {
@@ -577,6 +630,7 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 					break;
 				case "2":
 					this.openKey = false;
+					this.pageName = '会员信息'
 					break;
 			}
 		  }
@@ -754,12 +808,118 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 					console.log(this.bodyTestData)
 					this.bodyFraction = Number(this.bodyTestData.bodyFraction)
 				})
-			}
-		},
-		components: {
-			BgTheamCompontent,
-			NavBarCompontent
-		},
+			},
+			saveReport(){
+				const data = {};
+				let date = new Date();
+				data["traineeNo"] = this.traineeNo;
+				data["bodyTestData"] = this.bodyTestData;
+				data["assessmentTrueData"] = this.assessmentTrueData;
+				data["queryData"] = this.queryData;
+				data["saveDate"] = date;
+				console.log(data)
+				testOb.saveReport(data).then((res)=>{
+					console.log(res)
+				})
+				this.showShare = true;
+			},
+			async uploadImage(callback){
+				const result = await train.uploadBase64({
+					base64: this.baseUrl
+				});
+				this.url =  result.fileID;
+				this.canvasImageMsg = null;
+				callback&&callback(this.url);
+			},
+			downloadFile(){
+				uni.downloadFile({
+					url: this.url, //仅为示例，并非真实的资源
+					success: (res) => {
+						if (res.statusCode === 200) {
+							console.log('下载成功',res);
+							uni.saveImageToPhotosAlbum({
+								filePath: res.tempFilePath,
+								success: (res) => {
+									console.log('保存成功！',res);
+									uni.hideLoading();
+									uni.showModal({
+										showCancel: false,
+										title: '提示',
+										content: '图片已经保存到相册请查看',
+										success: function (res) {
+											if (res.confirm) {
+												console.log('用户点击确定');
+											} else if (res.cancel) {
+												console.log('用户点击取消');
+											}
+										}
+									});
+								},
+								fail:(err)=>{
+									console.log('err',err);
+								}
+							});
+						}
+					},
+				});
+			},
+			receiveRenderData(option) {
+				this.showShare = false;
+			    console.log(option.name, 8888)
+				this.baseUrl = option.base64;
+				this.uploadImage((url)=>{
+					uni.showLoading({ title: '加载中'});
+					// #ifndef H5
+					if(option.name==='保存到相册'){
+						this.downloadFile()
+					} else {
+						if(option.name==='分享到微信'){
+							uni.share({
+								provider: "weixin",
+								scene: "WXSceneSession",
+								type: 2,
+								imageUrl: url,
+								success: function (res) {
+									console.log("success:" + JSON.stringify(res));
+									uni.hideLoading();
+								},
+								fail: function (err) {
+									console.log("fail:" + JSON.stringify(err));
+								}
+							});
+						} else if (option.name==='分享到朋友圈') {
+							uni.share({
+								provider: "weixin",
+								scene: "WXSceneTimeline",
+								type: 2,
+								imageUrl: url,
+								success: function (res) {
+									console.log("success:" + JSON.stringify(res));
+									uni.hideLoading();
+								},
+								fail: function (err) {
+									console.log("fail:" + JSON.stringify(err));
+								}
+							});
+						}
+					}
+					// #endif
+				})
+			},
+			onSelect(option) {
+				console.log(option,88)
+				this.canvasImageMsg = option.name
+			},
+			onClickLeft(){
+				if(this.openKey){
+					uni.redirectTo({
+						url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo
+					})
+				}else{
+					uni.navigateBack()
+				}
+			},
+		}
 	}
 </script>
 <script lang="renderjs" module="canvasImage">
@@ -794,7 +954,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 	.content_style {
 		width: 100vw;
 		height: 100vh;
@@ -804,6 +964,45 @@ export default {
 		background-image: url('../../static/app-plus/bg/bodysideReport.png');
 		background-repeat:no-repeat;
 		background-size: 100%;
+		.arrow-box{
+			height: 88upx;
+			background: transparent;
+		}
+		.arrow-left{
+			top: var(--status-bar-height);
+			left: 0;
+			right: 0;
+			z-index: 88;
+			height: 88upx;
+			display: flex;
+			align-items: center;
+			padding-left: 30upx;
+			justify-content: space-between;
+			color: #bdc3ce;
+			position: relative;
+			.van-icon{
+				font-size: 40upx;
+				color: #bdc3ce;
+			}
+			&.show{
+				position: sticky;
+				background: #212328;
+				top: 0;
+				padding-top: var(--status-bar-height);
+			}
+		}
+	}
+	#viewReport{
+		margin-top: 80upx;
+	}
+	.title{
+		width: 120upx;
+		height: 42upx;
+		font-size: 30upx;
+		font-family: PingFangSC-Medium, PingFang SC;
+		font-weight: 500;
+		color: #FFFFFF;
+		line-height: 42upx;
 	}
 	.titleText{
 		margin: 10upx 30upx 0 30upx;
@@ -843,7 +1042,7 @@ export default {
 		margin: 30upx 30upx 0 30upx;
 	}
 	.basicInformationContent{
-		margin: 30upx 30upx 40upx 30upx;
+		/* margin: 30upx 30upx 40upx 30upx; */
 	}
 	.textContent{
 		margin-bottom: 30upx;
@@ -857,6 +1056,8 @@ export default {
 		background: #383D46;
 		border-top-left-radius: 24upx;
 		border-top-right-radius: 24upx;
+		padding-top: 40upx;
+		padding-bottom: 0px;
 	}
 	::v-deep .van-collapse-item__content{
 		background: #383D46;
@@ -898,7 +1099,7 @@ export default {
 		margin-left: -30upx;
 	}
 	.countNumBlock{
-		width: 550upx;
+		width: 580upx;
 		height: 190upx;
 		background: #4d5561;
 		border-radius: 24upx;
@@ -1016,7 +1217,7 @@ export default {
 		line-height: 50upx;
 		text-align: center;
 		float: right;
-		margin-right: 90upx;
+		margin-right: 20upx;
 		margin-top: 15upx;
 		padding-right: 20upx;
 	}
@@ -1043,5 +1244,35 @@ export default {
 		font-weight: 400;
 		color: #BDC3CE;
 		line-height: 42upx;
+	}
+	.historyView{
+		width: 690px;
+		height: 100px;
+		background: #454951;
+		border-radius: 16px;
+	}
+	.buttontrue{
+	background: #454951;
+	  border-radius: 16upx;
+	  margin-top: 30upx;
+	  margin-bottom: 30upx;
+	  font-size: 32upx;
+	  font-family: PingFangSC-Semibold, PingFang SC;
+	  font-weight: 600;
+	  color: #ffffff;
+	  line-height: 100upx;
+	  text-align: center;
+	  justify-content: center;
+	
+	  width: calc(100vw - 80upx);
+	  margin-left: 40upx;
+	
+	  display: flex;
+	}
+	.buttontrue image{
+		width: 32upx;
+		height: 32upx;
+		top: 34upx;
+		left: 20upx;
 	}
 </style>
