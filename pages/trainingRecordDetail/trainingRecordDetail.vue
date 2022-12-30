@@ -647,7 +647,7 @@ export default {
 				.share-icon {
 					width: 28upx;
 					height: 28upx;
-					background: url('../../static/newWorkout/share.svg');
+					background: url('../../static/newWorkout/share01.svg');
 					background-size: contain;
 					background-repeat: no-repeat;
 					margin-right: 16upx;
