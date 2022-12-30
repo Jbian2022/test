@@ -342,3 +342,17 @@
   top: 1.0625rem;
   left: 0.625rem;
 }
+.warningText {
+  width: 18.75rem;
+  background: #3e444e;
+  border-radius: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #FFC13C;
+  margin-top: 1.875rem;
+  margin-left: -15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}

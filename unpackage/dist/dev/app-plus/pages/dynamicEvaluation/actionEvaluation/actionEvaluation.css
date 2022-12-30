@@ -153,7 +153,7 @@
 	overflow-x: hidden;
 }
 .block{
-	width: 10.46875rem;
+	width: 10.875rem;
 	height: 2.8125rem;
 	border-radius: 0.5rem;
 	float: left;
@@ -164,7 +164,7 @@
 	line-height: 2.8125rem;
 	text-align: center;
 	background: #383D46;
-	margin-right: 1.40625rem;
+	margin-right: 0.6875rem;
 }
 .block0{
 	background: #195BC2;
@@ -261,7 +261,7 @@
 	line-height: 2.1875rem;
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 18.75rem;
+	margin-top: 19.375rem;
 }
 .clickActionEnd uni-image{
 	width: 1rem;
@@ -282,4 +282,47 @@
   color: #ffffff;
   line-height: 3.125rem;
   text-align: center;
+}
+.actinQuesson1{
+	position: absolute;
+	z-index: 2;
+	top: 25rem;
+	left: 2.5rem;
+}
+.quessonName{
+	width: 5.625rem;
+	/* height: 80upx; */
+	background: #212328;
+	border-radius: 0.5rem;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: #F4F7FF;
+	/* line-height: 80upx; */
+	padding-top: 0.625rem;
+	padding-bottom: 0.75rem;
+	padding-left: 0.46875rem;
+	padding-right: 0.3125rem;
+	/* text-align: center; */
+}
+.clickQuessonName{
+	width: 6.25rem;
+	/* height: 164upx; */
+	background: rgba(19,112,255,0.9);
+	border-radius: 0.5rem;
+	border: 0.0625rem solid #1370FF;
+	padding: 0.625rem;
+}
+.quessonTitle{
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: #F4F7FF;
+}
+.quessonText{
+	font-size: 0.5625rem;
+	font-weight: 400;
+	color: #FFFFFF;
+	margin-top: 0.625rem;
+}
+ .van-popup{
+	background: #383D46;
 }

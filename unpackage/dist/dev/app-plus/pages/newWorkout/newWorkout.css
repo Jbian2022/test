@@ -159,7 +159,22 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-body {
+.background-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 14.375rem;
+  background: linear-gradient(to bottom, #343a44, #212328);
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  height: 100vh;
   background: #212328;
 }
 .status_bar {
@@ -167,6 +182,7 @@ body {
   width: 100%;
 }
 .new-workout {
+  position: relative;
   padding-bottom: 5.46875rem;
 }
 .new-workout .header {
@@ -177,7 +193,7 @@ body {
   padding: 0.9375rem;
   font-size: 1.5rem;
   color: #FFFFFF;
-  background: #212328;
+  background: transparent;
 }
 .new-workout .header .title {
   font-weight: 600;
@@ -198,7 +214,7 @@ body {
   box-sizing: border-box;
   padding: 0 0.9375rem;
   padding-bottom: 0.9375rem;
-  background: #212328;
+  background: transparent;
 }
 .new-workout .workout-title .uni-input {
   height: 3.125rem;
