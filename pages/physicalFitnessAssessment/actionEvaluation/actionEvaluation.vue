@@ -95,6 +95,9 @@
 				  closePopup,
 			    };
 		  },
+		  created() {
+		  	uni.hideLoading();
+		  },
 		onLoad: function (item) {
 				// console.log(JSON.parse(item.data));
 				let data = JSON.parse(item.data);

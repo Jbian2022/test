@@ -1,7 +1,13 @@
 <template>
 	<view class="content_style">
-		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-		<NavBarCompontent :leftNavTitle="''"></NavBarCompontent>
+	<!-- 	<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+		<NavBarCompontent :leftNavTitle="pageName"></NavBarCompontent> -->
+		<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickLeft">
+			<van-icon name="arrow-left" />
+			<view class="title">{{pageName}}</view>
+			<view class="z" style="opacity: 0;">8888</view>
+		</view>
+		<view v-show="isFixedTop" class="arrow-box"></view>
 		<view id="viewReport">
 		<view class="titleText" v-if="openKey">
 			<van-row class="titleTopText">
@@ -515,8 +521,8 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 </template>
 
 <script>
-	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
-	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
+	// import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
+	// import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
 	import html2canvas from 'html2canvas'
 import { now } from 'moment';
@@ -527,6 +533,7 @@ import { now } from 'moment';
 		data() {
 			return {
 				currentRate:50,
+				pageName:'',
 				personName:"未知",
 				gender:1,
 				age:0,
@@ -584,6 +591,15 @@ import { now } from 'moment';
 				isFixedTop:false
 			}
 		},
+		//监测页面滑动
+		onPageScroll(e) {
+			console.log(uni.getWindowInfo().statusBarHeight)
+			if(e.scrollTop > uni.getWindowInfo().statusBarHeight){
+				this.isFixedTop = true
+			}else{
+				this.isFixedTop = false
+			}
+		},
 		setup() {
 		    const activeBasicInformation = ref(['1']);
 			const healthQA = ref(['2']);
@@ -614,19 +630,12 @@ import { now } from 'moment';
 					break;
 				case "2":
 					this.openKey = false;
+					this.pageName = '会员信息'
 					break;
 			}
 		  }
 		  this.getPosture();
 		  this.getBodyTestData();
-		},
-		//监测页面滑动
-		onPageScroll(e) {
-			if(e.scrollTop > uni.getWindowInfo().statusBarHeight){
-				this.isFixedTop = true
-			}else{
-				this.isFixedTop = false
-			}
 		},
 		methods: {
 			async getUserInfo(){
@@ -901,11 +910,16 @@ import { now } from 'moment';
 				console.log(option,88)
 				this.canvasImageMsg = option.name
 			},
-		},
-		components: {
-			BgTheamCompontent,
-			NavBarCompontent
-		},
+			onClickLeft(){
+				if(this.openKey){
+					uni.redirectTo({
+						url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo
+					})
+				}else{
+					uni.navigateBack()
+				}
+			},
+		}
 	}
 </script>
 <script lang="renderjs" module="canvasImage">
@@ -940,7 +954,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 	.content_style {
 		width: 100vw;
 		height: 100vh;
@@ -950,6 +964,45 @@ export default {
 		background-image: url('../../static/app-plus/bg/bodysideReport.png');
 		background-repeat:no-repeat;
 		background-size: 100%;
+		.arrow-box{
+			height: 88upx;
+			background: transparent;
+		}
+		.arrow-left{
+			top: var(--status-bar-height);
+			left: 0;
+			right: 0;
+			z-index: 88;
+			height: 88upx;
+			display: flex;
+			align-items: center;
+			padding-left: 30upx;
+			justify-content: space-between;
+			color: #bdc3ce;
+			position: relative;
+			.van-icon{
+				font-size: 40upx;
+				color: #bdc3ce;
+			}
+			&.show{
+				position: sticky;
+				background: #212328;
+				top: 0;
+				padding-top: var(--status-bar-height);
+			}
+		}
+	}
+	#viewReport{
+		margin-top: 80upx;
+	}
+	.title{
+		width: 120upx;
+		height: 42upx;
+		font-size: 30upx;
+		font-family: PingFangSC-Medium, PingFang SC;
+		font-weight: 500;
+		color: #FFFFFF;
+		line-height: 42upx;
 	}
 	.titleText{
 		margin: 10upx 30upx 0 30upx;
@@ -1003,6 +1056,8 @@ export default {
 		background: #383D46;
 		border-top-left-radius: 24upx;
 		border-top-right-radius: 24upx;
+		padding-top: 40upx;
+		padding-bottom: 0px;
 	}
 	::v-deep .van-collapse-item__content{
 		background: #383D46;
@@ -1044,7 +1099,7 @@ export default {
 		margin-left: -30upx;
 	}
 	.countNumBlock{
-		width: 550upx;
+		width: 580upx;
 		height: 190upx;
 		background: #4d5561;
 		border-radius: 24upx;
