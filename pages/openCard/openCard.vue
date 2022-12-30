@@ -155,7 +155,9 @@
 				this.payMoney = item.money
 			},
 			onClickLeft(){
-				uni.navigateBack()
+				uni.switchTab({
+					url: '/pages/my/my'
+				});
 			},
 		}
 	}
@@ -350,7 +352,7 @@
 				color: #FFE18F;
 			}
 			&.active{
-				background: linear-gradient(180deg, #FFECB8 0%, #383D46 100%);
+				background: linear-gradient(180deg, #645F52 0%, #292C31 100%);
 				border: 2upx solid #ffe6a1;
 			}
 		}
