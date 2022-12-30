@@ -330,7 +330,6 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 							</p>
 						</view>
 				</view>
-				    
 					<!-- <view class="bodyAssessment">
 						<view style="width: 5px;
 								height: 5px;
