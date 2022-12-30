@@ -155,7 +155,9 @@
 				this.payMoney = item.money
 			},
 			onClickLeft(){
-				uni.navigateBack()
+				uni.switchTab({
+					url: '/pages/my/my'
+				});
 			},
 		}
 	}
@@ -254,7 +256,7 @@
 			z-index: 0;
 			width: 260upx;
 			height: 260upx;
-			background: url('../../static/newWorkout/glod.png');
+			background: url('../../static/newWorkout/open-card-vip.png');
 			background-size: 180upx 180upx;
 			background-repeat: no-repeat;
 			background-position: center;
@@ -350,7 +352,7 @@
 				color: #FFE18F;
 			}
 			&.active{
-				background: linear-gradient(180deg, #FFECB8 30%, #383D46 65%);
+				background: linear-gradient(180deg, #645F52 0%, #292C31 100%);
 				border: 2upx solid #ffe6a1;
 			}
 		}

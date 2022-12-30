@@ -116,9 +116,8 @@ export default {
   watch: {
     scrollTop: {}
   },
-  onLoad() {},
-  onShow() {
-    uni.showTabBar();
+  onLoad() {
+    uni.showTabBar()
   },
   created() {},
   mounted() {

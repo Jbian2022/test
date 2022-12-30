@@ -42,7 +42,6 @@
 				genderName: null,
 				sexShow: false,
 				range: [
-					{ text: '未知', value: '0' },
 					{ text: '男', value: '1' },
 					{ text: '女', value: '2' }
 				],
@@ -113,14 +112,14 @@
 			},
 			onClickLeft(){
 				// uni.navigateBack()
-				uni.navigateTo({url:'/pages/personalInfo/personalInfo'})
+				uni.reLaunch({url:'/pages/personalInfo/personalInfo'})
 			},
 			open(){
 				this.sexShow = true
 			}
 		},
 		onBackPress(){
-			uni.navigateTo({url:'/pages/personalInfo/personalInfo'})
+			uni.reLaunch({url:'/pages/personalInfo/personalInfo'})
 			return true
 		}
 	}

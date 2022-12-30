@@ -1,5 +1,7 @@
 <template>
 	<view class="new-workout">
+		<view class="background-header"></view>
+		<view class="background"></view>
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<view class="header">
 			<view class="title">新建训练</view>
@@ -407,6 +409,10 @@
 						}
 					})
 				}
+				const traineeName = uni.getStorageSync('traineeName');
+				if(traineeName){
+					this.traineeName = traineeName
+				}
 			} catch (e) {
 				// error
 			}
@@ -458,12 +464,12 @@
 			},
 			addProjectItem(list){
 				list.push({
-					kg: 0,
-					km: 0,
-					time: 0,
-					hour: 0,
-					minute: 0,
-					second: 0,
+					kg: null,
+					km: null,
+					time: null,
+					hour: null,
+					minute: null,
+					second: null,
 					active: false
 				})
 			},
@@ -489,7 +495,7 @@
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')
 				uni.removeStorageSync('traineeName')
-				uni.navigateTo({
+				uni.reLaunch({
 					url:
 					'/pages/trainingRecord/trainingRecord' +
 					`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
@@ -507,7 +513,7 @@
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')
 				uni.removeStorageSync('traineeName')
-				uni.navigateTo({
+				uni.reLaunch({
 					url:
 					'/pages/trainingRecord/trainingRecord' +
 					`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
@@ -531,63 +537,90 @@
 				this.actionList.forEach((item)=>{
 					if(item.type===0){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {cur.kg = 0}
-							return cur.active ? +cur.kg + +prev : prev; 
+							if(!cur.kg) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.kg + +prev : prev; 
+							}
 						}, 0)
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===1){
 						item.mileage = item.groupList.reduce( function (prev, cur) {
-							if(!cur.km) {cur.km = 0} 
-							return  +cur.km + +prev; 
+							if(!cur.km) {
+								return  0 + +prev; 
+							} else {
+								return  +cur.km + +prev; 
+							}
 						}, 0)
 						item.times = item.groupList.reduce( function (prev, cur) {
-							if(!cur.hour) {cur.hour = 0}  
-							if(!cur.minute) {cur.minute = 0}  
-							if(!cur.second) {cur.second = 0}  
-							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							if(!cur.hour||!cur.minute||!cur.second) {
+								return 0 + +prev;
+							} else {
+								return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							}
 						}, 0)
 					} else if(item.type===2){
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===3){
 						item.times = item.groupList.reduce( function (prev, cur) {
-							if(!cur.hour) {cur.hour = 0}  
-							if(!cur.minute) {cur.minute = 0}  
-							if(!cur.second) {cur.second = 0}  
-							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							if(!cur.hour||!cur.minute||!cur.second) {
+								return 0 + +prev;
+							} else {
+								return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							}
 						}, 0)
 					} else if(item.type===4){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {cur.kg = 0}
-							return cur.active ? +cur.kg + +prev : prev; 
+							if(!cur.kg) {
+								return cur.active ? 0 + +prev : prev;
+							} else {
+								return cur.active ? +cur.kg + +prev : prev; 
+							}
 						}, 0)
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===5){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {cur.kg = 0}
-							return cur.active ? +cur.kg + +prev : prev; 
+							if(!cur.kg) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.kg + +prev : prev; 
+							}
 						}, 0)
 						if(item.weight){
 							item.load = item.load + +item.weight
 						}
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.time) {cur.time = 0}
-							return cur.active ? +cur.time + +prev : prev; 
+							if(!cur.time) {
+								return cur.active ? 0 + +prev : prev; 
+							} else {
+								return cur.active ? +cur.time + +prev : prev; 
+							}
 						}, 0)
 					} else if(item.type===6){
 						item.times = item.groupList.reduce( function (prev, cur) {
-							if(!cur.hour) {cur.hour = 0}  
-							if(!cur.minute) {cur.minute = 0}  
-							if(!cur.second) {cur.second = 0}  
-							return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							if(!cur.hour||!cur.minute||!cur.second) {
+								return 0 + +prev;
+							} else {
+								return (+cur.hour*60*60)+(+cur.minute*60)+ +cur.second + +prev; 
+							} 
 						}, 0)
 					}
 				})
@@ -617,7 +650,22 @@
 </script>
 
 <style lang="scss">
-page{
+.background-header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	height: 460upx;
+	background: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
+}
+.background{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -2;
+	height: 100vh;
 	background: #212328;
 }
 .status_bar {
@@ -625,6 +673,7 @@ page{
 	width: 100%;
 }
 .new-workout{
+	position: relative;
 	padding-bottom: 175upx;
 	.header{
 		height: 126upx;
@@ -634,7 +683,7 @@ page{
 		padding: 30upx;
 		font-size: 48upx;
 		color: #FFFFFF;
-		background: #212328;
+		background: transparent;
 		.title {
 			font-weight: 600;
 		}
@@ -655,7 +704,7 @@ page{
 		box-sizing: border-box;
 		padding: 0 30upx;
 		padding-bottom: 30upx;
-		background: #212328;
+		background: transparent;
 		.uni-input{
 			height: 100upx;
 			background: #383D46;

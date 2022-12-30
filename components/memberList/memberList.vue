@@ -342,7 +342,7 @@ export default {
       uni.navigateTo({
         url:
           '/pages/newWorkout/newWorkout' +
-          `?traineeNo=${item._id}&memberName=${item.traineeName}`
+          `?traineeNo=${item._id}&traineeName=${item.traineeName}`
       })
     },
 	getReport(item){

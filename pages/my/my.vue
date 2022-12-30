@@ -128,17 +128,17 @@
 				});
 			},
 			openCard(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/openCard/openCard'
 				});
 			},
 			setUp(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/setUp/setUp'
 				});
 			},
 			personalInfo(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/personalInfo/personalInfo'
 				});
 			},
