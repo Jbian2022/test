@@ -439,7 +439,7 @@ export default {
         }
       }
       ::v-deep .van-sidebar-item--select {
-        background: linear-gradient(270deg, #202123 0%, #383d46 100%);
+        background: linear-gradient(270deg, rgba(56,61,70,0) 0%, #383D46 100%);
         .van-sidebar-item__text {
           font-weight: 600;
           color: #f4f7ff;
