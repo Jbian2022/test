@@ -136,7 +136,7 @@
   align-items: center;
 }
 .counter .wx_loging_style .wx_img_style[data-v-62a93864] {
-  margin-top: 2.5rem;
+  margin-top: 3.625rem;
   width: 3.125rem;
   height: 3.125rem;
   object-fit: contain;
@@ -175,7 +175,6 @@
 }
 .botter_dakuang_style .botter .botter-top .botter-top4[data-v-62a93864] {
   margin-top: 2.1875rem;
-  width: calc(100% - 3.75rem);
   height: 3.125rem;
   background: #1370ff;
   border-radius: 0.5rem;

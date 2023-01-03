@@ -643,8 +643,8 @@ export default {
 }
 
 ::v-deep .uni-forms {
-  width: calc(100vw - 80upx);
-  margin-left: 40upx;
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
 
   uni-form {
     span {
@@ -656,6 +656,7 @@ export default {
         display: block;
         background: rgba(75, 82, 94, 0.5) !important;
         border-radius: 16upx;
+		margin-bottom: 30upx !important;
 
         .uni-forms-item__label {
           width: 100% !important;

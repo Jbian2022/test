@@ -104,6 +104,28 @@ module.exports = {
 		   
 	   })
    },
+   // 查询教练手下的会员
+   getCoachMemberList: async function() {
+	   const token = this.getUniIdToken()
+	   	const detailInfo = await this.uniID.checkToken(token)
+		// console.log(detailInfo,'detailInfo')
+	   return new Promise((resolve, reject) => {
+		   db.collection('t_trainee').where({
+			   userId: detailInfo.uid
+				
+		   }).get().then(memberRes => {
+			   let successMessage = {
+				   success: true,
+				   ...memberRes
+			   }
+			   resolve(successMessage)
+			   
+		   }).catch(err => {
+			   reject(err)
+		   })
+		   
+	   })
+   },
    // 添加会员
    addMember: async function(data) {
 	   const token = this.getUniIdToken()
@@ -435,6 +457,14 @@ module.exports = {
    	      		   
    	   })
    },
+   
+   // 删除动作库数据
+   // removeAtion: async function() {
+
+	  //  await db.collection("t_action_config").where({
+	  //    _id: dbCmd.neq(null)
+	  //  }).remove()
+   // }
    
    
    

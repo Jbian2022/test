@@ -48,7 +48,7 @@
         </view>
         <view class="ying_si_remark_dakuang_style">
           <text class="ying_si_remark">同意</text>
-          <text class="ying_si_remark_middle">
+          <text class="ying_si_remark_middle" @click.native.stop="jumpAgree">
             <text class="ying_si_jump_style">《用户隐私协议》</text>
 
             <!-- <text class="ying_si_jump_style">《用户协议》</text> -->
@@ -62,7 +62,7 @@
               <h1 class="botter-top1">欢迎使用本产品！</h1>
               <h2 class="botter-top2">welcome</h2>
               <p class="botter-top3">
-                为了更好的保障您的合法权益，在使用本应用之前，请您仔细阅读《用户隐私协议》，点击同意即表示您已阅读并同意接受我们的服务，感谢您的信任！
+                为了更好的保障您的合法权益，在使用本应用之前，请您仔细阅读<text style="color: #1370ff;" @click.native.stop="jumpAgree">《用户隐私协议》</text>，点击同意即表示您已阅读并同意接受我们的服务，感谢您的信任！
               </p>
               <button class="botter-top4" @click="agreeContiute">
                 <span class="botter-top4-text">同意并继续</span>
@@ -124,6 +124,12 @@ export default {
     // #endif
   },
   methods: {
+	  jumpAgree() {
+		  console.log('11111')
+		uni.navigateTo({
+			url: "/pages/agreement/agreement"
+		})  
+	  },
     phoneInput(event) {
       console.log(event, '你tm')
       this.phone = event.detail.value
@@ -332,7 +338,7 @@ export default {
     justify-content: center;
     align-items: center;
     .wx_img_style {
-      margin-top: 80upx;
+      margin-top: 116upx;
       width: 100upx;
       height: 100upx;
       object-fit: contain;
@@ -376,7 +382,7 @@ export default {
 
       .botter-top4 {
         margin-top: 70upx;
-        width: calc(100% - 120upx);
+        // width: calc(100% - 120upx);
         height: 100upx;
         background: #1370ff;
         border-radius: 16upx;
@@ -421,6 +427,7 @@ export default {
     }
   }
 }
+
 // 勾选
 
 ::v-deep .van-field__control {

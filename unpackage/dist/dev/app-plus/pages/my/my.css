@@ -74,8 +74,18 @@
   height: var(--status-bar-height);
   width: 100%;
 }
-body {
-  background: #212328;
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  height: 100%;
+  background-color: #212328;
+  background-image: url("../../static/newWorkout/mybackgroud.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 .my {
   position: relative;
@@ -177,8 +187,8 @@ body {
 .my .vip-info .right {
   width: 8.125rem;
   height: 8.125rem;
-  background: url("../../static/newWorkout/vip-logo.png");
-  background-size: 5rem 5rem;
+  background: url("../../static/newWorkout/glod.png");
+  background-size: 5.625rem 5.625rem;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -194,7 +204,8 @@ body {
 .my .vip-info.ordinary .right {
   width: 8.125rem;
   height: 8.125rem;
-  background: url("../../static/newWorkout/ordinary.png");
+  background: url("../../static/newWorkout/blue.png");
+  background-size: 5.625rem 5.625rem;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -217,7 +228,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #4B525E;
+  background: rgba(75, 82, 94, 0.5);
   height: 2.8125rem;
   border-radius: 0.5rem;
   padding: 0 0.9375rem;
@@ -241,9 +252,13 @@ body {
   color: #BDC3CE;
   font-size: 0.9375rem;
 }
-.my .recommend .van-cell .van-icon {
-  color: #BDC3CE;
-  font-size: 0.9375rem;
+.my .recommend .van-cell .icon {
+  margin-right: 0.6875rem;
+  width: 1rem;
+  height: 1rem;
+  background: url("../../static/newWorkout/user.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .my .recommend-sheet .van-picker {
   background: #383D46;
@@ -298,4 +313,67 @@ body {
 }
 .my .recommend-sheet .van-picker .van-picker__frame::after {
   display: none;
+}
+.my .picker-box {
+  background: #383D46;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+.my .picker-box .picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+.my .picker-box .picker-header .cancel-btn {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7A7F89;
+  line-height: 1.375rem;
+}
+.my .picker-box .picker-header .title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 1.375rem;
+}
+.my .picker-box .picker-header .success-btn {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 1.375rem;
+}
+.my .picker-box .message {
+  padding: 0 1.25rem;
+  height: 2.5rem;
+  margin-bottom: 0.3125rem;
+  margin-top: 0.3125rem;
+}
+.my .picker-box .message .text {
+  background: rgba(75, 82, 94, 0.5);
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #BDC3CE;
+  line-height: 2.5rem;
+  text-align: center;
+}
+.my .picker-box .picker-content {
+  height: 14.9375rem;
+  overflow-y: auto;
+  padding: 0 1.25rem;
+}
+.my .picker-box .picker-content .picker-item {
+  height: 3.4375rem;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #F4F7FF;
+  line-height: 3.4375rem;
+  text-align: center;
+}
+.my .picker-box .picker-content .picker-item.active {
+  background: rgba(75, 82, 94, 0.5);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #F4F7FF;
 }

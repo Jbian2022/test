@@ -23,8 +23,8 @@
       <button class="btn" :class="sureLogin ? 'active' : ''" @click="smsLogin">
         <span class="btn-text">登录</span>
       </button>
-      <p class="time" :class="isFinsh ? 'timeActive' : ''" @click="resend">
-        重新发送（<view>
+      <view class="time" :class="isFinsh ? 'timeActive' : ''" @click="resend">
+        重新发送<view class="kuo_hao_style" v-if="!isFinsh">(
           <uni-countdown
             :show-day="false"
             :color="isFinsh ? '#1370ff' : '#a8adb6'"
@@ -34,9 +34,10 @@
             :second="timeupSecond"
             @timeup="timeup"
           />
+		  <text>s</text>）
 		  </view
-        ><text>s</text>）
-      </p>
+        >
+      </view>
     </view>
   </view>
 </template>
@@ -172,7 +173,9 @@ export default {
       }
     },
     goBack() {
-      uni.navigateBack()
+    uni.reLaunch({
+      url: '/pages/logining/logining'
+    })  
     }
   }
 }
@@ -264,6 +267,11 @@ export default {
     line-height: 42upx;
     display: flex;
     justify-content: center;
+	.kuo_hao_style {
+		width: auto;
+		display: flex;
+		align-items: center;
+	}
   }
   .timeActive {
     color: #1370ff;

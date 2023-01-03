@@ -139,7 +139,7 @@ export default {
   animation-name: searchAnmation;
   animation-duration: 0.3s;
   z-index: 500;
-  top: 50upx;
+  top: 30upx;
 }
 @keyframes searchAnmation {
   0% {
@@ -147,7 +147,7 @@ export default {
   }
 
   100% {
-    top: 50upx;
+    top: 30upx;
   }
 }
 
@@ -170,6 +170,9 @@ export default {
   font-family: PingFangSC-Semibold, PingFang SC;
   // font-weight: 600;
   color: #f4f7ff !important;
+}
+::v-deep.uni-scroll-view-content {
+	height: auto !important;
 }
 .nav_bar_style {
   width: 100%;
@@ -230,7 +233,7 @@ export default {
       height: 28upx;
       margin-right: 14upx;
       margin-left: 28upx;
-      background-image: url('../../static/newWorkout/search.png');
+      background-image: url('../../static/app-plus/mebrs/fangdajing.svg');
       background-size: contain;
       background-repeat: no-repeat;
     }

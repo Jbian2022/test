@@ -146,13 +146,16 @@ export default {
     isActive: Number,
     searchValue: String,
     type: String,
-    isFirstFlag: Boolean
+    isFirstFlag: Boolean,
+	currentNum: Number,
+	page: Number
   },
   onLoad(options) {
     // 	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
     //  this.getMemberList(options.isActive)
     // }
   },
+
   created() {
     switch (this.type) {
       case 'home':
@@ -314,6 +317,7 @@ export default {
                   isOpened: 'none'
                 }
               }) || []
+			  
 
             self.$set(self, 'meberList', meberList)
             console.log(self.meberList, '?????')
@@ -360,6 +364,8 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+	padding-bottom: 180upx;
   // background: #212328;
   .no_data_style {
     width: 100%;
@@ -447,9 +453,10 @@ export default {
           }
         }
         .loop_bottom_style {
-          width: 100%;
+          width: calc(100% - 60upx);
+		  margin-left: 30upx;
           display: flex;
-          justify-content: space-around;
+          justify-content: space-between;
           align-items: center;
           .bottom_style {
             display: flex;

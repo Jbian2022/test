@@ -78,9 +78,11 @@
   min-width: 6.3125rem;
   background: #212328;
   border-radius: 0.5rem;
+  padding: 0.3125rem 0;
+  z-index: 8;
 }
 .popover .popover-list.center[data-v-c68365de] {
-  bottom: 0;
+  bottom: -0.3125rem;
   transform: translateY(100%) translateX(-50%);
   left: 50%;
 }
@@ -95,8 +97,8 @@
   right: -0.78125rem;
 }
 .popover .popover-list .list-item[data-v-c68365de] {
-  height: 2.1875rem;
-  line-height: 2.1875rem;
+  height: 2.65625rem;
+  line-height: 2.65625rem;
   text-align: center;
   font-size: 0.875rem;
   font-weight: 600;
@@ -157,7 +159,22 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-body {
+.background-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 14.375rem;
+  background: linear-gradient(to bottom, #343a44, #212328);
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  height: 100vh;
   background: #212328;
 }
 .status_bar {
@@ -165,6 +182,7 @@ body {
   width: 100%;
 }
 .new-workout {
+  position: relative;
   padding-bottom: 5.46875rem;
 }
 .new-workout .header {
@@ -175,7 +193,10 @@ body {
   padding: 0.9375rem;
   font-size: 1.5rem;
   color: #FFFFFF;
-  background: #212328;
+  background: transparent;
+}
+.new-workout .header .title {
+  font-weight: 600;
 }
 .new-workout .header .btn {
   padding: 0 0.9375rem;
@@ -193,7 +214,7 @@ body {
   box-sizing: border-box;
   padding: 0 0.9375rem;
   padding-bottom: 0.9375rem;
-  background: #212328;
+  background: transparent;
 }
 .new-workout .workout-title .uni-input {
   height: 3.125rem;
@@ -263,8 +284,8 @@ body {
   color: #FFFFFF;
 }
 .new-workout .action-list .action-tiem .action-tiem-header .config .img {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   background: url("../../static/newWorkout/config.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -335,8 +356,8 @@ body {
   box-sizing: border-box;
 }
 .new-workout .action-list .action-tiem .action-tiem-des .project-item .yes .true-icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   background: url("../../static/newWorkout/true.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -347,8 +368,8 @@ body {
 }
 .new-workout .action-list .action-tiem .action-tiem-des .project-item .delete .img {
   display: inline-block;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   background: url("../../static/newWorkout/trashcan.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -414,8 +435,8 @@ body {
   padding: 0;
 }
 .new-workout .footer-button .delete .img {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   background: url("../../static/newWorkout/trashcan.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -433,7 +454,7 @@ body {
   font-weight: 600;
   color: #FFFFFF;
 }
-.new-workout.uni-popup [name=mask] {
+.new-workout .uni-popup [name=mask] {
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
 }

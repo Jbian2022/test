@@ -1,7 +1,7 @@
 <template>
   <view class="content_style">
    <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'健康问答'"></NavBarCompontent>
+    <NavBarCompontent :leftNavTitle="'健康问答'" :isAuthority="true"></NavBarCompontent>
     <view class="list_content_style">
       <view
         class="need_loop_style"
@@ -9,8 +9,8 @@
         :key="'key' + itemIndex"
       >
         <view class="check_box_style" v-if="item.questionType === 2">
-          <van-collapse class="need_collapse_style" v-model="activeName">
-            <van-collapse-item :title="item.questionContent" :name="itemIndex">
+          <uni-collapse class="need_collapse_style" v-model="activeName">
+            <uni-collapse-item :title="item.questionContent" :name="itemIndex">
               <view class="collapes_conten_style">
                 <view
                   class="collapes_tag_stylle"
@@ -23,8 +23,8 @@
                   >{{ itemChild.answerTitle }}</view
                 >
               </view>
-            </van-collapse-item>
-          </van-collapse>
+            </uni-collapse-item>
+          </uni-collapse>
         </view>
         <view class="radio_style" v-if="item.questionType === 1">
           <view class="radio_title_style">
@@ -295,6 +295,7 @@ export default {
         padding-top: 40upx;
         padding-bottom: 40upx;
         box-sizing: border-box;
+		background-color: transparent !important;
         .collapes_conten_style {
           width: 100%;
           display: flex;
@@ -302,7 +303,8 @@ export default {
           flex-wrap: wrap;
 
           .collapes_tag_stylle {
-            width: 187upx;
+            // width: 187upx;
+			width: calc((100% - 48upx) / 3);
             height: 80upx;
             background: #4b525e;
             border-radius: 16upx;
@@ -402,54 +404,34 @@ export default {
   text-align: center;
 }
 
-::v-deep .van-field__control {
-  font-size: 32upx !important;
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
-  color: #f4f7ff;
+::v-deep.uni-collapse {
+	.uni-collapse-item {
+		.uni-collapse-item-border {
+			border: none !important;
+			
+		}
+	}
 }
-::v-deep .van-field__control::placeholder {
-  font-size: 32upx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #bdc3ce;
+::v-deep.uni-collapse-item__title-box {
+	background-color: transparent !important;
+	font-size: 32upx !important;
+	font-family: PingFangSC-Semibold, PingFang SC !important;
+	font-weight: 600 !important;
+	color: #F4F7FF !important;
+	padding: 0 !important;
 }
-
-::v-deep .van-cell::after {
-  border-bottom-width: 0 !important;
-  border-top-width: 0 !important;
-  border: none;
+::v-deep.uni-collapse-item__title-text {
+	font-size: 32upx !important;
+	font-family: PingFangSC-Semibold, PingFang SC !important;
+	font-weight: 600 !important;
+	color: #F4F7FF !important;
 }
-::v-deep .van-collapse-item::after {
-  border-bottom-width: 0 !important;
-  border-top-width: 0 !important;
-  border: none;
+::v-deep.uni-collapse-item__wrap {
+		background-color: transparent !important;
 }
-::v-deep .van-collapse::after {
-  border: none;
+::v-deep.uni-collapse-item__wrap-content.uni-collapse-item--border {
+	border-bottom-width: 0 !important;
 }
-::v-deep .van-collapse-item {
-  .van-cell {
-    background: #383d46 !important;
-    padding-left: 0;
-    padding-right: 0;
-    .van-cell__title {
-      color: #ffff;
-      font-size: 32upx;
-      // font-family: PingFangSC-Semibold, PingFang SC;
-      font-weight: 600;
-      color: #f4f7ff;
-    }
-  }
-  .van-collapse-item__wrapper {
-    .van-collapse-item__content {
-      background: #383d46 !important;
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-}
-
 ::v-deep .uni-textarea {
 	// height: 160px;
 	background: #4B525E;

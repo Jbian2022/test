@@ -44,10 +44,7 @@
 <script>
 export default {
   data() {
-    return {
-      title:
-        '<p>紧张肌肉：&nbsp;肩胛提肌，&nbsp;颈伸肌，&nbsp;前斜角肌，&nbsp;头后大直肌，&nbsp;头半棘肌，&nbsp;胸锁乳突形肌。</p><p>无力肌肉：&nbsp;深层颈屈肌，&nbsp;菱形肌，&nbsp;中下斜方肌，&nbsp;小圆肌，&nbsp;岗下肌。</p>'
-    }
+    return {}
   },
   methods: {
     goBack() {
@@ -71,7 +68,7 @@ export default {
   .nav_style {
     width: 100%;
 
-    padding-top: 24upx;
+    padding-top: 88upx;
     margin-left: 30upx;
     display: flex;
     align-items: center;

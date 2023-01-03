@@ -23,27 +23,104 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.uni-popup[data-v-4dd3c44b] {
-  position: fixed;
-  z-index: 99;
+.m-picker[data-v-3551bfb1] {
+  width: 100%;
+  height: 100%;
 }
-.uni-popup.top[data-v-4dd3c44b], .uni-popup.left[data-v-4dd3c44b], .uni-popup.right[data-v-4dd3c44b] {
+.m-picker__case[data-v-3551bfb1] {
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+  padding-top: 0.9375rem;
+  padding-bottom: 0.9375rem;
+}
+.m-picker__case .handle[data-v-3551bfb1] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.m-picker__case .handle .button[data-v-3551bfb1] {
+  font-size: 1.5rem;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #000000;
+}
+.m-picker__case .handle .button.confirm[data-v-3551bfb1] {
+  color: #ff8833;
+}
+.m-picker__case .content[data-v-3551bfb1] {
+  width: 100%;
+  height: 12.5rem;
+}
+.picker-view[data-v-3551bfb1] {
+  width: 100%;
+  height: 100%;
+}
+.picker-view__item[data-v-3551bfb1] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.transition[data-v-3551bfb1] {
+  border-radius: 0.75rem 0.75rem 0px 0px;
+}
+.m-picker[data-v-3551bfb1] {
+  border-radius: 0.75rem 0.75rem 0px 0px;
+}
+.m-picker__case[data-v-3551bfb1] {
+  border-radius: 0.75rem 0.75rem 0px 0px !important;
+  background: #383d46;
+}
+.m-picker__case .handle .cancel[data-v-3551bfb1] {
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #7a7f89;
+}
+.m-picker__case .handle .button.confirm[data-v-3551bfb1] {
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #f4f7ff !important;
+}
+.picker-view__item[data-v-3551bfb1] {
+  font-size: 0.9375rem;
+  font-family: SFPro-Regular, SFPro;
+  font-weight: 400;
+  color: #f4f7ff;
+}
+[data-v-3551bfb1] .uni-picker-view-indicator {
+  border: none !important;
+  background: rgba(75, 82, 94, 0.2) !important;
+  border-radius: 16px;
+}
+[data-v-3551bfb1] .uni-picker-view-indicator:before {
+  border-top: none;
+}
+[data-v-3551bfb1] .uni-picker-view-indicator::after {
+  border-bottom: none;
+}
+[data-v-3551bfb1] .uni-picker-view-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+[data-v-3551bfb1] .uni-picker-view-content .item {
+  font-size: 0.9375rem;
+  font-family: SFPro-Regular, SFPro;
+  font-weight: 400;
+  color: #F4F7FF;
+  line-height: 50px;
+}
+[data-v-3551bfb1] .uni-picker-view-mask {
   top: 0;
-}
-.uni-popup .uni-popup__wrapper[data-v-4dd3c44b] {
-  display: block;
-  position: relative;
-  /* iphonex 等安全区设置，底部安全区适配 */
-}
-.uni-popup .uni-popup__wrapper.left[data-v-4dd3c44b], .uni-popup .uni-popup__wrapper.right[data-v-4dd3c44b] {
-  padding-top: 0;
-  flex: 1;
-}
-.fixforpc-z-index[data-v-4dd3c44b] {
-  z-index: 999;
-}
-.fixforpc-top[data-v-4dd3c44b] {
-  top: 0;
+  height: 100%;
+  margin: 0 auto;
+  background-image: linear-gradient(to bottom, rgba(56, 61, 70, 0.9), rgba(56, 61, 70, 0.5)), linear-gradient(to bottom, rgba(56, 61, 70, 0.5), rgba(56, 61, 70, 0.9));
+  background-position: top, bottom;
+  background-size: 100% 102px;
+  background-repeat: no-repeat;
 }
 /**
  * 这里是uni-app内置的常用样式变量
