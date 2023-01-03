@@ -233,7 +233,7 @@ export default {
       height: 28upx;
       margin-right: 14upx;
       margin-left: 28upx;
-      background-image: url('../../static/newWorkout/search.png');
+      background-image: url('../../static/app-plus/mebrs/fangdajing.svg');
       background-size: contain;
       background-repeat: no-repeat;
     }

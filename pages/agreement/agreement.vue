@@ -68,7 +68,7 @@ export default {
   .nav_style {
     width: 100%;
 
-    padding-top: 24upx;
+    padding-top: 88upx;
     margin-left: 30upx;
     display: flex;
     align-items: center;

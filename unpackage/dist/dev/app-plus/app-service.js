@@ -657,7 +657,8 @@ if (uni.restoreGlobal) {
       style: {
         navigationBarTitleText: "",
         enablePullDownRefresh: false,
-        navigationBarTextStyle: "white",
+        navigationStyle: "custom",
+        navigationBarTextStyle: "black",
         "app-plus": {
           titleNView: false
         }
@@ -990,7 +991,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.71"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.79"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T$1 = "";
   try {
     T$1 = "__UNI__76A9E40";
@@ -4634,7 +4635,7 @@ if (uni.restoreGlobal) {
       uni.stopPullDownRefresh();
     },
     onReachBottom() {
-      formatAppLog("log", "at pages/myMebers/myMebers.vue:135", 2222);
+      formatAppLog("log", "at pages/myMebers/myMebers.vue:140", 2222);
     },
     created() {
     },
@@ -4664,7 +4665,7 @@ if (uni.restoreGlobal) {
         const login2 = Es.importObject("login");
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:169", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:174", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4675,7 +4676,7 @@ if (uni.restoreGlobal) {
       getCocachList() {
         let businessCloudObject2 = Es.importObject("businessCloudObject");
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:184", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:189", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4687,11 +4688,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:196", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:201", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:200", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:205", "success");
           }
         });
         uni.navigateTo({
@@ -4720,7 +4721,7 @@ if (uni.restoreGlobal) {
         }
         let businessCloudObject2 = Es.importObject("businessCloudObject");
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:234", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:239", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4774,7 +4775,11 @@ if (uni.restoreGlobal) {
                       key: 0,
                       class: "left_content_img_style",
                       src: $data.avatar
-                    }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
+                    }, null, 8, ["src"])) : (vue.openBlock(), vue.createElementBlock("image", {
+                      key: 1,
+                      class: "left_content_img_style",
+                      src: "/static/app-plus/mebrs/defaultAvator.png"
+                    })),
                     vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
                     vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
                   ])

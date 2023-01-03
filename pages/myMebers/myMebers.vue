@@ -16,6 +16,11 @@
                   v-if="avatar"
                   :src="avatar"
                 ></image>
+				<image
+				  class="left_content_img_style"
+				  v-else
+				  src="../../static/app-plus/mebrs/defaultAvator.png"
+				></image>
                 <view class="left_header_style">我的会员</view>
                 <view class="left_num_style">{{ meberList.length }}</view>
               </view>
@@ -365,117 +370,6 @@ export default {
   }
   .is_buy_style::after {
     width: calc(100vw - 300upx) !important;
-  }
-
-  .mebers_content {
-    width: 100vw;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding-bottom: 180upx;
-    // background: #212328;
-    .no_data_style {
-      width: 100%;
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .no_data_meber_img_style {
-        // width: 100%;
-        width: 382upx;
-        height: 382upx;
-        object-fit: contain;
-      }
-    }
-    .slide_stylle {
-      width: 100%;
-      flex: 1;
-
-      .add_student_style {
-        width: 100%;
-        display: flex;
-        // flex: 1;
-        align-items: center;
-        flex-direction: column;
-        .need_loop_style {
-          width: calc(100% - 60upx);
-          // margin: 30upx;
-
-          display: flex;
-
-          flex-direction: column;
-          justify-content: space-around;
-          background: #383d46;
-          border-radius: 24upx;
-          height: 260upx;
-
-          .loop_top_style {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            // margin-top: 40upx;
-            .top_left_style {
-              width: 50%;
-              display: flex;
-
-              .top_left_name_style {
-                font-size: 40upx;
-                font-family: PingFangSC-Semibold, PingFang SC;
-                font-weight: 600;
-                color: #f4f7ff;
-              }
-              .top_left_img_style {
-                width: 36upx;
-                height: 38upx;
-                object-fit: contain;
-                margin-left: 10upx;
-              }
-            }
-            .top_right_style {
-              width: 238upx;
-              height: 60upx;
-              background: rgba(1, 224, 140, 0.1);
-              border-radius: 12upx;
-              // opacity: 0.1;
-              font-size: 28upx;
-              text-align: center;
-              line-height: 60upx;
-              font-weight: 600;
-              color: #01e08c;
-              .top_right_img_style {
-                width: 20upx;
-                height: 22upx;
-                object-fit: contain;
-                margin-right: 10upx;
-              }
-            }
-          }
-          .loop_bottom_style {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            .bottom_style {
-              display: flex;
-              align-items: center;
-              .bootom_img_style {
-                width: 28upx;
-                height: 30upx;
-                margin-right: 8upx;
-                object-fit: contain;
-              }
-              .message_style {
-                font-size: 28upx;
-                font-weight: 400;
-                color: #bdc3ce;
-              }
-            }
-          }
-        }
-      }
-    }
   }
 
   .guid_style {
