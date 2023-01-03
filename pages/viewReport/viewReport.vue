@@ -961,7 +961,9 @@ import { now } from 'moment';
 						url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo
 					})
 				}else{
-					uni.navigateBack()
+					uni.reLaunch({
+						url: '/pages/myMebers/myMebers'
+					})
 				}
 			},
 		}

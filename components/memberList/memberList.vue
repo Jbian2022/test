@@ -67,7 +67,7 @@
           <view class="add_student_style">
             <view class="need_loop_style">
               <view class="loop_top_style">
-                <view class="top_left_style">
+                <view class="top_left_style" @click.stop="getReport(item)">
                   <text class="top_left_name_style">{{
                     item.traineeName
                   }}</text>
@@ -94,7 +94,7 @@
                 </view>
               </view>
               <view class="loop_bottom_style">
-                <view class="bottom_style" @click.stop="getReport(item)">
+                <view class="bottom_style" @click.stop="updateMember(item)">
                   <image
                     class="bootom_img_style"
                     src="../../static/app-plus/mebrs/meberMessage.svg"
