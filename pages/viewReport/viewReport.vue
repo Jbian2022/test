@@ -38,14 +38,15 @@
 			<!-- <image src="../../static/app-plus/bg/bodysideReport.png"></image> -->
 		</view>
 		<view class="basicInformation">
-			<van-collapse v-model="activeBasicInformation"
-			:border = 'false'>
-				<van-collapse-item 
+			<uni-collapse v-model="activeBasicInformation"
+			:border = 'false'
+			class="need_collapse_style"
+			title-border='none'>
+				<uni-collapse-item 
 				title="基础信息" 
 				name="1" 
-				title-class="informationTitleText"
-				class="informationCard">
-				    <view class="basicInformationContent">
+				>
+					<view style="height: 280upx;">
 						<view class="textContent">
 							<van-row class="text">
 							  <van-col span="12">姓名</van-col>
@@ -72,18 +73,18 @@
 							</van-row>
 						</view>
 					</view>
-				</van-collapse-item>
-			</van-collapse>
+				</uni-collapse-item>
+			</uni-collapse>
 		</view>
 		
 		<view class="basicInformation">
-			<van-collapse v-model="healthQA"
+			<uni-collapse v-model="healthQA"
 			:border = 'false'>
-				<van-collapse-item 
+				<uni-collapse-item 
 				title="健康问答" 
 				name="2" 
-				title-class="informationTitleText"
 				class="informationCard">
+				<view style="padding-bottom: 40upx;">
 				    <view class="basicInformationContent healthBlocks">
 						<view class="healthBlock">
 							高血压
@@ -134,19 +135,20 @@
 							重了15公斤
 						</view>
 					</view>
-				</van-collapse-item>
-			</van-collapse>
+					</view>
+				</uni-collapse-item>
+			</uni-collapse>
 		</view>
 		
 		<view class="basicInformation">
-			<van-collapse v-model="BodyTestReport"
+			<uni-collapse v-model="BodyTestReport"
 			:border = 'false'>
-				<van-collapse-item 
+				<uni-collapse-item 
 				title="体测报告" 
 				name="3" 
 				title-class="informationTitleText"
 				class="informationCard">
-				
+				<view style="padding-bottom: 40upx;">
 				<view class="countNumBlock">
 					<van-row>
 					  <van-col span="12"
@@ -164,7 +166,8 @@ text-align: right;
 margin-top: 10upx;">{{bodyFraction}}</van-col>
 					</van-row>
 					<van-row >
-					  <van-col span="24">再努力一点会更好哦！</van-col>
+					  <van-col span="24" style="
+color: #BDC3CE;">再努力一点会更好哦！</van-col>
 					</van-row>
 					<view style="margin-top: 44upx;">
 						<van-progress :percentage="bodyFraction" 
@@ -225,18 +228,20 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 							</van-row>
 						</view>
 				    </view>
-				</van-collapse-item>
-			</van-collapse>
+					</view>
+				</uni-collapse-item>
+			</uni-collapse>
 		</view>
 		
 		<view class="basicInformation">
-			<van-collapse v-model="bodyAssessment"
+			<uni-collapse v-model="bodyAssessment"
 			:border = 'false'>
-				<van-collapse-item 
+				<uni-collapse-item 
 				title="体态评估" 
 				name="4" 
 				title-class="informationTitleText"
 				class="informationCard">
+				<view style="padding-bottom: 40upx;">
 				<view class="bodyAssessment" v-for="(item,index) in assessmentTrueData">
 					<view style="width: 5px;
 								height: 5px;
@@ -249,7 +254,7 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 								color: #F4F7FF;
 								line-height: 42upx;">{{item.title}}</span>
 						<view class="assessmentContent">
-							<p>
+							<p style="color: #7A7F89;font-size: 26upx;">
 								{{item.text}}
 							</p>
 							<view class = "warningText">
@@ -258,6 +263,7 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 								</p>
 							</view>
 						</view>
+				</view>
 				</view>
 				    <!-- <view class="bodyAssessment">
 						<view style="width: 10px;
@@ -300,18 +306,19 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 							</p>
 						</view>
 					</view> -->
-				</van-collapse-item>
-			</van-collapse>
+				</uni-collapse-item>
+			</uni-collapse>
 		</view>
 		
 		<view class="basicInformation">
-			<van-collapse v-model="dynamicEvaluation"
+			<uni-collapse v-model="dynamicEvaluation"
 			:border = 'false'>
-				<van-collapse-item 
+				<uni-collapse-item 
 				title="动态评估" 
 				name="5" 
 				title-class="informationTitleText"
 				class="informationCard">
+				<view style="padding-bottom: 40upx;">
 					<view class="bodyAssessment"
 						v-for="(item,index) in physicalFitnessAssessmentData">
 						<view style="width: 5px;
@@ -325,11 +332,12 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 								color: #F4F7FF;
 								line-height: 42upx;">{{item.answerTitle}}</span>
 						<view class="assessmentContent">
-							<p>
+							<p style="color: #7A7F89;font-size: 26upx;">
 								{{item.answeerContent}}
 							</p>
 						</view>
 				</view>
+					</view>
 					<!-- <view class="bodyAssessment">
 						<view style="width: 5px;
 								height: 5px;
@@ -348,18 +356,19 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 							</p>
 						</view>
 					</view> -->
-				</van-collapse-item>
-			</van-collapse>
+				</uni-collapse-item>
+			</uni-collapse>
 		</view>
 		
 		<view class="basicInformation">
-			<van-collapse v-model="physicalFitnessAssessment"
+			<uni-collapse v-model="physicalFitnessAssessment"
 			:border = 'false'>
-				<van-collapse-item 
+				<uni-collapse-item 
 				title="体能评估" 
 				name="6" 
 				title-class="informationTitleText"
 				class="informationCard">
+				<view style="padding-bottom: 40upx;">
 					<van-row style="background-color: #343A44;">
 						<van-col class="need_scoll" span="24">
 							<view
@@ -482,26 +491,39 @@ margin-top: 10upx;">{{bodyFraction}}</van-col>
 							</view> -->
 						</van-col>
 					</van-row>
-				</van-collapse-item>
-			</van-collapse>
+					</view>
+				</uni-collapse-item>
+			</uni-collapse>
 		</view>
 		</view>
 		<view v-if="openKey">
 			<!-- #ifdef APP-PLUS || H5 -->
 			<view :prop="canvasImageMsg" :change:prop="canvasImage.updateEcharts" id="canvasImage"></view>
 			<!-- #endif -->
-			<van-button
+			<!-- <van-button
 			type="primary" 
 			class="shareButton" 
 			icon="../../static/app-plus/other/share.png"
-			@click="saveReport">分享报告</van-button>
-			<van-share-sheet
+			@click="saveReport">分享报告</van-button> -->
+			<view class="bottom_style" @click="saveReport">
+				<image src="../../static/app-plus/other/share.png" class="shareImage"></image>
+				分享报告
+			</view>
+			<uni-popup ref="popup" type="bottom" mask-background-color="rgba(20, 21, 23, 0.6)">
+				<view class="share-sheet">
+					<view class="item" v-for="(item,index) in options" :key="index" @click="onSelect(item)">
+						<van-image class="img" round :src="item.icon"/>
+						<view class="text">{{item.name}}</view>
+					</view>
+				</view>
+			</uni-popup>
+			<!-- <van-share-sheet
 			  v-model:show="showShare"
 			  :options="options"
 			  @select="onSelect"
 			  cancel-text=""
 			  class="shareBlock"
-			/>
+			/> -->
 		</view>
 		<view v-if="!openKey">
 			<view 
@@ -579,9 +601,9 @@ import { now } from 'moment';
 				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.png' }
 				],
 				history:[
-					{ name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.svg' },
-					{ name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.svg' },
-					{ name: '保存到相册', icon: '../../static/app-plus/other/savePhone.svg' }
+					{ name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.png' },
+					{ name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.png' },
+					{ name: '保存到相册', icon: '../../static/app-plus/other/savePhone.png' }
 				],
 				getOnlyLists:{},
 				traineeNo:'',
@@ -855,6 +877,7 @@ import { now } from 'moment';
 				})
 			},
 			saveReport(){
+				this.$refs.popup.open()
 				const data = {};
 				let date = new Date();
 				data["traineeNo"] = this.traineeNo;
@@ -1087,6 +1110,7 @@ export default {
 		border-radius: 24upx;
 		/* opacity: 0.6; */
 		margin: 30upx 30upx 0 30upx;
+		background: #383d46;
 	}
 	.basicInformationContent{
 		/* margin: 30upx 30upx 40upx 30upx; */
@@ -1129,6 +1153,7 @@ export default {
 		text-align: center;
 		display: inline-block;
 		margin-right: 17upx;
+		color: #BDC3CE;
 	}
 	.healthBlocks{
 		margin: 0;
@@ -1225,12 +1250,6 @@ export default {
 		margin-left: 30upx;
 		margin-top: 40upx;
 		margin-bottom: 10upx;
-	}
-	::v-deep .van-popup{
-		width: 100vw;
-		height: 388upx;
-		background: #383D46;
-		border-radius: 24upx 24upx 0upx 0upx;
 	}
 	::v-deep .van-share-sheet__name{
 		color: #F4F7FF;
@@ -1335,5 +1354,129 @@ export default {
 		padding-bottom: 20px;
 		padding-left: 15px;
 		padding-right: 15px;
+	}
+	.need_loop_style {
+	  width: calc(100vw - 60upx);
+	  margin-left: 30upx;
+	  margin-top: 30upx;
+	  background: #383d46;
+	  border-radius: 24upx;
+	  height: auto;
+		.check_box_style {
+		  .need_collapse_style {
+			width: calc(100% - 60upx);
+			margin-left: 30upx;
+			height: auto;
+			padding-top: 40upx;
+			padding-bottom: 40upx;
+			box-sizing: border-box;
+			background-color: transparent !important;
+			.collapes_conten_style {
+			  width: 100%;
+			  display: flex;
+			  align-items: center;
+			  flex-wrap: wrap;
+			  .collapes_tag_stylle {
+				// width: 187upx;
+				width: calc((100% - 48upx) / 3);
+				height: 80upx;
+				background: #4b525e;
+				border-radius: 16upx;
+				font-size: 28upx;
+				// font-family: PingFangSC-Semibold, PingFang SC;
+				font-weight: 600;
+				color: #f4f7ff;
+				text-align: center;
+				line-height: 80upx;
+				margin-right: 24upx;
+				margin-bottom: 24upx;
+			  }
+			  .active {
+				background: #1370ff;
+				color: #f4f7ff;
+			  }
+			  .collapes_tag_stylle:nth-child(3n) {
+				margin-right: 0;
+			  }
+			}
+		  }
+		}
+	}
+	::v-deep .uni-collapse{
+		background: #383d46 !important;
+		border-radius: 16upx;
+	}
+	::v-deep .uni-collapse-item{
+		color: #BDC3CE !important;
+	}
+	::v-deep .uni-collapse-item__title-box{
+		background: #383d46 !important;
+		border-radius: 16upx;
+	}
+	::v-deep .uni-collapse-item__title-text{
+		font-size: 36upx !important;
+		font-weight: 600 !important;
+		color: #F4F7FF !important;
+	}
+	::v-deep .uni-collapse-item__wrap{
+		padding-left: 30upx;
+		padding-right: 30upx;
+		background: #383d46 !important;
+		border-radius: 16upx;
+	}
+	.textContent{
+		color: #BDC3CE;
+	}
+	::v-deep .uni-collapse-item__wrap-content{
+		padding-top: 40upx;
+		border-radius: 16upx;
+	}
+	::v-deep .uni-collapse-item__wrap-content.uni-collapse-item--border{
+		border: none !important;
+	}
+	::v-deep .uni-collapse-item__title.uni-collapse-item-border{
+		border: none !important;
+	}
+	.bottom_style {
+	  width: calc(100vw - 60upx);
+	  margin-left: 30upx;
+	  height: 100upx;
+	  background: #1370ff;
+	  border-radius: 16upx;
+	  margin-top: 30upx;
+	  margin-bottom: 30upx;
+	  font-size: 32upx;
+	  font-family: PingFangSC-Semibold, PingFang SC;
+	  font-weight: 600;
+	  color: #ffffff;
+	  line-height: 100upx;
+	  text-align: center;
+	}
+	.shareImage{
+		width: 28upx;
+		height: 28upx;
+	}
+	.share-sheet{
+		display: flex;
+		align-items: center;
+		height: 388upx;
+		background: #383D46;
+		border-radius: 24upx 24upx 0px 0px;
+		justify-content: space-around;
+		.item {
+			text-align: center;
+			.img{
+				margin: 0 auto;
+				width: 100upx;
+				height: 100upx;
+				padding-bottom: 20upx;
+			}
+			.text{
+				font-size: 28upx;
+				font-weight: 400;
+				color: #F4F7FF;
+				line-height: 40tpx;
+			}
+		}
 	}
 </style>
