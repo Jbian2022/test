@@ -95,12 +95,10 @@
 }
 .open-card .vip-card .left .card-info .card-status {
   margin-left: 0.46875rem;
-  font-size: 0.75rem;
+  font-size: 0.0625rem;
   background: #FFF0C0;
-  border-radius: 0.78125rem;
-  padding: 0.3125rem 0.625rem;
-  height: 1.5625rem;
-  line-height: 1.5625rem;
+  border-radius: 0.625rem;
+  padding: 0.125rem 0.3125rem;
   font-weight: 600;
   color: #95673D;
 }
@@ -117,8 +115,8 @@
   z-index: 0;
   width: 8.125rem;
   height: 8.125rem;
-  background: url("../../static/newWorkout/vip-logo.png");
-  background-size: 5rem 5rem;
+  background: url("../../static/newWorkout/open-card-vip.png");
+  background-size: 5.625rem 5.625rem;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -156,16 +154,19 @@
 }
 .open-card .card-types {
   display: flex;
+  padding: 0 0.625rem;
+}
+.open-card .card-types .type-item-box {
+  flex-shrink: 0;
+  width: 33.333%;
   padding: 0 0.3125rem;
+  box-sizing: border-box;
 }
 .open-card .card-types .type-item {
-  flex-shrink: 0;
-  width: 6.78125rem;
-  height: 8.9375rem;
+  height: 9.375rem;
   background: rgba(56, 61, 70, 0.2);
   border-radius: 16px;
   border: 0.0625rem solid rgba(122, 127, 137, 0.2);
-  margin-left: 0.625rem;
   box-sizing: border-box;
   text-align: center;
   position: relative;
@@ -210,7 +211,7 @@
   color: #FFE18F;
 }
 .open-card .card-types .type-item.active {
-  background: linear-gradient(180deg, #FFECB8 0%, #383D46 65%);
+  background: linear-gradient(180deg, #645F52 0%, #292C31 100%);
   border: 0.0625rem solid #ffe6a1;
 }
 .open-card .equity-box {
@@ -221,7 +222,8 @@
 .open-card .equity-list {
   display: flex;
   flex-wrap: wrap;
-  padding: 1.125rem 2.1875rem;
+  padding: 1.125rem;
+  padding-bottom: 0.8125rem;
   background: rgba(56, 61, 70, 0.2);
   border-radius: 0.5rem;
   border: 0.0625rem solid rgba(122, 127, 137, 0.2);
@@ -274,6 +276,7 @@
   padding-bottom: 1.875rem;
   background-color: #212328;
   display: flex;
+  justify-content: space-between;
 }
 .open-card .footer-button .text-box {
   text-align: center;
@@ -295,12 +298,14 @@
   text-decoration: line-through;
 }
 .open-card .footer-button .van-button {
-  width: 14.6875rem;
+  width: 15.15625rem;
   height: 2.8125rem;
   background: linear-gradient(173deg, #FFF3D3 0%, #FFE6A1 100%);
   border-radius: 0.5rem;
   color: #90633A;
   font-weight: 600;
+  border: none;
+  font-size: 1rem;
 }
 .open-card .van-popup {
   background: #383D46;

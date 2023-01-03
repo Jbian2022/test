@@ -32,11 +32,12 @@
   z-index: -100;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 .bg_content .currency_style[data-v-826f61a7] {
   width: 100%;
   height: 14.375rem;
-  background-image: linear-gradient(to bottom, #343a44, #212328);
+  background: linear-gradient(to bottom, #343a44, #212328);
 }
 .bg_content .currency_style .currency_gold_img_style[data-v-826f61a7] {
   width: 100%;
@@ -123,7 +124,14 @@
   color: #FFFFFF;
 }
 .nav_bar_style .nav_right_style[data-v-d4dd2266] {
-  width: 10%;
+  margin-right: 0.9375rem;
+  margin-top: 0.625rem;
+}
+.nav_bar_style .nav_right_style .authority_style[data-v-d4dd2266] {
+  font-size: 0.75rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #7A7F89;
 }
 [data-v-d4dd2266] .van-icon {
   font-size: 0.75rem !important;
@@ -137,7 +145,7 @@
 	position: relative;
 }
 .headBox{
-	width: calc(100vw - 1.875rem);
+	width: calc(100vw - 0.625rem);
 	height: 2.8125rem;
 	margin: 0 auto;
 	margin-top: 0.625rem;
@@ -145,7 +153,7 @@
 	overflow-x: hidden;
 }
 .block{
-	width: 10.46875rem;
+	width: 10.875rem;
 	height: 2.8125rem;
 	border-radius: 0.5rem;
 	float: left;
@@ -156,7 +164,7 @@
 	line-height: 2.8125rem;
 	text-align: center;
 	background: #383D46;
-	margin-right: 0.78125rem;
+	margin-right: 0.6875rem;
 }
 .block0{
 	background: #195BC2;
@@ -202,16 +210,15 @@
 	top: 0.1875rem;
 }
 .clickActionBody{
-	height: 46.5625rem;
+	height: 43.75rem;
 	background: #383D46;
 	border-radius: 0.5rem;
-	-webkit-backdrop-filter: blur(0.09375rem);
-	        backdrop-filter: blur(0.09375rem);
+	/* backdrop-filter: blur(3upx); */
 	z-index: 999;
 }
  .clickActionContent{
 	width: calc(100vw - 1.875rem);
-	height: 46.5625rem;
+	height: 43.75rem;
 	margin-top: 8.4375rem;
 	margin-left: 0.9375rem;
 	--van-popup-background-color: #383D46;
@@ -244,7 +251,7 @@
 	line-height: 1.125rem;
 }
 .clickActionEnd{
-	width: 7.5rem;
+	width: 7.1875rem;
 	height: 2.5rem;
 	background: #000000;
 	border-radius: 1.25rem;
@@ -254,10 +261,68 @@
 	line-height: 2.1875rem;
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 20.8125rem;
+	margin-top: 19.375rem;
 }
 .clickActionEnd uni-image{
 	width: 1rem;
 	height: 1rem;
 	top: 0.1875rem;
+}
+.bottom_style {
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
+  height: 3.125rem;
+  background: #1370ff;
+  border-radius: 0.5rem;
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 3.125rem;
+  text-align: center;
+}
+.actinQuesson1{
+	position: absolute;
+	z-index: 2;
+	top: 25rem;
+	left: 2.5rem;
+}
+.quessonName{
+	width: 5.625rem;
+	/* height: 80upx; */
+	background: #212328;
+	border-radius: 0.5rem;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: #F4F7FF;
+	/* line-height: 80upx; */
+	padding-top: 0.625rem;
+	padding-bottom: 0.75rem;
+	padding-left: 0.46875rem;
+	padding-right: 0.3125rem;
+	/* text-align: center; */
+}
+.clickQuessonName{
+	width: 6.25rem;
+	/* height: 164upx; */
+	background: rgba(19,112,255,0.9);
+	border-radius: 0.5rem;
+	border: 0.0625rem solid #1370FF;
+	padding: 0.625rem;
+}
+.quessonTitle{
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: #F4F7FF;
+}
+.quessonText{
+	font-size: 0.5625rem;
+	font-weight: 400;
+	color: #FFFFFF;
+	margin-top: 0.625rem;
+}
+ .van-popup{
+	background: #383D46;
 }

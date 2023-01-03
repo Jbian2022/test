@@ -16,6 +16,11 @@
                   v-if="avatar"
                   :src="avatar"
                 ></image>
+				<image
+				  class="left_content_img_style"
+				  v-else
+				  src="../../static/app-plus/mebrs/defaultAvator.png"
+				></image>
                 <view class="left_header_style">我的会员</view>
                 <view class="left_num_style">{{ meberList.length }}</view>
               </view>
@@ -49,10 +54,14 @@
               >未购课</view
             >
           </view>
+		  <view class="zhan_wei_style" v-if="cellingFlag"></view>
           <MemberList
+            ref="memberList"
             @getMemberList="getMemberList"
             :isActive="isActive"
             :type="'home'"
+            :page="page"
+            :currentNum="currentNum"
           ></MemberList>
         </scroll-view>
       </view>
@@ -110,14 +119,25 @@ export default {
       scrollTop: 0,
       cellingFlag: false,
       delteIndex: 0,
-      avatar: null
+      avatar: null,
+      addUpperLimit: null, // 添加限制
+      cocahMemberLimit: 0, //该教练下的学员数量
+      page: 10, // 10条
+      currentNum: 1 //第一页
     }
   },
   watch: {
     scrollTop: {}
   },
   onLoad() {
-    uni.showTabBar()
+	   uni.showTabBar()
+  },
+  onPullDownRefresh() {
+    this.$refs.memberList.getMemberList(this.isActive)
+    uni.stopPullDownRefresh()
+  },
+  onReachBottom() {
+    console.log(2222)
   },
   created() {},
   mounted() {
@@ -141,7 +161,7 @@ export default {
     this.getUserInfor()
   },
   onShow() {
-  	this.getUserInfor()
+    this.getUserInfor()
   },
   methods: {
     // 获取用户信息
@@ -153,11 +173,23 @@ export default {
           .then((res) => {
             console.log(res, '....')
             this.avatar = res.userInfo.avatar || null
+            this.addUpperLimit = res.userInfo.addUpperLimit || null
           })
           .catch((err) => {})
       } catch (e) {
         //TODO handle the exception
       }
+    },
+    // 获取该教练的会员数量
+    getCocachList() {
+      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      businessCloudObject
+        .getCoachMemberList()
+        .then((res) => {
+          console.log(res, '腻')
+          this.cocahMemberLimit = res.affectedDocs
+        })
+        .catch((err) => {})
     },
     getMemberList(list) {
       this.meberList = list
@@ -199,12 +231,35 @@ export default {
       } catch (e) {
         // error
       }
-      uni.navigateTo({
-        url: '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
-        success: (res) => {},
-        fail: () => {},
-        complete: () => {}
-      })
+      // 判断蓝卡会员还是金卡会员
+      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      businessCloudObject
+        .getCoachMemberList()
+        .then((res) => {
+          console.log(res, '腻')
+          this.cocahMemberLimit = res.affectedDocs
+
+          if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
+            uni.showToast({
+              title: '普通教练限添加7名学员,升级金卡教练获取更多权益~',
+              duration: 1000,
+              width: 180,
+              icon: 'none'
+            })
+            return
+          }
+          if (this.addUpperLimit || this.cocahMemberLimit < 7) {
+            //
+            uni.navigateTo({
+              url:
+                '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
+              success: (res) => {},
+              fail: () => {},
+              complete: () => {}
+            })
+          }
+        })
+        .catch((err) => {})
     },
     buyClick(type) {
       this.isActive = type
@@ -315,115 +370,6 @@ export default {
   }
   .is_buy_style::after {
     width: calc(100vw - 300upx) !important;
-  }
-
-  .mebers_content {
-    width: 100vw;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    // background: #212328;
-    .no_data_style {
-      width: 100%;
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .no_data_meber_img_style {
-        // width: 100%;
-        width: 382upx;
-        height: 382upx;
-        object-fit: contain;
-      }
-    }
-    .slide_stylle {
-      width: 100%;
-      flex: 1;
-
-      .add_student_style {
-        width: 100%;
-        display: flex;
-        // flex: 1;
-        align-items: center;
-        flex-direction: column;
-        .need_loop_style {
-          width: calc(100% - 60upx);
-          // margin: 30upx;
-
-          display: flex;
-
-          flex-direction: column;
-          justify-content: space-around;
-          background: #383d46;
-          border-radius: 24upx;
-          height: 260upx;
-
-          .loop_top_style {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            // margin-top: 40upx;
-            .top_left_style {
-              width: 50%;
-              display: flex;
-
-              .top_left_name_style {
-                font-size: 40upx;
-                font-family: PingFangSC-Semibold, PingFang SC;
-                font-weight: 600;
-                color: #f4f7ff;
-              }
-              .top_left_img_style {
-                width: 36upx;
-                height: 38upx;
-                object-fit: contain;
-                margin-left: 10upx;
-              }
-            }
-            .top_right_style {
-              width: 238upx;
-              height: 60upx;
-              background: rgba(1, 224, 140, 0.1);
-              border-radius: 12upx;
-              // opacity: 0.1;
-              font-size: 28upx;
-              text-align: center;
-              line-height: 60upx;
-              font-weight: 600;
-              color: #01e08c;
-              .top_right_img_style {
-                width: 20upx;
-                height: 22upx;
-                object-fit: contain;
-                margin-right: 10upx;
-              }
-            }
-          }
-          .loop_bottom_style {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            .bottom_style {
-              display: flex;
-              align-items: center;
-              .bootom_img_style {
-                width: 28upx;
-                height: 30upx;
-                margin-right: 8upx;
-                object-fit: contain;
-              }
-              .message_style {
-                font-size: 28upx;
-                font-weight: 400;
-                color: #bdc3ce;
-              }
-            }
-          }
-        }
-      }
-    }
   }
 
   .guid_style {
@@ -604,7 +550,10 @@ uni-page-body {
   top: 0 !important;
 }
 uni-scroll-view {
-  height: 98%;
+  height: 100%;
+}
+::v-deep.uni-scroll-view-content {
+  height: auto !important;
 }
 .move_area_style {
   width: 100vw;
@@ -637,5 +586,9 @@ uni-scroll-view {
       z-index: 1000000;
     }
   }
+}
+.zhan_wei_style {
+	height: 82upx;
+	width: 100%;
 }
 </style>

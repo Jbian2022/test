@@ -191,6 +191,11 @@
   display: flex;
   justify-content: center;
 }
+.counter .time .kuo_hao_style[data-v-1bfd51d6] {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
 .counter .timeActive[data-v-1bfd51d6] {
   color: #1370ff;
 }

@@ -71,7 +71,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .status_bar {
-  height: var(--status-bar-height);
+  height: calc(var(--status-bar-height) + 2.75rem);
   width: 100%;
 }
 .training-record-detail {
@@ -97,9 +97,14 @@
   z-index: -1;
   background: #212328;
 }
+.training-record-detail .arrow-box {
+  height: 2.75rem;
+  background: transparent;
+}
 .training-record-detail .arrow-left {
-  position: absolute;
-  top: var(--status-bar-height);
+  position: fixed;
+  padding-top: var(--status-bar-height);
+  top: 0;
   left: 0;
   right: 0;
   z-index: 88;
@@ -107,17 +112,15 @@
   display: flex;
   align-items: center;
   padding-left: 0.9375rem;
+  justify-content: space-between;
+  color: #bdc3ce;
 }
 .training-record-detail .arrow-left .van-icon {
   font-size: 1.25rem;
   color: #bdc3ce;
 }
 .training-record-detail .arrow-left.show {
-  position: -webkit-sticky;
-  position: sticky;
   background: #212328;
-  top: 0;
-  padding-top: var(--status-bar-height);
 }
 .training-record-detail .first-title-times {
   padding: 0.3125rem 0.9375rem;
@@ -277,7 +280,7 @@
 .training-record-detail .footer-button .van-button .share-icon {
   width: 0.875rem;
   height: 0.875rem;
-  background: url("../../static/newWorkout/share.svg");
+  background: url("../../static/newWorkout/share01.svg");
   background-size: contain;
   background-repeat: no-repeat;
   margin-right: 0.5rem;
@@ -285,7 +288,7 @@
 .training-record-detail .footer-button .van-button::after {
   display: none;
 }
-.training-record-detail.uni-popup [name=mask] {
+.training-record-detail .uni-popup [name=mask] {
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
 }

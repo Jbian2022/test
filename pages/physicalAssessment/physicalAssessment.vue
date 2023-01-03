@@ -1,7 +1,7 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'身体评测'"></NavBarCompontent>
+    <NavBarCompontent :leftNavTitle="'身体评测'" :isAuthority="true"></NavBarCompontent>
 
     <view class="need_scoll list_style">
       <view
@@ -233,12 +233,14 @@ export default {
       width: 34upx;
       height: 29upx;
       // position: absolute;
+	  margin-bottom: 8upx;
       margin-left: 60upx;
       margin-right: 30upx;
       .correct_img_style {
         width: 40upx;
         height: 42upx;
         object-fit: contain;
+		
       }
     }
     .evaluationdata {
@@ -248,6 +250,7 @@ export default {
       font-family: PingFangSC-Semibold, PingFang SC;
       color: #f4f7ff;
       text-align: center;
+	  font-weight: 600;
       // margin: 80upx 130upx;
     }
   }

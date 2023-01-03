@@ -9,14 +9,16 @@
 		</view>
 		<text class="nav_content_style">{{contentTitle}}</text>
 		<!-- 可能会有图片 -->
-		<view class="nav_right_style"></view>
+		<view class="nav_right_style">
+			<text class="authority_style" v-if="isAuthority">数据评测来源于世界权威机构</text>
+		</view>
 	</view>
 </template>
 
 <script>
 	export default {
 		name:"navBarCompontent",
-		props: ['leftNavTitle', 'contentTitle', 'jumpType'],
+		props: ['leftNavTitle', 'contentTitle', 'jumpType', 'isAuthority'],
 		data() {
 			return {
 				
@@ -84,7 +86,15 @@
 			
 		}
 		.nav_right_style {
-			width: 10%;
+			// width: 10%;
+			margin-right: 30upx;
+			margin-top: 20upx;
+			.authority_style {
+				font-size: 24upx;
+				font-family: PingFangSC-Regular, PingFang SC;
+				font-weight: 400;
+				color: #7A7F89;
+			}
 		}
 		
 	}
