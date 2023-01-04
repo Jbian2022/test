@@ -1,7 +1,12 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'体能评估'"></NavBarCompontent>
+    <!-- <NavBarCompontent :leftNavTitle="'体能评估'"></NavBarCompontent> -->
+	<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickBack">
+		<van-icon name="arrow-left" />
+		<view class="title">动态评估</view>
+		<view class="z" style="opacity: 0;">8888</view>
+	</view>
 	<view class="watermark">数据评测来源于世界权威机构</view>
     <van-row style="background-color: #343a44">
       <van-col class="need_scoll" span="24">
@@ -50,7 +55,8 @@
       </van-col>
     </van-row>
     <view>
-      <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">确认</van-button>
+    <!--  <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">确认</van-button> -->
+	  <view class="bottom_style" @click.stop="getdynamicEvaluationdata()">确认</view>
     </view>
   </view>
 </template>
@@ -156,6 +162,11 @@ export default {
 		uni.redirectTo({
 			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
 		})
+	},
+	onClickBack(){
+		uni.redirectTo({
+			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
+		})
 	}
 	// actionResDate(){
 		
@@ -164,13 +175,42 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .content_style {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   position: relative;
   background: rgba(33, 35, 40, 1);
+.arrow-left{
+  	// top: var(--status-bar-height);
+  	// left: 0;
+  	// right: 0;
+  	z-index: 88;
+  	height: 88upx;
+  	display: flex;
+  	align-items: center;
+  	padding-left: 30upx;
+  	color: #bdc3ce;
+  	position: relative;
+	margin-top: 40upx;
+  	.van-icon{
+  		font-size: 40upx;
+  		color: #bdc3ce;
+  	}
+  	// &.show{
+  	// 	position: sticky;
+  	// 	background: #212328;
+  	// 	top: 0;
+  	// 	padding-top: var(--status-bar-height);
+  	// }
+  }
+}
+.title{
+	    margin-left: 10px;
+	    font-size: 24px;
+	    font-weight: 600;
+	    color: #FFFFFF;
 }
 /* .dynamicshow {
   width: calc(100vw - 220upx);
@@ -277,7 +317,22 @@ export default {
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
 	color: #7A7F89;
-	top: 90upx;
-	right: 30upx;
+	top: 70upx;
+	right: 50upx;
+}
+.bottom_style {
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  height: 100upx;
+  background: #1370ff;
+  border-radius: 16upx;
+  margin-top: 30upx;
+  margin-bottom: 30upx;
+  font-size: 32upx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 100upx;
+  text-align: center;
 }
 </style>
