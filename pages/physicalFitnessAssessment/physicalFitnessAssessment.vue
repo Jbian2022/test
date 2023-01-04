@@ -4,7 +4,7 @@
     <!-- <NavBarCompontent :leftNavTitle="'体能评估'"></NavBarCompontent> -->
 	<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickBack">
 		<van-icon name="arrow-left" />
-		<view class="title">动态评估</view>
+		<view class="title">体能评估</view>
 		<view class="z" style="opacity: 0;">8888</view>
 	</view>
 	<view class="watermark">数据评测来源于世界权威机构</view>
