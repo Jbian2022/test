@@ -185,10 +185,10 @@
 					this.getOpenerEventChannel().emit('refreshData')
 					setTimeout(() => uni.navigateBack(), 500)
 				}).catch((err) => {
-					uni.showModal({
-						content: err.message || '请求服务失败',
-						showCancel: false
-					})
+					// uni.showModal({
+					// 	content: err.message || '请求服务失败',
+					// 	showCancel: false
+					// })
 				}).finally(() => {
 					uni.hideLoading()
 				})
