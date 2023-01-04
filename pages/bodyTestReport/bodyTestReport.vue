@@ -1,7 +1,7 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'体测报告填写'" :jumpType="'TCBGTX'"></NavBarCompontent>
+    <NavBarCompontent :leftNavTitle="'体测报告填写'"></NavBarCompontent>
 
     <view class="contetnt_form_style">
       <uni-forms

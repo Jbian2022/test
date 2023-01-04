@@ -1,4 +1,4 @@
-import uniStarterConfig from '@/uni-starter.config.js';
+// import uniStarterConfig from '@/uni-starter.config.js';
 //应用初始化页
 // #ifdef APP-PLUS
 import checkUpdate from '@/uni_modules/uni-upgrade-center-app/utils/check-update';
@@ -11,14 +11,14 @@ interceptorChooseImage()
 // #endif
 const db = uniCloud.database()
 export default async function() {
-	const debug = uniStarterConfig.debug;
+	// const debug = uniStarterConfig.debug;
 
 	// uniStarterConfig挂载到getApp().globalData.config
-	setTimeout(() => {
-		getApp({
-			allowDefault: true
-		}).globalData.config = uniStarterConfig;
-	}, 1)
+	// setTimeout(() => {
+	// 	getApp({
+	// 		allowDefault: true
+	// 	}).globalData.config = uniStarterConfig;
+	// }, 1)
 
 
 	// 初始化appVersion（仅app生效）
@@ -37,7 +37,7 @@ export default async function() {
 		console.error(code, message);
 	}
 	// 绑定clientDB错误事件
-	db.on('error', onDBError)
+	// db.on('error', onDBError)
 
 
 	//拦截云对象请求
