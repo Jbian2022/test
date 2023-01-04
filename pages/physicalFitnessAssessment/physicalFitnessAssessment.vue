@@ -8,7 +8,7 @@
 		<view class="z" style="opacity: 0;">8888</view>
 	</view>
 	<view class="watermark">数据评测来源于世界权威机构</view>
-    <van-row style="background-color: #343a44">
+    <van-row>
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
@@ -47,7 +47,7 @@
               :color="item.typeColor"
               :style="'--van-circle-text-color:'+ item.typeColor"
             /> -->
-			<view class="circle" :style="'border: 4px solid '+item.typeColor+';'">
+			<view class="circle" :style="'border: 4px solid '+item.typeColor+';background-color:'+item.typeColor+'0D;'">
 				<view class="circleText" :style="'color:'+item.typeColor+';'">{{item.typeText}}</view>
 			</view>
           </view>
@@ -81,6 +81,7 @@ export default {
 	  resultValue:0,
 	  typeText:"待测",
 	  typeColor:"#4B525E",
+	  backColor:"",
 	  queryData:{},
       queryUserActionData:{}
     }
@@ -106,7 +107,7 @@ export default {
 		switch(levelType){
 			case "优秀":
 			case "良好":
-				return "rgba(1, 224, 140, 1)";
+				return "#01E08C";
 				break;
 			case "中等":
 			case "中上等":
@@ -181,7 +182,7 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: rgba(33, 35, 40, 1);
+  // background: rgba(33, 35, 40, 1);
 .arrow-left{
   	// top: var(--status-bar-height);
   	// left: 0;
@@ -224,7 +225,7 @@ export default {
   position: relative;
 } */
 .need_scoll{
-	background-color: rgba(33, 35, 40, 1);
+	// background-color: rgba(33, 35, 40, 1);
 }
 .dynamicshow {
   width: calc(100vw - 60upx);

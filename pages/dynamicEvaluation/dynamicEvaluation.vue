@@ -8,7 +8,7 @@
 		<view class="z" style="opacity: 0;">8888</view>
 	</view>
 	<view class="watermark">数据评测来源于世界权威机构</view>
-    <van-row style="background-color: #343a44">
+    <van-row>
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
@@ -88,7 +88,7 @@ export default {
     },
 	jumpModular(item) {
 	  console.log(item.path,'>>>>')
-	  uni.navigateTo({
+	  uni.redirectTo({
 	    url: item.path+"&type=" + item.type+'&traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode,
 	    success: (res) => {},
 	    fail: () => {},
@@ -134,7 +134,6 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background-color: rgba(33, 35, 40, 1);
   .arrow-left{
   	// top: var(--status-bar-height);
   	// left: 0;
@@ -166,7 +165,7 @@ export default {
 	    color: #FFFFFF;
 }
 .need_scoll{
-	background-color: rgba(33, 35, 40, 1);
+	// background-color: rgba(33, 35, 40, 1);
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
