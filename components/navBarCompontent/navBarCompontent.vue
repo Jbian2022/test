@@ -27,7 +27,7 @@
 		methods: {
 			goBack() {
 				switch(this.jumpType) {
-					case 'TCBGTX':
+					case 'STPC':
 					uni.reLaunch({
 					  url: '/pages/myMebers/myMebers'
 					})  

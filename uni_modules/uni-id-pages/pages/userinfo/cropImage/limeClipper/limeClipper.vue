@@ -743,9 +743,9 @@ export default {
 				});
 				return;
 			}
-			uni.showLoading({
-				title: '加载中'
-			});
+			// uni.showLoading({
+			// 	title: '加载中'
+			// });
 			const { canvasHeight, canvasWidth, clipHeight, clipWidth, ctx, scale, imageLeft, imageTop, clipX, clipY, angle, scaleRatio: dpr, image, quality, fileType, type: imageType, canvasId } = this;
 			const draw = () => {
 				const imageWidth = this.imageWidth * scale * dpr;

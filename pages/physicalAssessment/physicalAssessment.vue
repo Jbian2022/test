@@ -1,7 +1,7 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'身体评测'" :isAuthority="true"></NavBarCompontent>
+    <NavBarCompontent :leftNavTitle="'身体评测'" :jumpType="'STPC'" :isAuthority="true"></NavBarCompontent>
 
     <view class="need_scoll list_style">
       <view
