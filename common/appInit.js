@@ -77,27 +77,53 @@ export default async function() {
 				           })
 				           .catch((err) => {
 				             console.log(err, '我是错误')
-				             uni.reLaunch({
-				               url: '/pages/logining/logining',
-				               success: (res) => {},
-				               fail: () => {},
-				               complete: () => {}
-				             })
-				             uni.clearStorage()
-							 login.logout()
+							 	let tokenExpired = uniCloud.getCurrentUserInfo().tokenExpired
+							 		if (tokenExpired > 0) {
+										setTimeout(()=> {
+							 			login.logout()
+										},100)
+										setTimeout(()=> {
+											uni.clearStorage()
+											uni.reLaunch({
+											  url: '/pages/logining/logining'
+											})
+										}, 200)
+										return
+							 		}
+									if (tokenExpired == 0) {
+										uni.clearStorage()
+										uni.reLaunch({
+										  url: '/pages/logining/logining'
+										})
+									}
+							 			
+		
 							 
 				           })
 				       }
 				     },
 				     fail: function (err) {
 						  let login = uniCloud.importObject('login')
-				       uni.reLaunch({
-				         url: '/pages/logining/logining',
-				         success: (res) => {},
-				         fail: () => {},
-				         complete: () => {}
-				       })
-					   login.logout()
+						 let tokenExpired = uniCloud.getCurrentUserInfo().tokenExpired
+						 	if (tokenExpired > 0) {
+						 		setTimeout(()=> {
+						 		login.logout()
+						 		},100)
+						 		setTimeout(()=> {
+						 			uni.clearStorage()
+						 			uni.reLaunch({
+						 			  url: '/pages/logining/logining'
+						 			})
+						 		}, 200)
+						 		return
+						 	}
+						 	if (tokenExpired == 0) {
+						 		uni.clearStorage()
+						 		uni.reLaunch({
+						 		  url: '/pages/logining/logining'
+						 		})
+						 	}
+						 		
 				     }
 				   })
 				}

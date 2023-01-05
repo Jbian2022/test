@@ -43,7 +43,9 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject')
+var businessCloudObject = uniCloud.importObject('businessCloudObject',{
+	customUI: true // 取消自动展示的交互提示界面
+})
 export default {
   components: {
     BgTheamCompontent,
