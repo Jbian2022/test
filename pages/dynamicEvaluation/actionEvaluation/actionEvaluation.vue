@@ -289,20 +289,20 @@
 				pushUpTestimg:"../../../static/app-plus/bg/pushUpTest.jpg",
 				changeValue: true,
 				num: 0,
-				squatFrontVideoUrl: "../../../static/app-plus/video/squatFront.mp4",
-				squatSideVideoUrl: "../../../static/app-plus/video/squatSide.mp4",
+				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bbbf92cf-78e7-46c9-aefb-555fd45498ac.mp4",
+				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ac005e94-771a-482f-81a7-6f21f6721a5b.mp4",
 				//胸椎活动视频
-				thoracicSpineActivityUrl:"../../../static/app-plus/video/thoracicSpineActivity.mp4",
+				thoracicSpineActivityUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
 				//直抬腿
-				StraightLegLiftUrl:"../../../static/app-plus/video/StraightLegLift.mp4",
+				StraightLegLiftUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4f9af99a-4833-41d0-a584-1b0cdf4cb583.mp4",
 				//托马斯
-				ThomasUrl:"../../../static/app-plus/video/Thomas.mp4",
+				ThomasUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e971accd-2928-429b-86a1-e33f2d9e10aa.mp4",
 				//肩关节灵活性测试1
-				shoulderTest1Url:"../../../static/app-plus/video/shoulderTest1.mp4",
+				shoulderTest1Url:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f682d0b8-f3e6-4159-9242-01854025d3a6.mp4",
 				//肩关节灵活性测试2
-				shoulderTest2Url:"../../../static/app-plus/video/shoulderTest2.mp4",
+				shoulderTest2Url:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/580f6bf5-c503-40d9-819c-b4a11412791e.mp4",
 				//五，俯卧撑稳定性测试
-				pushUpTestUrl:"../../../static/app-plus/video/pushUpTest.mp4",
+				pushUpTestUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e27801c0-b63f-42f0-a5a4-68574a123e69.mp4",
 				quession1:[],
 				quession2:[],
 				quession3:[]
