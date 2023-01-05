@@ -43,7 +43,9 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject')
+var businessCloudObject = uniCloud.importObject('businessCloudObject',{
+		customUI : true
+	})
 export default {
   components: {
     BgTheamCompontent,

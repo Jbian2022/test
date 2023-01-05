@@ -52,8 +52,12 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-const busOb = uniCloud.importObject("businessCloudObject")
-const testOb = uniCloud.importObject("testResults")
+const busOb = uniCloud.importObject("businessCloudObject",{
+		customUI : true
+	})
+const testOb = uniCloud.importObject("testResults",{
+		customUI : true
+	})
 export default {
   components: {
     BgTheamCompontent,
@@ -88,7 +92,7 @@ export default {
     },
 	jumpModular(item) {
 	  console.log(item.path,'>>>>')
-	  uni.redirectTo({
+	  uni.reLaunch({
 	    url: item.path+"&type=" + item.type+'&traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode,
 	    success: (res) => {},
 	    fail: () => {},
