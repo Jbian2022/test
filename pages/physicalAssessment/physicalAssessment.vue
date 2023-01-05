@@ -1,7 +1,11 @@
 <template>
   <view class="content_style">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'身体评测'" :jumpType="'STPC'" :isAuthority="true"></NavBarCompontent>
+    <NavBarCompontent
+      :leftNavTitle="'身体评测'"
+      :jumpType="'STPC'"
+      :isAuthority="true"
+    ></NavBarCompontent>
     <view class="need_scoll list_style">
       <view
         class="dynamicshow"
@@ -43,8 +47,8 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject',{
-	customUI: true // 取消自动展示的交互提示界面
+var businessCloudObject = uniCloud.importObject('businessCloudObject', {
+  customUI: true // 取消自动展示的交互提示界面
 })
 export default {
   components: {
@@ -89,11 +93,15 @@ export default {
     }
   },
   methods: {
-	getReport(){
-		uni.redirectTo({
-			url: '/pages/viewReport/viewReport'+"?traineeNo="+this.traineeNo+"&key=1"
-		})
-	},
+    getReport() {
+      uni.redirectTo({
+        url:
+          '/pages/viewReport/viewReport' +
+          '?traineeNo=' +
+          this.traineeNo +
+          '&key=1'
+      })
+    },
     jumpModular(item) {
       // console.log(item.path,'>>>>')
 
@@ -150,19 +158,21 @@ export default {
                         JSON.stringify(v.bodyTestReport) !== '{}'
                           ? true
                           : false
-					  let postureAssessment =
-					    v.hasOwnProperty('postData') &&
-					    JSON.stringify(v.postData) !== '{}'
-					      ? true
-					      : false
-					  let dynamicEvaluation = v.hasOwnProperty('actionTestResult')
-					    ? v.actionTestResult.filter((c) => c.length > 0)
-					    : []
-					  let physicalFitnessAssessment =
-					    v.hasOwnProperty('physicalData') &&
-					    JSON.stringify(v.physicalData) !== '{}'
-					      ? true
-					      : false
+                      let postureAssessment =
+                        v.hasOwnProperty('postData') &&
+                        JSON.stringify(v.postData) !== '{}'
+                          ? true
+                          : false
+                      let dynamicEvaluation = v.hasOwnProperty(
+                        'actionTestResult'
+                      )
+                        ? v.actionTestResult.filter((c) => c.length > 0)
+                        : []
+                      let physicalFitnessAssessment =
+                        v.hasOwnProperty('physicalData') &&
+                        JSON.stringify(v.physicalData) !== '{}'
+                          ? true
+                          : false
                       // console.log(needCompareData, '逆势')
                       if (needCompareData.length > 0) {
                         isFinsh = true
@@ -170,15 +180,15 @@ export default {
                       if (compareBodyTestResport) {
                         isFinsh = true
                       }
-					  if (postureAssessment) {
-					    isFinsh = true
-					  }
-					  if (dynamicEvaluation){
-						  isFinsh = true
-					  }
-					  if (physicalFitnessAssessment){
-						  isFinsh = true
-					  }
+                      if (postureAssessment) {
+                        isFinsh = true
+                      }
+                      if (dynamicEvaluation) {
+                        isFinsh = true
+                      }
+                      if (physicalFitnessAssessment) {
+                        isFinsh = true
+                      }
                     }
                   })
                 }
@@ -234,14 +244,13 @@ export default {
       width: 34upx;
       height: 29upx;
       // position: absolute;
-	  margin-bottom: 8upx;
+      margin-bottom: 8upx;
       margin-left: 60upx;
       margin-right: 30upx;
       .correct_img_style {
         width: 40upx;
         height: 42upx;
         object-fit: contain;
-		
       }
     }
     .evaluationdata {
@@ -251,7 +260,7 @@ export default {
       font-family: PingFangSC-Semibold, PingFang SC;
       color: #f4f7ff;
       text-align: center;
-	  font-weight: 600;
+      font-weight: 600;
       // margin: 80upx 130upx;
     }
   }
