@@ -77,8 +77,12 @@
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 	import { ref } from 'vue';
-	const testOb = uniCloud.importObject("testResults");
-	const actionOb = uniCloud.importObject("businessCloudObject");
+	const testOb = uniCloud.importObject("testResults",{
+		customUI : true
+	});
+	const actionOb = uniCloud.importObject("businessCloudObject",{
+		customUI : true
+	});
 	import { debounce } from '@/common/util.js';
 	export default {
 		setup() {

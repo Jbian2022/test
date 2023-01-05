@@ -613,10 +613,18 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 	import { ref } from 'vue';
 	import html2canvas from 'html2canvas'
 import { now } from 'moment';
-	const user = uniCloud.importObject('my');
-	const testOb = uniCloud.importObject("testResults");
-	const busOb = uniCloud.importObject('businessCloudObject');
-	const train = uniCloud.importObject('train')
+	const user = uniCloud.importObject('my',{
+		customUI : true
+	});
+	const testOb = uniCloud.importObject("testResults",{
+		customUI : true
+	});
+	const busOb = uniCloud.importObject('businessCloudObject',{
+		customUI : true
+	});
+	const train = uniCloud.importObject('train',{
+		customUI : true
+	})
 	export default {
 		data() {
 			return {

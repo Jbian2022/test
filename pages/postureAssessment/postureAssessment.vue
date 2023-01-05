@@ -188,7 +188,9 @@
 <script>
 	import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 	import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-	const testOb = uniCloud.importObject("testResults");
+	const testOb = uniCloud.importObject("testResults",{
+		customUI : true
+	});
 	export default {
 		data() {
 			return {
