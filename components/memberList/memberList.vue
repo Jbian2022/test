@@ -1,7 +1,7 @@
 <template>
   <view class="mebers_content">
     <uni-popup
-      class="updatePopup"
+      class="new_popup_style_inner_style"
       ref="popup"
       type="center"
       mask-background-color="rgba(20, 21, 23, 0.6)"
@@ -376,7 +376,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .mebers_content {
   width: 100vw;
   flex: 1;
@@ -632,8 +632,11 @@ export default {
   }
 }
 
-::v-deep .van-popup {
-  // width: 100vw;
-  background: none !important;
+::v-deep .uni-popup [name='mask'] {
+  backdrop-filter: blur(3px);
+}
+::v-deep .new_popup_style_inner_style {
+  position: relative !important;
+  z-index: 1005;
 }
 </style>

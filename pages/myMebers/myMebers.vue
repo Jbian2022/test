@@ -93,7 +93,7 @@
       ref="popup"
       type="center"
       mask-background-color="rgba(20, 21, 23, 0.6)"
-      class="popup"
+     class="new_popup_style_outer_style"
 	  @maskClick="maskClick"
     >
     </uni-popup>
@@ -274,7 +274,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .content_style {
   width: 100vw;
   height: 100%;
@@ -603,14 +603,13 @@ uni-scroll-view {
 }
 ::v-deep .uni-popup [name='mask'] {
   backdrop-filter: blur(3px);
-  z-index: 100;
 }
-::v-deep .uni-popup {
+::v-deep .new_popup_style_outer_style {
   position: relative !important;
   z-index: 1000;
 }
 ::v-deep uni-movable-view {
-  z-index: 10001 !important;
+  z-index: 1001 !important;
   height: auto !important;
 }
 </style>
