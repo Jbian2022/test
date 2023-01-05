@@ -85,7 +85,7 @@
 				title="健康问答" 
 				name="2" 
 				class="informationCard">
-				<view style="padding-bottom: 40upx;">
+				<view style="padding-bottom: 40upx;"  v-if="showHQ">
 				    <view class="basicInformationContent healthBlocks">
 						<view v-for="(items,index) in HQDate">
 							<view class="healthBlock" v-for="(item,index) in items[0].answer">
@@ -181,6 +181,16 @@
 							</view>
 						</view>
 					</view>
+					</view>
+					<view style="height: 612upx;" v-else>
+						<image src="../../static/app-plus/other/defaultImg.png" style="width: 180upx;height: 180upx;margin: 0 auto;top: 120upx;left: 256upx;"></image>
+						<view style="width: 350upx;
+									height: 40upx;
+									font-size: 28upx;
+									font-weight: 400;
+									color: #7A7F89;
+									line-height: 320upx;
+									margin: 0 auto;">暂无评测内容，快去完善吧~</view>
 					</view>
 				</uni-collapse-item>
 			</uni-collapse>
@@ -623,6 +633,7 @@ import { now } from 'moment';
 				physicalFitnessAssessmentData:[],
 				bodyFraction:0,
 				historyData:[],
+				showHQ:true,
 				dynamicEvaluationdata: [
 					{
 						title: "俯卧撑耐力测试",
@@ -705,6 +716,12 @@ import { now } from 'moment';
 		  if (JSON.stringify(options) !== '{}' && options.traineeNo) {
 		    this.traineeNo = options.traineeNo
 			this.key = options.key
+			this.getUserInfo();
+			this.getconfingActionName();
+			this.getPosture();
+			this.getBodyTestData();
+			this.getDynameEvaluation();
+			this.getHealthQuesson();
 			switch(this.key){
 							case "1":
 								this.openKey = true;
@@ -717,12 +734,7 @@ import { now } from 'moment';
 								console.log("1111")
 								break;
 			}
-			this.getconfingActionName();
-			this.getPosture();
-			this.getBodyTestData();
-			this.getDynameEvaluation();
-			this.getHealthQuesson();
-			this.getUserInfo();
+			
 			}
 		},
 		methods: {
@@ -1065,6 +1077,9 @@ import { now } from 'moment';
 					console.log(res.data[0].testResult)
 					resData.push(res.data[0].testResult);
 					this.HQDate = resData
+					if(this.HQDate.length==0){
+						this.showHQ = false;
+					}
 					// res.data.forEach((r)=>{
 					// 	console.log(r)
 					// 	let rq = r.actionTestResult
