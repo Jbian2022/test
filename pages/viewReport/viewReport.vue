@@ -86,53 +86,98 @@
 				class="informationCard">
 				<view style="padding-bottom: 40upx;">
 				    <view class="basicInformationContent healthBlocks">
-						<view class="healthBlock">
-							高血压
-						</view>
-						<view class="healthBlock">
-							支气管炎
-						</view>
-						<view class="healthBlock">
-							支气管炎
+						<view v-for="(items,index) in HQDate">
+							<view class="healthBlock" v-for="(item,index) in items[0].answer">
+								{{item}}
+							</view>
 						</view>
 					</view>
-					<view class="healthBlocks">
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[1].remark == '是' ? true : false">
 						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
 							<view class="greenBlock"></view>
 							其他被确诊的疾病
 						</view>
-						<view class="healthBlock">
-							支气管炎
+							<view class="healthBlock">
+								{{items[1].remark}}
+							</view>
 						</view>
 					</view>
-					<view class="healthBlocks">
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[2].remark == '是' ? true : false">
 						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
 							<view class="greenBlock"></view>
 							关节、韧带和肌肉是否受过任何损伤
 						</view>
-						<view class="healthBlock">
-							跟腱损伤
-						</view>
-						<view class="healthBlock">
-							手臂拉伤
+							<view class="healthBlock">
+								{{items[2].remark}}
+							</view>
 						</view>
 					</view>
-					<view class="healthBlocks">
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[3].remark == '是' ? true : false">
 						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
 							<view class="greenBlock"></view>
 							是否曾经骨折
 						</view>
-						<view class="healthBlock">
-							肘部骨折
+							<view class="healthBlock">
+								{{items[3].remark}}
+							</view>
 						</view>
 					</view>
-					<view class="healthBlocks">
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[4].remark == '是' ? true : false">
 						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
 							<view class="greenBlock"></view>
 							最近的体重是否有大幅度的变化
 						</view>
-						<view class="healthBlock">
-							重了15公斤
+							<view class="healthBlock">
+								{{items[4].remark}}
+							</view>
+						</view>
+					</view>
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[5].remark == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+							<view class="greenBlock"></view>
+							最近的体重是否有大幅度的变化
+						</view>
+							<view class="healthBlock">
+								{{items[5].remark}}
+							</view>
+						</view>
+					</view>
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[6].remark == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+							<view class="greenBlock"></view>
+							最近的体重是否有大幅度的变化
+						</view>
+							<view class="healthBlock">
+								{{items[6].remark}}
+							</view>
+						</view>
+					</view>
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[7].remark == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+							<view class="greenBlock"></view>
+							最近的体重是否有大幅度的变化
+						</view>
+							<view class="healthBlock">
+								{{items[7].remark}}
+							</view>
+						</view>
+					</view>
+					<view v-for="(items,index) in HQDate">
+					<view class="healthBlocks" v-if="items[8].remark == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+							<view class="greenBlock"></view>
+							最近的体重是否有大幅度的变化
+						</view>
+							<view class="healthBlock">
+								{{items[8].remark}}
+							</view>
 						</view>
 					</view>
 					</view>
@@ -569,6 +614,7 @@ import { now } from 'moment';
 				openKey:true,
 				key:'',
 				bodyTestData:[],
+				HQDate:[],
 				physicalFitnessAssessmentData:[],
 				bodyFraction:0,
 				dynamicEvaluationdata: [
@@ -666,6 +712,7 @@ import { now } from 'moment';
 		  this.getPosture();
 		  this.getBodyTestData();
 		  this.getDynameEvaluation();
+		  this.getHealthQuesson()
 		},
 		methods: {
 			async getUserInfo(){
@@ -746,7 +793,7 @@ import { now } from 'moment';
 							})
 							for(let j = 0;j<this.queryUserActionData.length;j++){
 								for(let i=0;i<this.queryData.length;i++){
-									console.log(this.queryData[i].code===this.queryUserActionData[j].code)
+									// console.log(this.queryData[i].code===this.queryUserActionData[j].code)
 									if(this.queryData[i].code===this.queryUserActionData[j].code){
 										this.queryData[i].typeText=this.queryUserActionData[j].physicalData.actionTypeText;
 										this.queryData[i].type=this.queryUserActionData[j].physicalData.actionVlue;
@@ -844,7 +891,7 @@ import { now } from 'moment';
 				data["questionCode"] = "A0002";
 				testOb.opearConfigQuery(data).then((res)=>{
 					this.bodyTestData = res.data[0].bodyTestReport;
-					console.log(this.bodyTestData)
+					// console.log(this.bodyTestData)
 					this.bodyFraction = Number(this.bodyTestData.bodyFraction)
 				})
 			},
@@ -854,13 +901,13 @@ import { now } from 'moment';
 				data["questionCode"] = "A0004";
 				const resData = [];
 				testOb.opearConfigQuery(data).then((res)=>{
-					console.log(res)
+					// console.log(res)
 					res.data.forEach((r)=>{
-						console.log(r)
+						// console.log(r)
 						let rq = r.actionTestResult
-						console.log(rq)
+						// console.log(rq)
 						rq.forEach((rqs)=>{
-							console.log(rqs)
+							// console.log(rqs)
 							resData.push(rqs.answer)
 						})
 						// 
@@ -873,7 +920,7 @@ import { now } from 'moment';
 							
 						})
 					})
-					console.log(this.physicalFitnessAssessmentData)
+					// console.log(this.physicalFitnessAssessmentData)
 				})
 			},
 			saveReport(){
@@ -989,6 +1036,36 @@ import { now } from 'moment';
 					})
 				}
 			},
+			getHealthQuesson(){
+				const data = {};
+				data["traineeNo"] = this.traineeNo;
+				data["questionCode"] = "A0001";
+				const resData = [];
+				testOb.opearConfigQuery(data).then((res)=>{
+					console.log(res.data[0].testResult)
+					resData.push(res.data[0].testResult);
+					this.HQDate = resData
+					// res.data.forEach((r)=>{
+					// 	console.log(r)
+					// 	let rq = r.actionTestResult
+					// 	console.log(rq)
+					// 	rq.forEach((rqs)=>{
+					// 		console.log(rqs)
+					// 		resData.push(rqs.answer)
+					// 	})
+						// 
+					})
+					// resData.forEach((d)=>{
+					// 	d.forEach((a)=>{
+					// 		if(a.status == 0){
+					// 			this.physicalFitnessAssessmentData.push(a)
+					// 		}
+							
+					// 	})
+					// })
+					console.log(resData.length)
+				// })
+			}
 		}
 	}
 </script>
@@ -1034,6 +1111,15 @@ export default {
 		background-image: url('../../static/app-plus/bg/bodysideReport.png');
 		background-repeat:no-repeat;
 		background-size: 100%;
+		.backgroud-img{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: -1;
+			background: #212328;
+		}
 		.arrow-box{
 			height: 88upx;
 			background: transparent;
@@ -1154,6 +1240,7 @@ export default {
 		display: inline-block;
 		margin-right: 17upx;
 		color: #BDC3CE;
+		margin-bottom: 40upx;
 	}
 	.healthBlocks{
 		margin: 0;

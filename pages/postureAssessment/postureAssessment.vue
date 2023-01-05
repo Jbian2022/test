@@ -394,7 +394,6 @@
 	height: 100vh;
 	overflow: hidden;
 	position: relative;
-	background: rgba(33, 35, 40, 1);
 }
 .bgimg{
 	width: calc(100vw - 300upx);
@@ -416,7 +415,7 @@
 .contentLeftBlock{
 	width: 200upx;
 	height: 80upx;
-	background: #383D46;
+	/* background: #383D46; */
 	border-radius: 16upx;
 	font-size: 26upx;
 	font-weight: 600;
