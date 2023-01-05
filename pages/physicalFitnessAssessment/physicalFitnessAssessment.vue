@@ -112,10 +112,12 @@ export default {
 			case "中等":
 			case "中上等":
 			case "中下等":
+			case "尚可":
 				return "#FFC13C";
 				break;
 			case "较差":
 			case "非常差":
+			case "需改善":
 				return "#F04242";
 				break;
 			default:

@@ -9,6 +9,7 @@
 		</view>
 		<view v-show="isFixedTop" class="arrow-box"></view>
 		<view id="viewReport">
+		<view class="backImg"></view>
 		<view class="titleText" v-if="openKey">
 			<van-row class="titleTopText">
 			  <van-col span="12">体测报告</van-col>
@@ -293,7 +294,8 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 								background: #FFC13C;
 								border-radius: 100%;
 								display: inline-flex;
-								margin-right: 20upx;"
+								margin-right: 20upx;
+								margin-bottom: 2px;"
 								></view><span style="font-size: 30upx;
 								font-weight: 400;
 								color: #F4F7FF;
@@ -573,7 +575,7 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 		<view v-if="!openKey">
 			<view 
 			class="buttontrue"
-			@click="showHistory = true">历史评测记录
+			@click="openUIup">历史评测记录
 			<!-- <image src="../../../static/app-plus/mebrs/openarrit.png"></image> -->
 			<image src="../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
@@ -582,13 +584,15 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 			class="historyView" 
 			icon="../../static/app-plus/other/share.png"
 			@click="showShare = true">历史评测记录</van-button> -->
-			<van-share-sheet
-			  v-model:show="showHistory"
-			  :options="history"
-			  @select="onSelect"
-			  cancel-text=""
-			  class="shareBlock"
-			/>
+			<uni-popup ref="popup" type="bottom" mask-background-color="rgba(20, 21, 23, 0.6)">
+				<view class="histroys">
+					<view class="Titlehistroy" >历史评测报告</view>
+					<view class="item" v-for="(item,index) in historyData" :key="index" @click="">
+						<view class="text" style="float: left;">{{item.name}}</view>
+						<view class="text" style="float: right;">{{item.date}}</view>
+					</view>
+				</view>
+			</uni-popup>
 		</view>
 	</view>
 </template>
@@ -602,6 +606,7 @@ import { now } from 'moment';
 	const user = uniCloud.importObject('my');
 	const testOb = uniCloud.importObject("testResults");
 	const busOb = uniCloud.importObject('businessCloudObject');
+	const train = uniCloud.importObject('train')
 	export default {
 		data() {
 			return {
@@ -617,6 +622,7 @@ import { now } from 'moment';
 				HQDate:[],
 				physicalFitnessAssessmentData:[],
 				bodyFraction:0,
+				historyData:[],
 				dynamicEvaluationdata: [
 					{
 						title: "俯卧撑耐力测试",
@@ -641,10 +647,10 @@ import { now } from 'moment';
 				],
 				showShare:false,
 				showHistory:false,
-				options:[
-				  { name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.png' },
-				  { name: '分享到朋友圈', icon: '../../static/app-plus/other/wechatMoments.png' },
-				  { name: '保存到相册', icon: '../../static/app-plus/other/savePhone.png' }
+				options: [
+					{ name: '分享到微信', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png' },
+					{ name: '分享到朋友圈', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png' },
+					{ name: '保存到相册', icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png' }
 				],
 				history:[
 					{ name: '分享到微信', icon: '../../static/app-plus/other/saveWechat.png' },
@@ -692,34 +698,39 @@ import { now } from 'moment';
 				};
 		},
 		onShow() {
-			this.getUserInfo()
-			this.getconfingActionName();
+			console.log(this.key)
+			
 		},
 		onLoad(options) {
 		  if (JSON.stringify(options) !== '{}' && options.traineeNo) {
 		    this.traineeNo = options.traineeNo
 			this.key = options.key
 			switch(this.key){
-				case "1":
-					this.openKey = true;
-					break;
-				case "2":
-					this.openKey = false;
-					this.pageName = '会员信息'
-					break;
+							case "1":
+								this.openKey = true;
+								this.saveReport();
+								break;
+							case "2":
+								this.openKey = false;
+								this.getHistroyDate();
+								this.pageName = '会员信息'
+								console.log("1111")
+								break;
 			}
-		  }
-		  this.getPosture();
-		  this.getBodyTestData();
-		  this.getDynameEvaluation();
-		  this.getHealthQuesson()
+			this.getconfingActionName();
+			this.getPosture();
+			this.getBodyTestData();
+			this.getDynameEvaluation();
+			this.getHealthQuesson();
+			this.getUserInfo();
+			}
 		},
 		methods: {
 			async getUserInfo(){
 				const data ={};
 				data["traineeId"] = this.traineeNo;
 				testOb.getOnlyList(data).then((res)=>{
-					// console.log(res.data)
+					console.log(res.data)
 					this.personName =  res.data[0].traineeName;
 					this.gender = res.data[0].gender
 					this.mobileNumber = res.data[0].mobile
@@ -761,10 +772,12 @@ import { now } from 'moment';
 					case "中等":
 					case "中上等":
 					case "中下等":
+					case "尚可":
 						return "#FFC13C";
 						break;
 					case "较差":
 					case "非常差":
+					case "需改善":
 						return "#F04242";
 						break;
 					default:
@@ -920,18 +933,24 @@ import { now } from 'moment';
 							
 						})
 					})
-					// console.log(this.physicalFitnessAssessmentData)
+					console.log(this.physicalFitnessAssessmentData)
 				})
+			},
+			openUIup(){
+				this.$refs.popup.open()
 			},
 			saveReport(){
 				this.$refs.popup.open()
 				const data = {};
 				let date = new Date();
+				let today = date.getFullYear()+'-'+date.getMonth() + 1+'-'+date.getDate();
 				data["traineeNo"] = this.traineeNo;
 				data["bodyTestData"] = this.bodyTestData;
 				data["assessmentTrueData"] = this.assessmentTrueData;
 				data["queryData"] = this.queryData;
-				data["saveDate"] = date;
+				data["HQDate"] = this.HQDate;
+				data["physicalFitnessAssessmentData"]  =this.physicalFitnessAssessmentData;
+				data["saveDate"] = today;
 				console.log(data)
 				testOb.saveReport(data).then((res)=>{
 					console.log(res)
@@ -986,6 +1005,7 @@ import { now } from 'moment';
 					uni.showLoading({ title: '加载中'});
 					// #ifndef H5
 					if(option.name==='保存到相册'){
+						console.log("开始调用保存函数")
 						this.downloadFile()
 					} else {
 						if(option.name==='分享到微信'){
@@ -1065,6 +1085,30 @@ import { now } from 'moment';
 					// })
 					console.log(resData.length)
 				// })
+			},
+			getHistroyDate(){
+				if(!this.historyData.length!=0){
+					const data = {};
+					data["traineeNo"] = this.traineeNo;
+					const historyData = {};
+					if(!this.openKey){
+						testOb.opearReportQuery(data).then((res)=>{
+							console.log(res);
+							res.data.forEach((item)=>{
+								data["name"] = this.personName;
+								data["date"] = item.saveDate;
+								data["bodyTestData"] = item.bodyTestData;
+								data["assessmentTrueData"] = item.assessmentTrueData;
+								data["queryData"] = item.queryData;
+								data["HQDate"] = item.HQDate;
+								data["physicalFitnessAssessmentData"]  = item.physicalFitnessAssessmentData;
+								this.historyData.push(data)
+							})
+						})
+					}
+				}
+				console.log(this.historyData)
+				this.showShare = true;
 			}
 		}
 	}
@@ -1111,18 +1155,16 @@ export default {
 		background-image: url('../../static/app-plus/bg/bodysideReport.png');
 		background-repeat:no-repeat;
 		background-size: 100%;
-		.backgroud-img{
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			z-index: -1;
-			background: #212328;
-		}
 		.arrow-box{
 			height: 88upx;
 			background: transparent;
+		}
+		.backImg{
+			position: absolute;
+			background-image: url('../../static/app-plus/bg/bodysideReport.png');
+			background-repeat:no-repeat;
+			background-size: 100%;
+			z-index:-1;
 		}
 		.arrow-left{
 			top: var(--status-bar-height);
@@ -1271,7 +1313,7 @@ export default {
 	.assessmentContent{
 		margin-top: 20upx;
 		margin-bottom: 40upx;
-		margin-left: 40upx;
+		margin-left: 30upx;
 	}
 	.dynamicshow{
 		overflow-y: auto;
@@ -1405,7 +1447,7 @@ export default {
 		border-radius: 16px;
 	}
 	.buttontrue{
-	background: #454951;
+		background: #454951;
 	  border-radius: 16upx;
 	  margin-top: 30upx;
 	  margin-bottom: 30upx;
@@ -1417,8 +1459,8 @@ export default {
 	  text-align: center;
 	  justify-content: center;
 	
-	  width: calc(100vw - 80upx);
-	  margin-left: 40upx;
+	  width: calc(100vw - 60upx);
+	  margin-left: 30upx;
 	
 	  display: flex;
 	}
@@ -1565,5 +1607,34 @@ export default {
 				line-height: 40tpx;
 			}
 		}
+	}
+	.histroys{
+		align-items: center;
+		height: 728upx;
+		background: #383D46;
+		border-radius: 24upx 24upx 0px 0px;
+		justify-content: space-around;
+		padding: 40upx 40upx 0 40upx;
+		.item {
+				width: calc(100vw - 160upx);
+				height: 130upx;
+				background: #4B525E;
+				line-height: 130upx;
+				margin-bottom: 30upx;
+				border-radius: 24upx;
+				padding: 0 40upx;
+				.text{
+					font-size: 28upx;
+					font-weight: 400;
+					color: #F4F7FF;
+					line-height: 40tpx;
+				}
+			}
+	}
+	.Titlehistroy{
+		font-size: 36upx;
+		font-weight: 600;
+		color: #F4F7FF;
+		margin-bottom: 30upx;
 	}
 </style>

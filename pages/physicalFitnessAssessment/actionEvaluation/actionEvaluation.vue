@@ -109,6 +109,7 @@
 				// console.log(this.imgUrl+"||"+this.videoUrl)
 				this.traineeNo = item.traineeNo;
 				this.questionCode = item.questionCode;
+				this.codes = this.actionData.code;
 				this.getTraineeInfo();
 		},
 		watch:{
@@ -126,6 +127,7 @@
 				age:29,
 				resValue:80,
 				resultValue:'',
+				codes:'',
 				typeText:"待测",
 				actionData:[],
 				typeColor:"#4B525E",
@@ -149,15 +151,21 @@
 				const gender = this.gender;
 				const age = this.age;
 				const resValue = Number(this.resultValue);
+				const type = {};
 				// console.log(gender,age,resValue)
-				const res = testOb.method1(gender,age,resValue)
-				const type = (await res).data;
-				if(type.length == 0){
-					this.typeText = "待测";
-				}else{
-				this.typeText = type[0].resultLevel;
-				this.levelColor(this.typeText)
-				}
+				testOb.method1(gender,age,resValue,this.codes).then((res)=>{
+					console.log(res.data)
+					let numberAge = Number(this.age);
+					res.data.forEach((r)=>{
+						// console.log(r)
+						// console.log(this.age)
+						if(numberAge>r.minimumAge){
+							console.log(r)
+							this.typeText = r.resultLevel;
+							this.levelColor(this.typeText)
+						}
+					})
+				})
 				console.log(resValue)
 			},
 			async getTraineeInfo(){
@@ -200,6 +208,7 @@
 					  return age[0];
 			},
 			levelColor(levelType){
+				console.log(levelType)
 				switch(levelType){
 					case "优秀":
 					case "良好":
@@ -209,11 +218,13 @@
 					case "中等":
 					case "中上":
 					case "中下":
+					case "尚可":
 						this.typeColor = "rgba(255, 193, 60, 1)";
 						this.backgroundColor = "rgba(66, 67, 69, 0.5)"
 						break;
 					case "较差":
 					case "非常差":
+					case "需改善":
 						this.typeColor = "rgba(240, 66, 66, 1)";
 						this.backgroundColor = "rgba(65, 60, 69, 0.5)"
 						break;
