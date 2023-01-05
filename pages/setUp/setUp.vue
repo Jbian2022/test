@@ -40,7 +40,7 @@ export default {
       })
     },
     async logout() {
-      // await login.logout();
+      await login.logout();
       uni.clearStorage()
       uni.reLaunch({
         url: '/pages/logining/logining'

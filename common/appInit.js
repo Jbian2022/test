@@ -84,16 +84,20 @@ export default async function() {
 				               complete: () => {}
 				             })
 				             uni.clearStorage()
+							 login.logout()
+							 
 				           })
 				       }
 				     },
 				     fail: function (err) {
+						  let login = uniCloud.importObject('login')
 				       uni.reLaunch({
 				         url: '/pages/logining/logining',
 				         success: (res) => {},
 				         fail: () => {},
 				         complete: () => {}
 				       })
+					   login.logout()
 				     }
 				   })
 				}

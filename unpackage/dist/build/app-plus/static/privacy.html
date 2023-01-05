@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="divport" content="width=device-width, initial-scale=1.0">
+	<title>用户隐私协议</title>
 
 </head>
 <style>
@@ -39,7 +40,7 @@
     }
 
     .title {
-        font-size: 3rem;
+        font-size: 1rem;
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #323438;
@@ -59,21 +60,21 @@
     }
 
     .content_ying {
-        font-size: 1.875rem;
+        font-size: 1rem;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
         color: #6e7073;
-        line-height: 2.75rem;
+        line-height: 2rem;
         text-indent: 3.75rem;
         letter-spacing: 0;
     }
 
     .m_t {
-        font-size: 1.875rem;
+        font-size: 1rem;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
         color: #6e7073;
-        line-height: 2.75rem;
+        line-height: 2rem;
         letter-spacing: 0;
         padding-top: 0.9rem;
     }
@@ -81,26 +82,26 @@
     .is_agreement_style {
         width: calc(100vw - 3.75rem);
         margin-left: 1.875rem;
-        height: 100px;
+        height: 3.25rem;
         background: #1370ff;
-        border-radius: 16px;
-        margin-top: 1.875rem;
-        margin-bottom: 1.875rem;
-        font-size: 2rem;
+        border-radius: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #ffffff;
-        line-height: 6.25rem;
+        line-height: 3.25rem;
         text-align: center;
     }
 </style>
 
 <body>
     <div class="agreement_style">
-        <div class="nav_style" onclick="goBack()">
+<!--        <div class="nav_style" onclick="goBack()">
             <image class="back_img_style" src="./app-plus/mebrs/back.png"></image>
             <div class="title m_l"> 用户隐私协议 </div>
-        </div>
+        </div> -->
 
         <div class="content">
             <div class="content_ying">
@@ -148,6 +149,14 @@
         return c;
 
     })(), false);
+	window.onload = function() {		
+		    var d = document.documentElement;
+		    var cw = d.clientWidth || 750;
+		    d.style.fontSize = (20 * (cw / 375)) > 16 ? 16 + 'px' : (20 * (cw / 375)) + 'px';
+		
+		
+	}
+	
     function goBack () {
         console.log(111)
         window.history.back()

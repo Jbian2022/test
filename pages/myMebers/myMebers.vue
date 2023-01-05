@@ -103,6 +103,7 @@
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import MemberList from '@/components/memberList/memberList.vue'
 import ZbTooltip from '@/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue'
+import util from '@/common/timeUtil.js'
 export default {
   components: {
     BgTheamCompontent,
@@ -159,6 +160,8 @@ export default {
       fail: function (err) {}
     })
     this.getUserInfor()
+	//
+
   },
   onShow() {
     this.getUserInfor()
