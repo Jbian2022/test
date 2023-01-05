@@ -85,7 +85,7 @@
 </template>
 
 <script>
-	const My = uniCloud.importObject('my')
+	const My = uniCloud.importObject('my',{ customuI: true })
 	export default {
 		data() {
 			return {
