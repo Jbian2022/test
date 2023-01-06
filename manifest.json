@@ -2,8 +2,8 @@
     "name" : "健变",
     "appid" : "__UNI__76A9E40",
     "description" : "一款健身APP",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "versionName" : "1.0.3",
+    "versionCode" : 103,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -56,7 +56,8 @@
                             "applinks:static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com"
                         ]
                     }
-                }
+                },
+                "idfa" : false
             },
             "sdkConfigs" : {
                 "push" : {
@@ -79,7 +80,8 @@
                     "weixin" : {
                         "appid" : "wxc1a1c95912d3eca6",
                         "UniversalLinks" : "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
-                    }
+                    },
+                    "apple" : {}
                 },
                 "payment" : {},
                 "share" : {

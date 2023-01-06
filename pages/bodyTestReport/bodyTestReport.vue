@@ -23,6 +23,7 @@
 		    :value="item.value"
 			@input="changeInputValue($event, item)"
 		    :placeholder="item.answerRemark.remarkTitle"
+			style="margin-top: 6px;"
 		  />
 		  </uni-forms-item>
           <uni-forms-item
@@ -650,7 +651,7 @@ export default {
     span {
       .uni-forms-item {
         width: 100%;
-        min-height: 186upx;
+        height: 186upx;
         padding: 30upx;
         box-sizing: border-box;
         display: block;
@@ -779,5 +780,11 @@ export default {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400 !important;
   color: #7a7f89 !important;
+}
+::v-deep.uni-input-placeholder {
+	font-size: 32upx !important;
+	font-weight: 400 !important;
+	color: #7A7F89 !important;
+
 }
 </style>

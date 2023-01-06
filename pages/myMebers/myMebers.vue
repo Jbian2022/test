@@ -311,7 +311,7 @@ export default {
         }
         .left_header_style {
           font-size: 48upx;
-          font-family: PingFangSC-Semibold, PingFang SC;
+         
           font-weight: 600;
           color: #ffffff;
         }
@@ -324,7 +324,7 @@ export default {
           line-height: 50upx;
           text-align: center;
           font-size: 28upx;
-          font-family: PingFangSC-Medium, PingFang SC;
+        
           font-weight: 500;
           color: #bdc3ce;
         }
@@ -417,7 +417,7 @@ export default {
     width: calc(100% - 100upx);
     margin-left: 50upx;
     font-size: 30upx;
-    font-family: PingFangSC-Regular, PingFang SC;
+
     font-weight: 400;
     color: #bdc3ce;
     margin-top: 30upx;
@@ -435,7 +435,6 @@ export default {
       background: #454951;
       border-radius: 16upx;
       font-size: 32upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #ffffff;
       text-align: center;
@@ -448,7 +447,6 @@ export default {
       border-radius: 16px;
       backdrop-filter: blur(18px);
       font-size: 32upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #ffffff;
       text-align: center;

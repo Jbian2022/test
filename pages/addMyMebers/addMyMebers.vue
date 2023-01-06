@@ -20,6 +20,7 @@
             clas="change_input_style"
             v-model="studentForm.traineeName"
             placeholder="请输入真实姓名"
+			style="margin-top: 6px;"
           />
         </uni-forms-item>
         <uni-forms-item
@@ -94,6 +95,7 @@
           <input
            type="number"
             clas="change_input_style"
+			style="margin-top: 6px;"
             v-model="studentForm.mobile"
             placeholder="请输入手机号码"
 			maxlength="11"
@@ -487,7 +489,7 @@ export default {
     label {
       font-size: 30upx;
       color: #f4f7ff !important;
-      font-family: PingFangSC-Regular, PingFang SC;
+
       font-weight: 400;
     }
   }
@@ -530,7 +532,7 @@ export default {
   .buy_text_style {
     font-size: 30upx;
     color: #f4f7ff !important;
-    font-family: PingFangSC-Regular, PingFang SC;
+
     font-weight: 400;
   }
   .is_buy_style {
@@ -575,7 +577,6 @@ export default {
     width: calc(50% - 15upx);
     height: 100upx;
     font-size: 32upx;
-    font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #ffffff;
     background: #454951;
@@ -588,7 +589,6 @@ export default {
     width: calc(50% - 15upx);
     height: 100upx;
     font-size: 32upx;
-    font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #ffffff;
     background: #1370ff;
@@ -604,7 +604,6 @@ export default {
   margin-top: 30upx;
   margin-bottom: 30upx;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   line-height: 100upx;
@@ -620,7 +619,6 @@ export default {
 
   .bar_left_style {
     font-size: 36upx;
-    font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #f4f7ff;
   }
@@ -639,7 +637,6 @@ export default {
   background: #1370ff;
   border-radius: 16upx;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   text-align: center;
@@ -656,7 +653,6 @@ export default {
 ::v-deep .van-ellipsis {
   color: #f4f7ff;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #f4f7ff;
 }
@@ -678,14 +674,12 @@ export default {
 ::v-deep .van-picker__confirm {
   color: #f4f7ff;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #f4f7ff;
   line-height: 50upx;
 }
 ::v-deep .van-picker__cancel {
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #7a7f89;
   line-height: 50upx;
@@ -702,7 +696,7 @@ export default {
     span {
       .uni-forms-item {
         width: 100%;
-        min-height: 186upx;
+        height: 186upx;
         padding: 30upx;
         box-sizing: border-box;
         display: block;
@@ -717,7 +711,6 @@ export default {
             width: 100% !important;
             font-size: 30upx;
             height: 44upx;
-            font-family: PingFangSC-Semibold !important;
             font-weight: 400;
             color: #f4f7ff;
             span {
@@ -725,7 +718,6 @@ export default {
               width: 100% !important;
               font-size: 30upx;
               height: 44upx;
-               font-family: PingFangSC-Semibold !important;
               font-weight: 400;
               color: #f4f7ff;
             }
@@ -733,9 +725,9 @@ export default {
         }
 
         .uni-forms-item__content {
+			font-size: 32upx !important;
           .uni-easyinput {
             font-size: 32upx;
-            font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
             .uni-easyinput__content {
@@ -745,7 +737,6 @@ export default {
           }
           .uni-input-input {
             font-size: 32upx;
-           font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
           }
@@ -766,7 +757,6 @@ export default {
         padding-left: 40upx;
         // padding-top: 40upx;
         font-size: 32upx;
-        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #7a7f89;
       }
@@ -774,7 +764,6 @@ export default {
         padding-right: 40upx;
         // padding-top: 40upx;
         font-size: 32upx;
-        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #f4f7ff;
       }
@@ -799,7 +788,6 @@ export default {
   justify-content: space-between;
   .label_style {
     font-size: 32upx;
-    font-family: PingFangSC-Semibold, PingFang SC; 
     font-weight: 600;
     color: #f4f7ff;
     line-height: 44upx;
@@ -813,8 +801,13 @@ export default {
 }
 .student_label_style {
   font-size: 32upx !important;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400 !important;
   color: #7a7f89 !important;
+}
+::v-deep.uni-input-placeholder {
+	font-size: 32upx !important;
+	font-weight: 400 !important;
+	color: #7A7F89 !important;
+
 }
 </style>
