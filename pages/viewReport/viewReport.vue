@@ -1,4 +1,62 @@
 <template>
+	<view v-if="openKey"  style="
+					position: absolute;
+					    z-index: 1;
+					    top: 1580upx;
+						width: 100%;
+						background-color: #343A44;">
+				<!-- #ifdef APP-PLUS || H5 -->
+				<view :prop="canvasImageMsg" :change:prop="canvasImage.updateEcharts" id="canvasImage"></view>
+				<!-- #endif -->
+				<!-- <van-button
+				type="primary" 
+				class="shareButton" 
+				icon="../../static/app-plus/other/share.png"
+				@click="saveReport">分享报告</van-button> -->
+				<view class="bottom_style" @click="saveReport">
+					<image src="../../static/app-plus/other/share.png" class="shareImage"></image>
+					分享报告
+				</view>
+				<uni-popup ref="popup" type="bottom" mask-background-color="rgba(20, 21, 23, 0.6)">
+					<view class="share-sheet">
+						<view class="item" v-for="(item,index) in options" :key="index" @click="onSelect(item)">
+							<van-image class="img" round :src="item.icon"/>
+							<view class="text">{{item.name}}</view>
+						</view>
+					</view>
+				</uni-popup>
+				<!-- <van-share-sheet
+				  v-model:show="showShare"
+				  :options="options"
+				  @select="onSelect"
+				  cancel-text=""
+				  class="shareBlock"
+				/> -->
+			</view>
+			<view v-if="!openKey" style="position: absolute;
+					    z-index: 1;
+					    top: 1580upx;">
+						<view 
+						class="buttontrue"
+						@click="openUIup">历史评测记录
+						<!-- <image src="../../../static/app-plus/mebrs/openarrit.png"></image> -->
+						<image src="../../static/app-plus/mebrs/openarrit.png"></image>
+						</view>
+			<!-- 			<van-button
+						type="primary" 
+						class="historyView" 
+						icon="../../static/app-plus/other/share.png"
+						@click="showShare = true">历史评测记录</van-button> -->
+						<uni-popup ref="popup" type="bottom" mask-background-color="rgba(20, 21, 23, 0.6)">
+							<view class="histroys">
+								<view class="Titlehistroy" >历史评测报告</view>
+								<view class="item" v-for="(item,index) in historyData" :key="index" @click="">
+									<view class="text" style="float: left;">{{item.name}}</view>
+									<view class="text" style="float: right;">{{item.date}}</view>
+								</view>
+							</view>
+						</uni-popup>
+					</view>
 	<view class="content_style">
 	<!-- 	<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="pageName"></NavBarCompontent> -->
@@ -84,7 +142,7 @@
 				<uni-collapse-item 
 				title="健康问答" 
 				name="2" 
-				class="informationCard">
+				class="informationCard" :open="true">
 				<view style="padding-bottom: 40upx;"  v-if="showHQ">
 				    <view class="basicInformationContent healthBlocks">
 						<view v-for="(items,index) in HQDate">
@@ -203,7 +261,7 @@
 				title="体测报告" 
 				name="3" 
 				title-class="informationTitleText"
-				class="informationCard">
+				class="informationCard" :open="true">
 				<view style="padding-bottom: 40upx;">
 				<view class="countNumBlock">
 					<van-row>
@@ -296,7 +354,7 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 				title="体态评估" 
 				name="4" 
 				title-class="informationTitleText"
-				class="informationCard">
+				class="informationCard" :open="true">
 				<view style="padding-bottom: 40upx;">
 				<view class="bodyAssessment" v-for="(item,index) in assessmentTrueData">
 					<view style="width: 5px;
@@ -374,7 +432,7 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 				title="动态评估" 
 				name="5" 
 				title-class="informationTitleText"
-				class="informationCard">
+				class="informationCard" :open="true">
 				<view style="padding-bottom: 40upx;">
 					<view class="bodyAssessment"
 						v-for="(item,index) in physicalFitnessAssessmentData">
@@ -418,16 +476,14 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 		</view>
 		
 		<view class="basicInformation">
-			<uni-collapse v-model="physicalFitnessAssessment"
+			<uni-collapse
 			:border = 'false'>
 				<uni-collapse-item 
 				title="体能评估" 
-				name="6" 
-				title-class="informationTitleText"
-				class="informationCard">
-				<view style="padding-bottom: 40upx;">
-					<van-row style="background-color: #343A44;">
-						<van-col class="need_scoll" span="24">
+				class="informationCard" :open="true">
+				<view style="padding-bottom: 40upx;background-color: #343A44;">
+					<!-- <van-row style="background-color: #343A44;">
+						<van-col class="need_scoll" span="24"> -->
 							<view
 							  class="dynamicshow"
 							  v-for="(item, index) in queryData"
@@ -451,158 +507,22 @@ color: #BDC3CE;">再努力一点会更好哦！</van-col>
 								<text class="noEvaText">
 									暂未测试，快去测试吧
 								</text>
-							    <!-- <van-button
-							      round
-							      type="primary"
-							      color="#1370FF"
-							      class="dynamicshow_button"
-							      icon="../../static/app-plus/other/arrows.png"
-							      icon-position="right"
-								  @click.native="jumpModular(item)"
-							      >开始测试</van-button
-							    > -->
+							   
 							  </view>
 							  <view class="dynamicshow_right">
-							    <!-- <van-circle
-							      v-model:current-rate="currentRate"
-							      :rate="100"
-							      :speed="400"
-							      :text="item.typeText"
-							      :layer-color="item.typeColor"
-							      :color="item.typeColor"
-							      :style="'--van-circle-text-color:'+ item.typeColor"
-							    /> -->
+							    
 								<view class="circle" :style="'border: 4px solid '+item.typeColor+';'">
 									<view class="circleText" :style="'color:'+item.typeColor+';'">{{item.typeText}}</view>
 								</view>
 							  </view>
 							</view>
-							<!-- <view class="dynamicshow"
-								v-for="(item,index) in dynamicEvaluationdata" :key="index">
-								<view class="dynamicshow_left" v-if="item.type>0">
-									<text class="evaluationdata">
-										{{item.title}}
-									</text>
-									<text v-if="index==0">
-										心率：{{item.type}}/分
-									</text>
-									<text v-else-if="index==1">
-										数量：{{item.type}}个
-									</text>
-									<text v-else-if="index==2">
-										数量：{{item.type}}个
-									</text>
-								</view>
-								<view class="dynamicshow_left" v-else>
-									<text class="evaluationdata">
-										{{item.title}}
-									</text>
-									<text>
-										暂未测试，快去测试吧
-									</text>
-								</view>
-								<view class="dynamicshow_right" v-if="item.type>=90">
-									<van-circle
-									  v-model:current-rate="currentRate"
-									  :rate="100"
-									  :speed="400"
-									  text="优秀"
-									  layer-color="#383D46"
-									  color="#01E08C"
-									  style="--van-circle-text-color: #01E08C;"
-									/>
-								</view>
-								<view class="dynamicshow_right" v-else-if="item.type>=60">
-									<van-circle
-									  v-model:current-rate="currentRate"
-									  :rate="100"
-									  :speed="400"
-									  text="中上"
-									  layer-color="#383D46"
-									  color="#FFC13C"
-									  style="--van-circle-text-color: #FFC13C;"
-									/>
-								</view>
-								<view class="dynamicshow_right" v-else-if="item.type>0">
-									<van-circle
-									  v-model:current-rate="currentRate"
-									  :rate="100"
-									  :speed="400"
-									  text="较差"
-									  layer-color="#383D46"
-									  color="#F04242"
-									  style="--van-circle-text-color: #F04242;"
-									/>
-								</view>
-								<view class="dynamicshow_right" v-else>
-									<van-circle
-									  v-model:current-rate="currentRate"
-									  :rate="100"
-									  :speed="400"
-									  text="待测"
-									  layer-color="#383D46"
-									  color="#4B525E"
-									  style="--van-circle-text-color: #4B525E;"
-									/>
-								</view>
-							</view> -->
-						</van-col>
-					</van-row>
+						<!-- </van-col>
+					</van-row> -->
 					</view>
 				</uni-collapse-item>
 			</uni-collapse>
 		</view>
-		</view>
-		<view v-if="openKey">
-			<!-- #ifdef APP-PLUS || H5 -->
-			<view :prop="canvasImageMsg" :change:prop="canvasImage.updateEcharts" id="canvasImage"></view>
-			<!-- #endif -->
-			<!-- <van-button
-			type="primary" 
-			class="shareButton" 
-			icon="../../static/app-plus/other/share.png"
-			@click="saveReport">分享报告</van-button> -->
-			<view class="bottom_style" @click="saveReport">
-				<image src="../../static/app-plus/other/share.png" class="shareImage"></image>
-				分享报告
-			</view>
-			<uni-popup ref="popup" type="bottom" mask-background-color="rgba(20, 21, 23, 0.6)">
-				<view class="share-sheet">
-					<view class="item" v-for="(item,index) in options" :key="index" @click="onSelect(item)">
-						<van-image class="img" round :src="item.icon"/>
-						<view class="text">{{item.name}}</view>
-					</view>
-				</view>
-			</uni-popup>
-			<!-- <van-share-sheet
-			  v-model:show="showShare"
-			  :options="options"
-			  @select="onSelect"
-			  cancel-text=""
-			  class="shareBlock"
-			/> -->
-		</view>
-		<view v-if="!openKey">
-			<view 
-			class="buttontrue"
-			@click="openUIup">历史评测记录
-			<!-- <image src="../../../static/app-plus/mebrs/openarrit.png"></image> -->
-			<image src="../../static/app-plus/mebrs/openarrit.png"></image>
-			</view>
-<!-- 			<van-button
-			type="primary" 
-			class="historyView" 
-			icon="../../static/app-plus/other/share.png"
-			@click="showShare = true">历史评测记录</van-button> -->
-			<uni-popup ref="popup" type="bottom" mask-background-color="rgba(20, 21, 23, 0.6)">
-				<view class="histroys">
-					<view class="Titlehistroy" >历史评测报告</view>
-					<view class="item" v-for="(item,index) in historyData" :key="index" @click="">
-						<view class="text" style="float: left;">{{item.name}}</view>
-						<view class="text" style="float: right;">{{item.date}}</view>
-					</view>
-				</view>
-			</uni-popup>
+		<view style="height: 200upx;width: calc(100vw - 60upx);"></view>
 		</view>
 	</view>
 </template>
@@ -692,7 +612,7 @@ import { now } from 'moment';
 			}
 		},
 		//监测页面滑动
-		onPageScroll(e) {
+		onPageScroll:function(e) {
 			console.log(uni.getWindowInfo().statusBarHeight)
 			if(e.scrollTop > uni.getWindowInfo().statusBarHeight){
 				this.isFixedTop = true
@@ -1175,9 +1095,6 @@ export default {
 		overflow: auto;
 		position: relative;
 		background-color: #212328;
-		background-image: url('../../static/app-plus/bg/bodysideReport.png');
-		background-repeat:no-repeat;
-		background-size: 100%;
 		.arrow-box{
 			height: 88upx;
 			background: transparent;
@@ -1200,7 +1117,7 @@ export default {
 			padding-left: 30upx;
 			justify-content: space-between;
 			color: #bdc3ce;
-			position: relative;
+			position: absolute;
 			.van-icon{
 				font-size: 40upx;
 				color: #bdc3ce;
@@ -1214,7 +1131,10 @@ export default {
 		}
 	}
 	#viewReport{
-		margin-top: 80upx;
+		background-image: url('../../static/app-plus/bg/bodysideReport.png');
+		background-repeat:no-repeat;
+		background-size: 100%;
+		padding-top: 140upx;
 	}
 	.title{
 		width: 120upx;
@@ -1472,7 +1392,7 @@ export default {
 	.buttontrue{
 		background: #454951;
 	  border-radius: 16upx;
-	  margin-top: 30upx;
+	  // margin-top: 30upx;
 	  margin-bottom: 30upx;
 	  font-size: 32upx;
 	  font-family: PingFangSC-Semibold, PingFang SC;
@@ -1595,14 +1515,14 @@ export default {
 	  height: 100upx;
 	  background: #1370ff;
 	  border-radius: 16upx;
-	  margin-top: 30upx;
-	  margin-bottom: 30upx;
 	  font-size: 32upx;
 	  font-family: PingFangSC-Semibold, PingFang SC;
 	  font-weight: 600;
 	  color: #ffffff;
 	  line-height: 100upx;
 	  text-align: center;
+	  margin-top: 10px;
+	  margin-bottom: 30px;
 	}
 	.shareImage{
 		width: 28upx;
