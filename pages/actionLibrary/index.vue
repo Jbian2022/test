@@ -79,7 +79,7 @@
 </template>
 
 <script>
-const actionLibrary = uniCloud.importObject('actionLibrary')
+const actionLibrary = uniCloud.importObject('actionLibrary',{ customuI: true })
 import popover from '../../components/popover/index.vue'
 export default {
   components: {
