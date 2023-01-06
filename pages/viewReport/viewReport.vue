@@ -1134,7 +1134,7 @@ export default {
 		background-image: url('../../static/app-plus/bg/bodysideReport.png');
 		background-repeat:no-repeat;
 		background-size: 100%;
-		padding-top: 50px;
+		padding-top: 140upx;
 	}
 	.title{
 		width: 120upx;
