@@ -417,7 +417,7 @@
 .contentLeftBlock{
 	width: 200upx;
 	height: 80upx;
-	/* background: #383D46; */
+	background: #383D46;
 	border-radius: 16upx;
 	font-size: 26upx;
 	font-weight: 600;

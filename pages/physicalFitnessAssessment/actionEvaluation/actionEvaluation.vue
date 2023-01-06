@@ -118,7 +118,7 @@
 		},
 		watch:{
 			resultValue(newResultValue,oldResultValue){
-				debounce(this.testResult(),300)
+				debounce(this.testResult(),400)
 			}
 		},
 		components: {
@@ -163,10 +163,13 @@
 					res.data.forEach((r)=>{
 						// console.log(r)
 						// console.log(this.age)
-						if(numberAge>r.minimumAge){
+						if(numberAge>r.minimumAge&&numberAge<r.maximumAge){
 							console.log(r)
-							this.typeText = r.resultLevel;
-							this.levelColor(this.typeText)
+							if((resValue>r.minimumResult&&resValue<r.maximumResult)||resValue==r.minimumResult||resValue==r.maximumResult){
+								console.log(r)
+								this.typeText = r.resultLevel;
+								this.levelColor(this.typeText)
+							}
 						}
 					})
 				})
@@ -220,8 +223,8 @@
 						this.backgroundColor = "rgba(53, 68, 73, 0.5)"
 						break;
 					case "中等":
-					case "中上":
-					case "中下":
+					case "中上等":
+					case "中下等":
 					case "尚可":
 						this.typeColor = "rgba(255, 193, 60, 1)";
 						this.backgroundColor = "rgba(66, 67, 69, 0.5)"
