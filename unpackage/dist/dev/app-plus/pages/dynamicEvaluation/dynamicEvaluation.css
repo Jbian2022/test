@@ -167,10 +167,26 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background-color: #212328;
 }
-.need_scoll[data-v-517c7f12] {
-  background-color: #212328;
+.content_style .arrow-left[data-v-517c7f12] {
+  z-index: 88;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  padding-left: 0.9375rem;
+  color: #bdc3ce;
+  position: relative;
+  margin-top: 1.25rem;
+}
+.content_style .arrow-left .van-icon[data-v-517c7f12] {
+  font-size: 1.25rem;
+  color: #bdc3ce;
+}
+.title[data-v-517c7f12] {
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #FFFFFF;
 }
 .dynamicshow[data-v-517c7f12] {
   width: calc(100vw - 1.875rem);
@@ -251,6 +267,21 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7A7F89;
-  top: 2.8125rem;
-  right: 0.9375rem;
+  top: 2.1875rem;
+  right: 1.5625rem;
+}
+.bottom_style[data-v-517c7f12] {
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
+  height: 3.125rem;
+  background: #1370ff;
+  border-radius: 0.5rem;
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 3.125rem;
+  text-align: center;
 }

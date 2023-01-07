@@ -121,7 +121,9 @@ export default {
       this.isFinsh = true
     },
     async verifyCode() {
-      let login = uniCloud.importObject('login')
+      let login = uniCloud.importObject('login',{
+			  customUI: true // 取消自动展示的交互提示界面
+		})
       const getVerifyRes = await login.getVerifySchema()
       // console.log(getVerifyRes,'?????我是验证码')
       try {
@@ -134,20 +136,22 @@ export default {
       try {
         // 先验证该手机号是否登录过
 
-        let userLogin = uniCloud.importObject('login')
+        let userLogin = uniCloud.importObject('login',{
+		  customUI: true // 取消自动展示的交互提示界面
+		})
         const getUseRes = await userLogin.getUserSchema(this.mobile)
 
         uni.setStorageSync('loginNum', getUseRes.affectedDocs + '')
         if (getUseRes.affectedDocs == 0) {
+          await this.smsCodeLoginValid('first')
           uni.navigateTo({
             url: '/pages/personalnformation/personalnformation'
           })
-          this.smsCodeLoginValid('first')
         } else {
+        await  this.smsCodeLoginValid()
           uni.reLaunch({
             url: '/pages/myMebers/myMebers'
           })
-          this.smsCodeLoginValid()
         }
       } catch (err) {
         //TODO handle the exception
@@ -155,12 +159,14 @@ export default {
       }
     },
     // 验证码登录
-    async smsCodeLoginValid(type) {
+    async smsCodeLoginValid(type = null) {
       let param = {
         mobile: this.mobile,
         code: this.requestVerifyCode
       }
-      const vefiryLogin = uniCloud.importObject('login') //第一步导入云对象
+      const vefiryLogin = uniCloud.importObject('login',{
+		  customUI: true // 取消自动展示的交互提示界面
+		}) //第一步导入云对象
       const loginRes = await vefiryLogin.loginBySms(param)
       console.log(loginRes, '发送成功')
 

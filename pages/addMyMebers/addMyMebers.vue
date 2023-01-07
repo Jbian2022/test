@@ -20,6 +20,7 @@
             clas="change_input_style"
             v-model="studentForm.traineeName"
             placeholder="请输入真实姓名"
+			maxlength="7"
 			style="margin-top: 6px;"
           />
         </uni-forms-item>
@@ -340,7 +341,9 @@ export default {
       this.$refs.studentForm
         .validate()
         .then(() => {
-          let businessCloudObject = uniCloud.importObject('businessCloudObject')
+          let businessCloudObject = uniCloud.importObject('businessCloudObject',{
+			  customUI: true // 取消自动展示的交互提示界面
+			})
           console.log(that.requestItem, 'that.requestItem')
           if (type == 'edit' || that.requestItem) {
             businessCloudObject
@@ -696,7 +699,7 @@ export default {
     span {
       .uni-forms-item {
         width: 100%;
-        height: 186upx;
+        height: 216upx;
         padding: 30upx;
         box-sizing: border-box;
         display: block;
@@ -783,7 +786,8 @@ export default {
 .change_picker_style {
   display: flex;
   width: 100%;
-  height: 80upx;
+  // height: 80upx;
+  margin-top: 10upx;
   align-items: center;
   justify-content: space-between;
   .label_style {

@@ -32,6 +32,7 @@
 	            clas="change_input_style"
 	            v-model="coachForm.nickname"
 	            placeholder="请输入真实姓名"
+				maxlength="7"
 				style="margin-top: 6px;"
 	          />
 	        </uni-forms-item>
@@ -117,7 +118,9 @@ export default {
 	  savePersonInfo() {
 		 console.log( '1111')
 		  if (this.coachForm.nickname || this.coachForm.gender ) {
-			 const login = uniCloud.importObject('login') //第一步导入云对象
+			 const login = uniCloud.importObject('login',{
+						  customUI: true // 取消自动展示的交互提示界面
+						}) //第一步导入云对象
 			 try{
 				 let param = {
 					 ...this.coachForm
@@ -313,7 +316,7 @@ export default {
     span {
       .uni-forms-item {
         width: 100%;
-        height: 186upx;
+        height: 216upx;
         padding: 30upx;
         box-sizing: border-box;
         display: block;
@@ -397,7 +400,8 @@ export default {
 .change_picker_style {
 	display: flex;
 	width: 100%;
-	height: 80upx;
+	margin-top: 10upx;
+	// height: 80upx;
 	align-items: center;
 	justify-content: space-between;
 	.label_style {

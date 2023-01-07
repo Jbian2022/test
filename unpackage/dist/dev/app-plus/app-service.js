@@ -329,12 +329,16 @@ if (uni.restoreGlobal) {
       path: "pages/myMebers/myMebers",
       style: {
         navigationBarTitleText: "\u6211\u7684\u4F1A\u5458",
-        enablePullDownRefresh: true,
-        onReachBottomDistance: 100,
         navigationStyle: "custom",
         autoBackButton: false,
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          pullToRefresh: {
+            support: true,
+            color: "#ff3333",
+            style: "circle",
+            offset: "50%"
+          }
         },
         navigationBarTextStyle: "white"
       }
@@ -991,7 +995,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.79"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.70"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T$1 = "";
   try {
     T$1 = "__UNI__76A9E40";
@@ -3464,7 +3468,7 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ], 14, ["animation"])) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
   const _sfc_main$J = {
     name: "uniPopup",
     components: {},
@@ -3763,7 +3767,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$4);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       class: vue.normalizeClass(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]])
@@ -3803,7 +3807,7 @@ if (uni.restoreGlobal) {
       ], 32)
     ], 2)) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-4dd3c44b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-4dd3c44b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   const _sfc_main$I = {
     name: "bgTheamCompontent",
     props: ["theamType"],
@@ -4058,7 +4062,7 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   const debounce$1 = (fn2, delay) => {
     var delays = delay || 200;
     var timer;
@@ -4120,7 +4124,7 @@ if (uni.restoreGlobal) {
         if (this.meberList.length === 0) {
           flag = true;
         }
-        formatAppLog("log", "at components/memberList/memberList.vue:185", flag, " LLLLL");
+        formatAppLog("log", "at components/memberList/memberList.vue:203", flag, " LLLLL");
         return flag;
       }
     },
@@ -4144,7 +4148,7 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:209", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:227", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
@@ -4170,7 +4174,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:239", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:257", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4230,7 +4234,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:312", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:330", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4238,19 +4242,19 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:323", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:340", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e2) {
-        formatAppLog("log", "at components/memberList/memberList.vue:330", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:347", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e2, index) {
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:335", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:352", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
         uni.navigateTo({
@@ -4270,38 +4274,45 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_van_button = vue.resolveComponent("van-button");
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_1$3);
-    const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_2);
+    const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_2$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "mebers_content" }, [
       vue.createVNode(_component_uni_popup, {
-        class: "updatePopup",
+        class: "new_popup_style_inner_style",
         ref: "popup",
-        type: "center"
+        type: "center",
+        "mask-background-color": "rgba(20, 21, 23, 0.6)"
       }, {
         default: vue.withCtx(() => [
-          vue.createElementVNode("view", { class: "mask_popup_style" }, [
-            vue.createElementVNode("view", { class: "confirm_dakuang_style" }, [
-              vue.createElementVNode("view", { class: "confirm_top_style" }, [
-                vue.createElementVNode("text", { class: "config_top_title_style" }, "\u662F\u5426\u786E\u8BA4\u5220\u9664"),
-                vue.createElementVNode("image", {
-                  class: "delete_waring_style",
-                  src: "/static/app-plus/mebrs/delete.svg"
-                })
-              ]),
-              vue.createElementVNode("view", { class: "delet_remark" }, "\u786E\u8BA4\u5220\u9664\u8BE5\u5B66\u5458\u5417\uFF1F\u5220\u9664\u540E\u65E0\u6CD5\u6062\u590D"),
-              vue.createElementVNode("view", { class: "delete_btn_style" }, [
-                vue.createElementVNode("view", {
-                  class: "delete_cacel_style",
-                  onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => $options.close && $options.close(...args), ["stop"]))
-                }, "\u53D6\u6D88"),
-                vue.createElementVNode("view", {
-                  class: "delete_sure_style",
-                  onClick: _cache[1] || (_cache[1] = vue.withModifiers((...args) => $options.sureDeleteConfirm && $options.sureDeleteConfirm(...args), ["stop"]))
-                }, "\u786E\u8BA4")
+          vue.createElementVNode("view", { class: "dialog" }, [
+            vue.createElementVNode("view", { class: "dialog-section" }, [
+              vue.createElementVNode("view", { class: "dialog-title" }, "\u662F\u5426\u786E\u8BA4\u5220\u9664"),
+              vue.createElementVNode("view", { class: "dialog-content" }, "\u786E\u8BA4\u5220\u9664\u8BE5\u5B66\u5458\u5417\uFF1F\u5220\u9664\u540E\u65E0\u6CD5\u6062\u590D\uFF01"),
+              vue.createElementVNode("view", { class: "dialog-btn-box" }, [
+                vue.createVNode(_component_van_button, {
+                  type: "default",
+                  onClick: $options.close
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("\u53D6\u6D88")
+                  ]),
+                  _: 1
+                }, 8, ["onClick"]),
+                vue.createVNode(_component_van_button, {
+                  type: "primary",
+                  onClick: $options.sureDeleteConfirm
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("\u786E\u8BA4")
+                  ]),
+                  _: 1
+                }, 8, ["onClick"])
               ])
             ])
-          ])
+          ]),
+          vue.createCommentVNode(' <view class="mask_popup_style">\r\n        <view class="confirm_dakuang_style">\r\n          <view class="confirm_top_style">\r\n            <text class="config_top_title_style">\u662F\u5426\u786E\u8BA4\u5220\u9664</text>\r\n            <image\r\n              class="delete_waring_style"\r\n              src="../../static/app-plus/mebrs/delete.svg"\r\n            ></image>\r\n          </view>\r\n          <view class="delet_remark">\u786E\u8BA4\u5220\u9664\u8BE5\u5B66\u5458\u5417\uFF1F\u5220\u9664\u540E\u65E0\u6CD5\u6062\u590D</view>\r\n          <view class="delete_btn_style">\r\n            <view class="delete_cacel_style" @click.stop="close">\u53D6\u6D88</view>\r\n            <view\r\n              class="delete_sure_style"\r\n              @click.stop.native="sureDeleteConfirm"\r\n              >\u786E\u8BA4</view\r\n            >\r\n          </view>\r\n        </view>\r\n      </view> ')
         ]),
         _: 1
       }, 512),
@@ -4334,7 +4345,7 @@ if (uni.restoreGlobal) {
               right: vue.withCtx(() => [
                 vue.createElementVNode("view", {
                   class: "slot-button",
-                  onClick: _cache[2] || (_cache[2] = vue.withModifiers(($event) => $options.bindClick($event), ["stop"]))
+                  onClick: _cache[0] || (_cache[0] = vue.withModifiers(($event) => $options.bindClick($event), ["stop"]))
                 }, [
                   vue.createElementVNode("image", {
                     class: "slot_btn_img_style",
@@ -4346,7 +4357,10 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("view", { class: "add_student_style" }, [
                   vue.createElementVNode("view", { class: "need_loop_style" }, [
                     vue.createElementVNode("view", { class: "loop_top_style" }, [
-                      vue.createElementVNode("view", { class: "top_left_style" }, [
+                      vue.createElementVNode("view", {
+                        class: "top_left_style",
+                        onClick: vue.withModifiers(($event) => $options.getReport(item), ["stop"])
+                      }, [
                         vue.createElementVNode("text", { class: "top_left_name_style" }, vue.toDisplayString(item.traineeName), 1),
                         item.gender == 1 ? (vue.openBlock(), vue.createElementBlock("image", {
                           key: 0,
@@ -4358,7 +4372,7 @@ if (uni.restoreGlobal) {
                           class: "top_left_img_style",
                           src: "/static/app-plus/mebrs/woman.svg"
                         })) : vue.createCommentVNode("v-if", true)
-                      ]),
+                      ], 8, ["onClick"]),
                       vue.createElementVNode("view", {
                         class: "top_right_style",
                         onClick: vue.withModifiers(($event) => $options.goToNewWorkout(item), ["stop"])
@@ -4373,7 +4387,7 @@ if (uni.restoreGlobal) {
                     vue.createElementVNode("view", { class: "loop_bottom_style" }, [
                       vue.createElementVNode("view", {
                         class: "bottom_style",
-                        onClick: vue.withModifiers(($event) => $options.getReport(item), ["stop"])
+                        onClick: vue.withModifiers(($event) => $options.updateMember(item), ["stop"])
                       }, [
                         vue.createElementVNode("image", {
                           class: "bootom_img_style",
@@ -4601,6 +4615,140 @@ if (uni.restoreGlobal) {
     ], 4);
   }
   const ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-13dad3a2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
+  var util = {};
+  util.getCommonTime = function(date2 = new Date(), targetTimezone = 8) {
+    let res2 = {};
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const { year: year2, month: month2, day: day2, hour, minute, second } = util.getFullTime(date2, 2);
+    res2.now = {
+      year: year2,
+      month: month2,
+      day: day2,
+      hour,
+      minute,
+      second
+    };
+    let month_last_day = new Date(year2, month2, 0).getDate();
+    let year_last_day = new Date(year2, 12, 0).getDate();
+    res2.todayStart = new Date(`${year2}/${month2}/${day2}`).getTime() - timeDif;
+    res2.today12End = new Date(`${year2}/${month2}/${day2}`).getTime() + (12 * 60 * 60 * 1e3 - 1) - timeDif;
+    res2.todayEnd = new Date(`${year2}/${month2}/${day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    res2.monthStart = new Date(`${year2}/${month2}/1`).getTime() - timeDif;
+    res2.monthEnd = new Date(`${year2}/${month2}/${month_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    res2.yearStart = new Date(`${year2}/1/1`).getTime() - timeDif;
+    res2.yearEnd = new Date(`${year2}/12/${year_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    let weekObj = util.getWeekStartAndEnd(0, date2);
+    res2.weekStart = weekObj.weekStart;
+    res2.weekEnd = weekObj.weekEnd;
+    res2.months = [];
+    res2.months[0] = {
+      monthStart: res2.monthStart,
+      monthEnd: res2.monthEnd
+    };
+    for (let i2 = 1; i2 <= 12; i2++) {
+      let month_last_day2 = new Date(year2, i2, 0).getDate();
+      let monthStart = new Date(`${year2}/${i2}/1`).getTime() - timeDif;
+      let monthEnd = new Date(`${year2}/${i2}/${month_last_day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+      res2.months[i2] = {
+        monthStart,
+        monthEnd
+      };
+    }
+    return res2;
+  };
+  util.timeFormat = function(time2, fmt = "yyyy-MM-dd hh:mm:ss", targetTimezone = 8) {
+    if (!time2) {
+      return "";
+    }
+    let date2;
+    if (typeof time2 === "number") {
+      if (time2.toString().length == 10)
+        time2 *= 1e3;
+      date2 = new Date(time2);
+    } else {
+      date2 = time2;
+    }
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const east8time = date2.getTime() + timeDif;
+    date2 = new Date(east8time);
+    let opt = {
+      "M+": date2.getMonth() + 1,
+      "d+": date2.getDate(),
+      "h+": date2.getHours(),
+      "m+": date2.getMinutes(),
+      "s+": date2.getSeconds(),
+      "q+": Math.floor((date2.getMonth() + 3) / 3),
+      "S": date2.getMilliseconds()
+    };
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (date2.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (let k2 in opt) {
+      if (new RegExp("(" + k2 + ")").test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k2] : ("00" + opt[k2]).substr(("" + opt[k2]).length));
+      }
+    }
+    return fmt;
+  };
+  util.getFullTime = function(date2, type = 0, targetTimezone = 8) {
+    if (!date2) {
+      return "";
+    }
+    if (typeof date2 == "number") {
+      date2 = new Date(date2);
+    }
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const east8time = date2.getTime() + timeDif;
+    date2 = new Date(east8time);
+    let YYYY = date2.getFullYear() + "";
+    let MM = date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1;
+    let DD = date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate();
+    let hh = date2.getHours() < 10 ? "0" + date2.getHours() : date2.getHours();
+    let mm = date2.getMinutes() < 10 ? "0" + date2.getMinutes() : date2.getMinutes();
+    let ss2 = date2.getSeconds() < 10 ? "0" + date2.getSeconds() : date2.getSeconds();
+    if (type === 2) {
+      return {
+        YYYY: Number(YYYY),
+        MM: Number(MM),
+        DD: Number(DD),
+        hh: Number(hh),
+        mm: Number(mm),
+        ss: Number(ss2),
+        year: Number(YYYY),
+        month: Number(MM),
+        day: Number(DD),
+        hour: Number(hh),
+        minute: Number(mm),
+        second: Number(ss2)
+      };
+    } else if (type === 1) {
+      return YYYY + "" + MM + DD + hh + mm + ss2;
+    } else {
+      return YYYY + "-" + MM + "-" + DD + " " + hh + ":" + mm + ":" + ss2;
+    }
+  };
+  util.getWeekStartAndEnd = function(addWeekCount = 0, date2 = new Date(), targetTimezone = 8) {
+    let res2 = {};
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const east8time = date2.getTime() + timeDif;
+    const east8Date = new Date(east8time);
+    let week = east8Date.getDay();
+    east8Date.getDate();
+    let oneDayMillisecond = 1e3 * 60 * 60 * 24;
+    date2 = new Date(date2.getTime() + oneDayMillisecond * 7 * addWeekCount);
+    let minusDay = week != 0 ? week - 1 : 6;
+    let weekStart = new Date(date2.getTime() - oneDayMillisecond * minusDay);
+    let weekEnd = new Date(weekStart.getTime() + oneDayMillisecond * 6);
+    let weekStartObj = util.getFullTime(weekStart, 2);
+    let weekEndObj = util.getFullTime(weekEnd, 2);
+    res2.weekStart = new Date(`${weekStartObj.year}/${weekStartObj.month}/${weekStartObj.day}`).getTime() - timeDif;
+    res2.weekEnd = new Date(`${weekEndObj.year}/${weekEndObj.month}/${weekEndObj.day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    return res2;
+  };
   const _sfc_main$D = {
     components: {
       BgTheamCompontent,
@@ -4635,7 +4783,7 @@ if (uni.restoreGlobal) {
       uni.stopPullDownRefresh();
     },
     onReachBottom() {
-      formatAppLog("log", "at pages/myMebers/myMebers.vue:140", 2222);
+      formatAppLog("log", "at pages/myMebers/myMebers.vue:142", 2222);
     },
     created() {
     },
@@ -4648,7 +4796,7 @@ if (uni.restoreGlobal) {
             self2.loginNum = res2.data;
             self2.showPopover = res2.data == "0" ? true : false;
             if (res2.data == "0") {
-              this.$refs.first_popup.open();
+              self2.$refs.popup.open();
             }
           }
         },
@@ -4662,10 +4810,12 @@ if (uni.restoreGlobal) {
     },
     methods: {
       getUserInfor() {
-        const login2 = Es.importObject("login");
+        const login2 = Es.importObject("login", {
+          customUI: true
+        });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:174", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:181", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4674,9 +4824,11 @@ if (uni.restoreGlobal) {
         }
       },
       getCocachList() {
-        let businessCloudObject2 = Es.importObject("businessCloudObject");
+        let businessCloudObject2 = Es.importObject("businessCloudObject", {
+          customUI: true
+        });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:189", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:199", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4688,11 +4840,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:201", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:211", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:205", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:215", "success");
           }
         });
         uni.navigateTo({
@@ -4709,9 +4861,9 @@ if (uni.restoreGlobal) {
         this.scrollTop = event.detail.scrollTop;
         this.cellingFlag = this.scrollTop > 50 ? true : false;
       },
-      change() {
+      maskClick() {
         uni.setStorageSync("loginNum", "1");
-        this.$refs.first_popup.close();
+        this.$refs.popup.close();
         this.showPopover = false;
       },
       addClick() {
@@ -4719,9 +4871,11 @@ if (uni.restoreGlobal) {
           uni.setStorageSync("isActive", this.isActive);
         } catch (e2) {
         }
-        let businessCloudObject2 = Es.importObject("businessCloudObject");
+        let businessCloudObject2 = Es.importObject("businessCloudObject", {
+          customUI: true
+        });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:239", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:251", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4755,7 +4909,7 @@ if (uni.restoreGlobal) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_MemberList = vue.resolveComponent("MemberList");
     const _component_ZbTooltip = vue.resolveComponent("ZbTooltip");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F "),
       vue.createCommentVNode('  	<view class="status_bar" style="background: red;">\r\n	</view> '),
@@ -4842,20 +4996,21 @@ if (uni.restoreGlobal) {
                     show: true
                   }, null, 8, ["visible", "color"])
                 ])
-              ]),
-              vue.createVNode(_component_uni_popup, {
-                class: "updatePopup",
-                ref: "first_popup",
-                type: "center",
-                onChange: $options.change
-              }, null, 8, ["onChange"])
+              ])
             ], 2)
           ])
-        ])
+        ]),
+        vue.createVNode(_component_uni_popup, {
+          ref: "popup",
+          type: "center",
+          "mask-background-color": "rgba(20, 21, 23, 0.6)",
+          class: "new_popup_style_outer_style",
+          onMaskClick: $options.maskClick
+        }, null, 8, ["onMaskClick"])
       ])
     ], 2112);
   }
-  const PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__file", "D:/studyUninApp/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
+  const PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-5a412e6a"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
   const _sfc_main$C = {
     name: "uniFormsItem",
     options: {
@@ -5169,7 +5324,7 @@ if (uni.restoreGlobal) {
       ])
     ], 2);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-462874dd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-462874dd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -6026,140 +6181,6 @@ if (uni.restoreGlobal) {
     ]);
   }
   const NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-d4dd2266"], ["__file", "D:/studyUninApp/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
-  var util = {};
-  util.getCommonTime = function(date2 = new Date(), targetTimezone = 8) {
-    let res2 = {};
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const { year: year2, month: month2, day: day2, hour, minute, second } = util.getFullTime(date2, 2);
-    res2.now = {
-      year: year2,
-      month: month2,
-      day: day2,
-      hour,
-      minute,
-      second
-    };
-    let month_last_day = new Date(year2, month2, 0).getDate();
-    let year_last_day = new Date(year2, 12, 0).getDate();
-    res2.todayStart = new Date(`${year2}/${month2}/${day2}`).getTime() - timeDif;
-    res2.today12End = new Date(`${year2}/${month2}/${day2}`).getTime() + (12 * 60 * 60 * 1e3 - 1) - timeDif;
-    res2.todayEnd = new Date(`${year2}/${month2}/${day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    res2.monthStart = new Date(`${year2}/${month2}/1`).getTime() - timeDif;
-    res2.monthEnd = new Date(`${year2}/${month2}/${month_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    res2.yearStart = new Date(`${year2}/1/1`).getTime() - timeDif;
-    res2.yearEnd = new Date(`${year2}/12/${year_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    let weekObj = util.getWeekStartAndEnd(0, date2);
-    res2.weekStart = weekObj.weekStart;
-    res2.weekEnd = weekObj.weekEnd;
-    res2.months = [];
-    res2.months[0] = {
-      monthStart: res2.monthStart,
-      monthEnd: res2.monthEnd
-    };
-    for (let i2 = 1; i2 <= 12; i2++) {
-      let month_last_day2 = new Date(year2, i2, 0).getDate();
-      let monthStart = new Date(`${year2}/${i2}/1`).getTime() - timeDif;
-      let monthEnd = new Date(`${year2}/${i2}/${month_last_day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-      res2.months[i2] = {
-        monthStart,
-        monthEnd
-      };
-    }
-    return res2;
-  };
-  util.timeFormat = function(time2, fmt = "yyyy-MM-dd hh:mm:ss", targetTimezone = 8) {
-    if (!time2) {
-      return "";
-    }
-    let date2;
-    if (typeof time2 === "number") {
-      if (time2.toString().length == 10)
-        time2 *= 1e3;
-      date2 = new Date(time2);
-    } else {
-      date2 = time2;
-    }
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const east8time = date2.getTime() + timeDif;
-    date2 = new Date(east8time);
-    let opt = {
-      "M+": date2.getMonth() + 1,
-      "d+": date2.getDate(),
-      "h+": date2.getHours(),
-      "m+": date2.getMinutes(),
-      "s+": date2.getSeconds(),
-      "q+": Math.floor((date2.getMonth() + 3) / 3),
-      "S": date2.getMilliseconds()
-    };
-    if (/(y+)/.test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (date2.getFullYear() + "").substr(4 - RegExp.$1.length));
-    }
-    for (let k2 in opt) {
-      if (new RegExp("(" + k2 + ")").test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k2] : ("00" + opt[k2]).substr(("" + opt[k2]).length));
-      }
-    }
-    return fmt;
-  };
-  util.getFullTime = function(date2, type = 0, targetTimezone = 8) {
-    if (!date2) {
-      return "";
-    }
-    if (typeof date2 == "number") {
-      date2 = new Date(date2);
-    }
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const east8time = date2.getTime() + timeDif;
-    date2 = new Date(east8time);
-    let YYYY = date2.getFullYear() + "";
-    let MM = date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1;
-    let DD = date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate();
-    let hh = date2.getHours() < 10 ? "0" + date2.getHours() : date2.getHours();
-    let mm = date2.getMinutes() < 10 ? "0" + date2.getMinutes() : date2.getMinutes();
-    let ss2 = date2.getSeconds() < 10 ? "0" + date2.getSeconds() : date2.getSeconds();
-    if (type === 2) {
-      return {
-        YYYY: Number(YYYY),
-        MM: Number(MM),
-        DD: Number(DD),
-        hh: Number(hh),
-        mm: Number(mm),
-        ss: Number(ss2),
-        year: Number(YYYY),
-        month: Number(MM),
-        day: Number(DD),
-        hour: Number(hh),
-        minute: Number(mm),
-        second: Number(ss2)
-      };
-    } else if (type === 1) {
-      return YYYY + "" + MM + DD + hh + mm + ss2;
-    } else {
-      return YYYY + "-" + MM + "-" + DD + " " + hh + ":" + mm + ":" + ss2;
-    }
-  };
-  util.getWeekStartAndEnd = function(addWeekCount = 0, date2 = new Date(), targetTimezone = 8) {
-    let res2 = {};
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const east8time = date2.getTime() + timeDif;
-    const east8Date = new Date(east8time);
-    let week = east8Date.getDay();
-    east8Date.getDate();
-    let oneDayMillisecond = 1e3 * 60 * 60 * 24;
-    date2 = new Date(date2.getTime() + oneDayMillisecond * 7 * addWeekCount);
-    let minusDay = week != 0 ? week - 1 : 6;
-    let weekStart = new Date(date2.getTime() - oneDayMillisecond * minusDay);
-    let weekEnd = new Date(weekStart.getTime() + oneDayMillisecond * 6);
-    let weekStartObj = util.getFullTime(weekStart, 2);
-    let weekEndObj = util.getFullTime(weekEnd, 2);
-    res2.weekStart = new Date(`${weekStartObj.year}/${weekStartObj.month}/${weekStartObj.day}`).getTime() - timeDif;
-    res2.weekEnd = new Date(`${weekEndObj.year}/${weekEndObj.month}/${weekEndObj.day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    return res2;
-  };
   const props = {
     mark: {
       type: Boolean,
@@ -6439,7 +6460,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "pricke" }, [
       _ctx.mark ? (vue.openBlock(), vue.createBlock(_component_uni_transition, {
         key: 0,
@@ -6677,12 +6698,12 @@ if (uni.restoreGlobal) {
         this.sexShow = true;
       },
       sexConfirm(e2) {
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:282", e2, "???");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:285", e2, "???");
         this.studentForm.gender = e2[0] === -1 ? this.range[0].value : this.range[e2[0]].value;
         this.sexShow = false;
       },
       dateConfirm(e2) {
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:288", e2, "\u6211\u662F\u65E5\u671F");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:291", e2, "\u6211\u662F\u65E5\u671F");
         this.studentForm.birthday = e2;
         this.birthShow = false;
       },
@@ -6726,10 +6747,12 @@ if (uni.restoreGlobal) {
       },
       addDirectly(type) {
         var that = this;
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:337", type, "nishi");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:340", type, "nishi");
         this.$refs.studentForm.validate().then(() => {
-          let businessCloudObject2 = Es.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:342", that.requestItem, "that.requestItem");
+          let businessCloudObject2 = Es.importObject("businessCloudObject", {
+            customUI: true
+          });
+          formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:347", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -6768,13 +6791,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:386", type, ">>>>");
+              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:391", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:394", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
+                  formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:399", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -6801,7 +6824,7 @@ if (uni.restoreGlobal) {
                 width: 220
               });
             } else {
-              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:421", 2);
+              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:426", 2);
               uni.showToast({
                 icon: "none",
                 title: res2.message,
@@ -6826,7 +6849,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$2);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
@@ -6850,7 +6873,9 @@ if (uni.restoreGlobal) {
                   type: "text",
                   clas: "change_input_style",
                   "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.studentForm.traineeName = $event),
-                  placeholder: "\u8BF7\u8F93\u5165\u771F\u5B9E\u59D3\u540D"
+                  placeholder: "\u8BF7\u8F93\u5165\u771F\u5B9E\u59D3\u540D",
+                  maxlength: "7",
+                  style: { "margin-top": "6px" }
                 }, null, 512), [
                   [vue.vModelText, $data.studentForm.traineeName]
                 ])
@@ -6930,6 +6955,7 @@ if (uni.restoreGlobal) {
                 vue.withDirectives(vue.createElementVNode("input", {
                   type: "number",
                   clas: "change_input_style",
+                  style: { "margin-top": "6px" },
                   "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.studentForm.mobile = $event),
                   placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7\u7801",
                   maxlength: "11"
@@ -7098,7 +7124,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesMemberQueryMemberQuery = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__file", "D:/studyUninApp/bodybuilding-app/pages/memberQuery/memberQuery.vue"]]);
-  const testOb$3 = Es.importObject("testResults");
+  const testOb$3 = Es.importObject("testResults", {
+    customUI: true
+  });
   const _sfc_main$w = {
     data() {
       return {
@@ -7181,13 +7209,13 @@ if (uni.restoreGlobal) {
       NavBarCompontent
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:274", item);
+      formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:276", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
     },
     methods: {
       isonclick(a2) {
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:295", a2);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:297", a2);
         switch (a2) {
           case 1:
             this.textShow1 = !this.textShow1;
@@ -7246,14 +7274,14 @@ if (uni.restoreGlobal) {
         }
       },
       backPage() {
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:358", this.assessmentData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:360", this.assessmentData);
         this.assessmentNewData["postData"] = this.assessmentData;
         this.assessmentNewData["traineeNo"] = this.traineeNo;
         this.assessmentNewData["questionCode"] = this.questionCode;
         this.assessmentNewData["key"] = "posture";
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:363", this.assessmentNewData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:365", this.assessmentNewData);
         const res2 = testOb$3.postConfig(this.assessmentNewData, "postureTest").then((res3) => {
-          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:365", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:367", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res3.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -7266,7 +7294,7 @@ if (uni.restoreGlobal) {
           }
         }).catch(() => {
         });
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:377", res2);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:379", res2);
       }
     }
   };
@@ -7518,7 +7546,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesPostureAssessmentPostureAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__file", "D:/studyUninApp/bodybuilding-app/pages/postureAssessment/postureAssessment.vue"]]);
-  var businessCloudObject$2 = Es.importObject("businessCloudObject");
+  var businessCloudObject$2 = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
   const _sfc_main$v = {
     components: {
       BgTheamCompontent,
@@ -7575,7 +7605,7 @@ if (uni.restoreGlobal) {
         item["value"] = event.detail.value;
       },
       pickeConfirm(event, item, itemIndex) {
-        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:137", item, "\u6211\u5E73\u65F6", itemIndex);
+        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:140", item, "\u6211\u5E73\u65F6", itemIndex);
         item.flag = false;
         item["value"] = item.configList[event].text || "";
       },
@@ -7591,7 +7621,7 @@ if (uni.restoreGlobal) {
           let readyParam = {
             [value.key]: value.hasOwnProperty("value") ? value.value : ""
           };
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:158", readyParam, "readyParam");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:161", readyParam, "readyParam");
           Object.assign(resultParam, readyParam);
         });
         let saveParam = {
@@ -7600,7 +7630,7 @@ if (uni.restoreGlobal) {
           bodyTestReport: resultParam
         };
         businessCloudObject$2.opearConfig(saveParam, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:171", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:174", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -7631,7 +7661,7 @@ if (uni.restoreGlobal) {
               flag: false
             };
           });
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:213", res2, "kkkkk");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:216", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             this.configForm = {};
             this.bodyTestReport = opearConfigList;
@@ -7656,7 +7686,7 @@ if (uni.restoreGlobal) {
                 value: resultValue
               };
             });
-            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:244", self2.configForm, "this.configForm", opearConfigList);
+            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:247", self2.configForm, "this.configForm", opearConfigList);
             self2.bodyTestReport = opearConfigList;
           }
         }).catch((err) => {
@@ -7698,7 +7728,7 @@ if (uni.restoreGlobal) {
         var that = this;
         this.$refs.studentForm.validate().then(() => {
           let businessCloudObject2 = Es.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:295", that.requestItem, "that.requestItem");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:298", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -7734,13 +7764,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:336", type, ">>>>");
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:339", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:344", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
+                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:347", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -7766,7 +7796,7 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             } else {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:370", 2);
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:373", 2);
               uni.showToast({
                 icon: "fail",
                 title: res2.message,
@@ -7790,7 +7820,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$2);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
@@ -7817,7 +7847,8 @@ if (uni.restoreGlobal) {
                       clas: "change_input_style",
                       value: item.value,
                       onInput: ($event) => $options.changeInputValue($event, item),
-                      placeholder: item.answerRemark.remarkTitle
+                      placeholder: item.answerRemark.remarkTitle,
+                      style: { "margin-top": "6px" }
                     }, null, 40, ["value", "onInput", "placeholder"])
                   ]),
                   _: 2
@@ -7868,7 +7899,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-641854c1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
-  var businessCloudObject$1 = Es.importObject("businessCloudObject");
+  var businessCloudObject$1 = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
   const _sfc_main$u = {
     components: {
       BgTheamCompontent,
@@ -7910,7 +7943,7 @@ if (uni.restoreGlobal) {
                 }
               });
             }
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:121", res2, "\u6211\u662F\u5B50\u9009\u9879");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:130", res2, "\u6211\u662F\u5B50\u9009\u9879");
           }).catch((err) => {
           });
         }
@@ -7919,17 +7952,19 @@ if (uni.restoreGlobal) {
         businessCloudObject$1.getPhysicalAssessmentList().then((res2) => {
           let firstData = res2.data;
           businessCloudObject$1.opearConfigAllList(this.traineeNo).then((allRes) => {
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:135", allRes, "allRes");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:144", allRes, "allRes");
             firstData = firstData.map((item) => {
               let isFinsh = false;
               if (allRes.affectedDocs > 0) {
                 allRes.data.forEach((v2) => {
-                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:142", v2, "\u4EC0\u4E48\u9B3C");
+                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:151", v2, "\u4EC0\u4E48\u9B3C");
                   if (v2.questionCode === item.code) {
                     let needCompareData = v2.hasOwnProperty("testResult") ? v2.testResult.filter((c2) => c2.answer.length > 0) : [];
                     let compareBodyTestResport = v2.hasOwnProperty("bodyTestReport") && JSON.stringify(v2.bodyTestReport) !== "{}" ? true : false;
                     let postureAssessment = v2.hasOwnProperty("postData") && JSON.stringify(v2.postData) !== "{}" ? true : false;
-                    let dynamicEvaluation = v2.hasOwnProperty("actionTestResult") ? v2.actionTestResult.filter((c2) => c2.length > 0) : [];
+                    let dynamicEvaluation = v2.hasOwnProperty(
+                      "actionTestResult"
+                    ) ? v2.actionTestResult.filter((c2) => c2.length > 0) : [];
                     let physicalFitnessAssessment = v2.hasOwnProperty("physicalData") && JSON.stringify(v2.physicalData) !== "{}" ? true : false;
                     if (needCompareData.length > 0) {
                       isFinsh = true;
@@ -7954,7 +7989,7 @@ if (uni.restoreGlobal) {
                 isFinsh
               };
             });
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:190", firstData, "\u6211\u6052\u5F3A");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:201", firstData, "\u6211\u6052\u5F3A");
             this.dynamicEvaluationdata = firstData;
           });
         }).catch((err) => {
@@ -9241,7 +9276,7 @@ if (uni.restoreGlobal) {
       onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
     }, null, 6);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const _sfc_main$s = {
     name: "uniCollapseItem",
     props: {
@@ -9403,7 +9438,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse-item" }, [
       vue.createCommentVNode(" onClick(!isOpen) "),
       vue.createElementVNode("view", {
@@ -9449,7 +9484,7 @@ if (uni.restoreGlobal) {
       ], 6)
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-3d2dde9f"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-3d2dde9f"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
   const _sfc_main$r = {
     name: "uniCollapse",
     emits: ["change", "activeItem", "input", "update:modelValue"],
@@ -9564,8 +9599,10 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-3f050360"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
-  var businessCloudObject = Es.importObject("businessCloudObject");
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-3f050360"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
+  var businessCloudObject = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
   const _sfc_main$q = {
     components: {
       BgTheamCompontent,
@@ -9636,7 +9673,7 @@ if (uni.restoreGlobal) {
           testResult
         };
         businessCloudObject.opearConfig(saveParam, "physical").then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:155", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:157", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -9655,7 +9692,7 @@ if (uni.restoreGlobal) {
           traineeNo: this.traineeNo,
           questionCode: this.questionCode
         }).then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:177", res2, "kkkkk");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:179", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             let healthList = this.originList.map((item) => {
               let answer = item.answer.length > 0 ? item.answer.map((config) => {
@@ -9700,7 +9737,7 @@ if (uni.restoreGlobal) {
                 answer
               };
             });
-            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:238", healthList, "hellow");
+            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:240", healthList, "hellow");
             this.healthList = healthList;
           }
         }).catch((err) => {
@@ -9729,8 +9766,8 @@ if (uni.restoreGlobal) {
   function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_0$1);
-    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_1$1);
+    const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$1);
+    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, {
@@ -9815,8 +9852,12 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__file", "D:/studyUninApp/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
-  const testOb$2 = Es.importObject("testResults");
-  const busOb$3 = Es.importObject("businessCloudObject");
+  const testOb$2 = Es.importObject("testResults", {
+    customUI: true
+  });
+  const busOb$3 = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
   const _sfc_main$p = {
     components: {
       BgTheamCompontent,
@@ -9832,19 +9873,20 @@ if (uni.restoreGlobal) {
         resultValue: 0,
         typeText: "\u5F85\u6D4B",
         typeColor: "#4B525E",
+        backColor: "",
         queryData: {},
         queryUserActionData: {}
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:83", item);
+      formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:94", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getconfingActionName();
     },
     methods: {
       jumpModular(item) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:90", item.path, ">>>>");
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:101", item.path, ">>>>");
         uni.navigateTo({
           url: item.path + "?data=" + JSON.stringify(item) + "&traineeNo=" + this.traineeNo + "&questionCode=" + item.parentCode,
           success: (res2) => {
@@ -9859,13 +9901,15 @@ if (uni.restoreGlobal) {
         switch (levelType) {
           case "\u4F18\u79C0":
           case "\u826F\u597D":
-            return "rgba(1, 224, 140, 1)";
+            return "#01E08C";
           case "\u4E2D\u7B49":
           case "\u4E2D\u4E0A\u7B49":
           case "\u4E2D\u4E0B\u7B49":
+          case "\u5C1A\u53EF":
             return "#FFC13C";
           case "\u8F83\u5DEE":
           case "\u975E\u5E38\u5DEE":
+          case "\u9700\u6539\u5584":
             return "#F04242";
           default:
             return "#4B525E";
@@ -9876,7 +9920,7 @@ if (uni.restoreGlobal) {
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         testOb$2.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:125", res2);
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:138", res2);
           if (res2.success) {
             this.queryUserActionData = res2.data;
             busOb$3.getPhysicalChildAssessmentList("A0005").then((res3) => {
@@ -9886,11 +9930,11 @@ if (uni.restoreGlobal) {
                 item["type"] = 0;
                 item["typeColor"] = this.levelColor(item.typeText);
                 item["path"] = "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation";
-                formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:135", item);
+                formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:148", item);
               });
               for (let j2 = 0; j2 < this.queryUserActionData.length; j2++) {
                 for (let i2 = 0; i2 < this.queryData.length; i2++) {
-                  formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:139", this.queryData[i2].code === this.queryUserActionData[j2].code);
+                  formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:152", this.queryData[i2].code === this.queryUserActionData[j2].code);
                   if (this.queryData[i2].code === this.queryUserActionData[j2].code) {
                     this.queryData[i2].typeText = this.queryUserActionData[j2].physicalData.actionTypeText;
                     this.queryData[i2].type = this.queryUserActionData[j2].physicalData.actionVlue;
@@ -9899,7 +9943,7 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-              formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:148", this.queryData);
+              formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:161", this.queryData);
             }).catch((err) => {
             });
           }
@@ -9909,20 +9953,35 @@ if (uni.restoreGlobal) {
         uni.redirectTo({
           url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
         });
+      },
+      onClickBack() {
+        uni.redirectTo({
+          url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
+        });
       }
     }
   };
   function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+    const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
-    const _component_van_button = vue.resolveComponent("van-button");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u4F53\u80FD\u8BC4\u4F30" }),
+      vue.createCommentVNode(` <NavBarCompontent :leftNavTitle="'\u4F53\u80FD\u8BC4\u4F30'"></NavBarCompontent> `),
+      vue.createElementVNode("view", {
+        class: vue.normalizeClass(["arrow-left", { show: _ctx.isFixedTop }]),
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClickBack && $options.onClickBack(...args))
+      }, [
+        vue.createVNode(_component_van_icon, { name: "arrow-left" }),
+        vue.createElementVNode("view", { class: "title" }, "\u4F53\u80FD\u8BC4\u4F30"),
+        vue.createElementVNode("view", {
+          class: "z",
+          style: { "opacity": "0" }
+        }, "8888")
+      ], 2),
       vue.createElementVNode("view", { class: "watermark" }, "\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784"),
-      vue.createVNode(_component_van_row, { style: { "background-color": "#343a44" } }, {
+      vue.createVNode(_component_van_row, null, {
         default: vue.withCtx(() => [
           vue.createVNode(_component_van_col, {
             class: "need_scoll",
@@ -9972,7 +10031,7 @@ if (uni.restoreGlobal) {
             /> `),
                     vue.createElementVNode("view", {
                       class: "circle",
-                      style: vue.normalizeStyle("border: 4px solid " + item.typeColor + ";")
+                      style: vue.normalizeStyle("border: 4px solid " + item.typeColor + ";background-color:" + item.typeColor + "0D;")
                     }, [
                       vue.createElementVNode("view", {
                         class: "circleText",
@@ -9989,20 +10048,15 @@ if (uni.restoreGlobal) {
         _: 1
       }),
       vue.createElementVNode("view", null, [
-        vue.createVNode(_component_van_button, {
-          type: "primary",
-          class: "postureButton",
-          onClick: _cache[0] || (_cache[0] = ($event) => $options.getdynamicEvaluationdata())
-        }, {
-          default: vue.withCtx(() => [
-            vue.createTextVNode("\u786E\u8BA4")
-          ]),
-          _: 1
-        })
+        vue.createCommentVNode('  <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">\u786E\u8BA4</van-button> '),
+        vue.createElementVNode("view", {
+          class: "bottom_style",
+          onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
+        }, "\u786E\u8BA4")
       ])
     ]);
   }
-  const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
+  const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-c1425cf6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
   const _imports_0$1 = "/static/app-plus/other/coach.png";
   let weixinAuthService;
   const _sfc_main$o = {
@@ -10017,7 +10071,7 @@ if (uni.restoreGlobal) {
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/logining/logining.vue:104", this.phone, "????");
+        formatAppLog("log", "at pages/logining/logining.vue:109", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -10026,7 +10080,7 @@ if (uni.restoreGlobal) {
       }
     },
     onLoad() {
-      formatAppLog("log", "at pages/logining/logining.vue:114", plus, ">>>>");
+      formatAppLog("log", "at pages/logining/logining.vue:119", plus, ">>>>");
       plus.oauth.getServices((services) => {
         weixinAuthService = services.find((service) => {
           return service.id === "weixin";
@@ -10038,13 +10092,13 @@ if (uni.restoreGlobal) {
     },
     methods: {
       jumpAgree() {
-        formatAppLog("log", "at pages/logining/logining.vue:128", "11111");
+        formatAppLog("log", "at pages/logining/logining.vue:133", "11111");
         uni.navigateTo({
           url: "/pages/agreement/agreement"
         });
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/logining/logining.vue:134", event, "\u4F60tm");
+        formatAppLog("log", "at pages/logining/logining.vue:139", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       async getSms() {
@@ -10053,10 +10107,12 @@ if (uni.restoreGlobal) {
           return;
         }
         if (this.controlActiveFlag) {
-          const login2 = Es.importObject("login");
+          const login2 = Es.importObject("login", {
+            customUI: true
+          });
           try {
             const smsRes = await login2.sendSmsCode(this.phone);
-            formatAppLog("log", "at pages/logining/logining.vue:149", smsRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:156", smsRes, "\u767B\u5F55\u6210\u529F");
             if (smsRes.code == 0) {
               uni.reLaunch({
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + smsRes.mobile,
@@ -10069,7 +10125,7 @@ if (uni.restoreGlobal) {
               });
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:163", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:170", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
@@ -10085,7 +10141,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:181", err);
+              formatAppLog("log", "at pages/logining/logining.vue:187", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
@@ -10136,7 +10192,8 @@ if (uni.restoreGlobal) {
           onInput: _cache[0] || (_cache[0] = (...args) => $options.phoneInput && $options.phoneInput(...args)),
           class: "phone",
           focus: "",
-          placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7"
+          placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
+          "adjust-position": false
         }, null, 40, ["value"]),
         vue.createCommentVNode('   <van-field\r\n       v-model="phone"\r\n        class="phone"\r\n        placeholder="\u8BF7\u8F93\u5165\u624B\u673A\u53F7"\r\n		maxLength="11"\r\n		\r\n      /> '),
         vue.createElementVNode("button", {
@@ -10649,21 +10706,21 @@ if (uni.restoreGlobal) {
       },
       inputVerificationChange(val) {
         this.smsCode = val;
-        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:102", "\u503C\u6539\u53D8\u4E86\uFF1A" + val);
+        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:101", "\u503C\u6539\u53D8\u4E86\uFF1A" + val);
       },
       async resend() {
         if (this.isFinsh) {
           const login2 = Es.importObject("login");
           try {
             const smsRes = await login2.sendSmsCode(this.mobile);
-            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:109", smsRes, "\u53D1\u9001\u6210\u529F");
+            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:108", smsRes, "\u53D1\u9001\u6210\u529F");
             if (smsRes.code == 0) {
               this.mobile = smsRes.mobile;
               this.verifyCode();
               this.$refs.countDown.reset();
             }
           } catch (err) {
-            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:117", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:116", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
@@ -10671,7 +10728,9 @@ if (uni.restoreGlobal) {
         this.isFinsh = true;
       },
       async verifyCode() {
-        let login2 = Es.importObject("login");
+        let login2 = Es.importObject("login", {
+          customUI: true
+        });
         const getVerifyRes = await login2.getVerifySchema();
         try {
           this.requestVerifyCode = getVerifyRes.length > 0 ? getVerifyRes[0].code : "0000";
@@ -10679,39 +10738,59 @@ if (uni.restoreGlobal) {
         }
       },
       async smsLogin() {
-        const vefiryLogin = Es.importObject("login");
         try {
-          let param = {
-            mobile: this.mobile,
-            code: this.requestVerifyCode
-          };
-          const loginRes = await vefiryLogin.loginBySms(param);
-          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:142", loginRes, "\u53D1\u9001\u6210\u529F");
-          if (loginRes.code == 0) {
+          let userLogin = Es.importObject("login", {
+            customUI: true
+          });
+          const getUseRes = await userLogin.getUserSchema(this.mobile);
+          uni.setStorageSync("loginNum", getUseRes.affectedDocs + "");
+          if (getUseRes.affectedDocs == 0) {
+            await this.smsCodeLoginValid("first");
+            uni.navigateTo({
+              url: "/pages/personalnformation/personalnformation"
+            });
+          } else {
+            await this.smsCodeLoginValid();
+            uni.reLaunch({
+              url: "/pages/myMebers/myMebers"
+            });
+          }
+        } catch (err) {
+          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:158", err, "\u6211\u662F\u9519\u8BEF");
+        }
+      },
+      async smsCodeLoginValid(type = null) {
+        let param = {
+          mobile: this.mobile,
+          code: this.requestVerifyCode
+        };
+        const vefiryLogin = Es.importObject("login", {
+          customUI: true
+        });
+        const loginRes = await vefiryLogin.loginBySms(param);
+        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:171", loginRes, "\u53D1\u9001\u6210\u529F");
+        if (loginRes.code == 0) {
+          if (type === "first") {
             try {
-              uni.setStorageSync("userInfo", JSON.stringify(loginRes.userInfo));
-              uni.setStorageSync("uni_id_token", loginRes.token);
-              uni.setStorageSync("uid", loginRes.uid);
-              uni.setStorageSync("tokenExpired", loginRes.tokenExpired);
-              let userLogin = Es.importObject("login");
-              const getUseRes = await userLogin.getUserSchema(this.mobile);
-              if (getUseRes) {
-                uni.setStorageSync("loginNum", getUseRes.affectedDocs);
-                if (getUseRes.affectedDocs === 0) {
-                  uni.navigateTo({
-                    url: "/pages/personalnformation/personalnformation"
-                  });
-                } else {
-                  uni.reLaunch({
-                    url: "/pages/myMebers/myMebers"
-                  });
+              let param2 = {
+                avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
+              };
+              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:182", param2, "param");
+              vefiryLogin.perfectInfo(param2).then((res2) => {
+                if (res2.success) {
                 }
-              }
+              }).catch((err) => {
+              });
             } catch (e2) {
             }
           }
-        } catch (err) {
-          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:172", err, "\u6211\u662F\u9519\u8BEF");
+          try {
+            uni.setStorageSync("userInfo", JSON.stringify(loginRes.userInfo));
+            uni.setStorageSync("uni_id_token", loginRes.token);
+            uni.setStorageSync("uid", loginRes.uid);
+            uni.setStorageSync("tokenExpired", loginRes.tokenExpired);
+          } catch (e2) {
+          }
         }
       },
       goBack() {
@@ -10816,14 +10895,16 @@ if (uni.restoreGlobal) {
         });
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:117", "1111");
+        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:119", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
-          const login2 = Es.importObject("login");
+          const login2 = Es.importObject("login", {
+            customUI: true
+          });
           try {
             let param = {
               ...this.coachForm
             };
-            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:125", param, "param");
+            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:129", param, "param");
             login2.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();
@@ -10848,7 +10929,7 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$2);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "counter content_style" }, [
@@ -10890,7 +10971,9 @@ if (uni.restoreGlobal) {
                   type: "text",
                   clas: "change_input_style",
                   "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.coachForm.nickname = $event),
-                  placeholder: "\u8BF7\u8F93\u5165\u771F\u5B9E\u59D3\u540D"
+                  placeholder: "\u8BF7\u8F93\u5165\u771F\u5B9E\u59D3\u540D",
+                  maxlength: "7",
+                  style: { "margin-top": "6px" }
                 }, null, 512), [
                   [vue.vModelText, $data.coachForm.nickname]
                 ])
@@ -11014,7 +11097,7 @@ if (uni.restoreGlobal) {
     ], 34);
   }
   const popover = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
-  const actionLibrary$1 = Es.importObject("actionLibrary");
+  const actionLibrary$1 = Es.importObject("actionLibrary", { customuI: true });
   const _sfc_main$i = {
     components: {
       popover
@@ -11263,7 +11346,7 @@ if (uni.restoreGlobal) {
     const _component_popover = vue.resolveComponent("popover");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_button = vue.resolveComponent("van-button");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "action-library" }, [
       vue.createElementVNode("view", { class: "status_bar" }, [
         vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F ")
@@ -11580,7 +11663,7 @@ if (uni.restoreGlobal) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "add-action" }, [
       vue.createElementVNode("view", { class: "status_bar" }, [
         vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F ")
@@ -11952,7 +12035,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_popover = vue.resolveComponent("popover");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "new-workout" }, [
       vue.createElementVNode("view", { class: "background-header" }),
       vue.createElementVNode("view", { class: "background" }),
@@ -11974,6 +12057,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "workout-title" }, [
         vue.withDirectives(vue.createElementVNode("input", {
           "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.workoutName = $event),
+          maxlength: "8",
           class: "uni-input",
           focus: "",
           placeholder: "\u8BF7\u8F93\u5165\u8BAD\u7EC3\u540D\u79F0"
@@ -17136,7 +17220,7 @@ if (uni.restoreGlobal) {
         return week;
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:315", option, 88);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:316", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -17152,11 +17236,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:331", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:332", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:335", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:336", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -17164,15 +17248,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:343", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:344", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:345", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:346", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:351", "err", err);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:352", "err", err);
                 }
               });
             }
@@ -17181,7 +17265,7 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:360", option.name, 8888);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:361", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
@@ -17195,11 +17279,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:375", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:376", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:379", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:380", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -17209,11 +17293,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:389", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:390", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:393", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:394", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -17228,7 +17312,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_image = vue.resolveComponent("van-image");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "training-record-detail" }, [
       vue.createElementVNode("view", {
         class: vue.normalizeClass(["arrow-left", { show: $data.isFixedTop }]),
@@ -17242,6 +17326,7 @@ if (uni.restoreGlobal) {
         }, "8888")
       ], 2),
       vue.createElementVNode("view", { id: "training-detail" }, [
+        vue.createElementVNode("view", { class: "status_bar" }),
         vue.createElementVNode("view", { class: "backgroud-img" }, [
           vue.createVNode(_component_van_image, { src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png" })
         ]),
@@ -17602,7 +17687,7 @@ if (uni.restoreGlobal) {
   if (typeof block0$1 === "function")
     block0$1(_sfc_main$d);
   const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
-  const My$3 = Es.importObject("my");
+  const My$3 = Es.importObject("my", { customuI: true });
   const _sfc_main$c = {
     data() {
       return {
@@ -17716,7 +17801,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "my" }, [
       vue.createElementVNode("view", { class: "background" }),
       vue.createElementVNode("view", { class: "status_bar" }, [
@@ -17840,7 +17925,7 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "D:/studyUninApp/bodybuilding-app/pages/my/my.vue"]]);
-  const My$2 = Es.importObject("my");
+  const My$2 = Es.importObject("my", { customuI: true });
   const _sfc_main$b = {
     data() {
       return {
@@ -18049,7 +18134,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesOpenCardOpenCard = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "D:/studyUninApp/bodybuilding-app/pages/openCard/openCard.vue"]]);
-  Es.importObject("login");
+  const login$1 = Es.importObject("login", {
+    customUI: true
+  });
   const _sfc_main$a = {
     data() {
       return {};
@@ -18071,6 +18158,17 @@ if (uni.restoreGlobal) {
         });
       },
       async logout() {
+        let tokenExpired = Es.getCurrentUserInfo().tokenExpired;
+        if (tokenExpired > 0) {
+          await login$1.logout();
+          await this.remove();
+          return;
+        }
+        if (tokenExpired === 0) {
+          await this.remove();
+        }
+      },
+      remove() {
         uni.clearStorage();
         uni.reLaunch({
           url: "/pages/logining/logining"
@@ -18399,8 +18497,12 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesUpdateSignatureUpdateSignature = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "D:/studyUninApp/bodybuilding-app/pages/updateSignature/updateSignature.vue"]]);
-  const tesOb = Es.importObject("testResults");
-  const busOb$2 = Es.importObject("businessCloudObject");
+  const tesOb = Es.importObject("testResults", {
+    customUI: true
+  });
+  const busOb$2 = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
   const _sfc_main$7 = {
     components: {
       BgTheamCompontent,
@@ -18421,7 +18523,7 @@ if (uni.restoreGlobal) {
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:225", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:229", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       let leftNavTitle = item.pageTitle;
@@ -18488,14 +18590,14 @@ if (uni.restoreGlobal) {
         pushUpTestimg: "../../../static/app-plus/bg/pushUpTest.jpg",
         changeValue: true,
         num: 0,
-        squatFrontVideoUrl: "../../../static/app-plus/video/squatFront.mp4",
-        squatSideVideoUrl: "../../../static/app-plus/video/squatSide.mp4",
-        thoracicSpineActivityUrl: "../../../static/app-plus/video/thoracicSpineActivity.mp4",
-        StraightLegLiftUrl: "../../../static/app-plus/video/StraightLegLift.mp4",
-        ThomasUrl: "../../../static/app-plus/video/Thomas.mp4",
-        shoulderTest1Url: "../../../static/app-plus/video/shoulderTest1.mp4",
-        shoulderTest2Url: "../../../static/app-plus/video/shoulderTest2.mp4",
-        pushUpTestUrl: "../../../static/app-plus/video/pushUpTest.mp4",
+        squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bbbf92cf-78e7-46c9-aefb-555fd45498ac.mp4",
+        squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ac005e94-771a-482f-81a7-6f21f6721a5b.mp4",
+        thoracicSpineActivityUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
+        StraightLegLiftUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4f9af99a-4833-41d0-a584-1b0cdf4cb583.mp4",
+        ThomasUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e971accd-2928-429b-86a1-e33f2d9e10aa.mp4",
+        shoulderTest1Url: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f682d0b8-f3e6-4159-9242-01854025d3a6.mp4",
+        shoulderTest2Url: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/580f6bf5-c503-40d9-819c-b4a11412791e.mp4",
+        pushUpTestUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e27801c0-b63f-42f0-a5a4-68574a123e69.mp4",
         quession1: [],
         quession2: [],
         quession3: []
@@ -18520,7 +18622,7 @@ if (uni.restoreGlobal) {
       getActionInfo() {
         if (this.type !== "") {
           busOb$2.getPhysicalChildAssessmentList(this.type).then((res2) => {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:330", res2);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:334", res2);
             if (res2.success) {
               this.actionobs = res2.data;
               this.quession1 = this.actionobs[0].answer;
@@ -18531,16 +18633,16 @@ if (uni.restoreGlobal) {
         }
       },
       actionResDate() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:341", this.actionobs);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:345", this.actionobs);
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         data["actionTestResult"] = this.actionobs;
         data["status"] = "0";
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:348", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:352", data);
         tesOb.opearConfig(data, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:350", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:354", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -18740,12 +18842,15 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesDynamicEvaluationActionEvaluationActionEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "D:/studyUninApp/bodybuilding-app/pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue"]]);
-  const busOb$1 = Es.importObject("businessCloudObject");
-  Es.importObject("testResults");
+  const busOb$1 = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
+  Es.importObject("testResults", {
+    customUI: true
+  });
   const _sfc_main$6 = {
     components: {
-      BgTheamCompontent,
-      NavBarCompontent
+      BgTheamCompontent
     },
     data() {
       return {
@@ -18762,7 +18867,7 @@ if (uni.restoreGlobal) {
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:71", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:81", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getPageData();
@@ -18775,8 +18880,8 @@ if (uni.restoreGlobal) {
         };
       },
       jumpModular(item) {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:84", item.path, ">>>>");
-        uni.navigateTo({
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:94", item.path, ">>>>");
+        uni.reLaunch({
           url: item.path + "&type=" + item.type + "&traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode,
           success: (res2) => {
           },
@@ -18790,13 +18895,13 @@ if (uni.restoreGlobal) {
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:96", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:106", data);
         busOb$1.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:98", res2.data);
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:108", res2.data);
           res2.data.forEach((item) => {
             this.dynamicEvaluationdata.filter((v2) => {
               let resq = item.code == v2.type;
-              formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:102", resq);
+              formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:112", resq);
               if (resq) {
                 v2.icon = false;
               }
@@ -18805,7 +18910,12 @@ if (uni.restoreGlobal) {
         });
       },
       getdynamicEvaluationdata() {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:111", this.traineeNo);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:121", this.traineeNo);
+        uni.redirectTo({
+          url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
+        });
+      },
+      onClickBack() {
         uni.redirectTo({
           url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
         });
@@ -18814,15 +18924,25 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
+    const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
-    const _component_van_button = vue.resolveComponent("van-button");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u52A8\u6001\u8BC4\u4F30" }),
+      vue.createCommentVNode(` <NavBarCompontent :leftNavTitle="'\u52A8\u6001\u8BC4\u4F30'"></NavBarCompontent> `),
+      vue.createElementVNode("view", {
+        class: vue.normalizeClass(["arrow-left", { show: _ctx.isFixedTop }]),
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClickBack && $options.onClickBack(...args))
+      }, [
+        vue.createVNode(_component_van_icon, { name: "arrow-left" }),
+        vue.createElementVNode("view", { class: "title" }, "\u52A8\u6001\u8BC4\u4F30"),
+        vue.createElementVNode("view", {
+          class: "z",
+          style: { "opacity": "0" }
+        }, "8888")
+      ], 2),
       vue.createElementVNode("view", { class: "watermark" }, "\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784"),
-      vue.createVNode(_component_van_row, { style: { "background-color": "#343a44" } }, {
+      vue.createVNode(_component_van_row, null, {
         default: vue.withCtx(() => [
           vue.createVNode(_component_van_col, {
             class: "need_scoll",
@@ -18870,22 +18990,20 @@ if (uni.restoreGlobal) {
         ]),
         _: 1
       }),
-      vue.createVNode(_component_van_button, {
-        type: "primary",
-        block: "",
-        class: "buttontrue",
-        onClick: _cache[0] || (_cache[0] = ($event) => $options.getdynamicEvaluationdata())
-      }, {
-        default: vue.withCtx(() => [
-          vue.createTextVNode("\u786E\u8BA4")
-        ]),
-        _: 1
-      })
+      vue.createCommentVNode(' <van-button type="primary" block class="buttontrue" @click.native="getdynamicEvaluationdata()">\u786E\u8BA4</van-button> '),
+      vue.createElementVNode("view", {
+        class: "bottom_style",
+        onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
+      }, "\u786E\u8BA4")
     ]);
   }
   const PagesDynamicEvaluationDynamicEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-517c7f12"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/dynamicEvaluation/dynamicEvaluation.vue"]]);
-  const testOb$1 = Es.importObject("testResults");
-  Es.importObject("businessCloudObject");
+  const testOb$1 = Es.importObject("testResults", {
+    customUI: true
+  });
+  Es.importObject("businessCloudObject", {
+    customUI: true
+  });
   const _sfc_main$5 = {
     setup() {
       const show = vue.ref(false);
@@ -18907,17 +19025,18 @@ if (uni.restoreGlobal) {
     onLoad: function(item) {
       let data = JSON.parse(item.data);
       this.actionData = data;
-      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:105", this.actionData);
+      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:109", this.actionData);
       this.leftNavTitle = this.actionData.questionContent;
       this.imgUrl = this.actionData.url;
       this.videoUrl = this.actionData.answerRemark.url;
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
+      this.codes = this.actionData.code;
       this.getTraineeInfo();
     },
     watch: {
       resultValue(newResultValue, oldResultValue) {
-        debounce$1(this.testResult(), 300);
+        debounce$1(this.testResult(), 400);
       }
     },
     components: {
@@ -18930,6 +19049,7 @@ if (uni.restoreGlobal) {
         age: 29,
         resValue: 80,
         resultValue: "",
+        codes: "",
         typeText: "\u5F85\u6D4B",
         actionData: [],
         typeColor: "#4B525E",
@@ -18953,15 +19073,21 @@ if (uni.restoreGlobal) {
         const gender = this.gender;
         const age = this.age;
         const resValue = Number(this.resultValue);
-        const res2 = testOb$1.method1(gender, age, resValue);
-        const type = (await res2).data;
-        if (type.length == 0) {
-          this.typeText = "\u5F85\u6D4B";
-        } else {
-          this.typeText = type[0].resultLevel;
-          this.levelColor(this.typeText);
-        }
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:161", resValue);
+        testOb$1.method1(gender, age, resValue, this.codes).then((res2) => {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:161", res2.data);
+          let numberAge = Number(this.age);
+          res2.data.forEach((r2) => {
+            if (numberAge > r2.minimumAge && numberAge < r2.maximumAge) {
+              formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:167", r2);
+              if (resValue > r2.minimumResult && resValue < r2.maximumResult || resValue == r2.minimumResult || resValue == r2.maximumResult) {
+                formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:169", r2);
+                this.typeText = r2.resultLevel;
+                this.levelColor(this.typeText);
+              }
+            }
+          });
+        });
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:176", resValue);
       },
       async getTraineeInfo() {
         const data = {};
@@ -18969,7 +19095,7 @@ if (uni.restoreGlobal) {
         data["traineeId"] = this.traineeNo;
         testOb$1.getOnlyList(data).then((res2) => {
           if (res2.success) {
-            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:169", res2.data[0].birthday);
+            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:184", res2.data[0].birthday);
             this.gender = res2.data[0].gender;
             birth = res2.data[0].birthday;
             this.age = Number(this.getAge(birth));
@@ -18992,10 +19118,11 @@ if (uni.restoreGlobal) {
           age[0]--;
           age[1] += 12;
         }
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:199", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:214", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
         return age[0];
       },
       levelColor(levelType) {
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:218", levelType);
         switch (levelType) {
           case "\u4F18\u79C0":
           case "\u826F\u597D":
@@ -19003,13 +19130,15 @@ if (uni.restoreGlobal) {
             this.backgroundColor = "rgba(53, 68, 73, 0.5)";
             break;
           case "\u4E2D\u7B49":
-          case "\u4E2D\u4E0A":
-          case "\u4E2D\u4E0B":
+          case "\u4E2D\u4E0A\u7B49":
+          case "\u4E2D\u4E0B\u7B49":
+          case "\u5C1A\u53EF":
             this.typeColor = "rgba(255, 193, 60, 1)";
             this.backgroundColor = "rgba(66, 67, 69, 0.5)";
             break;
           case "\u8F83\u5DEE":
           case "\u975E\u5E38\u5DEE":
+          case "\u9700\u6539\u5584":
             this.typeColor = "rgba(240, 66, 66, 1)";
             this.backgroundColor = "rgba(65, 60, 69, 0.5)";
             break;
@@ -19029,9 +19158,9 @@ if (uni.restoreGlobal) {
         data["testDate"] = new Date();
         data["physicalData"] = actinData;
         data["status"] = "0";
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:236", data);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:254", data);
         const res2 = testOb$1.opearConfig(data, "bodyTestReport").then((res3) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:238", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:256", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res3.success) {
             uni.redirectTo({
               url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -19044,7 +19173,7 @@ if (uni.restoreGlobal) {
           }
         }).catch(() => {
         });
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:250", res2);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:268", res2);
       }
     }
   };
@@ -25651,9 +25780,18 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("canvasImage");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["canvasImage"] = "44880530";
   };
-  Es.importObject("my");
-  const testOb = Es.importObject("testResults");
-  const busOb = Es.importObject("businessCloudObject");
+  Es.importObject("my", {
+    customUI: true
+  });
+  const testOb = Es.importObject("testResults", {
+    customUI: true
+  });
+  const busOb = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
+  const train = Es.importObject("train", {
+    customUI: true
+  });
   const _sfc_main$4 = {
     data() {
       return {
@@ -25666,8 +25804,11 @@ if (uni.restoreGlobal) {
         openKey: true,
         key: "",
         bodyTestData: [],
+        HQDate: [],
         physicalFitnessAssessmentData: [],
         bodyFraction: 0,
+        historyData: [],
+        showHQ: true,
         dynamicEvaluationdata: [
           {
             title: "\u4FEF\u5367\u6491\u8010\u529B\u6D4B\u8BD5",
@@ -25693,14 +25834,14 @@ if (uni.restoreGlobal) {
         showShare: false,
         showHistory: false,
         options: [
+          { name: "\u5206\u4EAB\u5230\u5FAE\u4FE1", icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png" },
+          { name: "\u5206\u4EAB\u5230\u670B\u53CB\u5708", icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png" },
+          { name: "\u4FDD\u5B58\u5230\u76F8\u518C", icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png" }
+        ],
+        history: [
           { name: "\u5206\u4EAB\u5230\u5FAE\u4FE1", icon: "../../static/app-plus/other/saveWechat.png" },
           { name: "\u5206\u4EAB\u5230\u670B\u53CB\u5708", icon: "../../static/app-plus/other/wechatMoments.png" },
           { name: "\u4FDD\u5B58\u5230\u76F8\u518C", icon: "../../static/app-plus/other/savePhone.png" }
-        ],
-        history: [
-          { name: "\u5206\u4EAB\u5230\u5FAE\u4FE1", icon: "../../static/app-plus/other/saveWechat.svg" },
-          { name: "\u5206\u4EAB\u5230\u670B\u53CB\u5708", icon: "../../static/app-plus/other/wechatMoments.svg" },
-          { name: "\u4FDD\u5B58\u5230\u76F8\u518C", icon: "../../static/app-plus/other/savePhone.svg" }
         ],
         getOnlyLists: {},
         traineeNo: "",
@@ -25717,8 +25858,8 @@ if (uni.restoreGlobal) {
         isFixedTop: false
       };
     },
-    onPageScroll(e2) {
-      formatAppLog("log", "at pages/viewReport/viewReport.vue:603", uni.getWindowInfo().statusBarHeight);
+    onPageScroll: function(e2) {
+      formatAppLog("log", "at pages/viewReport/viewReport.vue:616", uni.getWindowInfo().statusBarHeight);
       if (e2.scrollTop > uni.getWindowInfo().statusBarHeight) {
         this.isFixedTop = true;
       } else {
@@ -25742,32 +25883,38 @@ if (uni.restoreGlobal) {
       };
     },
     onShow() {
-      this.getUserInfo();
-      this.getconfingActionName();
+      formatAppLog("log", "at pages/viewReport/viewReport.vue:640", this.key);
     },
     onLoad(options) {
       if (JSON.stringify(options) !== "{}" && options.traineeNo) {
         this.traineeNo = options.traineeNo;
         this.key = options.key;
+        this.getUserInfo();
+        this.getconfingActionName();
+        this.getPosture();
+        this.getBodyTestData();
+        this.getDynameEvaluation();
+        this.getHealthQuesson();
         switch (this.key) {
           case "1":
             this.openKey = true;
+            this.saveReport();
             break;
           case "2":
             this.openKey = false;
+            this.getHistroyDate();
             this.pageName = "\u4F1A\u5458\u4FE1\u606F";
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:662", "1111");
             break;
         }
       }
-      this.getPosture();
-      this.getBodyTestData();
-      this.getDynameEvaluation();
     },
     methods: {
       async getUserInfo() {
         const data = {};
         data["traineeId"] = this.traineeNo;
         testOb.getOnlyList(data).then((res2) => {
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:673", res2.data);
           this.personName = res2.data[0].traineeName;
           this.gender = res2.data[0].gender;
           this.mobileNumber = res2.data[0].mobile;
@@ -25800,9 +25947,11 @@ if (uni.restoreGlobal) {
           case "\u4E2D\u7B49":
           case "\u4E2D\u4E0A\u7B49":
           case "\u4E2D\u4E0B\u7B49":
+          case "\u5C1A\u53EF":
             return "#FFC13C";
           case "\u8F83\u5DEE":
           case "\u975E\u5E38\u5DEE":
+          case "\u9700\u6539\u5584":
             return "#F04242";
           default:
             return "#4B525E";
@@ -25825,7 +25974,6 @@ if (uni.restoreGlobal) {
               });
               for (let j2 = 0; j2 < this.queryUserActionData.length; j2++) {
                 for (let i2 = 0; i2 < this.queryData.length; i2++) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:727", this.queryData[i2].code === this.queryUserActionData[j2].code);
                   if (this.queryData[i2].code === this.queryUserActionData[j2].code) {
                     this.queryData[i2].typeText = this.queryUserActionData[j2].physicalData.actionTypeText;
                     this.queryData[i2].type = this.queryUserActionData[j2].physicalData.actionVlue;
@@ -25919,7 +26067,6 @@ if (uni.restoreGlobal) {
         data["questionCode"] = "A0002";
         testOb.opearConfigQuery(data).then((res2) => {
           this.bodyTestData = res2.data[0].bodyTestReport;
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:825", this.bodyTestData);
           this.bodyFraction = Number(this.bodyTestData.bodyFraction);
         });
       },
@@ -25929,13 +26076,9 @@ if (uni.restoreGlobal) {
         data["questionCode"] = "A0004";
         const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:835", res2);
           res2.data.forEach((r2) => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:837", r2);
             let rq = r2.actionTestResult;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:839", rq);
             rq.forEach((rqs) => {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:841", rqs);
               resData.push(rqs.answer);
             });
           });
@@ -25946,20 +26089,27 @@ if (uni.restoreGlobal) {
               }
             });
           });
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:854", this.physicalFitnessAssessmentData);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:876", this.physicalFitnessAssessmentData);
         });
       },
+      openUIup() {
+        this.$refs.popup.open();
+      },
       saveReport() {
+        this.$refs.popup.open();
         const data = {};
         let date2 = new Date();
+        let today = date2.getFullYear() + "-" + date2.getMonth() + 1 + "-" + date2.getDate();
         data["traineeNo"] = this.traineeNo;
         data["bodyTestData"] = this.bodyTestData;
         data["assessmentTrueData"] = this.assessmentTrueData;
         data["queryData"] = this.queryData;
-        data["saveDate"] = date2;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:865", data);
+        data["HQDate"] = this.HQDate;
+        data["physicalFitnessAssessmentData"] = this.physicalFitnessAssessmentData;
+        data["saveDate"] = today;
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:894", data);
         testOb.saveReport(data).then((res2) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:867", res2);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:896", res2);
         });
         this.showShare = true;
       },
@@ -25976,11 +26126,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:884", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:913", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:888", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:917", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -25988,15 +26138,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:896", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:925", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:898", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:927", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:904", "err", err);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:933", "err", err);
                 }
               });
             }
@@ -26005,11 +26155,12 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.showShare = false;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:913", option.name, 8888);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:942", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
           if (option.name === "\u4FDD\u5B58\u5230\u76F8\u518C") {
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:948", "\u5F00\u59CB\u8C03\u7528\u4FDD\u5B58\u51FD\u6570");
             this.downloadFile();
           } else {
             if (option.name === "\u5206\u4EAB\u5230\u5FAE\u4FE1") {
@@ -26019,11 +26170,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:928", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:958", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:932", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:962", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -26033,11 +26184,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:942", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:972", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:946", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:976", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -26045,7 +26196,7 @@ if (uni.restoreGlobal) {
         });
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:955", option, 88);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:985", option, 88);
         this.canvasImageMsg = option.name;
       },
       onClickLeft() {
@@ -26054,730 +26205,907 @@ if (uni.restoreGlobal) {
             url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
           });
         } else {
-          uni.navigateBack();
+          uni.reLaunch({
+            url: "/pages/myMebers/myMebers"
+          });
         }
+      },
+      getHealthQuesson() {
+        const data = {};
+        data["traineeNo"] = this.traineeNo;
+        data["questionCode"] = "A0001";
+        const resData = [];
+        testOb.opearConfigQuery(data).then((res2) => {
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1005", res2.data[0].testResult);
+          resData.push(res2.data[0].testResult);
+          this.HQDate = resData;
+          if (this.HQDate.length == 0) {
+            this.showHQ = false;
+          }
+        });
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1029", resData.length);
+      },
+      getHistroyDate() {
+        if (!this.historyData.length != 0) {
+          const data = {};
+          data["traineeNo"] = this.traineeNo;
+          if (!this.openKey) {
+            testOb.opearReportQuery(data).then((res2) => {
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1039", res2);
+              res2.data.forEach((item) => {
+                data["name"] = this.personName;
+                data["date"] = item.saveDate;
+                data["bodyTestData"] = item.bodyTestData;
+                data["assessmentTrueData"] = item.assessmentTrueData;
+                data["queryData"] = item.queryData;
+                data["HQDate"] = item.HQDate;
+                data["physicalFitnessAssessmentData"] = item.physicalFitnessAssessmentData;
+                this.historyData.push(data);
+              });
+            });
+          }
+        }
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1053", this.historyData);
+        this.showShare = true;
       }
     }
   };
   function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_van_image = vue.resolveComponent("van-image");
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
-    const _component_van_collapse_item = vue.resolveComponent("van-collapse-item");
-    const _component_van_collapse = vue.resolveComponent("van-collapse");
+    const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$1);
+    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2);
     const _component_van_progress = vue.resolveComponent("van-progress");
-    const _component_van_button = vue.resolveComponent("van-button");
-    const _component_van_share_sheet = vue.resolveComponent("van-share-sheet");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
-      vue.createCommentVNode(` 	<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>\r
-		<NavBarCompontent :leftNavTitle="pageName"></NavBarCompontent> `),
-      vue.createElementVNode("view", {
-        class: vue.normalizeClass(["arrow-left", { show: $data.isFixedTop }]),
-        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClickLeft && $options.onClickLeft(...args))
+    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+      $data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        style: { "position": "absolute", "z-index": "1", "top": "1580upx", "width": "100%", "background-color": "#343A44" }
       }, [
-        vue.createVNode(_component_van_icon, { name: "arrow-left" }),
-        vue.createElementVNode("view", { class: "title" }, vue.toDisplayString($data.pageName), 1),
-        vue.createElementVNode("view", {
-          class: "z",
-          style: { "opacity": "0" }
-        }, "8888")
-      ], 2),
-      vue.withDirectives(vue.createElementVNode("view", { class: "arrow-box" }, null, 512), [
-        [vue.vShow, $data.isFixedTop]
-      ]),
-      vue.createElementVNode("view", { id: "viewReport" }, [
-        $data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: "titleText"
-        }, [
-          vue.createVNode(_component_van_row, { class: "titleTopText" }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("\u4F53\u6D4B\u62A5\u544A")
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("10.04")
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }),
-          vue.createVNode(_component_van_row, { class: "titleBottomText" }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784")
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("2022\u5E74")
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          })
-        ])) : vue.createCommentVNode("v-if", true),
-        !$data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 1,
-          class: "titleText"
-        }, [
-          vue.createVNode(_component_van_row, { class: "titleTopText" }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode(vue.toDisplayString($data.personName) + " ", 1),
-                  vue.createElementVNode("view", { class: "titleType" }, "\u5DF2\u8D2D\u8BFE")
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createCommentVNode(' <input type="button" value="\u91CD\u65B0\u6D4B\u8BD5" class="titleButton"/> '),
-                  vue.createElementVNode("button", { class: "titleButton" }, "\u91CD\u65B0\u6D4B\u8BD5")
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }),
-          vue.createVNode(_component_van_row, { class: "titleBottomText" }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("2022\u5E74")
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_van_col, { span: "12" }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784")
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          })
-        ])) : vue.createCommentVNode("v-if", true),
-        vue.createElementVNode("view", { class: "bgImg" }, [
-          vue.createCommentVNode(' <image src="../../static/app-plus/bg/bodysideReport.png"></image> ')
-        ]),
-        vue.createElementVNode("view", { class: "basicInformation" }, [
-          vue.createVNode(_component_van_collapse, {
-            modelValue: $setup.activeBasicInformation,
-            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.activeBasicInformation = $event),
-            border: false
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_collapse_item, {
-                title: "\u57FA\u7840\u4FE1\u606F",
-                name: "1",
-                "title-class": "informationTitleText",
-                class: "informationCard"
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createElementVNode("view", { class: "basicInformationContent" }, [
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "12" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u59D3\u540D")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "12",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.personName), 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "12" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u6027\u522B")
-                            ]),
-                            _: 1
-                          }),
-                          $data.gender == 1 ? (vue.openBlock(), vue.createBlock(_component_van_col, {
-                            key: 0,
-                            span: "12",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u7537")
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("v-if", true),
-                          $data.gender == 2 ? (vue.openBlock(), vue.createBlock(_component_van_col, {
-                            key: 1,
-                            span: "12",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u5973")
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("v-if", true)
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "12" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u5E74\u9F84")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "12",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.age), 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "12" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u624B\u673A\u53F7\u7801")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "12",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.mobileNumber), 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ])
-                  ])
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["modelValue"])
-        ]),
-        vue.createElementVNode("view", { class: "basicInformation" }, [
-          vue.createVNode(_component_van_collapse, {
-            modelValue: $setup.healthQA,
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.healthQA = $event),
-            border: false
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_collapse_item, {
-                title: "\u5065\u5EB7\u95EE\u7B54",
-                name: "2",
-                "title-class": "informationTitleText",
-                class: "informationCard"
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createElementVNode("view", { class: "basicInformationContent healthBlocks" }, [
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u9AD8\u8840\u538B "),
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u652F\u6C14\u7BA1\u708E "),
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u652F\u6C14\u7BA1\u708E ")
-                  ]),
-                  vue.createElementVNode("view", { class: "healthBlocks" }, [
-                    vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
-                      vue.createElementVNode("view", { class: "greenBlock" }),
-                      vue.createTextVNode(" \u5176\u4ED6\u88AB\u786E\u8BCA\u7684\u75BE\u75C5 ")
-                    ]),
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u652F\u6C14\u7BA1\u708E ")
-                  ]),
-                  vue.createElementVNode("view", { class: "healthBlocks" }, [
-                    vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
-                      vue.createElementVNode("view", { class: "greenBlock" }),
-                      vue.createTextVNode(" \u5173\u8282\u3001\u97E7\u5E26\u548C\u808C\u8089\u662F\u5426\u53D7\u8FC7\u4EFB\u4F55\u635F\u4F24 ")
-                    ]),
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u8DDF\u8171\u635F\u4F24 "),
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u624B\u81C2\u62C9\u4F24 ")
-                  ]),
-                  vue.createElementVNode("view", { class: "healthBlocks" }, [
-                    vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
-                      vue.createElementVNode("view", { class: "greenBlock" }),
-                      vue.createTextVNode(" \u662F\u5426\u66FE\u7ECF\u9AA8\u6298 ")
-                    ]),
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u8098\u90E8\u9AA8\u6298 ")
-                  ]),
-                  vue.createElementVNode("view", { class: "healthBlocks" }, [
-                    vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
-                      vue.createElementVNode("view", { class: "greenBlock" }),
-                      vue.createTextVNode(" \u6700\u8FD1\u7684\u4F53\u91CD\u662F\u5426\u6709\u5927\u5E45\u5EA6\u7684\u53D8\u5316 ")
-                    ]),
-                    vue.createElementVNode("view", { class: "healthBlock" }, " \u91CD\u4E8615\u516C\u65A4 ")
-                  ])
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["modelValue"])
-        ]),
-        vue.createElementVNode("view", { class: "basicInformation" }, [
-          vue.createVNode(_component_van_collapse, {
-            modelValue: $setup.BodyTestReport,
-            "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.BodyTestReport = $event),
-            border: false
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_collapse_item, {
-                title: "\u4F53\u6D4B\u62A5\u544A",
-                name: "3",
-                "title-class": "informationTitleText",
-                class: "informationCard"
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createElementVNode("view", { class: "countNumBlock" }, [
-                    vue.createVNode(_component_van_row, null, {
-                      default: vue.withCtx(() => [
-                        vue.createVNode(_component_van_col, {
-                          span: "12",
-                          style: { "font-size": "32upx", "font-weight": "600", "color": "#F4F7FF", "line-height": "44upx", "margin-top": "20upx" }
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode("\u4F60\u5F88\u68D2\uFF01")
-                          ]),
-                          _: 1
-                        }),
-                        vue.createVNode(_component_van_col, {
-                          span: "12",
-                          style: { "font-size": "60upx", "font-weight": "600", "color": "#FFFFFF", "line-height": "72upx", "text-align": "right", "margin-top": "10upx" }
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode(vue.toDisplayString($data.bodyFraction), 1)
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    }),
-                    vue.createVNode(_component_van_row, null, {
-                      default: vue.withCtx(() => [
-                        vue.createVNode(_component_van_col, { span: "24" }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode("\u518D\u52AA\u529B\u4E00\u70B9\u4F1A\u66F4\u597D\u54E6\uFF01")
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    }),
-                    vue.createElementVNode("view", { style: { "margin-top": "44upx" } }, [
-                      vue.createVNode(_component_van_progress, {
-                        percentage: $data.bodyFraction,
-                        "stroke-width": "8",
-                        color: "#01E08C",
-                        "show-pivot": false,
-                        "track-color": "#454951"
-                      }, null, 8, ["percentage"])
-                    ])
-                  ]),
-                  vue.createElementVNode("view", { class: "basicInformationContent" }, [
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "12" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u8EAB\u9AD8")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "12",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.height) + "cm", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "17" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u4F53\u91CD\uFF08\u6807\u51C6\uFF1A70kg\uFF09")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "7",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.weight) + "kg", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "17" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u808C\u8089\u91CF\uFF08\u6807\u51C6\uFF1A60kg\uFF09")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "7",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.muscleMass) + "kg", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "17" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u4F53\u8102\u91CF\uFF08\u6807\u51C6\uFF1A30kg\uFF09")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "7",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.fatMass) + "kg", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "17" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u4F53\u8102\u767E\u5206\u6BD4\uFF08\u6807\u51C6\uFF1A18%\uFF09")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "7",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.fatPer) + "%", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "17" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u8170\u81C0\u767E\u5206\u6BD4\uFF08\u6807\u51C6\uFF1A15%\uFF09")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "7",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.buttockPer) + "%", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "17" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u57FA\u7840\u4EE3\u8C22\uFF08\u6807\u51C6\uFF1A2200cal\uFF09")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "7",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.basal) + "cal", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    vue.createElementVNode("view", { class: "textContent" }, [
-                      vue.createVNode(_component_van_row, { class: "text" }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_van_col, { span: "17" }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode("\u4F53\u6C34\u5206\uFF08\u6807\u51C6\uFF1A40%\uFF09")
-                            ]),
-                            _: 1
-                          }),
-                          vue.createVNode(_component_van_col, {
-                            span: "7",
-                            class: "textRight"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createTextVNode(vue.toDisplayString($data.bodyTestData.bodyMisture) + "%", 1)
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      })
-                    ])
-                  ])
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["modelValue"])
-        ]),
-        vue.createElementVNode("view", { class: "basicInformation" }, [
-          vue.createVNode(_component_van_collapse, {
-            modelValue: $setup.bodyAssessment,
-            "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.bodyAssessment = $event),
-            border: false
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_collapse_item, {
-                title: "\u4F53\u6001\u8BC4\u4F30",
-                name: "4",
-                "title-class": "informationTitleText",
-                class: "informationCard"
-              }, {
-                default: vue.withCtx(() => [
-                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.assessmentTrueData, (item, index) => {
-                    return vue.openBlock(), vue.createElementBlock("view", { class: "bodyAssessment" }, [
-                      vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
-                      vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, vue.toDisplayString(item.title), 1),
-                      vue.createElementVNode("view", { class: "assessmentContent" }, [
-                        vue.createElementVNode("p", null, vue.toDisplayString(item.text), 1),
-                        vue.createElementVNode("view", { class: "warningText" }, [
-                          vue.createElementVNode("p", null, vue.toDisplayString(item.warningMessage), 1)
-                        ])
-                      ])
-                    ]);
-                  }), 256)),
-                  vue.createCommentVNode(' <view class="bodyAssessment">\r\n						<view style="width: 10px;\r\n								height: 10px;\r\n								background: #FFC13C;\r\n								border-radius: 100%;\r\n								display: inline-flex;\r\n								margin-right: 20upx;"\r\n								></view><span style="font-size: 30upx;\r\n								font-weight: 400;\r\n								color: #F4F7FF;\r\n								line-height: 42upx;">\u9888\u90E8\u524D\u5F15</span>\r\n						<view class="assessmentContent">\r\n							<p>\r\n								\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\r\n							</p>\r\n							<p style="margin-top: 20upx;">\r\n								\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002\r\n							</p>\r\n						</view>\r\n					</view>\r\n					<view class="bodyAssessment">\r\n						<view style="width: 10px;\r\n								height: 10px;\r\n								background: #FFC13C;\r\n								border-radius: 100%;\r\n								display: inline-flex;\r\n								margin-right: 20upx;"\r\n								></view>\r\n								<span style="font-size: 30upx;\r\n								font-weight: 400;\r\n								color: #F4F7FF;\r\n								line-height: 42upx;">\u9AD8\u4F4E\u80A9</span>\r\n						<view class="assessmentContent">\r\n							<p>\r\n								\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\r\n							</p>\r\n							<p style="margin-top: 20upx;">\r\n								\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002\r\n							</p>\r\n						</view>\r\n					</view> ')
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["modelValue"])
-        ]),
-        vue.createElementVNode("view", { class: "basicInformation" }, [
-          vue.createVNode(_component_van_collapse, {
-            modelValue: $setup.dynamicEvaluation,
-            "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $setup.dynamicEvaluation = $event),
-            border: false
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_collapse_item, {
-                title: "\u52A8\u6001\u8BC4\u4F30",
-                name: "5",
-                "title-class": "informationTitleText",
-                class: "informationCard"
-              }, {
-                default: vue.withCtx(() => [
-                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.physicalFitnessAssessmentData, (item, index) => {
-                    return vue.openBlock(), vue.createElementBlock("view", { class: "bodyAssessment" }, [
-                      vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
-                      vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, vue.toDisplayString(item.answerTitle), 1),
-                      vue.createElementVNode("view", { class: "assessmentContent" }, [
-                        vue.createElementVNode("p", null, vue.toDisplayString(item.answeerContent), 1)
-                      ])
-                    ]);
-                  }), 256)),
-                  vue.createCommentVNode(' <view class="bodyAssessment">\r\n						<view style="width: 5px;\r\n								height: 5px;\r\n								background: #FFC13C;\r\n								border-radius: 100%;\r\n								display: inline-flex;\r\n								margin-right: 20upx;"\r\n								></view>\r\n								<span style="font-size: 30upx;\r\n								font-weight: 400;\r\n								color: #F4F7FF;\r\n								line-height: 42upx;">\u4FA7\u9762\u89C2\uFF1A\u80EB\u9AA8\u548C\u8EAF\u5E72\u4E0D\u5E73\u8861</span>\r\n						<view class="assessmentContent">\r\n							<p>\r\n								\u95EE\u9898\u63CF\u8FF0\uFF1A\u8DD6\u5C48\u808C\u7D27\u5F20\uFF0C\u5BFC\u81F4\u80CC\u5C48\u8DB3\u80CC\u5C48\u4E0D\u8DB3\uFF0C\u8FD0\u52A8\u529B\u5B66\u4E0D\u826F\u3002\r\n							</p>\r\n						</view>\r\n					</view> ')
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["modelValue"])
-        ]),
-        vue.createElementVNode("view", { class: "basicInformation" }, [
-          vue.createVNode(_component_van_collapse, {
-            modelValue: $setup.physicalFitnessAssessment,
-            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $setup.physicalFitnessAssessment = $event),
-            border: false
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_van_collapse_item, {
-                title: "\u4F53\u80FD\u8BC4\u4F30",
-                name: "6",
-                "title-class": "informationTitleText",
-                class: "informationCard"
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_van_row, { style: { "background-color": "#343A44" } }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_van_col, {
-                        class: "need_scoll",
-                        span: "24"
-                      }, {
-                        default: vue.withCtx(() => [
-                          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.queryData, (item, index) => {
-                            return vue.openBlock(), vue.createElementBlock("view", {
-                              class: "dynamicshow",
-                              key: index
-                            }, [
-                              item.type > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                                key: 0,
-                                class: "dynamicshow_left"
-                              }, [
-                                vue.createElementVNode("text", { class: "evaluationdata" }, vue.toDisplayString(item.questionContent), 1),
-                                item.code == "F0001" ? (vue.openBlock(), vue.createElementBlock("text", { key: 0 }, " \u5FC3\u7387\uFF1A" + vue.toDisplayString(item.type) + "/\u5206 ", 1)) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, " \u6570\u91CF\uFF1A" + vue.toDisplayString(item.type) + "\u4E2A ", 1))
-                              ])) : (vue.openBlock(), vue.createElementBlock("view", {
-                                key: 1,
-                                class: "dynamicshow_left"
-                              }, [
-                                vue.createElementVNode("text", { class: "evaluationdata" }, vue.toDisplayString(item.questionContent), 1),
-                                vue.createElementVNode("text", { class: "noEvaText" }, " \u6682\u672A\u6D4B\u8BD5\uFF0C\u5FEB\u53BB\u6D4B\u8BD5\u5427 "),
-                                vue.createCommentVNode(' <van-button\r\n							      round\r\n							      type="primary"\r\n							      color="#1370FF"\r\n							      class="dynamicshow_button"\r\n							      icon="../../static/app-plus/other/arrows.png"\r\n							      icon-position="right"\r\n								  @click.native="jumpModular(item)"\r\n							      >\u5F00\u59CB\u6D4B\u8BD5</van-button\r\n							    > ')
-                              ])),
-                              vue.createElementVNode("view", { class: "dynamicshow_right" }, [
-                                vue.createCommentVNode(` <van-circle\r
-							      v-model:current-rate="currentRate"\r
-							      :rate="100"\r
-							      :speed="400"\r
-							      :text="item.typeText"\r
-							      :layer-color="item.typeColor"\r
-							      :color="item.typeColor"\r
-							      :style="'--van-circle-text-color:'+ item.typeColor"\r
-							    /> `),
-                                vue.createElementVNode("view", {
-                                  class: "circle",
-                                  style: vue.normalizeStyle("border: 4px solid " + item.typeColor + ";")
-                                }, [
-                                  vue.createElementVNode("view", {
-                                    class: "circleText",
-                                    style: vue.normalizeStyle("color:" + item.typeColor + ";")
-                                  }, vue.toDisplayString(item.typeText), 5)
-                                ], 4)
-                              ])
-                            ]);
-                          }), 128)),
-                          vue.createCommentVNode(' <view class="dynamicshow"\r\n								v-for="(item,index) in dynamicEvaluationdata" :key="index">\r\n								<view class="dynamicshow_left" v-if="item.type>0">\r\n									<text class="evaluationdata">\r\n										{{item.title}}\r\n									</text>\r\n									<text v-if="index==0">\r\n										\u5FC3\u7387\uFF1A{{item.type}}/\u5206\r\n									</text>\r\n									<text v-else-if="index==1">\r\n										\u6570\u91CF\uFF1A{{item.type}}\u4E2A\r\n									</text>\r\n									<text v-else-if="index==2">\r\n										\u6570\u91CF\uFF1A{{item.type}}\u4E2A\r\n									</text>\r\n								</view>\r\n								<view class="dynamicshow_left" v-else>\r\n									<text class="evaluationdata">\r\n										{{item.title}}\r\n									</text>\r\n									<text>\r\n										\u6682\u672A\u6D4B\u8BD5\uFF0C\u5FEB\u53BB\u6D4B\u8BD5\u5427\r\n									</text>\r\n								</view>\r\n								<view class="dynamicshow_right" v-if="item.type>=90">\r\n									<van-circle\r\n									  v-model:current-rate="currentRate"\r\n									  :rate="100"\r\n									  :speed="400"\r\n									  text="\u4F18\u79C0"\r\n									  layer-color="#383D46"\r\n									  color="#01E08C"\r\n									  style="--van-circle-text-color: #01E08C;"\r\n									/>\r\n								</view>\r\n								<view class="dynamicshow_right" v-else-if="item.type>=60">\r\n									<van-circle\r\n									  v-model:current-rate="currentRate"\r\n									  :rate="100"\r\n									  :speed="400"\r\n									  text="\u4E2D\u4E0A"\r\n									  layer-color="#383D46"\r\n									  color="#FFC13C"\r\n									  style="--van-circle-text-color: #FFC13C;"\r\n									/>\r\n								</view>\r\n								<view class="dynamicshow_right" v-else-if="item.type>0">\r\n									<van-circle\r\n									  v-model:current-rate="currentRate"\r\n									  :rate="100"\r\n									  :speed="400"\r\n									  text="\u8F83\u5DEE"\r\n									  layer-color="#383D46"\r\n									  color="#F04242"\r\n									  style="--van-circle-text-color: #F04242;"\r\n									/>\r\n								</view>\r\n								<view class="dynamicshow_right" v-else>\r\n									<van-circle\r\n									  v-model:current-rate="currentRate"\r\n									  :rate="100"\r\n									  :speed="400"\r\n									  text="\u5F85\u6D4B"\r\n									  layer-color="#383D46"\r\n									  color="#4B525E"\r\n									  style="--van-circle-text-color: #4B525E;"\r\n									/>\r\n								</view>\r\n							</view> ')
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  })
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["modelValue"])
-        ])
-      ]),
-      $data.openKey ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
         vue.createElementVNode("view", {
           prop: $data.canvasImageMsg,
           "change:prop": _ctx.canvasImage.updateEcharts,
           id: "canvasImage"
         }, null, 8, ["prop", "change:prop"]),
-        vue.createVNode(_component_van_button, {
-          type: "primary",
-          class: "shareButton",
-          icon: "../../static/app-plus/other/share.png",
-          onClick: $options.saveReport
+        vue.createCommentVNode(' <van-button\r\n				type="primary" \r\n				class="shareButton" \r\n				icon="../../static/app-plus/other/share.png"\r\n				@click="saveReport">\u5206\u4EAB\u62A5\u544A</van-button> '),
+        vue.createElementVNode("view", {
+          class: "bottom_style",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.saveReport && $options.saveReport(...args))
+        }, [
+          vue.createElementVNode("image", {
+            src: "/static/app-plus/other/share.png",
+            class: "shareImage"
+          }),
+          vue.createTextVNode(" \u5206\u4EAB\u62A5\u544A ")
+        ]),
+        vue.createVNode(_component_uni_popup, {
+          ref: "popup",
+          type: "bottom",
+          "mask-background-color": "rgba(20, 21, 23, 0.6)"
         }, {
           default: vue.withCtx(() => [
-            vue.createTextVNode("\u5206\u4EAB\u62A5\u544A")
+            vue.createElementVNode("view", { class: "share-sheet" }, [
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.options, (item, index) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  class: "item",
+                  key: index,
+                  onClick: ($event) => $options.onSelect(item)
+                }, [
+                  vue.createVNode(_component_van_image, {
+                    class: "img",
+                    round: "",
+                    src: item.icon
+                  }, null, 8, ["src"]),
+                  vue.createElementVNode("view", { class: "text" }, vue.toDisplayString(item.name), 1)
+                ], 8, ["onClick"]);
+              }), 128))
+            ])
           ]),
           _: 1
-        }, 8, ["onClick"]),
-        vue.createVNode(_component_van_share_sheet, {
-          show: $data.showShare,
-          "onUpdate:show": _cache[7] || (_cache[7] = ($event) => $data.showShare = $event),
-          options: $data.options,
-          onSelect: $options.onSelect,
-          "cancel-text": "",
-          class: "shareBlock"
-        }, null, 8, ["show", "options", "onSelect"])
+        }, 512),
+        vue.createCommentVNode(' <van-share-sheet\r\n				  v-model:show="showShare"\r\n				  :options="options"\r\n				  @select="onSelect"\r\n				  cancel-text=""\r\n				  class="shareBlock"\r\n				/> ')
       ])) : vue.createCommentVNode("v-if", true),
-      !$data.openKey ? (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
+      !$data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        style: { "position": "absolute", "z-index": "1", "top": "1580upx" }
+      }, [
         vue.createElementVNode("view", {
           class: "buttontrue",
-          onClick: _cache[8] || (_cache[8] = ($event) => $data.showHistory = true)
+          onClick: _cache[1] || (_cache[1] = (...args) => $options.openUIup && $options.openUIup(...args))
         }, [
           vue.createTextVNode("\u5386\u53F2\u8BC4\u6D4B\u8BB0\u5F55 "),
           vue.createCommentVNode(' <image src="../../../static/app-plus/mebrs/openarrit.png"></image> '),
           vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
         ]),
-        vue.createCommentVNode(' 			<van-button\r\n			type="primary" \r\n			class="historyView" \r\n			icon="../../static/app-plus/other/share.png"\r\n			@click="showShare = true">\u5386\u53F2\u8BC4\u6D4B\u8BB0\u5F55</van-button> '),
-        vue.createVNode(_component_van_share_sheet, {
-          show: $data.showHistory,
-          "onUpdate:show": _cache[9] || (_cache[9] = ($event) => $data.showHistory = $event),
-          options: $data.history,
-          onSelect: $options.onSelect,
-          "cancel-text": "",
-          class: "shareBlock"
-        }, null, 8, ["show", "options", "onSelect"])
-      ])) : vue.createCommentVNode("v-if", true)
-    ]);
+        vue.createCommentVNode(' 			<van-button\r\n						type="primary" \r\n						class="historyView" \r\n						icon="../../static/app-plus/other/share.png"\r\n						@click="showShare = true">\u5386\u53F2\u8BC4\u6D4B\u8BB0\u5F55</van-button> '),
+        vue.createVNode(_component_uni_popup, {
+          ref: "popup",
+          type: "bottom",
+          "mask-background-color": "rgba(20, 21, 23, 0.6)"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "histroys" }, [
+              vue.createElementVNode("view", { class: "Titlehistroy" }, "\u5386\u53F2\u8BC4\u6D4B\u62A5\u544A"),
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.historyData, (item, index) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  class: "item",
+                  key: index,
+                  onClick: _cache[2] || (_cache[2] = () => {
+                  })
+                }, [
+                  vue.createElementVNode("view", {
+                    class: "text",
+                    style: { "float": "left" }
+                  }, vue.toDisplayString(item.name), 1),
+                  vue.createElementVNode("view", {
+                    class: "text",
+                    style: { "float": "right" }
+                  }, vue.toDisplayString(item.date), 1)
+                ]);
+              }), 128))
+            ])
+          ]),
+          _: 1
+        }, 512)
+      ])) : vue.createCommentVNode("v-if", true),
+      vue.createElementVNode("view", { class: "content_style" }, [
+        vue.createCommentVNode(` 	<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>\r
+		<NavBarCompontent :leftNavTitle="pageName"></NavBarCompontent> `),
+        vue.createElementVNode("view", {
+          class: vue.normalizeClass(["arrow-left", { show: $data.isFixedTop }]),
+          onClick: _cache[3] || (_cache[3] = (...args) => $options.onClickLeft && $options.onClickLeft(...args))
+        }, [
+          vue.createVNode(_component_van_icon, { name: "arrow-left" }),
+          vue.createElementVNode("view", { class: "title" }, vue.toDisplayString($data.pageName), 1),
+          vue.createElementVNode("view", {
+            class: "z",
+            style: { "opacity": "0" }
+          }, "8888")
+        ], 2),
+        vue.withDirectives(vue.createElementVNode("view", { class: "arrow-box" }, null, 512), [
+          [vue.vShow, $data.isFixedTop]
+        ]),
+        vue.createElementVNode("view", { id: "viewReport" }, [
+          vue.createElementVNode("view", { class: "backImg" }),
+          $data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "titleText"
+          }, [
+            vue.createVNode(_component_van_row, { class: "titleTopText" }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("\u4F53\u6D4B\u62A5\u544A")
+                  ]),
+                  _: 1
+                }),
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("10.04")
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }),
+            vue.createVNode(_component_van_row, { class: "titleBottomText" }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784")
+                  ]),
+                  _: 1
+                }),
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("2022\u5E74")
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            })
+          ])) : vue.createCommentVNode("v-if", true),
+          !$data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 1,
+            class: "titleText"
+          }, [
+            vue.createVNode(_component_van_row, { class: "titleTopText" }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode(vue.toDisplayString($data.personName) + " ", 1),
+                    vue.createElementVNode("view", { class: "titleType" }, "\u5DF2\u8D2D\u8BFE")
+                  ]),
+                  _: 1
+                }),
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createCommentVNode(' <input type="button" value="\u91CD\u65B0\u6D4B\u8BD5" class="titleButton"/> '),
+                    vue.createElementVNode("button", { class: "titleButton" }, "\u91CD\u65B0\u6D4B\u8BD5")
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }),
+            vue.createVNode(_component_van_row, { class: "titleBottomText" }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("2022\u5E74")
+                  ]),
+                  _: 1
+                }),
+                vue.createVNode(_component_van_col, { span: "12" }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode("\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784")
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            })
+          ])) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode("view", { class: "bgImg" }, [
+            vue.createCommentVNode(' <image src="../../static/app-plus/bg/bodysideReport.png"></image> ')
+          ]),
+          vue.createElementVNode("view", { class: "basicInformation" }, [
+            vue.createVNode(_component_uni_collapse, {
+              modelValue: $setup.activeBasicInformation,
+              "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.activeBasicInformation = $event),
+              border: false,
+              class: "need_collapse_style",
+              "title-border": "none"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_uni_collapse_item, {
+                  title: "\u57FA\u7840\u4FE1\u606F",
+                  name: "1"
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("view", { style: { "height": "280upx" } }, [
+                      vue.createElementVNode("view", { class: "textContent" }, [
+                        vue.createVNode(_component_van_row, { class: "text" }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_van_col, { span: "12" }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u59D3\u540D")
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_van_col, {
+                              span: "12",
+                              class: "textRight"
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(vue.toDisplayString($data.personName), 1)
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "textContent" }, [
+                        vue.createVNode(_component_van_row, { class: "text" }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_van_col, { span: "12" }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u6027\u522B")
+                              ]),
+                              _: 1
+                            }),
+                            $data.gender == 1 ? (vue.openBlock(), vue.createBlock(_component_van_col, {
+                              key: 0,
+                              span: "12",
+                              class: "textRight"
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u7537")
+                              ]),
+                              _: 1
+                            })) : vue.createCommentVNode("v-if", true),
+                            $data.gender == 2 ? (vue.openBlock(), vue.createBlock(_component_van_col, {
+                              key: 1,
+                              span: "12",
+                              class: "textRight"
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u5973")
+                              ]),
+                              _: 1
+                            })) : vue.createCommentVNode("v-if", true)
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "textContent" }, [
+                        vue.createVNode(_component_van_row, { class: "text" }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_van_col, { span: "12" }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u5E74\u9F84")
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_van_col, {
+                              span: "12",
+                              class: "textRight"
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(vue.toDisplayString($data.age), 1)
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      vue.createElementVNode("view", { class: "textContent" }, [
+                        vue.createVNode(_component_van_row, { class: "text" }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_van_col, { span: "12" }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u624B\u673A\u53F7\u7801")
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_van_col, {
+                              span: "12",
+                              class: "textRight"
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(vue.toDisplayString($data.mobileNumber), 1)
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        })
+                      ])
+                    ])
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }, 8, ["modelValue"])
+          ]),
+          vue.createElementVNode("view", { class: "basicInformation" }, [
+            vue.createVNode(_component_uni_collapse, {
+              modelValue: $setup.healthQA,
+              "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $setup.healthQA = $event),
+              border: false
+            }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_uni_collapse_item, {
+                  title: "\u5065\u5EB7\u95EE\u7B54",
+                  name: "2",
+                  class: "informationCard",
+                  open: true
+                }, {
+                  default: vue.withCtx(() => [
+                    $data.showHQ ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      style: { "padding-bottom": "40upx" }
+                    }, [
+                      vue.createElementVNode("view", { class: "basicInformationContent healthBlocks" }, [
+                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                          return vue.openBlock(), vue.createElementBlock("view", null, [
+                            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(items[0].answer, (item, index2) => {
+                              return vue.openBlock(), vue.createElementBlock("view", { class: "healthBlock" }, vue.toDisplayString(item), 1);
+                            }), 256))
+                          ]);
+                        }), 256))
+                      ]),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[1].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u5176\u4ED6\u88AB\u786E\u8BCA\u7684\u75BE\u75C5 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[1].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256)),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[2].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u5173\u8282\u3001\u97E7\u5E26\u548C\u808C\u8089\u662F\u5426\u53D7\u8FC7\u4EFB\u4F55\u635F\u4F24 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[2].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256)),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[3].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u662F\u5426\u66FE\u7ECF\u9AA8\u6298 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[3].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256)),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[4].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u6700\u8FD1\u7684\u4F53\u91CD\u662F\u5426\u6709\u5927\u5E45\u5EA6\u7684\u53D8\u5316 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[4].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256)),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[5].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u6700\u8FD1\u7684\u4F53\u91CD\u662F\u5426\u6709\u5927\u5E45\u5EA6\u7684\u53D8\u5316 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[5].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256)),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[6].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u6700\u8FD1\u7684\u4F53\u91CD\u662F\u5426\u6709\u5927\u5E45\u5EA6\u7684\u53D8\u5316 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[6].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256)),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[7].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u6700\u8FD1\u7684\u4F53\u91CD\u662F\u5426\u6709\u5927\u5E45\u5EA6\u7684\u53D8\u5316 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[7].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256)),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.HQDate, (items, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", null, [
+                          (items[8].remark == "\u662F" ? true : false) ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "healthBlocks"
+                          }, [
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#F4F7FF", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" \u6700\u8FD1\u7684\u4F53\u91CD\u662F\u5426\u6709\u5927\u5E45\u5EA6\u7684\u53D8\u5316 ")
+                            ]),
+                            vue.createElementVNode("view", { class: "healthBlock" }, vue.toDisplayString(items[8].remark), 1)
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ]);
+                      }), 256))
+                    ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 1,
+                      style: { "height": "612upx" }
+                    }, [
+                      vue.createElementVNode("image", {
+                        src: "/static/app-plus/other/defaultImg.png",
+                        style: { "width": "180upx", "height": "180upx", "margin": "0 auto", "top": "120upx", "left": "256upx" }
+                      }),
+                      vue.createElementVNode("view", { style: { "width": "350upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7A7F89", "line-height": "320upx", "margin": "0 auto" } }, "\u6682\u65E0\u8BC4\u6D4B\u5185\u5BB9\uFF0C\u5FEB\u53BB\u5B8C\u5584\u5427~")
+                    ]))
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }, 8, ["modelValue"])
+          ]),
+          vue.createElementVNode("view", { class: "basicInformation" }, [
+            vue.createVNode(_component_uni_collapse, {
+              modelValue: $setup.BodyTestReport,
+              "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $setup.BodyTestReport = $event),
+              border: false
+            }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_uni_collapse_item, {
+                  title: "\u4F53\u6D4B\u62A5\u544A",
+                  name: "3",
+                  "title-class": "informationTitleText",
+                  class: "informationCard",
+                  open: true
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("view", { style: { "padding-bottom": "40upx" } }, [
+                      vue.createElementVNode("view", { class: "countNumBlock" }, [
+                        vue.createVNode(_component_van_row, null, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_van_col, {
+                              span: "12",
+                              style: { "font-size": "32upx", "font-weight": "600", "color": "#F4F7FF", "line-height": "44upx", "margin-top": "20upx" }
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u4F60\u5F88\u68D2\uFF01")
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_van_col, {
+                              span: "12",
+                              style: { "font-size": "60upx", "font-weight": "600", "color": "#FFFFFF", "line-height": "72upx", "text-align": "right", "margin-top": "10upx" }
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(vue.toDisplayString($data.bodyFraction), 1)
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_van_row, null, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_van_col, {
+                              span: "24",
+                              style: { "color": "#BDC3CE" }
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode("\u518D\u52AA\u529B\u4E00\u70B9\u4F1A\u66F4\u597D\u54E6\uFF01")
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }),
+                        vue.createElementVNode("view", { style: { "margin-top": "44upx" } }, [
+                          vue.createVNode(_component_van_progress, {
+                            percentage: $data.bodyFraction,
+                            "stroke-width": "8",
+                            color: "#01E08C",
+                            "show-pivot": false,
+                            "track-color": "#454951"
+                          }, null, 8, ["percentage"])
+                        ])
+                      ]),
+                      vue.createElementVNode("view", { class: "basicInformationContent" }, [
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "12" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u8EAB\u9AD8")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "12",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.height) + "cm", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "17" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u4F53\u91CD\uFF08\u6807\u51C6\uFF1A70kg\uFF09")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "7",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.weight) + "kg", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "17" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u808C\u8089\u91CF\uFF08\u6807\u51C6\uFF1A60kg\uFF09")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "7",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.muscleMass) + "kg", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "17" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u4F53\u8102\u91CF\uFF08\u6807\u51C6\uFF1A30kg\uFF09")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "7",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.fatMass) + "kg", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "17" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u4F53\u8102\u767E\u5206\u6BD4\uFF08\u6807\u51C6\uFF1A18%\uFF09")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "7",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.fatPer) + "%", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "17" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u8170\u81C0\u767E\u5206\u6BD4\uFF08\u6807\u51C6\uFF1A15%\uFF09")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "7",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.buttockPer) + "%", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "17" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u57FA\u7840\u4EE3\u8C22\uFF08\u6807\u51C6\uFF1A2200cal\uFF09")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "7",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.basal) + "cal", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        vue.createElementVNode("view", { class: "textContent" }, [
+                          vue.createVNode(_component_van_row, { class: "text" }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_van_col, { span: "17" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("\u4F53\u6C34\u5206\uFF08\u6807\u51C6\uFF1A40%\uFF09")
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(_component_van_col, {
+                                span: "7",
+                                class: "textRight"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode(vue.toDisplayString($data.bodyTestData.bodyMisture) + "%", 1)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }, 8, ["modelValue"])
+          ]),
+          vue.createElementVNode("view", { class: "basicInformation" }, [
+            vue.createVNode(_component_uni_collapse, {
+              modelValue: $setup.bodyAssessment,
+              "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $setup.bodyAssessment = $event),
+              border: false
+            }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_uni_collapse_item, {
+                  title: "\u4F53\u6001\u8BC4\u4F30",
+                  name: "4",
+                  "title-class": "informationTitleText",
+                  class: "informationCard",
+                  open: true
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("view", { style: { "padding-bottom": "40upx" } }, [
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.assessmentTrueData, (item, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", { class: "bodyAssessment" }, [
+                          vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx", "margin-bottom": "2px" } }),
+                          vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, vue.toDisplayString(item.title), 1),
+                          vue.createElementVNode("view", { class: "assessmentContent" }, [
+                            vue.createElementVNode("p", { style: { "color": "#7A7F89", "font-size": "26upx" } }, vue.toDisplayString(item.text), 1),
+                            vue.createElementVNode("view", { class: "warningText" }, [
+                              vue.createElementVNode("p", null, vue.toDisplayString(item.warningMessage), 1)
+                            ])
+                          ])
+                        ]);
+                      }), 256))
+                    ]),
+                    vue.createCommentVNode(' <view class="bodyAssessment">\r\n						<view style="width: 10px;\r\n								height: 10px;\r\n								background: #FFC13C;\r\n								border-radius: 100%;\r\n								display: inline-flex;\r\n								margin-right: 20upx;"\r\n								></view><span style="font-size: 30upx;\r\n								font-weight: 400;\r\n								color: #F4F7FF;\r\n								line-height: 42upx;">\u9888\u90E8\u524D\u5F15</span>\r\n						<view class="assessmentContent">\r\n							<p>\r\n								\u7D27\u5F20\u808C\u8089\uFF1A\u80A9\u80DB\u63D0\u808C\uFF0C\u9888\u4F38\u808C\uFF0C\u524D\u659C\u89D2\u808C\uFF0C\u5934\u540E\u5927\u76F4\u808C\uFF0C\u5934\u534A\u68D8\u808C\uFF0C\u80F8\u9501\u4E73\u7A81\u5F62\u808C\u3002\r\n							</p>\r\n							<p style="margin-top: 20upx;">\r\n								\u65E0\u529B\u808C\u8089\uFF1A\u6DF1\u5C42\u9888\u5C48\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u5C0F\u5706\u808C\uFF0C\u5C97\u4E0B\u808C\u3002\r\n							</p>\r\n						</view>\r\n					</view>\r\n					<view class="bodyAssessment">\r\n						<view style="width: 10px;\r\n								height: 10px;\r\n								background: #FFC13C;\r\n								border-radius: 100%;\r\n								display: inline-flex;\r\n								margin-right: 20upx;"\r\n								></view>\r\n								<span style="font-size: 30upx;\r\n								font-weight: 400;\r\n								color: #F4F7FF;\r\n								line-height: 42upx;">\u9AD8\u4F4E\u80A9</span>\r\n						<view class="assessmentContent">\r\n							<p>\r\n								\u7D27\u5F20\u808C\u8089\uFF1A\u4E0A\u659C\u65B9\u808C\uFF0C\u80A9\u80DB\u63D0\u808C\uFF0C\u83F1\u5F62\u808C\u3002\r\n							</p>\r\n							<p style="margin-top: 20upx;">\r\n								\u65E0\u529B\u808C\u8089\uFF1A\u4E2D\u4E0B\u659C\u65B9\u808C\uFF0C\u83F1\u5F62\u808C\uFF0C\u5C97\u4E0B\u808C\u3002\r\n							</p>\r\n						</view>\r\n					</view> ')
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }, 8, ["modelValue"])
+          ]),
+          vue.createElementVNode("view", { class: "basicInformation" }, [
+            vue.createVNode(_component_uni_collapse, {
+              modelValue: $setup.dynamicEvaluation,
+              "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => $setup.dynamicEvaluation = $event),
+              border: false
+            }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_uni_collapse_item, {
+                  title: "\u52A8\u6001\u8BC4\u4F30",
+                  name: "5",
+                  "title-class": "informationTitleText",
+                  class: "informationCard",
+                  open: true
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("view", { style: { "padding-bottom": "40upx" } }, [
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.physicalFitnessAssessmentData, (item, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", { class: "bodyAssessment" }, [
+                          vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#FFC13C", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
+                          vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#F4F7FF", "line-height": "42upx" } }, vue.toDisplayString(item.answerTitle), 1),
+                          vue.createElementVNode("view", { class: "assessmentContent" }, [
+                            vue.createElementVNode("p", { style: { "color": "#7A7F89", "font-size": "26upx" } }, vue.toDisplayString(item.answeerContent), 1)
+                          ])
+                        ]);
+                      }), 256))
+                    ]),
+                    vue.createCommentVNode(' <view class="bodyAssessment">\r\n						<view style="width: 5px;\r\n								height: 5px;\r\n								background: #FFC13C;\r\n								border-radius: 100%;\r\n								display: inline-flex;\r\n								margin-right: 20upx;"\r\n								></view>\r\n								<span style="font-size: 30upx;\r\n								font-weight: 400;\r\n								color: #F4F7FF;\r\n								line-height: 42upx;">\u4FA7\u9762\u89C2\uFF1A\u80EB\u9AA8\u548C\u8EAF\u5E72\u4E0D\u5E73\u8861</span>\r\n						<view class="assessmentContent">\r\n							<p>\r\n								\u95EE\u9898\u63CF\u8FF0\uFF1A\u8DD6\u5C48\u808C\u7D27\u5F20\uFF0C\u5BFC\u81F4\u80CC\u5C48\u8DB3\u80CC\u5C48\u4E0D\u8DB3\uFF0C\u8FD0\u52A8\u529B\u5B66\u4E0D\u826F\u3002\r\n							</p>\r\n						</view>\r\n					</view> ')
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }, 8, ["modelValue"])
+          ]),
+          vue.createElementVNode("view", { class: "basicInformation" }, [
+            vue.createVNode(_component_uni_collapse, { border: false }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(_component_uni_collapse_item, {
+                  title: "\u4F53\u80FD\u8BC4\u4F30",
+                  class: "informationCard",
+                  open: true
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("view", { style: { "padding-bottom": "40upx", "background-color": "#343A44" } }, [
+                      vue.createCommentVNode(' <van-row style="background-color: #343A44;">\r\n						<van-col class="need_scoll" span="24"> '),
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.queryData, (item, index) => {
+                        return vue.openBlock(), vue.createElementBlock("view", {
+                          class: "dynamicshow",
+                          key: index
+                        }, [
+                          item.type > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "dynamicshow_left"
+                          }, [
+                            vue.createElementVNode("text", { class: "evaluationdata" }, vue.toDisplayString(item.questionContent), 1),
+                            item.code == "F0001" ? (vue.openBlock(), vue.createElementBlock("text", { key: 0 }, " \u5FC3\u7387\uFF1A" + vue.toDisplayString(item.type) + "/\u5206 ", 1)) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, " \u6570\u91CF\uFF1A" + vue.toDisplayString(item.type) + "\u4E2A ", 1))
+                          ])) : (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 1,
+                            class: "dynamicshow_left"
+                          }, [
+                            vue.createElementVNode("text", { class: "evaluationdata" }, vue.toDisplayString(item.questionContent), 1),
+                            vue.createElementVNode("text", { class: "noEvaText" }, " \u6682\u672A\u6D4B\u8BD5\uFF0C\u5FEB\u53BB\u6D4B\u8BD5\u5427 ")
+                          ])),
+                          vue.createElementVNode("view", { class: "dynamicshow_right" }, [
+                            vue.createElementVNode("view", {
+                              class: "circle",
+                              style: vue.normalizeStyle("border: 4px solid " + item.typeColor + ";")
+                            }, [
+                              vue.createElementVNode("view", {
+                                class: "circleText",
+                                style: vue.normalizeStyle("color:" + item.typeColor + ";")
+                              }, vue.toDisplayString(item.typeText), 5)
+                            ], 4)
+                          ])
+                        ]);
+                      }), 128)),
+                      vue.createCommentVNode(" </van-col>\r\n					</van-row> ")
+                    ])
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            })
+          ]),
+          vue.createElementVNode("view", { style: { "height": "200upx", "width": "calc(100vw - 60upx)" } })
+        ])
+      ])
+    ], 64);
   }
   if (typeof block0 === "function")
     block0(_sfc_main$4);
@@ -26832,7 +27160,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_button = vue.resolveComponent("van-button");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "cancel" }, [
       vue.createElementVNode("view", { class: "status_bar" }, [
         vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F ")
@@ -26994,18 +27322,213 @@ if (uni.restoreGlobal) {
       ]),
       vue.createElementVNode("scroll-view", { "scroll-y": "true" }, [
         vue.createElementVNode("view", { class: "content" }, [
-          vue.createElementVNode("view", { class: "content_ying" }, " \u4E0A\u6D77\u661F\u5B87\u5065\u53D8\u79D1\u6280\u6709\u9650\u516C\u53F8\u53CA\u5173\u8054\u516C\u53F8\uFF08\u4EE5\u4E0B\u7B80\u79F0\u6211\u4EEC\uFF09\u975E\u5E38\u91CD\u89C6\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u5E76\u8BA9\u60A8\u5BF9\u4E2A\u4EBA\u4FE1\u606F\u62E5\u6709\u63A7\u5236\u6743\uFF0C\u6211\u4EEC\u4F1A\u4F7F\u7528\u5F3A\u5927\u7684\u52A0\u5BC6\u6280\u672F\u6765\u4FDD\u62A4\u60A8\u7684\u9690\u79C1\uFF0C\u540C\u65F6\u5236\u5B9A\u4E25\u683C\u7684\u653F\u7B56\u6765\u7BA1\u7406\u6240\u6709\u6570\u636E\u3002\u5F53\u60A8\u8BBF\u95EE\u5065\u53D8\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u65F6\uFF0C\u6216\u4F7F\u7528\u6211\u4EEC\u63D0\u4F9B\u7684\u670D\u52A1\u524D\uFF0C\u60A8\u9700\u8981\u540C\u610F\u672C\u653F\u7B56\u4E2D\u5173\u4E8E\u6211\u4EEC\u5982\u4F55\u6536\u96C6\u3001\u4F7F\u7528\u3001\u50A8\u5B58\u548C\u5206\u4EAB\u60A8\u7684\u76F8\u5173\u4FE1\u606F\u7684\u89C4\u5B9A\u3002\u5982\u679C\u60A8\u4E0D\u540C\u610F\u672C\u9690\u79C1\u653F\u7B56\u4E2D\u7684\u4EFB\u4F55\u5185\u5BB9\uFF0C\u8BF7\u7ACB\u5373\u505C\u6B62\u4F7F\u7528\u6216\u8BBF\u95EE\u6211\u4EEC\u7684\u4EA7\u54C1\u548C\u670D\u52A1\u3002\u82E5\u60A8\u5BF9\u672C\u653F\u7B56\u6709\u4EFB\u4F55\u95EE\u9898\uFF0C\u8BF7\u8054\u7CFB\uFF1A kingtran@sina.cn\u3002\u672C\u9690\u79C1\u653F\u7B56\u8981\u70B9\u5982\u4E0B\uFF1A "),
-          vue.createElementVNode("p", { class: "m_t" }, " 1. \u6211\u4EEC\u5C06\u9010\u4E00\u8BF4\u660E\u6211\u4EEC\u6536\u96C6\u7684\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u7C7B\u578B\u53CA\u5176\u5BF9\u5E94\u7684\u7528\u9014\uFF0C\u4EE5\u4FBF\u60A8\u4E86\u89E3\u6211\u4EEC\u9488\u5BF9\u67D0\u4E00\u7279\u5B9A\u529F\u80FD\u6240\u6536\u96C6\u7684\u5177\u4F53\u4E2A\u4EBA\u4FE1\u606F\u7684\u7C7B\u522B\u3001\u4F7F\u7528\u7406\u7531\u53CA\u6536\u96C6\u65B9\u5F0F\u3002 "),
-          vue.createElementVNode("p", { class: "m_t" }, " 2. \u5F53\u60A8\u4F7F\u7528\u4E00\u4E9B\u529F\u80FD\u65F6\uFF0C\u6211\u4EEC\u4F1A\u5728\u83B7\u5F97\u60A8\u7684\u540C\u610F\u540E\uFF0C\u6536\u96C6\u60A8\u7684\u4E00\u4E9B\u654F\u611F\u4FE1\u606F\uFF0C\u9664\u975E\u6309\u7167\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u8981\u6C42\u5FC5\u987B\u6536\u96C6\uFF0C\u62D2\u7EDD\u63D0\u4F9B\u8FD9\u4E9B\u4FE1\u606F\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u76F8\u5173\u7279\u5B9A\u529F\u80FD\uFF0C\u4F46\u4E0D\u5F71\u54CD\u60A8\u6B63\u5E38\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u7684\u5176\u4ED6\u529F\u80FD\u3002 "),
-          vue.createElementVNode("p", { class: "m_t" }, " 3. \u76EE\u524D\uFF0C \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u4E0D\u4F1A\u4E3B\u52A8\u5171\u4EAB\u6216\u8F6C\u8BA9\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u81F3\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5916\u7684\u7B2C\u4E09\u65B9\uFF0C\u5982\u5B58\u5728\u5176\u4ED6\u5171\u4EAB\u6216\u8F6C\u8BA9\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u6216\u60A8\u9700\u8981\u6211\u4EEC\u5C06\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u5171\u4EAB\u6216\u8F6C\u8BA9\u81F3\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5916\u7684\u7B2C\u4E09\u65B9\u60C5\u5F62\u65F6\uFF0C\u6211\u4EEC\u4F1A\u76F4\u63A5\u6216\u786E\u8BA4\u7B2C\u4E09\u65B9\u5F81\u5F97\u60A8\u5BF9\u4E0A\u8FF0\u884C\u4E3A\u7684\u660E\u793A\u540C\u610F\uFF0C\u6B64\u5916\uFF0C\u6211\u4EEC\u4F1A\u5BF9\u5BF9\u5916\u63D0\u4F9B\u4FE1\u606F\u7684\u884C\u4E3A\u8FDB\u884C\u98CE\u9669\u8BC4\u4F30\u3002 "),
-          vue.createElementVNode("p", { class: "m_t" }, " 4. \u76EE\u524D\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0D\u4F1A\u4E3B\u52A8\u4ECE\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5916\u7684\u7B2C\u4E09\u65B9\u83B7\u53D6\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u5982\u672A\u6765\u4E3A\u4E1A\u52A1\u53D1\u5C55\u9700\u8981\u4ECE\u7B2C\u4E09\u65B9\u95F4\u63A5\u83B7\u53D6\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6211\u4EEC\u4F1A\u5728\u83B7\u53D6\u524D\u5411\u60A8\u660E\u793A\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u6765\u6E90\u3001\u7C7B\u578B\u53CA\u4F7F\u7528\u8303\u56F4\uFF0C\u5982\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5F00\u5C55\u4E1A\u52A1\u9700\u8FDB\u884C\u7684\u4E2A\u4EBA\u4FE1\u606F\u5904\u7406\u6D3B\u52A8\u8D85\u51FA\u60A8\u539F\u672C\u5411\u7B2C\u4E09\u65B9\u63D0\u4F9B\u4E2A\u4EBA\u4FE1\u606F\u65F6\u7684\u6388\u6743\u540C\u610F\u8303\u56F4\uFF0C\u6211\u4EEC\u5C06\u5728\u5904\u7406\u60A8\u7684\u8BE5\u7B49\u4E2A\u4EBA\u4FE1\u606F\u524D\uFF0C\u5F81\u5F97\u60A8\u7684\u660E\u793A\u540C\u610F\uFF1B\u6B64\u5916\uFF0C\u6211\u4EEC\u4E5F\u5C06\u4F1A\u4E25\u683C\u9075\u5B88\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u7684\u89C4\u5B9A\uFF0C\u5E76\u8981\u6C42\u7B2C\u4E09\u65B9\u4FDD\u969C\u5176\u63D0\u4F9B\u7684\u4FE1\u606F\u7684\u5408\u6CD5\u6027\u3002 "),
-          vue.createElementVNode("p", { class: "m_t" }, " 5. \u60A8\u53EF\u4EE5\u901A\u8FC7\u672C\u6307\u5F15\u6240\u5217\u9014\u5F84\u8BBF\u95EE\u3001\u66F4\u6B63\u3001\u5220\u9664\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u4E5F\u53EF\u4EE5\u64A4\u56DE\u540C\u610F\u3001\u6CE8\u9500\u5E10\u53F7\u3001\u6295\u8BC9\u4E3E\u62A5\u4EE5\u53CA\u8BBE\u7F6E\u9690\u79C1\u529F\u80FD\u3002 ")
+          vue.createElementVNode("p", null, "\u4E0A\u6D77\u661F\u5B87\u5065\u53D8\u79D1\u6280\u6709\u9650\u516C\u53F8\u53CA\u5173\u8054\u516C\u53F8\uFF08\u4EE5\u4E0B\u7B80\u79F0\u6211\u4EEC\uFF09\u975E\u5E38\u91CD\u89C6\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u5E76\u8BA9\u60A8\u5BF9\u4E2A\u4EBA\u4FE1\u606F\u62E5\u6709\u63A7\u5236\u6743\uFF0C\u6211\u4EEC\u4F1A\u4F7F\u7528\u5F3A\u5927\u7684\u52A0\u5BC6\u6280\u672F\u6765\u4FDD\u62A4\u60A8\u7684\u9690\u79C1\uFF0C\u540C\u65F6\u5236\u5B9A\u4E25\u683C\u7684\u653F\u7B56\u6765\u7BA1\u7406\u6240\u6709\u6570\u636E\u3002\u5F53\u60A8\u8BBF\u95EE\u5065\u53D8\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u65F6\uFF0C\u6216\u4F7F\u7528\u6211\u4EEC\u63D0\u4F9B\u7684\u670D\u52A1\u524D\uFF0C\u60A8\u9700\u8981\u540C\u610F\u672C\u653F\u7B56\u4E2D\u5173\u4E8E\u6211\u4EEC\u5982\u4F55\u6536\u96C6\u3001\u4F7F\u7528\u3001\u50A8\u5B58\u548C\u5206\u4EAB\u60A8\u7684\u76F8\u5173\u4FE1\u606F\u7684\u89C4\u5B9A\u3002\u5982\u679C\u60A8\u4E0D\u540C\u610F\u672C\u9690\u79C1\u653F\u7B56\u4E2D\u7684\u4EFB\u4F55\u5185\u5BB9\uFF0C\u8BF7\u7ACB\u5373\u505C\u6B62\u4F7F\u7528\u6216\u8BBF\u95EE\u6211\u4EEC\u7684\u4EA7\u54C1\u548C\u670D\u52A1\u3002\u82E5\u60A8\u5BF9\u672C\u653F\u7B56\u6709\u4EFB\u4F55\u95EE\u9898\uFF0C\u8BF7\u8054\u7CFB\uFF1A kingtran@sina.cn\u3002\u672C\u9690\u79C1\u653F\u7B56\u8981\u70B9\u5982\u4E0B\uFF1A"),
+          vue.createElementVNode("p", null, "1.\u6211\u4EEC\u5C06\u9010\u4E00\u8BF4\u660E\u6211\u4EEC\u6536\u96C6\u7684\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u7C7B\u578B\u53CA\u5176\u5BF9\u5E94\u7684\u7528\u9014\uFF0C\u4EE5\u4FBF\u60A8\u4E86\u89E3\u6211\u4EEC\u9488\u5BF9\u67D0\u4E00\u7279\u5B9A\u529F\u80FD\u6240\u6536\u96C6\u7684\u5177\u4F53\u4E2A\u4EBA\u4FE1\u606F\u7684\u7C7B\u522B\u3001\u4F7F\u7528\u7406\u7531\u53CA\u6536\u96C6\u65B9\u5F0F\u3002"),
+          vue.createElementVNode("p", null, "2.\u5F53\u60A8\u4F7F\u7528\u4E00\u4E9B\u529F\u80FD\u65F6\uFF0C\u6211\u4EEC\u4F1A\u5728\u83B7\u5F97\u60A8\u7684\u540C\u610F\u540E\uFF0C\u6536\u96C6\u60A8\u7684\u4E00\u4E9B\u654F\u611F\u4FE1\u606F\uFF0C\u9664\u975E\u6309\u7167\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u8981\u6C42\u5FC5\u987B\u6536\u96C6\uFF0C\u62D2\u7EDD\u63D0\u4F9B\u8FD9\u4E9B\u4FE1\u606F\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u76F8\u5173\u7279\u5B9A\u529F\u80FD\uFF0C\u4F46\u4E0D\u5F71\u54CD\u60A8\u6B63\u5E38\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054"),
+          vue.createElementVNode("p", null, "3.\u76EE\u524D\uFF0C \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u4E0D\u4F1A\u4E3B\u52A8\u5171\u4EAB\u6216\u8F6C\u8BA9\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u81F3\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5916\u7684\u7B2C\u4E09\u65B9\uFF0C\u5982\u5B58\u5728\u5176\u4ED6\u5171\u4EAB\u6216\u8F6C\u8BA9\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u6216\u60A8\u9700\u8981\u6211\u4EEC\u5C06\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u5171\u4EAB\u6216\u8F6C\u8BA9\u81F3\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5916\u7684\u7B2C\u4E09\u65B9\u60C5\u5F62\u65F6\uFF0C\u6211\u4EEC\u4F1A\u76F4\u63A5\u6216\u786E\u8BA4\u7B2C\u4E09\u65B9\u5F81\u5F97\u60A8\u5BF9\u4E0A\u8FF0\u884C\u4E3A\u7684\u660E\u793A\u540C\u610F\uFF0C\u6B64\u5916\uFF0C\u6211\u4EEC\u4F1A\u5BF9\u5BF9\u5916\u63D0\u4F9B\u4FE1\u606F\u7684\u884C\u4E3A\u8FDB\u884C\u98CE\u9669\u8BC4\u4F30\u3002"),
+          vue.createElementVNode("p", null, "4. \u76EE\u524D\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0D\u4F1A\u4E3B\u52A8\u4ECE\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5916\u7684\u7B2C\u4E09\u65B9\u83B7\u53D6\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u5982\u672A\u6765\u4E3A\u4E1A\u52A1\u53D1\u5C55\u9700\u8981\u4ECE\u7B2C\u4E09\u65B9\u95F4\u63A5\u83B7\u53D6\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6211\u4EEC\u4F1A\u5728\u83B7\u53D6\u524D\u5411\u60A8\u660E\u793A\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u6765\u6E90\u3001\u7C7B\u578B\u53CA\u4F7F\u7528\u8303\u56F4\uFF0C\u5982\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5F00\u5C55\u4E1A\u52A1\u9700\u8FDB\u884C\u7684\u4E2A\u4EBA\u4FE1\u606F\u5904\u7406\u6D3B\u52A8\u8D85\u51FA\u60A8\u539F\u672C\u5411\u7B2C\u4E09\u65B9\u63D0\u4F9B\u4E2A\u4EBA\u4FE1\u606F\u65F6\u7684\u6388\u6743\u540C\u610F\u8303\u56F4\uFF0C\u6211\u4EEC\u5C06\u5728\u5904\u7406\u60A8\u7684\u8BE5\u7B49\u4E2A\u4EBA\u4FE1\u606F\u524D\uFF0C\u5F81\u5F97\u60A8\u7684\u660E\u793A\u540C\u610F\uFF1B\u6B64\u5916\uFF0C\u6211\u4EEC\u4E5F\u5C06\u4F1A\u4E25\u683C\u9075\u5B88\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u7684\u89C4\u5B9A\uFF0C\u5E76\u8981\u6C42\u7B2C\u4E09\u65B9\u4FDD\u969C\u5176\u63D0\u4F9B\u7684\u4FE1\u606F\u7684\u5408\u6CD5\u6027\u3002"),
+          vue.createElementVNode("p", null, "5.\u60A8\u53EF\u4EE5\u901A\u8FC7\u672C\u6307\u5F15\u6240\u5217\u9014\u5F84\u8BBF\u95EE\u3001\u66F4\u6B63\u3001\u5220\u9664\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u4E5F\u53EF\u4EE5\u64A4\u56DE\u540C\u610F\u3001\u6CE8\u9500\u5E10\u53F7\u3001\u6295\u8BC9\u4E3E\u62A5\u4EE5\u53CA\u8BBE\u7F6E\u9690\u79C1\u529F\u80FD\u3002"),
+          vue.createElementVNode("p", null, "\u5982\u60A8\u60F3\u4E86\u89E3\u66F4\u52A0\u8BE6\u5C3D\u7684\u4FE1\u606F\uFF0C\u8BF7\u6839\u636E\u4EE5\u4E0B\u7D22\u5F15\u9605\u8BFB\u76F8\u5E94\u7AE0\u8282\uFF1A"),
+          vue.createElementVNode("p", null, "\u5982\u60A8\u60F3\u4E86\u89E3\u66F4\u52A0\u8BE6\u5C3D\u7684\u4FE1\u606F\uFF0C\u8BF7\u6839\u636E\u4EE5\u4E0B\u7D22\u5F15\u9605\u8BFB\u76F8\u5E94\u7AE0\u8282\uFF1A"),
+          vue.createElementVNode("p", null, "1. \u6211\u4EEC\u5982\u4F55\u641C\u96C6\u548C\u4F7F\u7528\u60A8\u7684\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "2. \u6211\u4EEC\u5982\u4F55\u4F7F\u7528 Cookie \u548C\u540C\u7C7B\u6280\u672F"),
+          vue.createElementVNode("p", null, "3. \u5982\u4F55\u66F4\u65B0\u3001\u53D8\u66F4\u3001\u5BFC\u51FA\u3001\u5220\u9664\u60A8\u7684\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "4. \u6211\u4EEC\u5982\u4F55\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "5. \u6211\u4EEC\u5982\u4F55\u5904\u7406\u672A\u6210\u5E74\u4EBA\u63D0\u4F9B\u7684\u4E2A\u4EBA\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "6. \u6211\u4EEC\u5982\u4F55\u5171\u4EAB\u3001\u8F6C\u8BA9\u3001\u516C\u5F00\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "7. \u4FE1\u606F\u7684\u5B58\u50A8"),
+          vue.createElementVNode("p", null, "8. \u7B2C\u4E09\u65B9\u670D\u52A1\u63D0\u4F9B\u5546"),
+          vue.createElementVNode("p", null, "9. \u672C\u653F\u7B56\u7684\u66F4\u65B0"),
+          vue.createElementVNode("p", null, "10. \u9002\u7528\u8303\u56F4"),
+          vue.createElementVNode("p", null, "11. \u5982\u4F55\u8054\u7CFB\u6211\u4EEC"),
+          vue.createElementVNode("p", null, "\u4E00. \u6211\u4EEC\u5982\u4F55\u641C\u96C6\u548C\u4F7F\u7528\u60A8\u7684\u4FE1\u606F\uFF1F"),
+          vue.createElementVNode("p", null, "1. \u6211\u4EEC\u5982\u4F55\u641C\u96C6\u60A8\u7684\u4FE1\u606F\uFF1F"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u63D0\u4F9B\u670D\u52A1\u65F6\uFF0C\u53EF\u80FD\u4F1A\u6536\u96C6\u3001\u50A8\u5B58\u548C\u4F7F\u7528\u4E0B\u5217\u4FE1\u606F\uFF1A"),
+          vue.createElementVNode("p", null, "1.1 \u60A8\u63D0\u4F9B\u7684\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "1.1.1 \u60A8\u5728\u6CE8\u518C\u8D26\u6237\u6216\u4F7F\u7528\u6211\u4EEC\u7684\u670D\u52A1\u65F6\uFF0C\u5411\u6211\u4EEC\u63D0\u4F9B\u7684\u53EF\u7528\u4E8E\u8BC6\u522B\u7528\u6237\u7684\u4E2A\u4EBA\u8EAB\u4EFD\u7684\u4FE1\u606F\uFF0C\u4F8B\u5982\u59D3\u540D\u3001\u7535\u5B50\u90AE\u4EF6\u5730\u5740\u3001\u7535\u8BDD\u53F7\u7801\u3001\u94F6\u884C\u5361\u53F7\u3001\u8EAB\u4EFD\u8BC1\u53F7\u7801\u3001\u4F4F\u5740\u3001\u901A\u8BAF\u8BB0\u5F55\u7B49\u4FE1\u606F\uFF0C\u6216\u6211\u4EEC\u53EF\u4EE5\u6B63\u5F53\u5730\u901A\u8FC7\u94FE\u63A5\u627E\u5230\u6B64\u7C7B\u4FE1\u606F\u7684\u5176\u4ED6\u6570\u636E\u3002\u5982\u679C\u60A8\u60F3\u5145\u5206\u4F7F\u7528\u6211\u4EEC\u63D0\u4F9B\u7684\u5404\u79CD\u5206\u4EAB\u529F\u80FD\uFF0C\u53EF\u80FD\u8FD8\u9700\u8981\u521B\u5EFA\u516C\u5F00\u663E\u793A\u7684\u4E2A\u4EBA\u8D44\u6599\uFF0C\u5176\u4E2D\u53EF\u80FD\u4F1A\u5305\u542B\u60A8\u7684\u59D3\u540D\u548C\u7167\u7247\u3002"),
+          vue.createElementVNode("p", null, "1.1.2 \u60A8\u901A\u8FC7\u6211\u4EEC\u7684\u670D\u52A1\u5411\u5176\u4ED6\u65B9\u63D0\u4F9B\u7684\u5171\u4EAB\u4FE1\u606F\uFF0C\u4EE5\u53CA\u60A8\u4F7F\u7528\u6211\u4EEC\u7684\u670D\u52A1\u65F6\u4E0A\u4F20\u3001\u63D0\u4EA4\u3001\u5B58\u50A8\u3001\u53D1\u9001\u6216\u63A5\u6536\u7684\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "1.1.3 \u6211\u4EEC\u4F1A\u4F7F\u7528\u7B2C\u4E09\u65B9SDK\u91C7\u96C6\u60A8\u7684\u8BBE\u5907\u4FE1\u606F(\u8BBE\u5907MAC\u5730\u5740\u3001IMEI\u548CAndroid id)\u3001\u6D4F\u89C8\u4FE1\u606F\u3001\u70B9\u51FB\u4FE1\u606F\uFF0C\u5E76\u5C06\u8BE5\u7B49\u4FE1\u606F\u50A8\u5B58\u4E3A\u65E5\u5FD7\u4FE1\u606F\uFF0C\u7528\u4E8E\u8BB0\u4F4F\u60A8\u7684\u8EAB\u4EFD\u3001\u5206\u6790\u60A8\u4F7F\u7528\u6211\u4EEC\u670D\u52A1\u7684\u60C5\u51B5\u3001\u4F18\u5316\u5E7F\u544A\u6295\u653E\u3002\u5728\u4E3A\u7528\u6237\u63D0\u4F9B\u670D\u52A1\u65F6\uFF0C\u6211\u4EEC\u8FD8\u4F1A\u4F7F\u7528\u4EE5\u4E0BSDK\u6280\u672F\uFF0CSDK\u63D0\u4F9B\u7684\u529F\u80FD\uFF0C\u6240\u9700\u7684\u6743\u9650\u4E0E\u6536\u96C6\u7684\u7528\u6237\u4FE1\u606F\u4E3A\uFF1A\xA0\xA0SDK\u6743\u9650\u4E0E\u6536\u96C6\u7528\u6237\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "1.2 \u60A8\u5728\u4F7F\u7528\u670D\u52A1\u8FC7\u7A0B\u4E2D\uFF0C\u6211\u4EEC\u83B7\u53D6\u7684\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u4F1A\u6536\u96C6\u60A8\u4F7F\u7528\u7684\u670D\u52A1\u4EE5\u53CA\u4F7F\u7528\u65B9\u5F0F\u7684\u4FE1\u606F\uFF0C\u5982\u60A8\u4F7F\u7528 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u8FD0\u52A8\u3001\u5728 \u5065\u53D8 \u793E\u533A\u53D1\u8868\u8BC4\u8BBA\u3001\u5F39\u5E55\u6216\u53C2\u4E0E\u8BDD\u9898\u6D3B\u52A8\u3001\u5728 \u5065\u53D8 \u5546\u57CE\u8D2D\u4E70\u4EA7\u54C1\u6216\u52A0\u5165 \u5065\u53D8 \u4F1A\u5458\u4EE5\u53CA\u5728\u4F7F\u7528 \u5065\u53D8 \u4F1A\u5458\u3001\u4F7F\u7528 \u5065\u53D8 \u786C\u4EF6\u4EA7\u54C1\u6216\u670D\u52A1\u65F6\u53EF\u80FD\u4EA7\u751F\u7684\u76F8\u5173\u4FE1\u606F\u3002\u6B64\u7C7B\u4FE1\u606F\u5305\u62EC\uFF1A"),
+          vue.createElementVNode("p", null, "1.2.1 \u8BBE\u5907\u4FE1\u606F\uFF1A\u6211\u4EEC\u4F1A\u6839\u636E\u60A8\u5728\u8F6F\u4EF6\u5B89\u88C5\u53CA/\u6216\u4F7F\u7528\u6388\u6743\u7684\u5177\u4F53\u6743\u9650\uFF0C\u63A5\u6536\u5E76\u8BB0\u5F55\u60A8\u6240\u4F7F\u7528\u7684\u8BBE\u5907\u76F8\u5173\u4FE1\u606F\uFF0C\u4F8B\u5982\u60A8\u7684\u8BBE\u5907\u578B\u53F7\u3001\u64CD\u4F5C\u7CFB\u7EDF\u7248\u672C\u4FE1\u606F\u3001\u8BBE\u5907\u8BBE\u7F6E\u3001\u79FB\u52A8\u8BBE\u5907\u7248\u672C\u3001\u8BBE\u5907\u8BC6\u522B\u7801\u3001\u5C4F\u5E55\u5206\u8868\u7387\u3001\u8BBE\u5907\u73AF\u5883\u7B49\u8F6F\u786C\u4EF6\u7279\u5F81\u4FE1\u606F\u3001\u8BBE\u5907\u6240\u5728\u4F4D\u7F6E\u76F8\u5173\u4FE1\u606F\uFF0C\u4F8B\u5982IP\u5730\u5740\u3001GPS\u4F4D\u7F6E\u4EE5\u53CA\u80FD\u591F\u63D0\u4F9B\u76F8\u5173\u4FE1\u606F\u7684WLAN\u63A5\u5165\u70B9\u3001\u84DD\u7259\u548C\u57FA\u7AD9\u7B49\u4F20\u611F\u5668\u4FE1\u606F\u3002\u5982\u679C\u60A8\u5728\u5B89\u88C5\u53CA/\u6216\u4F7F\u7528\u8FC7\u7A0B\u4E2D\u62D2\u7EDD\u6388\u4E88\u6211\u4EEC\u76F8\u5E94\u6743\u9650\u7684\uFF0C\u6211\u4EEC\u5E76\u4E0D\u4F1A\u8BB0\u5F55\u60A8\u4E0A\u8FF0\u5BF9\u5E94\u7684\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "1.2.2 \u65E5\u5FD7\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "A. \u8BBE\u5907\u6216\u8F6F\u4EF6\u4FE1\u606F\uFF0C\u4F8B\u5982\u60A8\u7684\u79FB\u52A8\u8BBE\u5907\u3001\u7F51\u9875\u6D4F\u89C8\u5668\u6216\u7528\u4E8E\u63A5\u5165\u6211\u4EEC\u670D\u52A1\u7684\u5176\u4ED6\u7A0B\u5E8F\u6240\u63D0\u4F9B\u7684\u914D\u7F6E\u4FE1\u606F\u3001\u60A8\u7684IP\u5730\u5740\u548C\u79FB\u52A8\u8BBE\u5907\u6240\u7528\u7684\u7248\u672C\u548C\u8BBE\u5907\u8BC6\u522B\u7801\uFF1B"),
+          vue.createElementVNode("p", null, "B. \u5728\u4F7F\u7528\u6211\u4EEC\u670D\u52A1\u65F6\u641C\u7D22\u6216\u6D4F\u89C8\u7684\u4FE1\u606F\uFF0C\u4F8B\u5982\u60A8\u4F7F\u7528\u7684\u7F51\u9875\u641C\u7D22\u8BCD\u8BED\u3001\u8BBF\u95EE\u7684\u793E\u4EA4\u5A92\u4F53\u9875\u9762URL\u5730\u5740\uFF0C\u4EE5\u53CA\u60A8\u5728\u4F7F\u7528\u6211\u4EEC\u670D\u52A1\u65F6\u6D4F\u89C8\u6216\u8981\u6C42\u63D0\u4F9B\u7684\u5176\u4ED6\u4FE1\u606F\u548C\u5185\u5BB9\u8BE6\u60C5\uFF1B"),
+          vue.createElementVNode("p", null, "1.2.3 IP\u5730\u5740"),
+          vue.createElementVNode("p", null, "A. \u6709\u5173\u60A8\u66FE\u4F7F\u7528\u7684\u79FB\u52A8\u5E94\u7528\uFF08APP\uFF09\u548C\u5176\u4ED6\u8F6F\u4EF6\u7684\u4FE1\u606F\uFF0C\u4EE5\u53CA\u60A8\u66FE\u7ECF\u4F7F\u7528\u8BE5\u7B49\u79FB\u52A8\u5E94\u7528\u548C\u8F6F\u4EF6\u7684\u4FE1\u606F\uFF1B"),
+          vue.createElementVNode("p", null, "B. \u60A8\u901A\u8FC7\u6211\u4EEC\u7684\u670D\u52A1\u8FDB\u884C\u901A\u8BAF\u7684\u4FE1\u606F\uFF0C\u4F8B\u5982\u66FE\u901A\u8BAF\u7684\u8D26\u53F7\uFF0C\u4EE5\u53CA\u901A\u8BAF\u65F6\u95F4\u3001\u6570\u636E\u548C\u65F6\u957F\uFF1B"),
+          vue.createElementVNode("p", null, "C. \u60A8\u901A\u8FC7\u6211\u4EEC\u7684\u670D\u52A1\u5206\u4EAB\u7684\u5185\u5BB9\u6240\u5305\u542B\u7684\u4FE1\u606F\uFF08\u5143\u6570\u636E\uFF09\uFF0C\u4F8B\u5982\u62CD\u6444\u6216\u4E0A\u4F20\u7684\u5171\u4EAB\u7167\u7247\u6216\u5F55\u50CF\u7684\u65E5\u671F\u3001\u65F6\u95F4\u6216\u5730\u70B9\u7B49\u3002"),
+          vue.createElementVNode("p", null, "1.2.4 \u8BBE\u5907\u4E2D\u7684\u89C6\u9891\u3001\u56FE\u7247\u3001\u6E38\u620F\u8F6F\u4EF6\u7B49"),
+          vue.createElementVNode("p", null, "\u4E3A\u4E86\u7ED9\u60A8\u63D0\u4F9B\u5168\u65B9\u4F4D\u7684\u8FD0\u52A8\u4F53\u9A8C\uFF0C\u7ECF\u8FC7\u60A8\u7684\u6388\u6743\uFF0C\u6211\u4EEC\u7684\u670D\u52A1\u5668\u4F1A\u63D0\u53D6\u60A8\u8BBE\u5907\u4E2D\u7684\u89C6\u9891\u3001\u56FE\u7247\u3001\u8F6F\u4EF6\u540D\u3001\u7248\u672C\u53F7\u7B49\uFF0C\u5E76\u901A\u8FC7\u52A0\u5BC6\u4E0A\u4F20\u5230\u670D\u52A1\u5668\u8FDB\u884C\u6BD4\u5BF9\uFF0C\u7528\u4E8E\u5339\u914D\u4E0E\u8BE5\u89C6\u9891\u3001\u56FE\u7247\u3001\u8F6F\u4EF6\u76F8\u5BF9\u5E94\u7684\u663E\u793A\u529F\u80FD\u3002\u540C\u65F6\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u968F\u65F6\u901A\u8FC7\u76F8\u5173\u529F\u80FD\u8BBE\u7F6E\u62D2\u7EDD/\u53D6\u6D88\u8BE5\u6743\u9650\u3002\u62D2\u7EDD\u63D0\u4F9B\u8BE5\u6743\u9650\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u4E0A\u8FF0\u529F\u80FD\uFF0C\u4F46\u4E0D\u5F71\u54CD \u5065\u53D8 \u5176\u4ED6\u529F\u80FD\u4E0E\u670D\u52A1\u7684\u6B63\u5E38\u4F7F\u7528\uFF1B\u4F46\u5F53\u60A8\u53D6\u6D88\u8BE5\u6388\u6743\u540E\uFF0C\u6211\u4EEC\u5C06\u4E0D\u518D\u6536\u96C6\u8BE5\u4FE1\u606F\uFF0C\u4E5F\u65E0\u6CD5\u518D\u4E3A\u60A8\u63D0\u4F9B\u4E0A\u8FF0\u4E0E\u4E4B\u5BF9\u5E94\u7684\u670D\u52A1\uFF1B\u4F46\u9664\u975E\u60A8\u4F9D\u7167\u6CD5\u5F8B\u7684\u89C4\u5B9A\u5220\u9664\u4E86\u60A8\u7684\u4FE1\u606F\uFF0C\u5426\u5219\u60A8\u7684\u53D6\u6D88\u884C\u4E3A\u4E0D\u4F1A\u5F71\u54CD\u6211\u4EEC\u57FA\u4E8E\u60A8\u4E4B\u524D\u7684\u6388\u6743\u8FDB\u884C\u7684\u4FE1\u606F\u7684\u5904\u7406\u3001\u5B58\u50A8\u3002"),
+          vue.createElementVNode("p", null, "1.2.5 \u626B\u63CF\u4E8C\u7EF4\u7801\u3001\u62CD\u6444\u7167\u7247"),
+          vue.createElementVNode("p", null, "\u5F53\u60A8\u4F7F\u7528\u626B\u63CF\u4E8C\u7EF4\u7801\u3001\u62CD\u6444\u7167\u7247\u3001\u62CD\u6444\u89C6\u9891\u529F\u80FD\u65F6\uFF0C\u6211\u4EEC\u5C06\u8BBF\u95EE\u60A8\u7684\u8BBE\u5907\u76F8\u673A\u76F8\u5173\u6743\u9650\uFF0C\u5E76\u6536\u96C6\u60A8\u63D0\u4F9B\u7684\u57FA\u4E8E\u626B\u63CF\u4E8C\u7EF4\u7801\u3001\u62CD\u6444\u7167\u7247\u540E\u5411\u6211\u4EEC\u4E0A\u4F20\u7684\u56FE\u7247\u3001\u89C6\u9891\u4FE1\u606F\u3002\u5982\u60A8\u62D2\u7EDD\u63D0\u4F9B\u6743\u9650\u548C\u5185\u5BB9\u7684\uFF0C\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u8BE5\u529F\u80FD\uFF0C\u4F46\u5E76\u4E0D\u5F71\u54CD\u60A8\u6B63\u5E38\u4F7F\u7528 \u5065\u53D8 \u7684\u5176\u4ED6\u529F\u80FD\u3002\u540C\u65F6\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u968F\u65F6\u901A\u8FC7\u76F8\u5173\u529F\u80FD\u8BBE\u7F6E\u53D6\u6D88\u8BE5\u6743\u9650\u3002\u5F53\u60A8\u53D6\u6D88\u8BE5\u6388\u6743\u540E\uFF0C\u6211\u4EEC\u5C06\u4E0D\u518D\u6536\u96C6\u8BE5\u4FE1\u606F\uFF0C\u4E5F\u65E0\u6CD5\u518D\u4E3A\u60A8\u63D0\u4F9B\u4E0A\u8FF0\u4E0E\u4E4B\u5BF9\u5E94\u7684\u670D\u52A1\uFF1B\u4F46\u9664\u975E\u60A8\u4F9D\u7167\u6CD5\u5F8B\u7684\u89C4\u5B9A\u5220\u9664\u4E86\u60A8\u7684\u4FE1\u606F\uFF0C\u5426\u5219\u60A8\u7684\u53D6\u6D88\u884C\u4E3A\u4E0D\u4F1A\u5F71\u54CD\u6211\u4EEC\u57FA\u4E8E\u60A8\u4E4B\u524D\u7684\u6388\u6743\u8FDB\u884C\u7684\u4FE1\u606F\u7684\u5904\u7406\u3001\u5B58\u50A8\u3002"),
+          vue.createElementVNode("p", null, "1.2.6 \u4F4D\u7F6E\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u60A8\u53EF\u4EE5\u6388\u6743\u5F00\u542F\u8BBE\u5907\u5B9A\u4F4D\u529F\u80FD\u5E76\u4F7F\u7528\u6211\u4EEC\u57FA\u4E8E\u4F4D\u7F6E\u63D0\u4F9B\u7684\u76F8\u5173\u670D\u52A1\uFF0C\u5F53\u7136\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u901A\u8FC7\u5173\u95ED\u5B9A\u4F4D\u529F\u80FD\u968F\u65F6\u505C\u6B62\u6211\u4EEC\u5BF9\u60A8\u7684\u5730\u7406\u4F4D\u7F6E\u4FE1\u606F\u7684\u6536\u96C6\u3002\u60A8\u53EF\u4EE5\u5141\u8BB8\u6211\u4EEC\u8BBF\u95EE\u60A8\u7684\u6D3B\u52A8\u4E0E\u4F53\u80FD\u8BAD\u7EC3\u8BB0\u5F55\uFF0C\u901A\u8FC7\u8BFB\u53D6\u60A8\u7684\u6D3B\u52A8\u4E0E\u4F53\u80FD\u8BAD\u7EC3\uFF0C\u8BB0\u5F55\u6B65\u9891\u548C\u6B65\u6570\u4FE1\u606F\u3002\u540C\u65F6\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u968F\u65F6\u901A\u8FC7\u76F8\u5173\u529F\u80FD\u8BBE\u7F6E\u53D6\u6D88\u8BE5\u6743\u9650\u3002\u5F53\u60A8\u53D6\u6D88\u8BE5\u6388\u6743\u540E\uFF0C\u6211\u4EEC\u5C06\u4E0D\u518D\u6536\u96C6\u8BE5\u4FE1\u606F\uFF0C\u4E5F\u65E0\u6CD5\u518D\u4E3A\u60A8\u63D0\u4F9B\u4E0A\u8FF0\u4E0E\u4E4B\u5BF9\u5E94\u7684\u670D\u52A1\uFF1B\u4F46\u9664\u975E\u60A8\u4F9D\u7167\u6CD5\u5F8B\u7684\u89C4\u5B9A\u5220\u9664\u4E86\u60A8\u7684\u4FE1\u606F\uFF0C\u5426\u5219\u60A8\u7684\u53D6\u6D88\u884C\u4E3A\u4E0D\u4F1A\u5F71\u54CD\u6211\u4EEC\u57FA\u4E8E\u60A8\u4E4B\u524D\u7684\u6388\u6743\u8FDB\u884C\u7684\u4FE1\u606F\u7684\u5904\u7406\u3001\u5B58\u50A8\u3002"),
+          vue.createElementVNode("p", null, "1.2.7 \u901A\u8BAF\u5F55"),
+          vue.createElementVNode("p", null, "\u5982\u60A8\u60F3\u8DDF\u8E2A\u4E86\u89E3\u81EA\u5DF1\u670B\u53CB\u4EEC\u4F7F\u7528 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u7684\u60C5\u51B5\uFF0C\u53EF\u4EE5\u7533\u8BF7\u4F7F\u7528 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u76F8\u5173\u529F\u80FD\uFF0C\u6211\u4EEC\u5C06\u6839\u636E\u60A8\u7684\u6388\u6743\u4E0A\u4F20\u5E76\u4FDD\u5B58\u60A8\u7684\u5E94\u7528\u5217\u8868\uFF0C\u5E76\u4EE5\u52A0\u5BC6\u65B9\u5F0F\u4E0A\u4F20\u5E76\u4FDD\u5B58\u7528\u6237\u901A\u8BAF\u5F55\u4E2D\u8054\u7CFB\u4EBA\u624B\u673A\u53F7\u7801\uFF0C\u901A\u8FC7\u4E0E\u670D\u52A1\u5668\u4E2D\u4FE1\u606F\u5339\u914D\u4E3A\u60A8\u63D0\u4F9B\u7279\u8272\u670D\u52A1\u3002\u540C\u65F6\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u968F\u65F6\u901A\u8FC7\u76F8\u5173\u529F\u80FD\u8BBE\u7F6E\u62D2\u7EDD/\u53D6\u6D88\u8BE5\u6743\u9650\u3002\u62D2\u7EDD\u63D0\u4F9B\u8BE5\u6743\u9650\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u4E0A\u8FF0\u529F\u80FD\uFF0C\u4F46\u4E0D\u5F71\u54CD \u5065\u53D8 \u5176\u4ED6\u529F\u80FD\u4E0E\u670D\u52A1\u7684\u6B63\u5E38\u4F7F\u7528\uFF1B\u4F46\u5F53\u60A8\u53D6\u6D88\u8BE5\u6388\u6743\u540E\uFF0C\u6211\u4EEC\u5C06\u4E0D\u518D\u6536\u96C6\u8BE5\u4FE1\u606F\uFF0C\u4E5F\u65E0\u6CD5\u518D\u4E3A\u60A8\u63D0\u4F9B\u4E0A\u8FF0\u4E0E\u4E4B\u5BF9\u5E94\u7684\u670D\u52A1\uFF1B\u4F46\u9664\u975E\u60A8\u4F9D\u7167\u6CD5\u5F8B\u7684\u89C4\u5B9A\u5220\u9664\u4E86\u60A8\u7684\u4FE1\u606F\uFF0C\u5426\u5219\u60A8\u7684\u53D6\u6D88\u884C\u4E3A\u4E0D\u4F1A\u5F71\u54CD\u6211\u4EEC\u57FA\u4E8E\u60A8\u4E4B\u524D\u7684\u6388\u6743\u8FDB\u884C\u7684\u4FE1\u606F\u7684\u5904\u7406\u3001\u5B58\u50A8\u3002"),
+          vue.createElementVNode("p", null, "1.2.8 \u9EA6\u514B\u98CE\u548C\u5F55\u97F3"),
+          vue.createElementVNode("p", null, "\u5F53\u60A8\u4F7F\u7528\u5F55\u5236\u89C6\u9891\u529F\u80FD\u65F6\u6211\u4EEC\u5C06\u8BBF\u95EE\u60A8\u7684\u8BBE\u5907\u9EA6\u514B\u98CE\u548C\u5F55\u97F3\u76F8\u5173\u6743\u9650\uFF0C\u6211\u4EEC\u9700\u8981\u6536\u96C6\u60A8\u7684\u8BED\u97F3\u4FE1\u606F\u3001\u8BED\u97F3\u4EA4\u4E92\u4FE1\u606F\u3002\u5982\u60A8\u62D2\u7EDD\u63D0\u4F9B\u7684\uFF0C\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u8BE5\u529F\u80FD\uFF0C\u4F46\u5E76\u4E0D\u5F71\u54CD\u60A8\u6B63\u5E38\u4F7F\u7528 \u5065\u53D8 \u7684\u5176\u4ED6\u529F\u80FD\u3002\u540C\u65F6\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u968F\u65F6\u901A\u8FC7\u76F8\u5173\u529F\u80FD\u8BBE\u7F6E\u53D6\u6D88\u8BE5\u6743\u9650\u3002\u4F46\u5F53\u60A8\u53D6\u6D88\u8BE5\u6388\u6743\u540E\uFF0C\u6211\u4EEC\u5C06\u4E0D\u518D\u6536\u96C6\u8BE5\u4FE1\u606F\uFF0C\u4E5F\u65E0\u6CD5\u518D\u4E3A\u60A8\u63D0\u4F9B\u4E0A\u8FF0\u4E0E\u4E4B\u5BF9\u5E94\u7684\u670D\u52A1\uFF1B\u4F46\u9664\u975E\u60A8\u4F9D\u7167\u6CD5\u5F8B\u7684\u89C4\u5B9A\u5220\u9664\u4E86\u60A8\u7684\u4FE1\u606F\uFF0C\u5426\u5219\u60A8\u7684\u53D6\u6D88\u884C\u4E3A\u4E0D\u4F1A\u5F71\u54CD\u6211\u4EEC\u57FA\u4E8E\u60A8\u4E4B\u524D\u7684\u6388\u6743\u8FDB\u884C\u7684\u4FE1\u606F\u7684\u5904\u7406\u3001\u5B58\u50A8\u3002"),
+          vue.createElementVNode("p", null, "1.2.9 \u4EA4\u6613\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u60A8\u53EF\u4EE5\u5728 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5185\u8D2D\u4E70\u5546\u54C1/\u670D\u52A1\uFF08\u5982\uFF1A\u5065\u53D8 \u4F1A\u5458\u670D\u52A1\uFF09\u3002\u5728\u60A8\u4F7F\u7528\u8BE5\u529F\u80FD\u7684\u8FC7\u7A0B\u4E2D\u53EF\u80FD\u4F1A\u9700\u8981\u8FDB\u884C\u652F\u4ED8\uFF0C\u5728\u652F\u4ED8\u8FC7\u7A0B\u4E2D\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u6536\u96C6\u60A8\u7684\u7B2C\u4E09\u65B9\u652F\u4ED8\u8D26\u53F7\uFF08\u4F8B\u5982\u652F\u4ED8\u5B9D\u8D26\u53F7\u3001\u5FAE\u4FE1\u8D26\u53F7\u3001\u94F6\u8054\u8D26\u53F7\uFF09\u3002"),
+          vue.createElementVNode("p", null, "1.2.10 \u84DD\u7259"),
+          vue.createElementVNode("p", null, "\u82E5\u60A8\u5DF2\u6709\u76F8\u5173\u786C\u4EF6\u8BBE\u5907\uFF08\u4E0D\u7BA1\u662F\u5426\u4E3A \u5065\u53D8 \u54C1\u724C\uFF09\uFF0C\u5E0C\u671B\u5C06\u786C\u4EF6\u4EA7\u54C1\u8BB0\u5F55\u7684\u4FE1\u606F\uFF08\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\u5FC3\u7387\u3001\u7761\u7720\u4FE1\u606F\u3001\u6B65\u6570\u3001\u8FD0\u52A8\u6570\u636E\u3001\u4F53\u91CD\u3001BMI\u3001\u7B49\u5DF2\u540C\u610F\u4E0A\u4F20\u7684\u4E2A\u4EBA\u4FE1\u606F\u53CA\u4E2A\u4EBA\u8EAB\u4F53\u6570\u636E\uFF09\u540C\u6B65\u81F3 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1, \u5219\u53EF\u4EE5\u901A\u8FC7\u5F00\u542F\u84DD\u7259\u529F\u80FD\u5B9E\u73B0\u3002\u5982\u60A8\u62D2\u7EDD\u5F00\u542F\u7684\uFF0C\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u8BE5\u529F\u80FD\uFF0C\u4F46\u5E76\u4E0D\u5F71\u54CD\u60A8\u6B63\u5E38\u4F7F\u7528 \u5065\u53D8 \u7684\u5176\u4ED6\u529F\u80FD\u3002\u540C\u65F6\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u968F\u65F6\u901A\u8FC7\u76F8\u5173\u529F\u80FD\u8BBE\u7F6E\u53D6\u6D88\u8BE5\u6743\u9650\u3002\u4F46\u5F53\u60A8\u53D6\u6D88\u8BE5\u6388\u6743\u540E\uFF0C\u6211\u4EEC\u5C06\u4E0D\u518D\u6536\u96C6\u8BE5\u4FE1\u606F\uFF0C\u4E5F\u65E0\u6CD5\u518D\u4E3A\u60A8\u63D0\u4F9B\u4E0A\u8FF0\u4E0E\u4E4B\u5BF9\u5E94\u7684\u670D\u52A1\uFF1B\u4F46\u9664\u975E\u60A8\u4F9D\u7167\u6CD5\u5F8B\u7684\u89C4\u5B9A\u5220\u9664\u4E86\u60A8\u7684\u4FE1\u606F\uFF0C\u5426\u5219\u60A8\u7684\u53D6\u6D88\u884C\u4E3A\u4E0D\u4F1A\u5F71\u54CD\u6211\u4EEC\u57FA\u4E8E\u60A8\u4E4B\u524D\u7684\u6388\u6743\u8FDB\u884C\u7684\u4FE1\u606F\u7684\u5904\u7406\u3001\u5B58\u50A8\u3002"),
+          vue.createElementVNode("p", null, "1.2.11 \u6765\u6E90\u4E8E\u7B2C\u4E09\u65B9\u7684\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u5728\u4E00\u4E9B\u6CD5\u5F8B\u5141\u8BB8\u7684\u60C5\u51B5\u4E0B\uFF0C\u6211\u4EEC\u53EF\u80FD\u4ECE\u7B2C\u4E09\u65B9\u5904\u83B7\u5F97\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u4F8B\u5982\uFF1A"),
+          vue.createElementVNode("p", null, "* \u51FA\u4E8E\u5B89\u5168\u548C\u9632\u6B3A\u8BC8\u7684\u76EE\u7684\uFF0C\u9488\u5BF9\u7279\u5B9A\u8D26\u53F7\u3001\u91D1\u878D\u4EA4\u6613\u7B49\u670D\u52A1\uFF0C\u5728\u60A8\u6388\u6743\u7684\u524D\u63D0\u4E0B\uFF0C\u901A\u8FC7\u5408\u6CD5\u6765\u6E90\u6838\u5B9E\u60A8\u7684\u4FE1\u606F\uFF08\u5982\u7535\u8BDD\u53F7\u7801\uFF09\uFF1B"),
+          vue.createElementVNode("p", null, "* \u901A\u8FC7\u6307\u5B9A\u7684\u552F\u4E00\u6807\u8BC6\u7B26\uFF08\u5982\u4ECE\u5E7F\u544A\u4E3B\u5904\u83B7\u5F97\u7684IMEI\u7F16\u53F7\uFF09\u4E3A\u60A8\u5BF9\u5E94\u63D0\u4F9B\u5E7F\u544A\u670D\u52A1\uFF1B"),
+          vue.createElementVNode("p", null, "* \u6211\u4EEC\u8FD8\u53EF\u80FD\u4ECE\u7B2C\u4E09\u65B9\u793E\u4EA4\u7F51\u7EDC\u670D\u52A1\u4E2D\u83B7\u53D6\u67D0\u4E9B\u4FE1\u606F\uFF0C\u4F8B\u5982\u8D26\u6237\u3001\u6635\u79F0\uFF08\u4F8B\u5982\uFF0C\u5F53\u60A8\u4F7F\u7528\u793E\u4EA4\u7F51\u7EDC\u8D26\u6237\u767B\u5F55 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u670D\u52A1\u65F6\uFF09\uFF1B"),
+          vue.createElementVNode("p", null, "* \u4ED6\u4EBA\u63D0\u4F9B\u7684\u4E0E\u60A8\u6709\u5173\u7684\u4FE1\u606F\uFF0C\u4F8B\u5982\u5176\u4ED6\u7528\u6237\u5728\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5546\u57CE\u65F6\u586B\u5199\u7684\u60A8\u7684\u6536\u8D27\u5730\u5740\u3002"),
+          vue.createElementVNode("p", null, "1.2.12 \u975E\u4E2A\u4EBA\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u8FD8\u53EF\u80FD\u6536\u96C6\u5176\u4ED6\u65E0\u6CD5\u8BC6\u522B\u5230\u7279\u5B9A\u4E2A\u4EBA\u3001\u6839\u636E\u5F53\u5730\u9002\u7528\u6CD5\u5F8B\u4E0D\u5C5E\u4E8E\u4E2A\u4EBA\u4FE1\u606F\u7684\u4FE1\u606F\uFF0C\u4F8B\u5982\u60A8\u4F7F\u7528\u7279\u5B9A\u670D\u52A1\u65F6\u4EA7\u751F\u7684\u7EDF\u8BA1\u7C7B\u6570\u636E\uFF0C\u5982\u533F\u540D\u8BBE\u5907\u76F8\u5173\u4FE1\u606F\u3001\u65E5\u6D3B\u4E8B\u4EF6\u3001\u9875\u9762\u8BBF\u95EE\u4E8B\u4EF6\u3001\u9875\u9762\u8BBF\u95EE\u65F6\u957F\u4E8B\u4EF6\u3001\u4F1A\u8BDD\u4E8B\u4EF6\uFF1B\u7F51\u7EDC\u76D1\u63A7\u6570\u636E\u5982\u8BF7\u6C42\u65F6\u957F\u3001\u8BF7\u6C42\u4E0E\u9519\u8BEF\u8BF7\u6C42\u6570\u7B49\uFF1B\u4EE5\u53CA\u5E94\u7528\u5D29\u6E83\u4E8B\u4EF6\u3002\u6536\u96C6\u6B64\u7C7B\u4FE1\u606F\u7684\u76EE\u7684\u5728\u4E8E\u6539\u5584\u6211\u4EEC\u5411\u60A8\u63D0\u4F9B\u7684\u670D\u52A1\u3002\u6240\u6536\u96C6\u4FE1\u606F\u7684\u7C7B\u522B\u548C\u6570\u91CF\u53D6\u51B3\u4E8E\u60A8\u5982\u4F55\u4F7F\u7528\u6211\u4EEC\u4EA7\u54C1\u6216\u670D\u52A1\u3002"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u4F1A\u6536\u96C6\u8BF8\u5982\u552F\u4E00\u8BBE\u5907\u6807\u8BC6\u7B26\u3001\u8BBE\u5907\u578B\u53F7\u3001\u7CFB\u7EDF\u7248\u672C\u53F7\u7B49\u4E0E\u60A8\u5728\u6211\u4EEC\u7684\u7F51\u7AD9\u6216\u79FB\u52A8\u5E94\u7528\u4E2D\u7684\u6D3B\u52A8\u6709\u5173\u7684\u4FE1\u606F\u3002\u6211\u4EEC\u4F1A\u5C06\u6B64\u7C7B\u4FE1\u606F\u6C47\u603B\uFF0C\u7528\u4E8E\u5E2E\u52A9\u6211\u4EEC\u5411\u5BA2\u6237\u63D0\u4F9B\u66F4\u6709\u7528\u7684\u4FE1\u606F\uFF0C\u4E86\u89E3\u5BA2\u6237\u5BF9\u6211\u4EEC\u7F51\u7AD9\u3001\u4EA7\u54C1\u6216\u670D\u52A1\u4E2D\u7684\u54EA\u4E9B\u90E8\u5206\u6700\u611F\u5174\u8DA3\u3002\u5C31\u672C\u9690\u79C1\u653F\u7B56\u800C\u8A00\uFF0C\u6C47\u603B\u6570\u636E\u88AB\u89C6\u4E3A\u975E\u4E2A\u4EBA\u4FE1\u606F\u3002\u5982\u679C\u6211\u4EEC\u5C06\u975E\u4E2A\u4EBA\u4FE1\u606F\u4E0E\u4E2A\u4EBA\u4FE1\u606F\u7ED3\u5408\u4F7F\u7528\uFF0C\u5219\u5728\u7ED3\u5408\u4F7F\u7528\u671F\u95F4\uFF0C\u6B64\u7C7B\u4FE1\u606F\u5C06\u88AB\u89C6\u4E3A\u4E2A\u4EBA\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "2. \u6211\u4EEC\u5982\u4F55\u4F7F\u7528\u60A8\u7684\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u6536\u96C6\u4E2A\u4EBA\u4FE1\u606F\u7684\u76EE\u7684\u5728\u4E8E\u5411\u60A8\u63D0\u4F9B\u4EA7\u54C1\u6216\u670D\u52A1\uFF0C\u5E76\u4E14\u4FDD\u8BC1\u6211\u4EEC\u9075\u5B88\u9002\u7528\u7684\u76F8\u5173\u6CD5\u5F8B\u3001\u6CD5\u89C4\u53CA\u5176\u4ED6\u89C4\u8303\u6027\u6587\u4EF6\u3002\u6211\u4EEC\u53EF\u80FD\u5C06\u4E0A\u8FF0\u6536\u96C6\u7684\u4FE1\u606F\u7528\u4F5C\u4EE5\u4E0B\u7528\u9014\uFF1A"),
+          vue.createElementVNode("p", null, "2.1 \u5411\u60A8\u63D0\u4F9B\u3001\u5904\u7406\u3001\u7EF4\u62A4\u3001\u6539\u5584\u3001\u5F00\u53D1\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u63D0\u4F9B\u7ED9\u60A8\u7684\u670D\u52A1\uFF0C \u4F8B\u5982\u4EA4\u4ED8\u3001\u9A8C\u8BC1\u3001\u552E\u540E\u3001\u5BA2\u6237\u652F\u6301\u548C\u5E7F\u544A\u5BA3\u4F20\uFF1B"),
+          vue.createElementVNode("p", null, "2.2 \u5728\u6211\u4EEC\u63D0\u4F9B\u670D\u52A1\u65F6\uFF0C\u7528\u4E8E\u8EAB\u4EFD\u9A8C\u8BC1\u3001\u5BA2\u6237\u670D\u52A1\u3001\u5B89\u5168\u9632\u8303\u3001\u8BC8\u9A97\u76D1\u6D4B\u3001\u5B58\u6863\u548C\u5907\u4EFD\u7528\u9014\uFF0C\u786E\u4FDD\u6211\u4EEC\u5411\u60A8\u63D0\u4F9B\u7684\u4EA7\u54C1\u548C\u670D\u52A1\u7684\u5B89\u5168\u6027\uFF1B"),
+          vue.createElementVNode("p", null, "2.3 \u5185\u90E8\u76EE\u7684\uFF0C\u5982\u6570\u636E\u5206\u6790\u3001\u7814\u7A76\u548C\u5F00\u53D1\u4E0E\u6211\u4EEC\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u4F7F\u7528\u76F8\u5173\u7684\u7EDF\u8BA1\u4FE1\u606F\uFF0C\u4EE5\u66F4\u597D\u5730\u6539\u8FDB\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\uFF1B"),
+          vue.createElementVNode("p", null, "2.4 \u5E2E\u52A9\u6211\u4EEC\u8BBE\u8BA1\u65B0\u670D\u52A1\uFF0C\u6539\u5584\u6211\u4EEC\u73B0\u6709\u670D\u52A1\uFF1B"),
+          vue.createElementVNode("p", null, "2.5 \u4F7F\u6211\u4EEC\u66F4\u52A0\u4E86\u89E3\u60A8\u5982\u4F55\u63A5\u5165\u548C\u4F7F\u7528\u6211\u4EEC\u7684\u670D\u52A1\uFF0C\u4ECE\u800C\u9488\u5BF9\u6027\u5730\u56DE\u5E94\u60A8\u7684\u4E2A\u6027\u5316\u9700\u6C42\uFF0C\u4F8B\u5982\u8BED\u8A00\u8BBE\u5B9A\u3001\u4F4D\u7F6E\u8BBE\u5B9A\u3001\u4E2A\u6027\u5316\u7684\u5E2E\u52A9\u670D\u52A1\u548C\u6307\u793A\uFF0C\u6216\u5BF9\u60A8\u548C\u5176\u4ED6\u7528\u6237\u4F5C\u51FA\u5176\u4ED6\u65B9\u9762\u7684\u56DE\u5E94\uFF1B\u82E5\u60A8\u5BF9\u793E\u533A\u5C55\u793A\u5185\u5BB9\u4E0D\u611F\u5174\u8DA3\u5219\u53EF\u901A\u8FC7\u300C\u957F\u6309\u5185\u5BB9\u300D\u540E\u70B9\u51FB\u300C\u4E0D\u611F\u5174\u8DA3\u300D\u7684\u65B9\u5F0F\u5173\u95ED\u8BE5\u6761\u5185\u5BB9\uFF0C\u540C\u65F6\u60A8\u53EF\u901A\u8FC7\u300C\u6211\u300D-\u300C\u8BBE\u7F6E\u300D-\u300C\u9690\u79C1\u300D-\u300C\u4E2A\u6027\u5316\u63A8\u8350\u300D\u81EA\u884C\u51B3\u5B9A\u5C06\u793E\u533A\u4E2A\u6027\u5316\u63A8\u8350\u53CA\u8BFE\u7A0B\u4E2A\u6027\u5316\u63A8\u8350\u5F00\u542F\u6216\u5173\u95ED\uFF1B\u4E5F\u53EF\u901A\u8FC7\u300C\u6211\u300D-\u300C\u8BBE\u7F6E\u300D-\u300C\u6D88\u606F\u63D0\u9192\u300D-\u300C\u7CFB\u7EDF\u901A\u77E5\u300D\u81EA\u884C\u51B3\u5B9A\u662F\u5426\u63A5\u53D7\u63A8\u9001\u6D88\u606F\u3002"),
+          vue.createElementVNode("p", null, "2.6 \u5411\u60A8\u63D0\u4F9B\u4E0E\u60A8\u66F4\u52A0\u76F8\u5173\u7684\u63A8\u5E7F\u6D3B\u52A8\uFF0C\u60A8\u53EF\u6839\u636E\u559C\u597D\u81EA\u884C\u51B3\u5B9A\u5F00\u542F\u6216\u5173\u95ED\uFF1B"),
+          vue.createElementVNode("p", null, "2.7 \u8BC4\u4F30\u6211\u4EEC\u670D\u52A1\u4E2D\u7684\u5E7F\u544A\u548C\u5176\u4ED6\u4FC3\u9500\u53CA\u63A8\u5E7F\u6D3B\u52A8\u7684\u6548\u679C\uFF0C\u5E76\u52A0\u4EE5\u6539\u5584\uFF1B"),
+          vue.createElementVNode("p", null, "2.8 \u6267\u884C\u8F6F\u4EF6\u9A8C\u8BC1\u3001\u5347\u7EA7\u670D\u52A1\uFF1B"),
+          vue.createElementVNode("p", null, "2.9 \u5E94\u7528\u6237\u7279\u6B8A\u8981\u6C42\u800C\u63D0\u4F9B\u7279\u5B9A\u670D\u52A1\u65F6\uFF0C\u9700\u8981\u5C06\u4FE1\u606F\u63D0\u4F9B\u7ED9\u6211\u4EEC\u7684\u5173\u8054\u516C\u53F8\u3001\u7B2C\u4E09\u65B9\u6216\u5176\u4ED6\u7528\u6237\uFF1B"),
+          vue.createElementVNode("p", null, "2.10 \u5176\u4ED6\u4E0D\u8FDD\u53CD\u4EFB\u4F55\u5F3A\u5236\u6027\u6CD5\u5F8B\u6CD5\u89C4\u7684\u60C5\u51B5\uFF1B"),
+          vue.createElementVNode("p", null, "2.11 \u8BA9\u60A8\u53C2\u4E0E\u6709\u5173\u6211\u4EEC\u4EA7\u54C1\u548C\u670D\u52A1\u7684\u8C03\u67E5\uFF1B"),
+          vue.createElementVNode("p", null, "2.12 \u50A8\u5B58\u5E76\u7EF4\u62A4\u4E0E\u60A8\u76F8\u5173\u7684\u4FE1\u606F\uFF0C\u7528\u4E8E\u6211\u4EEC\u7684\u4E1A\u52A1\u8FD0\u8425 \uFF08\u4F8B\u5982\u4E1A\u52A1\u7EDF\u8BA1\uFF09\u6216\u5C65\u884C\u6CD5\u5F8B\u4E49\u52A1\uFF1B"),
+          vue.createElementVNode("p", null, "2.13 \u5176\u4ED6\u5F81\u5F97\u60A8\u540C\u610F\u7684\u76EE\u7684\u3002"),
+          vue.createElementVNode("p", null, "\u5173\u4E8E\u6211\u4EEC\u5982\u4F55\u4F7F\u7528\u60A8\u7684\u4FE1\u606F\uFF08\u5176\u4E2D\u53EF\u80FD\u5305\u542B\u4E2A\u4EBA\u4FE1\u606F\uFF09\uFF0C\u4E0B\u9762\u63D0\u4F9B\u4E86\u66F4\u591A\u8BE6\u7EC6\u793A\u4F8B\uFF1A"),
+          vue.createElementVNode("p", null, "* \u767B\u5F55\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4EA7\u54C1\u6216\u670D\u52A1"),
+          vue.createElementVNode("p", null, "* \u521B\u5EFA\u53CA\u7EF4\u62A4\u60A8\u7684\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u3002 \u60A8\u901A\u8FC7\u7F51\u7AD9\u6216\u79FB\u52A8\u8BBE\u5907\u521B\u5EFA\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u65F6\u63D0\u4F9B\u7684\u4E2A\u4EBA\u4FE1\u606F\u53EF\u7528\u4E8E\u5EFA\u7ACB\u60A8\u4E2A\u4EBA\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u548C\u4E2A\u4EBA\u8D44\u6599\uFF1B"),
+          vue.createElementVNode("p", null, "* \u5904\u7406\u60A8\u7684\u8BA2\u8D2D\u5355\u3002 \u4E0E\u7535\u5B50\u5546\u52A1\u8BA2\u5355\u76F8\u5173\u7684\u4FE1\u606F\u53EF\u7528\u4E8E\u5904\u7406\u8BA2\u8D2D\u5355\u548C\u76F8\u5173\u7684\u552E\u540E\u670D\u52A1\uFF0C\u5305\u62EC\u5BA2\u6237\u652F\u6301\u548C\u91CD\u65B0\u53D1\u8D27\u3002\u6B64\u5916\uFF0C\u8BA2\u5355\u53F7\u5C06\u7528\u4E8E\u6821\u9A8C\u7269\u6D41\u5408\u4F5C\u4F19\u4F34\u7684\u8BA2\u5355\u548C\u5305\u88F9\u7684\u5B9E\u9645\u4EA4\u4ED8\u3002\u6536\u4EF6\u4EBA\u4FE1\u606F\uFF0C\u5305\u62EC\u59D3\u540D\u3001\u5730\u5740\u3001\u7535\u8BDD\u53F7\u7801\u548C\u90AE\u653F\u7F16\u7801\uFF0C\u5C06\u7528\u4E8E\u9001\u8D27\u3002\u8D2D\u4E70\u7269\u54C1\u7684\u6E05\u5355\u7528\u4E8E\u6253\u5370\u53D1\u7968\uFF0C\u5E76\u4F7F\u60A8\u80FD\u591F\u786E\u5B9A\u5305\u88F9\u4E2D\u7684\u7269\u54C1\uFF1B"),
+          vue.createElementVNode("p", null, "* \u53C2\u4E0E\u793E\u533A\u3002 \u4E0E\u793E\u533A\u6216\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5176\u4ED6\u7C7B\u4F3C\u793E\u4EA4\u5E73\u53F0\u6709\u5173\u7684\u4E2A\u4EBA\u4FE1\u606F\u53EF\u80FD\u88AB\u7528\u4E8E\u4E2A\u4EBA\u8D44\u6599\u9875\u9762\u5C55\u793A\u3001\u4E0E\u5176\u4ED6\u7528\u6237\u8FDB\u884C\u4E92\u52A8\u3001\u53C2\u4E0E\u8BBA\u575B\uFF1B"),
+          vue.createElementVNode("p", null, "* \u63D0\u4F9B\u57FA\u4E8E\u4F4D\u7F6E\u7684\u670D\u52A1\u3002 \u5728\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u670D\u52A1\u65F6\uFF0C\u6211\u4EEC\u6216\u7B2C\u4E09\u65B9\u670D\u52A1\u63D0\u4F9B\u5546\u4E0E\u4E1A\u52A1\u5408\u4F5C\u4F19\u4F34\uFF08\u66F4\u591A\u8BE6\u7EC6\u4FE1\u606F\u8BF7\u53C2\u9605\u4E0B\u65B9\u201C\u6211\u4EEC\u5982\u4F55\u5171\u4EAB\uFF0C\u8F6C\u79FB\u548C\u516C\u5F00\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u201D\uFF09\u53EF\u80FD\u4F1A\u4F7F\u7528\u4F4D\u7F6E\u4FE1\u606F\u4EE5\u4FBF\u4E3A\u60A8\u63D0\u4F9B\u670D\u52A1\uFF0C\u5E76\u4E14\u57FA\u4E8E\u51C6\u786E\u7684\u4F4D\u7F6E\u63D0\u4F9B\u66F4\u597D\u7684\u7528\u6237\u4F53\u9A8C\uFF0C\u4F8B\u5982\u83B7\u53D6\u51C6\u786E\u7684\u8DD1\u6B65\u8F68\u8FF9\uFF0C\u60A8\u53EF\u4EE5\u968F\u65F6\u5728\u8BBE\u7F6E\u4E2D\u5173\u95ED\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u4F4D\u7F6E\u670D\u52A1\uFF1B"),
+          vue.createElementVNode("p", null, "* \u6539\u5584\u7528\u6237\u4F53\u9A8C\u3002 \u67D0\u4E9B\u9009\u62E9\u6027\u52A0\u5165\u529F\u80FD\uFF0C\u4F8B\u5982\u7528\u6237\u4F53\u9A8C\u8BA1\u5212\uFF0C\u5141\u8BB8\u6211\u4EEC\u5206\u6790\u7528\u6237\u5982\u4F55\u4F7F\u7528\u624B\u673A\u548C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u670D\u52A1\u7684\u6570\u636E\uFF0C\u4EE5\u6539\u5584\u7528\u6237\u4F53\u9A8C\uFF0C\u4F8B\u5982\u53D1\u9001\u5D29\u6E83\u62A5\u544A\uFF1B"),
+          vue.createElementVNode("p", null, "* \u63D0\u4F9B\u63A8\u9001\u670D\u52A1\u3002 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u548CIMEI/GAID\u7F16\u53F7\u53EF\u80FD\u7528\u4E8E\u63D0\u4F9B\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u63A8\u9001\u670D\u52A1\uFF0C\u4EE5\u8BC4\u4F30\u5E7F\u544A\u6548\u679C\u548C\u4ECE\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5411\u60A8\u53D1\u9001\u8F6F\u4EF6\u66F4\u65B0\u6216\u65B0\u4EA7\u54C1\u53D1\u5E03\u7684\u901A\u77E5\uFF0C\u5305\u62EC\u9500\u552E\u548C\u4FC3\u9500\u4FE1\u606F\u3002\u540C\u65F6\uFF0C\u5728\u7B2C\u4E09\u65B9\uFF08\u540C\u6837\u4E3A\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u6570\u636E\u63A7\u5236\u8005 - \u66F4\u591A\u8BE6\u7EC6\u4FE1\u606F\u8BF7\u53C2\u9605\u4E0B\u65B9\u201C \u6211\u4EEC\u5982\u4F55\u5171\u4EAB\uFF0C\u8F6C\u79FB\u548C\u516C\u5F00\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u201D\uFF09\u7684\u6388\u6743\u4E0B\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u7684\u63A8\u9001\u670D\u52A1\u4E5F\u5C06\u4F7F\u7528\u60A8\u7684\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u548CIMEI/GAID\u7F16\u53F7\uFF0C\u4EE5\u8BC4\u4F30\u76F8\u5173\u5E7F\u544A\u8868\u73B0\u6216\u4ECE\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5411\u60A8\u53D1\u9001\u76F8\u5173\u901A\u77E5\u3002\u6211\u4EEC\u53EF\u80FD\u57FA\u4E8E\u63A8\u9001\u670D\u52A1\uFF08\u65E0\u8BBA\u662F\u901A\u8FC7\u670D\u52A1\u4E2D\u96C6\u6210\u7684\u4FE1\u606F\u63A8\u9001\u6216\u5176\u4ED6\u65B9\u5F0F\uFF09\u800C\u4F7F\u7528\u60A8\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u5E76\u4E3A\u60A8\u63D0\u4F9B\u6216\u63A8\u5E7F\u6211\u4EEC\u53CA\u76F8\u5173\u7B2C\u4E09\u65B9\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u3002\u60A8\u53EF\u4EE5\u968F\u65F6\u901A\u8FC7\u66F4\u6539\u624B\u673A\u8BBE\u7F6E\u9879\u4E0B\u7684\u504F\u597D\u8BBE\u7F6E\u6765\u62D2\u7EDD\u63A5\u6536\u6765\u81EA\u6211\u4EEC\u53CA\u7B2C\u4E09\u65B9\u7684\u8425\u9500\u4FE1\u606F\uFF0C\u6216\u901A\u8FC7\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u63A8\u9001\u7684\u7B2C\u4E09\u65B9\u5E94\u7528/\u7F51\u9875\u6765\u7BA1\u7406\u60A8\u7684\u504F\u597D\u8BBE\u7F6E\uFF1B"),
+          vue.createElementVNode("p", null, "* \u6536\u96C6\u7528\u6237\u53CD\u9988\u3002 \u60A8\u9009\u62E9\u63D0\u4F9B\u7684\u53CD\u9988\u5BF9\u5E2E\u52A9\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u6539\u8FDB\u670D\u52A1\u975E\u5E38\u91CD\u8981\u3002\u4E3A\u4E86\u5904\u7406\u60A8\u63D0\u4F9B\u7684\u53CD\u9988\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u53EF\u80FD\u4F1A\u4F7F\u7528\u60A8\u6240\u63D0\u4F9B\u7684\u4E2A\u4EBA\u4FE1\u606F\u4E0E\u60A8\u8054\u7CFB\uFF0C\u5E76\u4FDD\u7559\u8BB0\u5F55\u7528\u4E8E\u89E3\u51B3\u95EE\u9898\u53CA\u6539\u8FDB\u670D\u52A1\uFF1B"),
+          vue.createElementVNode("p", null, "* \u53D1\u9001\u901A\u77E5\u3002 \u6211\u4EEC\u53EF\u80FD\u4F1A\u5C06\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u7528\u4E8E\u53D1\u9001\u91CD\u8981\u901A\u77E5\uFF0C\u4F8B\u5982\u6709\u5173\u8BA2\u5355\u7684\u901A\u77E5\u548C\u6211\u4EEC\u7684\u6761\u6B3E\u3001\u6761\u4EF6\u548C\u653F\u7B56\u7684\u53D8\u66F4\u3002\u7531\u4E8E\u6B64\u7C7B\u4FE1\u606F\u5BF9\u60A8\u548C\u6211\u4EEC\u4E4B\u95F4\u7684\u6C9F\u901A\u81F3\u5173\u91CD\u8981\uFF0C\u4E0D\u5EFA\u8BAE\u60A8\u62D2\u7EDD\u63A5\u6536\u6B64\u7C7B\u4FE1\u606F\uFF1B"),
+          vue.createElementVNode("p", null, "* \u8FDB\u884C\u4FC3\u9500\u6D3B\u52A8\u3002 \u5982\u679C\u60A8\u901A\u8FC7\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u53C2\u4E0E\u4E86\u62BD\u5956\u3001\u6BD4\u8D5B\u6216\u8FD0\u52A8\u5546\u57CE\u7684\u4FC3\u9500\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u4F7F\u7528\u60A8\u63D0\u4F9B\u7684\u4E2A\u4EBA\u4FE1\u606F\u4EE5\u4E3A\u60A8\u53D1\u9001\u6B64\u7C7B\u5956\u52B1\uFF1B"),
+          vue.createElementVNode("p", null, "* \u8FDB\u884C\u8BBE\u5907\u7684\u5206\u6790\u4EE5\u63D0\u4F9B\u66F4\u597D\u7684\u7528\u6237\u4F53\u9A8C\u3002 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5C06\u4F1A\u8FDB\u884C\u786C\u4EF6\u53CA\u8F6F\u4EF6\u7684\u5206\u6790\uFF0C\u4EE5\u8FDB\u4E00\u6B65\u63D0\u5347\u8BBE\u5907\u7684\u4F7F\u7528\u4F53\u9A8C\u3002"),
+          vue.createElementVNode("p", null, " \u6211\u4EEC\u53EF\u80FD\u5C06\u8FD9\u4E9B\u4FE1\u606F\u4E0E\u5176\u4ED6\u4FE1\u606F\u7ED3\u5408\u8D77\u6765\uFF08\u5305\u62EC\u8DE8\u4E0D\u540C\u670D\u52A1\u6216\u8BBE\u5907\u5982\u7535\u8111\u3001\u624B\u673A\u3001\u667A\u80FD\u786C\u4EF6\u548C\u5176\u4ED6\u8054\u7F51\u8BBE\u5907\u4E2D\u7684\u4FE1\u606F\uFF09\uFF0C\u7528\u4E8E\u63D0\u4F9B\u548C\u6539\u8FDB\u6211\u4EEC\u7684\u4EA7\u54C1\u3001\u670D\u52A1\u3001\u5185\u5BB9\u548C\u5E7F\u544A\u5BA3\u4F20\u3002\u4F8B\u5982\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u5728\u6240\u6709\u9700\u8981\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u7684\u670D\u52A1\u4E2D\u4F7F\u7528\u60A8\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u7684\u8BE6\u7EC6\u4FE1\u606F\u3002\u540C\u65F6\uFF0C\u4E3A\u4E86\u8BA9\u60A8\u6709\u66F4\u597D\u7684\u4F53\u9A8C\u4EE5\u53CA\u6539\u5584\u6211\u4EEC\u7684\u670D\u52A1\uFF0C\u5728\u7B26\u5408\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u6216\u7ECF\u60A8\u540C\u610F\u65F6\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u5C06\u6765\u81EA\u60A8\u6216\u4E0E\u60A8\u76F8\u5173\u7684\u4E0D\u540C\u4EA7\u54C1\u3001\u670D\u52A1\u6216\u8BBE\u5907\u7684\u4FE1\u606F\u6574\u7406\u6210\u6807\u7B7E\uFF0C\u6765\u63D0\u4F9B\u5EFA\u8BAE\u3001\u5B9A\u5236\u5185\u5BB9\u548C\u4E2A\u6027\u5316\u529F\u80FD\u3002\u4F8B\u5982\u4F7F\u7528\u60A8\u5728\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E2D\u7684\u641C\u7D22\u5386\u53F2\u5728\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8FD0\u52A8\u5546\u57CE\u4E2D\u5411\u60A8\u63A8\u8350\u60A8\u611F\u5174\u8DA3\u7684\u5546\u54C1\u6216\u670D\u52A1\u3002\u6839\u636E\u6211\u4EEC\u5408\u5E76\u4FE1\u606F\u7684\u539F\u56E0\u4EE5\u53CA\u9002\u7528\u6CD5\u5F8B\u7684\u8981\u6C42\uFF0C\u6211\u4EEC\u5C06\u4E3A\u60A8\u63D0\u4F9B\u6B64\u7C7B\u6574\u5408\u7684\u5177\u4F53\u63A7\u5236\u673A\u5236\u3002\u60A8\u6709\u6743\u62D2\u7EDD\u4EE5\u76F4\u63A5\u8425\u9500\u76EE\u7684\u8FDB\u884C\u7684\u4E2A\u4EBA\u4FE1\u606F\u5904\u7406\u4EE5\u53CA\u81EA\u52A8\u5316\u51B3\u7B56\u7B49\u3002\u4E3A\u4E86\u884C\u4F7F\u4E0A\u8FF0\u6743\u5229\uFF0C\u60A8\u53EF\u4EE5\u53D1\u9001\u90AE\u4EF6\u81F3kingtran@sina.cn\u6216\u8005\u53C2\u8003\u5404\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u5355\u72EC\u9690\u79C1\u653F\u7B56\u4E2D\u8BF4\u660E\u7684\u63A7\u5236\u673A\u5236\u3002"),
+          vue.createElementVNode("p", null, "3. \u6211\u4EEC\u627F\u8BFA"),
+          vue.createElementVNode("p", null, "3.1 \u6211\u4EEC\u4E0D\u4F1A\u6839\u636E\u654F\u611F\u7C7B\u522B\uFF08\u4F8B\u5982\u79CD\u65CF\u3001\u5B97\u6559\u3001\u6027\u53D6\u5411\u6216\u5065\u5EB7\u72B6\u51B5\uFF09\u5411\u60A8\u5C55\u793A\u4E2A\u6027\u5316\u5E7F\u544A\uFF1B"),
+          vue.createElementVNode("p", null, "3.2 \u6211\u4EEC\u4E0D\u4F1A\u4E0E\u5E7F\u544A\u4E3B\u5206\u4EAB\u53EF\u7528\u4E8E\u8BC6\u522B\u60A8\u4E2A\u4EBA\u8EAB\u4EFD\u7684\u4FE1\u606F\uFF0C\u4F8B\u5982\u60A8\u7684\u59D3\u540D\u6216\u7535\u5B50\u90AE\u4EF6\u5730\u5740\uFF08\u9664\u975E\u7ECF\u60A8\u6388\u6743\u540C\u610F\uFF09\uFF1B"),
+          vue.createElementVNode("p", null, "3.3 \u5728\u4EFB\u4F55\u65F6\u5019\u3001\u4EFB\u4F55\u60C5\u51B5\u4E0B\u90FD\u4E0D\u4F1A\u5411\u4EFB\u4F55\u7B2C\u4E09\u65B9\u51FA\u552E\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6211\u4EEC\u53EA\u4F1A\u5728\u6CD5\u5F8B\u5141\u8BB8\u7684\u8303\u56F4\u5185\u4F7F\u7528\u6839\u636E\u672C\u534F\u8BAE\u83B7\u5F97\u7684\u4FE1\u606F\u3002\u6211\u4EEC\u4F1A\u5236\u5B9A\u4E25\u683C\u7684\u653F\u7B56\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u9664\u975E\u4E8B\u5148\u83B7\u5F97\u60A8\u7684\u6388\u6743\u6216\u672C\u58F0\u660E\u53E6\u6709\u89C4\u5B9A\u4E4B\u5916\uFF0C\u4E0D\u4F1A\u5C06\u60A8\u7684\u8FD9\u4E9B\u4FE1\u606F\u5BF9\u5916\u516C\u5F00\u6216\u5411\u7B2C\u4E09\u65B9\u63D0\u4F9B\u3002"),
+          vue.createElementVNode("p", null, "4. \u4E3A\u4FDD\u8BC1\u670D\u52A1\u8D28\u91CF\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u7531\u5173\u8054\u516C\u53F8\u6216\u5176\u4ED6\u53EF\u4FE1\u5408\u4F5C\u5355\u4F4D\u5411\u60A8\u63D0\u4F9B\u60A8\u6240\u8981\u6C42\u7684\u670D\u52A1\u6216\u60A8\u53EF\u80FD\u611F\u5174\u8DA3\u7684\u5185\u5BB9\u3002\u7ECF\u60A8\u6388\u6743\u540C\u610F\u540E\uFF0C\u6211\u4EEC\u5C06\u5411\u5173\u8054\u516C\u53F8\u6216\u5408\u4F5C\u5355\u4F4D\u5206\u4EAB\u8BE5\u4EA7\u54C1\u3001\u670D\u52A1\u6240\u5FC5\u987B\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u6211\u4EEC\u4F1A\u8981\u6C42\u5173\u8054\u516C\u53F8\u53CA\u5408\u4F5C\u5355\u4F4D\u6309\u7167\u6211\u4EEC\u7684\u8BF4\u660E\u3001\u9690\u79C1\u653F\u7B56\u4EE5\u53CA\u4EFB\u4F55\u5176\u4ED6\u9002\u5F53\u7684\u4FDD\u5BC6\u548C\u5B89\u5168\u63AA\u65BD\u6765\u4FDD\u8BC1\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u5B89\u5168\u3002\u9664\u6B64\u4E4B\u5916\uFF0C\u672A\u7ECF\u60A8\u7684\u6388\u6743\u540C\u610F\uFF0C\u6211\u4EEC\u4E0D\u4F1A\u5411\u4EFB\u4F55\u7B2C\u4E09\u65B9\u63D0\u4F9B\u6216\u5206\u4EAB\u60A8\u7684\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "5. \u82E5\u60A8\u4F7F\u7528\u7684\u662F\u82F9\u679C\u624B\u673A\uFF0C\u4E3A\u4E86\u8BA1\u7B97\u8BAD\u7EC3\u6D88\u8017\u91CF\uFF0C\u7ECF\u8FC7\u60A8\u7684\u6388\u6743\uFF0C\u6211\u4EEC\u5C06\u4ECE\u82F9\u679C\u516C\u53F8\u7684 HeathKit \u63A5\u6536\u5E76\u5411\u5176\u53D1\u9001\u60A8\u7684\u8FD0\u52A8\u6570\u636E\u3002 \u4E3A\u4E86\u7B80\u5316\u60A8\u7684\u8F93\u5165\u6D41\u7A0B\uFF0C\u6211\u4EEC\u4ECE HeathKit \u4E2D\u8BFB\u53D6\u60A8\u7684\u4F53\u91CD\u6570\u636E\u3002\u540C\u65F6\u60A8\u5728 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u751F\u6210\u7684\u8BAD\u7EC3\u6570\u636E\u5C06\u4E0E\u82F9\u679C\u516C\u53F8\u7684 HeathKit \u540C\u6B65\u3002\u4EFB\u4F55\u901A\u8FC7\u4F7F\u7528 HeathKit \u800C\u83B7\u5F97\u7684\u4FE1\u606F\uFF0C\u5982\u4F53\u91CD\u548C\u5FC3\u7387\u6570\u636E\u7B49\uFF0C\u5C06\u4E0D\u4F1A\u5206\u4EAB\u6216\u9500\u552E\u7ED9\u4EFB\u4F55\u7B2C\u4E09\u65B9\uFF0C\u5305\u62EC\u5E7F\u544A\u5546\u53CA\u5176\u4ED6\u4EE3\u7406\u5546\u3002\u6211\u4EEC\u5C06\u4E0D\u4F1A\u4F7F\u7528 HeathKit \u7684\u4FE1\u606F\u7528\u4E8E\u5E02\u573A\u3001\u5E7F\u544A\u53CA\u7C7B\u4F3C\u670D\u52A1\u4E2D\u3002"),
+          vue.createElementVNode("p", null, "6. \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u670D\u52A1\u4E2D\u7684\u7B2C\u4E09\u65B9\u670D\u52A1\u7531\u5916\u90E8\u7B2C\u4E09\u65B9\u4E3B\u4F53\u63D0\u4F9B\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u65E0\u6CD5\u83B7\u5F97\u60A8\u5728\u4F7F\u7528\u8BE5\u7C7B\u7B2C\u4E09\u65B9\u670D\u52A1\u65F6\u4EA7\u751F\u7684\u4FE1\u606F\u3002\u4F46\u662F\uFF0C\u5982\u679C\u60A8\u5DF2\u660E\u793A\u540C\u610F\u8BE5\u7B2C\u4E09\u65B9\u83B7\u5F97\u60A8\u7684\u5730\u7406\u4F4D\u7F6E\u4FE1\u606F\uFF0C\u8BE5\u7B2C\u4E09\u65B9\u5C06\u901A\u8FC7\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u63A5\u53E3\u83B7\u5F97\u60A8\u7684\u7EC8\u7AEF\u5730\u7406\u4F4D\u7F6E\u4FE1\u606F\u3002\u8BE5\u4FE1\u606F\u5C5E\u4E8E\u654F\u611F\u4FE1\u606F\uFF0C\u62D2\u7EDD\u63D0\u4F9B\u8BE5\u4FE1\u606F\u4EC5\u4F1A\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u4E0A\u8FF0\u7B2C\u4E09\u65B9\u670D\u52A1\uFF0C\u4F46\u4E0D\u5F71\u54CD\u60A8\u6B63\u5E38\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u7684\u529F\u80FD\u3002"),
+          vue.createElementVNode("p", null, "\u53E6\u5916\uFF0C\u6839\u636E\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u53CA\u56FD\u5BB6\u6807\u51C6\uFF0C\u4EE5\u4E0B\u60C5\u5F62\u4E2D\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u6536\u96C6\u3001\u4F7F\u7528\u60A8\u7684\u76F8\u5173\u4E2A\u4EBA\u4FE1\u606F\u65E0\u9700\u5F81\u6C42\u60A8\u7684\u6388\u6743\u540C\u610F\uFF1A"),
+          vue.createElementVNode("p", null, "6.1 \u4E0E\u56FD\u5BB6\u5B89\u5168\u3001\u56FD\u9632\u5B89\u5168\u7B49\u56FD\u5BB6\u5229\u76CA\u76F4\u63A5\u76F8\u5173\u7684\uFF1B\u4E0E\u516C\u5171\u5B89\u5168\u3001\u516C\u5171\u536B\u751F\u3001\u516C\u4F17\u77E5\u60C5\u7B49\u91CD\u5927\u516C\u5171\u5229\u76CA\u76F4\u63A5\u76F8\u5173\u7684\uFF1B"),
+          vue.createElementVNode("p", null, "6.2\u4E0E\u72AF\u7F6A\u4FA6\u67E5\u3001\u8D77\u8BC9\u3001\u5BA1\u5224\u548C\u5224\u51B3\u6267\u884C\u7B49\u76F4\u63A5\u76F8\u5173\u7684\uFF1B"),
+          vue.createElementVNode("p", null, "6.3\u51FA\u4E8E\u7EF4\u62A4\u60A8\u6216\u5176\u4ED6\u4E2A\u4EBA\u7684\u751F\u547D\u3001\u8D22\u4EA7\u3001\u58F0\u8A89\u7B49\u91CD\u5927\u5408\u6CD5\u6743\u76CA\u4F46\u53C8\u5F88\u96BE\u5F97\u5230\u672C\u4EBA\u540C\u610F\u7684\uFF1B"),
+          vue.createElementVNode("p", null, "6.4\u6240\u6536\u96C6\u7684\u4E2A\u4EBA\u4FE1\u606F\u662F\u60A8\u81EA\u884C\u5411\u793E\u4F1A\u516C\u4F17\u516C\u5F00\u7684\uFF1B"),
+          vue.createElementVNode("p", null, "6.5\u4ECE\u5408\u6CD5\u516C\u5F00\u62AB\u9732\u7684\u4FE1\u606F\u4E2D\u6536\u96C6\u4E2A\u4EBA\u4FE1\u606F\u7684\uFF0C\u5982\u5408\u6CD5\u7684\u65B0\u95FB\u62A5\u9053\u3001\u653F\u5E9C\u4FE1\u606F\u516C\u5F00\u7B49\u6E20\u9053\uFF1B"),
+          vue.createElementVNode("p", null, "6.6\u6839\u636E\u60A8\u8981\u6C42\u7B7E\u8BA2\u548C\u5C65\u884C\u5408\u540C\u6240\u5FC5\u9700\u7684\uFF1B"),
+          vue.createElementVNode("p", null, "6.7\u7528\u4E8E\u7EF4\u62A4\u6240\u63D0\u4F9B\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u5B89\u5168\u7A33\u5B9A\u8FD0\u884C\u6240\u5FC5\u9700\u7684\uFF0C\u4F8B\u5982\u53D1\u73B0\u3001\u5904\u7F6E\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u6545\u969C\uFF1B"),
+          vue.createElementVNode("p", null, "6.8\u4E3A\u5F00\u5C55\u5408\u6CD5\u7684\u65B0\u95FB\u62A5\u9053\u6240\u5FC5\u9700\u7684\uFF1B"),
+          vue.createElementVNode("p", null, "6.9\u51FA\u4E8E\u516C\u5171\u5229\u76CA\u5F00\u5C55\u7EDF\u8BA1\u6216\u5B66\u672F\u7814\u7A76\u6240\u5FC5\u8981\uFF0C\u4E14\u5176\u5BF9\u5916\u63D0\u4F9B\u5B66\u672F\u7814\u7A76\u6216\u63CF\u8FF0\u7684\u7ED3\u679C\u65F6\uFF0C\u5BF9\u7ED3\u679C\u4E2D\u6240\u5305\u542B\u7684\u4E2A\u4EBA\u4FE1\u606F\u8FDB\u884C\u53BB\u6807\u8BC6\u5316\u5904\u7406\u7684\uFF1B"),
+          vue.createElementVNode("p", null, "6.10\u4E3A\u5B8C\u6210\u5408\u5E76\u3001\u5206\u7ACB\u3001\u6536\u8D2D\u6216\u8D44\u4EA7\u8F6C\u8BA9\u800C\u8F6C\u79FB\uFF1B"),
+          vue.createElementVNode("p", null, "6.11\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u7684\u5176\u4ED6\u60C5\u5F62\u3002"),
+          vue.createElementVNode("p", null, "\u8BF7\u60A8\u7406\u89E3\uFF0C\u6211\u4EEC\u5411\u60A8\u63D0\u4F9B\u7684\u529F\u80FD\u548C\u670D\u52A1\u662F\u4E0D\u65AD\u66F4\u65B0\u548C\u53D1\u5C55\u7684\uFF0C\u5982\u679C\u67D0\u4E00\u529F\u80FD\u6216\u670D\u52A1\u672A\u5728\u524D\u8FF0\u8BF4\u660E\u4E2D\u4E14\u6536\u96C6\u4E86\u60A8\u7684\u4FE1\u606F\uFF0C\u6211\u4EEC\u4F1A\u901A\u8FC7\u9875\u9762\u63D0\u793A\u3001\u4EA4\u4E92\u6D41\u7A0B\u3001\u7F51\u7AD9\u516C\u544A\u7B49\u65B9\u5F0F\u53E6\u884C\u5411\u60A8\u8BF4\u660E\u4FE1\u606F\u6536\u96C6\u7684\u5185\u5BB9\u3001\u8303\u56F4\u548C\u76EE\u7684\uFF0C\u4EE5\u5F81\u5F97\u60A8\u7684\u540C\u610F\u3002"),
+          vue.createElementVNode("p", null, "\u8BF7\u60A8\u6CE8\u610F\uFF0C\u76EE\u524D\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0D\u4F1A\u4E3B\u52A8\u4ECE\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5916\u7684\u7B2C\u4E09\u65B9\u83B7\u53D6\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u5982\u672A\u6765\u4E3A\u4E1A\u52A1\u53D1\u5C55\u9700\u8981\u4ECE\u7B2C\u4E09\u65B9\u95F4\u63A5\u83B7\u53D6\u60A8\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6211\u4EEC\u4F1A\u5728\u83B7\u53D6\u524D\u5411\u60A8\u660E\u793A\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u6765\u6E90\u3001\u7C7B\u578B\u53CA\u4F7F\u7528\u8303\u56F4\uFF0C\u5982\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5F00\u5C55\u4E1A\u52A1\u9700\u8FDB\u884C\u7684\u4E2A\u4EBA\u4FE1\u606F\u5904\u7406\u6D3B\u52A8\u8D85\u51FA\u60A8\u539F\u672C\u5411\u7B2C\u4E09\u65B9\u63D0\u4F9B\u4E2A\u4EBA\u4FE1\u606F\u65F6\u7684\u6388\u6743\u540C\u610F\u8303\u56F4\uFF0C\u6211\u4EEC\u5C06\u5728\u5904\u7406\u60A8\u7684\u8BE5\u7B49\u4E2A\u4EBA\u4FE1\u606F\u524D\uFF0C\u5F81\u5F97\u60A8\u7684\u660E\u793A\u540C\u610F\uFF1B\u6B64\u5916\uFF0C\u6211\u4EEC\u4E5F\u5C06\u4F1A\u4E25\u683C\u9075\u5B88\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u7684\u89C4\u5B9A\uFF0C\u5E76\u8981\u6C42\u7B2C\u4E09\u65B9\u4FDD\u969C\u5176\u63D0\u4F9B\u7684\u4FE1\u606F\u7684\u5408\u6CD5\u6027\u3002"),
+          vue.createElementVNode("p", null, "7. \u9664\u975E\u7ECF\u8FC7\u60A8\u7684\u540C\u610F\uFF0C\u5426\u5219\u6211\u4EEC\u4E0D\u4F1A\u5411\u4EFB\u4F55\u4EBA\u63D0\u4F9B\u60A8\u7684\u654F\u611F\u4E2A\u4EBA\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "8. \u4E2A\u4EBA\u4FE1\u606F\u7684\u533F\u540D\u5316\u5904\u7406"),
+          vue.createElementVNode("p", null, "\u5728\u6536\u96C6\u5230\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u540E\uFF0C\u6211\u4EEC\u5C06\u901A\u8FC7\u6280\u672F\u624B\u6BB5\u53CA\u65F6\u5BF9\u6570\u636E\u8FDB\u884C\u533F\u540D\u5316\u5904\u7406\u3002\u5728\u4E0D\u6CC4\u9732\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u524D\u63D0\u4E0B\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u6709\u6743\u5BF9\u533F\u540D\u5316\u5904\u7406\u540E\u7684\u7528\u6237\u6570\u636E\u5E93\u8FDB\u884C\u6316\u6398\u3001\u5206\u6790\u548C\u5229\u7528\uFF08\u5305\u62EC\u5546\u4E1A\u6027\u4F7F\u7528\uFF09\uFF0C\u6709\u6743\u5BF9\u4EA7\u54C1/\u670D\u52A1\u4F7F\u7528\u60C5\u51B5\u8FDB\u884C\u7EDF\u8BA1\u5E76\u4E0E\u516C\u4F17/\u7B2C\u4E09\u65B9\u5171\u4EAB\u8131\u654F\u7684\u7EDF\u8BA1\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "\u4E8C.\u6211\u4EEC\u5982\u4F55\u4F7F\u7528 Cookie \u548C\u540C\u7C7B\u6280\u672F"),
+          vue.createElementVNode("p", null, "Cookie \u662F\u5305\u542B\u5B57\u7B26\u4E32\u7684\u5C0F\u6587\u4EF6\uFF0C\u4F1A\u5728\u60A8\u8BBF\u95EE\u7F51\u7AD9\u65F6\u53D1\u9001\u5230\u60A8\u7684\u8BA1\u7B97\u673A\u4E0A\u3002\u5F53\u60A8\u518D\u6B21\u8BBF\u95EE\u7F51\u7AD9\u65F6\uFF0CCookie \u4F7F\u8BE5\u7F51\u7AD9\u53EF\u4EE5\u8BC6\u522B\u60A8\u7684\u6D4F\u89C8\u5668\u3002Cookie \u8FD8\u80FD\u5B58\u50A8\u7528\u6237\u4F7F\u7528\u504F\u597D\u53CA\u5176\u4ED6\u4FE1\u606F\u3002\u60A8\u53EF\u4EE5\u91CD\u7F6E\u60A8\u7684\u6D4F\u89C8\u5668\u62D2\u7EDD\u6240\u6709\u7684Cookie \uFF0C\u6216\u8005\u5728\u53D1\u9001 Cookie \u65F6\u63D0\u793A\u3002\u4F46\u5982\u679C\u6CA1\u6709 Cookie \uFF0C\u67D0\u4E9B\u7F51\u7AD9\u529F\u80FD\u6216\u670D\u52A1\u53EF\u80FD\u65E0\u6CD5\u6B63\u5E38\u5DE5\u4F5C\u3002"),
+          vue.createElementVNode("p", null, "Cookie \u548C\u540C\u7C7B\u578B\u6280\u672F\u662F\u4E92\u8054\u7F51\u4E2D\u7684\u901A\u7528\u5E38\u7528\u6280\u672F\u3002\u5F53\u60A8\u4F7F\u7528 \u5065\u53D8 \u76F8\u5173\u670D\u52A1\u65F6\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u4F7F\u7528\u76F8\u5173\u6280\u672F\u5411\u60A8\u7684\u8BBE\u5907\u53D1\u9001\u4E00\u4E2A\u6216\u591A\u4E2A Cookie \u6216\u533F\u540D\u6807\u8BC6\u7B26\uFF0C\u4EE5\u6536\u96C6\u548C\u5B58\u50A8\u60A8\u8BBF\u95EE\u3001\u4F7F\u7528 \u5065\u53D8 \u65F6\u7684\u4FE1\u606F\u3002\u6211\u4EEC\u5C06\u901A\u8FC7Cookie\u548C\u5176\u4ED6\u6280\u672F\u6536\u96C6\u7684\u4FE1\u606F\u89C6\u4E3A\u975E\u4E2A\u4EBA\u4FE1\u606F\u3002\u4F46\u662F\uFF0C\u5982\u679C\u5F53\u5730\u6CD5\u5F8B\u5C06\u4E92\u8054\u7F51\u534F\u8BAE (IP) \u5730\u5740\u6216\u7C7B\u4F3C\u8BC6\u522B\u6807\u8BB0\u89C6\u4E3A\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6211\u4EEC\u4EA6\u5C06\u6B64\u7B49\u8BC6\u522B\u6807\u8BB0\u89C6\u4E3A\u4E2A\u4EBA\u4FE1\u606F\u3002\u6211\u4EEC\u4F7F\u7528 Cookie \u548C\u540C\u7C7B\u6280\u672F\u4E3B\u8981\u4E3A\u4E86\u5B9E\u73B0\u4EE5\u4E0B\u529F\u80FD\u6216\u670D\u52A1\uFF1A"),
+          vue.createElementVNode("p", null, "1. \u4FDD\u969C\u4EA7\u54C1\u4E0E\u670D\u52A1\u7684\u5B89\u5168\u3001\u9AD8\u6548\u8FD0\u8F6C"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u53EF\u80FD\u4F1A\u8BBE\u7F6E\u8BA4\u8BC1\u4E0E\u4FDD\u969C\u5B89\u5168\u6027\u7684 Cookie \u6216\u533F\u540D\u6807\u8BC6\u7B26\uFF0C\u4F7F\u6211\u4EEC\u786E\u8BA4\u60A8\u662F\u5426\u5B89\u5168\u767B\u5F55\u670D\u52A1\uFF0C\u6216\u8005\u662F\u5426\u9047\u5230\u76D7\u7528\u3001\u6B3A\u8BC8\u7B49\u4E0D\u6CD5\u884C\u4E3A\u3002\u8FD9\u4E9B\u6280\u672F\u8FD8\u4F1A\u5E2E\u52A9\u6211\u4EEC\u6539\u8FDB\u670D\u52A1\u6548\u7387\uFF0C\u63D0\u5347\u767B\u5F55\u548C\u54CD\u5E94\u901F\u5EA6\u3002"),
+          vue.createElementVNode("p", null, "2. \u5E2E\u52A9\u60A8\u83B7\u5F97\u66F4\u8F7B\u677E\u7684\u8BBF\u95EE\u4F53\u9A8C"),
+          vue.createElementVNode("p", null, "\u4F7F\u7528\u6B64\u7C7B\u6280\u672F\u53EF\u4EE5\u5E2E\u52A9\u60A8\u7701\u53BB\u91CD\u590D\u586B\u5199\u4E2A\u4EBA\u4FE1\u606F\u3001\u8F93\u5165\u641C\u7D22\u5185\u5BB9\u7684\u6B65\u9AA4\u548C\u6D41\u7A0B\uFF0C\u4F8B\u5982\u5B9E\u73B0\u4E00\u952E\u767B\u5F55\u6D41\u7A0B\u3001\u8BB0\u5F55\u641C\u7D22\u5386\u53F2\u3002"),
+          vue.createElementVNode("p", null, "3. \u4E3A\u60A8\u63A8\u8350\u3001\u5C55\u793A\u3001\u63A8\u9001\u60A8\u53EF\u80FD\u611F\u5174\u8DA3\u7684\u5185\u5BB9"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u53EF\u80FD\u4F1A\u5229\u7528 Cookie \u548C\u540C\u7C7B\u6280\u672F\u4E86\u89E3\u60A8\u7684\u504F\u597D\u548C\u4F7F\u7528\u4E60\u60EF\uFF0C\u8FDB\u884C\u54A8\u8BE2\u6216\u6570\u636E\u5206\u6790\uFF0C\u4EE5\u6539\u5584\u4EA7\u54C1\u670D\u52A1\u53CA\u7528\u6237\u4F53\u9A8C\u3002"),
+          vue.createElementVNode("p", null, "4. \u65E5\u5FD7\u6587\u4EF6"),
+          vue.createElementVNode("p", null, "\u548C\u5927\u90E8\u5206\u7F51\u7AD9\u4E00\u6837\uFF0C\u6211\u4EEC\u6536\u96C6\u7279\u5B9A\u4FE1\u606F\u5E76\u4FDD\u5B58\u5728\u65E5\u5FD7\u6587\u4EF6\u4E2D\u3002\u6B64\u7C7B\u4FE1\u606F\u53EF\u80FD\u5305\u62EC\u4E92\u8054\u7F51\u534F\u8BAE (IP) \u5730\u5740\u3001\u6D4F\u89C8\u5668\u7C7B\u578B\u3001\u4E92\u8054\u7F51\u670D\u52A1\u4F9B\u5E94\u5546 (ISP)\u3001\u5F15\u7528/\u9000\u51FA\u9875\u9762\u3001\u64CD\u4F5C\u7CFB\u7EDF\u3001\u65E5\u671F/\u65F6\u95F4\u6233\u548C/\u6216\u70B9\u51FB\u6D41\u6570\u636E\u3002\u6211\u4EEC\u4E0D\u4F1A\u628A\u81EA\u52A8\u6536\u96C6\u7684\u65E5\u5FD7\u6570\u636E\u4E0E\u6211\u4EEC\u6536\u96C6\u7684\u5176\u4ED6\u4FE1\u606F\u8FDB\u884C\u5173\u8054\u3002"),
+          vue.createElementVNode("p", null, "5. \u79FB\u52A8\u5206\u6790"),
+          vue.createElementVNode("p", null, "\u5728\u67D0\u4E9B\u79FB\u52A8\u5E94\u7528\u4E2D\uFF0C\u6211\u4EEC\u4F7F\u7528\u79FB\u52A8\u5206\u6790\u8F6F\u4EF6\uFF0C\u4EE5\u66F4\u597D\u5730\u4E86\u89E3\u6211\u4EEC\u7684\u79FB\u52A8\u8F6F\u4EF6\u5728\u60A8\u7684\u624B\u673A\u4E2D\u7684\u529F\u80FD\u3002\u6B64\u6B3E\u8F6F\u4EF6\u53EF\u80FD\u8BB0\u5F55\u4EE5\u4E0B\u4FE1\u606F\uFF0C\u5982\u60A8\u4F7F\u7528\u8BE5\u5E94\u7528\u7A0B\u5E8F\u7684\u9891\u7387\u3001\u8BE5\u5E94\u7528\u7A0B\u5E8F\u5185\u53D1\u751F\u7684\u4E8B\u4EF6\u3001\u7D2F\u8BA1\u4F7F\u7528\u3001\u6027\u80FD\u6570\u636E\u53CA\u5E94\u7528\u7A0B\u5E8F\u5D29\u6E83\u53D1\u751F\u7684\u4F4D\u7F6E\u3002\u6211\u4EEC\u4E0D\u4F1A\u5C06\u5B58\u50A8\u4E8E\u5206\u6790\u8F6F\u4EF6\u5185\u7684\u4FE1\u606F\u4E0E\u60A8\u5728\u79FB\u52A8\u5E94\u7528\u7A0B\u5E8F\u4E2D\u63D0\u4EA4\u7684\u4EFB\u4F55\u4E2A\u4EBA\u4FE1\u606F\u76F8\u5173\u8054\u3002"),
+          vue.createElementVNode("p", null, "6. \u672C\u5730\u5B58\u50A8- HTML5/Flash"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u4F7F\u7528\u672C\u5730\u5B58\u50A8\u5BF9\u8C61 (LSO)\uFF0C\u4F8B\u5982HTML5\u6216Flash\uFF0C\u6765\u5B58\u50A8\u5185\u5BB9\u3002\u4E0E\u6211\u4EEC\u5408\u4F5C\u5728\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0A\u63D0\u4F9B\u67D0\u4E9B\u529F\u80FD\uFF0C\u6216\u6839\u636E\u60A8\u7684\u6D4F\u89C8\u884C\u4E3A\u6295\u653E\u5E7F\u544A\u7684\u7B2C\u4E09\u65B9\u4E5F\u4F1A\u901A\u8FC7HTML5\u6216Flash Cookie\u6765\u6536\u96C6\u548C\u5B58\u50A8\u76F8\u5173\u4FE1\u606F\u3002\u5404\u79CD\u6D4F\u89C8\u5668\u63D0\u4F9B\u4E86\u5404\u81EA\u7684\u7BA1\u7406\u5DE5\u5177\u6765\u5220\u9664HTML5\u672C\u5730\u5B58\u50A8\u5BF9\u8C61\u3002"),
+          vue.createElementVNode("p", null, "\u4E09. \u5982\u4F55\u66F4\u65B0\u3001\u53D8\u66F4\u3001\u5BFC\u51FA\u3001\u5220\u9664\u60A8\u7684\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u4F9D\u636E\u67D0\u4E9B\u53F8\u6CD5\u7BA1\u8F96\u533A\u7684\u6CD5\u5F8B\u89C4\u5B9A\uFF1A"),
+          vue.createElementVNode("p", null, "1. \u60A8\u5728\u4F7F\u7528\u6211\u4EEC\u7684\u4EA7\u54C1\u548C\u670D\u52A1\u65F6\uFF0C\u4F1A\u88AB\u8981\u6C42\u63D0\u4F9B\u60A8\u771F\u5B9E\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u60A8\u5E94\u5F53\u5BF9\u60A8\u6240\u63D0\u4F9B\u4FE1\u606F\u7684\u771F\u5B9E\u6027\u3001\u5408\u6CD5\u6027\u3001\u6709\u6548\u6027\u53CA\u5B8C\u6574\u6027\u8D1F\u8D23\uFF0C\u5E76\u53CA\u65F6\u66F4\u65B0\u548C\u7EF4\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u4EE5\u4FDD\u8BC1\u4FE1\u606F\u7684\u771F\u5B9E\u3001\u5408\u6CD5\u548C\u6709\u6548\u3002\u60A8\u53EF\u4EE5\u968F\u65F6\u7BA1\u7406\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u4F8B\u5982\u60A8\u7684\u4E2A\u4EBA\u8D26\u6237\u6CE8\u518C\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "2. \u60A8\u53EF\u4EE5\u81EA\u884C\u4ECE \u5065\u53D8 \u8D26\u53F7\u4E2D\u5220\u9664\u60A8\u7684\u5185\u5BB9\u6216\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6216\u8981\u6C42\u6211\u4EEC\u5220\u9664\u6216\u4FEE\u6539\u4FE1\u606F\uFF0C\u4F8B\u5982\u60A8\u60F3\u8981\u5220\u9664\u4E2A\u4EBA\u5E10\u6237\uFF0C\u53EF\u4EE5\u53D1\u9001\u90AE\u4EF6\u5230 kingtran@sina.cn \u4E0E\u6211\u4EEC\u8054\u7EDC\u5E76\u63D0\u51FA\u60A8\u7684\u8981\u6C42\uFF0C\u6211\u4EEC\u5C06\u5728\u6536\u5230\u540E15\u4E2A\u5DE5\u4F5C\u65E5\u5185\u8054\u7EDC\u60A8\u5E76\u5B8C\u6210\u6838\u67E5\u548C\u5904\u7406\u3002"),
+          vue.createElementVNode("p", null, "3. \u5728\u6709\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u6211\u4EEC\u4F1A\u51FA\u4E8E\u6CD5\u5F8B\u76EE\u7684\u6216\u5408\u6CD5\u4E1A\u52A1\u7684\u9700\u8981\u5C06\u6570\u636E\u4FDD\u7559\u6709\u9650\u7684\u4E00\u6BB5\u65F6\u95F4\u3002\u6211\u4EEC\u4F1A\u5C3D\u529B\u786E\u4FDD \u5065\u53D8 \u7684\u670D\u52A1\u80FD\u591F\u4FDD\u62A4\u4FE1\u606F\u514D\u906D\u610F\u5916\u6216\u6076\u610F\u5220\u9664\u3002\u56E0\u6B64\uFF0C\u5982\u679C\u60A8\u5220\u9664\u4E86\u67D0\u4E9B\u5185\u5BB9\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u572815\u4E2A\u5DE5\u4F5C\u65E5\u5185\u4ECE\u6211\u4EEC\u73B0\u7528\u7684\u548C\u5907\u7528\u7684\u7CFB\u7EDF\u4E2D\u5220\u9664\u5176\u526F\u672C\u3002"),
+          vue.createElementVNode("p", null, "4. \u60A8\u53EF\u4EE5\u968F\u65F6\u5907\u4EFD\u4E2A\u4EBA\u5E10\u6237\u540D\u4E0B\u7684\u5185\u5BB9\u6216\u5C06\u5176\u7528\u4E8E\u975E \u5065\u53D8 \u670D\u52A1\uFF0C\u60A8\u53EF\u4EE5\u53D1\u90AE\u4EF6\u5230kingtran@sian.cn\u4E0E\u6211\u4EEC\u8054\u7EDC\u5E76\u63D0\u51FA\u60A8\u7684\u8981\u6C42\u3002"),
+          vue.createElementVNode("p", null, "5. \u64A4\u9500\u540C\u610F"),
+          vue.createElementVNode("p", null, "\u60A8\u53EF\u4EE5\u901A\u8FC7\u63D0\u4EA4\u8BF7\u6C42\u64A4\u9500\u4E4B\u524D\u51FA\u4E8E\u7279\u5B9A\u76EE\u7684\u6388\u4E88\u6211\u4EEC\u7684\u540C\u610F\uFF0C\u5305\u62EC\u6536\u96C6\u3001\u4F7F\u7528\u548C/\u6216\u62AB\u9732\u6211\u4EEC\u638C\u63E1\u6216\u63A7\u5236\u7684\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u6839\u636E\u60A8\u6240\u4F7F\u7528\u7684\u5177\u4F53\u670D\u52A1\uFF0C\u60A8\u53EF\u4EE5\u901A\u8FC7\u8BBF\u95EE\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u7BA1\u7406\u4E2D\u5FC3\u6216\u901A\u8FC7\u53D1\u9001\u90AE\u4EF6\u5230kingtran@sina.cn\u8FDB\u884C\u76F8\u5173\u64CD\u4F5C\u3002\u6211\u4EEC\u5C06\u4F1A\u5728\u60A8\u505A\u51FA\u8BF7\u6C42\u540E\u7684\u5408\u7406\u65F6\u95F4\u5185\u5904\u7406\u60A8\u7684\u8BF7\u6C42\uFF0C\u5E76\u4E14\u4F1A\u6839\u636E\u60A8\u7684\u8BF7\u6C42\uFF0C\u6B64\u540E\u4E0D\u518D\u6536\u96C6\u3001\u4F7F\u7528\u548C/\u6216\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "\u53D6\u51B3\u4E8E\u60A8\u64A4\u9500\u540C\u610F\u7684\u8303\u56F4\uFF0C\u5176\u53EF\u80FD\u5BFC\u81F4\u60A8\u4E0D\u80FD\u7EE7\u7EED\u4EAB\u53D7\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u3002\u4F46\u60A8\u64A4\u56DE\u540C\u610F\u6216\u6388\u6743\u7684\u51B3\u5B9A\uFF0C\u4E0D\u4F1A\u5F71\u54CD\u6211\u4EEC\u6B64\u524D\u57FA\u4E8E\u60A8\u7684\u540C\u610F\u800C\u5F00\u5C55\u7684\u4E2A\u4EBA\u4FE1\u606F\u5904\u7406\u6D3B\u52A8\u7684\u6709\u6548\u6027\u3002"),
+          vue.createElementVNode("p", null, "6.\u6CE8\u9500\u670D\u52A1\u6216\u8D26\u53F7"),
+          vue.createElementVNode("p", null, "\u5982\u60A8\u5E0C\u671B\u6CE8\u9500\u5177\u4F53\u4EA7\u54C1\u6216\u670D\u52A1\uFF0C \u60A8\u53EF\u4EE5\u901A\u8FC7\u300C\u6211\u300D-\u300C\u8BBE\u7F6E\u300D-\u300C\u8D26\u53F7\u4E0E\u5B89\u5168\u300D-\u300C\u6CE8\u9500\u8D26\u53F7\u300D\u8FDB\u884C\u8D26\u53F7\u7684\u6CE8\u9500\u3002\u5F53\u60A8\u6CE8\u9500\u8D26\u53F7\u540E\uFF0C\u6211\u4EEC\u5C06\u5220\u9664\u6216\u533F\u540D\u5316\u5904\u7406\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "\u5982\u60A8\u5E0C\u671B\u6CE8\u9500\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\uFF0C\u7531\u4E8E\u6CE8\u9500\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u7684\u64CD\u4F5C\u5C06\u4F7F\u60A8\u65E0\u6CD5\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5168\u7EBF\u4EA7\u54C1\u6216\u670D\u52A1\uFF0C\u8BF7\u60A8\u8C28\u614E\u64CD\u4F5C\u3002"),
+          vue.createElementVNode("p", null, "\u5F53\u60A8\u901A\u8FC7\u7B2C\u4E09\u65B9\u8D26\u53F7\u6388\u6743\u767B\u5F55\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u65F6\uFF0C\u9700\u8981\u5411\u7B2C\u4E09\u65B9\u7533\u8BF7\u6CE8\u9500\u8D26\u53F7\u3002"),
+          vue.createElementVNode("p", null, "\u56DB. \u6211\u4EEC\u5982\u4F55\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "1. \u6240\u6709 \u5065\u53D8 \u4EA7\u54C1\u90FD\u5185\u7F6E\u4E86\u5F3A\u5927\u7684\u5B89\u5168\u529F\u80FD\uFF0C\u5E76\u4E14\u6211\u4EEC\u5236\u5B9A\u4E86\u4E25\u683C\u7684\u4FE1\u606F\u7BA1\u7406\u653F\u7B56\uFF0C\u914D\u5907\u4E13\u4E1A\u7684\u6280\u672F\u56E2\u961F\uFF0C\u91C7\u53D6\u4E86\u4E00\u7CFB\u5217\u5408\u7406\u7684\u9884\u9632\u63AA\u65BD\uFF0C\u4EE5\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u4E0D\u4F1A\u906D\u53D7\u672A\u7ECF\u6388\u6743\u7684\u6D4F\u89C8\u3001\u62AB\u9732\u3001\u6EE5\u7528\u3001\u53D8\u66F4\u3001\u7834\u574F\u4EE5\u53CA\u635F\u5931\uFF0C\u5176\u4E2D\u5305\u62EC\uFF1A\uFF081\uFF09\u4F7F\u7528\u52A0\u5BC6\u6280\u672F\u6765\u786E\u4FDD\u60A8\u7684\u6570\u636E\u5728\u4F20\u8F93\u8FC7\u7A0B\u4E2D\u4FDD\u6301\u79C1\u5BC6\u6027\uFF1B\uFF082\uFF09\u63D0\u4F9B\u591A\u79CD\u5B89\u5168\u529F\u80FD\u6765\u534F\u52A9\u60A8\u4FDD\u62A4\u81EA\u5DF1\u7684\u5E10\u53F7\u5B89\u5168\uFF1B\uFF083\uFF09\u5BA1\u67E5\u6211\u4EEC\u5728\u6536\u96C6\u3001\u5B58\u50A8\u548C\u5904\u7406\u4FE1\u606F\u65B9\u9762\u7684\u505A\u6CD5\uFF08\u5305\u62EC\u5B9E\u4F53\u5B89\u5168\u63AA\u65BD\uFF09\uFF0C\u4EE5\u9632\u672A\u7ECF\u6388\u6743\u7684\u4EBA\u5458\u8BBF\u95EE\u6211\u4EEC\u7684\u7CFB\u7EDF\uFF1B\uFF084\uFF09\u6240\u6709\u56E0\u63D0\u4F9B\u670D\u52A1\u800C\u5FC5\u987B\u63A5\u89E6\u4E2A\u4EBA\u4FE1\u606F\u7684 \u5065\u53D8 \u5458\u5DE5\u3001\u627F\u5305\u5546\u548C\u4EE3\u7406\u5546\u7B49\uFF0C\u90FD\u9700\u8981\u9075\u5B88\u5408\u540C\u4E2D\u89C4\u5B9A\u7684\u4E25\u683C\u4FDD\u5BC6\u4E49\u52A1\uFF0C\u5426\u5219\u53EF\u5C06\u88AB\u5904\u5206\u6216\u88AB\u89E3\u7EA6\u3002"),
+          vue.createElementVNode("p", null, "2. \u5C3D\u7BA1\u5DF2\u7ECF\u91C7\u53D6\u4E86\u4E0A\u8FF0\u5408\u7406\u6709\u6548\u63AA\u65BD\uFF0C\u5E76\u5DF2\u7ECF\u9075\u5B88\u4E86\u76F8\u5173\u6CD5\u5F8B\u89C4\u5B9A\u8981\u6C42\u7684\u6807\u51C6\uFF0C\u4F46\u8BF7\u60A8\u7406\u89E3\uFF0C\u7531\u4E8E\u6280\u672F\u7684\u9650\u5236\u4EE5\u53CA\u53EF\u80FD\u5B58\u5728\u7684\u5404\u79CD\u6076\u610F\u624B\u6BB5\uFF0C\u5728\u4E92\u8054\u7F51\u884C\u4E1A\uFF0C\u5373\u4FBF\u7AED\u5C3D\u6240\u80FD\u52A0\u5F3A\u5B89\u5168\u63AA\u65BD\uFF0C\u4E5F\u4E0D\u53EF\u80FD\u59CB\u7EC8\u4FDD\u8BC1\u4FE1\u606F\u767E\u5206\u4E4B\u767E\u7684\u5B89\u5168\uFF0C\u6211\u4EEC\u5C06\u5C3D\u529B\u786E\u4FDD\u60A8\u63D0\u4F9B\u7ED9\u6211\u4EEC\u7684\u4E2A\u4EBA\u4FE1\u606F\u7684\u5B89\u5168\u6027\u3002\u60A8\u786E\u8BA4\u77E5\u6089\u5E76\u7406\u89E3\uFF0C\u60A8\u63A5\u5165\u6211\u4EEC\u7684\u670D\u52A1\u6240\u7528\u7684\u7CFB\u7EDF\u548C\u901A\u8BAF\u7F51\u7EDC\uFF0C\u6709\u53EF\u80FD\u56E0\u6211\u4EEC\u53EF\u63A7\u8303\u56F4\u5916\u7684\u56E0\u7D20\u800C\u51FA\u73B0\u95EE\u9898\u3002\u56E0\u6B64\uFF0C\u6211\u4EEC\u5F3A\u70C8\u5EFA\u8BAE\u60A8\u91C7\u53D6\u79EF\u6781\u63AA\u65BD\u4FDD\u62A4\u4E2A\u4EBA\u4FE1\u606F\u7684\u5B89\u5168\uFF0C\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\u4F7F\u7528\u590D\u6742\u5BC6\u7801\u3001\u5B9A\u671F\u4FEE\u6539\u5BC6\u7801\u3001\u4E0D\u5C06\u81EA\u5DF1\u7684\u8D26\u53F7\u5BC6\u7801\u7B49\u4E2A\u4EBA\u4FE1\u606F\u900F\u9732\u7ED9\u4ED6\u4EBA\u3002"),
+          vue.createElementVNode("p", null, "3. \u6211\u4EEC\u4F1A\u5236\u5B9A\u5E94\u6025\u5904\u7406\u9884\u6848\uFF0C\u5E76\u5728\u53D1\u751F\u7528\u6237\u4FE1\u606F\u5B89\u5168\u4E8B\u4EF6\u65F6\u7ACB\u5373\u5E94\u6025\u9884\u6848\uFF0C\u52AA\u529B\u963B\u6B62\u8BE5\u7B49\u5B89\u5168\u4E8B\u4EF6\u7684\u5F71\u54CD\u548C\u540E\u679C\u6269\u5927\u3002\u5728\u4E0D\u5E78\u53D1\u751F\u7528\u6237\u4FE1\u606F\u5B89\u5168\u4E8B\u4EF6\uFF08\u6CC4\u9732\u3001\u4E22\u5931\u7B49\uFF09\u540E\uFF0C\u6211\u4EEC\u5C06\u6309\u7167\u6CD5\u5F8B\u6CD5\u89C4\u7684\u8981\u6C42\uFF0C\u53CA\u65F6\u5411\u60A8\u544A\u77E5\uFF1A\u5B89\u5168\u4E8B\u4EF6\u7684\u57FA\u672C\u60C5\u51B5\u548C\u53EF\u80FD\u7684\u5F71\u54CD\u3001\u6211\u4EEC\u5DF2\u91C7\u53D6\u6216\u5C06\u8981\u91C7\u53D6\u7684\u5904\u7F6E\u63AA\u65BD\u3001\u60A8\u53EF\u81EA\u4E3B\u9632\u8303\u548C\u964D\u4F4E\u98CE\u9669\u7684\u5EFA\u8BAE\u3001\u5BF9\u60A8\u7684\u8865\u6551\u63AA\u65BD\u7B49\u3002\u4E8B\u4EF6\u76F8\u5173\u60C5\u51B5\u6211\u4EEC\u5C06\u4EE5\u90AE\u4EF6\u3001\u4FE1\u51FD\u3001\u7535\u8BDD\u3001\u63A8\u9001\u901A\u77E5\u7B49\u65B9\u5F0F\u544A\u77E5\u60A8\uFF0C\u96BE\u4EE5\u9010\u4E00\u544A\u77E5\u4E2A\u4EBA\u4FE1\u606F\u4E3B\u4F53\u65F6\uFF0C\u6211\u4EEC\u4F1A\u91C7\u53D6\u5408\u7406\u3001\u6709\u6548\u7684\u65B9\u5F0F\u53D1\u5E03\u516C\u544A\u3002\u540C\u65F6\uFF0C\u6211\u4EEC\u8FD8\u5C06\u6309\u7167\u76D1\u7BA1\u90E8\u95E8\u8981\u6C42\uFF0C\u4E0A\u62A5\u4E2A\u4EBA\u4FE1\u606F\u5B89\u5168\u4E8B\u4EF6\u7684\u5904\u7F6E\u60C5\u51B5\u3002"),
+          vue.createElementVNode("p", null, "4. \u60A8\u80FD\u505A\u4EC0\u4E48\uFF1F"),
+          vue.createElementVNode("p", null, "\u60A8\u53EF\u4EE5\u901A\u8FC7\u4E0D\u5411\u4EFB\u4F55\u4EBA\uFF08\u9664\u975E\u6B64\u4EBA\u7ECF\u60A8\u6B63\u5F0F\u6388\u6743\uFF09\u62AB\u9732\u60A8\u7684\u767B\u5F55\u5BC6\u7801\u6216\u8D26\u53F7\u4FE1\u606F\uFF0C\u60A8\u53EF\u4EE5\u4E3A\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8BBE\u7F6E\u552F\u4E00\u7684\u5BC6\u7801\uFF0C\u4EE5\u9632\u6B62\u5176\u4ED6\u7F51\u7AD9\u5BC6\u7801\u6CC4\u9732\u5371\u5BB3\u60A8\u5728\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u7684\u8D26\u53F7\u5B89\u5168\u3002\u65E0\u8BBA\u4F55\u65F6\uFF0C\u8BF7\u4E0D\u8981\u5411\u4EFB\u4F55\u4EBA\uFF08\u5305\u62EC\u81EA\u79F0\u662F\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5BA2\u670D\u7684\u4EBA\u58EB\uFF09\u900F\u9732\u60A8\u6536\u5230\u7684\u9A8C\u8BC1\u7801\u3002\u65E0\u8BBA\u60A8\u4F55\u65F6\u4F5C\u4E3A\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u7528\u6237\u767B\u5F55\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\uFF0C\u5C24\u5176\u662F\u5728\u4ED6\u4EBA\u7684\u8BA1\u7B97\u673A\u3001\u624B\u673A\u6216\u516C\u5171\u4E92\u8054\u7F51\u7EC8\u7AEF\u4E0A\u767B\u5F55\u65F6\uFF0C\u5728\u4F7F\u7528\u7ED3\u675F\u65F6\u60A8\u603B\u5E94\u6CE8\u9500\u767B\u51FA\u3002"),
+          vue.createElementVNode("p", null, "\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0D\u5BF9\u56E0\u60A8\u672A\u80FD\u4FDD\u6301\u4E2A\u4EBA\u4FE1\u606F\u7684\u79C1\u5BC6\u6027\u800C\u5BFC\u81F4\u7B2C\u4E09\u65B9\u8BBF\u95EE\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u8FDB\u800C\u9020\u6210\u7684\u5B89\u5168\u758F\u6F0F\u627F\u62C5\u8D23\u4EFB\u3002\u5C3D\u7BA1\u6709\u4E0A\u8FF0\u89C4\u5B9A\uFF0C\u5982\u679C\u53D1\u751F\u5176\u4ED6\u4EFB\u4F55\u4E92\u8054\u7F51\u7528\u6237\u672A\u7ECF\u6388\u6743\u4F7F\u7528\u60A8\u8D26\u53F7\u7684\u60C5\u51B5\u6216\u5176\u4ED6\u4EFB\u4F55\u5B89\u5168\u6F0F\u6D1E\uFF0C\u60A8\u5E94\u5F53\u7ACB\u5373\u901A\u77E5\u6211\u4EEC\u3002"),
+          vue.createElementVNode("p", null, "\u60A8\u7684\u534F\u52A9\u5C06\u6709\u52A9\u4E8E\u6211\u4EEC\u4FDD\u62A4\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u79C1\u5BC6\u6027\u3002"),
+          vue.createElementVNode("p", null, "\u4E94. \u6211\u4EEC\u5982\u4F55\u5904\u7406\u672A\u6210\u5E74\u4EBA\u63D0\u4F9B\u7684\u4E2A\u4EBA\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "1. \u6211\u4EEC\u5C06\u4E0D\u6EE1 18 \u5468\u5C81\u7684\u4EFB\u4F55\u4EBA\u5747\u89C6\u4E3A\u672A\u6210\u5E74\u4EBA\uFF0C\u6211\u4EEC\u975E\u5E38\u91CD\u89C6\u672A\u6210\u5E74\u4EBA\u4FE1\u606F\u7684\u4FDD\u62A4\u3002\u5728\u7535\u5B50\u5546\u52A1\u6D3B\u52A8\u4E2D\u6211\u4EEC\u63A8\u5B9A\u60A8\u5177\u6709\u76F8\u5E94\u7684\u6C11\u4E8B\u884C\u4E3A\u80FD\u529B\u3002\u5982\u60A8\u4E3A\u672A\u6210\u5E74\u4EBA\uFF0C\u6211\u4EEC\u8981\u6C42\u60A8\u8BF7\u60A8\u7684\u7236\u6BCD\u6216\u76D1\u62A4\u4EBA\u76D1\u62A4\u3001\u6307\u5BFC\u4E0B\u5171\u540C\u4ED4\u7EC6\u9605\u8BFB\u672C\u9690\u79C1\u653F\u7B56\uFF0C\u5E76\u5728\u5F81\u5F97\u60A8\u7684\u7236\u6BCD\u6216\u76D1\u62A4\u4EBA\u540C\u610F\u7684\u524D\u63D0\u4E0B\u4F7F\u7528\u6211\u4EEC\u7684\u670D\u52A1\u6216\u5411\u6211\u4EEC\u63D0\u4F9B\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "2. \u5BF9\u4E8E\u7ECF\u7236\u6BCD\u6216\u76D1\u62A4\u4EBA\u540C\u610F\u4F7F\u7528\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u800C\u6536\u96C6\u672A\u6210\u5E74\u4EBA\u4E2A\u4EBA\u4FE1\u606F\u7684\u60C5\u51B5\uFF0C\u6211\u4EEC\u53EA\u4F1A\u5728\u6CD5\u5F8B\u5141\u8BB8\u7684\u8303\u56F4\u5185\uFF0C\u6216\u4F9D\u5F53\u5730\u6CD5\u5F8B\u53D6\u5F97\u76D1\u62A4\u4EBA\u7684\u540C\u610F\uFF0C\u6216\u662F\u4E3A\u4E86\u4FDD\u62A4\u672A\u6210\u5E74\u4EBA\u800C\u4F7F\u7528\u6216\u62AB\u9732\u6709\u5173\u672A\u6210\u5E74\u4EBA\u7684\u4E2A\u4EBA\u6570\u636E\u3002"),
+          vue.createElementVNode("p", null, "3. \u6211\u4EEC\u8BA4\u4E3A\u76D1\u7763\u5B69\u5B50\u4F7F\u7528\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u662F\u5BB6\u957F\u6216\u76D1\u62A4\u4EBA\u7684\u8D23\u4EFB\u3002\u6211\u4EEC\u4E0D\u76F4\u63A5\u5411\u513F\u7AE5\u63D0\u4F9B\u670D\u52A1\uFF0C\u4E5F\u4E0D\u5C06\u513F\u7AE5\u7684\u4E2A\u4EBA\u4FE1\u606F\u7528\u4E8E\u8425\u9500\u76EE\u7684\u3002\u82E5\u60A8\u662F\u672A\u6210\u5E74\u4EBA\u7684\u5BB6\u957F\u6216\u76D1\u62A4\u4EBA\uFF0C\u5F53\u60A8\u5BF9\u60A8\u6240\u76D1\u62A4\u7684\u672A\u6210\u5E74\u4EBA\u7684\u4E2A\u4EBA\u4FE1\u606F\u6709\u76F8\u5173\u7591\u95EE\u65F6\uFF0C\u6216\u8BA4\u4E3A\u672A\u6210\u5E74\u4EBA\u5411\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u63D0\u4EA4\u4E86\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u8BF7\u901A\u8FC7\u672C\u9690\u79C1\u653F\u7B56\u7B2C\u5341\u4E00\u6761\u4E2D\u516C\u793A\u7684\u8054\u7CFB\u65B9\u5F0F\u4E0E\u6211\u4EEC\u8054\u7CFB\u3002"),
+          vue.createElementVNode("p", null, "\u516D. \u6211\u4EEC\u5982\u4F55\u5171\u4EAB\u3001\u8F6C\u8BA9\u3001\u516C\u5F00\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "6.1 \u5171\u4EAB"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u4E0D\u4F1A\u5C06\u4EFB\u4F55\u4E2A\u4EBA\u4FE1\u606F\u51FA\u552E\u7ED9\u7B2C\u4E09\u65B9\u3002"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u6709\u65F6\u53EF\u80FD\u4F1A\u5411\u7B2C\u4E09\u65B9\u5171\u4EAB\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u4EE5\u4FBF\u63D0\u4F9B\u6216\u6539\u8FDB\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\uFF0C\u5305\u62EC\u6839\u636E\u60A8\u7684\u8981\u6C42\u63D0\u4F9B\u4EA7\u54C1\u6216\u670D\u52A1\u3002\u5982\u679C\u60A8\u4E0D\u518D\u5E0C\u671B\u6211\u4EEC\u5171\u4EAB\u8FD9\u4E9B\u4FE1\u606F\uFF0C\u8BF7\u53D1\u9001\u7535\u5B50\u90AE\u4EF6\u5230kingtran@sina.cn\u8054\u7CFB\u6211\u4EEC\u3002"),
+          vue.createElementVNode("p", null, "6.1.1\u60A8\u4E3B\u52A8\u9009\u62E9\u7684\u5171\u4EAB"),
+          vue.createElementVNode("p", null, "\u5728\u83B7\u5F97\u60A8\u7684\u660E\u786E\u540C\u610F\u6216\u4E3B\u52A8\u9009\u62E9\u7684\u60C5\u51B5\u4E0B\uFF0C\u4E0E\u60A8\u6307\u5B9A\u7684\u7B2C\u4E09\u65B9\u5171\u4EAB\u60A8\u6388\u6743/\u8BF7\u6C42\u8303\u56F4\u5185\u7684\u4FE1\u606F\u3002\u4F8B\u5982\uFF0C\u60A8\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u5FEB\u6377\u767B\u5F55\u7B2C\u4E09\u65B9\u7F51\u7AD9\u6216\u8005APP\u3002"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u4F1A\u63D0\u4F9B\u793E\u4EA4\u7F51\u7EDC\u670D\u52A1\uFF0C\u60A8\u5728\u4F7F\u7528\u8FD9\u4E00\u7C7B\u578B\u670D\u52A1\u65F6\uFF0C\u60A8\u6240\u4E0A\u4F20\u6216\u53D1\u5E03\u7684\u4FE1\u606F\uFF08\u5305\u62EC\u60A8\u516C\u5F00\u7684\u4E2A\u4EBA\u4FE1\u606F\u3001\u60A8\u7684\u901A\u8BAF\u5F55\u3001\u597D\u53CB\u5708\uFF09\u3001\u60A8\u5BF9\u4ED6\u4EBA\u4E0A\u4F20\u6216\u53D1\u5E03\u7684\u4FE1\u606F\u4F5C\u51FA\u7684\u56DE\u5E94\uFF0C\u4EE5\u53CA\u4E0E\u8FD9\u4E9B\u4FE1\u606F\u6709\u5173\u7684\u65E5\u5FD7\u4FE1\u606F\u7B49\uFF0C\u53EA\u8981\u60A8\u4E0D\u5220\u9664\u8FD9\u4E9B\u4FE1\u606F\uFF0C\u5B83\u4EEC\u4F1A\u4E00\u76F4\u7559\u5B58\u5728\u516C\u5171\u9886\u57DF\uFF0C\u5E76\u88AB\u4F7F\u7528\u6211\u4EEC\u670D\u52A1\u7684\u5176\u4ED6\u7528\u6237\u5206\u4EAB\u3001\u6D4F\u89C8\u3002\u5373\u4F7F\u60A8\u5220\u9664\u8FD9\u4E9B\u4FE1\u606F\uFF0C\u6709\u5173\u4FE1\u606F\u4ECD\u53EF\u80FD\u7531\u5176\u4ED6\u7528\u6237\u6216\u4E0D\u53D7\u6211\u4EEC\u63A7\u5236\u7684\u975E\u5173\u8054\u7B2C\u4E09\u65B9\u72EC\u7ACB\u5730\u7F13\u5B58\u3001\u590D\u5236\u6216\u50A8\u5B58\uFF0C\u6216\u7531\u5176\u4ED6\u7528\u6237\u6216\u7B2C\u4E09\u65B9\u5728\u516C\u5171\u9886\u57DF\u4FDD\u5B58\u3002"),
+          vue.createElementVNode("p", null, "\u8BF7\u60A8\u8C28\u614E\u8003\u8651\u901A\u8FC7\u6211\u4EEC\u7684\u670D\u52A1\u4E0A\u4F20\u3001\u53D1\u5E03\u548C\u4EA4\u6D41\u7684\u4FE1\u606F\u5185\u5BB9\u3002\u5728\u4E00\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u60A8\u53EF\u901A\u8FC7\u6211\u4EEC\u67D0\u4E9B\u670D\u52A1\u7684\u9690\u79C1\u8BBE\u5B9A\u6765\u63A7\u5236\u6709\u6743\u6D4F\u89C8\u60A8\u5171\u4EAB\u4FE1\u606F\u7684\u7528\u6237\u8303\u56F4\u3002\u60A8\u53EF\u4EE5\u81EA\u884C\u5220\u9664\u60A8\u4E0A\u4F20\u3001\u53D1\u5E03\u6216\u5206\u4EAB\u7684\u4FE1\u606F\uFF0C\u5982\u8981\u6C42\u6211\u4EEC\u4E3A\u60A8\u5220\u9664\u60A8\u7684\u76F8\u5173\u4FE1\u606F\uFF0C\u8BF7\u53D1\u9001\u90AE\u4EF6\u5230 kingtran@sina.cn \u4E0E\u6211\u4EEC\u8054\u7EDC\u5E76\u63D0\u51FA\u60A8\u7684\u8981\u6C42\uFF0C\u6211\u4EEC\u4F1A\u5728\u6536\u5230\u540E15\u4E2A\u5DE5\u4F5C\u65E5\u5185\u5B8C\u6210\u5E76\u6838\u67E5\u548C\u5904\u7406\u3002"),
+          vue.createElementVNode("p", null, "6.1.2 \u4E0E\u6211\u4EEC\u7684\u5173\u8054\u516C\u53F8\u5171\u4EAB\u4FE1\u606F"),
+          vue.createElementVNode("p", null, "\u4E3A\u4E86\u987A\u5229\u5730\u4ECE\u4E8B\u5546\u4E1A\u7ECF\u8425\uFF0C\u4EE5\u5411\u60A8\u63D0\u4F9B\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u5168\u90E8\u529F\u80FD\uFF0C\u6211\u4EEC\u53EF\u80FD\u4E0D\u65F6\u4E0E\u5176\u4ED6\u7684\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5173\u8054\u516C\u53F8\u5171\u4EAB\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "6.1.3 \u4E0E\u7B2C\u4E09\u65B9\u670D\u52A1\u63D0\u4F9B\u5546\u4E0E\u4E1A\u52A1\u5408\u4F5C\u4F19\u4F34\u5171\u4EAB"),
+          vue.createElementVNode("p", null, "\u4E3A\u4FDD\u8BC1\u5411\u60A8\u63D0\u4F9B\u672C\u9690\u79C1\u653F\u7B56\u76EE\u7684\u6240\u8FF0\u7684\u670D\u52A1\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u5411\u7B2C\u4E09\u65B9\u670D\u52A1\u63D0\u4F9B\u5546\u4E0E\u4E1A\u52A1\u5408\u4F5C\u4F19\u4F34\u7B49\u7B2C\u4E09\u65B9\u5171\u4EAB\u5FC5\u8981\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "\u8FD9\u5305\u62EC\u6211\u4EEC\u7684\u7269\u6D41\u4F9B\u5E94\u5546\u3001\u6570\u636E\u4E2D\u5FC3\u3001\u6570\u636E\u5B58\u50A8\u8BBE\u65BD\u3001\u5BA2\u6237\u670D\u52A1\u4F9B\u5E94\u5546\u3001\u5E7F\u544A\u548C\u8425\u9500\u670D\u52A1\u4F9B\u5E94\u5546\u4EE5\u53CA\u5176\u4ED6\u4E1A\u52A1\u5408\u4F5C\u4F19\u4F34\uFF0C\u6BD4\u5982\uFF1A\u652F\u4ED8\u5B9D\uFF08\u4E2D\u56FD\uFF09\u7F51\u7EDC\u6280\u672F\u6709\u9650\u516C\u53F8\u3001\u6DF1\u5733\u5E02\u817E\u8BAF\u8BA1\u7B97\u673A\u7CFB\u7EDF\u6709\u9650\u516C\u53F8\u3001\u9AD8\u5FB7\u8F6F\u4EF6\u6709\u9650\u516C\u53F8\u7B49\u3002\u8FD9\u4E9B\u7B2C\u4E09\u65B9\u53EF\u80FD\u4EE3\u8868\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u6216\u51FA\u4E8E\u672C\u9690\u79C1\u653F\u7B56\u7684\u4E00\u9879\u6216\u591A\u9879\u76EE\u7684\u5904\u7406\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u6211\u4EEC\u4FDD\u8BC1\u4EC5\u51FA\u4E8E\u6B63\u5F53\u3001\u5408\u6CD5\u3001\u5FC5\u8981\u3001\u7279\u5B9A\u3001\u660E\u786E\u7684\u76EE\u7684\u5171\u4EAB\u4E3A\u60A8\u63D0\u4F9B\u670D\u52A1\u6240\u5FC5\u8981\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5C06\u8FDB\u884C\u5C3D\u804C\u8C03\u67E5\u5E76\u7B7E\u8BA2\u5408\u540C\uFF0C\u4EE5\u786E\u4FDD\u7B2C\u4E09\u65B9\u670D\u52A1\u63D0\u4F9B\u5546\u9075\u5B88\u60A8\u6240\u5C5E\u53F8\u6CD5\u7BA1\u8F96\u533A\u4E2D\u9002\u7528\u7684\u9690\u79C1\u6CD5\u5F8B\u3002\u7B2C\u4E09\u65B9\u670D\u52A1\u63D0\u4F9B\u5546\u4E5F\u53EF\u80FD\u62E5\u6709\u5176\u5B50\u5904\u7406\u8005\u3002"),
+          vue.createElementVNode("p", null, "\u4E3A\u63D0\u4F9B\u6210\u6548\u8861\u91CF\u3001\u5206\u6790\u548C\u5176\u4ED6\u5546\u4E1A\u670D\u52A1\uFF0C\u6211\u4EEC\u8FD8\u53EF\u80FD\u4EE5\u6C47\u603B\u7684\u5F62\u5F0F\u4E0E\u7B2C\u4E09\u65B9\uFF08\u4F8B\u5982\u5411\u6211\u4EEC\u7684\u5E7F\u544A\u5546\uFF09\u5171\u4EAB\u4FE1\u606F\uFF08\u975E\u4E2A\u4EBA\u4FE1\u606F\uFF09\u3002\u6211\u4EEC\u4F7F\u7528\u6240\u638C\u63E1\u7684\u4FE1\u606F\u6765\u5E2E\u52A9\u5E7F\u544A\u4E3B\u548C\u5176\u4ED6\u5408\u4F5C\u4F19\u4F34\u8BC4\u4F30\u4ED6\u4EEC\u5E7F\u544A\u548C\u670D\u52A1\u7684\u6210\u6548\u53CA\u8986\u76D6\u60C5\u51B5\uFF0C\u5E76\u4E86\u89E3\u4F7F\u7528\u4ED6\u4EEC\u670D\u52A1\u7684\u4EBA\u7FA4\u7C7B\u578B\u4EE5\u53CA\u4EBA\u4EEC\u5982\u4F55\u4E0E\u5176\u7F51\u7AD9\u3001\u5E94\u7528\u548C\u670D\u52A1\u4E92\u52A8\u3002\u6211\u4EEC\u4E5F\u53EF\u80FD\u4E0E\u5176\u5171\u4EAB\u6211\u4EEC\u670D\u52A1\u7684\u4E00\u822C\u4F7F\u7528\u8D8B\u52BF\uFF0C\u4F8B\u5982\u8D2D\u4E70\u67D0\u4E9B\u4EA7\u54C1\u6216\u4ECE\u4E8B\u67D0\u4E9B\u4EA4\u6613\u7684\u7279\u5B9A\u4EBA\u7FA4\u4E2D\u7684\u5BA2\u6237\u6570\u91CF\u3002"),
+          vue.createElementVNode("p", null, "\u63A5\u5165\u7B2C\u4E09\u65B9\u670D\u52A1\u7684\u60C5\u5F62\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u63A5\u5165\u7B2C\u4E09\u65B9SDK\u670D\u52A1\uFF0C\u5E76\u5C06\u6211\u4EEC\u4F9D\u7167\u672C\u653F\u7B56\u6536\u96C6\u7684\u60A8\u67D0\u4E9B\u4FE1\u606F\u5171\u4EAB\u7ED9\u8BE5\u7B49\u7B2C\u4E09\u65B9\u670D\u52A1\u5546\uFF0C\u4EE5\u4FBF\u63D0\u9AD8\u66F4\u597D\u7684\u5BA2\u6237\u670D\u52A1\u548C\u7528\u6237\u4F53\u9A8C\u3002"),
+          vue.createElementVNode("p", null, "\u76EE\u524D\uFF0C\u6211\u4EEC\u63A5\u5165\u7684\u7B2C\u4E09\u65B9\u670D\u52A1\u5546\u4E3B\u8981\u5305\u62EC\u4EE5\u4E0B\u51E0\u79CD\u7C7B\u578B\uFF1A1.\u7528\u4E8E\u6D88\u606F\u63A8\u9001\u529F\u80FD\uFF0C\u5305\u62EC\u6536\u96C6\u5382\u5546Push\u63A8\u9001\u3001\u7279\u5B9A\u4E8B\u4EF6\u63D0\u9192\u7B49\uFF1B2.\u7528\u4E8E\u652F\u4ED8\u76F8\u5173\u670D\u52A1\uFF0C\u5305\u62EC\u8BA2\u5355\u652F\u4ED8\u3001\u4EA4\u6613\u884C\u4E3A\u6838\u9A8C\u3001\u6536\u5165\u7ED3\u7B97\u3001\u652F\u4ED8\u4FE1\u606F\u6C47\u603B\u7EDF\u8BA1\u7B49\uFF1B3.\u7528\u4E8E\u5728\u60A8\u540C\u610F\u7684\u60C5\u51B5\u4E0B\u83B7\u53D6\u8BBE\u5907\u4F4D\u7F6E\u6743\u9650\u3001\u641C\u96C6\u8BBE\u5907\u4FE1\u606F\u548C\u65E5\u5FD7\u4FE1\u606F\u7B49\uFF1B4.\u7528\u4E8E\u7B2C\u4E09\u65B9\u6388\u6743\u670D\u52A1\uFF0C\u5305\u62EC\u7B2C\u4E09\u65B9\u8D26\u53F7\u767B\u9646\u3001\u5C06\u6709\u5173\u5185\u5BB9\u5206\u4EAB\u81F3\u7B2C\u4E09\u65B9\u4EA7\u54C1\u7B49\uFF1B5.\u7528\u4E8E\u5E7F\u544A\u76F8\u5173\u670D\u52A1\uFF0C\u5305\u62EC\u5E7F\u544A\u5C55\u793A\u3001\u5E7F\u544A\u7EDF\u8BA1\u53CA\u76D1\u63A7\u7B49\uFF1B6.\u7528\u4E8E\u652F\u6301\u4EA7\u54C1\u529F\u80FD\u6A21\u5757\uFF0C\u5305\u62EC\u76F4\u64AD\u3001\u89C6\u9891\u64AD\u653E\u3001\u667A\u80FD\u5BA2\u670D\u3001\u5185\u5BB9\u5B58\u50A8\u7B49\uFF1B7.\u7528\u4E8E\u4F18\u5316\u4EA7\u54C1\u6027\u80FD\uFF0C\u5305\u62EC\u63D0\u9AD8\u786C\u4EF6\u914D\u7F51\u80FD\u529B\u3001\u51CF\u4F4E\u670D\u52A1\u5668\u6210\u672C\u3001\u529F\u80FD\u70ED\u4FEE\u590D\u7B49\uFF1B8.\u7528\u4E8E\u8D26\u53F7\u5B89\u5168\u3001\u4EA7\u54C1\u52A0\u56FA\u76F8\u5173\u670D\u52A1\uFF0C\u5305\u62EC\u7F51\u7EDC\u76D1\u6D4B\u3001\u57DF\u540D\u89E3\u6790\u3001\u9632\u52AB\u6301\u3001\u53CD\u5783\u573E\u53CD\u4F5C\u5F0A\u3001\u52A0\u89E3\u5BC6\u670D\u52A1\u7B49\u3002\u6211\u4EEC\u4EC5\u4F1A\u51FA\u4E8E\u6B63\u5F53\u3001\u5FC5\u8981\u3001\u7279\u5B9A\u7684\u76EE\u7684\u5171\u4EAB\u60A8\u7684\u4FE1\u606F\u3002\u5BF9\u6211\u4EEC\u4E0E\u4E4B\u5171\u4EAB\u4FE1\u606F\u7684\u7B2C\u4E09\u65B9\u670D\u52A1\u5546\uFF0C\u6211\u4EEC\u4F1A\u8981\u6C42\u4ED6\u4EEC\u5C65\u884C\u76F8\u5173\u4FDD\u5BC6\u4E49\u52A1\u5E76\u91C7\u53D6\u76F8\u5E94\u7684\u5B89\u5168\u63AA\u65BD\u3002\u7B2C\u4E09\u65B9\u793E\u4EA4\u5A92\u4F53\u6216\u5176\u4ED6\u670D\u52A1\u7531\u76F8\u5173\u7684\u7B2C\u4E09\u65B9\u8D1F\u8D23\u8FD0\u8425\u3002\u60A8\u4F7F\u7528\u8BE5\u7B49\u7B2C\u4E09\u65B9\u7684\u793E\u4EA4\u5A92\u4F53\u670D\u52A1\u6216\u5176\u4ED6\u670D\u52A1\uFF08\u5305\u62EC\u60A8\u5411\u8BE5\u7B49\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u4EFB\u4F55\u4FE1\u606F\uFF09\uFF0C\u987B\u53D7\u7B2C\u4E09\u65B9\u81EA\u5DF1\u7684\u670D\u52A1\u6761\u6B3E\u53CA\u4FE1\u606F\u4FDD\u62A4\u58F0\u660E\uFF08\u800C\u975E\u672C\u653F\u7B56\uFF09\u7EA6\u675F\uFF0C\u60A8\u9700\u8981\u4ED4\u7EC6\u9605\u8BFB\u5176\u6761\u6B3E\u3002\u672C\u653F\u7B56\u4EC5\u9002\u7528\u4E8E\u6211\u4EEC\u6240\u6536\u96C6\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u5E76\u4E0D\u9002\u7528\u4E8E\u4EFB\u4F55\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u670D\u52A1\u6216\u7B2C\u4E09\u65B9\u7684\u4FE1\u606F\u4F7F\u7528\u89C4\u5219\u3002\u5982\u60A8\u53D1\u73B0\u8FD9\u4E9B\u7B2C\u4E09\u65B9\u793E\u4EA4\u5A92\u4F53\u6216\u5176\u4ED6\u670D\u52A1\u5B58\u5728\u98CE\u9669\u65F6\uFF0C\u5EFA\u8BAE\u60A8\u7EC8\u6B62\u76F8\u5173\u64CD\u4F5C\u4EE5\u4FDD\u62A4\u60A8\u7684\u5408\u6CD5\u6743\u76CA\u3002"),
+          vue.createElementVNode("p", null, "6.1.4 \u5176\u4ED6"),
+          vue.createElementVNode("p", null, "\u6839\u636E\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u8981\u6C42\u3001\u6CD5\u5F8B\u7A0B\u5E8F\u3001\u8BC9\u8BBC\u548C/\u6216\u516C\u5171\u673A\u6784\u548C\u653F\u5E9C\u90E8\u95E8\u4F9D\u6CD5\u63D0\u51FA\u7684\u8981\u6C42\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u53EF\u80FD\u6709\u5FC5\u8981\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u5982\u679C\u6211\u4EEC\u786E\u5B9A\u5C31\u56FD\u5BB6\u5B89\u5168\u3001\u6267\u6CD5\u6216\u5177\u6709\u516C\u4F17\u91CD\u8981\u6027\u7684\u5176\u4ED6\u4E8B\u5B9C\u800C\u8A00\uFF0C\u62AB\u9732\u662F\u5FC5\u987B\u7684\u6216\u9002\u5F53\u7684\uFF0C\u6211\u4EEC\u4E5F\u53EF\u80FD\u4F1A\u62AB\u9732\u5173\u4E8E\u60A8\u7684\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "\u5982\u679C\u6211\u4EEC\u786E\u5B9A\u4E3A\u4E86\u6267\u884C\u6211\u4EEC\u7684\u6761\u6B3E\u6216\u4FDD\u62A4\u6211\u4EEC\u7684\u7ECF\u8425\u3001\u6743\u5229\u3001\u8D44\u4EA7\u6216\u4EA7\u54C1\uFF0C\u6216\u4FDD\u62A4\u7528\u6237\uFF0C\u6216\u5BF9\u4E8E\u8FBE\u6210\u4EE5\u4E0B\u76EE\u7684\uFF08\u68C0\u6D4B\u3001\u9884\u9632\u5E76\u89E3\u51B3\u6B3A\u8BC8\u3001\u5BF9\u4EA7\u54C1\u7684\u672A\u6388\u6743\u4F7F\u7528\u3001\u5BF9\u6211\u4EEC\u6761\u6B3E\u6216\u653F\u7B56\u7684\u8FDD\u53CD\u6216\u5176\u4ED6\u6709\u5BB3\u6216\u975E\u6CD5\u6D3B\u52A8\uFF09\u62AB\u9732\u662F\u5408\u7406\u5FC5\u8981\u7684\uFF0C\u6211\u4EEC\u4E5F\u53EF\u80FD\u4F1A\u62AB\u9732\u5173\u4E8E\u60A8\u7684\u4FE1\u606F\u3002\uFF08\u4E3A\u907F\u514D\u7591\u95EE\uFF0C\u5728\u5F53\u5730\u6570\u636E\u4FDD\u62A4\u6CD5\u5F8B\u660E\u786E\u8BB8\u53EF\u7684\u8303\u56F4\u5185\u4E14\u4EC5\u9650\u5728\u6B64\u60C5\u51B5\u4E0B\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u624D\u4F1A\u5728\u672A\u7ECF\u60A8\u540C\u610F\u7684\u60C5\u51B5\u4E0B\u6536\u96C6\u3001\u4F7F\u7528\u6216\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\uFF09\u8FD9\u53EF\u80FD\u5305\u62EC\u5411\u516C\u5171\u6216\u653F\u5E9C\u673A\u6784\u63D0\u4F9B\u4FE1\u606F\uFF1B\u4E0E\u7B2C\u4E09\u65B9\u5408\u4F5C\u4F19\u4F34\u4EA4\u6D41\u6709\u5173\u60A8\u8D26\u6237\u53EF\u9760\u6027\u65B9\u9762\u7684\u4FE1\u606F\uFF0C\u4EE5\u9632\u6B62\u5728\u6211\u4EEC\u4EA7\u54C1\u5185\u5916\u6240\u8FDB\u884C\u7684\u6B3A\u8BC8\u3001\u8FDD\u89C4\u7B49\u5176\u4ED6\u6709\u5BB3\u884C\u4E3A\u3002"),
+          vue.createElementVNode("p", null, "\u6B64\u5916\uFF0C\u6211\u4EEC\u53EF\u80FD\u4E0E\u4E0B\u5217\u4EBA\u5458\u5171\u4EAB\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF1A\xB7 \u6211\u4EEC\u7684\u4F1A\u8BA1\u5E08\u3001\u5BA1\u8BA1\u5E08\u3001\u5F8B\u5E08\u6216\u7C7B\u4F3C\u7684\u987E\u95EE\uFF0C\u5F53\u6211\u4EEC\u8981\u6C42\u4ED6\u4EEC\u63D0\u4F9B\u4E13\u4E1A\u5EFA\u8BAE\u65F6\uFF1B\u4EE5\u53CA\xB7 \u6295\u8D44\u8005\u4EE5\u53CA\u5176\u4ED6\u76F8\u5173\u7B2C\u4E09\u65B9\uFF0C\u5982\u679C\u53D1\u751F\u5B9E\u9645\u6216\u6F5C\u5728\u7684\u51FA\u552E\u6216\u5176\u4ED6\u516C\u53F8\u4EA4\u6613\uFF0C\u4E14\u4E0E\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u5B9E\u4F53\u76F8\u5173\u65F6\uFF1B\u4EE5\u53CA\xB7 \u5176\u4ED6\u4EFB\u4F55\u7B2C\u4E09\u65B9\uFF0C\u5982\u7ECF\u60A8\u6388\u6743\u5C31\u7279\u5B9A\u4FE1\u606F\u8FDB\u884C\u62AB\u9732\u5171\u4EAB\u3002"),
+          vue.createElementVNode("p", null, "6.2 \u8F6C\u8BA9"),
+          vue.createElementVNode("p", null, "\u9664\u4EE5\u4E0B\u60C5\u5F62\u5916\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0D\u4F1A\u5C06\u60A8\u7684\u4FE1\u606F\u8F6C\u8BA9\u7ED9\u4EFB\u4F55\u4E3B\u4F53\uFF1A* \u83B7\u5F97\u60A8\u7684\u660E\u786E\u540C\u610F\uFF1B* \u5982\u679C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u53C2\u4E0E\u517C\u5E76\u3001\u6536\u8D2D\u6216\u51FA\u552E\u5176\u8D44\u4EA7\u7684\u5168\u90E8\u6216\u90E8\u5206\uFF0C\u6211\u4EEC\u5C06\u901A\u8FC7\u7535\u5B50\u90AE\u4EF6\u548C/\u6216\u5728\u6211\u4EEC\u7F51\u7AD9\u4E0A\u53D1\u5E03\u9192\u76EE\u901A\u77E5\uFF0C\u544A\u77E5\u5BF9\u60A8\u4E2A\u4EBA\u4FE1\u606F\u6240\u6709\u6743\u3001\u4F7F\u7528\u65B9\u9762\u7684\u4EFB\u4F55\u53D8\u5316\uFF0C\u4EE5\u53CA\u60A8\u53EF\u80FD\u62E5\u6709\u7684\u5173\u4E8E\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u4EFB\u4F55\u9009\u62E9\u3002"),
+          vue.createElementVNode("p", null, "6.3 \u516C\u5F00\u62AB\u9732"),
+          vue.createElementVNode("p", null, "\u9664\u5728\u516C\u5E03\u4E2D\u5956\u6D3B\u52A8\u540D\u5355\u65F6\u4F1A\u8131\u654F\u5C55\u793A\u4E2D\u5956\u8005\u7684\u624B\u673A\u53F7\u6216\u8005\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u8D26\u53F7\u3001\u7528\u6237\u540D\u5916\uFF0C\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4EC5\u4F1A\u5728\u4EE5\u4E0B\u60C5\u51B5\u4E0B\uFF0C\u516C\u5F00\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF1A"),
+          vue.createElementVNode("p", null, "* \u83B7\u5F97\u60A8\u7684\u660E\u786E\u540C\u610F\uFF1B"),
+          vue.createElementVNode("p", null, "* \u57FA\u4E8E\u6CD5\u5F8B\u6216\u5408\u7406\u4F9D\u636E\u7684\u516C\u5F00\u62AB\u9732\uFF1A\u5305\u62EC\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u8303\u3001\u6CD5\u5F8B\u7A0B\u5E8F\u3001\u8BC9\u8BBC\u6216\u5E94\u653F\u5E9C\u4E3B\u7BA1\u90E8\u95E8\u8981\u6C42\u3002"),
+          vue.createElementVNode("p", null, "\u4E03. \u4FE1\u606F\u7684\u5B58\u50A8"),
+          vue.createElementVNode("p", null, "1. \u4FE1\u606F\u5B58\u50A8\u7684\u5730\u70B9"),
+          vue.createElementVNode("p", null, "\u6211\u4EEC\u4F1A\u6309\u7167\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\uFF0C\u5C06\u5883\u5185\u6536\u96C6\u7684\u7528\u6237\u4E2A\u4EBA\u4FE1\u606F\u5B58\u50A8\u4E8E\u4E2D\u56FD\u5883\u5185\u3002"),
+          vue.createElementVNode("p", null, "2. \u4FE1\u606F\u5B58\u50A8\u7684\u671F\u9650"),
+          vue.createElementVNode("p", null, "\u4E00\u822C\u800C\u8A00\uFF0C\u6211\u4EEC\u4EC5\u4E3A\u5B9E\u73B0\u76EE\u7684\u6240\u5FC5\u9700\u7684\u65F6\u95F4\u4FDD\u7559\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u4F8B\u5982\uFF1A"),
+          vue.createElementVNode("p", null, "\u624B\u673A\u53F7\u7801\uFF1A\u82E5\u60A8\u9700\u8981\u4F7F\u7528\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u670D\u52A1\uFF0C\u6211\u4EEC\u9700\u8981\u4E00\u76F4\u4FDD\u5B58\u60A8\u7684\u624B\u673A\u53F7\u7801\uFF0C\u4EE5\u4FDD\u8BC1\u60A8\u6B63\u5E38\u4F7F\u7528\u8BE5\u670D\u52A1\uFF0C\u5F53\u60A8\u6CE8\u9500 \u5065\u53D8 \u5E10\u6237\u540E\uFF0C\u6211\u4EEC\u5C06\u5220\u9664\u76F8\u5E94\u7684\u4FE1\u606F\uFF1B"),
+          vue.createElementVNode("p", null, "\u793E\u533A\u4FE1\u606F\uFF1A\u5F53\u60A8\u53D1\u9001\u4E86\u793E\u533A\u5206\u4EAB\uFF0C\u6211\u4EEC\u9700\u8981\u4FDD\u5B58\u60A8\u7684\u793E\u533A\u4FE1\u606F\uFF0C\u4EE5\u4FDD\u8BC1\u60A8\u6B63\u5E38\u4F7F\u7528\u793E\u533A\u529F\u80FD\uFF0C\u5F53\u60A8\u5220\u9664\u60A8\u7684\u793E\u533A\u4FE1\u606F\u540E\uFF0C\u6211\u4EEC\u5C06\u5220\u9664\u76F8\u5E94\u7684\u4FE1\u606F\u3002"),
+          vue.createElementVNode("p", null, "\u5F53\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u53D1\u751F\u505C\u6B62\u8FD0\u8425\u7684\u60C5\u5F62\u65F6\uFF0C\u6211\u4EEC\u5C06\u4EE5\u63A8\u9001\u901A\u77E5\u3001\u516C\u544A\u7B49\u5F62\u5F0F\u901A\u77E5\u60A8\uFF0C\u5E76\u5728\u5408\u7406\u7684\u671F\u9650\u5185\u5220\u9664\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u6216\u8FDB\u884C\u533F\u540D\u5316\u5904\u7406\u3002"),
+          vue.createElementVNode("p", null, "\u516B. \u7B2C\u4E09\u65B9\u670D\u52A1\u63D0\u4F9B\u5546"),
+          vue.createElementVNode("p", null, "1. \u4E3A\u65B9\u4FBF\u60A8\u7684\u8BBF\u95EE\u5E76\u4E30\u5BCC\u60A8\u7684\u4F53\u9A8C\uFF0C\u53EF\u80FD\u4F1A\u6709\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u3002\u60A8\u53EF\u4EE5\u9009\u62E9\u662F\u5426\u8BBF\u95EE\u8FD9\u7C7B\u5185\u5BB9\u6216\u94FE\u63A5\uFF0C\u6216\u662F\u5426\u4F7F\u7528\u8BE5\u7B2C\u4E09\u65B9\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u3002\u4F46\u6211\u4EEC\u5BF9\u4E8E\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u6CA1\u6709\u63A7\u5236\u6743\u3002\u6211\u4EEC\u65E0\u6CD5\u63A7\u5236\u7B2C\u4E09\u65B9\u638C\u63E1\u7684\u60A8\u7684\u4EFB\u4F55\u4E2A\u4EBA\u4FE1\u606F\u3002\u60A8\u5728\u4F7F\u7528\u7B2C\u4E09\u65B9\u4EA7\u54C1\u6216\u670D\u52A1\u8FC7\u7A0B\u4E2D\u7684\u4FE1\u606F\u4FDD\u62A4\u95EE\u9898\uFF0C\u4E0D\u9002\u7528\u4E8E\u672C\u653F\u7B56\u7684\u7BA1\u7406\u3002\u672C\u653F\u7B56\u4E5F\u4E0D\u9002\u7528\u4E8E\u60A8\u81EA\u884C\u9009\u62E9\u63D0\u4F9B\u7ED9\u7B2C\u4E09\u65B9\u7684\u4EFB\u4F55\u4FE1\u606F\u3002\u8BF7\u60A8\u67E5\u770B\u8BE5\u7B2C\u4E09\u65B9\u7684\u9690\u79C1\u4FDD\u62A4\u653F\u7B56\u3002"),
+          vue.createElementVNode("p", null, "2. \u53C2\u52A0\u8425\u9500\u63A8\u5E7F\u6D3B\u52A8\u3002\u5F53\u60A8\u9009\u62E9\u53C2\u52A0\u6211\u4EEC\u4E3E\u529E\u7684\u6709\u5173\u8425\u9500\u6D3B\u52A8\u65F6\uFF0C\u6839\u636E\u6D3B\u52A8\u9700\u8981\u60A8\u9700\u8981\u63D0\u4F9B\u59D3\u540D\u3001\u901A\u4FE1\u5730\u5740\u3001\u8054\u7CFB\u65B9\u5F0F\u3001\u94F6\u884C\u8D26\u53F7\u7B49\u4FE1\u606F\uFF0C\u4EE5\u4FBF\u7B2C\u4E09\u65B9\u80FD\u53CA\u65F6\u5411\u60A8\u63D0\u4F9B\u5956\u54C1\u3002\u5F53\u60A8\u9009\u62E9\u53C2\u52A0\u6211\u4EEC\u4E3E\u529E\u7684\u6709\u5173\u8425\u9500\u6D3B\u52A8\u65F6\uFF0C\u6839\u636E\u6D3B\u52A8\u9700\u8981\u60A8\u9700\u8981\u63D0\u4F9B\u59D3\u540D\u3001\u901A\u4FE1\u5730\u5740\u3001\u8054\u7CFB\u65B9\u5F0F\u3001\u94F6\u884C\u8D26\u53F7\u7B49\u4FE1\u606F\u3002\u7ECF\u8FC7\u60A8\u7684\u660E\u793A\u540C\u610F\uFF0C\u6211\u4EEC\u4F1A\u5C06\u4E0A\u8FF0\u4FE1\u606F\u4E0E\u7B2C\u4E09\u65B9\u5171\u4EAB\uFF0C\u4EE5\u4FBF\u6211\u4EEC\u80FD\u59D4\u6258\u7B2C\u4E09\u65B9\u53CA\u65F6\u5411\u60A8\u63D0\u4F9B\u5956\u54C1\u3002"),
+          vue.createElementVNode("p", null, "\u4E5D.\u672C\u653F\u7B56\u7684\u66F4\u65B0"),
+          vue.createElementVNode("p", null, "1. \u6211\u4EEC\u53EF\u80FD\u4F1A\u4E0D\u5B9A\u671F\u4FEE\u6539\u3001\u66F4\u65B0\u672C\u9690\u79C1\u653F\u7B56\uFF0C\u6709\u5173\u9690\u79C1\u653F\u7B56\u7684\u66F4\u65B0\uFF0C\u6211\u4EEC\u4F1A\u5728 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u4E2D\u4EE5\u901A\u77E5\u516C\u544A\u7B49\u5F62\u5F0F\u53D1\u5E03\uFF0C\u60A8\u53EF\u4EE5\u8BBF\u95EE \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u67E5\u8BE2\u6700\u65B0\u7248\u672C\u7684\u9690\u79C1\u653F\u7B56\u3002\u5BF9\u4E8E\u91CD\u5927\u53D8\u66F4\uFF0C\u6211\u4EEC\u4F1A\u5411\u60A8\u53D1\u51FA\u90D1\u91CD\u901A\u77E5\uFF08\u5305\u62EC\u5BF9\u4E8E\u67D0\u4E9B\u670D\u52A1\uFF0C\u6211\u4EEC\u4F1A\u901A\u8FC7\u7535\u5B50\u90AE\u4EF6\u53D1\u9001\u901A\u77E5\uFF0C\u8BF4\u660E\u5BF9\u9690\u79C1\u653F\u7B56\u8FDB\u884C\u7684\u66F4\u6539\uFF09\u3002"),
+          vue.createElementVNode("p", null, "\u5341. \u9002\u7528\u8303\u56F4"),
+          vue.createElementVNode("p", null, "1. \u6211\u4EEC\u7684\u9690\u79C1\u653F\u7B56\u9002\u7528\u4E8E\u7531\u4E50\u9014\uFF08\u5E7F\u5DDE\uFF09\u5065\u8EAB\u79D1\u6280\u6709\u9650\u516C\u53F8\u53CA\u5176\u5173\u8054\u516C\u53F8\u63D0\u4F9B\u7684\u6240\u6709\u670D\u52A1\uFF0C\u5305\u62EC\u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0A\u63D0\u4F9B\u7684\u670D\u52A1\uFF0C\u4F46\u662F\u4E0D\u5305\u62EC\u9644\u6709\u72EC\u7ACB\u9690\u79C1\u653F\u7B56\u7684\u670D\u52A1\uFF08\u5982\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u4EA7\u54C1\u548C\u670D\u52A1\uFF09\u3002"),
+          vue.createElementVNode("p", null, "2. \u6211\u4EEC\u7684\u9690\u79C1\u6743\u653F\u7B56\u4E0D\u9002\u7528\u4E8E\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u4EA7\u54C1\u548C\u670D\u52A1\uFF0C\u4F8B\u5982\u5728 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1\u4E0A\u7531\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u4EA7\u54C1\u548C\u670D\u52A1\uFF0C\u4EE5\u53CA\u5728\u6211\u4EEC\u7684\u670D\u52A1\u4E2D\u94FE\u63A5\u5230\u7684\u5176\u4ED6\u7F51\u7AD9\uFF0C\u8FD9\u4E9B\u4EA7\u54C1\u3001\u670D\u52A1\u6216\u7F51\u7AD9\u4F1A\u6709\u72EC\u7ACB\u7684\u9690\u79C1\u653F\u7B56\u4E88\u4EE5\u89C4\u8303\uFF0C\u8BF7\u53E6\u884C\u67E5\u9605\u76F8\u5E94\u7684\u653F\u7B56\u89C4\u5B9A\u3002"),
+          vue.createElementVNode("p", null, "3. \u5BF9\u4E8E\u4E3A\u6211\u4EEC\u7684\u670D\u52A1\u8FDB\u884C\u5E7F\u544A\u5BA3\u4F20\uFF0C\u4EE5\u53CA\u53EF\u80FD\u4F7F\u7528\u6211\u4EEC\u7684 Cookie \u6216\u5176\u4ED6\u65E5\u5FD7\u4FE1\u606F\u6765\u6295\u653E\u548C\u4F7F\u7528\u5E7F\u544A\u7684\u5176\u4ED6\u516C\u53F8\u548C\u7EC4\u7EC7\uFF0C\u6211\u4EEC\u7684\u9690\u79C1\u6743\u653F\u7B56\u5E76\u672A\u6DB5\u76D6\u5176\u4FE1\u606F\u5904\u7406\u653F\u7B56\u3002"),
+          vue.createElementVNode("p", null, "\u5341\u4E00. \u5982\u4F55\u8054\u7CFB\u6211\u4EEC"),
+          vue.createElementVNode("p", null, "\u60A8\u53EF\u901A\u8FC7\u4EE5\u4E0B\u65B9\u5F0F\u4E0E\u6211\u4EEC\u8054\u7CFB\uFF1A"),
+          vue.createElementVNode("p", null, "1. \u5982\u5BF9\u672C\u653F\u7B56\u5185\u5BB9\u6709\u4EFB\u4F55\u7591\u95EE\u3001\u610F\u89C1\u6216\u5EFA\u8BAE\uFF0C\u60A8\u53EF\u901A\u8FC7 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u5728\u7EBF\u5BA2\u670D\u4E0E\u6211\u4EEC\u8054\u7CFB\uFF1B"),
+          vue.createElementVNode("p", null, "2. \u5982\u679C\u53D1\u73B0\u4E2A\u4EBA\u4FE1\u606F\u53EF\u80FD\u88AB\u6CC4\u9732\uFF0C\u60A8\u53EF\u4EE5\u901A\u8FC7 \u5065\u53D8\u53CA\u76F8\u5173\u4E92\u8054\u7F51\u4EA7\u54C1 \u6295\u8BC9\u4E3E\u62A5\uFF0C\u6211\u4EEC\u5C06\u572815\u4E2A\u5DE5\u4F5C\u65E5\u5185\u8054\u7EDC\u60A8\u5E76\u5B8C\u6210\u6838\u67E5\u548C\u5904\u7406\uFF1B"),
+          vue.createElementVNode("p", null, "3. \u6211\u4EEC\u8FD8\u8BBE\u7ACB\u4E86\u610F\u89C1\u3001\u5EFA\u8BAE\u53CD\u9988\u90AE\u7BB1\uFF0C\u60A8\u53EF\u4EE5\u901A\u8FC7 kingtran@sina.cn \u4E0E\u6211\u4EEC\u8054\u7CFB\uFF0C\u6211\u4EEC\u5C06\u572815\u4E2A\u5DE5\u4F5C\u65E5\u5185\u8054\u7EDC\u60A8\u5E76\u5B8C\u6210\u6838\u67E5\u548C\u5904\u7406\u3002")
         ])
       ]),
-      vue.createElementVNode("view", {
-        class: "is_agreement_style",
-        onClick: _cache[1] || (_cache[1] = (...args) => $options.goBack && $options.goBack(...args))
-      }, "\u6211\u5DF2\u9605\u8BFB\u5E76\u540C\u610F")
+      vue.createElementVNode("view", { class: "footer-box" }, [
+        vue.createElementVNode("view", {
+          class: "footer-btn van-button",
+          onClick: _cache[1] || (_cache[1] = (...args) => $options.goBack && $options.goBack(...args))
+        }, "\u6211\u5DF2\u9605\u8BFB\u5E76\u540C\u610F")
+      ])
     ]);
   }
   const PagesAgreementAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "D:/studyUninApp/bodybuilding-app/pages/agreement/agreement.vue"]]);
@@ -36837,34 +37360,58 @@ if (uni.restoreGlobal) {
             key: "uni_id_token",
             success: function(res2) {
               if (res2.data) {
-                let login2 = Es.importObject("login");
+                let login2 = Es.importObject("login", {
+                  customUI: true
+                });
                 login2.checkToken(res2.data).then((checkTokenRes) => {
                   plus.navigator.closeSplashscreen();
                 }).catch((err) => {
-                  formatAppLog("log", "at common/appInit.js:79", err, "\u6211\u662F\u9519\u8BEF");
-                  uni.reLaunch({
-                    url: "/pages/logining/logining",
-                    success: (res3) => {
-                    },
-                    fail: () => {
-                    },
-                    complete: () => {
-                    }
-                  });
-                  uni.clearStorage();
+                  formatAppLog("log", "at common/appInit.js:81", err, "\u6211\u662F\u9519\u8BEF");
+                  let tokenExpired = Es.getCurrentUserInfo().tokenExpired;
+                  if (tokenExpired > 0) {
+                    setTimeout(() => {
+                      login2.logout();
+                    }, 100);
+                    setTimeout(() => {
+                      uni.clearStorage();
+                      uni.reLaunch({
+                        url: "/pages/logining/logining"
+                      });
+                    }, 200);
+                    return;
+                  }
+                  if (tokenExpired == 0) {
+                    uni.clearStorage();
+                    uni.reLaunch({
+                      url: "/pages/logining/logining"
+                    });
+                  }
                 });
               }
             },
             fail: function(err) {
-              uni.reLaunch({
-                url: "/pages/logining/logining",
-                success: (res2) => {
-                },
-                fail: () => {
-                },
-                complete: () => {
-                }
+              let login2 = Es.importObject("login", {
+                customUI: true
               });
+              let tokenExpired = Es.getCurrentUserInfo().tokenExpired;
+              if (tokenExpired > 0) {
+                setTimeout(() => {
+                  login2.logout();
+                }, 100);
+                setTimeout(() => {
+                  uni.clearStorage();
+                  uni.reLaunch({
+                    url: "/pages/logining/logining"
+                  });
+                }, 200);
+                return;
+              }
+              if (tokenExpired == 0) {
+                uni.clearStorage();
+                uni.reLaunch({
+                  url: "/pages/logining/logining"
+                });
+              }
             }
           });
         }

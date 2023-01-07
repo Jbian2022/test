@@ -171,7 +171,9 @@ export default {
   methods: {
     // 获取用户信息
     getUserInfor() {
-      const login = uniCloud.importObject('login') //第一步导入云对象
+      const login = uniCloud.importObject('login', {
+	  customUI: true // 取消自动展示的交互提示界面
+	}) //第一步导入云对象
       try {
         login
           .getUserInfoMessage()
@@ -187,7 +189,9 @@ export default {
     },
     // 获取该教练的会员数量
     getCocachList() {
-      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      let businessCloudObject = uniCloud.importObject('businessCloudObject',{
+  customUI: true // 取消自动展示的交互提示界面
+})
 	  // businessCloudObject.removeAtion()
       businessCloudObject
         .getCoachMemberList()
@@ -238,7 +242,9 @@ export default {
         // error
       }
       // 判断蓝卡会员还是金卡会员
-      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      let businessCloudObject = uniCloud.importObject('businessCloudObject',{
+		  customUI: true // 取消自动展示的交互提示界面
+		})
       businessCloudObject
         .getCoachMemberList()
         .then((res) => {

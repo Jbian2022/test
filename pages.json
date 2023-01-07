@@ -4,12 +4,16 @@
 			"path": "pages/myMebers/myMebers",
 			"style": {
 				"navigationBarTitleText": "我的会员",
-				"enablePullDownRefresh": true,
-				"onReachBottomDistance": 100,
 				"navigationStyle": "custom",
 				"autoBackButton": false,
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"pullToRefresh": {
+						"support": true,
+						"color": "#ff3333",
+						"style": "circle",
+						"offset": "50%"
+					}
 				},
 				"navigationBarTextStyle": "white"
 			}

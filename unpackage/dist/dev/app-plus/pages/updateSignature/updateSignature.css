@@ -41,7 +41,6 @@
 }
 .m-picker__case .handle .button[data-v-3551bfb1] {
   font-size: 1.5rem;
-  font-family: PingFang SC;
   font-weight: 500;
   color: #000000;
 }
@@ -74,19 +73,16 @@
 }
 .m-picker__case .handle .cancel[data-v-3551bfb1] {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #7a7f89;
 }
 .m-picker__case .handle .button.confirm[data-v-3551bfb1] {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #f4f7ff !important;
 }
 .picker-view__item[data-v-3551bfb1] {
   font-size: 0.9375rem;
-  font-family: SFPro-Regular, SFPro;
   font-weight: 400;
   color: #f4f7ff;
 }
@@ -108,7 +104,6 @@
 }
 [data-v-3551bfb1] .uni-picker-view-content .item {
   font-size: 0.9375rem;
-  font-family: SFPro-Regular, SFPro;
   font-weight: 400;
   color: #F4F7FF;
   line-height: 50px;

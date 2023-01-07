@@ -16,6 +16,7 @@
         class="phone"
         focus
         placeholder="请输入手机号"
+		:adjust-position="false"
       />
 
       <!--   <van-field
@@ -147,7 +148,9 @@ export default {
       }
       if (this.controlActiveFlag) {
         // 发送验证码
-        const login = uniCloud.importObject('login') //第一步导入云对象
+        const login = uniCloud.importObject('login', {
+  customUI: true // 取消自动展示的交互提示界面
+}) //第一步导入云对象
         try {
           const smsRes = await login.sendSmsCode(this.phone)
           console.log(smsRes, '登录成功')
