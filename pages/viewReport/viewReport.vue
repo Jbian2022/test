@@ -65,7 +65,7 @@
 			<view class="title">{{pageName}}</view>
 			<view class="z" style="opacity: 0;">8888</view>
 		</view>
-		<view v-show="isFixedTop" class="arrow-box"></view>
+		<!-- <view v-show="isFixedTop" class="arrow-box"></view> -->
 		<view id="viewReport">
 		<view class="backImg"></view>
 		<view class="titleText" v-if="openKey">
@@ -152,8 +152,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[1].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[1].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							其他被确诊的疾病
 						</view>
@@ -163,8 +163,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[2].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[2].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							关节、韧带和肌肉是否受过任何损伤
 						</view>
@@ -174,8 +174,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[3].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[3].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							是否曾经骨折
 						</view>
@@ -185,8 +185,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[4].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[4].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							最近的体重是否有大幅度的变化
 						</view>
@@ -196,8 +196,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[5].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[5].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							最近的体重是否有大幅度的变化
 						</view>
@@ -207,8 +207,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[6].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[6].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							最近的体重是否有大幅度的变化
 						</view>
@@ -218,8 +218,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[7].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[7].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							最近的体重是否有大幅度的变化
 						</view>
@@ -229,8 +229,8 @@
 						</view>
 					</view>
 					<view v-for="(items,index) in HQDate">
-					<view class="healthBlocks" v-if="items[8].remark == '是' ? true : false">
-						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 500;">
+					<view class="healthBlocks" v-if="items[8].answer[0] == '是' ? true : false">
+						<view style="margin-bottom: 20upx;color: #F4F7FF;font-size: 30upx;font-weight: 800;">
 							<view class="greenBlock"></view>
 							最近的体重是否有大幅度的变化
 						</view>
@@ -536,15 +536,9 @@ import { now } from 'moment';
 	const user = uniCloud.importObject('my',{
 		customUI : true
 	});
-	const testOb = uniCloud.importObject("testResults",{
-		customUI : true
-	});
-	const busOb = uniCloud.importObject('businessCloudObject',{
-		customUI : true
-	});
-	const train = uniCloud.importObject('train',{
-		customUI : true
-	})
+	const testOb = uniCloud.importObject("testResults");
+	const busOb = uniCloud.importObject('businessCloudObject');
+	const train = uniCloud.importObject('train')
 	export default {
 		data() {
 			return {
@@ -898,6 +892,7 @@ import { now } from 'moment';
 				this.showShare = true;
 			},
 			async uploadImage(callback){
+				console.log("开始保存")
 				const result = await train.uploadBase64({
 					base64: this.baseUrl
 				});
@@ -984,6 +979,7 @@ import { now } from 'moment';
 			onSelect(option) {
 				console.log(option,88)
 				this.canvasImageMsg = option.name
+				console.log(this.canvasImageMsg)
 			},
 			onClickLeft(){
 				if(this.openKey){
@@ -1008,6 +1004,7 @@ import { now } from 'moment';
 					if(this.HQDate.length==0){
 						this.showHQ = false;
 					}
+					console.log(this.HQDate)
 					// res.data.forEach((r)=>{
 					// 	console.log(r)
 					// 	let rq = r.actionTestResult
@@ -1063,6 +1060,7 @@ export default {
 		generateImage(callback) {
 			setTimeout(() => {
 				const dom = document.getElementById('viewReport'); // 需要生成图片内容的 dom 节点
+				console.log(dom.clientWidth+"||"+dom.clientHeight)
 				html2canvas(dom, {
 					width: dom.clientWidth, //dom 原始宽度
 					height: dom.clientHeight,
@@ -1177,11 +1175,10 @@ export default {
 	}
 	.basicInformation{
 		width: calc(100vw - 60upx);
-		/* background: #383D46; */
 		border-radius: 24upx;
 		/* opacity: 0.6; */
 		margin: 30upx 30upx 0 30upx;
-		background: #383d46;
+		background: #2f333a;
 	}
 	.basicInformationContent{
 		/* margin: 30upx 30upx 40upx 30upx; */
@@ -1195,14 +1192,14 @@ export default {
 		color: #F4F7FF;
 	}
     ::v-deep .van-cell{
-		background: #383D46;
+		background: #2f333a;
 		border-top-left-radius: 24upx;
 		border-top-right-radius: 24upx;
 		padding-top: 40upx;
 		padding-bottom: 0px;
 	}
 	::v-deep .van-collapse-item__content{
-		background: #383D46;
+		background: #2f333a;
 		font-size: 30upx;
 		font-weight: 400;
 		color: #BDC3CE;
@@ -1216,7 +1213,7 @@ export default {
 	.healthBlock{
 		width: 197upx;
 		height: 80upx;
-		background: #4d5561;
+		background: #383D46;
 		border-radius: 16upx;
 		font-size: 28upx;
 		font-weight: 400;
@@ -1245,7 +1242,7 @@ export default {
 	.countNumBlock{
 		width: 580upx;
 		height: 190upx;
-		background: #4d5561;
+		background: #383D46;
 		border-radius: 24upx;
 		padding-top: 30upx;
 		padding-left: 40upx;
@@ -1260,19 +1257,19 @@ export default {
 	}
 	.dynamicshow{
 		overflow-y: auto;
-		background-color: #383D46;
+		background-color: #2f333a;
 		/* margin-left: 30upx; */
 		margin-top: 30upx;
 		padding:0 30upx 0 30upx;
 		height: 280upx;
-		background: #383D46;
+		background: #2f333a;
 		border-radius: 24upx;
 		position: relative;
 	}
 	.dynamicshow{
 	width: calc(100vw - 120upx);
 		overflow-y: auto;
-		background-color: #383D46;	
+		background-color: #2f333a;	
 		/* margin-left: 30upx; */
 		margin-top: 30upx;
 		height: 280upx;
@@ -1431,7 +1428,7 @@ export default {
 	  width: calc(100vw - 60upx);
 	  margin-left: 30upx;
 	  margin-top: 30upx;
-	  background: #383d46;
+	  background: #2f333a;
 	  border-radius: 24upx;
 	  height: auto;
 		.check_box_style {
@@ -1475,14 +1472,14 @@ export default {
 		}
 	}
 	::v-deep .uni-collapse{
-		background: #383d46 !important;
+		background: #2f333a !important;
 		border-radius: 16upx;
 	}
 	::v-deep .uni-collapse-item{
 		color: #BDC3CE !important;
 	}
 	::v-deep .uni-collapse-item__title-box{
-		background: #383d46 !important;
+		background: #2f333a !important;
 		border-radius: 16upx;
 	}
 	::v-deep .uni-collapse-item__title-text{
@@ -1493,7 +1490,7 @@ export default {
 	::v-deep .uni-collapse-item__wrap{
 		padding-left: 30upx;
 		padding-right: 30upx;
-		background: #383d46 !important;
+		background: #2f333a !important;
 		border-radius: 16upx;
 	}
 	.textContent{
@@ -1532,7 +1529,7 @@ export default {
 		display: flex;
 		align-items: center;
 		height: 388upx;
-		background: #383D46;
+		background: #2f333a;
 		border-radius: 24upx 24upx 0px 0px;
 		justify-content: space-around;
 		.item {
@@ -1554,7 +1551,7 @@ export default {
 	.histroys{
 		align-items: center;
 		height: 728upx;
-		background: #383D46;
+		background: #2f333a;
 		border-radius: 24upx 24upx 0px 0px;
 		justify-content: space-around;
 		padding: 40upx 40upx 0 40upx;
