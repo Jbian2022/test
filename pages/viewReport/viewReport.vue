@@ -171,7 +171,7 @@
                 <view class="basicInformationContent healthBlocks">
                   <view v-for="(items, index) in HQDate">
                     <view
-                      class="healthBlock"
+                      class="healthBlock blockdiv"
                       v-for="(item, index) in items[0].answer"
                     >
                       {{ item }}
@@ -181,7 +181,7 @@
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[1].remark == '是' ? true : false"
+                    v-if="items[1].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -202,7 +202,7 @@
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[2].remark == '是' ? true : false"
+                    v-if="items[2].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -223,7 +223,7 @@
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[3].remark == '是' ? true : false"
+                    v-if="items[3].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -244,7 +244,7 @@
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[4].remark == '是' ? true : false"
+                    v-if="items[4].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -265,7 +265,7 @@
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[5].remark == '是' ? true : false"
+                    v-if="items[5].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -286,7 +286,7 @@
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[6].remark == '是' ? true : false"
+                    v-if="items[6].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -300,14 +300,14 @@
                       最近的体重是否有大幅度的变化
                     </view>
                     <view class="healthBlock">
-                      {{ items[6].remark }}
+                      {{ items[6].answer[0] }}
                     </view>
                   </view>
                 </view>
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[7].remark == '是' ? true : false"
+                    v-if="items[7].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -328,7 +328,7 @@
                 <view v-for="(items, index) in HQDate">
                   <view
                     class="healthBlocks"
-                    v-if="items[8].remark == '是' ? true : false"
+                    v-if="items[8].answer[0] == '是' ? true : false"
                   >
                     <view
                       style="
@@ -1247,7 +1247,7 @@ export default {
 
       // 	})
       // })
-      console.log(resData.length)
+      console.log(resData)
       // })
     },
     getHistroyDate() {
@@ -1457,14 +1457,14 @@ export default {
   border-bottom: none;
 }
 .healthBlock {
-  width: 197upx;
-  height: 80upx;
+  min-width: 197upx;
+  min-height: 80upx;
   background: #383D46;
   border-radius: 16upx;
   font-size: 28upx;
   font-weight: 400;
   line-height: 80upx;
-  text-align: center;
+  text-align: left;
   display: inline-block;
   margin-right: 17upx;
   color: #bdc3ce;
@@ -1835,5 +1835,8 @@ export default {
 ::v-deep .uni-scroll-view {
 	height: 100vh;
 	 background-color: #212328 !important;
+}
+.blockdiv{
+	text-align: center !important;
 }
 </style>

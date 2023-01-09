@@ -276,6 +276,7 @@
 				console.log(item)
 				this.traineeNo = item.traineeNo;
 				this.questionCode = item.questionCode;
+				this.getData()
 		},
 		methods: {
 			// isonclick(item,a){
@@ -382,6 +383,23 @@
 				//   title: res.message,
 				//   duration: 800
 				// })
+			},
+			getData(){
+				const data = {}
+				data['traineeNo'] = this.traineeNo
+				data['questionCode'] = 'A0003'
+				testOb.opearConfigQuery(data).then((res)=>{
+					this.assessmentData = res.data.postData;
+					this.textShow1 = res.data[0].postData[0].textShow1;
+					this.textShow2 = res.data[0].postData[1].textShow2;
+					this.textShow3 = res.data[0].postData[2].textShow3;
+					this.textShow4 = res.data[0].postData[3].textShow4;
+					this.textShow5 = res.data[0].postData[4].textShow5;
+					this.textShow6 = res.data[0].postData[5].textShow6;
+					this.textShow7 = res.data[0].postData[6].textShow7;
+					this.textShow8 = res.data[0].postData[7].textShow8;
+					this.textShow9 = res.data[0].postData[8].textShow9;
+				})
 			}
 		}
 	}
