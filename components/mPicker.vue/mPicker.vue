@@ -322,7 +322,6 @@ export default {
 
       .button {
         font-size: 48rpx;
-        font-family: PingFang SC;
         font-weight: 500;
         color: #000000;
 
@@ -368,7 +367,6 @@ export default {
   //   padding-left: 40upx;
   // padding-top: 40upx;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #7a7f89;
 }
@@ -376,13 +374,11 @@ export default {
   //   padding-right: 40upx;
   // padding-top: 40upx;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #f4f7ff !important;
 }
 .picker-view__item {
   font-size: 30upx;
-  font-family: SFPro-Regular, SFPro;
   font-weight: 400;
   color: #f4f7ff;
 }
@@ -409,7 +405,6 @@ export default {
 
 	.item {
 		font-size: 30upx;
-		font-family: SFPro-Regular, SFPro;
 		font-weight: 400;
 		color: #F4F7FF;
 		line-height: 50px;

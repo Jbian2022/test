@@ -23,6 +23,7 @@
 		    :value="item.value"
 			@input="changeInputValue($event, item)"
 		    :placeholder="item.answerRemark.remarkTitle"
+			style="margin-top: 6px;"
 		  />
 		  </uni-forms-item>
           <uni-forms-item
@@ -69,7 +70,9 @@ import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompont
 import NavBarCompontent from '../../components/navBarCompontent/navBarCompontent.vue'
 import hadleDate from '../../common/timeUtil.js'
 import Mpicker from '../../components/mPicker.vue/mPicker.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject')
+var businessCloudObject = uniCloud.importObject('businessCloudObject',{
+  customUI: true // 取消自动展示的交互提示界面
+})
 export default {
   components: {
     BgTheamCompontent,
@@ -650,7 +653,7 @@ export default {
     span {
       .uni-forms-item {
         width: 100%;
-        min-height: 186upx;
+        height: 216upx;
         padding: 30upx;
         box-sizing: border-box;
         display: block;
@@ -757,7 +760,8 @@ export default {
 .change_picker_style {
   display: flex;
   width: 100%;
-  height: 80upx;
+  // height: 80upx;
+  height: 10upx;
   align-items: center;
   justify-content: space-between;
   .label_style {
@@ -779,5 +783,11 @@ export default {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400 !important;
   color: #7a7f89 !important;
+}
+::v-deep.uni-input-placeholder {
+	font-size: 32upx !important;
+	font-weight: 400 !important;
+	color: #7A7F89 !important;
+
 }
 </style>

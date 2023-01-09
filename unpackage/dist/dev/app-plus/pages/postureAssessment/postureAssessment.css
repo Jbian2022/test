@@ -146,7 +146,6 @@
 	height: 100vh;
 	overflow: hidden;
 	position: relative;
-	background: rgba(33, 35, 40, 1);
 }
 .bgimg{
 	width: calc(100vw - 9.375rem);

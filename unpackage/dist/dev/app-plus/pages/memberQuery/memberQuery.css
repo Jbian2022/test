@@ -322,6 +322,59 @@
   width: 3.125rem;
   height: 3.125rem;
 }
+.dialog[data-v-fce7d226] {
+  background: #383d46;
+  border-radius: 0.75rem;
+}
+.dialog-section[data-v-fce7d226] {
+  padding: 1.5625rem;
+}
+.dialog-section .dialog-title[data-v-fce7d226] {
+  display: flex;
+  align-items: center;
+  font-size: 1.625rem;
+  color: #f4f7ff;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+.dialog-section .dialog-title[data-v-fce7d226]::after {
+  content: "";
+  margin-left: 0.625rem;
+  display: inline-block;
+  width: 1.875rem;
+  height: 1.875rem;
+  background: url("../../static/newWorkout/pop-up.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.dialog-section .dialog-content[data-v-fce7d226] {
+  margin-top: 0.9375rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #a8adb6;
+  line-height: 1.5rem;
+}
+.dialog-btn-box[data-v-fce7d226] .van-button {
+  width: 7.5rem;
+  height: 2.8125rem;
+  background: #454951;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+.dialog-btn-box[data-v-fce7d226] .van-button + .van-button {
+  margin-left: 0.9375rem;
+}
+.dialog-btn-box[data-v-fce7d226] .van-button.van-button--primary {
+  background: #1370ff;
+}
+[data-v-fce7d226] .uni-popup [name=mask] {
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
 .mask_popup_style .confirm_dakuang_style[data-v-fce7d226] {
   width: calc(100vw - 1.875rem);
   margin-left: 0.9375rem;
@@ -385,8 +438,13 @@
   text-align: center;
   line-height: 2.8125rem;
 }
-[data-v-fce7d226] .van-popup {
-  background: none !important;
+[data-v-fce7d226] .uni-popup [name=mask] {
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
+[data-v-fce7d226] .new_popup_style_inner_style {
+  position: relative !important;
+  z-index: 1005;
 }
 /**
  * 这里是uni-app内置的常用样式变量
@@ -455,7 +513,6 @@
 }
  .uni-searchbar__box-search-input {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   color: #f4f7ff !important;
 }
 .uni-scroll-view-content {
@@ -484,7 +541,6 @@
 .nav_bar_style .nav_left_style .nav_title_style {
   margin-left: 0.625rem;
   font-size: 1.5rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   z-index: 80;
@@ -495,7 +551,6 @@
   flex: 1;
   text-align: center;
   font-size: 0.9375rem;
-  font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #ffffff;
 }

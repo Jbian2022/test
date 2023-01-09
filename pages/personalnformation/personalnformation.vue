@@ -32,6 +32,8 @@
 	            clas="change_input_style"
 	            v-model="coachForm.nickname"
 	            placeholder="请输入真实姓名"
+				maxlength="7"
+				style="margin-top: 6px;"
 	          />
 	        </uni-forms-item>
 	        <uni-forms-item
@@ -116,7 +118,9 @@ export default {
 	  savePersonInfo() {
 		 console.log( '1111')
 		  if (this.coachForm.nickname || this.coachForm.gender ) {
-			 const login = uniCloud.importObject('login') //第一步导入云对象
+			 const login = uniCloud.importObject('login',{
+						  customUI: true // 取消自动展示的交互提示界面
+						}) //第一步导入云对象
 			 try{
 				 let param = {
 					 ...this.coachForm
@@ -169,7 +173,7 @@ export default {
 // 性别
 ::v-deep.van-field__control {
   font-size: 30upx;
-  font-family: PingFangSC-Medium, PingFang SC;
+
   font-weight: 500;
   color: #f4f7ff;
 }
@@ -191,7 +195,7 @@ export default {
       width: 64upx;
       height: 44upx;
       font-size: 32upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
+
       font-weight: 600;
       color: #ffffff;
     }
@@ -199,7 +203,7 @@ export default {
 }
 ::v-deep.van-field__control--right {
   font-size: 30upx;
-  font-family: PingFangSC-Regular, PingFang SC;
+
   font-weight: 400;
   color: #7a7f89;
 }
@@ -207,7 +211,7 @@ export default {
   width: 60upx;
   height: 42upx;
   font-size: 30upx;
-  font-family: PingFangSC-Medium, PingFang SC;
+
   font-weight: 500;
   color: #f4f7ff;
   line-height: 80upx;
@@ -232,7 +236,7 @@ export default {
       width: 288upx;
       height: 66upx;
       font-size: 48upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
+ 
       font-weight: 600;
       color: #f4f7ff;
       line-height: 66upx;
@@ -243,7 +247,6 @@ export default {
       width: 390upx;
       height: 42upx;
       font-size: 30upx;
-      font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #a8adb6;
       line-height: 42upx;
@@ -260,7 +263,6 @@ export default {
       border-radius: 16upx;
       line-height: 80upx;
       font-size: 30upx;
-      font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #7a7f89;
     }
@@ -276,7 +278,6 @@ export default {
       border-radius: 16upx;
       line-height: 80upx;
       font-size: 30upx;
-      font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #7a7f89;
     }
@@ -290,7 +291,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 30upx;
+	margin-top: 80upx;
 }
 .nav_left_style {
 	width: 40upx;
@@ -303,7 +304,6 @@ export default {
 }
 .nav_text {
 	font-size: 30upx;
-	font-family: PingFangSC-Medium, PingFang SC;
 	font-weight: 500;
 	color: #BDC3CE;
 }
@@ -316,7 +316,7 @@ export default {
     span {
       .uni-forms-item {
         width: 100%;
-        min-height: 186upx;
+        height: 216upx;
         padding: 30upx;
         box-sizing: border-box;
         display: block;
@@ -330,7 +330,6 @@ export default {
             width: 100% !important;
             font-size: 30upx;
             height: 44upx;
-             font-family: PingFangSC-Semibold !important;
             font-weight: 400;
             color: #f4f7ff;
             span {
@@ -338,7 +337,6 @@ export default {
               width: 100% !important;
               font-size: 30upx;
               height: 44upx;
-               font-family: PingFangSC-Semibold !important;
               font-weight: 400;
               color: #f4f7ff;
             }
@@ -348,7 +346,6 @@ export default {
         .uni-forms-item__content {
           .uni-easyinput {
             font-size: 32upx;
-            font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
             .uni-easyinput__content {
@@ -358,7 +355,6 @@ export default {
           }
           .uni-input-input {
             font-size: 32upx;
-            font-family: PingFangSC-Semibold !important;
             font-weight: 600;
             color: #f4f7ff !important;
           }
@@ -378,7 +374,6 @@ export default {
         padding-left: 40upx;
         // padding-top: 40upx;
         font-size: 32upx;
-        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #7a7f89;
       }
@@ -386,7 +381,6 @@ export default {
         padding-right: 40upx;
         // padding-top: 40upx;
         font-size: 32upx;
-        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #f4f7ff;
       }
@@ -406,12 +400,12 @@ export default {
 .change_picker_style {
 	display: flex;
 	width: 100%;
-	height: 80upx;
+	margin-top: 10upx;
+	// height: 80upx;
 	align-items: center;
 	justify-content: space-between;
 	.label_style {
 		font-size: 32upx;
-		font-family: PingFangSC-Semibold, PingFang SC;
 		font-weight: 600;
 		color: #F4F7FF;
 		line-height: 44upx;
@@ -425,7 +419,6 @@ export default {
 }
 .student_label_style {
 	font-size: 32upx !important;
-	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400 !important;
 	color: #7A7F89 !important;
 }
@@ -437,7 +430,6 @@ export default {
   margin-top: 30upx;
   margin-bottom: 30upx;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   line-height: 100upx;
@@ -446,5 +438,11 @@ export default {
 }
 .active {
 	 background: #1370ff;
+}
+::v-deep.uni-input-placeholder {
+	font-size: 32upx !important;
+	font-weight: 400 !important;
+	color: #7A7F89 !important;
+
 }
 </style>

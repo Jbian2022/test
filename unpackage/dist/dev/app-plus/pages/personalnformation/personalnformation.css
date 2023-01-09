@@ -242,7 +242,6 @@
 }
 .m-picker__case .handle .button[data-v-3551bfb1] {
   font-size: 1.5rem;
-  font-family: PingFang SC;
   font-weight: 500;
   color: #000000;
 }
@@ -275,19 +274,16 @@
 }
 .m-picker__case .handle .cancel[data-v-3551bfb1] {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #7a7f89;
 }
 .m-picker__case .handle .button.confirm[data-v-3551bfb1] {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #f4f7ff !important;
 }
 .picker-view__item[data-v-3551bfb1] {
   font-size: 0.9375rem;
-  font-family: SFPro-Regular, SFPro;
   font-weight: 400;
   color: #f4f7ff;
 }
@@ -309,7 +305,6 @@
 }
 [data-v-3551bfb1] .uni-picker-view-content .item {
   font-size: 0.9375rem;
-  font-family: SFPro-Regular, SFPro;
   font-weight: 400;
   color: #F4F7FF;
   line-height: 50px;
@@ -364,7 +359,6 @@
 }
 [data-v-4422acd1] .van-field__control {
   font-size: 0.9375rem;
-  font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #f4f7ff;
 }
@@ -386,13 +380,11 @@
   width: 2rem;
   height: 1.375rem;
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
 }
 [data-v-4422acd1] .van-field__control--right {
   font-size: 0.9375rem;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7a7f89;
 }
@@ -400,7 +392,6 @@
   width: 1.875rem;
   height: 1.3125rem;
   font-size: 0.9375rem;
-  font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #f4f7ff;
   line-height: 2.5rem;
@@ -422,7 +413,6 @@
   width: 9rem;
   height: 2.0625rem;
   font-size: 1.5rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #f4f7ff;
   line-height: 2.0625rem;
@@ -433,7 +423,6 @@
   width: 12.1875rem;
   height: 1.3125rem;
   font-size: 0.9375rem;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #a8adb6;
   line-height: 1.3125rem;
@@ -450,7 +439,6 @@
   border-radius: 0.5rem;
   line-height: 2.5rem;
   font-size: 0.9375rem;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7a7f89;
 }
@@ -466,7 +454,6 @@
   border-radius: 0.5rem;
   line-height: 2.5rem;
   font-size: 0.9375rem;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7a7f89;
 }
@@ -477,7 +464,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 0.9375rem;
+  margin-top: 2.5rem;
 }
 .nav_left_style[data-v-4422acd1] {
   width: 1.25rem;
@@ -489,7 +476,6 @@
 }
 .nav_text[data-v-4422acd1] {
   font-size: 0.9375rem;
-  font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #BDC3CE;
 }
@@ -499,7 +485,7 @@
 }
 [data-v-4422acd1] .uni-forms uni-form span .uni-forms-item {
   width: 100%;
-  min-height: 5.8125rem;
+  height: 6.75rem;
   padding: 0.9375rem;
   box-sizing: border-box;
   display: block;
@@ -514,7 +500,6 @@
   width: 100% !important;
   font-size: 0.9375rem;
   height: 1.375rem;
-  font-family: PingFangSC-Semibold !important;
   font-weight: 400;
   color: #f4f7ff;
 }
@@ -523,13 +508,11 @@
   width: 100% !important;
   font-size: 0.9375rem;
   height: 1.375rem;
-  font-family: PingFangSC-Semibold !important;
   font-weight: 400;
   color: #f4f7ff;
 }
 [data-v-4422acd1] .uni-forms uni-form span .uni-forms-item .uni-forms-item__content .uni-easyinput {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold !important;
   font-weight: 600;
   color: #f4f7ff !important;
 }
@@ -539,7 +522,6 @@
 }
 [data-v-4422acd1] .uni-forms uni-form span .uni-forms-item .uni-forms-item__content .uni-input-input {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold !important;
   font-weight: 600;
   color: #f4f7ff !important;
 }
@@ -554,14 +536,12 @@
 [data-v-4422acd1] .uni-picker-container .uni-picker-custom .uni-picker-header .uni-picker-action-cancel {
   padding-left: 1.25rem;
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #7a7f89;
 }
 [data-v-4422acd1] .uni-picker-container .uni-picker-custom .uni-picker-header .uni-picker-action-confirm {
   padding-right: 1.25rem;
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #f4f7ff;
 }
@@ -577,13 +557,12 @@
 .change_picker_style[data-v-4422acd1] {
   display: flex;
   width: 100%;
-  height: 2.5rem;
+  margin-top: 0.3125rem;
   align-items: center;
   justify-content: space-between;
 }
 .change_picker_style .label_style[data-v-4422acd1] {
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #F4F7FF;
   line-height: 1.375rem;
@@ -596,7 +575,6 @@
 }
 .student_label_style[data-v-4422acd1] {
   font-size: 1rem !important;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400 !important;
   color: #7A7F89 !important;
 }
@@ -608,7 +586,6 @@
   margin-top: 0.9375rem;
   margin-bottom: 0.9375rem;
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   line-height: 3.125rem;
@@ -617,4 +594,9 @@
 }
 .active[data-v-4422acd1] {
   background: #1370ff;
+}
+[data-v-4422acd1] .uni-input-placeholder {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: #7A7F89 !important;
 }

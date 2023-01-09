@@ -16,11 +16,11 @@
                   v-if="avatar"
                   :src="avatar"
                 ></image>
-				<image
-				  class="left_content_img_style"
-				  v-else
-				  src="../../static/app-plus/mebrs/defaultAvator.png"
-				></image>
+                <image
+                  class="left_content_img_style"
+                  v-else
+                  src="../../static/app-plus/mebrs/defaultAvator.png"
+                ></image>
                 <view class="left_header_style">我的会员</view>
                 <view class="left_num_style">{{ meberList.length }}</view>
               </view>
@@ -54,7 +54,7 @@
               >未购课</view
             >
           </view>
-		  <view class="zhan_wei_style" v-if="cellingFlag"></view>
+          <view class="zhan_wei_style" v-if="cellingFlag"></view>
           <MemberList
             ref="memberList"
             @getMemberList="getMemberList"
@@ -86,16 +86,17 @@
               ></ZbTooltip>
             </view>
           </view>
-
-          <uni-popup
-            class="updatePopup"
-            ref="first_popup"
-            type="center"
-            @change="change"
-          ></uni-popup>
         </view>
       </movable-view>
     </movable-area>
+    <uni-popup
+      ref="popup"
+      type="center"
+      mask-background-color="rgba(20, 21, 23, 0.6)"
+     class="new_popup_style_outer_style"
+	  @maskClick="maskClick"
+    >
+    </uni-popup>
   </view>
 </template>
 
@@ -103,6 +104,7 @@
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import MemberList from '@/components/memberList/memberList.vue'
 import ZbTooltip from '@/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue'
+import util from '@/common/timeUtil.js'
 export default {
   components: {
     BgTheamCompontent,
@@ -130,7 +132,7 @@ export default {
     scrollTop: {}
   },
   onLoad() {
-	   uni.showTabBar()
+    uni.showTabBar()
   },
   onPullDownRefresh() {
     this.$refs.memberList.getMemberList(this.isActive)
@@ -141,8 +143,8 @@ export default {
   },
   created() {},
   mounted() {
-    // this.$refs.first_popup.open()
     let self = this
+	
     uni.getStorage({
       key: 'loginNum',
       success: function (res) {
@@ -150,23 +152,28 @@ export default {
           self.loginNum = res.data
           self.showPopover = res.data == '0' ? true : false
           if (res.data == '0') {
-            this.$refs.first_popup.open()
+            self.$refs.popup.open()
           }
 
-          // console.log(res, '次数',self.loginNum )
+       
         }
       },
       fail: function (err) {}
     })
     this.getUserInfor()
+	// this.getCocachList()
+    //
   },
   onShow() {
     this.getUserInfor()
+
   },
   methods: {
     // 获取用户信息
     getUserInfor() {
-      const login = uniCloud.importObject('login') //第一步导入云对象
+      const login = uniCloud.importObject('login', {
+	  customUI: true // 取消自动展示的交互提示界面
+	}) //第一步导入云对象
       try {
         login
           .getUserInfoMessage()
@@ -182,7 +189,10 @@ export default {
     },
     // 获取该教练的会员数量
     getCocachList() {
-      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      let businessCloudObject = uniCloud.importObject('businessCloudObject',{
+  customUI: true // 取消自动展示的交互提示界面
+})
+	  // businessCloudObject.removeAtion()
       businessCloudObject
         .getCoachMemberList()
         .then((res) => {
@@ -218,10 +228,10 @@ export default {
       // console.log( this.scrollTop)
     },
 
-    change() {
+    maskClick() {
       // console.log('拜拜')
       uni.setStorageSync('loginNum', '1')
-      this.$refs.first_popup.close()
+      this.$refs.popup.close()
       this.showPopover = false
     },
 
@@ -232,7 +242,9 @@ export default {
         // error
       }
       // 判断蓝卡会员还是金卡会员
-      let businessCloudObject = uniCloud.importObject('businessCloudObject')
+      let businessCloudObject = uniCloud.importObject('businessCloudObject',{
+		  customUI: true // 取消自动展示的交互提示界面
+		})
       businessCloudObject
         .getCoachMemberList()
         .then((res) => {
@@ -268,7 +280,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .content_style {
   width: 100vw;
   height: 100%;
@@ -305,7 +317,7 @@ export default {
         }
         .left_header_style {
           font-size: 48upx;
-          font-family: PingFangSC-Semibold, PingFang SC;
+         
           font-weight: 600;
           color: #ffffff;
         }
@@ -318,7 +330,7 @@ export default {
           line-height: 50upx;
           text-align: center;
           font-size: 28upx;
-          font-family: PingFangSC-Medium, PingFang SC;
+        
           font-weight: 500;
           color: #bdc3ce;
         }
@@ -388,13 +400,6 @@ export default {
   }
 }
 
-::v-deep .van-popup {
-  // width: 100vw;
-  background: none !important;
-}
-::v-deep .van-overlay {
-  opacity: 0.2 !important;
-}
 .confirm_dakuang_style {
   width: calc(100vw - 60upx);
   margin-left: 30upx;
@@ -418,7 +423,7 @@ export default {
     width: calc(100% - 100upx);
     margin-left: 50upx;
     font-size: 30upx;
-    font-family: PingFangSC-Regular, PingFang SC;
+
     font-weight: 400;
     color: #bdc3ce;
     margin-top: 30upx;
@@ -436,7 +441,6 @@ export default {
       background: #454951;
       border-radius: 16upx;
       font-size: 32upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #ffffff;
       text-align: center;
@@ -449,7 +453,6 @@ export default {
       border-radius: 16px;
       backdrop-filter: blur(18px);
       font-size: 32upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #ffffff;
       text-align: center;
@@ -572,6 +575,8 @@ uni-scroll-view {
 .btn_add {
   width: 130upx;
   height: 130upx;
+  position: relative;
+  z-index: 1000;
   // position: absolute;
   // right: 30upx;
   // bottom: calc(50px + 30upx);
@@ -588,7 +593,27 @@ uni-scroll-view {
   }
 }
 .zhan_wei_style {
-	height: 82upx;
-	width: 100%;
+  height: 82upx;
+  width: 100%;
+}
+.updatePopup {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(20, 21, 23, 0.6);
+  z-index: 90000;
+}
+::v-deep .uni-popup [name='mask'] {
+  backdrop-filter: blur(3px);
+}
+::v-deep .new_popup_style_outer_style {
+  position: relative !important;
+  z-index: 1000;
+}
+::v-deep uni-movable-view {
+  z-index: 1001 !important;
+  height: auto !important;
 }
 </style>

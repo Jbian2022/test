@@ -47,7 +47,7 @@
 <!-- 			  <input class="remark_style" type="textarea"  :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'" />
  -->			  
 			<view class="uni-textarea">
- 				<textarea v-model="item.answer[0].remark" placeholder-style="color:#BDC3CE" :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'"/>
+ 				<textarea :maxlength="30" v-model="item.answer[0].remark" placeholder-style="color:#BDC3CE" :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'"/>
  			</view>
 			  
           </view>
@@ -61,7 +61,9 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject')
+var businessCloudObject = uniCloud.importObject('businessCloudObject',{
+  customUI: true // 取消自动展示的交互提示界面
+})
 export default {
   components: {
     BgTheamCompontent,

@@ -133,7 +133,7 @@
 				});
 			},
 			setUp(){
-				uni.reLaunch({
+				uni.navigateTo({
 					url: '/pages/setUp/setUp'
 				});
 			},
