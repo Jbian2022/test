@@ -2,8 +2,8 @@
     "name" : "健变",
     "appid" : "__UNI__76A9E40",
     "description" : "一款健身APP",
-    "versionName" : "1.0.5",
-    "versionCode" : 105,
+    "versionName" : "1.0.6",
+    "versionCode" : 106,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -16,7 +16,6 @@
             "delay" : 0
         },
         "modules" : {
-            "Share" : {},
             "Camera" : {},
             "VideoPlayer" : {},
             "Push" : {}
