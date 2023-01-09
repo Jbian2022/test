@@ -9833,6 +9833,7 @@ if (uni.restoreGlobal) {
  `),
                 vue.createElementVNode("view", { class: "uni-textarea" }, [
                   vue.withDirectives(vue.createElementVNode("textarea", {
+                    maxlength: 30,
                     "onUpdate:modelValue": ($event) => item.answer[0].remark = $event,
                     "placeholder-style": "color:#BDC3CE",
                     placeholder: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u8865\u5145\u4FE1\u606F"
@@ -10071,7 +10072,7 @@ if (uni.restoreGlobal) {
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/logining/logining.vue:109", this.phone, "????");
+        formatAppLog("log", "at pages/logining/logining.vue:114", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -10080,7 +10081,7 @@ if (uni.restoreGlobal) {
       }
     },
     onLoad() {
-      formatAppLog("log", "at pages/logining/logining.vue:119", plus, ">>>>");
+      formatAppLog("log", "at pages/logining/logining.vue:124", plus, ">>>>");
       plus.oauth.getServices((services) => {
         weixinAuthService = services.find((service) => {
           return service.id === "weixin";
@@ -10092,13 +10093,13 @@ if (uni.restoreGlobal) {
     },
     methods: {
       jumpAgree() {
-        formatAppLog("log", "at pages/logining/logining.vue:133", "11111");
+        formatAppLog("log", "at pages/logining/logining.vue:138", "11111");
         uni.navigateTo({
           url: "/pages/agreement/agreement"
         });
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/logining/logining.vue:139", event, "\u4F60tm");
+        formatAppLog("log", "at pages/logining/logining.vue:144", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       async getSms() {
@@ -10112,7 +10113,7 @@ if (uni.restoreGlobal) {
           });
           try {
             const smsRes = await login2.sendSmsCode(this.phone);
-            formatAppLog("log", "at pages/logining/logining.vue:156", smsRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:161", smsRes, "\u767B\u5F55\u6210\u529F");
             if (smsRes.code == 0) {
               uni.reLaunch({
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + smsRes.mobile,
@@ -10125,7 +10126,7 @@ if (uni.restoreGlobal) {
               });
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:170", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:175", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
@@ -10141,11 +10142,13 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:187", err);
+              formatAppLog("log", "at pages/logining/logining.vue:192", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
         });
+      },
+      loginIos() {
       },
       loginByWeixin() {
         this.getWeixinCode().then((code) => {
@@ -10259,14 +10262,16 @@ if (uni.restoreGlobal) {
             ])
           ])) : vue.createCommentVNode("v-if", true)
         ]),
-        vue.createElementVNode("view", {
-          class: "wx_loging_style",
-          onClick: _cache[8] || (_cache[8] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args))
-        }, [
+        vue.createElementVNode("view", { class: "wx_loging_style" }, [
           vue.createElementVNode("image", {
             onClick: _cache[7] || (_cache[7] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args)),
             class: "wx_img_style",
             src: "/static/login/wxlogin.svg"
+          }),
+          vue.createElementVNode("image", {
+            onClick: _cache[8] || (_cache[8] = (...args) => $options.loginIos && $options.loginIos(...args)),
+            class: "wx_img_style",
+            src: "/static/login/ioslogin.svg"
           })
         ])
       ])
@@ -17747,7 +17752,7 @@ if (uni.restoreGlobal) {
         });
       },
       setUp() {
-        uni.reLaunch({
+        uni.navigateTo({
           url: "/pages/setUp/setUp"
         });
       },

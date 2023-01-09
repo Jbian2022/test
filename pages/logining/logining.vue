@@ -16,7 +16,7 @@
         class="phone"
         focus
         placeholder="请输入手机号"
-		:adjust-position="false"
+        :adjust-position="false"
       />
 
       <!--   <van-field
@@ -80,11 +80,16 @@
         </view>
       </view>
 
-      <view class="wx_loging_style" @click.native="loginByWeixin">
+      <view class="wx_loging_style">
         <image
           @click.native="loginByWeixin"
           class="wx_img_style"
           src="../../static/login/wxlogin.svg"
+        ></image>
+        <image
+          @click.native="loginIos"
+          class="wx_img_style"
+          src="../../static/login/ioslogin.svg"
         ></image>
       </view>
     </view>
@@ -149,8 +154,8 @@ export default {
       if (this.controlActiveFlag) {
         // 发送验证码
         const login = uniCloud.importObject('login', {
-  customUI: true // 取消自动展示的交互提示界面
-}) //第一步导入云对象
+          customUI: true // 取消自动展示的交互提示界面
+        }) //第一步导入云对象
         try {
           const smsRes = await login.sendSmsCode(this.phone)
           console.log(smsRes, '登录成功')
@@ -191,6 +196,9 @@ export default {
         // #endif
       })
     },
+	loginIos() {
+		
+	},
     loginByWeixin() {
       this.getWeixinCode()
         .then((code) => {
@@ -349,6 +357,9 @@ export default {
       height: 100upx;
       object-fit: contain;
     }
+	.wx_img_style:nth-child(1) {
+		margin-right: 100upx;
+	}
   }
 }
 

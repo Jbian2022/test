@@ -82,22 +82,25 @@
 			line-height: 44upx;
 		}
 		.footer-box{
+			width: 100vw;
 			position: fixed;
 			bottom: 0;
 			left: 0;
 			right: 0;
-			height: 120upx;
-			padding: 0 40upx;
-			padding-top: 10upx;
 			background-color: #fff;
 			.footer-btn{
-				box-sizing: border-box;
-				width: 100%;
-				background: #1370FF;
+			width: calc(100vw - 60upx);
+				
+				margin-left: 30upx;
+				height: 100upx;
+				background: #1370ff;
 				border-radius: 16upx;
+				margin-top: 30upx;
+				margin-bottom: 30upx;
 				font-size: 32upx;
+				font-family: PingFangSC-Semibold, PingFang SC;
 				font-weight: 600;
-				color: #FFFFFF;
+				color: #ffffff;
 				line-height: 100upx;
 				text-align: center;
 			}

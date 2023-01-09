@@ -47,7 +47,7 @@
 <!-- 			  <input class="remark_style" type="textarea"  :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'" />
  -->			  
 			<view class="uni-textarea">
- 				<textarea v-model="item.answer[0].remark" placeholder-style="color:#BDC3CE" :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'"/>
+ 				<textarea :maxlength="30" v-model="item.answer[0].remark" placeholder-style="color:#BDC3CE" :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'"/>
  			</view>
 			  
           </view>

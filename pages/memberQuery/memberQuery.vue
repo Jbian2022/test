@@ -171,7 +171,7 @@ export default {
   color: #f4f7ff !important;
 }
 ::v-deep.uni-scroll-view-content {
-	height: auto !important;
+  height: auto !important;
 }
 .nav_bar_style {
   width: 100%;
