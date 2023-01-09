@@ -1,7 +1,25 @@
 <template>
   <view class="mebers_content">
-    <uni-popup class="updatePopup" ref="popup" type="center">
-      <view class="mask_popup_style">
+    <uni-popup
+      class="new_popup_style_inner_style"
+      ref="popup"
+      type="center"
+      mask-background-color="rgba(20, 21, 23, 0.6)"
+    >
+      <view class="dialog">
+        <view class="dialog-section">
+          <view class="dialog-title">是否确认删除</view>
+          <view class="dialog-content">确认删除该学员吗？删除后无法恢复！</view>
+          <view class="dialog-btn-box">
+            <van-button type="default" @click="close">取消</van-button>
+            <van-button type="primary" @click="sureDeleteConfirm"
+              >确认</van-button
+            >
+          </view>
+        </view>
+      </view>
+
+      <!-- <view class="mask_popup_style">
         <view class="confirm_dakuang_style">
           <view class="confirm_top_style">
             <text class="config_top_title_style">是否确认删除</text>
@@ -20,7 +38,7 @@
             >
           </view>
         </view>
-      </view>
+      </view> -->
     </uni-popup>
 
     <template v-if="needFlag">
@@ -147,8 +165,8 @@ export default {
     searchValue: String,
     type: String,
     isFirstFlag: Boolean,
-	currentNum: Number,
-	page: Number
+    currentNum: Number,
+    page: Number
   },
   onLoad(options) {
     // 	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
@@ -317,7 +335,6 @@ export default {
                   isOpened: 'none'
                 }
               }) || []
-			  
 
             self.$set(self, 'meberList', meberList)
             console.log(self.meberList, '?????')
@@ -349,23 +366,24 @@ export default {
           `?traineeNo=${item._id}&traineeName=${item.traineeName}`
       })
     },
-	getReport(item){
-		uni.redirectTo({
-			url: '/pages/viewReport/viewReport'+"?traineeNo="+item._id+"&key=2"
-		})
-	}
+    getReport(item) {
+      uni.redirectTo({
+        url:
+          '/pages/viewReport/viewReport' + '?traineeNo=' + item._id + '&key=2'
+      })
+    }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .mebers_content {
   width: 100vw;
   flex: 1;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-	padding-bottom: 180upx;
+  padding-bottom: 180upx;
   // background: #212328;
   .no_data_style {
     width: 100%;
@@ -454,7 +472,7 @@ export default {
         }
         .loop_bottom_style {
           width: calc(100% - 60upx);
-		  margin-left: 30upx;
+          margin-left: 30upx;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -491,6 +509,61 @@ export default {
     width: 100upx;
     height: 100upx;
   }
+}
+
+.dialog {
+  background: #383d46;
+  border-radius: 24upx;
+}
+.dialog-section {
+  padding: 50upx;
+  .dialog-title {
+    display: flex;
+    align-items: center;
+    font-size: 52upx;
+    color: #f4f7ff;
+    line-height: 72upx;
+    font-weight: 600;
+    &::after {
+      content: '';
+      margin-left: 20upx;
+      display: inline-block;
+      width: 60upx;
+      height: 60upx;
+      background: url('../../static/newWorkout/pop-up.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+  .dialog-content {
+    margin-top: 30upx;
+    margin-bottom: 80upx;
+    font-size: 30upx;
+    font-weight: 400;
+    color: #a8adb6;
+    line-height: 48upx;
+  }
+}
+.dialog-btn-box {
+  ::v-deep .van-button {
+    width: 240upx;
+    height: 90upx;
+    background: #454951;
+    border-radius: 16upx;
+    border: none;
+    font-size: 32upx;
+    font-weight: 600;
+    color: #ffffff;
+    & + .van-button {
+      margin-left: 30upx;
+    }
+    &.van-button--primary {
+      background: #1370ff;
+    }
+  }
+}
+::v-deep .uni-popup [name='mask'] {
+  backdrop-filter: blur(3px);
 }
 
 .mask_popup_style {
@@ -559,8 +632,11 @@ export default {
   }
 }
 
-::v-deep .van-popup {
-  // width: 100vw;
-  background: none !important;
+::v-deep .uni-popup [name='mask'] {
+  backdrop-filter: blur(3px);
+}
+::v-deep .new_popup_style_inner_style {
+  position: relative !important;
+  z-index: 1005;
 }
 </style>

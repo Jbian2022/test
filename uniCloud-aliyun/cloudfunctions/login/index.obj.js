@@ -94,9 +94,11 @@ module.exports = {
 	   
    },
    // 登出
-   logout: async function(event,context) {
-	   const res = await uniID.logout(event.uniIdToken)
-	   	return res
+   logout: async function() {
+	  
+	  const res = await uniID.logout()
+		return res
+	  
    },
    // 设置用户头像
    setAvatar: async function(event, context) {

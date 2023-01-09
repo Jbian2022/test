@@ -4,27 +4,27 @@
     "version" : "0.0",
     "configurations" : [
         {
-        	"app-plus" : 
-        	{
-        		"launchtype" : "remote"
-        	},
-        	"default" : 
-        	{
-        		"launchtype" : "local"
-        	},
-        	"h5" : 
-        	{
-        		"launchtype" : "remote"
-        	},
-        	"type" : "uniCloud",
-        	"uniapp" : 
-        	{
-        		"launchtype" : "remote"
-        	}
+            "app-plus" : {
+                "launchtype" : "remote"
+            },
+            "default" : {
+                "launchtype" : "local"
+            },
+            "h5" : {
+                "launchtype" : "remote"
+            },
+            "type" : "uniCloud",
+            "uniapp" : {
+                "launchtype" : "remote"
+            }
         },
         {
             "playground" : "standard",
             "type" : "uni-app:app-android"
+        },
+        {
+            "playground" : "standard",
+            "type" : "uni-app:app-ios"
         }
     ]
 }

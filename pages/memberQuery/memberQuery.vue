@@ -167,12 +167,11 @@ export default {
 }
 ::v-deep .uni-searchbar__box-search-input {
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   // font-weight: 600;
   color: #f4f7ff !important;
 }
 ::v-deep.uni-scroll-view-content {
-	height: auto !important;
+  height: auto !important;
 }
 .nav_bar_style {
   width: 100%;
@@ -197,7 +196,6 @@ export default {
     .nav_title_style {
       margin-left: 20upx;
       font-size: 48upx;
-      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #ffffff;
       z-index: 80;
@@ -209,7 +207,6 @@ export default {
     flex: 1;
     text-align: center;
     font-size: 30upx;
-    font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
     color: #ffffff;
   }

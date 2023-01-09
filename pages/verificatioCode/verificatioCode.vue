@@ -24,7 +24,8 @@
         <span class="btn-text">登录</span>
       </button>
       <view class="time" :class="isFinsh ? 'timeActive' : ''" @click="resend">
-        重新发送<view class="kuo_hao_style" v-if="!isFinsh">(
+        重新发送<view class="kuo_hao_style" v-if="!isFinsh"
+          >(
           <uni-countdown
             :show-day="false"
             :color="isFinsh ? '#1370ff' : '#a8adb6'"
@@ -34,16 +35,14 @@
             :second="timeupSecond"
             @timeup="timeup"
           />
-		  <text>s</text>）
-		  </view
-        >
+          <text>s</text>）
+        </view>
       </view>
     </view>
   </view>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -122,7 +121,9 @@ export default {
       this.isFinsh = true
     },
     async verifyCode() {
-      let login = uniCloud.importObject('login')
+      let login = uniCloud.importObject('login',{
+			  customUI: true // 取消自动展示的交互提示界面
+		})
       const getVerifyRes = await login.getVerifySchema()
       // console.log(getVerifyRes,'?????我是验证码')
       try {
@@ -132,50 +133,79 @@ export default {
     },
     // 上方退出标识
     async smsLogin() {
-      const vefiryLogin = uniCloud.importObject('login') //第一步导入云对象
       try {
-        let param = {
-          mobile: this.mobile,
-          code: this.requestVerifyCode
-        }
-        const loginRes = await vefiryLogin.loginBySms(param)
-        console.log(loginRes, '发送成功')
-        if (loginRes.code == 0) {
-          try {
-            uni.setStorageSync('userInfo', JSON.stringify(loginRes.userInfo)) //个人信息
-            uni.setStorageSync('uni_id_token', loginRes.token) //token
-            uni.setStorageSync('uid', loginRes.uid) // uid 唯一标识
-            uni.setStorageSync('tokenExpired', loginRes.tokenExpired) // 有效期
+        // 先验证该手机号是否登录过
 
-            let userLogin = uniCloud.importObject('login')
-            const getUseRes = await userLogin.getUserSchema(this.mobile)
-            if (getUseRes) {
-              uni.setStorageSync('loginNum', getUseRes.affectedDocs)
-			if (getUseRes.affectedDocs === 0) {
-				uni.navigateTo({
-				  url: '/pages/personalnformation/personalnformation'
-				})
-			} else {
-				uni.reLaunch({
-				  url: '/pages/myMebers/myMebers'
-				})  
-			}
-			  
+        let userLogin = uniCloud.importObject('login',{
+		  customUI: true // 取消自动展示的交互提示界面
+		})
+        const getUseRes = await userLogin.getUserSchema(this.mobile)
 
-            }
-          } catch (e) {
-            // error
-          }
+        uni.setStorageSync('loginNum', getUseRes.affectedDocs + '')
+        if (getUseRes.affectedDocs == 0) {
+          await this.smsCodeLoginValid('first')
+          uni.navigateTo({
+            url: '/pages/personalnformation/personalnformation'
+          })
+        } else {
+        await  this.smsCodeLoginValid()
+          uni.reLaunch({
+            url: '/pages/myMebers/myMebers'
+          })
         }
       } catch (err) {
         //TODO handle the exception
         console.log(err, '我是错误')
       }
     },
+    // 验证码登录
+    async smsCodeLoginValid(type = null) {
+      let param = {
+        mobile: this.mobile,
+        code: this.requestVerifyCode
+      }
+      const vefiryLogin = uniCloud.importObject('login',{
+		  customUI: true // 取消自动展示的交互提示界面
+		}) //第一步导入云对象
+      const loginRes = await vefiryLogin.loginBySms(param)
+      console.log(loginRes, '发送成功')
+
+      if (loginRes.code == 0) {
+        if (type === 'first') {
+          // 首次登录,设置默认头像
+          try {
+            let param = {
+              avatar:
+                'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png'
+            }
+
+            console.log(param, 'param')
+            vefiryLogin
+              .perfectInfo(param)
+              .then((res) => {
+                if (res.success) {
+                }
+              })
+              .catch((err) => {})
+          } catch (e) {
+            //TODO handle the exception
+          }
+        }
+        try {
+          uni.setStorageSync('userInfo', JSON.stringify(loginRes.userInfo)) //个人信息
+          uni.setStorageSync('uni_id_token', loginRes.token) //token
+          uni.setStorageSync('uid', loginRes.uid) // uid 唯一标识
+          uni.setStorageSync('tokenExpired', loginRes.tokenExpired) // 有效期
+        } catch (e) {
+          // error
+        }
+      }
+    },
+
     goBack() {
-    uni.reLaunch({
-      url: '/pages/logining/logining'
-    })  
+      uni.reLaunch({
+        url: '/pages/logining/logining'
+      })
     }
   }
 }
@@ -267,11 +297,11 @@ export default {
     line-height: 42upx;
     display: flex;
     justify-content: center;
-	.kuo_hao_style {
-		width: auto;
-		display: flex;
-		align-items: center;
-	}
+    .kuo_hao_style {
+      width: auto;
+      display: flex;
+      align-items: center;
+    }
   }
   .timeActive {
     color: #1370ff;

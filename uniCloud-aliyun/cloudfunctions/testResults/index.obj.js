@@ -50,4 +50,264 @@ module.exports = {
 		      		   
 		   })
 	},
+	// 查询指定学员
+	getOnlyList: async function(data) {
+		   const token = this.getUniIdToken()
+		   	const detailInfo = await this.uniID.checkToken(token)
+			// console.log(detailInfo,'detailInfo')
+		   return new Promise((resolve, reject) => {
+			   db.collection('t_trainee').where({
+				   userId: detailInfo.uid,
+				   _id: data.traineeId
+					
+			   }).get().then(memberRes => {
+				   let successMessage = {
+					   success: true,
+					   ...memberRes
+				   }
+				   resolve(successMessage)
+				   
+			   }).catch(err => {
+				   reject(err)
+			   })
+			   
+		   })
+	},
+	// 配置表保存
+	opearConfig:  async function(data, type) { 
+		   const token = this.getUniIdToken()
+		   const detailInfo = await this.uniID.checkToken(token)
+		   // 先查询是否存在如果没有就新增
+		   return new Promise((resolve, reject) => {
+			   db.collection('t_questionaire_answer').where({
+			   			   traineeNo: data.traineeNo,
+			   				 userId: detailInfo.uid, 
+			   				 questionCode: data.questionCode,
+							 code: data.code
+			   				
+			   }).get().then((compareRes) => {
+				   console.log(compareRes, '你是')
+				    if (compareRes.affectedDocs === 0) {
+						let resultParam = {}
+						switch(type) {
+							 case 'physical':
+							 resultParam = {
+							 	...data
+							 	
+							 }
+							break;
+							case 'bodyTestReport':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+							case 'postureTest':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+								
+							 
+						}  
+						 db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+							  let successMessage = {
+								success: true,
+								message: '添加成功'
+						 			   			  }
+						 resolve(successMessage)
+						 }).catch(err => {
+								  console.log(err, 'err')
+								   
+						 })
+					} else {
+						console.log(data, '我是数据',type)
+						let resultParam = {}
+						switch(type) {
+							 case 'physical':
+							 resultParam = {
+							 	...data,
+								userId: detailInfo.uid
+							 	
+							 }
+							break; 
+							case 'bodyTestReport':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+							case 'postureTest':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+						}  
+						delete resultParam['_id']
+						db.collection('t_questionaire_answer').doc(compareRes.data[0]._id).update(resultParam).then(() =>{
+							console.log('它是')
+							  let successMessage = {
+								success: true,
+								message: '编辑成功'
+							  }
+						resolve(successMessage)
+						}).catch(err => {
+						  console.log(err, 'err')
+						   
+						})
+						
+						
+					}
+			   }).catch(() => {
+				   
+			   })
+		   })
+		   
+		
+		   
+		  
+	
+	},
+	// 体态评估保存
+	postConfig:  async function(data, type) { 
+		   const token = this.getUniIdToken()
+		   const detailInfo = await this.uniID.checkToken(token)
+		   // 先查询是否存在如果没有就新增
+		   return new Promise((resolve, reject) => {
+			   db.collection('t_questionaire_answer').where({
+							traineeNo: data.traineeNo,
+			   				userId: detailInfo.uid, 
+			   				questionCode: data.questionCode,
+			   				
+			   }).get().then((compareRes) => {
+				   console.log(compareRes, '你是')
+				    if (compareRes.affectedDocs === 0) {
+						let resultParam = {}
+						switch(type) {
+							case 'bodyTestReport':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+							case 'postureTest':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+								
+							 
+						}
+						 db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+							  let successMessage = {
+								success: true,
+								message: '添加成功'
+						 			   			  }
+						 resolve(successMessage)
+						 }).catch(err => {
+								  console.log(err, 'err')
+								   
+						 })
+					} else {
+						console.log(data, '我是数据',type)
+						let resultParam = {}
+						switch(type) {
+							 case 'physical':
+							 resultParam = {
+							 	...data,
+								userId: detailInfo.uid
+							 	
+							 }
+							break; 
+							case 'bodyTestReport':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+							case 'postureTest':
+							resultParam = {
+								...data,
+								userId: detailInfo.uid
+								
+							}
+							break;
+						}  
+						delete resultParam['_id']
+						db.collection('t_questionaire_answer').doc(compareRes.data[0]._id).update(resultParam).then(() =>{
+							console.log('它是')
+							  let successMessage = {
+								success: true,
+								message: '编辑成功'
+							  }
+						resolve(successMessage)
+						}).catch(err => {
+						  console.log(err, 'err')
+						   
+						})
+						
+						
+					}
+			   }).catch(() => {
+				   
+			   })
+		   })
+		   
+		
+		   
+		  
+	
+	},
+	// 配置表
+	getPhysicalChildAssessmentList: async function(key) {
+		   const token = this.getUniIdToken()
+		   const detailInfo = await this.uniID.checkToken(token)
+		   return new Promise((resolve, reject) => {
+			   db.collection('t_questionaire').where({
+					key: key,
+					
+			   }).get().then(childList => {
+				   let successMessage = {
+					   success: true,
+					   ...childList
+				   }
+				   resolve(successMessage)
+				   
+			   }).catch(err => {
+				   reject(err)
+			   })
+		      		   
+		   })
+	},
+	saveReport:async function(data){
+		const token = this.getUniIdToken()
+		const detailInfo = await this.uniID.checkToken(token)
+		let resultParam = {}
+			resultParam = {
+				...data,
+				userId: detailInfo.uid,
+				key:'Report'
+				
+			}
+		 db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+			  let successMessage = {
+				success: true,
+				message: '添加成功'
+		 			   			  }
+		 resolve(successMessage)
+		 }).catch(err => {
+				  console.log(err, 'err')
+				   
+		 })
+	}
 }

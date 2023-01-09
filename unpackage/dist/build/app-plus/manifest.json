@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.0.0",
-    "code": "100"
+    "name": "1.0.5",
+    "code": 105
   },
   "description": "一款健身APP",
   "developer": {
@@ -18,11 +18,10 @@
   },
   "permissions": {
     "Share": {},
-    "Push": {},
     "OAuth": {},
     "Camera": {},
-    "Contacts": {},
     "VideoPlayer": {},
+    "Push": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -87,33 +86,48 @@
           "hdpi": "D:/studyUninApp/素材/480.png",
           "xhdpi": "D:/studyUninApp/素材/720.png",
           "xxhdpi": "D:/studyUninApp/素材/1080.png"
+        },
+        "ios": {
+          "storyboard": "D:/studyUninApp/素材/模版/CustomStoryboard.zip"
         }
       },
       "google": {
         "permissions": [
           "<uses-feature android:name=\"android.hardware.camera\"/>",
           "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
           "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
           "<uses-permission android:name=\"android.permission.CAMERA\"/>",
           "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
           "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
           "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-          "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+          "<uses-permission android:name=\"android.permission.INTERNAL_SYSTEM_WINDOW\"/>",
           "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
           "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-          "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
           "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
           "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.READ_PROFILE\"/>",
           "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
           "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-          "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
           "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
         ],
         "minSdkVersion": 21
       },
       "apple": {
-        "dSYMs": false
+        "dSYMs": false,
+        "capabilities": {
+          "entitlements": {
+            "com.apple.developer.associated-domains": [
+              "applinks:static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com"
+            ]
+          }
+        },
+        "idfa": false,
+        "privacyDescription": {
+          "NSPhotoLibraryUsageDescription": "拍照或使用本地相册上传头像需要读取您的相册",
+          "NSPhotoLibraryAddUsageDescription": "训练记录和体侧报告需要保存到本地，需要读取您的相册",
+          "NSCameraUsageDescription": "用户拍照设置自定义头像时候需要用到摄像头",
+          "NSLocalNetworkUsageDescription": "本应用需要联网使用，需要开启本地网络连接"
+        }
       },
       "plugins": {
         "push": {
@@ -122,9 +136,9 @@
             "offline": false,
             "icons": {
               "small": {
+                "hdpi": "D:/studyUninApp/素材/36.png",
                 "ldpi": "D:/studyUninApp/素材/18.png",
                 "mdpi": "D:/studyUninApp/素材/24.png",
-                "hdpi": "D:/studyUninApp/素材/36.png",
                 "xhdpi": "D:/studyUninApp/素材/48.png",
                 "xxhdpi": "D:/studyUninApp/素材/72.png"
               }
@@ -135,14 +149,15 @@
         "oauth": {
           "weixin": {
             "appid": "wxc1a1c95912d3eca6",
-            "UniversalLinks": ""
-          }
+            "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
+          },
+          "apple": {}
         },
         "payment": {},
         "share": {
           "weixin": {
             "appid": "wxc1a1c95912d3eca6",
-            "UniversalLinks": ""
+            "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
           }
         },
         "audio": {
@@ -152,13 +167,20 @@
         }
       }
     },
+    "uniStatistics": {
+      "enable": false,
+      "version": "2",
+      "uniCloud": {
+        "provider": "aliyun",
+        "spaceId": "mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3",
+        "clientSecret": "hnLvmNQF/W9ZY06q5wYD/Q==",
+        "endpoint": "https://api.next.bspapp.com"
+      }
+    },
     "statusbar": {
       "immersed": "supportedDevice",
       "style": "light",
       "background": "#212328"
-    },
-    "uniStatistics": {
-      "enable": false
     },
     "allowsInlineMediaPlayback": true,
     "safearea": {

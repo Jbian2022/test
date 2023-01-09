@@ -71,7 +71,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .status_bar {
-  height: calc(var(--status-bar-height) + 2.75rem);
+  height: var(--status-bar-height);
   width: 100%;
 }
 .training-record-detail {
