@@ -115,6 +115,7 @@
 				this.questionCode = item.questionCode;
 				this.codes = this.actionData.code;
 				this.getTraineeInfo();
+				this.getData();
 		},
 		watch:{
 			resultValue(newResultValue,oldResultValue){
@@ -266,6 +267,18 @@
 						}
 					}).catch(() =>{})
 					console.log(res)
+			},
+			getData(){
+				const data = {}
+				data['traineeNo'] = this.traineeNo
+				data['questionCode'] = 'A0005'
+				data['code'] = this.codes
+				testOb.opearPHConfigQuery(data).then((res)=>{
+					console.log(res.data)
+					this.resultValue = res.data[0].physicalData.actionVlue
+				}).catch(()=>{
+					this.resultValue = ''
+				})
 			}
 		}
 	}
