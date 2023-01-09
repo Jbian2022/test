@@ -61,25 +61,28 @@
   line-height: 1.71875rem;
   text-indent: 1.875rem;
   letter-spacing: 0;
+  padding-bottom: 3.125rem;
 }
 .agreement_style .footer-box {
+  width: 100vw;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 3.75rem;
-  padding: 0 1.25rem;
-  padding-top: 0.3125rem;
   background-color: #fff;
 }
 .agreement_style .footer-box .footer-btn {
-  box-sizing: border-box;
-  width: 100%;
-  background: #1370FF;
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
+  height: 3.125rem;
+  background: #1370ff;
   border-radius: 0.5rem;
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
   font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 3.125rem;
   text-align: center;
 }

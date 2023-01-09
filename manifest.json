@@ -17,7 +17,6 @@
         },
         "modules" : {
             "Share" : {},
-            "OAuth" : {},
             "Camera" : {},
             "VideoPlayer" : {},
             "Push" : {}

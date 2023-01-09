@@ -80,7 +80,7 @@
         </view>
       </view>
 
-      <view class="wx_loging_style">
+<!--      <view class="wx_loging_style">
         <image
           @click.native="loginByWeixin"
           class="wx_img_style"
@@ -91,7 +91,7 @@
           class="wx_img_style"
           src="../../static/login/ioslogin.svg"
         ></image>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>
@@ -184,6 +184,7 @@ export default {
     getWeixinCode() {
       return new Promise((resolve, reject) => {
         // #ifdef APP-PLUS
+		
         weixinAuthService.authorize(
           function (res) {
             resolve(res.code)
@@ -200,8 +201,12 @@ export default {
 		
 	},
     loginByWeixin() {
+		let { code } = uni.login()
+		console.log(code, '?????')
       this.getWeixinCode()
         .then((code) => {
+			console.log(code, '你是谁')
+			
           return uniCloud.callFunction({
             name: 'login-by-weixin',
             data: {
