@@ -236,7 +236,7 @@ export default {
 .dynamicshow {
   width: calc(100vw - 60upx);
   overflow-y: auto;
-  background-color: #383d46;
+  background-color: #2f333a;
   margin-left: 30upx;
   margin-top: 30upx;
   height: 280upx;

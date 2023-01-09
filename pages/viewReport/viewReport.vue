@@ -88,11 +88,11 @@
         <view class="titleText" v-if="openKey">
           <van-row class="titleTopText">
             <van-col span="12">体测报告</van-col>
-            <van-col span="12">10.04</van-col>
+            <van-col span="12">{{nowDate}}</van-col>
           </van-row>
           <van-row class="titleBottomText">
             <van-col span="12">数据评测来源于世界权威机构</van-col>
-            <van-col span="12">2022年</van-col>
+            <van-col span="12">{{nowYear}}年</van-col>
           </van-row>
         </view>
         <view class="titleText" v-if="!openKey">
@@ -658,7 +658,7 @@
               class="informationCard"
               :open="true"
             >
-              <view style="padding-bottom: 40upx; background-color: #343a44">
+              <view style="padding-bottom: 40upx; background-color: #2f333a">
                 <!-- <van-row style="background-color: #343A44;">
 						<van-col class="need_scoll" span="24"> -->
                 <view
@@ -805,7 +805,9 @@ export default {
       baseUrl: null,
       url: null,
       canvasImageMsg: null,
-      isFixedTop: false
+      isFixedTop: false,
+	  nowDate:'',
+	  nowYear:''
     }
   },
   //监测页面滑动
@@ -876,6 +878,8 @@ export default {
       let date = new Date()
       // 今天日期，数组，同 birthday
       let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+	  this.nowDate = date.getMonth() + 1+'.'+ date.getDate();
+	  this.nowYear = date.getFullYear();
       // 分别计算年月日差值
       let age = today.map((val, index) => {
         return val - birthday[index]
@@ -1416,11 +1420,11 @@ export default {
 }
 .basicInformation {
   width: calc(100vw - 60upx);
-  /* background: #383D46; */
+  /* background: #2f333a; */
   border-radius: 24upx;
   /* opacity: 0.6; */
   margin: 30upx 30upx 0 30upx;
-  background: #383d46;
+  background: #2f333a;
 }
 .basicInformationContent {
   /* margin: 30upx 30upx 40upx 30upx; */
@@ -1434,14 +1438,14 @@ export default {
   color: #f4f7ff;
 }
 ::v-deep .van-cell {
-  background: #383d46;
+  background: #2f333a;
   border-top-left-radius: 24upx;
   border-top-right-radius: 24upx;
   padding-top: 40upx;
   padding-bottom: 0px;
 }
 ::v-deep .van-collapse-item__content {
-  background: #383d46;
+  background: #2f333a;
   font-size: 30upx;
   font-weight: 400;
   color: #bdc3ce;
@@ -1455,7 +1459,7 @@ export default {
 .healthBlock {
   width: 197upx;
   height: 80upx;
-  background: #4d5561;
+  background: #383D46;
   border-radius: 16upx;
   font-size: 28upx;
   font-weight: 400;
@@ -1484,7 +1488,7 @@ export default {
 .countNumBlock {
   width: 580upx;
   height: 190upx;
-  background: #4d5561;
+  background: #383D46;
   border-radius: 24upx;
   padding-top: 30upx;
   padding-left: 40upx;
@@ -1499,19 +1503,19 @@ export default {
 }
 .dynamicshow {
   overflow-y: auto;
-  background-color: #383d46;
+  background-color: #2f333a;
   /* margin-left: 30upx; */
   margin-top: 30upx;
   padding: 0 30upx 0 30upx;
   height: 280upx;
-  background: #383d46;
+  background: #2f333a;
   border-radius: 24upx;
   position: relative;
 }
 .dynamicshow {
   width: calc(100vw - 120upx);
   overflow-y: auto;
-  background-color: #383d46;
+  background-color: #383D46;
   /* margin-left: 30upx; */
   margin-top: 30upx;
   height: 280upx;
@@ -1670,7 +1674,7 @@ export default {
   width: calc(100vw - 60upx);
   margin-left: 30upx;
   margin-top: 30upx;
-  background: #383d46;
+  background: #2f333a;
   border-radius: 24upx;
   height: auto;
   .check_box_style {
@@ -1714,14 +1718,14 @@ export default {
   }
 }
 ::v-deep .uni-collapse {
-  background: #383d46 !important;
+  background: #2f333a !important;
   border-radius: 16upx;
 }
 ::v-deep .uni-collapse-item {
   color: #bdc3ce !important;
 }
 ::v-deep .uni-collapse-item__title-box {
-  background: #383d46 !important;
+  background: #2f333a !important;
   border-radius: 16upx;
 }
 ::v-deep .uni-collapse-item__title-text {
@@ -1732,7 +1736,7 @@ export default {
 ::v-deep .uni-collapse-item__wrap {
   padding-left: 30upx;
   padding-right: 30upx;
-  background: #383d46 !important;
+  background: #2f333a !important;
   border-radius: 16upx;
 }
 .textContent {
@@ -1753,7 +1757,7 @@ export default {
 	position: fixed;
 	left: 0;
 	bottom: 0;
-	background: red;
+	background: #2f333a;
 	
 .bottom_style {
   width: calc(100vw - 60upx);
@@ -1780,7 +1784,7 @@ export default {
   display: flex;
   align-items: center;
   height: 388upx;
-  background: #383d46;
+  background: #2f333a;
   border-radius: 24upx 24upx 0px 0px;
   justify-content: space-around;
   .item {
@@ -1802,7 +1806,7 @@ export default {
 .histroys {
   align-items: center;
   height: 728upx;
-  background: #383d46;
+  background: #2f333a;
   border-radius: 24upx 24upx 0px 0px;
   justify-content: space-around;
   padding: 40upx 40upx 0 40upx;
