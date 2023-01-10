@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.0.5",
-    "code": 105
+    "name": "1.0.7",
+    "code": 107
   },
   "description": "一款健身APP",
   "developer": {
@@ -17,7 +17,6 @@
     "url": ""
   },
   "permissions": {
-    "Share": {},
     "Camera": {},
     "VideoPlayer": {},
     "Push": {},

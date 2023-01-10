@@ -13,7 +13,8 @@
 						"color": "#ff3333",
 						"style": "circle",
 						"offset": "50%"
-					}
+					},
+					"bounce": "none"
 				},
 				"navigationBarTextStyle": "white"
 			}
@@ -27,7 +28,8 @@
 				"navigationStyle": "custom",
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -40,7 +42,8 @@
 				"navigationStyle": "custom",
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -53,7 +56,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -66,7 +70,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -88,7 +93,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -101,7 +107,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -114,7 +121,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -124,7 +132,8 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
-				"autoBackButton": false
+				"autoBackButton": false,
+				"bounce": "none"
 			}
 		},
 		{
@@ -136,7 +145,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -148,7 +158,8 @@
 				"navigationStyle": "custom",
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -161,7 +172,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -174,7 +186,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -187,7 +200,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -200,7 +214,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -213,7 +228,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -226,7 +242,9 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
+					
 				}
 			}
 		},
@@ -239,7 +257,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -252,7 +271,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -265,7 +285,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -278,7 +299,8 @@
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -289,7 +311,8 @@
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -300,7 +323,8 @@
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -311,7 +335,8 @@
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -322,7 +347,8 @@
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -348,7 +374,8 @@
 				"navigationStyle": "custom",
 				"navigationBarTextStyle": "black",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		}
@@ -357,6 +384,7 @@
     "style": {
         "backgroundColor": "#F8F8F8",
         "navigationBarTitleText": "支付成功"
+		
     }
 }
 ,{

@@ -338,7 +338,8 @@ if (uni.restoreGlobal) {
             color: "#ff3333",
             style: "circle",
             offset: "50%"
-          }
+          },
+          bounce: "none"
         },
         navigationBarTextStyle: "white"
       }
@@ -352,7 +353,8 @@ if (uni.restoreGlobal) {
         navigationStyle: "custom",
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -365,7 +367,8 @@ if (uni.restoreGlobal) {
         navigationStyle: "custom",
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -378,7 +381,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -391,7 +395,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -404,7 +409,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -417,7 +423,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -430,7 +437,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -440,7 +448,8 @@ if (uni.restoreGlobal) {
         navigationBarTitleText: "",
         enablePullDownRefresh: false,
         navigationStyle: "custom",
-        autoBackButton: false
+        autoBackButton: false,
+        bounce: "none"
       }
     },
     {
@@ -452,7 +461,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -464,7 +474,8 @@ if (uni.restoreGlobal) {
         navigationStyle: "custom",
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -477,7 +488,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -490,7 +502,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -503,7 +516,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -516,7 +530,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -529,7 +544,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -542,7 +558,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -555,7 +572,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -568,7 +586,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -581,7 +600,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -594,7 +614,8 @@ if (uni.restoreGlobal) {
         autoBackButton: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -605,7 +626,8 @@ if (uni.restoreGlobal) {
         enablePullDownRefresh: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -616,7 +638,8 @@ if (uni.restoreGlobal) {
         enablePullDownRefresh: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -627,7 +650,8 @@ if (uni.restoreGlobal) {
         enablePullDownRefresh: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -638,7 +662,8 @@ if (uni.restoreGlobal) {
         enablePullDownRefresh: false,
         navigationBarTextStyle: "white",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -664,7 +689,8 @@ if (uni.restoreGlobal) {
         navigationStyle: "custom",
         navigationBarTextStyle: "black",
         "app-plus": {
-          titleNView: false
+          titleNView: false,
+          bounce: "none"
         }
       }
     },
@@ -7943,7 +7969,11 @@ if (uni.restoreGlobal) {
       return {
         dynamicEvaluationdata: [],
         icon: true,
-        traineeNo: ""
+        traineeNo: "",
+        startData: {
+          clientX: 0,
+          clientY: 0
+        }
       };
     },
     created() {
@@ -7955,6 +7985,30 @@ if (uni.restoreGlobal) {
       }
     },
     methods: {
+      start(e2) {
+        formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:101", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        this.startData.clientX = e2.changedTouches[0].clientX;
+        this.startData.clientY = e2.changedTouches[0].clientY;
+      },
+      end(e2) {
+        formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:106", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        const subX = e2.changedTouches[0].clientX - this.startData.clientX;
+        const subY = e2.changedTouches[0].clientY - this.startData.clientY;
+        if (subY < -50) {
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:110", "\u4E0B\u6ED1");
+        } else if (subY > 50) {
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:113", "\u4E0A\u6ED1");
+        } else if (subX > 1) {
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:115", "\u5DE6\u6ED1");
+          uni.reLaunch({
+            url: "/pages/myMebers/myMebers"
+          });
+        } else if (subX < -1) {
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:120", "\u53F3\u6ED1");
+        } else {
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:122", "\u65E0\u6548");
+        }
+      },
       getReport() {
         uni.redirectTo({
           url: "/pages/viewReport/viewReport?traineeNo=" + this.traineeNo + "&key=1"
@@ -7975,7 +8029,7 @@ if (uni.restoreGlobal) {
                 }
               });
             }
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:130", res2, "\u6211\u662F\u5B50\u9009\u9879");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:159", res2, "\u6211\u662F\u5B50\u9009\u9879");
           }).catch((err) => {
           });
         }
@@ -7984,12 +8038,12 @@ if (uni.restoreGlobal) {
         businessCloudObject$1.getPhysicalAssessmentList().then((res2) => {
           let firstData = res2.data;
           businessCloudObject$1.opearConfigAllList(this.traineeNo).then((allRes) => {
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:144", allRes, "allRes");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:173", allRes, "allRes");
             firstData = firstData.map((item) => {
               let isFinsh = false;
               if (allRes.affectedDocs > 0) {
                 allRes.data.forEach((v2) => {
-                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:151", v2, "\u4EC0\u4E48\u9B3C");
+                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:180", v2, "\u4EC0\u4E48\u9B3C");
                   if (v2.questionCode === item.code) {
                     let needCompareData = v2.hasOwnProperty("testResult") ? v2.testResult.filter((c2) => c2.answer.length > 0) : [];
                     let compareBodyTestResport = v2.hasOwnProperty("bodyTestReport") && JSON.stringify(v2.bodyTestReport) !== "{}" ? true : false;
@@ -8021,7 +8075,7 @@ if (uni.restoreGlobal) {
                 isFinsh
               };
             });
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:201", firstData, "\u6211\u6052\u5F3A");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:230", firstData, "\u6211\u6052\u5F3A");
             this.dynamicEvaluationdata = firstData;
           });
         }).catch((err) => {
@@ -8032,7 +8086,11 @@ if (uni.restoreGlobal) {
   function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "content_style",
+      onTouchstart: _cache[1] || (_cache[1] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[2] || (_cache[2] = (...args) => $options.end && $options.end(...args))
+    }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, {
         leftNavTitle: "\u8EAB\u4F53\u8BC4\u6D4B",
@@ -8079,7 +8137,7 @@ if (uni.restoreGlobal) {
         class: "buttontrue",
         onClick: _cache[0] || (_cache[0] = ($event) => $options.getReport())
       }, "\u751F\u6210\u62A5\u544A")
-    ]);
+    ], 32);
   }
   const PagesPhysicalAssessmentPhysicalAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-fc7c2e74"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalAssessment/physicalAssessment.vue"]]);
   const icons = {
@@ -17761,7 +17819,7 @@ if (uni.restoreGlobal) {
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:121", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:141", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -17771,9 +17829,6 @@ if (uni.restoreGlobal) {
         });
       },
       openCard() {
-        uni.reLaunch({
-          url: "/pages/openCard/openCard"
-        });
       },
       setUp() {
         uni.navigateTo({
@@ -17789,7 +17844,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:149", "success");
+            formatAppLog("log", "at pages/my/my.vue:169", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3

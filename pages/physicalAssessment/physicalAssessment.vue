@@ -1,5 +1,5 @@
 <template>
-  <view class="content_style">
+  <view class="content_style" @touchstart="start" @touchend="end">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent
       :leftNavTitle="'身体评测'"
@@ -81,7 +81,11 @@ export default {
         // { title: '体能评估', type: 'fwcwdxcs' }
       ],
       icon: true,
-      traineeNo: ''
+      traineeNo: '',
+      startData: {
+        clientX: 0,
+        clientY: 0
+      }
     }
   },
   created() {
@@ -93,6 +97,31 @@ export default {
     }
   },
   methods: {
+    start(e) {
+      console.log('开始下滑坐标', e.changedTouches[0].clientY)
+      this.startData.clientX = e.changedTouches[0].clientX
+      this.startData.clientY = e.changedTouches[0].clientY
+    },
+    end(e) {
+      console.log('结束下滑坐标', e.changedTouches[0].clientY)
+      const subX = e.changedTouches[0].clientX - this.startData.clientX
+      const subY = e.changedTouches[0].clientY - this.startData.clientY
+      if (subY < -50) {
+        console.log('下滑')
+        // 翻页
+      } else if (subY > 50) {
+        console.log('上滑')
+      } else if (subX > 1) {
+        console.log('左滑')
+        uni.reLaunch({
+          url: '/pages/myMebers/myMebers'
+        })
+      } else if (subX < -1) {
+        console.log('右滑')
+      } else {
+        console.log('无效')
+      }
+    },
     getReport() {
       uni.redirectTo({
         url:

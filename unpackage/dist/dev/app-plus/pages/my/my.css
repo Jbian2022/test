@@ -118,7 +118,7 @@
 .my .header .user-name .name {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 1.75rem;
 }
 .my .header .user-name .name.ordinary::after {
@@ -134,7 +134,7 @@
   margin-top: 0.3125rem;
   font-size: 0.875rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
   line-height: 1.25rem;
 }
 .my .header .config {
@@ -150,7 +150,7 @@
 .my .vip-info {
   margin-top: 1.8125rem;
   display: flex;
-  background: linear-gradient(172deg, #5F6571 0%, #333842 100%);
+  background: linear-gradient(172deg, #5f6571 0%, #333842 100%);
   border-radius: 1.125rem;
   border: 0.0625rem solid;
   justify-content: space-between;
@@ -167,22 +167,22 @@
 }
 .my .vip-info .left .vip-grade .grade-name {
   font-size: 1.25rem;
-  color: #FFE59E;
+  color: #ffe59e;
   font-weight: 600;
 }
 .my .vip-info .left .vip-grade .grade-status {
   margin-left: 0.625rem;
   padding: 0.125rem 0.4375rem;
-  background: #4B525E;
+  background: #4b525e;
   border-radius: 0.25rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #BDC3CE;
+  color: #bdc3ce;
 }
 .my .vip-info .left .vip-expiration-date {
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #7A7F89;
+  color: #7a7f89;
 }
 .my .vip-info .right {
   width: 8.125rem;
@@ -193,13 +193,13 @@
   background-position: center;
 }
 .my .vip-info.ordinary {
-  background: linear-gradient(172deg, #5C9CFF 0%, #1370FF 100%);
+  background: linear-gradient(172deg, #5c9cff 0%, #1370ff 100%);
 }
 .my .vip-info.ordinary .left .grade-name {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .my .vip-info.ordinary .left .vip-expiration-date {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .my .vip-info.ordinary .right {
   width: 8.125rem;
@@ -220,7 +220,7 @@
 .my .contact-customer .title {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.3125rem;
 }
 .my .contact-customer .customer-info .customer-item {
@@ -234,7 +234,7 @@
   padding: 0 0.9375rem;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
   cursor: pointer;
 }
 .my .recommend {
@@ -245,11 +245,11 @@
   border-radius: 0.75rem;
   height: 3.75rem;
   align-items: center;
-  color: #BDC3CE;
+  color: #bdc3ce;
   font-size: 0.9375rem;
 }
 .my .recommend .van-cell .van-cell__value {
-  color: #BDC3CE;
+  color: #bdc3ce;
   font-size: 0.9375rem;
 }
 .my .recommend .van-cell .icon {
@@ -261,7 +261,7 @@
   background-repeat: no-repeat;
 }
 .my .recommend-sheet .van-picker {
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.75rem 0.75rem 0px 0px;
 }
 .my .recommend-sheet .van-picker .van-picker__mask {
@@ -270,7 +270,7 @@
 .my .recommend-sheet .van-picker .van-picker__cancel {
   font-size: 1rem;
   font-weight: 600;
-  color: #7A7F89;
+  color: #7a7f89;
   line-height: 1.375rem;
   margin: 0 1.25rem;
   padding-top: 1.25rem;
@@ -283,7 +283,7 @@
   padding-top: 1.25rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.375rem;
 }
 .my .recommend-sheet .van-picker .van-picker__confirm::after {
@@ -295,7 +295,7 @@
 .my .recommend-sheet .van-picker .van-picker__title {
   font-size: 1rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.375rem;
 }
 .my .recommend-sheet .van-picker .van-picker-column__item {
@@ -304,7 +304,7 @@
 }
 .my .recommend-sheet .van-picker .van-picker-column__item--selected {
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   background: transparent;
 }
 .my .recommend-sheet .van-picker .van-picker__frame {
@@ -315,7 +315,7 @@
   display: none;
 }
 .my .picker-box {
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.75rem 0.75rem 0 0;
 }
 .my .picker-box .picker-header {
@@ -327,19 +327,19 @@
 .my .picker-box .picker-header .cancel-btn {
   font-size: 1rem;
   font-weight: 600;
-  color: #7A7F89;
+  color: #7a7f89;
   line-height: 1.375rem;
 }
 .my .picker-box .picker-header .title {
   font-size: 1rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.375rem;
 }
 .my .picker-box .picker-header .success-btn {
   font-size: 1rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.375rem;
 }
 .my .picker-box .message {
@@ -353,7 +353,7 @@
   border-radius: 0.5rem;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
   line-height: 2.5rem;
   text-align: center;
 }
@@ -367,7 +367,7 @@
   border-radius: 0.5rem;
   font-size: 0.9375rem;
   font-weight: 400;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 3.4375rem;
   text-align: center;
 }
@@ -375,5 +375,5 @@
   background: rgba(75, 82, 94, 0.5);
   font-size: 1.125rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
