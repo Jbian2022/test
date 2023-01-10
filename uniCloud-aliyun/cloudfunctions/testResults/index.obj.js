@@ -12,21 +12,30 @@ module.exports = {
 		})
 	},
 	//三分钟踏板测试
-	async method1(param1,param2,param3) {
+	async method1(param1,param2,param3,param4) {
 		const gender = param1;
 		const age = param2;
 		const resValue = param3;
+		const code = param4;
 		const dbc = db.command
-		const res = await db.collection("t_config").where({
-			gender,
-			minimumAge:dbc.lt(age).or(dbc.eq(age)),
-			maximumAge:dbc.gt(age).or(dbc.eq(age)),
-			minimumResult: dbc.lt(resValue),
-			maximumResult: dbc.gt(resValue)
-		}).get();
-		return {
-			data: res.data
-		}
+		return new Promise((resolve, reject) => {
+					   db.collection('t_config').where({
+						    gender,
+						    code:code,
+						    minimumAge:dbc.lt(age).or(dbc.eq(age)),
+						    maximumAge:dbc.gt(age).or(dbc.eq(age))
+					   }).get().then(opearConfigRes => {
+						   let successMessage = {
+							   success: true,
+							   ...opearConfigRes
+						   }
+						   resolve(successMessage)
+						   
+					   }).catch(err => {
+						   reject(err)
+					   })
+		   		   
+		})
 	},//100    max101   min 80
 	
 	opearConfigQuery: async function(data) {
@@ -37,6 +46,29 @@ module.exports = {
 				    traineeNo: data.traineeNo,
 					questionCode: data.questionCode
 					
+			   }).get().then(opearConfigRes => {
+				   let successMessage = {
+					   success: true,
+					   ...opearConfigRes
+				   }
+				   resolve(successMessage)
+				   
+			   }).catch(err => {
+				   reject(err)
+			   })
+		      		   
+		   })
+	},
+	//获取体体能评估数据
+	opearPHConfigQuery: async function(data) {
+		   const token = this.getUniIdToken()
+		   const detailInfo = await this.uniID.checkToken(token)
+		   return new Promise((resolve, reject) => {
+			   db.collection('t_questionaire_answer').where({
+				    traineeNo: data.traineeNo,
+					questionCode: data.questionCode,
+					code:data.code,
+					userId:detailInfo.uid
 			   }).get().then(opearConfigRes => {
 				   let successMessage = {
 					   success: true,
@@ -292,22 +324,67 @@ module.exports = {
 	saveReport:async function(data){
 		const token = this.getUniIdToken()
 		const detailInfo = await this.uniID.checkToken(token)
-		let resultParam = {}
-			resultParam = {
-				...data,
-				userId: detailInfo.uid,
-				key:'Report'
-				
-			}
-		 db.collection('t_questionaire_answer').add(resultParam).then(() =>{
-			  let successMessage = {
-				success: true,
-				message: '添加成功'
-		 			   			  }
-		 resolve(successMessage)
-		 }).catch(err => {
-				  console.log(err, 'err')
+		return new Promise((resolve, reject) => {
+					   db.collection('t_questionaire_answer').where({
+									traineeNo: data.traineeNo,
+					   				userId: detailInfo.uid, 
+					   				questionCode: data.questionCode,
+					   				key:'Report'
+					   }).get().then((compareRes) => {
+						   console.log(compareRes, '你是')
+						   if (compareRes.affectedDocs < 3) {
+							   let resultParam = {}
+							   	resultParam = {
+							   		...data,
+							   		userId: detailInfo.uid,
+							   		key:'Report'
+							   		
+							   	}
+								db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+															  let successMessage = {
+																success: true,
+																message: '添加成功'
+											   			  }
+								resolve(successMessage)
+								}).catch(err => {
+										console.log(err, 'err')
+																   
+								})
+						   }else{
+							   db.collection('t_questionaire_answer').doc(compareRes.data[2]._id).update(resultParam).then(() =>{
+							   	console.log('它是')
+							   	  let successMessage = {
+							   		success: true,
+							   		message: '编辑成功'
+							   	  }
+							   resolve(successMessage)
+							   }).catch(err => {
+							     console.log(err, 'err')
+							      
+							   })
+						   }
+					   })
+		})
+	},
+	opearReportQuery: async function(data) {
+		   const token = this.getUniIdToken()
+		   const detailInfo = await this.uniID.checkToken(token)
+		   return new Promise((resolve, reject) => {
+			   db.collection('t_questionaire_answer').where({
+				    traineeNo: data.traineeNo,
+				    userId: detailInfo.uid, 
+				    key:'Report'
+			   }).get().then(opearConfigRes => {
+				   let successMessage = {
+					   success: true,
+					   ...opearConfigRes
+				   }
+				   resolve(successMessage)
 				   
-		 })
-	}
+			   }).catch(err => {
+				   reject(err)
+			   })
+		      		   
+		   })
+	},
 }

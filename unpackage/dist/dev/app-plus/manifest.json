@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.0.3",
-    "code": 103
+    "name": "1.0.5",
+    "code": 105
   },
   "description": "一款健身APP",
   "developer": {
@@ -20,7 +20,6 @@
     "Share": {},
     "OAuth": {},
     "Camera": {},
-    "Contacts": {},
     "VideoPlayer": {},
     "Push": {},
     "UniNView": {
@@ -101,17 +100,14 @@
           "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
           "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
           "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-          "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
           "<uses-permission android:name=\"android.permission.INTERNAL_SYSTEM_WINDOW\"/>",
           "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
           "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-          "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
           "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
           "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
           "<uses-permission android:name=\"android.permission.READ_PROFILE\"/>",
           "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
           "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-          "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
           "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
         ],
         "minSdkVersion": 21
@@ -125,7 +121,13 @@
             ]
           }
         },
-        "idfa": false
+        "idfa": false,
+        "privacyDescription": {
+          "NSPhotoLibraryUsageDescription": "拍照或使用本地相册上传头像需要读取您的相册",
+          "NSPhotoLibraryAddUsageDescription": "训练记录和体侧报告需要保存到本地，需要读取您的相册",
+          "NSCameraUsageDescription": "用户拍照设置自定义头像时候需要用到摄像头",
+          "NSLocalNetworkUsageDescription": "本应用需要联网使用，需要开启本地网络连接"
+        }
       },
       "plugins": {
         "push": {

@@ -167,6 +167,7 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
+  padding-top: 1.25rem;
 }
 .content_style .arrow-left[data-v-c1425cf6] {
   z-index: 88;
@@ -203,7 +204,7 @@
 .dynamicshow[data-v-c1425cf6] {
   width: calc(100vw - 1.875rem);
   overflow-y: auto;
-  background-color: #383d46;
+  background-color: #2f333a;
   margin-left: 0.9375rem;
   margin-top: 0.9375rem;
   height: 8.75rem;
@@ -290,7 +291,7 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7A7F89;
-  top: 2.1875rem;
+  top: 3.4375rem;
   right: 1.5625rem;
 }
 .bottom_style[data-v-c1425cf6] {

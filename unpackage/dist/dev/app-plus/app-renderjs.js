@@ -28,9 +28,9 @@ __renderjsModules["19043a88"] = (() => {
   ));
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-  // ../../../../studyUninApp/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js
+  // ../../../../workproject/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js
   var require_html2canvas = __commonJS({
-    "../../../../studyUninApp/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js"(exports, module) {
+    "../../../../workproject/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js"(exports, module) {
       (function(global, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, global.html2canvas = factory());
       })(exports, function() {
@@ -7563,9 +7563,9 @@ __renderjsModules["44880530"] = (() => {
   ));
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-  // ../../../../studyUninApp/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js
+  // ../../../../workproject/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js
   var require_html2canvas = __commonJS({
-    "../../../../studyUninApp/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js"(exports, module) {
+    "../../../../workproject/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.js"(exports, module) {
       (function(global, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, global.html2canvas = factory());
       })(exports, function() {
@@ -15095,7 +15095,7 @@ __renderjsModules["5a1e922e"] = (() => {
     default: () => stdin_default
   });
 
-  // ../../../../studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/render.js
+  // ../../../../workproject/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/render.js
   var MIN_DISTANCE = 10;
   var render_default = {
     showWatch(newVal, oldVal, ownerInstance, instance, self) {

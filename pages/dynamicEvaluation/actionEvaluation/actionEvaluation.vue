@@ -336,7 +336,11 @@
 							this.actionobs = res.data
 							this.quession1 = this.actionobs[0].answer
 							this.quession2 = this.actionobs[1].answer
-							this.quession3 = this.actionobs[2].answer
+							console.log(this.actionobs);
+							if(this.actionobs.length>2){
+								this.quession3 = this.actionobs[2].answer
+							}
+							this.getData()
 						}
 					})
 				}
@@ -370,6 +374,20 @@
 				}else{
 					item.status = 1;
 				}				
+			},
+			getData(){
+				const data = {};
+				data["traineeNo"] = this.traineeNo;
+				data["questionCode"] = this.questionCode;
+				data["code"] = this.type;
+				tesOb.opearPHConfigQuery(data).then((res)=>{
+					console.log(res.data[0].actionTestResult);
+					this.quession1 = res.data[0].actionTestResult[0].answer
+					this.quession2 = res.data[0].actionTestResult[1].answer
+					if(res.data[0].actionTestResult.length>2){
+						this.quession3 = res.data[0].actionTestResult[1].answer
+					}
+				})
 			}
 		}
 	}
