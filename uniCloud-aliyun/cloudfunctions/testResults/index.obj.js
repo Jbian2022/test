@@ -327,12 +327,12 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 					   db.collection('t_questionaire_answer').where({
 									traineeNo: data.traineeNo,
-					   				userId: detailInfo.uid, 
-					   				questionCode: data.questionCode,
+					   				userId: detailInfo.uid,
 					   				key:'Report'
 					   }).get().then((compareRes) => {
 						   console.log(compareRes, '你是')
-						   if (compareRes.affectedDocs < 3) {
+						   debugger;
+						   if (compareRes.affectedDocs > 3) {
 							   let resultParam = {}
 							   	resultParam = {
 							   		...data,

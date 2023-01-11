@@ -60,7 +60,7 @@
           class="item"
           v-for="(item, index) in historyData"
           :key="index"
-          @click=""
+		  @click="sethistorydata(item)"
         >
           <view class="text" style="float: left">{{ item.name }}</view>
           <view class="text" style="float: right">{{ item.date }}</view>
@@ -843,7 +843,9 @@ export default {
       switch (this.key) {
         case '1':
           this.openKey = true
-          this.saveReport()
+		  console.log("正在保存此次训练记录")
+		  setTimeout(this.saveReport(), 10000);
+		  console.log("保存成功！")
           break
         case '2':
           this.openKey = false
@@ -924,6 +926,7 @@ export default {
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = 'A0005'
       // console.log(data)
+	  const resdata = [];
       testOb
         .opearConfigQuery(data)
         .then((res) => {
@@ -960,12 +963,14 @@ export default {
                     }
                   }
                 }
-                // console.log(this.queryData)
+                console.log(this.queryData)
+				resdata["data"] = this.queryData
               })
               .catch((err) => {})
           }
         })
         .catch()
+		return resdata
     },
     //获取用户的体态评估
     getPosture() {
@@ -1060,14 +1065,19 @@ export default {
       const data = {}
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = 'A0002'
+	  const resData = [];
       testOb.opearConfigQuery(data).then((res) => {
 		  if(res.data.length>0){
 			  this.bodyTestData = res.data[0].bodyTestReport
 			  this.bodyFraction = Number(this.bodyTestData.bodyFraction)
+			  console.log(this.bodyTestData)
+			  resData["data"]=this.bodyTestData;
+			  console.log(resData)
 		  }
         // console.log(res)
         
       })
+	  return resData;
     },
     getDynameEvaluation() {
       const data = {}
@@ -1099,17 +1109,17 @@ export default {
     openUIup() {
       this.$refs.popup.open()
     },
-    saveReport() {
-      this.$refs.popup.open()
+    async saveReport() {
+      // this.$refs.popup.open()
       const data = {}
       let date = new Date()
       let today =
         date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
       data['traineeNo'] = this.traineeNo
-      data['bodyTestData'] = this.bodyTestData
+      data['bodyTestData'] = this.getBodyTestData()
       data['assessmentTrueData'] = this.assessmentTrueData
-      data['queryData'] = this.queryData
-      data['HQDate'] = this.HQDate
+      data['queryData'] = this.getconfingActionName()
+      data['HQDate'] = this.getHealthQuesson()
       data['physicalFitnessAssessmentData'] = this.physicalFitnessAssessmentData
       data['saveDate'] = today
       console.log(data)
@@ -1251,6 +1261,7 @@ export default {
       // 	})
       // })
       console.log(resData)
+	  return resData;
       // })
     },
     getHistroyDate() {
@@ -1277,7 +1288,15 @@ export default {
       }
       console.log(this.historyData)
       this.showShare = true
-    }
+    },
+	sethistorydata(item){
+		this.HQDate = item.HQDate;
+		this.bodyTestData = item.bodyTestData;
+		this.queryData = item.queryData;
+		this.assessmentTrueData = item.assessmentTrueData;
+		this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
+		console.log(item)
+	}
   }
 }
 </script>
