@@ -369,7 +369,7 @@ export default {
     getReport(item) {
       uni.redirectTo({
         url:
-          '/pages/viewReport/viewReport' + '?traineeNo=' + item._id + '&key=2'
+          '/pages/viewReport/viewReport' + '?traineeNo=' + item._id + '&key=2'+ '&buyStatus=' +item.buyStatus
       })
     }
   }

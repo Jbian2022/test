@@ -180,7 +180,7 @@
 		<view>
 			<button 
 			type="primary"
-			class="postureButton"  @click.native="backPage()" >确认</button>
+			class="postureButton"  @click.native="backPage()" >保存</button>
 		</view>
 	</view>
 </template>
