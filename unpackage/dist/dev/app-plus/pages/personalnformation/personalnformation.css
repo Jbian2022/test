@@ -410,7 +410,6 @@
 }
 .counter .botter .botter-top[data-v-4422acd1] {
   margin-left: 1.25rem;
-  width: 9rem;
   height: 2.0625rem;
   font-size: 1.5rem;
   font-weight: 600;
@@ -420,7 +419,6 @@
 .counter .botter .a-i-c[data-v-4422acd1] {
   margin-left: 1.25rem;
   margin-top: 0.625rem;
-  width: 12.1875rem;
   height: 1.3125rem;
   font-size: 0.9375rem;
   font-weight: 400;
@@ -494,7 +492,7 @@
 }
 [data-v-4422acd1] .uni-forms uni-form span .uni-forms-item .uni-forms-item__label {
   width: 100% !important;
-  margin-bottom: 0.625rem;
+  margin-bottom: 1.4375rem;
 }
 [data-v-4422acd1] .uni-forms uni-form span .uni-forms-item .uni-forms-item__label uni-text {
   width: 100% !important;

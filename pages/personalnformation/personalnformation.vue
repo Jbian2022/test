@@ -232,7 +232,7 @@ export default {
     margin-top: 40upx;
     .botter-top {
       margin-left: 40upx;
-      width: 288upx;
+      // width: 288upx;
       height: 66upx;
       font-size: 48upx;
 
@@ -243,7 +243,7 @@ export default {
     .a-i-c {
       margin-left: 40upx;
       margin-top: 20upx;
-      width: 390upx;
+      // width: 390upx;
       height: 42upx;
       font-size: 30upx;
       font-weight: 400;

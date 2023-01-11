@@ -2,7 +2,7 @@
   <view class="content_style" @touchstart="start" @touchend="end">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent
-      :leftNavTitle="'身体评测'"
+      :leftNavTitle="'身体评估'"
       :jumpType="'STPC'"
       :isAuthority="true"
     ></NavBarCompontent>

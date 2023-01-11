@@ -516,13 +516,13 @@
   text-align: center;
   background: linear-gradient(180deg, #343a44 0%, #212328 100%);
   line-height: 2.5625rem;
-  color: #a8adb6;
+  color: #fff;
   border-radius: 0.5rem 0px 0px 0.5rem;
 }
 .is_buy_content_style .is_buy_style .buy_right[data-v-67c2db77] {
   width: 50%;
   height: 100%;
-  color: #a8adb6;
+  color: #fff;
   line-height: 2.75rem;
   text-align: center;
   background: linear-gradient(180deg, #343a44 0%, #212328 100%);
@@ -531,6 +531,7 @@
 .is_buy_content_style .is_buy_style .active[data-v-67c2db77] {
   background: #1370ff;
   color: #fff;
+  font-weight: 600 !important;
 }
 .add_method_style[data-v-67c2db77] {
   box-sizing: border-box;
@@ -665,6 +666,7 @@
 }
 [data-v-67c2db77] .uni-forms uni-form span .uni-forms-item .uni-forms-item__label {
   width: 100% !important;
+  margin-bottom: 0.9375rem !important;
 }
 [data-v-67c2db77] .uni-forms uni-form span .uni-forms-item .uni-forms-item__label uni-text {
   width: 100% !important;
@@ -755,5 +757,5 @@
 [data-v-67c2db77] .uni-input-placeholder {
   font-size: 1rem !important;
   font-weight: 400 !important;
-  color: #7A7F89 !important;
+  color: #7a7f89 !important;
 }

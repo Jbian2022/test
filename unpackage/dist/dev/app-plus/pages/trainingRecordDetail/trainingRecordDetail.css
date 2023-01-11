@@ -129,14 +129,14 @@
 }
 .training-record-detail .first-title-times .title {
   font-size: 1.875rem;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 2.625rem;
   font-weight: 600;
 }
 .training-record-detail .first-title-times .times {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.8125rem;
 }
 .training-record-detail .second-title-day {
@@ -147,13 +147,13 @@
 .training-record-detail .second-title-day .title {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.3125rem;
 }
 .training-record-detail .second-title-day .day {
   font-size: 0.75rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
   line-height: 1.0625rem;
 }
 .training-record-detail .info-list {
@@ -172,7 +172,7 @@
 .training-record-detail .info-list .info-item .item-header .img .van-image {
   width: 3.125rem;
   height: 3.125rem;
-  background: #C7C9CC;
+  background: #c7c9cc;
 }
 .training-record-detail .info-list .info-item .item-header .des-info {
   margin-left: 0.9375rem;
@@ -180,7 +180,7 @@
 .training-record-detail .info-list .info-item .item-header .des-info .des-title {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.3125rem;
   margin-bottom: 0.4375rem;
 }
@@ -188,7 +188,7 @@
   width: 14.0625rem;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
   line-height: 1.125rem;
   display: flex;
   justify-content: space-between;
@@ -205,7 +205,7 @@
 .training-record-detail .info-list .info-item .detailed-data .data-item .index {
   font-size: 1.125rem;
   font-weight: 500;
-  color: #BDC3CE;
+  color: #bdc3ce;
   width: 2.5rem;
   text-align: center;
 }
@@ -218,13 +218,13 @@
   border-radius: 0.5rem;
   background: rgba(75, 82, 94, 0.5);
   font-size: 0.8125rem;
-  color: #BDC3CE;
+  color: #bdc3ce;
 }
 .training-record-detail .info-list .info-item .detailed-data .data-item .data-info .num {
   margin-right: 0.3125rem;
   font-size: 1.125rem;
   font-weight: 500;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .training-record-detail .info-list .info-item .detailed-data .data-item .data-info-km {
   text-align: center;
@@ -234,12 +234,12 @@
   background: rgba(75, 82, 94, 0.5);
   border-radius: 0.5rem;
   font-size: 0.8125rem;
-  color: #BDC3CE;
+  color: #bdc3ce;
 }
 .training-record-detail .info-list .info-item .detailed-data .data-item .data-info-km .num {
   font-size: 1.125rem;
   font-weight: 500;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .training-record-detail .info-list .info-item .detailed-data .data-item .data-info-time {
   margin-left: 0.625rem;
@@ -253,7 +253,7 @@
 .training-record-detail .info-list .info-item .detailed-data .data-item .data-info-time .num {
   font-size: 1.125rem;
   font-weight: 500;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .training-record-detail .footer-button {
   position: fixed;
@@ -267,11 +267,11 @@
 .training-record-detail .footer-button .van-button {
   height: 3.125rem;
   width: 100%;
-  background: #1370FF;
+  background: #1370ff;
   border-radius: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -296,7 +296,7 @@
   display: flex;
   align-items: center;
   height: 12.125rem;
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.75rem 0.75rem 0px 0px;
   justify-content: space-around;
 }
@@ -312,6 +312,6 @@
 .training-record-detail .share-sheet .item .text {
   font-size: 0.875rem;
   font-weight: 400;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 40tpx;
 }

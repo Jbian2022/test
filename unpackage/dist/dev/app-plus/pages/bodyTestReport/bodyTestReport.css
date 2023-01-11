@@ -675,6 +675,7 @@
 }
 [data-v-641854c1] .uni-forms uni-form span .uni-forms-item .uni-forms-item__label {
   width: 100% !important;
+  margin-bottom: 1.4375rem;
 }
 [data-v-641854c1] .uni-forms uni-form span .uni-forms-item .uni-forms-item__label uni-text {
   width: 100% !important;
@@ -785,5 +786,5 @@
 [data-v-641854c1] .uni-input-placeholder {
   font-size: 1rem !important;
   font-weight: 400 !important;
-  color: #7A7F89 !important;
+  color: #7a7f89 !important;
 }

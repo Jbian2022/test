@@ -139,7 +139,7 @@ module.exports = {
 		   }
 		  // 先去查一下是否重复
 		  db.collection('t_trainee').where({
-			  traineeName: resultParam.traineeName,
+			  mobile: resultParam.mobile,
 			  userId: uid
 			  
 		  }).get().then(valiodRes => {
@@ -220,7 +220,7 @@ module.exports = {
    	   	const detailInfo = await this.uniID.checkToken(token)
    		// console.log(detailInfo,'detailInfo')
    	   return new Promise((resolve, reject) => {
-   		   db.collection('t_questionaire').where({
+   		   db.collection('t_questionaire').orderBy('questionId', 'asc').where({
    				questionLevel: 1
    		   }).get().then(physicalList => {
    			   let successMessage = {
@@ -267,7 +267,7 @@ module.exports = {
 		   db.collection('t_questionaire').where({
 				parentCode: parentCode,
 				
-		   }).get().then(childList => {
+		   }).orderBy('questionId', 'asc').get().then(childList => {
 			   let successMessage = {
 				   success: true,
 				   ...childList
@@ -463,7 +463,7 @@ module.exports = {
    // 删除动作库数据
    removeAtion: async function() {
 
-	   await db.collection("t_trainee").where({
+	   await db.collection("t_questionaire").where({
 	     _id: dbCmd.neq(null)
 	   }).remove()
    }

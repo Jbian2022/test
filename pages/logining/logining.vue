@@ -18,15 +18,6 @@
         placeholder="请输入手机号"
         :adjust-position="false"
       />
-
-      <!--   <van-field
-       v-model="phone"
-        class="phone"
-        placeholder="请输入手机号"
-		maxLength="11"
-		
-      /> -->
-
       <button
         class="btn"
         :class="controlActiveFlag ? 'active_btn' : ''"

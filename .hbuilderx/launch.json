@@ -14,7 +14,7 @@
         	},
         	"h5" : 
         	{
-        		"launchtype" : "local"
+        		"launchtype" : "remote"
         	},
         	"type" : "uniCloud",
         	"uniapp" : 
@@ -27,7 +27,7 @@
             "type" : "uni-app:app-android"
         },
         {
-            "playground" : "standard",
+            "playground" : "custom",
             "type" : "uni-app:app-ios"
         }
     ]

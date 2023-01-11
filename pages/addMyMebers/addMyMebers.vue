@@ -22,6 +22,7 @@
             placeholder="请输入真实姓名"
             maxlength="7"
             style="margin-top: 6px"
+			
           />
         </uni-forms-item>
         <uni-forms-item

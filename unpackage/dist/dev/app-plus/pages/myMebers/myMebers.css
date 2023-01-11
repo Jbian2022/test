@@ -639,13 +639,13 @@
   text-align: center;
   background: #383d46;
   line-height: 2.5625rem;
-  color: #a8adb6;
+  color: #fff;
   border-radius: 6.25rem 0px 0px 6.25rem;
 }
 .content_style .is_buy_style .buy_right[data-v-5a412e6a] {
   width: 50%;
   height: 100%;
-  color: #a8adb6;
+  color: #fff;
   line-height: 2.5625rem;
   text-align: center;
   background: #383d46;
@@ -654,6 +654,7 @@
 .content_style .is_buy_style .active[data-v-5a412e6a] {
   background: #1370ff;
   color: #fff;
+  font-weight: 600 !important;
 }
 .content_style .is_buy_style[data-v-5a412e6a]::before {
   width: calc(100vw - 9.375rem) !important;

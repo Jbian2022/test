@@ -4421,7 +4421,7 @@ if (uni.restoreGlobal) {
                           class: "top_right_img_style",
                           src: "/static/app-plus/mebrs/trainingProgram.svg"
                         }),
-                        vue.createElementVNode("text", null, "\u751F\u6210\u8BAD\u7EC3\u8BA1\u5212")
+                        vue.createElementVNode("text", null, "\u65B0\u5EFA\u8BAD\u7EC3\u8BA1\u5212")
                       ], 8, ["onClick"])
                     ]),
                     vue.createElementVNode("view", { class: "loop_bottom_style" }, [
@@ -4433,7 +4433,7 @@ if (uni.restoreGlobal) {
                           class: "bootom_img_style",
                           src: "/static/app-plus/mebrs/meberMessage.svg"
                         }),
-                        vue.createElementVNode("text", { class: "message_style" }, "\u4F1A\u5458\u4FE1\u606F")
+                        vue.createElementVNode("text", { class: "message_style" }, "\u4FEE\u6539\u4FE1\u606F")
                       ], 8, ["onClick"]),
                       vue.createElementVNode("view", {
                         class: "bottom_style",
@@ -4443,7 +4443,7 @@ if (uni.restoreGlobal) {
                           class: "bootom_img_style",
                           src: "/static/app-plus/mebrs/evaluationInformation.svg"
                         }),
-                        vue.createElementVNode("text", { class: "message_style" }, "\u8BC4\u6D4B\u4FE1\u606F")
+                        vue.createElementVNode("text", { class: "message_style" }, "\u8EAB\u4F53\u8BC4\u4F30")
                       ], 8, ["onClick"]),
                       vue.createElementVNode("view", {
                         class: "bottom_style",
@@ -4855,7 +4855,7 @@ if (uni.restoreGlobal) {
         });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:181", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:178", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4868,7 +4868,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:199", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:196", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4880,11 +4880,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:211", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:208", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:215", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:212", "success");
           }
         });
         uni.navigateTo({
@@ -4915,7 +4915,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:251", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:248", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -6717,7 +6717,9 @@ if (uni.restoreGlobal) {
     computed: {
       handleSexDefaultIndex() {
         let sexIndex = 0;
-        sexIndex = this.range.findIndex((k2) => k2.value === this.studentForm.gender);
+        sexIndex = this.range.findIndex(
+          (k2) => k2.value === this.studentForm.gender
+        );
         return sexIndex;
       },
       genderLabel() {
@@ -6738,12 +6740,12 @@ if (uni.restoreGlobal) {
         this.sexShow = true;
       },
       sexConfirm(e2) {
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:285", e2, "???");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:288", e2, "???");
         this.studentForm.gender = e2[0] === -1 ? this.range[0].value : this.range[e2[0]].value;
         this.sexShow = false;
       },
       dateConfirm(e2) {
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:291", e2, "\u6211\u662F\u65E5\u671F");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:295", e2, "\u6211\u662F\u65E5\u671F");
         this.studentForm.birthday = e2;
         this.birthShow = false;
       },
@@ -6787,12 +6789,15 @@ if (uni.restoreGlobal) {
       },
       addDirectly(type) {
         var that = this;
-        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:340", type, "nishi");
+        formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:344", type, "nishi");
         this.$refs.studentForm.validate().then(() => {
-          let businessCloudObject2 = Es.importObject("businessCloudObject", {
-            customUI: true
-          });
-          formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:347", that.requestItem, "that.requestItem");
+          let businessCloudObject2 = Es.importObject(
+            "businessCloudObject",
+            {
+              customUI: true
+            }
+          );
+          formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:354", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -6831,13 +6836,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:391", type, ">>>>");
+              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:399", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:399", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
+                  formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:407", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -6864,7 +6869,7 @@ if (uni.restoreGlobal) {
                 width: 220
               });
             } else {
-              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:426", 2);
+              formatAppLog("log", "at pages/addMyMebers/addMyMebers.vue:435", 2);
               uni.showToast({
                 icon: "none",
                 title: res2.message,
@@ -7663,7 +7668,7 @@ if (uni.restoreGlobal) {
         item["value"] = event.detail.value;
       },
       pickeConfirm(event, item, itemIndex) {
-        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:140", item, "\u6211\u5E73\u65F6", itemIndex);
+        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:144", item, "\u6211\u5E73\u65F6", itemIndex);
         item.flag = false;
         item["value"] = item.configList[event].text || "";
       },
@@ -7679,7 +7684,7 @@ if (uni.restoreGlobal) {
           let readyParam = {
             [value.key]: value.hasOwnProperty("value") ? value.value : ""
           };
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:161", readyParam, "readyParam");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:163", readyParam, "readyParam");
           Object.assign(resultParam, readyParam);
         });
         let saveParam = {
@@ -7688,7 +7693,7 @@ if (uni.restoreGlobal) {
           bodyTestReport: resultParam
         };
         businessCloudObject$2.opearConfig(saveParam, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:174", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:176", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -7719,7 +7724,7 @@ if (uni.restoreGlobal) {
               flag: false
             };
           });
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:216", res2, "kkkkk");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:217", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             this.configForm = {};
             this.bodyTestReport = opearConfigList;
@@ -7744,7 +7749,7 @@ if (uni.restoreGlobal) {
                 value: resultValue
               };
             });
-            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:247", self2.configForm, "this.configForm", opearConfigList);
+            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:245", self2.configForm, "this.configForm", opearConfigList);
             self2.bodyTestReport = opearConfigList;
           }
         }).catch((err) => {
@@ -7786,7 +7791,7 @@ if (uni.restoreGlobal) {
         var that = this;
         this.$refs.studentForm.validate().then(() => {
           let businessCloudObject2 = Es.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:298", that.requestItem, "that.requestItem");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:296", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -7822,13 +7827,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:339", type, ">>>>");
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:337", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:347", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
+                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:345", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -7854,7 +7859,7 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             } else {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:373", 2);
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:371", 2);
               uni.showToast({
                 icon: "fail",
                 title: res2.message,
@@ -7933,7 +7938,10 @@ if (uni.restoreGlobal) {
                         onClick: vue.withModifiers(($event) => $options.openDialog(item), ["stop"])
                       }, [
                         vue.createElementVNode("view", {
-                          class: vue.normalizeClass(["label_style", item.hasOwnProperty("value") && item.value ? "" : "student_label_style"])
+                          class: vue.normalizeClass([
+                            "label_style",
+                            item.hasOwnProperty("value") && item.value ? "" : "student_label_style"
+                          ])
                         }, vue.toDisplayString(item.hasOwnProperty("value") && item.value ? item.value : item.answerRemark.remarkTitle), 3),
                         vue.createElementVNode("image", {
                           class: "back_img_style",
@@ -8093,7 +8101,7 @@ if (uni.restoreGlobal) {
     }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, {
-        leftNavTitle: "\u8EAB\u4F53\u8BC4\u6D4B",
+        leftNavTitle: "\u8EAB\u4F53\u8BC4\u4F30",
         jumpType: "STPC",
         isAuthority: true
       }),
@@ -10162,7 +10170,7 @@ if (uni.restoreGlobal) {
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/logining/logining.vue:114", this.phone, "????");
+        formatAppLog("log", "at pages/logining/logining.vue:105", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -10171,7 +10179,7 @@ if (uni.restoreGlobal) {
       }
     },
     onLoad() {
-      formatAppLog("log", "at pages/logining/logining.vue:124", plus, ">>>>");
+      formatAppLog("log", "at pages/logining/logining.vue:115", plus, ">>>>");
       plus.oauth.getServices((services) => {
         weixinAuthService = services.find((service) => {
           return service.id === "weixin";
@@ -10183,13 +10191,13 @@ if (uni.restoreGlobal) {
     },
     methods: {
       jumpAgree() {
-        formatAppLog("log", "at pages/logining/logining.vue:138", "11111");
+        formatAppLog("log", "at pages/logining/logining.vue:129", "11111");
         uni.navigateTo({
           url: "/pages/agreement/agreement"
         });
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/logining/logining.vue:144", event, "\u4F60tm");
+        formatAppLog("log", "at pages/logining/logining.vue:135", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       async getSms() {
@@ -10203,7 +10211,7 @@ if (uni.restoreGlobal) {
           });
           try {
             const smsRes = await login2.sendSmsCode(this.phone);
-            formatAppLog("log", "at pages/logining/logining.vue:161", smsRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:152", smsRes, "\u767B\u5F55\u6210\u529F");
             if (smsRes.code == 0) {
               uni.reLaunch({
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + smsRes.mobile,
@@ -10216,7 +10224,7 @@ if (uni.restoreGlobal) {
               });
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:175", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:166", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
@@ -10232,7 +10240,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:193", err);
+              formatAppLog("log", "at pages/logining/logining.vue:184", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
@@ -10242,9 +10250,9 @@ if (uni.restoreGlobal) {
       },
       loginByWeixin() {
         let { code } = uni.login();
-        formatAppLog("log", "at pages/logining/logining.vue:205", code, "?????");
+        formatAppLog("log", "at pages/logining/logining.vue:196", code, "?????");
         this.getWeixinCode().then((code2) => {
-          formatAppLog("log", "at pages/logining/logining.vue:208", code2, "\u4F60\u662F\u8C01");
+          formatAppLog("log", "at pages/logining/logining.vue:199", code2, "\u4F60\u662F\u8C01");
           return Es.callFunction({
             name: "login-by-weixin",
             data: {
@@ -10291,7 +10299,6 @@ if (uni.restoreGlobal) {
           placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
           "adjust-position": false
         }, null, 40, ["value"]),
-        vue.createCommentVNode('   <van-field\r\n       v-model="phone"\r\n        class="phone"\r\n        placeholder="\u8BF7\u8F93\u5165\u624B\u673A\u53F7"\r\n		maxLength="11"\r\n		\r\n      /> '),
         vue.createElementVNode("button", {
           class: vue.normalizeClass(["btn", $options.controlActiveFlag ? "active_btn" : ""]),
           onClick: _cache[1] || (_cache[1] = (...args) => $options.getSms && $options.getSms(...args))
@@ -17240,9 +17247,18 @@ if (uni.restoreGlobal) {
     data() {
       return {
         options: [
-          { name: "\u5206\u4EAB\u5230\u5FAE\u4FE1", icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png" },
-          { name: "\u5206\u4EAB\u5230\u670B\u53CB\u5708", icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png" },
-          { name: "\u4FDD\u5B58\u5230\u76F8\u518C", icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png" }
+          {
+            name: "\u5206\u4EAB\u5230\u5FAE\u4FE1",
+            icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png"
+          },
+          {
+            name: "\u5206\u4EAB\u5230\u670B\u53CB\u5708",
+            icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png"
+          },
+          {
+            name: "\u4FDD\u5B58\u5230\u76F8\u518C",
+            icon: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png"
+          }
         ],
         traineeTitle: "",
         trainDate: "",
@@ -17270,7 +17286,10 @@ if (uni.restoreGlobal) {
     },
     methods: {
       async getTrainInfo() {
-        const res2 = await train$1.getTrainList({ traineeNo: this.traineeNo, trainDate: this.trainDate });
+        const res2 = await train$1.getTrainList({
+          traineeNo: this.traineeNo,
+          trainDate: this.trainDate
+        });
         if (res2.data && res2.data.length > 0) {
           const { trainContent, traineeTitle } = res2.data[0];
           this.traineeTitle = traineeTitle;
@@ -17309,7 +17328,7 @@ if (uni.restoreGlobal) {
         return week;
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:316", option, 88);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:380", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -17325,11 +17344,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:332", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:396", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:336", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:400", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -17337,15 +17356,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:344", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:408", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:346", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:410", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:352", "err", err);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:416", "err", err);
                 }
               });
             }
@@ -17354,7 +17373,7 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:361", option.name, 8888);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:425", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
@@ -17368,11 +17387,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:376", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:440", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:380", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:444", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -17382,11 +17401,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:390", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:454", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:394", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:458", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -17732,15 +17751,7 @@ if (uni.restoreGlobal) {
           }), 128))
         ])
       ]),
-      vue.createElementVNode("view", { class: "footer-button" }, [
-        vue.createElementVNode("view", {
-          class: "van-button",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.openPopup && $options.openPopup(...args))
-        }, [
-          vue.createElementVNode("view", { class: "share-icon" }),
-          vue.createTextVNode("\u70AB\u8000\u4E00\u4E0B")
-        ])
-      ]),
+      vue.createCommentVNode(' <view class="footer-button">\r\n			<view class="van-button" @click="openPopup"><view class="share-icon"></view>\u70AB\u8000\u4E00\u4E0B</view>\r\n		</view> '),
       vue.createElementVNode("view", {
         prop: $data.canvasImageMsg,
         "change:prop": _ctx.canvasImage.updateEcharts,
@@ -17937,7 +17948,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("view", { class: "vip-grade" }, [
             vue.createElementVNode("view", { class: "grade-name" }, "\u84DD\u5361\u4F1A\u5458")
           ]),
-          vue.createElementVNode("view", { class: "vip-expiration-date" }, "\u5F00\u901A\u91D1\u5361\u6559\u7EC3\uFF0C\u7545\u60F3\u591A\u9879\u7279\u6743 >")
+          vue.createCommentVNode(' <view class="vip-expiration-date">\u5F00\u901A\u91D1\u5361\u6559\u7EC3\uFF0C\u7545\u60F3\u591A\u9879\u7279\u6743 ></view> ')
         ]),
         vue.createElementVNode("view", { class: "right" })
       ])),
@@ -37905,19 +37916,8 @@ if (uni.restoreGlobal) {
       }
     });
     uni.onNetworkStatusChange((res2) => {
-      if (res2.networkType != "none") {
-        uni.showToast({
-          title: "\u5F53\u524D\u7F51\u7EDC\u7C7B\u578B\uFF1A" + res2.networkType,
-          icon: "none",
-          duration: 3e3
-        });
-      } else {
-        uni.showToast({
-          title: "\u7F51\u7EDC\u7C7B\u578B\uFF1A" + res2.networkType,
-          icon: "none",
-          duration: 3e3
-        });
-      }
+      if (res2.networkType != "none")
+        ;
     });
   }
   function initAppVersion() {
