@@ -108,7 +108,7 @@
                     class="top_right_img_style"
                     src="../../static/app-plus/mebrs/trainingProgram.svg"
                   ></image>
-                  <text>生成训练计划</text>
+                  <text>新建训练计划</text>
                 </view>
               </view>
               <view class="loop_bottom_style">
@@ -117,7 +117,7 @@
                     class="bootom_img_style"
                     src="../../static/app-plus/mebrs/meberMessage.svg"
                   ></image>
-                  <text class="message_style">会员信息</text>
+                  <text class="message_style">修改信息</text>
                 </view>
                 <view
                   class="bottom_style"
@@ -127,7 +127,7 @@
                     class="bootom_img_style"
                     src="../../static/app-plus/mebrs/evaluationInformation.svg"
                   ></image>
-                  <text class="message_style">评测信息</text>
+                  <text class="message_style">身体评估</text>
                 </view>
                 <view
                   class="bottom_style"

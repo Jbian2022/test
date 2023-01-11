@@ -93,8 +93,8 @@
       ref="popup"
       type="center"
       mask-background-color="rgba(20, 21, 23, 0.6)"
-     class="new_popup_style_outer_style"
-	  @maskClick="maskClick"
+      class="new_popup_style_outer_style"
+      @maskClick="maskClick"
     >
     </uni-popup>
   </view>
@@ -144,7 +144,7 @@ export default {
   created() {},
   mounted() {
     let self = this
-	
+
     uni.getStorage({
       key: 'loginNum',
       success: function (res) {
@@ -154,26 +154,23 @@ export default {
           if (res.data == '0') {
             self.$refs.popup.open()
           }
-
-       
         }
       },
       fail: function (err) {}
     })
     this.getUserInfor()
-	// this.getCocachList()
+    // this.getCocachList()
     //
   },
   onShow() {
     this.getUserInfor()
-
   },
   methods: {
     // 获取用户信息
     getUserInfor() {
       const login = uniCloud.importObject('login', {
-	  customUI: true // 取消自动展示的交互提示界面
-	}) //第一步导入云对象
+        customUI: true // 取消自动展示的交互提示界面
+      }) //第一步导入云对象
       try {
         login
           .getUserInfoMessage()
@@ -189,10 +186,10 @@ export default {
     },
     // 获取该教练的会员数量
     getCocachList() {
-      let businessCloudObject = uniCloud.importObject('businessCloudObject',{
-  customUI: true // 取消自动展示的交互提示界面
-})
-	  // businessCloudObject.removeAtion()
+      let businessCloudObject = uniCloud.importObject('businessCloudObject', {
+        customUI: true // 取消自动展示的交互提示界面
+      })
+      // businessCloudObject.removeAtion()
       businessCloudObject
         .getCoachMemberList()
         .then((res) => {
@@ -242,9 +239,9 @@ export default {
         // error
       }
       // 判断蓝卡会员还是金卡会员
-      let businessCloudObject = uniCloud.importObject('businessCloudObject',{
-		  customUI: true // 取消自动展示的交互提示界面
-		})
+      let businessCloudObject = uniCloud.importObject('businessCloudObject', {
+        customUI: true // 取消自动展示的交互提示界面
+      })
       businessCloudObject
         .getCoachMemberList()
         .then((res) => {
@@ -317,7 +314,7 @@ export default {
         }
         .left_header_style {
           font-size: 48upx;
-         
+
           font-weight: 600;
           color: #ffffff;
         }
@@ -330,7 +327,7 @@ export default {
           line-height: 50upx;
           text-align: center;
           font-size: 28upx;
-        
+
           font-weight: 500;
           color: #bdc3ce;
         }
@@ -359,14 +356,14 @@ export default {
       text-align: center;
       background: #383d46;
       line-height: 82upx;
-      color: #a8adb6;
+      color: #fff;
 
       border-radius: 200upx 0px 0px 200upx;
     }
     .buy_right {
       width: 50%;
       height: 100%;
-      color: #a8adb6;
+      color: #fff;
       line-height: 82upx;
       text-align: center;
       background: #383d46;
@@ -375,6 +372,7 @@ export default {
     .active {
       background: #1370ff;
       color: #fff;
+      font-weight: 600 !important;
     }
   }
   .is_buy_style::before {

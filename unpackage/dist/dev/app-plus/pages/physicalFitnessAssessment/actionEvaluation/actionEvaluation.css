@@ -142,6 +142,7 @@
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
+	padding-top: 1.25rem;
 }
 .collapseBlock{
 	background-color: #383D46;
@@ -241,7 +242,7 @@
 	border-radius: 1.125rem;
 	opacity: 0.5;
 	position:absolute;
-	top: 5.625rem;
+	top: 6.875rem;
 	left: 1.875rem;
 	z-index: 1;
 	font-size: 0.8125rem;
@@ -264,9 +265,9 @@
  .clickActionContent{
 	width: calc(100vw - 1.875rem);
 	height: 46.5625rem;
-	margin-top: 5rem;
+	margin-top: 6.25rem;
 	margin-left: 0.9375rem;
-	--van-popup-background-color: #383D46;
+	background-color: #383D46;
 	border-radius: 1rem;
 }
 .clickActionBody uni-video{

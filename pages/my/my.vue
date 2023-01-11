@@ -32,7 +32,7 @@
         <view class="vip-grade">
           <view class="grade-name">蓝卡会员</view>
         </view>
-        <view class="vip-expiration-date">开通金卡教练，畅想多项特权 ></view>
+        <!-- <view class="vip-expiration-date">开通金卡教练，畅想多项特权 ></view> -->
       </view>
       <view class="right"></view>
     </view>

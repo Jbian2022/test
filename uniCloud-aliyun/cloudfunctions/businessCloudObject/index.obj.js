@@ -139,7 +139,9 @@ module.exports = {
 		   }
 		  // 先去查一下是否重复
 		  db.collection('t_trainee').where({
-			  traineeName: resultParam.traineeName
+			  traineeName: resultParam.traineeName,
+			  userId: uid
+			  
 		  }).get().then(valiodRes => {
 			  // console.log(valiodRes.affectedDocs, 'valiodRes.affectedDocs')
 			  if (valiodRes.affectedDocs == 0) {

@@ -20,8 +20,8 @@
             clas="change_input_style"
             v-model="studentForm.traineeName"
             placeholder="请输入真实姓名"
-			maxlength="7"
-			style="margin-top: 6px;"
+            maxlength="7"
+            style="margin-top: 6px"
           />
         </uni-forms-item>
         <uni-forms-item
@@ -94,12 +94,12 @@
           name="mobile"
         >
           <input
-           type="number"
+            type="number"
             clas="change_input_style"
-			style="margin-top: 6px;"
+            style="margin-top: 6px"
             v-model="studentForm.mobile"
             placeholder="请输入手机号码"
-			maxlength="11"
+            maxlength="11"
           />
         </uni-forms-item>
 
@@ -242,7 +242,7 @@ export default {
           validateTrigger: 'submit'
         }
       },
-	  isActive: ''
+      isActive: ''
     }
   },
   onLoad(options) {
@@ -254,17 +254,19 @@ export default {
       this.gender = this.range.find((v) => v.value === requestItem.gender).text
       this.leftNavTitle = '基础信息'
     }
-	if (JSON.stringify(options) !== '{}') {
-		let isActive = options.hasOwnProperty('isActive') ? options.isActive : '1'
-		this.isActive = isActive
-	}
+    if (JSON.stringify(options) !== '{}') {
+      let isActive = options.hasOwnProperty('isActive') ? options.isActive : '1'
+      this.isActive = isActive
+    }
   },
   computed: {
-	handleSexDefaultIndex() {
-		let sexIndex = 0
-		sexIndex = this.range.findIndex(k => k.value === this.studentForm.gender)
-		return sexIndex
-	},
+    handleSexDefaultIndex() {
+      let sexIndex = 0
+      sexIndex = this.range.findIndex(
+        (k) => k.value === this.studentForm.gender
+      )
+      return sexIndex
+    },
     genderLabel() {
       let label = ''
       let findData = this.range.find(
@@ -282,9 +284,10 @@ export default {
       this.sexShow = true
     },
     sexConfirm(e) {
-		console.log(e,'???')
-		
-      this.studentForm.gender = e[0] ===-1 ? this.range[0].value :  this.range[e[0]].value
+      console.log(e, '???')
+
+      this.studentForm.gender =
+        e[0] === -1 ? this.range[0].value : this.range[e[0]].value
       this.sexShow = false
     },
     dateConfirm(e) {
@@ -341,9 +344,12 @@ export default {
       this.$refs.studentForm
         .validate()
         .then(() => {
-          let businessCloudObject = uniCloud.importObject('businessCloudObject',{
-			  customUI: true // 取消自动展示的交互提示界面
-			})
+          let businessCloudObject = uniCloud.importObject(
+            'businessCloudObject',
+            {
+              customUI: true // 取消自动展示的交互提示界面
+            }
+          )
           console.log(that.requestItem, 'that.requestItem')
           if (type == 'edit' || that.requestItem) {
             businessCloudObject
@@ -351,7 +357,8 @@ export default {
               .then((updateRes) => {
                 if (updateRes.success) {
                   uni.reLaunch({
-                    url: '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
+                    url:
+                      '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -361,14 +368,14 @@ export default {
                     icon: 'success',
                     title: res.message,
                     duration: 800,
-					width: 220
+                    width: 220
                   })
                 } else {
                   uni.showToast({
                     icon: 'fail',
                     title: res.message,
                     duration: 800,
-					width: 220
+                    width: 220
                   })
                 }
               })
@@ -377,7 +384,7 @@ export default {
                   icon: '编辑失败',
                   title: err.message,
                   duration: 800,
-				  width: 220
+                  width: 220
                 })
               })
 
@@ -410,7 +417,8 @@ export default {
                     .catch((err) => {})
                 } else {
                   uni.reLaunch({
-                     url: '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
+                    url:
+                      '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -420,7 +428,7 @@ export default {
                   icon: 'success',
                   title: res.message,
                   duration: 800,
-				  width: 220
+                  width: 220
                 })
               } else {
                 console.log(2)
@@ -428,7 +436,7 @@ export default {
                   icon: 'none',
                   title: res.message,
                   duration: 800,
-				  width: 220
+                  width: 220
                 })
               }
             })
@@ -548,14 +556,15 @@ export default {
       text-align: center;
       background: linear-gradient(180deg, #343a44 0%, #212328 100%);
       line-height: 82upx;
-      color: #a8adb6;
+      color: #fff;
 
       border-radius: 16upx 0px 0px 16upx;
     }
     .buy_right {
       width: 50%;
       height: 100%;
-      color: #a8adb6;
+      color: #fff;
+      // color: #a8adb6;
       line-height: 88upx;
       text-align: center;
       background: linear-gradient(180deg, #343a44 0%, #212328 100%);
@@ -564,6 +573,7 @@ export default {
     .active {
       background: #1370ff;
       color: #fff;
+      font-weight: 600 !important;
     }
   }
 }
@@ -705,10 +715,11 @@ export default {
         display: block;
         background: rgba(75, 82, 94, 0.5) !important;
         border-radius: 16upx;
-		margin-bottom: 30upx !important;
+        margin-bottom: 30upx !important;
 
         .uni-forms-item__label {
           width: 100% !important;
+          margin-bottom: 30upx !important;
           uni-text {
             width: 100% !important;
             width: 100% !important;
@@ -728,7 +739,7 @@ export default {
         }
 
         .uni-forms-item__content {
-			font-size: 32upx !important;
+          font-size: 32upx !important;
           .uni-easyinput {
             font-size: 32upx;
             font-weight: 600;
@@ -809,9 +820,8 @@ export default {
   color: #7a7f89 !important;
 }
 ::v-deep.uni-input-placeholder {
-	font-size: 32upx !important;
-	font-weight: 400 !important;
-	color: #7A7F89 !important;
-
+  font-size: 32upx !important;
+  font-weight: 400 !important;
+  color: #7a7f89 !important;
 }
 </style>

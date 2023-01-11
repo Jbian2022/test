@@ -1,5 +1,5 @@
 <template>
-  <view
+  <!-- <view
     v-if="openKey"
     style="
       position: absolute;
@@ -8,15 +8,15 @@
       width: 100%;
       background-color: #343a44;
     "
-  >
+  > -->
     <!-- #ifdef APP-PLUS || H5 -->
-    <view
+    <!-- <view
       :prop="canvasImageMsg"
       :change:prop="canvasImage.updateEcharts"
       id="canvasImage"
-    ></view>
+    ></view> -->
     <!-- #endif -->
-	<view class="footer-box">
+	<!-- <view class="footer-box">
 		<view class="bottom_style" @click="saveReport">
 		  <image
 		    src="../../static/app-plus/other/share.png"
@@ -24,9 +24,9 @@
 		  ></image>
 		  分享报告
 		</view>
-	</view>
+	</view> -->
 
-    <uni-popup
+    <!-- <uni-popup
       ref="popup"
       type="bottom"
       mask-background-color="rgba(20, 21, 23, 0.6)"
@@ -43,7 +43,7 @@
         </view>
       </view>
     </uni-popup>
-  </view>
+  </view> -->
   <view v-if="!openKey" style="position: absolute; z-index: 1; top: 1580upx">
     <view class="buttontrue" @click="openUIup"
       >历史评测记录
@@ -1061,9 +1061,12 @@ export default {
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = 'A0002'
       testOb.opearConfigQuery(data).then((res) => {
-        this.bodyTestData = res.data[0].bodyTestReport
-        // console.log(this.bodyTestData)
-        this.bodyFraction = Number(this.bodyTestData.bodyFraction)
+		  if(res.data.length>0){
+			  this.bodyTestData = res.data[0].bodyTestReport
+			  this.bodyFraction = Number(this.bodyTestData.bodyFraction)
+		  }
+        // console.log(res)
+        
       })
     },
     getDynameEvaluation() {

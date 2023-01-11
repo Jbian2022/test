@@ -1,75 +1,73 @@
 <template>
   <view class="counter content_style">
-	   <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+    <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <!-- 返回图标 -->
-	<view class="nav_style">
-		<view class="nav_left_style " @click.native="goBack">
-			<image
-			  class="back_img_style"
-			  src="../../static/app-plus/mebrs/back.png"
-			></image>
-		</view>
-		<view class="nav_text" @click.native.stop="jump">跳过</view>
-	</view>
+    <view class="nav_style">
+      <view class="nav_left_style" @click.native="goBack">
+        <image
+          class="back_img_style"
+          src="../../static/app-plus/mebrs/back.png"
+        ></image>
+      </view>
+      <view class="nav_text" @click.native.stop="jump">跳过</view>
+    </view>
     <view class="botter">
       <span class="botter-top">个人信息完善</span>
       <p class="a-i-c">完善信息后方可进行学员管理</p>
     </view>
-	
-	<view class="contetnt_form_style">
-	      <uni-forms
-	        :modelValue="coachForm"
-	        ref="coachForm"
-	        label-position="left"
-	      >
-	        <uni-forms-item
-	          class="outer_form_item_style"
-	          :label="'姓名'"
-	          name="nickname"
-	        >
-	          <input
-	            type="text"
-	            clas="change_input_style"
-	            v-model="coachForm.nickname"
-	            placeholder="请输入真实姓名"
-				maxlength="7"
-				style="margin-top: 6px;"
-	          />
-	        </uni-forms-item>
-	        <uni-forms-item
-	          class="outer_form_item_style"
-	          :label="'性别(必填)'"
-	          name="gender"
-	        >
-	            <Mpicker
-	              mode="bottom"
-	              :show.sync="sexShow"
-	              :range="range"
-	              :rangeKey="'text'"
-	              @confirm="sexConfirm"
-				  @cancel="sexCancel"
-	              :pickerType="'ordinary'"
-	              :defaultIndex="0"
-	            ></Mpicker>
-	          <view class="change_picker_style" @click.stop="openDialog">
-				  <view class="label_style" :class="coachForm.gender ? '' : 'student_label_style'">{{ !coachForm.gender ? '请选择性别' :  genderLabel}}</view>
-				<image
-				  class="back_img_style"
-				  src="../../static/app-plus/mebrs/back.png"
-				></image>
-	          </view>
-	        </uni-forms-item>
-	      </uni-forms>
-	    </view>
-		<view
-		   class="add_method_style edit_save_style"
-		   :class="coachForm.gender ||coachForm.nickname ? 'active' : ''"
-		   @click.native="savePersonInfo"
-				  
-		 >
-		   保存
-		 </view>
 
+    <view class="contetnt_form_style">
+      <uni-forms :modelValue="coachForm" ref="coachForm" label-position="left">
+        <uni-forms-item
+          class="outer_form_item_style"
+          :label="'姓名'"
+          name="nickname"
+        >
+          <input
+            type="text"
+            clas="change_input_style"
+            v-model="coachForm.nickname"
+            placeholder="请输入真实姓名"
+            maxlength="7"
+            style="margin-top: 6px"
+          />
+        </uni-forms-item>
+        <uni-forms-item
+          class="outer_form_item_style"
+          :label="'性别(必填)'"
+          name="gender"
+        >
+          <Mpicker
+            mode="bottom"
+            :show.sync="sexShow"
+            :range="range"
+            :rangeKey="'text'"
+            @confirm="sexConfirm"
+            @cancel="sexCancel"
+            :pickerType="'ordinary'"
+            :defaultIndex="0"
+          ></Mpicker>
+          <view class="change_picker_style" @click.stop="openDialog">
+            <view
+              class="label_style"
+              :class="coachForm.gender ? '' : 'student_label_style'"
+              >{{ !coachForm.gender ? '请选择性别' : genderLabel }}</view
+            >
+            <image
+              class="back_img_style"
+              src="../../static/app-plus/mebrs/back.png"
+            ></image>
+          </view>
+        </uni-forms-item>
+      </uni-forms>
+    </view>
+    <view
+      class="add_method_style edit_save_style"
+      :class="coachForm.gender || coachForm.nickname ? 'active' : ''"
+      @click.native="savePersonInfo"
+    >
+      保存
+    </view>
   </view>
 </template>
 
@@ -78,78 +76,79 @@ import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompont
 import Mpicker from '../../components/mPicker.vue/mPicker.vue'
 export default {
   data() {
-	  return {
-		  coachForm: {
-			  nickname: '',
-			  gender: ''
-		  },
-		  sexShow: false,
-		  
-		  range: [
-		     { text: '男', value: '1' },
-		     { text: '女', value: '2' }
-		   ]
-	  }
+    return {
+      coachForm: {
+        nickname: '',
+        gender: ''
+      },
+      sexShow: false,
+
+      range: [
+        { text: '男', value: '1' },
+        { text: '女', value: '2' }
+      ]
+    }
   },
   components: {
-	  BgTheamCompontent,
-	  Mpicker
+    BgTheamCompontent,
+    Mpicker
   },
   computed: {
-  genderLabel() {
-  	let label = '';
-  	let findData = this.range.find(item => item.value === this.coachForm.gender )
-  	if (findData) {
-  		label = findData.text || ''
-  	}
-  	return label
-  }
-  	  
+    genderLabel() {
+      let label = ''
+      let findData = this.range.find(
+        (item) => item.value === this.coachForm.gender
+      )
+      if (findData) {
+        label = findData.text || ''
+      }
+      return label
+    }
   },
   methods: {
-	  goBack() {
-		uni.navigateBack();  
-	  },
-	  jump() {
-		uni.reLaunch({
-		  url: '/pages/myMebers/myMebers'
-		})  
-	  },
-	  savePersonInfo() {
-		 console.log( '1111')
-		  if (this.coachForm.nickname || this.coachForm.gender ) {
-			 const login = uniCloud.importObject('login',{
-						  customUI: true // 取消自动展示的交互提示界面
-						}) //第一步导入云对象
-			 try{
-				 let param = {
-					 ...this.coachForm
-				 }
-				 
-				 console.log(param, 'param')
-				login.perfectInfo(param).then(res => {
-					if (res.success) {
-						this.jump()
-					}
-				}).catch((err)=>{})
-			 }catch(e){
-				//TODO handle the exception
-			 }
-			  
-		  }
-		 
-	  },
-	  openDialog() {
-	  this.sexShow = true
-	  },
-	  sexConfirm(e) {
-	    this.coachForm.gender = this.range[e[0]].value
-	    this.sexShow = false
-	    
-	  },
-	  sexCancel() {
-	  	 this.sexShow = false
-	  },
+    goBack() {
+      uni.navigateBack()
+    },
+    jump() {
+      uni.reLaunch({
+        url: '/pages/myMebers/myMebers'
+      })
+    },
+    savePersonInfo() {
+      console.log('1111')
+      if (this.coachForm.nickname || this.coachForm.gender) {
+        const login = uniCloud.importObject('login', {
+          customUI: true // 取消自动展示的交互提示界面
+        }) //第一步导入云对象
+        try {
+          let param = {
+            ...this.coachForm
+          }
+
+          console.log(param, 'param')
+          login
+            .perfectInfo(param)
+            .then((res) => {
+              if (res.success) {
+                this.jump()
+              }
+            })
+            .catch((err) => {})
+        } catch (e) {
+          //TODO handle the exception
+        }
+      }
+    },
+    openDialog() {
+      this.sexShow = true
+    },
+    sexConfirm(e) {
+      this.coachForm.gender = this.range[e[0]].value
+      this.sexShow = false
+    },
+    sexCancel() {
+      this.sexShow = false
+    }
   }
 }
 </script>
@@ -168,8 +167,8 @@ export default {
     margin-top: 30upx;
     overflow-y: auto;
   }
-}	
-	
+}
+
 // 性别
 ::v-deep.van-field__control {
   font-size: 30upx;
@@ -236,7 +235,7 @@ export default {
       width: 288upx;
       height: 66upx;
       font-size: 48upx;
- 
+
       font-weight: 600;
       color: #f4f7ff;
       line-height: 66upx;
@@ -285,27 +284,26 @@ export default {
 }
 
 .nav_style {
-	width: calc(100vw - 60upx);
-	margin-left: 30upx;
-	height: 80upx;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 80upx;
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  height: 80upx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80upx;
 }
 .nav_left_style {
-	width: 40upx;
-	height: 40upx;
-	.back_img_style {
-		width: 100%;
-		height: 100%;
-	}
-
+  width: 40upx;
+  height: 40upx;
+  .back_img_style {
+    width: 100%;
+    height: 100%;
+  }
 }
 .nav_text {
-	font-size: 30upx;
-	font-weight: 500;
-	color: #BDC3CE;
+  font-size: 30upx;
+  font-weight: 500;
+  color: #bdc3ce;
 }
 
 ::v-deep .uni-forms {
@@ -325,6 +323,7 @@ export default {
 
         .uni-forms-item__label {
           width: 100% !important;
+          margin-bottom: 46upx;
           uni-text {
             width: 100% !important;
             width: 100% !important;
@@ -398,33 +397,33 @@ export default {
 }
 
 .change_picker_style {
-	display: flex;
-	width: 100%;
-	margin-top: 10upx;
-	// height: 80upx;
-	align-items: center;
-	justify-content: space-between;
-	.label_style {
-		font-size: 32upx;
-		font-weight: 600;
-		color: #F4F7FF;
-		line-height: 44upx;
-	}
-	.back_img_style {
-		width: 30upx;
-		height: 32upx;
-		object-fit: contain;
-		transform:rotate(180deg);
-	}
+  display: flex;
+  width: 100%;
+  margin-top: 10upx;
+  // height: 80upx;
+  align-items: center;
+  justify-content: space-between;
+  .label_style {
+    font-size: 32upx;
+    font-weight: 600;
+    color: #f4f7ff;
+    line-height: 44upx;
+  }
+  .back_img_style {
+    width: 30upx;
+    height: 32upx;
+    object-fit: contain;
+    transform: rotate(180deg);
+  }
 }
 .student_label_style {
-	font-size: 32upx !important;
-	font-weight: 400 !important;
-	color: #7A7F89 !important;
+  font-size: 32upx !important;
+  font-weight: 400 !important;
+  color: #7a7f89 !important;
 }
 .edit_save_style {
-	width: calc(100vw - 80upx);
-	margin-left: 40upx;
+  width: calc(100vw - 80upx);
+  margin-left: 40upx;
   background: #454951;
   border-radius: 16upx;
   margin-top: 30upx;
@@ -437,12 +436,11 @@ export default {
   justify-content: center;
 }
 .active {
-	 background: #1370ff;
+  background: #1370ff;
 }
 ::v-deep.uni-input-placeholder {
-	font-size: 32upx !important;
-	font-weight: 400 !important;
-	color: #7A7F89 !important;
-
+  font-size: 32upx !important;
+  font-weight: 400 !important;
+  color: #7a7f89 !important;
 }
 </style>

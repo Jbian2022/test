@@ -188,6 +188,7 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  padding-top: 40upx;
   // background: rgba(33, 35, 40, 1);
 .arrow-left{
   	// top: var(--status-bar-height);
@@ -324,7 +325,7 @@ export default {
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
 	color: #7A7F89;
-	top: 70upx;
+	top: 110upx;
 	right: 50upx;
 }
 .bottom_style {

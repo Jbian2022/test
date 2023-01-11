@@ -271,7 +271,7 @@
 			getData(){
 				const data = {}
 				data['traineeNo'] = this.traineeNo
-				data['questionCode'] = 'A0005'
+				data['questionCode'] = this.questionCode;
 				data['code'] = this.codes
 				testOb.opearPHConfigQuery(data).then((res)=>{
 					console.log(res.data)
@@ -289,6 +289,7 @@
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
+	padding-top: 40upx;
 }
 .collapseBlock{
 	background-color: #383D46;
@@ -389,7 +390,7 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 180upx;
+	top: 220upx;
 	left: 60upx;
 	z-index: 1;
 	font-size: 26upx;
@@ -412,9 +413,9 @@
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
 	height: 1490upx;
-	margin-top: 160upx;
+	margin-top: 200upx;
 	margin-left: 30upx;
-	--van-popup-background-color: #383D46;
+	background-color: #383D46;
 	border-radius: 32upx;
 }
 .clickActionBody video{

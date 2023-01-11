@@ -10,27 +10,26 @@
         label-position="top"
       >
         <template v-for="(item, itemIndex) in bodyTestReport" :key="itemIndex">
-		  <uni-forms-item
-		    class="outer_form_item_style"
-		    :label="item.questionContent"
-		    :name="item.code"
-			v-if="item.isInput && item.isInput === 'y'"
-		  >
-		 
-		  <input
-		   type="number"
-		    clas="change_input_style"
-		    :value="item.value"
-			@input="changeInputValue($event, item)"
-		    :placeholder="item.answerRemark.remarkTitle"
-			style="margin-top: 6px;"
-		  />
-		  </uni-forms-item>
           <uni-forms-item
             class="outer_form_item_style"
             :label="item.questionContent"
             :name="item.code"
-			v-else
+            v-if="item.isInput && item.isInput === 'y'"
+          >
+            <input
+              type="number"
+              clas="change_input_style"
+              :value="item.value"
+              @input="changeInputValue($event, item)"
+              :placeholder="item.answerRemark.remarkTitle"
+              style="margin-top: 6px"
+            />
+          </uni-forms-item>
+          <uni-forms-item
+            class="outer_form_item_style"
+            :label="item.questionContent"
+            :name="item.code"
+            v-else
           >
             <view class="change_picker_style">
               <Mpicker
@@ -46,9 +45,15 @@
               <view class="change_picker_style" @click.stop="openDialog(item)">
                 <view
                   class="label_style"
-                  :class="item.hasOwnProperty('value') && item.value ? '' : 'student_label_style'"
+                  :class="
+                    item.hasOwnProperty('value') && item.value
+                      ? ''
+                      : 'student_label_style'
+                  "
                   >{{
-                  item.hasOwnProperty('value') && item.value  ? item.value : item.answerRemark.remarkTitle
+                    item.hasOwnProperty('value') && item.value
+                      ? item.value
+                      : item.answerRemark.remarkTitle
                   }}</view
                 >
                 <image
@@ -70,7 +75,7 @@ import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompont
 import NavBarCompontent from '../../components/navBarCompontent/navBarCompontent.vue'
 import hadleDate from '../../common/timeUtil.js'
 import Mpicker from '../../components/mPicker.vue/mPicker.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject',{
+var businessCloudObject = uniCloud.importObject('businessCloudObject', {
   customUI: true // 取消自动展示的交互提示界面
 })
 export default {
@@ -113,56 +118,53 @@ export default {
     this.requestList()
   },
   computed: {
-	  handleIndex() {
-		return function(item) {
-			let index = 0
-			index = item.configList.findIndex(k => k.value === item.defaultValue)
-			return index
-		}  
-	  },
-	  handleFormValue() {
-		  return function(item) {
-			  debugger
-			  let value = ''
-			  if (item.hasOwnProperty('value')) {
-				  value = item.value || ''
-			  }
-			  return {value}
-		  }
-	  }
-
+    handleIndex() {
+      return function (item) {
+        let index = 0
+        index = item.configList.findIndex((k) => k.value === item.defaultValue)
+        return index
+      }
+    },
+    handleFormValue() {
+      return function (item) {
+        debugger
+        let value = ''
+        if (item.hasOwnProperty('value')) {
+          value = item.value || ''
+        }
+        return { value }
+      }
+    }
   },
   methods: {
-	  changeInputValue(event, item) {
-		  item['value'] = event.detail.value
-	  },
+    changeInputValue(event, item) {
+      item['value'] = event.detail.value
+    },
     pickeConfirm(event, item, itemIndex) {
-		console.log(item, '我平时', itemIndex)
-		item.flag = false
-		item['value'] = item.configList[event].text || ''
-	
-
+      console.log(item, '我平时', itemIndex)
+      item.flag = false
+      item['value'] = item.configList[event].text || ''
     },
     pickCancel(item) {
       item.flag = false
     },
     openDialog(item) {
-	  item.flag = true
+      item.flag = true
     },
     saveBodyTestReport() {
       // 参数封装
-	  
-	 var resultParam = {}
-	 this.bodyTestReport.forEach(value => {
-		 // console.log(value, 'kdjkafj')
-		 let readyParam = {
-			 [value.key]: value.hasOwnProperty('value') ? value.value : ''
-		 }
-		 console.log(readyParam, 'readyParam')
-		 Object.assign(resultParam, readyParam)
-	 })
-	 // console.log(resultParam, '>>>')
-	  
+
+      var resultParam = {}
+      this.bodyTestReport.forEach((value) => {
+        // console.log(value, 'kdjkafj')
+        let readyParam = {
+          [value.key]: value.hasOwnProperty('value') ? value.value : ''
+        }
+        console.log(readyParam, 'readyParam')
+        Object.assign(resultParam, readyParam)
+      })
+      // console.log(resultParam, '>>>')
+
       let saveParam = {
         traineeNo: this.traineeNo,
         questionCode: this.questionCode,
@@ -191,7 +193,6 @@ export default {
         .catch(() => {})
     },
     requestList() {
-
       var self = this
       businessCloudObject
         .opearConfigQuery({
@@ -210,7 +211,7 @@ export default {
             return {
               ...item,
               configList,
-			  flag: false
+              flag: false
             }
           })
           console.log(res, 'kkkkk')
@@ -222,26 +223,23 @@ export default {
             // 如果有数据则证明有答案
             opearConfigList = opearConfigList.map((config) => {
               var saveKey = null
-			  let resultValue = ''
+              let resultValue = ''
               res.data.forEach((v) => {
                 for (var key in v.bodyTestReport) {
                   if (config.key === key) {
                     saveKey = {
                       [key]: v.bodyTestReport[key]
                     }
-					resultValue = v.bodyTestReport[key]
+                    resultValue = v.bodyTestReport[key]
 
-                
-                      Object.assign(self.configForm, saveKey)
-            
+                    Object.assign(self.configForm, saveKey)
                   }
                 }
               })
               return {
                 ...config,
-				flag: false,
-				value: resultValue
-				
+                flag: false,
+                value: resultValue
               }
             })
             console.log(self.configForm, 'this.configForm', opearConfigList)
@@ -659,10 +657,11 @@ export default {
         display: block;
         background: rgba(75, 82, 94, 0.5) !important;
         border-radius: 16upx;
-		margin-bottom: 30upx !important;
+        margin-bottom: 30upx !important;
 
         .uni-forms-item__label {
           width: 100% !important;
+          margin-bottom: 46upx;
           uni-text {
             width: 100% !important;
             width: 100% !important;
@@ -785,9 +784,8 @@ export default {
   color: #7a7f89 !important;
 }
 ::v-deep.uni-input-placeholder {
-	font-size: 32upx !important;
-	font-weight: 400 !important;
-	color: #7A7F89 !important;
-
+  font-size: 32upx !important;
+  font-weight: 400 !important;
+  color: #7a7f89 !important;
 }
 </style>
