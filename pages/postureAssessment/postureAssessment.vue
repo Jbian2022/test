@@ -417,7 +417,7 @@
 				data['traineeNo'] = this.traineeNo
 				data['questionCode'] = 'A0003'
 				testOb.opearConfigQuery(data).then((res)=>{
-					this.assessmentData = res.data.postData;
+					this.assessmentData = res.data[0].postData;
 					this.textShow1 = res.data[0].postData[0].textShow1;
 					this.textShow2 = res.data[0].postData[1].textShow2;
 					this.textShow3 = res.data[0].postData[2].textShow3;
