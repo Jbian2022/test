@@ -27,15 +27,15 @@
       </view>
       <view class="right"></view>
     </view>
-    <view v-else class="vip-info ordinary" @click="openCard">
+	<view v-else style="margin-top: 80upx;"></view>
+<!--    <view v-else class="vip-info ordinary" @click="openCard">
       <view class="left">
         <view class="vip-grade">
           <view class="grade-name">蓝卡会员</view>
         </view>
-        <!-- <view class="vip-expiration-date">开通金卡教练，畅想多项特权 ></view> -->
       </view>
       <view class="right"></view>
-    </view>
+    </view> -->
     <view class="contact-customer">
       <view class="title">联系客服</view>
       <view class="customer-info">
