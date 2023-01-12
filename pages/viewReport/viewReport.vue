@@ -482,7 +482,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体重（标准：70kg）</van-col>
+                      <van-col span="17">体重</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.weight }}kg</van-col
                       >
@@ -490,7 +490,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">肌肉量（标准：60kg）</van-col>
+                      <van-col span="17">肌肉量</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.muscleMass }}kg</van-col
                       >
@@ -498,7 +498,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体脂量（标准：30kg）</van-col>
+                      <van-col span="17">体脂量</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.fatMass }}kg</van-col
                       >
@@ -506,7 +506,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体脂百分比（标准：18%）</van-col>
+                      <van-col span="17">体脂百分比</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.fatPer }}%</van-col
                       >
@@ -514,7 +514,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">腰臀百分比（标准：15%）</van-col>
+                      <van-col span="17">腰臀比</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.buttockPer }}%</van-col
                       >
@@ -522,7 +522,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">基础代谢（标准：2200cal）</van-col>
+                      <van-col span="17">基础代谢</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.basal }}cal</van-col
                       >
@@ -530,12 +530,28 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体水分（标准：40%）</van-col>
+                      <van-col span="17">体水分</van-col>
                       <van-col span="7" class="textRight"
-                        >{{ bodyTestData.bodyMisture }}%</van-col
+                        >{{ bodyTestData.bodymoisture }}%</van-col
                       >
                     </van-row>
                   </view>
+				  <view class="textContent">
+				    <van-row class="text">
+				      <van-col span="17">内脏脂肪等级</van-col>
+				      <van-col span="7" class="textRight"
+				        >{{ bodyTestData.visceralfatgrade }}</van-col
+				      >
+				    </van-row>
+				  </view>
+				  <view class="textContent">
+				    <van-row class="text">
+				      <van-col span="17">身体BMI值</van-col>
+				      <van-col span="7" class="textRight"
+				        >{{ bodyTestData.bmi }}</van-col
+				      >
+				    </van-row>
+				  </view>
                 </view>
               </view>
             </uni-collapse-item>
