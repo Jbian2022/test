@@ -10,7 +10,7 @@
 	<view class="watermark">数据评测来源于世界权威机构</view>
     <van-row>
       <van-col class="need_scoll" span="24">
-		<view style="height: 1300upx;flex: 1;overflow-y: auto;">
+		<view>
 			<view
 			  class="dynamicshow"
 			  v-for="(item, index) in queryData"
@@ -33,15 +33,15 @@
 						<view class="circleText" :style="'color:'+item.typeColor+';'">{{item.typeText}}</view>
 					</view>
 				  </view>
-			  </view>
+			</view>
         </view>
+		
+      </van-col>
+    </van-row>
 		<view>
 		<!--  <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">确认</van-button> -->
 		  <view class="bottom_style" @click.stop="getdynamicEvaluationdata()">保存</view>
 		</view>
-      </van-col>
-    </van-row>
-    
   </view>
 </template>
 
@@ -95,6 +95,7 @@ export default {
 		switch(levelType){
 			case "优秀":
 			case "良好":
+			case "非常好":
 				return "#01E08C";
 				break;
 			case "中等":
@@ -169,7 +170,7 @@ export default {
 <style lang="scss" scoped>
 .content_style {
   width: 100vw;
-  // height: 100vh;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -186,7 +187,7 @@ export default {
   	padding-left: 30upx;
   	color: #bdc3ce;
   	position: relative;
-	margin-top: 40upx;
+	margin-top: 80upx;
   	.van-icon{
   		font-size: 40upx;
   		color: #bdc3ce;
@@ -218,6 +219,8 @@ export default {
 } */
 .need_scoll{
 	// background-color: rgba(33, 35, 40, 1);
+	overflow: auto;
+	position: relative;
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
@@ -310,22 +313,21 @@ export default {
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
 	color: #7A7F89;
-	top: 50upx;
+	top: 110upx;
 	right: 50upx;
 }
 .bottom_style {
   background: #1370ff;
   border-radius: 16upx;
-  margin-top: 30upx;
-  margin-bottom: 30upx;
+  top:90vh;
+  z-index: 100;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
   justify-content: center;
-
+  position: absolute;
   width: calc(100vw - 80upx);
   margin-left: 40upx;
 
