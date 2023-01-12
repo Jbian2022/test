@@ -10,54 +10,38 @@
 	<view class="watermark">数据评测来源于世界权威机构</view>
     <van-row>
       <van-col class="need_scoll" span="24">
-        <view
-          class="dynamicshow"
-          v-for="(item, index) in queryData"
-          :key="index"
-        >
-          <view class="dynamicshow_left" v-if="item.type > 0">
-            <text class="evaluationdata">
-              {{ item.questionContent }}
-            </text>
-			<button class="dynamicshow_button buttonYes" @click.native="jumpModular(item)">重新测试<image src="../../static/app-plus/other/arrows.png"/></button>
-          </view>
-          <view class="dynamicshow_left" v-else>
-            <text class="evaluationdata">
-              {{ item.questionContent }}
-            </text>
-            <!-- <van-button
-              round
-              type="primary"
-              color="#1370FF"
-              class="dynamicshow_button"
-              icon="../../static/app-plus/other/arrows.png"
-              icon-position="right"
-			  @click.native="jumpModular(item)"
-              >开始测试</van-button
-            > -->
-			<button class="dynamicshow_button buttonNo" @click.native="jumpModular(item)">开始测试<image src="../../static/app-plus/other/arrows.png"/></button>
-          </view>
-          <view class="dynamicshow_right">
-            <!-- <van-circle
-              v-model:current-rate="currentRate"
-              :rate="100"
-              :speed="400"
-              :text="item.typeText"
-              :layer-color="item.typeColor"
-              :color="item.typeColor"
-              :style="'--van-circle-text-color:'+ item.typeColor"
-            /> -->
-			<view class="circle" :style="'border: 4px solid '+item.typeColor+';background-color:'+item.typeColor+'0D;'">
-				<view class="circleText" :style="'color:'+item.typeColor+';'">{{item.typeText}}</view>
-			</view>
-          </view>
+		<view style="height: 1300upx;flex: 1;overflow-y: auto;">
+			<view
+			  class="dynamicshow"
+			  v-for="(item, index) in queryData"
+			  :key="index"
+			>
+				  <view class="dynamicshow_left" v-if="item.type > 0">
+					<text class="evaluationdata">
+					  {{ item.questionContent }}
+					</text>
+					<button class="dynamicshow_button buttonYes" @click.native="jumpModular(item)">重新测试<image src="../../static/app-plus/other/arrows.png"/></button>
+				  </view>
+				  <view class="dynamicshow_left" v-else>
+					<text class="evaluationdata">
+					  {{ item.questionContent }}
+					</text>
+					<button class="dynamicshow_button buttonNo" @click.native="jumpModular(item)">开始测试<image src="../../static/app-plus/other/arrows.png"/></button>
+				  </view>
+				  <view class="dynamicshow_right">
+					<view class="circle" :style="'border: 4px solid '+item.typeColor+';background-color:'+item.typeColor+'0D;'">
+						<view class="circleText" :style="'color:'+item.typeColor+';'">{{item.typeText}}</view>
+					</view>
+				  </view>
+			  </view>
         </view>
+		<view>
+		<!--  <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">确认</van-button> -->
+		  <view class="bottom_style" @click.stop="getdynamicEvaluationdata()">保存</view>
+		</view>
       </van-col>
     </van-row>
-    <view>
-    <!--  <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">确认</van-button> -->
-	  <view class="bottom_style" @click.stop="getdynamicEvaluationdata()">确认</view>
-    </view>
+    
   </view>
 </template>
 
@@ -185,10 +169,11 @@ export default {
 <style lang="scss" scoped>
 .content_style {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   overflow: hidden;
   position: relative;
-  padding-top: 40upx;
+  display: flex;
+  flex-direction: column;
   // background: rgba(33, 35, 40, 1);
 .arrow-left{
   	// top: var(--status-bar-height);
@@ -236,7 +221,6 @@ export default {
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
-  overflow-y: auto;
   background-color: #2f333a;
   margin-left: 30upx;
   margin-top: 30upx;
@@ -251,6 +235,7 @@ export default {
 }
 .dynamicshow_left {
   /* display: flex; */
+  width: calc(100vw - 180upx);
   margin-left: 30upx;
   align-items: center;
 }
@@ -288,7 +273,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 252upx;
+  width: 350upx;
   height: 50upx;
   margin-bottom: 74upx;
   font-weight: 600;
@@ -325,13 +310,10 @@ export default {
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
 	color: #7A7F89;
-	top: 110upx;
+	top: 50upx;
 	right: 50upx;
 }
 .bottom_style {
-  width: calc(100vw - 60upx);
-  margin-left: 30upx;
-  height: 100upx;
   background: #1370ff;
   border-radius: 16upx;
   margin-top: 30upx;
@@ -342,5 +324,11 @@ export default {
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
+  justify-content: center;
+
+  width: calc(100vw - 80upx);
+  margin-left: 40upx;
+
+  display: flex;
 }
 </style>

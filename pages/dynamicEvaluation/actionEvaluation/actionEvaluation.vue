@@ -102,7 +102,12 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video :src="SideVideoUrl" wid autoplay loop :controls="false">
+					<video :src="SideVideoUrl" 
+					wid 
+					autoplay 
+					loop 
+					:controls="false"
+					:custom-cache="false">
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -192,7 +197,7 @@
 			></image> -->
 		</view>
 		
-		<view class="bottom_style" @click.stop="actionResDate">确认</view>
+		<view class="bottom_style" @click.stop="actionResDate">保存</view>
 	</view>
 </template>
 

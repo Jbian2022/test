@@ -8,8 +8,6 @@
 // 下面示例查询uni-id-users表的所有数据
 // db.collection('uni-id-users').get();
 db.collection('opendb-verify-codes').get();
-db.collection('t_questionaire_answer').where({
-			   traineeNo: "639ec7b4e1a35cff9abcdd91",
-				 userId: detailInfo.uid, 
-				 questionCode: "F0001"
-		   }).get()
+db.collection('t_config')
+			.where('gender=="'+1+'"&&code=="'+'F0001'+'"&&maximumAge>='+23+'&&minimumAge<='+23+'&&maximumResult>='+80+'&&minimumResult<='+80)
+			.get()
