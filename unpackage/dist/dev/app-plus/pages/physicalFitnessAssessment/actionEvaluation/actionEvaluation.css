@@ -235,7 +235,7 @@
   display: flex;
 }
 .clickAction{
-	width: 8.125rem;
+	width: 20.625rem;
 	height: 2.1875rem;
 	background: #000000;
 	border-radius: 1.125rem;
@@ -256,14 +256,12 @@
 	top: 0.1875rem;
 }
 .clickActionBody{
-	height: 46.59375rem;
 	background: #383D46;
 	border-radius: 0.5rem;
 	z-index: 999;
 }
  .clickActionContent{
 	width: calc(100vw - 1.875rem);
-	height: 46.5625rem;
 	margin-top: 6.25rem;
 	margin-left: 0.9375rem;
 	background-color: #383D46;
@@ -306,7 +304,8 @@
 	line-height: 2.1875rem;
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 20.8125rem;
+	margin-top: 97%;
+	margin-bottom: 1.25rem;
 }
 .clickActionEnd uni-image{
 	width: 1rem;

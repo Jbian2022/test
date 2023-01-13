@@ -7243,80 +7243,63 @@ if (uni.restoreGlobal) {
       NavBarCompontent
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:304", item);
+      formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:303", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getData();
     },
     methods: {
       isonclick(a2) {
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:326", a2);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:325", a2);
         switch (a2) {
           case 1:
             this.textShow1 = !this.textShow1;
-            if (!this.textShow1) {
-              this.assessmentData[0].textShow1 = this.textShow1;
-            }
+            this.assessmentData[0].textShow1 = this.textShow1;
+            formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:330", this.assessmentData[0].textShow1);
             break;
           case 2:
             this.textShow2 = !this.textShow2;
-            if (!this.textShow2) {
-              this.assessmentData[1].textShow2 = this.textShow2;
-            }
+            this.assessmentData[1].textShow2 = this.textShow2;
             break;
           case 3:
             this.textShow3 = !this.textShow3;
-            if (!this.textShow3) {
-              this.assessmentData[2].textShow3 = this.textShow3;
-            }
+            this.assessmentData[2].textShow3 = this.textShow3;
             break;
           case 4:
             this.textShow4 = !this.textShow4;
-            if (!this.textShow4) {
-              this.assessmentData[3].textShow4 = this.textShow4;
-            }
+            this.assessmentData[3].textShow4 = this.textShow4;
             break;
           case 5:
             this.textShow5 = !this.textShow5;
-            if (!this.textShow5) {
-              this.assessmentData[4].textShow5 = this.textShow5;
-            }
+            this.assessmentData[4].textShow5 = this.textShow5;
             break;
           case 6:
             this.textShow6 = !this.textShow6;
-            if (!this.textShow6) {
-              this.assessmentData[5].textShow6 = this.textShow6;
-            }
+            this.assessmentData[5].textShow6 = this.textShow6;
             break;
           case 7:
             this.textShow7 = !this.textShow7;
-            if (!this.textShow7) {
-              this.assessmentData[6].textShow7 = this.textShow7;
-            }
+            this.assessmentData[6].textShow7 = this.textShow7;
             break;
           case 8:
             this.textShow8 = !this.textShow8;
-            if (!this.textShow8) {
-              this.assessmentData[7].textShow8 = this.textShow8;
-            }
+            this.assessmentData[7].textShow8 = this.textShow8;
             break;
           case 9:
             this.textShow9 = !this.textShow9;
-            if (!this.textShow9) {
-              this.assessmentData[8].textShow9 = this.textShow9;
-            }
+            this.assessmentData[8].textShow9 = this.textShow9;
             break;
         }
       },
       backPage() {
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:389", this.assessmentData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:371", this.assessmentData);
         this.assessmentNewData["postData"] = this.assessmentData;
         this.assessmentNewData["traineeNo"] = this.traineeNo;
         this.assessmentNewData["questionCode"] = this.questionCode;
         this.assessmentNewData["key"] = "posture";
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:394", this.assessmentNewData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:376", this.assessmentNewData);
         const res2 = testOb$3.postConfig(this.assessmentNewData, "postureTest").then((res3) => {
-          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:396", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:378", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res3.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -7329,15 +7312,23 @@ if (uni.restoreGlobal) {
           }
         }).catch(() => {
         });
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:408", res2);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:390", res2);
+        uni.showToast({
+          icon: "success",
+          title: res2.message,
+          duration: 800
+        });
       },
       getData() {
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = "A0003";
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:401", this.assessmentData);
         testOb$3.opearConfigQuery(data).then((res2) => {
           this.assessmentData = res2.data[0].postData;
           this.textShow1 = res2.data[0].postData[0].textShow1;
+          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:405", res2.data[0].postData[0].textShow1);
+          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:406", this.textShow1);
           this.textShow2 = res2.data[0].postData[1].textShow2;
           this.textShow3 = res2.data[0].postData[2].textShow3;
           this.textShow4 = res2.data[0].postData[3].textShow4;
@@ -7347,6 +7338,7 @@ if (uni.restoreGlobal) {
           this.textShow8 = res2.data[0].postData[7].textShow8;
           this.textShow9 = res2.data[0].postData[8].textShow9;
         });
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:416", this.assessmentData);
       }
     }
   };
@@ -7669,7 +7661,6 @@ if (uni.restoreGlobal) {
         }),
         vue.createCommentVNode(' <van-row \r\n			v-for="(item,index) in assessmentData" :key="index">\r\n			  <van-col span="12">\r\n				  <view class="contentLeftBlock" @click.native="isonclick(item,1)" v-show="item.textShow1">\r\n					  {{item.title1}}\r\n				  </view>\r\n				  <view class="clickBlock" v-show="!item.textShow1" @click.native="isonclick(item,1)">\r\n					  <view>{{item.title1}}</view>\r\n					  <view>{{item.text1}}</view>\r\n				  </view>\r\n			  </van-col>\r\n			  <van-col span="12">\r\n				  <view class="contentRightBlock" @click.native="isonclick(item,2)" v-show="item.textShow2">\r\n					  {{item.title2}}\r\n				  </view>\r\n				  <view class="clickBlock" v-show="!item.textShow2" @click.native="isonclick(item,2)">\r\n				  		<view>{{item.title2}}</view>\r\n				  		<view>{{item.text2}}</view>\r\n				  </view>\r\n			  </van-col>\r\n			</van-row> ')
       ]),
-      vue.createElementVNode("view", { class: "contentText" }, "\u70B9\u51FB\u6807\u7B7E\u9009\u62E9\u95EE\u9898\u90E8\u4F4D"),
       vue.createElementVNode("view", { style: { "color": "7A7F89" } }, [
         vue.createElementVNode("button", {
           type: "primary",
@@ -19260,7 +19251,7 @@ if (uni.restoreGlobal) {
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:228", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:235", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       let leftNavTitle = item.pageTitle;
@@ -19285,7 +19276,7 @@ if (uni.restoreGlobal) {
           this.FrontVideoUrl = this.StraightLegLiftUrl;
           this.SideVideoUrl = this.ThomasUrl;
           break;
-        case "\u5173\u8282\u7075\u6D3B\u6D4B\u8BD5":
+        case "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5":
           this.backimgFront = this.shoulderTest1img;
           this.backimgSide = this.shoulderTest2img;
           this.FrontVideoUrl = this.shoulderTest1Url;
@@ -19362,14 +19353,15 @@ if (uni.restoreGlobal) {
       getActionInfo() {
         if (this.type !== "") {
           busOb$2.getPhysicalChildAssessmentList(this.type).then((res2) => {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:336", res2.data);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:343", res2.data);
             if (res2.success) {
               this.actionobs = res2.data;
               this.quession1 = this.actionobs[0].answer;
               this.testText1 = this.actionobs[0].answerRemark.detailArray;
-              this.quession2 = this.actionobs[1].answer;
-              this.testText2 = this.actionobs[1].answerRemark.detailArray;
-              formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:343", this.testText1);
+              if (this.actionobs.length > 1) {
+                this.quession2 = this.actionobs[1].answer;
+                this.testText2 = this.actionobs[1].answerRemark.detailArray;
+              }
               if (this.actionobs.length > 2) {
                 this.quession3 = this.actionobs[2].answer;
                 this.testText3 = this.actionobs[2].answerRemark.detailArray;
@@ -19380,16 +19372,16 @@ if (uni.restoreGlobal) {
         }
       },
       actionResDate() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:355", this.actionobs);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:363", this.actionobs);
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         data["actionTestResult"] = this.actionobs;
         data["status"] = "0";
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:362", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:370", data);
         tesOb.opearConfig(data, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:364", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:372", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -19403,12 +19395,18 @@ if (uni.restoreGlobal) {
         }).catch(() => {
         });
       },
-      clickQ(item) {
+      clickQ(item, num) {
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:386", item);
         if (item.status) {
           item.status = 0;
         } else {
           item.status = 1;
         }
+        this.actionobs[num].answer.forEach((ans) => {
+          if (ans.answerTitle === item.answerTitle) {
+            ans.status = item.status;
+          }
+        });
       },
       getData() {
         const data = {};
@@ -19416,11 +19414,13 @@ if (uni.restoreGlobal) {
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         tesOb.opearPHConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:390", res2.data[0].actionTestResult);
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:404", res2.data[0].actionTestResult);
           this.quession1 = res2.data[0].actionTestResult[0].answer;
-          this.quession2 = res2.data[0].actionTestResult[1].answer;
+          if (res2.data[0].actionTestResult.length > 1) {
+            this.quession2 = res2.data[0].actionTestResult[1].answer;
+          }
           if (res2.data[0].actionTestResult.length > 2) {
-            this.quession3 = res2.data[0].actionTestResult[1].answer;
+            this.quession3 = res2.data[0].actionTestResult[2].answer;
           }
         });
       }
@@ -19433,7 +19433,21 @@ if (uni.restoreGlobal) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, { leftNavTitle: _ctx.leftNavTitle }, null, 8, ["leftNavTitle"]),
-      vue.createElementVNode("view", { class: "headBox" }, [
+      _ctx.leftNavTitle === "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5" ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "headBox"
+      }, [
+        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.actionobs, (item, index) => {
+          return vue.openBlock(), vue.createElementBlock("view", {
+            class: vue.normalizeClass(["block1", $data.num == index ? "block0" : ""]),
+            key: index,
+            onClick: ($event) => $options.changeFunction(index)
+          }, vue.toDisplayString(item.questionContent), 11, ["onClick"]);
+        }), 128))
+      ])) : (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "headBox"
+      }, [
         (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.actionobs, (item, index) => {
           return vue.openBlock(), vue.createElementBlock("view", {
             class: vue.normalizeClass(["block", $data.num == index ? "block0" : ""]),
@@ -19441,9 +19455,9 @@ if (uni.restoreGlobal) {
             onClick: ($event) => $options.changeFunction(index)
           }, vue.toDisplayString(item.questionContent), 11, ["onClick"]);
         }), 128))
-      ]),
+      ])),
       $data.changeValue ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 0,
+        key: 2,
         class: "contentBody"
       }, [
         vue.createElementVNode("view", {
@@ -19497,14 +19511,14 @@ if (uni.restoreGlobal) {
               item.status ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 0,
                 class: "quessonName",
-                onClick: vue.withModifiers(($event) => $options.clickQ(item), ["stop"])
+                onClick: vue.withModifiers(($event) => $options.clickQ(item, 0), ["stop"])
               }, [
                 vue.createElementVNode("p", null, vue.toDisplayString(item.answerTitle), 1)
               ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
               !item.status ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 1,
                 class: "clickQuessonName",
-                onClick: vue.withModifiers(($event) => $options.clickQ(item), ["stop"])
+                onClick: vue.withModifiers(($event) => $options.clickQ(item, 0), ["stop"])
               }, [
                 vue.createElementVNode("view", { class: "quessonTitle" }, vue.toDisplayString(item.answerTitle), 1),
                 vue.createElementVNode("view", { class: "quessonText" }, [
@@ -19521,7 +19535,7 @@ if (uni.restoreGlobal) {
           src: $data.backimgFront
         }, null, 8, ["src"])
       ])) : (vue.openBlock(), vue.createElementBlock("view", {
-        key: 1,
+        key: 3,
         class: "contentBody"
       }, [
         vue.createElementVNode("view", {
@@ -19576,14 +19590,14 @@ if (uni.restoreGlobal) {
               item.status ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 0,
                 class: "quessonName",
-                onClick: vue.withModifiers(($event) => $options.clickQ(item), ["stop"])
+                onClick: vue.withModifiers(($event) => $options.clickQ(item, 1), ["stop"])
               }, [
                 vue.createElementVNode("p", null, vue.toDisplayString(item.answerTitle), 1)
               ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
               !item.status ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 1,
                 class: "clickQuessonName",
-                onClick: vue.withModifiers(($event) => $options.clickQ(item), ["stop"])
+                onClick: vue.withModifiers(($event) => $options.clickQ(item, 1), ["stop"])
               }, [
                 vue.createElementVNode("view", { class: "quessonTitle" }, vue.toDisplayString(item.answerTitle), 1),
                 vue.createElementVNode("view", { class: "quessonText" }, [
@@ -19624,7 +19638,7 @@ if (uni.restoreGlobal) {
           { title: "\u81EA\u91CD\u6DF1\u8E72\u8BC4\u4F30", type: "E0001", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u81EA\u91CD\u6DF1\u8E72\u8BC4\u4F30", icon: true },
           { title: "\u80F8\u690E\u6D3B\u52A8\u8BC4\u4F30", type: "E0002", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u80F8\u690E\u6D3B\u52A8\u8BC4\u4F30", icon: true },
           { title: "\u67D4\u97E7\u6027\u6D4B\u8BD5", type: "E0003", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u67D4\u97E7\u6027\u6D4B\u8BD5", icon: true },
-          { title: "\u80A9\u5173\u8282\u7075\u6D3B\u6D4B\u8BD5", type: "E0004", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u5173\u8282\u7075\u6D3B\u6D4B\u8BD5", icon: true },
+          { title: "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5", type: "E0004", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5", icon: true },
           { title: "\u4FEF\u5367\u6491\u7A33\u5B9A\u6027\u6D4B\u8BD5", type: "E0005", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u4FEF\u5367\u6491\u7A33\u5B9A\u6027\u6D4B\u8BD5", icon: true }
         ],
         icon: true,

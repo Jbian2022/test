@@ -166,6 +166,20 @@
 	background: #383D46;
 	margin-right: 0.6875rem;
 }
+.block1{
+	width: 29vw;
+	height: 2.8125rem;
+	border-radius: 0.5rem;
+	float: left;
+	font-size: 0.9375rem;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #F4F7FF;
+	line-height: 2.8125rem;
+	text-align: center;
+	background: #383D46;
+	margin-right: 0.6875rem;
+}
 .block0{
 	background: #195BC2;
 }
