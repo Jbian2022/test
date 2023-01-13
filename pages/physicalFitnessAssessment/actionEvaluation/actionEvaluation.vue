@@ -36,7 +36,7 @@
 				<van-row>
 				  <van-col span="16">
 					  <view class="testText" v-if="actionData.code=='F0001'">请填写心率</view>
-					  <view class="testText" v-else>请填写数量</view>
+					  <view class="testText" v-else>请填写数量（力竭）</view>
 					  <view class="testInput">
 						  <view>
 							  
@@ -249,6 +249,7 @@
 				switch(levelType){
 					case "优秀":
 					case "良好":
+					case "非常好":
 						this.typeColor = "rgba(1, 224, 140, 1)";
 						this.backgroundColor = "rgba(53, 68, 73, 0.5)"
 						break;
@@ -349,7 +350,6 @@
 	border-radius: 0px 0px 16px 16px;
 }
 .testText{
-	width: 180upx;
 	height: 50upx;
 	font-size: 36upx;
 	font-weight: 600;

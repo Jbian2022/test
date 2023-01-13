@@ -27,10 +27,7 @@
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
 						<view>
-							<p>1.双脚与肩同宽双臂自然下垂。</p>
-							<p>2.不提醒会员任何技巧，自然下蹲n次。</p>
-							<p>3.每次下蹲频率在5秒左右。</p>
-							<p>4.下蹲过程中，教练需观察会员，正面肢体状态，侧面肢体状态。</p>
+							<p v-for="(item,index) in testText1">{{item}}</p>
 						</view>
 					</view>
 					<view class="clickActionEnd" @click.native="closePopup">收起
@@ -50,7 +47,7 @@
 							{{item.answerTitle}}
 						</view>
 						<view class="quessonText">
-							{{item.answeerContent}}
+							<p style="color: #F04242;display: initial;">问题描述：</p>{{item.answeerContent}}
 						</view>
 					</view>
 				</view>
@@ -112,10 +109,7 @@
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
 						<view>
-							<p>1.双脚与肩同宽双臂自然下垂。</p>
-							<p>2.不提醒会员任何技巧，自然下蹲n次。</p>
-							<p>3.每次下蹲频率在5秒左右。</p>
-							<p>4.下蹲过程中，教练需观察会员，正面肢体状态，侧面肢体状态。</p>
+							<p v-for="(item,index) in testText1">{{item}}</p>
 						</view>
 					</view>
 					<view class="clickActionEnd" @click.native="closePopup">收起
@@ -136,7 +130,7 @@
 							{{item.answerTitle}}
 						</view>
 						<view class="quessonText">
-							{{item.answeerContent}}
+							<p style="color: #F04242;display: initial;">问题描述：</p>{{item.answeerContent}}
 						</view>
 					</view>
 				</view>
@@ -314,7 +308,10 @@
 				pushUpTestUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e27801c0-b63f-42f0-a5a4-68574a123e69.mp4",
 				quession1:[],
 				quession2:[],
-				quession3:[]
+				quession3:[],
+				testText1:[],
+				testText2:[],
+				testText3:[],
 			}
 		},
 		methods: {
@@ -336,14 +333,18 @@
 			getActionInfo(){
 				if(this.type!==''){
 					busOb.getPhysicalChildAssessmentList(this.type).then((res)=>{
-						console.log(res);
+						console.log(res.data);
 						if(res.success){
 							this.actionobs = res.data
 							this.quession1 = this.actionobs[0].answer
+							this.testText1 = this.actionobs[0].answerRemark.detailArray
 							this.quession2 = this.actionobs[1].answer
-							console.log(this.actionobs);
+							this.testText2 = this.actionobs[1].answerRemark.detailArray
+							console.log(this.testText1);
+							// console.log(this.actionobs);
 							if(this.actionobs.length>2){
 								this.quession3 = this.actionobs[2].answer
+								this.testText3 = this.actionobs[2].answerRemark.detailArray
 							}
 							this.getData()
 						}
@@ -406,7 +407,7 @@
 	position: relative;
 }
 .headBox{
-	width: calc(100vw - 20upx);
+	width: 100vw;
 	height: 90upx;
 	margin: 0 auto;
 	margin-top: 20upx;
@@ -414,7 +415,7 @@
 	overflow-x: hidden;
 }
 .block{
-	width: 348upx;
+	width: 45vw;
 	height: 90upx;
 	border-radius: 16upx;
 	float: left;
@@ -451,7 +452,7 @@
 }
 
 .clickAction{
-	width: 260upx;
+	width: 660upx;
 	height: 70upx;
 	background: #000000;
 	border-radius: 36upx;
@@ -554,7 +555,7 @@
 .quessonName{
 	width: 180upx;
 	/* height: 80upx; */
-	background: #212328;
+	background: rgba(19,112,255,0.9);
 	border-radius: 16upx;
 	font-size: 26upx;
 	font-weight: 600;

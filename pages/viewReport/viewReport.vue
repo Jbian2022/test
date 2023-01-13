@@ -104,11 +104,11 @@
             </van-col>
             <van-col span="12">
               <!-- <input type="button" value="重新测试" class="titleButton"/> -->
-              <button class="titleButton" @click="gototest()">重新测试</button>
+              <button class="titleButton" @click="gototest()">重新评估</button>
             </van-col>
           </van-row>
           <van-row class="titleBottomText">
-            <van-col span="12">{{nowYear}}年</van-col>
+            <van-col span="12">{{nowYear}}.{{nowDate}}</van-col>
             <van-col span="12">数据评测来源于世界权威机构</van-col>
           </van-row>
         </view>
@@ -120,17 +120,22 @@
             class="need_collapse_style"
             title-border="none"
           >
-            <uni-collapse-item title="基础信息" :show-arrow="false">
-				<!-- <template v-slot:title>
+            <uni-collapse-item  
+			titleBorder="none" 
+			:show-arrow="false" 
+			:open="true" >
+				<template v-slot:title>
 					<uni-list>
-						<uni-list-item title="基础信息" clickable  @click="onClickinfo(infoclick)" class="titleclass">
+						<uni-list-item :border="false" title="基础信息" clickable  @click="onClickinfo('基础信息')" class="titleclass" >
 							<template v-slot:footer>
-								<view class="rightclickblock" v-if="infoclick">点击展开</view>
-								<view class="rightclickblock" v-else>点击关闭</view>
+								<view class="rightclickblock arrowimgopen" v-if="!infoclick">
+									点击展开
+								</view>
+								<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
 							</template>
 						</uni-list-item>
 					</uni-list>
-				</template> -->
+				</template>
               <view style="height: 280upx">
                 <view class="textContent">
                   <van-row class="text">
@@ -176,7 +181,22 @@
               title="健康问答"
               class="informationCard"
 			  :open="false"
+			  :show-arrow="false"
             >
+			
+			<template v-slot:title>
+				<uni-list>
+					<uni-list-item title="健康问答" clickable  @click="onClickinfo('健康问答')" class="titleclass">
+						<template v-slot:footer>
+							<view class="rightclickblock arrowimgopen" v-if="!infoclick1">
+								点击展开
+							</view>
+							<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
+						</template>
+					</uni-list-item>
+				</uni-list>
+			</template>
+			
               <view style="padding-bottom: 40upx" v-if="showHQ">
                 <view class="basicInformationContent healthBlocks">
                   <view v-for="(items, index) in HQDate">
@@ -392,7 +412,22 @@
               title-class="informationTitleText"
               class="informationCard"
 			  :open="false"
+			  :showArrow="false"
             >
+			
+			<template v-slot:title>
+				<uni-list>
+					<uni-list-item title="体测报告" clickable  @click="onClickinfo('体测报告')" class="titleclass">
+						<template v-slot:footer>
+							<view class="rightclickblock arrowimgopen" v-if="!infoclick2">
+								点击展开
+							</view>
+							<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
+						</template>
+					</uni-list-item>
+				</uni-list>
+			</template>
+			
               <view style="padding-bottom: 40upx">
                 <view class="countNumBlock">
                   <van-row>
@@ -447,7 +482,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体重（标准：70kg）</van-col>
+                      <van-col span="17">体重</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.weight }}kg</van-col
                       >
@@ -455,7 +490,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">肌肉量（标准：60kg）</van-col>
+                      <van-col span="17">肌肉量</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.muscleMass }}kg</van-col
                       >
@@ -463,7 +498,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体脂量（标准：30kg）</van-col>
+                      <van-col span="17">体脂量</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.fatMass }}kg</van-col
                       >
@@ -471,7 +506,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体脂百分比（标准：18%）</van-col>
+                      <van-col span="17">体脂百分比</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.fatPer }}%</van-col
                       >
@@ -479,7 +514,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">腰臀百分比（标准：15%）</van-col>
+                      <van-col span="17">腰臀比</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.buttockPer }}%</van-col
                       >
@@ -487,7 +522,7 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">基础代谢（标准：2200cal）</van-col>
+                      <van-col span="17">基础代谢</van-col>
                       <van-col span="7" class="textRight"
                         >{{ bodyTestData.basal }}cal</van-col
                       >
@@ -495,12 +530,28 @@
                   </view>
                   <view class="textContent">
                     <van-row class="text">
-                      <van-col span="17">体水分（标准：40%）</van-col>
+                      <van-col span="17">体水分</van-col>
                       <van-col span="7" class="textRight"
-                        >{{ bodyTestData.bodyMisture }}%</van-col
+                        >{{ bodyTestData.bodymoisture }}%</van-col
                       >
                     </van-row>
                   </view>
+				  <view class="textContent">
+				    <van-row class="text">
+				      <van-col span="17">内脏脂肪等级</van-col>
+				      <van-col span="7" class="textRight"
+				        >{{ bodyTestData.visceralfatgrade }}</van-col
+				      >
+				    </van-row>
+				  </view>
+				  <view class="textContent">
+				    <van-row class="text">
+				      <van-col span="17">身体BMI值</van-col>
+				      <van-col span="7" class="textRight"
+				        >{{ bodyTestData.bmi }}</van-col
+				      >
+				    </van-row>
+				  </view>
                 </view>
               </view>
             </uni-collapse-item>
@@ -514,7 +565,22 @@
               title-class="informationTitleText"
               class="informationCard"
 			  :open="false"
+            :showArrow="false"
             >
+            
+            <template v-slot:title>
+            	<uni-list>
+            		<uni-list-item title="体态评估" clickable  @click="onClickinfo('体态评估')" class="titleclass">
+            			<template v-slot:footer>
+            				<view class="rightclickblock arrowimgopen" v-if="!infoclick3">
+            					点击展开
+            				</view>
+            				<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
+            			</template>
+            		</uni-list-item>
+            	</uni-list>
+            </template>
+			
               <view style="padding-bottom: 40upx">
                 <view
                   class="bodyAssessment"
@@ -604,7 +670,21 @@
               title-class="informationTitleText"
               class="informationCard"
 			  :open="false"
+            :showArrow="false"
             >
+            
+            <template v-slot:title>
+            	<uni-list>
+            		<uni-list-item title="动态评估" clickable  @click="onClickinfo('动态评估')" class="titleclass">
+            			<template v-slot:footer>
+            				<view class="rightclickblock arrowimgopen" v-if="!infoclick4">
+            					点击展开
+            				</view>
+            				<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
+            			</template>
+            		</uni-list-item>
+            	</uni-list>
+            </template>
               <view style="padding-bottom: 40upx">
                 <view
                   class="bodyAssessment"
@@ -664,7 +744,21 @@
               title="体能评估"
               class="informationCard"
 			  :open="false"
+            :showArrow="false"
             >
+            
+            <template v-slot:title>
+            	<uni-list>
+            		<uni-list-item title="体能评估" clickable  @click="onClickinfo('体能评估')" class="titleclass">
+            			<template v-slot:footer>
+            				<view class="rightclickblock arrowimgopen" v-if="!infoclick5">
+            					点击展开
+            				</view>
+            				<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
+            			</template>
+            		</uni-list-item>
+            	</uni-list>
+            </template>
               <view style="padding-bottom: 40upx; background-color: #2f333a">
                 <!-- <van-row style="background-color: #343A44;">
 						<van-col class="need_scoll" span="24"> -->
@@ -742,6 +836,11 @@ export default {
       mobileNumber: 0,
       openKey: true,
 	  infoclick:1,
+	  infoclick2:0,
+	  infoclick3:0,
+	  infoclick4:0,
+	  infoclick5:0,
+	  infoclick6:0,
       key: '',
       bodyTestData: [],
       HQDate: [],
@@ -1316,11 +1415,51 @@ export default {
 	},
 	onClickinfo(item){
 		console.log(item)
-		if(item){
-			this.infoclick=0
-		}else{
-			this.infoclick=1
+		switch(item){
+			case '基础信息':
+				if(this.infoclick){
+					this.infoclick=0
+				}else{
+					this.infoclick=1
+				}
+				break;
+			case '健康问答':
+				if(this.infoclick1){
+					this.infoclick1=0
+				}else{
+					this.infoclick1=1
+				}
+				break;
+			case '体测报告':
+				if(this.infoclick2){
+					this.infoclick2=0
+				}else{
+					this.infoclick2=1
+				}
+				break;
+			case '体态评估':
+				if(this.infoclick3){
+					this.infoclick3=0
+				}else{
+					this.infoclick3=1
+				}
+				break;
+			case '动态评估':
+				if(this.infoclick4){
+					this.infoclick4=0
+				}else{
+					this.infoclick4=1
+				}
+				break;
+			case '体能评估':
+				if(this.infoclick5){
+					this.infoclick5=0
+				}else{
+					this.infoclick5=1
+				}
+				break;
 		}
+		
 	}
   }
 }
@@ -1903,20 +2042,51 @@ export default {
 	text-align: center !important;
 }
 .rightclickblock{
-	width: 100upx;
+	width: 154upx;
 	height: 50upx;
 	background: #1370FF;
-	border-radius: 8upx;
+	border-radius: 26upx;
 	font-size: 24upx;
 	font-family: PingFangSC-Semibold, PingFang SC;
 	font-weight: 600;
 	color: #F4F7FF;
-	line-height: 34upx;
+	line-height: 50upx;
+	padding-left: 26upx;
 }
 .titleclass{
 	background: #2f333a !important;
 	border-top: none;
 	border-bottom: none;
+	color: #F4F7FF !important;	
+	border-radius: 24upx;
+}
+::v-deep .uni-list{
+	background-color: #2f333a !important;
+	border-radius: 24upx;
+}
+::v-deep .uni-list-item__content-title{
 	color: #F4F7FF !important;
+	font-weight: 600;
+	background-color: #2f333a !important;
+	font-size: 36upx !important;
+}
+::v-deep .uni-list--border-top{
+	background-color: #2f333a !important;
+}
+.arrowimgopen{
+	background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png');
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position-x: 124upx;
+}
+.arrowimgclose{
+	background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e98a8797-15e5-4862-b7f4-b747771c5e89.png");
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position-x: 124upx;
+	background-position-y: 2upx ;
+}
+::v-deep .uni-list--border-bottom{
+	background-color: #2f333a !important;
 }
 </style>
