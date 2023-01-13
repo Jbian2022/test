@@ -26,7 +26,7 @@
 			v-model:show="show" 
 			position="top" 
 			round
-			:overlay="false"
+			:overlay="false" 
 			class="clickActionContent">
 				<view class="clickActionBody">
 					<video :src="FrontVideoUrl" wid autoplay loop :controls="false">
