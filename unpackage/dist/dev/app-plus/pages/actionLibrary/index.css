@@ -190,16 +190,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 1.25rem;
+  position: relative;
 }
 .action-library .header .all-action,
 .action-library .header .problem-action {
   font-size: 1.25rem;
-  color: #7a7f89;
+  color: #f4f7ff;
 }
 .action-library .header .all-action.active,
 .action-library .header .problem-action.active {
   font-weight: 600;
-  color: #f4f7ff;
+  color: #1370ff;
 }
 .action-library .header .custom-action {
   font-size: 0.875rem;
@@ -209,10 +210,21 @@
 .action-library .header .custom-action.show {
   opacity: 0;
 }
+.action-library .header .firstLine {
+  width: 6.125rem;
+  height: 0.125rem;
+  background: #1370ff;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  transition: all 0.3s;
+}
 .action-library .search {
   height: 3.75rem;
   padding: 0.9375rem;
-  padding-top: 0;
+  padding-top: 0.5625rem;
   box-sizing: border-box;
 }
 .action-library .search .uni-search {
@@ -279,7 +291,7 @@
   transform: translateY(-50%);
 }
 .action-library .content .sidebar .van-sidebar-item--select {
-  background: linear-gradient(270deg, rgba(56, 61, 70, 0) 0%, #383D46 100%);
+  background: linear-gradient(270deg, rgba(56, 61, 70, 0) 0%, #383d46 100%);
 }
 .action-library .content .sidebar .van-sidebar-item--select .van-sidebar-item__text {
   font-weight: 600;
@@ -306,7 +318,7 @@
   transform: translateY(0.25rem);
   font-size: 0.875rem;
   font-weight: 600;
-  color: #BDC3CE;
+  color: #bdc3ce;
   line-height: 1.25rem;
 }
 .action-library .content .action-list .custom-action-button {
@@ -354,8 +366,8 @@
   font-weight: 600;
   line-height: 3.125rem;
   border-radius: 100%;
-  background: #1370FF;
-  color: #F4F7FF;
+  background: #1370ff;
+  color: #f4f7ff;
 }
 .action-library .content .action-list .action-list-box .action-list-item .van-image {
   width: 3.125rem;

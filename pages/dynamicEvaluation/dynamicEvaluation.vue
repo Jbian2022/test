@@ -45,7 +45,7 @@
       </van-col>
     </van-row>
     <!-- <van-button type="primary" block class="buttontrue" @click.native="getdynamicEvaluationdata()">确认</van-button> -->
-	<view class="bottom_style" @click.stop="getdynamicEvaluationdata()">确认</view>
+	<view class="bottom_style" @click.stop="getdynamicEvaluationdata()">保存</view>
   </view>
 </template>
 

@@ -85,7 +85,7 @@
           <view class="add_student_style">
             <view class="need_loop_style">
               <view class="loop_top_style">
-                <view class="top_left_style" @click.stop="getReport(item)">
+                <view class="top_left_style">
                   <text class="top_left_name_style">{{
                     item.traineeName
                   }}</text>
@@ -139,6 +139,16 @@
                   ></image>
                   <text class="message_style">训练记录</text>
                 </view>
+              </view>
+              <view
+                class="loop_bottom_result_style"
+                @click.stop="getReport(item)"
+              >
+                <view class="result_last_remark_style">查看会员详情</view>
+                <image
+                  class="result_last_img_style"
+                  src="../../static/app-plus/other/arrows.svg"
+                ></image>
               </view>
             </view>
           </view>
@@ -369,7 +379,12 @@ export default {
     getReport(item) {
       uni.redirectTo({
         url:
-          '/pages/viewReport/viewReport' + '?traineeNo=' + item._id + '&key=2'
+          '/pages/viewReport/viewReport' +
+          '?traineeNo=' +
+          item._id +
+          '&key=2' +
+          '&buyStatus=' +
+          item.buyStatus
       })
     }
   }
@@ -402,7 +417,6 @@ export default {
     .quckliy_add_style {
       margin-top: 20upx;
       font-size: 28upx;
-      font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #7a7f89;
     }
@@ -420,23 +434,22 @@ export default {
       .need_loop_style {
         width: calc(100% - 60upx);
         margin-top: 30upx;
-
         display: flex;
-
         flex-direction: column;
-        justify-content: space-around;
+        // justify-content: space-around;
         background: #383d46;
         border-radius: 24upx;
-        height: 260upx;
+        height: 346upx;
 
         .loop_top_style {
           width: 100%;
           display: flex;
           justify-content: space-around;
-          // margin-top: 40upx;
+          margin-top: 40upx;
           .top_left_style {
             width: 50%;
             display: flex;
+            align-items: center;
 
             .top_left_name_style {
               font-size: 40upx;
@@ -476,6 +489,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          margin-top: 70upx;
           .bottom_style {
             display: flex;
             align-items: center;
@@ -491,6 +505,27 @@ export default {
               color: #bdc3ce;
             }
           }
+        }
+      }
+      .loop_bottom_result_style {
+        display: flex;
+        width: calc(100% - 60upx);
+        height: 70upx;
+        margin-left: 30upx;
+        background: #454951;
+        border-radius: 16upx;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30upx;
+        .result_last_remark_style {
+          font-size: 24upx;
+          font-weight: 400;
+          color: #bdc3ce;
+        }
+        .result_last_img_style {
+          width: 24upx;
+          height: 24upx;
+          object-fit: contain;
         }
       }
       // .need_loop_style:last-child {

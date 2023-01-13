@@ -17,14 +17,19 @@ module.exports = {
 		const age = param2;
 		const resValue = param3;
 		const code = param4;
-		const dbc = db.command
+		console.log(resValue)
+		// 'gender=="'+1+'"&&code=="'+'F0001'+'"&&maximumAge>='+23+'&&minimumAge<='+23+'&&maximumResult>='+80+'&&minimumResult<='+80
 		return new Promise((resolve, reject) => {
-					   db.collection('t_config').where({
-						    gender,
-						    code:code,
-						    minimumAge:dbc.lt(age).or(dbc.eq(age)),
-						    maximumAge:dbc.gt(age).or(dbc.eq(age))
-					   }).get().then(opearConfigRes => {
+					   db.collection('t_config')
+					   			.where({
+									code:code,
+									gender:gender,
+									minimumAge:dbCmd.lte(age),
+									maximumAge:dbCmd.gte(age),
+									minimumResult: dbCmd.lte(resValue),
+									maximumResult: dbCmd.gte(resValue)
+								})
+					   			.get().then(opearConfigRes => {
 						   let successMessage = {
 							   success: true,
 							   ...opearConfigRes
@@ -327,12 +332,12 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 					   db.collection('t_questionaire_answer').where({
 									traineeNo: data.traineeNo,
-					   				userId: detailInfo.uid, 
-					   				questionCode: data.questionCode,
+					   				userId: detailInfo.uid,
 					   				key:'Report'
 					   }).get().then((compareRes) => {
 						   console.log(compareRes, '你是')
-						   if (compareRes.affectedDocs < 3) {
+						   debugger;
+						   if (compareRes.affectedDocs > 3) {
 							   let resultParam = {}
 							   	resultParam = {
 							   		...data,

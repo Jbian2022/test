@@ -164,10 +164,10 @@
 /* 文章场景相关 */
 .content_style[data-v-c1425cf6] {
   width: 100vw;
-  height: 100vh;
   overflow: hidden;
   position: relative;
-  padding-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
 }
 .content_style .arrow-left[data-v-c1425cf6] {
   z-index: 88;
@@ -203,7 +203,6 @@
 } */
 .dynamicshow[data-v-c1425cf6] {
   width: calc(100vw - 1.875rem);
-  overflow-y: auto;
   background-color: #2f333a;
   margin-left: 0.9375rem;
   margin-top: 0.9375rem;
@@ -218,6 +217,7 @@
 }
 .dynamicshow_left[data-v-c1425cf6] {
   /* display: flex; */
+  width: calc(100vw - 5.625rem);
   margin-left: 0.9375rem;
   align-items: center;
 }
@@ -254,7 +254,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 7.875rem;
+  width: 10.9375rem;
   height: 1.5625rem;
   margin-bottom: 2.3125rem;
   font-weight: 600;
@@ -291,13 +291,10 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7A7F89;
-  top: 3.4375rem;
+  top: 1.5625rem;
   right: 1.5625rem;
 }
 .bottom_style[data-v-c1425cf6] {
-  width: calc(100vw - 1.875rem);
-  margin-left: 0.9375rem;
-  height: 3.125rem;
   background: #1370ff;
   border-radius: 0.5rem;
   margin-top: 0.9375rem;
@@ -308,4 +305,8 @@
   color: #ffffff;
   line-height: 3.125rem;
   text-align: center;
+  justify-content: center;
+  width: calc(100vw - 2.5rem);
+  margin-left: 1.25rem;
+  display: flex;
 }

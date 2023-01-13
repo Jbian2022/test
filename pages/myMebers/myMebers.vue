@@ -43,13 +43,13 @@
           >
             <view
               class="buy_left"
-              :class="isActive === 1 ? 'active' : ''"
+              :class="isActive == 1 ? 'active' : ''"
               @click.native.stop="buyClick(1)"
               >已购课</view
             >
             <view
               class="buy_right"
-              :class="isActive === 0 ? 'active' : ''"
+              :class="isActive == 0 ? 'active' : ''"
               @click.native="buyClick(0)"
               >未购课</view
             >
@@ -80,7 +80,7 @@
                 :visible="showPopover"
                 :placement="'left'"
                 :color="'linear-gradient(180deg, #2BA9FF 0%, #1370FF 100%)'"
-                content="Hi～你来了
+                content="Hi～教练你来了
 			  点这里添加会员吧"
                 :show="true"
               ></ZbTooltip>
@@ -131,7 +131,11 @@ export default {
   watch: {
     scrollTop: {}
   },
-  onLoad() {
+  onLoad(options) {
+	 console.log(options, 'options')
+	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
+		 this.isActive = Number(options.isActive)
+	 }
     uni.showTabBar()
   },
   onPullDownRefresh() {
@@ -234,7 +238,7 @@ export default {
 
     addClick() {
       try {
-        uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
+        uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
       } catch (e) {
         // error
       }

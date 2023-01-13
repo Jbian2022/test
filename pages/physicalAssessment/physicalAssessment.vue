@@ -1,9 +1,8 @@
 <template>
   <view class="content_style" @touchstart="start" @touchend="end">
-    <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+    <BgTheamCompontent :theamType="'currency'"  ></BgTheamCompontent>
     <NavBarCompontent
       :leftNavTitle="'身体评估'"
-      :jumpType="'STPC'"
       :isAuthority="true"
     ></NavBarCompontent>
     <view class="need_scoll list_style">
@@ -90,11 +89,20 @@ export default {
   },
   created() {
     this.requestDynamicEvaluationdata()
+	let page = getCurrentPages()
+	console.log(page, '你是')
   },
   onLoad(options) {
     if (JSON.stringify(options) !== '{}' && options.traineeNo) {
       this.traineeNo = options.traineeNo
     }
+  },
+  onBackPress(options) {
+	  console.log(options.from, 'from', options)
+	  if (options.from === 'backbutton') {
+		   return true;
+	  }
+	  
   },
   methods: {
     start(e) {
@@ -111,12 +119,12 @@ export default {
         // 翻页
       } else if (subY > 50) {
         console.log('上滑')
-      } else if (subX > 1) {
+      } else if (subX > 50) {
         console.log('左滑')
         uni.reLaunch({
           url: '/pages/myMebers/myMebers'
         })
-      } else if (subX < -1) {
+      } else if (subX < -50) {
         console.log('右滑')
       } else {
         console.log('无效')

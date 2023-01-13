@@ -264,10 +264,10 @@ module.exports = {
 	   const token = this.getUniIdToken()
 	   const detailInfo = await this.uniID.checkToken(token)
 	   return new Promise((resolve, reject) => {
-		   db.collection('t_questionaire').where({
+		   db.collection('t_questionaire').orderBy('questionId', 'asc').where({
 				parentCode: parentCode,
 				
-		   }).orderBy('questionId', 'asc').get().then(childList => {
+		   }).get().then(childList => {
 			   let successMessage = {
 				   success: true,
 				   ...childList

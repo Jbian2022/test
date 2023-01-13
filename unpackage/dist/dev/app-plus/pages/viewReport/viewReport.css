@@ -782,7 +782,7 @@
   left: 0;
   right: 0;
   z-index: 88;
-  height: 2.75rem;
+  height: 4.625rem;
   display: flex;
   align-items: center;
   padding-left: 0.9375rem;
@@ -799,6 +799,7 @@
   position: fixed;
   top: 0;
   background: #212328;
+  padding-top: 0.625rem;
   animation-name: topAnmiation-62ef4d39;
   animation-duration: 0.3s;
   z-index: 30000;
@@ -815,7 +816,7 @@
   background-image: url("../../static/app-plus/bg/bodysideReport.png");
   background-repeat: no-repeat;
   background-size: 100%;
-  padding-top: 4.375rem;
+  padding-top: 6.25rem;
 }
 .title[data-v-62ef4d39] {
   width: 3.75rem;
@@ -924,7 +925,7 @@
   margin-left: -0.9375rem;
 }
 .countNumBlock[data-v-62ef4d39] {
-  width: 18.125rem;
+  width: calc(100vw - 6.25rem);
   height: 5.9375rem;
   background: #383D46;
   border-radius: 0.75rem;
@@ -1025,7 +1026,7 @@
   line-height: 2.125rem;
   margin-right: 0;
 }
-.titleType[data-v-62ef4d39] {
+.titleTypeok[data-v-62ef4d39] {
   width: 3.125rem;
   height: 1.5625rem;
   background: #1370ff;
@@ -1035,8 +1036,23 @@
   color: #f4f7ff;
   line-height: 1.5625rem;
   text-align: center;
-  float: right;
-  margin-right: 0.625rem;
+  float: left;
+  margin-left: 0.625rem;
+  margin-top: 0.46875rem;
+  padding-right: 0.625rem;
+}
+.titleTypeno[data-v-62ef4d39] {
+  width: 3.125rem;
+  height: 1.5625rem;
+  background: #454951;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #f4f7ff;
+  line-height: 1.5625rem;
+  text-align: center;
+  float: left;
+  margin-left: 0.625rem;
   margin-top: 0.46875rem;
   padding-right: 0.625rem;
 }
@@ -1267,4 +1283,21 @@
 }
 .blockdiv[data-v-62ef4d39] {
   text-align: center !important;
+}
+.rightclickblock[data-v-62ef4d39] {
+  width: 3.125rem;
+  height: 1.5625rem;
+  background: #1370FF;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 1.0625rem;
+}
+.titleclass[data-v-62ef4d39] {
+  background: #2f333a !important;
+  border-top: none;
+  border-bottom: none;
+  color: #F4F7FF !important;
 }

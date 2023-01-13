@@ -22,6 +22,7 @@
             placeholder="请输入真实姓名"
             maxlength="7"
             style="margin-top: 6px"
+			:adjust-position="false"
 			
           />
         </uni-forms-item>
@@ -101,6 +102,7 @@
             v-model="studentForm.mobile"
             placeholder="请输入手机号码"
             maxlength="11"
+			:adjust-position="false"
           />
         </uni-forms-item>
 

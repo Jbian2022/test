@@ -23,6 +23,7 @@
               @input="changeInputValue($event, item)"
               :placeholder="item.answerRemark.remarkTitle"
               style="margin-top: 6px"
+			  :adjust-position="false"
             />
           </uni-forms-item>
           <uni-forms-item

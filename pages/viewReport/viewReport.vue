@@ -60,7 +60,7 @@
           class="item"
           v-for="(item, index) in historyData"
           :key="index"
-          @click=""
+		  @click="sethistorydata(item)"
         >
           <view class="text" style="float: left">{{ item.name }}</view>
           <view class="text" style="float: right">{{ item.date }}</view>
@@ -98,16 +98,17 @@
         <view class="titleText" v-if="!openKey">
           <van-row class="titleTopText">
             <van-col span="12"
-              >{{ personName }}
-              <view class="titleType">已购课</view>
+              ><view style="float: left;">{{ personName }}</view>
+              <view class="titleTypeok" v-if="buyStatus">已购课</view>
+			  <view class="titleTypeno" v-else>未购课</view>
             </van-col>
             <van-col span="12">
               <!-- <input type="button" value="重新测试" class="titleButton"/> -->
-              <button class="titleButton">重新测试</button>
+              <button class="titleButton" @click="gototest()">重新测试</button>
             </van-col>
           </van-row>
           <van-row class="titleBottomText">
-            <van-col span="12">2022年</van-col>
+            <van-col span="12">{{nowYear}}年</van-col>
             <van-col span="12">数据评测来源于世界权威机构</van-col>
           </van-row>
         </view>
@@ -119,7 +120,17 @@
             class="need_collapse_style"
             title-border="none"
           >
-            <uni-collapse-item title="基础信息" name="1">
+            <uni-collapse-item title="基础信息" :show-arrow="false">
+				<!-- <template v-slot:title>
+					<uni-list>
+						<uni-list-item title="基础信息" clickable  @click="onClickinfo(infoclick)" class="titleclass">
+							<template v-slot:footer>
+								<view class="rightclickblock" v-if="infoclick">点击展开</view>
+								<view class="rightclickblock" v-else>点击关闭</view>
+							</template>
+						</uni-list-item>
+					</uni-list>
+				</template> -->
               <view style="height: 280upx">
                 <view class="textContent">
                   <van-row class="text">
@@ -163,9 +174,8 @@
           <uni-collapse v-model="healthQA" :border="false">
             <uni-collapse-item
               title="健康问答"
-              name="2"
               class="informationCard"
-              :open="true"
+			  :open="false"
             >
               <view style="padding-bottom: 40upx" v-if="showHQ">
                 <view class="basicInformationContent healthBlocks">
@@ -376,13 +386,12 @@
         </view>
 
         <view class="basicInformation">
-          <uni-collapse v-model="BodyTestReport" :border="false">
+          <uni-collapse v-model="BodyTestReport">
             <uni-collapse-item
               title="体测报告"
-              name="3"
               title-class="informationTitleText"
               class="informationCard"
-              :open="true"
+			  :open="false"
             >
               <view style="padding-bottom: 40upx">
                 <view class="countNumBlock">
@@ -502,10 +511,9 @@
           <uni-collapse v-model="bodyAssessment" :border="false">
             <uni-collapse-item
               title="体态评估"
-              name="4"
               title-class="informationTitleText"
               class="informationCard"
-              :open="true"
+			  :open="false"
             >
               <view style="padding-bottom: 40upx">
                 <view
@@ -593,10 +601,9 @@
           <uni-collapse v-model="dynamicEvaluation" :border="false">
             <uni-collapse-item
               title="动态评估"
-              name="5"
               title-class="informationTitleText"
               class="informationCard"
-              :open="true"
+			  :open="false"
             >
               <view style="padding-bottom: 40upx">
                 <view
@@ -656,7 +663,7 @@
             <uni-collapse-item
               title="体能评估"
               class="informationCard"
-              :open="true"
+			  :open="false"
             >
               <view style="padding-bottom: 40upx; background-color: #2f333a">
                 <!-- <van-row style="background-color: #343A44;">
@@ -734,6 +741,7 @@ export default {
       age: 0,
       mobileNumber: 0,
       openKey: true,
+	  infoclick:1,
       key: '',
       bodyTestData: [],
       HQDate: [],
@@ -807,7 +815,8 @@ export default {
       canvasImageMsg: null,
       isFixedTop: false,
 	  nowDate:'',
-	  nowYear:''
+	  nowYear:'',
+	  buyStatus:0
     }
   },
   //监测页面滑动
@@ -834,6 +843,7 @@ export default {
     if (JSON.stringify(options) !== '{}' && options.traineeNo) {
       this.traineeNo = options.traineeNo
       this.key = options.key
+	  this.buyStatus = Number(options.buyStatus);
       this.getUserInfo()
       this.getconfingActionName()
       this.getPosture()
@@ -843,7 +853,9 @@ export default {
       switch (this.key) {
         case '1':
           this.openKey = true
-          this.saveReport()
+		  console.log("正在保存此次训练记录")
+		  setTimeout(this.saveReport(), 10000);
+		  console.log("保存成功！")
           break
         case '2':
           this.openKey = false
@@ -856,7 +868,6 @@ export default {
   },
   methods: {
 	  viewReportScrrop(event) {
-		  console.log(event.detail.scrollTop, 'you')
 		 this.scrollTop = event.detail.scrollTop
 		 this.isFixedTop = this.scrollTop > 50 ? true : false 
 	  },
@@ -924,6 +935,7 @@ export default {
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = 'A0005'
       // console.log(data)
+	  const resdata = [];
       testOb
         .opearConfigQuery(data)
         .then((res) => {
@@ -960,12 +972,14 @@ export default {
                     }
                   }
                 }
-                // console.log(this.queryData)
+                console.log(this.queryData)
+				resdata["data"] = this.queryData
               })
               .catch((err) => {})
           }
         })
         .catch()
+		return resdata
     },
     //获取用户的体态评估
     getPosture() {
@@ -1060,14 +1074,19 @@ export default {
       const data = {}
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = 'A0002'
+	  const resData = [];
       testOb.opearConfigQuery(data).then((res) => {
 		  if(res.data.length>0){
 			  this.bodyTestData = res.data[0].bodyTestReport
 			  this.bodyFraction = Number(this.bodyTestData.bodyFraction)
+			  console.log(this.bodyTestData)
+			  resData["data"]=this.bodyTestData;
+			  console.log(resData)
 		  }
         // console.log(res)
         
       })
+	  return resData;
     },
     getDynameEvaluation() {
       const data = {}
@@ -1099,17 +1118,17 @@ export default {
     openUIup() {
       this.$refs.popup.open()
     },
-    saveReport() {
-      this.$refs.popup.open()
+    async saveReport() {
+      // this.$refs.popup.open()
       const data = {}
       let date = new Date()
       let today =
         date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
       data['traineeNo'] = this.traineeNo
-      data['bodyTestData'] = this.bodyTestData
+      data['bodyTestData'] = this.getBodyTestData()
       data['assessmentTrueData'] = this.assessmentTrueData
-      data['queryData'] = this.queryData
-      data['HQDate'] = this.HQDate
+      data['queryData'] = this.getconfingActionName()
+      data['HQDate'] = this.getHealthQuesson()
       data['physicalFitnessAssessmentData'] = this.physicalFitnessAssessmentData
       data['saveDate'] = today
       console.log(data)
@@ -1251,6 +1270,7 @@ export default {
       // 	})
       // })
       console.log(resData)
+	  return resData;
       // })
     },
     getHistroyDate() {
@@ -1277,7 +1297,31 @@ export default {
       }
       console.log(this.historyData)
       this.showShare = true
-    }
+    },
+	sethistorydata(item){
+		this.HQDate = item.HQDate;
+		this.bodyTestData = item.bodyTestData;
+		this.queryData = item.queryData;
+		this.assessmentTrueData = item.assessmentTrueData;
+		this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
+		console.log(item)
+	},
+	gototest(){
+		uni.redirectTo({
+		  url:
+		    '/pages/physicalAssessment/physicalAssessment' +
+		    '?traineeNo=' +
+		    this.traineeNo
+		})
+	},
+	onClickinfo(item){
+		console.log(item)
+		if(item){
+			this.infoclick=0
+		}else{
+			this.infoclick=1
+		}
+	}
   }
 }
 </script>
@@ -1344,7 +1388,7 @@ export default {
     left: 0;
     right: 0;
     z-index: 88;
-    height: 88upx;
+    height: 148upx;
     display: flex;
     align-items: center;
     padding-left: 30upx;
@@ -1360,6 +1404,7 @@ export default {
 		position: fixed;
 		top: 0;
 		background: #212328;
+		padding-top: 20upx;
 		animation-name: topAnmiation;
 		animation-duration: 0.3s;
 		z-index: 30000;
@@ -1380,7 +1425,7 @@ export default {
   background-image: url('../../static/app-plus/bg/bodysideReport.png');
   background-repeat: no-repeat;
   background-size: 100%;
-  padding-top: 140upx;
+  padding-top: 200upx;
 }
 .title {
   width: 120upx;
@@ -1489,7 +1534,7 @@ export default {
   margin-left: -30upx;
 }
 .countNumBlock {
-  width: 580upx;
+  width: calc(100vw - 200upx);
   height: 190upx;
   background: #383D46;
   border-radius: 24upx;
@@ -1590,7 +1635,7 @@ export default {
   line-height: 68upx;
   margin-right: 0upx;
 }
-.titleType {
+.titleTypeok {
   width: 100upx;
   height: 50upx;
   background: #1370ff;
@@ -1600,8 +1645,23 @@ export default {
   color: #f4f7ff;
   line-height: 50upx;
   text-align: center;
-  float: right;
-  margin-right: 20upx;
+  float: left;
+  margin-left: 20upx;
+  margin-top: 15upx;
+  padding-right: 20upx;
+}
+.titleTypeno {
+  width: 100upx;
+  height: 50upx;
+  background: #454951;
+  border-radius: 8upx;
+  font-size: 24upx;
+  font-weight: 600;
+  color: #f4f7ff;
+  line-height: 50upx;
+  text-align: center;
+  float: left;
+  margin-left: 20upx;
   margin-top: 15upx;
   padding-right: 20upx;
 }
@@ -1841,5 +1901,22 @@ export default {
 }
 .blockdiv{
 	text-align: center !important;
+}
+.rightclickblock{
+	width: 100upx;
+	height: 50upx;
+	background: #1370FF;
+	border-radius: 8upx;
+	font-size: 24upx;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #F4F7FF;
+	line-height: 34upx;
+}
+.titleclass{
+	background: #2f333a !important;
+	border-top: none;
+	border-bottom: none;
+	color: #F4F7FF !important;
 }
 </style>

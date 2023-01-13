@@ -15,7 +15,10 @@
 			:overlay="false"
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video :src="videoUrl" wid autoplay>
+					<video :src="videoUrl" 
+					wid 
+					autoplay
+					:custom-cache="false">
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -42,7 +45,12 @@
 							  class="inputBlock"
 							  @blur="testResult()"
 							  type="number"/> -->
-							  <input class="inputBlock" type="number" v-model="resultValue" placeholder="请填写"/>
+							  <input 
+							  class="inputBlock" 
+							  type="number" 
+							  v-model="resultValue" 
+							  placeholder="请填写"
+							  :cursor-spacing='45'/>
 						  </view>
 						  <view class="inputText" v-if="actionData.code=='F0001'">/分</view>
 						  <view class="inputText" v-else>/个</view>
@@ -68,7 +76,7 @@
 			</view>
 		</view>
 		<view>
-		  <view class="postureButton" @click.native="actionResDate()">确认</view>
+		  <view class="postureButton" @click.native="actionResDate()">保存</view>
 		</view>
 	</view>
 </template>
@@ -83,6 +91,7 @@
 	const actionOb = uniCloud.importObject("businessCloudObject",{
 		customUI : true
 	});
+	
 	import { debounce } from '@/common/util.js';
 	export default {
 		setup() {
@@ -119,7 +128,7 @@
 		},
 		watch:{
 			resultValue(newResultValue,oldResultValue){
-				debounce(this.testResult(),400)
+				setTimeout(this.testResult(this.gender,this.age,newResultValue),300)
 			}
 		},
 		components: {
@@ -152,29 +161,49 @@
 			}
 		},
 		methods: {
-			async testResult(){
-				const gender = this.gender;
-				const age = this.age;
-				const resValue = Number(this.resultValue);
+			testResult(gender,age,resValue){
 				const type = {};
-				// console.log(gender,age,resValue)
-				testOb.method1(gender,age,resValue,this.codes).then((res)=>{
-					console.log(res.data)
-					let numberAge = Number(this.age);
-					res.data.forEach((r)=>{
-						// console.log(r)
-						// console.log(this.age)
-						if(numberAge>r.minimumAge&&numberAge<r.maximumAge){
-							console.log(r)
-							if((resValue>r.minimumResult&&resValue<r.maximumResult)||resValue==r.minimumResult||resValue==r.maximumResult){
-								console.log(r)
-								this.typeText = r.resultLevel;
-								this.levelColor(this.typeText)
+				console.log(gender,age,resValue)
+				resValue = Number(resValue)
+				if(resValue==''){
+					this.levelColor('')
+					this.typeText = '待测'
+				}else{
+					testOb.method1(gender,age,resValue,this.codes).then((res)=>{
+						console.log(res.data)
+						if(resValue>500){
+							switch(this.codes){
+								case "F0001":
+									this.typeText = '非常差'
+									this.typeColor = "rgba(240, 66, 66, 1)";
+									this.backgroundColor = "rgba(65, 60, 69, 0.5)"
+									this.resultValue = 500
+									break;
+								case "F0002":
+								case "F0003":
+								case "F0004":
+								this.typeText = '优秀'
+									this.typeColor = "rgba(1, 224, 140, 1)";
+									this.backgroundColor = "rgba(53, 68, 73, 0.5)"
+									this.resultValue = 500
+									break;
+								default:
+									this.typeColor = "rgba(75, 82, 94, 1)";
+									break;
 							}
+							uni.showToast({
+							  icon: 'none',
+							  title: '最大数值上限为500',
+							  duration: 800,
+							  width: 220
+							})
+						}else{
+							this.typeText = res.data[0].resultLevel;
+							this.levelColor(this.typeText)
 						}
 					})
-				})
-				console.log(resValue)
+				}
+				// console.log(resValue)
 			},
 			async getTraineeInfo(){
 				const data = {};

@@ -227,7 +227,6 @@
 .mebers_content .no_data_style .quckliy_add_style[data-v-fce7d226] {
   margin-top: 0.625rem;
   font-size: 0.875rem;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7a7f89;
 }
@@ -246,19 +245,20 @@
   margin-top: 0.9375rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   background: #383d46;
   border-radius: 0.75rem;
-  height: 8.125rem;
+  height: 10.8125rem;
 }
 .mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style[data-v-fce7d226] {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  margin-top: 1.25rem;
 }
 .mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style .top_left_style[data-v-fce7d226] {
   width: 50%;
   display: flex;
+  align-items: center;
 }
 .mebers_content .slide_stylle .add_student_style .need_loop_style .loop_top_style .top_left_style .top_left_name_style[data-v-fce7d226] {
   font-size: 1.25rem;
@@ -295,6 +295,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2.1875rem;
 }
 .mebers_content .slide_stylle .add_student_style .need_loop_style .loop_bottom_style .bottom_style[data-v-fce7d226] {
   display: flex;
@@ -310,6 +311,27 @@
   font-size: 0.875rem;
   font-weight: 400;
   color: #bdc3ce;
+}
+.mebers_content .slide_stylle .add_student_style .loop_bottom_result_style[data-v-fce7d226] {
+  display: flex;
+  width: calc(100% - 1.875rem);
+  height: 2.1875rem;
+  margin-left: 0.9375rem;
+  background: #454951;
+  border-radius: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.9375rem;
+}
+.mebers_content .slide_stylle .add_student_style .loop_bottom_result_style .result_last_remark_style[data-v-fce7d226] {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #bdc3ce;
+}
+.mebers_content .slide_stylle .add_student_style .loop_bottom_result_style .result_last_img_style[data-v-fce7d226] {
+  width: 0.75rem;
+  height: 0.75rem;
+  object-fit: contain;
 }
 .slot-button[data-v-fce7d226] {
   width: 3.125rem !important;

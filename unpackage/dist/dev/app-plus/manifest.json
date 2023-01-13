@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.0.8",
-    "code": 108
+    "name": "1.1.0",
+    "code": 110
   },
   "description": "一款健身APP",
   "developer": {
@@ -143,8 +143,7 @@
           "NSHealthClinicalHealthRecordsShareUsageDescription": "应用使用期间会访问您的临床记录",
           "NSHomeKitUsageDescription": "当您尝试使用智能家居时需要访问HomeKit数据",
           "NSSiriUsageDescription": "当您用Siri控制启动应用时需要访问Siri权限",
-          "NSFaceIDUsageDescription": "当您使用人脸识别功能时需要开启Face ID权限",
-          "NSUserTrackingUsageDescription": "应用在使用期间需要跟踪用户活动"
+          "NSFaceIDUsageDescription": "当您使用人脸识别功能时需要开启Face ID权限"
         }
       },
       "plugins": {
@@ -211,7 +210,7 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "3.6.15",
+      "compilerVersion": "3.6.17",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {

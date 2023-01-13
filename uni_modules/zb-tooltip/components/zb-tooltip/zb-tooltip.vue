@@ -10,7 +10,7 @@
 				
 			}]" >
 				<slot name="content">
-					<view class="remark">Hi~你来了</view>
+					<view class="remark">Hi~教练你来了</view>
 					<view class="remark">点这里添加会员吧</view>
 				</slot>
 				<view class="zb_popper__icon"  :style="[arrowStyle]" :class="[{
