@@ -69,7 +69,7 @@ export default {
         { title: '自重深蹲评估', type: 'E0001',path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估',icon:true},
         { title: '胸椎活动评估', type: 'E0002' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估',icon:true},
         { title: '柔韧性测试', type: 'E0003' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试',icon:true},
-        { title: '肩关节灵活测试', type: 'E0004' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=关节灵活测试',icon:true},
+        { title: '肩关节灵活性测试', type: 'E0004' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=肩关节灵活性测试',icon:true},
         { title: '俯卧撑稳定性测试', type: 'E0005' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试',icon:true}
       ],
       icon: true,
@@ -155,7 +155,7 @@ export default {
   	position: relative;
 	    margin-top: 40upx;
   	.van-icon{
-  		font-size: 40upx;
+  		font-size: 45upx;
   		color: #bdc3ce;
   	}
   	// &.show{
