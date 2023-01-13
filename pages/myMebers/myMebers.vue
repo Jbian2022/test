@@ -7,7 +7,14 @@
       <view class="content_style">
         <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
         <!--内容 start-->
-        <scroll-view @scroll="memberSrollTop" scroll-y="true">
+        <scroll-view
+          scroll-top="0"
+          scroll-y="true"
+          class="scroller-y-style"
+          @scrolltoupper="upper"
+          @scrolltolower="lower"
+          @scroll="scroll"
+        >
           <view class="header_style">
             <view class="header_left_style">
               <view class="left_content_style">
@@ -27,7 +34,8 @@
             </view>
             <view
               class="header_right_style"
-              :class="cellingFlag ? 'search_anmition_style' : ''"
+			  :class="{ search_anmition_style: isFixedTop }"
+             
             >
               <image
                 class="right_img_style"
@@ -39,7 +47,8 @@
 
           <view
             class="is_buy_style"
-            :class="cellingFlag ? 'celling_animation_style' : ''"
+			 :class="{ celling_animation_style: isFixedTop }"
+           
           >
             <view
               class="buy_left"
@@ -54,7 +63,7 @@
               >未购课</view
             >
           </view>
-          <view class="zhan_wei_style" v-if="cellingFlag"></view>
+          <!-- <view class="zhan_wei_style" v-if="isFixedTop"></view> -->
           <MemberList
             ref="memberList"
             @getMemberList="getMemberList"
@@ -120,7 +129,7 @@ export default {
       loginNum: 0,
       showPopover: false,
       scrollTop: 0,
-      cellingFlag: false,
+      isFixedTop: false,
       delteIndex: 0,
       avatar: null,
       addUpperLimit: null, // 添加限制
@@ -139,36 +148,33 @@ export default {
   // onReachBottom() {
   //   console.log(2222)
   // },
-  created() {
-	 
-  },
+  created() {},
   mounted() {
     let self = this
-	this.$nextTick(() => {
-		uni.getStorage({
-		  key: 'loginNum',
-		  success: function (res) {
-		    if (res.data) {
-		      self.loginNum = res.data
-		      self.showPopover = res.data == '0' ? true : false
-		      if (res.data == '0') {
-		        self.$refs.popup.open()
-		      }
-		    }
-		  },
-		  fail: function (err) {}
-		})
-		uni.getStorage({
-		  key: 'isActive',
-		  success: function (res) {
-		    if (res.data) {
-		     self.isActive = Number(res.data) 
-		
-		    }
-		  },
-		  fail: function (err) {}
-		})
-	})
+    this.$nextTick(() => {
+      uni.getStorage({
+        key: 'loginNum',
+        success: function (res) {
+          if (res.data) {
+            self.loginNum = res.data
+            self.showPopover = res.data == '0' ? true : false
+            if (res.data == '0') {
+              self.$refs.popup.open()
+            }
+          }
+        },
+        fail: function (err) {}
+      })
+      uni.getStorage({
+        key: 'isActive',
+        success: function (res) {
+          if (res.data) {
+            self.isActive = Number(res.data)
+          }
+        },
+        fail: function (err) {}
+      })
+    })
 
     this.getUserInfor()
     // this.getCocachList()
@@ -231,9 +237,21 @@ export default {
         complete: () => {}
       })
     },
-    memberSrollTop(event) {
+    upper: function (e) {
+      console.log(e)
+    },
+    lower: function (e) {
+      console.log(e)
+    },
+    scroll(event) {
       this.scrollTop = event.detail.scrollTop
-      this.cellingFlag = this.scrollTop > 50 ? true : false
+	  if (event.detail.scrollTop > uni.getWindowInfo().statusBarHeight) {
+	    this.isFixedTop = true
+	  } else {
+	    this.isFixedTop = false
+	  }
+      console.log(event.detail.scrollTop, '?????')
+      // this.isFixedTop = event.detail.scrollTop > 50 ? true : false
       // console.log( this.scrollTop)
     },
 
@@ -277,12 +295,12 @@ export default {
         .catch((err) => {})
     },
     buyClick(type) {
-		uni.removeStorage({
-		  key: 'isActive',
-		  success: function (res) {
-		    console.log('success')
-		  }
-		})
+      uni.removeStorage({
+        key: 'isActive',
+        success: function (res) {
+          console.log('success')
+        }
+      })
       this.isActive = type
     }
   }
@@ -499,24 +517,18 @@ uni-page-body {
   background: #141517 !important;
   opacity: 0.8;
 }
-::v-deep.tui-sticky-class {
-  padding-bottom: 110upx;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
 .celling_animation_style {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1000;
+ 
   width: 100vw !important;
   background: #212328;
   margin-top: 0 !important;
   padding-top: 66upx;
   padding-bottom: 36upx;
   animation-name: cellingAnmation;
+   z-index: 30000;
   animation-duration: 0.3s;
   margin-left: 0 !important;
   .buy_left {
@@ -528,6 +540,7 @@ uni-page-body {
   }
 }
 .search_anmition_style {
+	
   position: fixed;
   right: 30upx;
   top: 86upx;
@@ -554,16 +567,13 @@ uni-page-body {
     top: 0upx;
   }
 }
-.celling_style {
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-::v-deep.tui-sticky-fixed {
-  top: 0 !important;
-}
-uni-scroll-view {
-  height: 100%;
+
+
+// uni-scroll-view {
+//   height: 100% !important;
+// }
+.scroller-y-style {
+  height: calc(100vh - var(--window-top)) !important;
 }
 ::v-deep.uni-scroll-view-content {
   height: auto !important;

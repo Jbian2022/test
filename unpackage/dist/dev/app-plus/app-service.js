@@ -4119,7 +4119,8 @@ if (uni.restoreGlobal) {
       return {
         meberList: [],
         deleteRemarkFlag: true,
-        delteIndex: 0
+        delteIndex: 0,
+        newActive: 0
       };
     },
     props: {
@@ -4145,7 +4146,7 @@ if (uni.restoreGlobal) {
         if (this.meberList.length === 0) {
           flag = true;
         }
-        formatAppLog("log", "at components/memberList/memberList.vue:199", flag, " LLLLL");
+        formatAppLog("log", "at components/memberList/memberList.vue:200", flag, " LLLLL");
         return flag;
       }
     },
@@ -4158,14 +4159,18 @@ if (uni.restoreGlobal) {
       },
       isActive: {
         handler: function(n2, o2) {
-          if (n2 !== o2) {
-            let number = JSON.parse(JSON.stringify(n2));
-            formatAppLog("log", "at components/memberList/memberList.vue:215", number, "n+1");
-            this.type === "home" ? this.getMemberList(number) : "";
-          }
+          let number = JSON.parse(JSON.stringify(n2));
+          this.newActive = number;
+          this.type === "home" ? this.getMemberList(number) : "";
         },
         deep: true,
         immediate: true
+      },
+      newActive: {
+        handler: function(n2, o2) {
+          this.type === "home" ? this.getMemberList(n2) : "";
+        },
+        deep: true
       },
       searchValue: {
         handler: function(n2, o2) {
@@ -4174,7 +4179,7 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:230", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:234", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
@@ -4199,7 +4204,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:258", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:262", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4251,7 +4256,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:318", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:322", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4259,19 +4264,19 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:328", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:332", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e2) {
-        formatAppLog("log", "at components/memberList/memberList.vue:335", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:339", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e2, index) {
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:340", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:344", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
         uni.navigateTo({
@@ -4787,7 +4792,7 @@ if (uni.restoreGlobal) {
         loginNum: 0,
         showPopover: false,
         scrollTop: 0,
-        cellingFlag: false,
+        isFixedTop: false,
         delteIndex: 0,
         avatar: null,
         addUpperLimit: null,
@@ -4840,7 +4845,7 @@ if (uni.restoreGlobal) {
         });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:190", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:196", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4853,7 +4858,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:208", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:214", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4865,11 +4870,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:220", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:226", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:224", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:230", "success");
           }
         });
         uni.navigateTo({
@@ -4882,9 +4887,20 @@ if (uni.restoreGlobal) {
           }
         });
       },
-      memberSrollTop(event) {
+      upper: function(e2) {
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:241", e2);
+      },
+      lower: function(e2) {
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:244", e2);
+      },
+      scroll(event) {
         this.scrollTop = event.detail.scrollTop;
-        this.cellingFlag = this.scrollTop > 50 ? true : false;
+        if (event.detail.scrollTop > uni.getWindowInfo().statusBarHeight) {
+          this.isFixedTop = true;
+        } else {
+          this.isFixedTop = false;
+        }
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:253", event.detail.scrollTop, "?????");
       },
       maskClick() {
         uni.setStorageSync("loginNum", "1");
@@ -4896,7 +4912,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:255", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:273", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4925,7 +4941,7 @@ if (uni.restoreGlobal) {
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:283", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:301", "success");
           }
         });
         this.isActive = type;
@@ -4946,8 +4962,12 @@ if (uni.restoreGlobal) {
             vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
             vue.createCommentVNode("\u5185\u5BB9 start"),
             vue.createElementVNode("scroll-view", {
-              onScroll: _cache[3] || (_cache[3] = (...args) => $options.memberSrollTop && $options.memberSrollTop(...args)),
-              "scroll-y": "true"
+              "scroll-top": "0",
+              "scroll-y": "true",
+              class: "scroller-y-style",
+              onScrolltoupper: _cache[3] || (_cache[3] = (...args) => $options.upper && $options.upper(...args)),
+              onScrolltolower: _cache[4] || (_cache[4] = (...args) => $options.lower && $options.lower(...args)),
+              onScroll: _cache[5] || (_cache[5] = (...args) => $options.scroll && $options.scroll(...args))
             }, [
               vue.createElementVNode("view", { class: "header_style" }, [
                 vue.createElementVNode("view", { class: "header_left_style" }, [
@@ -4966,7 +4986,7 @@ if (uni.restoreGlobal) {
                   ])
                 ]),
                 vue.createElementVNode("view", {
-                  class: vue.normalizeClass(["header_right_style", $data.cellingFlag ? "search_anmition_style" : ""])
+                  class: vue.normalizeClass(["header_right_style", { search_anmition_style: $data.isFixedTop }])
                 }, [
                   vue.createElementVNode("image", {
                     class: "right_img_style",
@@ -4976,7 +4996,7 @@ if (uni.restoreGlobal) {
                 ], 2)
               ]),
               vue.createElementVNode("view", {
-                class: vue.normalizeClass(["is_buy_style", $data.cellingFlag ? "celling_animation_style" : ""])
+                class: vue.normalizeClass(["is_buy_style", { celling_animation_style: $data.isFixedTop }])
               }, [
                 vue.createElementVNode("view", {
                   class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
@@ -4987,10 +5007,7 @@ if (uni.restoreGlobal) {
                   onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
                 }, "\u672A\u8D2D\u8BFE", 2)
               ], 2),
-              $data.cellingFlag ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 0,
-                class: "zhan_wei_style"
-              })) : vue.createCommentVNode("v-if", true),
+              vue.createCommentVNode(' <view class="zhan_wei_style" v-if="isFixedTop"></view> '),
               (vue.openBlock(), vue.createBlock(_component_MemberList, {
                 ref: "memberList",
                 onGetMemberList: $options.getMemberList,
@@ -5013,7 +5030,7 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("image", {
                   class: "add_img_style",
                   src: "/static/app-plus/mebrs/add.svg",
-                  onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
+                  onClick: _cache[6] || (_cache[6] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
                 }),
                 vue.createElementVNode("view", null, [
                   vue.createVNode(_component_ZbTooltip, {

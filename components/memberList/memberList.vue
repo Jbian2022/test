@@ -168,7 +168,8 @@ export default {
     return {
       meberList: [],
       deleteRemarkFlag: true,
-      delteIndex: 0
+      delteIndex: 0,
+	  newActive: 0
     }
   },
   props: {
@@ -209,17 +210,20 @@ export default {
     },
     isActive: {
       handler: function (n, o) {
-
-		if (n !== o) {
-			let number = JSON.parse(JSON.stringify(n))
-			console.log(number, 'n+1')
+let number = JSON.parse(JSON.stringify(n))
+			this.newActive = number
 			this.type === 'home' ? this.getMemberList(number) : ''
-			
-		}
+		
       },
 	  deep: true,
       immediate: true
     },
+	newActive: {
+		handler: function(n, o) {
+			this.type === 'home' ? this.getMemberList(n) : ''
+		},
+		deep: true
+	},
     searchValue: {
       handler: function (n, o) {
         if (this.type === 'detail') {

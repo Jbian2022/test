@@ -786,24 +786,17 @@ uni-page-body[data-v-5a412e6a] {
   background: #141517 !important;
   opacity: 0.8;
 }
-[data-v-5a412e6a] .tui-sticky-class {
-  padding-bottom: 3.4375rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
 .celling_animation_style[data-v-5a412e6a] {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1000;
   width: 100vw !important;
   background: #212328;
   margin-top: 0 !important;
   padding-top: 2.0625rem;
   padding-bottom: 1.125rem;
   animation-name: cellingAnmation-5a412e6a;
+  z-index: 30000;
   animation-duration: 0.3s;
   margin-left: 0 !important;
 }
@@ -838,16 +831,8 @@ uni-page-body[data-v-5a412e6a] {
     top: 0;
 }
 }
-.celling_style[data-v-5a412e6a] {
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-[data-v-5a412e6a] .tui-sticky-fixed {
-  top: 0 !important;
-}
-uni-scroll-view[data-v-5a412e6a] {
-  height: 100%;
+.scroller-y-style[data-v-5a412e6a] {
+  height: calc(100vh - var(--window-top)) !important;
 }
 [data-v-5a412e6a] .uni-scroll-view-content {
   height: auto !important;
