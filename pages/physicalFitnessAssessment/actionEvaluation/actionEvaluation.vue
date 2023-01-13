@@ -413,7 +413,7 @@
   display: flex;
 }
 .clickAction{
-	width: 260upx;
+	width: 660upx;
 	height: 70upx;
 	background: #000000;
 	border-radius: 36upx;
@@ -434,14 +434,12 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1491upx;
 	background: #383D46;
 	border-radius: 16upx;
 	z-index: 999;
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	height: 1490upx;
 	margin-top: 200upx;
 	margin-left: 30upx;
 	background-color: #383D46;
@@ -484,7 +482,8 @@
 	line-height: 70upx;
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 666upx;
+	margin-top: 97%;
+	margin-bottom: 40upx;
 }
 .clickActionEnd image{
 	width: 32upx;

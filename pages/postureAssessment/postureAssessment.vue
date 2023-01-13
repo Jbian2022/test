@@ -204,7 +204,6 @@
 			</van-row> -->
 			
 		</view>
-		<view class="contentText">点击标签选择问题部位</view>
 		<view style="color: 7A7F89;">
 			<button 
 			type="primary"
@@ -327,57 +326,40 @@
 				switch(a){
 					case 1:
 						this.textShow1 = !this.textShow1;
-						if(!this.textShow1){
-							this.assessmentData[0].textShow1 = this.textShow1;
-						}
+						this.assessmentData[0].textShow1 = this.textShow1;
+						console.log(this.assessmentData[0].textShow1)
 						break;
 					case 2:
 						this.textShow2 = !this.textShow2;
-						if(!this.textShow2){
-							this.assessmentData[1].textShow2 = this.textShow2;
-						}
+						this.assessmentData[1].textShow2 = this.textShow2;
 						break;
 					case 3:
 						this.textShow3 = !this.textShow3;
-						if(!this.textShow3){
-							this.assessmentData[2].textShow3 = this.textShow3;
-						}
+						this.assessmentData[2].textShow3 = this.textShow3;
 						break;
 					case 4:
 						this.textShow4 = !this.textShow4;
-						if(!this.textShow4){
-							this.assessmentData[3].textShow4 = this.textShow4;
-						}
+						this.assessmentData[3].textShow4 = this.textShow4;
 						break;
 					case 5:
 						this.textShow5 = !this.textShow5;
-						if(!this.textShow5){
-							this.assessmentData[4].textShow5 = this.textShow5;
-						}
+						this.assessmentData[4].textShow5 = this.textShow5;
 						break;
 					case 6:
 						this.textShow6 = !this.textShow6;
-						if(!this.textShow6){
-							this.assessmentData[5].textShow6 = this.textShow6;
-						}
+						this.assessmentData[5].textShow6 = this.textShow6;
 						break;
 					case 7:
 						this.textShow7 = !this.textShow7;
-						if(!this.textShow7){
-							this.assessmentData[6].textShow7 = this.textShow7;
-						}
+						this.assessmentData[6].textShow7 = this.textShow7;
 						break;
 					case 8:
 						this.textShow8 = !this.textShow8;
-						if(!this.textShow8){
-							this.assessmentData[7].textShow8 = this.textShow8;
-						}
+						this.assessmentData[7].textShow8 = this.textShow8;
 						break;
 					case 9:
 						this.textShow9 = !this.textShow9;
-						if(!this.textShow9){
-							this.assessmentData[8].textShow9 = this.textShow9;
-						}
+						this.assessmentData[8].textShow9 = this.textShow9;
 						break;
 				}
 				
@@ -406,19 +388,22 @@
 					}
 				}).catch(() =>{})
 				console.log(res)
-				// uni.showToast({
-				//   icon: 'success',
-				//   title: res.message,
-				//   duration: 800
-				// })
+				uni.showToast({
+				  icon: 'success',
+				  title: res.message,
+				  duration: 800
+				})
 			},
 			getData(){
 				const data = {}
 				data['traineeNo'] = this.traineeNo
 				data['questionCode'] = 'A0003'
+				console.log(this.assessmentData)
 				testOb.opearConfigQuery(data).then((res)=>{
 					this.assessmentData = res.data[0].postData;
 					this.textShow1 = res.data[0].postData[0].textShow1;
+					console.log(res.data[0].postData[0].textShow1)
+					console.log(this.textShow1)
 					this.textShow2 = res.data[0].postData[1].textShow2;
 					this.textShow3 = res.data[0].postData[2].textShow3;
 					this.textShow4 = res.data[0].postData[3].textShow4;
@@ -428,6 +413,7 @@
 					this.textShow8 = res.data[0].postData[7].textShow8;
 					this.textShow9 = res.data[0].postData[8].textShow9;
 				})
+				console.log(this.assessmentData)
 			}
 		}
 	}
