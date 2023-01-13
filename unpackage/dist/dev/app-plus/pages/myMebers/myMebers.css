@@ -334,7 +334,6 @@
   object-fit: contain;
 }
 .slot-button[data-v-fce7d226] {
-  width: 3.125rem !important;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -343,6 +342,7 @@
 .slot-button .slot_btn_img_style[data-v-fce7d226] {
   width: 3.125rem;
   height: 3.125rem;
+  margin-right: 1.25rem;
 }
 .dialog[data-v-fce7d226] {
   background: #383d46;

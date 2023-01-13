@@ -8,12 +8,6 @@
 				"autoBackButton": false,
 				"app-plus": {
 					"titleNView": false,
-					"pullToRefresh": {
-						"support": true,
-						"color": "#ff3333",
-						"style": "circle",
-						"offset": "50%"
-					},
 					"bounce": "none"
 				},
 				"navigationBarTextStyle": "white"
@@ -58,6 +52,7 @@
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"
+					
 				}
 			}
 		},
@@ -87,14 +82,17 @@
 		{
 			"path": "pages/physicalAssessment/physicalAssessment",
 			"style": {
-				"navigationBarTitleText": "身体评测",
+				"navigationBarTitleText": "身体评估",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
 				"autoBackButton": false,
 				"navigationBarTextStyle": "white",
+				"disableSwipeBack": true,
 				"app-plus": {
 					"titleNView": false,
-					"bounce": "none"
+					"bounce": "none",
+					"popGesture": "none",
+					"disableSwipeBack": true
 				}
 			}
 		},
@@ -117,8 +115,8 @@
 			"style": {
 				"navigationBarTitleText": "体能评估",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
 				"autoBackButton": false,
+				"navigationStyle": "custom",
 				"navigationBarTextStyle": "white",
 				"app-plus": {
 					"titleNView": false,
@@ -196,8 +194,8 @@
 			"style": {
 				"navigationBarTitleText": "新建训练",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
 				"autoBackButton": false,
+				"navigationStyle": "custom",
 				"navigationBarTextStyle": "white",
 				"app-plus": {
 					"titleNView": false,
@@ -210,8 +208,8 @@
 			"style": {
 				"navigationBarTitleText": "训练记录",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
 				"autoBackButton": false,
+				"navigationStyle": "custom",
 				"navigationBarTextStyle": "white",
 				"app-plus": {
 					"titleNView": false,
@@ -224,8 +222,8 @@
 			"style": {
 				"navigationBarTitleText": "训练记录详情",
 				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
 				"autoBackButton": false,
+				"navigationStyle": "custom",
 				"navigationBarTextStyle": "white",
 				"app-plus": {
 					"titleNView": false,
@@ -396,11 +394,6 @@
 }
 ],
 	"globalStyle": {
-		// #ifdef APP-PLUS || H5
-		"app-plus": {
-			"titleNView": false
-		},
-		// #endif
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-starter",
 		"navigationBarBackgroundColor": "#212328",

@@ -39,7 +39,7 @@
         </view>
       </view>
     </view>
-    <view class="buttontrue" @click.native="getReport()">生成报告</view>
+    <view class="buttontrue" @click.native.stop="getReport()">生成报告</view>
   </view>
 </template>
 
@@ -149,12 +149,14 @@ export default {
           .then((res) => {
             if (res.success) {
               let childList = res.data
+			  let sortList = childList.sort(this.compare);
+			 
               uni.navigateTo({
                 url:
                   item.path +
                   '?' +
                   'childList=' +
-                  JSON.stringify(childList) +
+                  JSON.stringify(sortList) +
                   '&traineeNo=' +
                   this.traineeNo +
                   '&questionCode=' +
@@ -170,6 +172,10 @@ export default {
           .catch((err) => {})
       }
     },
+	compare(x,y) {
+		return x.questionId - y.questionId
+
+	},
     requestDynamicEvaluationdata() {
       businessCloudObject
         .getPhysicalAssessmentList()

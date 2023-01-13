@@ -164,6 +164,7 @@
 /* 文章场景相关 */
 .content_style[data-v-c1425cf6] {
   width: 100vw;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -177,7 +178,7 @@
   padding-left: 0.9375rem;
   color: #bdc3ce;
   position: relative;
-  margin-top: 1.25rem;
+  margin-top: 2.5rem;
 }
 .content_style .arrow-left .van-icon[data-v-c1425cf6] {
   font-size: 1.25rem;
@@ -201,6 +202,10 @@
   border-radius: 24upx;
   position: relative;
 } */
+.need_scoll[data-v-c1425cf6] {
+  overflow: auto;
+  position: relative;
+}
 .dynamicshow[data-v-c1425cf6] {
   width: calc(100vw - 1.875rem);
   background-color: #2f333a;
@@ -291,21 +296,21 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #7A7F89;
-  top: 1.5625rem;
+  top: 3.4375rem;
   right: 1.5625rem;
 }
 .bottom_style[data-v-c1425cf6] {
   background: #1370ff;
   border-radius: 0.5rem;
-  margin-top: 0.9375rem;
-  margin-bottom: 0.9375rem;
+  top: 90vh;
+  z-index: 100;
   font-size: 1rem;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   line-height: 3.125rem;
   text-align: center;
   justify-content: center;
+  position: absolute;
   width: calc(100vw - 2.5rem);
   margin-left: 1.25rem;
   display: flex;

@@ -73,6 +73,7 @@
           :show="item.isOpened"
           :auto-close="false"
           @change="swipeChange($event, itemIndex, item)"
+		
         >
           <template v-slot:right>
             <view class="slot-button" @click.stop="bindClick($event)">
@@ -178,11 +179,7 @@ export default {
     currentNum: Number,
     page: Number
   },
-  onLoad(options) {
-    // 	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
-    //  this.getMemberList(options.isActive)
-    // }
-  },
+
 
   created() {
     switch (this.type) {
@@ -190,17 +187,6 @@ export default {
         this.getMemberList(this.isActive)
         break
     }
-    let _this = this
-    uni.getStorage({
-      key: 'isActive',
-      success: function (res) {
-        // console.log(res, '我是token')
-        if (res.data) {
-          _this.getMemberList(res.data)
-        }
-      },
-      fail: function (err) {}
-    })
   },
   onShow() {},
 
@@ -223,8 +209,15 @@ export default {
     },
     isActive: {
       handler: function (n, o) {
-        this.type === 'home' ? this.getMemberList(n) : ''
+
+		if (n !== o) {
+			let number = JSON.parse(JSON.stringify(n))
+			console.log(number, 'n+1')
+			this.type === 'home' ? this.getMemberList(number) : ''
+			
+		}
       },
+	  deep: true,
       immediate: true
     },
     searchValue: {
@@ -239,9 +232,7 @@ export default {
             debounce(this.searchMemberList(n), 300)
           }
         }
-      },
-
-      deep: true
+      }
     }
   },
   methods: {
@@ -310,25 +301,12 @@ export default {
     // 编辑会员信息
     updateMember(item) {
       uni.navigateTo({
-        url:
-          '/pages/addMyMebers/addMyMebers?item=' +
-          JSON.stringify(item) +
-          '&isActive=' +
-          this.isActive,
+        url: '/pages/addMyMebers/addMyMebers?item=' + JSON.stringify(item),
         success: (res) => {},
         fail: () => {},
         complete: () => {}
       })
-      try {
-        uni.setStorageSync('isActive', this.isActive) // 缓存标签激活信息
-      } catch (e) {
-        // error
-      }
-    },
-    memberSrollTop(event) {
-      this.scrollTop = event.detail.scrollTop
-      this.cellingFlag = this.scrollTop > 50 ? true : false
-      // console.log( this.scrollTop)
+
     },
 
     getMemberList(buyStatus) {
@@ -377,7 +355,7 @@ export default {
       })
     },
     getReport(item) {
-      uni.redirectTo({
+      uni.navigateTo({
         url:
           '/pages/viewReport/viewReport' +
           '?traineeNo=' +
@@ -535,14 +513,17 @@ export default {
   }
 }
 .slot-button {
-  width: 100upx !important;
+  // width: 100upx !important;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
   .slot_btn_img_style {
     width: 100upx;
     height: 100upx;
+	margin-right: 40upx;
+
   }
 }
 

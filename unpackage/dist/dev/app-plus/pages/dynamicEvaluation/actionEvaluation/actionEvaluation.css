@@ -145,7 +145,7 @@
 	position: relative;
 }
 .headBox{
-	width: calc(100vw - 0.625rem);
+	width: 100vw;
 	height: 2.8125rem;
 	margin: 0 auto;
 	margin-top: 0.625rem;
@@ -153,7 +153,7 @@
 	overflow-x: hidden;
 }
 .block{
-	width: 10.875rem;
+	width: 45vw;
 	height: 2.8125rem;
 	border-radius: 0.5rem;
 	float: left;
@@ -189,7 +189,7 @@
   margin-top: 0.9375rem;
 }
 .clickAction{
-	width: 8.125rem;
+	width: 20.625rem;
 	height: 2.1875rem;
 	background: #000000;
 	border-radius: 1.125rem;
@@ -292,7 +292,7 @@
 .quessonName{
 	width: 5.625rem;
 	/* height: 80upx; */
-	background: #212328;
+	background: rgba(19,112,255,0.9);
 	border-radius: 0.5rem;
 	font-size: 0.8125rem;
 	font-weight: 600;

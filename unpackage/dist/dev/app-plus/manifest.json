@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.1.0",
-    "code": 110
+    "name": "1.1.1",
+    "code": 111
   },
   "description": "一款健身APP",
   "developer": {
@@ -81,12 +81,12 @@
         "iosStyle": "storyboard",
         "androidStyle": "default",
         "android": {
-          "hdpi": "D:/studyUninApp/素材/480.png",
-          "xhdpi": "D:/studyUninApp/素材/720.png",
-          "xxhdpi": "D:/studyUninApp/素材/1080.png"
+          "hdpi": "D:/studyUninApp/素材/启动页面/480.png",
+          "xhdpi": "D:/studyUninApp/素材/启动页面/720.png",
+          "xxhdpi": "D:/studyUninApp/素材/启动页面/1080.png"
         },
         "ios": {
-          "storyboard": "D:/studyUninApp/素材/模版/CustomStoryboard.zip"
+          "storyboard": "D:/studyUninApp/素材/模版/CustomStoryboard(1).zip"
         }
       },
       "google": {
@@ -210,7 +210,7 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "3.6.17",
+      "compilerVersion": "3.6.15",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {

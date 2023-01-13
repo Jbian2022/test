@@ -143,17 +143,18 @@
 }
 .content_style{
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	overflow: hidden;
 	position: relative;
 }
 .bgimg{
 	width: calc(100vw - 9.375rem);
-	height: 100vh;
-	background-image: url('../../static/app-plus/other/postureAssessment.png');
-	background-size: 12.5rem;
+	height: 75vh;
+	background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/dd0f49ac-8bbb-4a24-88a5-bf961da5ac6c.png');
+	background-size: 100%;
 	background-repeat: no-repeat;
-	margin-top: 2.75rem;
+	background-position-x: -0.625rem;
+	margin-top: 4.375rem;
 	margin-left: 5.625rem;
 	margin-right: 6rem;
 	opacity: 1.25;
@@ -166,9 +167,10 @@
 }
 .contentLeftBlock{
 	width: 6.25rem;
-	height: 2.5rem;
-	background: #383D46;
-	border-radius: 0.5rem;
+	height: 2.5rem;	
+	background: rgba(19,112,255,0.6);
+	border-radius: 0.5rem;	
+	border: 2px solid #1370FF;
 	font-size: 0.8125rem;
 	font-weight: 600;
 	color: #F4F7FF;
@@ -181,8 +183,9 @@
 .contentRightBlock{
 	width: 6.25rem;
 	height: 2.5rem;
-	background: #383D46;
-	border-radius: 0.5rem;
+	background: rgba(19,112,255,0.6);
+	border-radius: 0.5rem;	
+	border: 2px solid #1370FF;
 	font-size: 0.8125rem;
 	font-weight: 600;
 	color: #F4F7FF;
@@ -193,8 +196,8 @@
 	position: absolute;
 }
 .clickBlock{
-	width: 8.75rem;
-	background: #1C3965;
+	width: 8.75rem;	
+	background: rgba(19,112,255,0.9);
 	border-radius: 0.5rem;
 	border: 0.0625rem solid #1370FF;
 	padding: 0.625rem;
@@ -223,7 +226,6 @@
 	color: #7A7F89;
 	line-height: 1.0625rem;
 	text-align: center;
-	margin-top: 0.71875rem;
 }
 .postureButton{
 	width: calc(100vw - 1.875rem);
@@ -234,6 +236,9 @@
 	margin-top: 1.25rem;
 	font-weight: 600;
 	line-height: 3.125rem;
+	top:90vh;
+	z-index: 100;
+	position: absolute;
 }
 .watermark{
 	position: absolute;
@@ -243,4 +248,19 @@
 	color: #7A7F89;
 	top: 2.8125rem;
 	right: 0.9375rem;
+}
+.infoText{
+	width: calc(100vw - 0.46875rem);
+	height: 2.1875rem;
+	border-radius: 1.125rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: #F4F7FF;
+	line-height: 2.1875rem;
+	text-align: center;
+	margin-top: 0.9375rem;
+}
+.testq{
+	font-size: 0.5625rem !important;
+	font-weight: 600 !important;
 }

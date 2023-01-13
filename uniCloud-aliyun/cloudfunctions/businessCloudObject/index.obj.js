@@ -287,7 +287,7 @@ module.exports = {
 	   const detailInfo = await this.uniID.checkToken(token)
 	   console.log(detailInfo.uid, '我是谁')
 	   return new Promise((resolve, reject) => {
-		   db.collection('t_questionaire_answer').where({
+		   db.collection('t_questionaire_answer').orderBy('questionId', 'asc').where({
 			   traineeNo: data.traineeNo,
 				 userId: detailInfo.uid, 
 				 questionCode: data.questionCode

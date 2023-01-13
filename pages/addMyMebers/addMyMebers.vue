@@ -244,8 +244,7 @@ export default {
           label: '手机号码',
           validateTrigger: 'submit'
         }
-      },
-      isActive: ''
+      }
     }
   },
   onLoad(options) {
@@ -256,10 +255,6 @@ export default {
       this.studentForm = this.requestItem = requestItem
       this.gender = this.range.find((v) => v.value === requestItem.gender).text
       this.leftNavTitle = '基础信息'
-    }
-    if (JSON.stringify(options) !== '{}') {
-      let isActive = options.hasOwnProperty('isActive') ? options.isActive : '1'
-      this.isActive = isActive
     }
   },
   computed: {
@@ -347,6 +342,11 @@ export default {
       this.$refs.studentForm
         .validate()
         .then(() => {
+			try {
+			  uni.setStorageSync('isActive', String(this.studentForm.buyStatus)) // 缓存标签激活信息
+			} catch (e) {
+			  // error
+			}
           let businessCloudObject = uniCloud.importObject(
             'businessCloudObject',
             {
@@ -361,7 +361,7 @@ export default {
                 if (updateRes.success) {
                   uni.reLaunch({
                     url:
-                      '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
+                      '/pages/myMebers/myMebers',
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -421,7 +421,7 @@ export default {
                 } else {
                   uni.reLaunch({
                     url:
-                      '/pages/myMebers/myMebers' + '?isActive=' + this.isActive,
+                      '/pages/myMebers/myMebers',
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}

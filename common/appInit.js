@@ -62,7 +62,6 @@ export default async function() {
 				if(objectName == "login") {
 					
 				} else {
-					
 				   uni.getStorage({
 				     key: 'uni_id_token',
 				     success: function (res) {

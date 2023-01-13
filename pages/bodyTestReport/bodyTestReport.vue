@@ -139,7 +139,18 @@ export default {
   },
   methods: {
     changeInputValue(event, item) {
-      item['value'] = event.detail.value
+     
+	  if (event.detail.value > 5000) {
+		uni.showToast({
+				 title: '基础代谢上限5000',
+				 duration: 1000,
+				 width: 180,
+				 icon: 'none'
+			   })
+		  item['value'] = 5000
+	  } else {
+		   item['value'] = event.detail.value
+	  }
     },
     pickeConfirm(event, item, itemIndex) {
       console.log(item, '我平时', itemIndex)

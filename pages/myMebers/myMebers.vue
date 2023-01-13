@@ -43,13 +43,13 @@
           >
             <view
               class="buy_left"
-              :class="isActive == 1 ? 'active' : ''"
+              :class="isActive === 1 ? 'active' : ''"
               @click.native.stop="buyClick(1)"
               >已购课</view
             >
             <view
               class="buy_right"
-              :class="isActive == 0 ? 'active' : ''"
+              :class="isActive === 0 ? 'active' : ''"
               @click.native="buyClick(0)"
               >未购课</view
             >
@@ -62,6 +62,7 @@
             :type="'home'"
             :page="page"
             :currentNum="currentNum"
+            :key="new Date().toString()"
           ></MemberList>
         </scroll-view>
       </view>
@@ -128,46 +129,53 @@ export default {
       currentNum: 1 //第一页
     }
   },
-  watch: {
-    scrollTop: {}
-  },
-  onLoad(options) {
-	 console.log(options, 'options')
-	 if (JSON.stringify(options) !== '{}' && options.hasOwnProperty('isActive')) {
-		 this.isActive = Number(options.isActive)
-	 }
+  onLoad() {
     uni.showTabBar()
   },
-  onPullDownRefresh() {
-    this.$refs.memberList.getMemberList(this.isActive)
-    uni.stopPullDownRefresh()
+  // onPullDownRefresh() {
+  //   this.$refs.memberList.getMemberList(this.isActive)
+  //   uni.stopPullDownRefresh()
+  // },
+  // onReachBottom() {
+  //   console.log(2222)
+  // },
+  created() {
+	 
   },
-  onReachBottom() {
-    console.log(2222)
-  },
-  created() {},
   mounted() {
     let self = this
+	this.$nextTick(() => {
+		uni.getStorage({
+		  key: 'loginNum',
+		  success: function (res) {
+		    if (res.data) {
+		      self.loginNum = res.data
+		      self.showPopover = res.data == '0' ? true : false
+		      if (res.data == '0') {
+		        self.$refs.popup.open()
+		      }
+		    }
+		  },
+		  fail: function (err) {}
+		})
+		uni.getStorage({
+		  key: 'isActive',
+		  success: function (res) {
+		    if (res.data) {
+		     self.isActive = Number(res.data) 
+		
+		    }
+		  },
+		  fail: function (err) {}
+		})
+	})
 
-    uni.getStorage({
-      key: 'loginNum',
-      success: function (res) {
-        if (res.data) {
-          self.loginNum = res.data
-          self.showPopover = res.data == '0' ? true : false
-          if (res.data == '0') {
-            self.$refs.popup.open()
-          }
-        }
-      },
-      fail: function (err) {}
-    })
     this.getUserInfor()
     // this.getCocachList()
     //
   },
   onShow() {
-    this.getUserInfor()
+    // this.getUserInfor()
   },
   methods: {
     // 获取用户信息
@@ -237,11 +245,6 @@ export default {
     },
 
     addClick() {
-      try {
-        uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
-      } catch (e) {
-        // error
-      }
       // 判断蓝卡会员还是金卡会员
       let businessCloudObject = uniCloud.importObject('businessCloudObject', {
         customUI: true // 取消自动展示的交互提示界面
@@ -264,8 +267,7 @@ export default {
           if (this.addUpperLimit || this.cocahMemberLimit < 7) {
             //
             uni.navigateTo({
-              url:
-                '/pages/addMyMebers/addMyMebers' + '?isActive=' + this.isActive,
+              url: '/pages/addMyMebers/addMyMebers',
               success: (res) => {},
               fail: () => {},
               complete: () => {}
@@ -275,6 +277,12 @@ export default {
         .catch((err) => {})
     },
     buyClick(type) {
+		uni.removeStorage({
+		  key: 'isActive',
+		  success: function (res) {
+		    console.log('success')
+		  }
+		})
       this.isActive = type
     }
   }

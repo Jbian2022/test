@@ -10,7 +10,19 @@
       >
         <view class="check_box_style" v-if="item.questionType === 2">
           <uni-collapse class="need_collapse_style" v-model="activeName">
-            <uni-collapse-item :title="item.questionContent" :name="itemIndex">
+            <uni-collapse-item titleBorder="none" :open="true" :show-arrow="false"  :title="item.questionContent" :name="itemIndex">
+				<template v-slot:title>
+					<uni-list>
+						<uni-list-item :border="false" :title="item.questionContent" clickable  @click="infoclick = !infoclick" class="titleclass" >
+							<template v-slot:footer>
+								<view class="rightclickblock arrowimgopen" v-if="infoclick">
+									点击展开
+								</view>
+								<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
+							</template>
+						</uni-list-item>
+					</uni-list>
+				</template>
               <view class="collapes_conten_style">
                 <view
                   class="collapes_tag_stylle"
@@ -75,7 +87,8 @@ export default {
       activeName: [0],
       traineeNo: '',
       originList: [], // 源数据
-      questionCode: ''
+      questionCode: '',
+	  infoclick: true
     }
   },
   onLoad(options) {
@@ -311,7 +324,6 @@ export default {
             background: #4b525e;
             border-radius: 16upx;
             font-size: 28upx;
-            // font-family: PingFangSC-Semibold, PingFang SC;
             font-weight: 600;
             color: #f4f7ff;
             text-align: center;
@@ -338,7 +350,6 @@ export default {
       height: auto;
       .radio_title_style {
         font-size: 32upx;
-        font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #f4f7ff;
         padding-top: 40upx;
@@ -360,7 +371,6 @@ export default {
           margin-right: 30upx;
           text-align: center;
           font-size: 30upx;
-          font-family: PingFangSC-Regular, PingFang SC;
           font-weight: 400;
           color: #f4f7ff;
         }
@@ -399,7 +409,6 @@ export default {
   margin-top: 30upx;
   margin-bottom: 30upx;
   font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   line-height: 100upx;
@@ -417,19 +426,18 @@ export default {
 ::v-deep.uni-collapse-item__title-box {
 	background-color: transparent !important;
 	font-size: 32upx !important;
-	font-family: PingFangSC-Semibold, PingFang SC !important;
 	font-weight: 600 !important;
 	color: #F4F7FF !important;
 	padding: 0 !important;
 }
 ::v-deep.uni-collapse-item__title-text {
 	font-size: 32upx !important;
-	font-family: PingFangSC-Semibold, PingFang SC !important;
 	font-weight: 600 !important;
 	color: #F4F7FF !important;
 }
 ::v-deep.uni-collapse-item__wrap {
 		background-color: transparent !important;
+		margin-top: 30upx;
 }
 ::v-deep.uni-collapse-item__wrap-content.uni-collapse-item--border {
 	border-bottom-width: 0 !important;
@@ -441,5 +449,58 @@ export default {
 	padding: 30upx;
 	box-sizing: border-box;
 	color: #F4F7FF;
+}
+.rightclickblock{
+	width: 154upx;
+	height: 50upx;
+	background: #1370FF;
+	border-radius: 26upx;
+	font-size: 24upx;
+	font-weight: 600;
+	color: #F4F7FF;
+	line-height: 50upx;
+	padding-left: 26upx;
+}
+.titleclass{
+	background: transparent  !important;
+	border-top: none;
+	border-bottom: none;
+	color: #F4F7FF !important;	
+	border-radius: 24upx;
+	font-size: 32upx;
+	font-weight: 600;
+	color: #f4f7ff;
+}
+::v-deep .uni-list{
+	background: transparent  !important;
+	border-radius: 24upx;
+}
+::v-deep .uni-list-item__container {
+	padding-left: 0 !important;
+}
+::v-deep .uni-list-item__content-title{
+	color: #F4F7FF !important;
+	// font-weight: 600;
+	background: transparent  !important;
+	font-size: 32upx !important;
+}
+::v-deep .uni-list--border-top{
+	background-color: #2f333a !important;
+}
+.arrowimgopen{
+	background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png');
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position-x: 124upx;
+}
+.arrowimgclose{
+	background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e98a8797-15e5-4862-b7f4-b747771c5e89.png");
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position-x: 124upx;
+	background-position-y: 2upx ;
+}
+::v-deep .uni-list--border-bottom{
+	background-color: #2f333a !important;
 }
 </style>
