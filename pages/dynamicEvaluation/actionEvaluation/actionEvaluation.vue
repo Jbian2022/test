@@ -2,7 +2,14 @@
 	<view class="content_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
-		<view class="headBox">
+		<view class="headBox" v-if="leftNavTitle==='肩关节灵活性测试'">
+			<view class="block1"
+			v-for="(item, index) in actionobs"
+			:key="index"
+			:class="num==index?'block0': ''"
+			@click.native="changeFunction(index)">{{item.questionContent}}</view>
+		</view>
+		<view class="headBox" v-else>
 			<view class="block"
 			v-for="(item, index) in actionobs"
 			:key="index"
@@ -19,7 +26,7 @@
 			v-model:show="show" 
 			position="top" 
 			round
-			:overlay="false"
+			:overlay="false" 
 			class="clickActionContent">
 				<view class="clickActionBody">
 					<video :src="FrontVideoUrl" wid autoplay loop :controls="false">
@@ -39,10 +46,10 @@
 				<view
 				 v-for="(item,index) in quession1"
 				 :style="item.style">
-					<view class="quessonName" v-if="item.status" @click.stop="clickQ(item)">
+					<view class="quessonName" v-if="item.status" @click.stop="clickQ(item,0)">
 						<p>{{item.answerTitle}}</p>
 					</view>
-					<view class="clickQuessonName" v-if="!item.status" @click.stop="clickQ(item)">
+					<view class="clickQuessonName" v-if="!item.status" @click.stop="clickQ(item,0)">
 						<view class="quessonTitle">
 							{{item.answerTitle}}
 						</view>
@@ -122,10 +129,10 @@
 				<view
 				 v-for="(item,index) in quession2"
 				 :style="item.style">
-					<view class="quessonName" v-if="item.status" @click.stop="clickQ(item)">
+					<view class="quessonName" v-if="item.status" @click.stop="clickQ(item,1)">
 						<p>{{item.answerTitle}}</p>
 					</view>
-					<view class="clickQuessonName" v-if="!item.status" @click.stop="clickQ(item)">
+					<view class="clickQuessonName" v-if="!item.status" @click.stop="clickQ(item,1)">
 						<view class="quessonTitle">
 							{{item.answerTitle}}
 						</view>
@@ -250,7 +257,7 @@
 							this.FrontVideoUrl = this.StraightLegLiftUrl;
 							this.SideVideoUrl = this.ThomasUrl;
 							break;
-						case "关节灵活测试" :
+						case "肩关节灵活性测试" :
 							this.backimgFront = this.shoulderTest1img;
 							this.backimgSide = this.shoulderTest2img;
 							this.FrontVideoUrl = this.shoulderTest1Url;
@@ -338,9 +345,10 @@
 							this.actionobs = res.data
 							this.quession1 = this.actionobs[0].answer
 							this.testText1 = this.actionobs[0].answerRemark.detailArray
-							this.quession2 = this.actionobs[1].answer
-							this.testText2 = this.actionobs[1].answerRemark.detailArray
-							console.log(this.testText1);
+							if(this.actionobs.length>1){
+								this.quession2 = this.actionobs[1].answer
+								this.testText2 = this.actionobs[1].answerRemark.detailArray
+							}
 							// console.log(this.actionobs);
 							if(this.actionobs.length>2){
 								this.quession3 = this.actionobs[2].answer
@@ -374,13 +382,19 @@
 						}
 					}).catch(() =>{})
 			},
-			clickQ(item){
+			clickQ(item,num){
+				console.log(item)
 				if(item.status){
 					item.status = 0;
 				}else{
 					item.status = 1;
-				}				
-			},
+				}
+				this.actionobs[num].answer.forEach((ans)=>{
+					if(ans.answerTitle===item.answerTitle){
+						ans.status = item.status
+					}
+				})
+			}, 
 			getData(){
 				const data = {};
 				data["traineeNo"] = this.traineeNo;
@@ -389,9 +403,11 @@
 				tesOb.opearPHConfigQuery(data).then((res)=>{
 					console.log(res.data[0].actionTestResult);
 					this.quession1 = res.data[0].actionTestResult[0].answer
-					this.quession2 = res.data[0].actionTestResult[1].answer
+					if(res.data[0].actionTestResult.length>1){
+						this.quession2 = res.data[0].actionTestResult[1].answer
+					}
 					if(res.data[0].actionTestResult.length>2){
-						this.quession3 = res.data[0].actionTestResult[1].answer
+						this.quession3 = res.data[0].actionTestResult[2].answer
 					}
 				})
 			}
@@ -416,6 +432,20 @@
 }
 .block{
 	width: 45vw;
+	height: 90upx;
+	border-radius: 16upx;
+	float: left;
+	font-size: 30upx;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #F4F7FF;
+	line-height: 90upx;
+	text-align: center;
+	background: #383D46;
+	margin-right: 22upx;
+}
+.block1{
+	width: 29vw;
 	height: 90upx;
 	border-radius: 16upx;
 	float: left;
