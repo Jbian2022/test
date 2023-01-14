@@ -507,6 +507,7 @@
 				} else {
 					const res = await train.addTrainInfo(params)
 				}
+				this.mode='DELETE'
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
 				uni.removeStorageSync('traineeNo')
