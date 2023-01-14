@@ -369,6 +369,17 @@
 				this.getOldInfo()
 			}
 		},
+		onHide(){
+			uni.setStorageSync('actionLibraryType', 'select')
+			uni.setStorageSync('oldTrainInfo', JSON.stringify({
+				workoutName:this.workoutName,
+				traineeNo:this.traineeNo,
+				actionList:this.actionList,
+				isNoOldInfo:this.isNoOldInfo,
+				trainDate:this.trainDate
+			}))
+			uni.setStorageSync('actionList', JSON.stringify([]))
+		},
 		onShow(){
 			try {
 				const oldTrainInfoStr = uni.getStorageSync('oldTrainInfo')
