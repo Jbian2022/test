@@ -358,7 +358,8 @@
 					{ text: '删除动作项'}
 				],
 				traineeNo:null,
-				isNoOldInfo:false
+				isNoOldInfo:false,
+				mode: 'ADD'
 			}
 		},
 		onLoad: function (option) { 
@@ -370,18 +371,22 @@
 			}
 		},
 		onHide(){
-			uni.setStorageSync('actionLibraryType', 'select')
-			uni.setStorageSync('oldTrainInfo', JSON.stringify({
-				workoutName:this.workoutName,
-				traineeNo:this.traineeNo,
-				actionList:this.actionList,
-				isNoOldInfo:this.isNoOldInfo,
-				trainDate:this.trainDate
-			}))
-			uni.setStorageSync('actionList', JSON.stringify([]))
+			if(this.mode==='ADD'){
+				uni.setStorageSync('oldTrainInfo', JSON.stringify({
+					workoutName:this.workoutName,
+					traineeNo:this.traineeNo,
+					actionList:this.actionList,
+					isNoOldInfo:this.isNoOldInfo,
+					trainDate:this.trainDate
+				}))
+				uni.setStorageSync('actionList', JSON.stringify([]))
+				uni.setStorageSync('traineeNo', this.traineeNo)
+				uni.setStorageSync('traineeName', this.traineeName)
+			}
 		},
 		onShow(){
 			try {
+				this.mode='ADD'
 				const oldTrainInfoStr = uni.getStorageSync('oldTrainInfo')
 				if(oldTrainInfoStr){
 					const oldTrainInfo = JSON.parse(oldTrainInfoStr)
@@ -513,6 +518,7 @@
 				})
 			},
 			async deleteHandle(){
+				this.mode='DELETE'
 				const params = {
 					traineeNo: this.traineeNo,
 					trainDate: this.trainDate
