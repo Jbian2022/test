@@ -199,7 +199,6 @@
       "style": "light",
       "background": "#212328"
     },
-    "arguments": "{\"name\":\"调试\",\"path\":\"pages/myMebers/myMebers\",\"query\":\"\"}",
     "allowsInlineMediaPlayback": true,
     "safearea": {
       "background": "#212328",
