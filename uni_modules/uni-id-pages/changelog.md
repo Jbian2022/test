@@ -1,3 +1,43 @@
+## 1.0.41（2023-01-16）
+- 优化 压缩依赖的文件资源大小
+## 1.0.40（2023-01-16）
+- 更新依赖的 验证码插件`uni-captcha`版本的版本为 0.6.4 修复 部分情况下APP端无法获取验证码的问题 [详情参考](https://ext.dcloud.net.cn/plugin?id=4048)
+- 修复 客户端token过期后，点击退出登录按钮报错的问题
+- uni-id-co 修复 updateUser 接口`手机号`和`邮箱`参数值为空字符串时，修改无效的问题
+## 1.0.39（2022-12-28）
+- uni-id-co 修复 URL化时第三方登录无法获取 uniPlatform 参数
+- uni-id-co 修复 validator error
+## 1.0.38（2022-12-26）
+- uni-id-co 优化 手机号与邮箱验证规则为空字符串时不校验
+## 1.0.37（2022-12-09）
+- 优化admin端样式
+## 1.0.36（2022-12-08）
+- uni-id-co 修复 `updateUser` 接口部分参数为空时数据修改异常
+## 1.0.35（2022-11-30）
+- uni-id-co 新增 匹配到的用户不可在当前应用登录时的错误码 `uni-id-account-not-exists-in-current-app` [错误码说明](https://uniapp.dcloud.net.cn/uniCloud/uni-id-summary.html#errcode)
+## 1.0.34（2022-11-29）
+- 优化 toast 错误提示时间为3秒
+- uni-id-co 修复 无法从 clientInfo 中获取 uniIdToken
+## 1.0.33（2022-11-25）
+- uni-id-co 新增 外部系统联登接口，可为外部系统创建与uni-id相对应的账号，使该账号可以使用依赖uniId的系统及功能 [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#external)
+- uni-id-co 新增 URL化请求时鉴权签名验证 [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#http-reqeust-auth)
+- uni-id-co 修复 微信登录时用户未设置头像的报错问题
+## 1.0.32（2022-11-21）
+- 新增 设置密码页面
+- 新增 登录后跳转设置密码页面配置项`setPasswordAfterLogin` [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#set-pwd-after-login)
+- uni-id-co 新增 设置密码接口 [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#set-pwd)
+## 1.0.31（2022-11-16）
+- uni-id-co 修复 验证码可能无法收到的bug
+## 1.0.30（2022-11-11）
+- uni-id-co 修复 用户只有openid时绑定微信/QQ报错
+## 1.0.29（2022-11-10）
+- uni-id-co 支持URL化方式请求 [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#adapter-http)
+## 1.0.28（2022-11-09）
+- uni-id-co 升级密码加密算法，支持hmac-sha256加密 [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-summary.html#password-safe)
+- uni-id-co 新增 开发者可以自定义密码加密规则 [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-summary.html#custom-password-encrypt)
+- uni-id-co 新增 支持将其他系统用户迁移至uni-id [详情](https://uniapp.dcloud.net.cn/uniCloud/uni-id-summary.html#move-users-to-uni-id)
+## 1.0.27（2022-10-26）
+- uni-id-co 新增 secureNetworkHandshakeByWeixin 接口，用于建立和微信小程序的安全网络连接
 ## 1.0.26（2022-10-18）
 - 修复 uni-id-pages 导入时异常的Bug
 ## 1.0.25（2022-10-14）

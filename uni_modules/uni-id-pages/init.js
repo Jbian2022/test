@@ -50,13 +50,12 @@ export default async function() {
 		uni.preLogin({
 			provider: 'univerify',
 			complete: e => {
-				console.log(e);
+				// console.log(e);
 			}
 		})
 	}
 	// #endif
 
-/* 注释此代码块原因：与uni-starter中的appinit逻辑一致
 	//3. 绑定clientDB错误事件
 	// clientDB对象
 	const db = uniCloud.database()
@@ -66,32 +65,29 @@ export default async function() {
 		code, // 错误码详见https://uniapp.dcloud.net.cn/uniCloud/clientdb?id=returnvalue
 		message
 	}) {
-		console.error('onDBError', {
-			code,
-			message
-		});
+		// console.error('onDBError', {code,message});
 	}
 	// 解绑clientDB错误事件
 	//db.off('error', onDBError)
-*/
 
-	//4. 同步客户端push_clientid至uni-id-device表
+
+	//4. 同步客户端push_clientid至device表
 	if (uniCloud.onRefreshToken) {
 		uniCloud.onRefreshToken(() => {
-			console.log('onRefreshToken');
+			// console.log('onRefreshToken');
 			if (uni.getPushClientId) {
 				uni.getPushClientId({
 					success: async function(e) {
-						console.log(e)
+						// console.log(e)
 						let pushClientId = e.cid
-						console.log(pushClientId);
+						// console.log(pushClientId);
 						let res = await uniIdCo.setPushCid({
 							pushClientId
 						})
-						console.log('getPushClientId', res);
+						// console.log('getPushClientId', res);
 					},
 					fail(e) {
-						console.error(e,'更多详情：https://uniapp.dcloud.net.cn/uniCloud/uni-starter.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9')
+						console.log(e)
 					}
 				})
 			}

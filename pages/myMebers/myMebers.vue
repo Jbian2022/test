@@ -34,8 +34,7 @@
             </view>
             <view
               class="header_right_style"
-			  :class="{ search_anmition_style: isFixedTop }"
-             
+              :class="{ search_anmition_style: isFixedTop }"
             >
               <image
                 class="right_img_style"
@@ -47,8 +46,7 @@
 
           <view
             class="is_buy_style"
-			 :class="{ celling_animation_style: isFixedTop }"
-           
+            :class="{ celling_animation_style: isFixedTop }"
           >
             <view
               class="buy_left"
@@ -66,12 +64,10 @@
           <!-- <view class="zhan_wei_style" v-if="isFixedTop"></view> -->
           <MemberList
             ref="memberList"
-            @getMemberList="getMemberList"
             :isActive="isActive"
             :type="'home'"
             :page="page"
             :currentNum="currentNum"
-            :key="new Date().toString()"
           ></MemberList>
         </scroll-view>
       </view>
@@ -114,7 +110,6 @@
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import MemberList from '@/components/memberList/memberList.vue'
 import ZbTooltip from '@/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue'
-import util from '@/common/timeUtil.js'
 export default {
   components: {
     BgTheamCompontent,
@@ -144,9 +139,6 @@ export default {
   // onPullDownRefresh() {
   //   this.$refs.memberList.getMemberList(this.isActive)
   //   uni.stopPullDownRefresh()
-  // },
-  // onReachBottom() {
-  //   console.log(2222)
   // },
   created() {},
   mounted() {
@@ -245,12 +237,12 @@ export default {
     },
     scroll(event) {
       this.scrollTop = event.detail.scrollTop
-	  if (event.detail.scrollTop > uni.getWindowInfo().statusBarHeight) {
-	    this.isFixedTop = true
-	  } else {
-	    this.isFixedTop = false
-	  }
-      console.log(event.detail.scrollTop, '?????')
+      if (event.detail.scrollTop > uni.getWindowInfo().statusBarHeight) {
+        this.isFixedTop = true
+      } else {
+        this.isFixedTop = false
+      }
+      return
       // this.isFixedTop = event.detail.scrollTop > 50 ? true : false
       // console.log( this.scrollTop)
     },
@@ -311,9 +303,6 @@ export default {
 .content_style {
   width: 100vw;
   height: 100%;
-  // overflow: hidden;
-  overflow-x: hidden;
-  // overflow-y: auto;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -364,7 +353,6 @@ export default {
       }
     }
     .header_right_style {
-      display: block;
       .right_img_style {
         width: 48.59upx;
         height: 48.59upx;
@@ -518,19 +506,21 @@ uni-page-body {
   opacity: 0.8;
 }
 .celling_animation_style {
-  position: fixed;
-  left: 0;
-  top: 0;
- 
+  position: sticky !important;
+  left: 0px;
+  top: 0px !important;
+
   width: 100vw !important;
   background: #212328;
-  margin-top: 0 !important;
-  padding-top: 66upx;
-  padding-bottom: 36upx;
-  animation-name: cellingAnmation;
-   z-index: 30000;
+  // margin-top: 0 !important;
+  // padding-top: 66upx;
+  // padding-bottom: 36upx;
+  // animation-name: cellingAnmation;
+  z-index: 30000;
   animation-duration: 0.3s;
   margin-left: 0 !important;
+  padding-top: 20upx;
+  padding-bottom: 20upx;
   .buy_left {
     width: 40% !important;
     margin-left: 30upx;
@@ -540,13 +530,14 @@ uni-page-body {
   }
 }
 .search_anmition_style {
-	
-  position: fixed;
-  right: 30upx;
-  top: 86upx;
-  animation-name: seachAnmation;
-  animation-duration: 0.3s;
-  z-index: 30000;
+  .right_img_style {
+    position: sticky !important;
+    right: 30upx;
+    top: 0px !important;
+    z-index: 80000;
+    width: 48.59upx;
+    height: 48.59upx;
+  }
 }
 @keyframes seachAnmation {
   0% {
@@ -568,7 +559,6 @@ uni-page-body {
   }
 }
 
-
 // uni-scroll-view {
 //   height: 100% !important;
 // }
@@ -576,7 +566,7 @@ uni-page-body {
   height: calc(100vh - var(--window-top)) !important;
 }
 ::v-deep.uni-scroll-view-content {
-  height: auto !important;
+  // height: auto !important;
 }
 .move_area_style {
   width: 100vw;

@@ -12,6 +12,7 @@ const {
   isUniIdError
 } = require('./common/error')
 const middleware = require('./middleware/index')
+const universal = require('./common/universal')
 
 const {
   registerAdmin,
@@ -49,6 +50,7 @@ const {
   unbindApple
 } = require('./module/relate/index')
 const {
+  setPwd,
   updatePwd,
   resetPwdBySms,
   resetPwdByEmail,
@@ -63,7 +65,8 @@ const {
 } = require('./module/verify/index')
 const {
   refreshToken,
-  setPushCid
+  setPushCid,
+  secureNetworkHandshakeByWeixin
 } = require('./module/utils/index')
 const {
   getInvitedUser,
@@ -78,9 +81,17 @@ const {
   getSupportedLoginType
 } = require('./module/dev/index')
 
+const {
+  externalRegister,
+  externalLogin
+} = require('./module/external')
+
 module.exports = {
   async _before () {
-    const clientInfo = this.getClientInfo()
+    // 支持 callFunction 与 URL化
+    universal.call(this)
+
+    const clientInfo = this.getUniversalClientInfo()
     /**
      * 检查clientInfo，无appId和uniPlatform时本云对象无法正常运行
      * 此外需要保证用到的clientInfo字段均经过类型检查
@@ -182,6 +193,9 @@ module.exports = {
     this.t = i18n.t.bind(i18n)
 
     this.response = {}
+
+    // 请求鉴权验证
+    await this.middleware.verifyRequestSign()
 
     // 通用权限校验模块
     await this.middleware.accessControl()
@@ -576,5 +590,27 @@ module.exports = {
    * @tutorial https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#unbind-apple
    * @returns
    */
-  unbindApple
+  unbindApple,
+  /**
+   * 安全网络握手，目前仅处理微信小程序安全网络握手
+   */
+  secureNetworkHandshakeByWeixin,
+  /**
+   * 设置密码
+   * @tutorial https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#set-pwd
+   * @returns
+   */
+  setPwd,
+  /**
+   * 外部用户注册，将自身系统的用户账号导入uniId，为其创建一个对应uniId的账号(unieid)，使得该账号可以使用依赖uniId的系统及功能。
+   * @tutorial https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#external-register
+   * @returns
+   */
+  externalRegister,
+  /**
+   * 外部用户登录，使用unieid即可登录
+   * @tutorial https://uniapp.dcloud.net.cn/uniCloud/uni-id-pages.html#external-login
+   * @returns
+   * */
+  externalLogin
 }

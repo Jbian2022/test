@@ -52,5 +52,16 @@ export default {
 	 * weak（弱：密码必须包含字母和数字，长度范围：6-16位之间）
 	 * 为空或false则不验证密码强度
 	 */
-	"passwordStrength":"medium"
+	"passwordStrength":"medium",
+	/**
+	 * 登录后允许用户设置密码（只针对未设置密码得用户）
+	 * 开启此功能将 setPasswordAfterLogin 设置为 true 即可
+	 * "setPasswordAfterLogin": false
+	 *
+	 * 如果允许用户跳过设置密码 将 allowSkip 设置为 true
+	 * "setPasswordAfterLogin": {
+	 *   "allowSkip": true
+	 * }
+	 * */
+	"setPasswordAfterLogin": false
 }

@@ -47,7 +47,7 @@
 		},
 		"comment": {
 			"bsonType": "string",
-			"description": "备注,用户的个性签名备注",
+			"description": "备注",
 			"title": "备注",
 			"trim": "both",
 			"permission": {
@@ -95,12 +95,14 @@
 			"defaultValue": 0,
 			"description": "邮箱验证状态：0 未验证 1 已验证",
 			"enum": [{
-				"text": "未验证",
-				"value": 0
-			}, {
-				"text": "已验证",
-				"value": 1
-			}],
+					"text": "未验证",
+					"value": 0
+				},
+				{
+					"text": "已验证",
+					"value": 1
+				}
+			],
 			"title": "邮箱验证状态",
 			"permission": {
 				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
@@ -112,38 +114,23 @@
 			"defaultValue": 0,
 			"description": "用户性别：0 未知 1 男性 2 女性",
 			"enum": [{
-				"text": "未知",
-				"value": 0
-			}, {
-				"text": "男",
-				"value": 1
-			}, {
-				"text": "女",
-				"value": 2
-			}],
+					"text": "未知",
+					"value": 0
+				},
+				{
+					"text": "男",
+					"value": 1
+				},
+				{
+					"text": "女",
+					"value": 2
+				}
+			],
 			"title": "性别",
 			"permission": {
 				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
 				"write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
 			}
-		},
-		"vipLevel": {
-			"title": "vip_level",
-			"description": "用户会员等级,蓝卡会员:1;金卡会员:2",
-			"bsonType": "int",
-			"defaultValue": 0,
-			"enum": [{
-				"text": "蓝卡会员",
-				"value": 1
-			}, {
-				"text": "金卡会员",
-				"value": 2
-			}]
-		},
-		"vipEndDate": {
-			"title": "vip_end_date",
-			"description": "用户会员有效期",
-			"bsonType": "timestamp"
 		},
 		"invite_time": {
 			"bsonType": "timestamp",
@@ -194,12 +181,14 @@
 			"defaultValue": 0,
 			"description": "手机号验证状态：0 未验证 1 已验证",
 			"enum": [{
-				"text": "未验证",
-				"value": 0
-			}, {
-				"text": "已验证",
-				"value": 1
-			}],
+					"text": "未验证",
+					"value": 0
+				},
+				{
+					"text": "已验证",
+					"value": 1
+				}
+			],
 			"title": "手机号验证状态",
 			"permission": {
 				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
@@ -225,7 +214,7 @@
 			}
 		},
 		"password": {
-			"bsonType": "string",
+			"bsonType": "password",
 			"description": "密码，加密存储",
 			"title": "密码",
 			"trim": "both"
@@ -279,7 +268,7 @@
 				},
 				"identity": {
 					"bsonType": "string",
-					"description": "身份证号码\/营业执照号码"
+					"description": "身份证号码/营业执照号码"
 				},
 				"in_hand": {
 					"bsonType": "string",
@@ -291,7 +280,7 @@
 				},
 				"real_name": {
 					"bsonType": "string",
-					"description": "真实姓名\/企业名称"
+					"description": "真实姓名/企业名称"
 				},
 				"type": {
 					"bsonType": "int",
@@ -300,7 +289,10 @@
 					"minimum": 0
 				}
 			},
-			"required": ["type", "auth_status"]
+			"required": [
+				"type",
+				"auth_status"
+			]
 		},
 		"register_date": {
 			"bsonType": "timestamp",
@@ -355,18 +347,22 @@
 				"write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
 			},
 			"enum": [{
-				"text": "正常",
-				"value": 0
-			}, {
-				"text": "禁用",
-				"value": 1
-			}, {
-				"text": "审核中",
-				"value": 2
-			}, {
-				"text": "审核拒绝",
-				"value": 3
-			}],
+					"text": "正常",
+					"value": 0
+				},
+				{
+					"text": "禁用",
+					"value": 1
+				},
+				{
+					"text": "审核中",
+					"value": 2
+				},
+				{
+					"text": "审核拒绝",
+					"value": 3
+				}
+			],
 			"title": "用户状态"
 		},
 		"token": {
@@ -383,7 +379,7 @@
 			"title": "用户名",
 			"trim": "both",
 			"permission": {
-				"read": true,
+				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
 				"write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
 			}
 		},

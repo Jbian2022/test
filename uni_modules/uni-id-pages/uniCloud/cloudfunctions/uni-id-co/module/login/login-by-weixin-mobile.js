@@ -2,10 +2,7 @@ const {
   initWeixin
 } = require('../../lib/third-party/index')
 const {
-  getWeixinPlatform,
-  getWeixinAccessToken,
-  generateWeixinCache,
-  saveWeixinUserKey
+  getWeixinAccessToken
 } = require('../../lib/utils/weixin')
 const {
   ERROR

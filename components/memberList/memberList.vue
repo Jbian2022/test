@@ -73,7 +73,6 @@
           :show="item.isOpened"
           :auto-close="false"
           @change="swipeChange($event, itemIndex, item)"
-		
         >
           <template v-slot:right>
             <view class="slot-button" @click.stop="bindClick($event)">
@@ -169,7 +168,7 @@ export default {
       meberList: [],
       deleteRemarkFlag: true,
       delteIndex: 0,
-	  newActive: 0
+      newActive: 0
     }
   },
   props: {
@@ -180,7 +179,6 @@ export default {
     currentNum: Number,
     page: Number
   },
-
 
   created() {
     switch (this.type) {
@@ -210,20 +208,19 @@ export default {
     },
     isActive: {
       handler: function (n, o) {
-let number = JSON.parse(JSON.stringify(n))
-			this.newActive = number
-			this.type === 'home' ? this.getMemberList(number) : ''
-		
+        let number = JSON.parse(JSON.stringify(n))
+        this.newActive = number
+        this.type === 'home' ? this.getMemberList(number) : ''
       },
-	  deep: true,
+      deep: true,
       immediate: true
     },
-	newActive: {
-		handler: function(n, o) {
-			this.type === 'home' ? this.getMemberList(n) : ''
-		},
-		deep: true
-	},
+    newActive: {
+      handler: function (n, o) {
+        this.type === 'home' ? this.getMemberList(n) : ''
+      },
+      deep: true
+    },
     searchValue: {
       handler: function (n, o) {
         if (this.type === 'detail') {
@@ -310,7 +307,6 @@ let number = JSON.parse(JSON.stringify(n))
         fail: () => {},
         complete: () => {}
       })
-
     },
 
     getMemberList(buyStatus) {
@@ -526,8 +522,7 @@ let number = JSON.parse(JSON.stringify(n))
   .slot_btn_img_style {
     width: 100upx;
     height: 100upx;
-	margin-right: 40upx;
-
+    margin-right: 40upx;
   }
 }
 

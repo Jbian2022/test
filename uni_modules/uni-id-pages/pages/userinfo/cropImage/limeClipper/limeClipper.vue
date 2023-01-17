@@ -506,7 +506,8 @@ export default {
 			if (!this.image) {
 				uni.showToast({
 					title: '请选择图片',
-					icon: 'none'
+					icon: 'none',
+					duration: 3000
 				});
 				return;
 			}
@@ -536,7 +537,8 @@ export default {
 			if (!this.image) {
 				uni.showToast({
 					title: '请选择图片',
-					icon: 'none'
+					icon: 'none',
+					duration: 3000
 				});
 				return;
 			}
@@ -721,7 +723,8 @@ export default {
 			if (!this.image) {
 				uni.showToast({
 					title: '请选择图片',
-					icon: 'none'
+					icon: 'none',
+					duration: 3000
 				});
 				return;
 			}
@@ -739,13 +742,14 @@ export default {
 			if (!this.image) {
 				uni.showToast({
 					title: '请选择图片',
-					icon: 'none'
+					icon: 'none',
+					duration: 3000
 				});
 				return;
 			}
-			// uni.showLoading({
-			// 	title: '加载中'
-			// });
+			uni.showLoading({
+				title: '加载中'
+			});
 			const { canvasHeight, canvasWidth, clipHeight, clipWidth, ctx, scale, imageLeft, imageTop, clipX, clipY, angle, scaleRatio: dpr, image, quality, fileType, type: imageType, canvasId } = this;
 			const draw = () => {
 				const imageWidth = this.imageWidth * scale * dpr;

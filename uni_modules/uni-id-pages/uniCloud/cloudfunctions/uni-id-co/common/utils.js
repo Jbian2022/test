@@ -174,8 +174,24 @@ function getNonceStr (length = 16) {
 try {
   require('lodash.merge')
 } catch (error) {
-  console.error('uni-id-co缺少依赖，请在uniCloud/cloudfunctions/common/uni-id-co目录执行 npm install 安装依赖')
+  console.error('uni-id-co缺少依赖，请在uniCloud/cloudfunctions/uni-id-co目录执行 npm install 安装依赖')
   throw error
+}
+
+function isMatchUserApp (userAppList, matchAppList) {
+  if (userAppList === undefined || userAppList === null) {
+    return true
+  }
+  if (getType(userAppList) !== 'array') {
+    return false    
+  }
+  if (userAppList.includes('*')) {
+    return true
+  }
+  if (getType(matchAppList) === 'string') {
+    matchAppList = [matchAppList]
+  }
+  return userAppList.some(item => matchAppList.includes(item))
 }
 
 module.exports = {
@@ -193,5 +209,6 @@ module.exports = {
   getExtension,
   getVerifyCode,
   coverMobile,
-  getNonceStr
+  getNonceStr,
+  isMatchUserApp
 }
