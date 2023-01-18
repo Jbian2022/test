@@ -14,6 +14,8 @@
           @scrolltoupper="upper"
           @scrolltolower="lower"
           @scroll="scroll"
+          :upper-threshold="50"
+          scroll-anchoring="true"
         >
           <view class="header_style">
             <view class="header_left_style">
@@ -34,7 +36,7 @@
             </view>
             <view
               class="header_right_style"
-              :class="{ search_anmition_style: isFixedTop }"
+              :class="{ search_anmition_style: buyTopFlag }"
             >
               <image
                 class="right_img_style"
@@ -46,7 +48,7 @@
 
           <view
             class="is_buy_style"
-            :class="{ celling_animation_style: isFixedTop }"
+            :class="{ celling_animation_style: buyTopFlag }"
           >
             <view
               class="buy_left"
@@ -61,7 +63,7 @@
               >未购课</view
             >
           </view>
-          <!-- <view class="zhan_wei_style" v-if="isFixedTop"></view> -->
+          <!-- <view class="zhan_wei_style" v-if="searchTopFlag"></view> -->
           <MemberList
             ref="memberList"
             :isActive="isActive"
@@ -124,7 +126,8 @@ export default {
       loginNum: 0,
       showPopover: false,
       scrollTop: 0,
-      isFixedTop: false,
+      searchTopFlag: false,
+      buyTopFlag: false,
       delteIndex: 0,
       avatar: null,
       addUpperLimit: null, // 添加限制
@@ -230,20 +233,26 @@ export default {
       })
     },
     upper: function (e) {
-      console.log(e)
+      console.log(e, 'mmm')
     },
     lower: function (e) {
       console.log(e)
     },
     scroll(event) {
+      console.log(event.detail.scrollTop, '我是距离')
       this.scrollTop = event.detail.scrollTop
-      if (event.detail.scrollTop > uni.getWindowInfo().statusBarHeight) {
-        this.isFixedTop = true
+      if (event.detail.scrollTop > 50) {
+        this.searchTopFlag = true
       } else {
-        this.isFixedTop = false
+        this.searchTopFlag = false
+      }
+      if (event.detail.scrollTop > 95) {
+        this.buyTopFlag = true
+      } else {
+        this.buyTopFlag = false
       }
       return
-      // this.isFixedTop = event.detail.scrollTop > 50 ? true : false
+      // this.searchTopFlag = event.detail.scrollTop > 50 ? true : false
       // console.log( this.scrollTop)
     },
 
@@ -353,6 +362,10 @@ export default {
       }
     }
     .header_right_style {
+      height: 80upx;
+      display: flex;
+      align-items: center;
+
       .right_img_style {
         width: 48.59upx;
         height: 48.59upx;
@@ -516,7 +529,7 @@ uni-page-body {
   // padding-top: 66upx;
   // padding-bottom: 36upx;
   // animation-name: cellingAnmation;
-  z-index: 30000;
+  z-index: 3000;
   animation-duration: 0.3s;
   margin-left: 0 !important;
   padding-top: 20upx;
@@ -530,22 +543,20 @@ uni-page-body {
   }
 }
 .search_anmition_style {
-  .right_img_style {
-    position: sticky !important;
-    right: 30upx;
-    top: 0px !important;
-    z-index: 80000;
-    width: 48.59upx;
-    height: 48.59upx;
-  }
+  animation-name: seachAnmation;
+  position: fixed !important;
+  right: 30upx;
+  z-index: 3003;
+  animation-duration: 0.5s;
+  top: 20upx;
 }
 @keyframes seachAnmation {
   0% {
-    top: 0upx;
+    top: -80upx;
   }
 
   100% {
-    top: 86upx;
+    top: 20upx;
   }
 }
 @keyframes cellingAnmation {
