@@ -168,7 +168,9 @@ export default {
       meberList: [],
       deleteRemarkFlag: true,
       delteIndex: 0,
-      newActive: 0
+      newActive: 0,
+	  isFirstActiveFlag: false,
+	  
     }
   },
   props: {
@@ -181,11 +183,11 @@ export default {
   },
 
   created() {
-    switch (this.type) {
-      case 'home':
-        this.getMemberList(this.isActive)
-        break
-    }
+    // switch (this.type) {
+    //   case 'home':
+    //     this.getMemberList(this.isActive)
+    //     break
+    // }
   },
   onShow() {},
 
@@ -208,19 +210,25 @@ export default {
     },
     isActive: {
       handler: function (n, o) {
-        let number = JSON.parse(JSON.stringify(n))
-        this.newActive = number
-        this.type === 'home' ? this.getMemberList(number) : ''
+		console.log(n, o,(n== o))
+			if (this.type === 'home' && typeof(n) === 'number') {
+						  this.newActive = n
+				this.getMemberList(n)
+			}
+
+
       },
-      deep: true,
       immediate: true
     },
-    newActive: {
-      handler: function (n, o) {
-        this.type === 'home' ? this.getMemberList(n) : ''
-      },
-      deep: true
-    },
+   //  newActive: {
+   //    handler: function (n, o) {
+   //       if (this.type === 'home' && typeof(n) === 'number') {
+   //       	this.getMemberList(n)
+   //       }
+   //    },
+   //    deep: true,
+	  // immediate: true
+   //  },
     searchValue: {
       handler: function (n, o) {
         if (this.type === 'detail') {
@@ -235,6 +243,12 @@ export default {
         }
       }
     }
+  },
+  updated() {
+	  // if (this.type === 'home' && typeof(this.isActive) === 'number') {
+		  
+	  // 	this.getMemberList(this.isActive)
+	  // }
   },
   methods: {
     close() {
