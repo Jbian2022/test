@@ -5,7 +5,10 @@
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
 		<view class="header">
 			<view class="title">新建训练</view>
-			<van-button class="btn" @click="openDialog('popupFinish')">完成</van-button>
+			<view>
+				<van-button class="btn save" @click="finish('save')">暂存</van-button>
+				<van-button class="btn" @click="openDialog('popupFinish')">完成训练</van-button>
+			</view>
 		</view>
 		<view class="workout-title">
 			<input v-model="workoutName" maxlength="8" class="uni-input" focus placeholder="请输入训练名称" />
@@ -325,7 +328,7 @@
 				<view class="first-level-title">完成训练</view>
 				<view class="second-level-title">是否已经完成训练了</view>
 				<view class="botton-box">
-					<van-button class="finish" block @click="finish">确认完成</van-button>
+					<van-button class="finish" block @click="finish('success')">确认完成</van-button>
 					<van-button block @click="closeDialog('popupFinish')">取消</van-button>
 				</view>
 			</view>
@@ -359,13 +362,15 @@
 				],
 				traineeNo:null,
 				isNoOldInfo:false,
-				mode: 'ADD'
+				mode: 'ADD',
+				allWork: null
 			}
 		},
 		onLoad: function (option) { 
 			if(option.traineeNo){
 				this.traineeNo = option.traineeNo
 				this.traineeName = option.traineeName
+				this.key = option.key || null
 				this.trainDate = option.trainDate || this.getCurTimestamp()
 				this.getOldInfo()
 			}
@@ -377,11 +382,11 @@
 					traineeNo:this.traineeNo,
 					actionList:this.actionList,
 					isNoOldInfo:this.isNoOldInfo,
-					trainDate:this.trainDate
+					trainDate:this.trainDate,
+					traineeName:this.traineeName,
+					key: this.key,
+					allWork: this.allWork
 				}))
-				uni.setStorageSync('actionList', JSON.stringify([]))
-				uni.setStorageSync('traineeNo', this.traineeNo)
-				uni.setStorageSync('traineeName', this.traineeName)
 			}
 		},
 		onShow(){
@@ -395,6 +400,9 @@
 					this.traineeNo = oldTrainInfo.traineeNo
 					this.isNoOldInfo = oldTrainInfo.isNoOldInfo
 					this.trainDate = oldTrainInfo.trainDate
+					this.traineeName = oldTrainInfo.traineeName
+					this.key = oldTrainInfo.key
+					this.allWork = oldTrainInfo.allWork
 				}
 				const actionListStr = uni.getStorageSync('actionList');
 				if (actionListStr) {
@@ -414,8 +422,8 @@
 						}
 					})
 					this.actionList.push(...tempList)
-					// console.log(list);
 				}
+				uni.setStorageSync('actionList', JSON.stringify([]))
 				if(this.actionList&&this.actionList.length>0){
 					this.actionList.forEach((item,i)=>{
 						if(i>0){
@@ -424,10 +432,6 @@
 							item.open = true
 						}
 					})
-				}
-				const traineeName = uni.getStorageSync('traineeName');
-				if(traineeName){
-					this.traineeName = traineeName
 				}
 			} catch (e) {
 				// error
@@ -441,18 +445,24 @@
 			async getOldInfo(){
 				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.trainDate})
 				if(res.data&&res.data.length>0){
-					const {trainContent,traineeTitle}  = res.data[0]
-					this.workoutName = traineeTitle
-					const actionList = JSON.parse(trainContent) || []
-					actionList.forEach((item,i)=>{
-						if(i>0){
-							item.open = false
-						} else {
-							item.open = true
+					const {trainContent}  = res.data[0]
+					const list = JSON.parse(trainContent) || []
+					if(list&&list.length>0){
+						this.allWork = list
+						if(list[this.key]){
+							this.workoutName = list[this.key].traineeTitle
+							const actionList = list[this.key].data || []
+							actionList.forEach((item,i)=>{
+								if(i>0){
+									item.open = false
+								} else {
+									item.open = true
+								}
+							})
+							this.actionList = actionList
+							this.isNoOldInfo = true
 						}
-					})
-					this.actionList = actionList
-					this.isNoOldInfo = true
+					}
 				} else {
 					this.isNoOldInfo = false
 				}
@@ -464,10 +474,11 @@
 					traineeNo:this.traineeNo,
 					actionList:this.actionList,
 					isNoOldInfo:this.isNoOldInfo,
-					trainDate:this.trainDate
+					trainDate:this.trainDate,
+					traineeName:this.traineeName,
+					key: this.key,
+					allWork: this.allWork
 				}))
-				uni.setStorageSync('traineeNo', this.traineeNo)
-				uni.setStorageSync('traineeName', this.traineeName)
 				uni.switchTab({
 					url: '/pages/actionLibrary/index'
 				});
@@ -489,48 +500,75 @@
 					active: false
 				})
 			},
-			async finish(){
+			async finish(traineeStatus){
 				if(!this.workoutName){
 					return uni.showToast({icon:'error', title: '请输入训练名称', duration: 2000});
 				}
 				if(!this.actionList||this.actionList.length===0){
 					return uni.showToast({icon:'error', title: '请添加动作', duration: 2000});
 				}
+				if(this.key){
+					this.allWork[this.key] = {
+						traineeTitle: this.workoutName,
+						traineeStatus: traineeStatus,
+						data:this.actionList
+					}
+				} else {
+					if(this.allWork&&this.allWork.length>0){
+						this.allWork.push({
+							traineeTitle: this.workoutName,
+							traineeStatus: traineeStatus,
+							data: this.actionList
+						})
+					} else {
+						this.allWork = [{
+							traineeTitle: this.workoutName,
+							traineeStatus: traineeStatus,
+							data: this.actionList
+						}]
+					}
+				}
 				const params = {
 					traineeNo:this.traineeNo,
 					trainDate: this.trainDate,
-					traineeTitle: this.workoutName,
-					trainContent: JSON.stringify(this.actionList)
+					trainContent: JSON.stringify(this.allWork)
 				}
-				if(this.isNoOldInfo){
+				if(this.allWork&&this.allWork.length>1||this.key){
 					const res = await train.updateTrainInfo(params)
 				} else {
 					const res = await train.addTrainInfo(params)
 				}
+				if(traineeStatus==='save'){
+					uni.showToast({icon:'none', title: '暂存成功', duration: 2000});
+				}
 				this.mode='DELETE'
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
-				uni.removeStorageSync('traineeNo')
-				uni.removeStorageSync('traineeName')
-				uni.reLaunch({
-					url:
-					'/pages/trainingRecord/trainingRecord' +
-					`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
-				})
+				const timer = setTimeout(()=>{
+					uni.reLaunch({
+						url:
+						'/pages/trainingRecord/trainingRecord' +
+						`?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+					})
+					clearTimeout(timer)
+				},1000)
+				
 			},
 			async deleteHandle(){
 				this.mode='DELETE'
-				const params = {
-					traineeNo: this.traineeNo,
-					trainDate: this.trainDate
-				}
-				if(this.isNoOldInfo){
-					const res = await train.deleteTrainInfo(params)
+				if(this.key){
+					this.allWork.splice(this.key,1)
+					const params = {
+						traineeNo:this.traineeNo,
+						trainDate: this.trainDate,
+						trainContent: JSON.stringify(this.allWork)
+					}
+					if(this.allWork&&this.allWork.length>1||this.key){
+						const res = await train.updateTrainInfo(params)
+					}
 				}
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
-				uni.removeStorageSync('traineeNo')
-				uni.removeStorageSync('traineeName')
 				uni.reLaunch({
 					url:
 					'/pages/trainingRecord/trainingRecord' +
@@ -698,6 +736,7 @@
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		padding: 30upx;
 		font-size: 48upx;
 		color: #FFFFFF;
@@ -715,6 +754,10 @@
 			color: #FFFFFF;
 			line-height: 42upx;
 			border: none;
+		}
+		.save {
+			margin-right: 20upx;
+			background: #4B525E;
 		}
 	}
 	.workout-title{

@@ -3,8 +3,8 @@
 		<view class="background-header"></view>
 		<view class="background"></view>
 		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
-		<van-nav-bar :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
-		<view class="calendar">
+		<van-nav-bar :class="{isFixedTop:isFixedTop}" :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
+		<view class="calendar-box">
 			<calendar v-model:value="value" ref="calendar" todayDisabled @select="selectHandle">
 				<template #operation-left>
 					<view class="calendar-title">训练记录</view>
@@ -15,7 +15,9 @@
 				<template #default="{cell}">
 					<view class="cell-box">
 						<view class="cell-key" :class="{active:cell.isSelected}">{{cell.key}}</view>
-						<view v-if="getTrainTitle(cell.day)" class="cell-label">{{getTrainTitle(cell.day)}}</view>
+						<view v-if="trainListInfo[cell.day]" class="cell-label-box">
+							<view class="cell-label" v-for="(item,key) in trainListInfo[cell.day]" :key="key" @click.stop="traineeTitleHandle(cell.day,key,item)">{{item.traineeTitle}}</view> 
+						</view>
 					</view>
 				</template>
 			</calendar>
@@ -42,7 +44,8 @@
 				trainDate: null,
 				memberName: '',
 				value: new Date(),
-				showTipes: true
+				showTipes: true,
+				isFixedTop: false
 			}
 		},
 		onLoad: function (option) { 
@@ -50,6 +53,14 @@
 				this.traineeNo = option.traineeNo
 				this.memberName =option.memberName
 				this.getTrainList()
+			}
+		},
+		//监测页面滑动
+		onPageScroll(e) {
+			if (e.scrollTop > uni.getWindowInfo().statusBarHeight) {
+				this.isFixedTop = true
+			} else {
+				this.isFixedTop = false
 			}
 		},
 		onShow(){
@@ -65,7 +76,11 @@
 				if(res.data&&res.data.length>0){
 					const trainListInfo = {}
 					res.data.forEach(item => {
-						trainListInfo[item.trainDate] = item.traineeTitle
+						const list = JSON.parse(item.trainContent) || []
+						list.forEach(item1=>{
+							item1.traineeTitle = item1.traineeTitle.substring(0,5)
+						})
+						trainListInfo[item.trainDate] = list
 					});
 					this.trainListInfo = trainListInfo
 				}
@@ -76,23 +91,34 @@
 				});
 			},
 			selectHandle(item){
-				if(item.disabled||item.day===this.getDay(new Date())){
-					this.sharePage(item.day)
+				if(item.disabled){
 					return
+				}
+				if(this.trainListInfo[item.day]&&this.trainListInfo[item.day].length>=3){
+					return uni.showToast({icon:'none', title: '每日最多添加三次训练记录', duration: 2000});
 				}
 				uni.navigateTo({
 					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${item.day}&traineeName=${this.memberName}`
 				})
 			},
+			traineeTitleHandle(date,key,item){
+				if(item.traineeStatus === 'save'){
+					uni.navigateTo({
+						url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${date}&traineeName=${this.memberName}&key=${key}`
+					})
+					return
+				}
+				uni.navigateTo({
+					url: '/pages/trainingRecordDetail/trainingRecordDetail'+`?traineeNo=${this.traineeNo}&trainDate=${date}&traineeName=${this.memberName}&key=${key}`
+				});
+			},
 			addWorkout(){
+				if(this.trainListInfo[this.getDay(new Date())]&&this.trainListInfo[this.getDay(new Date())].length>=3){
+					return uni.showToast({icon:'none', title: '每日最多添加三次训练记录', duration: 2000});
+				}
 				uni.navigateTo({
 					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${this.getDay(new Date())}&traineeName=${this.memberName}`
 				})
-			},
-			sharePage(date){
-				uni.navigateTo({
-					url: '/pages/trainingRecordDetail/trainingRecordDetail'+`?traineeNo=${this.traineeNo}&trainDate=${date}&traineeName=${this.memberName}`
-				});
 			},
 			getYearMonth(val){
 				const formater = (temp) =>{
@@ -120,9 +146,6 @@
 				const month=formater(d.getMonth()+1);
 				const date=formater(d.getDate());
 				return year+'-'+month+'-'+date
-			},
-			getTrainTitle(day){
-				return this.trainListInfo[day] || ''
 			}
 		}
 	}
@@ -147,13 +170,16 @@
 	top: 0;
 	left: 0;
 	right: 0;
+	bottom: 0;
 	z-index: -2;
-	height: 100vh;
+	min-height: 100vh;
 	background: #212328;
 }
 .training-record{
 	position: relative;
 	::v-deep .van-nav-bar{
+		position: sticky;
+		top: var(--status-bar-height);
 		background: transparent;
 		height: 88upx;
 		.van-nav-bar__content{
@@ -172,7 +198,10 @@
 			border: none;
 		}
 	}
-	.calendar{
+	::v-deep .van-nav-bar.isFixedTop{
+		background: rgba(52, 58, 68, 1)
+	}
+	.calendar-box{
 		padding: 0 15upx;
 		margin-top: 50upx;
 		.calendar-title{
@@ -186,7 +215,7 @@
 			color: #BDC3CE;
 		}
 		.cell-box{
-			padding: 0 4upx;
+			padding: 0 4upx 10upx 4upx;
 		}
 		.cell-key{
 			color: #F4F7FF;
@@ -203,6 +232,9 @@
 				font-weight: 600;
 				border-radius: 100%;
 			}
+		}
+		.cell-label-box {
+			height: 150upx;
 		}
 		.cell-label{
 			margin-top: 8upx;
