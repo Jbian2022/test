@@ -286,7 +286,7 @@ export default {
     width: 100%;
     overflow: hidden;
     position: relative;
-    min-height: 1500upx;
+    min-height: 1200upx;
   }
   .left-start{
     animation: leftStart .2s linear 0s 1 both;

@@ -2,7 +2,7 @@
 	<view class="training-record">
 		<view class="background-header"></view>
 		<view class="background"></view>
-		<view class="status_bar"> <!-- 这里是状态栏 --> </view>
+		<view class="status_bar" :class="{isFixedTop:isFixedTop}"> <!-- 这里是状态栏 --> </view>
 		<van-nav-bar :class="{isFixedTop:isFixedTop}" :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
 		<view class="calendar-box">
 			<calendar v-model:value="value" ref="calendar" todayDisabled @select="selectHandle">
@@ -155,7 +155,13 @@
 .status_bar {
 	height: var(--status-bar-height);
 	width: 100%;
+	position: fixed;
+	z-index: 1;
 }
+.isFixedTop{
+	background: rgba(52, 58, 68, 1)
+}
+
 .background-header{
 	position: absolute;
 	top: 0;
@@ -219,8 +225,8 @@
 		}
 		.cell-key{
 			color: #F4F7FF;
-			width: 52upx;
-			height: 52upx;
+			width: 62upx;
+			height: 62upx;
 			text-align: center;
 			line-height: 52upx;
 			margin: 0 auto;
@@ -234,7 +240,7 @@
 			}
 		}
 		.cell-label-box {
-			height: 150upx;
+			height: 100upx;
 		}
 		.cell-label{
 			margin-top: 8upx;
@@ -244,7 +250,7 @@
 			border-radius: 8upx;
 			font-size: 18upx;
 			color: #F4F7FF;
-			padding: 6upx;
+			padding: 4upx;
 		}
 		.prev,.next{
 			.cell-key{

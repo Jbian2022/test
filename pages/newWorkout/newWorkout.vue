@@ -11,7 +11,7 @@
 			</view>
 		</view>
 		<view class="workout-title">
-			<input v-model="workoutName" maxlength="8" class="uni-input" focus placeholder="请输入训练名称" />
+			<input v-model="workoutName" maxlength="8" class="uni-input" placeholder="请输入训练名称" />
 		</view>
 		<view class="action-list">
 			<view v-for="(i,ix) in actionList" :key="ix" class="action-type-box">
