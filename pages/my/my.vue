@@ -929,35 +929,5 @@ export default {
       }
     }
   }
-  ::v-deep .van-popup{
-		background: #383D46;
-		border-radius: 24upx 24upx 0 0;
-	}
-	.payment-action-sheet{
-		.title{
-			padding:40upx;
-			padding-bottom: 80upx;
-			font-size: 36upx;
-			font-weight: 600;
-			color: #F4F7FF;
-		}
-		.actions{
-			display: flex;
-			justify-content: space-between;
-			padding: 0 148upx 148upx;
-			.action{
-				.img{
-					width: 100upx;
-					height: 100upx;
-				}
-				.text{
-					text-align: center;
-					margin-top: 20upx;
-					font-size: 28upx;
-					color: #F4F7FF;
-				}
-			}
-		}
-	}
 }
 </style>
