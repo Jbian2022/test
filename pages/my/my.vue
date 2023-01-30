@@ -147,7 +147,7 @@
 				<view class="yuan">已省￥{{hotInfo.text1}}</view>
 				<view class="des">{{hotInfo.text2}}</view>
 			</view>
-			<van-button block @click="show=true">确认开通并支付￥{{payMoney}}元</van-button>
+			<van-button block>确认开通并支付￥{{payMoney}}元</van-button>
 		</view>
     <uni-popup
       ref="popup"
@@ -237,7 +237,8 @@ export default {
         text1 : '103',
         text2: '468元/年'
       },
-      payMoney: '365'
+      payMoney: '365',
+      show: false
     }
   },
   onShow() {
@@ -928,5 +929,35 @@ export default {
       }
     }
   }
+  ::v-deep .van-popup{
+		background: #383D46;
+		border-radius: 24upx 24upx 0 0;
+	}
+	.payment-action-sheet{
+		.title{
+			padding:40upx;
+			padding-bottom: 80upx;
+			font-size: 36upx;
+			font-weight: 600;
+			color: #F4F7FF;
+		}
+		.actions{
+			display: flex;
+			justify-content: space-between;
+			padding: 0 148upx 148upx;
+			.action{
+				.img{
+					width: 100upx;
+					height: 100upx;
+				}
+				.text{
+					text-align: center;
+					margin-top: 20upx;
+					font-size: 28upx;
+					color: #F4F7FF;
+				}
+			}
+		}
+	}
 }
 </style>
