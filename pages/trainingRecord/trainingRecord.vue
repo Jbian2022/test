@@ -5,7 +5,7 @@
 		<view class="status_bar" :class="{isFixedTop:isFixedTop}"> <!-- 这里是状态栏 --> </view>
 		<van-nav-bar :class="{isFixedTop:isFixedTop}" :title="memberName" left-text="返回主页" left-arrow @click-left="onClickLeft"/>
 		<view class="calendar-box">
-			<calendar v-model:value="value" ref="calendar" todayDisabled @select="selectHandle">
+			<calendar v-model:value="value" ref="calendar" todayDisabled @select="dataAndLabelHandle">
 				<template #operation-left>
 					<view class="calendar-title">训练记录</view>
 				</template>
@@ -16,7 +16,7 @@
 					<view class="cell-box">
 						<view class="cell-key" :class="{active:cell.isSelected}">{{cell.key}}</view>
 						<view v-if="trainListInfo[cell.day]" class="cell-label-box">
-							<view class="cell-label" v-for="(item,key) in trainListInfo[cell.day]" :key="key" @click.stop="traineeTitleHandle(cell.day,key,item)">{{item.traineeTitle}}</view> 
+							<view class="cell-label" v-for="(item,key) in trainListInfo[cell.day]" :key="key" @click.stop="dataAndLabelHandle(cell)">{{item.traineeTitle}}</view> 
 						</view>
 					</view>
 				</template>
@@ -28,6 +28,23 @@
 			</view>
 			<view class="add-button" @click="addWorkout"></view>
 		</view>
+		<uni-popup
+			ref="popup"
+			type="bottom"
+			mask-background-color="rgba(20, 21, 23, 0.6)"
+		>
+			<view class="action-box">
+				<view class="top">
+					<view class="action-date">{{actionBoxDate}}</view>
+					<view class="box-close" @click="onCloseHandle">×</view>
+				</view>
+				<view class="content">
+					<view class="action-item" v-for="(item,key) in actionList" :key="key" @click="traineeTitleHandle(currentDay,key,item)"><view>{{item.traineeTitle}}</view><van-icon name="arrow" /></view>
+				</view>
+				<view class="label" v-if="!isButton">每日最多添加三次训练记录</view>
+				<view class="action-button" v-else @click="selectHandle(currentDay)">新建训练</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -45,7 +62,11 @@
 				memberName: '',
 				value: new Date(),
 				showTipes: true,
-				isFixedTop: false
+				isFixedTop: false,
+				actionList: [],
+				actionBoxDate: '',
+				isButton: false,
+				currentDay: null
 			}
 		},
 		onLoad: function (option) { 
@@ -90,18 +111,32 @@
 					url: '/pages/myMebers/myMebers'
 				});
 			},
-			selectHandle(item){
-				if(item.disabled){
+			onCloseHandle(){
+				this.$refs.popup.close()
+			},
+			dataAndLabelHandle(item){
+				console.log(item,'item')
+				if(!this.trainListInfo[item.day]&&item.disabled||item.type!=='current'){
 					return
 				}
-				if(this.trainListInfo[item.day]&&this.trainListInfo[item.day].length>=3){
-					return uni.showToast({icon:'none', title: '每日最多添加三次训练记录', duration: 2000});
-				}
+				this.actionList = this.trainListInfo[item.day] || []
+				this.currentDay = item.day
+				let str = item.day.replace('-','年')
+				str = str.replace('-','月')
+				str = str.replace('-','日')
+				this.actionBoxDate = str
+				this.isButton = this.trainListInfo[item.day]&&this.trainListInfo[item.day].length<3
+				console.log('打开弹框',this.trainListInfo[item.day]);
+				this.$refs.popup.open()
+			},
+			selectHandle(day){
+				this.$refs.popup.close()
 				uni.navigateTo({
-					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${item.day}&traineeName=${this.memberName}`
+					url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${day}&traineeName=${this.memberName}`
 				})
 			},
 			traineeTitleHandle(date,key,item){
+				this.$refs.popup.close()
 				if(item.traineeStatus === 'save'){
 					uni.navigateTo({
 						url: '/pages/newWorkout/newWorkout'+`?traineeNo=${this.traineeNo}&trainDate=${date}&traineeName=${this.memberName}&key=${key}`
@@ -297,6 +332,73 @@
 			height: 120upx;
 			width: 120upx;
 			margin: 0 auto;
+		}
+	}
+	::v-deep .uni-popup [name='mask'] {
+		backdrop-filter: blur(3px);
+	}
+	.action-box{
+		position: relative;
+		height: 848upx;
+		background: #383D46;
+		border-radius: 24upx 24upx 0upx 0upx;
+		padding: 40upx 40upx 0 40upx;
+		.top{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 40upx;
+		}
+		.action-date{
+			font-size: 36upx;
+			font-weight: 600;
+			color: #F4F7FF;
+		}
+		.box-close {
+			font-size: 36upx;
+			font-weight: 500;
+			text-align: center;
+			color: #FFFFFF;
+			width: 50upx;
+			height: 50upx;
+			line-height: 50upx;
+			border-radius: 100%;
+			background: #4B525E;
+		}
+		.action-item{
+			padding: 48upx 40upx;
+			background: #4B525E;
+			border-radius: 24upx;
+			font-size: 36upx;
+			font-weight: 600;
+			color: #F4F7FF;
+			display: flex;
+			justify-content: space-between;
+		}
+		.action-item + .action-item{
+			margin-top: 30upx;
+		}
+		.label{
+			margin-top: 42upx;
+			text-align: center;
+			font-size: 28upx;
+			font-weight: 400;
+			color: #FFFFFF;
+			line-height: 40upx;
+		}
+		.action-button{
+			position: absolute;
+			bottom: 42upx;
+			left: 40upx;
+			right: 40upx;
+			height: 100upx;
+			line-height: 100upx;
+			background: #1370FF;
+			border-radius: 16upx;
+			text-align: center;
+			font-weight: 600;
+			color: #FFFFFF;
+			font-size: 32upx;
 		}
 	}
 }
