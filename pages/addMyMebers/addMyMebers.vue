@@ -49,7 +49,7 @@
             >
             <image
               class="back_img_style"
-              src="../../static/app-plus/mebrs/back.png"
+              src="../../static/app-plus/mebrs/back.svg"
             ></image>
           </view>
         </uni-forms-item>
@@ -78,7 +78,7 @@
             >
             <image
               class="back_img_style"
-              src="../../static/app-plus/mebrs/back.png"
+              src="../../static/app-plus/mebrs/back.svg"
             ></image>
           </view>
 

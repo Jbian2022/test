@@ -19,7 +19,7 @@
 		<view class="contentBody" v-if="changeValue">
 			<view
 			class="clickAction" 
-			@click.native="showPopup">标准动作描述
+			@click.native="showPopup">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<van-popup 
@@ -93,7 +93,7 @@
 			</view>
 			<image class="imagebg" :src="backimgFront"/>
 			<view class="imgbgText">
-				点击标签选择问题部位
+				点击上方蓝色标签选择问题部位，可多选
 			</view>
 		</view>
 		<view class="contentBody" v-else>

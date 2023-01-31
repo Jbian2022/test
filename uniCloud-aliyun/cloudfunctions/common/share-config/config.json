@@ -1,0 +1,10 @@
+{
+  "name": "share-config",
+  "version": "0.0.3",
+  "description": "管理模块",
+  "main": "index.js",
+  "keywords": [],
+  "author": "lijidong",
+  "license": "Apache-2.0"
+  
+}
