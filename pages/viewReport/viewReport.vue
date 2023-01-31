@@ -44,7 +44,7 @@
       </view>
     </uni-popup>
   </view> -->
-  <view v-if="!openKey" style="position: absolute; z-index: 1; top: 1580upx">
+  <view v-if="!openKey" style="position: absolute; z-index: 1; bottom: 10upx;">
     <view class="buttontrue" @click="openUIup"
       >历史评测记录
       <image src="../../static/app-plus/mebrs/openarrit.png"></image>
@@ -1447,6 +1447,7 @@ export default {
 	sethistorydata(item){
 		this.HQDate = item.HQDate;
 		this.bodyTestData = item.bodyTestData;
+		this.bodyFraction = Number(item.bodyTestData.bodyFraction)
 		this.queryData = item.queryData;
 		this.assessmentTrueData = item.assessmentTrueData;
 		this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
