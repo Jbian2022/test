@@ -512,7 +512,7 @@ export default {
           width: 130upx;
           height: 50upx;
 					margin-left: 15upx;
-					font-size: 2upx;
+					font-size: 24upx;
 					background: #FFF0C0;
 					border-radius: 20upx;
 					padding: 4upx 10upx;
