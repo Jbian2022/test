@@ -1,5 +1,5 @@
 <template>
-  <view class="content_style">
+  <view class="content_style" @touchstart="start" @touchend="end">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <!-- <NavBarCompontent :leftNavTitle="'体能评估'"></NavBarCompontent> -->
 	<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickBack">
@@ -71,7 +71,10 @@ export default {
 	  typeColor:"#4B525E",
 	  backColor:"",
 	  queryData:{},
-      queryUserActionData:{}
+      queryUserActionData:{},
+	  startData:[
+	  	{clientX:'',clientY:''}
+	  ]
     }
   },
   onLoad:function(item){
@@ -81,9 +84,37 @@ export default {
 		this.getconfingActionName();
   },
   methods: {
+	  start(e) {
+	    console.log('开始下滑坐标', e.changedTouches[0].clientY)
+	    this.startData.clientX = e.changedTouches[0].clientX
+	    this.startData.clientY = e.changedTouches[0].clientY
+	  },
+	  end(e) {
+	    console.log('结束下滑坐标', e.changedTouches[0].clientY)
+	    const subX = e.changedTouches[0].clientX - this.startData.clientX
+	    const subY = e.changedTouches[0].clientY - this.startData.clientY
+	    if (subY < -50) {
+	      console.log('下滑')
+	      // 翻页
+	    } else if (subY > 50) {
+	      console.log('上滑')
+	    } else if (subX > 50) {
+	      console.log('左滑')
+	      uni.reLaunch({
+	        url: '/pages/physicalAssessment/physicalAssessment?'+'traineeNo=' + this.traineeNo
+	      })
+	    } else if (subX < -50) {
+	      console.log('右滑')
+	  			  uni.reLaunch({
+	  			    url: '/pages/physicalAssessment/physicalAssessment?'+'traineeNo=' + this.traineeNo
+	  			  })
+	    } else {
+	      console.log('无效')
+	    }
+	  },
     jumpModular(item) {
       console.log(item.path, '>>>>')
-      uni.navigateTo({
+      uni.redirectTo({
         url: item.path + '?' + 'data=' + JSON.stringify(item) + '&traineeNo=' + this.traineeNo + '&questionCode=' + item.parentCode ,
         success: (res) => {},
         fail: () => {},

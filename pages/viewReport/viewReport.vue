@@ -52,7 +52,7 @@
     <uni-popup
       ref="popup"
       type="bottom"
-      mask-background-color="rgba(20, 21, 23, 0.6)"
+      mask-background-color="rgba(20, 21, 23, 0.8)"
     >
       <view class="histroys">
         <view class="Titlehistroy">历史评测报告</view>
@@ -61,9 +61,9 @@
           v-for="(item, index) in historyData"
           :key="index"
 		  @click="sethistorydata(item)"
-        >
-          <view class="text" style="float: left">{{ item.name }}</view>
-          <view class="text" style="float: right">{{ item.date }}</view>
+				  >
+          <view class="text" style="float: left;font-size: 36upx;font-weight: 600;color: #F4F7FF;">{{ item.name }}</view>
+          <view class="text" style="float: right;color: #BDC3CE;font-size: 30upx;font-weight: 400;">日期：{{ item.saveDate }}</view>
         </view>
       </view>
     </uni-popup>
@@ -200,10 +200,8 @@
               <view style="padding-bottom: 40upx" v-if="showHQ">
                 <view class="basicInformationContent healthBlocks">
                   <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlock blockdiv"
-                      v-for="(item, index) in items[0].answer"
-                    >
+                    <view class="healthBlock blockdiv"
+                      v-for="(item, index) in items[0].answer">
                       {{ item }}
                     </view>
                   </view>
@@ -690,31 +688,48 @@
                   class="bodyAssessment"
                   v-for="(item, index) in physicalFitnessAssessmentData"
                 >
-                  <view
-                    style="
-                      width: 5px;
-                      height: 5px;
-                      background: #ffc13c;
-                      border-radius: 100%;
-                      display: inline-flex;
-                      margin-right: 20upx;
-                    "
-                  ></view
-                  ><span
-                    style="
-                      font-size: 30upx;
-                      font-weight: 400;
-                      color: #f4f7ff;
-                      line-height: 42upx;
-                    "
-                    >{{ item.answerTitle }}</span
-                  >
-                  <view class="assessmentContent">
-                    <p style="color: #7a7f89; font-size: 26upx">
-                      {{ item.answeerContent }}
-                    </p>
-                  </view>
-                </view>
+				<view
+				  style="
+				    margin-bottom: 20upx;
+				    color: #f4f7ff;
+				    font-size: 30upx;
+				    font-weight: 500;
+				  "
+				>
+				  <view class="greenBlock"></view>
+				  {{getDyName(item.code)}}
+				</view>
+				<view v-for="(items,indexs) in item.actionTestResult">
+					<view v-for="(itemss,indexss) in items.answer" 
+					 >
+					 <view v-if="!itemss.status">
+						 <view
+						     style="
+						       width: 5px;
+						       height: 5px;
+						       background: #ffc13c;
+						       border-radius: 100%;
+						       display: inline-flex;
+						       margin-right: 20upx;
+						     "></view>
+						   <span
+						     style="
+						       font-size: 30upx;
+						       font-weight: 400;
+						       color: #f4f7ff;
+						       line-height: 42upx;
+						     "
+						     >{{ items.questionContent }}:{{itemss.answerTitle}}
+						 	</span>
+						   <view class="assessmentContent">
+						     <p style="color: #7a7f89; font-size: 26upx">
+						       {{ itemss.answeerContent }}
+						     </p>	
+						   </view>
+					 </view>
+					</view>
+					</view>
+				</view>
               </view>
               <!-- <view class="bodyAssessment">
 						<view style="width: 5px;
@@ -915,7 +930,8 @@ export default {
       isFixedTop: false,
 	  nowDate:'',
 	  nowYear:'',
-	  buyStatus:0
+	  buyStatus:0,
+	  statusDy:false
     }
   },
   //监测页面滑动
@@ -943,18 +959,10 @@ export default {
       this.traineeNo = options.traineeNo
       this.key = options.key
 	  this.buyStatus = Number(options.buyStatus);
-      this.getUserInfo()
-      this.getconfingActionName()
-      this.getPosture()
-      this.getBodyTestData()
-      this.getDynameEvaluation()
-      this.getHealthQuesson()
+	  this.pageMethods()
       switch (this.key) {
         case '1':
           this.openKey = true
-		  console.log("正在保存此次训练记录")
-		  setTimeout(this.saveReport(), 10000);
-		  console.log("保存成功！")
           break
         case '2':
           this.openKey = false
@@ -966,19 +974,41 @@ export default {
     }
   },
   methods: {
+	  getInfo(){
+		  return new Promise((resolve,reject)=>{
+			  this.getUserInfo()
+			  this.getconfingActionName()
+			  this.getPosture()
+			  this.getBodyTestData()
+			  this.getDynameEvaluation()
+			  this.getHealthQuesson()
+				setTimeout(()=>{
+					console.log('数据加载成功')
+					console.log("正在保存此次训练记录")
+					this.saveReport();
+				},3000)
+			console.log("保存成功！")
+    })
+		  
+	  },
+	  async pageMethods(){
+		await this.getInfo()
+	  },
 	  viewReportScrrop(event) {
 		 this.scrollTop = event.detail.scrollTop
-		 this.isFixedTop = this.scrollTop > 50 ? true : false 
+		 this.isFixedTop = this.scrollTop > 29 ? true : false 
 	  },
-    async getUserInfo() {
+    getUserInfo() {
       const data = {}
       data['traineeId'] = this.traineeNo
       testOb.getOnlyList(data).then((res) => {
-        console.log(res.data)
-        this.personName = res.data[0].traineeName
-        this.gender = res.data[0].gender
-        this.mobileNumber = res.data[0].mobile
-        this.age = this.getAge(res.data[0].birthday)
+		  if(res.success){
+			  this.personName = res.data[0].traineeName
+			  this.gender = res.data[0].gender
+			  this.mobileNumber = res.data[0].mobile
+			  this.age = this.getAge(res.data[0].birthday)
+			  console.log("学员信息获取完毕，内容为："+res.data)
+		  }
       })
     },
     getAge(birthday) {
@@ -1089,7 +1119,7 @@ export default {
       testOb
         .opearConfigQuery(data)
         .then((res) => {
-          if (res.success) {
+          if (res.success&&res.data.length!=0) {
             this.assessmentNewData = res.data[0].postData
             let trueData = {}
             if (!this.assessmentNewData[0].textShow1) {
@@ -1193,48 +1223,74 @@ export default {
       data['questionCode'] = 'A0004'
       const resData = []
       testOb.opearConfigQuery(data).then((res) => {
-        // console.log(res)
-        res.data.forEach((r) => {
-          // console.log(r)
-          let rq = r.actionTestResult
-          // console.log(rq)
-          rq.forEach((rqs) => {
-            // console.log(rqs)
-            resData.push(rqs.answer)
-          })
-          //
-        })
-        resData.forEach((d) => {
-          d.forEach((a) => {
-            if (a.status == 0) {
-              this.physicalFitnessAssessmentData.push(a)
-            }
-          })
-        })
+        console.log(res.data)
+		// this.physicalFitnessAssessmentData = res.data
+		// console.log(this.physicalFitnessAssessmentData)
+		for(let r of res.data){
+			for(let rq of r.actionTestResult){
+				for(let d of rq.answer){
+					if (d.status == 0) {
+					  this.physicalFitnessAssessmentData.push(r)
+						break;
+					}
+				}
+			}
+		}
         console.log(this.physicalFitnessAssessmentData)
       })
     },
+	setDyNameStatus(item){
+		if(item==0){
+			this.statusDy = true
+		}else{
+			this.statusDy = false
+		}
+	},
+	getDyName(item){
+		switch (item){
+			case 'E0001':
+				return '自重深蹲评估'
+				break;
+			case 'E0002':
+				return '胸椎活动度评估'
+				break;
+			case 'E0003':
+				return '柔韧性测试'
+				break;
+			case 'E0004':
+				return '肩关节灵活性'
+				break;
+			case 'E0005':
+				return '俯卧撑稳定性测试'
+			default:
+				break;
+		}
+	},
     openUIup() {
       this.$refs.popup.open()
     },
-    async saveReport() {
+    saveReport() {
+		console.log(this.openKey)
+		if(this.openKey){
+			const data = {}
+			let date = new Date()
+			let today =
+			  date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
+			data['traineeNo'] = this.traineeNo
+			data['bodyTestData'] = this.bodyTestData
+			data['assessmentTrueData'] = this.assessmentTrueData
+			data['queryData'] = this.queryData
+			data['HQDate'] = this.HQDate
+			data['physicalFitnessAssessmentData'] = this.physicalFitnessAssessmentData
+			data['saveDate'] = today
+			data['name'] = this.personName
+			console.log(data)
+			testOb.saveReport(data).then((res) => {
+			  console.log(res)
+			})
+			this.showShare = true
+		}
       // this.$refs.popup.open()
-      const data = {}
-      let date = new Date()
-      let today =
-        date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
-      data['traineeNo'] = this.traineeNo
-      data['bodyTestData'] = this.getBodyTestData()
-      data['assessmentTrueData'] = this.assessmentTrueData
-      data['queryData'] = this.getconfingActionName()
-      data['HQDate'] = this.getHealthQuesson()
-      data['physicalFitnessAssessmentData'] = this.physicalFitnessAssessmentData
-      data['saveDate'] = today
-      console.log(data)
-      testOb.saveReport(data).then((res) => {
-        console.log(res)
-      })
-      this.showShare = true
     },
     async uploadImage(callback) {
       const result = await train.uploadBase64({
@@ -1344,12 +1400,13 @@ export default {
       data['questionCode'] = 'A0001'
       const resData = []
       testOb.opearConfigQuery(data).then((res) => {
-        console.log(res.data[0].testResult)
-        resData.push(res.data[0].testResult)
-        this.HQDate = resData
-        if (this.HQDate.length == 0) {
-          this.showHQ = false
-        }
+		  if(res.success&&res.data.length!=0){
+			  console.log(res.data[0].testResult)
+			  resData.push(res.data[0].testResult)
+			  this.HQDate = resData
+		  }else{
+			  this.showHQ = false
+		  }
         // res.data.forEach((r)=>{
         // 	console.log(r)
         // 	let rq = r.actionTestResult
@@ -1380,21 +1437,11 @@ export default {
         if (!this.openKey) {
           testOb.opearReportQuery(data).then((res) => {
             console.log(res)
-            res.data.forEach((item) => {
-              data['name'] = this.personName
-              data['date'] = item.saveDate
-              data['bodyTestData'] = item.bodyTestData
-              data['assessmentTrueData'] = item.assessmentTrueData
-              data['queryData'] = item.queryData
-              data['HQDate'] = item.HQDate
-              data['physicalFitnessAssessmentData'] =
-                item.physicalFitnessAssessmentData
-              this.historyData.push(data)
-            })
+			this.historyData = res.data
+			console.log(this.historyData)
           })
         }
       }
-      console.log(this.historyData)
       this.showShare = true
     },
 	sethistorydata(item){
@@ -1404,6 +1451,7 @@ export default {
 		this.assessmentTrueData = item.assessmentTrueData;
 		this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
 		console.log(item)
+		this.$refs.popup.close()
 	},
 	gototest(){
 		uni.redirectTo({
@@ -1523,17 +1571,17 @@ export default {
     z-index: -1;
   }
   .arrow-left {
-    top: var(--status-bar-height);
+    top: 80upx;
     left: 0;
     right: 0;
     z-index: 88;
-    height: 148upx;
+    height: 80upx;
     display: flex;
     align-items: center;
     padding-left: 30upx;
     justify-content: space-between;
     color: #bdc3ce;
-    position: absolute;
+    position: fixed;
 	 z-index: 100000;
     .van-icon {
       font-size: 40upx;
@@ -1542,8 +1590,9 @@ export default {
     &.show {
 		position: fixed;
 		top: 0;
+		height: 120upx;
 		background: #212328;
-		padding-top: 20upx;
+		padding-top: 40upx;
 		animation-name: topAnmiation;
 		animation-duration: 0.3s;
 		z-index: 30000;
@@ -1564,7 +1613,7 @@ export default {
   background-image: url('../../static/app-plus/bg/bodysideReport.png');
   background-repeat: no-repeat;
   background-size: 100%;
-  padding-top: 200upx;
+  padding-top: 140upx;
 }
 .title {
   width: 120upx;
@@ -1700,8 +1749,8 @@ export default {
   position: relative;
 }
 .dynamicshow {
-  width: calc(100vw - 120upx);
-  overflow-y: auto;
+  width: calc(100vw - 180upx);
+  overflow: hidden;
   background-color: #383D46;
   /* margin-left: 30upx; */
   margin-top: 30upx;
@@ -1727,7 +1776,6 @@ export default {
   border: 0px none;
 }
 .dynamicshow_right {
-  margin-right: 70upx;
   --van-circle-text-font-weight: 600;
   --van-circle-text-font-size: 36upx;
 }
@@ -1982,6 +2030,9 @@ export default {
   width: 28upx;
   height: 28upx;
 }
+::v-deep .uni-popup [name="mask"]{
+			backdrop-filter: blur(3px);
+}
 .share-sheet {
   display: flex;
   align-items: center;
@@ -2088,5 +2139,8 @@ export default {
 }
 ::v-deep .uni-list--border-bottom{
 	background-color: #2f333a !important;
+}
+.mark{
+	opacity: 0.6;
 }
 </style>

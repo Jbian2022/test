@@ -1,5 +1,5 @@
 <template>
-	<view class="content_style">
+	<view class="content_style" @touchstart="start" @touchend="end">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
 		<view class="body_content" id="bodycontent">
@@ -50,7 +50,9 @@
 							  type="number" 
 							  v-model="resultValue" 
 							  placeholder="请填写"
-							  :cursor-spacing='45'/>
+							  :cursor-spacing='45'
+							  @focus="focus"
+							  @blur="blur"/>
 						  </view>
 						  <view class="inputText" v-if="actionData.code=='F0001'">/分</view>
 						  <view class="inputText" v-else>/个</view>
@@ -76,7 +78,7 @@
 			</view>
 		</view>
 		<view>
-		  <view class="postureButton" @click.native="actionResDate()">保存</view>
+		  <view class="postureButton" @click.native="actionResDate()" v-if="isfocus">保存</view>
 		</view>
 	</view>
 </template>
@@ -140,6 +142,7 @@
 				gender:"1",
 				age:29,
 				resValue:80,
+				isfocus:true,
 				resultValue:'',
 				codes:'',
 				typeText:"待测",
@@ -157,10 +160,47 @@
 					userId:'',
 					status:"0"
 				}],
-				backgroundColor:'rgba(56,61,70, 1)'
+				backgroundColor:'rgba(56,61,70, 1)',
+				startData:[
+					{clientX:'',clientY:''}
+				]
 			}
 		},
 		methods: {
+			focus(){
+				this.isfocus = false
+			},
+			blur() {
+				this.isfocus = true
+			},
+			start(e) {
+			  console.log('开始下滑坐标', e.changedTouches[0].clientY)
+			  this.startData.clientX = e.changedTouches[0].clientX
+			  this.startData.clientY = e.changedTouches[0].clientY
+			},
+			end(e) {
+			  console.log('结束下滑坐标', e.changedTouches[0].clientY)
+			  const subX = e.changedTouches[0].clientX - this.startData.clientX
+			  const subY = e.changedTouches[0].clientY - this.startData.clientY
+			  if (subY < -50) {
+			    console.log('下滑')
+			    // 翻页
+			  } else if (subY > 50) {
+			    console.log('上滑')
+			  } else if (subX > 50) {
+			    console.log('左滑')
+			    uni.reLaunch({
+			      url: '/pages/physicalFitnessAssessment/physicalFitnessAssessment?'+'traineeNo=' + this.traineeNo+ '&questionCode=' + this.questionCode
+			    })
+			  } else if (subX < -50) {
+			    console.log('右滑')
+				uni.reLaunch({
+				  url: '/pages/physicalFitnessAssessment/physicalFitnessAssessment?'+'traineeNo=' + this.traineeNo+ '&questionCode=' + this.questionCode
+				})
+			  } else {
+			    console.log('无效')
+			  }
+			},
 			testResult(gender,age,resValue){
 				const type = {};
 				console.log(gender,age,resValue)
@@ -268,6 +308,7 @@
 						break;
 					default:
 						this.typeColor = "rgba(75, 82, 94, 1)";
+						this.backgroundColor='rgba(56,61,70, 1)'
 						break;
 				}
 			},
@@ -319,6 +360,7 @@
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
+	position: relative;
 	padding-top: 40upx;
 }
 .collapseBlock{
