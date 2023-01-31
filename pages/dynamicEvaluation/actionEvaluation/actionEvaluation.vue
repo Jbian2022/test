@@ -1,5 +1,5 @@
 <template>
-	<view class="content_style">
+	<view class="content_style" @touchstart="start" @touchend="end">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
 		<view class="headBox" v-if="leftNavTitle==='肩关节灵活性测试'">
@@ -92,6 +92,9 @@
 				</view> -->
 			</view>
 			<image class="imagebg" :src="backimgFront"/>
+			<view class="imgbgText">
+				点击标签选择问题部位
+			</view>
 		</view>
 		<view class="contentBody" v-else>
 			<view
@@ -193,11 +196,13 @@
 			
 			<image class="imagebg" :src="backimgSide"
 			/>
+			<view class="imgbgText">
+				点击标签选择问题部位
+			</view>
 			<!-- <image
 			  src="../../static/app-plus/bg/actionImg.png"
 			></image> -->
 		</view>
-		
 		<view class="bottom_style" @click.stop="actionResDate">保存</view>
 	</view>
 </template>
@@ -268,7 +273,7 @@
 							this.FrontVideoUrl = this.pushUpTestUrl;
 							break;
 					}
-					this.getActionInfo();
+					this.getData();
 					this.traineeNo = item.traineeNo;
 					this.questionCode = item.questionCode;
 				},
@@ -319,9 +324,40 @@
 				testText1:[],
 				testText2:[],
 				testText3:[],
+				startData:[
+					{clientX:'',clientY:''}
+				]
 			}
 		},
 		methods: {
+			    start(e) {
+			      console.log('开始下滑坐标', e.changedTouches[0].clientY)
+			      this.startData.clientX = e.changedTouches[0].clientX
+			      this.startData.clientY = e.changedTouches[0].clientY
+			    },
+			    end(e) {
+			      console.log('结束下滑坐标', e.changedTouches[0].clientY)
+			      const subX = e.changedTouches[0].clientX - this.startData.clientX
+			      const subY = e.changedTouches[0].clientY - this.startData.clientY
+			      if (subY < -50) {
+			        console.log('下滑')
+			        // 翻页
+			      } else if (subY > 50) {
+			        console.log('上滑')
+			      } else if (subX > 50) {
+			        console.log('左滑')
+			        uni.reLaunch({
+			          url: '/pages/dynamicEvaluation/dynamicEvaluation?'+'traineeNo=' + this.traineeNo+ '&questionCode=' + this.questionCode
+			        })
+			      } else if (subX < -50) {
+			        console.log('右滑')
+					uni.reLaunch({
+					  url: '/pages/dynamicEvaluation/dynamicEvaluation?'+'traineeNo=' + this.traineeNo+ '&questionCode=' + this.questionCode
+					})
+			      } else {
+			        console.log('无效')
+			      }
+			    },
 			setup() {
 			  const onClickLeft = () => history.back()
 			  return {
@@ -341,6 +377,8 @@
 				if(this.type!==''){
 					busOb.getPhysicalChildAssessmentList(this.type).then((res)=>{
 						console.log(res.data);
+						let index = res.data.length
+						console.log(index);
 						if(res.success){
 							this.actionobs = res.data
 							this.quession1 = this.actionobs[0].answer
@@ -354,7 +392,6 @@
 								this.quession3 = this.actionobs[2].answer
 								this.testText3 = this.actionobs[2].answerRemark.detailArray
 							}
-							this.getData()
 						}
 					})
 				}
@@ -400,14 +437,23 @@
 				data["traineeNo"] = this.traineeNo;
 				data["questionCode"] = this.questionCode;
 				data["code"] = this.type;
+				const index = 0
 				tesOb.opearPHConfigQuery(data).then((res)=>{
-					console.log(res.data[0].actionTestResult);
-					this.quession1 = res.data[0].actionTestResult[0].answer
-					if(res.data[0].actionTestResult.length>1){
-						this.quession2 = res.data[0].actionTestResult[1].answer
-					}
-					if(res.data[0].actionTestResult.length>2){
-						this.quession3 = res.data[0].actionTestResult[2].answer
+					if(res.success&&res.data.length!=0){
+						console.log(res.data[0].actionTestResult);
+						this.actionobs = res.data[0].actionTestResult
+						this.quession1 = this.actionobs[0].answer
+						this.testText1 = this.actionobs[0].answerRemark.detailArray
+						if(this.actionobs.length>1){
+							this.quession2 = this.actionobs[1].answer
+							this.testText2 = this.actionobs[1].answerRemark.detailArray
+						}
+						if(this.actionobs.length>2){
+							this.quession3 = this.actionobs[2].answer
+							this.testText3 = this.actionobs[2].answerRemark.detailArray
+						}
+					}else{
+						this.getActionInfo();
 					}
 				})
 			}
@@ -471,6 +517,19 @@
       width: 100%;
       height: 1130upx;
 	  border-radius: 16upx;
+}
+.imgbgText{
+	width: 100%;
+	height: 80upx;
+	background: #000000;
+	opacity: 0.5;
+	margin-top: -85upx;
+	border-bottom-radius: 16upx;
+	color: #BDC3CE;
+	font-weight: 400;
+	font-size: 28upx;
+	text-align: center;
+	line-height: 80upx;
 }
 .buttontrue {
   width: calc(100vw - 60upx);
