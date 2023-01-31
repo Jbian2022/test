@@ -105,7 +105,7 @@ export default {
       }
       if(this.todayDisabled){
         list.forEach(item=>{
-          if(item.type==='current'&& +new Date(item.day) < +new Date(this.formatDate(this.value))){
+          if(item.type==='current'&& +new Date(item.day) < +new Date(moment().format('YYYY-MM-DD'))){
             item.disabled = true
           }
         })
