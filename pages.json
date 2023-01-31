@@ -91,8 +91,7 @@
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none",
-					"popGesture": "none",
-					"disableSwipeBack": true
+					"popGesture": "none"
 				}
 			}
 		},

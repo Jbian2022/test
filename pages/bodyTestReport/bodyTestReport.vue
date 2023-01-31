@@ -24,6 +24,7 @@
               :placeholder="item.answerRemark.remarkTitle"
               style="margin-top: 6px"
 			  :adjust-position="false"
+			  maxlength="4"
             />
           </uni-forms-item>
           <uni-forms-item
@@ -147,7 +148,8 @@ export default {
 				 width: 180,
 				 icon: 'none'
 			   })
-		  item['value'] = 5000
+		  item.value = '5000'
+		  event.detail.value = '5000'
 	  } else {
 		   item['value'] = event.detail.value
 	  }

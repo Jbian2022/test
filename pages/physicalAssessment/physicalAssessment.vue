@@ -89,8 +89,14 @@ export default {
   },
   created() {
     this.requestDynamicEvaluationdata()
-	let page = getCurrentPages()
-	console.log(page, '你是')
+
+  },
+  mounted() {
+  	// #ifdef APP-PLUS
+  	plus.webview.currentWebview().setStyle({
+  	   'popGesture': 'none'
+  	});
+  	// #endif
   },
   onLoad(options) {
     if (JSON.stringify(options) !== '{}' && options.traineeNo) {

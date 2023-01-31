@@ -36,7 +36,7 @@
             </view>
             <view
               class="header_right_style"
-              :class="{ search_anmition_style: buyTopFlag }"
+            
             >
               <image
                 class="right_img_style"
@@ -535,11 +535,12 @@ uni-page-body {
   padding-top: 20upx;
   padding-bottom: 20upx;
   .buy_left {
-    width: 40% !important;
+    // width: 40% !important;
     margin-left: 30upx;
   }
   .buy_right {
-    width: 40% !important;
+    // width: 40% !important;
+	  margin-right: 30upx;
   }
 }
 .search_anmition_style {
