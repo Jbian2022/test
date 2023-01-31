@@ -160,6 +160,7 @@
 
 <script>
 var businessCloudObject = uniCloud.importObject('businessCloudObject')
+const train = uniCloud.importObject('train')
 import { debounce } from '../../common/util.js'
 export default {
   name: 'memberList',
@@ -361,12 +362,34 @@ export default {
           `?traineeNo=${item._id}&memberName=${item.traineeName}`
       })
     },
-    goToNewWorkout(item) {
+    async goToNewWorkout(item) {
+      const res = await train.getTrainList({traineeNo:item._id,trainDate:this.getDay(new Date())})
+      if(res.data&&res.data.length>0){
+        const {trainContent}  = res.data[0]
+        const list = JSON.parse(trainContent) || []
+        if(list&&list.length>=3){
+          return uni.showToast({icon:'none', title: '每日最多添加三次训练记录', duration: 2000});
+        }
+      }
       uni.navigateTo({
         url:
           '/pages/newWorkout/newWorkout' +
           `?traineeNo=${item._id}&traineeName=${item.traineeName}`
       })
+    },
+    getDay(val){
+				const formater = (temp) =>{
+				　　if(temp<10){
+				　　　　return "0"+temp;
+				　　}else{
+				　　　　return temp;
+				　　}
+				}
+      const d=new Date(val);
+      const year = d.getFullYear();
+      const month=formater(d.getMonth()+1);
+      const date=formater(d.getDate());
+      return year+'-'+month+'-'+date
     },
     getReport(item) {
       uni.navigateTo({
