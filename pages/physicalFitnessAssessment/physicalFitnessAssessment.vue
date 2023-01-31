@@ -255,7 +255,7 @@ export default {
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
-  background-color: #2f333a;
+  background-color: #383D46;
   margin-left: 30upx;
   margin-top: 30upx;
   height: 280upx;
