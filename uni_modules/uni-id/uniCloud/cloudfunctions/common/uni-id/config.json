@@ -14,11 +14,11 @@
     "tokenExpiresIn": 2592000,
     "oauth": {
       "weixin": {
-        "appid": "填写来源微信开放平台https://open.weixin.qq.com/创建的应用的appid",
-        "appsecret": "填写来源微信开放平台https://open.weixin.qq.com/创建的应用的appsecret"
+        "appid": "wxf790c35e4d544ded",
+        "appsecret": "39c3067f3d2b2dce787d9d2917bef6c7"
       },
       "apple": {
-        "bundleId": "苹果开发者后台获取的bundleId"
+        "bundleId": "io.dcloud.bodybuildingapp"
       }
     }
   },

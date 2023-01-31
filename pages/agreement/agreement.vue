@@ -3,7 +3,7 @@
     <view class="nav_style" @click.native="goBack">
       <image
         class="back_img_style"
-        src="@/static/app-plus/mebrs/back.png"
+        src="@/static/app-plus/mebrs/back.svg"
       ></image>
       <view class="title m_l"> 用户隐私协议 </view>
     </view>

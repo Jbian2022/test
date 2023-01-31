@@ -9,14 +9,14 @@
       background-color: #343a44;
     "
   > -->
-    <!-- #ifdef APP-PLUS || H5 -->
-    <!-- <view
+  <!-- #ifdef APP-PLUS || H5 -->
+  <!-- <view
       :prop="canvasImageMsg"
       :change:prop="canvasImage.updateEcharts"
       id="canvasImage"
     ></view> -->
-    <!-- #endif -->
-	<!-- <view class="footer-box">
+  <!-- #endif -->
+  <!-- <view class="footer-box">
 		<view class="bottom_style" @click="saveReport">
 		  <image
 		    src="../../static/app-plus/other/share.png"
@@ -26,7 +26,7 @@
 		</view>
 	</view> -->
 
-    <!-- <uni-popup
+  <!-- <uni-popup
       ref="popup"
       type="bottom"
       mask-background-color="rgba(20, 21, 23, 0.6)"
@@ -44,7 +44,7 @@
       </view>
     </uni-popup>
   </view> -->
-  <view v-if="!openKey" style="position: absolute; z-index: 1; bottom: 10upx;">
+  <view v-if="!openKey" style="position: absolute; z-index: 1; bottom: 10upx">
     <view class="buttontrue" @click="openUIup"
       >历史评测记录
       <image src="../../static/app-plus/mebrs/openarrit.png"></image>
@@ -60,26 +60,44 @@
           class="item"
           v-for="(item, index) in historyData"
           :key="index"
-		  @click="sethistorydata(item)"
-				  >
-          <view class="text" style="float: left;font-size: 36upx;font-weight: 600;color: #F4F7FF;">{{ item.name }}</view>
-          <view class="text" style="float: right;color: #BDC3CE;font-size: 30upx;font-weight: 400;">日期：{{ item.saveDate }}</view>
+          @click="sethistorydata(item)"
+        >
+          <view
+            class="text"
+            style="
+              float: left;
+              font-size: 36upx;
+              font-weight: 600;
+              color: #f4f7ff;
+            "
+            >{{ item.name }}</view
+          >
+          <view
+            class="text"
+            style="
+              float: right;
+              color: #bdc3ce;
+              font-size: 30upx;
+              font-weight: 400;
+            "
+            >日期：{{ item.saveDate }}</view
+          >
         </view>
       </view>
     </uni-popup>
   </view>
   <scroll-view @scroll="viewReportScrrop" scroll-y="true">
-	<view class="status_bar"></view>
-<!-- 				<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
- -->    
- <view class="content_style" :class="isFixedTop ? 'zhan_wei_style' : ''">
+    <view class="status_bar"></view>
+    <!-- 				<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
+ -->
+    <view class="content_style" :class="isFixedTop ? 'zhan_wei_style' : ''">
       <view
         class="arrow-left"
         :class="{ show: isFixedTop }"
         @click="onClickLeft"
       >
         <van-icon name="arrow-left" />
-        <view class="title">{{ pageName }}</view>
+        <view class="title">评估报告</view>
         <view class="z" style="opacity: 0">8888</view>
       </view>
       <view v-show="isFixedTop" class="arrow-box"></view>
@@ -87,20 +105,20 @@
         <view class="backImg"></view>
         <view class="titleText" v-if="openKey">
           <van-row class="titleTopText">
-            <van-col span="12">体测报告</van-col>
-            <van-col span="12">{{nowDate}}</van-col>
+            <van-col span="12">评估报告</van-col>
+            <van-col span="12">{{ nowDate }}</van-col>
           </van-row>
           <van-row class="titleBottomText">
             <van-col span="12">数据评测来源于世界权威机构</van-col>
-            <van-col span="12">{{nowYear}}年</van-col>
+            <van-col span="12">{{ nowYear }}年</van-col>
           </van-row>
         </view>
         <view class="titleText" v-if="!openKey">
           <van-row class="titleTopText">
             <van-col span="12"
-              ><view style="float: left;">{{ personName }}</view>
+              ><view style="float: left">{{ personName }}</view>
               <view class="titleTypeok" v-if="buyStatus">已购课</view>
-			  <view class="titleTypeno" v-else>未购课</view>
+              <view class="titleTypeno" v-else>未购课</view>
             </van-col>
             <van-col span="12">
               <!-- <input type="button" value="重新测试" class="titleButton"/> -->
@@ -108,7 +126,7 @@
             </van-col>
           </van-row>
           <van-row class="titleBottomText">
-            <van-col span="12">{{nowYear}}.{{nowDate}}</van-col>
+            <van-col span="12">{{ nowYear }}.{{ nowDate }}</van-col>
             <van-col span="12">数据评测来源于世界权威机构</van-col>
           </van-row>
         </view>
@@ -120,22 +138,34 @@
             class="need_collapse_style"
             title-border="none"
           >
-            <uni-collapse-item  
-			titleBorder="none" 
-			:show-arrow="false" 
-			:open="true" >
-				<template v-slot:title>
-					<uni-list>
-						<uni-list-item :border="false" title="基础信息" clickable  @click="onClickinfo('基础信息')" class="titleclass" >
-							<template v-slot:footer>
-								<view class="rightclickblock arrowimgopen" v-if="!infoclick">
-									点击展开
-								</view>
-								<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
-							</template>
-						</uni-list-item>
-					</uni-list>
-				</template>
+            <uni-collapse-item
+              titleBorder="none"
+              :show-arrow="false"
+              :open="true"
+            >
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    :border="false"
+                    title="基础信息"
+                    clickable
+                    @click="onClickinfo('基础信息')"
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-if="!infoclick"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-else
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
               <view style="height: 280upx">
                 <view class="textContent">
                   <van-row class="text">
@@ -180,28 +210,39 @@
             <uni-collapse-item
               title="健康问答"
               class="informationCard"
-			  :open="false"
-			  :show-arrow="false"
+              :open="false"
+              :show-arrow="false"
             >
-			
-			<template v-slot:title>
-				<uni-list>
-					<uni-list-item title="健康问答" clickable  @click="onClickinfo('健康问答')" class="titleclass">
-						<template v-slot:footer>
-							<view class="rightclickblock arrowimgopen" v-if="!infoclick1">
-								点击展开
-							</view>
-							<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
-						</template>
-					</uni-list-item>
-				</uni-list>
-			</template>
-			
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    title="健康问答"
+                    clickable
+                    @click="onClickinfo('健康问答')"
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-if="!infoclick1"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-else
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
+
               <view style="padding-bottom: 40upx" v-if="showHQ">
                 <view class="basicInformationContent healthBlocks">
                   <view v-for="(items, index) in HQDate">
-                    <view class="healthBlock blockdiv"
-                      v-for="(item, index) in items[0].answer">
+                    <view
+                      class="healthBlock blockdiv"
+                      v-for="(item, index) in items[0].answer"
+                    >
                       {{ item }}
                     </view>
                   </view>
@@ -409,23 +450,32 @@
               title="体测报告"
               title-class="informationTitleText"
               class="informationCard"
-			  :open="false"
-			  :showArrow="false"
+              :open="false"
+              :showArrow="false"
             >
-			
-			<template v-slot:title>
-				<uni-list>
-					<uni-list-item title="体测报告" clickable  @click="onClickinfo('体测报告')" class="titleclass">
-						<template v-slot:footer>
-							<view class="rightclickblock arrowimgopen" v-if="!infoclick2">
-								点击展开
-							</view>
-							<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
-						</template>
-					</uni-list-item>
-				</uni-list>
-			</template>
-			
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    title="体测报告"
+                    clickable
+                    @click="onClickinfo('体测报告')"
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-if="!infoclick2"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-else
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
+
               <view style="padding-bottom: 40upx">
                 <view class="countNumBlock">
                   <van-row>
@@ -534,22 +584,22 @@
                       >
                     </van-row>
                   </view>
-				  <view class="textContent">
-				    <van-row class="text">
-				      <van-col span="17">内脏脂肪等级</van-col>
-				      <van-col span="7" class="textRight"
-				        >{{ bodyTestData.visceralfatgrade }}</van-col
-				      >
-				    </van-row>
-				  </view>
-				  <view class="textContent">
-				    <van-row class="text">
-				      <van-col span="17">身体BMI值</van-col>
-				      <van-col span="7" class="textRight"
-				        >{{ bodyTestData.bmi }}</van-col
-				      >
-				    </van-row>
-				  </view>
+                  <view class="textContent">
+                    <van-row class="text">
+                      <van-col span="17">内脏脂肪等级</van-col>
+                      <van-col span="7" class="textRight">{{
+                        bodyTestData.visceralfatgrade
+                      }}</van-col>
+                    </van-row>
+                  </view>
+                  <view class="textContent">
+                    <van-row class="text">
+                      <van-col span="17">身体BMI值</van-col>
+                      <van-col span="7" class="textRight">{{
+                        bodyTestData.bmi
+                      }}</van-col>
+                    </van-row>
+                  </view>
                 </view>
               </view>
             </uni-collapse-item>
@@ -562,23 +612,32 @@
               title="体态评估"
               title-class="informationTitleText"
               class="informationCard"
-			  :open="false"
-            :showArrow="false"
+              :open="false"
+              :showArrow="false"
             >
-            
-            <template v-slot:title>
-            	<uni-list>
-            		<uni-list-item title="体态评估" clickable  @click="onClickinfo('体态评估')" class="titleclass">
-            			<template v-slot:footer>
-            				<view class="rightclickblock arrowimgopen" v-if="!infoclick3">
-            					点击展开
-            				</view>
-            				<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
-            			</template>
-            		</uni-list-item>
-            	</uni-list>
-            </template>
-			
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    title="体态评估"
+                    clickable
+                    @click="onClickinfo('体态评估')"
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-if="!infoclick3"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-else
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
+
               <view style="padding-bottom: 40upx">
                 <view
                   class="bodyAssessment"
@@ -667,69 +726,78 @@
               title="动态评估"
               title-class="informationTitleText"
               class="informationCard"
-			  :open="false"
-            :showArrow="false"
+              :open="false"
+              :showArrow="false"
             >
-            
-            <template v-slot:title>
-            	<uni-list>
-            		<uni-list-item title="动态评估" clickable  @click="onClickinfo('动态评估')" class="titleclass">
-            			<template v-slot:footer>
-            				<view class="rightclickblock arrowimgopen" v-if="!infoclick4">
-            					点击展开
-            				</view>
-            				<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
-            			</template>
-            		</uni-list-item>
-            	</uni-list>
-            </template>
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    title="动态评估"
+                    clickable
+                    @click="onClickinfo('动态评估')"
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-if="!infoclick4"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-else
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
               <view style="padding-bottom: 40upx">
                 <view
                   class="bodyAssessment"
                   v-for="(item, index) in physicalFitnessAssessmentData"
                 >
-				<view
-				  style="
-				    margin-bottom: 20upx;
-				    color: #f4f7ff;
-				    font-size: 30upx;
-				    font-weight: 500;
-				  "
-				>
-				  <view class="greenBlock"></view>
-				  {{getDyName(item.code)}}
-				</view>
-				<view v-for="(items,indexs) in item.actionTestResult">
-					<view v-for="(itemss,indexss) in items.answer" 
-					 >
-					 <view v-if="!itemss.status">
-						 <view
-						     style="
-						       width: 5px;
-						       height: 5px;
-						       background: #ffc13c;
-						       border-radius: 100%;
-						       display: inline-flex;
-						       margin-right: 20upx;
-						     "></view>
-						   <span
-						     style="
-						       font-size: 30upx;
-						       font-weight: 400;
-						       color: #f4f7ff;
-						       line-height: 42upx;
-						     "
-						     >{{ items.questionContent }}:{{itemss.answerTitle}}
-						 	</span>
-						   <view class="assessmentContent">
-						     <p style="color: #7a7f89; font-size: 26upx">
-						       {{ itemss.answeerContent }}
-						     </p>	
-						   </view>
-					 </view>
-					</view>
-					</view>
-				</view>
+                  <view
+                    style="
+                      margin-bottom: 20upx;
+                      color: #f4f7ff;
+                      font-size: 30upx;
+                      font-weight: 500;
+                    "
+                  >
+                    <view class="greenBlock"></view>
+                    {{ getDyName(item.code) }}
+                  </view>
+                  <view v-for="(items, indexs) in item.actionTestResult">
+                    <view v-for="(itemss, indexss) in items.answer">
+                      <view v-if="!itemss.status">
+                        <view
+                          style="
+                            width: 5px;
+                            height: 5px;
+                            background: #ffc13c;
+                            border-radius: 100%;
+                            display: inline-flex;
+                            margin-right: 20upx;
+                          "
+                        ></view>
+                        <span
+                          style="
+                            font-size: 30upx;
+                            font-weight: 400;
+                            color: #f4f7ff;
+                            line-height: 42upx;
+                          "
+                          >{{ items.questionContent }}:{{ itemss.answerTitle }}
+                        </span>
+                        <view class="assessmentContent">
+                          <p style="color: #7a7f89; font-size: 26upx">
+                            {{ itemss.answeerContent }}
+                          </p>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
               </view>
               <!-- <view class="bodyAssessment">
 						<view style="width: 5px;
@@ -758,22 +826,31 @@
             <uni-collapse-item
               title="体能评估"
               class="informationCard"
-			  :open="false"
-            :showArrow="false"
+              :open="false"
+              :showArrow="false"
             >
-            
-            <template v-slot:title>
-            	<uni-list>
-            		<uni-list-item title="体能评估" clickable  @click="onClickinfo('体能评估')" class="titleclass">
-            			<template v-slot:footer>
-            				<view class="rightclickblock arrowimgopen" v-if="!infoclick5">
-            					点击展开
-            				</view>
-            				<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
-            			</template>
-            		</uni-list-item>
-            	</uni-list>
-            </template>
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    title="体能评估"
+                    clickable
+                    @click="onClickinfo('体能评估')"
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-if="!infoclick5"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-else
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
               <view style="padding-bottom: 40upx; background-color: #2f333a">
                 <!-- <van-row style="background-color: #343A44;">
 						<van-col class="need_scoll" span="24"> -->
@@ -850,12 +927,12 @@ export default {
       age: 0,
       mobileNumber: 0,
       openKey: true,
-	  infoclick:1,
-	  infoclick2:0,
-	  infoclick3:0,
-	  infoclick4:0,
-	  infoclick5:0,
-	  infoclick6:0,
+      infoclick: 1,
+      infoclick2: 0,
+      infoclick3: 0,
+      infoclick4: 0,
+      infoclick5: 0,
+      infoclick6: 0,
       key: '',
       bodyTestData: [],
       HQDate: [],
@@ -928,10 +1005,10 @@ export default {
       url: null,
       canvasImageMsg: null,
       isFixedTop: false,
-	  nowDate:'',
-	  nowYear:'',
-	  buyStatus:0,
-	  statusDy:false
+      nowDate: '',
+      nowYear: '',
+      buyStatus: 0,
+      statusDy: false
     }
   },
   //监测页面滑动
@@ -958,8 +1035,8 @@ export default {
     if (JSON.stringify(options) !== '{}' && options.traineeNo) {
       this.traineeNo = options.traineeNo
       this.key = options.key
-	  this.buyStatus = Number(options.buyStatus);
-	  this.pageMethods()
+      this.buyStatus = Number(options.buyStatus)
+      this.pageMethods()
       switch (this.key) {
         case '1':
           this.openKey = true
@@ -974,41 +1051,40 @@ export default {
     }
   },
   methods: {
-	  getInfo(){
-		  return new Promise((resolve,reject)=>{
-			  this.getUserInfo()
-			  this.getconfingActionName()
-			  this.getPosture()
-			  this.getBodyTestData()
-			  this.getDynameEvaluation()
-			  this.getHealthQuesson()
-				setTimeout(()=>{
-					console.log('数据加载成功')
-					console.log("正在保存此次训练记录")
-					this.saveReport();
-				},3000)
-			console.log("保存成功！")
-    })
-		  
-	  },
-	  async pageMethods(){
-		await this.getInfo()
-	  },
-	  viewReportScrrop(event) {
-		 this.scrollTop = event.detail.scrollTop
-		 this.isFixedTop = this.scrollTop > 29 ? true : false 
-	  },
+    getInfo() {
+      return new Promise((resolve, reject) => {
+        this.getUserInfo()
+        this.getconfingActionName()
+        this.getPosture()
+        this.getBodyTestData()
+        this.getDynameEvaluation()
+        this.getHealthQuesson()
+        setTimeout(() => {
+          console.log('数据加载成功')
+          console.log('正在保存此次训练记录')
+          this.saveReport()
+        }, 3000)
+        console.log('保存成功！')
+      })
+    },
+    async pageMethods() {
+      await this.getInfo()
+    },
+    viewReportScrrop(event) {
+      this.scrollTop = event.detail.scrollTop
+      this.isFixedTop = this.scrollTop > 29 ? true : false
+    },
     getUserInfo() {
       const data = {}
       data['traineeId'] = this.traineeNo
       testOb.getOnlyList(data).then((res) => {
-		  if(res.success){
-			  this.personName = res.data[0].traineeName
-			  this.gender = res.data[0].gender
-			  this.mobileNumber = res.data[0].mobile
-			  this.age = this.getAge(res.data[0].birthday)
-			  console.log("学员信息获取完毕，内容为："+res.data)
-		  }
+        if (res.success) {
+          this.personName = res.data[0].traineeName
+          this.gender = res.data[0].gender
+          this.mobileNumber = res.data[0].mobile
+          this.age = this.getAge(res.data[0].birthday)
+          console.log('学员信息获取完毕，内容为：' + res.data)
+        }
       })
     },
     getAge(birthday) {
@@ -1018,8 +1094,8 @@ export default {
       let date = new Date()
       // 今天日期，数组，同 birthday
       let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
-	  this.nowDate = date.getMonth() + 1+'.'+ date.getDate();
-	  this.nowYear = date.getFullYear();
+      this.nowDate = date.getMonth() + 1 + '.' + date.getDate()
+      this.nowYear = date.getFullYear()
       // 分别计算年月日差值
       let age = today.map((val, index) => {
         return val - birthday[index]
@@ -1064,7 +1140,7 @@ export default {
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = 'A0005'
       // console.log(data)
-	  const resdata = [];
+      const resdata = []
       testOb
         .opearConfigQuery(data)
         .then((res) => {
@@ -1102,13 +1178,13 @@ export default {
                   }
                 }
                 console.log(this.queryData)
-				resdata["data"] = this.queryData
+                resdata['data'] = this.queryData
               })
               .catch((err) => {})
           }
         })
         .catch()
-		return resdata
+      return resdata
     },
     //获取用户的体态评估
     getPosture() {
@@ -1119,7 +1195,7 @@ export default {
       testOb
         .opearConfigQuery(data)
         .then((res) => {
-          if (res.success&&res.data.length!=0) {
+          if (res.success && res.data.length != 0) {
             this.assessmentNewData = res.data[0].postData
             let trueData = {}
             if (!this.assessmentNewData[0].textShow1) {
@@ -1203,19 +1279,18 @@ export default {
       const data = {}
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = 'A0002'
-	  const resData = [];
+      const resData = []
       testOb.opearConfigQuery(data).then((res) => {
-		  if(res.data.length>0){
-			  this.bodyTestData = res.data[0].bodyTestReport
-			  this.bodyFraction = Number(this.bodyTestData.bodyFraction)
-			  console.log(this.bodyTestData)
-			  resData["data"]=this.bodyTestData;
-			  console.log(resData)
-		  }
+        if (res.data.length > 0) {
+          this.bodyTestData = res.data[0].bodyTestReport
+          this.bodyFraction = Number(this.bodyTestData.bodyFraction)
+          console.log(this.bodyTestData)
+          resData['data'] = this.bodyTestData
+          console.log(resData)
+        }
         // console.log(res)
-        
       })
-	  return resData;
+      return resData
     },
     getDynameEvaluation() {
       const data = {}
@@ -1224,72 +1299,69 @@ export default {
       const resData = []
       testOb.opearConfigQuery(data).then((res) => {
         console.log(res.data)
-		// this.physicalFitnessAssessmentData = res.data
-		// console.log(this.physicalFitnessAssessmentData)
-		for(let r of res.data){
-			for(let rq of r.actionTestResult){
-				for(let d of rq.answer){
-					if (d.status == 0) {
-					  this.physicalFitnessAssessmentData.push(r)
-						break;
-					}
-				}
-			}
-		}
+        // this.physicalFitnessAssessmentData = res.data
+        // console.log(this.physicalFitnessAssessmentData)
+        for (let r of res.data) {
+          for (let rq of r.actionTestResult) {
+            for (let d of rq.answer) {
+              if (d.status == 0) {
+                this.physicalFitnessAssessmentData.push(r)
+                break
+              }
+            }
+          }
+        }
         console.log(this.physicalFitnessAssessmentData)
       })
     },
-	setDyNameStatus(item){
-		if(item==0){
-			this.statusDy = true
-		}else{
-			this.statusDy = false
-		}
-	},
-	getDyName(item){
-		switch (item){
-			case 'E0001':
-				return '自重深蹲评估'
-				break;
-			case 'E0002':
-				return '胸椎活动度评估'
-				break;
-			case 'E0003':
-				return '柔韧性测试'
-				break;
-			case 'E0004':
-				return '肩关节灵活性'
-				break;
-			case 'E0005':
-				return '俯卧撑稳定性测试'
-			default:
-				break;
-		}
-	},
+    setDyNameStatus(item) {
+      if (item == 0) {
+        this.statusDy = true
+      } else {
+        this.statusDy = false
+      }
+    },
+    getDyName(item) {
+      switch (item) {
+        case 'E0001':
+          return '自重深蹲评估'
+        case 'E0002':
+          return '胸椎活动度评估'
+        case 'E0003':
+          return '柔韧性测试'
+        case 'E0004':
+          return '肩关节灵活性'
+        case 'E0005':
+          return '俯卧撑稳定性测试'
+        default:
+          break
+      }
+    },
     openUIup() {
       this.$refs.popup.open()
     },
     saveReport() {
-		console.log(this.openKey)
-		if(this.openKey){
-			const data = {}
-			let date = new Date()
-			let today =
-			  date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
-			data['traineeNo'] = this.traineeNo
-			data['bodyTestData'] = this.bodyTestData
-			data['assessmentTrueData'] = this.assessmentTrueData
-			data['queryData'] = this.queryData
-			data['HQDate'] = this.HQDate
-			data['physicalFitnessAssessmentData'] = this.physicalFitnessAssessmentData
-			data['saveDate'] = today
-			data['name'] = this.personName
-			console.log(data)
-			testOb.saveReport(data).then((res) => {
-			  console.log(res)
-			})
-			this.showShare = true
-		}
+      console.log(this.openKey)
+      if (this.openKey) {
+        const data = {}
+        let date = new Date()
+        let today =
+          date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
+        data['traineeNo'] = this.traineeNo
+        data['bodyTestData'] = this.bodyTestData
+        data['assessmentTrueData'] = this.assessmentTrueData
+        data['queryData'] = this.queryData
+        data['HQDate'] = this.HQDate
+        data['physicalFitnessAssessmentData'] =
+          this.physicalFitnessAssessmentData
+        data['saveDate'] = today
+        data['name'] = this.personName
+        console.log(data)
+        testOb.saveReport(data).then((res) => {
+          console.log(res)
+        })
+        this.showShare = true
+      }
       // this.$refs.popup.open()
     },
     async uploadImage(callback) {
@@ -1400,13 +1472,13 @@ export default {
       data['questionCode'] = 'A0001'
       const resData = []
       testOb.opearConfigQuery(data).then((res) => {
-		  if(res.success&&res.data.length!=0){
-			  console.log(res.data[0].testResult)
-			  resData.push(res.data[0].testResult)
-			  this.HQDate = resData
-		  }else{
-			  this.showHQ = false
-		  }
+        if (res.success && res.data.length != 0) {
+          console.log(res.data[0].testResult)
+          resData.push(res.data[0].testResult)
+          this.HQDate = resData
+        } else {
+          this.showHQ = false
+        }
         // res.data.forEach((r)=>{
         // 	console.log(r)
         // 	let rq = r.actionTestResult
@@ -1426,7 +1498,7 @@ export default {
       // 	})
       // })
       console.log(resData)
-	  return resData;
+      return resData
       // })
     },
     getHistroyDate() {
@@ -1437,79 +1509,78 @@ export default {
         if (!this.openKey) {
           testOb.opearReportQuery(data).then((res) => {
             console.log(res)
-			this.historyData = res.data
-			console.log(this.historyData)
+            this.historyData = res.data
+            console.log(this.historyData)
           })
         }
       }
       this.showShare = true
     },
-	sethistorydata(item){
-		this.HQDate = item.HQDate;
-		this.bodyTestData = item.bodyTestData;
-		this.bodyFraction = Number(item.bodyTestData.bodyFraction)
-		this.queryData = item.queryData;
-		this.assessmentTrueData = item.assessmentTrueData;
-		this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
-		console.log(item)
-		this.$refs.popup.close()
-	},
-	gototest(){
-		uni.redirectTo({
-		  url:
-		    '/pages/physicalAssessment/physicalAssessment' +
-		    '?traineeNo=' +
-		    this.traineeNo
-		})
-	},
-	onClickinfo(item){
-		console.log(item)
-		switch(item){
-			case '基础信息':
-				if(this.infoclick){
-					this.infoclick=0
-				}else{
-					this.infoclick=1
-				}
-				break;
-			case '健康问答':
-				if(this.infoclick1){
-					this.infoclick1=0
-				}else{
-					this.infoclick1=1
-				}
-				break;
-			case '体测报告':
-				if(this.infoclick2){
-					this.infoclick2=0
-				}else{
-					this.infoclick2=1
-				}
-				break;
-			case '体态评估':
-				if(this.infoclick3){
-					this.infoclick3=0
-				}else{
-					this.infoclick3=1
-				}
-				break;
-			case '动态评估':
-				if(this.infoclick4){
-					this.infoclick4=0
-				}else{
-					this.infoclick4=1
-				}
-				break;
-			case '体能评估':
-				if(this.infoclick5){
-					this.infoclick5=0
-				}else{
-					this.infoclick5=1
-				}
-				break;
-		}
-		
-	}
+    sethistorydata(item) {
+      this.HQDate = item.HQDate
+      this.bodyTestData = item.bodyTestData
+      this.bodyFraction = Number(item.bodyTestData.bodyFraction)
+      this.queryData = item.queryData
+      this.assessmentTrueData = item.assessmentTrueData
+      this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
+      console.log(item)
+      this.$refs.popup.close()
+    },
+    gototest() {
+      uni.redirectTo({
+        url:
+          '/pages/physicalAssessment/physicalAssessment' +
+          '?traineeNo=' +
+          this.traineeNo
+      })
+    },
+    onClickinfo(item) {
+      console.log(item)
+      switch (item) {
+        case '基础信息':
+          if (this.infoclick) {
+            this.infoclick = 0
+          } else {
+            this.infoclick = 1
+          }
+          break
+        case '健康问答':
+          if (this.infoclick1) {
+            this.infoclick1 = 0
+          } else {
+            this.infoclick1 = 1
+          }
+          break
+        case '体测报告':
+          if (this.infoclick2) {
+            this.infoclick2 = 0
+          } else {
+            this.infoclick2 = 1
+          }
+          break
+        case '体态评估':
+          if (this.infoclick3) {
+            this.infoclick3 = 0
+          } else {
+            this.infoclick3 = 1
+          }
+          break
+        case '动态评估':
+          if (this.infoclick4) {
+            this.infoclick4 = 0
+          } else {
+            this.infoclick4 = 1
+          }
+          break
+        case '体能评估':
+          if (this.infoclick5) {
+            this.infoclick5 = 0
+          } else {
+            this.infoclick5 = 1
+          }
+          break
+      }
+    }
   }
 }
 </script>
@@ -1546,10 +1617,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.status_bar {
-		height: var(--status-bar-height);
-		width: 100%;
-	}
+.status_bar {
+  height: var(--status-bar-height);
+  width: 100%;
+}
 .zhan_wei_style {
   // margin-top: -50upx;
 }
@@ -1572,42 +1643,25 @@ export default {
     z-index: -1;
   }
   .arrow-left {
-    top: 80upx;
+    position: fixed;
+    padding-top: var(--status-bar-height);
+    top: 0;
     left: 0;
     right: 0;
     z-index: 88;
-    height: 80upx;
+    height: 88upx;
     display: flex;
     align-items: center;
     padding-left: 30upx;
     justify-content: space-between;
     color: #bdc3ce;
-    position: fixed;
-	 z-index: 100000;
     .van-icon {
       font-size: 40upx;
       color: #bdc3ce;
     }
     &.show {
-		position: fixed;
-		top: 0;
-		height: 120upx;
-		background: #212328;
-		padding-top: 40upx;
-		animation-name: topAnmiation;
-		animation-duration: 0.3s;
-		z-index: 30000;
-		
+      background: #212328;
     }
-	@keyframes topAnmiation {
-	  0% {
-	    top: -80upx;
-	  }
-	
-	  100% {
-	    top: 0upx;
-	  }
-	}
   }
 }
 #viewReport {
@@ -1696,7 +1750,7 @@ export default {
 .healthBlock {
   min-width: 197upx;
   min-height: 80upx;
-  background: #383D46;
+  background: #383d46;
   border-radius: 16upx;
   font-size: 28upx;
   font-weight: 400;
@@ -1725,7 +1779,7 @@ export default {
 .countNumBlock {
   width: calc(100vw - 200upx);
   height: 190upx;
-  background: #383D46;
+  background: #383d46;
   border-radius: 24upx;
   padding-top: 30upx;
   padding-left: 40upx;
@@ -1752,7 +1806,7 @@ export default {
 .dynamicshow {
   width: calc(100vw - 180upx);
   overflow: hidden;
-  background-color: #383D46;
+  background-color: #383d46;
   /* margin-left: 30upx; */
   margin-top: 30upx;
   height: 280upx;
@@ -2004,35 +2058,34 @@ export default {
   border: none !important;
 }
 .footer-box {
-	width: 100vw;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	background: #2f333a;
-	
-.bottom_style {
-  width: calc(100vw - 60upx);
-  margin-left: 30upx;
-  height: 100upx;
-  background: #1370ff;
-  border-radius: 16upx;
-  font-size: 32upx;
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
-  color: #ffffff;
-  line-height: 100upx;
-  text-align: center;
-  margin-top: 30upx;
-  margin-bottom: 30upx;
- 
-}
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: #2f333a;
+
+  .bottom_style {
+    width: calc(100vw - 60upx);
+    margin-left: 30upx;
+    height: 100upx;
+    background: #1370ff;
+    border-radius: 16upx;
+    font-size: 32upx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 100upx;
+    text-align: center;
+    margin-top: 30upx;
+    margin-bottom: 30upx;
+  }
 }
 .shareImage {
   width: 28upx;
   height: 28upx;
 }
-::v-deep .uni-popup [name="mask"]{
-			backdrop-filter: blur(3px);
+::v-deep .uni-popup [name='mask'] {
+  backdrop-filter: blur(3px);
 }
 .share-sheet {
   display: flex;
@@ -2087,61 +2140,61 @@ export default {
   margin-bottom: 30upx;
 }
 ::v-deep .uni-scroll-view {
-	height: 100vh;
-	 background-color: #212328 !important;
+  height: 100vh;
+  background-color: #212328 !important;
 }
-.blockdiv{
-	text-align: center !important;
+.blockdiv {
+  text-align: center !important;
 }
-.rightclickblock{
-	width: 154upx;
-	height: 50upx;
-	background: #1370FF;
-	border-radius: 26upx;
-	font-size: 24upx;
-	font-family: PingFangSC-Semibold, PingFang SC;
-	font-weight: 600;
-	color: #F4F7FF;
-	line-height: 50upx;
-	padding-left: 26upx;
+.rightclickblock {
+  width: 154upx;
+  height: 50upx;
+  background: #1370ff;
+  border-radius: 26upx;
+  font-size: 24upx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #f4f7ff;
+  line-height: 50upx;
+  padding-left: 26upx;
 }
-.titleclass{
-	background: #2f333a !important;
-	border-top: none;
-	border-bottom: none;
-	color: #F4F7FF !important;	
-	border-radius: 24upx;
+.titleclass {
+  background: #2f333a !important;
+  border-top: none;
+  border-bottom: none;
+  color: #f4f7ff !important;
+  border-radius: 24upx;
 }
-::v-deep .uni-list{
-	background-color: #2f333a !important;
-	border-radius: 24upx;
+::v-deep .uni-list {
+  background-color: #2f333a !important;
+  border-radius: 24upx;
 }
-::v-deep .uni-list-item__content-title{
-	color: #F4F7FF !important;
-	font-weight: 600;
-	background-color: #2f333a !important;
-	font-size: 36upx !important;
+::v-deep .uni-list-item__content-title {
+  color: #f4f7ff !important;
+  font-weight: 600;
+  background-color: #2f333a !important;
+  font-size: 36upx !important;
 }
-::v-deep .uni-list--border-top{
-	background-color: #2f333a !important;
+::v-deep .uni-list--border-top {
+  background-color: #2f333a !important;
 }
-.arrowimgopen{
-	background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png');
-	background-repeat: no-repeat;
-	background-size: 25%;
-	background-position-x: 124upx;
+.arrowimgopen {
+  background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png');
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position-x: 124upx;
 }
-.arrowimgclose{
-	background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e98a8797-15e5-4862-b7f4-b747771c5e89.png");
-	background-repeat: no-repeat;
-	background-size: 25%;
-	background-position-x: 124upx;
-	background-position-y: 2upx ;
+.arrowimgclose {
+  background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e98a8797-15e5-4862-b7f4-b747771c5e89.png');
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position-x: 124upx;
+  background-position-y: 2upx;
 }
-::v-deep .uni-list--border-bottom{
-	background-color: #2f333a !important;
+::v-deep .uni-list--border-bottom {
+  background-color: #2f333a !important;
 }
-.mark{
-	opacity: 0.6;
+.mark {
+  opacity: 0.6;
 }
 </style>

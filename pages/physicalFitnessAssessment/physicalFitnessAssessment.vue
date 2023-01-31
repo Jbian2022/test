@@ -359,8 +359,8 @@ export default {
   text-align: center;
   justify-content: center;
   position: absolute;
-  width: calc(100vw - 80upx);
-  margin-left: 40upx;
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
 
   display: flex;
 }

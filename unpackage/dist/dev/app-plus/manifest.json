@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.1.2",
-    "code": 112
+    "name": "1.1.5",
+    "code": 115
   },
   "description": "一款健身APP",
   "developer": {
@@ -20,6 +20,8 @@
     "Camera": {},
     "VideoPlayer": {},
     "Push": {},
+    "OAuth": {},
+    "iBeacon": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -35,7 +37,7 @@
       "waiting": true,
       "delay": 0
     },
-    "popGesture": "close",
+    "popGesture": "none",
     "launchwebview": {
       "id": "1",
       "kernel": "WKWebview"
@@ -43,6 +45,7 @@
     "usingComponents": true,
     "nvueStyleCompiler": "uni-app",
     "compilerVersion": 3,
+    "bounce": "none",
     "distribute": {
       "icons": {
         "android": {
@@ -94,6 +97,8 @@
           "<uses-feature android:name=\"android.hardware.camera\"/>",
           "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
           "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
+          "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>",
           "<uses-permission android:name=\"android.permission.CAMERA\"/>",
           "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
           "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
@@ -106,7 +111,9 @@
           "<uses-permission android:name=\"android.permission.READ_PROFILE\"/>",
           "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
           "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-          "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+          "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
+          "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
+          "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>"
         ],
         "minSdkVersion": 21
       },
@@ -210,7 +217,7 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "3.6.15",
+      "compilerVersion": "3.6.18",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {

@@ -24,7 +24,6 @@
               :placeholder="item.answerRemark.remarkTitle"
               style="margin-top: 6px"
 			  :adjust-position="false"
-			  maxlength="4"
             />
           </uni-forms-item>
           <uni-forms-item
@@ -60,7 +59,7 @@
                 >
                 <image
                   class="back_img_style"
-                  src="../../static/app-plus/mebrs/back.png"
+                  src="../../static/app-plus/mebrs/back.svg"
                 ></image>
               </view>
             </view>

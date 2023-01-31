@@ -398,21 +398,10 @@
 		"navigationBarBackgroundColor": "#212328",
 		"backgroundColor": "#212328",
 		"enablePullDownRefresh": false,
-		// "maxWidth":375,
 		"rpxCalcMaxDeviceWidth": 375,
 		"rpxCalcBaseDeviceWidth": 375
-		// "usingComponents": {
-		// 	"van-button": "path/to/@vant/weapp/dist/button/index"
-		// }
-		// "rpxCalcIncludeWidth":0
 	},
-	//easycom配置
-	// "easycom": {
-	// 	"autoscan": true,
-	// 	"custom": {
-	// 		"van-(.*)": "@/wxcomponents/vant/$1/index"
-	// 	}
-	// },
+
 	"tabBar": {
 		"color": "#7A7E83",
 		"selectedColor": "#fff",
