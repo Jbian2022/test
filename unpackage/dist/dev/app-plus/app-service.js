@@ -11893,7 +11893,7 @@ if (uni.restoreGlobal) {
         actionName: null,
         actionIndex: 0,
         actionClass: 0,
-        actionClassName: "\u80F8",
+        actionClassName: "\u80F8\u90E8",
         actionClassList: [
           { text: "\u80F8\u90E8", value: 0 },
           { text: "\u80CC\u90E8", value: 1 },
@@ -12063,7 +12063,7 @@ if (uni.restoreGlobal) {
         }
         i2.active = !i2.active;
         if (i2.active) {
-          this.selectActionList.push(i2);
+          this.selectActionList.push({ ...i2, actionClassName: this.actionClassName });
         } else {
           this.selectActionList = this.selectActionList.filter(
             (item) => item._id !== i2._id
@@ -12608,6 +12608,7 @@ if (uni.restoreGlobal) {
             return {
               type: item.actionType,
               actionName: item.actionName,
+              actionClassName: item.actionClassName,
               url: item.url,
               load: 0,
               times: 0,
@@ -12618,6 +12619,7 @@ if (uni.restoreGlobal) {
               open: false
             };
           });
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:425", "tempList", tempList);
           this.actionList.push(...tempList);
         }
         uni.setStorageSync("actionList", JSON.stringify([]));
@@ -12641,6 +12643,7 @@ if (uni.restoreGlobal) {
       async getOldInfo() {
         const res2 = await train$3.getTrainList({ traineeNo: this.traineeNo, trainDate: this.trainDate });
         if (res2.data && res2.data.length > 0) {
+          this.isNoOldInfo = true;
           const { trainContent } = res2.data[0];
           const list = JSON.parse(trainContent) || [];
           if (list && list.length > 0) {
@@ -12656,7 +12659,6 @@ if (uni.restoreGlobal) {
                 }
               });
               this.actionList = actionList;
-              this.isNoOldInfo = true;
             }
           }
         } else {
@@ -12697,11 +12699,11 @@ if (uni.restoreGlobal) {
         });
       },
       async finish(traineeStatus) {
-        if (!this.workoutName) {
-          return uni.showToast({ icon: "error", title: "\u8BF7\u8F93\u5165\u8BAD\u7EC3\u540D\u79F0", duration: 2e3 });
-        }
         if (!this.actionList || this.actionList.length === 0) {
           return uni.showToast({ icon: "error", title: "\u8BF7\u6DFB\u52A0\u52A8\u4F5C", duration: 2e3 });
+        }
+        if (!this.workoutName) {
+          this.workoutName = this.actionList[0].actionClassName;
         }
         if (this.key) {
           this.allWork[this.key] = {
@@ -12729,7 +12731,7 @@ if (uni.restoreGlobal) {
           trainDate: this.trainDate,
           trainContent: JSON.stringify(this.allWork)
         };
-        if (this.allWork && this.allWork.length > 1 || this.key) {
+        if (this.allWork && this.allWork.length > 1 || this.key || this.isNoOldInfo) {
           await train$3.updateTrainInfo(params);
         } else {
           await train$3.addTrainInfo(params);
@@ -12756,9 +12758,7 @@ if (uni.restoreGlobal) {
             trainDate: this.trainDate,
             trainContent: JSON.stringify(this.allWork)
           };
-          if (this.allWork && this.allWork.length > 1 || this.key) {
-            await train$3.updateTrainInfo(params);
-          }
+          await train$3.updateTrainInfo(params);
         }
         uni.removeStorageSync("actionList");
         uni.removeStorageSync("oldTrainInfo");
@@ -12892,6 +12892,14 @@ if (uni.restoreGlobal) {
         this.openDialog("popupDelete");
       }
       return true;
+    },
+    computed: {
+      isShowSave() {
+        return this.actionList && this.actionList.length > 0;
+      },
+      isShowSuccess() {
+        return +new Date() >= +new Date(this.trainDate);
+      }
     }
   };
   function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
@@ -12907,7 +12915,8 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "header" }, [
         vue.createElementVNode("view", { class: "title" }, "\u65B0\u5EFA\u8BAD\u7EC3"),
         vue.createElementVNode("view", null, [
-          vue.createVNode(_component_van_button, {
+          $options.isShowSave ? (vue.openBlock(), vue.createBlock(_component_van_button, {
+            key: 0,
             class: "btn save",
             onClick: _cache[0] || (_cache[0] = ($event) => $options.finish("save"))
           }, {
@@ -12915,8 +12924,9 @@ if (uni.restoreGlobal) {
               vue.createTextVNode("\u6682\u5B58")
             ]),
             _: 1
-          }),
-          vue.createVNode(_component_van_button, {
+          })) : vue.createCommentVNode("v-if", true),
+          $options.isShowSave && $options.isShowSuccess ? (vue.openBlock(), vue.createBlock(_component_van_button, {
+            key: 1,
             class: "btn",
             onClick: _cache[1] || (_cache[1] = ($event) => $options.openDialog("popupFinish"))
           }, {
@@ -12924,7 +12934,7 @@ if (uni.restoreGlobal) {
               vue.createTextVNode("\u5B8C\u6210\u8BAD\u7EC3")
             ]),
             _: 1
-          })
+          })) : vue.createCommentVNode("v-if", true)
         ])
       ]),
       vue.createElementVNode("view", { class: "workout-title" }, [
@@ -17687,7 +17697,7 @@ if (uni.restoreGlobal) {
         }
         if (this.todayDisabled) {
           list.forEach((item) => {
-            if (item.type === "current" && +new Date(item.day) < +new Date(this.formatDate(this.value))) {
+            if (item.type === "current" && +new Date(item.day) < +new Date(hooks().format("YYYY-MM-DD"))) {
               item.disabled = true;
             }
           });
@@ -17937,7 +17947,7 @@ if (uni.restoreGlobal) {
         str = str.replace("-", "\u6708");
         str = str.replace("-", "\u65E5");
         this.actionBoxDate = str;
-        this.isButton = this.trainListInfo[item.day] && this.trainListInfo[item.day].length < 3;
+        this.isButton = this.trainListInfo[item.day] && this.trainListInfo[item.day].length < 3 || !this.trainListInfo[item.day];
         formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:129", "\u6253\u5F00\u5F39\u6846", this.trainListInfo[item.day]);
         this.$refs.popup.open();
       },
@@ -27627,10 +27637,11 @@ if (uni.restoreGlobal) {
       sethistorydata(item) {
         this.HQDate = item.HQDate;
         this.bodyTestData = item.bodyTestData;
+        this.bodyFraction = Number(item.bodyTestData.bodyFraction);
         this.queryData = item.queryData;
         this.assessmentTrueData = item.assessmentTrueData;
         this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1525", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1526", item);
         this.$refs.popup.close();
       },
       gototest() {
@@ -27639,7 +27650,7 @@ if (uni.restoreGlobal) {
         });
       },
       onClickinfo(item) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1537", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1538", item);
         switch (item) {
           case "\u57FA\u7840\u4FE1\u606F":
             if (this.infoclick) {
@@ -27704,7 +27715,7 @@ if (uni.restoreGlobal) {
       vue.createCommentVNode(' <uni-popup\r\n      ref="popup"\r\n      type="bottom"\r\n      mask-background-color="rgba(20, 21, 23, 0.6)"\r\n    >\r\n      <view class="share-sheet">\r\n        <view\r\n          class="item"\r\n          v-for="(item, index) in options"\r\n          :key="index"\r\n          @click="onSelect(item)"\r\n        >\r\n          <van-image class="img" round :src="item.icon" />\r\n          <view class="text">{{ item.name }}</view>\r\n        </view>\r\n      </view>\r\n    </uni-popup>\r\n  </view> '),
       !$data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
-        style: { "position": "absolute", "z-index": "1", "top": "1580upx" }
+        style: { "position": "absolute", "z-index": "1", "bottom": "10upx" }
       }, [
         vue.createElementVNode("view", {
           class: "buttontrue",

@@ -225,6 +225,7 @@
   background: #212328;
 }
 .training-record {
+  padding-top: var(--status-bar-height);
   position: relative;
 }
 .training-record .van-nav-bar {

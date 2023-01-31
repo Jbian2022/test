@@ -125,7 +125,7 @@
 				str = str.replace('-','月')
 				str = str.replace('-','日')
 				this.actionBoxDate = str
-				this.isButton = this.trainListInfo[item.day]&&this.trainListInfo[item.day].length<3
+				this.isButton = this.trainListInfo[item.day]&&this.trainListInfo[item.day].length<3 || !this.trainListInfo[item.day]
 				console.log('打开弹框',this.trainListInfo[item.day]);
 				this.$refs.popup.open()
 			},
@@ -217,6 +217,7 @@
 	background: #212328;
 }
 .training-record{
+	padding-top: var(--status-bar-height);
 	position: relative;
 	::v-deep .van-nav-bar{
 		position: sticky;
