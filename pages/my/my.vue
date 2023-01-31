@@ -509,8 +509,6 @@ export default {
 					font-weight: 600;
 				}
 				.card-status{
-          width: 130upx;
-          height: 50upx;
 					margin-left: 15upx;
 					font-size: 24upx;
 					background: #FFF0C0;
