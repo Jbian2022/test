@@ -320,6 +320,7 @@ export default {
     if (option.traineeNo) {
       this.traineeNo = option.traineeNo
       this.trainDate = option.trainDate
+      this.key = option.key
       this.getTrainInfo()
     }
   },
@@ -338,9 +339,12 @@ export default {
         trainDate: this.trainDate
       })
       if (res.data && res.data.length > 0) {
-        const { trainContent, traineeTitle } = res.data[0]
-        this.traineeTitle = traineeTitle
-        this.trainInfoList = JSON.parse(trainContent)
+        const { trainContent } = res.data[0]
+        const list = JSON.parse(trainContent) || []
+        if(list&&list.length>0){
+          this.trainInfoList = list[this.key].data || []
+          this.traineeTitle = list[this.key].traineeTitle
+        }
         this.sumLoad = this.trainInfoList.reduce(function (prev, cur) {
           return +cur.load + +prev
         }, 0)
