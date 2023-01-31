@@ -447,6 +447,7 @@
 			async getOldInfo(){
 				const res = await train.getTrainList({traineeNo:this.traineeNo,trainDate:this.trainDate})
 				if(res.data&&res.data.length>0){
+					this.isNoOldInfo = true
 					const {trainContent}  = res.data[0]
 					const list = JSON.parse(trainContent) || []
 					if(list&&list.length>0){
@@ -462,7 +463,6 @@
 								}
 							})
 							this.actionList = actionList
-							this.isNoOldInfo = true
 						}
 					}
 				} else {
@@ -535,7 +535,7 @@
 					trainDate: this.trainDate,
 					trainContent: JSON.stringify(this.allWork)
 				}
-				if(this.allWork&&this.allWork.length>1||this.key){
+				if(this.allWork&&this.allWork.length>1||this.key||this.isNoOldInfo){
 					const res = await train.updateTrainInfo(params)
 				} else {
 					const res = await train.addTrainInfo(params)
@@ -565,9 +565,7 @@
 						trainDate: this.trainDate,
 						trainContent: JSON.stringify(this.allWork)
 					}
-					if(this.allWork&&this.allWork.length>1||this.key){
-						const res = await train.updateTrainInfo(params)
-					}
+					const res = await train.updateTrainInfo(params)
 				}
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
