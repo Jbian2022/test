@@ -6,8 +6,8 @@
 		<view class="header">
 			<view class="title">新建训练</view>
 			<view>
-				<van-button class="btn save" @click="finish('save')">暂存</van-button>
-				<van-button class="btn" @click="openDialog('popupFinish')">完成训练</van-button>
+				<van-button class="btn save" v-if="isShowSave" @click="finish('save')">暂存</van-button>
+				<van-button class="btn" v-if="isShowSave&&isShowSuccess" @click="openDialog('popupFinish')">完成训练</van-button>
 			</view>
 		</view>
 		<view class="workout-title">
@@ -411,6 +411,7 @@
 						return {
 							type: item.actionType,
 							actionName: item.actionName,
+							actionClassName: item.actionClassName,
 							url: item.url,
 							load: 0,
 							times: 0,
@@ -421,6 +422,7 @@
 							open: false
 						}
 					})
+					console.log('tempList',tempList)
 					this.actionList.push(...tempList)
 				}
 				uni.setStorageSync('actionList', JSON.stringify([]))
@@ -501,11 +503,11 @@
 				})
 			},
 			async finish(traineeStatus){
-				if(!this.workoutName){
-					return uni.showToast({icon:'error', title: '请输入训练名称', duration: 2000});
-				}
 				if(!this.actionList||this.actionList.length===0){
 					return uni.showToast({icon:'error', title: '请添加动作', duration: 2000});
+				}
+				if(!this.workoutName){
+					this.workoutName = this.actionList[0].actionClassName
 				}
 				if(this.key){
 					this.allWork[this.key] = {
@@ -701,6 +703,14 @@
 				this.openDialog('popupDelete')
 			}
 			return true
+		},
+		computed: {
+			isShowSave(){
+				return this.actionList&&this.actionList.length>0
+			},
+			isShowSuccess(){
+				return +new Date() >= +new Date(this.trainDate)
+			}
 		}
 	}
 </script>
