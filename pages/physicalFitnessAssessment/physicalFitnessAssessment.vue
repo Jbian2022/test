@@ -114,7 +114,7 @@ export default {
 	  },
     jumpModular(item) {
       console.log(item.path, '>>>>')
-      uni.redirectTo({
+      uni.navigateTo({
         url: item.path + '?' + 'data=' + JSON.stringify(item) + '&traineeNo=' + this.traineeNo + '&questionCode=' + item.parentCode ,
         success: (res) => {},
         fail: () => {},

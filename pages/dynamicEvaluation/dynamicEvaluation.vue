@@ -126,7 +126,7 @@ export default {
     },
 	jumpModular(item) {
 	  console.log(item.path,'>>>>')
-	  uni.redirectTo({
+	  uni.navigateTo({
 	    url: item.path+"&type=" + item.type+'&traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode,
 	    success: (res) => {},
 	    fail: () => {},
