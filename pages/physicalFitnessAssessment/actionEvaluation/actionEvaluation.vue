@@ -78,7 +78,7 @@
 			</view>
 		</view>
 		<view>
-		  <view class="postureButton" @click.native="actionResDate()" v-if="isfocus">保存</view>
+		  <view class="postureButton" @click.native="actionResDate()">保存</view>
 		</view>
 	</view>
 </template>
