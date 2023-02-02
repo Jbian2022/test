@@ -4142,7 +4142,7 @@ if (uni.restoreGlobal) {
         if (this.meberList.length === 0) {
           flag = true;
         }
-        formatAppLog("log", "at components/memberList/memberList.vue:201", flag, " LLLLL");
+        formatAppLog("log", "at components/memberList/memberList.vue:200", flag, " LLLLL");
         return flag;
       }
     },
@@ -4155,7 +4155,7 @@ if (uni.restoreGlobal) {
       },
       isActive: {
         handler: function(n2, o2) {
-          formatAppLog("log", "at components/memberList/memberList.vue:214", n2, o2, n2 == o2);
+          formatAppLog("log", "at components/memberList/memberList.vue:213", n2, o2, n2 == o2);
           if (this.type === "home" && typeof n2 === "number") {
             this.newActive = n2;
             this.getMemberList(n2);
@@ -4170,7 +4170,7 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:240", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:237", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
@@ -4197,7 +4197,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:274", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:270", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4249,7 +4249,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:333", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:329", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4257,32 +4257,47 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:343", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:339", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e2) {
-        formatAppLog("log", "at components/memberList/memberList.vue:350", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:346", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e2, index) {
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:355", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:351", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
+        try {
+          uni.setStorageSync("isActive", String(this.isActive));
+        } catch (e2) {
+        }
         uni.navigateTo({
           url: `/pages/trainingRecord/trainingRecord?traineeNo=${item._id}&memberName=${item.traineeName}`
         });
       },
       async goToNewWorkout(item) {
-        const res2 = await train$4.getTrainList({ traineeNo: item._id, trainDate: this.getDay(new Date()) });
+        try {
+          uni.setStorageSync("isActive", String(this.isActive));
+        } catch (e2) {
+        }
+        const res2 = await train$4.getTrainList({
+          traineeNo: item._id,
+          trainDate: this.getDay(new Date())
+        });
         if (res2.data && res2.data.length > 0) {
           const { trainContent } = res2.data[0];
           const list = JSON.parse(trainContent) || [];
           if (list && list.length >= 3) {
-            return uni.showToast({ icon: "none", title: "\u6BCF\u65E5\u6700\u591A\u6DFB\u52A0\u4E09\u6B21\u8BAD\u7EC3\u8BB0\u5F55", duration: 2e3 });
+            return uni.showToast({
+              icon: "none",
+              title: "\u6BCF\u65E5\u6700\u591A\u6DFB\u52A0\u4E09\u6B21\u8BAD\u7EC3\u8BB0\u5F55",
+              duration: 2e3
+            });
           }
         }
         uni.navigateTo({
@@ -4304,6 +4319,10 @@ if (uni.restoreGlobal) {
         return year2 + "-" + month2 + "-" + date2;
       },
       getReport(item) {
+        try {
+          uni.setStorageSync("isActive", String(this.isActive));
+        } catch (e2) {
+        }
         uni.navigateTo({
           url: "/pages/viewReport/viewReport?traineeNo=" + item._id + "&key=2&buyStatus=" + item.buyStatus
         });
@@ -4727,7 +4746,7 @@ if (uni.restoreGlobal) {
         });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:188", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:189", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4740,7 +4759,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:206", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:207", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4752,11 +4771,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:218", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:219", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:222", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:223", "success");
           }
         });
         uni.navigateTo({
@@ -4770,13 +4789,13 @@ if (uni.restoreGlobal) {
         });
       },
       upper: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:233", e2, "mmm");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:234", e2, "mmm");
       },
       lower: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:236", e2);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:237", e2);
       },
       scroll(event) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:239", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:240", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
         this.scrollTop = event.detail.scrollTop;
         if (event.detail.scrollTop > 50) {
           this.searchTopFlag = true;
@@ -4800,7 +4819,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:271", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:272", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4829,7 +4848,7 @@ if (uni.restoreGlobal) {
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:299", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:300", "success");
           }
         });
         this.isActive = type;
@@ -4848,62 +4867,54 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("movable-area", null, [
           vue.createElementVNode("view", { class: "content_style" }, [
             vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-            vue.createCommentVNode("\u5185\u5BB9 start"),
-            vue.createElementVNode("scroll-view", {
-              "scroll-top": "0",
-              "scroll-y": "true",
-              class: "scroller-y-style",
-              onScrolltoupper: _cache[3] || (_cache[3] = (...args) => $options.upper && $options.upper(...args)),
-              onScrolltolower: _cache[4] || (_cache[4] = (...args) => $options.lower && $options.lower(...args)),
-              onScroll: _cache[5] || (_cache[5] = (...args) => $options.scroll && $options.scroll(...args)),
-              "upper-threshold": 50,
-              "scroll-anchoring": "true"
-            }, [
-              vue.createElementVNode("view", { class: "header_style" }, [
-                vue.createElementVNode("view", { class: "header_left_style" }, [
-                  vue.createElementVNode("view", { class: "left_content_style" }, [
-                    $data.avatar ? (vue.openBlock(), vue.createElementBlock("image", {
-                      key: 0,
-                      class: "left_content_img_style",
-                      src: $data.avatar
-                    }, null, 8, ["src"])) : (vue.openBlock(), vue.createElementBlock("image", {
-                      key: 1,
-                      class: "left_content_img_style",
-                      src: "/static/app-plus/mebrs/defaultAvator.png"
-                    })),
-                    vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
-                    vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
-                  ])
-                ]),
-                vue.createElementVNode("view", { class: "header_right_style" }, [
-                  vue.createElementVNode("image", {
-                    class: "right_img_style",
-                    src: "/static/app-plus/mebrs/fangdajing.svg",
-                    onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
-                  })
+            vue.createElementVNode("view", { class: "header_style" }, [
+              vue.createElementVNode("view", { class: "header_left_style" }, [
+                vue.createElementVNode("view", { class: "left_content_style" }, [
+                  $data.avatar ? (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 0,
+                    class: "left_content_img_style",
+                    src: $data.avatar
+                  }, null, 8, ["src"])) : (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 1,
+                    class: "left_content_img_style",
+                    src: "/static/app-plus/mebrs/defaultAvator.png"
+                  })),
+                  vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
+                  vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
                 ])
               ]),
+              vue.createElementVNode("view", { class: "header_right_style" }, [
+                vue.createElementVNode("image", {
+                  class: "right_img_style",
+                  src: "/static/app-plus/mebrs/fangdajing.svg",
+                  onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
+                })
+              ])
+            ]),
+            vue.createElementVNode("view", { class: "is_buy_style" }, [
               vue.createElementVNode("view", {
-                class: vue.normalizeClass(["is_buy_style", { celling_animation_style: $data.buyTopFlag }])
-              }, [
-                vue.createElementVNode("view", {
-                  class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
-                  onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
-                }, "\u5DF2\u8D2D\u8BFE", 2),
-                vue.createElementVNode("view", {
-                  class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
-                  onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
-                }, "\u672A\u8D2D\u8BFE", 2)
-              ], 2),
-              vue.createCommentVNode(' <view class="zhan_wei_style" v-if="searchTopFlag"></view> '),
+                class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
+                onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
+              }, "\u5DF2\u8D2D\u8BFE", 2),
+              vue.createElementVNode("view", {
+                class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
+                onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
+              }, "\u672A\u8D2D\u8BFE", 2)
+            ]),
+            vue.createCommentVNode(' <view class="zhan_wei_style" v-if="searchTopFlag"></view> '),
+            vue.createCommentVNode("\u5185\u5BB9 start"),
+            vue.createCommentVNode(' <scroll-view\r\n          scroll-top="0"\r\n          scroll-y="true"\r\n          class="scroller-y-style"\r\n          @scrolltoupper="upper"\r\n          @scrolltolower="lower"\r\n          @scroll="scroll"\r\n          :upper-threshold="50"\r\n          scroll-anchoring="true"\r\n        > '),
+            vue.createElementVNode("view", { class: "member_scroll_style" }, [
               vue.createVNode(_component_MemberList, {
                 ref: "memberList",
                 isActive: $data.isActive,
                 type: "home",
                 page: $data.page,
-                currentNum: $data.currentNum
-              }, null, 8, ["isActive", "page", "currentNum"])
-            ], 32)
+                currentNum: $data.currentNum,
+                onGetMemberList: $options.getMemberList
+              }, null, 8, ["isActive", "page", "currentNum", "onGetMemberList"])
+            ]),
+            vue.createCommentVNode(" </scroll-view> ")
           ]),
           vue.createElementVNode("movable-view", {
             direction: "all",
@@ -4916,7 +4927,7 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("image", {
                   class: "add_img_style",
                   src: "/static/app-plus/mebrs/add.svg",
-                  onClick: _cache[6] || (_cache[6] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
+                  onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
                 }),
                 vue.createElementVNode("view", null, [
                   vue.createVNode(_component_ZbTooltip, {
@@ -10404,7 +10415,7 @@ if (uni.restoreGlobal) {
           testResult
         };
         businessCloudObject.opearConfig(saveParam, "physical").then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:170", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:204", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -10423,7 +10434,7 @@ if (uni.restoreGlobal) {
           traineeNo: this.traineeNo,
           questionCode: this.questionCode
         }).then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:192", res2, "kkkkk");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:230", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             let healthList = this.originList.map((item) => {
               let answer = item.answer.length > 0 ? item.answer.map((config) => {
@@ -10468,7 +10479,7 @@ if (uni.restoreGlobal) {
                 answer
               };
             });
-            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:253", healthList, "hellow");
+            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:291", healthList, "hellow");
             this.healthList = healthList;
           }
         }).catch((err) => {
@@ -10595,7 +10606,6 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("view", { class: "uni-textarea" }, [
                   vue.withDirectives(vue.createElementVNode("textarea", {
                     maxlength: 30,
-                    "adjust-position": false,
                     "onUpdate:modelValue": ($event) => item.answer[0].remark = $event,
                     "placeholder-style": "color:#BDC3CE",
                     placeholder: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u8865\u5145\u4FE1\u606F"
@@ -10940,30 +10950,53 @@ if (uni.restoreGlobal) {
       loginIos() {
       },
       loginByWeixin() {
-        let { code } = uni.login();
-        formatAppLog("log", "at pages/logining/logining.vue:193", code, "?????");
-        this.getWeixinCode().then((code2) => {
-          formatAppLog("log", "at pages/logining/logining.vue:196", code2, "\u4F60\u662F\u8C01");
-          return Es.callFunction({
-            name: "login-by-weixin",
-            data: {
-              code: code2
+        this.getWeixinCode().then(async (code) => {
+          formatAppLog("log", "at pages/logining/logining.vue:191", code, "\u4F60\u662F\u8C01");
+          const wxLogin = Es.importObject("login", {
+            customUI: true
+          });
+          formatAppLog("log", "at pages/logining/logining.vue:195", wxLogin, "wxLogin");
+          try {
+            const wxLoginRes = await wxLogin.loginByWeixin(code);
+            formatAppLog("log", "at pages/logining/logining.vue:199", wxLoginRes, "\u767B\u5F55\u6210\u529F");
+            if (wxLoginRes.code == 0) {
+              try {
+                uni.setStorageSync(
+                  "userInfo",
+                  JSON.stringify(wxLoginRes.userInfo)
+                );
+                uni.setStorageSync("uni_id_token", wxLoginRes.token);
+                uni.setStorageSync("uid", wxLoginRes.uid);
+                uni.setStorageSync("tokenExpired", wxLoginRes.tokenExpired);
+                if (wxLoginRes.type === "login") {
+                  uni.setStorageSync("loginNum", "1");
+                  uni.reLaunch({
+                    url: "/pages/myMebers/myMebers"
+                  });
+                  return;
+                }
+                if (wxLoginRes.type === "register") {
+                  uni.setStorageSync("loginNum", "0");
+                  uni.navigateTo({
+                    url: "/pages/personalnformation/personalnformation"
+                  });
+                  let param = {
+                    avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
+                  };
+                  formatAppLog("log", "at pages/logining/logining.vue:227", param, "param");
+                  wxLogin.perfectInfo(param).then((res2) => {
+                    if (res2.success) {
+                    }
+                  }).catch((err) => {
+                  });
+                  return;
+                }
+              } catch (e2) {
+              }
             }
-          });
-        }).then((res2) => {
-          uni.showModal({
-            showCancel: false,
-            content: JSON.stringify(res2.result)
-          });
-          if (res2.result.code === 0) {
-            uni.setStorageSync("uni_id_token", res2.result.token);
-            uni.setStorageSync("uni_id_token_expired", res2.result.tokenExpired);
+          } catch (err) {
+            formatAppLog("log", "at pages/logining/logining.vue:243", err, "\u6211\u662F\u9519\u8BEF");
           }
-        }).catch(() => {
-          uni.showModal({
-            showCancel: false,
-            content: "\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25\uFF0C\u8BF7\u7A0D\u540E\u518D\u8BD5"
-          });
         });
       }
     }
@@ -11051,7 +11084,18 @@ if (uni.restoreGlobal) {
             ])
           ])) : vue.createCommentVNode("v-if", true)
         ]),
-        vue.createCommentVNode('      <view class="wx_loging_style">\r\n        <image\r\n          @click.native="loginByWeixin"\r\n          class="wx_img_style"\r\n          src="../../static/login/wxlogin.svg"\r\n        ></image>\r\n        <image\r\n          @click.native="loginIos"\r\n          class="wx_img_style"\r\n          src="../../static/login/ioslogin.svg"\r\n        ></image>\r\n      </view> ')
+        vue.createElementVNode("view", { class: "wx_loging_style" }, [
+          vue.createElementVNode("image", {
+            onClick: _cache[7] || (_cache[7] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args)),
+            class: "wx_img_style",
+            src: "/static/login/wxlogin.svg"
+          }),
+          vue.createElementVNode("image", {
+            onClick: _cache[8] || (_cache[8] = (...args) => $options.loginIos && $options.loginIos(...args)),
+            class: "wx_img_style",
+            src: "/static/login/ioslogin.svg"
+          })
+        ])
       ])
     ]);
   }
@@ -11727,7 +11771,7 @@ if (uni.restoreGlobal) {
         }, [
           vue.createElementVNode("image", {
             class: "back_img_style",
-            src: "/static/app-plus/mebrs/back.png"
+            src: "/static/app-plus/mebrs/back.svg"
           })
         ]),
         vue.createElementVNode("view", {
@@ -11790,7 +11834,7 @@ if (uni.restoreGlobal) {
                   }, vue.toDisplayString(!$data.coachForm.gender ? "\u8BF7\u9009\u62E9\u6027\u522B" : $options.genderLabel), 3),
                   vue.createElementVNode("image", {
                     class: "back_img_style",
-                    src: "/static/app-plus/mebrs/back.png"
+                    src: "/static/app-plus/mebrs/back.svg"
                   })
                 ])
               ]),
@@ -18671,7 +18715,7 @@ if (uni.restoreGlobal) {
     data() {
       return {
         userInfo: {
-          username: "",
+          nickname: "",
           avatar: null,
           comment: null,
           vipLevel: null,
@@ -18737,16 +18781,16 @@ if (uni.restoreGlobal) {
       },
       async getUserInfo() {
         const res2 = await My$3.getUserInfo();
-        const { avatar, username, comment, vipLevel, vipEndDate, referrer } = res2.data;
+        const { avatar, nickname, comment, vipLevel, vipEndDate, referrer } = res2.data;
         this.userInfo = {
           avatar: avatar || null,
-          username: username || null,
+          nickname: nickname || null,
           comment: comment || null,
           vipLevel: vipLevel || null,
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:264", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:277", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -18781,7 +18825,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:299", "success");
+            formatAppLog("log", "at pages/my/my.vue:312", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3
@@ -18829,7 +18873,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "status_bar" }, [
         vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F ")
       ]),
-      vue.createCommentVNode(' <view class="header">\r\n      <view class="logo" @click="personalInfo">\r\n        <van-image round :src="userInfo.avatar" />\r\n        <view class="edit-icon"></view>\r\n      </view>\r\n      <view class="user-name">\r\n        <view class="name" :class="{ ordinary: userInfo.vipLevel === 2 }">{{\r\n          userInfo.username\r\n        }}</view>\r\n        <view class="des">{{ userInfo.comment }}</view>\r\n      </view>\r\n      <view class="config" @click="setUp"></view>\r\n    </view>\r\n    <view v-if="userInfo.vipLevel === 2" class="vip-info" @click="openCard">\r\n      <view class="left">\r\n        <view class="vip-grade">\r\n          <view class="grade-name">\u91D1\u5361\u6559\u7EC3</view>\r\n          <view class="grade-status">\u751F\u6548\u4E2D</view>\r\n        </view>\r\n        <view class="vip-expiration-date">2023.01.20\u5230\u671F ></view>\r\n      </view>\r\n      <view class="right"></view>\r\n    </view>\r\n    <view v-else class="vip-info ordinary" @click="openCard">\r\n      <view class="left">\r\n        <view class="vip-grade">\r\n          <view class="grade-name">\u84DD\u5361\u4F1A\u5458</view>\r\n        </view>\r\n      </view>\r\n      <view class="right"></view>\r\n    </view> '),
+      vue.createCommentVNode(' <view class="header">\r\n      <view class="logo" @click="personalInfo">\r\n        <van-image round :src="userInfo.avatar" />\r\n        <view class="edit-icon"></view>\r\n      </view>\r\n      <view class="user-name">\r\n        <view class="name" :class="{ ordinary: userInfo.vipLevel === 2 }">{{\r\n          userInfo.nickname\r\n        }}</view>\r\n        <view class="des">{{ userInfo.comment }}</view>\r\n      </view>\r\n      <view class="config" @click="setUp"></view>\r\n    </view>\r\n    <view v-if="userInfo.vipLevel === 2" class="vip-info" @click="openCard">\r\n      <view class="left">\r\n        <view class="vip-grade">\r\n          <view class="grade-name">\u91D1\u5361\u6559\u7EC3</view>\r\n          <view class="grade-status">\u751F\u6548\u4E2D</view>\r\n        </view>\r\n        <view class="vip-expiration-date">2023.01.20\u5230\u671F ></view>\r\n      </view>\r\n      <view class="right"></view>\r\n    </view>\r\n    <view v-else class="vip-info ordinary" @click="openCard">\r\n      <view class="left">\r\n        <view class="vip-grade">\r\n          <view class="grade-name">\u84DD\u5361\u4F1A\u5458</view>\r\n        </view>\r\n      </view>\r\n      <view class="right"></view>\r\n    </view> '),
       $data.userInfo.vipLevel === 2 ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
         class: "vip-card"
@@ -18845,7 +18889,7 @@ if (uni.restoreGlobal) {
                 src: $data.userInfo.avatar
               }, null, 8, ["src"])
             ]),
-            vue.createElementVNode("view", { class: "card-name" }, vue.toDisplayString($data.userInfo.username), 1),
+            vue.createElementVNode("view", { class: "card-name" }, vue.toDisplayString($data.userInfo.nickname), 1),
             vue.createElementVNode("view", { class: "card-status" }, "\u91D1\u5361\u6559\u7EC3")
           ]),
           vue.createElementVNode("view", { class: "card-des" }, vue.toDisplayString($data.userInfo.vipEndDate ? $data.userInfo.vipEndDate : "\u7ACB\u5373\u7EED\u8D39\u91D1\u5361\u6559\u7EC3\uFF0C\u7545\u4EAB\u591A\u9879\u7279\u6743~"), 1)
@@ -18866,7 +18910,7 @@ if (uni.restoreGlobal) {
                 src: $data.userInfo.avatar
               }, null, 8, ["src"])
             ]),
-            vue.createElementVNode("view", { class: "card-name" }, vue.toDisplayString($data.userInfo.username), 1),
+            vue.createElementVNode("view", { class: "card-name" }, vue.toDisplayString($data.userInfo.nickname), 1),
             vue.createElementVNode("view", { class: "card-status" }, "\u666E\u5361\u6559\u7EC3")
           ]),
           vue.createElementVNode("view", { class: "card-des" }, "\u5F00\u901A\u91D1\u5361\u6559\u7EC3\uFF0C\u7545\u4EAB\u591A\u9879\u7279\u6743~")
@@ -19258,13 +19302,15 @@ if (uni.restoreGlobal) {
         });
       },
       async logout() {
-        let tokenExpired = Es.getCurrentUserInfo().tokenExpired;
-        if (tokenExpired > 0) {
+        formatAppLog("log", "at pages/setUp/setUp.vue:47", "\u5F00\u59CB\u70B9\u4E86");
+        let currentUserInfo = Es.getCurrentUserInfo();
+        formatAppLog("log", "at pages/setUp/setUp.vue:49", currentUserInfo, "currentUserInfo");
+        if (currentUserInfo.tokenExpired > 0) {
           await login$1.logout();
           await this.remove();
           return;
         }
-        if (tokenExpired === 0) {
+        if (currentUserInfo.tokenExpired === 0) {
           await this.remove();
         }
       },

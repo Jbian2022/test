@@ -68,7 +68,7 @@
         </view>
       </view>
 
-<!--      <view class="wx_loging_style">
+      <view class="wx_loging_style">
         <image
           @click.native="loginByWeixin"
           class="wx_img_style"
@@ -79,7 +79,7 @@
           class="wx_img_style"
           src="../../static/login/ioslogin.svg"
         ></image>
-      </view> -->
+      </view>
     </view>
   </view>
 </template>
@@ -172,7 +172,7 @@ export default {
     getWeixinCode() {
       return new Promise((resolve, reject) => {
         // #ifdef APP-PLUS
-		
+
         weixinAuthService.authorize(
           function (res) {
             resolve(res.code)
@@ -185,39 +185,80 @@ export default {
         // #endif
       })
     },
-	loginIos() {
-		
-	},
+    loginIos() {},
     loginByWeixin() {
-		let { code } = uni.login()
-		console.log(code, '?????')
-      this.getWeixinCode()
-        .then((code) => {
-			console.log(code, '你是谁')
-			
-          return uniCloud.callFunction({
-            name: 'login-by-weixin',
-            data: {
-              code
+      this.getWeixinCode().then(async (code) => {
+        console.log(code, '你是谁')
+        const wxLogin = uniCloud.importObject('login', {
+          customUI: true // 取消自动展示的交互提示界面
+        })
+        console.log(wxLogin, 'wxLogin')
+
+        try {
+          const wxLoginRes = await wxLogin.loginByWeixin(code)
+          console.log(wxLoginRes, '登录成功')
+          if (wxLoginRes.code == 0) {
+            try {
+              uni.setStorageSync(
+                'userInfo',
+                JSON.stringify(wxLoginRes.userInfo)
+              ) //个人信息
+              uni.setStorageSync('uni_id_token', wxLoginRes.token) //token
+              uni.setStorageSync('uid', wxLoginRes.uid) // uid 唯一标识
+              uni.setStorageSync('tokenExpired', wxLoginRes.tokenExpired) // 有效期
+              if (wxLoginRes.type === 'login') {
+                // 已经登录过了
+                uni.setStorageSync('loginNum', '1')
+                uni.reLaunch({
+                  url: '/pages/myMebers/myMebers'
+                })
+                return
+              }
+              if (wxLoginRes.type === 'register') {
+                // 首次登录
+                uni.setStorageSync('loginNum', '0')
+                uni.navigateTo({
+                  url: '/pages/personalnformation/personalnformation'
+                })
+                let param = {
+                  avatar:
+                    'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png'
+                }
+                console.log(param, 'param')
+                wxLogin
+                  .perfectInfo(param)
+                  .then((res) => {
+                    if (res.success) {
+                    }
+                  })
+                  .catch((err) => {})
+                return
+              }
+            } catch (e) {
+              // error
             }
-          })
-        })
-        .then((res) => {
-          uni.showModal({
-            showCancel: false,
-            content: JSON.stringify(res.result)
-          })
-          if (res.result.code === 0) {
-            uni.setStorageSync('uni_id_token', res.result.token)
-            uni.setStorageSync('uni_id_token_expired', res.result.tokenExpired)
           }
-        })
-        .catch(() => {
-          uni.showModal({
-            showCancel: false,
-            content: '微信登录失败，请稍后再试'
-          })
-        })
+        } catch (err) {
+          //TODO handle the exception
+          console.log(err, '我是错误')
+        }
+      })
+      // .then((res) => {
+      //   uni.showModal({
+      //     showCancel: false,
+      //     content: JSON.stringify(res.result)
+      //   })
+      //   if (res.result.code === 0) {
+      //     uni.setStorageSync('uni_id_token', res.result.token)
+      //     uni.setStorageSync('uni_id_token_expired', res.result.tokenExpired)
+      //   }
+      // })
+      // .catch(() => {
+      //   uni.showModal({
+      //     showCancel: false,
+      //     content: '微信登录失败，请稍后再试'
+      //   })
+      // })
     }
   }
 }
@@ -350,9 +391,9 @@ export default {
       height: 100upx;
       object-fit: contain;
     }
-	.wx_img_style:nth-child(1) {
-		margin-right: 100upx;
-	}
+    .wx_img_style:nth-child(1) {
+      margin-right: 100upx;
+    }
   }
 }
 

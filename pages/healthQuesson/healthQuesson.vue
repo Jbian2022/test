@@ -1,7 +1,10 @@
 <template>
   <view class="content_style">
-   <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-    <NavBarCompontent :leftNavTitle="'健康问答'" :isAuthority="true"></NavBarCompontent>
+    <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+    <NavBarCompontent
+      :leftNavTitle="'健康问答'"
+      :isAuthority="true"
+    ></NavBarCompontent>
     <view class="list_content_style">
       <view
         class="need_loop_style"
@@ -10,19 +13,36 @@
       >
         <view class="check_box_style" v-if="item.questionType === 2">
           <uni-collapse class="need_collapse_style" v-model="activeName">
-            <uni-collapse-item titleBorder="none" :open="true" :show-arrow="false"  :title="item.questionContent" :name="itemIndex">
-				<template v-slot:title>
-					<uni-list>
-						<uni-list-item :border="false" :title="item.questionContent" clickable  @click="infoclick = !infoclick" class="titleclass" >
-							<template v-slot:footer>
-								<view class="rightclickblock arrowimgopen" v-if="infoclick">
-									点击展开
-								</view>
-								<view class="rightclickblock arrowimgclose" v-else>点击关闭</view>
-							</template>
-						</uni-list-item>
-					</uni-list>
-				</template>
+            <uni-collapse-item
+              titleBorder="none"
+              :open="true"
+              :show-arrow="false"
+              :title="item.questionContent"
+              :name="itemIndex"
+            >
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    :border="false"
+                    :title="item.questionContent"
+                    clickable
+                    @click="infoclick = !infoclick"
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-if="infoclick"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-else
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
               <view class="collapes_conten_style">
                 <view
                   class="collapes_tag_stylle"
@@ -56,12 +76,20 @@
             >
           </view>
           <view class="radio_remark_style" v-if="item.answer[0].checked">
-<!-- 			  <input class="remark_style" type="textarea"  :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'" />
- -->			  
-			<view class="uni-textarea">
- 				<textarea :maxlength="30" :adjust-position="false" v-model="item.answer[0].remark" placeholder-style="color:#BDC3CE" :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'"/>
- 			</view>
-			  
+            <!-- 			  <input class="remark_style" type="textarea"  :placeholder=" item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : '请补充信息'" />
+ -->
+            <view class="uni-textarea">
+              <textarea
+                :maxlength="30"
+                v-model="item.answer[0].remark"
+                placeholder-style="color:#BDC3CE"
+                :placeholder="
+                  item.answerRemark && item.answerRemark.remarkTitle
+                    ? item.answerRemark.remarkTitle
+                    : '请补充信息'
+                "
+              />
+            </view>
           </view>
         </view>
       </view>
@@ -73,7 +101,7 @@
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-var businessCloudObject = uniCloud.importObject('businessCloudObject',{
+var businessCloudObject = uniCloud.importObject('businessCloudObject', {
   customUI: true // 取消自动展示的交互提示界面
 })
 export default {
@@ -88,7 +116,7 @@ export default {
       traineeNo: '',
       originList: [], // 源数据
       questionCode: '',
-	  infoclick: true
+      infoclick: true
     }
   },
   onLoad(options) {
@@ -124,64 +152,74 @@ export default {
     }
   },
   created() {
-  	uni.hideLoading();
+    uni.hideLoading()
   },
   mounted() {
-	
     this.requestList()
   },
   methods: {
-	saveHealthQuession() {
-		// console.log(this.healthList, 'healthList')
-		
-		let testResult = []
-		let newList = JSON.parse(JSON.stringify(this.healthList))
-		newList.forEach((item) => {
-			if (item.questionType == 2) {
-				delete item['remark']
-			}
-			let resetList = item.answer.length > 0 ? item.answer.filter(k => k.checked).map(z => {
-				return z
-			}) : [];
-			
-			// 提交时激活选项是n还是 y
-			let findResultChecked = resetList.find(k => k.checked)
-			
-			
-			
-			let result = {
-				code: item.code,
-				answer: resetList.map(c => c.answerTitle),
-				remark:  resetList.length > 0 ? findResultChecked.answerTitle === '是' ?  resetList[0].remark : '' : ''
-				
-				
-			}
-			testResult.push(result)
-	
-		})
-		// console.log(testResult, '我是你爹')
-		// 参数封装
-		let saveParam = {
-			traineeNo: this.traineeNo,
-			questionCode: this.questionCode,
-			testResult,
-		}
-		businessCloudObject.opearConfig(saveParam, 'physical').then(res => {
-			console.log(res, '我要保存了')
-			if (res.success) {
-				uni.redirectTo({
-					url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
-				})
-				uni.showToast({
-				  icon: 'success',
-				  title: res.message,
-				  duration: 800
-				})
-			}
-		}).catch(() =>{})
-		
-		
-	},
+    saveHealthQuession() {
+      // console.log(this.healthList, 'healthList')
+
+      let testResult = []
+      let newList = JSON.parse(JSON.stringify(this.healthList))
+      newList.forEach((item) => {
+        if (item.questionType == 2) {
+          delete item['remark']
+        }
+        let resetList =
+          item.answer.length > 0
+            ? item.answer
+                .filter((k) => k.checked)
+                .map((z) => {
+                  return z
+                })
+            : []
+
+        // 提交时激活选项是n还是 y
+        let findResultChecked = resetList.find((k) => k.checked)
+
+        let result = {
+          code: item.code,
+          answer: resetList.map((c) => c.answerTitle),
+          remark:
+            resetList.length > 0
+              ? findResultChecked.answerTitle === '是'
+                ? resetList[0].remark
+                : ''
+              : ''
+        }
+        testResult.push(result)
+      })
+      // console.log(testResult, '我是你爹')
+      // 参数封装
+      let saveParam = {
+        traineeNo: this.traineeNo,
+        questionCode: this.questionCode,
+        testResult
+      }
+      businessCloudObject
+        .opearConfig(saveParam, 'physical')
+        .then((res) => {
+          console.log(res, '我要保存了')
+          if (res.success) {
+            uni.redirectTo({
+              url:
+                '/pages/physicalAssessment/physicalAssessment' +
+                '?traineeNo=' +
+                this.traineeNo +
+                '&questionCode=' +
+                this.questionCode
+            })
+            uni.showToast({
+              icon: 'success',
+              title: res.message,
+              duration: 800
+            })
+          }
+        })
+        .catch(() => {})
+    },
     requestList() {
       businessCloudObject
         .opearConfigQuery({
@@ -258,7 +296,6 @@ export default {
     },
     quesionClick(item, itemIndex, itemChild, itemChildIndex) {
       itemChild.checked = !itemChild.checked
-
     },
     quesionChildClick(item, itemIndex, radioItem, radioItemIndex) {
       item.answer = item.answer.map((config, conifgIndex) => {
@@ -290,7 +327,7 @@ export default {
 }
 .list_content_style {
   width: 100%;
-  flex: 1;
+  flex: 0.88;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -310,7 +347,7 @@ export default {
         padding-top: 40upx;
         padding-bottom: 40upx;
         box-sizing: border-box;
-		background-color: transparent !important;
+        background-color: transparent !important;
         .collapes_conten_style {
           width: 100%;
           display: flex;
@@ -319,7 +356,7 @@ export default {
 
           .collapes_tag_stylle {
             // width: 187upx;
-			width: calc((100% - 48upx) / 3);
+            width: calc((100% - 48upx) / 3);
             height: 80upx;
             background: #4b525e;
             border-radius: 16upx;
@@ -383,7 +420,7 @@ export default {
         width: calc(100% - 60upx);
         margin-left: 30upx;
         padding-bottom: 30upx;
-		
+
         .supplement_style {
           width: 100%;
           height: 160px;
@@ -413,94 +450,96 @@ export default {
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 
 ::v-deep.uni-collapse {
-	.uni-collapse-item {
-		.uni-collapse-item-border {
-			border: none !important;
-			
-		}
-	}
+  .uni-collapse-item {
+    .uni-collapse-item-border {
+      border: none !important;
+    }
+  }
 }
 ::v-deep.uni-collapse-item__title-box {
-	background-color: transparent !important;
-	font-size: 32upx !important;
-	font-weight: 600 !important;
-	color: #F4F7FF !important;
-	padding: 0 !important;
+  background-color: transparent !important;
+  font-size: 32upx !important;
+  font-weight: 600 !important;
+  color: #f4f7ff !important;
+  padding: 0 !important;
 }
 ::v-deep.uni-collapse-item__title-text {
-	font-size: 32upx !important;
-	font-weight: 600 !important;
-	color: #F4F7FF !important;
+  font-size: 32upx !important;
+  font-weight: 600 !important;
+  color: #f4f7ff !important;
 }
 ::v-deep.uni-collapse-item__wrap {
-		background-color: transparent !important;
-		margin-top: 30upx;
+  background-color: transparent !important;
+  margin-top: 30upx;
 }
 ::v-deep.uni-collapse-item__wrap-content.uni-collapse-item--border {
-	border-bottom-width: 0 !important;
+  border-bottom-width: 0 !important;
 }
 ::v-deep .uni-textarea {
-	// height: 160px;
-	background: #4B525E;
-	border-radius: 16upx;
-	padding: 30upx;
-	box-sizing: border-box;
-	color: #F4F7FF;
+  // height: 160px;
+  background: #4b525e;
+  border-radius: 16upx;
+  padding: 30upx;
+  box-sizing: border-box;
+  color: #f4f7ff;
 }
-.rightclickblock{
-	width: 154upx;
-	height: 50upx;
-	background: #1370FF;
-	border-radius: 26upx;
-	font-size: 24upx;
-	font-weight: 600;
-	color: #F4F7FF;
-	line-height: 50upx;
-	padding-left: 26upx;
+.rightclickblock {
+  width: 154upx;
+  height: 50upx;
+  background: #1370ff;
+  border-radius: 26upx;
+  font-size: 24upx;
+  font-weight: 600;
+  color: #f4f7ff;
+  line-height: 50upx;
+  padding-left: 26upx;
 }
-.titleclass{
-	background: transparent  !important;
-	border-top: none;
-	border-bottom: none;
-	color: #F4F7FF !important;	
-	border-radius: 24upx;
-	font-size: 32upx;
-	font-weight: 600;
-	color: #f4f7ff;
+.titleclass {
+  background: transparent !important;
+  border-top: none;
+  border-bottom: none;
+  color: #f4f7ff !important;
+  border-radius: 24upx;
+  font-size: 32upx;
+  font-weight: 600;
+  color: #f4f7ff;
 }
-::v-deep .uni-list{
-	background: transparent  !important;
-	border-radius: 24upx;
+::v-deep .uni-list {
+  background: transparent !important;
+  border-radius: 24upx;
 }
 ::v-deep .uni-list-item__container {
-	padding-left: 0 !important;
+  padding-left: 0 !important;
 }
-::v-deep .uni-list-item__content-title{
-	color: #F4F7FF !important;
-	// font-weight: 600;
-	background: transparent  !important;
-	font-size: 32upx !important;
+::v-deep .uni-list-item__content-title {
+  color: #f4f7ff !important;
+  // font-weight: 600;
+  background: transparent !important;
+  font-size: 32upx !important;
 }
-::v-deep .uni-list--border-top{
-	background-color: #2f333a !important;
+::v-deep .uni-list--border-top {
+  background-color: #2f333a !important;
 }
-.arrowimgopen{
-	background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png');
-	background-repeat: no-repeat;
-	background-size: 25%;
-	background-position-x: 124upx;
+.arrowimgopen {
+  background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png');
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position-x: 124upx;
 }
-.arrowimgclose{
-	background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e98a8797-15e5-4862-b7f4-b747771c5e89.png");
-	background-repeat: no-repeat;
-	background-size: 25%;
-	background-position-x: 124upx;
-	background-position-y: 2upx ;
+.arrowimgclose {
+  background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e98a8797-15e5-4862-b7f4-b747771c5e89.png');
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position-x: 124upx;
+  background-position-y: 2upx;
 }
-::v-deep .uni-list--border-bottom{
-	background-color: #2f333a !important;
+::v-deep .uni-list--border-bottom {
+  background-color: #2f333a !important;
 }
 </style>

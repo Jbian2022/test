@@ -15,7 +15,7 @@
     "oauth": {
       "weixin": {
         "appid": "wxf790c35e4d544ded",
-        "appsecret": "39c3067f3d2b2dce787d9d2917bef6c7"
+        "appsecret": "d622e34a6c359fa5c6977d9749530b62"
       },
       "apple": {
         "bundleId": "io.dcloud.bodybuildingapp"
@@ -25,20 +25,20 @@
   "web": {
     "oauth": {
       "h5-weixin": {
-        "appid": "微信浏览器内微信登录，所用的微信公众号appid",
-        "appsecret": "微信公众号后台获取的appsecret"
+        "appid": "",
+        "appsecret": ""
       },
       "web-weixin": {
-        "appid": "wxc1a1c95912d3eca6",
-        "appsecret": "gh_05ee904eea80"
+        "appid": "",
+        "appsecret": ""
       }
     }
   },
   "mp-weixin": {
     "oauth": {
       "weixin": {
-        "appid": "wxc1a1c95912d3eca6",
-        "appsecret": "微信小程序后台获取的appsecret"
+        "appid": "",
+        "appsecret": ""
       }
     }
   },
@@ -61,7 +61,7 @@
     "univerify": {
       "appid": "__UNI__76A9E40",
       "apiKey": "apiKey 和 apiSecret 在开发者中心获取，开发者中心：https://dev.dcloud.net.cn/uniLogin/index?type=0，文档：https://ask.dcloud.net.cn/article/37965",
-      "apiSecret": ""
+      "apiSecret": "e03c7fbc0f851fd631e99909fa43da32"
     }
   }
 }
