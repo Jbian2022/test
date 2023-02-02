@@ -1044,6 +1044,7 @@ export default {
       switch (levelType) {
         case '优秀':
         case '良好':
+		case '非常好':
           return 'rgba(1, 224, 140, 1)'
         case '中等':
         case '中上等':
@@ -2114,7 +2115,7 @@ export default {
 }
 ::v-deep .uni-list{
 	background-color: #2f333a !important;
-	border-radius: 24upx;
+	border-radius: 24upx; 
 }
 ::v-deep .uni-list-item__content-title{
 	color: #F4F7FF !important;
