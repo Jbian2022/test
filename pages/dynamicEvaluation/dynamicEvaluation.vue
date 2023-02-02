@@ -169,7 +169,6 @@ export default {
 <style lang="scss" scoped>
 .content_style {
   width: 100vw;
-  height: 100vh;
   overflow: hidden;
   position: relative;
   padding-top: 40upx;

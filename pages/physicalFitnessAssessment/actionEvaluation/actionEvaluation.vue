@@ -52,7 +52,8 @@
 							  placeholder="请填写"
 							  :cursor-spacing='45'
 							  @focus="focus"
-							  @blur="blur"/>
+							  @blur="blur"
+							  @confirm="blur"/>
 						  </view>
 						  <view class="inputText" v-if="actionData.code=='F0001'">/分</view>
 						  <view class="inputText" v-else>/个</view>
@@ -78,7 +79,7 @@
 			</view>
 		</view>
 		<view>
-		  <view class="postureButton" @click.native="actionResDate()">保存</view>
+		  <view class="postureButton" @click.native="actionResDate()" v-if="isfocus">保存</view>
 		</view>
 	</view>
 </template>

@@ -304,8 +304,8 @@
 				pushUpTestimg:"../../../static/app-plus/bg/pushUpTest.jpg",
 				changeValue: true,
 				num: 0,
-				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bbbf92cf-78e7-46c9-aefb-555fd45498ac.mp4",
-				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ac005e94-771a-482f-81a7-6f21f6721a5b.mp4",
+				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/5599d329-4a47-4db2-a2a5-1ee1bc5deb35.mp4",
+				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/925865b3-3f5d-4c4a-9cbf-27ba8cdc8f65.mp4",
 				//胸椎活动视频
 				thoracicSpineActivityUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
 				//直抬腿
@@ -464,7 +464,6 @@
 <style>
 .content_style{
 	width: 100vw;
-	height: 100vh;
 	overflow: hidden;
 	position: relative;
 }
