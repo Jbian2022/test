@@ -18,7 +18,7 @@
         "appsecret": "d622e34a6c359fa5c6977d9749530b62"
       },
       "apple": {
-        "bundleId": "io.dcloud.bodybuildingapp"
+        "bundleId": "苹果开发者后台获取的bundleId"
       }
     }
   },
@@ -56,7 +56,7 @@
       "codeExpiresIn": 300,
       "smsKey": "301ed8d4b3a67f38ccb433ed4f6f2636",
       "smsSecret": "01e02edd1f64ecf35105f1c9597faeaa",
-	  "templateId": "16309"
+      "templateId": "16309"
     },
     "univerify": {
       "appid": "__UNI__76A9E40",

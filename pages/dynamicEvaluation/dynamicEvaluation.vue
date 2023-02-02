@@ -126,7 +126,7 @@ export default {
     },
 	jumpModular(item) {
 	  console.log(item.path,'>>>>')
-	  uni.redirectTo({
+	  uni.navigateTo({
 	    url: item.path+"&type=" + item.type+'&traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode,
 	    success: (res) => {},
 	    fail: () => {},
@@ -169,7 +169,6 @@ export default {
 <style lang="scss" scoped>
 .content_style {
   width: 100vw;
-  height: 100vh;
   overflow: hidden;
   position: relative;
   padding-top: 40upx;

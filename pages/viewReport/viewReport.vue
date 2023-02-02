@@ -1120,6 +1120,7 @@ export default {
       switch (levelType) {
         case '优秀':
         case '良好':
+		case '非常好':
           return 'rgba(1, 224, 140, 1)'
         case '中等':
         case '中上等':
@@ -1840,7 +1841,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 252upx;
+  width: 350upx;
   height: 50upx;
   margin-bottom: 74upx;
   font-weight: 600;

@@ -114,7 +114,7 @@ export default {
 	  },
     jumpModular(item) {
       console.log(item.path, '>>>>')
-      uni.redirectTo({
+      uni.navigateTo({
         url: item.path + '?' + 'data=' + JSON.stringify(item) + '&traineeNo=' + this.traineeNo + '&questionCode=' + item.parentCode ,
         success: (res) => {},
         fail: () => {},
@@ -201,7 +201,6 @@ export default {
 <style lang="scss" scoped>
 .content_style {
   width: 100vw;
-  height: 100vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -358,10 +357,10 @@ export default {
   line-height: 100upx;
   text-align: center;
   justify-content: center;
-  position: absolute;
   width: calc(100vw - 60upx);
   margin-left: 30upx;
-
   display: flex;
+  margin-top: 40upx;
+  margin-bottom: 40upx;
 }
 </style>
