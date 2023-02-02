@@ -38,6 +38,8 @@ class service {
 	async paymentNotify(data = {}) {
 		let {
 			httpInfo,
+			clientInfo,
+			cloudInfo
 		} = data;
 		let path = httpInfo.path;
 		let pay_type = path.substring(notifyPath.length);
@@ -104,6 +106,8 @@ class service {
 					userOrderSuccess = await orderPaySuccess({
 						verifyResult,
 						data: payOrderInfo,
+						clientInfo,
+						cloudInfo
 					});
 					console.log('用户自己的回调逻辑 - 执行完成');
 				}
@@ -193,7 +197,13 @@ class service {
 			notifyUrl = {}
 		} = config;
 		// 业务逻辑开始-----------------------------------------------------------
-		let currentNotifyUrl = notifyUrl[spaceId] || notifyUrl["default"]; // 异步回调地址
+		// 以下代码是为了兼容公测版迁移到正式版的空间
+		let notifySpaceId = spaceId;
+		if (!notifyUrl[notifySpaceId] && notifySpaceId.indexOf("mp-") === 0) {
+			notifySpaceId = notifySpaceId.substring(3);
+		}
+		// 以上代码是为了兼容公测版迁移到正式版的空间
+		let currentNotifyUrl = notifyUrl[notifySpaceId] || notifyUrl["default"]; // 异步回调地址
 		if (!currentNotifyUrl || currentNotifyUrl.indexOf("http") !== 0) {
 			throw { errCode: ERROR[52002] };
 		}

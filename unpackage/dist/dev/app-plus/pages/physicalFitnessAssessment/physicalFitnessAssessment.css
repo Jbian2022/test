@@ -110,7 +110,7 @@
   font-size: 1.5rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   z-index: 80;
 }
 .nav_bar_style .nav_content_style[data-v-d4dd2266] {
@@ -121,7 +121,7 @@
   font-size: 0.9375rem;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .nav_bar_style .nav_right_style[data-v-d4dd2266] {
   margin-right: 0.9375rem;
@@ -131,11 +131,11 @@
   font-size: 0.75rem;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
-  color: #7A7F89;
+  color: #7a7f89;
 }
 [data-v-d4dd2266] .van-icon {
   font-size: 0.75rem !important;
-  color: #7A7F89 !important;
+  color: #7a7f89 !important;
 }
 /**
  * 这里是uni-app内置的常用样式变量
@@ -164,7 +164,6 @@
 /* 文章场景相关 */
 .content_style[data-v-c1425cf6] {
   width: 100vw;
-  height: 100vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -208,7 +207,7 @@
 }
 .dynamicshow[data-v-c1425cf6] {
   width: calc(100vw - 1.875rem);
-  background-color: #2f333a;
+  background-color: #383D46;
   margin-left: 0.9375rem;
   margin-top: 0.9375rem;
   height: 8.75rem;
@@ -310,8 +309,9 @@
   line-height: 3.125rem;
   text-align: center;
   justify-content: center;
-  position: absolute;
-  width: calc(100vw - 2.5rem);
-  margin-left: 1.25rem;
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
   display: flex;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }

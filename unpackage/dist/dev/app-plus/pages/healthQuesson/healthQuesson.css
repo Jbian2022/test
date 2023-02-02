@@ -570,10 +570,11 @@
   display: flex;
   overflow: hidden;
   box-sizing: border-box;
+  font-feature-settings: "tnum";
+  min-width: 20px;
   justify-content: center;
   flex-direction: row;
   height: 20px;
-  min-width: 20px;
   padding: 0 4px;
   line-height: 18px;
   color: #fff;
@@ -583,7 +584,6 @@
   border: 1px solid #fff;
   text-align: center;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-feature-settings: "tnum";
   font-size: 12px;
 }
 .uni-badge--info[data-v-c97cb896] {
@@ -664,7 +664,7 @@
   opacity: 0.3;
 }
 .uni-list-item--hover[data-v-c7524739] {
-  background-color: #f1f1f1;
+  background-color: #f1f1f1 !important;
 }
 .uni-list-item__container[data-v-c7524739] {
   position: relative;
@@ -1101,7 +1101,7 @@
   font-size: 1.5rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   z-index: 80;
 }
 .nav_bar_style .nav_content_style[data-v-d4dd2266] {
@@ -1112,7 +1112,7 @@
   font-size: 0.9375rem;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .nav_bar_style .nav_right_style[data-v-d4dd2266] {
   margin-right: 0.9375rem;
@@ -1122,11 +1122,11 @@
   font-size: 0.75rem;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
-  color: #7A7F89;
+  color: #7a7f89;
 }
 [data-v-d4dd2266] .van-icon {
   font-size: 0.75rem !important;
-  color: #7A7F89 !important;
+  color: #7a7f89 !important;
 }
 /**
  * 这里是uni-app内置的常用样式变量
