@@ -52,7 +52,8 @@
 							  placeholder="请填写"
 							  :cursor-spacing='45'
 							  @focus="focus"
-							  @blur="blur"/>
+							  @blur="blur"
+							  @confirm="blur"/>
 						  </view>
 						  <view class="inputText" v-if="actionData.code=='F0001'">/分</view>
 						  <view class="inputText" v-else>/个</view>
@@ -358,7 +359,6 @@
 <style>
 .content_style {
 	width: 100vw;
-	height: 100vh;
 	overflow: hidden;
 	position: relative;
 	padding-top: 40upx;
@@ -461,8 +461,8 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 220upx;
-	left: 60upx;
+	top: 274upx;
+	left: calc(100vw - 717upx);
 	z-index: 1;
 	font-size: 26upx;
 	font-weight: 400;
@@ -482,10 +482,12 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	margin-top: 200upx;
+	height: 82%;
+	margin-top: 230upx;
 	margin-left: 30upx;
 	background-color: #383D46;
 	border-radius: 32upx;
+	position: fixed;
 }
 .clickActionBody video{
 	width: calc(100vw - 140upx);

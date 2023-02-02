@@ -594,6 +594,7 @@
 .content_style[data-v-5a412e6a] {
   width: 100vw;
   height: 100%;
+  overflow-x: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -640,9 +641,7 @@
   color: #bdc3ce;
 }
 .content_style .header_style .header_right_style[data-v-5a412e6a] {
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
+  display: block;
 }
 .content_style .header_style .header_right_style .right_img_style[data-v-5a412e6a] {
   width: 1.51844rem;
@@ -788,38 +787,40 @@ uni-page-body[data-v-5a412e6a] {
   opacity: 0.8;
 }
 .celling_animation_style[data-v-5a412e6a] {
-  position: -webkit-sticky !important;
-  position: sticky !important;
+  position: fixed;
   left: 0;
-  top: var(--status-bar-height) !important;
+  top: 0;
   width: 100vw !important;
   background: #212328;
-  z-index: 3000;
-  animation-duration: 0.2s;
+  margin-top: 0 !important;
+  padding-top: 2.0625rem;
+  padding-bottom: 1.125rem;
+  animation-name: cellingAnmation-5a412e6a;
+  z-index: 30000;
+  animation-duration: 0.3s;
   margin-left: 0 !important;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
 }
 .celling_animation_style .buy_left[data-v-5a412e6a] {
+  width: 40% !important;
   margin-left: 0.9375rem;
 }
 .celling_animation_style .buy_right[data-v-5a412e6a] {
-  margin-right: 0.9375rem;
+  width: 40% !important;
 }
 .search_anmition_style[data-v-5a412e6a] {
-  animation-name: seachAnmation-5a412e6a;
-  position: fixed !important;
+  position: fixed;
   right: 0.9375rem;
-  z-index: 3003;
-  animation-duration: 0.5s;
-  top: 0.625rem;
+  top: 2.6875rem;
+  animation-name: seachAnmation-5a412e6a;
+  animation-duration: 0.3s;
+  z-index: 30000;
 }
 @keyframes seachAnmation-5a412e6a {
 0% {
-    top: -2.5rem;
+    top: 0;
 }
 100% {
-    top: 0.625rem;
+    top: 2.6875rem;
 }
 }
 @keyframes cellingAnmation-5a412e6a {
@@ -832,6 +833,9 @@ uni-page-body[data-v-5a412e6a] {
 }
 .scroller-y-style[data-v-5a412e6a] {
   height: calc(100vh - var(--window-top)) !important;
+}
+[data-v-5a412e6a] .uni-scroll-view-content {
+  height: auto !important;
 }
 .move_area_style[data-v-5a412e6a] {
   width: 100vw;

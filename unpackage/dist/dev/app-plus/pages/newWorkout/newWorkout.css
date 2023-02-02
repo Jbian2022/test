@@ -190,7 +190,6 @@
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 0.9375rem;
   font-size: 1.5rem;
   color: #FFFFFF;
@@ -209,10 +208,6 @@
   color: #FFFFFF;
   line-height: 1.3125rem;
   border: none;
-}
-.new-workout .header .save {
-  margin-right: 0.625rem;
-  background: #4B525E;
 }
 .new-workout .workout-title {
   height: 4.0625rem;

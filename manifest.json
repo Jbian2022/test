@@ -10,7 +10,6 @@
         "nvueStyleCompiler" : "uni-app",
         "compilerVersion" : 3,
         "popGesture" : "none",
-		"bounce": "none",
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
             "waiting" : true,
