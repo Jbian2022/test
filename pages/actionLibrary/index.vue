@@ -153,7 +153,7 @@ export default {
       actionName: null,
       actionIndex: 0,
       actionClass: 0,
-      actionClassName: '胸',
+      actionClassName: '胸部',
       actionClassList: [
         { text: '胸部', value: 0 },
         { text: '背部', value: 1 },
@@ -323,7 +323,7 @@ export default {
       }
       i.active = !i.active
       if (i.active) {
-        this.selectActionList.push(i)
+        this.selectActionList.push({...i, actionClassName: this.actionClassName})
       } else {
         this.selectActionList = this.selectActionList.filter(
           (item) => item._id !== i._id

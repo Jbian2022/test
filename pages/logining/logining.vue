@@ -3,9 +3,6 @@
     <view class="text">
       <!-- <view class="text1"></view> -->
       <image class="text1" src="@/static/app-plus/other/coach.png"></image>
-
-      <br />
-      <text class="text2">私人专属教练，扁平学员管理</text>
     </view>
     <view class="middle">
       <input
@@ -240,7 +237,7 @@ export default {
     padding-left: 70upx;
     .text1 {
       width: 556upx;
-      height: 306upx;
+      height: 370upx;
       font-size: 100upx;
       font-family: HarmonyOS_Sans_SC_Black;
       color: #ffffff;

@@ -19,7 +19,7 @@
 		<view class="contentBody" v-if="changeValue">
 			<view
 			class="clickAction" 
-			@click.native="showPopup">标准动作描述
+			@click.native="showPopup">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<van-popup 
@@ -93,7 +93,7 @@
 			</view>
 			<image class="imagebg" :src="backimgFront"/>
 			<view class="imgbgText">
-				点击蓝色标签选择问题部位
+				点击上方蓝色标签选择问题部位，可多选
 			</view>
 		</view>
 		<view class="contentBody" v-else>
@@ -304,8 +304,8 @@
 				pushUpTestimg:"../../../static/app-plus/bg/pushUpTest.jpg",
 				changeValue: true,
 				num: 0,
-				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/5599d329-4a47-4db2-a2a5-1ee1bc5deb35.mp4",
-				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/925865b3-3f5d-4c4a-9cbf-27ba8cdc8f65.mp4",
+				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bbbf92cf-78e7-46c9-aefb-555fd45498ac.mp4",
+				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ac005e94-771a-482f-81a7-6f21f6721a5b.mp4",
 				//胸椎活动视频
 				thoracicSpineActivityUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
 				//直抬腿
@@ -464,6 +464,7 @@
 <style>
 .content_style{
 	width: 100vw;
+	height: 100vh;
 	overflow: hidden;
 	position: relative;
 }
@@ -546,8 +547,8 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 330upx;
-	left: calc(100vw - 717upx);
+	top: 310upx;
+	left: 60upx;
 	z-index: 1;
 	font-size: 26upx;
 	font-weight: 400;
@@ -561,7 +562,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	/* height: 1400upx; */
+	height: 1400upx;
 	background: #383D46;
 	border-radius: 16upx;
 	/* backdrop-filter: blur(3upx); */
@@ -569,12 +570,11 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	height: 82%;
-	margin-top: 39%;
+	height: 1400upx;
+	margin-top: 270upx;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
 	border-radius: 16upx;
-	position: fixed;
 }
 .clickActionBody video{
 	width: calc(100vw - 140upx);
@@ -585,7 +585,7 @@
 }
 .clickActionText{
 	width: calc(100vw - 140upx);
-	height: calc(100vh - 880upx);
+	height: 174upx;
 	margin-top: 40upx;
 	margin-left: 40upx;
 }
@@ -612,8 +612,8 @@
 	color: #F4F7FF;
 	line-height: 70upx;
 	text-align: center;
-	margin: auto;
-	margin-bottom: 20px;
+	margin: 0 auto;
+	margin-top: 620upx;
 }
 .clickActionEnd image{
 	width: 32upx;

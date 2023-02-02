@@ -4,6 +4,7 @@
     <NavBarCompontent
       :leftNavTitle="'身体评估'"
       :isAuthority="true"
+	  :jumpType="'STPC'"
     ></NavBarCompontent>
     <view class="need_scoll list_style">
       <view
@@ -334,8 +335,8 @@ export default {
   text-align: center;
   justify-content: center;
 
-  width: calc(100vw - 80upx);
-  margin-left: 40upx;
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
 
   display: flex;
 }

@@ -34,10 +34,7 @@
                 <view class="left_num_style">{{ meberList.length }}</view>
               </view>
             </view>
-            <view
-              class="header_right_style"
-            
-            >
+            <view class="header_right_style">
               <image
                 class="right_img_style"
                 src="../../static/app-plus/mebrs/fangdajing.svg"
@@ -520,27 +517,21 @@ uni-page-body {
 }
 .celling_animation_style {
   position: sticky !important;
-  left: 0px;
-  top: 0px !important;
-
+  left: 0;
+  top: var(--status-bar-height) !important;
+  // margin-top: var(--status-bar-height) !important;
   width: 100vw !important;
   background: #212328;
-  // margin-top: 0 !important;
-  // padding-top: 66upx;
-  // padding-bottom: 36upx;
-  // animation-name: cellingAnmation;
   z-index: 3000;
-  animation-duration: 0.3s;
+  animation-duration: 0.2s;
   margin-left: 0 !important;
   padding-top: 20upx;
   padding-bottom: 20upx;
   .buy_left {
-    // width: 40% !important;
     margin-left: 30upx;
   }
   .buy_right {
-    // width: 40% !important;
-	  margin-right: 30upx;
+    margin-right: 30upx;
   }
 }
 .search_anmition_style {
