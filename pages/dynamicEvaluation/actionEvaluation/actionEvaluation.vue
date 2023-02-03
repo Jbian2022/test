@@ -309,7 +309,7 @@
 				//胸椎活动视频
 				thoracicSpineActivityUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
 				//直抬腿
-				StraightLegLiftUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4f9af99a-4833-41d0-a584-1b0cdf4cb583.mp4",
+				StraightLegLiftUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bda98240-b083-41da-bbf4-7168183791a1.mp4",
 				//托马斯
 				ThomasUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e971accd-2928-429b-86a1-e33f2d9e10aa.mp4",
 				//肩关节灵活性测试1
