@@ -1028,7 +1028,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "10.102.21.251"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "172.20.10.8",\n        "192.168.160.1",\n        "192.168.32.1",\n        "10.102.21.251"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T$1 = "";
   try {
     T$1 = "__UNI__76A9E40";
@@ -3263,7 +3263,7 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$Q = {
+  const _sfc_main$R = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -3489,7 +3489,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
     return $data.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       ref: "ani",
@@ -3501,8 +3501,8 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ], 14, ["animation"])) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$P = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$Q = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -3799,7 +3799,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
@@ -3840,15 +3840,15 @@ if (uni.restoreGlobal) {
       ], 32)
     ], 2)) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-4dd3c44b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const _sfc_main$O = {
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-4dd3c44b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$P = {
     name: "bgTheamCompontent",
     props: ["theamType"],
     data() {
       return {};
     }
   };
-  function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "bg_content" }, [
       $props.theamType === "currency" ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -3864,7 +3864,7 @@ if (uni.restoreGlobal) {
 		</view> `)
     ]);
   }
-  const BgTheamCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__scopeId", "data-v-826f61a7"], ["__file", "D:/studyUninApp/bodybuilding-app/components/bgTheamCompontent/bgTheamCompontent.vue"]]);
+  const BgTheamCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-826f61a7"], ["__file", "D:/studyUninApp/bodybuilding-app/components/bgTheamCompontent/bgTheamCompontent.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -3935,7 +3935,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$N = {
+  const _sfc_main$O = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -3995,7 +3995,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u5728\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F app vue\u7AEF h5 \u4F7F\u7528wxs \u5B9E\u73B0"),
       vue.createElementVNode("view", { class: "uni-swipe" }, [
@@ -4062,11 +4062,11 @@ if (uni.restoreGlobal) {
     ], 2112);
   }
   if (typeof block0$2 === "function")
-    block0$2(_sfc_main$N);
+    block0$2(_sfc_main$O);
   if (typeof block1 === "function")
-    block1(_sfc_main$N);
-  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-8ff2a577"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$M = {
+    block1(_sfc_main$O);
+  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__scopeId", "data-v-8ff2a577"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$N = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -4090,12 +4090,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   const debounce$1 = (fn2, delay) => {
     var delays = delay || 200;
     var timer;
@@ -4113,7 +4113,7 @@ if (uni.restoreGlobal) {
   };
   var businessCloudObject$3 = Es.importObject("businessCloudObject");
   const train$4 = Es.importObject("train");
-  const _sfc_main$L = {
+  const _sfc_main$M = {
     name: "memberList",
     data() {
       return {
@@ -4134,6 +4134,8 @@ if (uni.restoreGlobal) {
     },
     created() {
     },
+    mounted() {
+    },
     onShow() {
     },
     computed: {
@@ -4142,7 +4144,7 @@ if (uni.restoreGlobal) {
         if (this.meberList.length === 0) {
           flag = true;
         }
-        formatAppLog("log", "at components/memberList/memberList.vue:200", flag, " LLLLL");
+        formatAppLog("log", "at components/memberList/memberList.vue:198", flag, " LLLLL");
         return flag;
       }
     },
@@ -4153,16 +4155,6 @@ if (uni.restoreGlobal) {
         },
         immediate: true
       },
-      isActive: {
-        handler: function(n2, o2) {
-          formatAppLog("log", "at components/memberList/memberList.vue:213", n2, o2, n2 == o2);
-          if (this.type === "home" && typeof n2 === "number") {
-            this.newActive = n2;
-            this.getMemberList(n2);
-          }
-        },
-        immediate: true
-      },
       searchValue: {
         handler: function(n2, o2) {
           if (this.type === "detail") {
@@ -4170,15 +4162,13 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:237", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:226", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
           }
         }
       }
-    },
-    updated() {
     },
     methods: {
       close() {
@@ -4197,7 +4187,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:270", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:254", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4249,7 +4239,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:329", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:313", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4257,19 +4247,19 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:339", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:323", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e2) {
-        formatAppLog("log", "at components/memberList/memberList.vue:346", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:330", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e2, index) {
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:351", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:335", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
         try {
@@ -4329,10 +4319,10 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
-    const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_1$4);
+    const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_1$5);
     const _component_uni_swipe_action = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action"), __easycom_2$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "mebers_content" }, [
       vue.createVNode(_component_uni_popup, {
@@ -4490,8 +4480,8 @@ if (uni.restoreGlobal) {
       }), 128))
     ]);
   }
-  const MemberList = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-fce7d226"], ["__file", "D:/studyUninApp/bodybuilding-app/components/memberList/memberList.vue"]]);
-  const _sfc_main$K = {
+  const MemberList = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__scopeId", "data-v-fce7d226"], ["__file", "D:/studyUninApp/bodybuilding-app/components/memberList/memberList.vue"]]);
+  const _sfc_main$L = {
     props: {
       visible: Boolean,
       color: {
@@ -4641,7 +4631,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "zb-tooltip",
       style: vue.normalizeStyle({
@@ -4677,8 +4667,8 @@ if (uni.restoreGlobal) {
       ])
     ], 4);
   }
-  const ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-13dad3a2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
-  const _sfc_main$J = {
+  const ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-13dad3a2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
+  const _sfc_main$K = {
     components: {
       BgTheamCompontent,
       MemberList,
@@ -4722,18 +4712,34 @@ if (uni.restoreGlobal) {
             }
           },
           fail: function(err) {
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:156", err, ">>>>");
           }
         });
-        uni.getStorage({
-          key: "isActive",
-          success: function(res2) {
-            if (res2.data) {
-              self2.isActive = Number(res2.data);
+        try {
+          const res2 = uni.getStorageInfoSync();
+          let flag = res2.keys.indexOf("isActive") !== -1 ? true : false;
+          if (!flag) {
+            try {
+              uni.setStorageSync("isActive", "1");
+              self2.isActive = 1;
+              self2.$refs.memberListDom.getMemberList(1);
+            } catch (e2) {
             }
-          },
-          fail: function(err) {
+          } else {
+            uni.getStorage({
+              key: "isActive",
+              success: function(res3) {
+                if (res3.data) {
+                  self2.isActive = Number(res3.data);
+                  self2.$refs.memberListDom.getMemberList(Number(res3.data));
+                }
+              },
+              fail: function(err) {
+              }
+            });
           }
-        });
+        } catch (e2) {
+        }
       });
       this.getUserInfor();
     },
@@ -4746,7 +4752,7 @@ if (uni.restoreGlobal) {
         });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:189", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:211", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4759,7 +4765,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:207", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:229", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4771,11 +4777,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:219", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:241", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:223", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:245", "success");
           }
         });
         uni.navigateTo({
@@ -4789,13 +4795,13 @@ if (uni.restoreGlobal) {
         });
       },
       upper: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:234", e2, "mmm");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:256", e2, "mmm");
       },
       lower: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:237", e2);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:259", e2);
       },
       scroll(event) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:240", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:262", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
         this.scrollTop = event.detail.scrollTop;
         if (event.detail.scrollTop > 50) {
           this.searchTopFlag = true;
@@ -4819,7 +4825,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:272", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:294", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4845,17 +4851,18 @@ if (uni.restoreGlobal) {
         });
       },
       buyClick(type) {
-        uni.removeStorage({
-          key: "isActive",
-          success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:300", "success");
+        this.$nextTick(function() {
+          try {
+            uni.setStorageSync("isActive", String(type));
+          } catch (e2) {
           }
+          this.isActive = type;
+          this.$refs.memberListDom.getMemberList(type);
         });
-        this.isActive = type;
       }
     }
   };
-  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_MemberList = vue.resolveComponent("MemberList");
     const _component_ZbTooltip = vue.resolveComponent("ZbTooltip");
@@ -4906,7 +4913,7 @@ if (uni.restoreGlobal) {
             vue.createCommentVNode(' <scroll-view\r\n          scroll-top="0"\r\n          scroll-y="true"\r\n          class="scroller-y-style"\r\n          @scrolltoupper="upper"\r\n          @scrolltolower="lower"\r\n          @scroll="scroll"\r\n          :upper-threshold="50"\r\n          scroll-anchoring="true"\r\n        > '),
             vue.createElementVNode("view", { class: "member_scroll_style" }, [
               vue.createVNode(_component_MemberList, {
-                ref: "memberList",
+                ref: "memberListDom",
                 isActive: $data.isActive,
                 type: "home",
                 page: $data.page,
@@ -4952,8 +4959,8 @@ if (uni.restoreGlobal) {
       ])
     ], 2112);
   }
-  const PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-5a412e6a"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
-  const _sfc_main$I = {
+  const PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-5a412e6a"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
+  const _sfc_main$J = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -5240,7 +5247,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["uni-forms-item", ["is-direction-" + $data.localLabelPos, $data.border ? "uni-forms-item--border" : "", $data.border && $data.isFirstBorder ? "is-first-border" : ""]])
     }, [
@@ -5266,7 +5273,7 @@ if (uni.restoreGlobal) {
       ])
     ], 2);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-462874dd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-462874dd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -5829,7 +5836,7 @@ if (uni.restoreGlobal) {
       return false;
     }
   };
-  const _sfc_main$H = {
+  const _sfc_main$I = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -6071,15 +6078,15 @@ if (uni.restoreGlobal) {
       _isEqual: isEqual$1
     }
   };
-  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-9a1e3c32"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$G = {
+  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-9a1e3c32"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$H = {
     name: "navBarCompontent",
     props: ["leftNavTitle", "contentTitle", "jumpType", "isAuthority"],
     data() {
@@ -6100,7 +6107,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "nav_bar_style" }, [
       vue.createElementVNode("view", {
         class: "nav_left_style",
@@ -6122,7 +6129,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-d4dd2266"], ["__file", "D:/studyUninApp/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
+  const NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-d4dd2266"], ["__file", "D:/studyUninApp/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
   var util$1 = {};
   util$1.getCommonTime = function(date2 = new Date(), targetTimezone = 8) {
     let res2 = {};
@@ -6363,7 +6370,7 @@ if (uni.restoreGlobal) {
   for (let i2 = 1; i2 <= 31; i2++) {
     days$1.push(i2);
   }
-  const _sfc_main$F = {
+  const _sfc_main$G = {
     name: "jarvis-picker",
     props,
     data() {
@@ -6535,7 +6542,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "pricke" }, [
       _ctx.mark ? (vue.openBlock(), vue.createBlock(_component_uni_transition, {
@@ -6655,8 +6662,8 @@ if (uni.restoreGlobal) {
       }, 8, ["mode-class", "styles", "show"])
     ]);
   }
-  const Mpicker = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-3551bfb1"], ["__file", "D:/studyUninApp/bodybuilding-app/components/mPicker.vue/mPicker.vue"]]);
-  const _sfc_main$E = {
+  const Mpicker = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-3551bfb1"], ["__file", "D:/studyUninApp/bodybuilding-app/components/mPicker.vue/mPicker.vue"]]);
+  const _sfc_main$F = {
     components: {
       BgTheamCompontent,
       NavBarCompontent,
@@ -6926,12 +6933,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
-    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$3);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, { leftNavTitle: $data.leftNavTitle }, null, 8, ["leftNavTitle"]),
@@ -7083,8 +7090,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesAddMyMebersAddMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-67c2db77"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addMyMebers/addMyMebers.vue"]]);
-  const _sfc_main$D = {
+  const PagesAddMyMebersAddMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-67c2db77"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addMyMebers/addMyMebers.vue"]]);
+  const _sfc_main$E = {
     components: {
       BgTheamCompontent,
       MemberList
@@ -7143,7 +7150,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_MemberList = vue.resolveComponent("MemberList");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
@@ -7205,11 +7212,11 @@ if (uni.restoreGlobal) {
       ], 32)
     ]);
   }
-  const PagesMemberQueryMemberQuery = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__file", "D:/studyUninApp/bodybuilding-app/pages/memberQuery/memberQuery.vue"]]);
+  const PagesMemberQueryMemberQuery = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__file", "D:/studyUninApp/bodybuilding-app/pages/memberQuery/memberQuery.vue"]]);
   const testOb$3 = Es.importObject("testResults", {
     customUI: true
   });
-  const _sfc_main$C = {
+  const _sfc_main$D = {
     data() {
       return {
         c: 0,
@@ -7390,7 +7397,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_van_col = vue.resolveComponent("van-col");
@@ -7718,11 +7725,11 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesPostureAssessmentPostureAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__file", "D:/studyUninApp/bodybuilding-app/pages/postureAssessment/postureAssessment.vue"]]);
+  const PagesPostureAssessmentPostureAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__file", "D:/studyUninApp/bodybuilding-app/pages/postureAssessment/postureAssessment.vue"]]);
   var businessCloudObject$2 = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$B = {
+  const _sfc_main$C = {
     components: {
       BgTheamCompontent,
       NavBarCompontent,
@@ -7774,7 +7781,7 @@ if (uni.restoreGlobal) {
       }
     },
     methods: {
-      changeInputValue(event, item) {
+      changeInputValue(event, item, itemIndex) {
         if (event.detail.value > 5e3) {
           uni.showToast({
             title: "\u57FA\u7840\u4EE3\u8C22\u4E0A\u96505000",
@@ -7782,14 +7789,16 @@ if (uni.restoreGlobal) {
             width: 180,
             icon: "none"
           });
-          item.value = "5000";
-          event.detail.value = "5000";
+          setTimeout(() => {
+            item.value = "5000";
+            event.detail.value = "5000";
+          }, 200);
         } else {
-          item["value"] = event.detail.value;
+          item.value = event.detail.value;
         }
       },
       pickeConfirm(event, item, itemIndex) {
-        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:157", item, "\u6211\u5E73\u65F6", itemIndex);
+        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:161", item, "\u6211\u5E73\u65F6", itemIndex);
         item.flag = false;
         item["value"] = item.configList[event].text || "";
       },
@@ -7805,7 +7814,7 @@ if (uni.restoreGlobal) {
           let readyParam = {
             [value.key]: value.hasOwnProperty("value") ? value.value : ""
           };
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:176", readyParam, "readyParam");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:180", readyParam, "readyParam");
           Object.assign(resultParam, readyParam);
         });
         let saveParam = {
@@ -7814,7 +7823,7 @@ if (uni.restoreGlobal) {
           bodyTestReport: resultParam
         };
         businessCloudObject$2.opearConfig(saveParam, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:189", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:193", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -7845,7 +7854,7 @@ if (uni.restoreGlobal) {
               flag: false
             };
           });
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:230", res2, "kkkkk");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:234", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             this.configForm = {};
             this.bodyTestReport = opearConfigList;
@@ -7870,7 +7879,7 @@ if (uni.restoreGlobal) {
                 value: resultValue
               };
             });
-            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:258", self2.configForm, "this.configForm", opearConfigList);
+            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:262", self2.configForm, "this.configForm", opearConfigList);
             self2.bodyTestReport = opearConfigList;
           }
         }).catch((err) => {
@@ -7912,7 +7921,7 @@ if (uni.restoreGlobal) {
         var that = this;
         this.$refs.studentForm.validate().then(() => {
           let businessCloudObject2 = Es.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:309", that.requestItem, "that.requestItem");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:313", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -7948,13 +7957,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:350", type, ">>>>");
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:354", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:358", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
+                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:362", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -7980,7 +7989,7 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             } else {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:384", 2);
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:388", 2);
               uni.showToast({
                 icon: "fail",
                 title: res2.message,
@@ -8001,12 +8010,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
-    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$3);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, { leftNavTitle: "\u4F53\u6D4B\u62A5\u544A\u586B\u5199" }),
@@ -8026,15 +8035,17 @@ if (uni.restoreGlobal) {
                   name: item.code
                 }, {
                   default: vue.withCtx(() => [
-                    vue.createElementVNode("input", {
+                    vue.withDirectives(vue.createElementVNode("input", {
                       type: "number",
-                      clas: "change_input_style",
-                      value: item.value,
-                      onInput: ($event) => $options.changeInputValue($event, item),
+                      class: "change_input_style",
+                      "onUpdate:modelValue": ($event) => item.value = $event,
+                      onInput: ($event) => $options.changeInputValue($event, item, itemIndex),
                       placeholder: item.answerRemark.remarkTitle,
                       style: { "margin-top": "6px" },
                       "adjust-position": false
-                    }, null, 40, ["value", "onInput", "placeholder"])
+                    }, null, 40, ["onUpdate:modelValue", "onInput", "placeholder"]), [
+                      [vue.vModelText, item.value]
+                    ])
                   ]),
                   _: 2
                 }, 1032, ["label", "name"])) : (vue.openBlock(), vue.createBlock(_component_uni_forms_item, {
@@ -8086,11 +8097,11 @@ if (uni.restoreGlobal) {
       }, "\u4FDD\u5B58")
     ]);
   }
-  const PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-641854c1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
+  const PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-641854c1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
   var businessCloudObject$1 = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$A = {
+  const _sfc_main$B = {
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -8228,7 +8239,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -8284,7 +8295,7 @@ if (uni.restoreGlobal) {
       }, "\u751F\u6210\u62A5\u544A")
     ], 32);
   }
-  const PagesPhysicalAssessmentPhysicalAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-fc7c2e74"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalAssessment/physicalAssessment.vue"]]);
+  const PagesPhysicalAssessmentPhysicalAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-fc7c2e74"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalAssessment/physicalAssessment.vue"]]);
   const icons = {
     "id": "2852637",
     "name": "uniui\u56FE\u6807\u5E93",
@@ -9460,7 +9471,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$z = {
+  const _sfc_main$A = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -9504,15 +9515,15 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("text", {
       style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
       class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
       onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
     }, null, 6);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-  const _sfc_main$y = {
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const _sfc_main$z = {
     name: "UniBadge",
     emits: ["click"],
     props: {
@@ -9635,7 +9646,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
       $props.text ? (vue.openBlock(), vue.createElementBlock("text", {
@@ -9646,8 +9657,8 @@ if (uni.restoreGlobal) {
       }, vue.toDisplayString($options.displayValue), 7)) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-c97cb896"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
-  const _sfc_main$x = {
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-c97cb896"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  const _sfc_main$y = {
     name: "UniListItem",
     emits: ["click", "switchChange"],
     props: {
@@ -9877,9 +9888,9 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-    const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$2);
+    const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
       style: vue.normalizeStyle({ "background-color": $props.customStyle.backgroundColor }),
@@ -9964,8 +9975,8 @@ if (uni.restoreGlobal) {
       })) : vue.createCommentVNode("v-if", true)
     ], 14, ["hover-class"]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-c7524739"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
-  const _sfc_main$w = {
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-c7524739"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  const _sfc_main$x = {
     name: "uniList",
     "mp-weixin": {
       options: {
@@ -10006,7 +10017,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
       $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -10019,8 +10030,8 @@ if (uni.restoreGlobal) {
       })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-c2f1266a"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
-  const _sfc_main$v = {
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-c2f1266a"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const _sfc_main$w = {
     name: "uniCollapseItem",
     props: {
       title: {
@@ -10180,7 +10191,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse-item" }, [
       vue.createCommentVNode(" onClick(!isOpen) "),
@@ -10227,8 +10238,8 @@ if (uni.restoreGlobal) {
       ], 6)
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-3d2dde9f"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
-  const _sfc_main$u = {
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-3d2dde9f"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
+  const _sfc_main$v = {
     name: "uniCollapse",
     emits: ["change", "activeItem", "input", "update:modelValue"],
     props: {
@@ -10337,16 +10348,16 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse" }, [
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-3f050360"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-3f050360"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
   var businessCloudObject = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$t = {
+  const _sfc_main$u = {
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -10358,7 +10369,8 @@ if (uni.restoreGlobal) {
         traineeNo: "",
         originList: [],
         questionCode: "",
-        infoclick: true
+        infoclick: true,
+        isfocus: true
       };
     },
     onLoad(options) {
@@ -10393,6 +10405,12 @@ if (uni.restoreGlobal) {
       this.requestList();
     },
     methods: {
+      focus() {
+        this.isfocus = false;
+      },
+      blur() {
+        this.isfocus = true;
+      },
       saveHealthQuession() {
         let testResult = [];
         let newList = JSON.parse(JSON.stringify(this.healthList));
@@ -10417,7 +10435,7 @@ if (uni.restoreGlobal) {
           testResult
         };
         businessCloudObject.opearConfig(saveParam, "physical").then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:204", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:216", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -10436,7 +10454,7 @@ if (uni.restoreGlobal) {
           traineeNo: this.traineeNo,
           questionCode: this.questionCode
         }).then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:230", res2, "kkkkk");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:242", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             let healthList = this.originList.map((item) => {
               let answer = item.answer.length > 0 ? item.answer.map((config) => {
@@ -10481,7 +10499,7 @@ if (uni.restoreGlobal) {
                 answer
               };
             });
-            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:291", healthList, "hellow");
+            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:303", healthList, "hellow");
             this.healthList = healthList;
           }
         }).catch((err) => {
@@ -10507,10 +10525,10 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$1);
+    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
     const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2);
     const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_3);
     const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_4);
@@ -10610,8 +10628,13 @@ if (uni.restoreGlobal) {
                     maxlength: 30,
                     "onUpdate:modelValue": ($event) => item.answer[0].remark = $event,
                     "placeholder-style": "color:#BDC3CE",
-                    placeholder: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u8865\u5145\u4FE1\u606F"
-                  }, null, 8, ["onUpdate:modelValue", "placeholder"]), [
+                    placeholder: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u8865\u5145\u4FE1\u606F",
+                    "cursor-spacing": 45,
+                    "auto-blur": true,
+                    onFocus: _cache[2] || (_cache[2] = (...args) => $options.focus && $options.focus(...args)),
+                    onBlur: _cache[3] || (_cache[3] = (...args) => $options.blur && $options.blur(...args)),
+                    onConfirm: _cache[4] || (_cache[4] = (...args) => $options.blur && $options.blur(...args))
+                  }, null, 40, ["onUpdate:modelValue", "placeholder"]), [
                     [vue.vModelText, item.answer[0].remark]
                   ])
                 ])
@@ -10620,20 +10643,21 @@ if (uni.restoreGlobal) {
           ]);
         }), 128))
       ]),
-      vue.createElementVNode("view", {
+      $data.isfocus ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
         class: "bottom_style",
-        onClick: _cache[2] || (_cache[2] = vue.withModifiers((...args) => $options.saveHealthQuession && $options.saveHealthQuession(...args), ["stop"]))
-      }, "\u4FDD\u5B58")
+        onClick: _cache[5] || (_cache[5] = vue.withModifiers((...args) => $options.saveHealthQuession && $options.saveHealthQuession(...args), ["stop"]))
+      }, "\u4FDD\u5B58")) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__file", "D:/studyUninApp/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
+  const PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__file", "D:/studyUninApp/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
   const testOb$2 = Es.importObject("testResults", {
     customUI: true
   });
   const busOb$3 = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$s = {
+  const _sfc_main$t = {
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -10767,7 +10791,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
@@ -10858,10 +10882,10 @@ if (uni.restoreGlobal) {
       ])
     ], 32);
   }
-  const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-c1425cf6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
+  const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-c1425cf6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
   const _imports_0$1 = "/static/app-plus/other/coach.png";
   let weixinAuthService;
-  const _sfc_main$r = {
+  const _sfc_main$s = {
     data() {
       return {
         phone: "",
@@ -11003,7 +11027,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "counter" }, [
       vue.createElementVNode("view", { class: "text" }, [
         vue.createCommentVNode(' <view class="text1"></view> '),
@@ -11101,8 +11125,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesLoginingLogining = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-62a93864"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/logining/logining.vue"]]);
-  const _sfc_main$q = {
+  const PagesLoginingLogining = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-62a93864"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/logining/logining.vue"]]);
+  const _sfc_main$r = {
     props: {
       latticeNum: {
         type: Number,
@@ -11177,7 +11201,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "acqui_verification_code" }, [
       vue.createElementVNode("view", { class: "verification_code_continor" }, [
         (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.latticeNum, (item, index) => {
@@ -11212,7 +11236,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-e5158781"], ["__file", "D:/studyUninApp/bodybuilding-app/components/verification-code-style2/verification-code-style2.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-e5158781"], ["__file", "D:/studyUninApp/bodybuilding-app/components/verification-code-style2/verification-code-style2.vue"]]);
   const en = {
     "uni-countdown.day": "day",
     "uni-countdown.h": "h",
@@ -11239,7 +11263,7 @@ if (uni.restoreGlobal) {
   const {
     t: t$k
   } = initVueI18n(messages$1);
-  const _sfc_main$p = {
+  const _sfc_main$q = {
     name: "UniCountdown",
     emits: ["timeup"],
     props: {
@@ -11443,7 +11467,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-countdown" }, [
       $props.showDay ? (vue.openBlock(), vue.createElementBlock("text", {
         key: 0,
@@ -11482,8 +11506,8 @@ if (uni.restoreGlobal) {
       }, vue.toDisplayString($options.secondText), 5)) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-c592f7f2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
-  const _sfc_main$o = {
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-c592f7f2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
+  const _sfc_main$p = {
     data() {
       return {
         smsCode: "",
@@ -11629,10 +11653,10 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_verification_code_style2 = resolveEasycom(vue.resolveDynamicComponent("verification-code-style2"), __easycom_0$1);
-    const _component_uni_countdown = resolveEasycom(vue.resolveDynamicComponent("uni-countdown"), __easycom_1);
+    const _component_uni_countdown = resolveEasycom(vue.resolveDynamicComponent("uni-countdown"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "counter" }, [
       vue.createCommentVNode(" \u8FD4\u56DE "),
       vue.createVNode(_component_van_icon, {
@@ -11685,8 +11709,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesVerificatioCodeVerificatioCode = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-1bfd51d6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/verificatioCode/verificatioCode.vue"]]);
-  const _sfc_main$n = {
+  const PagesVerificatioCodeVerificatioCode = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-1bfd51d6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/verificatioCode/verificatioCode.vue"]]);
+  const _sfc_main$o = {
     data() {
       return {
         coachForm: {
@@ -11758,11 +11782,11 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
-    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$3);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "counter content_style" }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createCommentVNode(" \u8FD4\u56DE\u56FE\u6807 "),
@@ -11852,8 +11876,8 @@ if (uni.restoreGlobal) {
       }, " \u4FDD\u5B58 ", 2)
     ]);
   }
-  const PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-4422acd1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
-  const _sfc_main$m = {
+  const PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-4422acd1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
+  const _sfc_main$n = {
     props: {
       disabled: {
         type: Boolean,
@@ -11900,7 +11924,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       tabindex: "-1",
       class: vue.normalizeClass(["popover", $props.className]),
@@ -11927,9 +11951,9 @@ if (uni.restoreGlobal) {
       ], 2)) : vue.createCommentVNode("v-if", true)
     ], 34);
   }
-  const popover = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
+  const popover = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
   const actionLibrary$1 = Es.importObject("actionLibrary", { customuI: true });
-  const _sfc_main$l = {
+  const _sfc_main$m = {
     components: {
       popover
     },
@@ -12190,7 +12214,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_sidebar_item = vue.resolveComponent("van-sidebar-item");
     const _component_van_sidebar = vue.resolveComponent("van-sidebar");
     const _component_popover = vue.resolveComponent("popover");
@@ -12396,9 +12420,9 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "D:/studyUninApp/bodybuilding-app/pages/actionLibrary/index.vue"]]);
+  const PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "D:/studyUninApp/bodybuilding-app/pages/actionLibrary/index.vue"]]);
   const actionLibrary = Es.importObject("actionLibrary");
-  const _sfc_main$k = {
+  const _sfc_main$l = {
     data() {
       return {
         show: false,
@@ -12514,7 +12538,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -12590,9 +12614,9 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
+  const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
   const train$3 = Es.importObject("train");
-  const _sfc_main$j = {
+  const _sfc_main$k = {
     components: {
       popover
     },
@@ -12661,11 +12685,19 @@ if (uni.restoreGlobal) {
               mileage: 0,
               frequency: 0,
               weight: null,
-              groupList: [],
+              groupList: [{
+                kg: null,
+                km: null,
+                time: null,
+                hour: null,
+                minute: null,
+                second: null,
+                active: false
+              }],
               open: false
             };
           });
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:425", "tempList", tempList);
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:433", "tempList", tempList);
           this.actionList.push(...tempList);
         }
         uni.setStorageSync("actionList", JSON.stringify([]));
@@ -12948,7 +12980,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_popover = vue.resolveComponent("popover");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
@@ -13772,7 +13804,7 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
+  const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
   //! moment.js
   //! version : 2.29.4
   //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -17677,7 +17709,7 @@ if (uni.restoreGlobal) {
     WEEK: "GGGG-[W]WW",
     MONTH: "YYYY-MM"
   };
-  const _sfc_main$i = {
+  const _sfc_main$j = {
     name: "calendar",
     props: {
       value: {
@@ -17861,7 +17893,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "calendar" }, [
       vue.createElementVNode("view", { class: "calendar-operation" }, [
         vue.createElementVNode("view", { class: "left" }, [
@@ -17918,9 +17950,9 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
+  const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
   const train$2 = Es.importObject("train");
-  const _sfc_main$h = {
+  const _sfc_main$i = {
     components: {
       calendar
     },
@@ -18052,7 +18084,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_calendar = vue.resolveComponent("calendar");
     const _component_van_icon = vue.resolveComponent("van-icon");
@@ -18158,13 +18190,13 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
+  const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
   const block0$1 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("canvasImage");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["canvasImage"] = "19043a88";
   };
   const train$1 = Es.importObject("train");
-  const _sfc_main$g = {
+  const _sfc_main$h = {
     data() {
       return {
         options: [
@@ -18342,7 +18374,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
@@ -18710,12 +18742,811 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$g);
-  const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
+    block0$1(_sfc_main$h);
+  const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
+  var util = {};
+  util.getWeixinCode = function() {
+    return new Promise((resolve, reject) => {
+      plus.oauth.getServices((services) => {
+        let weixinAuthService2 = services.find((service) => {
+          return service.id === "weixin";
+        });
+        if (weixinAuthService2) {
+          weixinAuthService2.authorize(function(res2) {
+            resolve(res2.code);
+          }, function(err) {
+            formatAppLog("log", "at uni_modules/uni-pay/js_sdk/js_sdk.js:30", err);
+            reject(new Error("\u83B7\u53D6\u5FAE\u4FE1code\u5931\u8D25"));
+          });
+        }
+      });
+    });
+  };
+  util.getAlipayCode = function() {
+    return new Promise((resolve, reject) => {
+      uni.login({
+        provider: "alipay",
+        success(res2) {
+          resolve(res2.code);
+        },
+        fail(err) {
+          reject(new Error("\u83B7\u53D6\u652F\u4ED8\u5B9Dcode\u5931\u8D25\uFF0C\u53EF\u80FD\u662F\u6CA1\u6709\u5173\u8054appid\u6216\u4F60\u7684\u652F\u4ED8\u5B9D\u5F00\u53D1\u8005\u5DE5\u5177\u8FD8\u6CA1\u6709\u767B\u5F55"));
+        }
+      });
+    });
+  };
+  util.checkPlatform = function() {
+  };
+  util.getH5Env = function() {
+    let ua = window.navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger" && ua.match(/miniprogram/i) == "miniprogram") {
+      return "mp-weixin";
+    }
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return "h5-weixin";
+    }
+    if (ua.match(/alipay/i) == "alipay" && ua.match(/miniprogram/i) == "miniprogram") {
+      return "mp-alipay";
+    }
+    if (ua.match(/alipay/i) == "alipay") {
+      return "h5-alipay";
+    }
+    return "h5";
+  };
+  util.timeFormat = function(time2, fmt = "yyyy-MM-dd hh:mm:ss", targetTimezone = 8) {
+    try {
+      if (!time2) {
+        return "";
+      }
+      if (typeof time2 === "string" && !isNaN(time2))
+        time2 = Number(time2);
+      let date2;
+      if (typeof time2 === "number") {
+        if (time2.toString().length == 10)
+          time2 *= 1e3;
+        date2 = new Date(time2);
+      } else {
+        date2 = time2;
+      }
+      const dif = date2.getTimezoneOffset();
+      const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+      const east8time = date2.getTime() + timeDif;
+      date2 = new Date(east8time);
+      let opt = {
+        "M+": date2.getMonth() + 1,
+        "d+": date2.getDate(),
+        "h+": date2.getHours(),
+        "m+": date2.getMinutes(),
+        "s+": date2.getSeconds(),
+        "q+": Math.floor((date2.getMonth() + 3) / 3),
+        "S": date2.getMilliseconds()
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (date2.getFullYear() + "").substr(4 - RegExp.$1.length));
+      }
+      for (let k2 in opt) {
+        if (new RegExp("(" + k2 + ")").test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k2] : ("00" + opt[k2]).substr(("" + opt[k2]).length));
+        }
+      }
+      return fmt;
+    } catch (err) {
+      return time2;
+    }
+  };
+  const IapTransactionState = {
+    purchasing: "0",
+    purchased: "1",
+    failed: "2",
+    restored: "3",
+    deferred: "4"
+  };
+  class Iap {
+    constructor(data = {}) {
+      this._productIds = data.products || [];
+      this._channel = null;
+      this._channelError = null;
+      this.ready = false;
+    }
+    init() {
+      return new Promise((resolve, reject) => {
+        this.getChannels((channel) => {
+          this.ready = true;
+          resolve(channel);
+        }, (err) => {
+          reject(err);
+        });
+      });
+    }
+    getProduct(productIds) {
+      return new Promise((resolve, reject) => {
+        this._channel.requestProduct(productIds || this._productIds, (res2) => {
+          resolve(res2);
+        }, (err) => {
+          reject(err);
+        });
+      });
+    }
+    requestPayment(orderInfo) {
+      return new Promise((resolve, reject) => {
+        uni.requestPayment({
+          provider: "appleiap",
+          orderInfo: {
+            quantity: 1,
+            manualFinishTransaction: true,
+            ...orderInfo
+          },
+          success: (res2) => {
+            resolve(res2);
+          },
+          fail: (err) => {
+            reject(err);
+          }
+        });
+      });
+    }
+    restoreCompletedTransactions(username) {
+      return new Promise((resolve, reject) => {
+        this._channel.restoreCompletedTransactions({
+          manualFinishTransaction: true,
+          username
+        }, (res2) => {
+          resolve(res2);
+        }, (err) => {
+          formatAppLog("log", "at uni_modules/uni-pay/js_sdk/appleiap.js:69", "restoreCompletedTransactions-err: ", err);
+          reject(err);
+        });
+      });
+    }
+    finishTransaction(transaction2) {
+      return new Promise((resolve, reject) => {
+        this._channel.finishTransaction(transaction2, (res2) => {
+          resolve(res2);
+        }, (err) => {
+          reject(err);
+        });
+      });
+    }
+    getChannels(success, fail) {
+      if (this._channel !== null) {
+        success(this._channel);
+        return;
+      }
+      if (this._channelError !== null) {
+        fail(this._channelError);
+        return;
+      }
+      uni.getProvider({
+        service: "payment",
+        success: (res2) => {
+          this._channel = res2.providers.find((channel) => {
+            return channel.id === "appleiap";
+          });
+          if (this._channel) {
+            success(this._channel);
+          } else {
+            this._channelError = {
+              errMsg: "paymentContext:fail iap service not found"
+            };
+            fail(this._channelError);
+          }
+        }
+      });
+    }
+    get channel() {
+      return this._channel;
+    }
+  }
+  const appleiapSdk = {
+    Iap,
+    IapTransactionState
+  };
+  const uniPayCo = Es.importObject("uni-pay-co");
+  var myOpenid;
+  const _sfc_main$g = {
+    name: "uni-pay",
+    emits: ["success", "cancel", "fail", "create", "mounted"],
+    props: {
+      adpid: {
+        Type: String,
+        default: ""
+      },
+      toSuccessPage: {
+        Type: Boolean,
+        default: true
+      },
+      returnUrl: {
+        Type: String,
+        default: ""
+      },
+      mainColor: {
+        Type: String,
+        default: ""
+      },
+      mode: {
+        Type: String,
+        default: ""
+      },
+      logo: {
+        Type: String,
+        default: "/static/logo.png"
+      },
+      height: {
+        Type: [String],
+        default: "70vh"
+      },
+      debug: {
+        Type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        options: {},
+        res: {},
+        images: {
+          wxpay: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAABC9JREFUeF7tWk1a20AMlUzv0bDr13AAYAOcpLCBcoqQU1DYEE6C2QAHIP26q3sPPOqniU2cZMYj+SeGxN5kEXlm9ObpjaQxwpY/uOX+Qw9Az4AtR6APgS0nQC+CfQi0FQLfrvcHXwAGPP4bQMK/fy5f7O9HehphwPfb/dOIogEhHQHBcamDCDESPoIxMQPTNSi1ABj+OrwDpNMaO5og4P2bMZOugFADwNTewWhU0/FVzAgnKZnxuoFQAbB3vX9MET7U2PHgq4R09vv8ZRI0bMhADMDw9uAhGN8NLQrWyAYRAGt1PgcRIU5TOms7JIIAdOL8nElJauikTRBKAdi7ObwioFFTzHaMw3mBzRV8DwKOXy+ertpagxcAq/YR/g2d6TlNrUDu4EiiE0Why4T1rgyINoXRC4DgjE+mF8+7RYAkp4RrRyVztRUKTgCkuz89fz4pAiB5z7WbklBrKxScAEgWxI6joZPXy5c4B0H0nkPdhzcHFIxxhHgZ8OA7AgMnAMObA479UnF6H5twQpF5RBMdibPDvB4AAAL6IZ0rNbTb9IngAyC8IwJ0K5okQBgzqFEKSV4wcXg17bxl8fIiJXFc0bHAgYLjYlHEFaZlVUQDoAIbcVZaN1VRrgAgUfImASiKW6Yh4pAohmHVQqpLABI0dMYiKhJPCeoV0ueuQsDmEJrkSeJ/bqNJnOqfApqVzWznzrdYWkvzhnUDYGnPKLTdV5gpfLiOqJUIaTefF8RKH6wxtAOX2IdA8NcCmmRItmBLfVF5jRBnR58kGQtWlGUJlBeAxpQ5A4eFKTu/ufLzPQv1f2mRRDiZ/nyyYwYrypI0OlQOc/9PsgshDsh2v+BUwTFnD3K5DglVlD4WlDZEsqywNgiK2F9gQBkLi7EtyV59WhBsiTURCjy5QZMgYRn9cxbZWgCQ+IKlnH2sFQYTURHmCYMgAJaKs9aYPkXNXGK6QhQdt9xeC4UhTC+eV/wVASASmrKj6IMA4NIBMQDsX1VN4IlbuU0K7vmiQS0G5EOpmiW6I1Dpjtp8pYc5yxYVj0RtXcMJcwDFSiqYLh2x+QgqAJwnAuEEydxbkZtdj+fKPVfwbPIq7KngqvMVX4WoAmDBAcH9HTMmXw23s0LJSlPOOsZx0l8VAu/0Fzjuc2Td3aY5zf1VoZgBvPgmvuhoIrFSMSXQThcDoJo0YLxGLfBSv5IINgVC1XxCOb/oZrkTBtRJqkQgKG6ROgPgPbGq/6HVIiYK51WngAj5ikbBhoZi3FALbHmozhlQXFChTc75g6wRM2ufzb9N/IwMcG0wg8HZJf9HBF/tFZnBBBH+cW/BpBDnd4XLDNJcon4oBiiY7jS194mEI0IaSz+12ygAclSYEcXvFsqA3UgANEzqAdCgtYm2PQM2cVc1PvUM0KC1ibY9AzZxVzU+bT0D/gPs/oxfcUEcJAAAAABJRU5ErkJggg==",
+          alipay: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA2FJREFUeF7tmU122jAQx2cMB2hp9yULeK+naHISwhJyiIRDBJaQkwRO0fdgEWff0h4ANH0yFc+m+hhbckKNvJUsaX76z4ckhAv/8MLthwggKuDCCUQXuHABxCAYXSC6wIUTiC7wFgL4MPveTaj9optrO+696ya8yeQRQFRAdIEYAxoVBD/PNtdCwHWpDIJwr+1PMCk1DgAkCSx/jHrLsv/p+lfKAp3HzQOYDAqxKtcYBJPtXe/B1Y3TXgmATGst0WIrgAC7JmBINOQsNN8HE0zfVQFlFxzrgFgHNLQOkNJuQ7vrcgkS1CXEua5fgnDj+l+172CX/h59Tbn9Of0qBUE1cGe2ngPhLWeiEH0krFDBT63HC8Cnx/VtFuFDfgl90UOldDvuX4WcSo7lBSD0YuR4H6ebZwRNkRUw9xdSah1G+IzZmW5IW7ERDX/e9Rc+YwerBEMvQo1nrhfqkf/ZuYCxxK5J/t4AjkFQBi71CXxFoFSWq2XTlkn+AndXodNf5SwgT4J7gnttoNL6BqUEmCZET/tkvzQZYj5g1Sf/0goIkfcJYIkEK5HsFnkYnen6BXQptUb5lwJgMz4zCihXD/BqAwVDuoy+Uqx399kACrkZaYECVjY5qxJZXpoQwrcDHB6UghfVvPssAMo35W4R7oZVg5EMmAJxUCZ2CNzfVJ2Pm6qdleDBNwFClaHZdRrQAEhWe25VSPCuAMo1tnQhdIzMNUixfDYBqAOGVQEKQB15OFMCwXPV3QsFww7g73E39Pudr/Gn0EyplQPXCkBF/5AKsBtPKRA+AdKAEx/0BhYLL9nHFkhZLiBvbkOcxFzG5wPtoe7gBUrrTiMttqO+8ebZCkAtWErs17jHvrrSLcj+lkCpKeV5g/ABIA05lqgVM4Er2nPhZgev7DHGnToLG+ALIC9budgWwoRzyuMUPlzj8waVBuELIFOB5iksi7xIKQh8PS4wu8/j+a3vBScbRAgABVfg5BZbH6SFgP0kVIl7UCjNja4RCkAGwecaPLDhp4yNsSYkADlp/mncdNLLu8fpud9XQK7//wERGoBrAefSfgRBsLI9pTtPg+diUNV1yLuJypVg1Un/p/8arwDXZkQALkJNb48KaPoOu+yLCnARanp7VEDTd9hlX1SAi1DT2/8AaakVXysj5qkAAAAASUVORK5CYII="
+        },
+        originalRroviders: ["wxpay", "alipay"],
+        currentProviders: ["wxpay", "alipay"]
+      };
+    },
+    async mounted() {
+      let getPayProviderFromCloudRes = await this.getPayProviderFromCloud();
+      if (getPayProviderFromCloudRes.errCode === 0) {
+        this.originalRroviders = getPayProviderFromCloudRes.provider;
+        this.currentProviders = JSON.parse(JSON.stringify(this.originalRroviders));
+      }
+      this.$emit("mounted", {
+        images: this.images,
+        originalRroviders: this.originalRroviders,
+        currentProviders: this.currentProviders,
+        appleiapSdk
+      });
+    },
+    methods: {
+      async open(options = {}) {
+        if (options.provider) {
+          let providers = [];
+          this.originalRroviders.map((item, index) => {
+            if (options.provider.indexOf(item) > -1) {
+              providers.push(item);
+            }
+          });
+          this.currentProviders = providers;
+          delete options.provider;
+        } else {
+          this.currentProviders = JSON.parse(JSON.stringify(this.originalRroviders));
+        }
+        this.options = options;
+        if (this.currentProviders.length === 1) {
+          this.createOrder({ provider: this.currentProviders[0] });
+        } else {
+          if (this.modeCom === "pc") {
+            await this._pcChooseProvider(this.currentProviders[0]);
+          }
+          this.$refs.payPopup.open();
+        }
+      },
+      async createOrder(data = {}) {
+        let { options } = this;
+        Object.assign(options, data);
+        if (options.provider === "appleiap") {
+          return this._appleiapCreateOrder(options);
+        }
+        let createOrderData = {
+          provider: options.provider,
+          total_fee: options.total_fee,
+          openid: myOpenid,
+          order_no: options.order_no || this.res.order_no,
+          out_trade_no: options.out_trade_no || this.res.out_trade_no,
+          description: options.description,
+          type: options.type,
+          qr_code: options.qr_code,
+          custom: options.custom,
+          other: options.other
+        };
+        let res2 = await uniPayCo.createOrder(createOrderData);
+        if (res2.errCode === 0) {
+          this.$emit("create", res2);
+          this.res = res2;
+          if (res2.qr_code) {
+            if (!options.cancel_popup) {
+              if (this.modeCom === "pc") {
+                this.$refs.payPopup.open();
+                this._pcChooseProvider(options.provider);
+              } else {
+                this.$refs.qrcodePopup.open();
+              }
+            }
+          } else if (res2.order) {
+            uni.requestPayment({
+              provider: res2.provider,
+              orderInfo: res2.order,
+              ...res2.order,
+              success: (res3) => {
+                this._getOrder();
+              },
+              fail: (err) => {
+                if (err.errMsg.indexOf("fail cancel") == -1) {
+                  formatAppLog("error", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:343", "uni.requestPayment:fail", err);
+                  this.$emit("fail", err);
+                } else {
+                  this.$emit("cancel", err);
+                }
+              }
+            });
+          }
+        }
+      },
+      async getOrder(data = {}) {
+        try {
+          let res2 = await uniPayCo.getOrder(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async refund(data = {}) {
+        try {
+          let res2 = await uniPayCo.refund(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async getRefund(data = {}) {
+        try {
+          let res2 = await uniPayCo.getRefund(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async closeOrder(data = {}) {
+        try {
+          let res2 = await uniPayCo.closeOrder(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async getPayProviderFromCloud(data = {}) {
+        try {
+          let res2 = await uniPayCo.getPayProviderFromCloud(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async getProviderAppId(data = {}) {
+        try {
+          let res2 = await uniPayCo.getProviderAppId(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async getOpenid(data = {}) {
+        try {
+          let res2 = await uniPayCo.getOpenid(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async verifyReceiptFromAppleiap(data = {}) {
+        try {
+          let res2 = await uniPayCo.verifyReceiptFromAppleiap(data);
+          if (typeof data.success === "function")
+            data.success(res2);
+          return res2;
+        } catch (err) {
+          if (typeof data.fail === "function")
+            data.fail(err);
+        }
+      },
+      async getCode() {
+      },
+      paySuccess(res2 = {}) {
+        this.$refs.payPopup.close();
+        this.$refs.payConfirmPopup.close();
+        this.clearQrcode();
+        if (this.toSuccessPage) {
+          this.pageToSuccess(res2);
+        }
+        this.$emit("success", res2);
+      },
+      pageToSuccess(res2) {
+        if (this.modeCom !== "pc") {
+          uni.navigateTo({
+            url: `/uni_modules/uni-pay/pages/success/success?out_trade_no=${res2.out_trade_no}&order_no=${res2.pay_order.order_no}&pay_date=${res2.pay_order.pay_date}&total_fee=${res2.pay_order.total_fee}&adpid=${this.adpid}&return_url=${this.returnUrl}&main_color=${this.mainColor}`
+          });
+        } else {
+          if (this.returnUrl) {
+            let url = this.returnUrl + `?out_trade_no=${res2.out_trade_no}&order_no=${res2.pay_order.order_no}`;
+            if (url.indexOf("/") !== 0)
+              url = `/${url}`;
+            uni.navigateTo({
+              url
+            });
+          }
+        }
+      },
+      clearQrcode() {
+        this.res.codeUrl = "";
+        this.res.qr_code_image = "";
+      },
+      async _getOrder() {
+        this.getOrder({
+          out_trade_no: this.res.out_trade_no,
+          await_notify: true,
+          success: (res2) => {
+            if (res2.has_paid) {
+              this.$refs.qrcodePopup.close();
+              this.paySuccess(res2);
+            }
+          }
+        });
+      },
+      clearQrcodePopup() {
+        this.$refs.qrcodePopup.close();
+      },
+      _afreshPayment() {
+        this.createOrder();
+      },
+      clearPayConfirmPopup() {
+        this.$refs.payConfirmPopup.close();
+      },
+      _pcChooseProvider(provider) {
+        if (provider === this.options.provider) {
+          return;
+        }
+        return this.createOrder({ provider });
+      },
+      async _appleiapCreateOrder(options) {
+        let appleiap = new appleiapSdk.Iap({
+          products: [options.productid]
+        });
+        uni.showLoading({
+          title: "\u52A0\u8F7D\u4E2D..."
+        });
+        await appleiap.init();
+        let productList = await appleiap.getProduct();
+        let productInfo = productList[0];
+        options.total_fee = productInfo.price * 100;
+        options.description = productInfo.description;
+        let createOrderData = {
+          provider: options.provider,
+          total_fee: options.total_fee,
+          order_no: options.order_no || this.res.order_no,
+          out_trade_no: options.out_trade_no || this.res.out_trade_no,
+          description: options.description,
+          type: options.type,
+          custom: options.custom
+        };
+        let res2 = await uniPayCo.createOrder(createOrderData);
+        if (res2.errCode === 0) {
+          this.$emit("create", res2);
+          this.res = res2;
+          uni.showLoading({
+            title: "\u652F\u4ED8\u8BF7\u6C42\u4E2D..."
+          });
+          try {
+            if (this.debug)
+              formatAppLog("log", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:542", "\u6B63\u5728\u8BF7\u6C42\u82F9\u679C\u670D\u52A1\u5668", options.productid, res2.out_trade_no);
+            let requestPaymentRes = await appleiap.requestPayment({
+              productid: options.productid,
+              username: res2.out_trade_no
+            });
+            if (this.debug)
+              formatAppLog("log", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:547", "\u7528\u6237\u652F\u4ED8\u6210\u529F", requestPaymentRes);
+            uni.showLoading({
+              title: "\u6B63\u5728\u5904\u7406\u652F\u4ED8\u7ED3\u679C..."
+            });
+            let verifyRes = await this.verifyReceiptFromAppleiap({
+              out_trade_no: requestPaymentRes.payment.username,
+              transaction_receipt: requestPaymentRes.transactionReceipt,
+              transaction_identifier: requestPaymentRes.transactionIdentifier
+            });
+            if (verifyRes.errCode === 0) {
+              await appleiap.finishTransaction(requestPaymentRes);
+              uni.hideLoading();
+              this.paySuccess(verifyRes);
+            }
+          } catch (err) {
+            let code = err.errCode || err.code;
+            if (code === 2) {
+              if (this.debug)
+                formatAppLog("log", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:567", "\u7528\u6237\u53D6\u6D88\u652F\u4ED8");
+              this.$emit("cancel", err);
+            } else {
+              formatAppLog("error", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:571", "appleiapCreateOrder:fail", err);
+              this.$emit("fail", err);
+            }
+            uni.hideLoading();
+          }
+        }
+      },
+      async appleiapRestore() {
+        uni.showLoading({
+          title: "\u68C0\u6D4B\u652F\u4ED8\u73AF\u5883..."
+        });
+        let appleiap = new appleiapSdk.Iap();
+        await appleiap.init();
+        try {
+          if (this.debug)
+            formatAppLog("log", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:588", "\u6B63\u5728\u67E5\u8BE2\u662F\u5426\u6709\u6F0F\u5355\u4FE1\u606F");
+          const transactions = await appleiap.restoreCompletedTransactions({
+            username: ""
+          });
+          if (this.debug)
+            formatAppLog("log", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:592", "\u6F0F\u5355\u67E5\u8BE2\u7ED3\u679C\uFF1A" + (transactions.length === 0 ? "\u672A\u6F0F\u5355" : "\u6709\u6F0F\u5355"), transactions);
+          if (!transactions.length) {
+            return;
+          }
+          for (let i2 = 0; i2 < transactions.length; i2++) {
+            let requestPaymentRes = transactions[i2];
+            switch (transaction.transactionState) {
+              case appleiapSdk.IapTransactionState.purchased:
+                let verifyRes = await this.verifyReceiptFromAppleiap({
+                  out_trade_no: requestPaymentRes.payment.username,
+                  transaction_receipt: requestPaymentRes.transactionReceipt,
+                  transaction_identifier: requestPaymentRes.transactionIdentifier
+                });
+                if (verifyRes.errCode === 0) {
+                  await appleiap.finishTransaction(requestPaymentRes);
+                }
+                break;
+              case appleiapSdk.IapTransactionState.failed:
+                await appleiap.finishTransaction(requestPaymentRes);
+                break;
+              default:
+                break;
+            }
+          }
+        } catch (e2) {
+          formatAppLog("error", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:621", e2);
+        } finally {
+          uni.hideLoading();
+        }
+      }
+    },
+    watch: {},
+    computed: {
+      modeCom() {
+        if (this.mode)
+          return this.mode;
+        let systemInfo = uni.getSystemInfoSync();
+        return systemInfo && systemInfo.deviceType === "pc" ? "pc" : "mobile";
+      }
+    }
+  };
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
+    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-pay" }, [
+      vue.createCommentVNode(" PC\u7248\u6536\u94F6\u53F0\u5F39\u7A97\u5F00\u59CB "),
+      $options.modeCom === "pc" ? (vue.openBlock(), vue.createBlock(_component_uni_popup, {
+        key: 0,
+        ref: "payPopup",
+        type: "center",
+        "safe-area": false
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("view", { class: "pc-pay-popup" }, [
+            vue.createElementVNode("view", { class: "pc-pay-popup-title" }, "\u6536\u94F6\u53F0"),
+            vue.createElementVNode("view", { class: "pc-pay-popup-flex" }, [
+              vue.createElementVNode("view", { class: "pc-pay-popup-qrcode-box" }, [
+                vue.createElementVNode("image", {
+                  class: "pc-pay-popup-qrcode-image",
+                  src: $data.res.qr_code_image
+                }, null, 8, ["src"]),
+                vue.createElementVNode("view", { class: "pc-pay-popup-amount-box" }, [
+                  vue.createElementVNode("view", { class: "pc-pay-popup-amount-tips" }, "\u626B\u4E00\u626B\u4ED8\u6B3E"),
+                  vue.createElementVNode("view", { class: "pc-pay-popup-amount" }, vue.toDisplayString(($data.options.total_fee / 100).toFixed(2)), 1)
+                ]),
+                $data.res.qr_code_image ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 0,
+                  class: "pc-pay-popup-complete-button"
+                }, [
+                  vue.createElementVNode("button", {
+                    type: "primary",
+                    onClick: _cache[0] || (_cache[0] = ($event) => $options._getOrder())
+                  }, "\u6211\u5DF2\u5B8C\u6210\u652F\u4ED8")
+                ])) : vue.createCommentVNode("v-if", true)
+              ]),
+              vue.createElementVNode("view", { class: "pc-pay-popup-provider-list" }, [
+                $data.currentProviders.indexOf("wxpay") > -1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 0,
+                  class: vue.normalizeClass(["pc-pay-popup-provider-item", $data.options.provider == "wxpay" ? "active" : ""]),
+                  onClick: _cache[1] || (_cache[1] = ($event) => $options._pcChooseProvider("wxpay"))
+                }, [
+                  vue.createElementVNode("image", {
+                    src: $data.images.wxpay,
+                    class: "pc-pay-popup-provider-image"
+                  }, null, 8, ["src"]),
+                  vue.createElementVNode("text", { class: "pc-pay-popup-provider-text" }, "\u5FAE\u4FE1\u652F\u4ED8")
+                ], 2)) : vue.createCommentVNode("v-if", true),
+                $data.currentProviders.indexOf("alipay") > -1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 1,
+                  class: vue.normalizeClass(["pc-pay-popup-provider-item", $data.options.provider == "alipay" ? "active" : ""]),
+                  onClick: _cache[2] || (_cache[2] = ($event) => $options._pcChooseProvider("alipay"))
+                }, [
+                  vue.createElementVNode("image", {
+                    src: $data.images.alipay,
+                    class: "pc-pay-popup-provider-image"
+                  }, null, 8, ["src"]),
+                  vue.createElementVNode("text", { class: "pc-pay-popup-provider-text" }, "\u652F\u4ED8\u5B9D\u652F\u4ED8")
+                ], 2)) : vue.createCommentVNode("v-if", true),
+                vue.createElementVNode("view", { class: "pc-pay-popup-logo" }, [
+                  vue.createElementVNode("image", {
+                    src: $props.logo,
+                    mode: "widthFix"
+                  }, null, 8, ["src"])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _: 1
+      }, 512)) : (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 1 }, [
+        vue.createCommentVNode(" PC\u7248\u6536\u94F6\u53F0\u5F39\u7A97\u7ED3\u675F "),
+        vue.createCommentVNode(" \u624B\u673A\u7248\u6536\u94F6\u53F0\u5F39\u7A97\u5F00\u59CB "),
+        vue.createVNode(_component_uni_popup, {
+          ref: "payPopup",
+          type: "bottom",
+          "safe-area": false
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", {
+              class: "mobile-pay-popup",
+              style: vue.normalizeStyle("min-height: " + $props.height + ";")
+            }, [
+              vue.createElementVNode("view", { class: "mobile-pay-popup-title" }, "\u6536\u94F6\u53F0"),
+              vue.createElementVNode("view", { class: "mobile-pay-popup-amount-box" }, [
+                vue.createElementVNode("view", null, "\u5F85\u652F\u4ED8\u91D1\u989D\uFF1A"),
+                vue.createElementVNode("view", { class: "mobile-pay-popup-amount" }, vue.toDisplayString(($data.options.total_fee / 100).toFixed(2)), 1)
+              ]),
+              vue.createElementVNode("view", { class: "mobile-pay-popup-provider-list" }, [
+                vue.createVNode(_component_uni_list, null, {
+                  default: vue.withCtx(() => [
+                    $data.currentProviders.indexOf("wxpay") > -1 ? (vue.openBlock(), vue.createBlock(_component_uni_list_item, {
+                      key: 0,
+                      thumb: $data.images.wxpay,
+                      title: "\u5FAE\u4FE1\u652F\u4ED8",
+                      onClick: _cache[3] || (_cache[3] = ($event) => $options.createOrder({ provider: "wxpay" })),
+                      clickable: "",
+                      link: ""
+                    }, null, 8, ["thumb"])) : vue.createCommentVNode("v-if", true),
+                    $data.currentProviders.indexOf("alipay") > -1 ? (vue.openBlock(), vue.createBlock(_component_uni_list_item, {
+                      key: 1,
+                      thumb: $data.images.alipay,
+                      title: "\u652F\u4ED8\u5B9D",
+                      onClick: _cache[4] || (_cache[4] = ($event) => $options.createOrder({ provider: "alipay" })),
+                      clickable: "",
+                      link: ""
+                    }, null, 8, ["thumb"])) : vue.createCommentVNode("v-if", true)
+                  ]),
+                  _: 1
+                })
+              ])
+            ], 4)
+          ]),
+          _: 1
+        }, 512)
+      ], 2112)),
+      vue.createCommentVNode(" \u624B\u673A\u7248\u6536\u94F6\u53F0\u5F39\u7A97\u7ED3\u675F "),
+      vue.createCommentVNode(" \u4E8C\u7EF4\u7801\u652F\u4ED8\u5F39\u7A97\u5F00\u59CB "),
+      vue.createVNode(_component_uni_popup, {
+        ref: "qrcodePopup",
+        type: "center",
+        "safe-area": false,
+        animation: false,
+        "mask-click": false,
+        onClose: $options.clearQrcode
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("view", { class: "qrcode-popup-content" }, [
+            vue.createElementVNode("image", {
+              src: $data.res.qr_code_image,
+              class: "qrcode-image"
+            }, null, 8, ["src"]),
+            vue.createElementVNode("view", { class: "qrcode-popup-info" }, [
+              vue.createElementVNode("view", null, [
+                vue.createElementVNode("text", { class: "qrcode-popup-info-fee" }, vue.toDisplayString(($data.options.total_fee / 100).toFixed(2)), 1),
+                vue.createElementVNode("text", null, "\u5143")
+              ]),
+              $data.options.provider == "wxpay" ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, "\u8BF7\u7528\u5FAE\u4FE1\u626B\u7801\u652F\u4ED8")) : $data.options.provider == "alipay" ? (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, "\u8BF7\u7528\u652F\u4ED8\u5B9D\u626B\u7801\u652F\u4ED8")) : vue.createCommentVNode("v-if", true)
+            ]),
+            vue.createElementVNode("button", {
+              type: "primary",
+              onClick: _cache[5] || (_cache[5] = ($event) => $options._getOrder())
+            }, "\u6211\u5DF2\u5B8C\u6210\u652F\u4ED8"),
+            vue.createElementVNode("view", {
+              class: "qrcode-popup-cancel",
+              onClick: _cache[6] || (_cache[6] = (...args) => $options.clearQrcodePopup && $options.clearQrcodePopup(...args))
+            }, "\u6682\u4E0D\u652F\u4ED8")
+          ])
+        ]),
+        _: 1
+      }, 8, ["onClose"]),
+      vue.createCommentVNode(" \u4E8C\u7EF4\u7801\u652F\u4ED8\u5F39\u7A97\u7ED3\u675F "),
+      vue.createCommentVNode(" \u5916\u90E8\u6D4F\u89C8\u5668\u786E\u8BA4\u652F\u4ED8\u5F39\u7A97\u5F00\u59CB "),
+      vue.createVNode(_component_uni_popup, {
+        ref: "payConfirmPopup",
+        type: "center",
+        "safe-area": false,
+        animation: false,
+        "mask-click": false
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("view", { class: "pay-confirm-popup-content" }, [
+            vue.createElementVNode("view", { class: "pay-confirm-popup-title" }, "\u8BF7\u786E\u8BA4\u652F\u4ED8\u662F\u5426\u5DF2\u5B8C\u6210"),
+            vue.createElementVNode("view", null, [
+              vue.createElementVNode("button", {
+                type: "primary",
+                onClick: _cache[7] || (_cache[7] = ($event) => $options._getOrder())
+              }, "\u5DF2\u5B8C\u6210\u652F\u4ED8")
+            ]),
+            vue.createElementVNode("view", { class: "pay-confirm-popup-refresh" }, [
+              vue.createElementVNode("button", {
+                type: "default",
+                onClick: _cache[8] || (_cache[8] = ($event) => $options._afreshPayment())
+              }, "\u652F\u4ED8\u9047\u5230\u95EE\u9898\uFF0C\u91CD\u65B0\u652F\u4ED8")
+            ]),
+            vue.createElementVNode("view", {
+              class: "pay-confirm-popup-cancel",
+              onClick: _cache[9] || (_cache[9] = (...args) => $options.clearPayConfirmPopup && $options.clearPayConfirmPopup(...args))
+            }, "\u6682\u4E0D\u652F\u4ED8")
+          ])
+        ]),
+        _: 1
+      }, 512),
+      vue.createCommentVNode(" \u5916\u90E8\u6D4F\u89C8\u5668\u786E\u8BA4\u652F\u4ED8\u5F39\u7A97\u7ED3\u675F ")
+    ]);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-9aa540bd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-pay/components/uni-pay/uni-pay.vue"]]);
   const My$3 = Es.importObject("my", { customuI: true });
   const _sfc_main$f = {
     data() {
       return {
+        total_fee: 1,
+        order_no: "",
+        out_trade_no: "",
+        description: "\u6D4B\u8BD5\u8BA2\u5355",
+        type: "test",
+        openid: "",
+        custom: {
+          a: "a",
+          b: 1
+        },
+        adpid: "1000000001",
+        transaction_id: "",
+        getOrderRes: {},
         userInfo: {
           nickname: "",
           avatar: null,
@@ -18789,9 +19620,22 @@ if (uni.restoreGlobal) {
       }
     },
     methods: {
-      aliPayment() {
-      },
-      wxPayment() {
+      createOrder(provider) {
+        debugger;
+        formatAppLog("log", "at pages/my/my.vue:349", provider, "provider");
+        this.order_no = `test` + Date.now();
+        this.out_trade_no = `${this.order_no}-1`;
+        this.$refs.uniPay.createOrder({
+          provider,
+          total_fee: this.total_fee,
+          order_no: this.order_no,
+          out_trade_no: this.out_trade_no,
+          description: this.description,
+          type: this.type,
+          qr_code: this.qr_code,
+          openid: this.openid,
+          custom: this.custom
+        });
       },
       payClick() {
         this.payShow = true;
@@ -18811,7 +19655,7 @@ if (uni.restoreGlobal) {
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:319", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:384", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -18846,7 +19690,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:354", "success");
+            formatAppLog("log", "at pages/my/my.vue:419", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3
@@ -18860,6 +19704,9 @@ if (uni.restoreGlobal) {
         }
         this.$refs.popup.open();
       },
+      openSheet1() {
+        this.$refs.popup1.open();
+      },
       popupChange(e2) {
         if (e2.show) {
           uni.hideTabBar();
@@ -18867,7 +19714,7 @@ if (uni.restoreGlobal) {
           const timer = setTimeout(() => {
             uni.showTabBar();
             clearTimeout(timer);
-          }, 300);
+          }, 100);
         }
       },
       onConfirm() {
@@ -18890,6 +19737,7 @@ if (uni.restoreGlobal) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_van_action_sheet = vue.resolveComponent("van-action-sheet");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
+    const _component_uni_pay = resolveEasycom(vue.resolveDynamicComponent("uni-pay"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "my" }, [
       vue.createElementVNode("view", { class: "background" }),
       vue.createElementVNode("view", { class: "status_bar" }, [
@@ -19058,29 +19906,31 @@ if (uni.restoreGlobal) {
         vue.createVNode(_component_van_action_sheet, {
           class: "payment-action-sheet",
           show: $data.payShow,
-          "onUpdate:show": _cache[6] || (_cache[6] = ($event) => $data.payShow = $event)
+          "onUpdate:show": _cache[7] || (_cache[7] = ($event) => $data.payShow = $event)
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", {
               class: "title",
-              onClick: _cache[4] || (_cache[4] = (...args) => $options.aliPayment && $options.aliPayment(...args))
+              onClick: _cache[4] || (_cache[4] = (...args) => _ctx.aliPayment && _ctx.aliPayment(...args))
             }, "\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F"),
             vue.createElementVNode("view", { class: "actions" }, [
               vue.createElementVNode("view", { class: "action" }, [
                 vue.createVNode(_component_van_image, {
                   class: "img",
-                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg",
+                  onClick: _cache[5] || (_cache[5] = ($event) => $options.createOrder("alipay"))
                 }),
                 vue.createElementVNode("view", { class: "text" }, "\u652F\u4ED8\u5B9D")
               ]),
               vue.createElementVNode("view", { class: "action" }, [
                 vue.createVNode(_component_van_image, {
                   class: "img",
-                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
-                }),
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg",
+                  onClick: _ctx.wxPayment
+                }, null, 8, ["onClick"]),
                 vue.createElementVNode("view", {
                   class: "text",
-                  onClick: _cache[5] || (_cache[5] = (...args) => $options.wxPayment && $options.wxPayment(...args))
+                  onClick: _cache[6] || (_cache[6] = ($event) => $options.createOrder("wxpay"))
                 }, "\u5FAE\u4FE1")
               ])
             ])
@@ -19099,12 +19949,12 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "picker-header" }, [
               vue.createElementVNode("view", {
                 class: "cancel-btn",
-                onClick: _cache[7] || (_cache[7] = (...args) => $options.onCancel && $options.onCancel(...args))
+                onClick: _cache[8] || (_cache[8] = (...args) => $options.onCancel && $options.onCancel(...args))
               }, "\u53D6\u6D88"),
               vue.createElementVNode("view", { class: "title" }, "\u63A8\u8350\u4EBA"),
               vue.createElementVNode("view", {
                 class: "success-btn",
-                onClick: _cache[8] || (_cache[8] = (...args) => $options.onConfirm && $options.onConfirm(...args))
+                onClick: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args))
               }, "\u786E\u8BA4")
             ]),
             vue.createElementVNode("view", { class: "message" }, [
@@ -19122,7 +19972,46 @@ if (uni.restoreGlobal) {
           ])
         ]),
         _: 1
-      }, 8, ["onChange"])
+      }, 8, ["onChange"]),
+      vue.createVNode(_component_uni_popup, {
+        ref: "popup1",
+        type: "bottom",
+        class: "recommend-sheet",
+        onChange: $options.popupChange
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("view", { class: "payment-action-sheet" }, [
+            vue.createElementVNode("view", { class: "title" }, "\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F"),
+            vue.createElementVNode("view", { class: "actions" }, [
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u652F\u4ED8\u5B9D")
+              ]),
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u5FAE\u4FE1")
+              ])
+            ])
+          ])
+        ]),
+        _: 1
+      }, 8, ["onChange"]),
+      vue.createCommentVNode(" \u7EDF\u4E00\u652F\u4ED8\u7EC4\u4EF6 "),
+      vue.createVNode(_component_uni_pay, {
+        ref: "uniPay",
+        adpid: $data.adpid,
+        height: "70vh",
+        "return-url": "/pages/order-detail/order-detail",
+        logo: "/static/logo.png",
+        onSuccess: _ctx.onSuccess,
+        onCreate: _ctx.onCreate
+      }, null, 8, ["adpid", "onSuccess", "onCreate"])
     ]);
   }
   const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "D:/studyUninApp/bodybuilding-app/pages/my/my.vue"]]);
@@ -19748,8 +20637,8 @@ if (uni.restoreGlobal) {
         case "\u67D4\u97E7\u6027\u6D4B\u8BD5":
           this.backimgFront = this.thomasimg;
           this.backimgSide = this.straightLegLiftimg;
-          this.FrontVideoUrl = this.StraightLegLiftUrl;
-          this.SideVideoUrl = this.ThomasUrl;
+          this.FrontVideoUrl = this.ThomasUrl;
+          this.SideVideoUrl = this.StraightLegLiftUrl;
           break;
         case "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5":
           this.backimgFront = this.shoulderTest1img;
@@ -19796,7 +20685,7 @@ if (uni.restoreGlobal) {
         squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/5599d329-4a47-4db2-a2a5-1ee1bc5deb35.mp4",
         squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/925865b3-3f5d-4c4a-9cbf-27ba8cdc8f65.mp4",
         thoracicSpineActivityUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
-        StraightLegLiftUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4f9af99a-4833-41d0-a584-1b0cdf4cb583.mp4",
+        StraightLegLiftUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bda98240-b083-41da-bbf4-7168183791a1.mp4",
         ThomasUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e971accd-2928-429b-86a1-e33f2d9e10aa.mp4",
         shoulderTest1Url: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f682d0b8-f3e6-4159-9242-01854025d3a6.mp4",
         shoulderTest2Url: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/580f6bf5-c503-40d9-819c-b4a11412791e.mp4",
@@ -20362,7 +21251,7 @@ if (uni.restoreGlobal) {
     onLoad: function(item) {
       let data = JSON.parse(item.data);
       this.actionData = data;
-      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:121", this.actionData);
+      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:122", this.actionData);
       this.leftNavTitle = this.actionData.questionContent;
       this.imgUrl = this.actionData.url;
       this.videoUrl = this.actionData.answerRemark.url;
@@ -20418,41 +21307,41 @@ if (uni.restoreGlobal) {
         this.isfocus = true;
       },
       start(e2) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:178", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:179", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
         this.startData.clientX = e2.changedTouches[0].clientX;
         this.startData.clientY = e2.changedTouches[0].clientY;
       },
       end(e2) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:183", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:184", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
         const subX = e2.changedTouches[0].clientX - this.startData.clientX;
         const subY = e2.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:187", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:188", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:190", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:191", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:192", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:193", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:197", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:198", "\u53F3\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:202", "\u65E0\u6548");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:203", "\u65E0\u6548");
         }
       },
       testResult(gender, age, resValue) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:207", gender, age, resValue);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:208", gender, age, resValue);
         resValue = Number(resValue);
         if (resValue == "") {
           this.levelColor("");
           this.typeText = "\u5F85\u6D4B";
         } else {
           testOb$1.method1(gender, age, resValue, this.codes).then((res2) => {
-            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:214", res2.data);
+            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:215", res2.data);
             if (resValue > 500) {
               switch (this.codes) {
                 case "F0001":
@@ -20492,7 +21381,7 @@ if (uni.restoreGlobal) {
         data["traineeId"] = this.traineeNo;
         testOb$1.getOnlyList(data).then((res2) => {
           if (res2.success) {
-            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:255", res2.data[0].birthday);
+            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:256", res2.data[0].birthday);
             this.gender = res2.data[0].gender;
             birth = res2.data[0].birthday;
             this.age = Number(this.getAge(birth));
@@ -20515,11 +21404,11 @@ if (uni.restoreGlobal) {
           age[0]--;
           age[1] += 12;
         }
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:285", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:286", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
         return age[0];
       },
       levelColor(levelType) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:289", levelType);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:290", levelType);
         switch (levelType) {
           case "\u4F18\u79C0":
           case "\u826F\u597D":
@@ -20557,9 +21446,9 @@ if (uni.restoreGlobal) {
         data["testDate"] = new Date();
         data["physicalData"] = actinData;
         data["status"] = "0";
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:327", data);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:328", data);
         const res2 = testOb$1.opearConfig(data, "bodyTestReport").then((res3) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:329", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:330", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res3.success) {
             uni.redirectTo({
               url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -20572,7 +21461,7 @@ if (uni.restoreGlobal) {
           }
         }).catch(() => {
         });
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:341", res2);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:342", res2);
       },
       getData() {
         const data = {};
@@ -20580,7 +21469,7 @@ if (uni.restoreGlobal) {
         data["questionCode"] = this.questionCode;
         data["code"] = this.codes;
         testOb$1.opearPHConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:349", res2.data);
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:350", res2.data);
           this.resultValue = res2.data[0].physicalData.actionVlue;
         }).catch(() => {
           this.resultValue = "";
@@ -20609,7 +21498,7 @@ if (uni.restoreGlobal) {
           class: "clickAction",
           onClick: _cache[0] || (_cache[0] = (...args) => $setup.showPopup && $setup.showPopup(...args))
         }, [
-          vue.createTextVNode("\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
+          vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
           vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
         ]),
         vue.createVNode(_component_van_popup, {
@@ -20672,6 +21561,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.resultValue = $event),
                         placeholder: "\u8BF7\u586B\u5199",
                         "cursor-spacing": 45,
+                        "auto-blur": true,
                         onFocus: _cache[4] || (_cache[4] = (...args) => $options.focus && $options.focus(...args)),
                         onBlur: _cache[5] || (_cache[5] = (...args) => $options.blur && $options.blur(...args)),
                         onConfirm: _cache[6] || (_cache[6] = (...args) => $options.blur && $options.blur(...args))
@@ -27324,7 +28214,7 @@ if (uni.restoreGlobal) {
       };
     },
     onShow() {
-      formatAppLog("log", "at pages/viewReport/viewReport.vue:1032", this.key);
+      formatAppLog("log", "at pages/viewReport/viewReport.vue:1035", this.key);
     },
     onLoad(options) {
       if (JSON.stringify(options) !== "{}" && options.traineeNo) {
@@ -27340,7 +28230,7 @@ if (uni.restoreGlobal) {
             this.openKey = false;
             this.getHistroyDate();
             this.pageName = "\u4F1A\u5458\u4FE1\u606F";
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1048", "1111");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1051", "1111");
             break;
         }
       }
@@ -27355,11 +28245,11 @@ if (uni.restoreGlobal) {
           this.getDynameEvaluation();
           this.getHealthQuesson();
           setTimeout(() => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1063", "\u6570\u636E\u52A0\u8F7D\u6210\u529F");
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1064", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1066", "\u6570\u636E\u52A0\u8F7D\u6210\u529F");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1067", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
             this.saveReport();
           }, 3e3);
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1067", "\u4FDD\u5B58\u6210\u529F\uFF01");
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1070", "\u4FDD\u5B58\u6210\u529F\uFF01");
         });
       },
       async pageMethods() {
@@ -27378,7 +28268,7 @@ if (uni.restoreGlobal) {
             this.gender = res2.data[0].gender;
             this.mobileNumber = res2.data[0].mobile;
             this.age = this.getAge(res2.data[0].birthday);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1086", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + res2.data);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1089", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + res2.data);
           }
         });
       },
@@ -27449,7 +28339,7 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1181", this.queryData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1184", this.queryData);
               resdata["data"] = this.queryData;
             }).catch((err) => {
             });
@@ -27540,9 +28430,9 @@ if (uni.restoreGlobal) {
           if (res2.data.length > 0) {
             this.bodyTestData = res2.data[0].bodyTestReport;
             this.bodyFraction = Number(this.bodyTestData.bodyFraction);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1288", this.bodyTestData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1291", this.bodyTestData);
             resData["data"] = this.bodyTestData;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1290", resData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1293", resData);
           }
         });
         return resData;
@@ -27552,7 +28442,7 @@ if (uni.restoreGlobal) {
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = "A0004";
         testOb.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1302", res2.data);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1305", res2.data);
           for (let r2 of res2.data) {
             for (let rq of r2.actionTestResult) {
               for (let d2 of rq.answer) {
@@ -27563,7 +28453,7 @@ if (uni.restoreGlobal) {
               }
             }
           }
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1315", this.physicalFitnessAssessmentData);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1318", this.physicalFitnessAssessmentData);
         });
       },
       setDyNameStatus(item) {
@@ -27591,7 +28481,7 @@ if (uni.restoreGlobal) {
         this.$refs.popup.open();
       },
       saveReport() {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1345", this.openKey);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1348", this.openKey);
         if (this.openKey) {
           const data = {};
           let date2 = new Date();
@@ -27604,9 +28494,9 @@ if (uni.restoreGlobal) {
           data["physicalFitnessAssessmentData"] = this.physicalFitnessAssessmentData;
           data["saveDate"] = today;
           data["name"] = this.personName;
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1360", data);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1363", data);
           testOb.saveReport(data).then((res2) => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1362", res2);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1365", res2);
           });
           this.showShare = true;
         }
@@ -27624,11 +28514,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1381", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1384", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1385", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1388", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -27636,15 +28526,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1393", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1396", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1395", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1398", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1401", "err", err);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1404", "err", err);
                 }
               });
             }
@@ -27653,12 +28543,12 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.showShare = false;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1410", option.name, 8888);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1413", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
           if (option.name === "\u4FDD\u5B58\u5230\u76F8\u518C") {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1416", "\u5F00\u59CB\u8C03\u7528\u4FDD\u5B58\u51FD\u6570");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1419", "\u5F00\u59CB\u8C03\u7528\u4FDD\u5B58\u51FD\u6570");
             this.downloadFile();
           } else {
             if (option.name === "\u5206\u4EAB\u5230\u5FAE\u4FE1") {
@@ -27668,11 +28558,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1426", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1429", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1430", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1433", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -27682,11 +28572,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1440", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1443", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1444", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1447", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -27694,7 +28584,7 @@ if (uni.restoreGlobal) {
         });
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1453", option, 88);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1456", option, 88);
         this.canvasImageMsg = option.name;
       },
       onClickLeft() {
@@ -27715,14 +28605,14 @@ if (uni.restoreGlobal) {
         const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1477", res2.data[0].testResult);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1480", res2.data[0].testResult);
             resData.push(res2.data[0].testResult);
             this.HQDate = resData;
           } else {
             this.showHQ = false;
           }
         });
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1501", resData);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1504", resData);
         return resData;
       },
       getHistroyDate() {
@@ -27731,9 +28621,9 @@ if (uni.restoreGlobal) {
           data["traineeNo"] = this.traineeNo;
           if (!this.openKey) {
             testOb.opearReportQuery(data).then((res2) => {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1512", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1515", res2);
               this.historyData = res2.data;
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1514", this.historyData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1517", this.historyData);
             });
           }
         }
@@ -27746,7 +28636,7 @@ if (uni.restoreGlobal) {
         this.queryData = item.queryData;
         this.assessmentTrueData = item.assessmentTrueData;
         this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1527", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1530", item);
         this.$refs.popup.close();
       },
       gototest() {
@@ -27754,8 +28644,23 @@ if (uni.restoreGlobal) {
           url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
         });
       },
+      insertStr(str) {
+        return str.slice(0, 5);
+      },
+      insertStr2(str) {
+        var a2 = str.indexOf("\u3002");
+        return str.slice(5, a2 + 1);
+      },
+      insertStr3(str) {
+        var a2 = str.indexOf("\u65E0");
+        return str.slice(a2, a2 + 5);
+      },
+      insertStr4(str) {
+        var a2 = str.indexOf("\u3002");
+        return str.slice(a2 + 7, str.length);
+      },
       onClickinfo(item) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1539", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1557", item);
         switch (item) {
           case "\u57FA\u7840\u4FE1\u606F":
             if (this.infoclick) {
@@ -27808,7 +28713,7 @@ if (uni.restoreGlobal) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
-    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$1);
+    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
     const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2);
     const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_3);
     const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_4);
@@ -28557,7 +29462,7 @@ if (uni.restoreGlobal) {
                                   class: "textRight"
                                 }, {
                                   default: vue.withCtx(() => [
-                                    vue.createTextVNode(vue.toDisplayString($data.bodyTestData.bodymoisture) + "%", 1)
+                                    vue.createTextVNode(vue.toDisplayString($data.bodyTestData.bodymoisture) + "L", 1)
                                   ]),
                                   _: 1
                                 })
@@ -28663,7 +29568,14 @@ if (uni.restoreGlobal) {
                             vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#ffc13c", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx", "margin-bottom": "2px" } }),
                             vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#f4f7ff", "line-height": "42upx" } }, vue.toDisplayString(item.title), 1),
                             vue.createElementVNode("view", { class: "assessmentContent" }, [
-                              vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx" } }, vue.toDisplayString(item.text), 1),
+                              vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx", "line-height": "44upx" } }, [
+                                vue.createElementVNode("view", { style: { "display": "initial", "color": "#ffc13c" } }, vue.toDisplayString($options.insertStr(item.text)), 1),
+                                vue.createTextVNode(vue.toDisplayString($options.insertStr2(item.text)), 1)
+                              ]),
+                              vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx", "line-height": "44upx" } }, [
+                                vue.createElementVNode("view", { style: { "display": "initial", "color": "#ffc13c" } }, vue.toDisplayString($options.insertStr3(item.text)), 1),
+                                vue.createTextVNode(vue.toDisplayString($options.insertStr4(item.text)), 1)
+                              ]),
                               vue.createElementVNode("view", { class: "warningText" }, [
                                 vue.createElementVNode("p", null, vue.toDisplayString(item.warningMessage), 1)
                               ])
@@ -29394,96 +30306,6 @@ if (uni.restoreGlobal) {
     ]);
   }
   const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-5abfd6f2"], ["__file", "D:/hbuilderX/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/ad-interactive/ad-interactive.vue"]]);
-  var util = {};
-  util.getWeixinCode = function() {
-    return new Promise((resolve, reject) => {
-      plus.oauth.getServices((services) => {
-        let weixinAuthService2 = services.find((service) => {
-          return service.id === "weixin";
-        });
-        if (weixinAuthService2) {
-          weixinAuthService2.authorize(function(res2) {
-            resolve(res2.code);
-          }, function(err) {
-            formatAppLog("log", "at uni_modules/uni-pay/js_sdk/js_sdk.js:30", err);
-            reject(new Error("\u83B7\u53D6\u5FAE\u4FE1code\u5931\u8D25"));
-          });
-        }
-      });
-    });
-  };
-  util.getAlipayCode = function() {
-    return new Promise((resolve, reject) => {
-      uni.login({
-        provider: "alipay",
-        success(res2) {
-          resolve(res2.code);
-        },
-        fail(err) {
-          reject(new Error("\u83B7\u53D6\u652F\u4ED8\u5B9Dcode\u5931\u8D25\uFF0C\u53EF\u80FD\u662F\u6CA1\u6709\u5173\u8054appid\u6216\u4F60\u7684\u652F\u4ED8\u5B9D\u5F00\u53D1\u8005\u5DE5\u5177\u8FD8\u6CA1\u6709\u767B\u5F55"));
-        }
-      });
-    });
-  };
-  util.checkPlatform = function() {
-  };
-  util.getH5Env = function() {
-    let ua = window.navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger" && ua.match(/miniprogram/i) == "miniprogram") {
-      return "mp-weixin";
-    }
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      return "h5-weixin";
-    }
-    if (ua.match(/alipay/i) == "alipay" && ua.match(/miniprogram/i) == "miniprogram") {
-      return "mp-alipay";
-    }
-    if (ua.match(/alipay/i) == "alipay") {
-      return "h5-alipay";
-    }
-    return "h5";
-  };
-  util.timeFormat = function(time2, fmt = "yyyy-MM-dd hh:mm:ss", targetTimezone = 8) {
-    try {
-      if (!time2) {
-        return "";
-      }
-      if (typeof time2 === "string" && !isNaN(time2))
-        time2 = Number(time2);
-      let date2;
-      if (typeof time2 === "number") {
-        if (time2.toString().length == 10)
-          time2 *= 1e3;
-        date2 = new Date(time2);
-      } else {
-        date2 = time2;
-      }
-      const dif = date2.getTimezoneOffset();
-      const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-      const east8time = date2.getTime() + timeDif;
-      date2 = new Date(east8time);
-      let opt = {
-        "M+": date2.getMonth() + 1,
-        "d+": date2.getDate(),
-        "h+": date2.getHours(),
-        "m+": date2.getMinutes(),
-        "s+": date2.getSeconds(),
-        "q+": Math.floor((date2.getMonth() + 3) / 3),
-        "S": date2.getMilliseconds()
-      };
-      if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (date2.getFullYear() + "").substr(4 - RegExp.$1.length));
-      }
-      for (let k2 in opt) {
-        if (new RegExp("(" + k2 + ")").test(fmt)) {
-          fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k2] : ("00" + opt[k2]).substr(("" + opt[k2]).length));
-        }
-      }
-      return fmt;
-    } catch (err) {
-      return time2;
-    }
-  };
   const _sfc_main$2 = {
     data() {
       return {

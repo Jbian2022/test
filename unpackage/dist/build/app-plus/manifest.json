@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.1.7",
-    "code": 117
+    "name": "1.1.8",
+    "code": 118
   },
   "description": "一款健身APP",
   "developer": {
@@ -191,6 +191,13 @@
             ],
             "appid": "wxf790c35e4d544ded",
             "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
+          },
+          "paypal": {
+            "__platform__": [
+              "ios"
+            ],
+            "returnURL_ios": "https://fc-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-pay-co",
+            "returnURL_android": ""
           }
         },
         "share": {
