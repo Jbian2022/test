@@ -1,5 +1,6 @@
 <template>
-	<view class="content_style" @touchstart="start" @touchend="end">
+	<view class="content_style " @touchstart="start" @touchend="end">
+		<view class="list_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
 		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
 		<view class="headBox" v-if="leftNavTitle==='肩关节灵活性测试'">
@@ -29,7 +30,7 @@
 			:overlay="false" 
 			class="clickActionContent">
 				<view class="clickActionBody">
-					<video :src="FrontVideoUrl" wid autoplay loop :controls="false">
+					<video :src="FrontVideoUrl" wid autoplay loop :controls="false" muted>
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -99,7 +100,7 @@
 		<view class="contentBody" v-else>
 			<view
 			class="clickAction"  
-			@click.native="showPopup">标准动作描述
+			@click.native="showPopup">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<van-popup 
@@ -114,7 +115,8 @@
 					autoplay 
 					loop 
 					:controls="false"
-					:custom-cache="false">
+					:custom-cache="false"
+					muted>
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -197,11 +199,12 @@
 			<image class="imagebg" :src="backimgSide"
 			/>
 			<view class="imgbgText">
-				点击标签选择问题部位
+				点击上方蓝色标签选择问题部位
 			</view>
 			<!-- <image
 			  src="../../static/app-plus/bg/actionImg.png"
 			></image> -->
+		</view>
 		</view>
 		<view class="bottom_style" @click.stop="actionResDate">保存</view>
 	</view>
@@ -304,8 +307,8 @@
 				pushUpTestimg:"../../../static/app-plus/bg/pushUpTest.jpg",
 				changeValue: true,
 				num: 0,
-				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/5599d329-4a47-4db2-a2a5-1ee1bc5deb35.mp4",
-				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/925865b3-3f5d-4c4a-9cbf-27ba8cdc8f65.mp4",
+				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/39e6eb66-787c-4615-b346-f80c490c69cf.mp4",
+				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6eb8e467-5798-49fd-9785-bfcde1fbb1e3.mp4",
 				//胸椎活动视频
 				thoracicSpineActivityUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
 				//直抬腿
@@ -463,9 +466,12 @@
 
 <style>
 .content_style{
-	width: 100vw;
-	overflow: hidden;
-	position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .headBox{
 	width: 100vw;
@@ -508,13 +514,12 @@
 }
 .contentBody{
 	width: calc(100vw - 60upx);
-	height: 1130upx;
 	margin: 0 auto;
 	margin-top: 20upx;
 }
 .imagebg {
-      width: 100%;
-      height: 1130upx;
+      width: calc(100vw - 60upx);
+      height: calc(100vh - 440upx);
 	  border-radius: 16upx;
 }
 .imgbgText{
@@ -569,8 +574,7 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	height: 82%;
-	margin-top: 39%;
+	margin-top: 36%;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
 	border-radius: 16upx;
@@ -621,9 +625,6 @@
 	top: 6upx;
 }
 .bottom_style {
-  width: calc(100vw - 60upx);
-  margin-left: 30upx;
-  height: 100upx;
   background: #1370ff;
   border-radius: 16upx;
   margin-top: 30upx;
@@ -634,6 +635,12 @@
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
+  justify-content: center;
+  
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  
+  display: flex;
 }
 .actinQuesson1{
 	position: absolute;
@@ -677,5 +684,8 @@
 }
 ::v-deep .van-popup{
 	background: #383D46;
+}
+.list_style{
+	flex: 1;
 }
 </style>
