@@ -19530,8 +19530,8 @@ if (uni.restoreGlobal) {
     data() {
       return {
         total_fee: 1,
-        order_no: "",
-        out_trade_no: "",
+        order_no: "2022102781283848489123144",
+        out_trade_no: "20012332132131232132",
         description: "\u6D4B\u8BD5\u8BA2\u5355",
         type: "test",
         openid: "",
@@ -19571,7 +19571,9 @@ if (uni.restoreGlobal) {
             des: "468",
             unit: "\u5143/\u5E74",
             activity: "\u65E0\u9650\u4F1A\u5458\u6570",
-            active: true
+            active: true,
+            order_no: "2022102781283848489123144",
+            out_trade_no: "20012332132131232132"
           },
           {
             hotMsg: "\u7ACB\u770160\u5143",
@@ -19580,7 +19582,9 @@ if (uni.restoreGlobal) {
             des: "218",
             unit: "\u5143/\u5B63\u5EA6",
             activity: "\u9650100\u4E2A\u4F1A\u5458",
-            active: false
+            active: false,
+            order_no: "2022102781283848389123144",
+            out_trade_no: "20012332132132332132"
           },
           {
             hotMsg: "\u7ACB\u770120\u5143",
@@ -19589,7 +19593,9 @@ if (uni.restoreGlobal) {
             des: "98",
             unit: "\u5143/\u6708",
             activity: "\u965030\u4E2A\u4F1A\u5458",
-            active: false
+            active: false,
+            order_no: "2022102781283848689123144",
+            out_trade_no: "20012332132132332135"
           }
         ],
         hotInfo: {
@@ -19616,17 +19622,17 @@ if (uni.restoreGlobal) {
     },
     methods: {
       createOrder(provider) {
-        formatAppLog("log", "at pages/my/my.vue:354", provider, "provider");
-        this.order_no = Date.now();
-        this.out_trade_no = `${this.order_no}-1`;
-        let order_no = 20221027812838484e8;
-        order_no++;
+        formatAppLog("log", "at pages/my/my.vue:363", this.order_no, "????");
         this.$refs.uniPay.createOrder({
           provider,
           total_fee: this.payMoney * 100,
           type: "recharge",
-          order_no: order_no + "",
-          description: "\u6559\u7EC3\u5145\u503CVIP"
+          order_no: this.order_no,
+          out_trade_no: this.out_trade_no,
+          description: "\u6559\u7EC3\u5145\u503CVIP",
+          qr_code: "",
+          openid: "",
+          custom: ""
         });
       },
       payClick() {
@@ -19647,7 +19653,7 @@ if (uni.restoreGlobal) {
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:396", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:395", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -19662,6 +19668,8 @@ if (uni.restoreGlobal) {
         this.hotInfo.text1 = +item.des - +item.money;
         this.hotInfo.text2 = item.des + item.unit;
         this.payMoney = item.money;
+        this.order_no = item.order_no;
+        this.out_trade_no = item.out_trade_no;
       },
       openCard() {
         uni.reLaunch({
@@ -19682,7 +19690,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:431", "success");
+            formatAppLog("log", "at pages/my/my.vue:432", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3

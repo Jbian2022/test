@@ -256,13 +256,14 @@
 
 <script>
 const My = uniCloud.importObject('my', { customuI: true })
+
 export default {
   data() {
     return {
       /** 支付 **/
       total_fee: 1, // 支付金额，单位分 100 = 1元
-      order_no: '', // 业务系统订单号（即你自己业务系统的订单表的订单号）
-      out_trade_no: '', // 插件支付单号
+      order_no: '2022102781283848489123144', // 业务系统订单号（即你自己业务系统的订单表的订单号）
+      out_trade_no: '20012332132131232132', // 插件支付单号
       description: '测试订单', // 支付描述
       type: 'test', // 支付回调类型 如 recharge 代表余额充值 goods 代表商品订单（可自定义，任意英文单词都可以，只要你在 uni-pay-co/notify/目录下创建对应的 xxx.js文件进行编写对应的回调逻辑即可）
       //qr_code: true, // 是否强制使用扫码支付
@@ -306,7 +307,9 @@ export default {
           des: '468',
           unit: '元/年',
           activity: '无限会员数',
-          active: true
+          active: true,
+          order_no: '2022102781283848489123144',
+          out_trade_no: '20012332132131232132'
         },
         {
           hotMsg: '立省60元',
@@ -315,7 +318,9 @@ export default {
           des: '218',
           unit: '元/季度',
           activity: '限100个会员',
-          active: false
+          active: false,
+          order_no: '2022102781283848389123144',
+          out_trade_no: '20012332132132332132'
         },
         {
           hotMsg: '立省20元',
@@ -324,7 +329,9 @@ export default {
           des: '98',
           unit: '元/月',
           activity: '限30个会员',
-          active: false
+          active: false,
+          order_no: '2022102781283848689123144',
+          out_trade_no: '20012332132132332135'
         }
       ],
       hotInfo: {
@@ -351,27 +358,19 @@ export default {
   },
   methods: {
     createOrder(provider) {
-      console.log(provider, 'provider')
-      this.order_no = Date.now()
-      this.out_trade_no = `${this.order_no}-1`
       // 发起支付
-      let order_no = 2022102781283848489123123
-      order_no++
+
+      console.log(this.order_no, '????')
       this.$refs.uniPay.createOrder({
         provider: provider, // 支付供应商
         total_fee: this.payMoney * 100, // 支付金额，单位分 100 = 1元
         type: 'recharge', // 支付回调类型
-        order_no: order_no + '', // 业务系统订单号
-        description: '教练充值VIP' // 支付描述
-
-        // total_fee: this.total_fee, // 支付金额，单位分 100 = 1元
-        // order_no: this.order_no, // 业务系统订单号（即你自己业务系统的订单表的订单号）
-        // out_trade_no: this.out_trade_no, // 插件支付单号
-        // description: this.description, // 支付描述
-        // type: this.type, // 支付回调类型
-        // qr_code: this.qr_code, // 是否强制使用扫码支付
-        // openid: this.openid, // 微信公众号需要
-        // custom: this.custom, // 自定义数据
+        order_no: this.order_no, // 业务系统订单号
+        out_trade_no: this.out_trade_no,
+        description: '教练充值VIP', // 支付描述
+        qr_code: '', // 是否强制使用扫码支付
+        openid: '', // 微信公众号需要
+        custom: '' // 自定义数据
       })
     },
     payClick() {
@@ -408,6 +407,8 @@ export default {
       this.hotInfo.text1 = +item.des - +item.money
       this.hotInfo.text2 = item.des + item.unit
       this.payMoney = item.money
+      this.order_no = item.order_no
+      this.out_trade_no = item.out_trade_no
     },
     openCard() {
       uni.reLaunch({
