@@ -10365,7 +10365,8 @@ if (uni.restoreGlobal) {
         traineeNo: "",
         originList: [],
         questionCode: "",
-        infoclick: true
+        infoclick: true,
+        isfocus: true
       };
     },
     onLoad(options) {
@@ -10400,6 +10401,12 @@ if (uni.restoreGlobal) {
       this.requestList();
     },
     methods: {
+      focus() {
+        this.isfocus = false;
+      },
+      blur() {
+        this.isfocus = true;
+      },
       saveHealthQuession() {
         let testResult = [];
         let newList = JSON.parse(JSON.stringify(this.healthList));
@@ -10424,7 +10431,7 @@ if (uni.restoreGlobal) {
           testResult
         };
         businessCloudObject.opearConfig(saveParam, "physical").then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:204", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:216", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -10443,7 +10450,7 @@ if (uni.restoreGlobal) {
           traineeNo: this.traineeNo,
           questionCode: this.questionCode
         }).then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:230", res2, "kkkkk");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:242", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             let healthList = this.originList.map((item) => {
               let answer = item.answer.length > 0 ? item.answer.map((config) => {
@@ -10488,7 +10495,7 @@ if (uni.restoreGlobal) {
                 answer
               };
             });
-            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:291", healthList, "hellow");
+            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:303", healthList, "hellow");
             this.healthList = healthList;
           }
         }).catch((err) => {
@@ -10617,8 +10624,13 @@ if (uni.restoreGlobal) {
                     maxlength: 30,
                     "onUpdate:modelValue": ($event) => item.answer[0].remark = $event,
                     "placeholder-style": "color:#BDC3CE",
-                    placeholder: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u8865\u5145\u4FE1\u606F"
-                  }, null, 8, ["onUpdate:modelValue", "placeholder"]), [
+                    placeholder: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u8865\u5145\u4FE1\u606F",
+                    "cursor-spacing": 45,
+                    "auto-blur": true,
+                    onFocus: _cache[2] || (_cache[2] = (...args) => $options.focus && $options.focus(...args)),
+                    onBlur: _cache[3] || (_cache[3] = (...args) => $options.blur && $options.blur(...args)),
+                    onConfirm: _cache[4] || (_cache[4] = (...args) => $options.blur && $options.blur(...args))
+                  }, null, 40, ["onUpdate:modelValue", "placeholder"]), [
                     [vue.vModelText, item.answer[0].remark]
                   ])
                 ])
@@ -10627,10 +10639,11 @@ if (uni.restoreGlobal) {
           ]);
         }), 128))
       ]),
-      vue.createElementVNode("view", {
+      $data.isfocus ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
         class: "bottom_style",
-        onClick: _cache[2] || (_cache[2] = vue.withModifiers((...args) => $options.saveHealthQuession && $options.saveHealthQuession(...args), ["stop"]))
-      }, "\u4FDD\u5B58")
+        onClick: _cache[5] || (_cache[5] = vue.withModifiers((...args) => $options.saveHealthQuession && $options.saveHealthQuession(...args), ["stop"]))
+      }, "\u4FDD\u5B58")) : vue.createCommentVNode("v-if", true)
     ]);
   }
   const PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__file", "D:/studyUninApp/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
@@ -12668,11 +12681,19 @@ if (uni.restoreGlobal) {
               mileage: 0,
               frequency: 0,
               weight: null,
-              groupList: [],
+              groupList: [{
+                kg: null,
+                km: null,
+                time: null,
+                hour: null,
+                minute: null,
+                second: null,
+                active: false
+              }],
               open: false
             };
           });
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:425", "tempList", tempList);
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:433", "tempList", tempList);
           this.actionList.push(...tempList);
         }
         uni.setStorageSync("actionList", JSON.stringify([]));
@@ -18818,7 +18839,7 @@ if (uni.restoreGlobal) {
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:319", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:341", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -18853,7 +18874,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:354", "success");
+            formatAppLog("log", "at pages/my/my.vue:376", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3
@@ -18867,6 +18888,9 @@ if (uni.restoreGlobal) {
         }
         this.$refs.popup.open();
       },
+      openSheet1() {
+        this.$refs.popup1.open();
+      },
       popupChange(e2) {
         if (e2.show) {
           uni.hideTabBar();
@@ -18874,7 +18898,7 @@ if (uni.restoreGlobal) {
           const timer = setTimeout(() => {
             uni.showTabBar();
             clearTimeout(timer);
-          }, 300);
+          }, 100);
         }
       },
       onConfirm() {
@@ -19125,6 +19149,35 @@ if (uni.restoreGlobal) {
                   onClick: ($event) => $options.pickerSelect(item)
                 }, vue.toDisplayString(item.text), 11, ["onClick"]);
               }), 128))
+            ])
+          ])
+        ]),
+        _: 1
+      }, 8, ["onChange"]),
+      vue.createVNode(_component_uni_popup, {
+        ref: "popup1",
+        type: "bottom",
+        class: "recommend-sheet",
+        onChange: $options.popupChange
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("view", { class: "payment-action-sheet" }, [
+            vue.createElementVNode("view", { class: "title" }, "\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F"),
+            vue.createElementVNode("view", { class: "actions" }, [
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u652F\u4ED8\u5B9D")
+              ]),
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u5FAE\u4FE1")
+              ])
             ])
           ])
         ]),

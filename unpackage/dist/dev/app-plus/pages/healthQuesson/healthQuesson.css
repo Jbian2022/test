@@ -1163,7 +1163,7 @@
 }
 .list_content_style {
   width: 100%;
-  flex: 0.88;
+  flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -1280,9 +1280,6 @@
   color: #ffffff;
   line-height: 3.125rem;
   text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
 }
 .uni-collapse .uni-collapse-item .uni-collapse-item-border {
   border: none !important;

@@ -418,7 +418,15 @@
 							mileage: 0,
 							frequency: 0,
 							weight: null,
-							groupList: [],
+							groupList: [{
+								kg: null,
+								km: null,
+								time: null,
+								hour: null,
+								minute: null,
+								second: null,
+								active: false
+							}],
 							open: false
 						}
 					})

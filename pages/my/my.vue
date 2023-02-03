@@ -210,6 +210,32 @@
         </view>
       </view>
     </uni-popup>
+    <uni-popup
+      ref="popup1"
+      type="bottom"
+      class="recommend-sheet"
+      @change="popupChange"
+    >
+      <view class="payment-action-sheet">
+        <view class="title">选择支付方式</view>
+        <view class="actions">
+          <view class="action">
+            <van-image
+              class="img"
+              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+            />
+            <view class="text">支付宝</view>
+          </view>
+          <view class="action">
+            <van-image
+              class="img"
+              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
+            />
+            <view class="text">微信</view>
+          </view>
+        </view>
+      </view>
+    </uni-popup>
   </view>
 </template>
 
@@ -291,12 +317,8 @@ export default {
     }
   },
   methods: {
-    aliPayment() {
-
-    },
-    wxPayment() {
-
-    },
+    aliPayment() {},
+    wxPayment() {},
     payClick() {
       this.payShow = true
     },
@@ -365,6 +387,9 @@ export default {
       }
       this.$refs.popup.open()
     },
+    openSheet1() {
+      this.$refs.popup1.open()
+    },
     popupChange(e) {
       if (e.show) {
         uni.hideTabBar()
@@ -372,7 +397,7 @@ export default {
         const timer = setTimeout(() => {
           uni.showTabBar()
           clearTimeout(timer)
-        }, 300)
+        }, 100)
       }
     },
     onConfirm() {
@@ -979,6 +1004,34 @@ export default {
           background: rgba(75, 82, 94, 0.5);
           font-size: 36upx;
           font-weight: 600;
+          color: #f4f7ff;
+        }
+      }
+    }
+  }
+  .payment-action-sheet {
+    background: #383d46;
+    border-radius: 24upx 24upx 0 0;
+    .title {
+      padding: 40upx;
+      padding-bottom: 80upx;
+      font-size: 36upx;
+      font-weight: 600;
+      color: #f4f7ff;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 148upx 148upx;
+      .action {
+        .img {
+          width: 100upx;
+          height: 100upx;
+        }
+        .text {
+          text-align: center;
+          margin-top: 20upx;
+          font-size: 28upx;
           color: #f4f7ff;
         }
       }

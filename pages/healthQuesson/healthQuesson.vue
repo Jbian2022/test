@@ -88,13 +88,18 @@
                     ? item.answerRemark.remarkTitle
                     : '请补充信息'
                 "
+				:cursor-spacing='45'
+				:auto-blur="true"
+				@focus="focus"
+				@blur="blur"
+				@confirm="blur"
               />
             </view>
           </view>
         </view>
       </view>
     </view>
-    <view class="bottom_style" @click.stop="saveHealthQuession">保存</view>
+    <view class="bottom_style" @click.stop="saveHealthQuession" v-if="isfocus">保存</view>
   </view>
 </template>
 
@@ -116,7 +121,8 @@ export default {
       traineeNo: '',
       originList: [], // 源数据
       questionCode: '',
-      infoclick: true
+      infoclick: true,
+	  isfocus: true
     }
   },
   onLoad(options) {
@@ -158,6 +164,12 @@ export default {
     this.requestList()
   },
   methods: {
+	  focus(){
+	  	this.isfocus = false
+	  },
+	  blur() {
+	  	this.isfocus = true
+	  },
     saveHealthQuession() {
       // console.log(this.healthList, 'healthList')
 
@@ -327,7 +339,7 @@ export default {
 }
 .list_content_style {
   width: 100%;
-  flex: 0.88;
+  flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -450,9 +462,9 @@ export default {
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  // position: fixed;
+  // left: 0;
+  // bottom: 0;
 }
 
 ::v-deep.uni-collapse {
