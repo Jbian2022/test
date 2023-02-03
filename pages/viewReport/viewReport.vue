@@ -410,7 +410,7 @@
                       <view class="greenBlock"></view>
                       最近的体重是否有大幅度的变化
                     </view>
-                    <view class="healthBlock">
+                    <view class="healthBlock"> 
                       {{ items[8].remark }}
                     </view>
                   </view>
