@@ -5,7 +5,7 @@
 		<view class="body_content" id="bodycontent">
 			<view 
 			class="clickAction" 
-			@click.native="showPopup">标准动作描述
+			@click.native="showPopup">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<van-popup 
