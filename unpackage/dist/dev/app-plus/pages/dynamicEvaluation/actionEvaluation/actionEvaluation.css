@@ -139,9 +139,12 @@
 }
 
 .content_style{
-	width: 100vw;
-	overflow: hidden;
-	position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .headBox{
 	width: 100vw;
@@ -184,13 +187,12 @@
 }
 .contentBody{
 	width: calc(100vw - 1.875rem);
-	height: 35.3125rem;
 	margin: 0 auto;
 	margin-top: 0.625rem;
 }
 .imagebg {
-      width: 100%;
-      height: 35.3125rem;
+      width: calc(100vw - 1.875rem);
+      height: calc(100vh - 13.75rem);
 	  border-radius: 0.5rem;
 }
 .imgbgText{
@@ -244,8 +246,7 @@
 }
  .clickActionContent{
 	width: calc(100vw - 1.875rem);
-	height: 82%;
-	margin-top: 39%;
+	margin-top: 36%;
 	margin-left: 0.9375rem;
 	--van-popup-background-color: #383D46;
 	border-radius: 0.5rem;
@@ -296,9 +297,6 @@
 	top: 0.1875rem;
 }
 .bottom_style {
-  width: calc(100vw - 1.875rem);
-  margin-left: 0.9375rem;
-  height: 3.125rem;
   background: #1370ff;
   border-radius: 0.5rem;
   margin-top: 0.9375rem;
@@ -309,6 +307,12 @@
   color: #ffffff;
   line-height: 3.125rem;
   text-align: center;
+  justify-content: center;
+  
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
+  
+  display: flex;
 }
 .actinQuesson1{
 	position: absolute;
@@ -352,4 +356,7 @@
 }
  .van-popup{
 	background: #383D46;
+}
+.list_style{
+	flex: 1;
 }
