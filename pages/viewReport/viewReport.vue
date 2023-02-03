@@ -664,9 +664,12 @@
                     >{{ item.title }}</span
                   >
                   <view class="assessmentContent">
-                    <p style="color: #7a7f89; font-size: 26upx">
-                      {{ item.text }}
+                    <p style="color: #7a7f89; font-size: 26upx;line-height: 44upx;">
+                      <view style="display: initial; color: #ffc13c;">{{ insertStr(item.text) }}</view>{{insertStr2(item.text)}}
                     </p>
+					<p style="color: #7a7f89; font-size: 26upx;line-height: 44upx;">
+					  <view style="display: initial; color: #ffc13c;">{{ insertStr3(item.text) }}</view>{{insertStr4(item.text)}}
+					</p>
                     <view class="warningText">
                       <p>
                         {{ item.warningMessage }}
@@ -1535,6 +1538,21 @@ export default {
           this.traineeNo
       })
     },
+	insertStr(str){
+		return str.slice(0,5)
+	},
+	insertStr2(str){
+		var a = str.indexOf("。")
+		return str.slice(5,a+1)
+	},
+	insertStr3(str){
+		var a = str.indexOf("无")
+		return str.slice(a,a+5)
+	},
+	insertStr4(str){
+		var a = str.indexOf("。")
+		return str.slice(a+7,str.length)
+	},
     onClickinfo(item) {
       console.log(item)
       switch (item) {
@@ -1969,7 +1987,7 @@ export default {
   font-size: 26upx;
   font-weight: 400;
   color: #ffc13c;
-  margin-top: 60upx;
+  margin-top: 34upx;
   margin-left: -15px;
   padding-top: 20px;
   padding-bottom: 20px;
