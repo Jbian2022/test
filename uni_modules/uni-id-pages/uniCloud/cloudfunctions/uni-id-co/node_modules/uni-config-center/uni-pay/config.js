@@ -29,7 +29,7 @@ module.exports = {
 			"appId": "wxf790c35e4d544ded", // app开放平台下的应用的appid
 			"secret": "d622e34a6c359fa5c6977d9749530b62", // app开放平台下的应用的secret
 			"mchId": "1637353318", // 商户id
-			"key": "pay", // v2的api key
+			"key": "wxpaykey", // v2的api key
 			"pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // v2需要用到的证书
 			"v3Key": "", // v3的api key
 			"appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
@@ -38,10 +38,10 @@ module.exports = {
 		},
 		// 微信 - 扫码支付
 		"native": {
-			"appId": "", // 可以是小程序或公众号或app开放平台下的应用的任意一个appid
-			"secret": "", // secret
-			"mchId": "", // 商户id
-			"key": "", // v2的api key
+			"appId": "wxf790c35e4d544ded", // app开放平台下的应用的appid
+			"secret": "d622e34a6c359fa5c6977d9749530b62", // app开放平台下的应用的secret
+			"mchId": "1637353318", // 商户id
+			"key": "wxpaykey", // v2的api key
 			"pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // v2需要用到的证书
 			"v3Key": "", // v3的api key
 			"appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
@@ -103,7 +103,7 @@ module.exports = {
 		// 支付宝 - H5支付配置（包含：网站二维码、手机H5，需申请支付宝当面付接口权限）
 		"native": {
 			"appId": "2021003174613818", // 支付宝开放平台下应用的appid
-			"privateKey": "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCE0O8frGdNjb1PojY3bwfbZO2RAE06EQhI7PyPi/RlLC6oFOukUHlcQjNSW2QsA1RCibai9o+wBFKMAy+7e6POboJ5I8Ag0DNcV5R9zLIRFkhfuQbb0ZwYKAvlbaeXNHVkHkhGL7JaWHvO85ahGxVaQVpbL7cFf4+1X1zxT9wiwRF7p+/XjSe2IV7Uid6SM9BDMs1m/9GsbLk4mWcrpkWUPEZKEwLwzNmE2ZWcqCVQBf+vhoIcjn7AF2dEWPSiy4+ORXbL4n8k/Ao1lbyRiCqS33rnvicrFYCH6PYMp2/Jgi+/AAcHK2aLHtbxktgRQQB9FkO2Q6jKCHEZomg/OF4PAgMBAAECggEAVKiRI5FTL53/Y7kz8dW2HmSRAXI9x5t/umxE+ILvP2YQP1dGdLBPCz2vVPmoOl3M4bTCU9Hx+PJoY5LMZCcFXNoYFHtzRfcwJdY1cpJ9lmKrs0hPVOKhKsyr+IwS3VC02yJqU0Kn3uqz0FB4XSzUSXmKzMD3WmvbAHNO3QpYeVXIapFaYulGlPI200YhKNXs1FyvBvTwNvWBQWEMdkm7v4Ke9gMJJCE11KuCpLmsmQmbIQlZm21jNxC96pvR0ix2yVDnT8GEzAUHhJ9shI90nQKYjV0CPtvV7mwCV/VBUAoB6Xrq6Xunhmu+SbeK89TGCajwG41f03UB173DrtTdoQKBgQC4c4UbGatsNYw2/qC8/KYLoNJS5o8YJc66YT8GowAJirmfGnrSxML3FRx6WPuBprGLTAIBgsAOrYDFwkFI+usHCAzQ+7KGdVLmP2KCiO9YCMXGRPoE/9NlBUmVijIhdV6tDfmJRuy7WbWrarw8j08nsZ6CwwZzy+63fPNqtJykiQKBgQC4Veqw1CqAf5wIacp2g+wh5EU5ViTDswYf8L8Z8/1tMKe2r7kjfeKHhN9w4uVK66kSbnKHzYW9sJYV6VR41zWsPapF8H2AkFJ0HvJrg0vVJbA3m7WJ2M8KDjYdNbLcumkXLmdNZZrkZK8WrozYG3Il33CVytIQq/PrEwvZPxr31wKBgBep+nG3oV6IoCyODmEwqLzlLRalrcYTU6plv4hCcUbIHXhkFU3lIH5CnxyzPdEsaarNXZSECc/YQqUcfvO1/WExjzNgl07YzoHrr9+/YbWRqo39W3Y4vA5B12bwC+5u+G6LVHBgQQ7oO356exvp5uXYy9VK4BELIN05kqEl+tLBAoGAK/cZ/cjsxi8pePw6dN/sHv1B4XYBWMfHKzERc1A1XqifJ7xrrOJmeCoh3NvREnh4n9PF70v+nQqUEW/QXO3/eDBQ/1Nnq5VAhT+oVCpBmPnfOLQjrVgPsXdIQtk+6tRvIj9IFjaopda5x/Aj2ZtaM1xCjweL6LwKdkPZrJwXg4sCgYAC9+cyJZYd6kfOoiByHnnlxTsSe7ocwRtycdrB64GQV6MexL9vIgtzp8GSVwv8cWG8ZT8b18lb3GgaxgGrJRw5T9pxUuc+iNBjI8BzNKe789ir62fy2I7ZEKORXAnNzH12v0KO6HRc3PWierRBKc//ZJ+d0uVClFER4d4fyoPXBw==",
+			"privateKey": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEK3Aa7s8t5BUvgglqsqcfUBNOVMbWAlinogJIYKB9AUPvJKe5Jwj/eSePLC4ZMSMZVAY9FCKN7INdq+9MJ2ZYHl1WE/nUB5Vz4MBdzS8T1UGsihHAI9TLV5sutkSg6HcovB+XCunK1V6wU3ZQVh4ck0GU0nSbg8V+ob7m+Oc78afaDUbyl2rMuWCBicNjTjHsMvTw9y37OVyP5KFrg9S5JrktE1eO6pIZG+PdDdOi2/odH82K8Kzv3jezwtHU8gk9aRep38+YwPm2P9bVcra9mxIl03EFoEmZVZ/ISkfSQuUbpa7SNWrrJaI82fqtyQVtmfoSgZpF+HgLminXWrM3AgMBAAECggEAS7e4fazPqxbuVngKynRKrXtq+EEgvloJfiq6VtV1HMrwPc4YLw8yGenZqxmScYbV1WDpR4oODFnOGsnSg8JxbnHJ9P+g3oZO2XtWxN393dnij4Z7c35hFFusOkuAEduoosB6MQK1WuUgt05/zGJxHPZ5ycex2pTyFf64gM5x8mCXDd8c5Ag3qlMqpGhClag0zESqFaIZY37xDyst0Kt/5aTV95M5cXYEzCBC0S1yYFA00lHCDX3ey2WDHwuFtCh8+WoDucsUaxZK4NqSzltDXqHMzWnqv/7EbEgMI7lJtPZ4c6s+vSHy18MQ4W8psgfT+aCCYid3hdLZVqj5Td1FAQKBgQDqVs+avosR3nkJFFN31oY+R60uG9e2id4OJtVWNALNgIL6V1TE5A1xOSP022C2FcZnmlyUouXJ6R1Ox1uDhIUNQfR8tQcxVEfBpbvqCFrFbQqxJ+UJV70UQTMAYuKBE1aRWhcZtnQB0xFEP5+FuGvwUxeJsIvF2jB4lYda8BpULwKBgQDWTWuMwiovSnAO+G+0+5bIhqIMhFyu7Ps9bXhAFg27wO5GPR6+qbxbTqwqGATXdhCpo+Pi7tgUpJWxA5J9wsL0MNG9aE8p8cjTHUCHL2Z1LoIDkgXNGsPpnU/gNUJl7wMvOIhnr2wT0wpnAuUsPjalXLDKD5qRvHnMMoc7KRZneQKBgA0v5W7n2hufUWBZbHkJ8XP/xJcbqf/zsjNJrCe1tZKq8LP1xiduTfNZK9TTo5WblBawcRVMNXIvVB7iyRuVkYc1dvStm0IDZCZZlUGORs1lXXyqqhDkhxdks+IJroVk+TIkx7gCtHSF1CrrCacUwb48bs6oyLTRmniusXdEm7axAoGAcd6LYiydi6lK57l8abcxRHW9T1dZhB0p1lb/iVXukDAQq8O4PWklS4L/GhLPJ8l1Sx5pbWCp8jYN0BPs1+QQAP6bw7/UKJ5vrjWh3vMBxwwiS1Fgwb4SEWTkV2cVU+JvV7z7RdTBYbtGkLvKF/sqwC0DRyqJYBy8vxKuJnJLlEkCgYEA1LrYpGc7mW5VGzzmJ96yZm81lXrT0whijE2n6HEkOEJjSB88VcQkebQiA1GVT9TkfUq3nB566DoGlhe4KVzXUglMxcjXgmmF0LRnQ6bB7pLrez6IWvl+L44ko06xs6zLs0xtJoKL1PcHBMY9R8ZAYHRl/Ub+3LH1cfDgcBue+k8=", // 支付宝商户私钥
 			"appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'), // 支付宝商户公钥路径
 			"alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'), // 支付宝公钥路径
 			"alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'), // 支付宝根证书路径

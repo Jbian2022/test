@@ -19621,20 +19621,17 @@ if (uni.restoreGlobal) {
     },
     methods: {
       createOrder(provider) {
-        debugger;
-        formatAppLog("log", "at pages/my/my.vue:349", provider, "provider");
-        this.order_no = `test` + Date.now();
+        formatAppLog("log", "at pages/my/my.vue:354", provider, "provider");
+        this.order_no = Date.now();
         this.out_trade_no = `${this.order_no}-1`;
+        let order_no = 20221027812838484e8;
+        order_no++;
         this.$refs.uniPay.createOrder({
           provider,
-          total_fee: this.total_fee,
-          order_no: this.order_no,
-          out_trade_no: this.out_trade_no,
-          description: this.description,
-          type: this.type,
-          qr_code: this.qr_code,
-          openid: this.openid,
-          custom: this.custom
+          total_fee: this.payMoney * 100,
+          type: "recharge",
+          order_no: order_no + "",
+          description: "\u6559\u7EC3\u5145\u503CVIP"
         });
       },
       payClick() {
@@ -19655,7 +19652,7 @@ if (uni.restoreGlobal) {
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:384", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:396", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -19690,7 +19687,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:419", "success");
+            formatAppLog("log", "at pages/my/my.vue:431", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3
@@ -19926,12 +19923,9 @@ if (uni.restoreGlobal) {
                 vue.createVNode(_component_van_image, {
                   class: "img",
                   src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg",
-                  onClick: _ctx.wxPayment
-                }, null, 8, ["onClick"]),
-                vue.createElementVNode("view", {
-                  class: "text",
                   onClick: _cache[6] || (_cache[6] = ($event) => $options.createOrder("wxpay"))
-                }, "\u5FAE\u4FE1")
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u5FAE\u4FE1")
               ])
             ])
           ]),

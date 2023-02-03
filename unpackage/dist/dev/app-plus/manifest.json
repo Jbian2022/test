@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.1.8",
-    "code": 118
+    "name": "1.2.1",
+    "code": 121
   },
   "description": "一款健身APP",
   "developer": {
@@ -97,6 +97,8 @@
         "permissions": [
           "<uses-feature android:name=\"android.hardware.camera\"/>",
           "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
           "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
           "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
           "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>",
@@ -105,6 +107,7 @@
           "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
           "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
           "<uses-permission android:name=\"android.permission.INTERNAL_SYSTEM_WINDOW\"/>",
+          "<uses-permission android:name=\"android.permission.INTERNET\"/>",
           "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
           "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
           "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
@@ -112,6 +115,7 @@
           "<uses-permission android:name=\"android.permission.READ_PROFILE\"/>",
           "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
           "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
           "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
           "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
           "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>"
