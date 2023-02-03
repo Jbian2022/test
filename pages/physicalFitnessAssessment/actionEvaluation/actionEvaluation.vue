@@ -18,7 +18,8 @@
 					<video :src="videoUrl" 
 					wid 
 					autoplay
-					:custom-cache="false">
+					:custom-cache="false"
+					muted>
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -359,10 +360,13 @@
 
 <style>
 .content_style {
-	width: 100vw;
-	overflow: hidden;
-	position: relative;
-	padding-top: 40upx;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40upx;
 }
 .collapseBlock{
 	background-color: #383D46;
@@ -377,12 +381,12 @@
 }
 .contentImg{
 	width: calc(100vw - 60upx);
-	height: 1062upx;
+	height: calc(100vh - 686upx);
+	border-radius: 16upx;
 	margin-top: 20upx;
 	margin-left: 30upx;
 	margin-bottom: -10upx;
 	position: relative;
-	border-radius: 16px 16px 0px 0px;
 }
 .contentBlock{
 	width: calc(100vw - 60upx);
@@ -390,6 +394,7 @@
 	background: #383D46;
 	margin-top: -5upx;
 	margin-left: 30upx;
+	margin-bottom: 20upx;
 	border-radius: 0px 0px 16px 16px;
 }
 .testText{
@@ -450,8 +455,8 @@
   text-align: center;
   justify-content: center;
   
-  width: calc(100vw - 80upx);
-  margin-left: 40upx;
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
   
   display: flex;
 }
@@ -462,7 +467,7 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 274upx;
+	top: 170upx;
 	left: calc(100vw - 717upx);
 	z-index: 1;
 	font-size: 26upx;
@@ -477,17 +482,18 @@
 	top: 6upx;
 }
 .clickActionBody{
+	/* height: 1400upx; */
 	background: #383D46;
 	border-radius: 16upx;
+	/* backdrop-filter: blur(3upx); */
 	z-index: 999;
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	height: 82%;
-	margin-top: 230upx;
+	margin-top: 14%;
 	margin-left: 30upx;
 	background-color: #383D46;
-	border-radius: 32upx;
+	border-radius: 16upx;
 	position: fixed;
 }
 .clickActionBody video{
@@ -499,7 +505,7 @@
 }
 .clickActionText{
 	width: calc(100vw - 140upx);
-	height: 174upx;
+	height: calc(100vh - 690upx);
 	margin-top: 40upx;
 	margin-left: 40upx;
 }
@@ -517,7 +523,7 @@
 	line-height: 36upx;
 }
 .clickActionEnd{
-	width: 240upx;
+	width: 230upx;
 	height: 80upx;
 	background: #000000;
 	border-radius: 40upx;
@@ -526,9 +532,8 @@
 	color: #F4F7FF;
 	line-height: 70upx;
 	text-align: center;
-	margin: 0 auto;
-	margin-top: 97%;
-	margin-bottom: 40upx;
+	margin: auto;
+	margin-bottom: 20px;
 }
 .clickActionEnd image{
 	width: 32upx;
@@ -550,6 +555,9 @@
 	color: #BDC3CE;
 	text-align: center;
 	margin: 0 auto;
+}
+.body_content{
+	flex: 1;
 }
 /* ::-webkit-input-placeholder { 
   color: white;
