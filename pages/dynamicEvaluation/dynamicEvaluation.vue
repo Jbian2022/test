@@ -8,7 +8,7 @@
 		<view class="z" style="opacity: 0;">8888</view>
 	</view>
 	<view class="watermark">数据评测来源于世界权威机构</view>
-    <van-row>
+    <van-row class="list_style">
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
@@ -169,9 +169,11 @@ export default {
 <style lang="scss" scoped>
 .content_style {
   width: 100vw;
+  height: 100vh;
   overflow: hidden;
   position: relative;
-  padding-top: 40upx;
+  display: flex;
+  flex-direction: column;
   .arrow-left{
   	// top: var(--status-bar-height);
   	// left: 0;
@@ -281,8 +283,6 @@ export default {
   margin-top: 85upx;
 }
 .need_scoll {
-  height: 82vh !important;
-  overflow-y: auto;
 }
 .watermark{
 	position: absolute;
@@ -294,9 +294,6 @@ export default {
 	right: 50upx;
 }
 .bottom_style {
-  width: calc(100vw - 60upx);
-  margin-left: 30upx;
-  height: 100upx;
   background: #1370ff;
   border-radius: 16upx;
   margin-top: 30upx;
@@ -307,5 +304,15 @@ export default {
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
+  justify-content: center;
+  
+  width: calc(100vw - 60upx);
+  margin-left: 30upx;
+  
+  display: flex;
+}
+.list_style{
+	flex: 1;
+	overflow-y: auto;
 }
 </style>

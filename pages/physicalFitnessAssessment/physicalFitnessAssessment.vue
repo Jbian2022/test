@@ -8,9 +8,8 @@
 		<view class="z" style="opacity: 0;">8888</view>
 	</view>
 	<view class="watermark">数据评测来源于世界权威机构</view>
-    <van-row>
+    <van-row class="list_style">
       <van-col class="need_scoll" span="24">
-		<view>
 			<view
 			  class="dynamicshow"
 			  v-for="(item, index) in queryData"
@@ -34,14 +33,10 @@
 					</view>
 				  </view>
 			</view>
-        </view>
 		
       </van-col>
     </van-row>
-		<view>
-		<!--  <van-button type="primary" class="postureButton" @click.native="getdynamicEvaluationdata()">确认</van-button> -->
 		  <view class="bottom_style" @click.stop="getdynamicEvaluationdata()">保存</view>
-		</view>
   </view>
 </template>
 
@@ -201,6 +196,7 @@ export default {
 <style lang="scss" scoped>
 .content_style {
   width: 100vw;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -249,8 +245,10 @@ export default {
 } */
 .need_scoll{
 	// background-color: rgba(33, 35, 40, 1);
-	overflow: auto;
-	position: relative;
+}
+.list_style {
+  flex: 1;
+  overflow-y: auto;
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
@@ -349,18 +347,19 @@ export default {
 .bottom_style {
   background: #1370ff;
   border-radius: 16upx;
-  top:90vh;
-  z-index: 100;
+  margin-top: 30upx;
+  margin-bottom: 30upx;
   font-size: 32upx;
+  font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #ffffff;
   line-height: 100upx;
   text-align: center;
   justify-content: center;
+  
   width: calc(100vw - 60upx);
   margin-left: 30upx;
+  
   display: flex;
-  margin-top: 40upx;
-  margin-bottom: 40upx;
 }
 </style>
