@@ -121,8 +121,12 @@ module.exports = {
 	 */
 	async payNotify(data) {
 		const httpInfo = this.getHttpInfo();
+		const clientInfo = this.getClientInfo();
+		const cloudInfo = this.getCloudInfo();
 		return service.pay.paymentNotify({
 			httpInfo,
+			clientInfo,
+			cloudInfo
 		});
 	},
 	/**

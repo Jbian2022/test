@@ -170,8 +170,7 @@ export default {
       deleteRemarkFlag: true,
       delteIndex: 0,
       newActive: 0,
-	  isFirstActiveFlag: false,
-	  
+      isFirstActiveFlag: false
     }
   },
   props: {
@@ -211,25 +210,23 @@ export default {
     },
     isActive: {
       handler: function (n, o) {
-		console.log(n, o,(n== o))
-			if (this.type === 'home' && typeof(n) === 'number') {
-						  this.newActive = n
-				this.getMemberList(n)
-			}
-
-
+        console.log(n, o, n == o)
+        if (this.type === 'home' && typeof n === 'number') {
+          this.newActive = n
+          this.getMemberList(n)
+        }
       },
       immediate: true
     },
-   //  newActive: {
-   //    handler: function (n, o) {
-   //       if (this.type === 'home' && typeof(n) === 'number') {
-   //       	this.getMemberList(n)
-   //       }
-   //    },
-   //    deep: true,
-	  // immediate: true
-   //  },
+    //  newActive: {
+    //    handler: function (n, o) {
+    //       if (this.type === 'home' && typeof(n) === 'number') {
+    //       	this.getMemberList(n)
+    //       }
+    //    },
+    //    deep: true,
+    // immediate: true
+    //  },
     searchValue: {
       handler: function (n, o) {
         if (this.type === 'detail') {
@@ -246,10 +243,9 @@ export default {
     }
   },
   updated() {
-	  // if (this.type === 'home' && typeof(this.isActive) === 'number') {
-		  
-	  // 	this.getMemberList(this.isActive)
-	  // }
+    // if (this.type === 'home' && typeof(this.isActive) === 'number') {
+    // 	this.getMemberList(this.isActive)
+    // }
   },
   methods: {
     close() {
@@ -356,6 +352,11 @@ export default {
     },
 
     goToTrainingRecord(item) {
+		try {
+		  uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
       uni.navigateTo({
         url:
           '/pages/trainingRecord/trainingRecord' +
@@ -363,12 +364,24 @@ export default {
       })
     },
     async goToNewWorkout(item) {
-      const res = await train.getTrainList({traineeNo:item._id,trainDate:this.getDay(new Date())})
-      if(res.data&&res.data.length>0){
-        const {trainContent}  = res.data[0]
+		try {
+		  uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
+      const res = await train.getTrainList({
+        traineeNo: item._id,
+        trainDate: this.getDay(new Date())
+      })
+      if (res.data && res.data.length > 0) {
+        const { trainContent } = res.data[0]
         const list = JSON.parse(trainContent) || []
-        if(list&&list.length>=3){
-          return uni.showToast({icon:'none', title: '每日最多添加三次训练记录', duration: 2000});
+        if (list && list.length >= 3) {
+          return uni.showToast({
+            icon: 'none',
+            title: '每日最多添加三次训练记录',
+            duration: 2000
+          })
         }
       }
       uni.navigateTo({
@@ -377,21 +390,26 @@ export default {
           `?traineeNo=${item._id}&traineeName=${item.traineeName}`
       })
     },
-    getDay(val){
-				const formater = (temp) =>{
-				　　if(temp<10){
-				　　　　return "0"+temp;
-				　　}else{
-				　　　　return temp;
-				　　}
-				}
-      const d=new Date(val);
-      const year = d.getFullYear();
-      const month=formater(d.getMonth()+1);
-      const date=formater(d.getDate());
-      return year+'-'+month+'-'+date
+    getDay(val) {
+      const formater = (temp) => {
+        if (temp < 10) {
+          return '0' + temp
+        } else {
+          return temp
+        }
+      }
+      const d = new Date(val)
+      const year = d.getFullYear()
+      const month = formater(d.getMonth() + 1)
+      const date = formater(d.getDate())
+      return year + '-' + month + '-' + date
     },
     getReport(item) {
+		try {
+		  uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
       uni.navigateTo({
         url:
           '/pages/viewReport/viewReport' +
@@ -446,6 +464,7 @@ export default {
       // flex: 1;
       align-items: center;
       flex-direction: column;
+
       .need_loop_style {
         width: calc(100% - 60upx);
         margin-top: 30upx;
@@ -522,6 +541,7 @@ export default {
           }
         }
       }
+
       .loop_bottom_result_style {
         display: flex;
         width: calc(100% - 60upx);

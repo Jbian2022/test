@@ -17,7 +17,7 @@ const uniID = require('uni-id')
 // 		}
 // 	}
 // })
-// console.log(uniID,'什么')
+ console.log(JSON.stringify(uniID) ,'配置文件')
 const db = uniCloud.database()
 module.exports = {
 	_before: function () { // 通用预处理器
@@ -95,8 +95,8 @@ module.exports = {
    },
    // 登出
    logout: async function() {
-	  
-	  const res = await uniID.logout()
+	  const token = this.getUniIdToken()
+	  const res = await uniID.logout(token)
 		return res
 	  
    },
@@ -146,7 +146,7 @@ module.exports = {
    },
    // 短信验证码登录
    sendSmsCode:  async function (mobile) {
-	   console.log(1111)
+	 
 	
 	 try{
 		 // 生成验证码可以按自己的需求来，这里以生成6位数字为例
@@ -285,11 +285,11 @@ module.exports = {
    
    },
    // 微信登录
-   loginByWeixin: async function(event,context) {
+   loginByWeixin: async function(code) {
 	   // 如下旧写法依然支持
-	   	// const res = await uniID.loginByWeixin(event.code)
-	   	const res = await uniID.loginByWeixin({
-	       code: event.code
+		console.log(code, '我是发送的code')
+	   const res = await uniID.loginByWeixin({
+	       code
 	     })
 	   	return res
    },
@@ -334,7 +334,7 @@ module.exports = {
 		return getRoleByUid.getWeixinUserInfo(event)
 	},
 	
-	// 登录业务模块联表对接
+	// 短信登录业务模块联表对接
 	getUserSchema: function (mobile) {
 		console.log(mobile)
 		return new Promise((resolve, reject) => {
@@ -342,6 +342,25 @@ module.exports = {
 			db.collection('uni-id-users')
 			  .where({
 					mobile: mobile	
+				})
+			  .get().then(res => {
+				  console.log(res,'>>>>>>')
+				  resolve(res)
+				 
+			  }).catch((err) => {
+				  reject(err)
+			  })
+		})
+			
+	
+	},
+	// 微信登录业务模块
+	getWxSchema: function (wx_unionid) {
+		return new Promise((resolve, reject) => {
+			
+			db.collection('uni-id-users')
+			  .where({
+					wx_unionid: wx_unionid	
 				})
 			  .get().then(res => {
 				  console.log(res,'>>>>>>')

@@ -6,8 +6,50 @@
     <movable-area>
       <view class="content_style">
         <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
+
+        <view class="header_style">
+          <view class="header_left_style">
+            <view class="left_content_style">
+              <image
+                class="left_content_img_style"
+                v-if="avatar"
+                :src="avatar"
+              ></image>
+              <image
+                class="left_content_img_style"
+                v-else
+                src="../../static/app-plus/mebrs/defaultAvator.png"
+              ></image>
+              <view class="left_header_style">我的会员</view>
+              <view class="left_num_style">{{ meberList.length }}</view>
+            </view>
+          </view>
+          <view class="header_right_style">
+            <image
+              class="right_img_style"
+              src="../../static/app-plus/mebrs/fangdajing.svg"
+              @click.native="jumpQuery"
+            ></image>
+          </view>
+        </view>
+
+        <view class="is_buy_style">
+          <view
+            class="buy_left"
+            :class="isActive === 1 ? 'active' : ''"
+            @click.native.stop="buyClick(1)"
+            >已购课</view
+          >
+          <view
+            class="buy_right"
+            :class="isActive === 0 ? 'active' : ''"
+            @click.native="buyClick(0)"
+            >未购课</view
+          >
+        </view>
+        <!-- <view class="zhan_wei_style" v-if="searchTopFlag"></view> -->
         <!--内容 start-->
-        <scroll-view
+        <!-- <scroll-view
           scroll-top="0"
           scroll-y="true"
           class="scroller-y-style"
@@ -16,59 +58,18 @@
           @scroll="scroll"
           :upper-threshold="50"
           scroll-anchoring="true"
-        >
-          <view class="header_style">
-            <view class="header_left_style">
-              <view class="left_content_style">
-                <image
-                  class="left_content_img_style"
-                  v-if="avatar"
-                  :src="avatar"
-                ></image>
-                <image
-                  class="left_content_img_style"
-                  v-else
-                  src="../../static/app-plus/mebrs/defaultAvator.png"
-                ></image>
-                <view class="left_header_style">我的会员</view>
-                <view class="left_num_style">{{ meberList.length }}</view>
-              </view>
-            </view>
-            <view class="header_right_style">
-              <image
-                class="right_img_style"
-                src="../../static/app-plus/mebrs/fangdajing.svg"
-                @click.native="jumpQuery"
-              ></image>
-            </view>
-          </view>
-
-          <view
-            class="is_buy_style"
-            :class="{ celling_animation_style: buyTopFlag }"
-          >
-            <view
-              class="buy_left"
-              :class="isActive === 1 ? 'active' : ''"
-              @click.native.stop="buyClick(1)"
-              >已购课</view
-            >
-            <view
-              class="buy_right"
-              :class="isActive === 0 ? 'active' : ''"
-              @click.native="buyClick(0)"
-              >未购课</view
-            >
-          </view>
-          <!-- <view class="zhan_wei_style" v-if="searchTopFlag"></view> -->
+        > -->
+        <view class="member_scroll_style">
           <MemberList
             ref="memberList"
             :isActive="isActive"
             :type="'home'"
             :page="page"
             :currentNum="currentNum"
+            @getMemberList="getMemberList"
           ></MemberList>
-        </scroll-view>
+        </view>
+        <!-- </scroll-view> -->
       </view>
 
       <movable-view direction="all" inertia>
@@ -403,13 +404,10 @@ export default {
       font-weight: 600 !important;
     }
   }
-  .is_buy_style::before {
-    width: calc(100vw - 300upx) !important;
+  .member_scroll_style {
+    overflow-x: hidden;
+    overflow-y: auto;
   }
-  .is_buy_style::after {
-    width: calc(100vw - 300upx) !important;
-  }
-
   .guid_style {
     z-index: 2200;
   }

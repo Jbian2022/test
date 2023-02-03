@@ -406,8 +406,7 @@ if (uni.restoreGlobal) {
         "app-plus": {
           titleNView: false,
           bounce: "none",
-          popGesture: "none",
-          disableSwipeBack: true
+          popGesture: "none"
         }
       }
     },
@@ -1029,7 +1028,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.70"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "10.102.21.251"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T$1 = "";
   try {
     T$1 = "__UNI__76A9E40";
@@ -4113,6 +4112,7 @@ if (uni.restoreGlobal) {
     };
   };
   var businessCloudObject$3 = Es.importObject("businessCloudObject");
+  const train$4 = Es.importObject("train");
   const _sfc_main$L = {
     name: "memberList",
     data() {
@@ -4120,7 +4120,8 @@ if (uni.restoreGlobal) {
         meberList: [],
         deleteRemarkFlag: true,
         delteIndex: 0,
-        newActive: 0
+        newActive: 0,
+        isFirstActiveFlag: false
       };
     },
     props: {
@@ -4132,11 +4133,6 @@ if (uni.restoreGlobal) {
       page: Number
     },
     created() {
-      switch (this.type) {
-        case "home":
-          this.getMemberList(this.isActive);
-          break;
-      }
     },
     onShow() {
     },
@@ -4159,18 +4155,13 @@ if (uni.restoreGlobal) {
       },
       isActive: {
         handler: function(n2, o2) {
-          let number = JSON.parse(JSON.stringify(n2));
-          this.newActive = number;
-          this.type === "home" ? this.getMemberList(number) : "";
+          formatAppLog("log", "at components/memberList/memberList.vue:213", n2, o2, n2 == o2);
+          if (this.type === "home" && typeof n2 === "number") {
+            this.newActive = n2;
+            this.getMemberList(n2);
+          }
         },
-        deep: true,
         immediate: true
-      },
-      newActive: {
-        handler: function(n2, o2) {
-          this.type === "home" ? this.getMemberList(n2) : "";
-        },
-        deep: true
       },
       searchValue: {
         handler: function(n2, o2) {
@@ -4179,13 +4170,15 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:234", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:237", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
           }
         }
       }
+    },
+    updated() {
     },
     methods: {
       close() {
@@ -4204,7 +4197,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:262", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:270", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4256,7 +4249,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:322", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:329", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4264,31 +4257,72 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:332", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:339", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e2) {
-        formatAppLog("log", "at components/memberList/memberList.vue:339", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:346", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e2, index) {
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:344", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:351", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
+        try {
+          uni.setStorageSync("isActive", String(this.isActive));
+        } catch (e2) {
+        }
         uni.navigateTo({
           url: `/pages/trainingRecord/trainingRecord?traineeNo=${item._id}&memberName=${item.traineeName}`
         });
       },
-      goToNewWorkout(item) {
+      async goToNewWorkout(item) {
+        try {
+          uni.setStorageSync("isActive", String(this.isActive));
+        } catch (e2) {
+        }
+        const res2 = await train$4.getTrainList({
+          traineeNo: item._id,
+          trainDate: this.getDay(new Date())
+        });
+        if (res2.data && res2.data.length > 0) {
+          const { trainContent } = res2.data[0];
+          const list = JSON.parse(trainContent) || [];
+          if (list && list.length >= 3) {
+            return uni.showToast({
+              icon: "none",
+              title: "\u6BCF\u65E5\u6700\u591A\u6DFB\u52A0\u4E09\u6B21\u8BAD\u7EC3\u8BB0\u5F55",
+              duration: 2e3
+            });
+          }
+        }
         uni.navigateTo({
           url: `/pages/newWorkout/newWorkout?traineeNo=${item._id}&traineeName=${item.traineeName}`
         });
       },
+      getDay(val) {
+        const formater = (temp) => {
+          if (temp < 10) {
+            return "0" + temp;
+          } else {
+            return temp;
+          }
+        };
+        const d2 = new Date(val);
+        const year2 = d2.getFullYear();
+        const month2 = formater(d2.getMonth() + 1);
+        const date2 = formater(d2.getDate());
+        return year2 + "-" + month2 + "-" + date2;
+      },
       getReport(item) {
+        try {
+          uni.setStorageSync("isActive", String(this.isActive));
+        } catch (e2) {
+        }
         uni.navigateTo({
           url: "/pages/viewReport/viewReport?traineeNo=" + item._id + "&key=2&buyStatus=" + item.buyStatus
         });
@@ -4644,140 +4678,6 @@ if (uni.restoreGlobal) {
     ], 4);
   }
   const ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-13dad3a2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
-  var util$1 = {};
-  util$1.getCommonTime = function(date2 = new Date(), targetTimezone = 8) {
-    let res2 = {};
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const { year: year2, month: month2, day: day2, hour, minute, second } = util$1.getFullTime(date2, 2);
-    res2.now = {
-      year: year2,
-      month: month2,
-      day: day2,
-      hour,
-      minute,
-      second
-    };
-    let month_last_day = new Date(year2, month2, 0).getDate();
-    let year_last_day = new Date(year2, 12, 0).getDate();
-    res2.todayStart = new Date(`${year2}/${month2}/${day2}`).getTime() - timeDif;
-    res2.today12End = new Date(`${year2}/${month2}/${day2}`).getTime() + (12 * 60 * 60 * 1e3 - 1) - timeDif;
-    res2.todayEnd = new Date(`${year2}/${month2}/${day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    res2.monthStart = new Date(`${year2}/${month2}/1`).getTime() - timeDif;
-    res2.monthEnd = new Date(`${year2}/${month2}/${month_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    res2.yearStart = new Date(`${year2}/1/1`).getTime() - timeDif;
-    res2.yearEnd = new Date(`${year2}/12/${year_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    let weekObj = util$1.getWeekStartAndEnd(0, date2);
-    res2.weekStart = weekObj.weekStart;
-    res2.weekEnd = weekObj.weekEnd;
-    res2.months = [];
-    res2.months[0] = {
-      monthStart: res2.monthStart,
-      monthEnd: res2.monthEnd
-    };
-    for (let i2 = 1; i2 <= 12; i2++) {
-      let month_last_day2 = new Date(year2, i2, 0).getDate();
-      let monthStart = new Date(`${year2}/${i2}/1`).getTime() - timeDif;
-      let monthEnd = new Date(`${year2}/${i2}/${month_last_day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-      res2.months[i2] = {
-        monthStart,
-        monthEnd
-      };
-    }
-    return res2;
-  };
-  util$1.timeFormat = function(time2, fmt = "yyyy-MM-dd hh:mm:ss", targetTimezone = 8) {
-    if (!time2) {
-      return "";
-    }
-    let date2;
-    if (typeof time2 === "number") {
-      if (time2.toString().length == 10)
-        time2 *= 1e3;
-      date2 = new Date(time2);
-    } else {
-      date2 = time2;
-    }
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const east8time = date2.getTime() + timeDif;
-    date2 = new Date(east8time);
-    let opt = {
-      "M+": date2.getMonth() + 1,
-      "d+": date2.getDate(),
-      "h+": date2.getHours(),
-      "m+": date2.getMinutes(),
-      "s+": date2.getSeconds(),
-      "q+": Math.floor((date2.getMonth() + 3) / 3),
-      "S": date2.getMilliseconds()
-    };
-    if (/(y+)/.test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (date2.getFullYear() + "").substr(4 - RegExp.$1.length));
-    }
-    for (let k2 in opt) {
-      if (new RegExp("(" + k2 + ")").test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k2] : ("00" + opt[k2]).substr(("" + opt[k2]).length));
-      }
-    }
-    return fmt;
-  };
-  util$1.getFullTime = function(date2, type = 0, targetTimezone = 8) {
-    if (!date2) {
-      return "";
-    }
-    if (typeof date2 == "number") {
-      date2 = new Date(date2);
-    }
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const east8time = date2.getTime() + timeDif;
-    date2 = new Date(east8time);
-    let YYYY = date2.getFullYear() + "";
-    let MM = date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1;
-    let DD = date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate();
-    let hh = date2.getHours() < 10 ? "0" + date2.getHours() : date2.getHours();
-    let mm = date2.getMinutes() < 10 ? "0" + date2.getMinutes() : date2.getMinutes();
-    let ss2 = date2.getSeconds() < 10 ? "0" + date2.getSeconds() : date2.getSeconds();
-    if (type === 2) {
-      return {
-        YYYY: Number(YYYY),
-        MM: Number(MM),
-        DD: Number(DD),
-        hh: Number(hh),
-        mm: Number(mm),
-        ss: Number(ss2),
-        year: Number(YYYY),
-        month: Number(MM),
-        day: Number(DD),
-        hour: Number(hh),
-        minute: Number(mm),
-        second: Number(ss2)
-      };
-    } else if (type === 1) {
-      return YYYY + "" + MM + DD + hh + mm + ss2;
-    } else {
-      return YYYY + "-" + MM + "-" + DD + " " + hh + ":" + mm + ":" + ss2;
-    }
-  };
-  util$1.getWeekStartAndEnd = function(addWeekCount = 0, date2 = new Date(), targetTimezone = 8) {
-    let res2 = {};
-    const dif = date2.getTimezoneOffset();
-    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
-    const east8time = date2.getTime() + timeDif;
-    const east8Date = new Date(east8time);
-    let week = east8Date.getDay();
-    east8Date.getDate();
-    let oneDayMillisecond = 1e3 * 60 * 60 * 24;
-    date2 = new Date(date2.getTime() + oneDayMillisecond * 7 * addWeekCount);
-    let minusDay = week != 0 ? week - 1 : 6;
-    let weekStart = new Date(date2.getTime() - oneDayMillisecond * minusDay);
-    let weekEnd = new Date(weekStart.getTime() + oneDayMillisecond * 6);
-    let weekStartObj = util$1.getFullTime(weekStart, 2);
-    let weekEndObj = util$1.getFullTime(weekEnd, 2);
-    res2.weekStart = new Date(`${weekStartObj.year}/${weekStartObj.month}/${weekStartObj.day}`).getTime() - timeDif;
-    res2.weekEnd = new Date(`${weekEndObj.year}/${weekEndObj.month}/${weekEndObj.day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
-    return res2;
-  };
   const _sfc_main$J = {
     components: {
       BgTheamCompontent,
@@ -4792,7 +4692,8 @@ if (uni.restoreGlobal) {
         loginNum: 0,
         showPopover: false,
         scrollTop: 0,
-        isFixedTop: false,
+        searchTopFlag: false,
+        buyTopFlag: false,
         delteIndex: 0,
         avatar: null,
         addUpperLimit: null,
@@ -4845,7 +4746,7 @@ if (uni.restoreGlobal) {
         });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:196", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:189", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4858,7 +4759,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:214", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:207", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4870,11 +4771,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:226", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:219", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:230", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:223", "success");
           }
         });
         uni.navigateTo({
@@ -4888,19 +4789,25 @@ if (uni.restoreGlobal) {
         });
       },
       upper: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:241", e2);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:234", e2, "mmm");
       },
       lower: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:244", e2);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:237", e2);
       },
       scroll(event) {
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:240", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
         this.scrollTop = event.detail.scrollTop;
-        if (event.detail.scrollTop > uni.getWindowInfo().statusBarHeight) {
-          this.isFixedTop = true;
+        if (event.detail.scrollTop > 50) {
+          this.searchTopFlag = true;
         } else {
-          this.isFixedTop = false;
+          this.searchTopFlag = false;
         }
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:253", event.detail.scrollTop, "?????");
+        if (event.detail.scrollTop > 95) {
+          this.buyTopFlag = true;
+        } else {
+          this.buyTopFlag = false;
+        }
+        return;
       },
       maskClick() {
         uni.setStorageSync("loginNum", "1");
@@ -4912,7 +4819,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:273", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:272", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4941,7 +4848,7 @@ if (uni.restoreGlobal) {
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:301", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:300", "success");
           }
         });
         this.isActive = type;
@@ -4960,64 +4867,54 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("movable-area", null, [
           vue.createElementVNode("view", { class: "content_style" }, [
             vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-            vue.createCommentVNode("\u5185\u5BB9 start"),
-            vue.createElementVNode("scroll-view", {
-              "scroll-top": "0",
-              "scroll-y": "true",
-              class: "scroller-y-style",
-              onScrolltoupper: _cache[3] || (_cache[3] = (...args) => $options.upper && $options.upper(...args)),
-              onScrolltolower: _cache[4] || (_cache[4] = (...args) => $options.lower && $options.lower(...args)),
-              onScroll: _cache[5] || (_cache[5] = (...args) => $options.scroll && $options.scroll(...args))
-            }, [
-              vue.createElementVNode("view", { class: "header_style" }, [
-                vue.createElementVNode("view", { class: "header_left_style" }, [
-                  vue.createElementVNode("view", { class: "left_content_style" }, [
-                    $data.avatar ? (vue.openBlock(), vue.createElementBlock("image", {
-                      key: 0,
-                      class: "left_content_img_style",
-                      src: $data.avatar
-                    }, null, 8, ["src"])) : (vue.openBlock(), vue.createElementBlock("image", {
-                      key: 1,
-                      class: "left_content_img_style",
-                      src: "/static/app-plus/mebrs/defaultAvator.png"
-                    })),
-                    vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
-                    vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
-                  ])
-                ]),
-                vue.createElementVNode("view", {
-                  class: vue.normalizeClass(["header_right_style", { search_anmition_style: $data.isFixedTop }])
-                }, [
-                  vue.createElementVNode("image", {
-                    class: "right_img_style",
-                    src: "/static/app-plus/mebrs/fangdajing.svg",
-                    onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
-                  })
-                ], 2)
+            vue.createElementVNode("view", { class: "header_style" }, [
+              vue.createElementVNode("view", { class: "header_left_style" }, [
+                vue.createElementVNode("view", { class: "left_content_style" }, [
+                  $data.avatar ? (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 0,
+                    class: "left_content_img_style",
+                    src: $data.avatar
+                  }, null, 8, ["src"])) : (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 1,
+                    class: "left_content_img_style",
+                    src: "/static/app-plus/mebrs/defaultAvator.png"
+                  })),
+                  vue.createElementVNode("view", { class: "left_header_style" }, "\u6211\u7684\u4F1A\u5458"),
+                  vue.createElementVNode("view", { class: "left_num_style" }, vue.toDisplayString($data.meberList.length), 1)
+                ])
               ]),
+              vue.createElementVNode("view", { class: "header_right_style" }, [
+                vue.createElementVNode("image", {
+                  class: "right_img_style",
+                  src: "/static/app-plus/mebrs/fangdajing.svg",
+                  onClick: _cache[0] || (_cache[0] = (...args) => $options.jumpQuery && $options.jumpQuery(...args))
+                })
+              ])
+            ]),
+            vue.createElementVNode("view", { class: "is_buy_style" }, [
               vue.createElementVNode("view", {
-                class: vue.normalizeClass(["is_buy_style", { celling_animation_style: $data.isFixedTop }])
-              }, [
-                vue.createElementVNode("view", {
-                  class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
-                  onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
-                }, "\u5DF2\u8D2D\u8BFE", 2),
-                vue.createElementVNode("view", {
-                  class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
-                  onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
-                }, "\u672A\u8D2D\u8BFE", 2)
-              ], 2),
-              vue.createCommentVNode(' <view class="zhan_wei_style" v-if="isFixedTop"></view> '),
-              (vue.openBlock(), vue.createBlock(_component_MemberList, {
+                class: vue.normalizeClass(["buy_left", $data.isActive === 1 ? "active" : ""]),
+                onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.buyClick(1), ["stop"]))
+              }, "\u5DF2\u8D2D\u8BFE", 2),
+              vue.createElementVNode("view", {
+                class: vue.normalizeClass(["buy_right", $data.isActive === 0 ? "active" : ""]),
+                onClick: _cache[2] || (_cache[2] = ($event) => $options.buyClick(0))
+              }, "\u672A\u8D2D\u8BFE", 2)
+            ]),
+            vue.createCommentVNode(' <view class="zhan_wei_style" v-if="searchTopFlag"></view> '),
+            vue.createCommentVNode("\u5185\u5BB9 start"),
+            vue.createCommentVNode(' <scroll-view\r\n          scroll-top="0"\r\n          scroll-y="true"\r\n          class="scroller-y-style"\r\n          @scrolltoupper="upper"\r\n          @scrolltolower="lower"\r\n          @scroll="scroll"\r\n          :upper-threshold="50"\r\n          scroll-anchoring="true"\r\n        > '),
+            vue.createElementVNode("view", { class: "member_scroll_style" }, [
+              vue.createVNode(_component_MemberList, {
                 ref: "memberList",
-                onGetMemberList: $options.getMemberList,
                 isActive: $data.isActive,
                 type: "home",
                 page: $data.page,
                 currentNum: $data.currentNum,
-                key: new Date().toString()
-              }, null, 8, ["onGetMemberList", "isActive", "page", "currentNum"]))
-            ], 32)
+                onGetMemberList: $options.getMemberList
+              }, null, 8, ["isActive", "page", "currentNum", "onGetMemberList"])
+            ]),
+            vue.createCommentVNode(" </scroll-view> ")
           ]),
           vue.createElementVNode("movable-view", {
             direction: "all",
@@ -5030,7 +4927,7 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("image", {
                   class: "add_img_style",
                   src: "/static/app-plus/mebrs/add.svg",
-                  onClick: _cache[6] || (_cache[6] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
+                  onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.addClick && $options.addClick(...args), ["stop"]))
                 }),
                 vue.createElementVNode("view", null, [
                   vue.createVNode(_component_ZbTooltip, {
@@ -6211,7 +6108,7 @@ if (uni.restoreGlobal) {
       }, [
         vue.createElementVNode("image", {
           class: "back_img_style",
-          src: "/static/app-plus/mebrs/back.png"
+          src: "/static/app-plus/mebrs/back.svg"
         }),
         vue.createElementVNode("view", { class: "nav_title_style" }, vue.toDisplayString($props.leftNavTitle), 1)
       ]),
@@ -6226,6 +6123,140 @@ if (uni.restoreGlobal) {
     ]);
   }
   const NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-d4dd2266"], ["__file", "D:/studyUninApp/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
+  var util$1 = {};
+  util$1.getCommonTime = function(date2 = new Date(), targetTimezone = 8) {
+    let res2 = {};
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const { year: year2, month: month2, day: day2, hour, minute, second } = util$1.getFullTime(date2, 2);
+    res2.now = {
+      year: year2,
+      month: month2,
+      day: day2,
+      hour,
+      minute,
+      second
+    };
+    let month_last_day = new Date(year2, month2, 0).getDate();
+    let year_last_day = new Date(year2, 12, 0).getDate();
+    res2.todayStart = new Date(`${year2}/${month2}/${day2}`).getTime() - timeDif;
+    res2.today12End = new Date(`${year2}/${month2}/${day2}`).getTime() + (12 * 60 * 60 * 1e3 - 1) - timeDif;
+    res2.todayEnd = new Date(`${year2}/${month2}/${day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    res2.monthStart = new Date(`${year2}/${month2}/1`).getTime() - timeDif;
+    res2.monthEnd = new Date(`${year2}/${month2}/${month_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    res2.yearStart = new Date(`${year2}/1/1`).getTime() - timeDif;
+    res2.yearEnd = new Date(`${year2}/12/${year_last_day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    let weekObj = util$1.getWeekStartAndEnd(0, date2);
+    res2.weekStart = weekObj.weekStart;
+    res2.weekEnd = weekObj.weekEnd;
+    res2.months = [];
+    res2.months[0] = {
+      monthStart: res2.monthStart,
+      monthEnd: res2.monthEnd
+    };
+    for (let i2 = 1; i2 <= 12; i2++) {
+      let month_last_day2 = new Date(year2, i2, 0).getDate();
+      let monthStart = new Date(`${year2}/${i2}/1`).getTime() - timeDif;
+      let monthEnd = new Date(`${year2}/${i2}/${month_last_day2}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+      res2.months[i2] = {
+        monthStart,
+        monthEnd
+      };
+    }
+    return res2;
+  };
+  util$1.timeFormat = function(time2, fmt = "yyyy-MM-dd hh:mm:ss", targetTimezone = 8) {
+    if (!time2) {
+      return "";
+    }
+    let date2;
+    if (typeof time2 === "number") {
+      if (time2.toString().length == 10)
+        time2 *= 1e3;
+      date2 = new Date(time2);
+    } else {
+      date2 = time2;
+    }
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const east8time = date2.getTime() + timeDif;
+    date2 = new Date(east8time);
+    let opt = {
+      "M+": date2.getMonth() + 1,
+      "d+": date2.getDate(),
+      "h+": date2.getHours(),
+      "m+": date2.getMinutes(),
+      "s+": date2.getSeconds(),
+      "q+": Math.floor((date2.getMonth() + 3) / 3),
+      "S": date2.getMilliseconds()
+    };
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (date2.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (let k2 in opt) {
+      if (new RegExp("(" + k2 + ")").test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? opt[k2] : ("00" + opt[k2]).substr(("" + opt[k2]).length));
+      }
+    }
+    return fmt;
+  };
+  util$1.getFullTime = function(date2, type = 0, targetTimezone = 8) {
+    if (!date2) {
+      return "";
+    }
+    if (typeof date2 == "number") {
+      date2 = new Date(date2);
+    }
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const east8time = date2.getTime() + timeDif;
+    date2 = new Date(east8time);
+    let YYYY = date2.getFullYear() + "";
+    let MM = date2.getMonth() + 1 < 10 ? "0" + (date2.getMonth() + 1) : date2.getMonth() + 1;
+    let DD = date2.getDate() < 10 ? "0" + date2.getDate() : date2.getDate();
+    let hh = date2.getHours() < 10 ? "0" + date2.getHours() : date2.getHours();
+    let mm = date2.getMinutes() < 10 ? "0" + date2.getMinutes() : date2.getMinutes();
+    let ss2 = date2.getSeconds() < 10 ? "0" + date2.getSeconds() : date2.getSeconds();
+    if (type === 2) {
+      return {
+        YYYY: Number(YYYY),
+        MM: Number(MM),
+        DD: Number(DD),
+        hh: Number(hh),
+        mm: Number(mm),
+        ss: Number(ss2),
+        year: Number(YYYY),
+        month: Number(MM),
+        day: Number(DD),
+        hour: Number(hh),
+        minute: Number(mm),
+        second: Number(ss2)
+      };
+    } else if (type === 1) {
+      return YYYY + "" + MM + DD + hh + mm + ss2;
+    } else {
+      return YYYY + "-" + MM + "-" + DD + " " + hh + ":" + mm + ":" + ss2;
+    }
+  };
+  util$1.getWeekStartAndEnd = function(addWeekCount = 0, date2 = new Date(), targetTimezone = 8) {
+    let res2 = {};
+    const dif = date2.getTimezoneOffset();
+    const timeDif = dif * 60 * 1e3 + targetTimezone * 60 * 60 * 1e3;
+    const east8time = date2.getTime() + timeDif;
+    const east8Date = new Date(east8time);
+    let week = east8Date.getDay();
+    east8Date.getDate();
+    let oneDayMillisecond = 1e3 * 60 * 60 * 24;
+    date2 = new Date(date2.getTime() + oneDayMillisecond * 7 * addWeekCount);
+    let minusDay = week != 0 ? week - 1 : 6;
+    let weekStart = new Date(date2.getTime() - oneDayMillisecond * minusDay);
+    let weekEnd = new Date(weekStart.getTime() + oneDayMillisecond * 6);
+    let weekStartObj = util$1.getFullTime(weekStart, 2);
+    let weekEndObj = util$1.getFullTime(weekEnd, 2);
+    res2.weekStart = new Date(`${weekStartObj.year}/${weekStartObj.month}/${weekStartObj.day}`).getTime() - timeDif;
+    res2.weekEnd = new Date(`${weekEndObj.year}/${weekEndObj.month}/${weekEndObj.day}`).getTime() + (24 * 60 * 60 * 1e3 - 1) - timeDif;
+    return res2;
+  };
   const props = {
     mark: {
       type: Boolean,
@@ -6957,7 +6988,7 @@ if (uni.restoreGlobal) {
                   }, vue.toDisplayString(!$data.studentForm.gender ? "\u8BF7\u9009\u62E9\u6027\u522B" : $options.genderLabel), 3),
                   vue.createElementVNode("image", {
                     class: "back_img_style",
-                    src: "/static/app-plus/mebrs/back.png"
+                    src: "/static/app-plus/mebrs/back.svg"
                   })
                 ])
               ]),
@@ -6988,7 +7019,7 @@ if (uni.restoreGlobal) {
                   }, vue.toDisplayString(!$data.studentForm.birthday ? "\u8BF7\u9009\u751F\u65E5" : $data.studentForm.birthday), 3),
                   vue.createElementVNode("image", {
                     class: "back_img_style",
-                    src: "/static/app-plus/mebrs/back.png"
+                    src: "/static/app-plus/mebrs/back.svg"
                   })
                 ]),
                 vue.createCommentVNode(" 		<DatePicker></DatePicker> "),
@@ -7130,7 +7161,7 @@ if (uni.restoreGlobal) {
           }, [
             vue.createElementVNode("image", {
               class: "back_img_style",
-              src: "/static/app-plus/mebrs/back.png"
+              src: "/static/app-plus/mebrs/back.svg"
             }),
             vue.createElementVNode("view", { class: "nav_title_style" })
           ]),
@@ -7751,13 +7782,14 @@ if (uni.restoreGlobal) {
             width: 180,
             icon: "none"
           });
-          item["value"] = 5e3;
+          item.value = "5000";
+          event.detail.value = "5000";
         } else {
           item["value"] = event.detail.value;
         }
       },
       pickeConfirm(event, item, itemIndex) {
-        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:156", item, "\u6211\u5E73\u65F6", itemIndex);
+        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:157", item, "\u6211\u5E73\u65F6", itemIndex);
         item.flag = false;
         item["value"] = item.configList[event].text || "";
       },
@@ -7773,7 +7805,7 @@ if (uni.restoreGlobal) {
           let readyParam = {
             [value.key]: value.hasOwnProperty("value") ? value.value : ""
           };
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:175", readyParam, "readyParam");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:176", readyParam, "readyParam");
           Object.assign(resultParam, readyParam);
         });
         let saveParam = {
@@ -7782,7 +7814,7 @@ if (uni.restoreGlobal) {
           bodyTestReport: resultParam
         };
         businessCloudObject$2.opearConfig(saveParam, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:188", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:189", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -7813,7 +7845,7 @@ if (uni.restoreGlobal) {
               flag: false
             };
           });
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:229", res2, "kkkkk");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:230", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             this.configForm = {};
             this.bodyTestReport = opearConfigList;
@@ -7838,7 +7870,7 @@ if (uni.restoreGlobal) {
                 value: resultValue
               };
             });
-            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:257", self2.configForm, "this.configForm", opearConfigList);
+            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:258", self2.configForm, "this.configForm", opearConfigList);
             self2.bodyTestReport = opearConfigList;
           }
         }).catch((err) => {
@@ -7880,7 +7912,7 @@ if (uni.restoreGlobal) {
         var that = this;
         this.$refs.studentForm.validate().then(() => {
           let businessCloudObject2 = Es.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:308", that.requestItem, "that.requestItem");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:309", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -7916,13 +7948,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:349", type, ">>>>");
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:350", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:357", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
+                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:358", res3, "\u5373\u5C06\u53D1\u9001\u7684res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -7948,7 +7980,7 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             } else {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:383", 2);
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:384", 2);
               uni.showToast({
                 icon: "fail",
                 title: res2.message,
@@ -8035,7 +8067,7 @@ if (uni.restoreGlobal) {
                         }, vue.toDisplayString(item.hasOwnProperty("value") && item.value ? item.value : item.answerRemark.remarkTitle), 3),
                         vue.createElementVNode("image", {
                           class: "back_img_style",
-                          src: "/static/app-plus/mebrs/back.png"
+                          src: "/static/app-plus/mebrs/back.svg"
                         })
                       ], 8, ["onClick"])
                     ])
@@ -8076,8 +8108,11 @@ if (uni.restoreGlobal) {
     },
     created() {
       this.requestDynamicEvaluationdata();
-      let page = getCurrentPages();
-      formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:93", page, "\u4F60\u662F");
+    },
+    mounted() {
+      plus.webview.currentWebview().setStyle({
+        "popGesture": "none"
+      });
     },
     onLoad(options) {
       if (JSON.stringify(options) !== "{}" && options.traineeNo) {
@@ -8085,34 +8120,34 @@ if (uni.restoreGlobal) {
       }
     },
     onBackPress(options) {
-      formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:101", options.from, "from", options);
+      formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:108", options.from, "from", options);
       if (options.from === "backbutton") {
         return true;
       }
     },
     methods: {
       start(e2) {
-        formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:109", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:116", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
         this.startData.clientX = e2.changedTouches[0].clientX;
         this.startData.clientY = e2.changedTouches[0].clientY;
       },
       end(e2) {
-        formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:114", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:121", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
         const subX = e2.changedTouches[0].clientX - this.startData.clientX;
         const subY = e2.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:118", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:125", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:121", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:128", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:123", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:130", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/myMebers/myMebers"
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:128", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:135", "\u53F3\u6ED1");
         } else {
-          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:130", "\u65E0\u6548");
+          formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:137", "\u65E0\u6548");
         }
       },
       getReport() {
@@ -8136,7 +8171,7 @@ if (uni.restoreGlobal) {
                 }
               });
             }
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:169", res2, "\u6211\u662F\u5B50\u9009\u9879");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:176", res2, "\u6211\u662F\u5B50\u9009\u9879");
           }).catch((err) => {
           });
         }
@@ -8148,12 +8183,12 @@ if (uni.restoreGlobal) {
         businessCloudObject$1.getPhysicalAssessmentList().then((res2) => {
           let firstData = res2.data;
           businessCloudObject$1.opearConfigAllList(this.traineeNo).then((allRes) => {
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:187", allRes, "allRes");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:194", allRes, "allRes");
             firstData = firstData.map((item) => {
               let isFinsh = false;
               if (allRes.affectedDocs > 0) {
                 allRes.data.forEach((v2) => {
-                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:194", v2, "\u4EC0\u4E48\u9B3C");
+                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:201", v2, "\u4EC0\u4E48\u9B3C");
                   if (v2.questionCode === item.code) {
                     let needCompareData = v2.hasOwnProperty("testResult") ? v2.testResult.filter((c2) => c2.answer.length > 0) : [];
                     let compareBodyTestResport = v2.hasOwnProperty("bodyTestReport") && JSON.stringify(v2.bodyTestReport) !== "{}" ? true : false;
@@ -8185,7 +8220,7 @@ if (uni.restoreGlobal) {
                 isFinsh
               };
             });
-            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:244", firstData, "\u6211\u6052\u5F3A");
+            formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:251", firstData, "\u6211\u6052\u5F3A");
             this.dynamicEvaluationdata = firstData;
           });
         }).catch((err) => {
@@ -8204,7 +8239,8 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, {
         leftNavTitle: "\u8EAB\u4F53\u8BC4\u4F30",
-        isAuthority: true
+        isAuthority: true,
+        jumpType: "STPC"
       }),
       vue.createElementVNode("view", { class: "need_scoll list_style" }, [
         (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.dynamicEvaluationdata, (item, index) => {
@@ -9699,7 +9735,8 @@ if (uni.restoreGlobal) {
           return {
             type: "",
             color: "#000000",
-            size: 20
+            size: 20,
+            customPrefix: ""
           };
         }
       },
@@ -9872,10 +9909,11 @@ if (uni.restoreGlobal) {
               class: "uni-list-item__icon"
             }, [
               vue.createVNode(_component_uni_icons, {
+                customPrefix: $props.extraIcon.customPrefix,
                 color: $props.extraIcon.color,
                 size: $props.extraIcon.size,
                 type: $props.extraIcon.type
-              }, null, 8, ["color", "size", "type"])
+              }, null, 8, ["customPrefix", "color", "size", "type"])
             ])) : vue.createCommentVNode("v-if", true)
           ])
         ], true),
@@ -10379,7 +10417,7 @@ if (uni.restoreGlobal) {
           testResult
         };
         businessCloudObject.opearConfig(saveParam, "physical").then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:170", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:204", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -10398,7 +10436,7 @@ if (uni.restoreGlobal) {
           traineeNo: this.traineeNo,
           questionCode: this.questionCode
         }).then((res2) => {
-          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:192", res2, "kkkkk");
+          formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:230", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             let healthList = this.originList.map((item) => {
               let answer = item.answer.length > 0 ? item.answer.map((config) => {
@@ -10443,7 +10481,7 @@ if (uni.restoreGlobal) {
                 answer
               };
             });
-            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:253", healthList, "hellow");
+            formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:291", healthList, "hellow");
             this.healthList = healthList;
           }
         }).catch((err) => {
@@ -10570,7 +10608,6 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("view", { class: "uni-textarea" }, [
                   vue.withDirectives(vue.createElementVNode("textarea", {
                     maxlength: 30,
-                    "adjust-position": "false",
                     "onUpdate:modelValue": ($event) => item.answer[0].remark = $event,
                     "placeholder-style": "color:#BDC3CE",
                     placeholder: item.answerRemark && item.answerRemark.remarkTitle ? item.answerRemark.remarkTitle : "\u8BF7\u8865\u5145\u4FE1\u606F"
@@ -10613,18 +10650,48 @@ if (uni.restoreGlobal) {
         typeColor: "#4B525E",
         backColor: "",
         queryData: {},
-        queryUserActionData: {}
+        queryUserActionData: {},
+        startData: [
+          { clientX: "", clientY: "" }
+        ]
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:78", item);
+      formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:81", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getconfingActionName();
     },
     methods: {
+      start(e2) {
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:88", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        this.startData.clientX = e2.changedTouches[0].clientX;
+        this.startData.clientY = e2.changedTouches[0].clientY;
+      },
+      end(e2) {
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:93", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        const subX = e2.changedTouches[0].clientX - this.startData.clientX;
+        const subY = e2.changedTouches[0].clientY - this.startData.clientY;
+        if (subY < -50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:97", "\u4E0B\u6ED1");
+        } else if (subY > 50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:100", "\u4E0A\u6ED1");
+        } else if (subX > 50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:102", "\u5DE6\u6ED1");
+          uni.reLaunch({
+            url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
+          });
+        } else if (subX < -50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:107", "\u53F3\u6ED1");
+          uni.reLaunch({
+            url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
+          });
+        } else {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:112", "\u65E0\u6548");
+        }
+      },
       jumpModular(item) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:85", item.path, ">>>>");
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:116", item.path, ">>>>");
         uni.navigateTo({
           url: item.path + "?data=" + JSON.stringify(item) + "&traineeNo=" + this.traineeNo + "&questionCode=" + item.parentCode,
           success: (res2) => {
@@ -10659,7 +10726,7 @@ if (uni.restoreGlobal) {
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         testOb$2.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:123", res2);
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:154", res2);
           if (res2.success) {
             this.queryUserActionData = res2.data;
             busOb$3.getPhysicalChildAssessmentList("A0005").then((res3) => {
@@ -10669,11 +10736,11 @@ if (uni.restoreGlobal) {
                 item["type"] = 0;
                 item["typeColor"] = this.levelColor(item.typeText);
                 item["path"] = "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation";
-                formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:133", item);
+                formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:164", item);
               });
               for (let j2 = 0; j2 < this.queryUserActionData.length; j2++) {
                 for (let i2 = 0; i2 < this.queryData.length; i2++) {
-                  formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:137", this.queryData[i2].code === this.queryUserActionData[j2].code);
+                  formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:168", this.queryData[i2].code === this.queryUserActionData[j2].code);
                   if (this.queryData[i2].code === this.queryUserActionData[j2].code) {
                     this.queryData[i2].typeText = this.queryUserActionData[j2].physicalData.actionTypeText;
                     this.queryData[i2].type = this.queryUserActionData[j2].physicalData.actionVlue;
@@ -10682,7 +10749,7 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-              formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:146", this.queryData);
+              formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:177", this.queryData);
             }).catch((err) => {
             });
           }
@@ -10705,7 +10772,11 @@ if (uni.restoreGlobal) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "content_style",
+      onTouchstart: _cache[2] || (_cache[2] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[3] || (_cache[3] = (...args) => $options.end && $options.end(...args))
+    }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createCommentVNode(` <NavBarCompontent :leftNavTitle="'\u4F53\u80FD\u8BC4\u4F30'"></NavBarCompontent> `),
       vue.createElementVNode("view", {
@@ -10785,7 +10856,7 @@ if (uni.restoreGlobal) {
           onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
         }, "\u4FDD\u5B58")
       ])
-    ]);
+    ], 32);
   }
   const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-c1425cf6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
   const _imports_0$1 = "/static/app-plus/other/coach.png";
@@ -10802,7 +10873,7 @@ if (uni.restoreGlobal) {
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/logining/logining.vue:105", this.phone, "????");
+        formatAppLog("log", "at pages/logining/logining.vue:102", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -10811,7 +10882,7 @@ if (uni.restoreGlobal) {
       }
     },
     onLoad() {
-      formatAppLog("log", "at pages/logining/logining.vue:115", plus, ">>>>");
+      formatAppLog("log", "at pages/logining/logining.vue:112", plus, ">>>>");
       plus.oauth.getServices((services) => {
         weixinAuthService = services.find((service) => {
           return service.id === "weixin";
@@ -10823,13 +10894,13 @@ if (uni.restoreGlobal) {
     },
     methods: {
       jumpAgree() {
-        formatAppLog("log", "at pages/logining/logining.vue:129", "11111");
+        formatAppLog("log", "at pages/logining/logining.vue:126", "11111");
         uni.navigateTo({
           url: "/pages/agreement/agreement"
         });
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/logining/logining.vue:135", event, "\u4F60tm");
+        formatAppLog("log", "at pages/logining/logining.vue:132", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       async getSms() {
@@ -10843,7 +10914,7 @@ if (uni.restoreGlobal) {
           });
           try {
             const smsRes = await login2.sendSmsCode(this.phone);
-            formatAppLog("log", "at pages/logining/logining.vue:152", smsRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:149", smsRes, "\u767B\u5F55\u6210\u529F");
             if (smsRes.code == 0) {
               uni.reLaunch({
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + smsRes.mobile,
@@ -10856,7 +10927,7 @@ if (uni.restoreGlobal) {
               });
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:166", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:163", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
@@ -10872,7 +10943,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:184", err);
+              formatAppLog("log", "at pages/logining/logining.vue:181", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
@@ -10881,30 +10952,53 @@ if (uni.restoreGlobal) {
       loginIos() {
       },
       loginByWeixin() {
-        let { code } = uni.login();
-        formatAppLog("log", "at pages/logining/logining.vue:196", code, "?????");
-        this.getWeixinCode().then((code2) => {
-          formatAppLog("log", "at pages/logining/logining.vue:199", code2, "\u4F60\u662F\u8C01");
-          return Es.callFunction({
-            name: "login-by-weixin",
-            data: {
-              code: code2
+        this.getWeixinCode().then(async (code) => {
+          formatAppLog("log", "at pages/logining/logining.vue:191", code, "\u4F60\u662F\u8C01");
+          const wxLogin = Es.importObject("login", {
+            customUI: true
+          });
+          formatAppLog("log", "at pages/logining/logining.vue:195", wxLogin, "wxLogin");
+          try {
+            const wxLoginRes = await wxLogin.loginByWeixin(code);
+            formatAppLog("log", "at pages/logining/logining.vue:199", wxLoginRes, "\u767B\u5F55\u6210\u529F");
+            if (wxLoginRes.code == 0) {
+              try {
+                uni.setStorageSync(
+                  "userInfo",
+                  JSON.stringify(wxLoginRes.userInfo)
+                );
+                uni.setStorageSync("uni_id_token", wxLoginRes.token);
+                uni.setStorageSync("uid", wxLoginRes.uid);
+                uni.setStorageSync("tokenExpired", wxLoginRes.tokenExpired);
+                if (wxLoginRes.type === "login") {
+                  uni.setStorageSync("loginNum", "1");
+                  uni.reLaunch({
+                    url: "/pages/myMebers/myMebers"
+                  });
+                  return;
+                }
+                if (wxLoginRes.type === "register") {
+                  uni.setStorageSync("loginNum", "0");
+                  uni.navigateTo({
+                    url: "/pages/personalnformation/personalnformation"
+                  });
+                  let param = {
+                    avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
+                  };
+                  formatAppLog("log", "at pages/logining/logining.vue:227", param, "param");
+                  wxLogin.perfectInfo(param).then((res2) => {
+                    if (res2.success) {
+                    }
+                  }).catch((err) => {
+                  });
+                  return;
+                }
+              } catch (e2) {
+              }
             }
-          });
-        }).then((res2) => {
-          uni.showModal({
-            showCancel: false,
-            content: JSON.stringify(res2.result)
-          });
-          if (res2.result.code === 0) {
-            uni.setStorageSync("uni_id_token", res2.result.token);
-            uni.setStorageSync("uni_id_token_expired", res2.result.tokenExpired);
+          } catch (err) {
+            formatAppLog("log", "at pages/logining/logining.vue:243", err, "\u6211\u662F\u9519\u8BEF");
           }
-        }).catch(() => {
-          uni.showModal({
-            showCancel: false,
-            content: "\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25\uFF0C\u8BF7\u7A0D\u540E\u518D\u8BD5"
-          });
         });
       }
     }
@@ -10916,9 +11010,7 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("image", {
           class: "text1",
           src: _imports_0$1
-        }),
-        vue.createElementVNode("br"),
-        vue.createElementVNode("text", { class: "text2" }, "\u79C1\u4EBA\u4E13\u5C5E\u6559\u7EC3\uFF0C\u6241\u5E73\u5B66\u5458\u7BA1\u7406")
+        })
       ]),
       vue.createElementVNode("view", { class: "middle" }, [
         vue.createElementVNode("input", {
@@ -10994,7 +11086,18 @@ if (uni.restoreGlobal) {
             ])
           ])) : vue.createCommentVNode("v-if", true)
         ]),
-        vue.createCommentVNode('      <view class="wx_loging_style">\r\n        <image\r\n          @click.native="loginByWeixin"\r\n          class="wx_img_style"\r\n          src="../../static/login/wxlogin.svg"\r\n        ></image>\r\n        <image\r\n          @click.native="loginIos"\r\n          class="wx_img_style"\r\n          src="../../static/login/ioslogin.svg"\r\n        ></image>\r\n      </view> ')
+        vue.createElementVNode("view", { class: "wx_loging_style" }, [
+          vue.createElementVNode("image", {
+            onClick: _cache[7] || (_cache[7] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args)),
+            class: "wx_img_style",
+            src: "/static/login/wxlogin.svg"
+          }),
+          vue.createElementVNode("image", {
+            onClick: _cache[8] || (_cache[8] = (...args) => $options.loginIos && $options.loginIos(...args)),
+            class: "wx_img_style",
+            src: "/static/login/ioslogin.svg"
+          })
+        ])
       ])
     ]);
   }
@@ -11670,7 +11773,7 @@ if (uni.restoreGlobal) {
         }, [
           vue.createElementVNode("image", {
             class: "back_img_style",
-            src: "/static/app-plus/mebrs/back.png"
+            src: "/static/app-plus/mebrs/back.svg"
           })
         ]),
         vue.createElementVNode("view", {
@@ -11733,7 +11836,7 @@ if (uni.restoreGlobal) {
                   }, vue.toDisplayString(!$data.coachForm.gender ? "\u8BF7\u9009\u62E9\u6027\u522B" : $options.genderLabel), 3),
                   vue.createElementVNode("image", {
                     class: "back_img_style",
-                    src: "/static/app-plus/mebrs/back.png"
+                    src: "/static/app-plus/mebrs/back.svg"
                   })
                 ])
               ]),
@@ -11836,7 +11939,7 @@ if (uni.restoreGlobal) {
         actionName: null,
         actionIndex: 0,
         actionClass: 0,
-        actionClassName: "\u80F8",
+        actionClassName: "\u80F8\u90E8",
         actionClassList: [
           { text: "\u80F8\u90E8", value: 0 },
           { text: "\u80CC\u90E8", value: 1 },
@@ -12006,7 +12109,7 @@ if (uni.restoreGlobal) {
         }
         i2.active = !i2.active;
         if (i2.active) {
-          this.selectActionList.push(i2);
+          this.selectActionList.push({ ...i2, actionClassName: this.actionClassName });
         } else {
           this.selectActionList = this.selectActionList.filter(
             (item) => item._id !== i2._id
@@ -12501,19 +12604,37 @@ if (uni.restoreGlobal) {
           { text: "\u5220\u9664\u52A8\u4F5C\u9879" }
         ],
         traineeNo: null,
-        isNoOldInfo: false
+        isNoOldInfo: false,
+        mode: "ADD",
+        allWork: null
       };
     },
     onLoad: function(option) {
       if (option.traineeNo) {
         this.traineeNo = option.traineeNo;
         this.traineeName = option.traineeName;
+        this.key = option.key || null;
         this.trainDate = option.trainDate || this.getCurTimestamp();
         this.getOldInfo();
       }
     },
+    onHide() {
+      if (this.mode === "ADD") {
+        uni.setStorageSync("oldTrainInfo", JSON.stringify({
+          workoutName: this.workoutName,
+          traineeNo: this.traineeNo,
+          actionList: this.actionList,
+          isNoOldInfo: this.isNoOldInfo,
+          trainDate: this.trainDate,
+          traineeName: this.traineeName,
+          key: this.key,
+          allWork: this.allWork
+        }));
+      }
+    },
     onShow() {
       try {
+        this.mode = "ADD";
         const oldTrainInfoStr = uni.getStorageSync("oldTrainInfo");
         if (oldTrainInfoStr) {
           const oldTrainInfo = JSON.parse(oldTrainInfoStr);
@@ -12522,6 +12643,9 @@ if (uni.restoreGlobal) {
           this.traineeNo = oldTrainInfo.traineeNo;
           this.isNoOldInfo = oldTrainInfo.isNoOldInfo;
           this.trainDate = oldTrainInfo.trainDate;
+          this.traineeName = oldTrainInfo.traineeName;
+          this.key = oldTrainInfo.key;
+          this.allWork = oldTrainInfo.allWork;
         }
         const actionListStr = uni.getStorageSync("actionList");
         if (actionListStr) {
@@ -12530,6 +12654,7 @@ if (uni.restoreGlobal) {
             return {
               type: item.actionType,
               actionName: item.actionName,
+              actionClassName: item.actionClassName,
               url: item.url,
               load: 0,
               times: 0,
@@ -12540,8 +12665,10 @@ if (uni.restoreGlobal) {
               open: false
             };
           });
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:425", "tempList", tempList);
           this.actionList.push(...tempList);
         }
+        uni.setStorageSync("actionList", JSON.stringify([]));
         if (this.actionList && this.actionList.length > 0) {
           this.actionList.forEach((item, i2) => {
             if (i2 > 0) {
@@ -12550,10 +12677,6 @@ if (uni.restoreGlobal) {
               item.open = true;
             }
           });
-        }
-        const traineeName = uni.getStorageSync("traineeName");
-        if (traineeName) {
-          this.traineeName = traineeName;
         }
       } catch (e2) {
       }
@@ -12566,18 +12689,24 @@ if (uni.restoreGlobal) {
       async getOldInfo() {
         const res2 = await train$3.getTrainList({ traineeNo: this.traineeNo, trainDate: this.trainDate });
         if (res2.data && res2.data.length > 0) {
-          const { trainContent, traineeTitle } = res2.data[0];
-          this.workoutName = traineeTitle;
-          const actionList = JSON.parse(trainContent) || [];
-          actionList.forEach((item, i2) => {
-            if (i2 > 0) {
-              item.open = false;
-            } else {
-              item.open = true;
-            }
-          });
-          this.actionList = actionList;
           this.isNoOldInfo = true;
+          const { trainContent } = res2.data[0];
+          const list = JSON.parse(trainContent) || [];
+          if (list && list.length > 0) {
+            this.allWork = list;
+            if (list[this.key]) {
+              this.workoutName = list[this.key].traineeTitle;
+              const actionList = list[this.key].data || [];
+              actionList.forEach((item, i2) => {
+                if (i2 > 0) {
+                  item.open = false;
+                } else {
+                  item.open = true;
+                }
+              });
+              this.actionList = actionList;
+            }
+          }
         } else {
           this.isNoOldInfo = false;
         }
@@ -12589,10 +12718,11 @@ if (uni.restoreGlobal) {
           traineeNo: this.traineeNo,
           actionList: this.actionList,
           isNoOldInfo: this.isNoOldInfo,
-          trainDate: this.trainDate
+          trainDate: this.trainDate,
+          traineeName: this.traineeName,
+          key: this.key,
+          allWork: this.allWork
         }));
-        uni.setStorageSync("traineeNo", this.traineeNo);
-        uni.setStorageSync("traineeName", this.traineeName);
         uni.switchTab({
           url: "/pages/actionLibrary/index"
         });
@@ -12614,44 +12744,70 @@ if (uni.restoreGlobal) {
           active: false
         });
       },
-      async finish() {
-        if (!this.workoutName) {
-          return uni.showToast({ icon: "error", title: "\u8BF7\u8F93\u5165\u8BAD\u7EC3\u540D\u79F0", duration: 2e3 });
-        }
+      async finish(traineeStatus) {
         if (!this.actionList || this.actionList.length === 0) {
           return uni.showToast({ icon: "error", title: "\u8BF7\u6DFB\u52A0\u52A8\u4F5C", duration: 2e3 });
+        }
+        if (!this.workoutName) {
+          this.workoutName = this.actionList[0].actionClassName;
+        }
+        if (this.key) {
+          this.allWork[this.key] = {
+            traineeTitle: this.workoutName,
+            traineeStatus,
+            data: this.actionList
+          };
+        } else {
+          if (this.allWork && this.allWork.length > 0) {
+            this.allWork.push({
+              traineeTitle: this.workoutName,
+              traineeStatus,
+              data: this.actionList
+            });
+          } else {
+            this.allWork = [{
+              traineeTitle: this.workoutName,
+              traineeStatus,
+              data: this.actionList
+            }];
+          }
         }
         const params = {
           traineeNo: this.traineeNo,
           trainDate: this.trainDate,
-          traineeTitle: this.workoutName,
-          trainContent: JSON.stringify(this.actionList)
+          trainContent: JSON.stringify(this.allWork)
         };
-        if (this.isNoOldInfo) {
+        if (this.allWork && this.allWork.length > 1 || this.key || this.isNoOldInfo) {
           await train$3.updateTrainInfo(params);
         } else {
           await train$3.addTrainInfo(params);
         }
+        if (traineeStatus === "save") {
+          uni.showToast({ icon: "none", title: "\u6682\u5B58\u6210\u529F", duration: 2e3 });
+        }
+        this.mode = "DELETE";
         uni.removeStorageSync("actionList");
         uni.removeStorageSync("oldTrainInfo");
-        uni.removeStorageSync("traineeNo");
-        uni.removeStorageSync("traineeName");
-        uni.reLaunch({
-          url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
-        });
+        const timer = setTimeout(() => {
+          uni.reLaunch({
+            url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+          });
+          clearTimeout(timer);
+        }, 1e3);
       },
       async deleteHandle() {
-        const params = {
-          traineeNo: this.traineeNo,
-          trainDate: this.trainDate
-        };
-        if (this.isNoOldInfo) {
-          await train$3.deleteTrainInfo(params);
+        this.mode = "DELETE";
+        if (this.key) {
+          this.allWork.splice(this.key, 1);
+          const params = {
+            traineeNo: this.traineeNo,
+            trainDate: this.trainDate,
+            trainContent: JSON.stringify(this.allWork)
+          };
+          await train$3.updateTrainInfo(params);
         }
         uni.removeStorageSync("actionList");
         uni.removeStorageSync("oldTrainInfo");
-        uni.removeStorageSync("traineeNo");
-        uni.removeStorageSync("traineeName");
         uni.reLaunch({
           url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
         });
@@ -12782,6 +12938,14 @@ if (uni.restoreGlobal) {
         this.openDialog("popupDelete");
       }
       return true;
+    },
+    computed: {
+      isShowSave() {
+        return this.actionList && this.actionList.length > 0;
+      },
+      isShowSuccess() {
+        return +new Date() >= +new Date(this.trainDate);
+      }
     }
   };
   function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
@@ -12796,22 +12960,34 @@ if (uni.restoreGlobal) {
       ]),
       vue.createElementVNode("view", { class: "header" }, [
         vue.createElementVNode("view", { class: "title" }, "\u65B0\u5EFA\u8BAD\u7EC3"),
-        vue.createVNode(_component_van_button, {
-          class: "btn",
-          onClick: _cache[0] || (_cache[0] = ($event) => $options.openDialog("popupFinish"))
-        }, {
-          default: vue.withCtx(() => [
-            vue.createTextVNode("\u5B8C\u6210")
-          ]),
-          _: 1
-        })
+        vue.createElementVNode("view", null, [
+          $options.isShowSave ? (vue.openBlock(), vue.createBlock(_component_van_button, {
+            key: 0,
+            class: "btn save",
+            onClick: _cache[0] || (_cache[0] = ($event) => $options.finish("save"))
+          }, {
+            default: vue.withCtx(() => [
+              vue.createTextVNode("\u6682\u5B58")
+            ]),
+            _: 1
+          })) : vue.createCommentVNode("v-if", true),
+          $options.isShowSave && $options.isShowSuccess ? (vue.openBlock(), vue.createBlock(_component_van_button, {
+            key: 1,
+            class: "btn",
+            onClick: _cache[1] || (_cache[1] = ($event) => $options.openDialog("popupFinish"))
+          }, {
+            default: vue.withCtx(() => [
+              vue.createTextVNode("\u5B8C\u6210\u8BAD\u7EC3")
+            ]),
+            _: 1
+          })) : vue.createCommentVNode("v-if", true)
+        ])
       ]),
       vue.createElementVNode("view", { class: "workout-title" }, [
         vue.withDirectives(vue.createElementVNode("input", {
-          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.workoutName = $event),
+          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.workoutName = $event),
           maxlength: "8",
           class: "uni-input",
-          focus: "",
           placeholder: "\u8BF7\u8F93\u5165\u8BAD\u7EC3\u540D\u79F0"
         }, null, 512), [
           [vue.vModelText, $data.workoutName]
@@ -12973,7 +13149,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.km = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[2] || (_cache[2] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[3] || (_cache[3] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.km]
                       ]),
@@ -12984,7 +13160,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.hour = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[3] || (_cache[3] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[4] || (_cache[4] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.hour]
                       ]),
@@ -12995,7 +13171,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.minute = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[4] || (_cache[4] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[5] || (_cache[5] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.minute]
                       ]),
@@ -13155,7 +13331,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.hour = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[5] || (_cache[5] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[6] || (_cache[6] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.hour]
                       ]),
@@ -13166,7 +13342,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.minute = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[6] || (_cache[6] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[7] || (_cache[7] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.minute]
                       ]),
@@ -13177,7 +13353,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.second = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[7] || (_cache[7] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[8] || (_cache[8] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.second]
                       ]),
@@ -13342,7 +13518,7 @@ if (uni.restoreGlobal) {
                   class: "uni-input",
                   type: "number",
                   placeholder: "\u8BF7\u5148\u8BBE\u7F6E\u5F53\u524D\u4F53\u91CD",
-                  onBlur: _cache[8] || (_cache[8] = (...args) => $options.technicalData && $options.technicalData(...args))
+                  onBlur: _cache[9] || (_cache[9] = (...args) => $options.technicalData && $options.technicalData(...args))
                 }, null, 40, ["onUpdate:modelValue"]), [
                   [vue.vModelText, i2.weight]
                 ])
@@ -13455,7 +13631,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.hour = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[9] || (_cache[9] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[10] || (_cache[10] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.hour]
                       ]),
@@ -13466,7 +13642,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.minute = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[10] || (_cache[10] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[11] || (_cache[11] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.minute]
                       ]),
@@ -13477,7 +13653,7 @@ if (uni.restoreGlobal) {
                         "onUpdate:modelValue": ($event) => item.second = $event,
                         class: "uni-input",
                         type: "number",
-                        onBlur: _cache[11] || (_cache[11] = (...args) => $options.technicalData && $options.technicalData(...args))
+                        onBlur: _cache[12] || (_cache[12] = (...args) => $options.technicalData && $options.technicalData(...args))
                       }, null, 40, ["onUpdate:modelValue"]), [
                         [vue.vModelText, item.second]
                       ]),
@@ -13508,7 +13684,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "footer-button" }, [
         vue.createVNode(_component_van_button, {
           class: "delete",
-          onClick: _cache[12] || (_cache[12] = ($event) => $options.openDialog("popupDelete"))
+          onClick: _cache[13] || (_cache[13] = ($event) => $options.openDialog("popupDelete"))
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "img" })
@@ -13539,16 +13715,16 @@ if (uni.restoreGlobal) {
               vue.createVNode(_component_van_button, {
                 class: "finish",
                 block: "",
-                onClick: $options.finish
+                onClick: _cache[14] || (_cache[14] = ($event) => $options.finish("success"))
               }, {
                 default: vue.withCtx(() => [
                   vue.createTextVNode("\u786E\u8BA4\u5B8C\u6210")
                 ]),
                 _: 1
-              }, 8, ["onClick"]),
+              }),
               vue.createVNode(_component_van_button, {
                 block: "",
-                onClick: _cache[13] || (_cache[13] = ($event) => $options.closeDialog("popupFinish"))
+                onClick: _cache[15] || (_cache[15] = ($event) => $options.closeDialog("popupFinish"))
               }, {
                 default: vue.withCtx(() => [
                   vue.createTextVNode("\u53D6\u6D88")
@@ -13582,7 +13758,7 @@ if (uni.restoreGlobal) {
               }, 8, ["onClick"]),
               vue.createVNode(_component_van_button, {
                 block: "",
-                onClick: _cache[14] || (_cache[14] = ($event) => $options.closeDialog("popupDelete"))
+                onClick: _cache[16] || (_cache[16] = ($event) => $options.closeDialog("popupDelete"))
               }, {
                 default: vue.withCtx(() => [
                   vue.createTextVNode("\u53D6\u6D88")
@@ -17567,7 +17743,7 @@ if (uni.restoreGlobal) {
         }
         if (this.todayDisabled) {
           list.forEach((item) => {
-            if (item.type === "current" && +new Date(item.day) < +new Date(this.formatDate(this.value))) {
+            if (item.type === "current" && +new Date(item.day) < +new Date(hooks().format("YYYY-MM-DD"))) {
               item.disabled = true;
             }
           });
@@ -17754,7 +17930,12 @@ if (uni.restoreGlobal) {
         trainDate: null,
         memberName: "",
         value: new Date(),
-        showTipes: true
+        showTipes: true,
+        isFixedTop: false,
+        actionList: [],
+        actionBoxDate: "",
+        isButton: false,
+        currentDay: null
       };
     },
     onLoad: function(option) {
@@ -17762,6 +17943,13 @@ if (uni.restoreGlobal) {
         this.traineeNo = option.traineeNo;
         this.memberName = option.memberName;
         this.getTrainList();
+      }
+    },
+    onPageScroll(e2) {
+      if (e2.scrollTop > uni.getWindowInfo().statusBarHeight) {
+        this.isFixedTop = true;
+      } else {
+        this.isFixedTop = false;
       }
     },
     onShow() {
@@ -17777,7 +17965,11 @@ if (uni.restoreGlobal) {
         if (res2.data && res2.data.length > 0) {
           const trainListInfo = {};
           res2.data.forEach((item) => {
-            trainListInfo[item.trainDate] = item.traineeTitle;
+            const list = JSON.parse(item.trainContent) || [];
+            list.forEach((item1) => {
+              item1.traineeTitle = item1.traineeTitle.substring(0, 5);
+            });
+            trainListInfo[item.trainDate] = list;
           });
           this.trainListInfo = trainListInfo;
         }
@@ -17787,23 +17979,48 @@ if (uni.restoreGlobal) {
           url: "/pages/myMebers/myMebers"
         });
       },
-      selectHandle(item) {
-        if (item.disabled || item.day === this.getDay(new Date())) {
-          this.sharePage(item.day);
+      onCloseHandle() {
+        this.$refs.popup.close();
+      },
+      dataAndLabelHandle(item) {
+        formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:118", item, "item");
+        if (!this.trainListInfo[item.day] && item.disabled || item.type !== "current") {
+          return;
+        }
+        this.actionList = this.trainListInfo[item.day] || [];
+        this.currentDay = item.day;
+        let str = item.day.replace("-", "\u5E74");
+        str = str.replace("-", "\u6708");
+        str = str.replace("-", "\u65E5");
+        this.actionBoxDate = str;
+        this.isButton = this.trainListInfo[item.day] && this.trainListInfo[item.day].length < 3 || !this.trainListInfo[item.day];
+        formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:129", "\u6253\u5F00\u5F39\u6846", this.trainListInfo[item.day]);
+        this.$refs.popup.open();
+      },
+      selectHandle(day2) {
+        this.$refs.popup.close();
+        uni.navigateTo({
+          url: `/pages/newWorkout/newWorkout?traineeNo=${this.traineeNo}&trainDate=${day2}&traineeName=${this.memberName}`
+        });
+      },
+      traineeTitleHandle(date2, key, item) {
+        this.$refs.popup.close();
+        if (item.traineeStatus === "save") {
+          uni.navigateTo({
+            url: `/pages/newWorkout/newWorkout?traineeNo=${this.traineeNo}&trainDate=${date2}&traineeName=${this.memberName}&key=${key}`
+          });
           return;
         }
         uni.navigateTo({
-          url: `/pages/newWorkout/newWorkout?traineeNo=${this.traineeNo}&trainDate=${item.day}&traineeName=${this.memberName}`
+          url: `/pages/trainingRecordDetail/trainingRecordDetail?traineeNo=${this.traineeNo}&trainDate=${date2}&traineeName=${this.memberName}&key=${key}`
         });
       },
       addWorkout() {
+        if (this.trainListInfo[this.getDay(new Date())] && this.trainListInfo[this.getDay(new Date())].length >= 3) {
+          return uni.showToast({ icon: "none", title: "\u6BCF\u65E5\u6700\u591A\u6DFB\u52A0\u4E09\u6B21\u8BAD\u7EC3\u8BB0\u5F55", duration: 2e3 });
+        }
         uni.navigateTo({
           url: `/pages/newWorkout/newWorkout?traineeNo=${this.traineeNo}&trainDate=${this.getDay(new Date())}&traineeName=${this.memberName}`
-        });
-      },
-      sharePage(date2) {
-        uni.navigateTo({
-          url: `/pages/trainingRecordDetail/trainingRecordDetail?traineeNo=${this.traineeNo}&trainDate=${date2}&traineeName=${this.memberName}`
         });
       },
       getYearMonth(val) {
@@ -17832,34 +18049,36 @@ if (uni.restoreGlobal) {
         const month2 = formater(d2.getMonth() + 1);
         const date2 = formater(d2.getDate());
         return year2 + "-" + month2 + "-" + date2;
-      },
-      getTrainTitle(day2) {
-        return this.trainListInfo[day2] || "";
       }
     }
   };
   function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_calendar = vue.resolveComponent("calendar");
+    const _component_van_icon = vue.resolveComponent("van-icon");
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "training-record" }, [
       vue.createElementVNode("view", { class: "background-header" }),
       vue.createElementVNode("view", { class: "background" }),
-      vue.createElementVNode("view", { class: "status_bar" }, [
+      vue.createElementVNode("view", {
+        class: vue.normalizeClass(["status_bar", { isFixedTop: $data.isFixedTop }])
+      }, [
         vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F ")
-      ]),
+      ], 2),
       vue.createVNode(_component_van_nav_bar, {
+        class: vue.normalizeClass({ isFixedTop: $data.isFixedTop }),
         title: $data.memberName,
         "left-text": "\u8FD4\u56DE\u4E3B\u9875",
         "left-arrow": "",
         onClickLeft: $options.onClickLeft
-      }, null, 8, ["title", "onClickLeft"]),
-      vue.createElementVNode("view", { class: "calendar" }, [
+      }, null, 8, ["class", "title", "onClickLeft"]),
+      vue.createElementVNode("view", { class: "calendar-box" }, [
         vue.createVNode(_component_calendar, {
           value: $data.value,
           "onUpdate:value": _cache[0] || (_cache[0] = ($event) => $data.value = $event),
           ref: "calendar",
           todayDisabled: "",
-          onSelect: $options.selectHandle
+          onSelect: $options.dataAndLabelHandle
         }, {
           "operation-left": vue.withCtx(() => [
             vue.createElementVNode("view", { class: "calendar-title" }, "\u8BAD\u7EC3\u8BB0\u5F55")
@@ -17872,10 +18091,18 @@ if (uni.restoreGlobal) {
               vue.createElementVNode("view", {
                 class: vue.normalizeClass(["cell-key", { active: cell.isSelected }])
               }, vue.toDisplayString(cell.key), 3),
-              $options.getTrainTitle(cell.day) ? (vue.openBlock(), vue.createElementBlock("view", {
+              $data.trainListInfo[cell.day] ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 0,
-                class: "cell-label"
-              }, vue.toDisplayString($options.getTrainTitle(cell.day)), 1)) : vue.createCommentVNode("v-if", true)
+                class: "cell-label-box"
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.trainListInfo[cell.day], (item, key) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "cell-label",
+                    key,
+                    onClick: vue.withModifiers(($event) => $options.dataAndLabelHandle(cell), ["stop"])
+                  }, vue.toDisplayString(item.traineeTitle), 9, ["onClick"]);
+                }), 128))
+              ])) : vue.createCommentVNode("v-if", true)
             ])
           ]),
           _: 1
@@ -17890,7 +18117,45 @@ if (uni.restoreGlobal) {
           class: "add-button",
           onClick: _cache[1] || (_cache[1] = (...args) => $options.addWorkout && $options.addWorkout(...args))
         })
-      ])
+      ]),
+      vue.createVNode(_component_uni_popup, {
+        ref: "popup",
+        type: "bottom",
+        "mask-background-color": "rgba(20, 21, 23, 0.6)"
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("view", { class: "action-box" }, [
+            vue.createElementVNode("view", { class: "top" }, [
+              vue.createElementVNode("view", { class: "action-date" }, vue.toDisplayString($data.actionBoxDate), 1),
+              vue.createElementVNode("view", {
+                class: "box-close",
+                onClick: _cache[2] || (_cache[2] = (...args) => $options.onCloseHandle && $options.onCloseHandle(...args))
+              }, "\xD7")
+            ]),
+            vue.createElementVNode("view", { class: "content" }, [
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.actionList, (item, key) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  class: "action-item",
+                  key,
+                  onClick: ($event) => $options.traineeTitleHandle($data.currentDay, key, item)
+                }, [
+                  vue.createElementVNode("view", null, vue.toDisplayString(item.traineeTitle), 1),
+                  vue.createVNode(_component_van_icon, { name: "arrow" })
+                ], 8, ["onClick"]);
+              }), 128))
+            ]),
+            !$data.isButton ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "label"
+            }, "\u6BCF\u65E5\u6700\u591A\u6DFB\u52A0\u4E09\u6B21\u8BAD\u7EC3\u8BB0\u5F55")) : (vue.openBlock(), vue.createElementBlock("view", {
+              key: 1,
+              class: "action-button",
+              onClick: _cache[3] || (_cache[3] = ($event) => $options.selectHandle($data.currentDay))
+            }, "\u65B0\u5EFA\u8BAD\u7EC3"))
+          ])
+        ]),
+        _: 1
+      }, 512)
     ]);
   }
   const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
@@ -17930,6 +18195,7 @@ if (uni.restoreGlobal) {
       if (option.traineeNo) {
         this.traineeNo = option.traineeNo;
         this.trainDate = option.trainDate;
+        this.key = option.key;
         this.getTrainInfo();
       }
     },
@@ -17947,9 +18213,12 @@ if (uni.restoreGlobal) {
           trainDate: this.trainDate
         });
         if (res2.data && res2.data.length > 0) {
-          const { trainContent, traineeTitle } = res2.data[0];
-          this.traineeTitle = traineeTitle;
-          this.trainInfoList = JSON.parse(trainContent);
+          const { trainContent } = res2.data[0];
+          const list = JSON.parse(trainContent) || [];
+          if (list && list.length > 0) {
+            this.trainInfoList = list[this.key].data || [];
+            this.traineeTitle = list[this.key].traineeTitle;
+          }
           this.sumLoad = this.trainInfoList.reduce(function(prev, cur) {
             return +cur.load + +prev;
           }, 0);
@@ -17984,7 +18253,7 @@ if (uni.restoreGlobal) {
         return week;
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:380", option, 88);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:384", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -18000,11 +18269,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:396", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:400", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:400", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:404", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -18012,15 +18281,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:408", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:412", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:410", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:414", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:416", "err", err);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:420", "err", err);
                 }
               });
             }
@@ -18029,7 +18298,7 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:425", option.name, 8888);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:429", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
@@ -18043,11 +18312,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:440", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:444", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:444", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:448", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -18057,11 +18326,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:454", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:458", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:458", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:462", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -18448,13 +18717,14 @@ if (uni.restoreGlobal) {
     data() {
       return {
         userInfo: {
-          username: "",
+          nickname: "",
           avatar: null,
           comment: null,
           vipLevel: null,
           vipEndDate: null,
           referrer: null
         },
+        payShow: false,
         columns: [
           { text: "001", value: "001" },
           { text: "002", value: "002" },
@@ -18466,29 +18736,82 @@ if (uni.restoreGlobal) {
           { text: "008", value: "008" },
           { text: "009", value: "009" },
           { text: "010", value: "010" }
-        ]
+        ],
+        cardList: [
+          {
+            hotMsg: "\u6BCF\u5929\u4EC5\u97001\u5143\u94B1",
+            text: "\u5E74\u5361",
+            money: "365",
+            des: "468",
+            unit: "\u5143/\u5E74",
+            activity: "\u65E0\u9650\u4F1A\u5458\u6570",
+            active: true
+          },
+          {
+            hotMsg: "\u7ACB\u770160\u5143",
+            text: "\u4E09\u4E2A\u6708",
+            money: "158",
+            des: "218",
+            unit: "\u5143/\u5B63\u5EA6",
+            activity: "\u9650100\u4E2A\u4F1A\u5458",
+            active: false
+          },
+          {
+            hotMsg: "\u7ACB\u770120\u5143",
+            text: "\u6708\u5361",
+            money: "78",
+            des: "98",
+            unit: "\u5143/\u6708",
+            activity: "\u965030\u4E2A\u4F1A\u5458",
+            active: false
+          }
+        ],
+        hotInfo: {
+          text1: "103",
+          text2: "468\u5143/\u5E74"
+        },
+        payMoney: "365",
+        show: false
       };
     },
     onShow() {
       this.getUserInfo();
     },
+    watch: {
+      payShow: {
+        handler: function(n2) {
+          if (n2) {
+            uni.hideTabBar();
+          } else {
+            uni.showTabBar();
+          }
+        }
+      }
+    },
     methods: {
+      aliPayment() {
+      },
+      wxPayment() {
+      },
+      payClick() {
+        this.payShow = true;
+      },
       pickerSelect(val) {
         this.columns.forEach((item) => item.active = false);
         val.active = true;
       },
       async getUserInfo() {
         const res2 = await My$3.getUserInfo();
-        const { avatar, username, comment, vipLevel, vipEndDate, referrer } = res2.data;
+        const { avatar, nickname, comment, vipLevel, vipEndDate, referrer } = res2.data;
         this.userInfo = {
           avatar: avatar || null,
-          username: username || null,
+          nickname: nickname || null,
           comment: comment || null,
           vipLevel: vipLevel || null,
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:141", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:319", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -18497,7 +18820,17 @@ if (uni.restoreGlobal) {
           duration: 2e3
         });
       },
+      selectCard(item) {
+        this.cardList.forEach((element) => element.active = false);
+        item.active = true;
+        this.hotInfo.text1 = +item.des - +item.money;
+        this.hotInfo.text2 = item.des + item.unit;
+        this.payMoney = item.money;
+      },
       openCard() {
+        uni.reLaunch({
+          url: "/pages/openCard/openCard"
+        });
       },
       setUp() {
         uni.navigateTo({
@@ -18513,7 +18846,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:169", "success");
+            formatAppLog("log", "at pages/my/my.vue:354", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3
@@ -18554,83 +18887,206 @@ if (uni.restoreGlobal) {
   function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
+    const _component_van_button = vue.resolveComponent("van-button");
+    const _component_van_action_sheet = vue.resolveComponent("van-action-sheet");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "my" }, [
       vue.createElementVNode("view", { class: "background" }),
       vue.createElementVNode("view", { class: "status_bar" }, [
         vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F ")
       ]),
-      vue.createElementVNode("view", { class: "header" }, [
-        vue.createElementVNode("view", {
-          class: "logo",
-          onClick: _cache[0] || (_cache[0] = (...args) => $options.personalInfo && $options.personalInfo(...args))
-        }, [
-          vue.createVNode(_component_van_image, {
-            round: "",
-            src: $data.userInfo.avatar
-          }, null, 8, ["src"]),
-          vue.createElementVNode("view", { class: "edit-icon" })
-        ]),
-        vue.createElementVNode("view", { class: "user-name" }, [
-          vue.createElementVNode("view", {
-            class: vue.normalizeClass(["name", { ordinary: $data.userInfo.vipLevel === 2 }])
-          }, vue.toDisplayString($data.userInfo.username), 3),
-          vue.createElementVNode("view", { class: "des" }, vue.toDisplayString($data.userInfo.comment), 1)
-        ]),
-        vue.createElementVNode("view", {
-          class: "config",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.setUp && $options.setUp(...args))
-        })
-      ]),
+      vue.createCommentVNode(' <view class="header">\r\n      <view class="logo" @click="personalInfo">\r\n        <van-image round :src="userInfo.avatar" />\r\n        <view class="edit-icon"></view>\r\n      </view>\r\n      <view class="user-name">\r\n        <view class="name" :class="{ ordinary: userInfo.vipLevel === 2 }">{{\r\n          userInfo.nickname\r\n        }}</view>\r\n        <view class="des">{{ userInfo.comment }}</view>\r\n      </view>\r\n      <view class="config" @click="setUp"></view>\r\n    </view>\r\n    <view v-if="userInfo.vipLevel === 2" class="vip-info" @click="openCard">\r\n      <view class="left">\r\n        <view class="vip-grade">\r\n          <view class="grade-name">\u91D1\u5361\u6559\u7EC3</view>\r\n          <view class="grade-status">\u751F\u6548\u4E2D</view>\r\n        </view>\r\n        <view class="vip-expiration-date">2023.01.20\u5230\u671F ></view>\r\n      </view>\r\n      <view class="right"></view>\r\n    </view>\r\n    <view v-else class="vip-info ordinary" @click="openCard">\r\n      <view class="left">\r\n        <view class="vip-grade">\r\n          <view class="grade-name">\u84DD\u5361\u4F1A\u5458</view>\r\n        </view>\r\n      </view>\r\n      <view class="right"></view>\r\n    </view> '),
       $data.userInfo.vipLevel === 2 ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
-        class: "vip-info",
-        onClick: _cache[2] || (_cache[2] = (...args) => $options.openCard && $options.openCard(...args))
+        class: "vip-card"
       }, [
         vue.createElementVNode("view", { class: "left" }, [
-          vue.createElementVNode("view", { class: "vip-grade" }, [
-            vue.createElementVNode("view", { class: "grade-name" }, "\u91D1\u5361\u6559\u7EC3"),
-            vue.createElementVNode("view", { class: "grade-status" }, "\u751F\u6548\u4E2D")
+          vue.createElementVNode("view", {
+            class: "card-info",
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.personalInfo && $options.personalInfo(...args))
+          }, [
+            vue.createElementVNode("view", { class: "user-logo" }, [
+              vue.createVNode(_component_van_image, {
+                round: "",
+                src: $data.userInfo.avatar
+              }, null, 8, ["src"])
+            ]),
+            vue.createElementVNode("view", { class: "card-name" }, vue.toDisplayString($data.userInfo.nickname), 1),
+            vue.createElementVNode("view", { class: "card-status" }, "\u91D1\u5361\u6559\u7EC3")
           ]),
-          vue.createElementVNode("view", { class: "vip-expiration-date" }, "2023.01.20\u5230\u671F >")
+          vue.createElementVNode("view", { class: "card-des" }, vue.toDisplayString($data.userInfo.vipEndDate ? $data.userInfo.vipEndDate : "\u7ACB\u5373\u7EED\u8D39\u91D1\u5361\u6559\u7EC3\uFF0C\u7545\u4EAB\u591A\u9879\u7279\u6743~"), 1)
         ]),
-        vue.createElementVNode("view", { class: "right" })
+        vue.createElementVNode("view")
       ])) : (vue.openBlock(), vue.createElementBlock("view", {
         key: 1,
-        style: { "margin-top": "80upx" }
-      })),
-      vue.createCommentVNode('    <view v-else class="vip-info ordinary" @click="openCard">\r\n      <view class="left">\r\n        <view class="vip-grade">\r\n          <view class="grade-name">\u84DD\u5361\u4F1A\u5458</view>\r\n        </view>\r\n      </view>\r\n      <view class="right"></view>\r\n    </view> '),
-      vue.createElementVNode("view", { class: "contact-customer" }, [
-        vue.createElementVNode("view", { class: "title" }, "\u8054\u7CFB\u5BA2\u670D"),
-        vue.createElementVNode("view", { class: "customer-info" }, [
+        class: "vip-card default"
+      }, [
+        vue.createElementVNode("view", { class: "left" }, [
           vue.createElementVNode("view", {
-            class: "customer-item",
-            onClick: _cache[3] || (_cache[3] = ($event) => $options.copyText("1234567890"))
+            class: "card-info",
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.personalInfo && $options.personalInfo(...args))
           }, [
-            vue.createElementVNode("text", null, "\u5BA2\u670D\u5FAE\u4FE1\uFF1A1234567890"),
-            vue.createElementVNode("text", null, "\u590D\u5236")
+            vue.createElementVNode("view", { class: "user-logo" }, [
+              vue.createVNode(_component_van_image, {
+                round: "",
+                src: $data.userInfo.avatar
+              }, null, 8, ["src"])
+            ]),
+            vue.createElementVNode("view", { class: "card-name" }, vue.toDisplayString($data.userInfo.nickname), 1),
+            vue.createElementVNode("view", { class: "card-status" }, "\u666E\u5361\u6559\u7EC3")
           ]),
-          vue.createElementVNode("view", {
-            class: "customer-item",
-            onClick: _cache[4] || (_cache[4] = ($event) => $options.copyText("Kingtran12@aliyun.com"))
-          }, [
-            vue.createElementVNode("text", null, "\u5BA2\u670D\u90AE\u7BB1\uFF1AKingtran12@aliyun.com"),
-            vue.createElementVNode("text", null, "\u590D\u5236")
+          vue.createElementVNode("view", { class: "card-des" }, "\u5F00\u901A\u91D1\u5361\u6559\u7EC3\uFF0C\u7545\u4EAB\u591A\u9879\u7279\u6743~")
+        ]),
+        vue.createElementVNode("view")
+      ])),
+      vue.createElementVNode("view", { class: "vip-title" }, "\u91D1\u5361\u6559\u7EC3"),
+      vue.createElementVNode("view", { class: "card-types-box" }, [
+        vue.createElementVNode("view", { class: "card-types" }, [
+          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.cardList, (item, index) => {
+            return vue.openBlock(), vue.createElementBlock("view", {
+              key: index,
+              class: "type-item-box"
+            }, [
+              vue.createElementVNode("view", {
+                class: vue.normalizeClass(["type-item", { active: item.active }]),
+                onClick: ($event) => $options.selectCard(item)
+              }, [
+                vue.createElementVNode("view", { class: "hot-msg" }, vue.toDisplayString(item.hotMsg), 1),
+                vue.createElementVNode("view", { class: "text" }, vue.toDisplayString(item.text), 1),
+                vue.createElementVNode("view", { class: "money" }, [
+                  vue.createTextVNode("\xA5"),
+                  vue.createElementVNode("text", { class: "num" }, vue.toDisplayString(item.money), 1)
+                ]),
+                vue.createElementVNode("view", { class: "des" }, vue.toDisplayString(item.des) + vue.toDisplayString(item.unit), 1),
+                vue.createElementVNode("div", { class: "activity" }, vue.toDisplayString(item.activity), 1)
+              ], 10, ["onClick"])
+            ]);
+          }), 128))
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "vip-title" }, "\u91D1\u5361\u6559\u7EC3\u6743\u76CA"),
+      vue.createElementVNode("view", { class: "equity-box" }, [
+        vue.createElementVNode("view", { class: "equity-list" }, [
+          vue.createElementVNode("view", { class: "equity-item" }, [
+            vue.createElementVNode("view", { class: "logo" }),
+            vue.createElementVNode("view", { class: "des" }, "\u91D1\u5361\u6743\u76CA")
+          ]),
+          vue.createElementVNode("view", { class: "equity-item" }, [
+            vue.createElementVNode("view", { class: "logo" }),
+            vue.createElementVNode("view", { class: "des" }, "\u91D1\u5361\u6743\u76CA")
+          ]),
+          vue.createElementVNode("view", { class: "equity-item" }, [
+            vue.createElementVNode("view", { class: "logo" }),
+            vue.createElementVNode("view", { class: "des" }, "\u91D1\u5361\u6743\u76CA")
+          ]),
+          vue.createElementVNode("view", { class: "equity-item" }, [
+            vue.createElementVNode("view", { class: "logo" }),
+            vue.createElementVNode("view", { class: "des" }, "\u91D1\u5361\u6743\u76CA")
+          ]),
+          vue.createElementVNode("view", { class: "equity-item" }, [
+            vue.createElementVNode("view", { class: "logo" }),
+            vue.createElementVNode("view", { class: "des" }, "\u91D1\u5361\u6743\u76CA")
+          ]),
+          vue.createElementVNode("view", { class: "equity-item" }, [
+            vue.createElementVNode("view", { class: "logo" }),
+            vue.createElementVNode("view", { class: "des" }, "\u91D1\u5361\u6743\u76CA")
           ])
         ])
       ]),
-      vue.createElementVNode("view", { class: "recommend" }, [
-        vue.createVNode(_component_van_cell, {
-          title: "\u63A8\u8350\u4EBA",
-          "is-link": !$data.userInfo.referrer,
-          value: $data.userInfo.referrer,
-          onClick: $options.openSheet
+      vue.createElementVNode("view", { class: "contact-customer-box" }, [
+        vue.createElementVNode("view", { class: "contact-customer" }, [
+          vue.createElementVNode("view", { class: "title" }, "\u8054\u7CFB\u5BA2\u670D"),
+          vue.createElementVNode("view", { class: "customer-info" }, [
+            vue.createElementVNode("view", {
+              class: "customer-item",
+              onClick: _cache[2] || (_cache[2] = ($event) => $options.copyText("1234567890"))
+            }, [
+              vue.createElementVNode("text", null, "\u5BA2\u670D\u5FAE\u4FE1\uFF1A1234567890"),
+              vue.createElementVNode("text", null, "\u590D\u5236")
+            ]),
+            vue.createElementVNode("view", {
+              class: "customer-item",
+              onClick: _cache[3] || (_cache[3] = ($event) => $options.copyText("Kingtran12@aliyun.com"))
+            }, [
+              vue.createElementVNode("text", null, "\u5BA2\u670D\u90AE\u7BB1\uFF1AKingtran12@aliyun.com"),
+              vue.createElementVNode("text", null, "\u590D\u5236")
+            ])
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "recommend-box" }, [
+          vue.createElementVNode("view", { class: "recommend" }, [
+            vue.createVNode(_component_van_cell, {
+              title: "\u63A8\u8350\u4EBA",
+              "is-link": !$data.userInfo.referrer,
+              value: $data.userInfo.referrer,
+              onClick: $options.openSheet
+            }, {
+              icon: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "icon" })
+              ]),
+              _: 1
+            }, 8, ["is-link", "value", "onClick"])
+          ]),
+          vue.createElementVNode("view", { class: "recommend" }, [
+            vue.createVNode(_component_van_cell, {
+              title: "\u8BBE\u7F6E",
+              "is-link": "",
+              onClick: $options.setUp
+            }, {
+              icon: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "icon air-config" })
+              ]),
+              _: 1
+            }, 8, ["onClick"])
+          ])
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "footer-button" }, [
+        vue.createElementVNode("view", { class: "text-box" }, [
+          vue.createElementVNode("view", { class: "yuan" }, "\u5DF2\u7701\uFFE5" + vue.toDisplayString($data.hotInfo.text1), 1),
+          vue.createElementVNode("view", { class: "des" }, vue.toDisplayString($data.hotInfo.text2), 1)
+        ]),
+        vue.createVNode(_component_van_button, {
+          block: "",
+          onClick: $options.payClick
         }, {
-          icon: vue.withCtx(() => [
-            vue.createElementVNode("view", { class: "icon" })
+          default: vue.withCtx(() => [
+            vue.createTextVNode("\u786E\u8BA4\u5F00\u901A\u5E76\u652F\u4ED8\uFFE5" + vue.toDisplayString($data.payMoney) + "\u5143", 1)
           ]),
           _: 1
-        }, 8, ["is-link", "value", "onClick"])
+        }, 8, ["onClick"]),
+        vue.createVNode(_component_van_action_sheet, {
+          class: "payment-action-sheet",
+          show: $data.payShow,
+          "onUpdate:show": _cache[6] || (_cache[6] = ($event) => $data.payShow = $event)
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", {
+              class: "title",
+              onClick: _cache[4] || (_cache[4] = (...args) => $options.aliPayment && $options.aliPayment(...args))
+            }, "\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F"),
+            vue.createElementVNode("view", { class: "actions" }, [
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u652F\u4ED8\u5B9D")
+              ]),
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
+                }),
+                vue.createElementVNode("view", {
+                  class: "text",
+                  onClick: _cache[5] || (_cache[5] = (...args) => $options.wxPayment && $options.wxPayment(...args))
+                }, "\u5FAE\u4FE1")
+              ])
+            ])
+          ]),
+          _: 1
+        }, 8, ["show"])
       ]),
       vue.createVNode(_component_uni_popup, {
         ref: "popup",
@@ -18643,12 +19099,12 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "picker-header" }, [
               vue.createElementVNode("view", {
                 class: "cancel-btn",
-                onClick: _cache[5] || (_cache[5] = (...args) => $options.onCancel && $options.onCancel(...args))
+                onClick: _cache[7] || (_cache[7] = (...args) => $options.onCancel && $options.onCancel(...args))
               }, "\u53D6\u6D88"),
               vue.createElementVNode("view", { class: "title" }, "\u63A8\u8350\u4EBA"),
               vue.createElementVNode("view", {
                 class: "success-btn",
-                onClick: _cache[6] || (_cache[6] = (...args) => $options.onConfirm && $options.onConfirm(...args))
+                onClick: _cache[8] || (_cache[8] = (...args) => $options.onConfirm && $options.onConfirm(...args))
               }, "\u786E\u8BA4")
             ]),
             vue.createElementVNode("view", { class: "message" }, [
@@ -18903,13 +19359,15 @@ if (uni.restoreGlobal) {
         });
       },
       async logout() {
-        let tokenExpired = Es.getCurrentUserInfo().tokenExpired;
-        if (tokenExpired > 0) {
+        formatAppLog("log", "at pages/setUp/setUp.vue:47", "\u5F00\u59CB\u70B9\u4E86");
+        let currentUserInfo = Es.getCurrentUserInfo();
+        formatAppLog("log", "at pages/setUp/setUp.vue:49", currentUserInfo, "currentUserInfo");
+        if (currentUserInfo.tokenExpired > 0) {
           await login$1.logout();
           await this.remove();
           return;
         }
-        if (tokenExpired === 0) {
+        if (currentUserInfo.tokenExpired === 0) {
           await this.remove();
         }
       },
@@ -19268,7 +19726,7 @@ if (uni.restoreGlobal) {
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:235", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:240", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       let leftNavTitle = item.pageTitle;
@@ -19304,7 +19762,7 @@ if (uni.restoreGlobal) {
           this.FrontVideoUrl = this.pushUpTestUrl;
           break;
       }
-      this.getActionInfo();
+      this.getData();
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
     },
@@ -19335,8 +19793,8 @@ if (uni.restoreGlobal) {
         pushUpTestimg: "../../../static/app-plus/bg/pushUpTest.jpg",
         changeValue: true,
         num: 0,
-        squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bbbf92cf-78e7-46c9-aefb-555fd45498ac.mp4",
-        squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ac005e94-771a-482f-81a7-6f21f6721a5b.mp4",
+        squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/5599d329-4a47-4db2-a2a5-1ee1bc5deb35.mp4",
+        squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/925865b3-3f5d-4c4a-9cbf-27ba8cdc8f65.mp4",
         thoracicSpineActivityUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
         StraightLegLiftUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4f9af99a-4833-41d0-a584-1b0cdf4cb583.mp4",
         ThomasUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e971accd-2928-429b-86a1-e33f2d9e10aa.mp4",
@@ -19348,10 +19806,40 @@ if (uni.restoreGlobal) {
         quession3: [],
         testText1: [],
         testText2: [],
-        testText3: []
+        testText3: [],
+        startData: [
+          { clientX: "", clientY: "" }
+        ]
       };
     },
     methods: {
+      start(e2) {
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:334", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        this.startData.clientX = e2.changedTouches[0].clientX;
+        this.startData.clientY = e2.changedTouches[0].clientY;
+      },
+      end(e2) {
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:339", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        const subX = e2.changedTouches[0].clientX - this.startData.clientX;
+        const subY = e2.changedTouches[0].clientY - this.startData.clientY;
+        if (subY < -50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:343", "\u4E0B\u6ED1");
+        } else if (subY > 50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:346", "\u4E0A\u6ED1");
+        } else if (subX > 50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:348", "\u5DE6\u6ED1");
+          uni.reLaunch({
+            url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
+          });
+        } else if (subX < -50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:353", "\u53F3\u6ED1");
+          uni.reLaunch({
+            url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
+          });
+        } else {
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:358", "\u65E0\u6548");
+        }
+      },
       setup() {
         const onClickLeft = () => history.back();
         return {
@@ -19370,7 +19858,9 @@ if (uni.restoreGlobal) {
       getActionInfo() {
         if (this.type !== "") {
           busOb$2.getPhysicalChildAssessmentList(this.type).then((res2) => {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:343", res2.data);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:379", res2.data);
+            let index = res2.data.length;
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:381", index);
             if (res2.success) {
               this.actionobs = res2.data;
               this.quession1 = this.actionobs[0].answer;
@@ -19383,22 +19873,21 @@ if (uni.restoreGlobal) {
                 this.quession3 = this.actionobs[2].answer;
                 this.testText3 = this.actionobs[2].answerRemark.detailArray;
               }
-              this.getData();
             }
           });
         }
       },
       actionResDate() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:363", this.actionobs);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:400", this.actionobs);
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         data["actionTestResult"] = this.actionobs;
         data["status"] = "0";
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:370", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:407", data);
         tesOb.opearConfig(data, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:372", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:409", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -19413,7 +19902,7 @@ if (uni.restoreGlobal) {
         });
       },
       clickQ(item, num) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:386", item);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:423", item);
         if (item.status) {
           item.status = 0;
         } else {
@@ -19431,13 +19920,21 @@ if (uni.restoreGlobal) {
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         tesOb.opearPHConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:404", res2.data[0].actionTestResult);
-          this.quession1 = res2.data[0].actionTestResult[0].answer;
-          if (res2.data[0].actionTestResult.length > 1) {
-            this.quession2 = res2.data[0].actionTestResult[1].answer;
-          }
-          if (res2.data[0].actionTestResult.length > 2) {
-            this.quession3 = res2.data[0].actionTestResult[2].answer;
+          if (res2.success && res2.data.length != 0) {
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:443", res2.data[0].actionTestResult);
+            this.actionobs = res2.data[0].actionTestResult;
+            this.quession1 = this.actionobs[0].answer;
+            this.testText1 = this.actionobs[0].answerRemark.detailArray;
+            if (this.actionobs.length > 1) {
+              this.quession2 = this.actionobs[1].answer;
+              this.testText2 = this.actionobs[1].answerRemark.detailArray;
+            }
+            if (this.actionobs.length > 2) {
+              this.quession3 = this.actionobs[2].answer;
+              this.testText3 = this.actionobs[2].answerRemark.detailArray;
+            }
+          } else {
+            this.getActionInfo();
           }
         });
       }
@@ -19447,7 +19944,11 @@ if (uni.restoreGlobal) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_van_popup = vue.resolveComponent("van-popup");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "content_style",
+      onTouchstart: _cache[7] || (_cache[7] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[8] || (_cache[8] = (...args) => $options.end && $options.end(...args))
+    }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, { leftNavTitle: _ctx.leftNavTitle }, null, 8, ["leftNavTitle"]),
       _ctx.leftNavTitle === "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5" ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -19481,7 +19982,7 @@ if (uni.restoreGlobal) {
           class: "clickAction",
           onClick: _cache[0] || (_cache[0] = (...args) => $setup.showPopup && $setup.showPopup(...args))
         }, [
-          vue.createTextVNode("\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
+          vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
           vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
         ]),
         vue.createVNode(_component_van_popup, {
@@ -19550,7 +20051,8 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("image", {
           class: "imagebg",
           src: $data.backimgFront
-        }, null, 8, ["src"])
+        }, null, 8, ["src"]),
+        vue.createElementVNode("view", { class: "imgbgText" }, " \u70B9\u51FB\u4E0A\u65B9\u84DD\u8272\u6807\u7B7E\u9009\u62E9\u95EE\u9898\u90E8\u4F4D\uFF0C\u53EF\u591A\u9009 ")
       ])) : (vue.openBlock(), vue.createElementBlock("view", {
         key: 3,
         class: "contentBody"
@@ -19630,13 +20132,14 @@ if (uni.restoreGlobal) {
           class: "imagebg",
           src: $data.backimgSide
         }, null, 8, ["src"]),
+        vue.createElementVNode("view", { class: "imgbgText" }, " \u70B9\u51FB\u6807\u7B7E\u9009\u62E9\u95EE\u9898\u90E8\u4F4D "),
         vue.createCommentVNode(' <image\r\n			  src="../../static/app-plus/bg/actionImg.png"\r\n			></image> ')
       ])),
       vue.createElementVNode("view", {
         class: "bottom_style",
         onClick: _cache[6] || (_cache[6] = vue.withModifiers((...args) => $options.actionResDate && $options.actionResDate(...args), ["stop"]))
       }, "\u4FDD\u5B58")
-    ]);
+    ], 32);
   }
   const PagesDynamicEvaluationActionEvaluationActionEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "D:/studyUninApp/bodybuilding-app/pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue"]]);
   const busOb$1 = Es.importObject("businessCloudObject", {
@@ -19660,19 +20163,49 @@ if (uni.restoreGlobal) {
         ],
         icon: true,
         traineeNo: "",
-        questionCode: ""
+        questionCode: "",
+        startData: [
+          { clientX: "", clientY: "" }
+        ]
       };
     },
     created() {
       this.getPageData();
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:84", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:87", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getPageData();
     },
     methods: {
+      start(e2) {
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:94", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        this.startData.clientX = e2.changedTouches[0].clientX;
+        this.startData.clientY = e2.changedTouches[0].clientY;
+      },
+      end(e2) {
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:99", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        const subX = e2.changedTouches[0].clientX - this.startData.clientX;
+        const subY = e2.changedTouches[0].clientY - this.startData.clientY;
+        if (subY < -50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:103", "\u4E0B\u6ED1");
+        } else if (subY > 50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:106", "\u4E0A\u6ED1");
+        } else if (subX > 50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:108", "\u5DE6\u6ED1");
+          uni.reLaunch({
+            url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
+          });
+        } else if (subX < -50) {
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:113", "\u53F3\u6ED1");
+          uni.reLaunch({
+            url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
+          });
+        } else {
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:118", "\u65E0\u6548");
+        }
+      },
       setup() {
         const onClickLeft = () => history.back();
         return {
@@ -19680,7 +20213,7 @@ if (uni.restoreGlobal) {
         };
       },
       jumpModular(item) {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:97", item.path, ">>>>");
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:128", item.path, ">>>>");
         uni.navigateTo({
           url: item.path + "&type=" + item.type + "&traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode,
           success: (res2) => {
@@ -19695,13 +20228,13 @@ if (uni.restoreGlobal) {
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:109", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:140", data);
         busOb$1.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:111", res2.data);
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:142", res2.data);
           res2.data.forEach((item) => {
             this.dynamicEvaluationdata.filter((v2) => {
               let resq = item.code == v2.type;
-              formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:115", resq);
+              formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:146", resq);
               if (resq) {
                 v2.icon = false;
               }
@@ -19710,7 +20243,7 @@ if (uni.restoreGlobal) {
         });
       },
       getdynamicEvaluationdata() {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:124", this.traineeNo);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:155", this.traineeNo);
         uni.redirectTo({
           url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
         });
@@ -19727,7 +20260,11 @@ if (uni.restoreGlobal) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "content_style",
+      onTouchstart: _cache[2] || (_cache[2] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[3] || (_cache[3] = (...args) => $options.end && $options.end(...args))
+    }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createCommentVNode(` <NavBarCompontent :leftNavTitle="'\u52A8\u6001\u8BC4\u4F30'"></NavBarCompontent> `),
       vue.createElementVNode("view", {
@@ -19795,7 +20332,7 @@ if (uni.restoreGlobal) {
         class: "bottom_style",
         onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
       }, "\u4FDD\u5B58")
-    ]);
+    ], 32);
   }
   const PagesDynamicEvaluationDynamicEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-517c7f12"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/dynamicEvaluation/dynamicEvaluation.vue"]]);
   const testOb$1 = Es.importObject("testResults", {
@@ -19825,7 +20362,7 @@ if (uni.restoreGlobal) {
     onLoad: function(item) {
       let data = JSON.parse(item.data);
       this.actionData = data;
-      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:118", this.actionData);
+      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:121", this.actionData);
       this.leftNavTitle = this.actionData.questionContent;
       this.imgUrl = this.actionData.url;
       this.videoUrl = this.actionData.answerRemark.url;
@@ -19849,6 +20386,7 @@ if (uni.restoreGlobal) {
         gender: "1",
         age: 29,
         resValue: 80,
+        isfocus: true,
         resultValue: "",
         codes: "",
         typeText: "\u5F85\u6D4B",
@@ -19866,19 +20404,55 @@ if (uni.restoreGlobal) {
           userId: "",
           status: "0"
         }],
-        backgroundColor: "rgba(56,61,70, 1)"
+        backgroundColor: "rgba(56,61,70, 1)",
+        startData: [
+          { clientX: "", clientY: "" }
+        ]
       };
     },
     methods: {
+      focus() {
+        this.isfocus = false;
+      },
+      blur() {
+        this.isfocus = true;
+      },
+      start(e2) {
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:178", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        this.startData.clientX = e2.changedTouches[0].clientX;
+        this.startData.clientY = e2.changedTouches[0].clientY;
+      },
+      end(e2) {
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:183", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e2.changedTouches[0].clientY);
+        const subX = e2.changedTouches[0].clientX - this.startData.clientX;
+        const subY = e2.changedTouches[0].clientY - this.startData.clientY;
+        if (subY < -50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:187", "\u4E0B\u6ED1");
+        } else if (subY > 50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:190", "\u4E0A\u6ED1");
+        } else if (subX > 50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:192", "\u5DE6\u6ED1");
+          uni.reLaunch({
+            url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
+          });
+        } else if (subX < -50) {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:197", "\u53F3\u6ED1");
+          uni.reLaunch({
+            url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
+          });
+        } else {
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:202", "\u65E0\u6548");
+        }
+      },
       testResult(gender, age, resValue) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:166", gender, age, resValue);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:207", gender, age, resValue);
         resValue = Number(resValue);
         if (resValue == "") {
           this.levelColor("");
           this.typeText = "\u5F85\u6D4B";
         } else {
           testOb$1.method1(gender, age, resValue, this.codes).then((res2) => {
-            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:173", res2.data);
+            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:214", res2.data);
             if (resValue > 500) {
               switch (this.codes) {
                 case "F0001":
@@ -19918,7 +20492,7 @@ if (uni.restoreGlobal) {
         data["traineeId"] = this.traineeNo;
         testOb$1.getOnlyList(data).then((res2) => {
           if (res2.success) {
-            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:214", res2.data[0].birthday);
+            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:255", res2.data[0].birthday);
             this.gender = res2.data[0].gender;
             birth = res2.data[0].birthday;
             this.age = Number(this.getAge(birth));
@@ -19941,11 +20515,11 @@ if (uni.restoreGlobal) {
           age[0]--;
           age[1] += 12;
         }
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:244", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:285", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
         return age[0];
       },
       levelColor(levelType) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:248", levelType);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:289", levelType);
         switch (levelType) {
           case "\u4F18\u79C0":
           case "\u826F\u597D":
@@ -19968,6 +20542,7 @@ if (uni.restoreGlobal) {
             break;
           default:
             this.typeColor = "rgba(75, 82, 94, 1)";
+            this.backgroundColor = "rgba(56,61,70, 1)";
             break;
         }
       },
@@ -19982,9 +20557,9 @@ if (uni.restoreGlobal) {
         data["testDate"] = new Date();
         data["physicalData"] = actinData;
         data["status"] = "0";
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:285", data);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:327", data);
         const res2 = testOb$1.opearConfig(data, "bodyTestReport").then((res3) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:287", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:329", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res3.success) {
             uni.redirectTo({
               url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -19997,7 +20572,7 @@ if (uni.restoreGlobal) {
           }
         }).catch(() => {
         });
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:299", res2);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:341", res2);
       },
       getData() {
         const data = {};
@@ -20005,7 +20580,7 @@ if (uni.restoreGlobal) {
         data["questionCode"] = this.questionCode;
         data["code"] = this.codes;
         testOb$1.opearPHConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:307", res2.data);
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:349", res2.data);
           this.resultValue = res2.data[0].physicalData.actionVlue;
         }).catch(() => {
           this.resultValue = "";
@@ -20019,7 +20594,11 @@ if (uni.restoreGlobal) {
     const _component_van_popup = vue.resolveComponent("van-popup");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "content_style",
+      onTouchstart: _cache[8] || (_cache[8] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[9] || (_cache[9] = (...args) => $options.end && $options.end(...args))
+    }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createVNode(_component_NavBarCompontent, { leftNavTitle: $data.leftNavTitle }, null, 8, ["leftNavTitle"]),
       vue.createElementVNode("view", {
@@ -20092,8 +20671,11 @@ if (uni.restoreGlobal) {
                         type: "number",
                         "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.resultValue = $event),
                         placeholder: "\u8BF7\u586B\u5199",
-                        "cursor-spacing": 45
-                      }, null, 512), [
+                        "cursor-spacing": 45,
+                        onFocus: _cache[4] || (_cache[4] = (...args) => $options.focus && $options.focus(...args)),
+                        onBlur: _cache[5] || (_cache[5] = (...args) => $options.blur && $options.blur(...args)),
+                        onConfirm: _cache[6] || (_cache[6] = (...args) => $options.blur && $options.blur(...args))
+                      }, null, 544), [
                         [vue.vModelText, $data.resultValue]
                       ])
                     ]),
@@ -20139,12 +20721,13 @@ if (uni.restoreGlobal) {
         ])
       ]),
       vue.createElementVNode("view", null, [
-        vue.createElementVNode("view", {
+        $data.isfocus ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
           class: "postureButton",
-          onClick: _cache[4] || (_cache[4] = ($event) => $options.actionResDate())
-        }, "\u4FDD\u5B58")
+          onClick: _cache[7] || (_cache[7] = ($event) => $options.actionResDate())
+        }, "\u4FDD\u5B58")) : vue.createCommentVNode("v-if", true)
       ])
-    ]);
+    ], 32);
   }
   const PagesPhysicalFitnessAssessmentActionEvaluationActionEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue"]]);
   /*!
@@ -26720,7 +27303,8 @@ if (uni.restoreGlobal) {
         isFixedTop: false,
         nowDate: "",
         nowYear: "",
-        buyStatus: 0
+        buyStatus: 0,
+        statusDy: false
       };
     },
     setup() {
@@ -26740,49 +27324,62 @@ if (uni.restoreGlobal) {
       };
     },
     onShow() {
-      formatAppLog("log", "at pages/viewReport/viewReport.vue:939", this.key);
+      formatAppLog("log", "at pages/viewReport/viewReport.vue:1032", this.key);
     },
     onLoad(options) {
       if (JSON.stringify(options) !== "{}" && options.traineeNo) {
         this.traineeNo = options.traineeNo;
         this.key = options.key;
         this.buyStatus = Number(options.buyStatus);
-        this.getUserInfo();
-        this.getconfingActionName();
-        this.getPosture();
-        this.getBodyTestData();
-        this.getDynameEvaluation();
-        this.getHealthQuesson();
+        this.pageMethods();
         switch (this.key) {
           case "1":
             this.openKey = true;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:955", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
-            setTimeout(this.saveReport(), 1e4);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:957", "\u4FDD\u5B58\u6210\u529F\uFF01");
             break;
           case "2":
             this.openKey = false;
             this.getHistroyDate();
             this.pageName = "\u4F1A\u5458\u4FE1\u606F";
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:963", "1111");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1048", "1111");
             break;
         }
       }
     },
     methods: {
+      getInfo() {
+        return new Promise((resolve, reject) => {
+          this.getUserInfo();
+          this.getconfingActionName();
+          this.getPosture();
+          this.getBodyTestData();
+          this.getDynameEvaluation();
+          this.getHealthQuesson();
+          setTimeout(() => {
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1063", "\u6570\u636E\u52A0\u8F7D\u6210\u529F");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1064", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
+            this.saveReport();
+          }, 3e3);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1067", "\u4FDD\u5B58\u6210\u529F\uFF01");
+        });
+      },
+      async pageMethods() {
+        await this.getInfo();
+      },
       viewReportScrrop(event) {
         this.scrollTop = event.detail.scrollTop;
-        this.isFixedTop = this.scrollTop > 50 ? true : false;
+        this.isFixedTop = this.scrollTop > 29 ? true : false;
       },
-      async getUserInfo() {
+      getUserInfo() {
         const data = {};
         data["traineeId"] = this.traineeNo;
         testOb.getOnlyList(data).then((res2) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:977", res2.data);
-          this.personName = res2.data[0].traineeName;
-          this.gender = res2.data[0].gender;
-          this.mobileNumber = res2.data[0].mobile;
-          this.age = this.getAge(res2.data[0].birthday);
+          if (res2.success) {
+            this.personName = res2.data[0].traineeName;
+            this.gender = res2.data[0].gender;
+            this.mobileNumber = res2.data[0].mobile;
+            this.age = this.getAge(res2.data[0].birthday);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1086", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + res2.data);
+          }
         });
       },
       getAge(birthday) {
@@ -26809,6 +27406,7 @@ if (uni.restoreGlobal) {
         switch (levelType) {
           case "\u4F18\u79C0":
           case "\u826F\u597D":
+          case "\u975E\u5E38\u597D":
             return "rgba(1, 224, 140, 1)";
           case "\u4E2D\u7B49":
           case "\u4E2D\u4E0A\u7B49":
@@ -26851,7 +27449,7 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1074", this.queryData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1181", this.queryData);
               resdata["data"] = this.queryData;
             }).catch((err) => {
             });
@@ -26864,7 +27462,7 @@ if (uni.restoreGlobal) {
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = "A0003";
         testOb.opearConfigQuery(data).then((res2) => {
-          if (res2.success) {
+          if (res2.success && res2.data.length != 0) {
             this.assessmentNewData = res2.data[0].postData;
             let trueData = {};
             if (!this.assessmentNewData[0].textShow1) {
@@ -26942,9 +27540,9 @@ if (uni.restoreGlobal) {
           if (res2.data.length > 0) {
             this.bodyTestData = res2.data[0].bodyTestReport;
             this.bodyFraction = Number(this.bodyTestData.bodyFraction);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1181", this.bodyTestData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1288", this.bodyTestData);
             resData["data"] = this.bodyTestData;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1183", resData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1290", resData);
           }
         });
         return resData;
@@ -26953,43 +27551,65 @@ if (uni.restoreGlobal) {
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = "A0004";
-        const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
-          res2.data.forEach((r2) => {
-            let rq = r2.actionTestResult;
-            rq.forEach((rqs) => {
-              resData.push(rqs.answer);
-            });
-          });
-          resData.forEach((d2) => {
-            d2.forEach((a2) => {
-              if (a2.status == 0) {
-                this.physicalFitnessAssessmentData.push(a2);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1302", res2.data);
+          for (let r2 of res2.data) {
+            for (let rq of r2.actionTestResult) {
+              for (let d2 of rq.answer) {
+                if (d2.status == 0) {
+                  this.physicalFitnessAssessmentData.push(r2);
+                  break;
+                }
               }
-            });
-          });
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1214", this.physicalFitnessAssessmentData);
+            }
+          }
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1315", this.physicalFitnessAssessmentData);
         });
+      },
+      setDyNameStatus(item) {
+        if (item == 0) {
+          this.statusDy = true;
+        } else {
+          this.statusDy = false;
+        }
+      },
+      getDyName(item) {
+        switch (item) {
+          case "E0001":
+            return "\u81EA\u91CD\u6DF1\u8E72\u8BC4\u4F30";
+          case "E0002":
+            return "\u80F8\u690E\u6D3B\u52A8\u5EA6\u8BC4\u4F30";
+          case "E0003":
+            return "\u67D4\u97E7\u6027\u6D4B\u8BD5";
+          case "E0004":
+            return "\u80A9\u5173\u8282\u7075\u6D3B\u6027";
+          case "E0005":
+            return "\u4FEF\u5367\u6491\u7A33\u5B9A\u6027\u6D4B\u8BD5";
+        }
       },
       openUIup() {
         this.$refs.popup.open();
       },
-      async saveReport() {
-        const data = {};
-        let date2 = new Date();
-        let today = date2.getFullYear() + "-" + date2.getMonth() + 1 + "-" + date2.getDate();
-        data["traineeNo"] = this.traineeNo;
-        data["bodyTestData"] = this.getBodyTestData();
-        data["assessmentTrueData"] = this.assessmentTrueData;
-        data["queryData"] = this.getconfingActionName();
-        data["HQDate"] = this.getHealthQuesson();
-        data["physicalFitnessAssessmentData"] = this.physicalFitnessAssessmentData;
-        data["saveDate"] = today;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1233", data);
-        testOb.saveReport(data).then((res2) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1235", res2);
-        });
-        this.showShare = true;
+      saveReport() {
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1345", this.openKey);
+        if (this.openKey) {
+          const data = {};
+          let date2 = new Date();
+          let today = date2.getFullYear() + "-" + date2.getMonth() + 1 + "-" + date2.getDate();
+          data["traineeNo"] = this.traineeNo;
+          data["bodyTestData"] = this.bodyTestData;
+          data["assessmentTrueData"] = this.assessmentTrueData;
+          data["queryData"] = this.queryData;
+          data["HQDate"] = this.HQDate;
+          data["physicalFitnessAssessmentData"] = this.physicalFitnessAssessmentData;
+          data["saveDate"] = today;
+          data["name"] = this.personName;
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1360", data);
+          testOb.saveReport(data).then((res2) => {
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1362", res2);
+          });
+          this.showShare = true;
+        }
       },
       async uploadImage(callback) {
         const result = await train.uploadBase64({
@@ -27004,11 +27624,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1252", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1381", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1256", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1385", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -27016,15 +27636,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1264", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1393", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1266", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1395", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1272", "err", err);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1401", "err", err);
                 }
               });
             }
@@ -27033,12 +27653,12 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.showShare = false;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1281", option.name, 8888);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1410", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
           if (option.name === "\u4FDD\u5B58\u5230\u76F8\u518C") {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1287", "\u5F00\u59CB\u8C03\u7528\u4FDD\u5B58\u51FD\u6570");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1416", "\u5F00\u59CB\u8C03\u7528\u4FDD\u5B58\u51FD\u6570");
             this.downloadFile();
           } else {
             if (option.name === "\u5206\u4EAB\u5230\u5FAE\u4FE1") {
@@ -27048,11 +27668,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1297", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1426", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1301", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1430", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -27062,11 +27682,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1311", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1440", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1315", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1444", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -27074,7 +27694,7 @@ if (uni.restoreGlobal) {
         });
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1324", option, 88);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1453", option, 88);
         this.canvasImageMsg = option.name;
       },
       onClickLeft() {
@@ -27094,14 +27714,15 @@ if (uni.restoreGlobal) {
         data["questionCode"] = "A0001";
         const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1347", res2.data[0].testResult);
-          resData.push(res2.data[0].testResult);
-          this.HQDate = resData;
-          if (this.HQDate.length == 0) {
+          if (res2.success && res2.data.length != 0) {
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1477", res2.data[0].testResult);
+            resData.push(res2.data[0].testResult);
+            this.HQDate = resData;
+          } else {
             this.showHQ = false;
           }
         });
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1371", resData);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1501", resData);
         return resData;
       },
       getHistroyDate() {
@@ -27110,30 +27731,23 @@ if (uni.restoreGlobal) {
           data["traineeNo"] = this.traineeNo;
           if (!this.openKey) {
             testOb.opearReportQuery(data).then((res2) => {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1382", res2);
-              res2.data.forEach((item) => {
-                data["name"] = this.personName;
-                data["date"] = item.saveDate;
-                data["bodyTestData"] = item.bodyTestData;
-                data["assessmentTrueData"] = item.assessmentTrueData;
-                data["queryData"] = item.queryData;
-                data["HQDate"] = item.HQDate;
-                data["physicalFitnessAssessmentData"] = item.physicalFitnessAssessmentData;
-                this.historyData.push(data);
-              });
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1512", res2);
+              this.historyData = res2.data;
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1514", this.historyData);
             });
           }
         }
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1397", this.historyData);
         this.showShare = true;
       },
       sethistorydata(item) {
         this.HQDate = item.HQDate;
         this.bodyTestData = item.bodyTestData;
+        this.bodyFraction = Number(item.bodyTestData.bodyFraction);
         this.queryData = item.queryData;
         this.assessmentTrueData = item.assessmentTrueData;
         this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData;
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1406", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1527", item);
+        this.$refs.popup.close();
       },
       gototest() {
         uni.redirectTo({
@@ -27141,7 +27755,7 @@ if (uni.restoreGlobal) {
         });
       },
       onClickinfo(item) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1417", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1539", item);
         switch (item) {
           case "\u57FA\u7840\u4FE1\u606F":
             if (this.infoclick) {
@@ -27206,7 +27820,7 @@ if (uni.restoreGlobal) {
       vue.createCommentVNode(' <uni-popup\r\n      ref="popup"\r\n      type="bottom"\r\n      mask-background-color="rgba(20, 21, 23, 0.6)"\r\n    >\r\n      <view class="share-sheet">\r\n        <view\r\n          class="item"\r\n          v-for="(item, index) in options"\r\n          :key="index"\r\n          @click="onSelect(item)"\r\n        >\r\n          <van-image class="img" round :src="item.icon" />\r\n          <view class="text">{{ item.name }}</view>\r\n        </view>\r\n      </view>\r\n    </uni-popup>\r\n  </view> '),
       !$data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
-        style: { "position": "absolute", "z-index": "1", "top": "1580upx" }
+        style: { "position": "absolute", "z-index": "1", "bottom": "10upx" }
       }, [
         vue.createElementVNode("view", {
           class: "buttontrue",
@@ -27218,7 +27832,7 @@ if (uni.restoreGlobal) {
         vue.createVNode(_component_uni_popup, {
           ref: "popup",
           type: "bottom",
-          "mask-background-color": "rgba(20, 21, 23, 0.6)"
+          "mask-background-color": "rgba(20, 21, 23, 0.8)"
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "histroys" }, [
@@ -27231,12 +27845,12 @@ if (uni.restoreGlobal) {
                 }, [
                   vue.createElementVNode("view", {
                     class: "text",
-                    style: { "float": "left" }
+                    style: { "float": "left", "font-size": "36upx", "font-weight": "600", "color": "#f4f7ff" }
                   }, vue.toDisplayString(item.name), 1),
                   vue.createElementVNode("view", {
                     class: "text",
-                    style: { "float": "right" }
-                  }, vue.toDisplayString(item.date), 1)
+                    style: { "float": "right", "color": "#bdc3ce", "font-size": "30upx", "font-weight": "400" }
+                  }, "\u65E5\u671F\uFF1A" + vue.toDisplayString(item.saveDate), 1)
                 ], 8, ["onClick"]);
               }), 128))
             ])
@@ -27258,7 +27872,7 @@ if (uni.restoreGlobal) {
             onClick: _cache[1] || (_cache[1] = (...args) => $options.onClickLeft && $options.onClickLeft(...args))
           }, [
             vue.createVNode(_component_van_icon, { name: "arrow-left" }),
-            vue.createElementVNode("view", { class: "title" }, vue.toDisplayString($data.pageName), 1),
+            vue.createElementVNode("view", { class: "title" }, "\u8BC4\u4F30\u62A5\u544A"),
             vue.createElementVNode("view", {
               class: "z",
               style: { "opacity": "0" }
@@ -27277,7 +27891,7 @@ if (uni.restoreGlobal) {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_van_col, { span: "12" }, {
                     default: vue.withCtx(() => [
-                      vue.createTextVNode("\u4F53\u6D4B\u62A5\u544A")
+                      vue.createTextVNode("\u8BC4\u4F30\u62A5\u544A")
                     ]),
                     _: 1
                   }),
@@ -28106,11 +28720,25 @@ if (uni.restoreGlobal) {
                       vue.createElementVNode("view", { style: { "padding-bottom": "40upx" } }, [
                         (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.physicalFitnessAssessmentData, (item, index) => {
                           return vue.openBlock(), vue.createElementBlock("view", { class: "bodyAssessment" }, [
-                            vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#ffc13c", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
-                            vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#f4f7ff", "line-height": "42upx" } }, vue.toDisplayString(item.answerTitle), 1),
-                            vue.createElementVNode("view", { class: "assessmentContent" }, [
-                              vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx" } }, vue.toDisplayString(item.answeerContent), 1)
-                            ])
+                            vue.createElementVNode("view", { style: { "margin-bottom": "20upx", "color": "#f4f7ff", "font-size": "30upx", "font-weight": "500" } }, [
+                              vue.createElementVNode("view", { class: "greenBlock" }),
+                              vue.createTextVNode(" " + vue.toDisplayString($options.getDyName(item.code)), 1)
+                            ]),
+                            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(item.actionTestResult, (items, indexs) => {
+                              return vue.openBlock(), vue.createElementBlock("view", null, [
+                                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(items.answer, (itemss, indexss) => {
+                                  return vue.openBlock(), vue.createElementBlock("view", null, [
+                                    !itemss.status ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
+                                      vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#ffc13c", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
+                                      vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#f4f7ff", "line-height": "42upx" } }, vue.toDisplayString(items.questionContent) + ":" + vue.toDisplayString(itemss.answerTitle), 1),
+                                      vue.createElementVNode("view", { class: "assessmentContent" }, [
+                                        vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx" } }, vue.toDisplayString(itemss.answeerContent), 1)
+                                      ])
+                                    ])) : vue.createCommentVNode("v-if", true)
+                                  ]);
+                                }), 256))
+                              ]);
+                            }), 256))
                           ]);
                         }), 256))
                       ])
@@ -28393,7 +29021,7 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesCancelAgreementCancelAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "D:/studyUninApp/bodybuilding-app/pages/cancelAgreement/cancelAgreement.vue"]]);
-  const _imports_0 = "/static/app-plus/mebrs/back.png";
+  const _imports_0 = "/static/app-plus/mebrs/back.svg";
   const _sfc_main$4 = {
     data() {
       return {};

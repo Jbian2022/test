@@ -89,7 +89,8 @@
 }
 .my {
   position: relative;
-  padding: 2.5rem 1.25rem 0;
+  padding: 1rem 0 0;
+  padding-bottom: 4.6875rem;
 }
 .my .header {
   display: flex;
@@ -209,6 +210,268 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+.my .vip-card {
+  display: flex;
+  justify-content: space-between;
+  height: 12.0625rem;
+  background: url("../../static/newWorkout/card-vip-bg.png");
+  background-size: 100% 12.0625rem;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-bottom: -2.5rem;
+}
+.my .vip-card .left {
+  padding-top: 1.25rem;
+  padding-left: 2.1875rem;
+}
+.my .vip-card .left .card-info {
+  display: flex;
+  align-items: center;
+}
+.my .vip-card .left .card-info .user-logo .van-image {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.my .vip-card .left .card-info .card-name {
+  margin-left: 0.625rem;
+  font-size: 1.5rem;
+  color: #93653c;
+  line-height: 2.125rem;
+  font-weight: 600;
+}
+.my .vip-card .left .card-info .card-status {
+  margin-left: 0.46875rem;
+  font-size: 0.75rem;
+  background: #fff0c0;
+  border-radius: 0.625rem;
+  padding: 0.125rem 0.3125rem;
+  font-weight: 600;
+  color: #95673d;
+}
+.my .vip-card .left .card-des {
+  margin-top: 2.65625rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #90633a;
+}
+.my .vip-card .right {
+  position: absolute;
+  right: -0.9375rem;
+  top: 0;
+  z-index: 0;
+  width: 8.125rem;
+  height: 8.125rem;
+  background: url("../../static/newWorkout/open-card-vip.png");
+  background-size: 5.625rem 5.625rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.my .vip-card.default {
+  background: url("../../static/newWorkout/card-default-bg.png");
+  background-size: 100% 12.0625rem;
+  background-repeat: no-repeat;
+}
+.my .vip-card.default .left .card-info .card-name {
+  color: #fff;
+}
+.my .vip-card.default .left .card-info .card-status {
+  background: rgba(65, 70, 81, 0.7);
+  border: 0.0625rem solid #5f6572;
+  color: #bdc3ce;
+}
+.my .vip-card.default .left .card-des {
+  color: #ffffff;
+}
+.my .vip-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: #ffe18f;
+  line-height: 1.4375rem;
+  font-weight: bold;
+  margin: 1.25rem 0;
+}
+.my .vip-title::before {
+  content: "";
+  width: 2.5rem;
+  height: 0.6875rem;
+  background-image: url("../../static/newWorkout/vip-card-title-bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 0.625rem;
+}
+.my .vip-title::after {
+  content: "";
+  width: 2.5rem;
+  height: 0.6875rem;
+  background-image: url("../../static/newWorkout/vip-card-title-bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotateY(180deg);
+  margin-left: 0.625rem;
+}
+.my .card-types-box {
+  padding: 0 0.9375rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+.my .card-types {
+  display: flex;
+}
+.my .card-types .type-item-box {
+  flex-shrink: 0;
+  width: 33.333%;
+  padding: 0 0.3125rem;
+  box-sizing: border-box;
+}
+.my .card-types .type-item {
+  height: 9.375rem;
+  background: rgba(56, 61, 70, 0.2);
+  border-radius: 16px;
+  border: 0.0625rem solid rgba(122, 127, 137, 0.2);
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+.my .card-types .type-item .hot-msg {
+  position: absolute;
+  top: -0.25rem;
+  left: -0.0625rem;
+  padding: 0 0.4375rem;
+  height: 1.375rem;
+  line-height: 1.375rem;
+  background: linear-gradient(173deg, #fff3d3 0%, #ffe6a1 100%);
+  border-radius: 0.5rem 0.125rem 0.5rem 0.125rem;
+  color: #90633a;
+  font-size: 0.75rem;
+}
+.my .card-types .type-item .text {
+  margin-top: 1.625rem;
+  font-size: 0.875rem;
+  color: #f4f7ff;
+  font-weight: bold;
+}
+.my .card-types .type-item .money {
+  margin-top: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #ffe18f;
+}
+.my .card-types .type-item .money .num {
+  font-size: 1.625rem;
+}
+.my .card-types .type-item .des {
+  margin-top: 0.3125rem;
+  font-size: 0.625rem;
+  color: #bdc3ce;
+  text-decoration: line-through;
+  margin-bottom: 0.6875rem;
+}
+.my .card-types .type-item .activity {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #ffe18f;
+}
+.my .card-types .type-item.active {
+  background: linear-gradient(180deg, #645f52 0%, #292c31 100%);
+  border: 0.0625rem solid #ffe6a1;
+}
+.my .equity-box {
+  margin-top: 1.25rem;
+  margin-bottom: 0.625rem;
+  padding: 0 0.9375rem;
+  box-sizing: border-box;
+}
+.my .equity-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1.125rem;
+  padding-bottom: 0.8125rem;
+  background: rgba(56, 61, 70, 0.2);
+  border-radius: 0.5rem;
+  border: 0.0625rem solid rgba(122, 127, 137, 0.2);
+}
+.my .equity-list .equity-item {
+  width: 33%;
+  text-align: center;
+  margin-bottom: 0.9375rem;
+}
+.my .equity-list .equity-item .logo {
+  margin: 0 auto;
+  width: 3.125rem;
+  height: 3.125rem;
+  background: linear-gradient(180deg, #69707c 0%, #383d46 100%);
+  border-radius: 100%;
+  background-image: url("../../static/newWorkout/equity2.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.my .equity-list .equity-item .des {
+  margin-top: 0.3125rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #bdc3ce;
+  line-height: 1.0625rem;
+}
+.my .equity-list .equity-item:nth-child(2) .logo {
+  background-image: url("../../static/newWorkout/equity1.svg");
+}
+.my .equity-list .equity-item:nth-child(3) .logo {
+  background-image: url("../../static/newWorkout/equity3.svg");
+}
+.my .equity-list .equity-item:nth-child(4) .logo {
+  background-image: url("../../static/newWorkout/equity4.svg");
+}
+.my .equity-list .equity-item:nth-child(5) .logo {
+  background-image: url("../../static/newWorkout/equity5.svg");
+}
+.my .equity-list .equity-item:nth-child(6) .logo {
+  background-image: url("../../static/newWorkout/equity6.svg");
+}
+.my .footer-button {
+  position: fixed;
+  bottom: var(--window-bottom);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0.625rem 0.9375rem;
+  background: #383d46;
+  display: flex;
+  justify-content: space-between;
+}
+.my .footer-button .text-box {
+  text-align: center;
+  margin-right: 1.375rem;
+  width: 5rem;
+}
+.my .footer-button .text-box .yuan {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffe18f;
+  line-height: 1.375rem;
+}
+.my .footer-button .text-box .des {
+  margin-top: 0.3125rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #bdc3ce;
+  line-height: 0.875rem;
+  text-decoration: line-through;
+}
+.my .footer-button .van-button {
+  width: 15.15625rem;
+  height: 2.8125rem;
+  background: linear-gradient(173deg, #fff3d3 0%, #ffe6a1 100%);
+  border-radius: 0.5rem;
+  color: #90633a;
+  font-weight: 600;
+  border: none;
+  font-size: 1rem;
+}
+.my .contact-customer-box {
+  padding: 0 0.9375rem;
+}
 .my .contact-customer {
   margin-top: 0.9375rem;
   height: 10.8125rem;
@@ -237,12 +500,14 @@
   color: #bdc3ce;
   cursor: pointer;
 }
-.my .recommend {
+.my .recommend-box {
   margin-top: 0.9375rem;
+  background: rgba(56, 61, 70, 0.6);
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 .my .recommend .van-cell {
   background: rgba(56, 61, 70, 0.6);
-  border-radius: 0.75rem;
   height: 3.75rem;
   align-items: center;
   color: #bdc3ce;
@@ -257,6 +522,11 @@
   width: 1rem;
   height: 1rem;
   background: url("../../static/newWorkout/user.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.my .recommend .van-cell .icon.air-config {
+  background: url("../../static/newWorkout/air-config.svg");
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -375,5 +645,31 @@
   background: rgba(75, 82, 94, 0.5);
   font-size: 1.125rem;
   font-weight: 600;
+  color: #f4f7ff;
+}
+ .van-popup {
+  background: #383d46;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+.payment-action-sheet .title {
+  padding: 1.25rem;
+  padding-bottom: 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f4f7ff;
+}
+.payment-action-sheet .actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4.625rem 4.625rem;
+}
+.payment-action-sheet .actions .action .img {
+  width: 3.125rem;
+  height: 3.125rem;
+}
+.payment-action-sheet .actions .action .text {
+  text-align: center;
+  margin-top: 0.625rem;
+  font-size: 0.875rem;
   color: #f4f7ff;
 }

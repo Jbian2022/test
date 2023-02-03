@@ -13,13 +13,15 @@
       <van-cell title="注销账号" is-link @click="closeAccount" />
       <van-cell title="用户隐私协议" is-link @click.native.stop="jumpAgree" />
     </view>
-    <van-button class="footer-btn" block @click.native="logout">退出登录</van-button>
+    <van-button class="footer-btn" block @click.native="logout"
+      >退出登录</van-button
+    >
   </view>
 </template>
 
 <script>
-const login = uniCloud.importObject('login',{
-	customUI: true // 取消自动展示的交互提示界面
+const login = uniCloud.importObject('login', {
+  customUI: true // 取消自动展示的交互提示界面
 })
 export default {
   data() {
@@ -42,24 +44,24 @@ export default {
       })
     },
     async logout() {
-		let tokenExpired = uniCloud.getCurrentUserInfo().tokenExpired
-		if (tokenExpired > 0) {
-			await login.logout()
-			await this.remove()
-			return
-		}
-		if (tokenExpired === 0) {
-			await  this.remove()
-		}
-			
-
+      console.log('开始点了')
+      let currentUserInfo = uniCloud.getCurrentUserInfo()
+      console.log(currentUserInfo, 'currentUserInfo')
+      if (currentUserInfo.tokenExpired > 0) {
+        await login.logout()
+        await this.remove()
+        return
+      }
+      if (currentUserInfo.tokenExpired === 0) {
+        await this.remove()
+      }
     },
-	remove() {
-		uni.clearStorage()
-		uni.reLaunch({
-		  url: '/pages/logining/logining'
-		})
-	}
+    remove() {
+      uni.clearStorage()
+      uni.reLaunch({
+        url: '/pages/logining/logining'
+      })
+    }
   }
 }
 </script>

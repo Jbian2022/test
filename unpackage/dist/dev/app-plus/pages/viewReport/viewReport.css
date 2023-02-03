@@ -617,10 +617,11 @@
   display: flex;
   overflow: hidden;
   box-sizing: border-box;
+  font-feature-settings: "tnum";
+  min-width: 20px;
   justify-content: center;
   flex-direction: row;
   height: 20px;
-  min-width: 20px;
   padding: 0 4px;
   line-height: 18px;
   color: #fff;
@@ -630,7 +631,6 @@
   border: 1px solid #fff;
   text-align: center;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-feature-settings: "tnum";
   font-size: 12px;
 }
 .uni-badge--info[data-v-c97cb896] {
@@ -711,7 +711,7 @@
   opacity: 0.3;
 }
 .uni-list-item--hover[data-v-c7524739] {
-  background-color: #f1f1f1;
+  background-color: #f1f1f1 !important;
 }
 .uni-list-item__container[data-v-c7524739] {
   position: relative;
@@ -1082,45 +1082,31 @@
   z-index: -1;
 }
 .content_style .arrow-left[data-v-62ef4d39] {
-  top: var(--status-bar-height);
+  position: fixed;
+  padding-top: var(--status-bar-height);
+  top: 0;
   left: 0;
   right: 0;
   z-index: 88;
-  height: 4.625rem;
+  height: 2.75rem;
   display: flex;
   align-items: center;
   padding-left: 0.9375rem;
   justify-content: space-between;
   color: #bdc3ce;
-  position: absolute;
-  z-index: 100000;
 }
 .content_style .arrow-left .van-icon[data-v-62ef4d39] {
   font-size: 1.25rem;
   color: #bdc3ce;
 }
 .content_style .arrow-left.show[data-v-62ef4d39] {
-  position: fixed;
-  top: 0;
   background: #212328;
-  padding-top: 0.625rem;
-  animation-name: topAnmiation-62ef4d39;
-  animation-duration: 0.3s;
-  z-index: 30000;
-}
-@keyframes topAnmiation-62ef4d39 {
-0% {
-    top: -2.5rem;
-}
-100% {
-    top: 0;
-}
 }
 #viewReport[data-v-62ef4d39] {
   background-image: url("../../static/app-plus/bg/bodysideReport.png");
   background-repeat: no-repeat;
   background-size: 100%;
-  padding-top: 6.25rem;
+  padding-top: 4.375rem;
 }
 .title[data-v-62ef4d39] {
   width: 3.75rem;
@@ -1202,7 +1188,7 @@
 .healthBlock[data-v-62ef4d39] {
   min-width: 6.15625rem;
   min-height: 2.5rem;
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 400;
@@ -1231,7 +1217,7 @@
 .countNumBlock[data-v-62ef4d39] {
   width: calc(100vw - 6.25rem);
   height: 5.9375rem;
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.75rem;
   padding-top: 0.9375rem;
   padding-left: 1.25rem;
@@ -1256,9 +1242,9 @@
   position: relative;
 }
 .dynamicshow[data-v-62ef4d39] {
-  width: calc(100vw - 3.75rem);
-  overflow-y: auto;
-  background-color: #383D46;
+  width: calc(100vw - 5.625rem);
+  overflow: hidden;
+  background-color: #383d46;
   /* margin-left: 30upx; */
   margin-top: 0.9375rem;
   height: 8.75rem;
@@ -1283,7 +1269,6 @@
   border: 0px none;
 }
 .dynamicshow_right[data-v-62ef4d39] {
-  margin-right: 2.1875rem;
   --van-circle-text-font-weight: 600;
   --van-circle-text-font-size: 1.125rem;
 }
@@ -1293,7 +1278,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 7.875rem;
+  width: 10.9375rem;
   height: 1.5625rem;
   margin-bottom: 2.3125rem;
   font-weight: 600;
@@ -1529,6 +1514,10 @@
   width: 0.875rem;
   height: 0.875rem;
 }
+[data-v-62ef4d39] .uni-popup [name=mask] {
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
 .share-sheet[data-v-62ef4d39] {
   display: flex;
   align-items: center;
@@ -1591,12 +1580,12 @@
 .rightclickblock[data-v-62ef4d39] {
   width: 4.8125rem;
   height: 1.5625rem;
-  background: #1370FF;
+  background: #1370ff;
   border-radius: 0.8125rem;
   font-size: 0.75rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.5625rem;
   padding-left: 0.8125rem;
 }
@@ -1604,7 +1593,7 @@
   background: #2f333a !important;
   border-top: none;
   border-bottom: none;
-  color: #F4F7FF !important;
+  color: #f4f7ff !important;
   border-radius: 0.75rem;
 }
 [data-v-62ef4d39] .uni-list {
@@ -1612,7 +1601,7 @@
   border-radius: 0.75rem;
 }
 [data-v-62ef4d39] .uni-list-item__content-title {
-  color: #F4F7FF !important;
+  color: #f4f7ff !important;
   font-weight: 600;
   background-color: #2f333a !important;
   font-size: 1.125rem !important;
@@ -1635,4 +1624,7 @@
 }
 [data-v-62ef4d39] .uni-list--border-bottom {
   background-color: #2f333a !important;
+}
+.mark[data-v-62ef4d39] {
+  opacity: 0.6;
 }

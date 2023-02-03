@@ -6,7 +6,7 @@
       <view class="nav_left_style" @click.native="goBack">
         <image
           class="back_img_style"
-          src="../../static/app-plus/mebrs/back.png"
+          src="../../static/app-plus/mebrs/back.svg"
         ></image>
       </view>
       <view class="nav_text" @click.native.stop="jump">跳过</view>
@@ -55,7 +55,7 @@
             >
             <image
               class="back_img_style"
-              src="../../static/app-plus/mebrs/back.png"
+              src="../../static/app-plus/mebrs/back.svg"
             ></image>
           </view>
         </uni-forms-item>
