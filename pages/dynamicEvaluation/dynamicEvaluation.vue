@@ -174,6 +174,8 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
+  
+  padding-top:40upx;
   .arrow-left{
   	// top: var(--status-bar-height);
   	// left: 0;

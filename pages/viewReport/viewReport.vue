@@ -100,7 +100,7 @@
         <view class="title">评估报告</view>
         <view class="z" style="opacity: 0">8888</view>
       </view>
-      <view v-show="isFixedTop" class="arrow-box"></view>
+     <!-- <view v-show="isFixedTop" class="arrow-box"></view> -->
       <view id="viewReport">
         <view class="backImg"></view>
         <view class="titleText" v-if="openKey">
