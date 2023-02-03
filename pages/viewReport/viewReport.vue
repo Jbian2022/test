@@ -2196,6 +2196,7 @@ export default {
 }
 ::v-deep .uni-list--border-top {
   background-color: #2f333a !important;
+  z-index: 0 !important;
 }
 .arrowimgopen {
   background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png');
