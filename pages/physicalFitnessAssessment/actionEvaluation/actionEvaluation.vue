@@ -467,7 +467,7 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 170upx;
+	top: 280upx;
 	left: calc(100vw - 717upx);
 	z-index: 1;
 	font-size: 26upx;
