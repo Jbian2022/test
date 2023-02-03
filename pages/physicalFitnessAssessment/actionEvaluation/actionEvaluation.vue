@@ -51,6 +51,7 @@
 							  v-model="resultValue" 
 							  placeholder="请填写"
 							  :cursor-spacing='45'
+							  :auto-blur="true"
 							  @focus="focus"
 							  @blur="blur"
 							  @confirm="blur"/>
