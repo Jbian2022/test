@@ -164,9 +164,11 @@
 /* 文章场景相关 */
 .content_style[data-v-517c7f12] {
   width: 100vw;
+  height: 100vh;
   overflow: hidden;
   position: relative;
-  padding-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
 }
 .content_style .arrow-left[data-v-517c7f12] {
   z-index: 88;
@@ -257,10 +259,6 @@
   margin-left: 18.75rem;
   margin-top: 2.65625rem;
 }
-.need_scoll[data-v-517c7f12] {
-  height: 82vh !important;
-  overflow-y: auto;
-}
 .watermark[data-v-517c7f12] {
   position: absolute;
   font-size: 0.75rem;
@@ -271,9 +269,6 @@
   right: 1.5625rem;
 }
 .bottom_style[data-v-517c7f12] {
-  width: calc(100vw - 1.875rem);
-  margin-left: 0.9375rem;
-  height: 3.125rem;
   background: #1370ff;
   border-radius: 0.5rem;
   margin-top: 0.9375rem;
@@ -284,4 +279,12 @@
   color: #ffffff;
   line-height: 3.125rem;
   text-align: center;
+  justify-content: center;
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
+  display: flex;
+}
+.list_style[data-v-517c7f12] {
+  flex: 1;
+  overflow-y: auto;
 }

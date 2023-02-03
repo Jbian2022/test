@@ -139,10 +139,13 @@
 }
 
 .content_style {
-	width: 100vw;
-	overflow: hidden;
-	position: relative;
-	padding-top: 1.25rem;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.25rem;
 }
 .collapseBlock{
 	background-color: #383D46;
@@ -157,12 +160,12 @@
 }
 .contentImg{
 	width: calc(100vw - 1.875rem);
-	height: 33.1875rem;
+	height: calc(100vh - 21.4375rem);
+	border-radius: 0.5rem;
 	margin-top: 0.625rem;
 	margin-left: 0.9375rem;
 	margin-bottom: -0.3125rem;
 	position: relative;
-	border-radius: 16px 16px 0px 0px;
 }
 .contentBlock{
 	width: calc(100vw - 1.875rem);
@@ -170,6 +173,7 @@
 	background: #383D46;
 	margin-top: -0.15625rem;
 	margin-left: 0.9375rem;
+	margin-bottom: 0.625rem;
 	border-radius: 0px 0px 16px 16px;
 }
 .testText{
@@ -229,8 +233,8 @@
   text-align: center;
   justify-content: center;
   
-  width: calc(100vw - 2.5rem);
-  margin-left: 1.25rem;
+  width: calc(100vw - 1.875rem);
+  margin-left: 0.9375rem;
   
   display: flex;
 }
@@ -241,7 +245,7 @@
 	border-radius: 1.125rem;
 	opacity: 0.5;
 	position:absolute;
-	top: 8.5625rem;
+	top: 5.3125rem;
 	left: calc(100vw - 22.40625rem);
 	z-index: 1;
 	font-size: 0.8125rem;
@@ -256,17 +260,18 @@
 	top: 0.1875rem;
 }
 .clickActionBody{
+	/* height: 1400upx; */
 	background: #383D46;
 	border-radius: 0.5rem;
+	/* backdrop-filter: blur(3upx); */
 	z-index: 999;
 }
  .clickActionContent{
 	width: calc(100vw - 1.875rem);
-	height: 82%;
-	margin-top: 7.1875rem;
+	margin-top: 14%;
 	margin-left: 0.9375rem;
 	background-color: #383D46;
-	border-radius: 1rem;
+	border-radius: 0.5rem;
 	position: fixed;
 }
 .clickActionBody uni-video{
@@ -278,7 +283,7 @@
 }
 .clickActionText{
 	width: calc(100vw - 4.375rem);
-	height: 5.4375rem;
+	height: calc(100vh - 21.5625rem);
 	margin-top: 1.25rem;
 	margin-left: 1.25rem;
 }
@@ -296,7 +301,7 @@
 	line-height: 1.125rem;
 }
 .clickActionEnd{
-	width: 7.5rem;
+	width: 7.1875rem;
 	height: 2.5rem;
 	background: #000000;
 	border-radius: 1.25rem;
@@ -305,9 +310,8 @@
 	color: #F4F7FF;
 	line-height: 2.1875rem;
 	text-align: center;
-	margin: 0 auto;
-	margin-top: 97%;
-	margin-bottom: 1.25rem;
+	margin: auto;
+	margin-bottom: 20px;
 }
 .clickActionEnd uni-image{
 	width: 1rem;
@@ -329,6 +333,9 @@
 	color: #BDC3CE;
 	text-align: center;
 	margin: 0 auto;
+}
+.body_content{
+	flex: 1;
 }
 /* ::-webkit-input-placeholder { 
   color: white;
