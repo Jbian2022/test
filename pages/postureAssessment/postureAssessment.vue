@@ -5,7 +5,7 @@
 		<view class="watermark">数据评测来源于世界权威机构</view>
 		<view class="bgimg"></view>
 		<view class="infoText">点击下方蓝色标签选择问题部位，可多选</view>
-		<view class="content">
+		<view class="content list_style">
 			<van-row>
 			  <van-col span="12">
 				  <view class="contentLeftBlock"  
@@ -73,7 +73,7 @@
 				  <view class="clickBlock" 
 				  @click.native="isonclick(4)" 
 				  v-show="!textShow4"
-				  style="top: 20upx;position: relative;">
+				  style="top: 8upx;position: relative;height: 78%;">
 				  		<view>驼背</view>
 				  		<view>
 							<p class="testq"><view style="display: initial; color: #FFC13C;">紧张肌肉：</view>胸大肌，胸小肌，三角肌前束，颈伸肌群，上斜方肌，肩胛提肌，髋关节区肌。</p>
@@ -93,7 +93,7 @@
 				  <view class="clickBlock" 
 				  @click.native="isonclick(5)" 
 				  v-show="!textShow5"
-				  style="top: 810upx;">
+				  style="top: 820upx;">
 					  <view>骨盆前倾</view>
 					  <view>
 						  <p class="testq"><view style="display: initial; color: #FFC13C;">紧张肌肉：</view>髂腰肌，股直肌，腹直肌，缝匠肌，阔筋膜张肌，长收肌，短收肌，竖脊肌。</p>
@@ -131,7 +131,7 @@
 				  <view class="clickBlock" 
 				  @click.native="isonclick(7)" 
 				  v-show="!textShow7"
-				  style="top: 1072upx;">
+				  style="top: 1070upx;">
 					  <view>膝关节内扣</view>
 					  <view>
 						  <p class="testq"><view style="display: initial; color: #FFC13C;">紧张肌肉：</view>大收肌，短内收肌，长内收肌，股薄肌，趾骨肌。</p>
@@ -204,11 +204,7 @@
 			</van-row> -->
 			
 		</view>
-		<view style="color: 7A7F89;">
-			<button 
-			type="primary"
-			class="postureButton"  @click.native="backPage()" >保存</button>
-		</view>
+		<view class="bottom_style" @click.native="backPage()">保存</view>
 	</view>
 </template>
 
@@ -424,10 +420,12 @@
 	margin: 0 auto;
 }
 .content_style{
-	width: 100vw;
-	height: 100%;
-	overflow: hidden;
-	position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .bgimg{
 	width: calc(100vw - 300upx);
@@ -436,7 +434,7 @@
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position-x: -20upx;
-	margin-top: 140upx;
+	margin-top: 280upx;
 	margin-left: 180upx;
 	margin-right: 192upx;
 	opacity: 1.25;
@@ -478,13 +476,14 @@
 	position: absolute;
 }
 .clickBlock{
-	width: 280upx;	
+	width: 280upx;
 	background: rgba(19,112,255,0.9);
 	border-radius: 16upx;
 	border: 2upx solid #1370FF;
 	padding: 20upx;
 	margin-left: 30upx;
 	position: absolute;
+	overflow: auto;
 }
 .clickBlock :first-child{
 	font-size: 26upx;
@@ -545,5 +544,27 @@
 .testq{
 	font-size: 18upx !important;
 	font-weight: 600 !important;
+}
+.bottom_style{
+	background: #1370ff;
+	border-radius: 16upx;
+	margin-top: 30upx;
+	margin-bottom: 30upx;
+	font-size: 32upx;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #ffffff;
+	line-height: 100upx;
+	text-align: center;
+	justify-content: center;
+	
+	width: calc(100vw - 60upx);
+	margin-left: 30upx;
+	
+	display: flex;
+}
+.list_style{
+	flex: 1;
+	overflow-y: auto;
 }
 </style>
