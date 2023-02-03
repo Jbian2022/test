@@ -220,7 +220,7 @@ export default {
 	margin-top: 80upx;
   	.van-icon{
   		font-size: 40upx;
-  		color: #bdc3ce;
+  		color: #fff;
   	}
   	// &.show{
   	// 	position: sticky;
