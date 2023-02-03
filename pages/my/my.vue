@@ -164,7 +164,7 @@
         >确认开通并支付￥{{ payMoney }}元</van-button
       >
       <van-action-sheet class="payment-action-sheet" v-model:show="payShow">
-        <view class="title">选择支付方式</view>
+        <view class="title" @click.native="aliPayment">选择支付方式</view>
         <view class="actions">
           <view class="action">
             <van-image
@@ -178,7 +178,7 @@
               class="img"
               src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
             />
-            <view class="text">微信</view>
+            <view class="text" @click.native="wxPayment">微信</view>
           </view>
         </view>
       </van-action-sheet>
@@ -291,6 +291,12 @@ export default {
     }
   },
   methods: {
+    aliPayment() {
+
+    },
+    wxPayment() {
+
+    },
     payClick() {
       this.payShow = true
     },

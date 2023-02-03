@@ -17,7 +17,7 @@ const uniID = require('uni-id')
 // 		}
 // 	}
 // })
-console.log(uniID,'什么')
+ console.log(JSON.stringify(uniID) ,'配置文件')
 const db = uniCloud.database()
 module.exports = {
 	_before: function () { // 通用预处理器
@@ -146,7 +146,7 @@ module.exports = {
    },
    // 短信验证码登录
    sendSmsCode:  async function (mobile) {
-	   console.log(1111)
+	 
 	
 	 try{
 		 // 生成验证码可以按自己的需求来，这里以生成6位数字为例

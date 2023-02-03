@@ -1028,7 +1028,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "172.20.10.8",\n        "192.168.160.1",\n        "192.168.32.1"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "10.102.21.251"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T$1 = "";
   try {
     T$1 = "__UNI__76A9E40";
@@ -18789,6 +18789,10 @@ if (uni.restoreGlobal) {
       }
     },
     methods: {
+      aliPayment() {
+      },
+      wxPayment() {
+      },
       payClick() {
         this.payShow = true;
       },
@@ -18807,7 +18811,7 @@ if (uni.restoreGlobal) {
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:313", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:319", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -18842,7 +18846,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:348", "success");
+            formatAppLog("log", "at pages/my/my.vue:354", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3
@@ -19054,10 +19058,13 @@ if (uni.restoreGlobal) {
         vue.createVNode(_component_van_action_sheet, {
           class: "payment-action-sheet",
           show: $data.payShow,
-          "onUpdate:show": _cache[4] || (_cache[4] = ($event) => $data.payShow = $event)
+          "onUpdate:show": _cache[6] || (_cache[6] = ($event) => $data.payShow = $event)
         }, {
           default: vue.withCtx(() => [
-            vue.createElementVNode("view", { class: "title" }, "\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F"),
+            vue.createElementVNode("view", {
+              class: "title",
+              onClick: _cache[4] || (_cache[4] = (...args) => $options.aliPayment && $options.aliPayment(...args))
+            }, "\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F"),
             vue.createElementVNode("view", { class: "actions" }, [
               vue.createElementVNode("view", { class: "action" }, [
                 vue.createVNode(_component_van_image, {
@@ -19071,7 +19078,10 @@ if (uni.restoreGlobal) {
                   class: "img",
                   src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
                 }),
-                vue.createElementVNode("view", { class: "text" }, "\u5FAE\u4FE1")
+                vue.createElementVNode("view", {
+                  class: "text",
+                  onClick: _cache[5] || (_cache[5] = (...args) => $options.wxPayment && $options.wxPayment(...args))
+                }, "\u5FAE\u4FE1")
               ])
             ])
           ]),
@@ -19089,12 +19099,12 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "picker-header" }, [
               vue.createElementVNode("view", {
                 class: "cancel-btn",
-                onClick: _cache[5] || (_cache[5] = (...args) => $options.onCancel && $options.onCancel(...args))
+                onClick: _cache[7] || (_cache[7] = (...args) => $options.onCancel && $options.onCancel(...args))
               }, "\u53D6\u6D88"),
               vue.createElementVNode("view", { class: "title" }, "\u63A8\u8350\u4EBA"),
               vue.createElementVNode("view", {
                 class: "success-btn",
-                onClick: _cache[6] || (_cache[6] = (...args) => $options.onConfirm && $options.onConfirm(...args))
+                onClick: _cache[8] || (_cache[8] = (...args) => $options.onConfirm && $options.onConfirm(...args))
               }, "\u786E\u8BA4")
             ]),
             vue.createElementVNode("view", { class: "message" }, [

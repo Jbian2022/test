@@ -22,6 +22,7 @@
     "Push": {},
     "OAuth": {},
     "iBeacon": {},
+    "Payment": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -37,7 +38,7 @@
       "waiting": true,
       "delay": 0
     },
-    "popGesture": "close",
+    "popGesture": "none",
     "launchwebview": {
       "id": "1",
       "kernel": "WKWebview"
@@ -171,13 +172,27 @@
         },
         "ad": {},
         "oauth": {
+          "apple": {},
           "weixin": {
             "appid": "wxf790c35e4d544ded",
+            "appsecret": "d622e34a6c359fa5c6977d9749530b62",
             "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
-          },
-          "apple": {}
+          }
         },
-        "payment": {},
+        "payment": {
+          "alipay": {
+            "__platform__": [
+              "ios"
+            ]
+          },
+          "weixin": {
+            "__platform__": [
+              "ios"
+            ],
+            "appid": "wxf790c35e4d544ded",
+            "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
+          }
+        },
         "share": {
           "weixin": {
             "appid": "wxf790c35e4d544ded",
@@ -216,7 +231,7 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "3.6.15",
+      "compilerVersion": "3.6.18",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {
