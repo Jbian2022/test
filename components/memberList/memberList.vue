@@ -183,11 +183,9 @@ export default {
   },
 
   created() {
-    // switch (this.type) {
-    //   case 'home':
-    //     this.getMemberList(this.isActive)
-    //     break
-    // }
+  },
+  mounted() {
+
   },
   onShow() {},
 
@@ -208,25 +206,16 @@ export default {
       },
       immediate: true
     },
-    isActive: {
-      handler: function (n, o) {
-        console.log(n, o, n == o)
-        if (this.type === 'home' && typeof n === 'number') {
-          this.newActive = n
-          this.getMemberList(n)
-        }
-      },
-      immediate: true
-    },
-    //  newActive: {
-    //    handler: function (n, o) {
-    //       if (this.type === 'home' && typeof(n) === 'number') {
-    //       	this.getMemberList(n)
-    //       }
-    //    },
-    //    deep: true,
-    // immediate: true
-    //  },
+    // isActive: {
+    //   handler: function (n, o) {
+    //     console.log(n, o, n == o)
+    //     if (this.type === 'home' && typeof n === 'number') {
+    //       this.newActive = n
+    //       this.getMemberList(n)
+    //     }
+    //   },
+    //   immediate: true
+    // },
     searchValue: {
       handler: function (n, o) {
         if (this.type === 'detail') {
@@ -241,11 +230,6 @@ export default {
         }
       }
     }
-  },
-  updated() {
-    // if (this.type === 'home' && typeof(this.isActive) === 'number') {
-    // 	this.getMemberList(this.isActive)
-    // }
   },
   methods: {
     close() {

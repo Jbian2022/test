@@ -61,7 +61,7 @@
         > -->
         <view class="member_scroll_style">
           <MemberList
-            ref="memberList"
+            ref="memberListDom"
             :isActive="isActive"
             :type="'home'"
             :page="page"
@@ -137,10 +137,6 @@ export default {
   onLoad() {
     uni.showTabBar()
   },
-  // onPullDownRefresh() {
-  //   this.$refs.memberList.getMemberList(this.isActive)
-  //   uni.stopPullDownRefresh()
-  // },
   created() {},
   mounted() {
     let self = this
@@ -156,17 +152,43 @@ export default {
             }
           }
         },
-        fail: function (err) {}
+        fail: function (err) {
+			console.log(err,'>>>>')
+		}
       })
-      uni.getStorage({
-        key: 'isActive',
-        success: function (res) {
-          if (res.data) {
-            self.isActive = Number(res.data)
-          }
-        },
-        fail: function (err) {}
-      })
+	  
+	  try {
+	  	const res = uni.getStorageInfoSync();
+		let flag = res.keys.indexOf('isActive') !== -1 ? true : false
+		if (!flag) {
+			try {
+			  uni.setStorageSync('isActive', '1') // 缓存标签激活信息
+			  self.isActive = 1
+			  self.$refs.memberListDom.getMemberList(1) 
+			} catch (e) {
+			  // error
+			}
+		}  else {
+			uni.getStorage({
+			  key: 'isActive',
+			  success: function (res) {
+			    if (res.data) {
+					self.isActive = Number(res.data)
+			          self.$refs.memberListDom.getMemberList(Number(res.data)) 
+			        
+			    }
+			  },
+			  fail: function (err) {}
+			})
+		}
+		
+	  	// console.log(res.keys);
+	  	// console.log(res.currentSize);
+	  	// console.log(res.limitSize);
+	  } catch (e) {
+	  	// error
+	  }
+	  
     })
 
     this.getUserInfor()
@@ -294,13 +316,16 @@ export default {
         .catch((err) => {})
     },
     buyClick(type) {
-      uni.removeStorage({
-        key: 'isActive',
-        success: function (res) {
-          console.log('success')
-        }
-      })
-      this.isActive = type
+	 this.$nextTick(function() {
+		try {
+		  uni.setStorageSync('isActive', String(type)) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
+		this.isActive = type
+		this.$refs.memberListDom.getMemberList(type) 
+	 })
+
     }
   }
 }

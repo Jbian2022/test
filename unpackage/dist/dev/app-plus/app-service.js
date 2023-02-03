@@ -4134,6 +4134,8 @@ if (uni.restoreGlobal) {
     },
     created() {
     },
+    mounted() {
+    },
     onShow() {
     },
     computed: {
@@ -4142,7 +4144,7 @@ if (uni.restoreGlobal) {
         if (this.meberList.length === 0) {
           flag = true;
         }
-        formatAppLog("log", "at components/memberList/memberList.vue:200", flag, " LLLLL");
+        formatAppLog("log", "at components/memberList/memberList.vue:198", flag, " LLLLL");
         return flag;
       }
     },
@@ -4153,16 +4155,6 @@ if (uni.restoreGlobal) {
         },
         immediate: true
       },
-      isActive: {
-        handler: function(n2, o2) {
-          formatAppLog("log", "at components/memberList/memberList.vue:213", n2, o2, n2 == o2);
-          if (this.type === "home" && typeof n2 === "number") {
-            this.newActive = n2;
-            this.getMemberList(n2);
-          }
-        },
-        immediate: true
-      },
       searchValue: {
         handler: function(n2, o2) {
           if (this.type === "detail") {
@@ -4170,15 +4162,13 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:237", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:226", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
           }
         }
       }
-    },
-    updated() {
     },
     methods: {
       close() {
@@ -4197,7 +4187,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:270", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:254", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4249,7 +4239,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:329", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:313", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4257,19 +4247,19 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:339", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:323", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e2) {
-        formatAppLog("log", "at components/memberList/memberList.vue:346", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:330", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e2, index) {
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:351", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:335", "\u5F53\u524D\u72B6\u6001\uFF1A" + e2 + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
         try {
@@ -4722,18 +4712,34 @@ if (uni.restoreGlobal) {
             }
           },
           fail: function(err) {
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:156", err, ">>>>");
           }
         });
-        uni.getStorage({
-          key: "isActive",
-          success: function(res2) {
-            if (res2.data) {
-              self2.isActive = Number(res2.data);
+        try {
+          const res2 = uni.getStorageInfoSync();
+          let flag = res2.keys.indexOf("isActive") !== -1 ? true : false;
+          if (!flag) {
+            try {
+              uni.setStorageSync("isActive", "1");
+              self2.isActive = 1;
+              self2.$refs.memberListDom.getMemberList(1);
+            } catch (e2) {
             }
-          },
-          fail: function(err) {
+          } else {
+            uni.getStorage({
+              key: "isActive",
+              success: function(res3) {
+                if (res3.data) {
+                  self2.isActive = Number(res3.data);
+                  self2.$refs.memberListDom.getMemberList(Number(res3.data));
+                }
+              },
+              fail: function(err) {
+              }
+            });
           }
-        });
+        } catch (e2) {
+        }
       });
       this.getUserInfor();
     },
@@ -4746,7 +4752,7 @@ if (uni.restoreGlobal) {
         });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:189", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:211", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4759,7 +4765,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:207", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:229", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4771,11 +4777,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:219", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:241", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:223", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:245", "success");
           }
         });
         uni.navigateTo({
@@ -4789,13 +4795,13 @@ if (uni.restoreGlobal) {
         });
       },
       upper: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:234", e2, "mmm");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:256", e2, "mmm");
       },
       lower: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:237", e2);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:259", e2);
       },
       scroll(event) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:240", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:262", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
         this.scrollTop = event.detail.scrollTop;
         if (event.detail.scrollTop > 50) {
           this.searchTopFlag = true;
@@ -4819,7 +4825,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:272", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:294", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4845,13 +4851,14 @@ if (uni.restoreGlobal) {
         });
       },
       buyClick(type) {
-        uni.removeStorage({
-          key: "isActive",
-          success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:300", "success");
+        this.$nextTick(function() {
+          try {
+            uni.setStorageSync("isActive", String(type));
+          } catch (e2) {
           }
+          this.isActive = type;
+          this.$refs.memberListDom.getMemberList(type);
         });
-        this.isActive = type;
       }
     }
   };
@@ -4906,7 +4913,7 @@ if (uni.restoreGlobal) {
             vue.createCommentVNode(' <scroll-view\r\n          scroll-top="0"\r\n          scroll-y="true"\r\n          class="scroller-y-style"\r\n          @scrolltoupper="upper"\r\n          @scrolltolower="lower"\r\n          @scroll="scroll"\r\n          :upper-threshold="50"\r\n          scroll-anchoring="true"\r\n        > '),
             vue.createElementVNode("view", { class: "member_scroll_style" }, [
               vue.createVNode(_component_MemberList, {
-                ref: "memberList",
+                ref: "memberListDom",
                 isActive: $data.isActive,
                 type: "home",
                 page: $data.page,
