@@ -647,3 +647,29 @@
   font-weight: 600;
   color: #f4f7ff;
 }
+ .van-popup {
+  background: #383d46;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+.payment-action-sheet .title {
+  padding: 1.25rem;
+  padding-bottom: 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f4f7ff;
+}
+.payment-action-sheet .actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4.625rem 4.625rem;
+}
+.payment-action-sheet .actions .action .img {
+  width: 3.125rem;
+  height: 3.125rem;
+}
+.payment-action-sheet .actions .action .text {
+  text-align: center;
+  margin-top: 0.625rem;
+  font-size: 0.875rem;
+  color: #f4f7ff;
+}

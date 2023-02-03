@@ -18724,6 +18724,7 @@ if (uni.restoreGlobal) {
           vipEndDate: null,
           referrer: null
         },
+        payShow: false,
         columns: [
           { text: "001", value: "001" },
           { text: "002", value: "002" },
@@ -18776,7 +18777,21 @@ if (uni.restoreGlobal) {
     onShow() {
       this.getUserInfo();
     },
+    watch: {
+      payShow: {
+        handler: function(n2) {
+          if (n2) {
+            uni.hideTabBar();
+          } else {
+            uni.showTabBar();
+          }
+        }
+      }
+    },
     methods: {
+      payClick() {
+        this.payShow = true;
+      },
       pickerSelect(val) {
         this.columns.forEach((item) => item.active = false);
         val.active = true;
@@ -18792,7 +18807,7 @@ if (uni.restoreGlobal) {
           vipEndDate: vipEndDate || null,
           referrer: referrer || null
         };
-        formatAppLog("log", "at pages/my/my.vue:277", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:313", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -18827,7 +18842,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:312", "success");
+            formatAppLog("log", "at pages/my/my.vue:348", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3
@@ -18869,6 +18884,7 @@ if (uni.restoreGlobal) {
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
+    const _component_van_action_sheet = vue.resolveComponent("van-action-sheet");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "my" }, [
       vue.createElementVNode("view", { class: "background" }),
@@ -19026,12 +19042,41 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("view", { class: "yuan" }, "\u5DF2\u7701\uFFE5" + vue.toDisplayString($data.hotInfo.text1), 1),
           vue.createElementVNode("view", { class: "des" }, vue.toDisplayString($data.hotInfo.text2), 1)
         ]),
-        vue.createVNode(_component_van_button, { block: "" }, {
+        vue.createVNode(_component_van_button, {
+          block: "",
+          onClick: $options.payClick
+        }, {
           default: vue.withCtx(() => [
             vue.createTextVNode("\u786E\u8BA4\u5F00\u901A\u5E76\u652F\u4ED8\uFFE5" + vue.toDisplayString($data.payMoney) + "\u5143", 1)
           ]),
           _: 1
-        })
+        }, 8, ["onClick"]),
+        vue.createVNode(_component_van_action_sheet, {
+          class: "payment-action-sheet",
+          show: $data.payShow,
+          "onUpdate:show": _cache[4] || (_cache[4] = ($event) => $data.payShow = $event)
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "title" }, "\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F"),
+            vue.createElementVNode("view", { class: "actions" }, [
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u652F\u4ED8\u5B9D")
+              ]),
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createVNode(_component_van_image, {
+                  class: "img",
+                  src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
+                }),
+                vue.createElementVNode("view", { class: "text" }, "\u5FAE\u4FE1")
+              ])
+            ])
+          ]),
+          _: 1
+        }, 8, ["show"])
       ]),
       vue.createVNode(_component_uni_popup, {
         ref: "popup",
@@ -19044,12 +19089,12 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "picker-header" }, [
               vue.createElementVNode("view", {
                 class: "cancel-btn",
-                onClick: _cache[4] || (_cache[4] = (...args) => $options.onCancel && $options.onCancel(...args))
+                onClick: _cache[5] || (_cache[5] = (...args) => $options.onCancel && $options.onCancel(...args))
               }, "\u53D6\u6D88"),
               vue.createElementVNode("view", { class: "title" }, "\u63A8\u8350\u4EBA"),
               vue.createElementVNode("view", {
                 class: "success-btn",
-                onClick: _cache[5] || (_cache[5] = (...args) => $options.onConfirm && $options.onConfirm(...args))
+                onClick: _cache[6] || (_cache[6] = (...args) => $options.onConfirm && $options.onConfirm(...args))
               }, "\u786E\u8BA4")
             ]),
             vue.createElementVNode("view", { class: "message" }, [

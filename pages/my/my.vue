@@ -160,7 +160,28 @@
         <view class="yuan">已省￥{{ hotInfo.text1 }}</view>
         <view class="des">{{ hotInfo.text2 }}</view>
       </view>
-      <van-button block>确认开通并支付￥{{ payMoney }}元</van-button>
+      <van-button block @click="payClick"
+        >确认开通并支付￥{{ payMoney }}元</van-button
+      >
+      <van-action-sheet class="payment-action-sheet" v-model:show="payShow">
+        <view class="title">选择支付方式</view>
+        <view class="actions">
+          <view class="action">
+            <van-image
+              class="img"
+              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+            />
+            <view class="text">支付宝</view>
+          </view>
+          <view class="action">
+            <van-image
+              class="img"
+              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
+            />
+            <view class="text">微信</view>
+          </view>
+        </view>
+      </van-action-sheet>
     </view>
     <uni-popup
       ref="popup"
@@ -205,6 +226,7 @@ export default {
         vipEndDate: null,
         referrer: null
       },
+      payShow: false,
       columns: [
         { text: '001', value: '001' },
         { text: '002', value: '002' },
@@ -257,7 +279,21 @@ export default {
   onShow() {
     this.getUserInfo()
   },
+  watch: {
+    payShow: {
+      handler: function (n) {
+        if (n) {
+          uni.hideTabBar()
+        } else {
+          uni.showTabBar()
+        }
+      }
+    }
+  },
   methods: {
+    payClick() {
+      this.payShow = true
+    },
     pickerSelect(val) {
       this.columns.forEach((item) => (item.active = false))
       val.active = true
@@ -939,6 +975,37 @@ export default {
           font-weight: 600;
           color: #f4f7ff;
         }
+      }
+    }
+  }
+}
+
+::v-deep .van-popup {
+  background: #383d46;
+  border-radius: 24upx 24upx 0 0;
+}
+.payment-action-sheet {
+  .title {
+    padding: 40upx;
+    padding-bottom: 80upx;
+    font-size: 36upx;
+    font-weight: 600;
+    color: #f4f7ff;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 148upx 148upx;
+    .action {
+      .img {
+        width: 100upx;
+        height: 100upx;
+      }
+      .text {
+        text-align: center;
+        margin-top: 20upx;
+        font-size: 28upx;
+        color: #f4f7ff;
       }
     }
   }
