@@ -21498,7 +21498,7 @@ if (uni.restoreGlobal) {
           class: "clickAction",
           onClick: _cache[0] || (_cache[0] = (...args) => $setup.showPopup && $setup.showPopup(...args))
         }, [
-          vue.createTextVNode("\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
+          vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
           vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
         ]),
         vue.createVNode(_component_van_popup, {
@@ -29462,7 +29462,7 @@ if (uni.restoreGlobal) {
                                   class: "textRight"
                                 }, {
                                   default: vue.withCtx(() => [
-                                    vue.createTextVNode(vue.toDisplayString($data.bodyTestData.bodymoisture) + "%", 1)
+                                    vue.createTextVNode(vue.toDisplayString($data.bodyTestData.bodymoisture) + "L", 1)
                                   ]),
                                   _: 1
                                 })
