@@ -259,8 +259,8 @@
 						case "柔韧性测试" :
 							this.backimgFront = this.thomasimg;
 							this.backimgSide = this.straightLegLiftimg;
-							this.FrontVideoUrl = this.StraightLegLiftUrl;
-							this.SideVideoUrl = this.ThomasUrl;
+							this.FrontVideoUrl = this.ThomasUrl;
+							this.SideVideoUrl = this.StraightLegLiftUrl;
 							break;
 						case "肩关节灵活性测试" :
 							this.backimgFront = this.shoulderTest1img;
