@@ -580,7 +580,7 @@
                     <van-row class="text">
                       <van-col span="17">体水分</van-col>
                       <van-col span="7" class="textRight"
-                        >{{ bodyTestData.bodymoisture }}%</van-col
+                        >{{ bodyTestData.bodymoisture }}L</van-col
                       >
                     </van-row>
                   </view>
@@ -1361,9 +1361,9 @@ export default {
         data['saveDate'] = today
         data['name'] = this.personName
         console.log(data)
-        testOb.saveReport(data).then((res) => {
-          console.log(res)
-        })
+		testOb.saveReport(data).then((res)=>{
+			console.log(res)
+		})
         this.showShare = true
       }
       // this.$refs.popup.open()
