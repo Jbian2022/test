@@ -546,8 +546,8 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 310upx;
-	left: 60upx;
+	top: 330upx;
+	left: calc(100vw - 717upx);
 	z-index: 1;
 	font-size: 26upx;
 	font-weight: 400;
@@ -561,7 +561,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1400upx;
+	/* height: 1400upx; */
 	background: #383D46;
 	border-radius: 16upx;
 	/* backdrop-filter: blur(3upx); */
@@ -569,11 +569,12 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	height: 1400upx;
-	margin-top: 270upx;
+	height: 82%;
+	margin-top: 39%;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
 	border-radius: 16upx;
+	position: fixed;
 }
 .clickActionBody video{
 	width: calc(100vw - 140upx);
@@ -584,7 +585,7 @@
 }
 .clickActionText{
 	width: calc(100vw - 140upx);
-	height: 174upx;
+	height: calc(100vh - 880upx);
 	margin-top: 40upx;
 	margin-left: 40upx;
 }
@@ -611,8 +612,8 @@
 	color: #F4F7FF;
 	line-height: 70upx;
 	text-align: center;
-	margin: 0 auto;
-	margin-top: 620upx;
+	margin: auto;
+	margin-bottom: 20px;
 }
 .clickActionEnd image{
 	width: 32upx;
