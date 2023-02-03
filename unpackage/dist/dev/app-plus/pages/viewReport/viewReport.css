@@ -1403,7 +1403,7 @@
   font-size: 0.8125rem;
   font-weight: 400;
   color: #ffc13c;
-  margin-top: 1.875rem;
+  margin-top: 1.0625rem;
   margin-left: -15px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -1608,6 +1608,7 @@
 }
 [data-v-62ef4d39] .uni-list--border-top {
   background-color: #2f333a !important;
+  z-index: 0 !important;
 }
 .arrowimgopen[data-v-62ef4d39] {
   background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/70b5ca0b-6450-45fc-b306-4882dd2b6e47.png");

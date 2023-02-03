@@ -18,9 +18,9 @@
           >
             <input
               type="number"
-              clas="change_input_style"
-              :value="item.value"
-              @input="changeInputValue($event, item)"
+              class="change_input_style"
+              v-model="item.value"
+              @input="changeInputValue($event, item, itemIndex)"
               :placeholder="item.answerRemark.remarkTitle"
               style="margin-top: 6px"
 			  :adjust-position="false"
@@ -138,7 +138,8 @@ export default {
     }
   },
   methods: {
-    changeInputValue(event, item) {
+    changeInputValue(event, item, itemIndex) {
+	
      
 	  if (event.detail.value > 5000) {
 		uni.showToast({
@@ -147,10 +148,13 @@ export default {
 				 width: 180,
 				 icon: 'none'
 			   })
+			   setTimeout(()=> {
+				   
 		  item.value = '5000'
 		  event.detail.value = '5000'
+			   },200)
 	  } else {
-		   item['value'] = event.detail.value
+		    item.value  = event.detail.value
 	  }
     },
     pickeConfirm(event, item, itemIndex) {
