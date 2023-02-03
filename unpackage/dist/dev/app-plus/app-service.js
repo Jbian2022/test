@@ -7298,19 +7298,19 @@ if (uni.restoreGlobal) {
       NavBarCompontent
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:303", item);
+      formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:299", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getData();
     },
     methods: {
       isonclick(a2) {
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:325", a2);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:321", a2);
         switch (a2) {
           case 1:
             this.textShow1 = !this.textShow1;
             this.assessmentData[0].textShow1 = this.textShow1;
-            formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:330", this.assessmentData[0].textShow1);
+            formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:326", this.assessmentData[0].textShow1);
             break;
           case 2:
             this.textShow2 = !this.textShow2;
@@ -7347,14 +7347,14 @@ if (uni.restoreGlobal) {
         }
       },
       backPage() {
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:371", this.assessmentData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:367", this.assessmentData);
         this.assessmentNewData["postData"] = this.assessmentData;
         this.assessmentNewData["traineeNo"] = this.traineeNo;
         this.assessmentNewData["questionCode"] = this.questionCode;
         this.assessmentNewData["key"] = "posture";
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:376", this.assessmentNewData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:372", this.assessmentNewData);
         const res2 = testOb$3.postConfig(this.assessmentNewData, "postureTest").then((res3) => {
-          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:378", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:374", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res3.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -7367,7 +7367,7 @@ if (uni.restoreGlobal) {
           }
         }).catch(() => {
         });
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:390", res2);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:386", res2);
         uni.showToast({
           icon: "success",
           title: res2.message,
@@ -7378,12 +7378,12 @@ if (uni.restoreGlobal) {
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = "A0003";
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:401", this.assessmentData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:397", this.assessmentData);
         testOb$3.opearConfigQuery(data).then((res2) => {
           this.assessmentData = res2.data[0].postData;
           this.textShow1 = res2.data[0].postData[0].textShow1;
-          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:405", res2.data[0].postData[0].textShow1);
-          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:406", this.textShow1);
+          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:401", res2.data[0].postData[0].textShow1);
+          formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:402", this.textShow1);
           this.textShow2 = res2.data[0].postData[1].textShow2;
           this.textShow3 = res2.data[0].postData[2].textShow3;
           this.textShow4 = res2.data[0].postData[3].textShow4;
@@ -7393,7 +7393,7 @@ if (uni.restoreGlobal) {
           this.textShow8 = res2.data[0].postData[7].textShow8;
           this.textShow9 = res2.data[0].postData[8].textShow9;
         });
-        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:416", this.assessmentData);
+        formatAppLog("log", "at pages/postureAssessment/postureAssessment.vue:412", this.assessmentData);
       }
     }
   };
@@ -7408,7 +7408,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "watermark" }, "\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784"),
       vue.createElementVNode("view", { class: "bgimg" }),
       vue.createElementVNode("view", { class: "infoText" }, "\u70B9\u51FB\u4E0B\u65B9\u84DD\u8272\u6807\u7B7E\u9009\u62E9\u95EE\u9898\u90E8\u4F4D\uFF0C\u53EF\u591A\u9009"),
-      vue.createElementVNode("view", { class: "content" }, [
+      vue.createElementVNode("view", { class: "content list_style" }, [
         vue.createVNode(_component_van_row, null, {
           default: vue.withCtx(() => [
             vue.createVNode(_component_van_col, { span: "12" }, {
@@ -7521,7 +7521,7 @@ if (uni.restoreGlobal) {
                 vue.withDirectives(vue.createElementVNode("view", {
                   class: "clickBlock",
                   onClick: _cache[7] || (_cache[7] = ($event) => $options.isonclick(4)),
-                  style: { "top": "20upx", "position": "relative" }
+                  style: { "top": "8upx", "position": "relative", "height": "78%" }
                 }, [
                   vue.createElementVNode("view", null, "\u9A7C\u80CC"),
                   vue.createElementVNode("view", null, [
@@ -7557,7 +7557,7 @@ if (uni.restoreGlobal) {
                 vue.withDirectives(vue.createElementVNode("view", {
                   class: "clickBlock",
                   onClick: _cache[9] || (_cache[9] = ($event) => $options.isonclick(5)),
-                  style: { "top": "810upx" }
+                  style: { "top": "820upx" }
                 }, [
                   vue.createElementVNode("view", null, "\u9AA8\u76C6\u524D\u503E"),
                   vue.createElementVNode("view", null, [
@@ -7624,7 +7624,7 @@ if (uni.restoreGlobal) {
                 vue.withDirectives(vue.createElementVNode("view", {
                   class: "clickBlock",
                   onClick: _cache[13] || (_cache[13] = ($event) => $options.isonclick(7)),
-                  style: { "top": "1072upx" }
+                  style: { "top": "1070upx" }
                 }, [
                   vue.createElementVNode("view", null, "\u819D\u5173\u8282\u5185\u6263"),
                   vue.createElementVNode("view", null, [
@@ -7716,13 +7716,10 @@ if (uni.restoreGlobal) {
         }),
         vue.createCommentVNode(' <van-row \r\n			v-for="(item,index) in assessmentData" :key="index">\r\n			  <van-col span="12">\r\n				  <view class="contentLeftBlock" @click.native="isonclick(item,1)" v-show="item.textShow1">\r\n					  {{item.title1}}\r\n				  </view>\r\n				  <view class="clickBlock" v-show="!item.textShow1" @click.native="isonclick(item,1)">\r\n					  <view>{{item.title1}}</view>\r\n					  <view>{{item.text1}}</view>\r\n				  </view>\r\n			  </van-col>\r\n			  <van-col span="12">\r\n				  <view class="contentRightBlock" @click.native="isonclick(item,2)" v-show="item.textShow2">\r\n					  {{item.title2}}\r\n				  </view>\r\n				  <view class="clickBlock" v-show="!item.textShow2" @click.native="isonclick(item,2)">\r\n				  		<view>{{item.title2}}</view>\r\n				  		<view>{{item.text2}}</view>\r\n				  </view>\r\n			  </van-col>\r\n			</van-row> ')
       ]),
-      vue.createElementVNode("view", { style: { "color": "7A7F89" } }, [
-        vue.createElementVNode("button", {
-          type: "primary",
-          class: "postureButton",
-          onClick: _cache[18] || (_cache[18] = ($event) => $options.backPage())
-        }, "\u4FDD\u5B58")
-      ])
+      vue.createElementVNode("view", {
+        class: "bottom_style",
+        onClick: _cache[18] || (_cache[18] = ($event) => $options.backPage())
+      }, "\u4FDD\u5B58")
     ]);
   }
   const PagesPostureAssessmentPostureAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__file", "D:/studyUninApp/bodybuilding-app/pages/postureAssessment/postureAssessment.vue"]]);
@@ -28785,9 +28782,7 @@ if (uni.restoreGlobal) {
               style: { "opacity": "0" }
             }, "8888")
           ], 2),
-          vue.withDirectives(vue.createElementVNode("view", { class: "arrow-box" }, null, 512), [
-            [vue.vShow, $data.isFixedTop]
-          ]),
+          vue.createCommentVNode(' <view v-show="isFixedTop" class="arrow-box"></view> '),
           vue.createElementVNode("view", { id: "viewReport" }, [
             vue.createElementVNode("view", { class: "backImg" }),
             $data.openKey ? (vue.openBlock(), vue.createElementBlock("view", {

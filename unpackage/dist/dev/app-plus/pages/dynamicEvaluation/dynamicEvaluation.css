@@ -169,6 +169,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  padding-top: 1.25rem;
 }
 .content_style .arrow-left[data-v-517c7f12] {
   z-index: 88;
