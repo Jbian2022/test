@@ -259,8 +259,8 @@
 						case "柔韧性测试" :
 							this.backimgFront = this.thomasimg;
 							this.backimgSide = this.straightLegLiftimg;
-							this.FrontVideoUrl = this.StraightLegLiftUrl;
-							this.SideVideoUrl = this.ThomasUrl;
+							this.FrontVideoUrl = this.ThomasUrl;
+							this.SideVideoUrl = this.StraightLegLiftUrl;
 							break;
 						case "肩关节灵活性测试" :
 							this.backimgFront = this.shoulderTest1img;
@@ -309,7 +309,7 @@
 				//胸椎活动视频
 				thoracicSpineActivityUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6f77e7d9-77b3-455e-a378-75b05fb0848b.mp4",
 				//直抬腿
-				StraightLegLiftUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4f9af99a-4833-41d0-a584-1b0cdf4cb583.mp4",
+				StraightLegLiftUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/bda98240-b083-41da-bbf4-7168183791a1.mp4",
 				//托马斯
 				ThomasUrl:"https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/e971accd-2928-429b-86a1-e33f2d9e10aa.mp4",
 				//肩关节灵活性测试1
@@ -546,8 +546,8 @@
 	border-radius: 36upx;
 	opacity: 0.5;
 	position:absolute;
-	top: 310upx;
-	left: 60upx;
+	top: 330upx;
+	left: calc(100vw - 717upx);
 	z-index: 1;
 	font-size: 26upx;
 	font-weight: 400;
@@ -561,7 +561,7 @@
 	top: 6upx;
 }
 .clickActionBody{
-	height: 1400upx;
+	/* height: 1400upx; */
 	background: #383D46;
 	border-radius: 16upx;
 	/* backdrop-filter: blur(3upx); */
@@ -569,11 +569,12 @@
 }
 ::v-deep .clickActionContent{
 	width: calc(100vw - 60upx);
-	height: 1400upx;
-	margin-top: 270upx;
+	height: 82%;
+	margin-top: 39%;
 	margin-left: 30upx;
 	--van-popup-background-color: #383D46;
 	border-radius: 16upx;
+	position: fixed;
 }
 .clickActionBody video{
 	width: calc(100vw - 140upx);
@@ -584,7 +585,7 @@
 }
 .clickActionText{
 	width: calc(100vw - 140upx);
-	height: 174upx;
+	height: calc(100vh - 880upx);
 	margin-top: 40upx;
 	margin-left: 40upx;
 }
@@ -611,8 +612,8 @@
 	color: #F4F7FF;
 	line-height: 70upx;
 	text-align: center;
-	margin: 0 auto;
-	margin-top: 620upx;
+	margin: auto;
+	margin-bottom: 20px;
 }
 .clickActionEnd image{
 	width: 32upx;
