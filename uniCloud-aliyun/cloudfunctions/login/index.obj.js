@@ -146,8 +146,6 @@ module.exports = {
    },
    // 短信验证码登录
    sendSmsCode:  async function (mobile) {
-	 
-	
 	 try{
 		 // 生成验证码可以按自己的需求来，这里以生成6位数字为例
 		 const randomStr = '00000' + Math.floor(Math.random() * 1000000)
@@ -293,10 +291,20 @@ module.exports = {
 	     })
 	   	return res
    },
+   // getWeixinUserInfo
+   getWeixinUserInfo: async function(data) {
+	   // 如下旧写法依然支持
+		console.log(data , 'data')
+	   const res = await uniID.getWeixinUserInfo({
+	       accessToken: data.accessToken,
+		   openid: data.openid
+	     })
+	   	return res
+   },
    // 获取微信openid
-   code2SessionWeixin: async function(event, context) {
+   code2SessionWeixin: async function(code) {
 	   const res = await uniID.code2SessionWeixin({
-	       code: event.code
+	       code
 	     })
 	   	return res
    },
@@ -357,10 +365,9 @@ module.exports = {
 	// 微信登录业务模块
 	getWxSchema: function (wx_unionid) {
 		return new Promise((resolve, reject) => {
-			
 			db.collection('uni-id-users')
 			  .where({
-					wx_unionid: wx_unionid	
+					wx_unionid	
 				})
 			  .get().then(res => {
 				  console.log(res,'>>>>>>')

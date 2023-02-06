@@ -72,10 +72,12 @@
         <image
           @click.native="loginByWeixin"
           class="wx_img_style"
+          :class="platform === 'ios' ? 'common_style' : ''"
           src="../../static/login/wxlogin.svg"
         ></image>
         <image
           @click.native="loginIos"
+          v-if="platform === 'ios'"
           class="wx_img_style"
           src="../../static/login/ioslogin.svg"
         ></image>
@@ -93,7 +95,9 @@ export default {
       checkFlag: false,
       hasWeixinAuth: false,
       checkPhone: '',
-      needChecked: false
+      needChecked: false,
+      platform: uni.getSystemInfoSync().platform,
+      agreementType: null
     }
   },
 
@@ -121,6 +125,11 @@ export default {
     })
     // #endif
   },
+  mounted() {
+    let platform = uni.getSystemInfoSync().platform
+    console.log(platform, '????')
+  },
+
   methods: {
     jumpAgree() {
       console.log('11111')
@@ -134,6 +143,7 @@ export default {
     },
 
     async getSms() {
+      this.agreementType = 'sms'
       if (this.controlActiveFlag && !this.checkFlag) {
         // Toast('请同意隐私政策')
         this.needChecked = true
@@ -167,7 +177,14 @@ export default {
     agreeContiute() {
       this.checkFlag = true
       this.needChecked = false
-      this.getSms()
+      switch (this.agreementType) {
+        case 'sms':
+          this.getSms()
+          break
+        case 'wx':
+          this.wxLoginCommon()
+          break
+      }
     },
     getWeixinCode() {
       return new Promise((resolve, reject) => {
@@ -187,6 +204,15 @@ export default {
     },
     loginIos() {},
     loginByWeixin() {
+      this.agreementType = 'wx'
+      if (!this.checkFlag) {
+        // Toast('请同意隐私政策')
+        this.needChecked = true
+      } else {
+        this.wxLoginCommon()
+      }
+    },
+    wxLoginCommon() {
       this.getWeixinCode().then(async (code) => {
         console.log(code, '你是谁')
         const wxLogin = uniCloud.importObject('login', {
@@ -206,6 +232,12 @@ export default {
               uni.setStorageSync('uni_id_token', wxLoginRes.token) //token
               uni.setStorageSync('uid', wxLoginRes.uid) // uid 唯一标识
               uni.setStorageSync('tokenExpired', wxLoginRes.tokenExpired) // 有效期
+              // 存储微信登录信息
+              let weixinLoginInfo = {
+                accessToken: wxLoginRes.accessToken,
+                openid: wxLoginRes.openid
+              }
+
               if (wxLoginRes.type === 'login') {
                 // 已经登录过了
                 uni.setStorageSync('loginNum', '1')
@@ -217,21 +249,15 @@ export default {
               if (wxLoginRes.type === 'register') {
                 // 首次登录
                 uni.setStorageSync('loginNum', '0')
+
+                uni.setStorageSync(
+                  'weixinLoginInfo',
+                  JSON.stringify(weixinLoginInfo)
+                ) //
                 uni.navigateTo({
-                  url: '/pages/personalnformation/personalnformation'
+                  url: '/pages/bindPhone/bindPhone'
                 })
-                let param = {
-                  avatar:
-                    'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png'
-                }
-                console.log(param, 'param')
-                wxLogin
-                  .perfectInfo(param)
-                  .then((res) => {
-                    if (res.success) {
-                    }
-                  })
-                  .catch((err) => {})
+
                 return
               }
             } catch (e) {
@@ -239,26 +265,9 @@ export default {
             }
           }
         } catch (err) {
-          //TODO handle the exception
           console.log(err, '我是错误')
         }
       })
-      // .then((res) => {
-      //   uni.showModal({
-      //     showCancel: false,
-      //     content: JSON.stringify(res.result)
-      //   })
-      //   if (res.result.code === 0) {
-      //     uni.setStorageSync('uni_id_token', res.result.token)
-      //     uni.setStorageSync('uni_id_token_expired', res.result.tokenExpired)
-      //   }
-      // })
-      // .catch(() => {
-      //   uni.showModal({
-      //     showCancel: false,
-      //     content: '微信登录失败，请稍后再试'
-      //   })
-      // })
     }
   }
 }
@@ -391,7 +400,7 @@ export default {
       height: 100upx;
       object-fit: contain;
     }
-    .wx_img_style:nth-child(1) {
+    .common_style:nth-child(1) {
       margin-right: 100upx;
     }
   }

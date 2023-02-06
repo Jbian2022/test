@@ -53,12 +53,15 @@ export default {
       mobile: '',
       requestVerifyCode: '',
       sureLogin: false,
-      isFinsh: false
+      isFinsh: false,
+      scanel: null
     }
   },
   onLoad(options) {
     this.mobile = options.mobile || ''
     // 校验验证码
+    // 判断来源渠道
+    this.scanel = options.scanel || null
   },
   async mounted() {
     this.verifyCode()
@@ -121,9 +124,9 @@ export default {
       this.isFinsh = true
     },
     async verifyCode() {
-      let login = uniCloud.importObject('login',{
-			  customUI: true // 取消自动展示的交互提示界面
-		})
+      let login = uniCloud.importObject('login', {
+        customUI: true // 取消自动展示的交互提示界面
+      })
       const getVerifyRes = await login.getVerifySchema()
       // console.log(getVerifyRes,'?????我是验证码')
       try {
@@ -134,11 +137,45 @@ export default {
     // 上方退出标识
     async smsLogin() {
       try {
-        // 先验证该手机号是否登录过
+        if (this.scanel === 'wx') {
+          uni.getStorage({
+            key: 'weixinLoginInfo',
+            success: async function (res) {
+              if (res.data) {
+                // 获取用户信息
+                let getWeixinRes = await wxLogin.getWeixinUserInfo(res.data)
+                if (getWeixinRes.code == 0) {
+                  let param = {
+                    avatar: getWeixinRes.avatar,
+                    nickname: getWeixinRes.nickname,
+                    mobile: this.mobile
+                  }
+                  console.log(param, 'param')
+                  wxLogin
+                    .perfectInfo(param)
+                    .then((res) => {
+                      if (res.success) {
+                      }
+                    })
+                    .catch((err) => {})
+                }
+              }
+            },
+            fail: function (err) {
+              console.log(err, '>>>>')
+            }
+          })
 
-        let userLogin = uniCloud.importObject('login',{
-		  customUI: true // 取消自动展示的交互提示界面
-		})
+          uni.reLaunch({
+            url: '/pages/myMebers/myMebers'
+          })
+          return
+        }
+
+        // 先验证该手机号是否登录过
+        let userLogin = uniCloud.importObject('login', {
+          customUI: true // 取消自动展示的交互提示界面
+        })
         const getUseRes = await userLogin.getUserSchema(this.mobile)
 
         uni.setStorageSync('loginNum', getUseRes.affectedDocs + '')
@@ -148,7 +185,7 @@ export default {
             url: '/pages/personalnformation/personalnformation'
           })
         } else {
-        await  this.smsCodeLoginValid()
+          await this.smsCodeLoginValid()
           uni.reLaunch({
             url: '/pages/myMebers/myMebers'
           })
@@ -164,9 +201,9 @@ export default {
         mobile: this.mobile,
         code: this.requestVerifyCode
       }
-      const vefiryLogin = uniCloud.importObject('login',{
-		  customUI: true // 取消自动展示的交互提示界面
-		}) //第一步导入云对象
+      const vefiryLogin = uniCloud.importObject('login', {
+        customUI: true // 取消自动展示的交互提示界面
+      }) //第一步导入云对象
       const loginRes = await vefiryLogin.loginBySms(param)
       console.log(loginRes, '发送成功')
 

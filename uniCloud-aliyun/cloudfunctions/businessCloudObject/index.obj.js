@@ -463,7 +463,7 @@ module.exports = {
    // 删除动作库数据
    removeAtion: async function() {
 
-	   await db.collection("t_questionaire").where({
+	   await db.collection("t_action_config").where({
 	     _id: dbCmd.neq(null)
 	   }).remove()
    }

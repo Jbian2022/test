@@ -153,42 +153,40 @@ export default {
           }
         },
         fail: function (err) {
-			console.log(err,'>>>>')
-		}
+          console.log(err, '>>>>')
+        }
       })
-	  
-	  try {
-	  	const res = uni.getStorageInfoSync();
-		let flag = res.keys.indexOf('isActive') !== -1 ? true : false
-		if (!flag) {
-			try {
-			  uni.setStorageSync('isActive', '1') // 缓存标签激活信息
-			  self.isActive = 1
-			  self.$refs.memberListDom.getMemberList(1) 
-			} catch (e) {
-			  // error
-			}
-		}  else {
-			uni.getStorage({
-			  key: 'isActive',
-			  success: function (res) {
-			    if (res.data) {
-					self.isActive = Number(res.data)
-			          self.$refs.memberListDom.getMemberList(Number(res.data)) 
-			        
-			    }
-			  },
-			  fail: function (err) {}
-			})
-		}
-		
-	  	// console.log(res.keys);
-	  	// console.log(res.currentSize);
-	  	// console.log(res.limitSize);
-	  } catch (e) {
-	  	// error
-	  }
-	  
+
+      try {
+        const res = uni.getStorageInfoSync()
+        let flag = res.keys.indexOf('isActive') !== -1 ? true : false
+        if (!flag) {
+          try {
+            uni.setStorageSync('isActive', '1') // 缓存标签激活信息
+            self.isActive = 1
+            self.$refs.memberListDom.getMemberList(1)
+          } catch (e) {
+            // error
+          }
+        } else {
+          uni.getStorage({
+            key: 'isActive',
+            success: function (res) {
+              if (res.data) {
+                self.isActive = Number(res.data)
+                self.$refs.memberListDom.getMemberList(Number(res.data))
+              }
+            },
+            fail: function (err) {}
+          })
+        }
+
+        // console.log(res.keys);
+        // console.log(res.currentSize);
+        // console.log(res.limitSize);
+      } catch (e) {
+        // error
+      }
     })
 
     this.getUserInfor()
@@ -222,7 +220,7 @@ export default {
       let businessCloudObject = uniCloud.importObject('businessCloudObject', {
         customUI: true // 取消自动展示的交互提示界面
       })
-      // businessCloudObject.removeAtion()
+      businessCloudObject.removeAtion()
       businessCloudObject
         .getCoachMemberList()
         .then((res) => {
@@ -316,16 +314,15 @@ export default {
         .catch((err) => {})
     },
     buyClick(type) {
-	 this.$nextTick(function() {
-		try {
-		  uni.setStorageSync('isActive', String(type)) // 缓存标签激活信息
-		} catch (e) {
-		  // error
-		}
-		this.isActive = type
-		this.$refs.memberListDom.getMemberList(type) 
-	 })
-
+      this.$nextTick(function () {
+        try {
+          uni.setStorageSync('isActive', String(type)) // 缓存标签激活信息
+        } catch (e) {
+          // error
+        }
+        this.isActive = type
+        this.$refs.memberListDom.getMemberList(type)
+      })
     }
   }
 }

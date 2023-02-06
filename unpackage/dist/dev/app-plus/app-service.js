@@ -602,6 +602,20 @@ if (uni.restoreGlobal) {
       }
     },
     {
+      path: "pages/bindPhone/bindPhone",
+      style: {
+        navigationBarTitleText: "\u7ED1\u5B9A\u624B\u673A\u53F7",
+        enablePullDownRefresh: false,
+        navigationStyle: "custom",
+        autoBackButton: false,
+        navigationBarTextStyle: "white",
+        "app-plus": {
+          titleNView: false,
+          bounce: "none"
+        }
+      }
+    },
+    {
       path: "pages/updateSignature/updateSignature",
       style: {
         navigationBarTitleText: "\u4FEE\u6539\u7B7E\u540D",
@@ -1028,7 +1042,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "172.20.10.8",\n        "192.168.160.1",\n        "192.168.32.1",\n        "10.102.21.251"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.60"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T$1 = "";
   try {
     T$1 = "__UNI__76A9E40";
@@ -3263,7 +3277,7 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$R = {
+  const _sfc_main$S = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -3489,7 +3503,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
     return $data.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       ref: "ani",
@@ -3501,8 +3515,8 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ], 14, ["animation"])) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$Q = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$R], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$R = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -3799,7 +3813,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
@@ -3840,15 +3854,15 @@ if (uni.restoreGlobal) {
       ], 32)
     ], 2)) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-4dd3c44b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const _sfc_main$P = {
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__scopeId", "data-v-4dd3c44b"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$Q = {
     name: "bgTheamCompontent",
     props: ["theamType"],
     data() {
       return {};
     }
   };
-  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "bg_content" }, [
       $props.theamType === "currency" ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -3864,7 +3878,7 @@ if (uni.restoreGlobal) {
 		</view> `)
     ]);
   }
-  const BgTheamCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-826f61a7"], ["__file", "D:/studyUninApp/bodybuilding-app/components/bgTheamCompontent/bgTheamCompontent.vue"]]);
+  const BgTheamCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-826f61a7"], ["__file", "D:/studyUninApp/bodybuilding-app/components/bgTheamCompontent/bgTheamCompontent.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -3935,7 +3949,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderswipe");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderswipe"] = "5a1e922e";
   };
-  const _sfc_main$O = {
+  const _sfc_main$P = {
     mixins: [mpwxs, bindIngXMixins, otherMixins],
     emits: ["click", "change"],
     props: {
@@ -3995,7 +4009,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u5728\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F app vue\u7AEF h5 \u4F7F\u7528wxs \u5B9E\u73B0"),
       vue.createElementVNode("view", { class: "uni-swipe" }, [
@@ -4062,11 +4076,11 @@ if (uni.restoreGlobal) {
     ], 2112);
   }
   if (typeof block0$2 === "function")
-    block0$2(_sfc_main$O);
+    block0$2(_sfc_main$P);
   if (typeof block1 === "function")
-    block1(_sfc_main$O);
-  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__scopeId", "data-v-8ff2a577"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
-  const _sfc_main$N = {
+    block1(_sfc_main$P);
+  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-8ff2a577"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const _sfc_main$O = {
     name: "uniSwipeAction",
     data() {
       return {};
@@ -4090,12 +4104,12 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   const debounce$1 = (fn2, delay) => {
     var delays = delay || 200;
     var timer;
@@ -4113,7 +4127,7 @@ if (uni.restoreGlobal) {
   };
   var businessCloudObject$3 = Es.importObject("businessCloudObject");
   const train$4 = Es.importObject("train");
-  const _sfc_main$M = {
+  const _sfc_main$N = {
     name: "memberList",
     data() {
       return {
@@ -4319,7 +4333,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     const _component_uni_swipe_action_item = resolveEasycom(vue.resolveDynamicComponent("uni-swipe-action-item"), __easycom_1$5);
@@ -4480,8 +4494,8 @@ if (uni.restoreGlobal) {
       }), 128))
     ]);
   }
-  const MemberList = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__scopeId", "data-v-fce7d226"], ["__file", "D:/studyUninApp/bodybuilding-app/components/memberList/memberList.vue"]]);
-  const _sfc_main$L = {
+  const MemberList = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-fce7d226"], ["__file", "D:/studyUninApp/bodybuilding-app/components/memberList/memberList.vue"]]);
+  const _sfc_main$M = {
     props: {
       visible: Boolean,
       color: {
@@ -4631,7 +4645,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "zb-tooltip",
       style: vue.normalizeStyle({
@@ -4667,8 +4681,8 @@ if (uni.restoreGlobal) {
       ])
     ], 4);
   }
-  const ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-13dad3a2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
-  const _sfc_main$K = {
+  const ZbTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__scopeId", "data-v-13dad3a2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue"]]);
+  const _sfc_main$L = {
     components: {
       BgTheamCompontent,
       MemberList,
@@ -4752,7 +4766,7 @@ if (uni.restoreGlobal) {
         });
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:211", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:209", res2, "....");
             this.avatar = res2.userInfo.avatar || null;
             this.addUpperLimit = res2.userInfo.addUpperLimit || null;
           }).catch((err) => {
@@ -4764,8 +4778,9 @@ if (uni.restoreGlobal) {
         let businessCloudObject2 = Es.importObject("businessCloudObject", {
           customUI: true
         });
+        businessCloudObject2.removeAtion();
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:229", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:227", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -4777,11 +4792,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:241", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:239", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:245", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:243", "success");
           }
         });
         uni.navigateTo({
@@ -4795,13 +4810,13 @@ if (uni.restoreGlobal) {
         });
       },
       upper: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:256", e2, "mmm");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:254", e2, "mmm");
       },
       lower: function(e2) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:259", e2);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:257", e2);
       },
       scroll(event) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:262", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:260", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
         this.scrollTop = event.detail.scrollTop;
         if (event.detail.scrollTop > 50) {
           this.searchTopFlag = true;
@@ -4825,7 +4840,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:294", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:292", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
           if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
             uni.showToast({
@@ -4862,7 +4877,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_MemberList = vue.resolveComponent("MemberList");
     const _component_ZbTooltip = vue.resolveComponent("ZbTooltip");
@@ -4959,8 +4974,8 @@ if (uni.restoreGlobal) {
       ])
     ], 2112);
   }
-  const PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-5a412e6a"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
-  const _sfc_main$J = {
+  const PagesMyMebersMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-5a412e6a"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/myMebers/myMebers.vue"]]);
+  const _sfc_main$K = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -5247,7 +5262,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["uni-forms-item", ["is-direction-" + $data.localLabelPos, $data.border ? "uni-forms-item--border" : "", $data.border && $data.isFirstBorder ? "is-first-border" : ""]])
     }, [
@@ -5273,7 +5288,7 @@ if (uni.restoreGlobal) {
       ])
     ], 2);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-462874dd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-462874dd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -5836,7 +5851,7 @@ if (uni.restoreGlobal) {
       return false;
     }
   };
-  const _sfc_main$I = {
+  const _sfc_main$J = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -6078,15 +6093,15 @@ if (uni.restoreGlobal) {
       _isEqual: isEqual$1
     }
   };
-  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-9a1e3c32"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$H = {
+  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-9a1e3c32"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$I = {
     name: "navBarCompontent",
     props: ["leftNavTitle", "contentTitle", "jumpType", "isAuthority"],
     data() {
@@ -6107,7 +6122,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "nav_bar_style" }, [
       vue.createElementVNode("view", {
         class: "nav_left_style",
@@ -6129,7 +6144,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-d4dd2266"], ["__file", "D:/studyUninApp/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
+  const NavBarCompontent = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-d4dd2266"], ["__file", "D:/studyUninApp/bodybuilding-app/components/navBarCompontent/navBarCompontent.vue"]]);
   var util$1 = {};
   util$1.getCommonTime = function(date2 = new Date(), targetTimezone = 8) {
     let res2 = {};
@@ -6370,7 +6385,7 @@ if (uni.restoreGlobal) {
   for (let i2 = 1; i2 <= 31; i2++) {
     days$1.push(i2);
   }
-  const _sfc_main$G = {
+  const _sfc_main$H = {
     name: "jarvis-picker",
     props,
     data() {
@@ -6542,7 +6557,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "pricke" }, [
       _ctx.mark ? (vue.openBlock(), vue.createBlock(_component_uni_transition, {
@@ -6662,8 +6677,8 @@ if (uni.restoreGlobal) {
       }, 8, ["mode-class", "styles", "show"])
     ]);
   }
-  const Mpicker = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-3551bfb1"], ["__file", "D:/studyUninApp/bodybuilding-app/components/mPicker.vue/mPicker.vue"]]);
-  const _sfc_main$F = {
+  const Mpicker = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-3551bfb1"], ["__file", "D:/studyUninApp/bodybuilding-app/components/mPicker.vue/mPicker.vue"]]);
+  const _sfc_main$G = {
     components: {
       BgTheamCompontent,
       NavBarCompontent,
@@ -6933,7 +6948,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
@@ -7090,8 +7105,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesAddMyMebersAddMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-67c2db77"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addMyMebers/addMyMebers.vue"]]);
-  const _sfc_main$E = {
+  const PagesAddMyMebersAddMyMebers = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-67c2db77"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addMyMebers/addMyMebers.vue"]]);
+  const _sfc_main$F = {
     components: {
       BgTheamCompontent,
       MemberList
@@ -7150,7 +7165,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_MemberList = vue.resolveComponent("MemberList");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
@@ -7212,11 +7227,11 @@ if (uni.restoreGlobal) {
       ], 32)
     ]);
   }
-  const PagesMemberQueryMemberQuery = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__file", "D:/studyUninApp/bodybuilding-app/pages/memberQuery/memberQuery.vue"]]);
+  const PagesMemberQueryMemberQuery = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__file", "D:/studyUninApp/bodybuilding-app/pages/memberQuery/memberQuery.vue"]]);
   const testOb$3 = Es.importObject("testResults", {
     customUI: true
   });
-  const _sfc_main$D = {
+  const _sfc_main$E = {
     data() {
       return {
         c: 0,
@@ -7397,7 +7412,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_van_col = vue.resolveComponent("van-col");
@@ -7722,11 +7737,11 @@ if (uni.restoreGlobal) {
       }, "\u4FDD\u5B58")
     ]);
   }
-  const PagesPostureAssessmentPostureAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__file", "D:/studyUninApp/bodybuilding-app/pages/postureAssessment/postureAssessment.vue"]]);
+  const PagesPostureAssessmentPostureAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__file", "D:/studyUninApp/bodybuilding-app/pages/postureAssessment/postureAssessment.vue"]]);
   var businessCloudObject$2 = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$C = {
+  const _sfc_main$D = {
     components: {
       BgTheamCompontent,
       NavBarCompontent,
@@ -8007,7 +8022,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
@@ -8094,11 +8109,11 @@ if (uni.restoreGlobal) {
       }, "\u4FDD\u5B58")
     ]);
   }
-  const PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-641854c1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
+  const PagesBodyTestReportBodyTestReport = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-641854c1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bodyTestReport/bodyTestReport.vue"]]);
   var businessCloudObject$1 = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$B = {
+  const _sfc_main$C = {
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -8236,7 +8251,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -8292,7 +8307,7 @@ if (uni.restoreGlobal) {
       }, "\u751F\u6210\u62A5\u544A")
     ], 32);
   }
-  const PagesPhysicalAssessmentPhysicalAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-fc7c2e74"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalAssessment/physicalAssessment.vue"]]);
+  const PagesPhysicalAssessmentPhysicalAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-fc7c2e74"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalAssessment/physicalAssessment.vue"]]);
   const icons = {
     "id": "2852637",
     "name": "uniui\u56FE\u6807\u5E93",
@@ -9468,7 +9483,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$A = {
+  const _sfc_main$B = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -9512,15 +9527,15 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("text", {
       style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
       class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
       onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
     }, null, 6);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-  const _sfc_main$z = {
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const _sfc_main$A = {
     name: "UniBadge",
     emits: ["click"],
     props: {
@@ -9643,7 +9658,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
       $props.text ? (vue.openBlock(), vue.createElementBlock("text", {
@@ -9654,8 +9669,8 @@ if (uni.restoreGlobal) {
       }, vue.toDisplayString($options.displayValue), 7)) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-c97cb896"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
-  const _sfc_main$y = {
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-c97cb896"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  const _sfc_main$z = {
     name: "UniListItem",
     emits: ["click", "switchChange"],
     props: {
@@ -9885,7 +9900,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
     const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -9972,8 +9987,8 @@ if (uni.restoreGlobal) {
       })) : vue.createCommentVNode("v-if", true)
     ], 14, ["hover-class"]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-c7524739"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
-  const _sfc_main$x = {
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-c7524739"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  const _sfc_main$y = {
     name: "uniList",
     "mp-weixin": {
       options: {
@@ -10014,7 +10029,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
       $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -10027,8 +10042,8 @@ if (uni.restoreGlobal) {
       })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-c2f1266a"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
-  const _sfc_main$w = {
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-c2f1266a"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const _sfc_main$x = {
     name: "uniCollapseItem",
     props: {
       title: {
@@ -10188,7 +10203,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse-item" }, [
       vue.createCommentVNode(" onClick(!isOpen) "),
@@ -10235,8 +10250,8 @@ if (uni.restoreGlobal) {
       ], 6)
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-3d2dde9f"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
-  const _sfc_main$v = {
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-3d2dde9f"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
+  const _sfc_main$w = {
     name: "uniCollapse",
     emits: ["change", "activeItem", "input", "update:modelValue"],
     props: {
@@ -10345,16 +10360,16 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse" }, [
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-3f050360"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-3f050360"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
   var businessCloudObject = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$u = {
+  const _sfc_main$v = {
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -10522,7 +10537,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
@@ -10647,14 +10662,14 @@ if (uni.restoreGlobal) {
       }, "\u4FDD\u5B58")) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__file", "D:/studyUninApp/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
+  const PagesHealthQuessonHealthQuesson = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__file", "D:/studyUninApp/bodybuilding-app/pages/healthQuesson/healthQuesson.vue"]]);
   const testOb$2 = Es.importObject("testResults", {
     customUI: true
   });
   const busOb$3 = Es.importObject("businessCloudObject", {
     customUI: true
   });
-  const _sfc_main$t = {
+  const _sfc_main$u = {
     components: {
       BgTheamCompontent,
       NavBarCompontent
@@ -10788,7 +10803,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_col = vue.resolveComponent("van-col");
@@ -10874,22 +10889,24 @@ if (uni.restoreGlobal) {
       }, "\u4FDD\u5B58")
     ], 32);
   }
-  const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-c1425cf6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
+  const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-c1425cf6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
   const _imports_0$1 = "/static/app-plus/other/coach.png";
   let weixinAuthService;
-  const _sfc_main$s = {
+  const _sfc_main$t = {
     data() {
       return {
         phone: "",
         checkFlag: false,
         hasWeixinAuth: false,
         checkPhone: "",
-        needChecked: false
+        needChecked: false,
+        platform: uni.getSystemInfoSync().platform,
+        agreementType: null
       };
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/logining/logining.vue:102", this.phone, "????");
+        formatAppLog("log", "at pages/logining/logining.vue:106", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -10898,7 +10915,7 @@ if (uni.restoreGlobal) {
       }
     },
     onLoad() {
-      formatAppLog("log", "at pages/logining/logining.vue:112", plus, ">>>>");
+      formatAppLog("log", "at pages/logining/logining.vue:116", plus, ">>>>");
       plus.oauth.getServices((services) => {
         weixinAuthService = services.find((service) => {
           return service.id === "weixin";
@@ -10908,18 +10925,23 @@ if (uni.restoreGlobal) {
         }
       });
     },
+    mounted() {
+      let platform = uni.getSystemInfoSync().platform;
+      formatAppLog("log", "at pages/logining/logining.vue:130", platform, "????");
+    },
     methods: {
       jumpAgree() {
-        formatAppLog("log", "at pages/logining/logining.vue:126", "11111");
+        formatAppLog("log", "at pages/logining/logining.vue:135", "11111");
         uni.navigateTo({
           url: "/pages/agreement/agreement"
         });
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/logining/logining.vue:132", event, "\u4F60tm");
+        formatAppLog("log", "at pages/logining/logining.vue:141", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       async getSms() {
+        this.agreementType = "sms";
         if (this.controlActiveFlag && !this.checkFlag) {
           this.needChecked = true;
           return;
@@ -10930,7 +10952,7 @@ if (uni.restoreGlobal) {
           });
           try {
             const smsRes = await login2.sendSmsCode(this.phone);
-            formatAppLog("log", "at pages/logining/logining.vue:149", smsRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:159", smsRes, "\u767B\u5F55\u6210\u529F");
             if (smsRes.code == 0) {
               uni.reLaunch({
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + smsRes.mobile,
@@ -10943,14 +10965,21 @@ if (uni.restoreGlobal) {
               });
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:163", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:173", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
       agreeContiute() {
         this.checkFlag = true;
         this.needChecked = false;
-        this.getSms();
+        switch (this.agreementType) {
+          case "sms":
+            this.getSms();
+            break;
+          case "wx":
+            this.wxLoginCommon();
+            break;
+        }
       },
       getWeixinCode() {
         return new Promise((resolve, reject) => {
@@ -10959,7 +10988,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:181", err);
+              formatAppLog("log", "at pages/logining/logining.vue:198", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
@@ -10968,15 +10997,23 @@ if (uni.restoreGlobal) {
       loginIos() {
       },
       loginByWeixin() {
+        this.agreementType = "wx";
+        if (!this.checkFlag) {
+          this.needChecked = true;
+        } else {
+          this.wxLoginCommon();
+        }
+      },
+      wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
-          formatAppLog("log", "at pages/logining/logining.vue:191", code, "\u4F60\u662F\u8C01");
-          const wxLogin = Es.importObject("login", {
+          formatAppLog("log", "at pages/logining/logining.vue:217", code, "\u4F60\u662F\u8C01");
+          const wxLogin2 = Es.importObject("login", {
             customUI: true
           });
-          formatAppLog("log", "at pages/logining/logining.vue:195", wxLogin, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:221", wxLogin2, "wxLogin");
           try {
-            const wxLoginRes = await wxLogin.loginByWeixin(code);
-            formatAppLog("log", "at pages/logining/logining.vue:199", wxLoginRes, "\u767B\u5F55\u6210\u529F");
+            const wxLoginRes = await wxLogin2.loginByWeixin(code);
+            formatAppLog("log", "at pages/logining/logining.vue:225", wxLoginRes, "\u767B\u5F55\u6210\u529F");
             if (wxLoginRes.code == 0) {
               try {
                 uni.setStorageSync(
@@ -10986,6 +11023,10 @@ if (uni.restoreGlobal) {
                 uni.setStorageSync("uni_id_token", wxLoginRes.token);
                 uni.setStorageSync("uid", wxLoginRes.uid);
                 uni.setStorageSync("tokenExpired", wxLoginRes.tokenExpired);
+                let weixinLoginInfo = {
+                  accessToken: wxLoginRes.accessToken,
+                  openid: wxLoginRes.openid
+                };
                 if (wxLoginRes.type === "login") {
                   uni.setStorageSync("loginNum", "1");
                   uni.reLaunch({
@@ -10995,17 +11036,12 @@ if (uni.restoreGlobal) {
                 }
                 if (wxLoginRes.type === "register") {
                   uni.setStorageSync("loginNum", "0");
+                  uni.setStorageSync(
+                    "weixinLoginInfo",
+                    JSON.stringify(weixinLoginInfo)
+                  );
                   uni.navigateTo({
-                    url: "/pages/personalnformation/personalnformation"
-                  });
-                  let param = {
-                    avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
-                  };
-                  formatAppLog("log", "at pages/logining/logining.vue:227", param, "param");
-                  wxLogin.perfectInfo(param).then((res2) => {
-                    if (res2.success) {
-                    }
-                  }).catch((err) => {
+                    url: "/pages/bindPhone/bindPhone"
                   });
                   return;
                 }
@@ -11013,13 +11049,13 @@ if (uni.restoreGlobal) {
               }
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:243", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:268", err, "\u6211\u662F\u9519\u8BEF");
           }
         });
       }
     }
   };
-  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "counter" }, [
       vue.createElementVNode("view", { class: "text" }, [
         vue.createCommentVNode(' <view class="text1"></view> '),
@@ -11105,20 +11141,21 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("view", { class: "wx_loging_style" }, [
           vue.createElementVNode("image", {
             onClick: _cache[7] || (_cache[7] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args)),
-            class: "wx_img_style",
+            class: vue.normalizeClass(["wx_img_style", $data.platform === "ios" ? "common_style" : ""]),
             src: "/static/login/wxlogin.svg"
-          }),
-          vue.createElementVNode("image", {
+          }, null, 2),
+          $data.platform === "ios" ? (vue.openBlock(), vue.createElementBlock("image", {
+            key: 0,
             onClick: _cache[8] || (_cache[8] = (...args) => $options.loginIos && $options.loginIos(...args)),
             class: "wx_img_style",
             src: "/static/login/ioslogin.svg"
-          })
+          })) : vue.createCommentVNode("v-if", true)
         ])
       ])
     ]);
   }
-  const PagesLoginingLogining = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-62a93864"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/logining/logining.vue"]]);
-  const _sfc_main$r = {
+  const PagesLoginingLogining = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-62a93864"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/logining/logining.vue"]]);
+  const _sfc_main$s = {
     props: {
       latticeNum: {
         type: Number,
@@ -11193,7 +11230,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "acqui_verification_code" }, [
       vue.createElementVNode("view", { class: "verification_code_continor" }, [
         (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.latticeNum, (item, index) => {
@@ -11228,7 +11265,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-e5158781"], ["__file", "D:/studyUninApp/bodybuilding-app/components/verification-code-style2/verification-code-style2.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-e5158781"], ["__file", "D:/studyUninApp/bodybuilding-app/components/verification-code-style2/verification-code-style2.vue"]]);
   const en = {
     "uni-countdown.day": "day",
     "uni-countdown.h": "h",
@@ -11255,7 +11292,7 @@ if (uni.restoreGlobal) {
   const {
     t: t$k
   } = initVueI18n(messages$1);
-  const _sfc_main$q = {
+  const _sfc_main$r = {
     name: "UniCountdown",
     emits: ["timeup"],
     props: {
@@ -11459,7 +11496,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-countdown" }, [
       $props.showDay ? (vue.openBlock(), vue.createElementBlock("text", {
         key: 0,
@@ -11498,8 +11535,8 @@ if (uni.restoreGlobal) {
       }, vue.toDisplayString($options.secondText), 5)) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-c592f7f2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
-  const _sfc_main$p = {
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-c592f7f2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
+  const _sfc_main$q = {
     data() {
       return {
         smsCode: "",
@@ -11509,11 +11546,13 @@ if (uni.restoreGlobal) {
         mobile: "",
         requestVerifyCode: "",
         sureLogin: false,
-        isFinsh: false
+        isFinsh: false,
+        scanel: null
       };
     },
     onLoad(options) {
       this.mobile = options.mobile || "";
+      this.scanel = options.scanel || null;
     },
     async mounted() {
       this.verifyCode();
@@ -11551,21 +11590,21 @@ if (uni.restoreGlobal) {
       },
       inputVerificationChange(val) {
         this.smsCode = val;
-        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:101", "\u503C\u6539\u53D8\u4E86\uFF1A" + val);
+        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:104", "\u503C\u6539\u53D8\u4E86\uFF1A" + val);
       },
       async resend() {
         if (this.isFinsh) {
           const login2 = Es.importObject("login");
           try {
             const smsRes = await login2.sendSmsCode(this.mobile);
-            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:108", smsRes, "\u53D1\u9001\u6210\u529F");
+            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:111", smsRes, "\u53D1\u9001\u6210\u529F");
             if (smsRes.code == 0) {
               this.mobile = smsRes.mobile;
               this.verifyCode();
               this.$refs.countDown.reset();
             }
           } catch (err) {
-            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:116", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:119", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
@@ -11584,6 +11623,36 @@ if (uni.restoreGlobal) {
       },
       async smsLogin() {
         try {
+          if (this.scanel === "wx") {
+            uni.getStorage({
+              key: "weixinLoginInfo",
+              success: async function(res2) {
+                if (res2.data) {
+                  let getWeixinRes = await wxLogin.getWeixinUserInfo(res2.data);
+                  if (getWeixinRes.code == 0) {
+                    let param = {
+                      avatar: getWeixinRes.avatar,
+                      nickname: getWeixinRes.nickname,
+                      mobile: this.mobile
+                    };
+                    formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:153", param, "param");
+                    wxLogin.perfectInfo(param).then((res3) => {
+                      if (res3.success) {
+                      }
+                    }).catch((err) => {
+                    });
+                  }
+                }
+              },
+              fail: function(err) {
+                formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:165", err, ">>>>");
+              }
+            });
+            uni.reLaunch({
+              url: "/pages/myMebers/myMebers"
+            });
+            return;
+          }
           let userLogin = Es.importObject("login", {
             customUI: true
           });
@@ -11601,7 +11670,7 @@ if (uni.restoreGlobal) {
             });
           }
         } catch (err) {
-          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:158", err, "\u6211\u662F\u9519\u8BEF");
+          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:195", err, "\u6211\u662F\u9519\u8BEF");
         }
       },
       async smsCodeLoginValid(type = null) {
@@ -11613,14 +11682,14 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         const loginRes = await vefiryLogin.loginBySms(param);
-        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:171", loginRes, "\u53D1\u9001\u6210\u529F");
+        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:208", loginRes, "\u53D1\u9001\u6210\u529F");
         if (loginRes.code == 0) {
           if (type === "first") {
             try {
               let param2 = {
                 avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
               };
-              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:182", param2, "param");
+              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:219", param2, "param");
               vefiryLogin.perfectInfo(param2).then((res2) => {
                 if (res2.success) {
                 }
@@ -11645,7 +11714,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_verification_code_style2 = resolveEasycom(vue.resolveDynamicComponent("verification-code-style2"), __easycom_0$1);
     const _component_uni_countdown = resolveEasycom(vue.resolveDynamicComponent("uni-countdown"), __easycom_1$1);
@@ -11701,8 +11770,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesVerificatioCodeVerificatioCode = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-1bfd51d6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/verificatioCode/verificatioCode.vue"]]);
-  const _sfc_main$o = {
+  const PagesVerificatioCodeVerificatioCode = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-1bfd51d6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/verificatioCode/verificatioCode.vue"]]);
+  const _sfc_main$p = {
     data() {
       return {
         coachForm: {
@@ -11774,7 +11843,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
@@ -11868,8 +11937,8 @@ if (uni.restoreGlobal) {
       }, " \u4FDD\u5B58 ", 2)
     ]);
   }
-  const PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-4422acd1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
-  const _sfc_main$n = {
+  const PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-4422acd1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
+  const _sfc_main$o = {
     props: {
       disabled: {
         type: Boolean,
@@ -11916,7 +11985,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       tabindex: "-1",
       class: vue.normalizeClass(["popover", $props.className]),
@@ -11943,9 +12012,9 @@ if (uni.restoreGlobal) {
       ], 2)) : vue.createCommentVNode("v-if", true)
     ], 34);
   }
-  const popover = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
+  const popover = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
   const actionLibrary$1 = Es.importObject("actionLibrary", { customuI: true });
-  const _sfc_main$m = {
+  const _sfc_main$n = {
     components: {
       popover
     },
@@ -12206,7 +12275,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_sidebar_item = vue.resolveComponent("van-sidebar-item");
     const _component_van_sidebar = vue.resolveComponent("van-sidebar");
     const _component_popover = vue.resolveComponent("popover");
@@ -12412,9 +12481,9 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "D:/studyUninApp/bodybuilding-app/pages/actionLibrary/index.vue"]]);
+  const PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "D:/studyUninApp/bodybuilding-app/pages/actionLibrary/index.vue"]]);
   const actionLibrary = Es.importObject("actionLibrary");
-  const _sfc_main$l = {
+  const _sfc_main$m = {
     data() {
       return {
         show: false,
@@ -12530,7 +12599,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -12606,9 +12675,9 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
+  const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
   const train$3 = Es.importObject("train");
-  const _sfc_main$k = {
+  const _sfc_main$l = {
     components: {
       popover
     },
@@ -12972,7 +13041,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_popover = vue.resolveComponent("popover");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
@@ -13796,7 +13865,7 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
+  const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
   //! moment.js
   //! version : 2.29.4
   //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -17701,7 +17770,7 @@ if (uni.restoreGlobal) {
     WEEK: "GGGG-[W]WW",
     MONTH: "YYYY-MM"
   };
-  const _sfc_main$j = {
+  const _sfc_main$k = {
     name: "calendar",
     props: {
       value: {
@@ -17885,7 +17954,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "calendar" }, [
       vue.createElementVNode("view", { class: "calendar-operation" }, [
         vue.createElementVNode("view", { class: "left" }, [
@@ -17942,9 +18011,9 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
+  const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
   const train$2 = Es.importObject("train");
-  const _sfc_main$i = {
+  const _sfc_main$j = {
     components: {
       calendar
     },
@@ -18076,7 +18145,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_calendar = vue.resolveComponent("calendar");
     const _component_van_icon = vue.resolveComponent("van-icon");
@@ -18182,13 +18251,13 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
+  const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
   const block0$1 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("canvasImage");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["canvasImage"] = "19043a88";
   };
   const train$1 = Es.importObject("train");
-  const _sfc_main$h = {
+  const _sfc_main$i = {
     data() {
       return {
         options: [
@@ -18366,7 +18435,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
@@ -18734,8 +18803,8 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$h);
-  const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
+    block0$1(_sfc_main$i);
+  const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
   var util = {};
   util.getWeixinCode = function() {
     return new Promise((resolve, reject) => {
@@ -18935,7 +19004,7 @@ if (uni.restoreGlobal) {
   };
   const uniPayCo = Es.importObject("uni-pay-co");
   var myOpenid;
-  const _sfc_main$g = {
+  const _sfc_main$h = {
     name: "uni-pay",
     emits: ["success", "cancel", "fail", "create", "mounted"],
     props: {
@@ -19336,7 +19405,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
     const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2);
@@ -19521,9 +19590,9 @@ if (uni.restoreGlobal) {
       vue.createCommentVNode(" \u5916\u90E8\u6D4F\u89C8\u5668\u786E\u8BA4\u652F\u4ED8\u5F39\u7A97\u7ED3\u675F ")
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-9aa540bd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-pay/components/uni-pay/uni-pay.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-9aa540bd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-pay/components/uni-pay/uni-pay.vue"]]);
   const My$3 = Es.importObject("my", { customuI: true });
-  const _sfc_main$f = {
+  const _sfc_main$g = {
     data() {
       return {
         total_fee: 1,
@@ -19728,7 +19797,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -20008,9 +20077,9 @@ if (uni.restoreGlobal) {
       }, null, 8, ["adpid", "onSuccess", "onCreate"])
     ]);
   }
-  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "D:/studyUninApp/bodybuilding-app/pages/my/my.vue"]]);
+  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "D:/studyUninApp/bodybuilding-app/pages/my/my.vue"]]);
   const My$2 = Es.importObject("my", { customuI: true });
-  const _sfc_main$e = {
+  const _sfc_main$f = {
     data() {
       return {
         show: false,
@@ -20085,7 +20154,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -20217,11 +20286,11 @@ if (uni.restoreGlobal) {
       }, 8, ["show"])
     ]);
   }
-  const PagesOpenCardOpenCard = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "D:/studyUninApp/bodybuilding-app/pages/openCard/openCard.vue"]]);
+  const PagesOpenCardOpenCard = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "D:/studyUninApp/bodybuilding-app/pages/openCard/openCard.vue"]]);
   const login$1 = Es.importObject("login", {
     customUI: true
   });
-  const _sfc_main$d = {
+  const _sfc_main$e = {
     data() {
       return {};
     },
@@ -20262,7 +20331,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -20303,9 +20372,9 @@ if (uni.restoreGlobal) {
       }, 8, ["onClick"])
     ]);
   }
-  const PagesSetUpSetUp = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "D:/studyUninApp/bodybuilding-app/pages/setUp/setUp.vue"]]);
+  const PagesSetUpSetUp = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "D:/studyUninApp/bodybuilding-app/pages/setUp/setUp.vue"]]);
   const My$1 = Es.importObject("my");
-  const _sfc_main$c = {
+  const _sfc_main$d = {
     data() {
       return {
         show: false,
@@ -20380,7 +20449,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
@@ -20437,7 +20506,140 @@ if (uni.restoreGlobal) {
       }, null, 8, ["show", "actions", "onSelect"])
     ]);
   }
-  const PagesPersonalInfoPersonalInfo = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalInfo/personalInfo.vue"]]);
+  const PagesPersonalInfoPersonalInfo = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalInfo/personalInfo.vue"]]);
+  const _sfc_main$c = {
+    data() {
+      return {
+        coachForm: {
+          nickname: "",
+          gender: ""
+        },
+        phone: "",
+        sexShow: false
+      };
+    },
+    components: {
+      BgTheamCompontent
+    },
+    computed: {
+      controlActiveFlag() {
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:66", this.phone, "????");
+        let flag = false;
+        if (this.phone && this.phone.length === 11) {
+          flag = true;
+        }
+        return flag;
+      }
+    },
+    methods: {
+      async getSms() {
+        const login2 = Es.importObject("login", {
+          customUI: true
+        });
+        if (this.controlActiveFlag) {
+          try {
+            const smsRes = await login2.sendSmsCode(this.phone);
+            if (smsRes.code == 0) {
+              uni.navigateTo({
+                url: "/pages/verificatioCode/verificatioCode?mobile=" + this.phone + "&scanel=wx"
+              });
+            }
+          } catch (err) {
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:95", err, "\u6211\u662F\u9519\u8BEF");
+          }
+        }
+      },
+      phoneInput(event) {
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:100", event, "\u4F60tm");
+        this.phone = event.detail.value;
+      },
+      goBack() {
+        uni.navigateBack();
+      },
+      savePersonInfo() {
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:107", "1111");
+        if (this.coachForm.nickname || this.coachForm.gender) {
+          const login2 = Es.importObject("login", {
+            customUI: true
+          });
+          try {
+            let param = {
+              ...this.coachForm
+            };
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:117", param, "param");
+            login2.perfectInfo(param).then((res2) => {
+              if (res2.success) {
+                this.jump();
+              }
+            }).catch((err) => {
+            });
+          } catch (e2) {
+          }
+        }
+      }
+    }
+  };
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "counter content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+      vue.createCommentVNode(" \u8FD4\u56DE\u56FE\u6807 "),
+      vue.createElementVNode("view", { class: "nav_style" }, [
+        vue.createElementVNode("view", {
+          class: "nav_left_style",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
+        }, [
+          vue.createElementVNode("image", {
+            class: "back_img_style",
+            src: "/static/app-plus/mebrs/back.svg"
+          })
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "botter" }, [
+        vue.createElementVNode("span", { class: "botter-top" }, "\u7ED1\u5B9A\u624B\u673A\u53F7"),
+        vue.createElementVNode("p", { class: "a-i-c" }, "\u60A8\u7684\u5FAE\u4FE1\u8D26\u53F7\u5DF2\u9A8C\u8BC1\u901A\u8FC7,,\u8BF7\u7ED1\u5B9A\u624B\u673A\u53F7\u7801")
+      ]),
+      vue.createElementVNode("view", { class: "contetnt_form_style" }, [
+        vue.createVNode(_component_uni_forms, {
+          modelValue: $data.coachForm,
+          ref: "coachForm",
+          "label-position": "left"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_forms_item, {
+              class: "outer_form_item_style",
+              label: "\u624B\u673A\u53F7",
+              name: "nickname"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("input", {
+                  value: $data.phone,
+                  type: "tel",
+                  maxlength: 11,
+                  onInput: _cache[1] || (_cache[1] = (...args) => $options.phoneInput && $options.phoneInput(...args)),
+                  class: "phone change_input_style",
+                  focus: "",
+                  placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
+                  "adjust-position": false
+                }, null, 40, ["value"])
+              ]),
+              _: 1
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue"]),
+        vue.createElementVNode("button", {
+          class: vue.normalizeClass(["btn", $options.controlActiveFlag ? "active_btn" : ""]),
+          onClick: _cache[2] || (_cache[2] = (...args) => $options.getSms && $options.getSms(...args))
+        }, [
+          vue.createElementVNode("span", { class: "btn-text" }, "\u83B7\u53D6\u9A8C\u8BC1\u7801")
+        ], 2)
+      ])
+    ]);
+  }
+  const PagesBindPhoneBindPhone = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-8a2b02c0"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bindPhone/bindPhone.vue"]]);
   const My = Es.importObject("my");
   const _sfc_main$b = {
     components: {
@@ -30472,6 +30674,7 @@ if (uni.restoreGlobal) {
   __definePage("pages/openCard/openCard", PagesOpenCardOpenCard);
   __definePage("pages/setUp/setUp", PagesSetUpSetUp);
   __definePage("pages/personalInfo/personalInfo", PagesPersonalInfoPersonalInfo);
+  __definePage("pages/bindPhone/bindPhone", PagesBindPhoneBindPhone);
   __definePage("pages/updateSignature/updateSignature", PagesUpdateSignatureUpdateSignature);
   __definePage("pages/dynamicEvaluation/actionEvaluation/actionEvaluation", PagesDynamicEvaluationActionEvaluationActionEvaluation);
   __definePage("pages/dynamicEvaluation/dynamicEvaluation", PagesDynamicEvaluationDynamicEvaluation);
