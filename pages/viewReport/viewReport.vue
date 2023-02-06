@@ -126,7 +126,7 @@
             </van-col>
           </van-row>
           <van-row class="titleBottomText">
-            <van-col span="12">{{ nowYear }}.{{ nowDate }}</van-col>
+			<van-col span="12">{{histroydate}}</van-col>
             <van-col span="12">数据评测来源于世界权威机构</van-col>
           </van-row>
         </view>
@@ -1011,7 +1011,8 @@ export default {
       nowDate: '',
       nowYear: '',
       buyStatus: 0,
-      statusDy: false
+      statusDy: false,
+	  histroydate: '',
     }
   },
   //监测页面滑动
@@ -1086,7 +1087,8 @@ export default {
           this.gender = res.data[0].gender
           this.mobileNumber = res.data[0].mobile
           this.age = this.getAge(res.data[0].birthday)
-          console.log('学员信息获取完毕，内容为：' + res.data)
+          console.log('学员信息获取完毕，内容为：' + this.nowDate)
+		  console.log('学员信息获取完毕，内容为：' + res.data)
         }
       })
     },
@@ -1099,6 +1101,7 @@ export default {
       let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
       this.nowDate = date.getMonth() + 1 + '.' + date.getDate()
       this.nowYear = date.getFullYear()
+	  this.histroydate = this.nowYear+'-'+this.nowDate
       // 分别计算年月日差值
       let age = today.map((val, index) => {
         return val - birthday[index]
@@ -1527,6 +1530,7 @@ export default {
       this.queryData = item.queryData
       this.assessmentTrueData = item.assessmentTrueData
       this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
+	  this.histroydate = item.saveDate,
       console.log(item)
       this.$refs.popup.close()
     },
@@ -1687,7 +1691,7 @@ export default {
   background-image: url('../../static/app-plus/bg/bodysideReport.png');
   background-repeat: no-repeat;
   background-size: 100%;
-  padding-top: 140upx;
+  padding-top: 100upx;
 }
 .title {
   width: 120upx;
