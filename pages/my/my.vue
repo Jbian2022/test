@@ -33,7 +33,15 @@
       </view>
       <view class="right"></view>
     </view> -->
-    <view v-if="userInfo.vipLevel === 2" class="vip-card">
+    <view
+      v-if="
+        termOfValidity &&
+        (userInfo.vipLevel == 'annualCard' ||
+          userInfo.vipLevel == 'quarterCard' ||
+          userInfo.vipLevel == 'monthlyCard')
+      "
+      class="vip-card"
+    >
       <view class="left">
         <view class="card-info" @click="personalInfo">
           <view class="user-logo">
@@ -44,7 +52,7 @@
         </view>
         <view class="card-des">{{
           userInfo.vipEndDate
-            ? userInfo.vipEndDate
+            ? '到期时间: ' + userInfo.vipEndDate
             : '立即续费金卡教练，畅享多项特权~'
         }}</view>
       </view>
@@ -59,7 +67,11 @@
           <view class="card-name">{{ userInfo.nickname }}</view>
           <view class="card-status">普卡教练</view>
         </view>
-        <view class="card-des">开通金卡教练，畅享多项特权~</view>
+        <view class="card-des">{{
+          userInfo.vipEndDate
+            ? '已到期: ' + userInfo.vipEndDate + ', 续费畅享多项特权~'
+            : '开通金卡教练，畅享多项特权~'
+        }}</view>
       </view>
       <view></view>
     </view>
@@ -161,7 +173,7 @@
         <view class="des">{{ hotInfo.text2 }}</view>
       </view>
       <van-button block @click="payClick"
-        >确认开通并支付￥{{ payMoney }}元</van-button
+        >确认开通并支付￥{{ payInfo.money }}元</van-button
       >
       <van-action-sheet class="payment-action-sheet" v-model:show="payShow">
         <view class="title" @click.native="aliPayment">选择支付方式</view>
@@ -256,14 +268,15 @@
 
 <script>
 const My = uniCloud.importObject('my', { customuI: true })
-
+const login = uniCloud.importObject('login', {
+  customUI: true // 取消自动展示的交互提示界面
+})
+import moment from 'moment'
 export default {
   data() {
     return {
       /** 支付 **/
       total_fee: 1, // 支付金额，单位分 100 = 1元
-      order_no: '2022102781283848489123144', // 业务系统订单号（即你自己业务系统的订单表的订单号）
-      out_trade_no: '20012332132131232132', // 插件支付单号
       description: '测试订单', // 支付描述
       type: 'test', // 支付回调类型 如 recharge 代表余额充值 goods 代表商品订单（可自定义，任意英文单词都可以，只要你在 uni-pay-co/notify/目录下创建对应的 xxx.js文件进行编写对应的回调逻辑即可）
       //qr_code: true, // 是否强制使用扫码支付
@@ -308,8 +321,21 @@ export default {
           unit: '元/年',
           activity: '无限会员数',
           active: true,
-          order_no: '2022102781283848489123144',
-          out_trade_no: '20012332132131232132'
+          order_no:
+            '20221027812838484891' +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1),
+          out_trade_no:
+            '200123321321312' +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1),
+          vipLevel: 'annualCard'
         },
         {
           hotMsg: '立省60元',
@@ -319,8 +345,21 @@ export default {
           unit: '元/季度',
           activity: '限100个会员',
           active: false,
-          order_no: '2022102781283848389123144',
-          out_trade_no: '20012332132132332132'
+          order_no:
+            '20221027812838483891' +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1),
+          out_trade_no:
+            '200123321321323' +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1),
+          vipLevel: 'quarterCard'
         },
         {
           hotMsg: '立省20元',
@@ -330,20 +369,42 @@ export default {
           unit: '元/月',
           activity: '限30个会员',
           active: false,
-          order_no: '2022102781283848689123144',
-          out_trade_no: '20012332132132332135'
+          order_no:
+            '20221027812838486891' +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1),
+          out_trade_no:
+            '200123321321323' +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1) +
+            Math.floor(Math.random() * 10 + 1),
+          vipLevel: 'monthlyCard'
         }
       ],
       hotInfo: {
         text1: '103',
         text2: '468元/年'
       },
-      payMoney: '365',
-      show: false
+
+      payInfo: {}, //支付情况
+
+      show: false,
+      termOfValidity: false
     }
   },
   onShow() {
     this.getUserInfo()
+  },
+  mounted() {
+    // 用户有效判断
+
+    let c = moment('2021-05-07').isSame('2021-05-08')
+    console.log(c, '???')
   },
   watch: {
     payShow: {
@@ -354,19 +415,78 @@ export default {
           uni.showTabBar()
         }
       }
+    },
+    cardList: {
+      handler: function (n) {
+        let list = JSON.parse(JSON.stringify(n))
+        let findItem = list.find((v) => v.active)
+        this.payInfo = findItem
+      },
+      deep: true,
+      immediate: true
     }
   },
+
   methods: {
+    // 监听事件 - 支付订单创建成功（此时用户还未支付）
+    onCreate(res) {
+      console.log('create: ', res)
+      // 如果只是想生成支付二维码，不需要组件自带的弹窗，则在这里可以获取到支付二维码 qr_code_image
+    },
+    // 监听事件 - 支付成功
+    onSuccess(res) {
+      console.log('success: ', res)
+      // 充值成功添加有效期
+      let self = this
+      if (res.user_order_success) {
+        // 代表用户已付款，且你自己写的回调成功并正确执行了
+        let vipEndDate = null
+        switch (self.vipLevel) {
+          case 'annualCard':
+            vipEndDate = moment()
+              .add(1, 'years')
+              .add(1, 'day')
+              .format('YYYY-MM-DD') // 1年后
+            break
+          case 'quarterCard':
+            vipEndDate = moment()
+              .add(3, 'months')
+              .add(1, 'day')
+              .format('YYYY-MM-DD') // 三月之后
+            break
+          case 'monthlyCard':
+            vipEndDate = moment()
+              .add(1, 'months')
+              .add(1, 'day')
+              .format('YYYY-MM-DD') // 三月之后
+            break
+        }
+        let param = {
+          vipEndDate: vipEndDate
+        }
+        console.log(param, 'param')
+        login
+          .perfectInfo(param)
+          .then((res) => {
+            if (res.success) {
+            }
+          })
+          .catch((err) => {})
+
+        self.payShow = false
+      } else {
+        // 代表用户已付款，但你自己写的回调执行失败（通常是因为你的回调代码有问题）
+      }
+    },
     createOrder(provider) {
       // 发起支付
 
-      console.log(this.order_no, '????')
       this.$refs.uniPay.createOrder({
         provider: provider, // 支付供应商
-        total_fee: this.payMoney * 100, // 支付金额，单位分 100 = 1元
+        total_fee: this.payInfo.money * 100, // 支付金额，单位分 100 = 1元
         type: 'recharge', // 支付回调类型
-        order_no: this.order_no, // 业务系统订单号
-        out_trade_no: this.out_trade_no,
+        order_no: String(this.payInfo.order_no), // 业务系统订单号
+        out_trade_no: String(this.payInfo.out_trade_no),
         description: '教练充值VIP', // 支付描述
         qr_code: '', // 是否强制使用扫码支付
         openid: '', // 微信公众号需要
@@ -392,6 +512,18 @@ export default {
         vipEndDate: vipEndDate || null,
         referrer: referrer || null
       }
+      // 获取当前时间
+      let currentDay = moment().format('YYYY-MM-DD') // 当前时间
+      // 先比较是否相等
+      let sameTime = moment(currentDay).isSame(this.userInfo.vipEndDate)
+      if (sameTime) {
+        this.termOfValidity = false
+      } else {
+        this.termOfValidity = moment(currentDay).isBefore(
+          this.userInfo.vipEndDate
+        )
+      }
+
       console.log(res, 88888)
     },
     async setReferrer() {
@@ -406,9 +538,6 @@ export default {
       item.active = true
       this.hotInfo.text1 = +item.des - +item.money
       this.hotInfo.text2 = item.des + item.unit
-      this.payMoney = item.money
-      this.order_no = item.order_no
-      this.out_trade_no = item.out_trade_no
     },
     openCard() {
       uni.reLaunch({
