@@ -627,7 +627,6 @@
 .bottom_style {
   background: #1370ff;
   border-radius: 16upx;
-  margin-top: 30upx;
   margin-bottom: 30upx;
   font-size: 32upx;
   font-family: PingFangSC-Semibold, PingFang SC;
