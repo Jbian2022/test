@@ -1,5 +1,5 @@
 <template>
-  <!-- <view
+  <view
     v-if="openKey"
     style="
       position: absolute;
@@ -8,25 +8,25 @@
       width: 100%;
       background-color: #343a44;
     "
-  > -->
-  <!-- #ifdef APP-PLUS || H5 -->
-  <!-- <view
-      :prop="canvasImageMsg"
-      :change:prop="canvasImage.updateEcharts"
-      id="canvasImage"
-    ></view> -->
-  <!-- #endif -->
-  <!-- <view class="footer-box">
-		<view class="bottom_style" @click="saveReport">
+  >
+
+  <view class="footer-box">
+		<view class="bottom_style" @click="openUIup">
 		  <image
 		    src="../../static/app-plus/other/share.png"
 		    class="shareImage"
 		  ></image>
 		  分享报告
 		</view>
-	</view> -->
-
-  <!-- <uni-popup
+	</view>
+  <!-- #ifdef APP-PLUS || H5 -->
+  <view
+      :prop="canvasImageMsg"
+      :change:prop="canvasImage.updateEcharts"
+      id="canvasImage"
+    ></view>
+  <!-- #endif -->
+  <uni-popup
       ref="popup"
       type="bottom"
       mask-background-color="rgba(20, 21, 23, 0.6)"
@@ -43,7 +43,7 @@
         </view>
       </view>
     </uni-popup>
-  </view> -->
+  </view>
   <view v-if="!openKey" style="position: absolute; z-index: 1; bottom: 10upx">
     <view class="buttontrue" @click="openUIup"
       >历史评测记录
@@ -100,9 +100,10 @@
         <view class="title">评估报告</view>
         <view class="z" style="opacity: 0">8888</view>
       </view>
-     <!-- <view v-show="isFixedTop" class="arrow-box"></view> -->
-      <view id="viewReport">
-        <view class="backImg"></view>
+	 <view id = "imageReport">
+	 	<image id="viewReport" src="../../static/app-plus/bg/bodysideReport.png"></image>
+      <view>
+        <!-- <view class="backImg"></view> -->
         <view class="titleText" v-if="openKey">
           <van-row class="titleTopText">
             <van-col span="12">评估报告</van-col>
@@ -126,7 +127,7 @@
             </van-col>
           </van-row>
           <van-row class="titleBottomText">
-            <van-col span="12">{{ nowYear }}.{{ nowDate }}</van-col>
+			<van-col span="12">{{histroydate}}</van-col>
             <van-col span="12">数据评测来源于世界权威机构</van-col>
           </van-row>
         </view>
@@ -273,14 +274,7 @@
                     class="healthBlocks"
                     v-if="items[2].answer[0] == '是' ? true : false"
                   >
-                    <view
-                      style="
-                        margin-bottom: 20upx;
-                        color: #f4f7ff;
-                        font-size: 30upx;
-                        font-weight: 500;
-                      "
-                    >
+                    <view style="margin-bottom: 20upx;color: #f4f7ff;font-size: 30upx;font-weight: 500;">
                       <view class="greenBlock"></view>
                       关节、韧带和肌肉是否受过任何损伤
                     </view>
@@ -294,14 +288,7 @@
                     class="healthBlocks"
                     v-if="items[3].answer[0] == '是' ? true : false"
                   >
-                    <view
-                      style="
-                        margin-bottom: 20upx;
-                        color: #f4f7ff;
-                        font-size: 30upx;
-                        font-weight: 500;
-                      "
-                    >
+                    <view style="margin-bottom: 20upx;color: #f4f7ff;  font-size: 30upx;font-weight: 500;">
                       <view class="greenBlock"></view>
                       是否曾经骨折
                     </view>
@@ -315,8 +302,7 @@
                     class="healthBlocks"
                     v-if="items[4].answer[0] == '是' ? true : false"
                   >
-                    <view
-                      style="
+                    <view style="
                         margin-bottom: 20upx;
                         color: #f4f7ff;
                         font-size: 30upx;
@@ -899,6 +885,7 @@
         <view style="height: 200upx; width: calc(100vw - 60upx)"></view>
       </view>
     </view>
+	</view>
   </scroll-view>
 </template>
 
@@ -906,7 +893,6 @@
 // import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
 // import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 import { ref } from 'vue'
-import html2canvas from 'html2canvas'
 import { now } from 'moment'
 const user = uniCloud.importObject('my', {
   customUI: true
@@ -1011,7 +997,8 @@ export default {
       nowDate: '',
       nowYear: '',
       buyStatus: 0,
-      statusDy: false
+      statusDy: false,
+	  histroydate: '',
     }
   },
   //监测页面滑动
@@ -1086,7 +1073,8 @@ export default {
           this.gender = res.data[0].gender
           this.mobileNumber = res.data[0].mobile
           this.age = this.getAge(res.data[0].birthday)
-          console.log('学员信息获取完毕，内容为：' + res.data)
+          console.log('学员信息获取完毕，内容为：' + this.nowDate)
+		  console.log('学员信息获取完毕，内容为：' + res.data)
         }
       })
     },
@@ -1099,6 +1087,7 @@ export default {
       let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
       this.nowDate = date.getMonth() + 1 + '.' + date.getDate()
       this.nowYear = date.getFullYear()
+	  this.histroydate = this.nowYear+'-'+this.nowDate
       // 分别计算年月日差值
       let age = today.map((val, index) => {
         return val - birthday[index]
@@ -1372,11 +1361,13 @@ export default {
       const result = await train.uploadBase64({
         base64: this.baseUrl
       })
+	  console.log("33333")
       this.url = result.fileID
       this.canvasImageMsg = null
       callback && callback(this.url)
     },
     downloadFile() {
+		console.log("4444")
       uni.downloadFile({
         url: this.url, //仅为示例，并非真实的资源
         success: (res) => {
@@ -1409,14 +1400,13 @@ export default {
       })
     },
     receiveRenderData(option) {
-      this.showShare = false
+      this.$refs.popup.close()
       console.log(option.name, 8888)
       this.baseUrl = option.base64
       this.uploadImage((url) => {
         uni.showLoading({ title: '加载中' })
         // #ifndef H5
         if (option.name === '保存到相册') {
-          console.log('开始调用保存函数')
           this.downloadFile()
         } else {
           if (option.name === '分享到微信') {
@@ -1527,6 +1517,7 @@ export default {
       this.queryData = item.queryData
       this.assessmentTrueData = item.assessmentTrueData
       this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData
+	  this.histroydate = item.saveDate,
       console.log(item)
       this.$refs.popup.close()
     },
@@ -1608,25 +1599,36 @@ import html2canvas from 'html2canvas'
 export default {
 	methods: {
 		generateImage(callback) {
+			console.log("5555")
 			setTimeout(() => {
-				const dom = document.getElementById('viewReport'); // 需要生成图片内容的 dom 节点
+				const dom = document.getElementById('imageReport'); // 需要生成图片内容的 dom 节点
+				// const base64 = dom.toDataURL('image/png');
+				// callback&&callback(base64);
+				window.pageYoffset = 0;
+				document.documentElement.scrollTop = 0;
+				document.body.scrollTop = 0;
 				html2canvas(dom, {
 					width: dom.clientWidth, //dom 原始宽度
 					height: dom.clientHeight,
-					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
-					scrollX: 0,
+					scrollY: -33, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
+					scrollX: 1,
+					foreignObjectRendering: true,
+					allowTaint:false,
 					useCORS: true, //支持跨域
 					// scale: 1, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 				}).then((canvas) => {
+					console.log(canvas)
 					const base64 = canvas.toDataURL('image/png');
+					
 					callback&&callback(base64);
 				}).catch(err=>{})
-			}, 300);
+			}, 900);
 		},
 		updateEcharts(newValue, oldValue, ownerInstance, instance) {
 			// 监听 service 层数据变更
 			if(newValue){
 				this.generateImage((base64)=>{
+					console.log(base64)
 					ownerInstance.callMethod('receiveRenderData', {name:newValue,base64});
 				})
 			}
@@ -1655,11 +1657,11 @@ export default {
     background: transparent;
   }
   .backImg {
-    position: absolute;
+    // position: absolute;
     background-image: url('../../static/app-plus/bg/bodysideReport.png');
     background-repeat: no-repeat;
     background-size: 100%;
-    z-index: -1;
+    // z-index: 10;
   }
   .arrow-left {
     position: fixed;
@@ -1684,10 +1686,17 @@ export default {
   }
 }
 #viewReport {
-  background-image: url('../../static/app-plus/bg/bodysideReport.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  padding-top: 140upx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: #212328;
+  width: 100%;
+}
+#imageReport{
+	background: #212328;
 }
 .title {
   width: 120upx;
@@ -1700,6 +1709,9 @@ export default {
 }
 .titleText {
   margin: 10upx 30upx 0 30upx;
+  position: relative;
+      top: 42px;
+      margin-bottom: 58px;
 }
 .text {
   font-size: 30upx;
@@ -2081,7 +2093,7 @@ export default {
   position: fixed;
   left: 0;
   bottom: 0;
-  background: #2f333a;
+  background: #212328;
 
   .bottom_style {
     width: calc(100vw - 60upx);
