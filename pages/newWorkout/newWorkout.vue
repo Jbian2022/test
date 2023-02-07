@@ -601,10 +601,10 @@
 				this.actionList.forEach((item)=>{
 					if(item.type===0){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {
+							if(!cur.kg||!cur.time) {
 								return cur.active ? 0 + +prev : prev; 
 							} else {
-								return cur.active ? +cur.kg + +prev : prev; 
+								return cur.active ? (cur.kg*cur.time) + +prev : prev; 
 							}
 						}, 0)
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
@@ -647,10 +647,10 @@
 						}, 0)
 					} else if(item.type===4){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {
+							if(!cur.kg||!cur.time) {
 								return cur.active ? 0 + +prev : prev;
 							} else {
-								return cur.active ? +cur.kg + +prev : prev; 
+								return cur.active ? (cur.kg*cur.time) + +prev : prev; 
 							}
 						}, 0)
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
@@ -662,15 +662,16 @@
 						}, 0)
 					} else if(item.type===5){
 						item.load = item.groupList.reduce( function (prev, cur) { 
-							if(!cur.kg) {
+							if(!cur.kg||!cur.time) {
 								return cur.active ? 0 + +prev : prev; 
 							} else {
-								return cur.active ? +cur.kg + +prev : prev; 
+								if(item.weight){
+									return cur.active ? ((+cur.kg + +item.weight)*cur.time) + +prev : prev;
+								} else {
+									return cur.active ? (cur.kg*cur.time) + +prev : prev; 
+								}
 							}
 						}, 0)
-						if(item.weight){
-							item.load = item.load + +item.weight
-						}
 						item.frequency = item.groupList.reduce( function (prev, cur) { 
 							if(!cur.time) {
 								return cur.active ? 0 + +prev : prev; 
