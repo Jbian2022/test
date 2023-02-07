@@ -100,7 +100,6 @@
         <view class="title">评估报告</view>
         <view class="z" style="opacity: 0">8888</view>
       </view>
-     <!-- <view v-show="isFixedTop" class="arrow-box"></view> -->
 	 <view id = "imageReport">
 	 	<image id="viewReport" src="../../static/app-plus/bg/bodysideReport.png"></image>
       <view>
