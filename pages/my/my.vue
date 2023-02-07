@@ -267,7 +267,7 @@
 </template>
 
 <script>
-const My = uniCloud.importObject('my', { customuI: true })
+const My = uniCloud.importObject('my', { customUI: true })
 const login = uniCloud.importObject('login', {
   customUI: true // 取消自动展示的交互提示界面
 })
@@ -512,16 +512,20 @@ export default {
         vipEndDate: vipEndDate || null,
         referrer: referrer || null
       }
-      // 获取当前时间
-      let currentDay = moment().format('YYYY-MM-DD') // 当前时间
-      // 先比较是否相等
-      let sameTime = moment(currentDay).isSame(this.userInfo.vipEndDate)
-      if (sameTime) {
-        this.termOfValidity = false
+      if (this.userInfo.vipLevel) {
+        // 获取当前时间
+        let currentDay = moment().format('YYYY-MM-DD') // 当前时间
+        // 先比较是否相等
+        let sameTime = moment(currentDay).isSame(this.userInfo.vipEndDate)
+        if (sameTime) {
+          this.termOfValidity = false
+        } else {
+          this.termOfValidity = moment(currentDay).isBefore(
+            this.userInfo.vipEndDate
+          )
+        }
       } else {
-        this.termOfValidity = moment(currentDay).isBefore(
-          this.userInfo.vipEndDate
-        )
+        this.termOfValidity = false
       }
 
       console.log(res, 88888)
