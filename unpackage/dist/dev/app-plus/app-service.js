@@ -11007,12 +11007,12 @@ if (uni.restoreGlobal) {
       wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
           formatAppLog("log", "at pages/logining/logining.vue:217", code, "\u4F60\u662F\u8C01");
-          const wxLogin2 = Es.importObject("login", {
+          const wxLogin = Es.importObject("login", {
             customUI: true
           });
-          formatAppLog("log", "at pages/logining/logining.vue:221", wxLogin2, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:221", wxLogin, "wxLogin");
           try {
-            const wxLoginRes = await wxLogin2.loginByWeixin(code);
+            const wxLoginRes = await wxLogin.loginByWeixin(code);
             formatAppLog("log", "at pages/logining/logining.vue:225", wxLoginRes, "\u767B\u5F55\u6210\u529F");
             if (wxLoginRes.code == 0) {
               try {
@@ -11027,14 +11027,19 @@ if (uni.restoreGlobal) {
                   accessToken: wxLoginRes.accessToken,
                   openid: wxLoginRes.openid
                 };
-                if (wxLoginRes.type === "login") {
+                let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
+                formatAppLog("log", "at pages/logining/logining.vue:242", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
+                let flag = false;
+                if (wxSchemaRes.affectedDocs === 0) {
+                  flag = false;
+                }
+                flag = wxSchemaRes.data[0].hasOwnProperty("mobile") ? true : false;
+                if (flag) {
                   uni.setStorageSync("loginNum", "1");
                   uni.reLaunch({
                     url: "/pages/myMebers/myMebers"
                   });
-                  return;
-                }
-                if (wxLoginRes.type === "register") {
+                } else {
                   uni.setStorageSync("loginNum", "0");
                   uni.setStorageSync(
                     "weixinLoginInfo",
@@ -11049,7 +11054,7 @@ if (uni.restoreGlobal) {
               }
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:268", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:274", err, "\u6211\u662F\u9519\u8BEF");
           }
         });
       }
@@ -11536,6 +11541,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-c592f7f2"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
+  const login$2 = Es.importObject("login", {
+    customUI: true
+  });
   const _sfc_main$q = {
     data() {
       return {
@@ -11590,21 +11598,21 @@ if (uni.restoreGlobal) {
       },
       inputVerificationChange(val) {
         this.smsCode = val;
-        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:104", "\u503C\u6539\u53D8\u4E86\uFF1A" + val);
+        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:107", "\u503C\u6539\u53D8\u4E86\uFF1A" + val);
       },
       async resend() {
         if (this.isFinsh) {
           const login2 = Es.importObject("login");
           try {
             const smsRes = await login2.sendSmsCode(this.mobile);
-            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:111", smsRes, "\u53D1\u9001\u6210\u529F");
+            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:114", smsRes, "\u53D1\u9001\u6210\u529F");
             if (smsRes.code == 0) {
               this.mobile = smsRes.mobile;
               this.verifyCode();
               this.$refs.countDown.reset();
             }
           } catch (err) {
-            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:119", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:122", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
@@ -11622,21 +11630,25 @@ if (uni.restoreGlobal) {
         }
       },
       async smsLogin() {
+        let self2 = this;
         try {
           if (this.scanel === "wx") {
             uni.getStorage({
               key: "weixinLoginInfo",
               success: async function(res2) {
                 if (res2.data) {
-                  let getWeixinRes = await wxLogin.getWeixinUserInfo(res2.data);
+                  formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:150", res2.data, "\u6211\u662F\u4F60\u7238\u7238");
+                  let getWeixinRes = await login$2.getWeixinUserInfo(
+                    JSON.parse(res2.data)
+                  );
                   if (getWeixinRes.code == 0) {
                     let param = {
                       avatar: getWeixinRes.avatar,
                       nickname: getWeixinRes.nickname,
-                      mobile: this.mobile
+                      mobile: self2.mobile
                     };
-                    formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:153", param, "param");
-                    wxLogin.perfectInfo(param).then((res3) => {
+                    formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:161", param, "param");
+                    login$2.perfectInfo(param).then((res3) => {
                       if (res3.success) {
                       }
                     }).catch((err) => {
@@ -11645,7 +11657,7 @@ if (uni.restoreGlobal) {
                 }
               },
               fail: function(err) {
-                formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:165", err, ">>>>");
+                formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:173", err, ">>>>");
               }
             });
             uni.reLaunch({
@@ -11670,7 +11682,7 @@ if (uni.restoreGlobal) {
             });
           }
         } catch (err) {
-          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:195", err, "\u6211\u662F\u9519\u8BEF");
+          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:203", err, "\u6211\u662F\u9519\u8BEF");
         }
       },
       async smsCodeLoginValid(type = null) {
@@ -11682,14 +11694,14 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         const loginRes = await vefiryLogin.loginBySms(param);
-        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:208", loginRes, "\u53D1\u9001\u6210\u529F");
+        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:216", loginRes, "\u53D1\u9001\u6210\u529F");
         if (loginRes.code == 0) {
           if (type === "first") {
             try {
               let param2 = {
                 avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
               };
-              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:219", param2, "param");
+              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:227", param2, "param");
               vefiryLogin.perfectInfo(param2).then((res2) => {
                 if (res2.success) {
                 }

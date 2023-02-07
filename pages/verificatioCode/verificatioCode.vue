@@ -43,6 +43,9 @@
 </template>
 
 <script>
+const login = uniCloud.importObject('login', {
+  customUI: true // 取消自动展示的交互提示界面
+})
 export default {
   data() {
     return {
@@ -136,6 +139,7 @@ export default {
     },
     // 上方退出标识
     async smsLogin() {
+      let self = this
       try {
         if (this.scanel === 'wx') {
           uni.getStorage({
@@ -143,15 +147,19 @@ export default {
             success: async function (res) {
               if (res.data) {
                 // 获取用户信息
-                let getWeixinRes = await wxLogin.getWeixinUserInfo(res.data)
+                console.log(res.data, '我是你爸爸')
+
+                let getWeixinRes = await login.getWeixinUserInfo(
+                  JSON.parse(res.data)
+                )
                 if (getWeixinRes.code == 0) {
                   let param = {
                     avatar: getWeixinRes.avatar,
                     nickname: getWeixinRes.nickname,
-                    mobile: this.mobile
+                    mobile: self.mobile
                   }
                   console.log(param, 'param')
-                  wxLogin
+                  login
                     .perfectInfo(param)
                     .then((res) => {
                       if (res.success) {

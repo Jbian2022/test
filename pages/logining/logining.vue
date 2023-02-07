@@ -237,19 +237,25 @@ export default {
                 accessToken: wxLoginRes.accessToken,
                 openid: wxLoginRes.openid
               }
-
-              if (wxLoginRes.type === 'login') {
+              // 绑定手机号码
+              let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid)
+              console.log(wxSchemaRes, '我是微信的前一步')
+              let flag = false
+              if (wxSchemaRes.affectedDocs === 0) {
+                flag = false
+              }
+              flag = wxSchemaRes.data[0].hasOwnProperty('mobile') ? true : false
+              if (flag) {
+                // 用户绑定了
                 // 已经登录过了
                 uni.setStorageSync('loginNum', '1')
                 uni.reLaunch({
                   url: '/pages/myMebers/myMebers'
                 })
-                return
-              }
-              if (wxLoginRes.type === 'register') {
+              } else {
+                // 用户未绑定
                 // 首次登录
                 uni.setStorageSync('loginNum', '0')
-
                 uni.setStorageSync(
                   'weixinLoginInfo',
                   JSON.stringify(weixinLoginInfo)
