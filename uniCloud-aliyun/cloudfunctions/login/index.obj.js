@@ -296,30 +296,27 @@ module.exports = {
    },
    // 获取微信openid
    code2SessionWeixin: async function(code) {
+	   console.log(code, '我是发送的code')
 	   const res = await uniID.code2SessionWeixin({
 	       code
 	     })
 	   	return res
    },
    // 绑定微信
-   bindWeixin: async function(event, context) {
-	    payload = await uniID.checkToken(event.uniIdToken)
-	     if (payload.code) {
-	     	return payload
-	     }
+   bindWeixin: async function(code) {
+	    console.log(code, '我是发送的code')
+const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 	   	const res = await uniID.bindWeixin({
-	       uid: payload.uid,
-	       code: event.code
+	      code,
+		  uid
 	     })
 	   	return res
    },
    // 解绑微信
-	unbindWeixin: async function(event,context) {
-		 payload = await uniID.checkToken(event.uniIdToken)
-		  if (payload.code) {
-		  	return payload
-		  }
-			const res = await uniID.unbindWeixin(payload.uid)
+	unbindWeixin: async function() {
+		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
+		
+			const res = await uniID.unbindWeixin(uid)
 			return res
 	},
 	// 微信数据解密
@@ -333,6 +330,29 @@ module.exports = {
 	// 根据uid获取用户角色
 	getRoleByUid: async function (event, context) {
 		return getRoleByUid.getWeixinUserInfo(event)
+	},
+	
+	// 返解unid
+	needUserMessage: async function () {
+		const token = this.getUniIdToken()
+		const detailInfo = await this.uniID.checkToken(token)
+		console.log(detailInfo, '逆势')
+		return new Promise((resolve, reject) => {
+			
+			db.collection('uni-id-users')
+			  .where({
+					mobile: detailInfo.userInfo.mobile
+				})
+			  .get().then(res => {
+				  console.log(res,'>>>>>>')
+				  resolve(res)
+				 
+			  }).catch((err) => {
+				  reject(err)
+			  })
+		})
+			
+	
 	},
 	
 	// 短信登录业务模块联表对接

@@ -681,14 +681,28 @@ if (uni.restoreGlobal) {
       path: "pages/cancel/cancel",
       style: {
         navigationBarTitleText: "",
-        enablePullDownRefresh: false
+        enablePullDownRefresh: false,
+        autoBackButton: false,
+        navigationStyle: "custom",
+        navigationBarTextStyle: "white",
+        "app-plus": {
+          titleNView: false,
+          bounce: "none"
+        }
       }
     },
     {
       path: "pages/cancelAgreement/cancelAgreement",
       style: {
         navigationBarTitleText: "",
-        enablePullDownRefresh: false
+        enablePullDownRefresh: false,
+        autoBackButton: false,
+        navigationStyle: "custom",
+        navigationBarTextStyle: "white",
+        "app-plus": {
+          titleNView: false,
+          bounce: "none"
+        }
       }
     },
     {
@@ -14994,7 +15008,7 @@ if (uni.restoreGlobal) {
   }
   const PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-c1425cf6"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/physicalFitnessAssessment/physicalFitnessAssessment.vue"]]);
   const _imports_0$1 = "/static/app-plus/other/coach.png";
-  let weixinAuthService;
+  let weixinAuthService$1;
   const _sfc_main$t = {
     data() {
       return {
@@ -15020,10 +15034,10 @@ if (uni.restoreGlobal) {
     onLoad() {
       formatAppLog("log", "at pages/logining/logining.vue:116", plus, ">>>>");
       plus.oauth.getServices((services) => {
-        weixinAuthService = services.find((service) => {
+        weixinAuthService$1 = services.find((service) => {
           return service.id === "weixin";
         });
-        if (weixinAuthService) {
+        if (weixinAuthService$1) {
           this.hasWeixinAuth = true;
         }
       });
@@ -15086,7 +15100,7 @@ if (uni.restoreGlobal) {
       },
       getWeixinCode() {
         return new Promise((resolve, reject) => {
-          weixinAuthService.authorize(
+          weixinAuthService$1.authorize(
             function(res2) {
               resolve(res2.code);
             },
@@ -20566,11 +20580,84 @@ if (uni.restoreGlobal) {
   const login$1 = Es.importObject("login", {
     customUI: true
   });
+  let weixinAuthService;
   const _sfc_main$e = {
     data() {
-      return {};
+      return {
+        isBindValue: "",
+        checkFlag: false
+      };
+    },
+    onLoad() {
+      plus.oauth.getServices((services) => {
+        weixinAuthService = services.find((service) => {
+          return service.id === "weixin";
+        });
+        if (weixinAuthService) {
+          this.hasWeixinAuth = true;
+        }
+      });
+    },
+    onShow() {
+      this.getUserMessage();
     },
     methods: {
+      getWeixinCode() {
+        return new Promise((resolve, reject) => {
+          weixinAuthService.authorize(
+            function(res2) {
+              resolve(res2.code);
+            },
+            function(err) {
+              reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
+            }
+          );
+        });
+      },
+      async getUserMessage() {
+        let self2 = this;
+        let needUserRes = await login$1.needUserMessage();
+        formatAppLog("log", "at pages/setUp/setUp.vue:104", needUserRes, " ....");
+        let needPanduan = needUserRes.data;
+        if (needPanduan.length > 0) {
+          if (needPanduan.length > 0) {
+            formatAppLog("log", "at pages/setUp/setUp.vue:108", 3);
+            formatAppLog("log", "at pages/setUp/setUp.vue:109", needPanduan, "needPanduan\u90A3\u68F5\u6811\u7684\u514B\u62C9\u4ED8\u6B3E\u4E86");
+            if (needPanduan[0].hasOwnProperty("wx_openid")) {
+              self2.isBindValue = "\u5DF2\u7ED1\u5B9A";
+            } else {
+              self2.isBindValue = "\u672A\u7ED1\u5B9A";
+            }
+          }
+        }
+      },
+      closeHandle() {
+        this.$refs.popup.close();
+      },
+      async sure() {
+        let unbindRes = await login$1.unbindWeixin();
+        if (unbindRes.code == 0) {
+          this.$refs.popup.close();
+          this.getUserMessage();
+          formatAppLog("log", "at pages/setUp/setUp.vue:130", "\u89E3\u7ED1\u6210\u529F");
+        }
+      },
+      async wxBind() {
+        let that = this;
+        if (that.isBindValue === "\u5DF2\u7ED1\u5B9A") {
+          that.$refs.popup.open();
+        }
+        if (that.isBindValue === "\u672A\u7ED1\u5B9A") {
+          that.getWeixinCode().then(async (code) => {
+            formatAppLog("log", "at pages/setUp/setUp.vue:142", code, "\u6211\u662F\u5FAE\u4FE1\u670D\u52A1\u5546");
+            let bindRes = await login$1.bindWeixin(code);
+            if (bindRes.code === 0) {
+              formatAppLog("log", "at pages/setUp/setUp.vue:145", "\u7ED1\u5B9A\u6210\u529F");
+              that.getUserMessage();
+            }
+          });
+        }
+      },
       jumpAgree() {
         uni.navigateTo({
           url: "/pages/agreement/agreement"
@@ -20587,9 +20674,9 @@ if (uni.restoreGlobal) {
         });
       },
       async logout() {
-        formatAppLog("log", "at pages/setUp/setUp.vue:47", "\u5F00\u59CB\u70B9\u4E86");
+        formatAppLog("log", "at pages/setUp/setUp.vue:167", "\u5F00\u59CB\u70B9\u4E86");
         let currentUserInfo = Es.getCurrentUserInfo();
-        formatAppLog("log", "at pages/setUp/setUp.vue:49", currentUserInfo, "currentUserInfo");
+        formatAppLog("log", "at pages/setUp/setUp.vue:169", currentUserInfo, "currentUserInfo");
         if (currentUserInfo.tokenExpired > 0) {
           await login$1.logout();
           await this.remove();
@@ -20610,7 +20697,9 @@ if (uni.restoreGlobal) {
   function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_cell = vue.resolveComponent("van-cell");
+    const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_button = vue.resolveComponent("van-button");
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "set-up" }, [
       vue.createElementVNode("view", { class: "status_bar" }, [
         vue.createCommentVNode(" \u8FD9\u91CC\u662F\u72B6\u6001\u680F ")
@@ -20634,7 +20723,58 @@ if (uni.restoreGlobal) {
           title: "\u7528\u6237\u9690\u79C1\u534F\u8BAE",
           "is-link": "",
           onClick: vue.withModifiers($options.jumpAgree, ["stop"])
-        }, null, 8, ["onClick"])
+        }, null, 8, ["onClick"]),
+        vue.createVNode(_component_van_cell, {
+          value: $data.isBindValue,
+          "is-link": "",
+          onClick: vue.withModifiers($options.wxBind, ["stop"])
+        }, {
+          title: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "left_wx_style" }, [
+              vue.createVNode(_component_van_image, {
+                class: "wx_img_style",
+                src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/10fd0194-0323-410d-be1c-a6df7dab702d.svg"
+              }),
+              vue.createElementVNode("span", { class: "weixin_title_style" }, "\u5FAE\u4FE1")
+            ])
+          ]),
+          _: 1
+        }, 8, ["value", "onClick"]),
+        vue.createVNode(_component_uni_popup, {
+          ref: "popup",
+          type: "center",
+          "mask-background-color": "rgba(20, 21, 23, 0.6)"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "dialog" }, [
+              vue.createElementVNode("view", { class: "dialog-section" }, [
+                vue.createElementVNode("view", { class: "dialog-title" }, "\u786E\u8BA4\u6CE8\u9500"),
+                vue.createElementVNode("view", { class: "dialog-content" }, "\u786E\u5B9A\u8981\u89E3\u9664\u8D26\u53F7\u4E0E\u5FAE\u4FE1\u7684\u5173\u952E\u5417\uFF1F"),
+                vue.createElementVNode("view", { class: "dialog-btn-box" }, [
+                  vue.createVNode(_component_van_button, {
+                    type: "default",
+                    onClick: $options.closeHandle
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("\u53D6\u6D88")
+                    ]),
+                    _: 1
+                  }, 8, ["onClick"]),
+                  vue.createVNode(_component_van_button, {
+                    type: "primary",
+                    onClick: $options.sure
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("\u89E3\u9664\u7ED1\u5B9A")
+                    ]),
+                    _: 1
+                  }, 8, ["onClick"])
+                ])
+              ])
+            ])
+          ]),
+          _: 1
+        }, 512)
       ]),
       vue.createVNode(_component_van_button, {
         class: "footer-btn",
@@ -23898,7 +24038,7 @@ if (uni.restoreGlobal) {
           })) : vue.createCommentVNode("v-if", true)
         ]),
         vue.createElementVNode("div", { class: "check-text" }, [
-          vue.createTextVNode("\u6211\u5DF2\u9605\u8BFB\u5E76\u540C\u610F"),
+          vue.createTextVNode(" \u6211\u5DF2\u9605\u8BFB\u5E76\u540C\u610F"),
           vue.createElementVNode("text", {
             class: "btn",
             onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => $options.goto && $options.goto(...args), ["stop"]))
