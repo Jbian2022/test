@@ -2,7 +2,12 @@
 	<view class="content_style " @touchstart="start" @touchend="end">
 		<view class="list_style">
 		<BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-		<NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
+		<!-- <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent> -->
+		<view class="arrow-left" @click="onClickBack(show)">
+			<van-icon name="arrow-left" v-if="!show" />
+			<view class="title">{{leftNavTitle}}</view>
+			<view class="z" style="opacity: 0;">8888</view>
+		</view>
 		<view class="headBox" v-if="leftNavTitle==='肩关节灵活性测试'">
 			<view class="block1"
 			v-for="(item, index) in actionobs"
@@ -20,29 +25,31 @@
 		<view class="contentBody" v-if="changeValue">
 			<view
 			class="clickAction" 
-			@click.native="showPopup">点击查看标准动作描述
+			@click.native="showPopup()">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
-			<van-popup 
-			v-model:show="show" 
-			position="top" 
-			round
-			:overlay="false" 
-			class="clickActionContent">
-				<view class="clickActionBody">
-					<video :src="FrontVideoUrl" wid autoplay loop :controls="false" muted>
-					</video>
-					<view class="clickActionText">
-						<view class="Actionname">标准动作：</view>
-						<view>
-							<p v-for="(item,index) in testText1">{{item}}</p>
+			<view>
+				<van-popup 
+				v-model:show="show" 
+				position="top" 
+				round
+				:overlay="false" 
+				class="clickActionContent">
+					<view class="clickActionBody">
+						<video :src="FrontVideoUrl" wid autoplay loop :controls="false" muted>
+						</video>
+						<view class="clickActionText">
+							<view class="Actionname">标准动作：</view>
+							<view>
+								<p v-for="(item,index) in testText1">{{item}}</p>
+							</view>
+						</view>
+						<view class="clickActionEnd" @click.native="closePopup">收起
+						<image src="../../../static/app-plus/other/close.png"></image>
 						</view>
 					</view>
-					<view class="clickActionEnd" @click.native="closePopup">收起
-					<image src="../../../static/app-plus/other/close.png"></image>
-					</view>
-				</view>
-			</van-popup>
+				</van-popup>
+			</view>
 			<view class="actinQuessonContent">
 				<view
 				 v-for="(item,index) in quession1"
@@ -103,6 +110,7 @@
 			@click.native="showPopup">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
+			<view>
 			<van-popup 
 			v-model:show="show" 
 			position="top" 
@@ -129,7 +137,7 @@
 					</view>
 				</view>
 			</van-popup>
-			
+			</view>
 			<view class="actinQuessonContent">
 				<view
 				 v-for="(item,index) in quession2"
@@ -286,10 +294,12 @@
 					{name:'正面观'},
 					{name:'侧面观'}
 				],
+				backIcon:true,
 				type:'',
 				traineeNo:'',
 				questionCode:'',
 				icon: true,
+				showpop: false,
 				clickQuession1:true,
 				clickQuession2:true,
 				backimgFront:"",
@@ -333,6 +343,13 @@
 			}
 		},
 		methods: {
+				onClickBack(boo){
+					if(!boo){
+						uni.redirectTo({
+							url: '/pages/dynamicEvaluation/dynamicEvaluation' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
+						})
+					}
+				},
 			    start(e) {
 			      console.log('开始下滑坐标', e.changedTouches[0].clientY)
 			      this.startData.clientX = e.changedTouches[0].clientX
@@ -464,7 +481,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 .content_style{
   width: 100vw;
   height: 100vh;
@@ -472,6 +489,29 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  .arrow-left{
+  	// top: var(--status-bar-height);
+  	// left: 0;
+  	// right: 0;
+  	z-index: 88;
+  	height: 88upx;
+  	display: flex;
+  	align-items: center;
+  	padding-left: 30upx;
+  	color: #bdc3ce;
+  	position: relative;
+  	margin-top: 80upx;
+		.van-icon{
+			font-size: 45upx;
+			color: #fff;
+		}
+	}
+}
+.title{
+	    margin-left: 10px;
+	    font-size: 24px;
+	    font-weight: 600;
+	    color: #FFFFFF;
 }
 .headBox{
 	width: 100vw;
