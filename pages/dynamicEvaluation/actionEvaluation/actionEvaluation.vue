@@ -25,12 +25,12 @@
 		<view class="contentBody" v-if="changeValue">
 			<view
 			class="clickAction" 
-			@click.native="showPopup()">点击查看标准动作描述
+			@click.native="openUIup()">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<view>
-				<van-popup 
-				v-model:show="show" 
+				<uni-popup 
+				ref="popup"
 				position="top" 
 				round
 				:overlay="false" 
@@ -44,11 +44,11 @@
 								<p v-for="(item,index) in testText1">{{item}}</p>
 							</view>
 						</view>
-						<view class="clickActionEnd" @click.native="closePopup">收起
+						<view class="clickActionEnd" @click.native="closeUIup()">收起
 						<image src="../../../static/app-plus/other/close.png"></image>
 						</view>
 					</view>
-				</van-popup>
+				</uni-popup>
 			</view>
 			<view class="actinQuessonContent">
 				<view
@@ -107,12 +107,12 @@
 		<view class="contentBody" v-else>
 			<view
 			class="clickAction"  
-			@click.native="showPopup">点击查看标准动作描述
+			@click.native="openUIup()">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<view>
-			<van-popup 
-			v-model:show="show" 
+			<uni-popup
+			ref="popup"
 			position="top" 
 			round
 			:overlay="false"
@@ -132,11 +132,11 @@
 							<p v-for="(item,index) in testText1">{{item}}</p>
 						</view>
 					</view>
-					<view class="clickActionEnd" @click.native="closePopup">收起
+					<view class="clickActionEnd" @click.native="closeUIup()">收起
 					<image src="../../../static/app-plus/other/close.png"></image>
 					</view>
 				</view>
-			</van-popup>
+			</uni-popup>
 			</view>
 			<view class="actinQuessonContent">
 				<view
@@ -343,6 +343,12 @@
 			}
 		},
 		methods: {
+			openUIup() {
+			  this.$refs.popup.open()
+			},
+			closeUIup(){
+				this.$refs.popup.close()
+			},
 				onClickBack(boo){
 					if(!boo){
 						uni.redirectTo({
@@ -609,23 +615,30 @@
 	/* height: 1400upx; */
 	background: #383D46;
 	border-radius: 16upx;
+	width: calc(100vw - 40upx);
+	margin-left: 20upx;
+	
+	
 	/* backdrop-filter: blur(3upx); */
 	z-index: 999;
 }
-::v-deep .clickActionContent{
-	width: calc(100vw - 60upx);
-	margin-top: 36%;
-	margin-left: 30upx;
-	--van-popup-background-color: #383D46;
-	border-radius: 16upx;
-	position: fixed;
+
+.clickActionContent {
+
 }
-.clickActionBody video{
-	width: calc(100vw - 140upx);
-	height: 400upx;
-	margin-left: 40upx;
-	margin-top: 40upx;
-	border-radius: 20upx;
+
+::v-deep uni-video{
+	width: 100% !important;
+	height: 400upx !important;
+
+	padding: 0 !important;
+}
+::v-deep.uni-video-container{
+	background-color: transparent !important;
+	width: calc(100vw - 140upx) !important ;
+	height: 400upx !important;
+	margin-left: 70upx !important;
+	position: relative !important;
 }
 .clickActionText{
 	width: calc(100vw - 140upx);
@@ -727,4 +740,11 @@
 .list_style{
 	flex: 1;
 }
+
+// 
+::v-deep .uni-popup__wrapper {
+	width: 100vw !important;
+	
+}
+
 </style>
