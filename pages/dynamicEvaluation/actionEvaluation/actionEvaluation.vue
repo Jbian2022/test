@@ -103,7 +103,7 @@
 			<view class="imgbgText">
 				点击上方蓝色标签选择问题部位，可多选
 			</view>
-		</view>
+		</view> 
 		<view class="contentBody" v-else>
 			<view
 			class="clickAction"  
