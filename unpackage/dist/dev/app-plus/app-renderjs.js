@@ -15023,24 +15023,32 @@ __renderjsModules["44880530"] = (() => {
   var stdin_default = {
     methods: {
       generateImage(callback) {
+        __f__("log", "at pages/viewReport/viewReport.vue:1602", "5555");
         setTimeout(() => {
-          const dom = document.getElementById("viewReport");
+          const dom = document.getElementById("imageReport");
+          window.pageYoffset = 0;
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
           (0, import_html2canvas.default)(dom, {
             width: dom.clientWidth,
             height: dom.clientHeight,
-            scrollY: 0,
-            scrollX: 0,
+            scrollY: -33,
+            scrollX: 1,
+            foreignObjectRendering: true,
+            allowTaint: false,
             useCORS: true
           }).then((canvas) => {
+            __f__("log", "at pages/viewReport/viewReport.vue:1620", canvas);
             const base64 = canvas.toDataURL("image/png");
             callback && callback(base64);
           }).catch((err) => {
           });
-        }, 300);
+        }, 900);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
         if (newValue) {
           this.generateImage((base64) => {
+            __f__("log", "at pages/viewReport/viewReport.vue:1631", base64);
             ownerInstance.callMethod("receiveRenderData", { name: newValue, base64 });
           });
         }

@@ -79,7 +79,7 @@ export default {
       }) //第一步导入云对象
       if (this.controlActiveFlag) {
         try {
-          const smsRes = await login.sendSmsCode(this.phone)
+          const smsRes = await login.sendSmsCode(this.phone, 'bind')
           if (smsRes.code == 0) {
             uni.navigateTo({
               url:

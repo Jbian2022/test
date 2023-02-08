@@ -1075,11 +1075,9 @@
   background: transparent;
 }
 .content_style .backImg[data-v-62ef4d39] {
-  position: absolute;
   background-image: url("../../static/app-plus/bg/bodysideReport.png");
   background-repeat: no-repeat;
   background-size: 100%;
-  z-index: -1;
 }
 .content_style .arrow-left[data-v-62ef4d39] {
   position: fixed;
@@ -1103,10 +1101,17 @@
   background: #212328;
 }
 #viewReport[data-v-62ef4d39] {
-  background-image: url("../../static/app-plus/bg/bodysideReport.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  padding-top: 3.125rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: #212328;
+  width: 100%;
+}
+#imageReport[data-v-62ef4d39] {
+  background: #212328;
 }
 .title[data-v-62ef4d39] {
   width: 3.75rem;
@@ -1119,6 +1124,9 @@
 }
 .titleText[data-v-62ef4d39] {
   margin: 0.3125rem 0.9375rem 0 0.9375rem;
+  position: relative;
+  top: 42px;
+  margin-bottom: 58px;
 }
 .text[data-v-62ef4d39] {
   font-size: 0.9375rem;
@@ -1493,7 +1501,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  background: #2f333a;
+  background: #212328;
 }
 .footer-box .bottom_style[data-v-62ef4d39] {
   width: calc(100vw - 1.875rem);

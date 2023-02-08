@@ -145,7 +145,7 @@ module.exports = {
 	   	return res
    },
    // 短信验证码登录
-   sendSmsCode:  async function (mobile) {
+   sendSmsCode:  async function (mobile, type = 'login') {
 	 try{
 		 // 生成验证码可以按自己的需求来，这里以生成6位数字为例
 		 const randomStr = '00000' + Math.floor(Math.random() * 1000000)
@@ -157,7 +157,7 @@ module.exports = {
 			 templateId: '16334',
 			mobile,
 			   code,
-			   type: 'login',
+			   type,
 		      data: {
 			   name: '健变科技',
 			   code: code,
@@ -234,19 +234,12 @@ module.exports = {
 	  	return res 
    },
    // 绑定手机号
-   bindMobile: async function (event,context) {
-	   const {
-	   		mobile,
-	       code
-	   	} = event
-	     const payload = await uniID.checkToken(event.uniIdToken)
-	     if(payload.code) {
-	       return payload
-	     }
+   bindMobile: async function (data) {
+		const token = this.getUniIdToken()
+		const { uid } = await this.uniID.checkToken(token)
 	   	const res = await uniID.bindMobile({
-	       uid: payload.uid,
-	   		mobile,
-	       code
+	       uid: uid,
+	   		mobile: data.mobile,
 	   	})
 	   	return res
    },

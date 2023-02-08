@@ -110,7 +110,8 @@ export default {
       if (this.isFinsh) {
         const login = uniCloud.importObject('login') //第一步导入云对象
         try {
-          const smsRes = await login.sendSmsCode(this.mobile)
+          let type = this.scanel === 'wx' ? 'bind' : 'login'
+          const smsRes = await login.sendSmsCode(this.mobile, type)
           console.log(smsRes, '发送成功')
           if (smsRes.code == 0) {
             this.mobile = smsRes.mobile
@@ -142,30 +143,39 @@ export default {
       let self = this
       try {
         if (this.scanel === 'wx') {
+          // 微信登录如果
+
           uni.getStorage({
             key: 'weixinLoginInfo',
             success: async function (res) {
               if (res.data) {
                 // 获取用户信息
                 console.log(res.data, '我是你爸爸')
-
-                let getWeixinRes = await login.getWeixinUserInfo(
-                  JSON.parse(res.data)
-                )
-                if (getWeixinRes.code == 0) {
-                  let param = {
-                    avatar: getWeixinRes.avatar,
-                    nickname: getWeixinRes.nickname,
-                    mobile: self.mobile
+                // 手机号绑定操作
+                let param = {
+                  mobile: self.mobile
+                }
+                let bindMobileRes = await login.bindMobile(param)
+                if (bindMobileRes.code == 0) {
+                  // 绑定手机号成功
+                  let getWeixinRes = await login.getWeixinUserInfo(
+                    JSON.parse(res.data)
+                  )
+                  if (getWeixinRes.code == 0) {
+                    let param = {
+                      avatar: getWeixinRes.avatar,
+                      nickname: getWeixinRes.nickname
+                      // mobile: self.mobile
+                    }
+                    console.log(param, 'param')
+                    login
+                      .perfectInfo(param)
+                      .then((res) => {
+                        if (res.success) {
+                        }
+                      })
+                      .catch((err) => {})
                   }
-                  console.log(param, 'param')
-                  login
-                    .perfectInfo(param)
-                    .then((res) => {
-                      if (res.success) {
-                      }
-                    })
-                    .catch((err) => {})
                 }
               }
             },
