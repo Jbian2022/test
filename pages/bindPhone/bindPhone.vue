@@ -12,7 +12,7 @@
     </view>
     <view class="botter">
       <span class="botter-top">绑定手机号</span>
-      <p class="a-i-c">您的微信账号已验证通过,,请绑定手机号码</p>
+      <p class="a-i-c">您的微信账号已验证通过,请绑定手机号码</p>
     </view>
 
     <view class="contetnt_form_style">

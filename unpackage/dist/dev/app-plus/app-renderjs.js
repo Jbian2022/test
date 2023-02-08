@@ -15023,32 +15023,30 @@ __renderjsModules["44880530"] = (() => {
   var stdin_default = {
     methods: {
       generateImage(callback) {
-        __f__("log", "at pages/viewReport/viewReport.vue:1602", "5555");
         setTimeout(() => {
           const dom = document.getElementById("imageReport");
-          window.pageYoffset = 0;
-          document.documentElement.scrollTop = 0;
-          document.body.scrollTop = 0;
           (0, import_html2canvas.default)(dom, {
             width: dom.clientWidth,
             height: dom.clientHeight,
-            scrollY: -33,
-            scrollX: 1,
-            foreignObjectRendering: true,
-            allowTaint: false,
-            useCORS: true
+            scrollY: 0,
+            scrollX: 0,
+            x: 0,
+            y: 0,
+            useCORS: true,
+            allowTaint: true
           }).then((canvas) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1620", canvas);
-            const base64 = canvas.toDataURL("image/png");
+            __f__("log", "at pages/viewReport/viewReport.vue:1626", canvas);
+            const base64 = canvas.toDataURL("image/jpeg");
             callback && callback(base64);
           }).catch((err) => {
+            __f__("log", "at pages/viewReport/viewReport.vue:1630", JSON.stringify(err));
           });
-        }, 900);
+        }, 300);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
+        __f__("log", "at pages/viewReport/viewReport.vue:1636", newValue);
         if (newValue) {
           this.generateImage((base64) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1631", base64);
             ownerInstance.callMethod("receiveRenderData", { name: newValue, base64 });
           });
         }

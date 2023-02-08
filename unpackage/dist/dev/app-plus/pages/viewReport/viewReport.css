@@ -1100,6 +1100,39 @@
 .content_style .arrow-left.show[data-v-62ef4d39] {
   background: #212328;
 }
+.footer-button[data-v-62ef4d39] {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0.9375rem;
+  background: #212328;
+}
+.footer-button .van-button[data-v-62ef4d39] {
+  height: 3.125rem;
+  width: 100%;
+  background: #1370ff;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+.footer-button .van-button .share-icon[data-v-62ef4d39] {
+  width: 0.875rem;
+  height: 0.875rem;
+  background: url("../../static/newWorkout/share01.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 0.5rem;
+}
+.footer-button .van-button[data-v-62ef4d39]::after {
+  display: none;
+}
 #viewReport[data-v-62ef4d39] {
   position: absolute;
   top: 0;
@@ -1109,6 +1142,9 @@
   z-index: 0;
   background: #212328;
   width: 100%;
+  background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 #imageReport[data-v-62ef4d39] {
   background: #212328;
