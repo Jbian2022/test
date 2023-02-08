@@ -9,40 +9,33 @@
       background-color: #343a44;
     "
   >
-
-  <view class="footer-box">
-		<view class="bottom_style" @click="openUIup">
-		  <image
-		    src="../../static/app-plus/other/share.png"
-		    class="shareImage"
-		  ></image>
-		  分享报告
+		<view class="footer-button">
+			<view class="van-button" @click="openPopup"><view class="share-icon"></view>分享报告</view>
 		</view>
-	</view>
   <!-- #ifdef APP-PLUS || H5 -->
   <view
-      :prop="canvasImageMsg"
-      :change:prop="canvasImage.updateEcharts"
-      id="canvasImage"
-    ></view>
+    :prop="canvasImageMsg"
+    :change:prop="canvasImage.updateEcharts"
+    id="canvasImage"
+  ></view>
   <!-- #endif -->
   <uni-popup
-      ref="popup"
-      type="bottom"
-      mask-background-color="rgba(20, 21, 23, 0.6)"
-    >
-      <view class="share-sheet">
-        <view
-          class="item"
-          v-for="(item, index) in options"
-          :key="index"
-          @click="onSelect(item)"
-        >
-          <van-image class="img" round :src="item.icon" />
-          <view class="text">{{ item.name }}</view>
-        </view>
+    ref="popup"
+    type="bottom"
+    mask-background-color="rgba(20, 21, 23, 0.6)"
+  >
+    <view class="share-sheet">
+      <view
+        class="item"
+        v-for="(item, index) in options"
+        :key="index"
+        @click="onSelect(item)"
+      >
+        <van-image class="img" round :src="item.icon" />
+        <view class="text">{{ item.name }}</view>
       </view>
-    </uni-popup>
+    </view>
+  </uni-popup>
   </view>
   <view v-if="!openKey" style="position: absolute; z-index: 1; bottom: 10upx">
     <view class="buttontrue" @click="openUIup"
@@ -100,8 +93,10 @@
         <view class="title">评估报告</view>
         <view class="z" style="opacity: 0">8888</view>
       </view>
+     <!-- <view v-show="isFixedTop" class="arrow-box"></view> -->
 	 <view id = "imageReport">
-	 	<image id="viewReport" src="../../static/app-plus/bg/bodysideReport.png"></image>
+		 <view id="viewReport"></view>
+	 	<!-- <image  src="../../static/app-plus/bg/bodysideReport.png" crossorigin="anonymous"></image> -->
       <view>
         <!-- <view class="backImg"></view> -->
         <view class="titleText" v-if="openKey">
@@ -402,8 +397,8 @@
                   </view>
                 </view>
               </view>
-              <view style="height: 612upx" v-else>
-                <image
+              <view style="height: 612upx;" v-else>
+                <!-- <image
                   src="../../static/app-plus/other/defaultImg.png"
                   style="
                     width: 180upx;
@@ -412,7 +407,16 @@
                     top: 120upx;
                     left: 256upx;
                   "
-                ></image>
+                ></image> -->
+				<view style="
+                    width: 180upx;
+                    height: 180upx;
+                    margin: 0 auto;
+                    top: 120upx;
+                    left: 256upx;
+					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png');background-repeat: no-repeat;
+					background-size: 100%;
+                  "></view>
                 <view
                   style="
                     width: 350upx;
@@ -1041,6 +1045,27 @@ export default {
     }
   },
   methods: {
+	  setImage(){
+	  	const img = document.getElementsByTagName('img');
+	  	for (var i = 0;i<img.length;i++) {
+	  		console.log(img[i])
+	  	}
+	  },
+	  openPopup() {
+	    this.$refs.popup.open()
+	  },
+	  onSelect(option) {
+	    console.log(option, 88)
+	    this.canvasImageMsg = option.name
+	  },
+	  async uploadImage(callback) {
+	    const result = await train.uploadBase64({
+	      base64: this.baseUrl
+	    })
+	    this.url = result.fileID
+	    this.canvasImageMsg = null
+	    callback && callback(this.url)
+	  },
     getInfo() {
       return new Promise((resolve, reject) => {
         this.getUserInfo()
@@ -1357,95 +1382,81 @@ export default {
       }
       // this.$refs.popup.open()
     },
-    async uploadImage(callback) {
-      const result = await train.uploadBase64({
-        base64: this.baseUrl
-      })
-	  console.log("33333")
-      this.url = result.fileID
-      this.canvasImageMsg = null
-      callback && callback(this.url)
-    },
-    downloadFile() {
-		console.log("4444")
-      uni.downloadFile({
-        url: this.url, //仅为示例，并非真实的资源
-        success: (res) => {
-          if (res.statusCode === 200) {
-            console.log('下载成功', res)
-            uni.saveImageToPhotosAlbum({
-              filePath: res.tempFilePath,
-              success: (res) => {
-                console.log('保存成功！', res)
-                uni.hideLoading()
-                uni.showModal({
-                  showCancel: false,
-                  title: '提示',
-                  content: '图片已经保存到相册请查看',
-                  success: function (res) {
-                    if (res.confirm) {
-                      console.log('用户点击确定')
-                    } else if (res.cancel) {
-                      console.log('用户点击取消')
-                    }
-                  }
-                })
-              },
-              fail: (err) => {
-                console.log('err', err)
-              }
-            })
-          }
-        }
-      })
-    },
-    receiveRenderData(option) {
-      this.$refs.popup.close()
-      console.log(option.name, 8888)
-      this.baseUrl = option.base64
-      this.uploadImage((url) => {
-        uni.showLoading({ title: '加载中' })
-        // #ifndef H5
-        if (option.name === '保存到相册') {
-          this.downloadFile()
-        } else {
-          if (option.name === '分享到微信') {
-            uni.share({
-              provider: 'weixin',
-              scene: 'WXSceneSession',
-              type: 2,
-              imageUrl: url,
-              success: function (res) {
-                console.log('success:' + JSON.stringify(res))
-                uni.hideLoading()
-              },
-              fail: function (err) {
-                console.log('fail:' + JSON.stringify(err))
-              }
-            })
-          } else if (option.name === '分享到朋友圈') {
-            uni.share({
-              provider: 'weixin',
-              scene: 'WXSceneTimeline',
-              type: 2,
-              imageUrl: url,
-              success: function (res) {
-                console.log('success:' + JSON.stringify(res))
-                uni.hideLoading()
-              },
-              fail: function (err) {
-                console.log('fail:' + JSON.stringify(err))
-              }
-            })
-          }
-        }
-        // #endif
-      })
-    },
-    onSelect(option) {
-      console.log(option, 88)
-      this.canvasImageMsg = option.name
-    },
+	downloadFile() {
+	  uni.downloadFile({
+	    url: this.url, //仅为示例，并非真实的资源
+	    success: (res) => {
+	      if (res.statusCode === 200) {
+	        console.log('下载成功', res)
+	        uni.saveImageToPhotosAlbum({
+	          filePath: res.tempFilePath,
+	          success: (res) => {
+	            console.log('保存成功！', res)
+	            uni.hideLoading()
+	            uni.showModal({
+	              showCancel: false,
+	              title: '提示',
+	              content: '图片已经保存到相册请查看',
+	              success: function (res) {
+	                if (res.confirm) {
+	                  console.log('用户点击确定')
+	                } else if (res.cancel) {
+	                  console.log('用户点击取消')
+	                }
+	              }
+	            })
+	          },
+	          fail: (err) => {
+	            console.log('err', err)
+	          }
+	        })
+	      }
+	    }
+	  })
+	},
+	receiveRenderData(option) {
+	  this.$refs.popup.close()
+	  console.log(option.name, 8888)
+	  this.baseUrl = option.base64
+	  this.uploadImage((url) => {
+	    uni.showLoading({ title: '加载中' })
+	    // #ifndef H5
+	    if (option.name === '保存到相册') {
+	      this.downloadFile()
+	    } else {
+	      if (option.name === '分享到微信') {
+	        uni.share({
+	          provider: 'weixin',
+	          scene: 'WXSceneSession',
+	          type: 2,
+	          imageUrl: url,
+	          success: function (res) {
+	            console.log('success:' + JSON.stringify(res))
+	            uni.hideLoading()
+	          },
+	          fail: function (err) {
+	            console.log('fail:' + JSON.stringify(err))
+	          }
+	        })
+	      } else if (option.name === '分享到朋友圈') {
+	        uni.share({
+	          provider: 'weixin',
+	          scene: 'WXSceneTimeline',
+	          type: 2,
+	          imageUrl: url,
+	          success: function (res) {
+	            console.log('success:' + JSON.stringify(res))
+	            uni.hideLoading()
+	          },
+	          fail: function (err) {
+	            console.log('fail:' + JSON.stringify(err))
+	          }
+	        })
+	      }
+	    }
+	    // #endif
+	  })
+	},
     onClickLeft() {
       if (this.openKey) {
         uni.redirectTo({
@@ -1591,7 +1602,7 @@ export default {
           break
       }
     }
-  }
+  },
 }
 </script>
 <script lang="renderjs" module="canvasImage">
@@ -1599,36 +1610,32 @@ import html2canvas from 'html2canvas'
 export default {
 	methods: {
 		generateImage(callback) {
-			console.log("5555")
 			setTimeout(() => {
 				const dom = document.getElementById('imageReport'); // 需要生成图片内容的 dom 节点
-				// const base64 = dom.toDataURL('image/png');
-				// callback&&callback(base64);
-				window.pageYoffset = 0;
-				document.documentElement.scrollTop = 0;
-				document.body.scrollTop = 0;
 				html2canvas(dom, {
 					width: dom.clientWidth, //dom 原始宽度
 					height: dom.clientHeight,
-					scrollY: -33, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
-					scrollX: 1,
-					foreignObjectRendering: true,
-					allowTaint:false,
+					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
+					scrollX: 0,
+					x: 0,
+					y: 0,
 					useCORS: true, //支持跨域
+					allowTaint:true
 					// scale: 1, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 				}).then((canvas) => {
 					console.log(canvas)
-					const base64 = canvas.toDataURL('image/png');
-					
+					const base64 = canvas.toDataURL('image/jpeg');
 					callback&&callback(base64);
-				}).catch(err=>{})
-			}, 900);
+				}).catch((err)=>{
+					console.log(JSON.stringify(err))
+				})
+			}, 300);
 		},
 		updateEcharts(newValue, oldValue, ownerInstance, instance) {
 			// 监听 service 层数据变更
+			console.log(newValue)
 			if(newValue){
 				this.generateImage((base64)=>{
-					console.log(base64)
 					ownerInstance.callMethod('receiveRenderData', {name:newValue,base64});
 				})
 			}
@@ -1636,7 +1643,6 @@ export default {
 	}
 }
 </script>
-
 <style lang="scss" scoped>
 .status_bar {
   height: var(--status-bar-height);
@@ -1685,6 +1691,39 @@ export default {
     }
   }
 }
+.footer-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    padding: 30upx;
+    background: #212328;
+    .van-button {
+      height: 100upx;
+      width: 100%;
+      background: #1370ff;
+      border-radius: 16upx;
+      font-size: 32upx;
+      font-weight: 600;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      .share-icon {
+        width: 28upx;
+        height: 28upx;
+        background: url('../../static/newWorkout/share01.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 16upx;
+      }
+      &::after {
+        display: none;
+      }
+    }
+  }
 #viewReport {
   position: absolute;
   top: 0;
@@ -1694,6 +1733,9 @@ export default {
   z-index: 0;
   background: #212328;
   width: 100%;
+  background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 #imageReport{
 	background: #212328;
