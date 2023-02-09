@@ -1446,7 +1446,7 @@ export default {
         const data = {}
         let date = new Date()
         let today =
-          date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate()
+          date.getFullYear() + '-' + (Number(date.getMonth())+ 1) + '-' + date.getDate()
         data['traineeNo'] = this.traineeNo
         data['bodyTestData'] = this.bodyTestData
         data['assessmentTrueData'] = this.assessmentTrueData
