@@ -15035,16 +15035,16 @@ __renderjsModules["44880530"] = (() => {
             useCORS: true,
             allowTaint: true
           }).then((canvas) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1626", canvas);
+            __f__("log", "at pages/viewReport/viewReport.vue:1630", canvas);
             const base64 = canvas.toDataURL("image/jpeg");
             callback && callback(base64);
           }).catch((err) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1630", JSON.stringify(err));
+            __f__("log", "at pages/viewReport/viewReport.vue:1634", JSON.stringify(err));
           });
         }, 300);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
-        __f__("log", "at pages/viewReport/viewReport.vue:1636", newValue);
+        __f__("log", "at pages/viewReport/viewReport.vue:1640", newValue);
         if (newValue) {
           this.generateImage((base64) => {
             ownerInstance.callMethod("receiveRenderData", { name: newValue, base64 });

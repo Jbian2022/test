@@ -20,7 +20,14 @@
 <script>
 export default {
   name: 'navBarCompontent',
-  props: ['leftNavTitle', 'contentTitle', 'jumpType', 'isAuthority'],
+  props: [
+    'leftNavTitle',
+    'contentTitle',
+    'jumpType',
+    'isAuthority',
+    'traineeNo',
+    'questionCode'
+  ],
   data() {
     return {}
   },
@@ -32,6 +39,25 @@ export default {
             url: '/pages/myMebers/myMebers'
           })
           break
+        case 'DTPG':
+          console.log('你贷款撒娇咖啡机')
+          uni.redirectTo({
+            url:
+              '/pages/physicalAssessment/physicalAssessment?' +
+              'traineeNo=' +
+              this.traineeNo
+          })
+          break
+        case 'TNPG':
+          console.log('你贷款撒娇咖啡机')
+          uni.redirectTo({
+            url:
+              '/pages/physicalAssessment/physicalAssessment?' +
+              'traineeNo=' +
+              this.traineeNo
+          })
+          break
+
         default:
           uni.navigateBack()
           break

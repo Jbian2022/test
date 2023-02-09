@@ -1056,7 +1056,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.60"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "172.20.10.8",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.129"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -10220,7 +10220,14 @@ if (uni.restoreGlobal) {
   const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-9a1e3c32"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
   const _sfc_main$I = {
     name: "navBarCompontent",
-    props: ["leftNavTitle", "contentTitle", "jumpType", "isAuthority"],
+    props: [
+      "leftNavTitle",
+      "contentTitle",
+      "jumpType",
+      "isAuthority",
+      "traineeNo",
+      "questionCode"
+    ],
     data() {
       return {};
     },
@@ -10230,6 +10237,18 @@ if (uni.restoreGlobal) {
           case "STPC":
             uni.reLaunch({
               url: "/pages/myMebers/myMebers"
+            });
+            break;
+          case "DTPG":
+            formatAppLog("log", "at components/navBarCompontent/navBarCompontent.vue:43", "\u4F60\u8D37\u6B3E\u6492\u5A07\u5496\u5561\u673A");
+            uni.redirectTo({
+              url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
+            });
+            break;
+          case "TNPG":
+            formatAppLog("log", "at components/navBarCompontent/navBarCompontent.vue:52", "\u4F60\u8D37\u6B3E\u6492\u5A07\u5496\u5561\u673A");
+            uni.redirectTo({
+              url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
             });
             break;
           default:
@@ -14804,47 +14823,45 @@ if (uni.restoreGlobal) {
         backColor: "",
         queryData: {},
         queryUserActionData: {},
-        startData: [
-          { clientX: "", clientY: "" }
-        ]
+        startData: [{ clientX: "", clientY: "" }]
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:76", item);
+      formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:102", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getconfingActionName();
     },
     methods: {
       start(e) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:83", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:109", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         this.startData.clientX = e.changedTouches[0].clientX;
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:88", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:114", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         const subX = e.changedTouches[0].clientX - this.startData.clientX;
         const subY = e.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:92", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:118", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:95", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:121", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:97", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:123", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:102", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:131", "\u53F3\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
           });
         } else {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:107", "\u65E0\u6548");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:139", "\u65E0\u6548");
         }
       },
       jumpModular(item) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:111", item.path, ">>>>");
+        formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:143", item.path, ">>>>");
         uni.navigateTo({
           url: item.path + "?data=" + JSON.stringify(item) + "&traineeNo=" + this.traineeNo + "&questionCode=" + item.parentCode,
           success: (res2) => {
@@ -14879,7 +14896,7 @@ if (uni.restoreGlobal) {
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         testOb$2.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:149", res2);
+          formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:187", res2);
           if (res2.success) {
             this.queryUserActionData = res2.data;
             busOb$3.getPhysicalChildAssessmentList("A0005").then((res3) => {
@@ -14889,20 +14906,26 @@ if (uni.restoreGlobal) {
                 item["type"] = 0;
                 item["typeColor"] = this.levelColor(item.typeText);
                 item["path"] = "/pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation";
-                formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:159", item);
+                formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:200", item);
               });
               for (let j2 = 0; j2 < this.queryUserActionData.length; j2++) {
                 for (let i2 = 0; i2 < this.queryData.length; i2++) {
-                  formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:163", this.queryData[i2].code === this.queryUserActionData[j2].code);
+                  formatAppLog(
+                    "log",
+                    "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:204",
+                    this.queryData[i2].code === this.queryUserActionData[j2].code
+                  );
                   if (this.queryData[i2].code === this.queryUserActionData[j2].code) {
                     this.queryData[i2].typeText = this.queryUserActionData[j2].physicalData.actionTypeText;
                     this.queryData[i2].type = this.queryUserActionData[j2].physicalData.actionVlue;
-                    this.queryData[i2].typeColor = this.levelColor(this.queryUserActionData[j2].physicalData.actionTypeText);
+                    this.queryData[i2].typeColor = this.levelColor(
+                      this.queryUserActionData[j2].physicalData.actionTypeText
+                    );
                     continue;
                   }
                 }
               }
-              formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:172", this.queryData);
+              formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:223", this.queryData);
             }).catch((err) => {
             });
           }
@@ -14922,27 +14945,21 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_van_icon = vue.resolveComponent("van-icon");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "content_style",
-      onTouchstart: _cache[2] || (_cache[2] = (...args) => $options.start && $options.start(...args)),
-      onTouchend: _cache[3] || (_cache[3] = (...args) => $options.end && $options.end(...args))
+      onTouchstart: _cache[1] || (_cache[1] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[2] || (_cache[2] = (...args) => $options.end && $options.end(...args))
     }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createCommentVNode(` <NavBarCompontent :leftNavTitle="'\u4F53\u80FD\u8BC4\u4F30'"></NavBarCompontent> `),
-      vue.createElementVNode("view", {
-        class: vue.normalizeClass(["arrow-left", { show: _ctx.isFixedTop }]),
-        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClickBack && $options.onClickBack(...args))
-      }, [
-        vue.createVNode(_component_van_icon, { name: "arrow-left" }),
-        vue.createElementVNode("view", { class: "title" }, "\u4F53\u80FD\u8BC4\u4F30"),
-        vue.createElementVNode("view", {
-          class: "z",
-          style: { "opacity": "0" }
-        }, "8888")
-      ], 2),
+      vue.createVNode(_component_NavBarCompontent, {
+        leftNavTitle: "\u4F53\u80FD\u8BC4\u4F30",
+        jumpType: "TNPG",
+        traineeNo: $data.traineeNo
+      }, null, 8, ["traineeNo"]),
+      vue.createCommentVNode(' <view class="arrow-left" :class="{show:isFixedTop}" @click="onClickBack">\r\n		<van-icon name="arrow-left" />\r\n		<view class="title">\u4F53\u80FD\u8BC4\u4F30</view>\r\n		<view class="z" style="opacity: 0;">8888</view>\r\n	</view> '),
       vue.createElementVNode("view", { class: "watermark" }, "\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784"),
       vue.createVNode(_component_van_row, { class: "list_style" }, {
         default: vue.withCtx(() => [
@@ -14965,7 +14982,7 @@ if (uni.restoreGlobal) {
                       class: "dynamicshow_button buttonYes",
                       onClick: ($event) => $options.jumpModular(item)
                     }, [
-                      vue.createTextVNode("\u91CD\u65B0\u6D4B\u8BD5"),
+                      vue.createTextVNode(" \u91CD\u65B0\u6D4B\u8BD5"),
                       vue.createElementVNode("image", { src: "/static/app-plus/other/arrows.png" })
                     ], 8, ["onClick"])
                   ])) : (vue.openBlock(), vue.createElementBlock("view", {
@@ -14977,14 +14994,16 @@ if (uni.restoreGlobal) {
                       class: "dynamicshow_button buttonNo",
                       onClick: ($event) => $options.jumpModular(item)
                     }, [
-                      vue.createTextVNode("\u5F00\u59CB\u6D4B\u8BD5"),
+                      vue.createTextVNode(" \u5F00\u59CB\u6D4B\u8BD5"),
                       vue.createElementVNode("image", { src: "/static/app-plus/other/arrows.png" })
                     ], 8, ["onClick"])
                   ])),
                   vue.createElementVNode("view", { class: "dynamicshow_right" }, [
                     vue.createElementVNode("view", {
                       class: "circle",
-                      style: vue.normalizeStyle("border: 4px solid " + item.typeColor + ";background-color:" + item.typeColor + "0D;")
+                      style: vue.normalizeStyle(
+                        "border: 4px solid " + item.typeColor + ";background-color:" + item.typeColor + "0D;"
+                      )
                     }, [
                       vue.createElementVNode("view", {
                         class: "circleText",
@@ -15002,7 +15021,7 @@ if (uni.restoreGlobal) {
       }),
       vue.createElementVNode("view", {
         class: "bottom_style",
-        onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
+        onClick: _cache[0] || (_cache[0] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
       }, "\u4FDD\u5B58")
     ], 32);
   }
@@ -21219,7 +21238,7 @@ if (uni.restoreGlobal) {
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:258", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:202", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       let leftNavTitle = item.pageTitle;
@@ -21306,12 +21325,14 @@ if (uni.restoreGlobal) {
     },
     methods: {
       openOne() {
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:305", 11111);
         this.popFlagOne = true;
       },
       closeOne() {
         this.popFlagOne = false;
       },
       openTwo() {
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:312", 22222);
         this.popFlagTwo = true;
       },
       closeTwo() {
@@ -21325,30 +21346,30 @@ if (uni.restoreGlobal) {
         }
       },
       start(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:385", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:331", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         this.startData.clientX = e.changedTouches[0].clientX;
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:390", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:336", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         const subX = e.changedTouches[0].clientX - this.startData.clientX;
         const subY = e.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:394", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:340", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:397", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:343", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:399", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:345", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:409", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:355", "\u53F3\u6ED1");
           uni.reLaunch({
             url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:419", "\u65E0\u6548");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:365", "\u65E0\u6548");
         }
       },
       setup() {
@@ -21369,9 +21390,9 @@ if (uni.restoreGlobal) {
       getActionInfo() {
         if (this.type !== "") {
           busOb$2.getPhysicalChildAssessmentList(this.type).then((res2) => {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:440", res2.data);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:386", res2.data);
             let index = res2.data.length;
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:442", index);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:388", index);
             if (res2.success) {
               this.actionobs = res2.data;
               this.quession1 = this.actionobs[0].answer;
@@ -21389,16 +21410,16 @@ if (uni.restoreGlobal) {
         }
       },
       actionResDate() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:461", this.actionobs);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:407", this.actionobs);
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         data["actionTestResult"] = this.actionobs;
         data["status"] = "0";
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:468", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:414", data);
         tesOb.opearConfig(data, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:472", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:418", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -21413,7 +21434,7 @@ if (uni.restoreGlobal) {
         });
       },
       clickQ(item, num) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:492", item);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:438", item);
         if (item.status) {
           item.status = 0;
         } else {
@@ -21432,7 +21453,7 @@ if (uni.restoreGlobal) {
         data["code"] = this.type;
         tesOb.opearPHConfigQuery(data).then((res2) => {
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:512", res2.data[0].actionTestResult);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:458", res2.data[0].actionTestResult);
             this.actionobs = res2.data[0].actionTestResult;
             this.quession1 = this.actionobs[0].answer;
             this.testText1 = this.actionobs[0].answerRemark.detailArray;
@@ -21453,25 +21474,12 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_van_icon = vue.resolveComponent("van-icon");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
       vue.createElementVNode("view", { class: "list_style" }, [
         vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-        vue.createCommentVNode(' <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent> '),
-        vue.createElementVNode("view", {
-          class: "arrow-left",
-          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClickBack($setup.show))
-        }, [
-          !$setup.show ? (vue.openBlock(), vue.createBlock(_component_van_icon, {
-            key: 0,
-            name: "arrow-left"
-          })) : vue.createCommentVNode("v-if", true),
-          vue.createElementVNode("view", { class: "title" }, vue.toDisplayString(_ctx.leftNavTitle), 1),
-          vue.createElementVNode("view", {
-            class: "z",
-            style: { "opacity": "0" }
-          }, "8888")
-        ]),
+        vue.createVNode(_component_NavBarCompontent, { leftNavTitle: _ctx.leftNavTitle }, null, 8, ["leftNavTitle"]),
+        vue.createCommentVNode(' <view class="arrow-left" @click="onClickBack(show)">\r\n        <van-icon name="arrow-left" v-if="!show" />\r\n        <view class="title">{{ leftNavTitle }}</view>\r\n        <view class="z" style="opacity: 0">8888</view>\r\n      </view> '),
         _ctx.leftNavTitle === "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5" ? (vue.openBlock(), vue.createElementBlock("view", {
           key: 0,
           class: "headBox"
@@ -21501,43 +21509,12 @@ if (uni.restoreGlobal) {
         }, [
           vue.createElementVNode("view", {
             class: "clickAction",
-            onClick: _cache[1] || (_cache[1] = vue.withModifiers((...args) => $options.openOne && $options.openOne(...args), ["stop"]))
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.openOne && $options.openOne(...args))
           }, [
             vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
             vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
           ]),
-          vue.createElementVNode("view", null, [
-            vue.withDirectives(vue.createElementVNode("view", { class: "shouxie_pop" }, [
-              vue.createElementVNode("view", { class: "clickActionBody" }, [
-                vue.createElementVNode("video", {
-                  src: $data.FrontVideoUrl,
-                  wid: "",
-                  autoplay: "",
-                  loop: "",
-                  controls: false,
-                  muted: "",
-                  id: "video_style"
-                }, null, 8, ["src"]),
-                vue.createElementVNode("view", { class: "clickActionText" }, [
-                  vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
-                  vue.createElementVNode("view", null, [
-                    (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.testText1, (item, index) => {
-                      return vue.openBlock(), vue.createElementBlock("p", null, vue.toDisplayString(item), 1);
-                    }), 256))
-                  ])
-                ]),
-                vue.createElementVNode("view", {
-                  class: "clickActionEnd",
-                  onClick: _cache[2] || (_cache[2] = (...args) => $options.closeOne && $options.closeOne(...args))
-                }, [
-                  vue.createTextVNode("\u6536\u8D77 "),
-                  vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
-                ])
-              ])
-            ], 512), [
-              [vue.vShow, $data.popFlagOne]
-            ])
-          ]),
+          vue.createElementVNode("view"),
           vue.createElementVNode("view", { class: "actinQuessonContent" }, [
             (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.quession1, (item, index) => {
               return vue.openBlock(), vue.createElementBlock("view", {
@@ -21562,8 +21539,7 @@ if (uni.restoreGlobal) {
                   ])
                 ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true)
               ], 4);
-            }), 256)),
-            vue.createCommentVNode(' <view style="position: absolute;\r\n							z-index: 2;\r\n							top: 670upx;\r\n							left: 530upx;">\r\n					<view class="quessonName" v-if="true">\r\n						<p>\u8EAF\u5E72\u4E00\u4FA7\u504F\u79FB</p>\r\n					</view>\r\n					<view class="clickQuessonName" v-if="false">\r\n						<view class="quessonTitle">\r\n							\u8EAF\u5E72\u4E00\u4FA7\u504F\u79FB\r\n						</view>\r\n						<view class="quessonText">\r\n							\u95EE\u9898\u63CF\u8FF0\uFF1A\u80A1\u56DB\u5934\u808C\u548C\u9ACB\u5173\u8282\u5C48\u808C\u6D3B\u8DC3\uFF0C\u81C0\u90E8\r\n						</view>\r\n					</view>\r\n				</view>\r\n				<view style="position: absolute;\r\n							z-index: 2;\r\n							top: 1040upx;\r\n							left: 530upx;">\r\n					<view class="quessonName" v-if="true">\r\n						<p>\u8DB3\u80CC\u5C48\u4E0D\u8DB3</p>\r\n					</view>\r\n					<view class="clickQuessonName" v-if="false">\r\n						<view class="quessonTitle">\r\n							\u8DB3\u80CC\u5C48\u4E0D\u8DB3\r\n						</view>\r\n						<view class="quessonText">\r\n							\u95EE\u9898\u63CF\u8FF0\uFF1A\u80A1\u56DB\u5934\u808C\u548C\u9ACB\u5173\u8282\u5C48\u808C\u6D3B\u8DC3\uFF0C\u81C0\u90E8\r\n						</view>\r\n					</view>\r\n				</view> ')
+            }), 256))
           ]),
           vue.createElementVNode("image", {
             class: "imagebg",
@@ -21576,7 +21552,7 @@ if (uni.restoreGlobal) {
         }, [
           vue.createElementVNode("view", {
             class: "clickAction",
-            onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.openTwo && $options.openTwo(...args), ["stop"]))
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.openTwo && $options.openTwo(...args))
           }, [
             vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
             vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
@@ -21604,7 +21580,7 @@ if (uni.restoreGlobal) {
                 ]),
                 vue.createElementVNode("view", {
                   class: "clickActionEnd",
-                  onClick: _cache[4] || (_cache[4] = (...args) => $options.closeTwo && $options.closeTwo(...args))
+                  onClick: _cache[2] || (_cache[2] = (...args) => $options.closeTwo && $options.closeTwo(...args))
                 }, [
                   vue.createTextVNode("\u6536\u8D77 "),
                   vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
@@ -21651,7 +21627,7 @@ if (uni.restoreGlobal) {
       ]),
       vue.createElementVNode("view", {
         class: "bottom_style",
-        onClick: _cache[5] || (_cache[5] = vue.withModifiers((...args) => $options.actionResDate && $options.actionResDate(...args), ["stop"]))
+        onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.actionResDate && $options.actionResDate(...args), ["stop"]))
       }, "\u4FDD\u5B58")
     ]);
   }
@@ -21664,60 +21640,84 @@ if (uni.restoreGlobal) {
   });
   const _sfc_main$9 = {
     components: {
-      BgTheamCompontent
+      BgTheamCompontent,
+      NavBarCompontent
     },
     data() {
       return {
         dynamicEvaluationdata: [
-          { title: "\u81EA\u91CD\u6DF1\u8E72\u8BC4\u4F30", type: "E0001", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u81EA\u91CD\u6DF1\u8E72\u8BC4\u4F30", icon: true },
-          { title: "\u80F8\u690E\u6D3B\u52A8\u8BC4\u4F30", type: "E0002", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u80F8\u690E\u6D3B\u52A8\u8BC4\u4F30", icon: true },
-          { title: "\u67D4\u97E7\u6027\u6D4B\u8BD5", type: "E0003", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u67D4\u97E7\u6027\u6D4B\u8BD5", icon: true },
-          { title: "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5", type: "E0004", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5", icon: true },
-          { title: "\u4FEF\u5367\u6491\u7A33\u5B9A\u6027\u6D4B\u8BD5", type: "E0005", path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u4FEF\u5367\u6491\u7A33\u5B9A\u6027\u6D4B\u8BD5", icon: true }
+          {
+            title: "\u81EA\u91CD\u6DF1\u8E72\u8BC4\u4F30",
+            type: "E0001",
+            path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u81EA\u91CD\u6DF1\u8E72\u8BC4\u4F30",
+            icon: true
+          },
+          {
+            title: "\u80F8\u690E\u6D3B\u52A8\u8BC4\u4F30",
+            type: "E0002",
+            path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u80F8\u690E\u6D3B\u52A8\u8BC4\u4F30",
+            icon: true
+          },
+          {
+            title: "\u67D4\u97E7\u6027\u6D4B\u8BD5",
+            type: "E0003",
+            path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u67D4\u97E7\u6027\u6D4B\u8BD5",
+            icon: true
+          },
+          {
+            title: "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5",
+            type: "E0004",
+            path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5",
+            icon: true
+          },
+          {
+            title: "\u4FEF\u5367\u6491\u7A33\u5B9A\u6027\u6D4B\u8BD5",
+            type: "E0005",
+            path: "/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=\u4FEF\u5367\u6491\u7A33\u5B9A\u6027\u6D4B\u8BD5",
+            icon: true
+          }
         ],
         icon: true,
         traineeNo: "",
         questionCode: "",
-        startData: [
-          { clientX: "", clientY: "" }
-        ]
+        startData: [{ clientX: "", clientY: "" }]
       };
     },
     created() {
       this.getPageData();
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:87", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:119", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       this.getPageData();
     },
     methods: {
       start(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:94", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:126", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         this.startData.clientX = e.changedTouches[0].clientX;
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:99", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:131", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         const subX = e.changedTouches[0].clientX - this.startData.clientX;
         const subY = e.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:103", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:135", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:106", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:138", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:108", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:140", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:113", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:148", "\u53F3\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo
           });
         } else {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:118", "\u65E0\u6548");
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:156", "\u65E0\u6548");
         }
       },
       setup() {
@@ -21727,7 +21727,7 @@ if (uni.restoreGlobal) {
         };
       },
       jumpModular(item) {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:128", item.path, ">>>>");
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:166", item.path, ">>>>");
         uni.navigateTo({
           url: item.path + "&type=" + item.type + "&traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode,
           success: (res2) => {
@@ -21742,13 +21742,13 @@ if (uni.restoreGlobal) {
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:140", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:185", data);
         busOb$1.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:142", res2.data);
+          formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:187", res2.data);
           res2.data.forEach((item) => {
             this.dynamicEvaluationdata.filter((v2) => {
               let resq = item.code == v2.type;
-              formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:146", resq);
+              formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:191", resq);
               if (resq) {
                 v2.icon = false;
               }
@@ -21757,7 +21757,7 @@ if (uni.restoreGlobal) {
         });
       },
       getdynamicEvaluationdata() {
-        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:155", this.traineeNo);
+        formatAppLog("log", "at pages/dynamicEvaluation/dynamicEvaluation.vue:200", this.traineeNo);
         uni.redirectTo({
           url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
         });
@@ -21771,28 +21771,23 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_van_icon = vue.resolveComponent("van-icon");
+    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
     const _component_van_col = vue.resolveComponent("van-col");
     const _component_van_row = vue.resolveComponent("van-row");
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "content_style",
-      onTouchstart: _cache[2] || (_cache[2] = (...args) => $options.start && $options.start(...args)),
-      onTouchend: _cache[3] || (_cache[3] = (...args) => $options.end && $options.end(...args))
+      onTouchstart: _cache[1] || (_cache[1] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[2] || (_cache[2] = (...args) => $options.end && $options.end(...args))
     }, [
       vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
       vue.createCommentVNode(` <NavBarCompontent :leftNavTitle="'\u52A8\u6001\u8BC4\u4F30'"></NavBarCompontent> `),
-      vue.createElementVNode("view", {
-        class: vue.normalizeClass(["arrow-left", { show: _ctx.isFixedTop }]),
-        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClickBack && $options.onClickBack(...args))
-      }, [
-        vue.createVNode(_component_van_icon, { name: "arrow-left" }),
-        vue.createElementVNode("view", { class: "title" }, "\u52A8\u6001\u8BC4\u4F30"),
-        vue.createElementVNode("view", {
-          class: "z",
-          style: { "opacity": "0" }
-        }, "8888")
-      ], 2),
-      vue.createElementVNode("view", { class: "watermark" }, "\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784"),
+      vue.createCommentVNode(' 	<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickBack">\r\n		<van-icon name="arrow-left" />\r\n		<view class="title">\u52A8\u6001\u8BC4\u4F30</view>\r\n		<view class="z" style="opacity: 0;">8888</view>\r\n	</view>\r\n	<view class="watermark">\u6570\u636E\u8BC4\u6D4B\u6765\u6E90\u4E8E\u4E16\u754C\u6743\u5A01\u673A\u6784</view> '),
+      vue.createVNode(_component_NavBarCompontent, {
+        leftNavTitle: "\u52A8\u6001\u8BC4\u4F30",
+        isAuthority: true,
+        jumpType: "DTPG",
+        traineeNo: $data.traineeNo
+      }, null, 8, ["traineeNo"]),
       vue.createVNode(_component_van_row, { class: "list_style" }, {
         default: vue.withCtx(() => [
           vue.createVNode(_component_van_col, {
@@ -21844,7 +21839,7 @@ if (uni.restoreGlobal) {
       vue.createCommentVNode(' <van-button type="primary" block class="buttontrue" @click.native="getdynamicEvaluationdata()">\u786E\u8BA4</van-button> '),
       vue.createElementVNode("view", {
         class: "bottom_style",
-        onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
+        onClick: _cache[0] || (_cache[0] = vue.withModifiers(($event) => $options.getdynamicEvaluationdata(), ["stop"]))
       }, "\u4FDD\u5B58")
     ], 32);
   }
@@ -22265,6 +22260,9 @@ if (uni.restoreGlobal) {
     customUI: true
   });
   const _sfc_main$7 = {
+    components: {
+      BgTheamCompontent
+    },
     data() {
       return {
         currentRate: 50,
@@ -22376,7 +22374,7 @@ if (uni.restoreGlobal) {
       };
     },
     onShow() {
-      formatAppLog("log", "at pages/viewReport/viewReport.vue:1026", this.key);
+      formatAppLog("log", "at pages/viewReport/viewReport.vue:1030", this.key);
     },
     onLoad(options) {
       if (JSON.stringify(options) !== "{}" && options.traineeNo) {
@@ -22392,7 +22390,7 @@ if (uni.restoreGlobal) {
             this.openKey = false;
             this.getHistroyDate();
             this.pageName = "\u4F1A\u5458\u4FE1\u606F";
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1042", "1111");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1046", "1111");
             break;
         }
       }
@@ -22401,14 +22399,14 @@ if (uni.restoreGlobal) {
       setImage() {
         const img = document.getElementsByTagName("img");
         for (var i2 = 0; i2 < img.length; i2++) {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1051", img[i2]);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1055", img[i2]);
         }
       },
       openPopup() {
         this.$refs.popup.open();
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1058", option, 88);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1062", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -22428,11 +22426,11 @@ if (uni.restoreGlobal) {
           this.getDynameEvaluation();
           this.getHealthQuesson();
           setTimeout(() => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1078", "\u6570\u636E\u52A0\u8F7D\u6210\u529F");
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1079", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1082", "\u6570\u636E\u52A0\u8F7D\u6210\u529F");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1083", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
             this.saveReport();
           }, 3e3);
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1082", "\u4FDD\u5B58\u6210\u529F\uFF01");
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1086", "\u4FDD\u5B58\u6210\u529F\uFF01");
         });
       },
       async pageMethods() {
@@ -22451,8 +22449,8 @@ if (uni.restoreGlobal) {
             this.gender = res2.data[0].gender;
             this.mobileNumber = res2.data[0].mobile;
             this.age = this.getAge(res2.data[0].birthday);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1101", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + this.nowDate);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1102", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + res2.data);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1105", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + this.nowDate);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1106", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + res2.data);
           }
         });
       },
@@ -22524,7 +22522,7 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1198", this.queryData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1202", this.queryData);
               resdata["data"] = this.queryData;
             }).catch((err) => {
             });
@@ -22615,9 +22613,9 @@ if (uni.restoreGlobal) {
           if (res2.data.length > 0) {
             this.bodyTestData = res2.data[0].bodyTestReport;
             this.bodyFraction = Number(this.bodyTestData.bodyFraction);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1305", this.bodyTestData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1309", this.bodyTestData);
             resData["data"] = this.bodyTestData;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1307", resData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1311", resData);
           }
         });
         return resData;
@@ -22627,7 +22625,7 @@ if (uni.restoreGlobal) {
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = "A0004";
         testOb.opearConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1319", res2.data);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1323", res2.data);
           for (let r2 of res2.data) {
             for (let rq of r2.actionTestResult) {
               for (let d2 of rq.answer) {
@@ -22638,7 +22636,7 @@ if (uni.restoreGlobal) {
               }
             }
           }
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1332", this.physicalFitnessAssessmentData);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1336", this.physicalFitnessAssessmentData);
         });
       },
       setDyNameStatus(item) {
@@ -22666,7 +22664,7 @@ if (uni.restoreGlobal) {
         this.$refs.popup.open();
       },
       saveReport() {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1362", this.openKey);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1366", this.openKey);
         if (this.openKey) {
           const data = {};
           let date2 = new Date();
@@ -22679,9 +22677,9 @@ if (uni.restoreGlobal) {
           data["physicalFitnessAssessmentData"] = this.physicalFitnessAssessmentData;
           data["saveDate"] = today;
           data["name"] = this.personName;
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1377", data);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1381", data);
           testOb.saveReport(data).then((res2) => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1379", res2);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1383", res2);
           });
           this.showShare = true;
         }
@@ -22691,11 +22689,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1390", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1394", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1394", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1398", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -22703,15 +22701,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1402", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1406", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1404", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1408", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1410", "err", err);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1414", "err", err);
                 }
               });
             }
@@ -22720,7 +22718,7 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1419", option.name, 8888);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1423", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
@@ -22734,11 +22732,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1434", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1438", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1438", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1442", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -22748,11 +22746,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1448", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1452", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1452", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1456", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -22777,14 +22775,14 @@ if (uni.restoreGlobal) {
         const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1481", res2.data[0].testResult);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1485", res2.data[0].testResult);
             resData.push(res2.data[0].testResult);
             this.HQDate = resData;
           } else {
             this.showHQ = false;
           }
         });
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1505", resData);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1509", resData);
         return resData;
       },
       getHistroyDate() {
@@ -22793,9 +22791,9 @@ if (uni.restoreGlobal) {
           data["traineeNo"] = this.traineeNo;
           if (!this.openKey) {
             testOb.opearReportQuery(data).then((res2) => {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1516", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1520", res2);
               this.historyData = res2.data;
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1518", this.historyData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1522", this.historyData);
             });
           }
         }
@@ -22808,7 +22806,7 @@ if (uni.restoreGlobal) {
         this.queryData = item.queryData;
         this.assessmentTrueData = item.assessmentTrueData;
         this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData;
-        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1532", item);
+        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1536", item);
         this.$refs.popup.close();
       },
       gototest() {
@@ -22832,7 +22830,7 @@ if (uni.restoreGlobal) {
         return str.slice(a2 + 7, str.length);
       },
       onClickinfo(item) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1559", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1563", item);
         switch (item) {
           case "\u57FA\u7840\u4FE1\u606F":
             if (this.infoclick) {
@@ -22881,6 +22879,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     const _component_van_icon = vue.resolveComponent("van-icon");
@@ -22896,6 +22895,7 @@ if (uni.restoreGlobal) {
         key: 0,
         style: { "position": "absolute", "z-index": "1", "top": "1580upx", "width": "100%", "background-color": "#343a44" }
       }, [
+        vue.createVNode(_component_BgTheamCompontent),
         vue.createElementVNode("view", { class: "footer-button" }, [
           vue.createElementVNode("view", {
             class: "van-button",

@@ -410,7 +410,6 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-top: 40upx;
 }
 .collapseBlock {
   background-color: #383d46;

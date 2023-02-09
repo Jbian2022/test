@@ -2,12 +2,12 @@
   <view class="content_style">
     <view class="list_style">
       <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
-      <!-- <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent> -->
-      <view class="arrow-left" @click="onClickBack(show)">
+      <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
+      <!-- <view class="arrow-left" @click="onClickBack(show)">
         <van-icon name="arrow-left" v-if="!show" />
         <view class="title">{{ leftNavTitle }}</view>
         <view class="z" style="opacity: 0">8888</view>
-      </view>
+      </view> -->
       <view class="headBox" v-if="leftNavTitle === '肩关节灵活性测试'">
         <view
           class="block1"
@@ -29,35 +29,11 @@
         >
       </view>
       <view class="contentBody" v-if="changeValue">
-        <view class="clickAction" @click.native.stop="openOne"
+        <view class="clickAction" @tap="openOne"
           >点击查看标准动作描述
           <image src="../../../static/app-plus/mebrs/openarrit.png"></image>
         </view>
-        <view>
-          <view class="shouxie_pop" v-show="popFlagOne">
-            <view class="clickActionBody">
-              <video
-                :src="FrontVideoUrl"
-                wid
-                autoplay
-                loop
-                :controls="false"
-                muted
-                id="video_style"
-              ></video>
-              <view class="clickActionText">
-                <view class="Actionname">标准动作：</view>
-                <view>
-                  <p v-for="(item, index) in testText1">{{ item }}</p>
-                </view>
-              </view>
-              <view class="clickActionEnd" @click.native="closeOne"
-                >收起
-                <image src="../../../static/app-plus/other/close.png"></image>
-              </view>
-            </view>
-          </view>
-        </view>
+        <view> </view>
         <view class="actinQuessonContent">
           <view v-for="(item, index) in quession1" :style="item.style">
             <view
@@ -81,44 +57,12 @@
               </view>
             </view>
           </view>
-          <!-- <view style="position: absolute;
-							z-index: 2;
-							top: 670upx;
-							left: 530upx;">
-					<view class="quessonName" v-if="true">
-						<p>躯干一侧偏移</p>
-					</view>
-					<view class="clickQuessonName" v-if="false">
-						<view class="quessonTitle">
-							躯干一侧偏移
-						</view>
-						<view class="quessonText">
-							问题描述：股四头肌和髋关节屈肌活跃，臀部
-						</view>
-					</view>
-				</view>
-				<view style="position: absolute;
-							z-index: 2;
-							top: 1040upx;
-							left: 530upx;">
-					<view class="quessonName" v-if="true">
-						<p>足背屈不足</p>
-					</view>
-					<view class="clickQuessonName" v-if="false">
-						<view class="quessonTitle">
-							足背屈不足
-						</view>
-						<view class="quessonText">
-							问题描述：股四头肌和髋关节屈肌活跃，臀部
-						</view>
-					</view>
-				</view> -->
         </view>
         <image class="imagebg" :src="backimgFront" />
         <view class="imgbgText"> 点击上方蓝色标签选择问题部位，可多选 </view>
       </view>
       <view class="contentBody" v-else>
-        <view class="clickAction" @click.native.stop="openTwo"
+        <view class="clickAction" @tap="openTwo"
           >点击查看标准动作描述
           <image src="../../../static/app-plus/mebrs/openarrit.png"></image>
         </view>
@@ -358,12 +302,14 @@ export default {
   },
   methods: {
     openOne() {
+      console.log(11111)
       this.popFlagOne = true
     },
     closeOne() {
       this.popFlagOne = false
     },
     openTwo() {
+      console.log(22222)
       this.popFlagTwo = true
     },
     closeTwo() {
@@ -762,7 +708,6 @@ export default {
 .shouxie_pop {
   position: fixed;
   left: 0;
-  top: 290upx;
   background: #383d46;
   border-radius: 16upx;
   width: calc(100vw - 40upx);

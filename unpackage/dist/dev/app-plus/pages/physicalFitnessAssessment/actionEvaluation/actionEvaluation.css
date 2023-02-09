@@ -145,7 +145,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-top: 1.25rem;
 }
 .collapseBlock {
   background-color: #383d46;
