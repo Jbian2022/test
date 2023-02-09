@@ -430,7 +430,7 @@
 .bgimg{
 	width: calc(100vw - 300upx);
 	height: 75vh;
-	background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/dd0f49ac-8bbb-4a24-88a5-bf961da5ac6c.png');
+	background-image: url('../../static/app-plus/bg/bodyMan.png');
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position-x: -20upx;

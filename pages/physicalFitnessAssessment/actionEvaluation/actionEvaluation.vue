@@ -3,8 +3,8 @@
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
     <view class="body_content" id="bodycontent">
-      <view class="clickAction" @click.native="showPopup"
-        >点击查看标准动作描述
+      <view class="clickAction" @click="showPopup">
+		  点击查看标准动作描述
         <image src="../../../static/app-plus/mebrs/openarrit.png"></image>
       </view>
       <van-popup
@@ -519,6 +519,7 @@ export default {
   color: rgb(244, 247, 255);
   line-height: 70upx;
   text-align: center;
+  cursor: pointer;
 }
 .clickAction image {
   width: 32upx;

@@ -88,7 +88,7 @@ body {
 }
 .cancel .top-bar .van-icon {
   font-size: 1.25rem;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 .cancel .top-bar .zan {
   opacity: 0;
@@ -96,13 +96,13 @@ body {
 .cancel .top-bar .title {
   font-size: 0.9375rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 .cancel .project-des {
   padding-top: 1.25rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #f4f7ff;
+  color: #F4F7FF;
   line-height: 1.375rem;
 }
 .cancel .project-box {
@@ -114,7 +114,7 @@ body {
 .cancel .project-box .first-text {
   font-size: 1rem;
   font-weight: 600;
-  color: #bdc3ce;
+  color: #BDC3CE;
   line-height: 1.375rem;
 }
 .cancel .project-box .second-text + .first-text {
@@ -123,7 +123,7 @@ body {
 .cancel .project-box .second-text {
   font-size: 0.875rem;
   font-weight: 400;
-  color: #7a7f89;
+  color: #7A7F89;
   line-height: 1.25rem;
   margin-top: 0.625rem;
 }
@@ -144,11 +144,11 @@ body {
 .cancel .check-read .check-text {
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #bdc3ce;
+  color: #BDC3CE;
   line-height: 1.125rem;
 }
 .cancel .check-read .check-text .btn {
-  color: #f4f7ff;
+  color: #F4F7FF;
 }
 .cancel .footer-btn {
   position: fixed;
@@ -160,12 +160,12 @@ body {
   border-radius: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #FFFFFF;
   line-height: 3.125rem;
   text-align: center;
 }
 .cancel .footer-btn.active {
-  background: #1370ff;
+  background: #1370FF;
 }
 .cancel .dialog {
   background: #383d46;

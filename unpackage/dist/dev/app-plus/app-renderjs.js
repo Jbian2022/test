@@ -15024,27 +15024,21 @@ __renderjsModules["44880530"] = (() => {
     methods: {
       generateImage(callback) {
         setTimeout(() => {
-          const dom = document.getElementById("imageReport");
+          const dom = document.getElementById("viewReport");
           (0, import_html2canvas.default)(dom, {
             width: dom.clientWidth,
             height: dom.clientHeight,
             scrollY: 0,
             scrollX: 0,
-            x: 0,
-            y: 0,
-            useCORS: true,
-            allowTaint: true
+            useCORS: true
           }).then((canvas) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1626", canvas);
-            const base64 = canvas.toDataURL("image/jpeg");
+            const base64 = canvas.toDataURL("image/png");
             callback && callback(base64);
           }).catch((err) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1630", JSON.stringify(err));
           });
         }, 300);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
-        __f__("log", "at pages/viewReport/viewReport.vue:1636", newValue);
         if (newValue) {
           this.generateImage((base64) => {
             ownerInstance.callMethod("receiveRenderData", { name: newValue, base64 });
