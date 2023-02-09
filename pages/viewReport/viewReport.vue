@@ -151,11 +151,11 @@
                     <template v-slot:footer>
                       <view
                         class="rightclickblock arrowimgopen"
-                        v-if="!infoclick"
+                        v-show="!infoclick"
                       >
                         点击展开
                       </view>
-                      <view class="rightclickblock arrowimgclose" v-else
+                      <view class="rightclickblock arrowimgclose" v-show="infoclick"
                         >点击关闭</view
                       >
                     </template>
@@ -202,29 +202,29 @@
         </view>
 
         <view class="basicInformation">
-          <uni-collapse v-model="healthQA" :border="false">
+          <uni-collapse :border="false">
             <uni-collapse-item
               title="健康问答"
               class="informationCard"
-              :open="false"
               :show-arrow="false"
+			  :open="infoclick1"
+			  @click="onClickinfo('健康问答')"
             >
               <template v-slot:title>
                 <uni-list>
                   <uni-list-item
                     title="健康问答"
                     clickable
-                    @click="onClickinfo('健康问答')"
                     class="titleclass"
                   >
                     <template v-slot:footer>
                       <view
                         class="rightclickblock arrowimgopen"
-                        v-if="!infoclick1"
+                        v-show="!infoclick1"
                       >
                         点击展开
                       </view>
-                      <view class="rightclickblock arrowimgclose" v-else
+                      <view class="rightclickblock arrowimgclose" v-show="infoclick1"
                         >点击关闭</view
                       >
                     </template>
@@ -435,30 +435,31 @@
         </view>
 
         <view class="basicInformation">
-          <uni-collapse v-model="BodyTestReport">
+          <uni-collapse>
             <uni-collapse-item
               title="体测报告"
               title-class="informationTitleText"
               class="informationCard"
-              :open="false"
+              :open="infoclick2"
               :showArrow="false"
+			  @click="onClickinfo('体测报告')"
             >
               <template v-slot:title>
                 <uni-list>
                   <uni-list-item
                     title="体测报告"
                     clickable
-                    @click="onClickinfo('体测报告')"
+                    
                     class="titleclass"
                   >
                     <template v-slot:footer>
                       <view
                         class="rightclickblock arrowimgopen"
-                        v-if="!infoclick2"
+                        v-show="!infoclick2"
                       >
                         点击展开
                       </view>
-                      <view class="rightclickblock arrowimgclose" v-else
+                      <view class="rightclickblock arrowimgclose" v-show="infoclick2"
                         >点击关闭</view
                       >
                     </template>
@@ -597,30 +598,31 @@
         </view>
 
         <view class="basicInformation">
-          <uni-collapse v-model="bodyAssessment" :border="false">
+          <uni-collapse :border="false">
             <uni-collapse-item
               title="体态评估"
               title-class="informationTitleText"
               class="informationCard"
-              :open="false"
+              :open="infoclick3"
               :showArrow="false"
+			  @click="onClickinfo('体态评估')"
             >
               <template v-slot:title>
                 <uni-list>
                   <uni-list-item
                     title="体态评估"
                     clickable
-                    @click="onClickinfo('体态评估')"
+                    
                     class="titleclass"
                   >
                     <template v-slot:footer>
                       <view
                         class="rightclickblock arrowimgopen"
-                        v-if="!infoclick3"
+                        v-show="!infoclick3"
                       >
                         点击展开
                       </view>
-                      <view class="rightclickblock arrowimgclose" v-else
+                      <view class="rightclickblock arrowimgclose" v-show="infoclick3"
                         >点击关闭</view
                       >
                     </template>
@@ -628,7 +630,7 @@
                 </uni-list>
               </template>
 
-              <view style="padding-bottom: 40upx">
+              <view style="padding-bottom: 40upx" v-if="!postureData">
                 <view
                   class="bodyAssessment"
                   v-for="(item, index) in assessmentTrueData"
@@ -668,6 +670,39 @@
                   </view>
                 </view>
               </view>
+			  <view style="height: 612upx;" v-else>
+			    <!-- <image
+			      src="../../static/app-plus/other/defaultImg.png"
+			      style="
+			        width: 180upx;
+			        height: 180upx;
+			        margin: 0 auto;
+			        top: 120upx;
+			        left: 256upx;
+			      "
+			    ></image> -->
+			  				<view style="
+			        width: 180upx;
+			        height: 180upx;
+			        margin: 0 auto;
+			        top: 120upx;
+			        left: 256upx;
+			  					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png');background-repeat: no-repeat;
+			  					background-size: 100%;
+			      "></view>
+			    <view
+			      style="
+			        width: 350upx;
+			        height: 40upx;
+			        font-size: 28upx;
+			        font-weight: 400;
+			        color: #7a7f89;
+			        line-height: 320upx;
+			        margin: 0 auto;
+			      "
+			      >暂无评测内容，快去完善吧~</view
+			    >
+			  </view>
               <!-- <view class="bodyAssessment">
 						<view style="width: 10px;
 								height: 10px;
@@ -714,37 +749,38 @@
         </view>
 
         <view class="basicInformation">
-          <uni-collapse v-model="dynamicEvaluation" :border="false">
+          <uni-collapse :border="false">
             <uni-collapse-item
               title="动态评估"
               title-class="informationTitleText"
               class="informationCard"
-              :open="false"
+              :open="infoclick4"
               :showArrow="false"
+			   @click="onClickinfo('动态评估')"
             >
               <template v-slot:title>
                 <uni-list>
                   <uni-list-item
                     title="动态评估"
                     clickable
-                    @click="onClickinfo('动态评估')"
+                   
                     class="titleclass"
                   >
                     <template v-slot:footer>
                       <view
                         class="rightclickblock arrowimgopen"
-                        v-if="!infoclick4"
+                        v-show="!infoclick4"
                       >
                         点击展开
                       </view>
-                      <view class="rightclickblock arrowimgclose" v-else
+                      <view class="rightclickblock arrowimgclose" v-show="infoclick4"
                         >点击关闭</view
                       >
                     </template>
                   </uni-list-item>
                 </uni-list>
               </template>
-              <view style="padding-bottom: 40upx">
+              <view style="padding-bottom: 40upx" v-if="!Dyname">
                 <view
                   class="bodyAssessment"
                   v-for="(item, index) in physicalFitnessAssessmentData"
@@ -792,6 +828,39 @@
                   </view>
                 </view>
               </view>
+			  <view style="height: 612upx;" v-else>
+			    <!-- <image
+			      src="../../static/app-plus/other/defaultImg.png"
+			      style="
+			        width: 180upx;
+			        height: 180upx;
+			        margin: 0 auto;
+			        top: 120upx;
+			        left: 256upx;
+			      "
+			    ></image> -->
+			  				<view style="
+			        width: 180upx;
+			        height: 180upx;
+			        margin: 0 auto;
+			        top: 120upx;
+			        left: 256upx;
+			  					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png');background-repeat: no-repeat;
+			  					background-size: 100%;
+			      "></view>
+			    <view
+			      style="
+			        width: 350upx;
+			        height: 40upx;
+			        font-size: 28upx;
+			        font-weight: 400;
+			        color: #7a7f89;
+			        line-height: 320upx;
+			        margin: 0 auto;
+			      "
+			      >暂无评测内容，快去完善吧~</view
+			    >
+			  </view>
               <!-- <view class="bodyAssessment">
 						<view style="width: 5px;
 								height: 5px;
@@ -819,25 +888,26 @@
             <uni-collapse-item
               title="体能评估"
               class="informationCard"
-              :open="false"
+              :open="infoclick5"
               :showArrow="false"
+			  @click="onClickinfo('体能评估')"
             >
               <template v-slot:title>
                 <uni-list>
                   <uni-list-item
                     title="体能评估"
                     clickable
-                    @click="onClickinfo('体能评估')"
+                    
                     class="titleclass"
                   >
                     <template v-slot:footer>
                       <view
                         class="rightclickblock arrowimgopen"
-                        v-if="!infoclick5"
+                        v-show="!infoclick5"
                       >
                         点击展开
                       </view>
-                      <view class="rightclickblock arrowimgclose" v-else
+                      <view class="rightclickblock arrowimgclose" v-show="infoclick5"
                         >点击关闭</view
                       >
                     </template>
@@ -920,12 +990,6 @@ export default {
       age: 0,
       mobileNumber: 0,
       openKey: true,
-      infoclick: 1,
-      infoclick2: 0,
-      infoclick3: 0,
-      infoclick4: 0,
-      infoclick5: 0,
-      infoclick6: 0,
       key: '',
       bodyTestData: [],
       HQDate: [],
@@ -933,6 +997,7 @@ export default {
       bodyFraction: 0,
       historyData: [],
       showHQ: true,
+	  postureData: false,
       dynamicEvaluationdata: [
         {
           title: '俯卧撑耐力测试',
@@ -1003,6 +1068,12 @@ export default {
       buyStatus: 0,
       statusDy: false,
 	  histroydate: '',
+	  infoclick:true,
+	  infoclick1:false,
+	  infoclick2:false,
+	  infoclick3:false,
+	  infoclick4:false,
+	  infoclick5:false,
     }
   },
   //监测页面滑动
@@ -1052,6 +1123,12 @@ export default {
 	  	}
 	  },
 	  openPopup() {
+		  console.log("用户点击分享")
+		  this.infoclick1 = true;
+		  this.infoclick2 = true;
+		  this.infoclick3 = true;
+		  this.infoclick4 = true;
+		  this.infoclick5 = true;
 	    this.$refs.popup.open()
 	  },
 	  onSelect(option) {
@@ -1289,7 +1366,10 @@ export default {
               trueData = {}
             }
             // console.log(this.assessmentTrueData)
-          }
+          }else{
+			  console.log("没有数据哦")
+			  this.postureData = true
+		  }
         })
         .catch()
     },
@@ -1316,7 +1396,9 @@ export default {
       data['questionCode'] = 'A0004'
       const resData = []
       testOb.opearConfigQuery(data).then((res) => {
-        console.log(res.data)
+        if(res.data.length==0){
+			this.Dyname = true
+		}
         // this.physicalFitnessAssessmentData = res.data
         // console.log(this.physicalFitnessAssessmentData)
         for (let r of res.data) {
@@ -1400,6 +1482,9 @@ export default {
 	              success: function (res) {
 	                if (res.confirm) {
 	                  console.log('用户点击确定')
+					  uni.reLaunch({
+					    url: '/pages/myMebers/myMebers'
+					  })
 	                } else if (res.cancel) {
 	                  console.log('用户点击取消')
 	                }
@@ -1560,44 +1645,44 @@ export default {
       switch (item) {
         case '基础信息':
           if (this.infoclick) {
-            this.infoclick = 0
+            this.infoclick = false
           } else {
-            this.infoclick = 1
+            this.infoclick = true
           }
           break
         case '健康问答':
           if (this.infoclick1) {
-            this.infoclick1 = 0
+            this.infoclick1 = false
           } else {
-            this.infoclick1 = 1
+            this.infoclick1 = true
           }
           break
         case '体测报告':
           if (this.infoclick2) {
-            this.infoclick2 = 0
+            this.infoclick2 = false
           } else {
-            this.infoclick2 = 1
+            this.infoclick2 = true
           }
           break
         case '体态评估':
           if (this.infoclick3) {
-            this.infoclick3 = 0
+            this.infoclick3 = false
           } else {
-            this.infoclick3 = 1
+            this.infoclick3 = true
           }
           break
         case '动态评估':
           if (this.infoclick4) {
-            this.infoclick4 = 0
+            this.infoclick4 = false
           } else {
-            this.infoclick4 = 1
+            this.infoclick4 = true
           }
           break
         case '体能评估':
           if (this.infoclick5) {
-            this.infoclick5 = 0
+            this.infoclick5 = false
           } else {
-            this.infoclick5 = 1
+            this.infoclick5 = true
           }
           break
       }
