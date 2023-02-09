@@ -240,9 +240,6 @@
   align-items: center;
   flex-direction: column;
 }
-.mebers_content .slide_stylle .add_student_style .prohibit_style[data-v-fce7d226] {
-  opacity: 0.3;
-}
 .mebers_content .slide_stylle .add_student_style .need_loop_style[data-v-fce7d226] {
   width: calc(100% - 1.875rem);
   margin-top: 0.9375rem;

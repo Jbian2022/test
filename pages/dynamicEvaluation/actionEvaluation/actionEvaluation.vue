@@ -3,11 +3,6 @@
     <view class="list_style">
       <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
       <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
-      <!-- <view class="arrow-left" @click="onClickBack(show)">
-        <van-icon name="arrow-left" v-if="!show" />
-        <view class="title">{{ leftNavTitle }}</view>
-        <view class="z" style="opacity: 0">8888</view>
-      </view> -->
       <view class="headBox" v-if="leftNavTitle === '肩关节灵活性测试'">
         <view
           class="block1"
@@ -33,7 +28,30 @@
           >点击查看标准动作描述
           <image src="../../../static/app-plus/mebrs/openarrit.png"></image>
         </view>
-        <view> </view>
+
+        <view class="shouxie_pop" v-show="popFlagOne">
+          <view class="clickActionBody">
+            <video
+              :src="FrontVideoUrl"
+              wid
+              autoplay
+              loop
+              :controls="false"
+              muted
+              id="video_style"
+            ></video>
+            <view class="clickActionText">
+              <view class="Actionname">标准动作：</view>
+              <view>
+                <p v-for="(item, index) in testText1">{{ item }}</p>
+              </view>
+            </view>
+            <view class="clickActionEnd" @click.native="closeOne"
+              >收起
+              <image src="../../../static/app-plus/other/close.png"></image>
+            </view>
+          </view>
+        </view>
         <view class="actinQuessonContent">
           <view v-for="(item, index) in quession1" :style="item.style">
             <view
@@ -67,7 +85,7 @@
           <image src="../../../static/app-plus/mebrs/openarrit.png"></image>
         </view>
         <view>
-          <view class="shouxie_pop" v-show="popFlagTwo">
+          <view class="shouxie_pop" v-if="popFlagTwo">
             <view class="clickActionBody">
               <video
                 :src="SideVideoUrl"
@@ -381,23 +399,24 @@ export default {
       }
     },
     getActionInfo() {
-      if (this.type !== '') {
-        busOb.getPhysicalChildAssessmentList(this.type).then((res) => {
+      let self = this
+      if (self.type !== '') {
+        busOb.getPhysicalChildAssessmentList(self.type).then((res) => {
           console.log(res.data)
           let index = res.data.length
           console.log(index)
           if (res.success) {
-            this.actionobs = res.data
-            this.quession1 = this.actionobs[0].answer
-            this.testText1 = this.actionobs[0].answerRemark.detailArray
-            if (this.actionobs.length > 1) {
-              this.quession2 = this.actionobs[1].answer
-              this.testText2 = this.actionobs[1].answerRemark.detailArray
+            self.actionobs = res.data
+            self.quession1 = self.actionobs[0].answer
+            self.testText1 = self.actionobs[0].answerRemark.detailArray
+            if (self.actionobs.length > 1) {
+              self.quession2 = self.actionobs[1].answer
+              self.testText2 = self.actionobs[1].answerRemark.detailArray
             }
             // console.log(this.actionobs);
-            if (this.actionobs.length > 2) {
-              this.quession3 = this.actionobs[2].answer
-              this.testText3 = this.actionobs[2].answerRemark.detailArray
+            if (self.actionobs.length > 2) {
+              self.quession3 = self.actionobs[2].answer
+              self.testText3 = self.actionobs[2].answerRemark.detailArray
             }
           }
         })
@@ -448,6 +467,7 @@ export default {
       })
     },
     getData() {
+      let that = this
       const data = {}
       data['traineeNo'] = this.traineeNo
       data['questionCode'] = this.questionCode
@@ -456,19 +476,19 @@ export default {
       tesOb.opearPHConfigQuery(data).then((res) => {
         if (res.success && res.data.length != 0) {
           console.log(res.data[0].actionTestResult)
-          this.actionobs = res.data[0].actionTestResult
-          this.quession1 = this.actionobs[0].answer
-          this.testText1 = this.actionobs[0].answerRemark.detailArray
-          if (this.actionobs.length > 1) {
-            this.quession2 = this.actionobs[1].answer
-            this.testText2 = this.actionobs[1].answerRemark.detailArray
+          that.actionobs = res.data[0].actionTestResult
+          that.quession1 = that.actionobs[0].answer
+          that.testText1 = that.actionobs[0].answerRemark.detailArray
+          if (that.actionobs.length > 1) {
+            that.quession2 = that.actionobs[1].answer
+            that.testText2 = that.actionobs[1].answerRemark.detailArray
           }
-          if (this.actionobs.length > 2) {
-            this.quession3 = this.actionobs[2].answer
-            this.testText3 = this.actionobs[2].answerRemark.detailArray
+          if (that.actionobs.length > 2) {
+            that.quession3 = that.actionobs[2].answer
+            that.testText3 = that.actionobs[2].answerRemark.detailArray
           }
         } else {
-          this.getActionInfo()
+          that.getActionInfo()
         }
       })
     }
@@ -551,6 +571,7 @@ export default {
   width: calc(100vw - 60upx);
   margin: 0 auto;
   margin-top: 20upx;
+  position: relative;
 }
 .imagebg {
   width: calc(100vw - 60upx);
@@ -586,14 +607,14 @@ export default {
   border-radius: 36upx;
   opacity: 0.5;
   position: absolute;
-  top: 330upx;
+  top: 30upx;
   left: calc(100vw - 717upx);
-  z-index: 1;
   font-size: 26upx;
   font-weight: 400;
   color: rgb(244, 247, 255);
   line-height: 70upx;
   text-align: center;
+  z-index: 2;
 }
 .clickAction image {
   width: 32upx;

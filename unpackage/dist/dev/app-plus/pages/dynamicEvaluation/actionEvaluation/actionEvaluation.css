@@ -233,6 +233,7 @@
   width: calc(100vw - 1.875rem);
   margin: 0 auto;
   margin-top: 0.625rem;
+  position: relative;
 }
 .imagebg[data-v-5866a140] {
   width: calc(100vw - 1.875rem);
@@ -267,14 +268,14 @@
   border-radius: 1.125rem;
   opacity: 0.5;
   position: absolute;
-  top: 10.3125rem;
+  top: 0.9375rem;
   left: calc(100vw - 22.40625rem);
-  z-index: 1;
   font-size: 0.8125rem;
   font-weight: 400;
   color: #f4f7ff;
   line-height: 2.1875rem;
   text-align: center;
+  z-index: 2;
 }
 .clickAction uni-image[data-v-5866a140] {
   width: 1rem;

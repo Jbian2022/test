@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.2.4",
-    "code": 124
+    "name": "1.2.3",
+    "code": 123
   },
   "description": "一款健身APP",
   "developer": {
@@ -23,7 +23,6 @@
     "OAuth": {},
     "iBeacon": {},
     "Payment": {},
-    "Share": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }

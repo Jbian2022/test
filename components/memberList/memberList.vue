@@ -66,7 +66,7 @@
     <template v-else>
       <uni-swipe-action
         class="slide_stylle"
-        v-for="(item, itemIndex) in resultMeberList"
+        v-for="(item, itemIndex) in meberList"
         :key="'itemIndex' + itemIndex"
       >
         <uni-swipe-action-item
@@ -83,11 +83,7 @@
             </view>
           </template>
           <view class="add_student_style">
-            <view
-              class="need_loop_style"
-              :class="{ prohibit_style: item.prohibitUserOpear }"
-              @click.native.stop="jumpMy(item)"
-            >
+            <view class="need_loop_style">
               <view class="loop_top_style">
                 <view class="top_left_style">
                   <text class="top_left_name_style">{{
@@ -166,7 +162,6 @@
 var businessCloudObject = uniCloud.importObject('businessCloudObject')
 const train = uniCloud.importObject('train')
 import { debounce } from '../../common/util.js'
-
 export default {
   name: 'memberList',
   data() {
@@ -184,13 +179,14 @@ export default {
     type: String,
     isFirstFlag: Boolean,
     currentNum: Number,
-    page: Number,
-    termOfValidity: Boolean,
-    userInfo: Object
+    page: Number
   },
 
-  created() {},
-  mounted() {},
+  created() {
+  },
+  mounted() {
+
+  },
   onShow() {},
 
   computed: {
@@ -199,51 +195,8 @@ export default {
       if (this.meberList.length === 0) {
         flag = true
       }
-      // console.log(flag, ' LLLLL')
+      console.log(flag, ' LLLLL')
       return flag
-    },
-    // 最终的会员列表
-    resultMeberList() {
-      let list = this.meberList
-
-      if (this.userInfo.vipLevel) {
-        // 出现 vip 等级 它一定充钱了
-        if (this.termOfValidity) {
-          // 在有效期内不做任何逻辑处理
-          list = list.map((item) => {
-            return {
-              ...item,
-              prohibitUserOpear: false
-            }
-          })
-        } else {
-          if (list.length <= 7) {
-            // 充钱不添加会员的大shamao
-            list = list.map((item) => {
-              return {
-                ...item,
-                prohibitUserOpear: false
-              }
-            })
-          }
-          if (list.length > 7) {
-            console.log(list, '我是尼巴巴爸爸思考')
-            // 充钱了且会员超过7
-            let sliceFirstList = list.slice(0, 7)
-            let sliceLastList = list.slice(7)
-            sliceLastList = sliceLastList.map((item) => {
-              return {
-                ...item,
-                prohibitUserOpear: true
-              }
-            })
-            list = [...sliceFirstList, ...sliceLastList]
-          }
-        }
-      } else {
-        // 不做任何处理
-      }
-      return list
     }
   },
   watch: {
@@ -253,6 +206,16 @@ export default {
       },
       immediate: true
     },
+    // isActive: {
+    //   handler: function (n, o) {
+    //     console.log(n, o, n == o)
+    //     if (this.type === 'home' && typeof n === 'number') {
+    //       this.newActive = n
+    //       this.getMemberList(n)
+    //     }
+    //   },
+    //   immediate: true
+    // },
     searchValue: {
       handler: function (n, o) {
         if (this.type === 'detail') {
@@ -273,19 +236,6 @@ export default {
       this.$refs.popup.close()
     },
     jumpPhysicalAssessment(item) {
-      if (item.prohibitUserOpear) {
-        uni.switchTab({
-          url: '/pages/my/my'
-        })
-        uni.showToast({
-          title: '您的金卡教练已过期，续费金卡教练可继续管理会员~',
-          duration: 1000,
-          width: 180,
-          icon: 'none'
-        })
-        return
-      }
-
       uni.navigateTo({
         url:
           '/pages/physicalAssessment/physicalAssessment' +
@@ -346,18 +296,6 @@ export default {
     },
     // 编辑会员信息
     updateMember(item) {
-      if (item.prohibitUserOpear) {
-        uni.switchTab({
-          url: '/pages/my/my'
-        })
-        uni.showToast({
-          title: '您的金卡教练已过期，续费金卡教练可继续管理会员~',
-          duration: 1000,
-          width: 180,
-          icon: 'none'
-        })
-        return
-      }
       uni.navigateTo({
         url: '/pages/addMyMebers/addMyMebers?item=' + JSON.stringify(item),
         success: (res) => {},
@@ -377,10 +315,9 @@ export default {
               meberListRes.data.map((item) => {
                 return {
                   ...item,
-                  prohibitUserOpear: false
+                  isOpened: 'none'
                 }
               }) || []
-            // 判端是否过期
 
             self.$set(self, 'meberList', meberList)
             console.log(self.meberList, '?????')
@@ -393,33 +330,17 @@ export default {
       console.log('你好')
       this.$refs.popup.open()
     },
-    swipeChange(e, index, item) {
-      if (item.prohibitUserOpear) {
-        return
-      }
-
+    swipeChange(e, index) {
       this.delteIndex = index
       console.log('当前状态：' + e + '，下标：' + index)
     },
 
     goToTrainingRecord(item) {
-      if (item.prohibitUserOpear) {
-        uni.switchTab({
-          url: '/pages/my/my'
-        })
-        uni.showToast({
-          title: '您的金卡教练已过期，续费金卡教练可继续管理会员~',
-          duration: 1000,
-          width: 180,
-          icon: 'none'
-        })
-        return
-      }
-      try {
-        uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
-      } catch (e) {
-        // error
-      }
+		try {
+		  uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
       uni.navigateTo({
         url:
           '/pages/trainingRecord/trainingRecord' +
@@ -427,23 +348,11 @@ export default {
       })
     },
     async goToNewWorkout(item) {
-      if (item.prohibitUserOpear) {
-        uni.switchTab({
-          url: '/pages/my/my'
-        })
-        uni.showToast({
-          title: '您的金卡教练已过期，续费金卡教练可继续管理会员~',
-          duration: 1000,
-          width: 180,
-          icon: 'none'
-        })
-        return
-      }
-      try {
-        uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
-      } catch (e) {
-        // error
-      }
+		try {
+		  uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
       const res = await train.getTrainList({
         traineeNo: item._id,
         trainDate: this.getDay(new Date())
@@ -479,38 +388,12 @@ export default {
       const date = formater(d.getDate())
       return year + '-' + month + '-' + date
     },
-    jumpMy(item) {
-      if (item.prohibitUserOpear) {
-        uni.switchTab({
-          url: '/pages/my/my'
-        })
-        uni.showToast({
-          title: '您的金卡教练已过期，续费金卡教练可继续管理会员~',
-          duration: 2000,
-          width: 180,
-          icon: 'none'
-        })
-        return
-      }
-    },
     getReport(item) {
-      if (item.prohibitUserOpear) {
-        uni.switchTab({
-          url: '/pages/my/my'
-        })
-        uni.showToast({
-          title: '您的金卡教练已过期，续费金卡教练可继续管理会员~',
-          duration: 1000,
-          width: 180,
-          icon: 'none'
-        })
-        return
-      }
-      try {
-        uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
-      } catch (e) {
-        // error
-      }
+		try {
+		  uni.setStorageSync('isActive', String(this.isActive)) // 缓存标签激活信息
+		} catch (e) {
+		  // error
+		}
       uni.navigateTo({
         url:
           '/pages/viewReport/viewReport' +
@@ -565,9 +448,6 @@ export default {
       // flex: 1;
       align-items: center;
       flex-direction: column;
-      .prohibit_style {
-        opacity: 0.3;
-      }
 
       .need_loop_style {
         width: calc(100% - 60upx);
