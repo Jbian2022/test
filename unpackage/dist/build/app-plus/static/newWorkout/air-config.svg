@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>设置</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="21" height="21"></rect>
+    </defs>
+    <g id="设置" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="蒙版"></g>
+        <path d="M12.4083496,1.93342864 L16.60498,4.35635434 C17.9342653,5.12381751 18.7531387,6.54214795 18.7531387,8.07707431 L18.7531387,12.9229257 C18.7531387,14.457852 17.9342653,15.8761825 16.60498,16.6436457 L12.4083496,19.0665714 C11.0790644,19.8340345 9.4413175,19.8340345 8.11203228,19.0665714 L3.91540188,16.6436457 C2.58611666,15.8761825 1.7672432,14.457852 1.7672432,12.9229257 L1.7672432,8.07707431 C1.7672432,6.54214795 2.58611666,5.12381751 3.91540188,4.35635434 L8.11203228,1.93342864 C9.4413175,1.16596547 11.0790644,1.16596547 12.4083496,1.93342864 Z" id="多边形" stroke="#BDC3CE" stroke-width="1.5" fill-rule="nonzero" mask="url(#mask-2)" transform="translate(10.260191, 10.500000) rotate(-30.000000) translate(-10.260191, -10.500000) "></path>
+        <circle id="椭圆形" fill="#BDC3CE" mask="url(#mask-2)" cx="10.260191" cy="10.5" r="2.86363636"></circle>
+    </g>
+</svg>

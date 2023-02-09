@@ -1075,11 +1075,9 @@
   background: transparent;
 }
 .content_style .backImg[data-v-62ef4d39] {
-  position: absolute;
   background-image: url("../../static/app-plus/bg/bodysideReport.png");
   background-repeat: no-repeat;
   background-size: 100%;
-  z-index: -1;
 }
 .content_style .arrow-left[data-v-62ef4d39] {
   position: fixed;
@@ -1102,11 +1100,54 @@
 .content_style .arrow-left.show[data-v-62ef4d39] {
   background: #212328;
 }
+.footer-button[data-v-62ef4d39] {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0.9375rem;
+  background: #212328;
+}
+.footer-button .van-button[data-v-62ef4d39] {
+  height: 3.125rem;
+  width: 100%;
+  background: #1370ff;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+.footer-button .van-button .share-icon[data-v-62ef4d39] {
+  width: 0.875rem;
+  height: 0.875rem;
+  background: url("../../static/newWorkout/share01.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 0.5rem;
+}
+.footer-button .van-button[data-v-62ef4d39]::after {
+  display: none;
+}
 #viewReport[data-v-62ef4d39] {
-  background-image: url("../../static/app-plus/bg/bodysideReport.png");
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: #212328;
+  width: 100%;
+  background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png");
   background-repeat: no-repeat;
   background-size: 100%;
-  padding-top: 4.375rem;
+}
+#imageReport[data-v-62ef4d39] {
+  background: #212328;
 }
 .title[data-v-62ef4d39] {
   width: 3.75rem;
@@ -1119,6 +1160,9 @@
 }
 .titleText[data-v-62ef4d39] {
   margin: 0.3125rem 0.9375rem 0 0.9375rem;
+  position: relative;
+  top: 42px;
+  margin-bottom: 58px;
 }
 .text[data-v-62ef4d39] {
   font-size: 0.9375rem;
@@ -1493,7 +1537,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  background: #2f333a;
+  background: #212328;
 }
 .footer-box .bottom_style[data-v-62ef4d39] {
   width: calc(100vw - 1.875rem);
