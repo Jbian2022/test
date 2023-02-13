@@ -279,14 +279,14 @@
 			height: 100upx;
 		}
 		.cell-label{
-			margin-top: 8upx;
+			margin-top: 6upx;
 			text-align: center;
 			word-break: break-all;
 			background: rgba(19, 112, 255, 0.3);
 			border-radius: 8upx;
-			font-size: 18upx;
+			font-size: 14upx;
 			color: #F4F7FF;
-			padding: 4upx;
+			padding: 2upx;
 		}
 		.prev,.next{
 			.cell-key{
