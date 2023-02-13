@@ -327,50 +327,66 @@ module.exports = {
 		   })
 	},
 	saveReport:async function(data){
-		const token = this.getUniIdToken()
-		const detailInfo = await this.uniID.checkToken(token)
-		return new Promise((resolve, reject) => {
-					   db.collection('t_questionaire_answer').where({
-									traineeNo: data.traineeNo,
-					   				userId: detailInfo.uid,
-					   				key:'Report'
-					   }).get().then((compareRes) => {
-						   console.log(compareRes, '你是')
-						   debugger;
-						   if (compareRes.affectedDocs > 3) {
-							   let resultParam = {}
-							   	resultParam = {
-							   		...data,
-							   		userId: detailInfo.uid,
-							   		key:'Report'
-							   		
-							   	}
-								db.collection('t_questionaire_answer').add(resultParam).then(() =>{
-															  let successMessage = {
-																success: true,
-																message: '添加成功'
-											   			  }
-								resolve(successMessage)
-								}).catch(err => {
-										console.log(err, 'err')
-																   
-								})
-						   }else{
-							   db.collection('t_questionaire_answer').doc(compareRes.data[2]._id).update(resultParam).then(() =>{
-							   	console.log('它是')
-							   	  let successMessage = {
-							   		success: true,
-							   		message: '编辑成功'
-							   	  }
-							   resolve(successMessage)
-							   }).catch(err => {
-							     console.log(err, 'err')
-							      
-							   })
-						   }
-					   })
-		})
-	},
+			const token = this.getUniIdToken()
+			const detailInfo = await this.uniID.checkToken(token)
+			console.log(data)
+			return new Promise((resolve, reject) => {
+						   db.collection('t_questionaire_answer').where({
+										traineeNo: data.traineeNo,
+						   				userId: detailInfo.uid,
+						   				key:'Report'
+						   }).get().then((compareRes) => {
+							   console.log(compareRes, '你是')
+							   if (compareRes.affectedDocs < 3) {
+								   let resultParam = {}
+								   	resultParam = {
+								   		...data,
+								   		userId: detailInfo.uid,
+								   		key:'Report'
+								   		
+								   	}
+									db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+																  let successMessage = {
+																	success: true,
+																	message: '添加成功'
+												   			  }
+									resolve(successMessage)
+									}).catch(err => {
+											console.log(err, 'err')
+																	   
+									})
+							   }else{
+								   console.log("此用户历史数据已满三个")
+								   let resultParam = {}
+								   	resultParam = {
+								   		...data,
+								   		userId: detailInfo.uid,
+								   		key:'Report'
+								   		
+								   	}
+								   db.collection('t_questionaire_answer').doc(compareRes.data[0]._id).remove((res)=>{
+									   console.log('它是',res)
+									   if(res.success){
+										   console.log("删除成功")
+									   }
+								   }).catch(err => {
+								     console.log(err, 'err')
+								      
+								   })
+								   db.collection('t_questionaire_answer').add(resultParam).then(() =>{
+								   							  let successMessage = {
+								   								success: true,
+								   								message: '添加成功'
+								   			   			  }
+								   resolve(successMessage)
+								   }).catch(err => {
+								   		console.log(err, 'err')
+								   								   
+								   })
+							   }
+						   })
+			})
+		},
 	opearReportQuery: async function(data) {
 		   const token = this.getUniIdToken()
 		   const detailInfo = await this.uniID.checkToken(token)

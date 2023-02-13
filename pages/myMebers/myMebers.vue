@@ -67,6 +67,8 @@
             :page="page"
             :currentNum="currentNum"
             @getMemberList="getMemberList"
+            :userInfo="userInfo"
+            :termOfValidity="termOfValidity"
           ></MemberList>
         </view>
         <!-- </scroll-view> -->
@@ -110,6 +112,7 @@
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import MemberList from '@/components/memberList/memberList.vue'
 import ZbTooltip from '@/uni_modules/zb-tooltip/components/zb-tooltip/zb-tooltip.vue'
+import moment from 'moment'
 export default {
   components: {
     BgTheamCompontent,
@@ -131,7 +134,9 @@ export default {
       addUpperLimit: null, // 添加限制
       cocahMemberLimit: 0, //该教练下的学员数量
       page: 10, // 10条
-      currentNum: 1 //第一页
+      currentNum: 1, //第一页
+      termOfValidity: false, //有效期时间
+      userInfo: {}
     }
   },
   onLoad() {
@@ -153,50 +158,48 @@ export default {
           }
         },
         fail: function (err) {
-			console.log(err,'>>>>')
-		}
+          console.log(err, '>>>>')
+        }
       })
-	  
-	  try {
-	  	const res = uni.getStorageInfoSync();
-		let flag = res.keys.indexOf('isActive') !== -1 ? true : false
-		if (!flag) {
-			try {
-			  uni.setStorageSync('isActive', '1') // 缓存标签激活信息
-			  self.isActive = 1
-			  self.$refs.memberListDom.getMemberList(1) 
-			} catch (e) {
-			  // error
-			}
-		}  else {
-			uni.getStorage({
-			  key: 'isActive',
-			  success: function (res) {
-			    if (res.data) {
-					self.isActive = Number(res.data)
-			          self.$refs.memberListDom.getMemberList(Number(res.data)) 
-			        
-			    }
-			  },
-			  fail: function (err) {}
-			})
-		}
-		
-	  	// console.log(res.keys);
-	  	// console.log(res.currentSize);
-	  	// console.log(res.limitSize);
-	  } catch (e) {
-	  	// error
-	  }
-	  
+
+      try {
+        const res = uni.getStorageInfoSync()
+        let flag = res.keys.indexOf('isActive') !== -1 ? true : false
+        if (!flag) {
+          try {
+            uni.setStorageSync('isActive', '1') // 缓存标签激活信息
+            self.isActive = 1
+            self.$refs.memberListDom.getMemberList(1)
+          } catch (e) {
+            // error
+          }
+        } else {
+          uni.getStorage({
+            key: 'isActive',
+            success: function (res) {
+              if (res.data) {
+                self.isActive = Number(res.data)
+                self.$refs.memberListDom.getMemberList(Number(res.data))
+              }
+            },
+            fail: function (err) {}
+          })
+        }
+
+        // console.log(res.keys);
+        // console.log(res.currentSize);
+        // console.log(res.limitSize);
+      } catch (e) {
+        // error
+      }
     })
 
-    this.getUserInfor()
-    // this.getCocachList()
+    // this.getUserInfor()
+    this.getCocachList()
     //
   },
   onShow() {
-    // this.getUserInfor()
+    this.getUserInfor()
   },
   methods: {
     // 获取用户信息
@@ -204,13 +207,33 @@ export default {
       const login = uniCloud.importObject('login', {
         customUI: true // 取消自动展示的交互提示界面
       }) //第一步导入云对象
+      let self = this
       try {
         login
           .getUserInfoMessage()
           .then((res) => {
             console.log(res, '....')
-            this.avatar = res.userInfo.avatar || null
-            this.addUpperLimit = res.userInfo.addUpperLimit || null
+            self.avatar = res.userInfo.avatar || null
+            self.addUpperLimit = res.userInfo.addUpperLimit || null
+            // 暂存userInfo信息
+            self.userInfo = res.userInfo || {}
+
+            // 获取当前时间
+            let currentDay = moment().format('YYYY-MM-DD') // 当前时间
+            // 先比较是否相等
+            if (res.userInfo.vipEndDate || res.userInfo.vipLevel) {
+              let sameTime = moment(currentDay).isSame(res.userInfo.vipEndDate)
+              console.log('补药')
+              if (sameTime) {
+                self.termOfValidity = false
+              } else {
+                self.termOfValidity = moment(currentDay).isBefore(
+                  res.userInfo.vipEndDate
+                )
+              }
+            } else {
+              self.termOfValidity = false
+            }
           })
           .catch((err) => {})
       } catch (e) {
@@ -239,6 +262,7 @@ export default {
     },
     jumpQuery() {
       console.log(111)
+
       uni.removeStorage({
         key: 'isActive',
         success: function (res) {
@@ -288,44 +312,105 @@ export default {
       let businessCloudObject = uniCloud.importObject('businessCloudObject', {
         customUI: true // 取消自动展示的交互提示界面
       })
+      let that = this
       businessCloudObject
         .getCoachMemberList()
         .then((res) => {
-          console.log(res, '腻')
-          this.cocahMemberLimit = res.affectedDocs
-
-          if (!this.addUpperLimit && this.cocahMemberLimit >= 7) {
-            uni.showToast({
-              title: '普通教练限添加7名学员,升级金卡教练获取更多权益~',
-              duration: 1000,
-              width: 180,
-              icon: 'none'
-            })
+          console.log(that.termOfValidity, that.userInfo, '你都是咖啡可考虑')
+          that.cocahMemberLimit = res.affectedDocs
+          if (!that.termOfValidity || !that.userInfo.vipLevel) {
+            // 到期了或者 根本没交钱
+            if (!that.addUpperLimit && that.cocahMemberLimit >= 7) {
+              uni.showToast({
+                title: '普通教练限添加7名学员,升级金卡教练获取更多权益~',
+                duration: 1000,
+                width: 180,
+                icon: 'none'
+              })
+              return
+            }
+            if (that.addUpperLimit || that.cocahMemberLimit < 7) {
+              //
+              uni.navigateTo({
+                url: '/pages/addMyMebers/addMyMebers',
+                success: (res) => {},
+                fail: () => {},
+                complete: () => {}
+              })
+            }
             return
           }
-          if (this.addUpperLimit || this.cocahMemberLimit < 7) {
-            //
-            uni.navigateTo({
-              url: '/pages/addMyMebers/addMyMebers',
-              success: (res) => {},
-              fail: () => {},
-              complete: () => {}
-            })
+
+          if (that.termOfValidity && that.userInfo.vipLevel) {
+            switch (that.userInfo.vipLevel) {
+              case 'annualCard':
+                // 年卡无限制
+                uni.navigateTo({
+                  url: '/pages/addMyMebers/addMyMebers',
+                  success: (res) => {},
+                  fail: () => {},
+                  complete: () => {}
+                })
+
+                break
+              case 'quarterCard':
+                if (!that.addUpperLimit && that.cocahMemberLimit >= 100) {
+                  uni.showToast({
+                    title:
+                      '月卡教练限制添加30个会员，升级年卡可无限添加会员哦~',
+                    duration: 1000,
+                    width: 180,
+                    icon: 'none'
+                  })
+                  return
+                }
+                if (that.addUpperLimit || that.cocahMemberLimit < 100) {
+                  //
+                  uni.navigateTo({
+                    url: '/pages/addMyMebers/addMyMebers',
+                    success: (res) => {},
+                    fail: () => {},
+                    complete: () => {}
+                  })
+                }
+                break
+              case 'monthlyCard':
+                if (!that.addUpperLimit && that.cocahMemberLimit >= 30) {
+                  uni.showToast({
+                    title:
+                      '月卡教练限制添加30个会员，升级年卡可无限添加会员哦~',
+                    duration: 1000,
+                    width: 180,
+                    icon: 'none'
+                  })
+                  return
+                }
+                if (that.addUpperLimit || that.cocahMemberLimit < 30) {
+                  //
+                  uni.navigateTo({
+                    url: '/pages/addMyMebers/addMyMebers',
+                    success: (res) => {},
+                    fail: () => {},
+                    complete: () => {}
+                  })
+                }
+
+                break
+            }
           }
         })
         .catch((err) => {})
     },
     buyClick(type) {
-	 this.$nextTick(function() {
-		try {
-		  uni.setStorageSync('isActive', String(type)) // 缓存标签激活信息
-		} catch (e) {
-		  // error
-		}
-		this.isActive = type
-		this.$refs.memberListDom.getMemberList(type) 
-	 })
-
+      this.$nextTick(function () {
+        try {
+          uni.setStorageSync('isActive', String(type)) // 缓存标签激活信息
+        } catch (e) {
+          // error
+        }
+        this.isActive = type
+        this.$refs.memberListDom.getMemberList(type)
+      })
     }
   }
 }

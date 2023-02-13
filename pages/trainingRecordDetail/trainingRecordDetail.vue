@@ -257,9 +257,12 @@
         </view>
       </view>
     </view>
-    <!-- <view class="footer-button">
-			<view class="van-button" @click="openPopup"><view class="share-icon"></view>炫耀一下</view>
-		</view> -->
+    <view class="footer-button">
+			<view class="van-button" @click="openPopup">
+				<view class="share-icon"></view>
+				炫耀一下
+			</view>
+	</view>
     <!-- #ifdef APP-PLUS || H5 -->
     <view
       :prop="canvasImageMsg"
