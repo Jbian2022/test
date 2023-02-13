@@ -1,6 +1,6 @@
 import {
   __reExport
-} from "./chunk-VY64FMTN.js";
+} from "./chunk-BPKF3OQJ.js";
 
 // ../../../../studyUninApp/bodybuilding-app/node_modules/vant/es/utils/validate.mjs
 var isDef = (val) => val !== void 0 && val !== null;

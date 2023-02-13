@@ -1,4 +1,4 @@
-import "./chunk-VY64FMTN.js";
+import "./chunk-BPKF3OQJ.js";
 
 // ../../../../studyUninApp/bodybuilding-app/node_modules/html2canvas/dist/html2canvas.esm.js
 var extendStatics = function(d, b) {
