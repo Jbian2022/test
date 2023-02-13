@@ -9,6 +9,7 @@
       background-color: #343a44;
     "
   >
+  <BgTheamCompontent></BgTheamCompontent>
 		<view class="footer-button">
 			<view class="van-button" @click="openPopup"><view class="share-icon"></view>分享报告</view>
 		</view>
@@ -964,7 +965,7 @@
 </template>
 
 <script>
-// import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
+import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue';
 // import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue';
 import { ref } from 'vue'
 import { now } from 'moment'
@@ -981,6 +982,9 @@ const train = uniCloud.importObject('train', {
   customUI: true
 })
 export default {
+	components: {
+		BgTheamCompontent
+	},
   data() {
     return {
       currentRate: 50,
@@ -1734,15 +1738,12 @@ export default {
   width: 100%;
 }
 .zhan_wei_style {
-  // margin-top: -50upx;
 }
 .content_style {
   width: 100vw;
   height: 100%;
-  // height: 100vh;
-  // overflow: auto;
   position: relative;
-  // background-color: #212328;
+  box-sizing: border-box;
   .arrow-box {
     height: 88upx;
     background: transparent;
@@ -1811,7 +1812,7 @@ export default {
   }
 #viewReport {
   position: absolute;
-  top: 0;
+  top: -10upx;
   left: 0;
   right: 0;
   bottom: 0;

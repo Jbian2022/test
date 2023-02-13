@@ -13,30 +13,33 @@
 			v-for="(item, index) in actionobs"
 			:key="index"
 			:class="num==index?'block0': ''"
-			@click.native="changeFunction(index)">{{item.questionContent}}</view>
+			@click.native="changeFunction(index)"
+			@click="closePopup">{{item.questionContent}}</view>
 		</view>
 		<view class="headBox" v-else>
 			<view class="block"
 			v-for="(item, index) in actionobs"
 			:key="index"
 			:class="num==index?'block0': ''"
-			@click.native="changeFunction(index)">{{item.questionContent}}</view>
+			@click.native="changeFunction(index)"
+			@click="closePopup"
+			>{{item.questionContent}}</view>
 		</view>
-		<view class="contentBody" v-if="changeValue">
+		<view class="contentBody" v-show="changeValue">
 			<view
 			class="clickAction" 
-			@click.native="openUIup()">点击查看标准动作描述
+			@click.native="showPopup()">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<view>
-				<uni-popup 
-				ref="popup"
+				<van-popup 
+				v-model:show="show" 
 				position="top" 
 				round
 				:overlay="false" 
 				class="clickActionContent">
 					<view class="clickActionBody">
-						<video :src="FrontVideoUrl" wid autoplay loop :controls="false" muted>
+						<video :src="FrontVideoUrl" wid autoplay loop :controls="false" muted v-if="show">
 						</video>
 						<view class="clickActionText">
 							<view class="Actionname">标准动作：</view>
@@ -44,11 +47,11 @@
 								<p v-for="(item,index) in testText1">{{item}}</p>
 							</view>
 						</view>
-						<view class="clickActionEnd" @click.native="closeUIup()">收起
+						<view class="clickActionEnd" @click.native="closePopup">收起
 						<image src="../../../static/app-plus/other/close.png"></image>
 						</view>
 					</view>
-				</uni-popup>
+				</van-popup>
 			</view>
 			<view class="actinQuessonContent">
 				<view
@@ -104,15 +107,15 @@
 				点击上方蓝色标签选择问题部位，可多选
 			</view>
 		</view> 
-		<view class="contentBody" v-else>
+		<view class="contentBody" v-show="!changeValue">
 			<view
 			class="clickAction"  
-			@click.native="openUIup()">点击查看标准动作描述
+			@click.native="showPopup">点击查看标准动作描述
 			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
 			</view>
 			<view>
-			<uni-popup
-			ref="popup"
+			<van-popup 
+			v-model:show="show" 
 			position="top" 
 			round
 			:overlay="false"
@@ -124,7 +127,8 @@
 					loop 
 					:controls="false"
 					:custom-cache="false"
-					muted>
+					muted
+					v-if="show2">
 					</video>
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
@@ -132,11 +136,11 @@
 							<p v-for="(item,index) in testText1">{{item}}</p>
 						</view>
 					</view>
-					<view class="clickActionEnd" @click.native="closeUIup()">收起
+					<view class="clickActionEnd" @click.native="closePopup">收起
 					<image src="../../../static/app-plus/other/close.png"></image>
 					</view>
 				</view>
-			</uni-popup>
+			</van-popup>
 			</view>
 			<view class="actinQuessonContent">
 				<view
@@ -235,14 +239,18 @@
 		},
 		setup() {
 			const show = ref(false);
+			const show2 = ref(false);
 			    const showPopup = () => {
 			      show.value = true;
+				  show2.value = true;
 			    };
 				const closePopup = () =>{
 				  show.value = false;
+				  show2.value = false;
 				};
 			    return {
 			      show,
+				  show2,
 			      showPopup,
 				  closePopup,
 			    };
@@ -343,12 +351,6 @@
 			}
 		},
 		methods: {
-			openUIup() {
-			  this.$refs.popup.open()
-			},
-			closeUIup(){
-				this.$refs.popup.close()
-			},
 				onClickBack(boo){
 					if(!boo){
 						uni.redirectTo({
@@ -465,6 +467,7 @@
 				data["code"] = this.type;
 				const index = 0
 				tesOb.opearPHConfigQuery(data).then((res)=>{
+					console.log(res)
 					if(res.success&&res.data.length!=0){
 						console.log(res.data[0].actionTestResult);
 						this.actionobs = res.data[0].actionTestResult
@@ -593,7 +596,6 @@
 .clickAction{
 	width: 660upx;
 	height: 70upx;
-	cursor: pointer;
 	background: #000000;
 	border-radius: 36upx;
 	opacity: 0.5;
@@ -616,30 +618,23 @@
 	/* height: 1400upx; */
 	background: #383D46;
 	border-radius: 16upx;
-	width: calc(100vw - 40upx);
-	margin-left: 20upx;
-	
-	
 	/* backdrop-filter: blur(3upx); */
 	z-index: 999;
 }
-
-.clickActionContent {
-
+::v-deep .clickActionContent{
+	width: calc(100vw - 60upx);
+	margin-top: 36%;
+	margin-left: 30upx;
+	--van-popup-background-color: #383D46;
+	border-radius: 16upx;
+	position: fixed;
 }
-
-::v-deep uni-video{
-	width: 100% !important;
-	height: 400upx !important;
-
-	padding: 0 !important;
-}
-::v-deep.uni-video-container{
-	background-color: transparent !important;
-	width: calc(100vw - 140upx) !important ;
-	height: 400upx !important;
-	margin-left: 70upx !important;
-	position: relative !important;
+.clickActionBody video{
+	width: calc(100vw - 140upx);
+	height: 400upx;
+	margin-left: 40upx;
+	margin-top: 40upx;
+	border-radius: 20upx;
 }
 .clickActionText{
 	width: calc(100vw - 140upx);
@@ -741,11 +736,4 @@
 .list_style{
 	flex: 1;
 }
-
-// 
-::v-deep .uni-popup__wrapper {
-	width: 100vw !important;
-	
-}
-
 </style>

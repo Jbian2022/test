@@ -198,7 +198,7 @@ export default {
                 // console.log(item.code, '你是大傻逼')
                 if (allRes.affectedDocs > 0) {
                   allRes.data.forEach((v) => {
-                    console.log(v, '什么鬼')
+                    
                     if (v.questionCode === item.code) {
                       let needCompareData = v.hasOwnProperty('testResult')
                         ? v.testResult.filter((c) => c.answer.length > 0)
