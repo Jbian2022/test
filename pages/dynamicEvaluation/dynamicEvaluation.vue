@@ -2,18 +2,25 @@
   <view class="content_style" @touchstart="start" @touchend="end">
     <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <!-- <NavBarCompontent :leftNavTitle="'动态评估'"></NavBarCompontent> -->
-	<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickBack">
+    <!-- 	<view class="arrow-left" :class="{show:isFixedTop}" @click="onClickBack">
 		<van-icon name="arrow-left" />
 		<view class="title">动态评估</view>
 		<view class="z" style="opacity: 0;">8888</view>
 	</view>
-	<view class="watermark">数据评测来源于世界权威机构</view>
+	<view class="watermark">数据评测来源于世界权威机构</view> -->
+    <NavBarCompontent
+      :leftNavTitle="'动态评估'"
+      :isAuthority="true"
+      :jumpType="'DTPG'"
+      :traineeNo="traineeNo"
+    ></NavBarCompontent>
+
     <van-row class="list_style">
       <van-col class="need_scoll" span="24">
         <view
           class="dynamicshow"
           v-for="(item, index) in dynamicEvaluationdata"
-		  @click.native="jumpModular(item)"
+          @click.native="jumpModular(item)"
           :key="index"
         >
           <view class="dynamicshow_left">
@@ -45,123 +52,171 @@
       </van-col>
     </van-row>
     <!-- <van-button type="primary" block class="buttontrue" @click.native="getdynamicEvaluationdata()">确认</van-button> -->
-	<view class="bottom_style" @click.stop="getdynamicEvaluationdata()">保存</view>
+    <view class="bottom_style" @click.stop="getdynamicEvaluationdata()"
+      >保存</view
+    >
   </view>
 </template>
 
 <script>
 import BgTheamCompontent from '@/components/bgTheamCompontent/bgTheamCompontent.vue'
 import NavBarCompontent from '@/components/navBarCompontent/navBarCompontent.vue'
-const busOb = uniCloud.importObject("businessCloudObject",{
-		customUI : true
-	})
-const testOb = uniCloud.importObject("testResults",{
-		customUI : true
-	})
+const busOb = uniCloud.importObject('businessCloudObject', {
+  customUI: true
+})
+const testOb = uniCloud.importObject('testResults', {
+  customUI: true
+})
 export default {
   components: {
     BgTheamCompontent,
-    // NavBarCompontent
+    NavBarCompontent
   },
   data() {
     return {
       dynamicEvaluationdata: [
-        { title: '自重深蹲评估', type: 'E0001',path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估',icon:true},
-        { title: '胸椎活动评估', type: 'E0002' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估',icon:true},
-        { title: '柔韧性测试', type: 'E0003' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试',icon:true},
-        { title: '肩关节灵活性测试', type: 'E0004' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=肩关节灵活性测试',icon:true},
-        { title: '俯卧撑稳定性测试', type: 'E0005' ,path:'/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试',icon:true}
+        {
+          title: '自重深蹲评估',
+          type: 'E0001',
+          path: '/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=自重深蹲评估',
+          icon: true
+        },
+        {
+          title: '胸椎活动评估',
+          type: 'E0002',
+          path: '/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=胸椎活动评估',
+          icon: true
+        },
+        {
+          title: '柔韧性测试',
+          type: 'E0003',
+          path: '/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=柔韧性测试',
+          icon: true
+        },
+        {
+          title: '肩关节灵活性测试',
+          type: 'E0004',
+          path: '/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=肩关节灵活性测试',
+          icon: true
+        },
+        {
+          title: '俯卧撑稳定性测试',
+          type: 'E0005',
+          path: '/pages/dynamicEvaluation/actionEvaluation/actionEvaluation?pageTitle=俯卧撑稳定性测试',
+          icon: true
+        }
       ],
       icon: true,
-	  traineeNo:'',
-	  questionCode:'',
-	  startData:[
-	  	{clientX:'',clientY:''}
-	  ]
+      traineeNo: '',
+      questionCode: '',
+      startData: [{ clientX: '', clientY: '' }]
     }
   },
   created() {
-  	this.getPageData()
+    this.getPageData()
   },
   onLoad: function (item) {
-		console.log(item)
-		this.traineeNo = item.traineeNo;
-		this.questionCode = item.questionCode;
-		this.getPageData()
+    console.log(item)
+    this.traineeNo = item.traineeNo
+    this.questionCode = item.questionCode
+    this.getPageData()
   },
   methods: {
-	      start(e) {
-	        console.log('开始下滑坐标', e.changedTouches[0].clientY)
-	        this.startData.clientX = e.changedTouches[0].clientX
-	        this.startData.clientY = e.changedTouches[0].clientY
-	      },
-	      end(e) {
-	        console.log('结束下滑坐标', e.changedTouches[0].clientY)
-	        const subX = e.changedTouches[0].clientX - this.startData.clientX
-	        const subY = e.changedTouches[0].clientY - this.startData.clientY
-	        if (subY < -50) {
-	          console.log('下滑')
-	          // 翻页
-	        } else if (subY > 50) {
-	          console.log('上滑')
-	        } else if (subX > 50) {
-	          console.log('左滑')
-	          uni.reLaunch({
-	            url: '/pages/physicalAssessment/physicalAssessment?'+'traineeNo=' + this.traineeNo
-	          })
-	        } else if (subX < -50) {
-	          console.log('右滑')
-			  uni.reLaunch({
-			    url: '/pages/physicalAssessment/physicalAssessment?'+'traineeNo=' + this.traineeNo
-			  })
-	        } else {
-	          console.log('无效')
-	        }
-	      },
+    start(e) {
+      console.log('开始下滑坐标', e.changedTouches[0].clientY)
+      this.startData.clientX = e.changedTouches[0].clientX
+      this.startData.clientY = e.changedTouches[0].clientY
+    },
+    end(e) {
+      console.log('结束下滑坐标', e.changedTouches[0].clientY)
+      const subX = e.changedTouches[0].clientX - this.startData.clientX
+      const subY = e.changedTouches[0].clientY - this.startData.clientY
+      if (subY < -50) {
+        console.log('下滑')
+        // 翻页
+      } else if (subY > 50) {
+        console.log('上滑')
+      } else if (subX > 50) {
+        console.log('左滑')
+        uni.reLaunch({
+          url:
+            '/pages/physicalAssessment/physicalAssessment?' +
+            'traineeNo=' +
+            this.traineeNo
+        })
+      } else if (subX < -50) {
+        console.log('右滑')
+        uni.reLaunch({
+          url:
+            '/pages/physicalAssessment/physicalAssessment?' +
+            'traineeNo=' +
+            this.traineeNo
+        })
+      } else {
+        console.log('无效')
+      }
+    },
     setup() {
       const onClickLeft = () => history.back()
       return {
         onClickLeft
       }
     },
-	jumpModular(item) {
-	  console.log(item.path,'>>>>')
-	  uni.navigateTo({
-	    url: item.path+"&type=" + item.type+'&traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode,
-	    success: (res) => {},
-	    fail: () => {},
-	    complete: () => {}
-	  })
-	},
-	getPageData(){
-		const data = {};
-		data["traineeNo"] = this.traineeNo;
-		data["questionCode"] = this.questionCode;
-		console.log(data)
-		busOb.opearConfigQuery(data).then((res)=>{
-			console.log(res.data)
-			res.data.forEach((item)=>{
-				this.dynamicEvaluationdata.filter((v)=>{
-					let resq = item.code == v.type;
-					console.log(resq)
-					if(resq){
-						v.icon = false;
-					}
-				})
-			})
-		})
-	},
-	getdynamicEvaluationdata(){
-		console.log(this.traineeNo)
-		uni.redirectTo({
-			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
-		})
-	},
-	onClickBack(){
-		uni.redirectTo({
-			url: '/pages/physicalAssessment/physicalAssessment' +'?traineeNo=' + this.traineeNo + '&questionCode=' + this.questionCode
-		})
-	}
+    jumpModular(item) {
+      console.log(item.path, '>>>>')
+      uni.navigateTo({
+        url:
+          item.path +
+          '&type=' +
+          item.type +
+          '&traineeNo=' +
+          this.traineeNo +
+          '&questionCode=' +
+          this.questionCode,
+        success: (res) => {},
+        fail: () => {},
+        complete: () => {}
+      })
+    },
+    getPageData() {
+      const data = {}
+      data['traineeNo'] = this.traineeNo
+      data['questionCode'] = this.questionCode
+      console.log(data)
+      busOb.opearConfigQuery(data).then((res) => {
+        console.log(res.data)
+        res.data.forEach((item) => {
+          this.dynamicEvaluationdata.filter((v) => {
+            let resq = item.code == v.type
+            console.log(resq)
+            if (resq) {
+              v.icon = false
+            }
+          })
+        })
+      })
+    },
+    getdynamicEvaluationdata() {
+      console.log(this.traineeNo)
+      uni.redirectTo({
+        url:
+          '/pages/physicalAssessment/physicalAssessment' +
+          '?traineeNo=' +
+          this.traineeNo +
+          '&questionCode=' +
+          this.questionCode
+      })
+    },
+    onClickBack() {
+      uni.redirectTo({
+        url:
+          '/pages/physicalAssessment/physicalAssessment' +
+          '?traineeNo=' +
+          this.traineeNo +
+          '&questionCode=' +
+          this.questionCode
+      })
+    }
   }
 }
 </script>
@@ -174,40 +229,40 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  
-  padding-top:40upx;
-  .arrow-left{
-  	// top: var(--status-bar-height);
-  	// left: 0;
-  	// right: 0;
-  	z-index: 88;
-  	height: 88upx;
-  	display: flex;
-  	align-items: center;
-  	padding-left: 30upx;
-  	color: #bdc3ce;
-  	position: relative;
-	    margin-top: 40upx;
-  	.van-icon{
-  		font-size: 45upx;
-  		color: #fff;
-  	}
-  	// &.show{
-  	// 	position: sticky;
-  	// 	background: #212328;
-  	// 	top: 0;
-  	// 	padding-top: var(--status-bar-height);
-  	// }
+
+  // padding-top:40upx;
+  .arrow-left {
+    // top: var(--status-bar-height);
+    // left: 0;
+    // right: 0;
+    z-index: 88;
+    height: 88upx;
+    display: flex;
+    align-items: center;
+    padding-left: 30upx;
+    color: #bdc3ce;
+    position: relative;
+    margin-top: 40upx;
+    .van-icon {
+      font-size: 45upx;
+      color: #fff;
+    }
+    // &.show{
+    // 	position: sticky;
+    // 	background: #212328;
+    // 	top: 0;
+    // 	padding-top: var(--status-bar-height);
+    // }
   }
 }
-.title{
-	    margin-left: 10px;
-	    font-size: 24px;
-	    font-weight: 600;
-	    color: #FFFFFF;
+.title {
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
 }
-.need_scoll{
-	// background-color: rgba(33, 35, 40, 1);
+.need_scoll {
+  // background-color: rgba(33, 35, 40, 1);
 }
 .dynamicshow {
   width: calc(100vw - 60upx);
@@ -244,7 +299,7 @@ export default {
       // width: 216upx;
       height: 50upx;
       font-size: 36upx;
-	  font-weight: 600;
+      font-weight: 600;
       color: #f4f7ff;
       text-align: center;
       // margin: 80upx 130upx;
@@ -286,14 +341,14 @@ export default {
 }
 .need_scoll {
 }
-.watermark{
-	position: absolute;
-	font-size: 24upx;
-	font-family: PingFangSC-Regular, PingFang SC;
-	font-weight: 400;
-	color: #7A7F89;
-	top: 110upx;
-	right: 50upx;
+.watermark {
+  position: absolute;
+  font-size: 24upx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #7a7f89;
+  top: 110upx;
+  right: 50upx;
 }
 .bottom_style {
   background: #1370ff;
@@ -307,14 +362,14 @@ export default {
   line-height: 100upx;
   text-align: center;
   justify-content: center;
-  
+
   width: calc(100vw - 60upx);
   margin-left: 30upx;
-  
+
   display: flex;
 }
-.list_style{
-	flex: 1;
-	overflow-y: auto;
+.list_style {
+  flex: 1;
+  overflow-y: auto;
 }
 </style>

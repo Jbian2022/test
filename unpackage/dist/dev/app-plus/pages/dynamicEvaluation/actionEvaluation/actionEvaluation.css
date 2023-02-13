@@ -137,8 +137,32 @@
   font-size: 0.75rem !important;
   color: #7a7f89 !important;
 }
-
-.content_style{
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.content_style[data-v-5866a140] {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -146,69 +170,89 @@
   display: flex;
   flex-direction: column;
 }
-.headBox{
-	width: 100vw;
-	height: 2.8125rem;
-	margin: 0 auto;
-	margin-top: 0.625rem;
-	margin-left: 0.9375rem;
-	overflow-x: hidden;
+.content_style .arrow-left[data-v-5866a140] {
+  z-index: 88;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  padding-left: 0.9375rem;
+  color: #bdc3ce;
+  position: relative;
+  margin-top: 2.5rem;
 }
-.block{
-	width: 45vw;
-	height: 2.8125rem;
-	border-radius: 0.5rem;
-	float: left;
-	font-size: 0.9375rem;
-	font-family: PingFangSC-Semibold, PingFang SC;
-	font-weight: 600;
-	color: #F4F7FF;
-	line-height: 2.8125rem;
-	text-align: center;
-	background: #383D46;
-	margin-right: 0.6875rem;
+.content_style .arrow-left .van-icon[data-v-5866a140] {
+  font-size: 1.40625rem;
+  color: #fff;
 }
-.block1{
-	width: 29vw;
-	height: 2.8125rem;
-	border-radius: 0.5rem;
-	float: left;
-	font-size: 0.9375rem;
-	font-family: PingFangSC-Semibold, PingFang SC;
-	font-weight: 600;
-	color: #F4F7FF;
-	line-height: 2.8125rem;
-	text-align: center;
-	background: #383D46;
-	margin-right: 0.6875rem;
+.title[data-v-5866a140] {
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #FFFFFF;
 }
-.block0{
-	background: #195BC2;
+.headBox[data-v-5866a140] {
+  width: 100vw;
+  height: 2.8125rem;
+  margin: 0 auto;
+  margin-top: 0.625rem;
+  margin-left: 0.9375rem;
+  overflow-x: hidden;
 }
-.contentBody{
-	width: calc(100vw - 1.875rem);
-	margin: 0 auto;
-	margin-top: 0.625rem;
+.block[data-v-5866a140] {
+  width: 45vw;
+  height: 2.8125rem;
+  border-radius: 0.5rem;
+  float: left;
+  font-size: 0.9375rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 2.8125rem;
+  text-align: center;
+  background: #383D46;
+  margin-right: 0.6875rem;
 }
-.imagebg {
-      width: calc(100vw - 1.875rem);
-      height: calc(100vh - 13.75rem);
-	  border-radius: 0.5rem;
+.block1[data-v-5866a140] {
+  width: 29vw;
+  height: 2.8125rem;
+  border-radius: 0.5rem;
+  float: left;
+  font-size: 0.9375rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 2.8125rem;
+  text-align: center;
+  background: #383D46;
+  margin-right: 0.6875rem;
 }
-.imgbgText{
-	width: 100%;
-	height: 2.5rem;
-	background: #000000;
-	opacity: 0.5;
-	margin-top: -2.65625rem;
-	border-bottom-radius: 0.5rem;
-	color: #BDC3CE;
-	font-weight: 400;
-	font-size: 0.875rem;
-	text-align: center;
-	line-height: 2.5rem;
+.block0[data-v-5866a140] {
+  background: #195BC2;
 }
-.buttontrue {
+.contentBody[data-v-5866a140] {
+  width: calc(100vw - 1.875rem);
+  margin: 0 auto;
+  margin-top: 0.625rem;
+}
+.imagebg[data-v-5866a140] {
+  width: calc(100vw - 1.875rem);
+  height: calc(100vh - 13.75rem);
+  border-radius: 0.5rem;
+}
+.imgbgText[data-v-5866a140] {
+  width: 100%;
+  height: 2.5rem;
+  background: #000000;
+  opacity: 0.5;
+  margin-top: -2.65625rem;
+  border-bottom-radius: 0.5rem;
+  color: #BDC3CE;
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-align: center;
+  line-height: 2.5rem;
+}
+.buttontrue[data-v-5866a140] {
   width: calc(100vw - 1.875rem);
   height: 3.125rem;
   background: #1370ff;
@@ -216,90 +260,89 @@
   margin-left: 0.9375rem;
   margin-top: 0.9375rem;
 }
-.clickAction{
-	width: 20.625rem;
-	height: 2.1875rem;
-	background: #000000;
-	border-radius: 1.125rem;
-	opacity: 0.5;
-	position:absolute;
-	top: 10.3125rem;
-	left: calc(100vw - 22.40625rem);
-	z-index: 1;
-	font-size: 0.8125rem;
-	font-weight: 400;
-	color: rgb(244, 247, 255);
-	line-height: 2.1875rem;
-	text-align: center;
+.clickAction[data-v-5866a140] {
+  width: 20.625rem;
+  height: 2.1875rem;
+  background: #000000;
+  border-radius: 1.125rem;
+  opacity: 0.5;
+  position: absolute;
+  top: 10.3125rem;
+  left: calc(100vw - 22.40625rem);
+  z-index: 1;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #f4f7ff;
+  line-height: 2.1875rem;
+  text-align: center;
 }
-.clickAction uni-image{
-	width: 1rem;
-	height: 1rem;
-	top: 0.1875rem;
+.clickAction uni-image[data-v-5866a140] {
+  width: 1rem;
+  height: 1rem;
+  top: 0.1875rem;
 }
-.clickActionBody{
-	/* height: 1400upx; */
-	background: #383D46;
-	border-radius: 0.5rem;
-	/* backdrop-filter: blur(3upx); */
-	z-index: 999;
+.clickActionBody[data-v-5866a140] {
+  /* height: 1400upx; */
+  background: #383D46;
+  border-radius: 0.5rem;
+  /* backdrop-filter: blur(3upx); */
+  z-index: 999;
 }
- .clickActionContent{
-	width: calc(100vw - 1.875rem);
-	margin-top: 36%;
-	margin-left: 0.9375rem;
-	--van-popup-background-color: #383D46;
-	border-radius: 0.5rem;
-	position: fixed;
+[data-v-5866a140] .clickActionContent {
+  width: calc(100vw - 1.875rem);
+  margin-top: 36%;
+  margin-left: 0.9375rem;
+  --van-popup-background-color: #383D46;
+  border-radius: 0.5rem;
+  position: fixed;
 }
-.clickActionBody uni-video{
-	width: calc(100vw - 4.375rem);
-	height: 12.5rem;
-	margin-left: 1.25rem;
-	margin-top: 1.25rem;
-	border-radius: 0.625rem;
+.clickActionBody uni-video[data-v-5866a140] {
+  width: calc(100vw - 4.375rem);
+  height: 12.5rem;
+  margin-left: 1.25rem;
+  margin-top: 1.25rem;
+  border-radius: 0.625rem;
 }
-.clickActionText{
-	width: calc(100vw - 4.375rem);
-	height: calc(100vh - 27.5rem);
-	margin-top: 1.25rem;
-	margin-left: 1.25rem;
+.clickActionText[data-v-5866a140] {
+  width: calc(100vw - 4.375rem);
+  height: calc(100vh - 27.5rem);
+  margin-top: 1.25rem;
+  margin-left: 1.25rem;
 }
-.Actionname{
-	font-size: 0.9375rem;
-	font-weight: 600;
-	color: #F4F7FF;
-	line-height: 1.3125rem;
-	margin-bottom: 0.625rem;
+.Actionname[data-v-5866a140] {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #F4F7FF;
+  line-height: 1.3125rem;
+  margin-bottom: 0.625rem;
 }
-.clickActionText p{
-	font-size: 0.8125rem;
-	font-weight: 400;
-	color: #BDC3CE;
-	line-height: 1.125rem;
+.clickActionText p[data-v-5866a140] {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #BDC3CE;
+  line-height: 1.125rem;
 }
-.clickActionEnd{
-	width: 7.1875rem;
-	height: 2.5rem;
-	background: #000000;
-	border-radius: 1.25rem;
-	font-size: 0.8125rem;
-	font-weight: 400;
-	color: #F4F7FF;
-	line-height: 2.1875rem;
-	text-align: center;
-	margin: auto;
-	margin-bottom: 20px;
+.clickActionEnd[data-v-5866a140] {
+  width: 7.1875rem;
+  height: 2.5rem;
+  background: #000000;
+  border-radius: 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #F4F7FF;
+  line-height: 2.1875rem;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 20px;
 }
-.clickActionEnd uni-image{
-	width: 1rem;
-	height: 1rem;
-	top: 0.1875rem;
+.clickActionEnd uni-image[data-v-5866a140] {
+  width: 1rem;
+  height: 1rem;
+  top: 0.1875rem;
 }
-.bottom_style {
+.bottom_style[data-v-5866a140] {
   background: #1370ff;
   border-radius: 0.5rem;
-  margin-top: 0.9375rem;
   margin-bottom: 0.9375rem;
   font-size: 1rem;
   font-family: PingFangSC-Semibold, PingFang SC;
@@ -308,55 +351,53 @@
   line-height: 3.125rem;
   text-align: center;
   justify-content: center;
-  
   width: calc(100vw - 1.875rem);
   margin-left: 0.9375rem;
-  
   display: flex;
 }
-.actinQuesson1{
-	position: absolute;
-	z-index: 2;
-	top: 25rem;
-	left: 2.5rem;
+.actinQuesson1[data-v-5866a140] {
+  position: absolute;
+  z-index: 2;
+  top: 25rem;
+  left: 2.5rem;
 }
-.quessonName{
-	width: 5.625rem;
-	/* height: 80upx; */
-	background: rgba(19,112,255,0.9);
-	border-radius: 0.5rem;
-	font-size: 0.8125rem;
-	font-weight: 600;
-	color: #F4F7FF;
-	/* line-height: 80upx; */
-	padding-top: 0.625rem;
-	padding-bottom: 0.75rem;
-	padding-left: 0.46875rem;
-	padding-right: 0.3125rem;
-	/* text-align: center; */
+.quessonName[data-v-5866a140] {
+  width: 5.625rem;
+  /* height: 80upx; */
+  background: rgba(19, 112, 255, 0.9);
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #F4F7FF;
+  /* line-height: 80upx; */
+  padding-top: 0.625rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.46875rem;
+  padding-right: 0.3125rem;
+  /* text-align: center; */
 }
-.clickQuessonName{
-	width: 6.25rem;
-	/* height: 164upx; */
-	background: rgba(19,112,255,0.9);
-	border-radius: 0.5rem;
-	border: 0.0625rem solid #1370FF;
-	padding: 0.625rem;
+.clickQuessonName[data-v-5866a140] {
+  width: 6.25rem;
+  /* height: 164upx; */
+  background: rgba(19, 112, 255, 0.9);
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #1370FF;
+  padding: 0.625rem;
 }
-.quessonTitle{
-	font-size: 0.8125rem;
-	font-weight: 600;
-	color: #F4F7FF;
+.quessonTitle[data-v-5866a140] {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #F4F7FF;
 }
-.quessonText{
-	font-size: 0.5625rem;
-	font-weight: 400;
-	color: #FFFFFF;
-	margin-top: 0.625rem;
+.quessonText[data-v-5866a140] {
+  font-size: 0.5625rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-top: 0.625rem;
 }
- .van-popup{
-	background: #383D46;
+[data-v-5866a140] .van-popup {
+  background: #383D46;
 }
-.list_style{
-	flex: 1;
+.list_style[data-v-5866a140] {
+  flex: 1;
 }

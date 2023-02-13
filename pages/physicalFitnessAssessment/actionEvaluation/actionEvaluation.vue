@@ -21,6 +21,7 @@
             autoplay
             :custom-cache="false"
             muted
+			v-if="show"
           ></video>
           <view class="clickActionText">
             <view class="Actionname">标准动作：</view>
@@ -124,6 +125,7 @@ export default {
   setup() {
     const show = ref(false)
     const showPopup = () => {
+		console.log("11111");
       show.value = true
     }
     const closePopup = () => {
@@ -410,7 +412,6 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-top: 40upx;
 }
 .collapseBlock {
   background-color: #383d46;

@@ -2,8 +2,8 @@
     "name" : "健变",
     "appid" : "__UNI__76A9E40",
     "description" : "一款健身APP",
-    "versionName" : "1.2.2",
-    "versionCode" : 122,
+    "versionName" : "1.2.5",
+    "versionCode" : 125,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -23,7 +23,8 @@
             "Push" : {},
             "OAuth" : {},
             "iBeacon" : {},
-            "Payment" : {}
+            "Payment" : {},
+            "Share" : {}
         },
         "distribute" : {
             "android" : {
@@ -53,7 +54,8 @@
                     "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
                     "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>"
                 ],
-                "minSdkVersion" : 21
+                "minSdkVersion" : 21,
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ]
             },
             "ios" : {
                 "dSYMs" : false,

@@ -17,8 +17,10 @@ const Locale = {
     deepAssign(messages, newMessages);
   }
 };
+const useCurrentLang = () => lang;
 var stdin_default = Locale;
 export {
   Locale,
-  stdin_default as default
+  stdin_default as default,
+  useCurrentLang
 };
