@@ -1,0 +1,242 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.counter[data-v-62a93864] {
+  position: absolute;
+  background: url("../../static/backgroundImage.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+.counter .text[data-v-62a93864] {
+  padding-top: 12.625rem;
+  padding-left: 2.1875rem;
+}
+.counter .text .text1[data-v-62a93864] {
+  width: 17.375rem;
+  height: 11.5625rem;
+  font-size: 3.125rem;
+  font-family: HarmonyOS_Sans_SC_Black;
+  color: #ffffff;
+  line-height: 4.375rem;
+  font-weight: 600;
+  object-fit: cover;
+}
+.counter .text .text2[data-v-62a93864] {
+  margin-top: 0.3125rem;
+  width: 12.1875rem;
+  height: 1.3125rem;
+  font-size: 0.9375rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #a8adb6;
+  line-height: 1.3125rem;
+}
+.counter .middle[data-v-62a93864] {
+  margin-top: 0.78125rem;
+  height: 9.375rem;
+}
+.counter .middle .phone[data-v-62a93864] {
+  margin: 0 auto;
+  width: calc(100vw - 4.375rem);
+  margin-left: 2.1875rem;
+  height: 3.125rem;
+  display: inline-block;
+  background-color: rgba(244, 247, 255, 0.15);
+  border-radius: 0.5rem;
+}
+.counter .middle .phone[data-v-62a93864] .uni-input-wrapper .uni-input-placeholder {
+  left: 1.25rem;
+  color: #bdc3ce;
+}
+.counter .middle .phone[data-v-62a93864] .uni-input-input {
+  box-sizing: border-box;
+  padding-left: 1.25rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #f4f7ff;
+}
+.counter .middle .btn[data-v-62a93864] {
+  margin-top: 0.625rem;
+  width: calc(100vw - 4.375rem);
+  margin-left: 2.1875rem;
+  height: 3.125rem;
+  background: #454951;
+  border-radius: 0.5rem;
+  cursor: not-allowed;
+}
+.counter .middle .btn .btn-text[data-v-62a93864] {
+  height: 1.375rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #f4f7ff;
+  line-height: 3.125rem;
+}
+.counter .middle .active_btn[data-v-62a93864] {
+  background: #1370ff;
+}
+.counter .middle .ying_si_style[data-v-62a93864] {
+  width: calc(100vw - 4.375rem);
+  margin-left: 2.1875rem;
+  margin-top: 0.9375rem;
+  display: flex;
+  align-items: center;
+}
+.counter .middle .ying_si_style .check_style[data-v-62a93864] {
+  width: 0.875rem;
+  height: 0.9375rem;
+  padding-right: 0.625rem;
+}
+.counter .middle .ying_si_style .check_style .check_img_style[data-v-62a93864] {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.counter .middle .ying_si_style .ying_si_remark_dakuang_style[data-v-62a93864] {
+  flex: 1;
+  pardding-left: 0.625rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #bdc3ce;
+}
+.counter .middle .ying_si_style .ying_si_remark_dakuang_style .ying_si_remark_middle[data-v-62a93864] {
+  color: #f4f7ff;
+}
+.counter .wx_loging_style[data-v-62a93864] {
+  width: calc(100vw - 4.375rem);
+  margin-left: 2.1875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.counter .wx_loging_style .wx_img_style[data-v-62a93864] {
+  margin-top: 3.625rem;
+  width: 3.125rem;
+  height: 3.125rem;
+  object-fit: contain;
+}
+.counter .wx_loging_style .wx_img_style[data-v-62a93864]:nth-child(1) {
+  margin-right: 3.125rem;
+}
+.botter_dakuang_style[data-v-62a93864] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(75, 82, 94, 0.2);
+  z-index: 10000;
+}
+.botter_dakuang_style .botter[data-v-62a93864] {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 4.375rem);
+  height: 23.5rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+}
+.botter_dakuang_style .botter .botter-top[data-v-62a93864] {
+  width: calc(100% - 3.75rem);
+  padding-top: 2.0625rem;
+  margin-left: 1.875rem;
+}
+.botter_dakuang_style .botter .botter-top .botter-top5-text[data-v-62a93864] {
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 0.9375rem;
+  font-weight: 400;
+  color: #a8adb6;
+}
+.botter_dakuang_style .botter .botter-top .botter-top4[data-v-62a93864] {
+  margin-top: 2.1875rem;
+  height: 3.125rem;
+  background: #1370ff;
+  border-radius: 0.5rem;
+}
+.botter_dakuang_style .botter .botter-top .botter-top4 .botter-top4-text[data-v-62a93864] {
+  width: 5rem;
+  height: 1.375rem;
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.375rem;
+  line-height: 3.125rem;
+}
+.botter_dakuang_style .botter .botter-top .botter-top3[data-v-62a93864] {
+  width: 15.3125rem;
+  height: 7.5rem;
+  font-size: 0.9375rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6e7073;
+  line-height: 1.5rem;
+}
+.botter_dakuang_style .botter .botter-top .botter-top2[data-v-62a93864] {
+  width: 5.25rem;
+  height: 1.4375rem;
+  font-size: 1rem;
+  font-family: HarmonyOS_Sans_SC_Black;
+  color: #1370ff;
+  line-height: 1.4375rem;
+}
+.botter_dakuang_style .botter .botter-top .botter-top1[data-v-62a93864] {
+  width: 13rem;
+  height: 2.25rem;
+  font-size: 1.625rem;
+  font-family: HarmonyOS_Sans_SC_Bold;
+  color: #323438;
+  line-height: 2.25rem;
+}
+[data-v-62a93864] .van-field__control {
+  font-size: 1rem !important;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #f4f7ff;
+}
+[data-v-62a93864] .van-field__control::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #bdc3ce;
+}
+[data-v-62a93864] .van-field__control::placeholder {
+  font-size: 1rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #bdc3ce;
+}
+[data-v-62a93864] .van-cell::after {
+  border-bottom-width: 0 !important;
+  border-top-width: 0 !important;
+  border: none;
+}

@@ -288,20 +288,6 @@
 			}
 		},
 		{
-			"path": "pages/bindPhone/bindPhone",
-			"style": {
-				"navigationBarTitleText": "绑定手机号",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
-				"autoBackButton": false,
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-					"titleNView": false,
-					"bounce": "none"
-				}
-			}
-		},
-		{
 			"path": "pages/updateSignature/updateSignature",
 			"style": {
 				"navigationBarTitleText": "修改签名",
@@ -366,29 +352,15 @@
 		{
 			"path": "pages/cancel/cancel",
 			"style": {
-					"navigationBarTitleText": "",
-						"enablePullDownRefresh": false,
-						"autoBackButton": false,
-						"navigationStyle": "custom",
-						"navigationBarTextStyle": "white",
-						"app-plus": {
-							"titleNView": false,
-							"bounce": "none"
-						}
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/cancelAgreement/cancelAgreement",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"autoBackButton": false,
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-					"titleNView": false,
-					"bounce": "none"
-				}
+				"enablePullDownRefresh": false
 			}
 		},
 		{
