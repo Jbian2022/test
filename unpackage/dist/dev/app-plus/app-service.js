@@ -1028,7 +1028,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.129"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.137"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -8215,7 +8215,6 @@ if (uni.restoreGlobal) {
               let isFinsh = false;
               if (allRes.affectedDocs > 0) {
                 allRes.data.forEach((v2) => {
-                  formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:201", v2, "\u4EC0\u4E48\u9B3C");
                   if (v2.questionCode === item.code) {
                     let needCompareData = v2.hasOwnProperty("testResult") ? v2.testResult.filter((c2) => c2.answer.length > 0) : [];
                     let compareBodyTestResport = v2.hasOwnProperty("bodyTestReport") && JSON.stringify(v2.bodyTestReport) !== "{}" ? true : false;
@@ -20624,12 +20623,24 @@ if (uni.restoreGlobal) {
     },
     setup() {
       const show = vue.ref(false);
+      const show2 = vue.ref(false);
+      const showPopup = () => {
+        show.value = true;
+        show2.value = true;
+      };
+      const closePopup = () => {
+        show.value = false;
+        show2.value = false;
+      };
       return {
-        show
+        show,
+        show2,
+        showPopup,
+        closePopup
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:220", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:259", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       let leftNavTitle = item.pageTitle;
@@ -20671,7 +20682,10 @@ if (uni.restoreGlobal) {
     },
     data() {
       return {
-        actionobs: [{ name: "\u6B63\u9762\u89C2" }, { name: "\u4FA7\u9762\u89C2" }],
+        actionobs: [
+          { name: "\u6B63\u9762\u89C2" },
+          { name: "\u4FA7\u9762\u89C2" }
+        ],
         backIcon: true,
         type: "",
         traineeNo: "",
@@ -20709,26 +20723,12 @@ if (uni.restoreGlobal) {
         testText1: [],
         testText2: [],
         testText3: [],
-        startData: [{ clientX: "", clientY: "" }],
-        popFlagOne: false,
-        popFlagTwo: false
+        startData: [
+          { clientX: "", clientY: "" }
+        ]
       };
     },
     methods: {
-      openOne() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:323", 11111);
-        this.popFlagOne = true;
-      },
-      closeOne() {
-        this.popFlagOne = false;
-      },
-      openTwo() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:330", 22222);
-        this.popFlagTwo = true;
-      },
-      closeTwo() {
-        this.popFlagTwo = false;
-      },
       onClickBack(boo) {
         if (!boo) {
           uni.redirectTo({
@@ -20737,30 +20737,30 @@ if (uni.restoreGlobal) {
         }
       },
       start(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:349", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:362", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         this.startData.clientX = e.changedTouches[0].clientX;
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:354", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:367", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         const subX = e.changedTouches[0].clientX - this.startData.clientX;
         const subY = e.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:358", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:371", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:361", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:374", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:363", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:376", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:373", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:381", "\u53F3\u6ED1");
           uni.reLaunch({
             url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:383", "\u65E0\u6548");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:386", "\u65E0\u6548");
         }
       },
       setup() {
@@ -20779,37 +20779,36 @@ if (uni.restoreGlobal) {
         }
       },
       getActionInfo() {
-        let self2 = this;
-        if (self2.type !== "") {
-          busOb$2.getPhysicalChildAssessmentList(self2.type).then((res2) => {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:405", res2.data);
+        if (this.type !== "") {
+          busOb$2.getPhysicalChildAssessmentList(this.type).then((res2) => {
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:407", res2.data);
             let index = res2.data.length;
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:407", index);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:409", index);
             if (res2.success) {
-              self2.actionobs = res2.data;
-              self2.quession1 = self2.actionobs[0].answer;
-              self2.testText1 = self2.actionobs[0].answerRemark.detailArray;
-              if (self2.actionobs.length > 1) {
-                self2.quession2 = self2.actionobs[1].answer;
-                self2.testText2 = self2.actionobs[1].answerRemark.detailArray;
+              this.actionobs = res2.data;
+              this.quession1 = this.actionobs[0].answer;
+              this.testText1 = this.actionobs[0].answerRemark.detailArray;
+              if (this.actionobs.length > 1) {
+                this.quession2 = this.actionobs[1].answer;
+                this.testText2 = this.actionobs[1].answerRemark.detailArray;
               }
-              if (self2.actionobs.length > 2) {
-                self2.quession3 = self2.actionobs[2].answer;
-                self2.testText3 = self2.actionobs[2].answerRemark.detailArray;
+              if (this.actionobs.length > 2) {
+                this.quession3 = this.actionobs[2].answer;
+                this.testText3 = this.actionobs[2].answerRemark.detailArray;
               }
             }
           });
         }
       },
       actionResDate() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:426", this.actionobs);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:428", this.actionobs);
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         data["actionTestResult"] = this.actionobs;
         data["status"] = "0";
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:433", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:435", data);
         tesOb.opearConfig(data, "bodyTestReport").then((res2) => {
           formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:437", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
@@ -20826,7 +20825,7 @@ if (uni.restoreGlobal) {
         });
       },
       clickQ(item, num) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:457", item);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:451", item);
         if (item.status) {
           item.status = 0;
         } else {
@@ -20839,27 +20838,27 @@ if (uni.restoreGlobal) {
         });
       },
       getData() {
-        let that = this;
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         tesOb.opearPHConfigQuery(data).then((res2) => {
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:470", res2);
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:478", res2.data[0].actionTestResult);
-            that.actionobs = res2.data[0].actionTestResult;
-            that.quession1 = that.actionobs[0].answer;
-            that.testText1 = that.actionobs[0].answerRemark.detailArray;
-            if (that.actionobs.length > 1) {
-              that.quession2 = that.actionobs[1].answer;
-              that.testText2 = that.actionobs[1].answerRemark.detailArray;
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:472", res2.data[0].actionTestResult);
+            this.actionobs = res2.data[0].actionTestResult;
+            this.quession1 = this.actionobs[0].answer;
+            this.testText1 = this.actionobs[0].answerRemark.detailArray;
+            if (this.actionobs.length > 1) {
+              this.quession2 = this.actionobs[1].answer;
+              this.testText2 = this.actionobs[1].answerRemark.detailArray;
             }
-            if (that.actionobs.length > 2) {
-              that.quession3 = that.actionobs[2].answer;
-              that.testText3 = that.actionobs[2].answerRemark.detailArray;
+            if (this.actionobs.length > 2) {
+              this.quession3 = this.actionobs[2].answer;
+              this.testText3 = this.actionobs[2].answerRemark.detailArray;
             }
           } else {
-            that.getActionInfo();
+            this.getActionInfo();
           }
         });
       }
@@ -20867,11 +20866,30 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_NavBarCompontent = vue.resolveComponent("NavBarCompontent");
-    return vue.openBlock(), vue.createElementBlock("view", { class: "content_style" }, [
+    const _component_van_icon = vue.resolveComponent("van-icon");
+    const _component_van_popup = vue.resolveComponent("van-popup");
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "content_style",
+      onTouchstart: _cache[10] || (_cache[10] = (...args) => $options.start && $options.start(...args)),
+      onTouchend: _cache[11] || (_cache[11] = (...args) => $options.end && $options.end(...args))
+    }, [
       vue.createElementVNode("view", { class: "list_style" }, [
         vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-        vue.createVNode(_component_NavBarCompontent, { leftNavTitle: _ctx.leftNavTitle }, null, 8, ["leftNavTitle"]),
+        vue.createCommentVNode(' <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent> '),
+        vue.createElementVNode("view", {
+          class: "arrow-left",
+          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClickBack($setup.show))
+        }, [
+          !$setup.show ? (vue.openBlock(), vue.createBlock(_component_van_icon, {
+            key: 0,
+            name: "arrow-left"
+          })) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode("view", { class: "title" }, vue.toDisplayString(_ctx.leftNavTitle), 1),
+          vue.createElementVNode("view", {
+            class: "z",
+            style: { "opacity": "0" }
+          }, "8888")
+        ]),
         _ctx.leftNavTitle === "\u80A9\u5173\u8282\u7075\u6D3B\u6027\u6D4B\u8BD5" ? (vue.openBlock(), vue.createElementBlock("view", {
           key: 0,
           class: "headBox"
@@ -20880,7 +20898,10 @@ if (uni.restoreGlobal) {
             return vue.openBlock(), vue.createElementBlock("view", {
               class: vue.normalizeClass(["block1", $data.num == index ? "block0" : ""]),
               key: index,
-              onClick: ($event) => $options.changeFunction(index)
+              onClick: [
+                ($event) => $options.changeFunction(index),
+                _cache[1] || (_cache[1] = (...args) => $setup.closePopup && $setup.closePopup(...args))
+              ]
             }, vue.toDisplayString(item.questionContent), 11, ["onClick"]);
           }), 128))
         ])) : (vue.openBlock(), vue.createElementBlock("view", {
@@ -20891,50 +20912,60 @@ if (uni.restoreGlobal) {
             return vue.openBlock(), vue.createElementBlock("view", {
               class: vue.normalizeClass(["block", $data.num == index ? "block0" : ""]),
               key: index,
-              onClick: ($event) => $options.changeFunction(index)
+              onClick: [
+                ($event) => $options.changeFunction(index),
+                _cache[2] || (_cache[2] = (...args) => $setup.closePopup && $setup.closePopup(...args))
+              ]
             }, vue.toDisplayString(item.questionContent), 11, ["onClick"]);
           }), 128))
         ])),
-        $data.changeValue ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 2,
-          class: "contentBody"
-        }, [
+        vue.withDirectives(vue.createElementVNode("view", { class: "contentBody" }, [
           vue.createElementVNode("view", {
             class: "clickAction",
-            onClick: _cache[0] || (_cache[0] = (...args) => $options.openOne && $options.openOne(...args))
+            onClick: _cache[3] || (_cache[3] = ($event) => $setup.showPopup())
           }, [
             vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
             vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
           ]),
-          vue.withDirectives(vue.createElementVNode("view", { class: "shouxie_pop" }, [
-            vue.createElementVNode("view", { class: "clickActionBody" }, [
-              vue.createElementVNode("video", {
-                src: $data.FrontVideoUrl,
-                wid: "",
-                autoplay: "",
-                loop: "",
-                controls: false,
-                muted: "",
-                id: "video_style"
-              }, null, 8, ["src"]),
-              vue.createElementVNode("view", { class: "clickActionText" }, [
-                vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
-                vue.createElementVNode("view", null, [
-                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.testText1, (item, index) => {
-                    return vue.openBlock(), vue.createElementBlock("p", null, vue.toDisplayString(item), 1);
-                  }), 256))
+          vue.createElementVNode("view", null, [
+            vue.createVNode(_component_van_popup, {
+              show: $setup.show,
+              "onUpdate:show": _cache[5] || (_cache[5] = ($event) => $setup.show = $event),
+              position: "top",
+              round: "",
+              overlay: false,
+              class: "clickActionContent"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "clickActionBody" }, [
+                  $setup.show ? (vue.openBlock(), vue.createElementBlock("video", {
+                    key: 0,
+                    src: $data.FrontVideoUrl,
+                    wid: "",
+                    autoplay: "",
+                    loop: "",
+                    controls: false,
+                    muted: ""
+                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
+                  vue.createElementVNode("view", { class: "clickActionText" }, [
+                    vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
+                    vue.createElementVNode("view", null, [
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.testText1, (item, index) => {
+                        return vue.openBlock(), vue.createElementBlock("p", null, vue.toDisplayString(item), 1);
+                      }), 256))
+                    ])
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "clickActionEnd",
+                    onClick: _cache[4] || (_cache[4] = (...args) => $setup.closePopup && $setup.closePopup(...args))
+                  }, [
+                    vue.createTextVNode("\u6536\u8D77 "),
+                    vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
+                  ])
                 ])
               ]),
-              vue.createElementVNode("view", {
-                class: "clickActionEnd",
-                onClick: _cache[1] || (_cache[1] = (...args) => $options.closeOne && $options.closeOne(...args))
-              }, [
-                vue.createTextVNode("\u6536\u8D77 "),
-                vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
-              ])
-            ])
-          ], 512), [
-            [vue.vShow, $data.popFlagOne]
+              _: 1
+            }, 8, ["show"])
           ]),
           vue.createElementVNode("view", { class: "actinQuessonContent" }, [
             (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.quession1, (item, index) => {
@@ -20955,62 +20986,70 @@ if (uni.restoreGlobal) {
                 }, [
                   vue.createElementVNode("view", { class: "quessonTitle" }, vue.toDisplayString(item.answerTitle), 1),
                   vue.createElementVNode("view", { class: "quessonText" }, [
-                    vue.createElementVNode("p", { style: { "color": "#f04242", "display": "initial" } }, "\u95EE\u9898\u63CF\u8FF0\uFF1A"),
-                    vue.createTextVNode(" " + vue.toDisplayString(item.answeerContent), 1)
+                    vue.createElementVNode("p", { style: { "color": "#F04242", "display": "initial" } }, "\u95EE\u9898\u63CF\u8FF0\uFF1A"),
+                    vue.createTextVNode(vue.toDisplayString(item.answeerContent), 1)
                   ])
                 ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true)
               ], 4);
-            }), 256))
+            }), 256)),
+            vue.createCommentVNode(' <view style="position: absolute;\r\n							z-index: 2;\r\n							top: 670upx;\r\n							left: 530upx;">\r\n					<view class="quessonName" v-if="true">\r\n						<p>\u8EAF\u5E72\u4E00\u4FA7\u504F\u79FB</p>\r\n					</view>\r\n					<view class="clickQuessonName" v-if="false">\r\n						<view class="quessonTitle">\r\n							\u8EAF\u5E72\u4E00\u4FA7\u504F\u79FB\r\n						</view>\r\n						<view class="quessonText">\r\n							\u95EE\u9898\u63CF\u8FF0\uFF1A\u80A1\u56DB\u5934\u808C\u548C\u9ACB\u5173\u8282\u5C48\u808C\u6D3B\u8DC3\uFF0C\u81C0\u90E8\r\n						</view>\r\n					</view>\r\n				</view>\r\n				<view style="position: absolute;\r\n							z-index: 2;\r\n							top: 1040upx;\r\n							left: 530upx;">\r\n					<view class="quessonName" v-if="true">\r\n						<p>\u8DB3\u80CC\u5C48\u4E0D\u8DB3</p>\r\n					</view>\r\n					<view class="clickQuessonName" v-if="false">\r\n						<view class="quessonTitle">\r\n							\u8DB3\u80CC\u5C48\u4E0D\u8DB3\r\n						</view>\r\n						<view class="quessonText">\r\n							\u95EE\u9898\u63CF\u8FF0\uFF1A\u80A1\u56DB\u5934\u808C\u548C\u9ACB\u5173\u8282\u5C48\u808C\u6D3B\u8DC3\uFF0C\u81C0\u90E8\r\n						</view>\r\n					</view>\r\n				</view> ')
           ]),
           vue.createElementVNode("image", {
             class: "imagebg",
             src: $data.backimgFront
           }, null, 8, ["src"]),
           vue.createElementVNode("view", { class: "imgbgText" }, " \u70B9\u51FB\u4E0A\u65B9\u84DD\u8272\u6807\u7B7E\u9009\u62E9\u95EE\u9898\u90E8\u4F4D\uFF0C\u53EF\u591A\u9009 ")
-        ])) : (vue.openBlock(), vue.createElementBlock("view", {
-          key: 3,
-          class: "contentBody"
-        }, [
+        ], 512), [
+          [vue.vShow, $data.changeValue]
+        ]),
+        vue.withDirectives(vue.createElementVNode("view", { class: "contentBody" }, [
           vue.createElementVNode("view", {
             class: "clickAction",
-            onClick: _cache[2] || (_cache[2] = (...args) => $options.openTwo && $options.openTwo(...args))
+            onClick: _cache[6] || (_cache[6] = (...args) => $setup.showPopup && $setup.showPopup(...args))
           }, [
             vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
             vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
           ]),
           vue.createElementVNode("view", null, [
-            $data.popFlagTwo ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 0,
-              class: "shouxie_pop"
-            }, [
-              vue.createElementVNode("view", { class: "clickActionBody" }, [
-                vue.createElementVNode("video", {
-                  src: $data.SideVideoUrl,
-                  wid: "",
-                  autoplay: "",
-                  loop: "",
-                  controls: false,
-                  "custom-cache": false,
-                  muted: "",
-                  id: "video_style_two"
-                }, null, 8, ["src"]),
-                vue.createElementVNode("view", { class: "clickActionText" }, [
-                  vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
-                  vue.createElementVNode("view", null, [
-                    (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.testText1, (item, index) => {
-                      return vue.openBlock(), vue.createElementBlock("p", null, vue.toDisplayString(item), 1);
-                    }), 256))
+            vue.createVNode(_component_van_popup, {
+              show: $setup.show,
+              "onUpdate:show": _cache[8] || (_cache[8] = ($event) => $setup.show = $event),
+              position: "top",
+              round: "",
+              overlay: false,
+              class: "clickActionContent"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "clickActionBody" }, [
+                  $setup.show2 ? (vue.openBlock(), vue.createElementBlock("video", {
+                    key: 0,
+                    src: $data.SideVideoUrl,
+                    wid: "",
+                    autoplay: "",
+                    loop: "",
+                    controls: false,
+                    "custom-cache": false,
+                    muted: ""
+                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
+                  vue.createElementVNode("view", { class: "clickActionText" }, [
+                    vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
+                    vue.createElementVNode("view", null, [
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.testText1, (item, index) => {
+                        return vue.openBlock(), vue.createElementBlock("p", null, vue.toDisplayString(item), 1);
+                      }), 256))
+                    ])
+                  ]),
+                  vue.createElementVNode("view", {
+                    class: "clickActionEnd",
+                    onClick: _cache[7] || (_cache[7] = (...args) => $setup.closePopup && $setup.closePopup(...args))
+                  }, [
+                    vue.createTextVNode("\u6536\u8D77 "),
+                    vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
                   ])
-                ]),
-                vue.createElementVNode("view", {
-                  class: "clickActionEnd",
-                  onClick: _cache[3] || (_cache[3] = (...args) => $options.closeTwo && $options.closeTwo(...args))
-                }, [
-                  vue.createTextVNode("\u6536\u8D77 "),
-                  vue.createElementVNode("image", { src: "/static/app-plus/other/close.png" })
                 ])
-              ])
-            ])) : vue.createCommentVNode("v-if", true)
+              ]),
+              _: 1
+            }, 8, ["show"])
           ]),
           vue.createElementVNode("view", { class: "actinQuessonContent" }, [
             (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.quession2, (item, index) => {
@@ -21031,8 +21070,8 @@ if (uni.restoreGlobal) {
                 }, [
                   vue.createElementVNode("view", { class: "quessonTitle" }, vue.toDisplayString(item.answerTitle), 1),
                   vue.createElementVNode("view", { class: "quessonText" }, [
-                    vue.createElementVNode("p", { style: { "color": "#f04242", "display": "initial" } }, "\u95EE\u9898\u63CF\u8FF0\uFF1A"),
-                    vue.createTextVNode(" " + vue.toDisplayString(item.answeerContent), 1)
+                    vue.createElementVNode("p", { style: { "color": "#F04242", "display": "initial" } }, "\u95EE\u9898\u63CF\u8FF0\uFF1A"),
+                    vue.createTextVNode(vue.toDisplayString(item.answeerContent), 1)
                   ])
                 ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true)
               ], 4);
@@ -21045,13 +21084,15 @@ if (uni.restoreGlobal) {
           }, null, 8, ["src"]),
           vue.createElementVNode("view", { class: "imgbgText" }, " \u70B9\u51FB\u4E0A\u65B9\u84DD\u8272\u6807\u7B7E\u9009\u62E9\u95EE\u9898\u90E8\u4F4D "),
           vue.createCommentVNode(' <image\r\n			  src="../../static/app-plus/bg/actionImg.png"\r\n			></image> ')
-        ]))
+        ], 512), [
+          [vue.vShow, !$data.changeValue]
+        ])
       ]),
       vue.createElementVNode("view", {
         class: "bottom_style",
-        onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.actionResDate && $options.actionResDate(...args), ["stop"]))
+        onClick: _cache[9] || (_cache[9] = vue.withModifiers((...args) => $options.actionResDate && $options.actionResDate(...args), ["stop"]))
       }, "\u4FDD\u5B58")
-    ]);
+    ], 32);
   }
   const PagesDynamicEvaluationActionEvaluationActionEvaluation = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-5866a140"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue"]]);
   const busOb$1 = Es.importObject("businessCloudObject", {
@@ -21276,6 +21317,7 @@ if (uni.restoreGlobal) {
     setup() {
       const show = vue.ref(false);
       const showPopup = () => {
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:128", "11111");
         show.value = true;
       };
       const closePopup = () => {
@@ -21293,7 +21335,7 @@ if (uni.restoreGlobal) {
     onLoad: function(item) {
       let data = JSON.parse(item.data);
       this.actionData = data;
-      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:123", this.actionData);
+      formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:147", this.actionData);
       this.leftNavTitle = this.actionData.questionContent;
       this.imgUrl = this.actionData.url;
       this.videoUrl = this.actionData.answerRemark.url;
@@ -21328,17 +21370,17 @@ if (uni.restoreGlobal) {
         videoUrl: "",
         traineeNo: "",
         questionCode: "",
-        restData: [{
-          traineeNo: "",
-          questionCode: "",
-          testResult: [],
-          userId: "",
-          status: "0"
-        }],
+        restData: [
+          {
+            traineeNo: "",
+            questionCode: "",
+            testResult: [],
+            userId: "",
+            status: "0"
+          }
+        ],
         backgroundColor: "rgba(56,61,70, 1)",
-        startData: [
-          { clientX: "", clientY: "" }
-        ]
+        startData: [{ clientX: "", clientY: "" }]
       };
     },
     methods: {
@@ -21349,41 +21391,41 @@ if (uni.restoreGlobal) {
         this.isfocus = true;
       },
       start(e) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:180", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:204", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         this.startData.clientX = e.changedTouches[0].clientX;
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:185", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:209", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         const subX = e.changedTouches[0].clientX - this.startData.clientX;
         const subY = e.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:189", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:213", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:192", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:216", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:194", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:218", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:199", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:228", "\u53F3\u6ED1");
           uni.reLaunch({
             url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:204", "\u65E0\u6548");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:238", "\u65E0\u6548");
         }
       },
       testResult(gender, age, resValue) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:209", gender, age, resValue);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:243", gender, age, resValue);
         resValue = Number(resValue);
         if (resValue == "") {
           this.levelColor("");
           this.typeText = "\u5F85\u6D4B";
         } else {
           testOb$1.method1(gender, age, resValue, this.codes).then((res2) => {
-            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:216", res2.data);
+            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:250", res2.data);
             if (resValue > 500) {
               switch (this.codes) {
                 case "F0001":
@@ -21423,7 +21465,7 @@ if (uni.restoreGlobal) {
         data["traineeId"] = this.traineeNo;
         testOb$1.getOnlyList(data).then((res2) => {
           if (res2.success) {
-            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:257", res2.data[0].birthday);
+            formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:291", res2.data[0].birthday);
             this.gender = res2.data[0].gender;
             birth = res2.data[0].birthday;
             this.age = Number(this.getAge(birth));
@@ -21446,11 +21488,11 @@ if (uni.restoreGlobal) {
           age[0]--;
           age[1] += 12;
         }
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:287", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:322", age[0] + "\u5C81" + age[1] + "\u6708" + age[2] + "\u5929");
         return age[0];
       },
       levelColor(levelType) {
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:291", levelType);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:326", levelType);
         switch (levelType) {
           case "\u4F18\u79C0":
           case "\u826F\u597D":
@@ -21488,9 +21530,9 @@ if (uni.restoreGlobal) {
         data["testDate"] = new Date();
         data["physicalData"] = actinData;
         data["status"] = "0";
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:329", data);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:364", data);
         const res2 = testOb$1.opearConfig(data, "bodyTestReport").then((res3) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:331", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:368", res3, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res3.success) {
             uni.redirectTo({
               url: "/pages/physicalFitnessAssessment/physicalFitnessAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -21503,7 +21545,7 @@ if (uni.restoreGlobal) {
           }
         }).catch(() => {
         });
-        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:343", res2);
+        formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:386", res2);
       },
       getData() {
         const data = {};
@@ -21511,7 +21553,7 @@ if (uni.restoreGlobal) {
         data["questionCode"] = this.questionCode;
         data["code"] = this.codes;
         testOb$1.opearPHConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:351", res2.data);
+          formatAppLog("log", "at pages/physicalFitnessAssessment/actionEvaluation/actionEvaluation.vue:396", res2.data);
           this.resultValue = res2.data[0].physicalData.actionVlue;
         }).catch(() => {
           this.resultValue = "";
@@ -21540,7 +21582,7 @@ if (uni.restoreGlobal) {
           class: "clickAction",
           onClick: _cache[0] || (_cache[0] = (...args) => $setup.showPopup && $setup.showPopup(...args))
         }, [
-          vue.createTextVNode("\u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
+          vue.createTextVNode(" \u70B9\u51FB\u67E5\u770B\u6807\u51C6\u52A8\u4F5C\u63CF\u8FF0 "),
           vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
         ]),
         vue.createVNode(_component_van_popup, {
@@ -21553,13 +21595,14 @@ if (uni.restoreGlobal) {
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "clickActionBody" }, [
-              vue.createElementVNode("video", {
+              $setup.show ? (vue.openBlock(), vue.createElementBlock("video", {
+                key: 0,
                 src: $data.videoUrl,
                 wid: "",
                 autoplay: "",
                 "custom-cache": false,
                 muted: ""
-              }, null, 8, ["src"]),
+              }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
               vue.createElementVNode("view", { class: "clickActionText" }, [
                 vue.createElementVNode("view", { class: "Actionname" }, "\u6807\u51C6\u52A8\u4F5C\uFF1A"),
                 vue.createElementVNode("view", null, [
@@ -21637,7 +21680,9 @@ if (uni.restoreGlobal) {
 					    /> `),
                     vue.createElementVNode("view", {
                       class: "circle",
-                      style: vue.normalizeStyle("border: 4px solid " + $data.typeColor + ";background-color:" + $data.backgroundColor + ";")
+                      style: vue.normalizeStyle(
+                        "border: 4px solid " + $data.typeColor + ";background-color:" + $data.backgroundColor + ";"
+                      )
                     }, [
                       vue.createElementVNode("view", {
                         class: "circleText",
