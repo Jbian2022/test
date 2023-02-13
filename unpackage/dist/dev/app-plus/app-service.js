@@ -11047,26 +11047,27 @@ if (uni.restoreGlobal) {
         })
       ]),
       vue.createElementVNode("view", { class: "middle" }, [
-        vue.createElementVNode("input", {
-          value: $data.phone,
-          type: "tel",
-          maxlength: 11,
-          onInput: _cache[0] || (_cache[0] = (...args) => $options.phoneInput && $options.phoneInput(...args)),
-          class: "phone",
-          focus: "",
-          placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
-          "adjust-position": false
-        }, null, 40, ["value"]),
-        vue.createElementVNode("button", {
-          class: vue.normalizeClass(["btn", $options.controlActiveFlag ? "active_btn" : ""]),
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.getSms && $options.getSms(...args))
-        }, [
-          vue.createElementVNode("span", { class: "btn-text" }, "\u83B7\u53D6\u9A8C\u8BC1\u7801")
-        ], 2),
+        vue.createCommentVNode(` <input\r
+        :value="phone"\r
+        type="tel"\r
+        :maxlength="11"\r
+        @input="phoneInput"\r
+        class="phone"\r
+        focus\r
+        placeholder="\u8BF7\u8F93\u5165\u624B\u673A\u53F7"\r
+        :adjust-position="false"\r
+      />\r
+      <button\r
+        class="btn"\r
+        :class="controlActiveFlag ? 'active_btn' : ''"\r
+        @click.native="getSms"\r
+      >\r
+        <span class="btn-text">\u83B7\u53D6\u9A8C\u8BC1\u7801</span>\r
+      </button> `),
         vue.createElementVNode("view", { class: "ying_si_style" }, [
           vue.createElementVNode("view", {
             class: "check_style",
-            onClick: _cache[2] || (_cache[2] = ($event) => $data.checkFlag = !$data.checkFlag)
+            onClick: _cache[0] || (_cache[0] = ($event) => $data.checkFlag = !$data.checkFlag)
           }, [
             $data.checkFlag ? (vue.openBlock(), vue.createElementBlock("image", {
               key: 0,
@@ -11083,7 +11084,7 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("text", { class: "ying_si_remark" }, "\u540C\u610F"),
             vue.createElementVNode("text", {
               class: "ying_si_remark_middle",
-              onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
+              onClick: _cache[1] || (_cache[1] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
             }, [
               vue.createElementVNode("text", { class: "ying_si_jump_style" }, "\u300A\u7528\u6237\u9690\u79C1\u534F\u8BAE\u300B"),
               vue.createCommentVNode(' <text class="ying_si_jump_style">\u300A\u7528\u6237\u534F\u8BAE\u300B</text> ')
@@ -11102,19 +11103,19 @@ if (uni.restoreGlobal) {
                   vue.createTextVNode(" \u4E3A\u4E86\u66F4\u597D\u7684\u4FDD\u969C\u60A8\u7684\u5408\u6CD5\u6743\u76CA\uFF0C\u5728\u4F7F\u7528\u672C\u5E94\u7528\u4E4B\u524D\uFF0C\u8BF7\u60A8\u4ED4\u7EC6\u9605\u8BFB"),
                   vue.createElementVNode("text", {
                     style: { "color": "#1370ff" },
-                    onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
+                    onClick: _cache[2] || (_cache[2] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
                   }, "\u300A\u7528\u6237\u9690\u79C1\u534F\u8BAE\u300B"),
                   vue.createTextVNode("\uFF0C\u70B9\u51FB\u540C\u610F\u5373\u8868\u793A\u60A8\u5DF2\u9605\u8BFB\u5E76\u540C\u610F\u63A5\u53D7\u6211\u4EEC\u7684\u670D\u52A1\uFF0C\u611F\u8C22\u60A8\u7684\u4FE1\u4EFB\uFF01 ")
                 ]),
                 vue.createElementVNode("button", {
                   class: "botter-top4",
-                  onClick: _cache[5] || (_cache[5] = (...args) => $options.agreeContiute && $options.agreeContiute(...args))
+                  onClick: _cache[3] || (_cache[3] = (...args) => $options.agreeContiute && $options.agreeContiute(...args))
                 }, [
                   vue.createElementVNode("span", { class: "botter-top4-text" }, "\u540C\u610F\u5E76\u7EE7\u7EED")
                 ]),
                 vue.createElementVNode("view", {
                   class: "botter-top5-text",
-                  onClick: _cache[6] || (_cache[6] = ($event) => $data.needChecked = false)
+                  onClick: _cache[4] || (_cache[4] = ($event) => $data.needChecked = false)
                 }, "\u4E0D\u540C\u610F")
               ])
             ])
@@ -11122,12 +11123,12 @@ if (uni.restoreGlobal) {
         ]),
         vue.createElementVNode("view", { class: "wx_loging_style" }, [
           vue.createElementVNode("image", {
-            onClick: _cache[7] || (_cache[7] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args)),
+            onClick: _cache[5] || (_cache[5] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args)),
             class: "wx_img_style",
             src: "/static/login/wxlogin.svg"
           }),
           vue.createElementVNode("image", {
-            onClick: _cache[8] || (_cache[8] = (...args) => $options.loginIos && $options.loginIos(...args)),
+            onClick: _cache[6] || (_cache[6] = (...args) => $options.loginIos && $options.loginIos(...args)),
             class: "wx_img_style",
             src: "/static/login/ioslogin.svg"
           })

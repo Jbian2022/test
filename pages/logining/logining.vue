@@ -5,7 +5,7 @@
       <image class="text1" src="@/static/app-plus/other/coach.png"></image>
     </view>
     <view class="middle">
-      <input
+      <!-- <input
         :value="phone"
         type="tel"
         :maxlength="11"
@@ -14,7 +14,7 @@
         focus
         placeholder="请输入手机号"
         :adjust-position="false"
-      />
+      /> -->
       <button
         class="btn"
         :class="controlActiveFlag ? 'active_btn' : ''"
