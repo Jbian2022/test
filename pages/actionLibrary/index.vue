@@ -275,6 +275,9 @@ export default {
         actionName: this.actionName
       })
       const actionTemp = res.data || []
+      actionTemp.sort(function(a, b){
+        return a.actionId - b.actionId;
+      });
       const actionList = actionTemp.map((item) => {
         const flag = this.selectActionList.some((i) => item._id === i._id)
         if (flag) {
