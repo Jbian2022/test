@@ -31,7 +31,7 @@
       >
         <view class="dialog">
           <view class="dialog-section">
-            <view class="dialog-title">确认注销</view>
+            <view class="dialog-title">确认解绑</view>
             <view class="dialog-content">确定要解除账号与微信的关键吗？</view>
             <view class="dialog-btn-box">
               <van-button type="default" @click.native="closeHandle"

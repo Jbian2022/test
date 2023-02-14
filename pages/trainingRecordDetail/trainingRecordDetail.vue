@@ -9,7 +9,7 @@
       <view class="status_bar"></view>
       <view class="backgroud-img"
         ><van-image
-          src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"
+          src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/af1f1238-0e5f-468a-9a00-120d347c451a.png"
       /></view>
       <view class="first-title-times">
         <view class="title">{{ traineeTitle }}</view>

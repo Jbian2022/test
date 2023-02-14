@@ -15,13 +15,20 @@
         placeholder="请输入手机号"
         :adjust-position="false"
       /> -->
-      <button
+      <!-- <button
         class="btn"
         :class="controlActiveFlag ? 'active_btn' : ''"
         @click.native="getSms"
       >
         <span class="btn-text">获取验证码</span>
-      </button>
+      </button> -->
+      <view class="wx_icon_login_style" @click.native="loginByWeixin">
+        <image
+          class="icon_img_style"
+          src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/10fd0194-0323-410d-be1c-a6df7dab702d.svg"
+        ></image>
+        <view class="icon_remark_style">微信快捷登录</view>
+      </view>
       <view class="ying_si_style">
         <view class="check_style" @click="checkFlag = !checkFlag">
           <image
@@ -70,13 +77,13 @@
 
       <view class="wx_loging_style">
         <image
-          @click.native="loginByWeixin"
+          @click.native="getSms"
           class="wx_img_style"
           :class="platform === 'ios' ? 'common_style' : ''"
-          src="../../static/login/wxlogin.svg"
+          src="../../static/login/phonelogin.svg"
         ></image>
         <image
-          @click.native="loginIos"
+          @click.native="loginByApple"
           v-if="platform === 'ios'"
           class="wx_img_style"
           src="../../static/login/ioslogin.svg"
@@ -88,6 +95,7 @@
 
 <script>
 let weixinAuthService
+let appleAuthService
 export default {
   data() {
     return {
@@ -97,7 +105,8 @@ export default {
       checkPhone: '',
       needChecked: false,
       platform: uni.getSystemInfoSync().platform,
-      agreementType: null
+      agreementType: null,
+      hasAppleAuth: false
     }
   },
 
@@ -123,6 +132,17 @@ export default {
         this.hasWeixinAuth = true
       }
     })
+    uni.getProvider({
+      service: 'oauth',
+      success: (result) => {
+        if (result.provider.indexOf('apple') !== -1) {
+          this.haAuth = true
+        }
+      },
+      fail: (error) => {
+        console.log('获取登录通道失败', error)
+      }
+    })
     // #endif
   },
   mounted() {
@@ -144,35 +164,14 @@ export default {
 
     async getSms() {
       this.agreementType = 'sms'
-      if (this.controlActiveFlag && !this.checkFlag) {
+      if (!this.checkFlag) {
         // Toast('请同意隐私政策')
         this.needChecked = true
         return
       }
-      if (this.controlActiveFlag) {
-        // 发送验证码
-        const login = uniCloud.importObject('login', {
-          customUI: true // 取消自动展示的交互提示界面
-        }) //第一步导入云对象
-        try {
-          const smsRes = await login.sendSmsCode(this.phone)
-          console.log(smsRes, '登录成功')
-          if (smsRes.code == 0) {
-            uni.reLaunch({
-              url:
-                '/pages/verificatioCode/verificatioCode?' +
-                'mobile=' +
-                smsRes.mobile,
-              success: (res) => {},
-              fail: () => {},
-              complete: () => {}
-            })
-          }
-        } catch (err) {
-          //TODO handle the exception
-          console.log(err, '我是错误')
-        }
-      }
+      uni.navigateTo({
+        url: '/pages/phoneLoging/phoneLoging'
+      })
     },
     agreeContiute() {
       this.checkFlag = true
@@ -202,7 +201,38 @@ export default {
         // #endif
       })
     },
-    loginIos() {},
+    async loginByApple() {
+      if (!this.haAuth) return
+      uni.login({
+        provider: 'apple', //使用微信登录
+        success: async function (loginRes) {
+          console.log(loginRes, '什么鬼')
+          // uni-id 苹果登录
+          const appleLogin = uniCloud.importObject('login', {
+            customUI: true // 取消自动展示的交互提示界面
+          })
+
+          let getLogingByAppleRes = await appleLogin.logingByApple(
+            loginRes.appleInfo
+          )
+          console.log(getLogingByAppleRes, '苹果登陆了')
+          if (getLogingByAppleRes.code == 0) {
+          } else {
+            uni.showModal({
+              content: `苹果登录失败: ${JSON.stringify(e)}`,
+              showCancel: false
+            })
+          }
+        },
+        fail: function (loginErr) {
+          uni.showModal({
+            showCancel: false,
+            content: '苹果登录失败，请稍后再试'
+          })
+        }
+      })
+    },
+
     loginByWeixin() {
       this.agreementType = 'wx'
       if (!this.checkFlag) {
@@ -491,6 +521,31 @@ export default {
         line-height: 72upx;
       }
     }
+  }
+}
+.wx_icon_login_style {
+  margin-top: 20upx;
+  width: calc(100vw - 140upx);
+  margin-left: 70upx;
+  height: 100upx;
+  background: #179d52;
+  border-radius: 16upx;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon_img_style {
+    width: 50upx;
+    height: 50upx;
+    object-fit: cover;
+  }
+  .icon_remark_style {
+    font-size: 32upx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #f4f7ff;
+    margin-left: 20upx;
   }
 }
 

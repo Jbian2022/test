@@ -331,6 +331,13 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 	getRoleByUid: async function (event, context) {
 		return getRoleByUid.getWeixinUserInfo(event)
 	},
+	// 苹果登录
+	logingByApple: async function(data) {
+	
+		
+			const res = await uniID.loginByApple(data)
+			return res
+	},
 	
 	// 返解unid
 	needUserMessage: async function () {

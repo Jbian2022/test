@@ -52,7 +52,6 @@
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"
-					
 				}
 			}
 		},
@@ -135,6 +134,34 @@
 		},
 		{
 			"path": "pages/verificatioCode/verificatioCode",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/bindPhone/bindPhone",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/phoneLoging/phoneLoging",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
@@ -241,7 +268,6 @@
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"
-					
 				}
 			}
 		},
@@ -375,23 +401,22 @@
 					"bounce": "none"
 				}
 			}
+		},
+		{
+			"path": "uni_modules/uni-pay/pages/success/success",
+			"style": {
+				"backgroundColor": "#F8F8F8",
+				"navigationBarTitleText": "支付成功"
+			}
+		},
+		{
+			"path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
+			"style": {
+				"backgroundColor": "#F8F8F8",
+				"navigationBarTitleText": "ad"
+			}
 		}
-	,{
-    "path": "uni_modules/uni-pay/pages/success/success",
-    "style": {
-        "backgroundColor": "#F8F8F8",
-        "navigationBarTitleText": "支付成功"
-		
-    }
-}
-,{
-    "path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
-    "style": {
-        "backgroundColor": "#F8F8F8",
-        "navigationBarTitleText": "ad"
-    }
-}
-],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-starter",
