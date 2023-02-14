@@ -463,34 +463,6 @@ if (uni.restoreGlobal) {
       }
     },
     {
-      path: "pages/bindPhone/bindPhone",
-      style: {
-        navigationBarTitleText: "",
-        enablePullDownRefresh: false,
-        navigationStyle: "custom",
-        autoBackButton: false,
-        navigationBarTextStyle: "white",
-        "app-plus": {
-          titleNView: false,
-          bounce: "none"
-        }
-      }
-    },
-    {
-      path: "pages/phoneLoging/phoneLoging",
-      style: {
-        navigationBarTitleText: "",
-        enablePullDownRefresh: false,
-        navigationStyle: "custom",
-        autoBackButton: false,
-        navigationBarTextStyle: "white",
-        "app-plus": {
-          titleNView: false,
-          bounce: "none"
-        }
-      }
-    },
-    {
       path: "pages/personalnformation/personalnformation",
       style: {
         navigationBarTitleText: "",
@@ -619,6 +591,34 @@ if (uni.restoreGlobal) {
       path: "pages/personalInfo/personalInfo",
       style: {
         navigationBarTitleText: "\u4E2A\u4EBA\u4FE1\u606F",
+        enablePullDownRefresh: false,
+        navigationStyle: "custom",
+        autoBackButton: false,
+        navigationBarTextStyle: "white",
+        "app-plus": {
+          titleNView: false,
+          bounce: "none"
+        }
+      }
+    },
+    {
+      path: "pages/bindPhone/bindPhone",
+      style: {
+        navigationBarTitleText: "\u7ED1\u5B9A\u624B\u673A\u53F7",
+        enablePullDownRefresh: false,
+        navigationStyle: "custom",
+        autoBackButton: false,
+        navigationBarTextStyle: "white",
+        "app-plus": {
+          titleNView: false,
+          bounce: "none"
+        }
+      }
+    },
+    {
+      path: "pages/phoneLoging/phoneLoging",
+      style: {
+        navigationBarTitleText: "\u624B\u673A\u53F7\u767B\u5F55",
         enablePullDownRefresh: false,
         navigationStyle: "custom",
         autoBackButton: false,
@@ -15962,283 +15962,6 @@ if (uni.restoreGlobal) {
           nickname: "",
           gender: ""
         },
-        phone: "",
-        sexShow: false,
-        scanel: null
-      };
-    },
-    components: {
-      BgTheamCompontent
-    },
-    onLoad(options) {
-      this.scanel = options.scanel || null;
-    },
-    computed: {
-      controlActiveFlag() {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:71", this.phone, "????");
-        let flag = false;
-        if (this.phone && this.phone.length === 11) {
-          flag = true;
-        }
-        return flag;
-      }
-    },
-    methods: {
-      async getSms() {
-        const login2 = Es.importObject("login", {
-          customUI: true
-        });
-        if (this.controlActiveFlag) {
-          try {
-            const smsRes = await login2.sendSmsCode(this.phone, "bind");
-            if (smsRes.code == 0) {
-              uni.navigateTo({
-                url: "/pages/verificatioCode/verificatioCode?mobile=" + this.phone + "&scanel=" + this.scanel
-              });
-            }
-          } catch (err) {
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:100", err, "\u6211\u662F\u9519\u8BEF");
-          }
-        }
-      },
-      phoneInput(event) {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:105", event, "\u4F60tm");
-        this.phone = event.detail.value;
-      },
-      goBack() {
-        uni.navigateBack();
-      },
-      savePersonInfo() {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:112", "1111");
-        if (this.coachForm.nickname || this.coachForm.gender) {
-          const login2 = Es.importObject("login", {
-            customUI: true
-          });
-          try {
-            let param = {
-              ...this.coachForm
-            };
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:122", param, "param");
-            login2.perfectInfo(param).then((res2) => {
-              if (res2.success) {
-                this.jump();
-              }
-            }).catch((err) => {
-            });
-          } catch (e) {
-          }
-        }
-      }
-    }
-  };
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
-    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "counter content_style" }, [
-      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createCommentVNode(" \u8FD4\u56DE\u56FE\u6807 "),
-      vue.createElementVNode("view", { class: "nav_style" }, [
-        vue.createElementVNode("view", {
-          class: "nav_left_style",
-          onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
-        }, [
-          vue.createElementVNode("image", {
-            class: "back_img_style",
-            src: "/static/app-plus/mebrs/back.svg"
-          })
-        ])
-      ]),
-      vue.createElementVNode("view", { class: "botter" }, [
-        vue.createElementVNode("span", { class: "botter-top" }, "\u7ED1\u5B9A\u624B\u673A\u53F7"),
-        vue.createElementVNode("p", { class: "a-i-c" }, "\u60A8\u7684\u5FAE\u4FE1\u8D26\u53F7\u5DF2\u9A8C\u8BC1\u901A\u8FC7,\u8BF7\u7ED1\u5B9A\u624B\u673A\u53F7\u7801")
-      ]),
-      vue.createElementVNode("view", { class: "contetnt_form_style" }, [
-        vue.createVNode(_component_uni_forms, {
-          modelValue: $data.coachForm,
-          ref: "coachForm",
-          "label-position": "left"
-        }, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_uni_forms_item, {
-              class: "outer_form_item_style",
-              label: "\u624B\u673A\u53F7",
-              name: "nickname"
-            }, {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("input", {
-                  value: $data.phone,
-                  type: "tel",
-                  maxlength: 11,
-                  onInput: _cache[1] || (_cache[1] = (...args) => $options.phoneInput && $options.phoneInput(...args)),
-                  class: "phone change_input_style",
-                  focus: "",
-                  placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
-                  "adjust-position": false
-                }, null, 40, ["value"])
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }, 8, ["modelValue"]),
-        vue.createElementVNode("button", {
-          class: vue.normalizeClass(["btn", $options.controlActiveFlag ? "active_btn" : ""]),
-          onClick: _cache[2] || (_cache[2] = (...args) => $options.getSms && $options.getSms(...args))
-        }, [
-          vue.createElementVNode("span", { class: "btn-text" }, "\u83B7\u53D6\u9A8C\u8BC1\u7801")
-        ], 2)
-      ])
-    ]);
-  }
-  const PagesBindPhoneBindPhone = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-8a2b02c0"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bindPhone/bindPhone.vue"]]);
-  const _sfc_main$p = {
-    data() {
-      return {
-        coachForm: {
-          nickname: "",
-          gender: ""
-        },
-        phone: "",
-        sexShow: false
-      };
-    },
-    components: {
-      BgTheamCompontent
-    },
-    computed: {
-      controlActiveFlag() {
-        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:66", this.phone, "????");
-        let flag = false;
-        if (this.phone && this.phone.length === 11) {
-          flag = true;
-        }
-        return flag;
-      }
-    },
-    methods: {
-      async getSms() {
-        if (this.controlActiveFlag) {
-          const login2 = Es.importObject("login", {
-            customUI: true
-          });
-          try {
-            const smsRes = await login2.sendSmsCode(this.phone);
-            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:84", smsRes, "\u767B\u5F55\u6210\u529F");
-            if (smsRes.code == 0) {
-              uni.reLaunch({
-                url: "/pages/verificatioCode/verificatioCode?mobile=" + smsRes.mobile,
-                success: (res2) => {
-                },
-                fail: () => {
-                },
-                complete: () => {
-                }
-              });
-            }
-          } catch (err) {
-            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:98", err, "\u6211\u662F\u9519\u8BEF");
-          }
-        }
-      },
-      phoneInput(event) {
-        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:103", event, "\u4F60tm");
-        this.phone = event.detail.value;
-      },
-      goBack() {
-        uni.navigateBack();
-      },
-      savePersonInfo() {
-        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:110", "1111");
-        if (this.coachForm.nickname || this.coachForm.gender) {
-          const login2 = Es.importObject("login", {
-            customUI: true
-          });
-          try {
-            let param = {
-              ...this.coachForm
-            };
-            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:120", param, "param");
-            login2.perfectInfo(param).then((res2) => {
-              if (res2.success) {
-                this.jump();
-              }
-            }).catch((err) => {
-            });
-          } catch (e) {
-          }
-        }
-      }
-    }
-  };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
-    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "counter content_style" }, [
-      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
-      vue.createCommentVNode(" \u8FD4\u56DE\u56FE\u6807 "),
-      vue.createElementVNode("view", { class: "nav_style" }, [
-        vue.createElementVNode("view", {
-          class: "nav_left_style",
-          onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
-        }, [
-          vue.createElementVNode("image", {
-            class: "back_img_style",
-            src: "/static/app-plus/mebrs/back.svg"
-          })
-        ])
-      ]),
-      vue.createElementVNode("view", { class: "botter" }, [
-        vue.createElementVNode("span", { class: "botter-top" }, "\u624B\u673A\u53F7\u767B\u5F55"),
-        vue.createElementVNode("p", { class: "a-i-c" }, "\u8BF7\u8F93\u5165\u60A8\u7684\u7684\u767B\u5F55\u624B\u673A\u53F7")
-      ]),
-      vue.createElementVNode("view", { class: "contetnt_form_style" }, [
-        vue.createVNode(_component_uni_forms, {
-          modelValue: $data.coachForm,
-          ref: "coachForm",
-          "label-position": "left"
-        }, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_uni_forms_item, {
-              class: "outer_form_item_style",
-              label: "\u624B\u673A\u53F7",
-              name: "nickname"
-            }, {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("input", {
-                  value: $data.phone,
-                  type: "tel",
-                  maxlength: 11,
-                  onInput: _cache[1] || (_cache[1] = (...args) => $options.phoneInput && $options.phoneInput(...args)),
-                  class: "phone change_input_style",
-                  focus: "",
-                  placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
-                  "adjust-position": false
-                }, null, 40, ["value"])
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        }, 8, ["modelValue"]),
-        vue.createElementVNode("button", {
-          class: vue.normalizeClass(["btn", $options.controlActiveFlag ? "active_btn" : ""]),
-          onClick: _cache[2] || (_cache[2] = (...args) => $options.getSms && $options.getSms(...args))
-        }, [
-          vue.createElementVNode("span", { class: "btn-text" }, "\u83B7\u53D6\u9A8C\u8BC1\u7801")
-        ], 2)
-      ])
-    ]);
-  }
-  const PagesPhoneLogingPhoneLoging = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-a11f623e"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/phoneLoging/phoneLoging.vue"]]);
-  const _sfc_main$o = {
-    data() {
-      return {
-        coachForm: {
-          nickname: "",
-          gender: ""
-        },
         sexShow: false,
         range: [
           { text: "\u7537", value: "1" },
@@ -16304,7 +16027,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
     const _component_Mpicker = vue.resolveComponent("Mpicker");
@@ -16398,8 +16121,8 @@ if (uni.restoreGlobal) {
       }, " \u4FDD\u5B58 ", 2)
     ]);
   }
-  const PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-4422acd1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
-  const _sfc_main$n = {
+  const PagesPersonalnformationPersonalnformation = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-4422acd1"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalnformation/personalnformation.vue"]]);
+  const _sfc_main$p = {
     props: {
       disabled: {
         type: Boolean,
@@ -16446,7 +16169,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       tabindex: "-1",
       class: vue.normalizeClass(["popover", $props.className]),
@@ -16473,9 +16196,9 @@ if (uni.restoreGlobal) {
       ], 2)) : vue.createCommentVNode("v-if", true)
     ], 34);
   }
-  const popover = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
+  const popover = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-c68365de"], ["__file", "D:/studyUninApp/bodybuilding-app/components/popover/index.vue"]]);
   const actionLibrary$1 = Es.importObject("actionLibrary", { customuI: true });
-  const _sfc_main$m = {
+  const _sfc_main$o = {
     components: {
       popover
     },
@@ -16739,7 +16462,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_sidebar_item = vue.resolveComponent("van-sidebar-item");
     const _component_van_sidebar = vue.resolveComponent("van-sidebar");
     const _component_popover = vue.resolveComponent("popover");
@@ -16945,9 +16668,9 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "D:/studyUninApp/bodybuilding-app/pages/actionLibrary/index.vue"]]);
+  const PagesActionLibraryIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__file", "D:/studyUninApp/bodybuilding-app/pages/actionLibrary/index.vue"]]);
   const actionLibrary = Es.importObject("actionLibrary");
-  const _sfc_main$l = {
+  const _sfc_main$n = {
     data() {
       return {
         show: false,
@@ -17063,7 +16786,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -17139,9 +16862,9 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
+  const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
   const train$3 = Es.importObject("train");
-  const _sfc_main$k = {
+  const _sfc_main$m = {
     components: {
       popover
     },
@@ -17506,7 +17229,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_popover = vue.resolveComponent("popover");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
@@ -18330,8 +18053,8 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
-  const _sfc_main$j = {
+  const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
+  const _sfc_main$l = {
     name: "calendar",
     props: {
       value: {
@@ -18515,7 +18238,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "calendar" }, [
       vue.createElementVNode("view", { class: "calendar-operation" }, [
         vue.createElementVNode("view", { class: "left" }, [
@@ -18572,9 +18295,9 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
+  const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
   const train$2 = Es.importObject("train");
-  const _sfc_main$i = {
+  const _sfc_main$k = {
     components: {
       calendar
     },
@@ -18706,7 +18429,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_calendar = vue.resolveComponent("calendar");
     const _component_van_icon = vue.resolveComponent("van-icon");
@@ -18812,13 +18535,13 @@ if (uni.restoreGlobal) {
       }, 512)
     ]);
   }
-  const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
+  const PagesTrainingRecordTrainingRecord = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecord/trainingRecord.vue"]]);
   const block0$1 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("canvasImage");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["canvasImage"] = "19043a88";
   };
   const train$1 = Es.importObject("train");
-  const _sfc_main$h = {
+  const _sfc_main$j = {
     data() {
       return {
         options: [
@@ -18996,7 +18719,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
@@ -19372,8 +19095,8 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0$1 === "function")
-    block0$1(_sfc_main$h);
-  const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
+    block0$1(_sfc_main$j);
+  const PagesTrainingRecordDetailTrainingRecordDetail = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__file", "D:/studyUninApp/bodybuilding-app/pages/trainingRecordDetail/trainingRecordDetail.vue"]]);
   var util = {};
   util.getWeixinCode = function() {
     return new Promise((resolve, reject) => {
@@ -19573,7 +19296,7 @@ if (uni.restoreGlobal) {
   };
   const uniPayCo = Es.importObject("uni-pay-co");
   var myOpenid;
-  const _sfc_main$g = {
+  const _sfc_main$i = {
     name: "uni-pay",
     emits: ["success", "cancel", "fail", "create", "mounted"],
     props: {
@@ -19974,7 +19697,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
     const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2);
@@ -20159,12 +19882,12 @@ if (uni.restoreGlobal) {
       vue.createCommentVNode(" \u5916\u90E8\u6D4F\u89C8\u5668\u786E\u8BA4\u652F\u4ED8\u5F39\u7A97\u7ED3\u675F ")
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-9aa540bd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-pay/components/uni-pay/uni-pay.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-9aa540bd"], ["__file", "D:/studyUninApp/bodybuilding-app/uni_modules/uni-pay/components/uni-pay/uni-pay.vue"]]);
   const My$3 = Es.importObject("my", { customUI: true });
   const login$2 = Es.importObject("login", {
     customUI: true
   });
-  const _sfc_main$f = {
+  const _sfc_main$h = {
     data() {
       return {
         total_fee: 1,
@@ -20424,7 +20147,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -20704,9 +20427,9 @@ if (uni.restoreGlobal) {
       }, null, 8, ["adpid", "onSuccess", "onCreate"])
     ]);
   }
-  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "D:/studyUninApp/bodybuilding-app/pages/my/my.vue"]]);
+  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "D:/studyUninApp/bodybuilding-app/pages/my/my.vue"]]);
   const My$2 = Es.importObject("my", { customuI: true });
-  const _sfc_main$e = {
+  const _sfc_main$g = {
     data() {
       return {
         show: false,
@@ -20781,7 +20504,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_nav_bar = vue.resolveComponent("van-nav-bar");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_button = vue.resolveComponent("van-button");
@@ -20913,12 +20636,12 @@ if (uni.restoreGlobal) {
       }, 8, ["show"])
     ]);
   }
-  const PagesOpenCardOpenCard = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "D:/studyUninApp/bodybuilding-app/pages/openCard/openCard.vue"]]);
+  const PagesOpenCardOpenCard = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "D:/studyUninApp/bodybuilding-app/pages/openCard/openCard.vue"]]);
   const login$1 = Es.importObject("login", {
     customUI: true
   });
   let weixinAuthService;
-  const _sfc_main$d = {
+  const _sfc_main$f = {
     data() {
       return {
         isBindValue: "",
@@ -21031,7 +20754,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_image = vue.resolveComponent("van-image");
@@ -21125,9 +20848,9 @@ if (uni.restoreGlobal) {
       }, 8, ["onClick"])
     ]);
   }
-  const PagesSetUpSetUp = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "D:/studyUninApp/bodybuilding-app/pages/setUp/setUp.vue"]]);
+  const PagesSetUpSetUp = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "D:/studyUninApp/bodybuilding-app/pages/setUp/setUp.vue"]]);
   const My$1 = Es.importObject("my");
-  const _sfc_main$c = {
+  const _sfc_main$e = {
     data() {
       return {
         show: false,
@@ -21202,7 +20925,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_van_icon = vue.resolveComponent("van-icon");
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
@@ -21259,7 +20982,284 @@ if (uni.restoreGlobal) {
       }, null, 8, ["show", "actions", "onSelect"])
     ]);
   }
-  const PagesPersonalInfoPersonalInfo = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalInfo/personalInfo.vue"]]);
+  const PagesPersonalInfoPersonalInfo = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "D:/studyUninApp/bodybuilding-app/pages/personalInfo/personalInfo.vue"]]);
+  const _sfc_main$d = {
+    data() {
+      return {
+        coachForm: {
+          nickname: "",
+          gender: ""
+        },
+        phone: "",
+        sexShow: false,
+        scanel: null
+      };
+    },
+    components: {
+      BgTheamCompontent
+    },
+    onLoad(options) {
+      this.scanel = options.scanel || null;
+    },
+    computed: {
+      controlActiveFlag() {
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:71", this.phone, "????");
+        let flag = false;
+        if (this.phone && this.phone.length === 11) {
+          flag = true;
+        }
+        return flag;
+      }
+    },
+    methods: {
+      async getSms() {
+        const login2 = Es.importObject("login", {
+          customUI: true
+        });
+        if (this.controlActiveFlag) {
+          try {
+            const smsRes = await login2.sendSmsCode(this.phone, "bind");
+            if (smsRes.code == 0) {
+              uni.navigateTo({
+                url: "/pages/verificatioCode/verificatioCode?mobile=" + this.phone + "&scanel=" + this.scanel
+              });
+            }
+          } catch (err) {
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:100", err, "\u6211\u662F\u9519\u8BEF");
+          }
+        }
+      },
+      phoneInput(event) {
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:105", event, "\u4F60tm");
+        this.phone = event.detail.value;
+      },
+      goBack() {
+        uni.navigateBack();
+      },
+      savePersonInfo() {
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:112", "1111");
+        if (this.coachForm.nickname || this.coachForm.gender) {
+          const login2 = Es.importObject("login", {
+            customUI: true
+          });
+          try {
+            let param = {
+              ...this.coachForm
+            };
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:122", param, "param");
+            login2.perfectInfo(param).then((res2) => {
+              if (res2.success) {
+                this.jump();
+              }
+            }).catch((err) => {
+            });
+          } catch (e) {
+          }
+        }
+      }
+    }
+  };
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "counter content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+      vue.createCommentVNode(" \u8FD4\u56DE\u56FE\u6807 "),
+      vue.createElementVNode("view", { class: "nav_style" }, [
+        vue.createElementVNode("view", {
+          class: "nav_left_style",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
+        }, [
+          vue.createElementVNode("image", {
+            class: "back_img_style",
+            src: "/static/app-plus/mebrs/back.svg"
+          })
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "botter" }, [
+        vue.createElementVNode("span", { class: "botter-top" }, "\u7ED1\u5B9A\u624B\u673A\u53F7"),
+        vue.createElementVNode("p", { class: "a-i-c" }, "\u60A8\u7684\u5FAE\u4FE1\u8D26\u53F7\u5DF2\u9A8C\u8BC1\u901A\u8FC7,\u8BF7\u7ED1\u5B9A\u624B\u673A\u53F7\u7801")
+      ]),
+      vue.createElementVNode("view", { class: "contetnt_form_style" }, [
+        vue.createVNode(_component_uni_forms, {
+          modelValue: $data.coachForm,
+          ref: "coachForm",
+          "label-position": "left"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_forms_item, {
+              class: "outer_form_item_style",
+              label: "\u624B\u673A\u53F7",
+              name: "nickname"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("input", {
+                  value: $data.phone,
+                  type: "tel",
+                  maxlength: 11,
+                  onInput: _cache[1] || (_cache[1] = (...args) => $options.phoneInput && $options.phoneInput(...args)),
+                  class: "phone change_input_style",
+                  focus: "",
+                  placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
+                  "adjust-position": false
+                }, null, 40, ["value"])
+              ]),
+              _: 1
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue"]),
+        vue.createElementVNode("button", {
+          class: vue.normalizeClass(["btn", $options.controlActiveFlag ? "active_btn" : ""]),
+          onClick: _cache[2] || (_cache[2] = (...args) => $options.getSms && $options.getSms(...args))
+        }, [
+          vue.createElementVNode("span", { class: "btn-text" }, "\u83B7\u53D6\u9A8C\u8BC1\u7801")
+        ], 2)
+      ])
+    ]);
+  }
+  const PagesBindPhoneBindPhone = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-8a2b02c0"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/bindPhone/bindPhone.vue"]]);
+  const _sfc_main$c = {
+    data() {
+      return {
+        coachForm: {
+          nickname: "",
+          gender: ""
+        },
+        phone: "",
+        sexShow: false
+      };
+    },
+    components: {
+      BgTheamCompontent
+    },
+    computed: {
+      controlActiveFlag() {
+        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:66", this.phone, "????");
+        let flag = false;
+        if (this.phone && this.phone.length === 11) {
+          flag = true;
+        }
+        return flag;
+      }
+    },
+    methods: {
+      async getSms() {
+        if (this.controlActiveFlag) {
+          const login2 = Es.importObject("login", {
+            customUI: true
+          });
+          try {
+            const smsRes = await login2.sendSmsCode(this.phone);
+            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:84", smsRes, "\u767B\u5F55\u6210\u529F");
+            if (smsRes.code == 0) {
+              uni.reLaunch({
+                url: "/pages/verificatioCode/verificatioCode?mobile=" + smsRes.mobile,
+                success: (res2) => {
+                },
+                fail: () => {
+                },
+                complete: () => {
+                }
+              });
+            }
+          } catch (err) {
+            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:98", err, "\u6211\u662F\u9519\u8BEF");
+          }
+        }
+      },
+      phoneInput(event) {
+        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:103", event, "\u4F60tm");
+        this.phone = event.detail.value;
+      },
+      goBack() {
+        uni.navigateBack();
+      },
+      savePersonInfo() {
+        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:110", "1111");
+        if (this.coachForm.nickname || this.coachForm.gender) {
+          const login2 = Es.importObject("login", {
+            customUI: true
+          });
+          try {
+            let param = {
+              ...this.coachForm
+            };
+            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:120", param, "param");
+            login2.perfectInfo(param).then((res2) => {
+              if (res2.success) {
+                this.jump();
+              }
+            }).catch((err) => {
+            });
+          } catch (e) {
+          }
+        }
+      }
+    }
+  };
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_BgTheamCompontent = vue.resolveComponent("BgTheamCompontent");
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_0$3);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_1$4);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "counter content_style" }, [
+      vue.createVNode(_component_BgTheamCompontent, { theamType: "currency" }),
+      vue.createCommentVNode(" \u8FD4\u56DE\u56FE\u6807 "),
+      vue.createElementVNode("view", { class: "nav_style" }, [
+        vue.createElementVNode("view", {
+          class: "nav_left_style",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
+        }, [
+          vue.createElementVNode("image", {
+            class: "back_img_style",
+            src: "/static/app-plus/mebrs/back.svg"
+          })
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "botter" }, [
+        vue.createElementVNode("span", { class: "botter-top" }, "\u624B\u673A\u53F7\u767B\u5F55"),
+        vue.createElementVNode("p", { class: "a-i-c" }, "\u8BF7\u8F93\u5165\u60A8\u7684\u7684\u767B\u5F55\u624B\u673A\u53F7")
+      ]),
+      vue.createElementVNode("view", { class: "contetnt_form_style" }, [
+        vue.createVNode(_component_uni_forms, {
+          modelValue: $data.coachForm,
+          ref: "coachForm",
+          "label-position": "left"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_forms_item, {
+              class: "outer_form_item_style",
+              label: "\u624B\u673A\u53F7",
+              name: "nickname"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("input", {
+                  value: $data.phone,
+                  type: "tel",
+                  maxlength: 11,
+                  onInput: _cache[1] || (_cache[1] = (...args) => $options.phoneInput && $options.phoneInput(...args)),
+                  class: "phone change_input_style",
+                  focus: "",
+                  placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7",
+                  "adjust-position": false
+                }, null, 40, ["value"])
+              ]),
+              _: 1
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue"]),
+        vue.createElementVNode("button", {
+          class: vue.normalizeClass(["btn", $options.controlActiveFlag ? "active_btn" : ""]),
+          onClick: _cache[2] || (_cache[2] = (...args) => $options.getSms && $options.getSms(...args))
+        }, [
+          vue.createElementVNode("span", { class: "btn-text" }, "\u83B7\u53D6\u9A8C\u8BC1\u7801")
+        ], 2)
+      ])
+    ]);
+  }
+  const PagesPhoneLogingPhoneLoging = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-a11f623e"], ["__file", "D:/studyUninApp/bodybuilding-app/pages/phoneLoging/phoneLoging.vue"]]);
   const My = Es.importObject("my");
   const _sfc_main$b = {
     components: {
@@ -22635,7 +22635,8 @@ if (uni.restoreGlobal) {
       };
     },
     onShow() {
-      formatAppLog("log", "at pages/viewReport/viewReport.vue:1101", this.key);
+      formatAppLog("log", "at pages/viewReport/viewReport.vue:1132", this.key);
+      uni.hideLoading();
     },
     onLoad(options) {
       if (JSON.stringify(options) !== "{}" && options.traineeNo) {
@@ -22651,7 +22652,7 @@ if (uni.restoreGlobal) {
             this.openKey = false;
             this.getHistroyDate();
             this.pageName = "\u4F1A\u5458\u4FE1\u606F";
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1117", "1111");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1149", "1111");
             break;
         }
       }
@@ -22660,11 +22661,11 @@ if (uni.restoreGlobal) {
       setImage() {
         const img = document.getElementsByTagName("img");
         for (var i2 = 0; i2 < img.length; i2++) {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1126", img[i2]);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1158", img[i2]);
         }
       },
       openPopup() {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1130", "\u7528\u6237\u70B9\u51FB\u5206\u4EAB");
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1162", "\u7528\u6237\u70B9\u51FB\u5206\u4EAB");
         this.infoclick1 = true;
         this.infoclick2 = true;
         this.infoclick3 = true;
@@ -22673,7 +22674,7 @@ if (uni.restoreGlobal) {
         this.$refs.popup.open();
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1139", option, 88);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1171", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -22693,11 +22694,11 @@ if (uni.restoreGlobal) {
           this.getDynameEvaluation();
           this.getHealthQuesson();
           setTimeout(() => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1159", "\u6570\u636E\u52A0\u8F7D\u6210\u529F");
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1160", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1191", "\u6570\u636E\u52A0\u8F7D\u6210\u529F");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1192", "\u6B63\u5728\u4FDD\u5B58\u6B64\u6B21\u8BAD\u7EC3\u8BB0\u5F55");
             this.saveReport();
           }, 3e3);
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1163", "\u4FDD\u5B58\u6210\u529F\uFF01");
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1195", "\u4FDD\u5B58\u6210\u529F\uFF01");
         });
       },
       async pageMethods() {
@@ -22716,8 +22717,8 @@ if (uni.restoreGlobal) {
             this.gender = res2.data[0].gender;
             this.mobileNumber = res2.data[0].mobile;
             this.age = this.getAge(res2.data[0].birthday);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1182", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + this.nowDate);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1183", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + res2.data);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1214", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + this.nowDate);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1215", "\u5B66\u5458\u4FE1\u606F\u83B7\u53D6\u5B8C\u6BD5\uFF0C\u5185\u5BB9\u4E3A\uFF1A" + res2.data);
           }
         });
       },
@@ -22789,7 +22790,7 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1279", this.queryData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1311", this.queryData);
               resdata["data"] = this.queryData;
             }).catch((err) => {
             });
@@ -22869,7 +22870,7 @@ if (uni.restoreGlobal) {
               trueData = {};
             }
           } else {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1374", "\u6CA1\u6709\u6570\u636E\u54E6");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1406", "\u6CA1\u6709\u6570\u636E\u54E6");
             this.postureData = true;
           }
         }).catch();
@@ -22883,9 +22884,9 @@ if (uni.restoreGlobal) {
           if (res2.data.length > 0) {
             this.bodyTestData = res2.data[0].bodyTestReport;
             this.bodyFraction = Number(this.bodyTestData.bodyFraction);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1389", this.bodyTestData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1421", this.bodyTestData);
             resData["data"] = this.bodyTestData;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1391", resData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1423", resData);
           }
         });
         return resData;
@@ -22908,7 +22909,7 @@ if (uni.restoreGlobal) {
               }
             }
           }
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1418", this.physicalFitnessAssessmentData);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1450", this.physicalFitnessAssessmentData);
         });
       },
       setDyNameStatus(item) {
@@ -22936,7 +22937,7 @@ if (uni.restoreGlobal) {
         this.$refs.popup.open();
       },
       saveReport() {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1448", this.openKey);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1480", this.openKey);
         if (this.openKey) {
           const data = {};
           let date2 = new Date();
@@ -22949,11 +22950,10 @@ if (uni.restoreGlobal) {
           data["physicalFitnessAssessmentData"] = this.physicalFitnessAssessmentData;
           data["saveDate"] = today;
           data["name"] = this.personName;
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1463", data);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1495", data);
           testOb.saveReport(data).then((res2) => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1465", res2);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1497", res2);
           });
-          this.showShare = true;
         }
       },
       downloadFile() {
@@ -22961,11 +22961,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1476", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1507", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1480", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1511", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -22973,18 +22973,18 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1488", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1519", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                         uni.reLaunch({
                           url: "/pages/myMebers/myMebers"
                         });
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1493", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1524", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1499", "err", err);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1530", "err", err);
                 }
               });
             }
@@ -22993,9 +22993,10 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1508", option.name, 8888);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1539", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1542", url);
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
           if (option.name === "\u4FDD\u5B58\u5230\u76F8\u518C") {
             this.downloadFile();
@@ -23007,11 +23008,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1523", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1555", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1527", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1559", "fail:" + JSON.stringify(err));
                 }
               });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
@@ -23021,11 +23022,11 @@ if (uni.restoreGlobal) {
                 type: 2,
                 imageUrl: url,
                 success: function(res2) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1537", "success:" + JSON.stringify(res2));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1569", "success:" + JSON.stringify(res2));
                   uni.hideLoading();
                 },
                 fail: function(err) {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1541", "fail:" + JSON.stringify(err));
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1573", "fail:" + JSON.stringify(err));
                 }
               });
             }
@@ -23050,14 +23051,14 @@ if (uni.restoreGlobal) {
         const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1570", res2.data[0].testResult);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1602", res2.data[0].testResult);
             resData.push(res2.data[0].testResult);
             this.HQDate = resData;
           } else {
             this.showHQ = false;
           }
         });
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1594", resData);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1626", resData);
         return resData;
       },
       getHistroyDate() {
@@ -23066,13 +23067,14 @@ if (uni.restoreGlobal) {
           data["traineeNo"] = this.traineeNo;
           if (!this.openKey) {
             testOb.opearReportQuery(data).then((res2) => {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1605", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1637", res2);
               this.historyData = res2.data;
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1607", this.historyData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1639", this.historyData);
             });
           }
+        } else {
+          this.showShare = true;
         }
-        this.showShare = true;
       },
       sethistorydata(item) {
         this.HQDate = item.HQDate;
@@ -23081,7 +23083,7 @@ if (uni.restoreGlobal) {
         this.queryData = item.queryData;
         this.assessmentTrueData = item.assessmentTrueData;
         this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData;
-        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1621", item);
+        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1655", item);
         this.$refs.popup.close();
       },
       gototest() {
@@ -23105,7 +23107,7 @@ if (uni.restoreGlobal) {
         return str.slice(a2 + 7, str.length);
       },
       onClickinfo(item) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1648", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1682", item);
         switch (item) {
           case "\u57FA\u7840\u4FE1\u606F":
             if (this.infoclick) {
@@ -23229,8 +23231,8 @@ if (uni.restoreGlobal) {
         }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "histroys" }, [
-              vue.createElementVNode("view", { class: "Titlehistroy" }, "\u5386\u53F2\u8BC4\u6D4B\u62A5\u544A"),
-              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.historyData, (item, index) => {
+              vue.createElementVNode("view", { class: "Titlehistroy" }, "\u5386\u53F2\u8BC4\u4F30\u62A5\u544A"),
+              $data.showShare ? (vue.openBlock(true), vue.createElementBlock(vue.Fragment, { key: 0 }, vue.renderList($data.historyData, (item, index) => {
                 return vue.openBlock(), vue.createElementBlock("view", {
                   class: "item",
                   key: index,
@@ -23245,7 +23247,14 @@ if (uni.restoreGlobal) {
                     style: { "float": "right", "color": "#bdc3ce", "font-size": "30upx", "font-weight": "400" }
                   }, "\u65E5\u671F\uFF1A" + vue.toDisplayString(item.saveDate), 1)
                 ], 8, ["onClick"]);
-              }), 128))
+              }), 128)) : (vue.openBlock(), vue.createElementBlock("view", {
+                key: 1,
+                style: { "margin-top": "120upx" }
+              }, [
+                vue.createCommentVNode(' <image\r\n		    src="../../static/app-plus/other/defaultImg.png"\r\n		    style="\r\n		      width: 180upx;\r\n		      height: 180upx;\r\n		      margin: 0 auto;\r\n		      top: 120upx;\r\n		      left: 256upx;\r\n		    "\r\n		  ></image> '),
+                vue.createElementVNode("view", { style: { "width": "180upx", "height": "220upx", "margin": "0 auto", "margin-top": "60upx", "margin-bottom": "30upx", "background-image": "url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png')", "background-repeat": "no-repeat", "background-size": "100%" } }),
+                vue.createElementVNode("view", { style: { "width": "360upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7a7f89", "margin": "0 auto", "text-align": "center" } }, "\u6682\u65E0\u5386\u53F2\u8BC4\u4F30\u62A5\u544A")
+              ]))
             ])
           ]),
           _: 1
@@ -23677,8 +23686,8 @@ if (uni.restoreGlobal) {
                           style: { "height": "612upx" }
                         }, [
                           vue.createCommentVNode(' <image\r\n                  src="../../static/app-plus/other/defaultImg.png"\r\n                  style="\r\n                    width: 180upx;\r\n                    height: 180upx;\r\n                    margin: 0 auto;\r\n                    top: 120upx;\r\n                    left: 256upx;\r\n                  "\r\n                ></image> '),
-                          vue.createElementVNode("view", { style: { "width": "180upx", "height": "180upx", "margin": "0 auto", "top": "120upx", "left": "256upx", "background-image": "url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png')", "background-repeat": "no-repeat", "background-size": "100%" } }),
-                          vue.createElementVNode("view", { style: { "width": "350upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7a7f89", "line-height": "320upx", "margin": "0 auto" } }, "\u6682\u65E0\u8BC4\u6D4B\u5185\u5BB9\uFF0C\u5FEB\u53BB\u5B8C\u5584\u5427~")
+                          vue.createElementVNode("view", { style: { "width": "180upx", "height": "220upx", "margin": "0 auto", "margin-top": "60upx", "margin-bottom": "30upx", "background-image": "url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png')", "background-repeat": "no-repeat", "background-size": "100%" } }),
+                          vue.createElementVNode("view", { style: { "width": "360upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7a7f89", "margin": "0 auto" } }, "\u6682\u65E0\u8BC4\u4F30\u5185\u5BB9\uFF0C\u5FEB\u53BB\u5B8C\u5584\u5427~")
                         ]))
                       ]),
                       _: 1
@@ -24062,8 +24071,8 @@ if (uni.restoreGlobal) {
                           style: { "height": "612upx" }
                         }, [
                           vue.createCommentVNode(' <image\r\n			      src="../../static/app-plus/other/defaultImg.png"\r\n			      style="\r\n			        width: 180upx;\r\n			        height: 180upx;\r\n			        margin: 0 auto;\r\n			        top: 120upx;\r\n			        left: 256upx;\r\n			      "\r\n			    ></image> '),
-                          vue.createElementVNode("view", { style: { "width": "180upx", "height": "180upx", "margin": "0 auto", "top": "120upx", "left": "256upx", "background-image": "url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png')", "background-repeat": "no-repeat", "background-size": "100%" } }),
-                          vue.createElementVNode("view", { style: { "width": "350upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7a7f89", "line-height": "320upx", "margin": "0 auto" } }, "\u6682\u65E0\u8BC4\u6D4B\u5185\u5BB9\uFF0C\u5FEB\u53BB\u5B8C\u5584\u5427~")
+                          vue.createElementVNode("view", { style: { "width": "180upx", "height": "220upx", "margin": "0 auto", "margin-top": "60upx", "margin-bottom": "30upx", "background-image": "url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png')", "background-repeat": "no-repeat", "background-size": "100%" } }),
+                          vue.createElementVNode("view", { style: { "width": "360upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7a7f89", "margin": "0 auto" } }, "\u6682\u65E0\u8BC4\u4F30\u5185\u5BB9\uFF0C\u5FEB\u53BB\u5B8C\u5584\u5427~")
                         ]))
                       ]),
                       _: 1
@@ -24138,8 +24147,8 @@ if (uni.restoreGlobal) {
                           style: { "height": "612upx" }
                         }, [
                           vue.createCommentVNode(' <image\r\n			      src="../../static/app-plus/other/defaultImg.png"\r\n			      style="\r\n			        width: 180upx;\r\n			        height: 180upx;\r\n			        margin: 0 auto;\r\n			        top: 120upx;\r\n			        left: 256upx;\r\n			      "\r\n			    ></image> '),
-                          vue.createElementVNode("view", { style: { "width": "180upx", "height": "180upx", "margin": "0 auto", "top": "120upx", "left": "256upx", "background-image": "url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png')", "background-repeat": "no-repeat", "background-size": "100%" } }),
-                          vue.createElementVNode("view", { style: { "width": "350upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7a7f89", "line-height": "320upx", "margin": "0 auto" } }, "\u6682\u65E0\u8BC4\u6D4B\u5185\u5BB9\uFF0C\u5FEB\u53BB\u5B8C\u5584\u5427~")
+                          vue.createElementVNode("view", { style: { "width": "180upx", "height": "220upx", "margin": "0 auto", "margin-top": "60upx", "margin-bottom": "30upx", "background-image": "url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png')", "background-repeat": "no-repeat", "background-size": "100%" } }),
+                          vue.createElementVNode("view", { style: { "width": "360upx", "height": "40upx", "font-size": "28upx", "font-weight": "400", "color": "#7a7f89", "margin": "0 auto" } }, "\u6682\u65E0\u8BC4\u4F30\u5185\u5BB9\uFF0C\u5FEB\u53BB\u5B8C\u5584\u5427~")
                         ]))
                       ]),
                       _: 1
@@ -24952,8 +24961,6 @@ if (uni.restoreGlobal) {
   __definePage("pages/physicalFitnessAssessment/physicalFitnessAssessment", PagesPhysicalFitnessAssessmentPhysicalFitnessAssessment);
   __definePage("pages/logining/logining", PagesLoginingLogining);
   __definePage("pages/verificatioCode/verificatioCode", PagesVerificatioCodeVerificatioCode);
-  __definePage("pages/bindPhone/bindPhone", PagesBindPhoneBindPhone);
-  __definePage("pages/phoneLoging/phoneLoging", PagesPhoneLogingPhoneLoging);
   __definePage("pages/personalnformation/personalnformation", PagesPersonalnformationPersonalnformation);
   __definePage("pages/actionLibrary/index", PagesActionLibraryIndex);
   __definePage("pages/addAction/index", PagesAddActionIndex);
@@ -24964,6 +24971,8 @@ if (uni.restoreGlobal) {
   __definePage("pages/openCard/openCard", PagesOpenCardOpenCard);
   __definePage("pages/setUp/setUp", PagesSetUpSetUp);
   __definePage("pages/personalInfo/personalInfo", PagesPersonalInfoPersonalInfo);
+  __definePage("pages/bindPhone/bindPhone", PagesBindPhoneBindPhone);
+  __definePage("pages/phoneLoging/phoneLoging", PagesPhoneLogingPhoneLoging);
   __definePage("pages/updateSignature/updateSignature", PagesUpdateSignatureUpdateSignature);
   __definePage("pages/dynamicEvaluation/actionEvaluation/actionEvaluation", PagesDynamicEvaluationActionEvaluationActionEvaluation);
   __definePage("pages/dynamicEvaluation/dynamicEvaluation", PagesDynamicEvaluationDynamicEvaluation);
@@ -35015,10 +35024,19 @@ if (uni.restoreGlobal) {
     traverse(children);
     return result;
   }
+  var findVNodeIndex = (vnodes, vnode) => {
+    const index = vnodes.indexOf(vnode);
+    if (index === -1) {
+      return vnodes.findIndex(
+        (item) => vnode.key !== void 0 && vnode.key !== null && item.type === vnode.type && item.key === vnode.key
+      );
+    }
+    return index;
+  };
   function sortChildren(parent, publicChildren, internalChildren) {
     const vnodes = flattenVNodes(parent.subTree.children);
     internalChildren.sort(
-      (a2, b) => vnodes.indexOf(a2.vnode) - vnodes.indexOf(b.vnode)
+      (a2, b) => findVNodeIndex(vnodes, a2.vnode) - findVNodeIndex(vnodes, b.vnode)
     );
     const orderedPublicChildren = internalChildren.map((item) => item.proxy);
     publicChildren.sort((a2, b) => {
@@ -35189,8 +35207,12 @@ if (uni.restoreGlobal) {
       return;
     }
     const { target = window, passive: passive2 = false, capture = false } = options;
+    let cleaned = false;
     let attached;
     const add2 = (target2) => {
+      if (cleaned) {
+        return;
+      }
       const element = vue.unref(target2);
       if (element && !attached) {
         element.addEventListener(type, listener, {
@@ -35201,6 +35223,9 @@ if (uni.restoreGlobal) {
       }
     };
     const remove = (target2) => {
+      if (cleaned) {
+        return;
+      }
       const element = vue.unref(target2);
       if (element && attached) {
         element.removeEventListener(type, listener, capture);
@@ -35210,12 +35235,18 @@ if (uni.restoreGlobal) {
     vue.onUnmounted(() => remove(target));
     vue.onDeactivated(() => remove(target));
     onMountedOrActivated(() => add2(target));
+    let stopWatch;
     if (vue.isRef(target)) {
-      vue.watch(target, (val, oldVal) => {
+      stopWatch = vue.watch(target, (val, oldVal) => {
         remove(oldVal);
         add2(val);
       });
     }
+    return () => {
+      stopWatch == null ? void 0 : stopWatch();
+      remove(target);
+      cleaned = true;
+    };
   }
   function useClickAway(target, listener, options = {}) {
     if (!inBrowser) {
@@ -35477,7 +35508,7 @@ if (uni.restoreGlobal) {
     });
     return to2;
   }
-  var stdin_default$1H = {
+  var stdin_default$1K = {
     name: "\u59D3\u540D",
     tel: "\u7535\u8BDD",
     save: "\u4FDD\u5B58",
@@ -35540,7 +35571,7 @@ if (uni.restoreGlobal) {
   };
   const lang = vue.ref("zh-CN");
   const messages = vue.reactive({
-    "zh-CN": stdin_default$1H
+    "zh-CN": stdin_default$1K
   });
   const Locale = {
     messages() {
@@ -35554,11 +35585,11 @@ if (uni.restoreGlobal) {
       deepAssign(messages, newMessages);
     }
   };
-  var stdin_default$1G = Locale;
+  var stdin_default$1J = Locale;
   function createTranslate(name2) {
     const prefix = camelize(name2) + ".";
     return (path, ...args) => {
-      const messages2 = stdin_default$1G.messages();
+      const messages2 = stdin_default$1J.messages();
       const message = get(messages2, prefix + path) || get(messages2, path);
       return isFunction(message) ? message(...args) : message;
     };
@@ -35686,7 +35717,7 @@ if (uni.restoreGlobal) {
     placeholder: Boolean,
     safeAreaInsetBottom: truthProp
   };
-  var stdin_default$1F = vue.defineComponent({
+  var stdin_default$1I = vue.defineComponent({
     name: name$1B,
     props: actionBarProps,
     setup(props2, {
@@ -35715,7 +35746,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const ActionBar = withInstall(stdin_default$1F);
+  const ActionBar = withInstall(stdin_default$1I);
   function useExpose(apis) {
     const instance2 = vue.getCurrentInstance();
     if (instance2) {
@@ -35754,7 +35785,7 @@ if (uni.restoreGlobal) {
     showZero: truthProp,
     position: makeStringProp("top-right")
   };
-  var stdin_default$1E = vue.defineComponent({
+  var stdin_default$1H = vue.defineComponent({
     name: name$1A,
     props: badgeProps,
     setup(props2, {
@@ -35786,18 +35817,27 @@ if (uni.restoreGlobal) {
           return content;
         }
       };
+      const getOffsetWithMinusString = (val) => val.startsWith("-") ? val.replace("-", "") : `-${val}`;
       const style = vue.computed(() => {
         const style2 = {
           background: props2.color
         };
         if (props2.offset) {
           const [x2, y2] = props2.offset;
+          const {
+            position
+          } = props2;
+          const [offsetY, offsetX] = position.split("-");
           if (slots.default) {
-            style2.top = addUnit(y2);
-            if (typeof x2 === "number") {
-              style2.right = addUnit(-x2);
+            if (typeof y2 === "number") {
+              style2[offsetY] = addUnit(offsetY === "top" ? y2 : -y2);
             } else {
-              style2.right = x2.startsWith("-") ? x2.replace("-", "") : `-${x2}`;
+              style2[offsetY] = offsetY === "top" ? addUnit(y2) : getOffsetWithMinusString(y2);
+            }
+            if (typeof x2 === "number") {
+              style2[offsetX] = addUnit(offsetX === "left" ? x2 : -x2);
+            } else {
+              style2[offsetX] = offsetX === "left" ? addUnit(x2) : getOffsetWithMinusString(x2);
             }
           } else {
             style2.marginTop = addUnit(y2);
@@ -35832,7 +35872,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Badge = withInstall(stdin_default$1E);
+  const Badge = withInstall(stdin_default$1H);
   let globalZIndex = 2e3;
   const useGlobalZIndex = () => ++globalZIndex;
   const setGlobalZIndex = (val) => {
@@ -35856,7 +35896,7 @@ if (uni.restoreGlobal) {
     });
     return cssVars;
   }
-  var stdin_default$1D = vue.defineComponent({
+  var stdin_default$1G = vue.defineComponent({
     name: name$1z,
     props: configProviderProps,
     setup(props2, {
@@ -35911,7 +35951,7 @@ if (uni.restoreGlobal) {
     badgeProps: Object,
     classPrefix: String
   };
-  var stdin_default$1C = vue.defineComponent({
+  var stdin_default$1F = vue.defineComponent({
     name: name$1y,
     props: iconProps,
     setup(props2, {
@@ -35950,7 +35990,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Icon = withInstall(stdin_default$1C);
+  const Icon = withInstall(stdin_default$1F);
   const [name$1x, bem$1s] = createNamespace("loading");
   const SpinIcon = Array(12).fill(null).map((_2, index) => vue.createVNode("i", {
     "class": bem$1s("line", String(index + 1))
@@ -35972,7 +36012,7 @@ if (uni.restoreGlobal) {
     textSize: numericProp,
     textColor: String
   };
-  var stdin_default$1B = vue.defineComponent({
+  var stdin_default$1E = vue.defineComponent({
     name: name$1x,
     props: loadingProps,
     setup(props2, {
@@ -36015,7 +36055,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Loading = withInstall(stdin_default$1B);
+  const Loading = withInstall(stdin_default$1E);
   const [name$1w, bem$1r] = createNamespace("button");
   const buttonProps = extend({}, routeProps, {
     tag: makeStringProp("button"),
@@ -36038,7 +36078,7 @@ if (uni.restoreGlobal) {
     loadingType: String,
     iconPosition: makeStringProp("left")
   });
-  var stdin_default$1A = vue.defineComponent({
+  var stdin_default$1D = vue.defineComponent({
     name: name$1w,
     props: buttonProps,
     emits: ["click"],
@@ -36155,7 +36195,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Button = withInstall(stdin_default$1A);
+  const Button = withInstall(stdin_default$1D);
   const [name$1v, bem$1q] = createNamespace("action-bar-button");
   const actionBarButtonProps = extend({}, routeProps, {
     type: String,
@@ -36165,7 +36205,7 @@ if (uni.restoreGlobal) {
     loading: Boolean,
     disabled: Boolean
   });
-  var stdin_default$1z = vue.defineComponent({
+  var stdin_default$1C = vue.defineComponent({
     name: name$1v,
     props: actionBarButtonProps,
     setup(props2, {
@@ -36218,7 +36258,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const ActionBarButton = withInstall(stdin_default$1z);
+  const ActionBarButton = withInstall(stdin_default$1C);
   const [name$1u, bem$1p] = createNamespace("action-bar-icon");
   const actionBarIconProps = extend({}, routeProps, {
     dot: Boolean,
@@ -36230,7 +36270,7 @@ if (uni.restoreGlobal) {
     badgeProps: Object,
     iconPrefix: String
   });
-  var stdin_default$1y = vue.defineComponent({
+  var stdin_default$1B = vue.defineComponent({
     name: name$1u,
     props: actionBarIconProps,
     setup(props2, {
@@ -36276,7 +36316,7 @@ if (uni.restoreGlobal) {
       }, [renderIcon(), slots.default ? slots.default() : props2.text]);
     }
   });
-  const ActionBarIcon = withInstall(stdin_default$1y);
+  const ActionBarIcon = withInstall(stdin_default$1B);
   const popupSharedProps = {
     show: Boolean,
     zIndex: numericProp,
@@ -36425,7 +36465,7 @@ if (uni.restoreGlobal) {
     lazyRender: truthProp,
     customStyle: Object
   };
-  var stdin_default$1x = vue.defineComponent({
+  var stdin_default$1A = vue.defineComponent({
     name: name$1t,
     props: overlayProps,
     setup(props2, {
@@ -36461,7 +36501,7 @@ if (uni.restoreGlobal) {
       });
     }
   });
-  const Overlay = withInstall(stdin_default$1x);
+  const Overlay = withInstall(stdin_default$1A);
   const popupProps$2 = extend({}, popupSharedProps, {
     round: Boolean,
     position: makeStringProp("center"),
@@ -36475,7 +36515,7 @@ if (uni.restoreGlobal) {
     safeAreaInsetBottom: Boolean
   });
   const [name$1s, bem$1n] = createNamespace("popup");
-  var stdin_default$1w = vue.defineComponent({
+  var stdin_default$1z = vue.defineComponent({
     name: name$1s,
     inheritAttrs: false,
     props: popupProps$2,
@@ -36653,7 +36693,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Popup = withInstall(stdin_default$1w);
+  const Popup = withInstall(stdin_default$1z);
   const [name$1r, bem$1m] = createNamespace("action-sheet");
   const actionSheetProps = extend({}, popupSharedProps, {
     title: String,
@@ -36668,7 +36708,7 @@ if (uni.restoreGlobal) {
     safeAreaInsetBottom: truthProp
   });
   const popupInheritKeys$2 = [...popupSharedPropKeys, "round", "closeOnPopstate", "safeAreaInsetBottom"];
-  var stdin_default$1v = vue.defineComponent({
+  var stdin_default$1y = vue.defineComponent({
     name: name$1r,
     props: actionSheetProps,
     emits: ["select", "cancel", "update:show"],
@@ -36775,7 +36815,7 @@ if (uni.restoreGlobal) {
       });
     }
   });
-  const ActionSheet = withInstall(stdin_default$1v);
+  const ActionSheet = withInstall(stdin_default$1y);
   const [name$1q, bem$1l, t$j] = createNamespace("picker");
   const getFirstEnabledOption = (options) => options.find((option) => !option.disabled) || options[0];
   function getColumnsType(columns, fields) {
@@ -36847,7 +36887,7 @@ if (uni.restoreGlobal) {
   const MOMENTUM_DISTANCE = 15;
   const [name$1p, bem$1k] = createNamespace("picker-column");
   const PICKER_KEY = Symbol(name$1p);
-  var stdin_default$1u = vue.defineComponent({
+  var stdin_default$1x = vue.defineComponent({
     name: name$1p,
     props: {
       value: numericProp,
@@ -37033,7 +37073,7 @@ if (uni.restoreGlobal) {
   };
   const pickerToolbarSlots = ["cancel", "confirm", "title", "toolbar"];
   const pickerToolbarPropKeys = Object.keys(pickerToolbarProps);
-  var stdin_default$1t = vue.defineComponent({
+  var stdin_default$1w = vue.defineComponent({
     name: name$1o,
     props: pickerToolbarProps,
     emits: ["confirm", "cancel"],
@@ -37159,7 +37199,7 @@ if (uni.restoreGlobal) {
     offsetTop: makeNumericProp(0),
     offsetBottom: makeNumericProp(0)
   };
-  var stdin_default$1s = vue.defineComponent({
+  var stdin_default$1v = vue.defineComponent({
     name: name$1n,
     props: stickyProps,
     emits: ["scroll", "change"],
@@ -37263,9 +37303,9 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Sticky = withInstall(stdin_default$1s);
+  const Sticky = withInstall(stdin_default$1v);
   const [name$1m, bem$1i] = createNamespace("tab");
-  var stdin_default$1r = vue.defineComponent({
+  var stdin_default$1u = vue.defineComponent({
     name: name$1m,
     props: {
       id: String,
@@ -37363,10 +37403,10 @@ if (uni.restoreGlobal) {
     stopPropagation: truthProp
   };
   const SWIPE_KEY = Symbol(name$1l);
-  var stdin_default$1q = vue.defineComponent({
+  var stdin_default$1t = vue.defineComponent({
     name: name$1l,
     props: swipeProps,
-    emits: ["change"],
+    emits: ["change", "dragStart", "dragEnd"],
     setup(props2, {
       emit,
       slots
@@ -37381,6 +37421,7 @@ if (uni.restoreGlobal) {
         active: 0,
         swiping: false
       });
+      let dragging = false;
       const touch = useTouch();
       const {
         children,
@@ -37530,6 +37571,9 @@ if (uni.restoreGlobal) {
           }
           if (count.value) {
             active = Math.min(count.value - 1, active);
+            if (active === -1) {
+              active = count.value - 1;
+            }
           }
           state.active = active;
           state.swiping = true;
@@ -37548,9 +37592,10 @@ if (uni.restoreGlobal) {
       const resize = () => initialize(state.active);
       let touchStartTime;
       const onTouchStart = (event) => {
-        if (!props2.touchable)
+        if (!props2.touchable || event.touches.length > 1)
           return;
         touch.start(event);
+        dragging = false;
         touchStartTime = Date.now();
         stopAutoplay();
         correctPosition();
@@ -37565,6 +37610,10 @@ if (uni.restoreGlobal) {
               move({
                 offset: delta.value
               });
+              if (!dragging) {
+                emit("dragStart");
+                dragging = true;
+              }
             }
           }
         }
@@ -37593,7 +37642,9 @@ if (uni.restoreGlobal) {
             pace: 0
           });
         }
+        dragging = false;
         state.swiping = false;
+        emit("dragEnd");
         autoplay();
       };
       const swipeTo = (index, options = {}) => {
@@ -37696,9 +37747,9 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Swipe = withInstall(stdin_default$1q);
+  const Swipe = withInstall(stdin_default$1t);
   const [name$1k, bem$1g] = createNamespace("tabs");
-  var stdin_default$1p = vue.defineComponent({
+  var stdin_default$1s = vue.defineComponent({
     name: name$1k,
     props: {
       count: makeRequiredProp(Number),
@@ -37781,7 +37832,7 @@ if (uni.restoreGlobal) {
     titleInactiveColor: String
   };
   const TABS_KEY = Symbol(name$1j);
-  var stdin_default$1o = vue.defineComponent({
+  var stdin_default$1r = vue.defineComponent({
     name: name$1j,
     props: tabsProps,
     emits: ["change", "scroll", "rendered", "clickTab", "update:active"],
@@ -37971,7 +38022,7 @@ if (uni.restoreGlobal) {
           setCurrentIndex(index);
         }
       };
-      const renderNav = () => children.map((item, index) => vue.createVNode(stdin_default$1r, vue.mergeProps({
+      const renderNav = () => children.map((item, index) => vue.createVNode(stdin_default$1u, vue.mergeProps({
         "key": item.id,
         "id": `${id}-${index}`,
         "ref": setTitleRefs(index),
@@ -38087,7 +38138,7 @@ if (uni.restoreGlobal) {
         "onScroll": onStickyScroll
       }, {
         default: () => [renderHeader()]
-      }) : renderHeader(), vue.createVNode(stdin_default$1p, {
+      }) : renderHeader(), vue.createVNode(stdin_default$1s, {
         "ref": contentRef,
         "count": children.length,
         "inited": state.inited,
@@ -38108,7 +38159,7 @@ if (uni.restoreGlobal) {
   const TAB_STATUS_KEY = Symbol();
   const useTabStatus = () => vue.inject(TAB_STATUS_KEY, null);
   const [name$1i, bem$1e] = createNamespace("swipe-item");
-  var stdin_default$1n = vue.defineComponent({
+  var stdin_default$1q = vue.defineComponent({
     name: name$1i,
     setup(props2, {
       slots
@@ -38180,7 +38231,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const SwipeItem = withInstall(stdin_default$1n);
+  const SwipeItem = withInstall(stdin_default$1q);
   const [name$1h, bem$1d] = createNamespace("tab");
   const tabProps = extend({}, routeProps, {
     dot: Boolean,
@@ -38192,7 +38243,7 @@ if (uni.restoreGlobal) {
     titleStyle: [String, Object],
     showZeroBadge: truthProp
   });
-  var stdin_default$1m = vue.defineComponent({
+  var stdin_default$1p = vue.defineComponent({
     name: name$1h,
     props: tabProps,
     setup(props2, {
@@ -38291,14 +38342,15 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Tab = withInstall(stdin_default$1m);
-  const Tabs = withInstall(stdin_default$1o);
+  const Tab = withInstall(stdin_default$1p);
+  const Tabs = withInstall(stdin_default$1r);
   const [name$1g, bem$1c] = createNamespace("picker-group");
   const PICKER_GROUP_KEY = Symbol(name$1g);
   const pickerGroupProps = extend({
-    tabs: makeArrayProp()
+    tabs: makeArrayProp(),
+    nextStepText: String
   }, pickerToolbarProps);
-  var stdin_default$1l = vue.defineComponent({
+  var stdin_default$1o = vue.defineComponent({
     name: name$1g,
     props: pickerGroupProps,
     emits: ["confirm", "cancel"],
@@ -38306,26 +38358,38 @@ if (uni.restoreGlobal) {
       emit,
       slots
     }) {
+      const activeTab = vue.ref(0);
       const {
         children,
         linkChildren
       } = useChildren(PICKER_GROUP_KEY);
       linkChildren();
+      const showNextButton = () => activeTab.value < props2.tabs.length - 1 && props2.nextStepText;
       const onConfirm = () => {
-        emit("confirm", children.map((item) => item.confirm()));
+        if (showNextButton()) {
+          activeTab.value++;
+        } else {
+          emit("confirm", children.map((item) => item.confirm()));
+        }
       };
       const onCancel = () => emit("cancel");
       return () => {
         var _a;
         const childNodes = (_a = slots.default) == null ? void 0 : _a.call(slots);
+        const confirmButtonText = showNextButton() ? props2.nextStepText : props2.confirmButtonText;
         return vue.createVNode("div", {
           "class": bem$1c()
-        }, [vue.createVNode(stdin_default$1t, vue.mergeProps(props2, {
+        }, [vue.createVNode(stdin_default$1w, {
+          "title": props2.title,
+          "cancelButtonText": props2.cancelButtonText,
+          "confirmButtonText": confirmButtonText,
           "onConfirm": onConfirm,
           "onCancel": onCancel
-        }), null), vue.createVNode(Tabs, {
-          "shrink": true,
+        }, null), vue.createVNode(Tabs, {
+          "active": activeTab.value,
+          "onUpdate:active": ($event) => activeTab.value = $event,
           "class": bem$1c("tabs"),
+          "shrink": true,
           "animated": true
         }, {
           default: () => [props2.tabs.map((title, index) => vue.createVNode(Tab, {
@@ -38353,7 +38417,7 @@ if (uni.restoreGlobal) {
     toolbarPosition: makeStringProp("top"),
     columnsFieldNames: Object
   });
-  var stdin_default$1k = vue.defineComponent({
+  var stdin_default$1n = vue.defineComponent({
     name: name$1q,
     props: pickerProps,
     emits: ["confirm", "cancel", "change", "clickOption", "update:modelValue"],
@@ -38412,9 +38476,11 @@ if (uni.restoreGlobal) {
             }
           });
         }
-        emit("change", extend({
-          columnIndex
-        }, getEventParams()));
+        vue.nextTick(() => {
+          emit("change", extend({
+            columnIndex
+          }, getEventParams()));
+        });
       };
       const onClickOption = (currentOption, columnIndex) => emit("clickOption", extend({
         columnIndex,
@@ -38429,7 +38495,7 @@ if (uni.restoreGlobal) {
         return params;
       };
       const cancel = () => emit("cancel", getEventParams());
-      const renderColumnItems = () => currentColumns.value.map((options, columnIndex) => vue.createVNode(stdin_default$1u, {
+      const renderColumnItems = () => currentColumns.value.map((options, columnIndex) => vue.createVNode(stdin_default$1x, {
         "value": selectedValues.value[columnIndex],
         "fields": fields.value,
         "options": options,
@@ -38473,7 +38539,7 @@ if (uni.restoreGlobal) {
       };
       const renderToolbar = () => {
         if (props2.showToolbar && !parent) {
-          return vue.createVNode(stdin_default$1t, vue.mergeProps(pick(props2, pickerToolbarPropKeys), {
+          return vue.createVNode(stdin_default$1w, vue.mergeProps(pick(props2, pickerToolbarPropKeys), {
             "onConfirm": confirm,
             "onCancel": cancel
           }), pick(slots, pickerToolbarSlots));
@@ -38608,7 +38674,7 @@ if (uni.restoreGlobal) {
     }
     return options;
   }
-  const Picker = withInstall(stdin_default$1k);
+  const Picker = withInstall(stdin_default$1n);
   const [name$1f, bem$1b] = createNamespace("area");
   const areaProps = extend({}, pickerSharedProps, {
     modelValue: String,
@@ -38619,7 +38685,7 @@ if (uni.restoreGlobal) {
       default: () => ({})
     }
   });
-  var stdin_default$1j = vue.defineComponent({
+  var stdin_default$1m = vue.defineComponent({
     name: name$1f,
     props: areaProps,
     emits: ["change", "confirm", "cancel", "update:modelValue"],
@@ -38675,7 +38741,7 @@ if (uni.restoreGlobal) {
       }, pick(props2, INHERIT_PROPS)), pick(slots, INHERIT_SLOTS));
     }
   });
-  const Area = withInstall(stdin_default$1j);
+  const Area = withInstall(stdin_default$1m);
   const [name$1e, bem$1a] = createNamespace("cell");
   const cellSharedProps = {
     tag: makeStringProp("div"),
@@ -38700,7 +38766,7 @@ if (uni.restoreGlobal) {
     }
   };
   const cellProps = extend({}, cellSharedProps, routeProps);
-  var stdin_default$1i = vue.defineComponent({
+  var stdin_default$1l = vue.defineComponent({
     name: name$1e,
     props: cellProps,
     setup(props2, {
@@ -38795,7 +38861,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Cell = withInstall(stdin_default$1i);
+  const Cell = withInstall(stdin_default$1l);
   const [name$1d, bem$19] = createNamespace("form");
   const formProps = {
     colon: Boolean,
@@ -38815,7 +38881,7 @@ if (uni.restoreGlobal) {
       default: "onBlur"
     }
   };
-  var stdin_default$1h = vue.defineComponent({
+  var stdin_default$1k = vue.defineComponent({
     name: name$1d,
     props: formProps,
     emits: ["submit", "failed"],
@@ -38907,7 +38973,9 @@ if (uni.restoreGlobal) {
         });
       };
       const getValues = () => children.reduce((form, field) => {
-        form[field.name] = field.formValue.value;
+        if (field.name !== void 0) {
+          form[field.name] = field.formValue.value;
+        }
         return form;
       }, {});
       const submit = () => {
@@ -38946,7 +39014,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Form = withInstall(stdin_default$1h);
+  const Form = withInstall(stdin_default$1k);
   function isEmptyValue(value) {
     if (Array.isArray(value)) {
       return !value.length;
@@ -39082,7 +39150,7 @@ if (uni.restoreGlobal) {
       default: null
     }
   });
-  var stdin_default$1g = vue.defineComponent({
+  var stdin_default$1j = vue.defineComponent({
     name: name$1c,
     props: fieldProps,
     emits: ["blur", "focus", "clear", "keypress", "clickInput", "endValidate", "startValidate", "clickLeftIcon", "clickRightIcon", "update:modelValue"],
@@ -39206,6 +39274,7 @@ if (uni.restoreGlobal) {
         }
       };
       const limitValueLength = (value) => {
+        var _a;
         const {
           maxlength
         } = props2;
@@ -39214,6 +39283,13 @@ if (uni.restoreGlobal) {
           if (modelValue && getStringLength(modelValue) === +maxlength) {
             return modelValue;
           }
+          const selectionEnd = (_a = inputRef.value) == null ? void 0 : _a.selectionEnd;
+          if (state.focused && selectionEnd) {
+            const valueArr = [...value];
+            const exceededLength = valueArr.length - +maxlength;
+            valueArr.splice(selectionEnd - exceededLength, exceededLength);
+            return valueArr.join("");
+          }
           return cutString(value, +maxlength);
         }
         return value;
@@ -39221,22 +39297,47 @@ if (uni.restoreGlobal) {
       const updateValue = (value, trigger = "onChange") => {
         const originalValue = value;
         value = limitValueLength(value);
-        const isExceedLimit = value !== originalValue;
+        const limitDiffLen = getStringLength(originalValue) - getStringLength(value);
         if (props2.type === "number" || props2.type === "digit") {
           const isNumber2 = props2.type === "number";
           value = formatNumber(value, isNumber2, isNumber2);
         }
+        let formatterDiffLen = 0;
         if (props2.formatter && trigger === props2.formatTrigger) {
-          value = props2.formatter(value);
+          const {
+            formatter,
+            maxlength
+          } = props2;
+          value = formatter(value);
+          if (isDef(maxlength) && getStringLength(value) > maxlength) {
+            value = cutString(value, +maxlength);
+          }
+          if (inputRef.value && state.focused) {
+            const {
+              selectionEnd
+            } = inputRef.value;
+            const bcoVal = cutString(originalValue, selectionEnd);
+            formatterDiffLen = getStringLength(formatter(bcoVal)) - getStringLength(bcoVal);
+          }
         }
         if (inputRef.value && inputRef.value.value !== value) {
-          if (state.focused && isExceedLimit) {
-            const {
+          if (state.focused) {
+            let {
               selectionStart,
               selectionEnd
             } = inputRef.value;
             inputRef.value.value = value;
-            inputRef.value.setSelectionRange(selectionStart - 1, selectionEnd - 1);
+            if (isDef(selectionStart) && isDef(selectionEnd)) {
+              const valueLen = getStringLength(value);
+              if (limitDiffLen) {
+                selectionStart -= limitDiffLen;
+                selectionEnd -= limitDiffLen;
+              } else if (formatterDiffLen) {
+                selectionStart += formatterDiffLen;
+                selectionEnd += formatterDiffLen;
+              }
+              inputRef.value.setSelectionRange(Math.min(selectionStart, valueLen), Math.min(selectionEnd, valueLen));
+            }
           } else {
             inputRef.value.value = value;
           }
@@ -39497,7 +39598,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Field = withInstall(stdin_default$1g);
+  const Field = withInstall(stdin_default$1j);
   let lockCount = 0;
   function lockClick(lock) {
     if (lock) {
@@ -39535,7 +39636,7 @@ if (uni.restoreGlobal) {
     closeOnClick: Boolean,
     closeOnClickOverlay: Boolean
   };
-  var stdin_default$1f = vue.defineComponent({
+  var stdin_default$1i = vue.defineComponent({
     name: name$1b,
     props: toastProps,
     emits: ["update:show"],
@@ -39713,7 +39814,7 @@ if (uni.restoreGlobal) {
             onClosed,
             "onUpdate:show": toggle
           };
-          return vue.createVNode(stdin_default$1f, vue.mergeProps(state, attrs), null);
+          return vue.createVNode(stdin_default$1i, vue.mergeProps(state, attrs), null);
         };
         vue.watch(message, (val) => {
           state.message = val;
@@ -39744,7 +39845,7 @@ if (uni.restoreGlobal) {
     toast.open(extend({}, currentOptions, defaultOptionsMap.get(parsedOptions.type || currentOptions.type), parsedOptions));
     return toast;
   }
-  const Toast = withInstall(stdin_default$1f);
+  const Toast = withInstall(stdin_default$1i);
   const [name$1a, bem$16] = createNamespace("switch");
   const switchProps = {
     size: numericProp,
@@ -39762,7 +39863,7 @@ if (uni.restoreGlobal) {
       default: false
     }
   };
-  var stdin_default$1e = vue.defineComponent({
+  var stdin_default$1h = vue.defineComponent({
     name: name$1a,
     props: switchProps,
     emits: ["change", "update:modelValue"],
@@ -39822,10 +39923,10 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Switch = withInstall(stdin_default$1e);
+  const Switch = withInstall(stdin_default$1h);
   const [name$19, bem$15] = createNamespace("address-edit-detail");
   const t$i = createNamespace("address-edit")[2];
-  var stdin_default$1d = vue.defineComponent({
+  var stdin_default$1g = vue.defineComponent({
     name: name$19,
     props: {
       show: Boolean,
@@ -39931,7 +40032,7 @@ if (uni.restoreGlobal) {
       default: isMobile
     }
   };
-  var stdin_default$1c = vue.defineComponent({
+  var stdin_default$1f = vue.defineComponent({
     name: name$18,
     props: addressEditProps,
     emits: ["save", "focus", "delete", "clickArea", "changeArea", "changeDetail", "selectSearch", "changeDefault"],
@@ -40106,7 +40207,7 @@ if (uni.restoreGlobal) {
                 emit("clickArea");
                 showAreaPopup.value = !disableArea;
               }
-            }, null), [[vue.vShow, props2.showArea]]), vue.createVNode(stdin_default$1d, {
+            }, null), [[vue.vShow, props2.showArea]]), vue.createVNode(stdin_default$1g, {
               "show": props2.showDetail,
               "rows": props2.detailRows,
               "rules": rules.value.addressDetail,
@@ -40162,7 +40263,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const AddressEdit = withInstall(stdin_default$1c);
+  const AddressEdit = withInstall(stdin_default$1f);
   const [name$17, bem$13] = createNamespace("radio-group");
   const radioGroupProps = {
     disabled: Boolean,
@@ -40172,7 +40273,7 @@ if (uni.restoreGlobal) {
     checkedColor: String
   };
   const RADIO_KEY = Symbol(name$17);
-  var stdin_default$1b = vue.defineComponent({
+  var stdin_default$1e = vue.defineComponent({
     name: name$17,
     props: radioGroupProps,
     emits: ["change", "update:modelValue"],
@@ -40199,7 +40300,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const RadioGroup = withInstall(stdin_default$1b);
+  const RadioGroup = withInstall(stdin_default$1e);
   const [name$16, bem$12] = createNamespace("tag");
   const tagProps = {
     size: String,
@@ -40212,7 +40313,7 @@ if (uni.restoreGlobal) {
     textColor: String,
     closeable: Boolean
   };
-  var stdin_default$1a = vue.defineComponent({
+  var stdin_default$1d = vue.defineComponent({
     name: name$16,
     props: tagProps,
     emits: ["close"],
@@ -40271,7 +40372,7 @@ if (uni.restoreGlobal) {
       });
     }
   });
-  const Tag = withInstall(stdin_default$1a);
+  const Tag = withInstall(stdin_default$1d);
   const checkerProps = {
     name: unknownProp,
     shape: makeStringProp("round"),
@@ -40282,7 +40383,7 @@ if (uni.restoreGlobal) {
     labelPosition: String,
     labelDisabled: Boolean
   };
-  var stdin_default$19 = vue.defineComponent({
+  var stdin_default$1c = vue.defineComponent({
     props: extend({}, checkerProps, {
       bem: makeRequiredProp(Function),
       role: String,
@@ -40373,7 +40474,7 @@ if (uni.restoreGlobal) {
   });
   checkerProps;
   const [name$15, bem$11] = createNamespace("radio");
-  var stdin_default$18 = vue.defineComponent({
+  var stdin_default$1b = vue.defineComponent({
     name: name$15,
     props: checkerProps,
     emits: ["update:modelValue"],
@@ -40395,7 +40496,7 @@ if (uni.restoreGlobal) {
           emit("update:modelValue", props2.name);
         }
       };
-      return () => vue.createVNode(stdin_default$19, vue.mergeProps({
+      return () => vue.createVNode(stdin_default$1c, vue.mergeProps({
         "bem": bem$11,
         "role": "radio",
         "parent": parent,
@@ -40404,9 +40505,9 @@ if (uni.restoreGlobal) {
       }, props2), pick(slots, ["default", "icon"]));
     }
   });
-  const Radio = withInstall(stdin_default$18);
+  const Radio = withInstall(stdin_default$1b);
   const [name$14, bem$10] = createNamespace("address-item");
-  var stdin_default$17 = vue.defineComponent({
+  var stdin_default$1a = vue.defineComponent({
     name: name$14,
     props: {
       address: makeRequiredProp(Object),
@@ -40501,7 +40602,7 @@ if (uni.restoreGlobal) {
     addButtonText: String,
     defaultTagText: String
   };
-  var stdin_default$16 = vue.defineComponent({
+  var stdin_default$19 = vue.defineComponent({
     name: name$13,
     props: addressListProps,
     emits: ["add", "edit", "select", "clickItem", "editDisabled", "selectDisabled", "update:modelValue"],
@@ -40518,7 +40619,7 @@ if (uni.restoreGlobal) {
             emit("update:modelValue", item.id);
           }
         };
-        return vue.createVNode(stdin_default$17, {
+        return vue.createVNode(stdin_default$1a, {
           "key": item.id,
           "address": item,
           "disabled": disabled,
@@ -40564,7 +40665,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const AddressList = withInstall(stdin_default$16);
+  const AddressList = withInstall(stdin_default$19);
   function throttle(action, delay) {
     let timeout = null;
     let lastRun = 0;
@@ -40591,12 +40692,13 @@ if (uni.restoreGlobal) {
     bottom: numericProp,
     target: [String, Object],
     offset: makeNumericProp(200),
+    immediate: Boolean,
     teleport: {
       type: [String, Object],
       default: "body"
     }
   };
-  var stdin_default$15 = vue.defineComponent({
+  var stdin_default$18 = vue.defineComponent({
     name: name$12,
     inheritAttrs: false,
     props: backTopProps,
@@ -40618,7 +40720,7 @@ if (uni.restoreGlobal) {
         emit("click", event);
         (_a = scrollParent.value) == null ? void 0 : _a.scrollTo({
           top: 0,
-          behavior: "smooth"
+          behavior: props2.immediate ? "auto" : "smooth"
         });
       };
       const scroll = () => {
@@ -40634,7 +40736,7 @@ if (uni.restoreGlobal) {
             return el;
           }
           {
-            formatAppLog("error", "at node_modules/vant/es/back-top/BackTop.mjs:56", `[Vant] BackTop: target element "${target}" was not found, the BackTop component will not be rendered.`);
+            formatAppLog("error", "at node_modules/vant/es/back-top/BackTop.mjs:57", `[Vant] BackTop: target element "${target}" was not found, the BackTop component will not be rendered.`);
           }
         } else {
           return target;
@@ -40676,7 +40778,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const BackTop = withInstall(stdin_default$15);
+  const BackTop = withInstall(stdin_default$18);
   const [name$11, bem$Z, t$f] = createNamespace("calendar");
   const formatMonthTitle = (date2) => t$f("monthTitle", date2.getFullYear(), date2.getMonth() + 1);
   function compareMonth(date1, date2) {
@@ -40759,7 +40861,7 @@ if (uni.restoreGlobal) {
     return value;
   });
   const [name$10] = createNamespace("calendar-day");
-  var stdin_default$14 = vue.defineComponent({
+  var stdin_default$17 = vue.defineComponent({
     name: name$10,
     props: {
       item: makeRequiredProp(Object),
@@ -40897,7 +40999,7 @@ if (uni.restoreGlobal) {
     showMonthTitle: Boolean,
     firstDayOfWeek: Number
   };
-  var stdin_default$13 = vue.defineComponent({
+  var stdin_default$16 = vue.defineComponent({
     name: name$$,
     props: calendarMonthProps,
     emits: ["click"],
@@ -41004,7 +41106,10 @@ if (uni.restoreGlobal) {
         if (props2.showMonthTitle) {
           return vue.createVNode("div", {
             "class": bem$Z("month-title")
-          }, [title.value]);
+          }, [slots["month-title"] ? slots["month-title"]({
+            date: props2.date,
+            text: title.value
+          }) : title.value]);
         }
       };
       const renderMark = () => {
@@ -41050,7 +41155,7 @@ if (uni.restoreGlobal) {
           setScrollTop(body, daysRect.top + rowOffset + body.scrollTop - useRect(body).top);
         }
       };
-      const renderDay = (item, index) => vue.createVNode(stdin_default$14, {
+      const renderDay = (item, index) => vue.createVNode(stdin_default$17, {
         "item": item,
         "index": index,
         "color": props2.color,
@@ -41077,7 +41182,7 @@ if (uni.restoreGlobal) {
     }
   });
   const [name$_] = createNamespace("calendar-header");
-  var stdin_default$12 = vue.defineComponent({
+  var stdin_default$15 = vue.defineComponent({
     name: name$_,
     props: {
       date: Date,
@@ -41178,7 +41283,7 @@ if (uni.restoreGlobal) {
       validator: (val) => val >= 0 && val <= 6
     }
   };
-  var stdin_default$11 = vue.defineComponent({
+  var stdin_default$14 = vue.defineComponent({
     name: name$11,
     props: calendarProps,
     emits: ["select", "confirm", "unselect", "monthShow", "overRange", "update:show", "clickSubtitle"],
@@ -41442,7 +41547,7 @@ if (uni.restoreGlobal) {
       const updateShow = (value) => emit("update:show", value);
       const renderMonth = (date2, index) => {
         const showMonthTitle = index !== 0 || !props2.showSubtitle;
-        return vue.createVNode(stdin_default$13, vue.mergeProps({
+        return vue.createVNode(stdin_default$16, vue.mergeProps({
           "ref": setMonthRefs(index),
           "date": date2,
           "currentDate": currentDate.value,
@@ -41450,7 +41555,7 @@ if (uni.restoreGlobal) {
           "firstDayOfWeek": dayOffset.value
         }, pick(props2, ["type", "color", "minDate", "maxDate", "showMark", "formatter", "rowHeight", "lazyRender", "showSubtitle", "allowSameDay"]), {
           "onClick": onClickDay
-        }), pick(slots, ["top-info", "bottom-info"]));
+        }), pick(slots, ["top-info", "bottom-info", "month-title"]));
       };
       const renderFooterButton = () => {
         if (slots.footer) {
@@ -41483,7 +41588,7 @@ if (uni.restoreGlobal) {
       }, [renderFooterButton()]);
       const renderCalendar = () => vue.createVNode("div", {
         "class": bem$Z()
-      }, [vue.createVNode(stdin_default$12, {
+      }, [vue.createVNode(stdin_default$15, {
         "date": subtitle.value.date,
         "title": props2.title,
         "subtitle": subtitle.value.text,
@@ -41529,7 +41634,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Calendar = withInstall(stdin_default$11);
+  const Calendar = withInstall(stdin_default$14);
   const [name$Z, bem$Y] = createNamespace("image");
   const imageProps = {
     src: String,
@@ -41549,7 +41654,7 @@ if (uni.restoreGlobal) {
     showLoading: truthProp,
     loadingIcon: makeStringProp("photo")
   };
-  var stdin_default$10 = vue.defineComponent({
+  var stdin_default$13 = vue.defineComponent({
     name: name$Z,
     props: imageProps,
     emits: ["load", "error"],
@@ -41583,6 +41688,14 @@ if (uni.restoreGlobal) {
           loading.value = false;
           emit("load", event);
         }
+      };
+      const triggerLoad = () => {
+        const loadEvent = new Event("load");
+        Object.defineProperty(loadEvent, "target", {
+          value: imageRef.value,
+          enumerable: true
+        });
+        onLoad(loadEvent);
       };
       const onError = (event) => {
         error.value = true;
@@ -41641,7 +41754,7 @@ if (uni.restoreGlobal) {
       }) => {
         const check = () => {
           if (el === imageRef.value && loading.value) {
-            onLoad();
+            triggerLoad();
           }
         };
         if (imageRef.value) {
@@ -41669,7 +41782,7 @@ if (uni.restoreGlobal) {
         vue.nextTick(() => {
           var _a;
           if ((_a = imageRef.value) == null ? void 0 : _a.complete) {
-            onLoad();
+            triggerLoad();
           }
         });
       });
@@ -41685,7 +41798,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Image = withInstall(stdin_default$10);
+  const Image = withInstall(stdin_default$13);
   const [name$Y, bem$X] = createNamespace("card");
   const cardProps = {
     tag: String,
@@ -41700,7 +41813,7 @@ if (uni.restoreGlobal) {
     thumbLink: String,
     originPrice: numericProp
   };
-  var stdin_default$$ = vue.defineComponent({
+  var stdin_default$12 = vue.defineComponent({
     name: name$Y,
     props: cardProps,
     emits: ["clickThumb"],
@@ -41804,7 +41917,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Card = withInstall(stdin_default$$);
+  const Card = withInstall(stdin_default$12);
   const [name$X, bem$W, t$e] = createNamespace("cascader");
   const cascaderProps = {
     title: String,
@@ -41818,7 +41931,7 @@ if (uni.restoreGlobal) {
     placeholder: String,
     activeColor: String
   };
-  var stdin_default$_ = vue.defineComponent({
+  var stdin_default$11 = vue.defineComponent({
     name: name$X,
     props: cascaderProps,
     emits: ["close", "change", "finish", "clickTab", "update:modelValue"],
@@ -42023,14 +42136,14 @@ if (uni.restoreGlobal) {
       }, [renderHeader(), renderTabs()]);
     }
   });
-  const Cascader = withInstall(stdin_default$_);
+  const Cascader = withInstall(stdin_default$11);
   const [name$W, bem$V] = createNamespace("cell-group");
   const cellGroupProps = {
     title: String,
     inset: Boolean,
     border: truthProp
   };
-  var stdin_default$Z = vue.defineComponent({
+  var stdin_default$10 = vue.defineComponent({
     name: name$W,
     inheritAttrs: false,
     props: cellGroupProps,
@@ -42061,7 +42174,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const CellGroup = withInstall(stdin_default$Z);
+  const CellGroup = withInstall(stdin_default$10);
   const [name$V, bem$U] = createNamespace("checkbox-group");
   const checkboxGroupProps = {
     max: numericProp,
@@ -42072,7 +42185,7 @@ if (uni.restoreGlobal) {
     checkedColor: String
   };
   const CHECKBOX_GROUP_KEY = Symbol(name$V);
-  var stdin_default$Y = vue.defineComponent({
+  var stdin_default$$ = vue.defineComponent({
     name: name$V,
     props: checkboxGroupProps,
     emits: ["change", "update:modelValue"],
@@ -42128,7 +42241,7 @@ if (uni.restoreGlobal) {
   const checkboxProps = extend({}, checkerProps, {
     bindGroup: truthProp
   });
-  var stdin_default$X = vue.defineComponent({
+  var stdin_default$_ = vue.defineComponent({
     name: name$U,
     props: checkboxProps,
     emits: ["change", "update:modelValue"],
@@ -42186,7 +42299,7 @@ if (uni.restoreGlobal) {
         checked
       });
       useCustomFieldValue(() => props2.modelValue);
-      return () => vue.createVNode(stdin_default$19, vue.mergeProps({
+      return () => vue.createVNode(stdin_default$1c, vue.mergeProps({
         "bem": bem$T,
         "role": "checkbox",
         "parent": parent,
@@ -42195,8 +42308,8 @@ if (uni.restoreGlobal) {
       }, props2), pick(slots, ["default", "icon"]));
     }
   });
-  const Checkbox = withInstall(stdin_default$X);
-  const CheckboxGroup = withInstall(stdin_default$Y);
+  const Checkbox = withInstall(stdin_default$_);
+  const CheckboxGroup = withInstall(stdin_default$$);
   const [name$T, bem$S] = createNamespace("circle");
   let uid = 0;
   const format$1 = (rate) => Math.min(Math.max(+rate, 0), 100);
@@ -42218,7 +42331,7 @@ if (uni.restoreGlobal) {
     strokeLinecap: String,
     startPosition: makeStringProp("top")
   };
-  var stdin_default$W = vue.defineComponent({
+  var stdin_default$Z = vue.defineComponent({
     name: name$T,
     props: circleProps,
     emits: ["update:currentRate"],
@@ -42342,7 +42455,7 @@ if (uni.restoreGlobal) {
       }, [renderGradient(), renderLayer(), renderHover()]), renderText()]);
     }
   });
-  const Circle = withInstall(stdin_default$W);
+  const Circle = withInstall(stdin_default$Z);
   const [name$S, bem$R] = createNamespace("row");
   const ROW_KEY = Symbol(name$S);
   const rowProps = {
@@ -42352,7 +42465,7 @@ if (uni.restoreGlobal) {
     gutter: makeNumericProp(0),
     justify: String
   };
-  var stdin_default$V = vue.defineComponent({
+  var stdin_default$Y = vue.defineComponent({
     name: name$S,
     props: rowProps,
     setup(props2, {
@@ -42432,7 +42545,7 @@ if (uni.restoreGlobal) {
     span: makeNumericProp(0),
     offset: numericProp
   };
-  var stdin_default$U = vue.defineComponent({
+  var stdin_default$X = vue.defineComponent({
     name: name$R,
     props: colProps,
     setup(props2, {
@@ -42481,7 +42594,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Col = withInstall(stdin_default$U);
+  const Col = withInstall(stdin_default$X);
   const [name$Q, bem$P] = createNamespace("collapse");
   const COLLAPSE_KEY = Symbol(name$Q);
   const collapseProps = {
@@ -42503,7 +42616,7 @@ if (uni.restoreGlobal) {
     }
     return true;
   }
-  var stdin_default$T = vue.defineComponent({
+  var stdin_default$W = vue.defineComponent({
     name: name$Q,
     props: collapseProps,
     emits: ["change", "update:modelValue"],
@@ -42581,7 +42694,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Collapse = withInstall(stdin_default$T);
+  const Collapse = withInstall(stdin_default$W);
   const [name$P, bem$O] = createNamespace("collapse-item");
   const CELL_SLOTS = ["icon", "title", "value", "label", "right-icon"];
   const collapseItemProps = extend({}, cellSharedProps, {
@@ -42591,7 +42704,7 @@ if (uni.restoreGlobal) {
     readonly: Boolean,
     lazyRender: truthProp
   });
-  var stdin_default$S = vue.defineComponent({
+  var stdin_default$V = vue.defineComponent({
     name: name$P,
     props: collapseItemProps,
     setup(props2, {
@@ -42706,8 +42819,8 @@ if (uni.restoreGlobal) {
       }, [renderTitle(), renderContent()]);
     }
   });
-  const CollapseItem = withInstall(stdin_default$S);
-  const ConfigProvider = withInstall(stdin_default$1D);
+  const CollapseItem = withInstall(stdin_default$V);
+  const ConfigProvider = withInstall(stdin_default$1G);
   const [name$O, bem$N, t$d] = createNamespace("contact-card");
   const contactCardProps = {
     tel: String,
@@ -42716,7 +42829,7 @@ if (uni.restoreGlobal) {
     addText: String,
     editable: truthProp
   };
-  var stdin_default$R = vue.defineComponent({
+  var stdin_default$U = vue.defineComponent({
     name: name$O,
     props: contactCardProps,
     emits: ["click"],
@@ -42747,7 +42860,7 @@ if (uni.restoreGlobal) {
       });
     }
   });
-  const ContactCard = withInstall(stdin_default$R);
+  const ContactCard = withInstall(stdin_default$U);
   const [name$N, bem$M, t$c] = createNamespace("contact-edit");
   const DEFAULT_CONTACT = {
     tel: "",
@@ -42768,7 +42881,7 @@ if (uni.restoreGlobal) {
       default: isMobile
     }
   };
-  var stdin_default$Q = vue.defineComponent({
+  var stdin_default$T = vue.defineComponent({
     name: name$N,
     props: contactEditProps,
     emits: ["save", "delete", "changeDefault"],
@@ -42849,7 +42962,7 @@ if (uni.restoreGlobal) {
       });
     }
   });
-  const ContactEdit = withInstall(stdin_default$Q);
+  const ContactEdit = withInstall(stdin_default$T);
   const [name$M, bem$L, t$b] = createNamespace("contact-list");
   const contactListProps = {
     list: Array,
@@ -42857,7 +42970,7 @@ if (uni.restoreGlobal) {
     modelValue: unknownProp,
     defaultTagText: String
   };
-  var stdin_default$P = vue.defineComponent({
+  var stdin_default$S = vue.defineComponent({
     name: name$M,
     props: contactListProps,
     emits: ["add", "edit", "select", "update:modelValue"],
@@ -42927,7 +43040,7 @@ if (uni.restoreGlobal) {
       }, null)])]);
     }
   });
-  const ContactList = withInstall(stdin_default$P);
+  const ContactList = withInstall(stdin_default$S);
   function parseFormat(format2, currentTime) {
     const { days: days2 } = currentTime;
     let { hours: hours2, minutes: minutes2, seconds: seconds2, milliseconds: milliseconds2 } = currentTime;
@@ -42970,7 +43083,7 @@ if (uni.restoreGlobal) {
     autoStart: truthProp,
     millisecond: Boolean
   };
-  var stdin_default$O = vue.defineComponent({
+  var stdin_default$R = vue.defineComponent({
     name: name$L,
     props: countDownProps,
     emits: ["change", "finish"],
@@ -43010,7 +43123,7 @@ if (uni.restoreGlobal) {
       }, [slots.default ? slots.default(current2.value) : timeText.value]);
     }
   });
-  const CountDown = withInstall(stdin_default$O);
+  const CountDown = withInstall(stdin_default$R);
   function getDate(timeStamp) {
     const date2 = new Date(timeStamp * 1e3);
     return `${date2.getFullYear()}.${padZero(date2.getMonth() + 1)}.${padZero(
@@ -43020,7 +43133,7 @@ if (uni.restoreGlobal) {
   const formatDiscount = (discount) => (discount / 10).toFixed(discount % 10 === 0 ? 0 : 1);
   const formatAmount = (amount) => (amount / 100).toFixed(amount % 100 === 0 ? 0 : amount % 10 === 0 ? 1 : 2);
   const [name$K, bem$J, t$a] = createNamespace("coupon");
-  var stdin_default$N = vue.defineComponent({
+  var stdin_default$Q = vue.defineComponent({
     name: name$K,
     props: {
       chosen: Boolean,
@@ -43091,7 +43204,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Coupon = withInstall(stdin_default$N);
+  const Coupon = withInstall(stdin_default$Q);
   const [name$J, bem$I, t$9] = createNamespace("coupon-cell");
   const couponCellProps = {
     title: String,
@@ -43120,7 +43233,7 @@ if (uni.restoreGlobal) {
     }
     return coupons.length === 0 ? t$9("noCoupon") : t$9("count", coupons.length);
   }
-  var stdin_default$M = vue.defineComponent({
+  var stdin_default$P = vue.defineComponent({
     name: name$J,
     props: couponCellProps,
     setup(props2) {
@@ -43139,14 +43252,14 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const CouponCell = withInstall(stdin_default$M);
+  const CouponCell = withInstall(stdin_default$P);
   const [name$I, bem$H] = createNamespace("empty");
   const emptyProps = {
     image: makeStringProp("default"),
     imageSize: [Number, String, Array],
     description: String
   };
-  var stdin_default$L = vue.defineComponent({
+  var stdin_default$O = vue.defineComponent({
     name: name$I,
     props: emptyProps,
     setup(props2, {
@@ -43455,7 +43568,7 @@ if (uni.restoreGlobal) {
       }, [renderImage()]), renderDescription(), renderBottom()]);
     }
   });
-  const Empty = withInstall(stdin_default$L);
+  const Empty = withInstall(stdin_default$O);
   const [name$H, bem$G, t$8] = createNamespace("coupon-list");
   const couponListProps = {
     code: makeStringProp(""),
@@ -43477,7 +43590,7 @@ if (uni.restoreGlobal) {
     exchangeButtonLoading: Boolean,
     exchangeButtonDisabled: Boolean
   };
-  var stdin_default$K = vue.defineComponent({
+  var stdin_default$N = vue.defineComponent({
     name: name$H,
     props: couponListProps,
     emits: ["change", "exchange", "update:code"],
@@ -43628,7 +43741,7 @@ if (uni.restoreGlobal) {
       }, null), [[vue.vShow, props2.showCloseButton]])])]);
     }
   });
-  const CouponList = withInstall(stdin_default$K);
+  const CouponList = withInstall(stdin_default$N);
   const currentYear = new Date().getFullYear();
   const [name$G] = createNamespace("date-picker");
   const datePickerProps = extend({}, sharedProps, {
@@ -43647,7 +43760,7 @@ if (uni.restoreGlobal) {
       validator: isDate
     }
   });
-  var stdin_default$J = vue.defineComponent({
+  var stdin_default$M = vue.defineComponent({
     name: name$G,
     props: datePickerProps,
     emits: ["confirm", "cancel", "change", "update:modelValue"],
@@ -43736,7 +43849,7 @@ if (uni.restoreGlobal) {
       }, pick(props2, pickerInheritKeys)), slots);
     }
   });
-  const DatePicker = withInstall(stdin_default$J);
+  const DatePicker = withInstall(stdin_default$M);
   const [name$F, bem$F, t$7] = createNamespace("dialog");
   const dialogProps = extend({}, popupSharedProps, {
     title: String,
@@ -43760,7 +43873,7 @@ if (uni.restoreGlobal) {
     closeOnClickOverlay: Boolean
   });
   const popupInheritKeys$1 = [...popupSharedPropKeys, "transition", "closeOnPopstate"];
-  var stdin_default$I = vue.defineComponent({
+  var stdin_default$L = vue.defineComponent({
     name: name$F,
     props: dialogProps,
     emits: ["confirm", "cancel", "keydown", "update:show"],
@@ -43943,14 +44056,14 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Dialog = withInstall(stdin_default$I);
+  const Dialog = withInstall(stdin_default$L);
   const [name$E, bem$E] = createNamespace("divider");
   const dividerProps = {
     dashed: Boolean,
     hairline: truthProp,
     contentPosition: makeStringProp("center")
   };
-  var stdin_default$H = vue.defineComponent({
+  var stdin_default$K = vue.defineComponent({
     name: name$E,
     props: dividerProps,
     setup(props2, {
@@ -43969,7 +44082,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Divider = withInstall(stdin_default$H);
+  const Divider = withInstall(stdin_default$K);
   const [name$D, bem$D] = createNamespace("dropdown-menu");
   const dropdownMenuProps = {
     overlay: truthProp,
@@ -43981,7 +44094,7 @@ if (uni.restoreGlobal) {
     closeOnClickOverlay: truthProp
   };
   const DROPDOWN_KEY = Symbol(name$D);
-  var stdin_default$G = vue.defineComponent({
+  var stdin_default$J = vue.defineComponent({
     name: name$D,
     props: dropdownMenuProps,
     setup(props2, {
@@ -44107,7 +44220,7 @@ if (uni.restoreGlobal) {
     modelValue: unknownProp,
     titleClass: unknownProp
   };
-  var stdin_default$F = vue.defineComponent({
+  var stdin_default$I = vue.defineComponent({
     name: name$C,
     inheritAttrs: false,
     props: dropdownItemProps,
@@ -44267,8 +44380,8 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const DropdownItem = withInstall(stdin_default$F);
-  const DropdownMenu = withInstall(stdin_default$G);
+  const DropdownItem = withInstall(stdin_default$I);
+  const DropdownMenu = withInstall(stdin_default$J);
   const [name$B, bem$B] = createNamespace("grid");
   const gridProps = {
     square: Boolean,
@@ -44282,7 +44395,7 @@ if (uni.restoreGlobal) {
     columnNum: makeNumericProp(4)
   };
   const GRID_KEY = Symbol(name$B);
-  var stdin_default$E = vue.defineComponent({
+  var stdin_default$H = vue.defineComponent({
     name: name$B,
     props: gridProps,
     setup(props2, {
@@ -44307,7 +44420,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Grid = withInstall(stdin_default$E);
+  const Grid = withInstall(stdin_default$H);
   const [name$A, bem$A] = createNamespace("grid-item");
   const gridItemProps = extend({}, routeProps, {
     dot: Boolean,
@@ -44318,7 +44431,7 @@ if (uni.restoreGlobal) {
     iconPrefix: String,
     badgeProps: Object
   });
-  var stdin_default$D = vue.defineComponent({
+  var stdin_default$G = vue.defineComponent({
     name: name$A,
     props: gridItemProps,
     setup(props2, {
@@ -44442,10 +44555,10 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const GridItem = withInstall(stdin_default$D);
+  const GridItem = withInstall(stdin_default$G);
   const getDistance = (touches) => Math.sqrt((touches[0].clientX - touches[1].clientX) ** 2 + (touches[0].clientY - touches[1].clientY) ** 2);
   const bem$z = createNamespace("image-preview")[1];
-  var stdin_default$C = vue.defineComponent({
+  var stdin_default$F = vue.defineComponent({
     props: {
       src: String,
       show: Boolean,
@@ -44453,7 +44566,8 @@ if (uni.restoreGlobal) {
       minZoom: makeRequiredProp(numericProp),
       maxZoom: makeRequiredProp(numericProp),
       rootWidth: makeRequiredProp(Number),
-      rootHeight: makeRequiredProp(Number)
+      rootHeight: makeRequiredProp(Number),
+      disableZoom: Boolean
     },
     emits: ["scale", "close", "longPress"],
     setup(props2, {
@@ -44548,18 +44662,23 @@ if (uni.restoreGlobal) {
       let startDistance;
       let doubleTapTimer;
       let touchStartTime;
+      let isImageMoved = false;
       const onTouchStart = (event) => {
         const {
           touches
         } = event;
+        fingerNum = touches.length;
+        if (fingerNum === 2 && props2.disableZoom) {
+          return;
+        }
         const {
           offsetX
         } = touch;
         touch.start(event);
-        fingerNum = touches.length;
         startMoveX = state.moveX;
         startMoveY = state.moveY;
         touchStartTime = Date.now();
+        isImageMoved = false;
         state.moving = fingerNum === 1 && state.scale !== 1;
         state.zooming = fingerNum === 2 && !offsetX.value;
         if (state.zooming) {
@@ -44572,9 +44691,6 @@ if (uni.restoreGlobal) {
           touches
         } = event;
         touch.move(event);
-        if (state.moving || state.zooming) {
-          preventDefault(event, true);
-        }
         if (state.moving) {
           const {
             deltaX,
@@ -44582,13 +44698,22 @@ if (uni.restoreGlobal) {
           } = touch;
           const moveX = deltaX.value + startMoveX;
           const moveY = deltaY.value + startMoveY;
+          if ((moveX > maxMoveX.value || moveX < -maxMoveX.value) && !isImageMoved) {
+            state.moving = false;
+            return;
+          }
+          isImageMoved = true;
+          preventDefault(event, true);
           state.moveX = clamp(moveX, -maxMoveX.value, maxMoveX.value);
           state.moveY = clamp(moveY, -maxMoveY.value, maxMoveY.value);
         }
-        if (state.zooming && touches.length === 2) {
-          const distance = getDistance(touches);
-          const scale = startScale * distance / startDistance;
-          setScale(scale);
+        if (state.zooming) {
+          preventDefault(event, true);
+          if (touches.length === 2) {
+            const distance = getDistance(touches);
+            const scale = startScale * distance / startDistance;
+            setScale(scale);
+          }
         }
       };
       const checkTap = () => {
@@ -44698,7 +44823,7 @@ if (uni.restoreGlobal) {
     }
   });
   const [name$z, bem$y] = createNamespace("image-preview");
-  const popupProps$1 = ["show", "transition", "overlayStyle", "closeOnPopstate"];
+  const popupProps$1 = ["show", "teleport", "transition", "overlayStyle", "closeOnPopstate"];
   const imagePreviewProps = {
     show: Boolean,
     loop: truthProp,
@@ -44718,9 +44843,10 @@ if (uni.restoreGlobal) {
     startPosition: makeNumericProp(0),
     showIndicators: Boolean,
     closeOnPopstate: truthProp,
-    closeIconPosition: makeStringProp("top-right")
+    closeIconPosition: makeStringProp("top-right"),
+    teleport: [String, Object]
   };
-  var stdin_default$B = vue.defineComponent({
+  var stdin_default$E = vue.defineComponent({
     name: name$z,
     props: imagePreviewProps,
     emits: ["scale", "close", "closed", "change", "longPress", "update:show"],
@@ -44732,7 +44858,8 @@ if (uni.restoreGlobal) {
       const state = vue.reactive({
         active: 0,
         rootWidth: 0,
-        rootHeight: 0
+        rootHeight: 0,
+        disableZoom: false
       });
       const resize = () => {
         if (swipeRef.value) {
@@ -44772,6 +44899,12 @@ if (uni.restoreGlobal) {
           }, [slots.cover()]);
         }
       };
+      const onDragStart = () => {
+        state.disableZoom = true;
+      };
+      const onDragEnd = () => {
+        state.disableZoom = false;
+      };
       const renderImages = () => vue.createVNode(Swipe, {
         "ref": swipeRef,
         "lazyRender": true,
@@ -44781,9 +44914,11 @@ if (uni.restoreGlobal) {
         "initialSwipe": props2.startPosition,
         "showIndicators": props2.showIndicators,
         "indicatorColor": "white",
-        "onChange": setActive
+        "onChange": setActive,
+        "onDragEnd": onDragEnd,
+        "onDragStart": onDragStart
       }, {
-        default: () => [props2.images.map((image, index) => vue.createVNode(stdin_default$C, {
+        default: () => [props2.images.map((image, index) => vue.createVNode(stdin_default$F, {
           "src": image,
           "show": props2.show,
           "active": state.active,
@@ -44791,6 +44926,7 @@ if (uni.restoreGlobal) {
           "minZoom": props2.minZoom,
           "rootWidth": state.rootWidth,
           "rootHeight": state.rootHeight,
+          "disableZoom": state.disableZoom,
           "onScale": emitScale,
           "onClose": emitClose,
           "onLongPress": () => emit("longPress", {
@@ -44887,7 +45023,7 @@ if (uni.restoreGlobal) {
         const onClosed = () => {
           state.images = [];
         };
-        return () => vue.createVNode(stdin_default$B, vue.mergeProps(state, {
+        return () => vue.createVNode(stdin_default$E, vue.mergeProps(state, {
           "onClosed": onClosed,
           "onUpdate:show": toggle
         }), null);
@@ -44908,7 +45044,7 @@ if (uni.restoreGlobal) {
     instance.open(extend({}, defaultConfig, options));
     return instance;
   };
-  const ImagePreview = withInstall(stdin_default$B);
+  const ImagePreview = withInstall(stdin_default$E);
   function genAlphabet() {
     const charCodeOfA = "A".charCodeAt(0);
     const indexList = Array(26).fill("").map((_2, i2) => String.fromCharCode(charCodeOfA + i2));
@@ -44927,7 +45063,7 @@ if (uni.restoreGlobal) {
     }
   };
   const INDEX_BAR_KEY = Symbol(name$y);
-  var stdin_default$A = vue.defineComponent({
+  var stdin_default$D = vue.defineComponent({
     name: name$y,
     props: indexBarProps,
     emits: ["select", "change"],
@@ -45129,7 +45265,7 @@ if (uni.restoreGlobal) {
   const indexAnchorProps = {
     index: numericProp
   };
-  var stdin_default$z = vue.defineComponent({
+  var stdin_default$C = vue.defineComponent({
     name: name$x,
     props: indexAnchorProps,
     setup(props2, {
@@ -45202,8 +45338,8 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const IndexAnchor = withInstall(stdin_default$z);
-  const IndexBar = withInstall(stdin_default$A);
+  const IndexAnchor = withInstall(stdin_default$C);
+  const IndexBar = withInstall(stdin_default$D);
   const [name$w, bem$v, t$6] = createNamespace("list");
   const listProps = {
     error: Boolean,
@@ -45217,7 +45353,7 @@ if (uni.restoreGlobal) {
     finishedText: String,
     immediateCheck: truthProp
   };
-  var stdin_default$y = vue.defineComponent({
+  var stdin_default$B = vue.defineComponent({
     name: name$w,
     props: listProps,
     emits: ["load", "update:error", "update:loading"],
@@ -45334,7 +45470,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const List = withInstall(stdin_default$y);
+  const List = withInstall(stdin_default$B);
   const [name$v, bem$u] = createNamespace("nav-bar");
   const navBarProps = {
     title: String,
@@ -45348,7 +45484,7 @@ if (uni.restoreGlobal) {
     safeAreaInsetTop: Boolean,
     clickable: truthProp
   };
-  var stdin_default$x = vue.defineComponent({
+  var stdin_default$A = vue.defineComponent({
     name: name$v,
     props: navBarProps,
     emits: ["clickLeft", "clickRight"],
@@ -45418,7 +45554,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const NavBar = withInstall(stdin_default$x);
+  const NavBar = withInstall(stdin_default$A);
   const [name$u, bem$t] = createNamespace("notice-bar");
   const noticeBarProps = {
     text: String,
@@ -45434,7 +45570,7 @@ if (uni.restoreGlobal) {
       default: null
     }
   };
-  var stdin_default$w = vue.defineComponent({
+  var stdin_default$z = vue.defineComponent({
     name: name$u,
     props: noticeBarProps,
     emits: ["close", "replay"],
@@ -45574,7 +45710,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const NoticeBar = withInstall(stdin_default$w);
+  const NoticeBar = withInstall(stdin_default$z);
   const [name$t, bem$s] = createNamespace("notify");
   const notifyProps = extend({}, popupSharedProps, {
     type: makeStringProp("danger"),
@@ -45585,7 +45721,7 @@ if (uni.restoreGlobal) {
     background: String,
     lockScroll: Boolean
   });
-  var stdin_default$v = vue.defineComponent({
+  var stdin_default$y = vue.defineComponent({
     name: name$t,
     props: notifyProps,
     emits: ["update:show"],
@@ -45612,7 +45748,7 @@ if (uni.restoreGlobal) {
       });
     }
   });
-  const Notify = withInstall(stdin_default$v);
+  const Notify = withInstall(stdin_default$y);
   const [name$s, bem$r] = createNamespace("key");
   const CollapseIcon = vue.createVNode("svg", {
     "class": bem$r("collapse-icon"),
@@ -45628,7 +45764,7 @@ if (uni.restoreGlobal) {
     "d": "M28 0a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H10.4a2 2 0 0 1-1.4-.6L1 13.1c-.6-.5-.9-1.3-.9-2 0-1 .3-1.7.9-2.2L9 .6a2 2 0 0 1 1.4-.6zm0 2H10.4l-8.2 8.3a1 1 0 0 0-.3.7c0 .3.1.5.3.7l8.2 8.4H28a2 2 0 0 0 2-2V4c0-1.1-.9-2-2-2zm-5 4a1 1 0 0 1 .7.3 1 1 0 0 1 0 1.4L20.4 11l3.3 3.3c.2.2.3.5.3.7 0 .3-.1.5-.3.7a1 1 0 0 1-.7.3 1 1 0 0 1-.7-.3L19 12.4l-3.4 3.3a1 1 0 0 1-.6.3 1 1 0 0 1-.7-.3 1 1 0 0 1-.3-.7c0-.2.1-.5.3-.7l3.3-3.3-3.3-3.3A1 1 0 0 1 14 7c0-.3.1-.5.3-.7A1 1 0 0 1 15 6a1 1 0 0 1 .6.3L19 9.6l3.3-3.3A1 1 0 0 1 23 6z",
     "fill": "currentColor"
   }, null)]);
-  var stdin_default$u = vue.defineComponent({
+  var stdin_default$x = vue.defineComponent({
     name: name$s,
     props: {
       type: String,
@@ -45731,7 +45867,7 @@ if (uni.restoreGlobal) {
     }
     return array;
   }
-  var stdin_default$t = vue.defineComponent({
+  var stdin_default$w = vue.defineComponent({
     name: name$r,
     inheritAttrs: false,
     props: numberKeyboardProps,
@@ -45850,7 +45986,7 @@ if (uni.restoreGlobal) {
         if (key.type === "extra") {
           keySlots.default = slots["extra-key"];
         }
-        return vue.createVNode(stdin_default$u, {
+        return vue.createVNode(stdin_default$x, {
           "key": key.text,
           "text": key.text,
           "type": key.type,
@@ -45863,14 +45999,14 @@ if (uni.restoreGlobal) {
         if (props2.theme === "custom") {
           return vue.createVNode("div", {
             "class": bem$q("sidebar")
-          }, [props2.showDeleteKey && vue.createVNode(stdin_default$u, {
+          }, [props2.showDeleteKey && vue.createVNode(stdin_default$x, {
             "large": true,
             "text": props2.deleteButtonText,
             "type": "delete",
             "onPress": onPress
           }, {
             delete: slots.delete
-          }), vue.createVNode(stdin_default$u, {
+          }), vue.createVNode(stdin_default$x, {
             "large": true,
             "text": props2.closeButtonText,
             "type": "close",
@@ -45921,7 +46057,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const NumberKeyboard = withInstall(stdin_default$t);
+  const NumberKeyboard = withInstall(stdin_default$w);
   const [name$q, bem$p, t$5] = createNamespace("pagination");
   const makePage = (number, text, active) => ({
     number,
@@ -45939,7 +46075,7 @@ if (uni.restoreGlobal) {
     itemsPerPage: makeNumericProp(10),
     forceEllipses: Boolean
   };
-  var stdin_default$s = vue.defineComponent({
+  var stdin_default$v = vue.defineComponent({
     name: name$q,
     props: paginationProps,
     emits: ["change", "update:modelValue"],
@@ -46060,7 +46196,7 @@ if (uni.restoreGlobal) {
       }, [renderPrevButton(), props2.mode === "simple" ? renderDesc() : renderPages(), renderNextButton()])]);
     }
   });
-  const Pagination = withInstall(stdin_default$s);
+  const Pagination = withInstall(stdin_default$v);
   const [name$p, bem$o] = createNamespace("password-input");
   const passwordInputProps = {
     info: String,
@@ -46071,7 +46207,7 @@ if (uni.restoreGlobal) {
     focused: Boolean,
     errorInfo: String
   };
-  var stdin_default$r = vue.defineComponent({
+  var stdin_default$u = vue.defineComponent({
     name: name$p,
     props: passwordInputProps,
     emits: ["focus"],
@@ -46133,8 +46269,8 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PasswordInput = withInstall(stdin_default$r);
-  const PickerGroup = withInstall(stdin_default$1l);
+  const PasswordInput = withInstall(stdin_default$u);
+  const PickerGroup = withInstall(stdin_default$1o);
   function getWindow(node) {
     if (node == null) {
       return window;
@@ -47084,7 +47220,7 @@ if (uni.restoreGlobal) {
       default: "body"
     }
   };
-  var stdin_default$q = vue.defineComponent({
+  var stdin_default$t = vue.defineComponent({
     name: name$o,
     props: popoverProps,
     emits: ["select", "touchstart", "update:show"],
@@ -47230,7 +47366,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Popover = withInstall(stdin_default$q);
+  const Popover = withInstall(stdin_default$t);
   const [name$n, bem$m] = createNamespace("progress");
   const progressProps = {
     color: String,
@@ -47247,7 +47383,7 @@ if (uni.restoreGlobal) {
       validator: (value) => value >= 0 && value <= 100
     }
   };
-  var stdin_default$p = vue.defineComponent({
+  var stdin_default$s = vue.defineComponent({
     name: name$n,
     props: progressProps,
     setup(props2) {
@@ -47301,7 +47437,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Progress = withInstall(stdin_default$p);
+  const Progress = withInstall(stdin_default$s);
   const [name$m, bem$l, t$4] = createNamespace("pull-refresh");
   const DEFAULT_HEAD_HEIGHT = 50;
   const TEXT_STATUS = ["pulling", "loosing", "success"];
@@ -47317,7 +47453,7 @@ if (uni.restoreGlobal) {
     successDuration: makeNumericProp(500),
     animationDuration: makeNumericProp(300)
   };
-  var stdin_default$o = vue.defineComponent({
+  var stdin_default$r = vue.defineComponent({
     name: name$m,
     props: pullRefreshProps,
     emits: ["change", "refresh", "update:modelValue"],
@@ -47486,7 +47622,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PullRefresh = withInstall(stdin_default$o);
+  const PullRefresh = withInstall(stdin_default$r);
   const [name$l, bem$k] = createNamespace("rate");
   function getRateStatus(value, index, allowHalf, readonly) {
     if (value >= index) {
@@ -47529,7 +47665,7 @@ if (uni.restoreGlobal) {
     modelValue: makeNumberProp(0),
     disabledColor: String
   };
-  var stdin_default$n = vue.defineComponent({
+  var stdin_default$q = vue.defineComponent({
     name: name$l,
     props: rateProps,
     emits: ["change", "update:modelValue"],
@@ -47696,8 +47832,8 @@ if (uni.restoreGlobal) {
       }, [list.value.map(renderStar)]);
     }
   });
-  const Rate = withInstall(stdin_default$n);
-  const Row = withInstall(stdin_default$V);
+  const Rate = withInstall(stdin_default$q);
+  const Row = withInstall(stdin_default$Y);
   const [name$k, bem$j, t$3] = createNamespace("search");
   const searchProps = extend({}, fieldSharedProps, {
     label: String,
@@ -47708,7 +47844,7 @@ if (uni.restoreGlobal) {
     background: String,
     showAction: Boolean
   });
-  var stdin_default$m = vue.defineComponent({
+  var stdin_default$p = vue.defineComponent({
     name: name$k,
     props: searchProps,
     emits: ["blur", "focus", "clear", "search", "cancel", "clickInput", "clickLeftIcon", "clickRightIcon", "update:modelValue"],
@@ -47806,7 +47942,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Search = withInstall(stdin_default$m);
+  const Search = withInstall(stdin_default$p);
   const popupInheritKeys = [...popupSharedPropKeys, "round", "closeOnPopstate", "safeAreaInsetBottom"];
   const iconMap = {
     qq: "qq",
@@ -47828,7 +47964,7 @@ if (uni.restoreGlobal) {
     closeOnPopstate: truthProp,
     safeAreaInsetBottom: truthProp
   });
-  var stdin_default$l = vue.defineComponent({
+  var stdin_default$o = vue.defineComponent({
     name: name$j,
     props: shareSheetProps,
     emits: ["cancel", "select", "update:show"],
@@ -47920,13 +48056,13 @@ if (uni.restoreGlobal) {
       });
     }
   });
-  const ShareSheet = withInstall(stdin_default$l);
+  const ShareSheet = withInstall(stdin_default$o);
   const [name$i, bem$h] = createNamespace("sidebar");
   const SIDEBAR_KEY = Symbol(name$i);
   const sidebarProps = {
     modelValue: makeNumericProp(0)
   };
-  var stdin_default$k = vue.defineComponent({
+  var stdin_default$n = vue.defineComponent({
     name: name$i,
     props: sidebarProps,
     emits: ["change", "update:modelValue"],
@@ -47957,7 +48093,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Sidebar = withInstall(stdin_default$k);
+  const Sidebar = withInstall(stdin_default$n);
   const [name$h, bem$g] = createNamespace("sidebar-item");
   const sidebarItemProps = extend({}, routeProps, {
     dot: Boolean,
@@ -47966,7 +48102,7 @@ if (uni.restoreGlobal) {
     disabled: Boolean,
     badgeProps: Object
   });
-  var stdin_default$j = vue.defineComponent({
+  var stdin_default$m = vue.defineComponent({
     name: name$h,
     props: sidebarItemProps,
     emits: ["click"],
@@ -48020,13 +48156,13 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const SidebarItem = withInstall(stdin_default$j);
+  const SidebarItem = withInstall(stdin_default$m);
   const [name$g, bem$f] = createNamespace("skeleton-title");
   const skeletonTitleProps = {
     round: Boolean,
     titleWidth: numericProp
   };
-  var stdin_default$i = vue.defineComponent({
+  var stdin_default$l = vue.defineComponent({
     name: name$g,
     props: skeletonTitleProps,
     setup(props2) {
@@ -48040,12 +48176,14 @@ if (uni.restoreGlobal) {
       }, null);
     }
   });
+  const SkeletonTitle = withInstall(stdin_default$l);
+  var stdin_default$k = SkeletonTitle;
   const [name$f, bem$e] = createNamespace("skeleton-avatar");
   const skeletonAvatarProps = {
     avatarSize: numericProp,
     avatarShape: makeStringProp("round")
   };
-  var stdin_default$h = vue.defineComponent({
+  var stdin_default$j = vue.defineComponent({
     name: name$f,
     props: skeletonAvatarProps,
     setup(props2) {
@@ -48055,6 +48193,8 @@ if (uni.restoreGlobal) {
       }, null);
     }
   });
+  const SkeletonAvatar = withInstall(stdin_default$j);
+  var stdin_default$i = SkeletonAvatar;
   const DEFAULT_ROW_WIDTH = "100%";
   const skeletonParagraphProps = {
     round: Boolean,
@@ -48064,7 +48204,7 @@ if (uni.restoreGlobal) {
     }
   };
   const [name$e, bem$d] = createNamespace("skeleton-paragraph");
-  var stdin_default$g = vue.defineComponent({
+  var stdin_default$h = vue.defineComponent({
     name: name$e,
     props: skeletonParagraphProps,
     setup(props2) {
@@ -48078,6 +48218,8 @@ if (uni.restoreGlobal) {
       }, null);
     }
   });
+  const SkeletonParagraph = withInstall(stdin_default$h);
+  var stdin_default$g = SkeletonParagraph;
   const [name$d, bem$c] = createNamespace("skeleton");
   const DEFAULT_LAST_ROW_WIDTH = "60%";
   const skeletonProps = {
@@ -48105,7 +48247,7 @@ if (uni.restoreGlobal) {
     }) {
       const renderAvatar = () => {
         if (props2.avatar) {
-          return vue.createVNode(stdin_default$h, {
+          return vue.createVNode(stdin_default$i, {
             "avatarShape": props2.avatarShape,
             "avatarSize": props2.avatarSize
           }, null);
@@ -48113,7 +48255,7 @@ if (uni.restoreGlobal) {
       };
       const renderTitle = () => {
         if (props2.title) {
-          return vue.createVNode(stdin_default$i, {
+          return vue.createVNode(stdin_default$k, {
             "round": props2.round,
             "titleWidth": props2.titleWidth
           }, null);
@@ -48158,6 +48300,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
+  const Skeleton = withInstall(stdin_default$f);
   const [name$c, bem$b] = createNamespace("skeleton-image");
   const skeletonImageProps = {
     imageSize: numericProp,
@@ -48176,11 +48319,7 @@ if (uni.restoreGlobal) {
       }, null)]);
     }
   });
-  withInstall(stdin_default$e);
-  withInstall(stdin_default$i);
-  withInstall(stdin_default$h);
-  withInstall(stdin_default$g);
-  const Skeleton = withInstall(stdin_default$f);
+  const SkeletonImage = withInstall(stdin_default$e);
   const [name$b, bem$a] = createNamespace("slider");
   const sliderProps = {
     min: makeNumericProp(0),
@@ -48212,7 +48351,7 @@ if (uni.restoreGlobal) {
       let current2;
       let startValue;
       const root = vue.ref();
-      const slider = vue.ref();
+      const slider = [vue.ref(), vue.ref()];
       const dragStatus = vue.ref();
       const touch = useTouch();
       const scope = vue.computed(() => Number(props2.max) - Number(props2.min));
@@ -48404,7 +48543,7 @@ if (uni.restoreGlobal) {
       const renderButton = (index) => {
         const current22 = typeof index === "number" ? props2.modelValue[index] : props2.modelValue;
         return vue.createVNode("div", {
-          "ref": slider,
+          "ref": slider[index != null ? index : 0],
           "role": "slider",
           "class": getButtonClassName(index),
           "tabindex": props2.disabled ? void 0 : 0,
@@ -48427,8 +48566,10 @@ if (uni.restoreGlobal) {
       };
       updateValue(props2.modelValue);
       useCustomFieldValue(() => props2.modelValue);
-      useEventListener("touchmove", onTouchMove, {
-        target: slider
+      slider.forEach((item) => {
+        useEventListener("touchmove", onTouchMove, {
+          target: item
+        });
       });
       return () => vue.createVNode("div", {
         "ref": root,
@@ -49937,7 +50078,7 @@ if (uni.restoreGlobal) {
     }
   });
   const Uploader = withInstall(stdin_default$1);
-  const version = "4.0.3";
+  const version = "4.0.10";
   function install(app) {
     const components = [
       ActionBar,
@@ -50009,6 +50150,10 @@ if (uni.restoreGlobal) {
       Sidebar,
       SidebarItem,
       Skeleton,
+      SkeletonAvatar,
+      SkeletonImage,
+      SkeletonParagraph,
+      SkeletonTitle,
       Slider,
       Space,
       Step,

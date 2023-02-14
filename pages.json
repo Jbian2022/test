@@ -147,34 +147,6 @@
 			}
 		},
 		{
-			"path": "pages/bindPhone/bindPhone",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
-				"autoBackButton": false,
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-					"titleNView": false,
-					"bounce": "none"
-				}
-			}
-		},
-		{
-			"path": "pages/phoneLoging/phoneLoging",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
-				"autoBackButton": false,
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-					"titleNView": false,
-					"bounce": "none"
-				}
-			}
-		},
-		{
 			"path": "pages/personalnformation/personalnformation",
 			"style": {
 				"navigationBarTitleText": "",
@@ -303,6 +275,34 @@
 			"path": "pages/personalInfo/personalInfo",
 			"style": {
 				"navigationBarTitleText": "个人信息",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/bindPhone/bindPhone",
+			"style": {
+				"navigationBarTitleText": "绑定手机号",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/phoneLoging/phoneLoging",
+			"style": {
+				"navigationBarTitleText": "手机号登录",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
 				"autoBackButton": false,

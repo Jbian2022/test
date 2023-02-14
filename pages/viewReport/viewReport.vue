@@ -49,9 +49,10 @@
       mask-background-color="rgba(20, 21, 23, 0.8)"
     >
       <view class="histroys">
-        <view class="Titlehistroy">历史评测报告</view>
+        <view class="Titlehistroy">历史评估报告</view>
         <view
           class="item"
+		  v-if="showShare"
           v-for="(item, index) in historyData"
           :key="index"
           @click="sethistorydata(item)"
@@ -77,6 +78,39 @@
             >日期：{{ item.saveDate }}</view
           >
         </view>
+		<view style="margin-top: 120upx;" v-else>
+		  <!-- <image
+		    src="../../static/app-plus/other/defaultImg.png"
+		    style="
+		      width: 180upx;
+		      height: 180upx;
+		      margin: 0 auto;
+		      top: 120upx;
+		      left: 256upx;
+		    "
+		  ></image> -->
+						<view style="
+		      width: 180upx;
+		      height: 220upx;
+		      margin: 0 auto;
+							margin-top: 60upx;
+							margin-bottom: 30upx;
+							background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
+							background-size: 100%;
+		    "></view>
+		  <view
+		    style="
+		      width: 360upx;
+		      height: 40upx;
+		      font-size: 28upx;
+		      font-weight: 400;
+		      color: #7a7f89;
+		      margin: 0 auto;
+			  text-align: center;
+		    "
+		    >暂无历史评估报告</view
+		  >
+		</view>
       </view>
     </uni-popup>
   </view>
@@ -411,24 +445,23 @@
                 ></image> -->
 				<view style="
                     width: 180upx;
-                    height: 180upx;
+                    height: 220upx;
                     margin: 0 auto;
-                    top: 120upx;
-                    left: 256upx;
-					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png');background-repeat: no-repeat;
+					margin-top: 60upx;
+					margin-bottom: 30upx;
+					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
 					background-size: 100%;
                   "></view>
                 <view
                   style="
-                    width: 350upx;
+                    width: 360upx;
                     height: 40upx;
                     font-size: 28upx;
                     font-weight: 400;
                     color: #7a7f89;
-                    line-height: 320upx;
                     margin: 0 auto;
                   "
-                  >暂无评测内容，快去完善吧~</view
+                  >暂无评估内容，快去完善吧~</view
                 >
               </view>
             </uni-collapse-item>
@@ -682,27 +715,26 @@
 			        left: 256upx;
 			      "
 			    ></image> -->
-			  				<view style="
-			        width: 180upx;
-			        height: 180upx;
-			        margin: 0 auto;
-			        top: 120upx;
-			        left: 256upx;
-			  					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png');background-repeat: no-repeat;
-			  					background-size: 100%;
-			      "></view>
-			    <view
-			      style="
-			        width: 350upx;
-			        height: 40upx;
-			        font-size: 28upx;
-			        font-weight: 400;
-			        color: #7a7f89;
-			        line-height: 320upx;
-			        margin: 0 auto;
-			      "
-			      >暂无评测内容，快去完善吧~</view
-			    >
+			  	<view style="
+			  	    width: 180upx;
+			  	    height: 220upx;
+			  	    margin: 0 auto;
+			  		margin-top: 60upx;
+			  		margin-bottom: 30upx;
+			  		background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
+			  		background-size: 100%;
+			  	  "></view>
+			  	<view
+			  	  style="
+			  	    width: 360upx;
+			  	    height: 40upx;
+			  	    font-size: 28upx;
+			  	    font-weight: 400;
+			  	    color: #7a7f89;
+			  	    margin: 0 auto;
+			  	  "
+			  	  >暂无评估内容，快去完善吧~</view
+			  	>
 			  </view>
               <!-- <view class="bodyAssessment">
 						<view style="width: 10px;
@@ -840,27 +872,26 @@
 			        left: 256upx;
 			      "
 			    ></image> -->
-			  				<view style="
-			        width: 180upx;
-			        height: 180upx;
-			        margin: 0 auto;
-			        top: 120upx;
-			        left: 256upx;
-			  					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/21d31629-dfa6-4bbc-81fd-accb424c4345.png');background-repeat: no-repeat;
-			  					background-size: 100%;
-			      "></view>
-			    <view
-			      style="
-			        width: 350upx;
-			        height: 40upx;
-			        font-size: 28upx;
-			        font-weight: 400;
-			        color: #7a7f89;
-			        line-height: 320upx;
-			        margin: 0 auto;
-			      "
-			      >暂无评测内容，快去完善吧~</view
-			    >
+			  	<view style="
+			  	    width: 180upx;
+			  	    height: 220upx;
+			  	    margin: 0 auto;
+			  		margin-top: 60upx;
+			  		margin-bottom: 30upx;
+			  		background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
+			  		background-size: 100%;
+			  	  "></view>
+			  	<view
+			  	  style="
+			  	    width: 360upx;
+			  	    height: 40upx;
+			  	    font-size: 28upx;
+			  	    font-weight: 400;
+			  	    color: #7a7f89;
+			  	    margin: 0 auto;
+			  	  "
+			  	  >暂无评估内容，快去完善吧~</view
+			  	>
 			  </view>
               <!-- <view class="bodyAssessment">
 						<view style="width: 5px;
@@ -1099,6 +1130,7 @@ export default {
   },
   onShow() {
     console.log(this.key)
+	uni.hideLoading()
   },
   onLoad(options) {
     if (JSON.stringify(options) !== '{}' && options.traineeNo) {
@@ -1464,7 +1496,6 @@ export default {
 		testOb.saveReport(data).then((res)=>{
 			console.log(res)
 		})
-        this.showShare = true
       }
       // this.$refs.popup.open()
     },
@@ -1508,6 +1539,7 @@ export default {
 	  console.log(option.name, 8888)
 	  this.baseUrl = option.base64
 	  this.uploadImage((url) => {
+		  console.log(url)
 	    uni.showLoading({ title: '加载中' })
 	    // #ifndef H5
 	    if (option.name === '保存到相册') {
@@ -1607,8 +1639,10 @@ export default {
             console.log(this.historyData)
           })
         }
-      }
-      this.showShare = true
+      }else{
+		  this.showShare = true
+	  }
+      
     },
     sethistorydata(item) {
       this.HQDate = item.HQDate
@@ -1704,13 +1738,13 @@ export default {
 				html2canvas(dom, {
 					width: dom.clientWidth, //dom 原始宽度
 					height: dom.clientHeight,
-					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
+					scrollY: -30, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 					scrollX: 0,
 					x: 0,
 					y: 0,
 					useCORS: true, //支持跨域
-					allowTaint:true
-					// scale: 1, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
+					allowTaint:true,
+					scale: 1.3, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 				}).then((canvas) => {
 					console.log(canvas)
 					const base64 = canvas.toDataURL('image/jpeg');
@@ -1819,7 +1853,7 @@ export default {
   z-index: 0;
   background: #212328;
   width: 100%;
-  background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png");
+  background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/af1f1238-0e5f-468a-9a00-120d347c451a.png");
   background-repeat: no-repeat;
   background-size: 100%;
 }
