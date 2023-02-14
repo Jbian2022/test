@@ -55,11 +55,16 @@ export default {
         gender: ''
       },
       phone: '',
-      sexShow: false
+      sexShow: false,
+      scanel: null
     }
   },
   components: {
     BgTheamCompontent
+  },
+  onLoad(options) {
+    // 判断来源渠道
+    this.scanel = options.scanel || null
   },
   computed: {
     controlActiveFlag() {
@@ -87,7 +92,7 @@ export default {
                 'mobile=' +
                 this.phone +
                 '&scanel=' +
-                'wx'
+                this.scanel
             })
           }
         } catch (err) {

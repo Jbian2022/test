@@ -110,7 +110,8 @@ export default {
       if (this.isFinsh) {
         const login = uniCloud.importObject('login') //第一步导入云对象
         try {
-          let type = this.scanel === 'wx' ? 'bind' : 'login'
+          let type =
+            this.scanel === 'wx' || this.scanel === 'apple' ? 'bind' : 'login'
           const smsRes = await login.sendSmsCode(this.mobile, type)
           console.log(smsRes, '发送成功')
           if (smsRes.code == 0) {

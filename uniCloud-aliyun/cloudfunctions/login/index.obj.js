@@ -332,11 +332,21 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 		return getRoleByUid.getWeixinUserInfo(event)
 	},
 	// 苹果登录
-	logingByApple: async function(data) {
+	logingByApple: async function(identityToken) {
 	
-		
-			const res = await uniID.loginByApple(data)
+		let param = {
+			identityToken
+		}
+			const res = await uniID.loginByApple(param)
 			return res
+	},
+	// 校验苹果登录
+	verifyAppleIdentityToken: async function(identityToken) {
+		let param = {
+			identityToken
+		}
+		const res = await uniID.verifyAppleIdentityToken(param)
+		return res
 	},
 	
 	// 返解unid
@@ -400,7 +410,27 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 			
 	
 	},
+	// 苹果登录业务模块
+	getAppleSchema: function () {
+		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
+		return new Promise((resolve, reject) => {
+			db.collection('uni-id-users')
+			  .where({
+					uid	
+				})
+			  .get().then(res => {
+				  console.log(res,'>>>>>>')
+				  resolve(res)
+				 
+			  }).catch((err) => {
+				  reject(err)
+			  })
+		})
+			
 	
+	},
+	
+
 	getVerifySchema: function () {
 		return new Promise((resolve, reject) => {
 			db.collection('opendb-verify-codes')
