@@ -15106,6 +15106,7 @@ if (uni.restoreGlobal) {
             break;
           case "wx":
             this.wxLoginCommon();
+            break;
           case "apple":
             this.appleLoginCommon();
             break;
@@ -15118,7 +15119,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:199", err);
+              formatAppLog("log", "at pages/logining/logining.vue:200", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
@@ -15128,7 +15129,7 @@ if (uni.restoreGlobal) {
         uni.login({
           provider: "apple",
           success: async (loginRes) => {
-            formatAppLog("log", "at pages/logining/logining.vue:210", loginRes, "\u4EC0\u4E48\u9B3C");
+            formatAppLog("log", "at pages/logining/logining.vue:211", loginRes, "\u4EC0\u4E48\u9B3C");
             const appleLogin = Es.importObject("login", {
               customUI: true
             });
@@ -15138,7 +15139,7 @@ if (uni.restoreGlobal) {
               );
               formatAppLog(
                 "log",
-                "at pages/logining/logining.vue:220",
+                "at pages/logining/logining.vue:221",
                 verifyAppleIdentityTokenRes,
                 "verifyAppleIdentityTokenRes"
               );
@@ -15146,7 +15147,7 @@ if (uni.restoreGlobal) {
                 let getLogingByAppleRes = await appleLogin.logingByApple(
                   loginRes.appleInfo.identityToken
                 );
-                formatAppLog("log", "at pages/logining/logining.vue:229", getLogingByAppleRes, "\u82F9\u679C\u767B\u9646\u4E86");
+                formatAppLog("log", "at pages/logining/logining.vue:230", getLogingByAppleRes, "\u82F9\u679C\u767B\u9646\u4E86");
                 if (getLogingByAppleRes.code == 0) {
                   try {
                     uni.setStorageSync(
@@ -15159,32 +15160,27 @@ if (uni.restoreGlobal) {
                       "tokenExpired",
                       getLogingByAppleRes.tokenExpired
                     );
-                    let appleSchemaRes = await appleLogin.getAppleSchema();
-                    formatAppLog("log", "at pages/logining/logining.vue:245", appleSchemaRes, "\u6211\u662F\u82F9\u679C\u767B\u5F55\u7684\u524D\u4E00\u6B65");
-                    let flag = false;
-                    if (appleSchemaRes.affectedDocs === 0) {
-                      flag = false;
-                    }
-                    flag = appleSchemaRes.data[0].hasOwnProperty("mobile") ? true : false;
-                    if (flag) {
+                    if (getLogingByAppleRes.type === "login") {
                       uni.setStorageSync("loginNum", "1");
                       uni.reLaunch({
                         url: "/pages/myMebers/myMebers"
                       });
-                    } else {
+                      return;
+                    }
+                    if (getLogingByAppleRes.type === "register") {
                       uni.setStorageSync("loginNum", "0");
                       uni.navigateTo({
-                        url: "/pages/bindPhone/bindPhone?scanel=apple"
+                        url: "/pages/personalnformation/personalnformation"
                       });
                       return;
                     }
                   } catch (e) {
-                    formatAppLog("log", "at pages/logining/logining.vue:271", e, ">>>>>");
+                    formatAppLog("log", "at pages/logining/logining.vue:304", e, ">>>>>");
                   }
                 }
               }
             } catch (e) {
-              formatAppLog("log", "at pages/logining/logining.vue:276", e, "222");
+              formatAppLog("log", "at pages/logining/logining.vue:309", e, "222");
             }
           },
           fail: function(loginErr) {
@@ -15215,14 +15211,14 @@ if (uni.restoreGlobal) {
       },
       wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
-          formatAppLog("log", "at pages/logining/logining.vue:309", code, "\u4F60\u662F\u8C01");
+          formatAppLog("log", "at pages/logining/logining.vue:342", code, "\u4F60\u662F\u8C01");
           const wxLogin = Es.importObject("login", {
             customUI: true
           });
-          formatAppLog("log", "at pages/logining/logining.vue:313", wxLogin, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:346", wxLogin, "wxLogin");
           try {
             const wxLoginRes = await wxLogin.loginByWeixin(code);
-            formatAppLog("log", "at pages/logining/logining.vue:317", wxLoginRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:350", wxLoginRes, "\u767B\u5F55\u6210\u529F");
             if (wxLoginRes.code == 0) {
               try {
                 uni.setStorageSync(
@@ -15237,7 +15233,7 @@ if (uni.restoreGlobal) {
                   openid: wxLoginRes.openid
                 };
                 let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
-                formatAppLog("log", "at pages/logining/logining.vue:334", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
+                formatAppLog("log", "at pages/logining/logining.vue:367", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
                 let flag = false;
                 if (wxSchemaRes.affectedDocs === 0) {
                   flag = false;
@@ -15263,7 +15259,7 @@ if (uni.restoreGlobal) {
               }
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:366", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:399", err, "\u6211\u662F\u9519\u8BEF");
           }
         });
       }
@@ -15844,7 +15840,7 @@ if (uni.restoreGlobal) {
       async smsLogin() {
         let self2 = this;
         try {
-          if (this.scanel === "wx") {
+          if (self2.scanel === "wx") {
             uni.getStorage({
               key: "weixinLoginInfo",
               success: async function(res2) {
@@ -15882,7 +15878,7 @@ if (uni.restoreGlobal) {
             });
             return;
           }
-          if (this.scanel === "apple") {
+          if (self2.scanel === "apple") {
             try {
               let param = {
                 mobile: self2.mobile
@@ -20725,7 +20721,9 @@ if (uni.restoreGlobal) {
     data() {
       return {
         isBindValue: "",
-        checkFlag: false
+        isAppleBindValue: "",
+        checkFlag: false,
+        wechatDisplay: true
       };
     },
     onLoad() {
@@ -20742,6 +20740,8 @@ if (uni.restoreGlobal) {
       this.getUserMessage();
     },
     methods: {
+      appleBind() {
+      },
       getWeixinCode() {
         return new Promise((resolve, reject) => {
           weixinAuthService.authorize(
@@ -20757,12 +20757,15 @@ if (uni.restoreGlobal) {
       async getUserMessage() {
         let self2 = this;
         let needUserRes = await login$1.needUserMessage();
-        formatAppLog("log", "at pages/setUp/setUp.vue:104", needUserRes, " ....");
+        formatAppLog("log", "at pages/setUp/setUp.vue:127", needUserRes, " ....");
         let needPanduan = needUserRes.data;
+        if (needPanduan[0].hasOwnProperty("apple_openid")) {
+          self2.wechatDisplay = false;
+        }
         if (needPanduan.length > 0) {
           if (needPanduan.length > 0) {
-            formatAppLog("log", "at pages/setUp/setUp.vue:108", 3);
-            formatAppLog("log", "at pages/setUp/setUp.vue:109", needPanduan, "needPanduan\u90A3\u68F5\u6811\u7684\u514B\u62C9\u4ED8\u6B3E\u4E86");
+            formatAppLog("log", "at pages/setUp/setUp.vue:134", 3);
+            formatAppLog("log", "at pages/setUp/setUp.vue:135", needPanduan, "needPanduan\u90A3\u68F5\u6811\u7684\u514B\u62C9\u4ED8\u6B3E\u4E86");
             if (needPanduan[0].hasOwnProperty("wx_openid")) {
               self2.isBindValue = "\u5DF2\u7ED1\u5B9A";
             } else {
@@ -20779,7 +20782,7 @@ if (uni.restoreGlobal) {
         if (unbindRes.code == 0) {
           this.$refs.popup.close();
           this.getUserMessage();
-          formatAppLog("log", "at pages/setUp/setUp.vue:130", "\u89E3\u7ED1\u6210\u529F");
+          formatAppLog("log", "at pages/setUp/setUp.vue:156", "\u89E3\u7ED1\u6210\u529F");
         }
       },
       async wxBind() {
@@ -20789,10 +20792,10 @@ if (uni.restoreGlobal) {
         }
         if (that.isBindValue === "\u672A\u7ED1\u5B9A") {
           that.getWeixinCode().then(async (code) => {
-            formatAppLog("log", "at pages/setUp/setUp.vue:142", code, "\u6211\u662F\u5FAE\u4FE1\u670D\u52A1\u5546");
+            formatAppLog("log", "at pages/setUp/setUp.vue:168", code, "\u6211\u662F\u5FAE\u4FE1\u670D\u52A1\u5546");
             let bindRes = await login$1.bindWeixin(code);
             if (bindRes.code === 0) {
-              formatAppLog("log", "at pages/setUp/setUp.vue:145", "\u7ED1\u5B9A\u6210\u529F");
+              formatAppLog("log", "at pages/setUp/setUp.vue:171", "\u7ED1\u5B9A\u6210\u529F");
               that.getUserMessage();
             }
           });
@@ -20814,9 +20817,9 @@ if (uni.restoreGlobal) {
         });
       },
       async logout() {
-        formatAppLog("log", "at pages/setUp/setUp.vue:167", "\u5F00\u59CB\u70B9\u4E86");
+        formatAppLog("log", "at pages/setUp/setUp.vue:193", "\u5F00\u59CB\u70B9\u4E86");
         let currentUserInfo = Es.getCurrentUserInfo();
-        formatAppLog("log", "at pages/setUp/setUp.vue:169", currentUserInfo, "currentUserInfo");
+        formatAppLog("log", "at pages/setUp/setUp.vue:195", currentUserInfo, "currentUserInfo");
         if (currentUserInfo.tokenExpired > 0) {
           await login$1.logout();
           await this.remove();
@@ -20864,7 +20867,8 @@ if (uni.restoreGlobal) {
           "is-link": "",
           onClick: vue.withModifiers($options.jumpAgree, ["stop"])
         }, null, 8, ["onClick"]),
-        vue.createVNode(_component_van_cell, {
+        $data.wechatDisplay ? (vue.openBlock(), vue.createBlock(_component_van_cell, {
+          key: 0,
           value: $data.isBindValue,
           "is-link": "",
           onClick: vue.withModifiers($options.wxBind, ["stop"])
@@ -20879,7 +20883,8 @@ if (uni.restoreGlobal) {
             ])
           ]),
           _: 1
-        }, 8, ["value", "onClick"]),
+        }, 8, ["value", "onClick"])) : vue.createCommentVNode("v-if", true),
+        vue.createCommentVNode(' <van-cell\r\n        :value="isAppleBindValue"\r\n        is-link\r\n        @click.native.stop="appleBind"\r\n      >\r\n        <template #title>\r\n          <view class="left_wx_style">\r\n            <van-image\r\n              class="wx_img_style apple_img_style"\r\n              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c6ded5a6-1d29-40fa-a4c7-7c26ad6d13ec.svg"\r\n            />\r\n            <span class="weixin_title_style">\u82F9\u679C</span>\r\n          </view>\r\n        </template>\r\n      </van-cell> '),
         vue.createVNode(_component_uni_popup, {
           ref: "popup",
           type: "center",
@@ -21072,7 +21077,8 @@ if (uni.restoreGlobal) {
         },
         phone: "",
         sexShow: false,
-        scanel: null
+        scanel: null,
+        bindMessage: ""
       };
     },
     components: {
@@ -21080,10 +21086,11 @@ if (uni.restoreGlobal) {
     },
     onLoad(options) {
       this.scanel = options.scanel || null;
+      this.bindMessage = options.scanel === "wx" ? "\u60A8\u7684\u5FAE\u4FE1\u8D26\u53F7\u5DF2\u9A8C\u8BC1\u901A\u8FC7,\u8BF7\u7ED1\u5B9A\u624B\u673A\u53F7\u7801" : "\u60A8\u7684\u82F9\u679C\u8D26\u53F7\u5DF2\u9A8C\u8BC1\u901A\u8FC7,\u8BF7\u7ED1\u5B9A\u624B\u673A\u53F7\u7801";
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:71", this.phone, "????");
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:76", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -21100,24 +21107,25 @@ if (uni.restoreGlobal) {
           try {
             const smsRes = await login2.sendSmsCode(this.phone, "bind");
             if (smsRes.code == 0) {
+              formatAppLog("log", "at pages/bindPhone/bindPhone.vue:94", this.phone, "\u7A9D\u65F6", this.scanel);
               uni.navigateTo({
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + this.phone + "&scanel=" + this.scanel
               });
             }
           } catch (err) {
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:100", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:106", err, "\u6211\u662F\u9519\u8BEF");
           }
         }
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:105", event, "\u4F60tm");
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:111", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       goBack() {
         uni.navigateBack();
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:112", "1111");
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:118", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
           const login2 = Es.importObject("login", {
             customUI: true
@@ -21126,7 +21134,7 @@ if (uni.restoreGlobal) {
             let param = {
               ...this.coachForm
             };
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:122", param, "param");
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:128", param, "param");
             login2.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();
@@ -21159,7 +21167,7 @@ if (uni.restoreGlobal) {
       ]),
       vue.createElementVNode("view", { class: "botter" }, [
         vue.createElementVNode("span", { class: "botter-top" }, "\u7ED1\u5B9A\u624B\u673A\u53F7"),
-        vue.createElementVNode("p", { class: "a-i-c" }, "\u60A8\u7684\u5FAE\u4FE1\u8D26\u53F7\u5DF2\u9A8C\u8BC1\u901A\u8FC7,\u8BF7\u7ED1\u5B9A\u624B\u673A\u53F7\u7801")
+        vue.createElementVNode("p", { class: "a-i-c" }, vue.toDisplayString($data.bindMessage), 1)
       ]),
       vue.createElementVNode("view", { class: "contetnt_form_style" }, [
         vue.createVNode(_component_uni_forms, {
@@ -24499,7 +24507,26 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("view", { class: "title" }, "\u8D26\u53F7\u6CE8\u9500\u534F\u8BAE"),
         vue.createElementVNode("view", { class: "zan" }, "00")
       ]),
-      vue.createElementVNode("view", { class: "agreement-box" }, " \u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u5360\u4F4D\u6587\u5B57\u3002 "),
+      vue.createElementVNode("view", { class: "agreement-box" }, [
+        vue.createElementVNode("p", null, "\u5728\u4F60\u7533\u8BF7\u6CE8\u9500\u5065\u53D8\u8D26\u53F7\u4E4B\u524D\uFF0C\u8BF7\u8C28\u614E\u64CD\u4F5C\u3002"),
+        vue.createElementVNode("p", null, "\u8BF7\u4F60\u8BA4\u771F\u9605\u8BFB\u3001\u7406\u89E3\u5E76\u540C\u610F\u300A\u8D26\u53F7\u6CE8\u9500\u987B\u77E5\u300B\uFF08\u4EE5\u4E0B\u79F0\u201C\u6CE8\u9500\u987B\u77E5\u201D\uFF09\u3002"),
+        vue.createElementVNode("p", null, "\u3010\u7279\u522B\u63D0\u793A\u3011\u5728\u6B64\u5584\u610F\u63D0\u9192\u4F60\uFF0C\u6CE8\u9500\u5065\u53D8\u8D26\u53F7\u4E3A\u4E0D\u53EF\u6062\u590D\u7684\u64CD\u4F5C\uFF0C\u6CE8\u9500\u8D26\u53F7\u540E\u4F60\u5C06\u65E0\u6CD5\u518D\u5728\u5065\u53D8\u53CA\u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u5185\u7684\u591A\u9879\u5173\u8054\u65B9\u4EA7\u54C1/\u670D\u52A1\u4E2D\u4F7F\u7528\u672C\u8D26\u53F7\u6216\u627E\u56DE\u4F60\u6DFB\u52A0\u3001\u7ED1\u5B9A\u7684\u4EFB\u4F55\u5185\u5BB9\u6216\u4FE1\u606F\uFF08\u5373\u4F7F\u4F60\u4F7F\u7528\u76F8\u540C\u7684\u624B\u673A\u53F7\u7801\u518D\u6B21\u6CE8\u518C\u5E76\u4F7F\u7528\u5065\u53D8)\u3002"),
+        vue.createElementVNode("p", null, " \u5EFA\u8BAE\u4F60\u5728\u6CE8\u9500\u524D\u81EA\u884C\u5907\u4EFD\u5065\u53D8\u8D26\u53F7\u76F8\u5173\u7684\u6240\u6709\u4FE1\u606F\uFF0C\u5E76\u8BF7\u786E\u8BA4\u4E0E\u672C\u5065\u53D8\u8D26\u53F7\u76F8\u5173\u7684\u6240\u6709\u670D\u52A1\u5747\u5DF2\u8FDB\u884C\u59A5\u5584\u5904\u7406\u3002\u6CE8\u9500\u6210\u529F\u540E\uFF0C\u6211\u4EEC\u5C06\u5220\u9664\u4F60\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6216\u5BF9\u5176\u8FDB\u884C\u533F\u540D\u5316\u5904\u7406\u3002\u8BF7\u4F60\u77E5\u6089\u5E76\u7406\u89E3\uFF0C\u6839\u636E\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u76F8\u5173\u65E5\u5FD7\u8BB0\u5F55\u5065\u53D8\u5C06\u4FDD\u7559\u4E0D\u5C11\u4E8E6\u4E2A\u6708\u7684\u65F6\u95F4\u3002"),
+        vue.createElementVNode("p", null, "1 \u6211\u4EEC\u5BF9\u4F60\u6CE8\u9500\u5065\u53D8\u8D26\u53F7\u7684\u51B3\u5B9A\u6DF1\u8868\u9057\u61BE\u3002"),
+        vue.createElementVNode("p", null, "\u5982\u679C\u4F60\u4ECD\u6267\u610F\u6CE8\u9500\u8D26\u53F7\uFF0C\u4F60\u7684\u8D26\u53F7\u9700\u540C\u65F6\u6EE1\u8DB3\u4EE5\u4E0B\u6761\u4EF6\uFF1A"),
+        vue.createElementVNode("p", null, "1.1 \u8D26\u53F7\u5904\u4E8E\u5B89\u5168\u72B6\u6001\uFF1A\u8D26\u53F7\u5904\u4E8E\u6B63\u5E38\u4F7F\u7528\u72B6\u6001\uFF0C\u65E0\u88AB\u76D7\u98CE\u9669\u3002"),
+        vue.createElementVNode("p", null, "1.2 \u8D26\u53F7\u8D22\u4EA7\u5747\u5DF2\u7ED3\u6E05\uFF0C\u6CA1\u6709\u672A\u5B8C\u6210\u548C/\u6216\u5B58\u5728\u4E89\u8BAE\u7684\u670D\u52A1\uFF1A\u8D26\u53F7\u4E2D\u6CA1\u6709\u8D44\u4EA7\u3001\u6B20\u6B3E\u3001\u672A\u7ED3\u6E05\u7684\u8D44\u91D1\u548C\u865A\u62DF\u6743\u76CA\uFF1B\u672C\u8D26\u53F7\u53CA\u901A\u8FC7\u672C\u8D26\u53F7\u63A5\u5165\u7684\u7B2C\u4E09\u65B9\u4E2D\u6CA1\u6709\u672A\u5B8C\u6210\u548C/\u6216\u5B58\u5728\u4E89\u8BAE\u7684\u670D\u52A1\u3002"),
+        vue.createElementVNode("p", null, "1.3\u8D26\u53F7\u6743\u9650\u89E3\u9664\uFF1A\u8D26\u53F7\u5DF1\u89E3\u9664\u4E0E\u5176\u4ED6\u4EA7\u54C1\u3001\u7F51\u7AD9\u6388\u6743\u767B\u5F55\u6216\u7ED1\u5B9A\u5173\u7CFB\u3002"),
+        vue.createElementVNode("p", null, "1.4 \u8D26\u53F7\u65E0\u4EFB\u4F55\u7EA0\u7EB7\uFF0C\u5305\u62EC\u6295\u8BC9\u4E3E\u62A5\u6216\u88AB\u6295\u8BC9\u4E3E\u62A5\u3002"),
+        vue.createElementVNode("p", null, "2. \u5728\u4F60\u7684\u8D26\u53F7\u6CE8\u9500\u671F\u95F4\uFF0C\u5982\u679C\u4F60\u7684\u8D26\u53F7\u6D89\u53CA\u4E89\u8BAE\u7EA0\u7EB7\uFF0C\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\uFF1A"),
+        vue.createElementVNode("p", null, "2.1\u6295\u8BC9\u3001\u4E3E\u62A5\u3001\u8BC9\u8BBC\u3001\u4EF2\u88C1\u3001\u56FD\u5BB6\u6709\u6743\u673A\u5173\u8C03\u67E5\u7B49\uFF0C\u4F60\u77E5\u6653\u5E76\u7406\u89E3\uFF0C\u5065\u53D8\u6709\u6743\u81EA\u884C\u51B3\u5B9A\u662F\u5426\u7EC8\u6B62\u672C\u8D26\u53F7\u7684\u6CE8\u9500\u800C\u65E0\u9700\u53E6\u884C\u5F97\u5230\u4F60\u7684\u540C\u610F\u3002"),
+        vue.createElementVNode("p", null, "3. \u6CE8\u9500\u5065\u53D8\u8D26\u53F7\uFF0C\u4F60\u5C06\u65E0\u6CD5\u518D\u4F7F\u7528\u672C\u5065\u53D8\u8D26\u53F7\uFF0C\u4E5F\u5C06\u65E0\u6CD5\u627E\u56DE\u672C\u5065\u53D8\u8D26\u53F7\u4E2D\u53CA\u4E0E\u8D26\u53F7\u76F8\u5173\u7684\u4EFB\u4F55\u5185\u5BB9\u6216\u4FE1\u606F\uFF0C\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\uFF1A"),
+        vue.createElementVNode("p", null, "3.1\u672C\u5065\u53D8\u8D26\u53F7\u7684\u4E2A\u4EBA\u8D44\u6599\u548C\u5386\u53F2\u4FE1\u606F\uFF08\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\u5934\u50CF\u3001\u7528\u6237\u540D\u3001\u53D1\u5E03\u5185\u5BB9\u3001\u6D4F\u89C8\u8BB0\u5F55\u3001\u5173\u6CE8\u3001\u6536\u85CF\u7B49\uFF09\u90FD\u5C06\u65E0\u6CD5\u627E\u56DE\uFF1B"),
+        vue.createElementVNode("p", null, "3.2 \u4F60\u5C06\u65E0\u6CD5\u767B\u5F55\u3001\u4F7F\u7528\u672C\u5065\u53D8\u8D26\u53F7\uFF1B"),
+        vue.createElementVNode("p", null, "3.3 \u4F60\u901A\u8FC7\u672C\u5065\u53D8\u8D26\u53F7\u4F7F\u7528\u3001\u6388\u6748\u767B\u5F55\u6216\u7ED1\u5B9A\u672C\u5065\u53D8\u8D26\u53F7\u540E\u4F7F\u7528\u7684\u5065\u53D8\u6216\u7B2C\u4E09\u65B9\u670D\u52A1\u7684\u76F8\u5173\u8BB0\u5F55\u5C06\u65E0\u6CD5\u627E\u56DE\u3002\u4F60\u5C06\u65E0\u6CD5\u518D\u767B\u5F55\u3001\u4F7F\u7528\u4E0A\u8FF0\u670D\u52A1\uFF0C\u4F60\u66FE\u83B7\u5F97\u7684\u865B\u62DF\u6743\u76CA\u7B49\u8D22\u4EA7\u6027\u5229\u76CA\u89C6\u4E3A\u4F60\u81EA\u52A8\u653E\u5954\uFF0C\u5C06\u65E0\u6CD5\u7EE7\u7EED\u4F7F\u7528\u3002"),
+        vue.createElementVNode("p", null, "3.4 \u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u8303\u56F4\u5185\u7684\u591A\u9879\u5173\u8054\u65B9\u4EA7\u54C1/\u670D\u52A1\u5C06\u65E0\u6CD5\u4F7F\u7528\u672C\u8D26\u53F7\uFF0C\u4E86\u89E3\u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u4F60\u7406\u89E3\u4E95\u540C\u610F\uFF0C\u5065\u53D8\u65E0\u6CD5\u534F\u52A9\u4F60\u91CD\u65B0\u6062\u590D\u4E0A\u8FF0\u670D\u52A1\u3002"),
+        vue.createElementVNode("p", null, "4. \u6CE8\u9500\u672C\u5065\u53D8\u8D26\u53F7\u5E76\u4E0D\u4EE3\u8868\u6CE8\u9500\u524D\u7684\u8D26\u53F7\u4E2D\u7684\u884C\u4E3A\u548C\u76F8\u5173\u8D23\u4EFB\u5F97\u5230\u8C41\u514D\u6216\u51CF\u8F7B\u3002")
+      ]),
       vue.createElementVNode("view", { class: "footer-box" }, [
         vue.createElementVNode("view", {
           class: "footer-btn van-button",

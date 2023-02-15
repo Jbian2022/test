@@ -143,7 +143,7 @@ export default {
     async smsLogin() {
       let self = this
       try {
-        if (this.scanel === 'wx') {
+        if (self.scanel === 'wx') {
           // 微信登录如果
 
           uni.getStorage({
@@ -191,7 +191,7 @@ export default {
           return
         }
 
-        if (this.scanel === 'apple') {
+        if (self.scanel === 'apple') {
           try {
             // 手机号绑定操作
             let param = {

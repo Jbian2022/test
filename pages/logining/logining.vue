@@ -182,6 +182,7 @@ export default {
           break
         case 'wx':
           this.wxLoginCommon()
+          break
         case 'apple':
           this.appleLoginCommon()
           break
@@ -241,32 +242,64 @@ export default {
                   ) // 有效期
                   // 存储Apple登录信息
                   // 绑定手机号码
-                  let appleSchemaRes = await appleLogin.getAppleSchema()
-                  console.log(appleSchemaRes, '我是苹果登录的前一步')
-                  let flag = false
-                  if (appleSchemaRes.affectedDocs === 0) {
-                    flag = false
-                  }
-                  flag = appleSchemaRes.data[0].hasOwnProperty('mobile')
-                    ? true
-                    : false
-                  if (flag) {
-                    // 用户绑定了
-                    // 已经登录过了
+                  if (getLogingByAppleRes.type === 'login') {
                     uni.setStorageSync('loginNum', '1')
                     uni.reLaunch({
                       url: '/pages/myMebers/myMebers'
                     })
-                  } else {
-                    // 用户未绑定
-                    // 首次登录
-                    uni.setStorageSync('loginNum', '0')
-                    uni.navigateTo({
-                      url: '/pages/bindPhone/bindPhone?' + 'scanel=' + 'apple'
-                    })
-
                     return
                   }
+
+                  if (getLogingByAppleRes.type === 'register') {
+                    uni.setStorageSync('loginNum', '0')
+                    uni.navigateTo({
+                      url: '/pages/personalnformation/personalnformation'
+                    })
+                    return
+                  }
+
+                  // let appleSchemaRes = await appleLogin.getAppleSchema(
+                  //   getLogingByAppleRes.userInfo.apple_openid
+                  // )
+                  // console.log(appleSchemaRes, '我是苹果登录的前一步')
+                  // if (appleSchemaRes.affectedDocs === 0) {
+                  //   // 用户未登录
+                  //   uni.setStorageSync('loginNum', '0')
+                  //   uni.navigateTo({
+                  //     url: '/pages/personalnformation/personalnformation'
+                  //   })
+                  // } else {
+                  //   // 用户已登录
+                  //   uni.setStorageSync('loginNum', '1')
+                  //   uni.reLaunch({
+                  //     url: '/pages/myMebers/myMebers'
+                  //   })
+                  // }
+
+                  // let flag = false
+                  // if (appleSchemaRes.affectedDocs === 0) {
+                  //   flag = false
+                  // }
+                  // flag = appleSchemaRes.data[0].hasOwnProperty('mobile')
+                  //   ? true
+                  //   : false
+                  // if (flag) {
+                  //   // 用户绑定了
+                  //   // 已经登录过了
+                  //   uni.setStorageSync('loginNum', '1')
+                  //   uni.reLaunch({
+                  //     url: '/pages/myMebers/myMebers'
+                  //   })
+                  // } else {
+                  //   // 用户未绑定
+                  //   // 首次登录
+                  //   uni.setStorageSync('loginNum', '0')
+                  //   uni.navigateTo({
+                  //     url: '/pages/bindPhone/bindPhone?' + 'scanel=' + 'apple'
+                  //   })
+
+                  //   return
+                  // }
                 } catch (e) {
                   console.log(e, '>>>>>')
                 }

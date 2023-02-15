@@ -12,7 +12,7 @@
     </view>
     <view class="botter">
       <span class="botter-top">绑定手机号</span>
-      <p class="a-i-c">您的微信账号已验证通过,请绑定手机号码</p>
+      <p class="a-i-c">{{ bindMessage }}</p>
     </view>
 
     <view class="contetnt_form_style">
@@ -56,7 +56,8 @@ export default {
       },
       phone: '',
       sexShow: false,
-      scanel: null
+      scanel: null,
+      bindMessage: ''
     }
   },
   components: {
@@ -65,6 +66,10 @@ export default {
   onLoad(options) {
     // 判断来源渠道
     this.scanel = options.scanel || null
+    this.bindMessage =
+      options.scanel === 'wx'
+        ? '您的微信账号已验证通过,请绑定手机号码'
+        : '您的苹果账号已验证通过,请绑定手机号码'
   },
   computed: {
     controlActiveFlag() {
@@ -86,6 +91,7 @@ export default {
         try {
           const smsRes = await login.sendSmsCode(this.phone, 'bind')
           if (smsRes.code == 0) {
+            console.log(this.phone, '窝时', this.scanel)
             uni.navigateTo({
               url:
                 '/pages/verificatioCode/verificatioCode?' +

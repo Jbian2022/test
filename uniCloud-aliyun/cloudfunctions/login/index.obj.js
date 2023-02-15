@@ -351,14 +351,15 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 	
 	// 返解unid
 	needUserMessage: async function () {
-		const token = this.getUniIdToken()
-		const detailInfo = await this.uniID.checkToken(token)
-		console.log(detailInfo, '逆势')
+		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
+		// const token = this.getUniIdToken()
+		// const detailInfo = await this.uniID.checkToken(token)
+		// console.log(detailInfo, '逆势')
 		return new Promise((resolve, reject) => {
 			
 			db.collection('uni-id-users')
 			  .where({
-					mobile: detailInfo.userInfo.mobile
+					_id: uid
 				})
 			  .get().then(res => {
 				  console.log(res,'>>>>>>')
@@ -411,12 +412,12 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 	
 	},
 	// 苹果登录业务模块
-	getAppleSchema: async function () {
+	getAppleSchema: async function (apple_openid) {
 		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 		return new Promise((resolve, reject) => {
 			db.collection('uni-id-users')
 			  .where({
-					_id: uid	
+					apple_openid
 				})
 			  .get().then(res => {
 				  console.log(res,'>>>>>>')

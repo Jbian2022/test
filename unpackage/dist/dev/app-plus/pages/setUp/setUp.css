@@ -152,6 +152,10 @@
   height: 1.28125rem;
   margin-right: 0.625rem;
 }
+.left_wx_style .apple_img_style {
+  width: 1.71875rem !important;
+  height: 1.28125rem;
+}
 .dialog {
   background: #383d46;
   border-radius: 0.75rem;

@@ -12,7 +12,12 @@
     <view class="form">
       <van-cell title="注销账号" is-link @click="closeAccount" />
       <van-cell title="用户隐私协议" is-link @click.native.stop="jumpAgree" />
-      <van-cell :value="isBindValue" is-link @click.native.stop="wxBind">
+      <van-cell
+        :value="isBindValue"
+        is-link
+        @click.native.stop="wxBind"
+        v-if="wechatDisplay"
+      >
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <view class="left_wx_style">
@@ -24,6 +29,21 @@
           </view>
         </template>
       </van-cell>
+      <!-- <van-cell
+        :value="isAppleBindValue"
+        is-link
+        @click.native.stop="appleBind"
+      >
+        <template #title>
+          <view class="left_wx_style">
+            <van-image
+              class="wx_img_style apple_img_style"
+              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c6ded5a6-1d29-40fa-a4c7-7c26ad6d13ec.svg"
+            />
+            <span class="weixin_title_style">苹果</span>
+          </view>
+        </template>
+      </van-cell> -->
       <uni-popup
         ref="popup"
         type="center"
@@ -60,7 +80,9 @@ export default {
   data() {
     return {
       isBindValue: '',
-      checkFlag: false
+      isAppleBindValue: '',
+      checkFlag: false,
+      wechatDisplay: true
     }
   },
   onLoad() {
@@ -81,6 +103,7 @@ export default {
     this.getUserMessage()
   },
   methods: {
+    appleBind() {},
     getWeixinCode() {
       return new Promise((resolve, reject) => {
         // #ifdef APP-PLUS
@@ -103,6 +126,9 @@ export default {
       let needUserRes = await login.needUserMessage()
       console.log(needUserRes, ' ....')
       let needPanduan = needUserRes.data
+      if (needPanduan[0].hasOwnProperty('apple_openid')) {
+        self.wechatDisplay = false
+      }
       if (needPanduan.length > 0) {
         if (needPanduan.length > 0) {
           console.log(3)
@@ -267,6 +293,10 @@ export default {
     width: 51upx;
     height: 41upx;
     margin-right: 20upx;
+  }
+  .apple_img_style {
+    width: 55upx !important;
+    height: 41upx;
   }
 }
 .dialog {
