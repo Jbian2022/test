@@ -1128,8 +1128,12 @@
   width: 100%;
 }
 .content_style[data-v-62ef4d39] {
+  margin: 0;
+  padding: 0;
   width: 100vw;
   height: 100%;
+  position: relative;
+  box-sizing: border-box;
   position: relative;
   box-sizing: border-box;
 }
@@ -1144,10 +1148,10 @@
 }
 .content_style .arrow-left[data-v-62ef4d39] {
   position: fixed;
+  width: 100%;
   padding-top: var(--status-bar-height);
   top: 0;
   left: 0;
-  right: 0;
   z-index: 88;
   height: 2.75rem;
   display: flex;
@@ -1155,12 +1159,20 @@
   padding-left: 0.9375rem;
   justify-content: space-between;
   color: #bdc3ce;
+  box-sizing: border-box;
 }
 .content_style .arrow-left .van-icon[data-v-62ef4d39] {
   font-size: 1.25rem;
   color: #bdc3ce;
 }
 .content_style .arrow-left.show[data-v-62ef4d39] {
+  background: #212328;
+}
+.backgroud-img[data-v-62ef4d39] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
   background: #212328;
 }
 .footer-button[data-v-62ef4d39] {
@@ -1170,7 +1182,6 @@
   right: 0;
   z-index: 1;
   padding: 0.9375rem;
-  background: #212328;
 }
 .footer-button .van-button[data-v-62ef4d39] {
   height: 3.125rem;
@@ -1198,19 +1209,14 @@
 }
 #viewReport[data-v-62ef4d39] {
   position: absolute;
-  top: -0.3125rem;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 0;
-  background: #212328;
   width: 100%;
   background-image: url("https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/af1f1238-0e5f-468a-9a00-120d347c451a.png");
   background-repeat: no-repeat;
   background-size: 100%;
-}
-#imageReport[data-v-62ef4d39] {
-  background: #212328;
 }
 .title[data-v-62ef4d39] {
   width: 3.75rem;
@@ -1260,7 +1266,6 @@
   border-radius: 0.75rem;
   /* opacity: 0.6; */
   margin: 0.9375rem 0.9375rem 0 0.9375rem;
-  background: #2f333a;
 }
 .basicInformationContent[data-v-62ef4d39] {
   /* margin: 30upx 30upx 40upx 30upx; */
@@ -1679,7 +1684,8 @@
 }
 [data-v-62ef4d39] .uni-scroll-view {
   height: 100vh;
-  background-color: #212328 !important;
+  margin: 0;
+  padding: 0;
 }
 .blockdiv[data-v-62ef4d39] {
   text-align: center !important;

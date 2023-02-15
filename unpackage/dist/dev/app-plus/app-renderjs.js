@@ -13522,7 +13522,7 @@ __renderjsModules["44880530"] = (() => {
           (0, import_html2canvas.default)(dom, {
             width: dom.clientWidth,
             height: dom.clientHeight,
-            scrollY: -30,
+            scrollY: 0,
             scrollX: 0,
             x: 0,
             y: 0,
@@ -13530,16 +13530,16 @@ __renderjsModules["44880530"] = (() => {
             allowTaint: true,
             scale: 1.3
           }).then((canvas) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1749", canvas);
+            __f__("log", "at pages/viewReport/viewReport.vue:1830", canvas);
             const base64 = canvas.toDataURL("image/jpeg");
             callback && callback(base64);
           }).catch((err) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1753", JSON.stringify(err));
+            __f__("log", "at pages/viewReport/viewReport.vue:1834", JSON.stringify(err));
           });
         }, 300);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
-        __f__("log", "at pages/viewReport/viewReport.vue:1759", newValue);
+        __f__("log", "at pages/viewReport/viewReport.vue:1840", newValue);
         if (newValue) {
           this.generateImage((base64) => {
             ownerInstance.callMethod("receiveRenderData", { name: newValue, base64 });
