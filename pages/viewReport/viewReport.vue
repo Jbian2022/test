@@ -122,9 +122,9 @@
   </view>
 
   <view class="content_style">
+    <view class="status_bar"></view>
     <BgTheamCompontent></BgTheamCompontent>
     <scroll-view @scroll="viewReportScrrop" scroll-y="true">
-      <view class="status_bar"></view>
       <view class="backgroud-img"
         ><van-image
           src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/af1f1238-0e5f-468a-9a00-120d347c451a.png"
