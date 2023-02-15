@@ -104,27 +104,27 @@
       <view class="equity-list">
         <view class="equity-item">
           <view class="logo"></view>
-          <view class="des">金卡权益</view>
+          <view class="des">体态评估</view>
         </view>
         <view class="equity-item">
           <view class="logo"></view>
-          <view class="des">金卡权益</view>
+          <view class="des">体能评估</view>
         </view>
         <view class="equity-item">
           <view class="logo"></view>
-          <view class="des">金卡权益</view>
+          <view class="des">动态评估</view>
         </view>
         <view class="equity-item">
           <view class="logo"></view>
-          <view class="des">金卡权益</view>
+          <view class="des">训练计划</view>
         </view>
         <view class="equity-item">
           <view class="logo"></view>
-          <view class="des">金卡权益</view>
+          <view class="des">问题动作库</view>
         </view>
         <view class="equity-item">
           <view class="logo"></view>
-          <view class="des">金卡权益</view>
+          <view class="des">全部动作库</view>
         </view>
       </view>
     </view>

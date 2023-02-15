@@ -113,7 +113,7 @@ export default {
           let type =
             this.scanel === 'wx' || this.scanel === 'apple' ? 'bind' : 'login'
           const smsRes = await login.sendSmsCode(this.mobile, type)
-          console.log(smsRes, '发送成功')
+          console.log(this.scanel, '发送成功', type)
           if (smsRes.code == 0) {
             this.mobile = smsRes.mobile
             this.verifyCode()
@@ -191,6 +191,27 @@ export default {
           return
         }
 
+        if (this.scanel === 'apple') {
+          try {
+            // 手机号绑定操作
+            let param = {
+              mobile: self.mobile
+            }
+            let bindMobileRes = await login.bindMobile(param)
+            if (bindMobileRes.code == 0) {
+              uni.navigateTo({
+                url:
+                  '/pages/personalnformation/personalnformation?' +
+                  'mobile=' +
+                  self.mobile
+              })
+            }
+          } catch (e) {
+            console.log(e, '我是苹果登录')
+          }
+          return
+        }
+
         // 先验证该手机号是否登录过
         let userLogin = uniCloud.importObject('login', {
           customUI: true // 取消自动展示的交互提示界面
@@ -201,7 +222,10 @@ export default {
         if (getUseRes.affectedDocs == 0) {
           await this.smsCodeLoginValid('first')
           uni.navigateTo({
-            url: '/pages/personalnformation/personalnformation'
+            url:
+              '/pages/personalnformation/personalnformation?' +
+              'mobile=' +
+              this.mobile
           })
         } else {
           await this.smsCodeLoginValid()

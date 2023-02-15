@@ -411,12 +411,12 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 	
 	},
 	// 苹果登录业务模块
-	getAppleSchema: function () {
+	getAppleSchema: async function () {
 		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 		return new Promise((resolve, reject) => {
 			db.collection('uni-id-users')
 			  .where({
-					uid	
+					_id: uid	
 				})
 			  .get().then(res => {
 				  console.log(res,'>>>>>>')

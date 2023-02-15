@@ -74,6 +74,9 @@
 <script>
 import BgTheamCompontent from '../../components/bgTheamCompontent/bgTheamCompontent.vue'
 import Mpicker from '../../components/mPicker.vue/mPicker.vue'
+const login = uniCloud.importObject('login', {
+  customUI: true // 取消自动展示的交互提示界面
+}) //第一步导入云对象
 export default {
   data() {
     return {
@@ -86,8 +89,13 @@ export default {
       range: [
         { text: '男', value: '1' },
         { text: '女', value: '2' }
-      ]
+      ],
+      mobile: ''
     }
+  },
+  onLoad(options) {
+    this.mobile = options.mobile || ''
+    // 校验验证码
   },
   components: {
     BgTheamCompontent,
@@ -110,19 +118,41 @@ export default {
       uni.navigateBack()
     },
     jump() {
-      uni.reLaunch({
-        url: '/pages/myMebers/myMebers'
-      })
+      try {
+        let param = {
+          nickname:
+            this.coachForm.nickname ||
+            this.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2'),
+          avatar:
+            'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png'
+        }
+
+        console.log(param, 'param')
+        login
+          .perfectInfo(param)
+          .then((res) => {
+            if (res.success) {
+              uni.reLaunch({
+                url: '/pages/myMebers/myMebers'
+              })
+            }
+          })
+          .catch((err) => {})
+      } catch (e) {
+        //TODO handle the exception
+      }
     },
     savePersonInfo() {
       console.log('1111')
       if (this.coachForm.nickname || this.coachForm.gender) {
-        const login = uniCloud.importObject('login', {
-          customUI: true // 取消自动展示的交互提示界面
-        }) //第一步导入云对象
         try {
           let param = {
-            ...this.coachForm
+            nickname:
+              this.coachForm.nickname ||
+              this.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2'),
+            gender: this.coachForm.gender,
+            avatar:
+              'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png'
           }
 
           console.log(param, 'param')

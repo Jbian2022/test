@@ -182,6 +182,8 @@ export default {
           break
         case 'wx':
           this.wxLoginCommon()
+        case 'apple':
+          this.appleLoginCommon()
           break
       }
     },
@@ -201,8 +203,7 @@ export default {
         // #endif
       })
     },
-    loginByApple() {
-      if (!this.haAuth) return
+    appleLoginCommon() {
       uni.login({
         provider: 'apple', //使用苹果登录
         success: async (loginRes) => {
@@ -226,50 +227,50 @@ export default {
                 loginRes.appleInfo.identityToken
               )
               console.log(getLogingByAppleRes, '苹果登陆了')
-              // if (getLogingByAppleRes.code == 0) {
-              //   try {
-              //     uni.setStorageSync(
-              //       'userInfo',
-              //       JSON.stringify(getLogingByAppleRes.userInfo)
-              //     ) //个人信息
-              //     uni.setStorageSync('uni_id_token', getLogingByAppleRes.token) //token
-              //     uni.setStorageSync('uid', getLogingByAppleRes.uid) // uid 唯一标识
-              //     uni.setStorageSync(
-              //       'tokenExpired',
-              //       getLogingByAppleRes.tokenExpired
-              //     ) // 有效期
-              //     // 存储Apple登录信息
-              //     // 绑定手机号码
-              //     let appleSchemaRes = await appleLogin.getAppleSchema()
-              //     console.log(appleSchemaRes, '我是苹果登录的前一步')
-              //     let flag = false
-              //     if (appleSchemaRes.affectedDocs === 0) {
-              //       flag = false
-              //     }
-              //     flag = appleSchemaRes.data[0].hasOwnProperty('mobile')
-              //       ? true
-              //       : false
-              //     if (flag) {
-              //       // 用户绑定了
-              //       // 已经登录过了
-              //       uni.setStorageSync('loginNum', '1')
-              //       uni.reLaunch({
-              //         url: '/pages/myMebers/myMebers'
-              //       })
-              //     } else {
-              //       // 用户未绑定
-              //       // 首次登录
-              //       uni.setStorageSync('loginNum', '0')
-              //       uni.navigateTo({
-              //         url: '/pages/bindPhone/bindPhone?' + 'scanel=' + 'apple'
-              //       })
+              if (getLogingByAppleRes.code == 0) {
+                try {
+                  uni.setStorageSync(
+                    'userInfo',
+                    JSON.stringify(getLogingByAppleRes.userInfo)
+                  ) //个人信息
+                  uni.setStorageSync('uni_id_token', getLogingByAppleRes.token) //token
+                  uni.setStorageSync('uid', getLogingByAppleRes.uid) // uid 唯一标识
+                  uni.setStorageSync(
+                    'tokenExpired',
+                    getLogingByAppleRes.tokenExpired
+                  ) // 有效期
+                  // 存储Apple登录信息
+                  // 绑定手机号码
+                  let appleSchemaRes = await appleLogin.getAppleSchema()
+                  console.log(appleSchemaRes, '我是苹果登录的前一步')
+                  let flag = false
+                  if (appleSchemaRes.affectedDocs === 0) {
+                    flag = false
+                  }
+                  flag = appleSchemaRes.data[0].hasOwnProperty('mobile')
+                    ? true
+                    : false
+                  if (flag) {
+                    // 用户绑定了
+                    // 已经登录过了
+                    uni.setStorageSync('loginNum', '1')
+                    uni.reLaunch({
+                      url: '/pages/myMebers/myMebers'
+                    })
+                  } else {
+                    // 用户未绑定
+                    // 首次登录
+                    uni.setStorageSync('loginNum', '0')
+                    uni.navigateTo({
+                      url: '/pages/bindPhone/bindPhone?' + 'scanel=' + 'apple'
+                    })
 
-              //       return
-              //     }
-              //   } catch (e) {
-              //     console.log(e, '>>>>>')
-              //   }
-              // }
+                    return
+                  }
+                } catch (e) {
+                  console.log(e, '>>>>>')
+                }
+              }
             }
           } catch (e) {
             console.log(e, '222')
@@ -282,6 +283,16 @@ export default {
           })
         }
       })
+    },
+    loginByApple() {
+      this.agreementType = 'apple'
+      if (!this.haAuth) return
+      if (!this.checkFlag) {
+        // Toast('请同意隐私政策')
+        this.needChecked = true
+        return
+      }
+      this.appleLoginCommon()
     },
 
     loginByWeixin() {
