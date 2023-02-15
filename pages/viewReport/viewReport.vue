@@ -52,7 +52,7 @@
         <view class="Titlehistroy">历史评估报告</view>
         <view
           class="item"
-		  v-if="showShare"
+		  v-if="!showShare"
           v-for="(item, index) in historyData"
           :key="index"
           @click="sethistorydata(item)"
@@ -197,7 +197,7 @@
                   </uni-list-item>
                 </uni-list>
               </template>
-              <view style="height: 280upx">
+              <view style="height: 380upx">
                 <view class="textContent">
                   <van-row class="text">
                     <van-col span="12">姓名</van-col>
@@ -223,6 +223,12 @@
                     <van-col span="12" class="textRight">{{ age }}</van-col>
                   </van-row>
                 </view>
+				<view class="textContent">
+				  <van-row class="text">
+				    <van-col span="12">生日</van-col>
+				    <van-col span="12" class="textRight">{{ birthdate }}</van-col>
+				  </van-row>
+				</view>
                 <view class="textContent">
                   <van-row class="text">
                     <van-col span="12">手机号码</van-col>
@@ -1100,6 +1106,7 @@ export default {
       isFixedTop: false,
       nowDate: '',
       nowYear: '',
+	  birthdate:'',
       buyStatus: 0,
       statusDy: false,
 	  histroydate: '',
@@ -1211,8 +1218,8 @@ export default {
           this.gender = res.data[0].gender
           this.mobileNumber = res.data[0].mobile
           this.age = this.getAge(res.data[0].birthday)
-          console.log('学员信息获取完毕，内容为：' + this.nowDate)
-		  console.log('学员信息获取完毕，内容为：' + res.data)
+		  this.birthdate = res.data[0].birthday;
+          console.log('学员信息获取完毕，内容为：' + this.birthdate)
         }
       })
     },
@@ -1436,7 +1443,7 @@ export default {
 			this.Dyname = true
 		}
         // this.physicalFitnessAssessmentData = res.data
-        // console.log(this.physicalFitnessAssessmentData)
+        console.log(res.data)
         for (let r of res.data) {
           for (let rq of r.actionTestResult) {
             for (let d of rq.answer) {
@@ -1629,6 +1636,7 @@ export default {
     },
     getHistroyDate() {
       if (!this.historyData.length != 0) {
+		  this.showShare = false
         const data = {}
         data['traineeNo'] = this.traineeNo
         const historyData = {}
