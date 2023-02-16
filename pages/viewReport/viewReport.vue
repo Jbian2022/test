@@ -155,12 +155,12 @@
           </view>
           <view class="titleText" v-if="!openKey">
             <van-row class="titleTopText">
-              <van-col span="15"
+              <van-col span="14"
                 ><view style="float: left">{{ personName }}</view>
                 <view class="titleTypeok" v-if="buyStatus">已购课</view>
                 <view class="titleTypeno" v-else>未购课</view>
               </van-col>
-              <van-col span="7">
+              <van-col span="8">
                 <!-- <input type="button" value="重新测试" class="titleButton"/> -->
                 <button class="titleButton" @click="gototest()">
                   重新评估
@@ -326,7 +326,7 @@
                           <view class="greenBlock"></view>
                           其他被确诊的疾病
                         </view>
-                        <view class="healthBlock">
+                        <view class="healthBlockorther">
                           {{ items[1].remark }}
                         </view>
                       </view>
@@ -654,7 +654,7 @@
                       </view>
                       <view class="textContent">
                         <van-row class="text">
-                          <van-col span="17">体水分</van-col>
+                          <van-col span="17">体水份</van-col>
                           <van-col span="7" class="textRight"
                             >{{ bodyTestData.bodymoisture }}L</van-col
                           >
@@ -1821,8 +1821,6 @@ export default {
 					height: dom.clientHeight,
 					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 					scrollX: 0,
-					x: 0,
-					y: 0,
 					useCORS: true, //支持跨域
 					allowTaint:true,
 					scale: 1.3, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
@@ -1989,7 +1987,7 @@ export default {
   text-align: right;
 }
 .titleTopText :last-child {
-  text-align: right;
+  text-align: center;
 }
 .titleBottomText {
   font-size: 24upx;
@@ -2074,9 +2072,23 @@ export default {
   line-height: 80upx;
   text-align: left;
   display: inline-block;
-  margin-right: 17upx;
   color: #bdc3ce;
+  margin-right: 20upx;
   margin-bottom: 40upx;
+}
+.healthBlockorther{
+	min-width: 197upx;
+	min-height: 80upx;
+	background: #383d46;
+	border-radius: 16upx;
+	font-size: 28upx;
+	font-weight: 400;
+	line-height: 80upx;
+	text-align: left;
+	display: inline-block;
+	padding-left: 32upx;
+	color: #bdc3ce;
+	margin-bottom: 40upx;
 }
 .healthBlocks {
   margin: 0;
@@ -2184,7 +2196,7 @@ export default {
   margin-right: -44upx;
 }
 .titleButton {
-  width: 190upx;
+  width: 170upx;
   height: 68upx;
   background: #1370FF;
   border-radius: 16upx;
@@ -2193,6 +2205,7 @@ export default {
   color: #f4f7ff;
   line-height: 68upx;
   margin-right: 0upx;
+  padding: 0;
 }
 .titleTypeok {
   width: 100upx;
@@ -2207,7 +2220,6 @@ export default {
   float: left;
   margin-left: 20upx;
   margin-top: 15upx;
-  padding-right: 20upx;
 }
 .titleTypeno {
   width: 100upx;

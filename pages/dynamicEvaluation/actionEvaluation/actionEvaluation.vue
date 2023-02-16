@@ -133,7 +133,7 @@
 					<view class="clickActionText">
 						<view class="Actionname">标准动作：</view>
 						<view>
-							<p v-for="(item,index) in testText1">{{item}}</p>
+							<p v-for="(item,index) in testText2">{{item}}</p>
 						</view>
 					</view>
 					<view class="clickActionEnd" @click.native="closePopup">收起

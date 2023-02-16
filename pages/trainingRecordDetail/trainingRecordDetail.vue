@@ -487,7 +487,11 @@ export default {
 					height: dom.clientHeight,
 					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 					scrollX: 0,
+					x:0,
+					y:0,
 					useCORS: true, //支持跨域
+					allowTaint:true,
+					scale: 1.3,
 					// scale: 1, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 				}).then((canvas) => {
 					const base64 = canvas.toDataURL('image/png');
