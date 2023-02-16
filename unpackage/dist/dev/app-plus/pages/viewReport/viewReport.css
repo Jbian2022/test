@@ -1067,7 +1067,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  z-index: -100;
+  z-index: -1;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -1091,7 +1091,7 @@
   width: 100%;
   height: 11.625rem;
   object-fit: contain;
-  z-index: -1;
+  z-index: -2;
 }
 .bg_content .currency_content_style[data-v-826f61a7] {
   width: 100%;
@@ -1131,8 +1131,7 @@
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100%;
-  position: relative;
+  height: 100vh;
   box-sizing: border-box;
   position: relative;
   box-sizing: border-box;
@@ -1148,10 +1147,10 @@
 }
 .content_style .arrow-left[data-v-62ef4d39] {
   position: fixed;
-  width: 100%;
-  padding-top: var(--status-bar-height);
+  padding-top: var(--status-bar-height) !important;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 88;
   height: 2.75rem;
   display: flex;
@@ -1159,7 +1158,6 @@
   padding-left: 0.9375rem;
   justify-content: space-between;
   color: #bdc3ce;
-  box-sizing: border-box;
 }
 .content_style .arrow-left .van-icon[data-v-62ef4d39] {
   font-size: 1.25rem;
@@ -1218,6 +1216,11 @@
   background-repeat: no-repeat;
   background-size: 100%;
 }
+#imageReport[data-v-62ef4d39] {
+  padding-top: calc(var(--status-bar-height) + 3.125rem);
+  width: 100vw;
+  position: relative;
+}
 .title[data-v-62ef4d39] {
   width: 3.75rem;
   height: 1.3125rem;
@@ -1228,10 +1231,8 @@
   line-height: 1.3125rem;
 }
 .titleText[data-v-62ef4d39] {
-  margin: 0.3125rem 0.9375rem 0 0.9375rem;
-  position: relative;
-  top: 42px;
-  margin-bottom: 58px;
+  margin-left: 0.9375rem;
+  margin-bottom: 0.9375rem;
 }
 .text[data-v-62ef4d39] {
   font-size: 0.9375rem;
@@ -1259,6 +1260,28 @@
 }
 .titleBottomText[data-v-62ef4d39] :last-child {
   text-align: right;
+}
+.basic_dakuang_style[data-v-62ef4d39] {
+  width: 100vw;
+  position: relative;
+}
+.basic_dakuang_style .bg_new_style[data-v-62ef4d39] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.basic_dakuang_style .bg_new_style .fen_ceng_top_style[data-v-62ef4d39] {
+  width: 100%;
+  height: 1.25rem;
+  background: transparent;
+}
+.basic_dakuang_style .bg_new_style .fen_ceng_bottom_style[data-v-62ef4d39] {
+  flex: 1;
+  background: #212328;
 }
 .basicInformation[data-v-62ef4d39] {
   width: calc(100vw - 1.875rem);
@@ -1683,7 +1706,7 @@
   margin-bottom: 0.9375rem;
 }
 [data-v-62ef4d39] .uni-scroll-view {
-  height: 100vh;
+  height: 100vh !important;
   margin: 0;
   padding: 0;
 }

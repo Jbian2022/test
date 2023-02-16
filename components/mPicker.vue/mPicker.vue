@@ -62,38 +62,46 @@
                 @pickstart="pickstart"
                 @pickend="pickend"
               >
-			  <template v-if="pickerType === 'ordinary'">
-					<picker-view-column
-					  v-for="(rangeItem, rangeIndex) in opearRange"
-					  :key="rangeIndex"
-					>
-					  <view
-						class="picker-view__item"
-						v-for="(item, index) in rangeItem"
-						:key="index"
-					  >
-						{{ item[rangeKey] }}
-					  </view>
-					</picker-view-column>
-				  
-			  </template>
-			  <template v-else>
-				        <picker-view-column>
-				          <view class="item" v-for="(item, index) in years" :key="index"
-				            >{{ item }}年</view
-				          >
-				        </picker-view-column>
-				        <picker-view-column>
-				          <view class="item" v-for="(item, index) in months" :key="index"
-				            >{{ item }}月</view
-				          >
-				        </picker-view-column>
-				        <picker-view-column>
-				          <view class="item" v-for="(item, index) in days" :key="index"
-				            >{{ item }}日</view
-				          >
-				        </picker-view-column>
-			  </template>
+                <template v-if="pickerType === 'ordinary'">
+                  <picker-view-column
+                    v-for="(rangeItem, rangeIndex) in opearRange"
+                    :key="rangeIndex"
+                  >
+                    <view
+                      class="picker-view__item"
+                      v-for="(item, index) in rangeItem"
+                      :key="index"
+                    >
+                      {{ item[rangeKey] }}
+                    </view>
+                  </picker-view-column>
+                </template>
+                <template v-if="pickerType === 'date'">
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in years"
+                      :key="index"
+                      >{{ item }}年</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in months"
+                      :key="index"
+                      >{{ item }}月</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in days"
+                      :key="index"
+                      >{{ item }}日</view
+                    >
+                  </picker-view-column>
+                </template>
               </picker-view>
             </view>
           </slot>
@@ -121,22 +129,22 @@
 
 <script>
 import props from './props.js'
-  const date = new Date()
-    const years = []
-    const year = date.getFullYear()
-    const months = []
-    const month = date.getMonth() + 1
-    const days = []
-    const day = date.getDate()
-    for (let i = 1770; i <= date.getFullYear(); i++) {
-      years.push(i)
-    }
-    for (let i = 1; i <= 12; i++) {
-      months.push(i)
-    }
-    for (let i = 1; i <= 31; i++) {
-      days.push(i)
-    }
+const date = new Date()
+const years = []
+const year = date.getFullYear()
+const months = []
+const month = date.getMonth() + 1
+const days = []
+const day = date.getDate()
+for (let i = 1770; i <= date.getFullYear(); i++) {
+  years.push(i)
+}
+for (let i = 1; i <= 12; i++) {
+  months.push(i)
+}
+for (let i = 1; i <= 31; i++) {
+  days.push(i)
+}
 export default {
   name: 'jarvis-picker',
   props,
@@ -145,16 +153,15 @@ export default {
       pickerValue: [],
       pickMove: false,
       opearRange: [],
-	  years,
-	  year,
-	  months,
-	  month,
-	  days,
-	  day,
-	  value: [9999, month - 1, day - 1],
-	  visible: true,
-	  valueModel: ''
-	  
+      years,
+      year,
+      months,
+      month,
+      days,
+      day,
+      value: [9999, month - 1, day - 1],
+      visible: true,
+      valueModel: ''
     }
   },
   computed: {
@@ -219,37 +226,35 @@ export default {
     }
   },
   watch: {
-	range: {
-		handler: function(n, o) {	
-			this.opearRange  = [n]
-		},
-		immediate: true
-	},
-	distinguishModel: {
-		handler: function(n, o) {
-			if (n) {
-				let resultInde = n.split('-')
-				let findYearIndex = this.years.findIndex(k => k == resultInde[0])
-				let findMonthIndex = this.months.findIndex(v => v == resultInde[1])
-				let findDatyIndex = this.days.findIndex(c =>  c == resultInde[2])
-				this.pickerValue = [findYearIndex, findMonthIndex, findDatyIndex]
-				
-			} else {
-				 this.pickerValue = [9999, this.month - 1, this.day - 1 ]  
-			}
-		},
-		deep: true,
-		immediate: true
-	}
+    range: {
+      handler: function (n, o) {
+        this.opearRange = [n]
+      },
+      immediate: true
+    },
+    distinguishModel: {
+      handler: function (n, o) {
+        if (n) {
+          let resultInde = n.split('-')
+          let findYearIndex = this.years.findIndex((k) => k == resultInde[0])
+          let findMonthIndex = this.months.findIndex((v) => v == resultInde[1])
+          let findDatyIndex = this.days.findIndex((c) => c == resultInde[2])
+          this.pickerValue = [findYearIndex, findMonthIndex, findDatyIndex]
+        } else {
+          this.pickerValue = [9999, this.month - 1, this.day - 1]
+        }
+      },
+      deep: true,
+      immediate: true
+    }
   },
   mounted() {
-	  this.$nextTick(() => {
-	  // console.log(this.range,'>>>>')
-	  if (this.pickerType === 'ordinary') {
-		this.pickerValue = [this.defaultIndex ] 
-	  }
-		  
-	  })
+    this.$nextTick(() => {
+      // console.log(this.range,'>>>>')
+      if (this.pickerType === 'ordinary') {
+        this.pickerValue = [this.defaultIndex]
+      }
+    })
   },
   methods: {
     // 关闭
@@ -263,35 +268,33 @@ export default {
     },
     // 确定
     confirm() {
-	 if (this.pickerType === 'ordinary') {
-		 console.log(this.pickerValue.Target, 'this.pickerValue')
-		  this.$emit('confirm', this.pickerValue)
-		  if (this.btnClose) this.close() 
-	 } else {
-		  this.$emit('confirm',this.valueModel)
-		    if (this.btnClose) this.close() 
-	 }
-	 
+      if (this.pickerType === 'ordinary') {
+        console.log(this.pickerValue.Target, 'this.pickerValue')
+        this.$emit('confirm', this.pickerValue)
+        if (this.btnClose) this.close()
+      } else {
+        this.$emit('confirm', this.valueModel)
+        if (this.btnClose) this.close()
+      }
     },
     // 点击遮罩
     clickMark() {
       if (this.markClose) this.close()
     },
     bindChange(e) {
-		console.log(e, '>>>>>')
-			  const val = e.detail.value
-		if (this.pickerType === 'ordinary') {
-			  this.pickerValue = val
-			
-		} else {
-			// this.pickerValue =val
-			 this.year = this.years[val[0]]
-			this.month = this.months[val[1]]
-			this.day = this.days[val[2]]
-			// 新增需要的数据组装
-			this.valueModel =  this.year +  "-" + this.month + "-" + this.day
-			console.log( this.year, this.month, this.day)
-		}
+      console.log(e, '>>>>>')
+      const val = e.detail.value
+      if (this.pickerType === 'ordinary') {
+        this.pickerValue = val
+      } else {
+        // this.pickerValue =val
+        this.year = this.years[val[0]]
+        this.month = this.months[val[1]]
+        this.day = this.days[val[2]]
+        // 新增需要的数据组装
+        this.valueModel = this.year + '-' + this.month + '-' + this.day
+        console.log(this.year, this.month, this.day)
+      }
     },
     pickstart() {
       this.pickMove = true
@@ -399,27 +402,31 @@ export default {
   border-bottom: none;
 }
 ::v-deep.uni-picker-view-content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-	.item {
-		font-size: 30upx;
-		font-weight: 400;
-		color: #F4F7FF;
-		line-height: 50px;
-		
-	}
+  .item {
+    font-size: 30upx;
+    font-weight: 400;
+    color: #f4f7ff;
+    line-height: 50px;
+  }
 }
 
 ::v-deep .uni-picker-view-mask {
-    top: 0;
-    height: 100%;
-    margin: 0 auto;
-	background-image: linear-gradient(to bottom, rgba(56, 61, 70, 0.9), rgba(56, 61, 70, 0.5)),linear-gradient(to bottom, rgba(56, 61, 70, 0.5), rgba(56, 61, 70, 0.9));
-    // background: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6) ), linear-gradient(0deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6));
-    background-position: top, bottom;
-    background-size: 100% 102px;
-    background-repeat: no-repeat;
+  top: 0;
+  height: 100%;
+  margin: 0 auto;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(56, 61, 70, 0.9),
+      rgba(56, 61, 70, 0.5)
+    ),
+    linear-gradient(to bottom, rgba(56, 61, 70, 0.5), rgba(56, 61, 70, 0.9));
+  // background: linear-gradient( 180deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6) ), linear-gradient(0deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6));
+  background-position: top, bottom;
+  background-size: 100% 102px;
+  background-repeat: no-repeat;
 }
 </style>

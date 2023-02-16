@@ -1,88 +1,89 @@
 <template>
-  <view
-    v-if="openKey"
-    style="
-      position: absolute;
-      z-index: 1;
-      top: 1580upx;
-      width: 100%;
-      background-color: #343a44;
-    "
-  >
+  <view id="share_content">
     <BgTheamCompontent></BgTheamCompontent>
-
-    <view class="footer-button">
-      <view class="van-button" @click="openPopup"
-        ><view class="share-icon"></view>分享报告</view
-      >
-    </view>
-    <!-- #ifdef APP-PLUS || H5 -->
     <view
-      :prop="canvasImageMsg"
-      :change:prop="canvasImage.updateEcharts"
-      id="canvasImage"
-    ></view>
-    <!-- #endif -->
-    <uni-popup
-      ref="popup"
-      type="bottom"
-      mask-background-color="rgba(20, 21, 23, 0.6)"
+      v-if="openKey"
+      style="
+        position: absolute;
+        z-index: 1;
+        top: 1580upx;
+        width: 100%;
+        background-color: #343a44;
+      "
     >
-      <view class="share-sheet">
-        <view
-          class="item"
-          v-for="(item, index) in options"
-          :key="index"
-          @click="onSelect(item)"
+      <view class="footer-button">
+        <view class="van-button" @click="openPopup"
+          ><view class="share-icon"></view>分享报告</view
         >
-          <van-image class="img" round :src="item.icon" />
-          <view class="text">{{ item.name }}</view>
-        </view>
       </view>
-    </uni-popup>
-  </view>
-  <view v-if="!openKey" style="position: absolute; z-index: 1; bottom: 10upx">
-    <view class="buttontrue" @click="openUIup"
-      >历史评测记录
-      <image src="../../static/app-plus/mebrs/openarrit.png"></image>
-    </view>
-    <uni-popup
-      ref="popup"
-      type="bottom"
-      mask-background-color="rgba(20, 21, 23, 0.8)"
-    >
-      <view class="histroys">
-        <view class="Titlehistroy">历史评估报告</view>
-        <view
-          class="item"
-          v-if="!showShare"
-          v-for="(item, index) in historyData"
-          :key="index"
-          @click="sethistorydata(item)"
-        >
+      <!-- #ifdef APP-PLUS || H5 -->
+      <view
+        :prop="canvasImageMsg"
+        :change:prop="canvasImage.updateEcharts"
+        id="canvasImage"
+      ></view>
+      <!-- #endif -->
+      <uni-popup
+        ref="popup"
+        type="bottom"
+        mask-background-color="rgba(20, 21, 23, 0.6)"
+      >
+        <view class="share-sheet">
           <view
-            class="text"
-            style="
-              float: left;
-              font-size: 36upx;
-              font-weight: 600;
-              color: #f4f7ff;
-            "
-            >{{ item.name }}</view
+            class="item"
+            v-for="(item, index) in options"
+            :key="index"
+            @click="onSelect(item)"
           >
-          <view
-            class="text"
-            style="
-              float: right;
-              color: #bdc3ce;
-              font-size: 30upx;
-              font-weight: 400;
-            "
-            >日期：{{ item.saveDate }}</view
-          >
+            <van-image class="img" round :src="item.icon" />
+            <view class="text">{{ item.name }}</view>
+          </view>
         </view>
-        <view style="margin-top: 120upx" v-else>
-          <!-- <image
+      </uni-popup>
+    </view>
+
+    <view v-if="!openKey" style="position: absolute; z-index: 1; bottom: 10upx">
+      <view class="buttontrue" @click="openUIup"
+        >历史评测记录
+        <image src="../../static/app-plus/mebrs/openarrit.png"></image>
+      </view>
+      <uni-popup
+        ref="popup"
+        type="bottom"
+        mask-background-color="rgba(20, 21, 23, 0.8)"
+      >
+        <view class="histroys">
+          <view class="Titlehistroy">历史评估报告</view>
+          <view
+            class="item"
+            v-if="!showShare"
+            v-for="(item, index) in historyData"
+            :key="index"
+            @click="sethistorydata(item)"
+          >
+            <view
+              class="text"
+              style="
+                float: left;
+                font-size: 36upx;
+                font-weight: 600;
+                color: #f4f7ff;
+              "
+              >{{ item.name }}</view
+            >
+            <view
+              class="text"
+              style="
+                float: right;
+                color: #bdc3ce;
+                font-size: 30upx;
+                font-weight: 400;
+              "
+              >日期：{{ item.saveDate }}</view
+            >
+          </view>
+          <view style="margin-top: 120upx" v-else>
+            <!-- <image
 		    src="../../static/app-plus/other/defaultImg.png"
 		    style="
 		      width: 180upx;
@@ -92,59 +93,56 @@
 		      left: 256upx;
 		    "
 		  ></image> -->
-          <view
-            style="
-              width: 180upx;
-              height: 220upx;
-              margin: 0 auto;
-              margin-top: 60upx;
-              margin-bottom: 30upx;
-              background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
-              background-repeat: no-repeat;
-              background-size: 100%;
-            "
-          ></view>
-          <view
-            style="
-              width: 360upx;
-              height: 40upx;
-              font-size: 28upx;
-              font-weight: 400;
-              color: #7a7f89;
-              margin: 0 auto;
-              text-align: center;
-            "
-            >暂无历史评估报告</view
-          >
+            <view
+              style="
+                width: 180upx;
+                height: 220upx;
+                margin: 0 auto;
+                margin-top: 60upx;
+                margin-bottom: 30upx;
+                background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
+                background-repeat: no-repeat;
+                background-size: 100%;
+              "
+            ></view>
+            <view
+              style="
+                width: 360upx;
+                height: 40upx;
+                font-size: 28upx;
+                font-weight: 400;
+                color: #7a7f89;
+                margin: 0 auto;
+                text-align: center;
+              "
+              >暂无历史评估报告</view
+            >
+          </view>
         </view>
-      </view>
-    </uni-popup>
-  </view>
+      </uni-popup>
+    </view>
+    <!-- 我是第三个 -->
 
-  <view class="content_style">
-    <view class="status_bar"></view>
-    <BgTheamCompontent></BgTheamCompontent>
-    <scroll-view @scroll="viewReportScrrop" scroll-y="true">
-      <view class="backgroud-img"
-        ><van-image
-          src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/af1f1238-0e5f-468a-9a00-120d347c451a.png"
-      /></view>
-      <view
-        class="arrow-left"
-        :class="{ show: isFixedTop }"
-        @click="onClickLeft"
-      >
-        <van-icon name="arrow-left" />
-        <view class="title">评估报告</view>
-        <view class="z" style="opacity: 0">8888</view>
-      </view>
-      <!-- <view v-show="isFixedTop" class="arrow-box"></view> -->
-      <view id="imageReport">
-        <view id="viewReport"></view>
+    <view class="content_style">
+      <scroll-view @scroll="viewReportScrrop" scroll-y="true">
+        <BgTheamCompontent></BgTheamCompontent>
+        <view class="backgroud-img"
+          ><van-image
+            src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/af1f1238-0e5f-468a-9a00-120d347c451a.png"
+        /></view>
 
-        <!-- <image  src="../../static/app-plus/bg/bodysideReport.png" crossorigin="anonymous"></image> -->
-        <view>
-          <!-- <view class="backImg"></view> -->
+        <view
+          class="arrow-left"
+          :class="{ show: isFixedTop }"
+          @click="onClickLeft"
+        >
+          <van-icon name="arrow-left" />
+          <view class="title">评估报告</view>
+          <view class="z" style="opacity: 0">8888</view>
+        </view>
+        <view id="imageReport">
+          <view id="viewReport"></view>
+
           <view class="titleText" v-if="openKey">
             <van-row class="titleTopText">
               <van-col span="12">评估报告</van-col>
@@ -174,310 +172,315 @@
               <van-col span="12">数据评测来源于世界权威机构</van-col>
             </van-row>
           </view>
-          <!-- <view class="bgImg"> </view> -->
           <view class="backgroud-img"
             ><van-image
               src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/af1f1238-0e5f-468a-9a00-120d347c451a.png"
           /></view>
-          <view class="basicInformation">
-            <uni-collapse
-              v-model="activeBasicInformation"
-              :border="false"
-              class="need_collapse_style"
-              title-border="none"
-            >
-              <uni-collapse-item
-                titleBorder="none"
-                :show-arrow="false"
-                :open="true"
-              >
-                <template v-slot:title>
-                  <uni-list>
-                    <uni-list-item
-                      :border="false"
-                      title="基础信息"
-                      clickable
-                      @click="onClickinfo('基础信息')"
-                      class="titleclass"
-                    >
-                      <template v-slot:footer>
-                        <view
-                          class="rightclickblock arrowimgopen"
-                          v-show="!infoclick"
-                        >
-                          点击展开
-                        </view>
-                        <view
-                          class="rightclickblock arrowimgclose"
-                          v-show="infoclick"
-                          >点击关闭</view
-                        >
-                      </template>
-                    </uni-list-item>
-                  </uni-list>
-                </template>
-                <view style="height: 380upx">
-                  <view class="textContent">
-                    <van-row class="text">
-                      <van-col span="12">姓名</van-col>
-                      <van-col span="12" class="textRight">{{
-                        personName
-                      }}</van-col>
-                    </van-row>
-                  </view>
-                  <view class="textContent">
-                    <van-row class="text">
-                      <van-col span="12">性别</van-col>
-                      <van-col span="12" class="textRight" v-if="gender == 1"
-                        >男</van-col
-                      >
-                      <van-col span="12" class="textRight" v-if="gender == 2"
-                        >女</van-col
-                      >
-                    </van-row>
-                  </view>
-                  <view class="textContent">
-                    <van-row class="text">
-                      <van-col span="12">年龄</van-col>
-                      <van-col span="12" class="textRight">{{ age }}</van-col>
-                    </van-row>
-                  </view>
-                  <view class="textContent">
-                    <van-row class="text">
-                      <van-col span="12">生日</van-col>
-                      <van-col span="12" class="textRight">{{
-                        birthdate
-                      }}</van-col>
-                    </van-row>
-                  </view>
-                  <view class="textContent">
-                    <van-row class="text">
-                      <van-col span="12">手机号码</van-col>
-                      <van-col span="12" class="textRight">{{
-                        mobileNumber
-                      }}</van-col>
-                    </van-row>
-                  </view>
-                </view>
-              </uni-collapse-item>
-            </uni-collapse>
-          </view>
 
-          <view class="basicInformation">
-            <uni-collapse :border="false">
-              <uni-collapse-item
-                title="健康问答"
-                class="informationCard"
-                :show-arrow="false"
-                :open="infoclick1"
-                @click="onClickinfo('健康问答')"
+          <view class="basic_dakuang_style">
+            <view class="bg_new_style">
+              <view class="fen_ceng_top_style"></view>
+              <view class="fen_ceng_bottom_style"></view>
+            </view>
+            <view class="basicInformation">
+              <uni-collapse
+                v-model="activeBasicInformation"
+                :border="false"
+                class="need_collapse_style"
+                title-border="none"
               >
-                <template v-slot:title>
-                  <uni-list>
-                    <uni-list-item
-                      title="健康问答"
-                      clickable
-                      class="titleclass"
-                    >
-                      <template v-slot:footer>
-                        <view
-                          class="rightclickblock arrowimgopen"
-                          v-show="!infoclick1"
+                <uni-collapse-item
+                  titleBorder="none"
+                  :show-arrow="false"
+                  :open="true"
+                >
+                  <template v-slot:title>
+                    <uni-list>
+                      <uni-list-item
+                        :border="false"
+                        title="基础信息"
+                        clickable
+                        @click="onClickinfo('基础信息')"
+                        class="titleclass"
+                      >
+                        <template v-slot:footer>
+                          <view
+                            class="rightclickblock arrowimgopen"
+                            v-show="!infoclick"
+                          >
+                            点击展开
+                          </view>
+                          <view
+                            class="rightclickblock arrowimgclose"
+                            v-show="infoclick"
+                            >点击关闭</view
+                          >
+                        </template>
+                      </uni-list-item>
+                    </uni-list>
+                  </template>
+                  <view style="height: 380upx">
+                    <view class="textContent">
+                      <van-row class="text">
+                        <van-col span="12">姓名</van-col>
+                        <van-col span="12" class="textRight">{{
+                          personName
+                        }}</van-col>
+                      </van-row>
+                    </view>
+                    <view class="textContent">
+                      <van-row class="text">
+                        <van-col span="12">性别</van-col>
+                        <van-col span="12" class="textRight" v-if="gender == 1"
+                          >男</van-col
                         >
-                          点击展开
-                        </view>
-                        <view
-                          class="rightclickblock arrowimgclose"
-                          v-show="infoclick1"
-                          >点击关闭</view
+                        <van-col span="12" class="textRight" v-if="gender == 2"
+                          >女</van-col
                         >
-                      </template>
-                    </uni-list-item>
-                  </uni-list>
-                </template>
+                      </van-row>
+                    </view>
+                    <view class="textContent">
+                      <van-row class="text">
+                        <van-col span="12">年龄</van-col>
+                        <van-col span="12" class="textRight">{{ age }}</van-col>
+                      </van-row>
+                    </view>
+                    <view class="textContent">
+                      <van-row class="text">
+                        <van-col span="12">生日</van-col>
+                        <van-col span="12" class="textRight">{{
+                          birthdate
+                        }}</van-col>
+                      </van-row>
+                    </view>
+                    <view class="textContent">
+                      <van-row class="text">
+                        <van-col span="12">手机号码</van-col>
+                        <van-col span="12" class="textRight">{{
+                          mobileNumber
+                        }}</van-col>
+                      </van-row>
+                    </view>
+                  </view>
+                </uni-collapse-item>
+              </uni-collapse>
+            </view>
 
-                <view style="padding-bottom: 40upx" v-if="showHQ">
-                  <view class="basicInformationContent healthBlocks">
+            <view class="basicInformation">
+              <uni-collapse :border="false">
+                <uni-collapse-item
+                  title="健康问答"
+                  class="informationCard"
+                  :show-arrow="false"
+                  :open="infoclick1"
+                  @click="onClickinfo('健康问答')"
+                >
+                  <template v-slot:title>
+                    <uni-list>
+                      <uni-list-item
+                        title="健康问答"
+                        clickable
+                        class="titleclass"
+                      >
+                        <template v-slot:footer>
+                          <view
+                            class="rightclickblock arrowimgopen"
+                            v-show="!infoclick1"
+                          >
+                            点击展开
+                          </view>
+                          <view
+                            class="rightclickblock arrowimgclose"
+                            v-show="infoclick1"
+                            >点击关闭</view
+                          >
+                        </template>
+                      </uni-list-item>
+                    </uni-list>
+                  </template>
+
+                  <view style="padding-bottom: 40upx" v-if="showHQ">
+                    <view class="basicInformationContent healthBlocks">
+                      <view v-for="(items, index) in HQDate">
+                        <view
+                          class="healthBlock blockdiv"
+                          v-for="(item, index) in items[0].answer"
+                        >
+                          {{ item }}
+                        </view>
+                      </view>
+                    </view>
                     <view v-for="(items, index) in HQDate">
                       <view
-                        class="healthBlock blockdiv"
-                        v-for="(item, index) in items[0].answer"
+                        class="healthBlocks"
+                        v-if="items[1].answer[0] == '是' ? true : false"
                       >
-                        {{ item }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          其他被确诊的疾病
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[1].remark }}
+                        </view>
                       </view>
                     </view>
-                  </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[1].answer[0] == '是' ? true : false"
-                    >
+                    <view v-for="(items, index) in HQDate">
                       <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
+                        class="healthBlocks"
+                        v-if="items[2].answer[0] == '是' ? true : false"
                       >
-                        <view class="greenBlock"></view>
-                        其他被确诊的疾病
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[1].remark }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          关节、韧带和肌肉是否受过任何损伤
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[2].remark }}
+                        </view>
                       </view>
                     </view>
-                  </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[2].answer[0] == '是' ? true : false"
-                    >
+                    <view v-for="(items, index) in HQDate">
                       <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
+                        class="healthBlocks"
+                        v-if="items[3].answer[0] == '是' ? true : false"
                       >
-                        <view class="greenBlock"></view>
-                        关节、韧带和肌肉是否受过任何损伤
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[2].remark }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          是否曾经骨折
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[3].remark }}
+                        </view>
                       </view>
                     </view>
-                  </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[3].answer[0] == '是' ? true : false"
-                    >
+                    <view v-for="(items, index) in HQDate">
                       <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
+                        class="healthBlocks"
+                        v-if="items[4].answer[0] == '是' ? true : false"
                       >
-                        <view class="greenBlock"></view>
-                        是否曾经骨折
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[3].remark }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          最近的体重是否有大幅度的变化
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[4].remark }}
+                        </view>
                       </view>
                     </view>
-                  </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[4].answer[0] == '是' ? true : false"
-                    >
+                    <view v-for="(items, index) in HQDate">
                       <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
+                        class="healthBlocks"
+                        v-if="items[5].answer[0] == '是' ? true : false"
                       >
-                        <view class="greenBlock"></view>
-                        最近的体重是否有大幅度的变化
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[4].remark }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          最近的体重是否有大幅度的变化
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[5].remark }}
+                        </view>
                       </view>
                     </view>
-                  </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[5].answer[0] == '是' ? true : false"
-                    >
+                    <view v-for="(items, index) in HQDate">
                       <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
+                        class="healthBlocks"
+                        v-if="items[6].answer[0] == '是' ? true : false"
                       >
-                        <view class="greenBlock"></view>
-                        最近的体重是否有大幅度的变化
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[5].remark }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          最近的体重是否有大幅度的变化
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[6].answer[0] }}
+                        </view>
                       </view>
                     </view>
-                  </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[6].answer[0] == '是' ? true : false"
-                    >
+                    <view v-for="(items, index) in HQDate">
                       <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
+                        class="healthBlocks"
+                        v-if="items[7].answer[0] == '是' ? true : false"
                       >
-                        <view class="greenBlock"></view>
-                        最近的体重是否有大幅度的变化
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[6].answer[0] }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          最近的体重是否有大幅度的变化
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[7].remark }}
+                        </view>
                       </view>
                     </view>
-                  </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[7].answer[0] == '是' ? true : false"
-                    >
+                    <view v-for="(items, index) in HQDate">
                       <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
+                        class="healthBlocks"
+                        v-if="items[8].answer[0] == '是' ? true : false"
                       >
-                        <view class="greenBlock"></view>
-                        最近的体重是否有大幅度的变化
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[7].remark }}
+                        <view
+                          style="
+                            margin-bottom: 20upx;
+                            color: #f4f7ff;
+                            font-size: 30upx;
+                            font-weight: 500;
+                          "
+                        >
+                          <view class="greenBlock"></view>
+                          最近的体重是否有大幅度的变化
+                        </view>
+                        <view class="healthBlock">
+                          {{ items[8].remark }}
+                        </view>
                       </view>
                     </view>
                   </view>
-                  <view v-for="(items, index) in HQDate">
-                    <view
-                      class="healthBlocks"
-                      v-if="items[8].answer[0] == '是' ? true : false"
-                    >
-                      <view
-                        style="
-                          margin-bottom: 20upx;
-                          color: #f4f7ff;
-                          font-size: 30upx;
-                          font-weight: 500;
-                        "
-                      >
-                        <view class="greenBlock"></view>
-                        最近的体重是否有大幅度的变化
-                      </view>
-                      <view class="healthBlock">
-                        {{ items[8].remark }}
-                      </view>
-                    </view>
-                  </view>
-                </view>
-                <view style="height: 612upx" v-else>
-                  <!-- <image
+                  <view style="height: 612upx" v-else>
+                    <!-- <image
                   src="../../static/app-plus/other/defaultImg.png"
                   style="
                     width: 180upx;
@@ -487,292 +490,292 @@
                     left: 256upx;
                   "
                 ></image> -->
-                  <view
-                    style="
-                      width: 180upx;
-                      height: 220upx;
-                      margin: 0 auto;
-                      margin-top: 60upx;
-                      margin-bottom: 30upx;
-                      background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
-                      background-repeat: no-repeat;
-                      background-size: 100%;
-                    "
-                  ></view>
-                  <view
-                    style="
-                      width: 360upx;
-                      height: 40upx;
-                      font-size: 28upx;
-                      font-weight: 400;
-                      color: #7a7f89;
-                      margin: 0 auto;
-                    "
-                    >暂无评估内容，快去完善吧~</view
-                  >
-                </view>
-              </uni-collapse-item>
-            </uni-collapse>
-          </view>
-
-          <view class="basicInformation">
-            <uni-collapse>
-              <uni-collapse-item
-                title="体测报告"
-                title-class="informationTitleText"
-                class="informationCard"
-                :open="infoclick2"
-                :showArrow="false"
-                @click="onClickinfo('体测报告')"
-              >
-                <template v-slot:title>
-                  <uni-list>
-                    <uni-list-item
-                      title="体测报告"
-                      clickable
-                      class="titleclass"
-                    >
-                      <template v-slot:footer>
-                        <view
-                          class="rightclickblock arrowimgopen"
-                          v-show="!infoclick2"
-                        >
-                          点击展开
-                        </view>
-                        <view
-                          class="rightclickblock arrowimgclose"
-                          v-show="infoclick2"
-                          >点击关闭</view
-                        >
-                      </template>
-                    </uni-list-item>
-                  </uni-list>
-                </template>
-
-                <view style="padding-bottom: 40upx">
-                  <view class="countNumBlock">
-                    <van-row>
-                      <van-col
-                        span="12"
-                        style="
-                          font-size: 32upx;
-                          font-weight: 600;
-                          color: #f4f7ff;
-                          line-height: 44upx;
-                          margin-top: 20upx;
-                        "
-                        >你很棒！</van-col
-                      >
-                      <van-col
-                        span="12"
-                        style="
-                          font-size: 60upx;
-                          font-weight: 600;
-                          color: #ffffff;
-                          line-height: 72upx;
-                          text-align: right;
-                          margin-top: 10upx;
-                        "
-                        >{{ bodyFraction }}</van-col
-                      >
-                    </van-row>
-                    <van-row>
-                      <van-col span="24" style="color: #bdc3ce"
-                        >再努力一点会更好哦！</van-col
-                      >
-                    </van-row>
-                    <view style="margin-top: 44upx">
-                      <van-progress
-                        :percentage="bodyFraction"
-                        stroke-width="8"
-                        color="#01E08C"
-                        :show-pivot="false"
-                        track-color="#454951"
-                      />
-                    </view>
-                  </view>
-
-                  <view class="basicInformationContent">
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="12">身高</van-col>
-                        <van-col span="12" class="textRight"
-                          >{{ bodyTestData.height }}cm</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">体重</van-col>
-                        <van-col span="7" class="textRight"
-                          >{{ bodyTestData.weight }}kg</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">肌肉量</van-col>
-                        <van-col span="7" class="textRight"
-                          >{{ bodyTestData.muscleMass }}kg</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">体脂量</van-col>
-                        <van-col span="7" class="textRight"
-                          >{{ bodyTestData.fatMass }}kg</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">体脂百分比</van-col>
-                        <van-col span="7" class="textRight"
-                          >{{ bodyTestData.fatPer }}%</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">腰臀比</van-col>
-                        <van-col span="7" class="textRight"
-                          >{{ bodyTestData.buttockPer }}%</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">基础代谢</van-col>
-                        <van-col span="7" class="textRight"
-                          >{{ bodyTestData.basal }}cal</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">体水分</van-col>
-                        <van-col span="7" class="textRight"
-                          >{{ bodyTestData.bodymoisture }}L</van-col
-                        >
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">内脏脂肪等级</van-col>
-                        <van-col span="7" class="textRight">{{
-                          bodyTestData.visceralfatgrade
-                        }}</van-col>
-                      </van-row>
-                    </view>
-                    <view class="textContent">
-                      <van-row class="text">
-                        <van-col span="17">身体BMI值</van-col>
-                        <van-col span="7" class="textRight">{{
-                          bodyTestData.bmi
-                        }}</van-col>
-                      </van-row>
-                    </view>
-                  </view>
-                </view>
-              </uni-collapse-item>
-            </uni-collapse>
-          </view>
-
-          <view class="basicInformation">
-            <uni-collapse :border="false">
-              <uni-collapse-item
-                title="体态评估"
-                title-class="informationTitleText"
-                class="informationCard"
-                :open="infoclick3"
-                :showArrow="false"
-                @click="onClickinfo('体态评估')"
-              >
-                <template v-slot:title>
-                  <uni-list>
-                    <uni-list-item
-                      title="体态评估"
-                      clickable
-                      class="titleclass"
-                    >
-                      <template v-slot:footer>
-                        <view
-                          class="rightclickblock arrowimgopen"
-                          v-show="!infoclick3"
-                        >
-                          点击展开
-                        </view>
-                        <view
-                          class="rightclickblock arrowimgclose"
-                          v-show="infoclick3"
-                          >点击关闭</view
-                        >
-                      </template>
-                    </uni-list-item>
-                  </uni-list>
-                </template>
-
-                <view style="padding-bottom: 40upx" v-if="!postureData">
-                  <view
-                    class="bodyAssessment"
-                    v-for="(item, index) in assessmentTrueData"
-                  >
                     <view
                       style="
-                        width: 5px;
-                        height: 5px;
-                        background: #ffc13c;
-                        border-radius: 100%;
-                        display: inline-flex;
-                        margin-right: 20upx;
-                        margin-bottom: 2px;
+                        width: 180upx;
+                        height: 220upx;
+                        margin: 0 auto;
+                        margin-top: 60upx;
+                        margin-bottom: 30upx;
+                        background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
+                        background-repeat: no-repeat;
+                        background-size: 100%;
                       "
-                    ></view
-                    ><span
+                    ></view>
+                    <view
                       style="
-                        font-size: 30upx;
+                        width: 360upx;
+                        height: 40upx;
+                        font-size: 28upx;
                         font-weight: 400;
-                        color: #f4f7ff;
-                        line-height: 42upx;
+                        color: #7a7f89;
+                        margin: 0 auto;
                       "
-                      >{{ item.title }}</span
+                      >暂无评估内容，快去完善吧~</view
                     >
-                    <view class="assessmentContent">
-                      <p
-                        style="
-                          color: #7a7f89;
-                          font-size: 26upx;
-                          line-height: 44upx;
-                        "
+                  </view>
+                </uni-collapse-item>
+              </uni-collapse>
+            </view>
+
+            <view class="basicInformation">
+              <uni-collapse>
+                <uni-collapse-item
+                  title="体测报告"
+                  title-class="informationTitleText"
+                  class="informationCard"
+                  :open="infoclick2"
+                  :showArrow="false"
+                  @click="onClickinfo('体测报告')"
+                >
+                  <template v-slot:title>
+                    <uni-list>
+                      <uni-list-item
+                        title="体测报告"
+                        clickable
+                        class="titleclass"
                       >
-                        <view style="display: initial; color: #ffc13c">{{
-                          insertStr(item.text)
-                        }}</view
-                        >{{ insertStr2(item.text) }}
-                      </p>
-                      <p
-                        style="
-                          color: #7a7f89;
-                          font-size: 26upx;
-                          line-height: 44upx;
-                        "
-                      >
-                        <view style="display: initial; color: #ffc13c">{{
-                          insertStr3(item.text)
-                        }}</view
-                        >{{ insertStr4(item.text) }}
-                      </p>
-                      <view class="warningText">
-                        <p>
-                          {{ item.warningMessage }}
-                        </p>
+                        <template v-slot:footer>
+                          <view
+                            class="rightclickblock arrowimgopen"
+                            v-show="!infoclick2"
+                          >
+                            点击展开
+                          </view>
+                          <view
+                            class="rightclickblock arrowimgclose"
+                            v-show="infoclick2"
+                            >点击关闭</view
+                          >
+                        </template>
+                      </uni-list-item>
+                    </uni-list>
+                  </template>
+
+                  <view style="padding-bottom: 40upx">
+                    <view class="countNumBlock">
+                      <van-row>
+                        <van-col
+                          span="12"
+                          style="
+                            font-size: 32upx;
+                            font-weight: 600;
+                            color: #f4f7ff;
+                            line-height: 44upx;
+                            margin-top: 20upx;
+                          "
+                          >你很棒！</van-col
+                        >
+                        <van-col
+                          span="12"
+                          style="
+                            font-size: 60upx;
+                            font-weight: 600;
+                            color: #ffffff;
+                            line-height: 72upx;
+                            text-align: right;
+                            margin-top: 10upx;
+                          "
+                          >{{ bodyFraction }}</van-col
+                        >
+                      </van-row>
+                      <van-row>
+                        <van-col span="24" style="color: #bdc3ce"
+                          >再努力一点会更好哦！</van-col
+                        >
+                      </van-row>
+                      <view style="margin-top: 44upx">
+                        <van-progress
+                          :percentage="bodyFraction"
+                          stroke-width="8"
+                          color="#01E08C"
+                          :show-pivot="false"
+                          track-color="#454951"
+                        />
+                      </view>
+                    </view>
+
+                    <view class="basicInformationContent">
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="12">身高</van-col>
+                          <van-col span="12" class="textRight"
+                            >{{ bodyTestData.height }}cm</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">体重</van-col>
+                          <van-col span="7" class="textRight"
+                            >{{ bodyTestData.weight }}kg</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">肌肉量</van-col>
+                          <van-col span="7" class="textRight"
+                            >{{ bodyTestData.muscleMass }}kg</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">体脂量</van-col>
+                          <van-col span="7" class="textRight"
+                            >{{ bodyTestData.fatMass }}kg</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">体脂百分比</van-col>
+                          <van-col span="7" class="textRight"
+                            >{{ bodyTestData.fatPer }}%</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">腰臀比</van-col>
+                          <van-col span="7" class="textRight"
+                            >{{ bodyTestData.buttockPer }}%</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">基础代谢</van-col>
+                          <van-col span="7" class="textRight"
+                            >{{ bodyTestData.basal }}cal</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">体水分</van-col>
+                          <van-col span="7" class="textRight"
+                            >{{ bodyTestData.bodymoisture }}L</van-col
+                          >
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">内脏脂肪等级</van-col>
+                          <van-col span="7" class="textRight">{{
+                            bodyTestData.visceralfatgrade
+                          }}</van-col>
+                        </van-row>
+                      </view>
+                      <view class="textContent">
+                        <van-row class="text">
+                          <van-col span="17">身体BMI值</van-col>
+                          <van-col span="7" class="textRight">{{
+                            bodyTestData.bmi
+                          }}</van-col>
+                        </van-row>
                       </view>
                     </view>
                   </view>
-                </view>
-                <view style="height: 612upx" v-else>
-                  <!-- <image
+                </uni-collapse-item>
+              </uni-collapse>
+            </view>
+
+            <view class="basicInformation">
+              <uni-collapse :border="false">
+                <uni-collapse-item
+                  title="体态评估"
+                  title-class="informationTitleText"
+                  class="informationCard"
+                  :open="infoclick3"
+                  :showArrow="false"
+                  @click="onClickinfo('体态评估')"
+                >
+                  <template v-slot:title>
+                    <uni-list>
+                      <uni-list-item
+                        title="体态评估"
+                        clickable
+                        class="titleclass"
+                      >
+                        <template v-slot:footer>
+                          <view
+                            class="rightclickblock arrowimgopen"
+                            v-show="!infoclick3"
+                          >
+                            点击展开
+                          </view>
+                          <view
+                            class="rightclickblock arrowimgclose"
+                            v-show="infoclick3"
+                            >点击关闭</view
+                          >
+                        </template>
+                      </uni-list-item>
+                    </uni-list>
+                  </template>
+
+                  <view style="padding-bottom: 40upx" v-if="!postureData">
+                    <view
+                      class="bodyAssessment"
+                      v-for="(item, index) in assessmentTrueData"
+                    >
+                      <view
+                        style="
+                          width: 5px;
+                          height: 5px;
+                          background: #ffc13c;
+                          border-radius: 100%;
+                          display: inline-flex;
+                          margin-right: 20upx;
+                          margin-bottom: 2px;
+                        "
+                      ></view
+                      ><span
+                        style="
+                          font-size: 30upx;
+                          font-weight: 400;
+                          color: #f4f7ff;
+                          line-height: 42upx;
+                        "
+                        >{{ item.title }}</span
+                      >
+                      <view class="assessmentContent">
+                        <p
+                          style="
+                            color: #7a7f89;
+                            font-size: 26upx;
+                            line-height: 44upx;
+                          "
+                        >
+                          <view style="display: initial; color: #ffc13c">{{
+                            insertStr(item.text)
+                          }}</view
+                          >{{ insertStr2(item.text) }}
+                        </p>
+                        <p
+                          style="
+                            color: #7a7f89;
+                            font-size: 26upx;
+                            line-height: 44upx;
+                          "
+                        >
+                          <view style="display: initial; color: #ffc13c">{{
+                            insertStr3(item.text)
+                          }}</view
+                          >{{ insertStr4(item.text) }}
+                        </p>
+                        <view class="warningText">
+                          <p>
+                            {{ item.warningMessage }}
+                          </p>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view style="height: 612upx" v-else>
+                    <!-- <image
 			      src="../../static/app-plus/other/defaultImg.png"
 			      style="
 			        width: 180upx;
@@ -782,31 +785,31 @@
 			        left: 256upx;
 			      "
 			    ></image> -->
-                  <view
-                    style="
-                      width: 180upx;
-                      height: 220upx;
-                      margin: 0 auto;
-                      margin-top: 60upx;
-                      margin-bottom: 30upx;
-                      background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
-                      background-repeat: no-repeat;
-                      background-size: 100%;
-                    "
-                  ></view>
-                  <view
-                    style="
-                      width: 360upx;
-                      height: 40upx;
-                      font-size: 28upx;
-                      font-weight: 400;
-                      color: #7a7f89;
-                      margin: 0 auto;
-                    "
-                    >暂无评估内容，快去完善吧~</view
-                  >
-                </view>
-                <!-- <view class="bodyAssessment">
+                    <view
+                      style="
+                        width: 180upx;
+                        height: 220upx;
+                        margin: 0 auto;
+                        margin-top: 60upx;
+                        margin-bottom: 30upx;
+                        background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                      "
+                    ></view>
+                    <view
+                      style="
+                        width: 360upx;
+                        height: 40upx;
+                        font-size: 28upx;
+                        font-weight: 400;
+                        color: #7a7f89;
+                        margin: 0 auto;
+                      "
+                      >暂无评估内容，快去完善吧~</view
+                    >
+                  </view>
+                  <!-- <view class="bodyAssessment">
 						<view style="width: 10px;
 								height: 10px;
 								background: #FFC13C;
@@ -847,95 +850,95 @@
 							</p>
 						</view>
 					</view> -->
-              </uni-collapse-item>
-            </uni-collapse>
-          </view>
+                </uni-collapse-item>
+              </uni-collapse>
+            </view>
 
-          <view class="basicInformation">
-            <uni-collapse :border="false">
-              <uni-collapse-item
-                title="动态评估"
-                title-class="informationTitleText"
-                class="informationCard"
-                :open="infoclick4"
-                :showArrow="false"
-                @click="onClickinfo('动态评估')"
-              >
-                <template v-slot:title>
-                  <uni-list>
-                    <uni-list-item
-                      title="动态评估"
-                      clickable
-                      class="titleclass"
-                    >
-                      <template v-slot:footer>
-                        <view
-                          class="rightclickblock arrowimgopen"
-                          v-show="!infoclick4"
-                        >
-                          点击展开
-                        </view>
-                        <view
-                          class="rightclickblock arrowimgclose"
-                          v-show="infoclick4"
-                          >点击关闭</view
-                        >
-                      </template>
-                    </uni-list-item>
-                  </uni-list>
-                </template>
-                <view style="padding-bottom: 40upx" v-if="!Dyname">
-                  <view
-                    class="bodyAssessment"
-                    v-for="(item, index) in physicalFitnessAssessmentData"
-                  >
-                    <view
-                      style="
-                        margin-bottom: 20upx;
-                        color: #f4f7ff;
-                        font-size: 30upx;
-                        font-weight: 500;
-                      "
-                    >
-                      <view class="greenBlock"></view>
-                      {{ getDyName(item.code) }}
-                    </view>
-                    <view v-for="(items, indexs) in item.actionTestResult">
-                      <view v-for="(itemss, indexss) in items.answer">
-                        <view v-if="!itemss.status">
+            <view class="basicInformation">
+              <uni-collapse :border="false">
+                <uni-collapse-item
+                  title="动态评估"
+                  title-class="informationTitleText"
+                  class="informationCard"
+                  :open="infoclick4"
+                  :showArrow="false"
+                  @click="onClickinfo('动态评估')"
+                >
+                  <template v-slot:title>
+                    <uni-list>
+                      <uni-list-item
+                        title="动态评估"
+                        clickable
+                        class="titleclass"
+                      >
+                        <template v-slot:footer>
                           <view
-                            style="
-                              width: 5px;
-                              height: 5px;
-                              background: #ffc13c;
-                              border-radius: 100%;
-                              display: inline-flex;
-                              margin-right: 20upx;
-                            "
-                          ></view>
-                          <span
-                            style="
-                              font-size: 30upx;
-                              font-weight: 400;
-                              color: #f4f7ff;
-                              line-height: 42upx;
-                            "
-                            >{{ items.questionContent }}:{{
-                              itemss.answerTitle
-                            }}
-                          </span>
-                          <view class="assessmentContent">
-                            <p style="color: #7a7f89; font-size: 26upx">
-                              {{ itemss.answeerContent }}
-                            </p>
+                            class="rightclickblock arrowimgopen"
+                            v-show="!infoclick4"
+                          >
+                            点击展开
+                          </view>
+                          <view
+                            class="rightclickblock arrowimgclose"
+                            v-show="infoclick4"
+                            >点击关闭</view
+                          >
+                        </template>
+                      </uni-list-item>
+                    </uni-list>
+                  </template>
+                  <view style="padding-bottom: 40upx" v-if="!Dyname">
+                    <view
+                      class="bodyAssessment"
+                      v-for="(item, index) in physicalFitnessAssessmentData"
+                    >
+                      <view
+                        style="
+                          margin-bottom: 20upx;
+                          color: #f4f7ff;
+                          font-size: 30upx;
+                          font-weight: 500;
+                        "
+                      >
+                        <view class="greenBlock"></view>
+                        {{ getDyName(item.code) }}
+                      </view>
+                      <view v-for="(items, indexs) in item.actionTestResult">
+                        <view v-for="(itemss, indexss) in items.answer">
+                          <view v-if="!itemss.status">
+                            <view
+                              style="
+                                width: 5px;
+                                height: 5px;
+                                background: #ffc13c;
+                                border-radius: 100%;
+                                display: inline-flex;
+                                margin-right: 20upx;
+                              "
+                            ></view>
+                            <span
+                              style="
+                                font-size: 30upx;
+                                font-weight: 400;
+                                color: #f4f7ff;
+                                line-height: 42upx;
+                              "
+                              >{{ items.questionContent }}:{{
+                                itemss.answerTitle
+                              }}
+                            </span>
+                            <view class="assessmentContent">
+                              <p style="color: #7a7f89; font-size: 26upx">
+                                {{ itemss.answeerContent }}
+                              </p>
+                            </view>
                           </view>
                         </view>
                       </view>
                     </view>
                   </view>
-                </view>
-                <view style="height: 612upx" v-else>
-                  <!-- <image
+                  <view style="height: 612upx" v-else>
+                    <!-- <image
 			      src="../../static/app-plus/other/defaultImg.png"
 			      style="
 			        width: 180upx;
@@ -945,31 +948,31 @@
 			        left: 256upx;
 			      "
 			    ></image> -->
-                  <view
-                    style="
-                      width: 180upx;
-                      height: 220upx;
-                      margin: 0 auto;
-                      margin-top: 60upx;
-                      margin-bottom: 30upx;
-                      background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
-                      background-repeat: no-repeat;
-                      background-size: 100%;
-                    "
-                  ></view>
-                  <view
-                    style="
-                      width: 360upx;
-                      height: 40upx;
-                      font-size: 28upx;
-                      font-weight: 400;
-                      color: #7a7f89;
-                      margin: 0 auto;
-                    "
-                    >暂无评估内容，快去完善吧~</view
-                  >
-                </view>
-                <!-- <view class="bodyAssessment">
+                    <view
+                      style="
+                        width: 180upx;
+                        height: 220upx;
+                        margin: 0 auto;
+                        margin-top: 60upx;
+                        margin-bottom: 30upx;
+                        background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                      "
+                    ></view>
+                    <view
+                      style="
+                        width: 360upx;
+                        height: 40upx;
+                        font-size: 28upx;
+                        font-weight: 400;
+                        color: #7a7f89;
+                        margin: 0 auto;
+                      "
+                      >暂无评估内容，快去完善吧~</view
+                    >
+                  </view>
+                  <!-- <view class="bodyAssessment">
 						<view style="width: 5px;
 								height: 5px;
 								background: #FFC13C;
@@ -987,88 +990,92 @@
 							</p>
 						</view>
 					</view> -->
-              </uni-collapse-item>
-            </uni-collapse>
-          </view>
+                </uni-collapse-item>
+              </uni-collapse>
+            </view>
 
-          <view class="basicInformation">
-            <uni-collapse :border="false">
-              <uni-collapse-item
-                title="体能评估"
-                class="informationCard"
-                :open="infoclick5"
-                :showArrow="false"
-                @click="onClickinfo('体能评估')"
-              >
-                <template v-slot:title>
-                  <uni-list>
-                    <uni-list-item
-                      title="体能评估"
-                      clickable
-                      class="titleclass"
-                    >
-                      <template v-slot:footer>
-                        <view
-                          class="rightclickblock arrowimgopen"
-                          v-show="!infoclick5"
-                        >
-                          点击展开
-                        </view>
-                        <view
-                          class="rightclickblock arrowimgclose"
-                          v-show="infoclick5"
-                          >点击关闭</view
-                        >
-                      </template>
-                    </uni-list-item>
-                  </uni-list>
-                </template>
-                <view style="padding-bottom: 40upx; background-color: #2f333a">
-                  <!-- <van-row style="background-color: #343A44;">
-						<van-col class="need_scoll" span="24"> -->
-                  <view
-                    class="dynamicshow"
-                    v-for="(item, index) in queryData"
-                    :key="index"
-                  >
-                    <view class="dynamicshow_left" v-if="item.type > 0">
-                      <text class="evaluationdata">
-                        {{ item.questionContent }}
-                      </text>
-                      <text v-if="item.code == 'F0001'">
-                        心率：{{ item.type }}/分
-                      </text>
-                      <text v-else> 数量：{{ item.type }}个 </text>
-                    </view>
-                    <view class="dynamicshow_left" v-else>
-                      <text class="evaluationdata">
-                        {{ item.questionContent }}
-                      </text>
-                      <text class="noEvaText"> 暂未测试，快去测试吧 </text>
-                    </view>
-                    <view class="dynamicshow_right">
-                      <view
-                        class="circle"
-                        :style="'border: 4px solid ' + item.typeColor + ';'"
+            <view class="basicInformation">
+              <uni-collapse :border="false">
+                <uni-collapse-item
+                  title="体能评估"
+                  class="informationCard"
+                  :open="infoclick5"
+                  :showArrow="false"
+                  @click="onClickinfo('体能评估')"
+                >
+                  <template v-slot:title>
+                    <uni-list>
+                      <uni-list-item
+                        title="体能评估"
+                        clickable
+                        class="titleclass"
                       >
+                        <template v-slot:footer>
+                          <view
+                            class="rightclickblock arrowimgopen"
+                            v-show="!infoclick5"
+                          >
+                            点击展开
+                          </view>
+                          <view
+                            class="rightclickblock arrowimgclose"
+                            v-show="infoclick5"
+                            >点击关闭</view
+                          >
+                        </template>
+                      </uni-list-item>
+                    </uni-list>
+                  </template>
+                  <view
+                    style="padding-bottom: 40upx; background-color: #2f333a"
+                  >
+                    <!-- <van-row style="background-color: #343A44;">
+              <van-col class="need_scoll" span="24"> -->
+                    <view
+                      class="dynamicshow"
+                      v-for="(item, index) in queryData"
+                      :key="index"
+                    >
+                      <view class="dynamicshow_left" v-if="item.type > 0">
+                        <text class="evaluationdata">
+                          {{ item.questionContent }}
+                        </text>
+                        <text v-if="item.code == 'F0001'">
+                          心率：{{ item.type }}/分
+                        </text>
+                        <text v-else> 数量：{{ item.type }}个 </text>
+                      </view>
+                      <view class="dynamicshow_left" v-else>
+                        <text class="evaluationdata">
+                          {{ item.questionContent }}
+                        </text>
+                        <text class="noEvaText"> 暂未测试，快去测试吧 </text>
+                      </view>
+                      <view class="dynamicshow_right">
                         <view
-                          class="circleText"
-                          :style="'color:' + item.typeColor + ';'"
-                          >{{ item.typeText }}</view
+                          class="circle"
+                          :style="'border: 4px solid ' + item.typeColor + ';'"
                         >
+                          <view
+                            class="circleText"
+                            :style="'color:' + item.typeColor + ';'"
+                            >{{ item.typeText }}</view
+                          >
+                        </view>
                       </view>
                     </view>
+                    <!-- </van-col>
+            </van-row> -->
                   </view>
-                  <!-- </van-col>
-					</van-row> -->
-                </view>
-              </uni-collapse-item>
-            </uni-collapse>
+                </uni-collapse-item>
+              </uni-collapse>
+            </view>
+
+            <view style="height: 200upx; width: calc(100vw - 60upx)"></view>
           </view>
-          <view style="height: 200upx; width: calc(100vw - 60upx)"></view>
         </view>
-      </view>
-    </scroll-view>
+      </scroll-view>
+    </view>
   </view>
 </template>
 
@@ -1858,8 +1865,7 @@ export default {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100%;
-  position: relative;
+  height: 100vh;
   box-sizing: border-box;
   position: relative;
   // padding-top: 88upx;
@@ -1877,10 +1883,10 @@ export default {
   }
   .arrow-left {
     position: fixed;
-    width: 100%;
-    padding-top: var(--status-bar-height);
+    padding-top: var(--status-bar-height) !important;
     top: 0;
     left: 0;
+    right: 0;
     z-index: 88;
     height: 88upx;
     display: flex;
@@ -1888,7 +1894,6 @@ export default {
     padding-left: 30upx;
     justify-content: space-between;
     color: #bdc3ce;
-    box-sizing: border-box;
     .van-icon {
       font-size: 40upx;
       color: #bdc3ce;
@@ -1955,6 +1960,9 @@ export default {
 }
 #imageReport {
   // background: #212328;
+  padding-top: calc(var(--status-bar-height) + 100upx);
+  width: 100vw;
+  position: relative;
 }
 .title {
   width: 120upx;
@@ -1966,10 +1974,12 @@ export default {
   line-height: 42upx;
 }
 .titleText {
-  margin: 10upx 30upx 0 30upx;
-  position: relative;
-  top: 42px;
-  margin-bottom: 58px;
+  // margin: 10upx 30upx 0 30upx;
+
+  // margin-top: calc(var(--status-bar-height) + 20upx);
+  margin-left: 30upx;
+  // top: 42px;
+  margin-bottom: 30upx;
 }
 .text {
   font-size: 30upx;
@@ -1997,6 +2007,31 @@ export default {
 }
 .titleBottomText :last-child {
   text-align: right;
+}
+.basic_dakuang_style {
+  width: 100vw;
+  position: relative;
+  .bg_new_style {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // background: red;
+    .fen_ceng_top_style {
+      width: 100%;
+      height: 40upx;
+      background: transparent;
+    }
+    .fen_ceng_bottom_style {
+      flex: 1;
+      background: #212328;
+    }
+  }
+
+  // background: #212328;
 }
 .basicInformation {
   width: calc(100vw - 60upx);
@@ -2429,7 +2464,7 @@ export default {
   margin-bottom: 30upx;
 }
 ::v-deep .uni-scroll-view {
-  height: 100vh;
+  height: 100vh !important;
   // background-color: #212328 !important;
   margin: 0;
   padding: 0;
@@ -2488,5 +2523,8 @@ export default {
 }
 .mark {
   opacity: 0.6;
+}
+#share_content {
+  // background: linear-gradient(to bottom, rgba(52, 58, 68, 1), #212328);
 }
 </style>

@@ -23,7 +23,7 @@
               @input="changeInputValue($event, item, itemIndex)"
               :placeholder="item.answerRemark.remarkTitle"
               style="margin-top: 6px"
-			  :adjust-position="false"
+              :adjust-position="false"
             />
           </uni-forms-item>
           <uni-forms-item
@@ -40,7 +40,7 @@
                 :rangeKey="'text'"
                 @confirm="pickeConfirm($event, item, itemIndex)"
                 @cancel="pickCancel(item)"
-                :pickerType="'ordinary'"
+                :pickerType="controlType(item)"
                 :defaultIndex="handleIndex(item)"
               ></Mpicker>
               <view class="change_picker_style" @click.stop="openDialog(item)">
@@ -135,27 +135,31 @@ export default {
         }
         return { value }
       }
+    },
+    controlType() {
+      return function (item) {
+        let whiteType = ['height', 'visceralfatgrade', 'bodyFraction']
+        let type = whiteType.indexOf(item.key) > -1 ? 'ordinary' : 'ordinary'
+        return type
+      }
     }
   },
   methods: {
     changeInputValue(event, item, itemIndex) {
-	
-     
-	  if (event.detail.value > 5000) {
-		uni.showToast({
-				 title: '基础代谢上限5000',
-				 duration: 1000,
-				 width: 180,
-				 icon: 'none'
-			   })
-			   setTimeout(()=> {
-				   
-		  item.value = '5000'
-		  event.detail.value = '5000'
-			   },200)
-	  } else {
-		    item.value  = event.detail.value
-	  }
+      if (event.detail.value > 5000) {
+        uni.showToast({
+          title: '基础代谢上限5000',
+          duration: 1000,
+          width: 180,
+          icon: 'none'
+        })
+        setTimeout(() => {
+          item.value = '5000'
+          event.detail.value = '5000'
+        }, 200)
+      } else {
+        item.value = event.detail.value
+      }
     },
     pickeConfirm(event, item, itemIndex) {
       console.log(item, '我平时', itemIndex)

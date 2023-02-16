@@ -22,8 +22,7 @@
             placeholder="请输入真实姓名"
             maxlength="7"
             style="margin-top: 6px"
-			:adjust-position="false"
-			
+            :adjust-position="false"
           />
         </uni-forms-item>
         <uni-forms-item
@@ -102,7 +101,7 @@
             v-model="studentForm.mobile"
             placeholder="请输入手机号码"
             maxlength="11"
-			:adjust-position="false"
+            :adjust-position="false"
           />
         </uni-forms-item>
 
@@ -342,11 +341,11 @@ export default {
       this.$refs.studentForm
         .validate()
         .then(() => {
-			try {
-			  uni.setStorageSync('isActive', String(this.studentForm.buyStatus)) // 缓存标签激活信息
-			} catch (e) {
-			  // error
-			}
+          try {
+            uni.setStorageSync('isActive', String(this.studentForm.buyStatus)) // 缓存标签激活信息
+          } catch (e) {
+            // error
+          }
           let businessCloudObject = uniCloud.importObject(
             'businessCloudObject',
             {
@@ -360,8 +359,7 @@ export default {
               .then((updateRes) => {
                 if (updateRes.success) {
                   uni.reLaunch({
-                    url:
-                      '/pages/myMebers/myMebers',
+                    url: '/pages/myMebers/myMebers',
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
@@ -420,8 +418,7 @@ export default {
                     .catch((err) => {})
                 } else {
                   uni.reLaunch({
-                    url:
-                      '/pages/myMebers/myMebers',
+                    url: '/pages/myMebers/myMebers',
                     success: (res) => {},
                     fail: () => {},
                     complete: () => {}
