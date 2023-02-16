@@ -1,29 +1,23 @@
 {
   "hash": "1dfac88b",
-  "browserHash": "ab0f721d",
+  "browserHash": "07b9d3ec",
   "optimized": {
     "vant": {
       "src": "../../node_modules/vant/es/index.mjs",
       "file": "vant.js",
-      "fileHash": "8530857b",
+      "fileHash": "4c2f93f0",
       "needsInterop": false
     },
     "html2canvas": {
       "src": "../../node_modules/html2canvas/dist/html2canvas.esm.js",
       "file": "html2canvas.js",
-      "fileHash": "22f2adca",
+      "fileHash": "f20cd0a7",
       "needsInterop": false
-    },
-    "moment": {
-      "src": "../../node_modules/moment/dist/moment.js",
-      "file": "moment.js",
-      "fileHash": "fafe80db",
-      "needsInterop": true
     }
   },
   "chunks": {
-    "chunk-VY64FMTN": {
-      "file": "chunk-VY64FMTN.js"
+    "chunk-BPKF3OQJ": {
+      "file": "chunk-BPKF3OQJ.js"
     }
   }
 }

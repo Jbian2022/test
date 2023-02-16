@@ -141,7 +141,7 @@
   height: 3.125rem;
   object-fit: contain;
 }
-.counter .wx_loging_style .wx_img_style[data-v-62a93864]:nth-child(1) {
+.counter .wx_loging_style .common_style[data-v-62a93864]:nth-child(1) {
   margin-right: 3.125rem;
 }
 .botter_dakuang_style[data-v-62a93864] {
@@ -216,6 +216,30 @@
   font-family: HarmonyOS_Sans_SC_Bold;
   color: #323438;
   line-height: 2.25rem;
+}
+.wx_icon_login_style[data-v-62a93864] {
+  margin-top: 0.625rem;
+  width: calc(100vw - 4.375rem);
+  margin-left: 2.1875rem;
+  height: 3.125rem;
+  background: #179d52;
+  border-radius: 0.5rem;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wx_icon_login_style .icon_img_style[data-v-62a93864] {
+  width: 1.5625rem;
+  height: 1.5625rem;
+  object-fit: cover;
+}
+.wx_icon_login_style .icon_remark_style[data-v-62a93864] {
+  font-size: 1rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #f4f7ff;
+  margin-left: 0.625rem;
 }
 [data-v-62a93864] .van-field__control {
   font-size: 1rem !important;

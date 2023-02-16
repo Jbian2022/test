@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="50px" viewBox="0 0 51 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>手机号</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="登录0-首页" transform="translate(-112.000000, -645.000000)">
+            <g id="手机号" transform="translate(112.500000, 645.000000)">
+                <rect id="矩形" fill="#454951" opacity="0.300000012" x="0" y="0" width="50" height="50" rx="25"></rect>
+                <g id="编组-7" transform="translate(15.522605, 14.197408)">
+                    <rect id="矩形" fill="#F4F7FF" x="0" y="0" width="18.9547892" height="21.6051847" rx="4"></rect>
+                    <rect id="矩形备份-3" fill="#2C2D30" x="7.97739458" y="17.1778424" width="3" height="3" rx="1.5"></rect>
+                    <rect id="矩形备份-4" fill="#2C2D31" x="3.03635448" y="2.88651597" width="12.8820802" height="12.8369083" rx="2"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

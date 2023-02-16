@@ -52,7 +52,6 @@
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"
-					
 				}
 			}
 		},
@@ -241,7 +240,6 @@
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"
-					
 				}
 			}
 		},
@@ -277,6 +275,34 @@
 			"path": "pages/personalInfo/personalInfo",
 			"style": {
 				"navigationBarTitleText": "个人信息",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/bindPhone/bindPhone",
+			"style": {
+				"navigationBarTitleText": "绑定手机号",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"autoBackButton": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/phoneLoging/phoneLoging",
+			"style": {
+				"navigationBarTitleText": "手机号登录",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
 				"autoBackButton": false,
@@ -375,23 +401,22 @@
 					"bounce": "none"
 				}
 			}
+		},
+		{
+			"path": "uni_modules/uni-pay/pages/success/success",
+			"style": {
+				"backgroundColor": "#F8F8F8",
+				"navigationBarTitleText": "支付成功"
+			}
+		},
+		{
+			"path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
+			"style": {
+				"backgroundColor": "#F8F8F8",
+				"navigationBarTitleText": "ad"
+			}
 		}
-	,{
-    "path": "uni_modules/uni-pay/pages/success/success",
-    "style": {
-        "backgroundColor": "#F8F8F8",
-        "navigationBarTitleText": "支付成功"
-		
-    }
-}
-,{
-    "path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
-    "style": {
-        "backgroundColor": "#F8F8F8",
-        "navigationBarTitleText": "ad"
-    }
-}
-],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-starter",
