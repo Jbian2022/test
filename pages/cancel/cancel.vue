@@ -1,6 +1,6 @@
 <template>
   <view class="cancel">
-    <view class="status_bar"> <!-- 这里是状态栏 --> </view>
+    <!-- <view class="status_bar"></view> -->
     <view class="top-bar">
       <van-icon name="arrow-left" @click="back" />
       <view class="title">申请注销账号</view>
@@ -124,12 +124,18 @@ export default {
 page {
   background: #212328;
 }
+::v-deep .uni-page-head{
+	display: none !important;
+}
+::v-deep .uni-placeholder{
+	display: none !important;
+}
 .status_bar {
   height: var(--status-bar-height);
   width: 100%;
 }
 .cancel {
-  padding: 0 40upx;
+  // padding: 0 40upx;
   .top-bar {
     height: 88upx;
     display: flex;
