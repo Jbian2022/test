@@ -281,7 +281,7 @@
           :key="index"
           @click="onSelect(item)"
         >
-          <van-image class="img" round :src="item.icon" />
+          <image class="img" round :src="item.icon" />
           <view class="text">{{ item.name }}</view>
         </view>
       </view>
@@ -297,15 +297,15 @@ export default {
       options: [
         {
           name: '分享到微信',
-          icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png'
+          icon: '../../static/app-plus/other/saveWechat.svg'
         },
         {
           name: '分享到朋友圈',
-          icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png'
+          icon: '../../static/app-plus/other/wechatMoments.svg'
         },
         {
           name: '保存到相册',
-          icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png'
+          icon: '../../static/app-plus/other/savePhone.svg'
         }
       ],
       traineeTitle: '',
@@ -694,6 +694,9 @@ export default {
         }
       }
     }
+  }
+  .img:hover{
+  	  opacity: 0.6;
   }
   .footer-button {
     position: fixed;

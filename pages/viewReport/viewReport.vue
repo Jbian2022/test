@@ -35,7 +35,7 @@
             :key="index"
             @click="onSelect(item)"
           >
-            <van-image class="img" round :src="item.icon" />
+            <image class="img" round :src="item.icon" />
             <view class="text">{{ item.name }}</view>
           </view>
         </view>
@@ -155,12 +155,12 @@
           </view>
           <view class="titleText" v-if="!openKey">
             <van-row class="titleTopText">
-              <van-col span="12"
+              <van-col span="15"
                 ><view style="float: left">{{ personName }}</view>
                 <view class="titleTypeok" v-if="buyStatus">已购课</view>
                 <view class="titleTypeno" v-else>未购课</view>
               </van-col>
-              <van-col span="12">
+              <van-col span="7">
                 <!-- <input type="button" value="重新测试" class="titleButton"/> -->
                 <button class="titleButton" @click="gototest()">
                   重新评估
@@ -168,8 +168,8 @@
               </van-col>
             </van-row>
             <van-row class="titleBottomText">
-              <van-col span="12">{{ histroydate }}</van-col>
-              <van-col span="12">数据评测来源于世界权威机构</van-col>
+              <van-col span="9">{{ histroydate }}</van-col>
+              <van-col span="13">数据评测来源于世界权威机构</van-col>
             </van-row>
           </view>
           <view class="backgroud-img"
@@ -504,12 +504,12 @@
                     ></view>
                     <view
                       style="
-                        width: 360upx;
-                        height: 40upx;
-                        font-size: 28upx;
-                        font-weight: 400;
-                        color: #7a7f89;
-                        margin: 0 auto;
+                        width: 100%;
+                                  height: 40upx;
+                                  font-size: 28upx;
+                                  font-weight: 400;
+                                  color: #7a7f89;
+                                  text-align: center;
                       "
                       >暂无评估内容，快去完善吧~</view
                     >
@@ -799,12 +799,12 @@
                     ></view>
                     <view
                       style="
-                        width: 360upx;
-                        height: 40upx;
-                        font-size: 28upx;
-                        font-weight: 400;
-                        color: #7a7f89;
-                        margin: 0 auto;
+                        width: 100%;
+                                  height: 40upx;
+                                  font-size: 28upx;
+                                  font-weight: 400;
+                                  color: #7a7f89;
+                                  text-align: center;
                       "
                       >暂无评估内容，快去完善吧~</view
                     >
@@ -962,12 +962,12 @@
                     ></view>
                     <view
                       style="
-                        width: 360upx;
-                        height: 40upx;
-                        font-size: 28upx;
-                        font-weight: 400;
-                        color: #7a7f89;
-                        margin: 0 auto;
+                        width: 100%;
+                                  height: 40upx;
+                                  font-size: 28upx;
+                                  font-weight: 400;
+                                  color: #7a7f89;
+                                  text-align: center;
                       "
                       >暂无评估内容，快去完善吧~</view
                     >
@@ -1141,32 +1141,32 @@ export default {
       ],
       showShare: false,
       showHistory: false,
+      // options: [
+      //   {
+      //     name: '分享到微信',
+      //     icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png'
+      //   },
+      //   {
+      //     name: '分享到朋友圈',
+      //     icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png'
+      //   },
+      //   {
+      //     name: '保存到相册',
+      //     icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png'
+      //   }
+      // ],
       options: [
         {
           name: '分享到微信',
-          icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/23704d74-641b-4a8e-9ced-f393c631667a.png'
+          icon: '../../static/app-plus/other/saveWechat.svg'
         },
         {
           name: '分享到朋友圈',
-          icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/4be11f14-035d-47f0-8c5d-f147b494246b.png'
+          icon: '../../static/app-plus/other/wechatMoments.svg'
         },
         {
           name: '保存到相册',
-          icon: 'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/c5edf505-9026-4d72-a16c-3ea5c8e4304c.png'
-        }
-      ],
-      history: [
-        {
-          name: '分享到微信',
-          icon: '../../static/app-plus/other/saveWechat.png'
-        },
-        {
-          name: '分享到朋友圈',
-          icon: '../../static/app-plus/other/wechatMoments.png'
-        },
-        {
-          name: '保存到相册',
-          icon: '../../static/app-plus/other/savePhone.png'
+          icon: '../../static/app-plus/other/savePhone.svg'
         }
       ],
       getOnlyLists: {},
@@ -1523,14 +1523,7 @@ export default {
         // this.physicalFitnessAssessmentData = res.data
         console.log(res.data)
         for (let r of res.data) {
-          for (let rq of r.actionTestResult) {
-            for (let d of rq.answer) {
-              if (d.status == 0) {
-                this.physicalFitnessAssessmentData.push(r)
-                break
-              }
-            }
-          }
+			this.physicalFitnessAssessmentData.push(r)
         }
         console.log(this.physicalFitnessAssessmentData)
       })
@@ -1764,7 +1757,7 @@ export default {
     },
     insertStr4(str) {
       var a = str.indexOf('。')
-      return str.slice(a + 7, str.length)
+      return str.slice(a + 6, str.length)
     },
     onClickinfo(item) {
       console.log(item)
@@ -2193,7 +2186,7 @@ export default {
 .titleButton {
   width: 190upx;
   height: 68upx;
-  background: #454951;
+  background: #1370FF;
   border-radius: 16upx;
   font-size: 30upx;
   font-weight: 600;
@@ -2204,11 +2197,11 @@ export default {
 .titleTypeok {
   width: 100upx;
   height: 50upx;
-  background: #1370ff;
+  background: -webkit-linear-gradient(top,#FFF3D3,#FFE6A1);
   border-radius: 8upx;
   font-size: 24upx;
   font-weight: 600;
-  color: #f4f7ff;
+  color: #93653C;
   line-height: 50upx;
   text-align: center;
   float: left;
@@ -2432,6 +2425,9 @@ export default {
       color: #f4f7ff;
       line-height: 40tpx;
     }
+  }
+  .img:hover{
+	  opacity: 0.6;
   }
 }
 .histroys {
