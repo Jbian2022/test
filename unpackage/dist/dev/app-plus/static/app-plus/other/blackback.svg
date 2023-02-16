@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>返回黑色</title>
+    <g id="返回黑色" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="矩形" x="0" y="0" width="20" height="20"></rect>
+        <polyline id="路径" stroke="#000000" stroke-width="2" fill-rule="nonzero" transform="translate(9.910285, 10.000000) rotate(-45.000000) translate(-9.910285, -10.000000) " points="4.48961438 15.4206702 5.30391345 5.39362884 15.3309548 4.57932977"></polyline>
+    </g>
+</svg>
