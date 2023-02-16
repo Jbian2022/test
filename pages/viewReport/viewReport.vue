@@ -93,29 +93,91 @@
 		      left: 256upx;
 		    "
 		  ></image> -->
-            <view
-              style="
-                width: 180upx;
-                height: 220upx;
-                margin: 0 auto;
-                margin-top: 60upx;
-                margin-bottom: 30upx;
-                background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
-                background-repeat: no-repeat;
-                background-size: 100%;
-              "
-            ></view>
-            <view
-              style="
-                width: 360upx;
-                height: 40upx;
-                font-size: 28upx;
-                font-weight: 400;
-                color: #7a7f89;
-                margin: 0 auto;
-                text-align: center;
-              "
-              >暂无历史评估报告</view
+						<view style="
+		      width: 180upx;
+		      height: 220upx;
+		      margin: 0 auto;
+							margin-top: 60upx;
+							margin-bottom: 30upx;
+							background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
+							background-size: 100%;
+		    "></view>
+		  <view
+		    style="
+		      width: 360upx;
+		      height: 40upx;
+		      font-size: 28upx;
+		      font-weight: 400;
+		      color: #7a7f89;
+		      margin: 0 auto;
+			  text-align: center;
+		    "
+		    >暂无历史评估报告</view
+		  >
+		</view>
+      </view>
+    </uni-popup>
+  </view>
+  
+  <scroll-view @scroll="viewReportScrrop" scroll-y="true">
+   <!-- <view class="status_bar"></view> -->
+    <!-- 				<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
+ -->
+    <view class="content_style" :class="isFixedTop ? 'zhan_wei_style' : ''">
+      <view
+        class="arrow-left"
+        :class="{ show: isFixedTop }"
+        @click="onClickLeft"
+      >
+        <van-icon name="arrow-left" />
+        <view class="title">评估报告</view>
+        <view class="z" style="opacity: 0">8888</view>
+      </view>
+     <!-- <view v-show="isFixedTop" class="arrow-box"></view> -->
+	 <view id = "imageReport">
+		 <view id="viewReport"></view>
+	 	<!-- <image  src="../../static/app-plus/bg/bodysideReport.png" crossorigin="anonymous"></image> -->
+      <view>
+        <!-- <view class="backImg"></view> -->
+        <view class="titleText" v-if="openKey">
+          <van-row class="titleTopText">
+            <van-col span="12">评估报告</van-col>
+            <van-col span="12">{{ nowDate }}</van-col>
+          </van-row>
+          <van-row class="titleBottomText">
+            <van-col span="12">数据评测来源于世界权威机构</van-col>
+            <van-col span="12">{{ nowYear }}年</van-col>
+          </van-row>
+        </view>
+        <view class="titleText" v-if="!openKey">
+          <van-row class="titleTopText">
+            <van-col span="12"
+              ><view style="float: left">{{ personName }}</view>
+              <view class="titleTypeok" v-if="buyStatus">已购课</view>
+              <view class="titleTypeno" v-else>未购课</view>
+            </van-col>
+            <van-col span="12">
+              <!-- <input type="button" value="重新测试" class="titleButton"/> -->
+              <button class="titleButton" @click="gototest()">重新评估</button>
+            </van-col>
+          </van-row>
+          <van-row class="titleBottomText">
+			<van-col span="12">{{histroydate}}</van-col>
+            <van-col span="12">数据评测来源于世界权威机构</van-col>
+          </van-row>
+        </view>
+        <view class="bgImg"> </view>
+        <view class="basicInformation">
+          <uni-collapse
+            v-model="activeBasicInformation"
+            :border="false"
+            class="need_collapse_style"
+            title-border="none"
+          >
+            <uni-collapse-item
+              titleBorder="none"
+              :show-arrow="false"
+              :open="true"
             >
           </view>
         </view>
@@ -490,7 +552,69 @@
                     left: 256upx;
                   "
                 ></image> -->
-                    <view
+				<view style="
+                    width: 180upx;
+                    height: 220upx;
+                    margin: 0 auto;
+					margin-top: 60upx;
+					margin-bottom: 30upx;
+					background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
+					background-size: 100%;
+                  "></view>
+                <view
+                  style="
+                    width: 100%;
+                    height: 40upx;
+                    font-size: 28upx;
+                    font-weight: 400;
+                    color: #7a7f89;
+                    text-align: center;
+                  "
+                  >暂无评估内容，快去完善吧~</view
+                >
+              </view>
+            </uni-collapse-item>
+          </uni-collapse>
+        </view>
+
+        <view class="basicInformation">
+          <uni-collapse>
+            <uni-collapse-item
+              title="体测报告"
+              title-class="informationTitleText"
+              class="informationCard"
+              :open="infoclick2"
+              :showArrow="false"
+			  @click="onClickinfo('体测报告')"
+            >
+              <template v-slot:title>
+                <uni-list>
+                  <uni-list-item
+                    title="体测报告"
+                    clickable
+                    
+                    class="titleclass"
+                  >
+                    <template v-slot:footer>
+                      <view
+                        class="rightclickblock arrowimgopen"
+                        v-show="!infoclick2"
+                      >
+                        点击展开
+                      </view>
+                      <view class="rightclickblock arrowimgclose" v-show="infoclick2"
+                        >点击关闭</view
+                      >
+                    </template>
+                  </uni-list-item>
+                </uni-list>
+              </template>
+
+              <view style="padding-bottom: 40upx">
+                <view class="countNumBlock">
+                  <van-row>
+                    <van-col
+                      span="12"
                       style="
                         width: 180upx;
                         height: 220upx;
@@ -785,31 +909,28 @@
 			        left: 256upx;
 			      "
 			    ></image> -->
-                    <view
-                      style="
-                        width: 180upx;
-                        height: 220upx;
-                        margin: 0 auto;
-                        margin-top: 60upx;
-                        margin-bottom: 30upx;
-                        background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
-                        background-repeat: no-repeat;
-                        background-size: 100%;
-                      "
-                    ></view>
-                    <view
-                      style="
-                        width: 100%;
-                                  height: 40upx;
-                                  font-size: 28upx;
-                                  font-weight: 400;
-                                  color: #7a7f89;
-                                  text-align: center;
-                      "
-                      >暂无评估内容，快去完善吧~</view
-                    >
-                  </view>
-                  <!-- <view class="bodyAssessment">
+			  	<view style="
+			  	    width: 180upx;
+			  	    height: 220upx;
+			  	    margin: 0 auto;
+			  		margin-top: 60upx;
+			  		margin-bottom: 30upx;
+			  		background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
+			  		background-size: 100%;
+			  	  "></view>
+			  	<view
+			  	  style="
+			  	    width: 100%;
+			  	    height: 40upx;
+			  	    font-size: 28upx;
+			  	    font-weight: 400;
+			  	    color: #7a7f89;
+			  	    text-align: center;
+			  	  "
+			  	  >暂无评估内容，快去完善吧~</view
+			  	>
+			  </view>
+              <!-- <view class="bodyAssessment">
 						<view style="width: 10px;
 								height: 10px;
 								background: #FFC13C;
@@ -948,31 +1069,28 @@
 			        left: 256upx;
 			      "
 			    ></image> -->
-                    <view
-                      style="
-                        width: 180upx;
-                        height: 220upx;
-                        margin: 0 auto;
-                        margin-top: 60upx;
-                        margin-bottom: 30upx;
-                        background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');
-                        background-repeat: no-repeat;
-                        background-size: 100%;
-                      "
-                    ></view>
-                    <view
-                      style="
-                        width: 100%;
-                                  height: 40upx;
-                                  font-size: 28upx;
-                                  font-weight: 400;
-                                  color: #7a7f89;
-                                  text-align: center;
-                      "
-                      >暂无评估内容，快去完善吧~</view
-                    >
-                  </view>
-                  <!-- <view class="bodyAssessment">
+			  	<view style="
+			  	    width: 180upx;
+			  	    height: 220upx;
+			  	    margin: 0 auto;
+			  		margin-top: 60upx;
+			  		margin-bottom: 30upx;
+			  		background-image: url('https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/f744076f-9607-4093-b9a4-7a08a5ebadbd.png');background-repeat: no-repeat;
+			  		background-size: 100%;
+			  	  "></view>
+			  	<view
+			  	  style="
+			  	    width: 100%;
+			  	    height: 40upx;
+			  	    font-size: 28upx;
+			  	    font-weight: 400;
+			  	    color: #7a7f89;
+			  	    text-align: center;
+			  	  "
+			  	  >暂无评估内容，快去完善吧~</view
+			  	>
+			  </view>
+              <!-- <view class="bodyAssessment">
 						<view style="width: 5px;
 								height: 5px;
 								background: #FFC13C;
@@ -1486,7 +1604,7 @@ export default {
               this.assessmentTrueData.push(trueData)
               trueData = {}
             }
-            // console.log(this.assessmentTrueData)
+            console.log(this.assessmentTrueData)
           } else {
             console.log('没有数据哦')
             this.postureData = true
@@ -1521,11 +1639,21 @@ export default {
           this.Dyname = true
         }
         // this.physicalFitnessAssessmentData = res.data
-        console.log(res.data)
+        // console.log(res.data)
         for (let r of res.data) {
 			this.physicalFitnessAssessmentData.push(r)
+    //       for (let rq of r.actionTestResult) {
+			 //  // console.log(rq)
+    //         for (let d of rq.answer) {
+				// // console.log(rq)
+    //           if (d.status == 0) {
+				// // console.log(r)
+                
+    //             break;
+    //           }
+    //         }
+    //       }
         }
-        console.log(this.physicalFitnessAssessmentData)
       })
     },
     setDyNameStatus(item) {
@@ -1821,8 +1949,6 @@ export default {
 					height: dom.clientHeight,
 					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 					scrollX: 0,
-					x: 0,
-					y: 0,
 					useCORS: true, //支持跨域
 					allowTaint:true,
 					scale: 1.3, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
@@ -1848,10 +1974,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.status_bar {
-  height: var(--status-bar-height);
-  width: 100%;
-}
+// .status_bar {
+//   height: var(--status-bar-height);
+//   width: 100%;
+// }
 .zhan_wei_style {
 }
 .content_style {
@@ -1967,12 +2093,10 @@ export default {
   line-height: 42upx;
 }
 .titleText {
-  // margin: 10upx 30upx 0 30upx;
-
-  // margin-top: calc(var(--status-bar-height) + 20upx);
-  margin-left: 30upx;
-  // top: 42px;
-  margin-bottom: 30upx;
+  margin: 10upx 30upx 0 30upx;
+  position: relative;
+      top: 80px;
+      margin-bottom: 100px;
 }
 .text {
   font-size: 30upx;
