@@ -114,8 +114,9 @@
       </view>
     </uni-popup>
   </view>
+  
   <scroll-view @scroll="viewReportScrrop" scroll-y="true">
-    <view class="status_bar"></view>
+   <!-- <view class="status_bar"></view> -->
     <!-- 				<view class="backgroud-img"><van-image  src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6b1a6145-faf2-4eb1-a710-4e41ff2ca19b.png"/></view>
  -->
     <view class="content_style" :class="isFixedTop ? 'zhan_wei_style' : ''">
@@ -460,12 +461,12 @@
                   "></view>
                 <view
                   style="
-                    width: 360upx;
+                    width: 100%;
                     height: 40upx;
                     font-size: 28upx;
                     font-weight: 400;
                     color: #7a7f89;
-                    margin: 0 auto;
+                    text-align: center;
                   "
                   >暂无评估内容，快去完善吧~</view
                 >
@@ -732,12 +733,12 @@
 			  	  "></view>
 			  	<view
 			  	  style="
-			  	    width: 360upx;
+			  	    width: 100%;
 			  	    height: 40upx;
 			  	    font-size: 28upx;
 			  	    font-weight: 400;
 			  	    color: #7a7f89;
-			  	    margin: 0 auto;
+			  	    text-align: center;
 			  	  "
 			  	  >暂无评估内容，快去完善吧~</view
 			  	>
@@ -889,12 +890,12 @@
 			  	  "></view>
 			  	<view
 			  	  style="
-			  	    width: 360upx;
+			  	    width: 100%;
 			  	    height: 40upx;
 			  	    font-size: 28upx;
 			  	    font-weight: 400;
 			  	    color: #7a7f89;
-			  	    margin: 0 auto;
+			  	    text-align: center;
 			  	  "
 			  	  >暂无评估内容，快去完善吧~</view
 			  	>
@@ -1408,7 +1409,7 @@ export default {
               this.assessmentTrueData.push(trueData)
               trueData = {}
             }
-            // console.log(this.assessmentTrueData)
+            console.log(this.assessmentTrueData)
           }else{
 			  console.log("没有数据哦")
 			  this.postureData = true
@@ -1443,18 +1444,21 @@ export default {
 			this.Dyname = true
 		}
         // this.physicalFitnessAssessmentData = res.data
-        console.log(res.data)
+        // console.log(res.data)
         for (let r of res.data) {
-          for (let rq of r.actionTestResult) {
-            for (let d of rq.answer) {
-              if (d.status == 0) {
-                this.physicalFitnessAssessmentData.push(r)
-                break
-              }
-            }
-          }
+			this.physicalFitnessAssessmentData.push(r)
+    //       for (let rq of r.actionTestResult) {
+			 //  // console.log(rq)
+    //         for (let d of rq.answer) {
+				// // console.log(rq)
+    //           if (d.status == 0) {
+				// // console.log(r)
+                
+    //             break;
+    //           }
+    //         }
+    //       }
         }
-        console.log(this.physicalFitnessAssessmentData)
       })
     },
     setDyNameStatus(item) {
@@ -1746,10 +1750,8 @@ export default {
 				html2canvas(dom, {
 					width: dom.clientWidth, //dom 原始宽度
 					height: dom.clientHeight,
-					scrollY: -30, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
+					scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 					scrollX: 0,
-					x: 0,
-					y: 0,
 					useCORS: true, //支持跨域
 					allowTaint:true,
 					scale: 1.3, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
@@ -1775,10 +1777,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.status_bar {
-  height: var(--status-bar-height);
-  width: 100%;
-}
+// .status_bar {
+//   height: var(--status-bar-height);
+//   width: 100%;
+// }
 .zhan_wei_style {
 }
 .content_style {
@@ -1880,8 +1882,8 @@ export default {
 .titleText {
   margin: 10upx 30upx 0 30upx;
   position: relative;
-      top: 42px;
-      margin-bottom: 58px;
+      top: 80px;
+      margin-bottom: 100px;
 }
 .text {
   font-size: 30upx;
