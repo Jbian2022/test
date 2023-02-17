@@ -929,7 +929,7 @@
                             </span>
                             <view class="assessmentContent">
                               <p style="color: #7a7f89; font-size: 26upx">
-                                {{ itemss.answeerContent }}
+                                <rich-text :nodes="itemss.answeerContent" ></rich-text>
                               </p>
                             </view>
                           </view>

@@ -65,7 +65,7 @@
 							{{item.answerTitle}}
 						</view>
 						<view class="quessonText">
-							<p style="color: #F04242;display: initial;">问题描述：</p>{{item.answeerContent}}
+							<p style="color: #F04242;display: initial;">问题描述：</p><rich-text :nodes="item.answeerContent"></rich-text>
 						</view>
 					</view>
 				</view>
@@ -154,7 +154,8 @@
 							{{item.answerTitle}}
 						</view>
 						<view class="quessonText">
-							<p style="color: #F04242;display: initial;">问题描述：</p>{{item.answeerContent}}
+							<p style="color: #F04242;display: initial;">问题描述：</p>
+							<rich-text :nodes="item.answeerContent"></rich-text>
 						</view>
 					</view>
 				</view>
