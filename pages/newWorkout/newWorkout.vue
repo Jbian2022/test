@@ -380,13 +380,13 @@
 				uni.setStorageSync('oldTrainInfo', JSON.stringify({
 					workoutName:this.workoutName,
 					traineeNo:this.traineeNo,
-					actionList:this.actionList,
 					isNoOldInfo:this.isNoOldInfo,
 					trainDate:this.trainDate,
 					traineeName:this.traineeName,
 					key: this.key,
 					allWork: this.allWork
 				}))
+				uni.setStorageSync('actionList', JSON.stringify(this.actionList))
 			}
 		},
 		onShow(){
@@ -395,7 +395,6 @@
 				const oldTrainInfoStr = uni.getStorageSync('oldTrainInfo')
 				if(oldTrainInfoStr){
 					const oldTrainInfo = JSON.parse(oldTrainInfoStr)
-					this.actionList = oldTrainInfo.actionList
 					this.workoutName = oldTrainInfo.workoutName
 					this.traineeNo = oldTrainInfo.traineeNo
 					this.isNoOldInfo = oldTrainInfo.isNoOldInfo
@@ -406,35 +405,10 @@
 				}
 				const actionListStr = uni.getStorageSync('actionList');
 				if (actionListStr) {
-					const list = JSON.parse(actionListStr)
-					const tempList = list.map(item=>{
-						return {
-							type: item.actionType,
-							actionName: item.actionName,
-							actionClassName: item.actionClassName,
-							url: item.url,
-							load: 0,
-							times: 0,
-							mileage: 0,
-							frequency: 0,
-							weight: null,
-							groupList: [{
-								kg: null,
-								km: null,
-								time: null,
-								hour: null,
-								minute: null,
-								second: null,
-								active: false
-							}],
-							open: false
-						}
-					})
-					console.log('tempList',tempList)
-					this.actionList.push(...tempList)
+					this.actionList = JSON.parse(actionListStr)
 				}
-				uni.setStorageSync('actionList', JSON.stringify([]))
-				if(this.actionList&&this.actionList.length>0){
+				const flag = this.actionList.some(item=>item.isOld)
+				if(!flag){
 					this.actionList.forEach((item,i)=>{
 						if(i>0){
 							item.open = false
@@ -489,6 +463,7 @@
 					key: this.key,
 					allWork: this.allWork
 				}))
+				uni.setStorageSync('actionList', JSON.stringify(this.actionList))
 				uni.switchTab({
 					url: '/pages/actionLibrary/index'
 				});
@@ -554,6 +529,7 @@
 				this.mode='DELETE'
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
+				uni.removeStorageSync('actionLibrary')
 				const timer = setTimeout(()=>{
 					uni.reLaunch({
 						url:
@@ -577,6 +553,7 @@
 				}
 				uni.removeStorageSync('actionList')
 				uni.removeStorageSync('oldTrainInfo')
+				uni.removeStorageSync('actionLibrary')
 				uni.reLaunch({
 					url:
 					'/pages/trainingRecord/trainingRecord' +
