@@ -6743,7 +6743,11 @@ __renderjsModules["19043a88"] = (() => {
             height: dom.clientHeight,
             scrollY: 0,
             scrollX: 0,
-            useCORS: true
+            x: 0,
+            y: 0,
+            useCORS: true,
+            allowTaint: true,
+            scale: 1.3
           }).then((canvas) => {
             const base64 = canvas.toDataURL("image/png");
             callback && callback(base64);
@@ -13524,22 +13528,20 @@ __renderjsModules["44880530"] = (() => {
             height: dom.clientHeight,
             scrollY: 0,
             scrollX: 0,
-            x: 0,
-            y: 0,
             useCORS: true,
             allowTaint: true,
             scale: 1.3
           }).then((canvas) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1837", canvas);
+            __f__("log", "at pages/viewReport/viewReport.vue:1828", canvas);
             const base64 = canvas.toDataURL("image/jpeg");
             callback && callback(base64);
           }).catch((err) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1841", JSON.stringify(err));
+            __f__("log", "at pages/viewReport/viewReport.vue:1832", JSON.stringify(err));
           });
         }, 300);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
-        __f__("log", "at pages/viewReport/viewReport.vue:1847", newValue);
+        __f__("log", "at pages/viewReport/viewReport.vue:1838", newValue);
         if (newValue) {
           this.generateImage((base64) => {
             ownerInstance.callMethod("receiveRenderData", { name: newValue, base64 });
