@@ -6,7 +6,7 @@
 		<view class="header">
 			<view class="title">新建训练</view>
 			<view>
-				<van-button class="btn save" v-if="isShowSave" @click="finish('save')">暂存</van-button>
+				<van-button :class="isShowSave&&isShowSuccess?'btn save':'bluecss btn save'" v-if="isShowSave" @click="finish('save')">暂存</van-button>
 				<van-button class="btn" v-if="isShowSave&&isShowSuccess" @click="openDialog('popupFinish')">完成训练</van-button>
 			</view>
 		</view>
@@ -1072,6 +1072,9 @@
 			background: #F04242 !important;
 			color: #FFFFFF !important;
 		}
+	}
+	.bluecss{
+		background: #1370FF !important;
 	}
 }
 </style>

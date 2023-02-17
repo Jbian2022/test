@@ -3,7 +3,7 @@
     <view class="nav_style" @click.native="goBack">
       <image
         class="back_img_style"
-        src="@/static/app-plus/mebrs/back.svg"
+        src="@/static/app-plus/other/blackback.svg"
       ></image>
       <view class="title m_l"> 用户隐私协议 </view>
     </view>
@@ -609,7 +609,7 @@ export default {
     .back_img_style {
       width: 40upx;
       height: 40upx;
-    }
+	}
 
     .title {
       font-size: 48upx;

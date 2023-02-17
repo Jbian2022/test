@@ -180,17 +180,17 @@
         <view class="actions">
           <view class="action">
             <!-- #ifdef MP-ALIPAY || H5 || APP -->
-            <van-image
+            <image
               class="img"
-              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/92897c24-96a3-4bb2-8fb8-44019822af77.svg"
+              src="../../static/app-plus/other/zfb.svg"
               @click.native="createOrder('alipay')"
             />
             <view class="text">支付宝</view>
           </view>
           <view class="action">
-            <van-image
+            <image
               class="img"
-              src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/ca311552-a492-4e14-b884-cefd7a6cb712.svg"
+              src="../../static/app-plus/other/saveWechat.svg"
               @click.native="createOrder('wxpay')"
             />
             <view class="text">微信</view>
@@ -1223,6 +1223,9 @@ export default {
           font-size: 28upx;
           color: #f4f7ff;
         }
+		.img:hover{
+			  opacity: 0.6;
+		}
       }
     }
   }
