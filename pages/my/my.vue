@@ -316,8 +316,8 @@ export default {
         {
           hotMsg: '每天仅需1元钱',
           text: '年卡',
-          money: '365',
-          des: '468',
+          money: '98',
+          des: '365',
           unit: '元/年',
           activity: '无限会员数',
           active: true,
@@ -340,8 +340,8 @@ export default {
         {
           hotMsg: '立省60元',
           text: '三个月',
-          money: '158',
-          des: '218',
+          money: '68',
+          des: '158',
           unit: '元/季度',
           activity: '限100个会员',
           active: false,
@@ -364,8 +364,8 @@ export default {
         {
           hotMsg: '立省20元',
           text: '月卡',
-          money: '78',
-          des: '98',
+          money: '38',
+          des: '78',
           unit: '元/月',
           activity: '限30个会员',
           active: false,
@@ -387,8 +387,8 @@ export default {
         }
       ],
       hotInfo: {
-        text1: '103',
-        text2: '468元/年'
+        text1: '267',
+        text2: '365元/年'
       },
 
       payInfo: {}, //支付情况
