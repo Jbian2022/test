@@ -318,6 +318,12 @@ export default {
           children: children
         }
       })
+      this.actionClassList.forEach((item) => {
+        const list = this.selectActionList.filter(
+          (child) => child.actionClass === item.value
+        )
+        item.badge = list.length || null
+      })
       console.log(this.actionList, 888)
     },
     modeChangeHandle(val) {
