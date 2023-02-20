@@ -1056,7 +1056,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "10.102.22.173"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.134"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -15114,7 +15114,29 @@ if (uni.restoreGlobal) {
             this.getSms();
             break;
           case "wx":
-            this.wxLoginCommon();
+            formatAppLog(
+              "log",
+              "at pages/logining/logining.vue:184",
+              plus.runtime.isApplicationExist({
+                pname: "bodybuildingApp.myapp",
+                action: "weixin://"
+              }),
+              "\u5B89\u88C5\u5FAE\u4FE1"
+            );
+            if (plus.runtime.isApplicationExist({
+              pname: "bodybuildingApp.myapp",
+              action: "weixin://"
+            })) {
+              this.wxLoginCommon();
+            } else {
+              uni.showToast({
+                title: "\u672A\u5B89\u88C5\u5FAE\u4FE1",
+                duration: 1e3,
+                width: 180,
+                icon: "none"
+              });
+              return;
+            }
             break;
           case "apple":
             this.appleLoginCommon();
@@ -15128,7 +15150,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:200", err);
+              formatAppLog("log", "at pages/logining/logining.vue:223", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
@@ -15138,7 +15160,7 @@ if (uni.restoreGlobal) {
         uni.login({
           provider: "apple",
           success: async (loginRes) => {
-            formatAppLog("log", "at pages/logining/logining.vue:211", loginRes, "\u4EC0\u4E48\u9B3C");
+            formatAppLog("log", "at pages/logining/logining.vue:234", loginRes, "\u4EC0\u4E48\u9B3C");
             const appleLogin = Es.importObject("login", {
               customUI: true
             });
@@ -15148,7 +15170,7 @@ if (uni.restoreGlobal) {
               );
               formatAppLog(
                 "log",
-                "at pages/logining/logining.vue:221",
+                "at pages/logining/logining.vue:244",
                 verifyAppleIdentityTokenRes,
                 "verifyAppleIdentityTokenRes"
               );
@@ -15156,7 +15178,7 @@ if (uni.restoreGlobal) {
                 let getLogingByAppleRes = await appleLogin.logingByApple(
                   loginRes.appleInfo.identityToken
                 );
-                formatAppLog("log", "at pages/logining/logining.vue:230", getLogingByAppleRes, "\u82F9\u679C\u767B\u9646\u4E86");
+                formatAppLog("log", "at pages/logining/logining.vue:253", getLogingByAppleRes, "\u82F9\u679C\u767B\u9646\u4E86");
                 if (getLogingByAppleRes.code == 0) {
                   try {
                     uni.setStorageSync(
@@ -15184,12 +15206,12 @@ if (uni.restoreGlobal) {
                       return;
                     }
                   } catch (e) {
-                    formatAppLog("log", "at pages/logining/logining.vue:304", e, ">>>>>");
+                    formatAppLog("log", "at pages/logining/logining.vue:327", e, ">>>>>");
                   }
                 }
               }
             } catch (e) {
-              formatAppLog("log", "at pages/logining/logining.vue:309", e, "222");
+              formatAppLog("log", "at pages/logining/logining.vue:332", e, "222");
             }
           },
           fail: function(loginErr) {
@@ -15215,19 +15237,41 @@ if (uni.restoreGlobal) {
         if (!this.checkFlag) {
           this.needChecked = true;
         } else {
-          this.wxLoginCommon();
+          formatAppLog(
+            "log",
+            "at pages/logining/logining.vue:360",
+            plus.runtime.isApplicationExist({
+              pname: "bodybuildingApp.myapp",
+              action: "weixin://"
+            }),
+            "\u5B89\u88C5\u5FAE\u4FE1"
+          );
+          if (plus.runtime.isApplicationExist({
+            pname: "bodybuildingApp.myapp",
+            action: "weixin://"
+          })) {
+            this.wxLoginCommon();
+          } else {
+            uni.showToast({
+              title: "\u672A\u5B89\u88C5\u5FAE\u4FE1",
+              duration: 1e3,
+              width: 180,
+              icon: "none"
+            });
+            return;
+          }
         }
       },
       wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
-          formatAppLog("log", "at pages/logining/logining.vue:342", code, "\u4F60\u662F\u8C01");
+          formatAppLog("log", "at pages/logining/logining.vue:387", code, "\u4F60\u662F\u8C01");
           const wxLogin = Es.importObject("login", {
             customUI: true
           });
-          formatAppLog("log", "at pages/logining/logining.vue:346", wxLogin, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:391", wxLogin, "wxLogin");
           try {
             const wxLoginRes = await wxLogin.loginByWeixin(code);
-            formatAppLog("log", "at pages/logining/logining.vue:350", wxLoginRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:395", wxLoginRes, "\u767B\u5F55\u6210\u529F");
             if (wxLoginRes.code == 0) {
               try {
                 uni.setStorageSync(
@@ -15242,7 +15286,7 @@ if (uni.restoreGlobal) {
                   openid: wxLoginRes.openid
                 };
                 let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
-                formatAppLog("log", "at pages/logining/logining.vue:367", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
+                formatAppLog("log", "at pages/logining/logining.vue:412", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
                 let flag = false;
                 if (wxSchemaRes.affectedDocs === 0) {
                   flag = false;
@@ -15268,7 +15312,7 @@ if (uni.restoreGlobal) {
               }
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:399", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:444", err, "\u6211\u662F\u9519\u8BEF");
           }
         });
       }
@@ -20064,8 +20108,8 @@ if (uni.restoreGlobal) {
         ],
         cardList: [
           {
-            hotMsg: "\u6BCF\u5929\u4EC5\u97001\u5143\u94B1",
-            text: "\u5E74\u5361",
+            hotMsg: "\u6BCF\u5929\u4EC5\u97000.26\u5143",
+            text: "\u5E74\u5361\u9650\u65F6\u7279\u60E0",
             money: "98",
             des: "365",
             unit: "\u5143/\u5E74",
@@ -20076,7 +20120,7 @@ if (uni.restoreGlobal) {
             vipLevel: "annualCard"
           },
           {
-            hotMsg: "\u7ACB\u770160\u5143",
+            hotMsg: "\u7ACB\u770190\u5143",
             text: "\u4E09\u4E2A\u6708",
             money: "68",
             des: "158",
@@ -20088,7 +20132,7 @@ if (uni.restoreGlobal) {
             vipLevel: "quarterCard"
           },
           {
-            hotMsg: "\u7ACB\u770120\u5143",
+            hotMsg: "\u7ACB\u770140\u5143",
             text: "\u6708\u5361",
             money: "38",
             des: "78",
@@ -20140,32 +20184,40 @@ if (uni.restoreGlobal) {
       onCreate(res2) {
         formatAppLog("log", "at pages/my/my.vue:433", "create: ", res2);
       },
-      onSuccess(res2) {
-        formatAppLog("log", "at pages/my/my.vue:438", "success: ", res2);
+      successChangeBusiness() {
         let self2 = this;
+        self2.getUserInfo();
+        let vipEndDate = null;
+        switch (self2.payInfo.vipLevel) {
+          case "annualCard":
+            vipEndDate = hooks().add(1, "years").add(1, "day").format("YYYY-MM-DD");
+            break;
+          case "quarterCard":
+            vipEndDate = hooks().add(3, "months").add(1, "day").format("YYYY-MM-DD");
+            break;
+          case "monthlyCard":
+            vipEndDate = hooks().add(1, "months").add(1, "day").format("YYYY-MM-DD");
+            break;
+        }
+        let param = {
+          vipEndDate,
+          vipLevel: self2.payInfo.vipLevel
+        };
+        formatAppLog("log", "at pages/my/my.vue:465", param, "param");
+        login$2.perfectInfo(param).then((res2) => {
+          if (res2.success)
+            ;
+        }).catch((err) => {
+        });
+      },
+      onSuccess(res2) {
+        formatAppLog("log", "at pages/my/my.vue:476", "success: ", res2);
         if (res2.user_order_success) {
-          let vipEndDate = null;
-          switch (self2.vipLevel) {
-            case "annualCard":
-              vipEndDate = hooks().add(1, "years").add(1, "day").format("YYYY-MM-DD");
-              break;
-            case "quarterCard":
-              vipEndDate = hooks().add(3, "months").add(1, "day").format("YYYY-MM-DD");
-              break;
-            case "monthlyCard":
-              vipEndDate = hooks().add(1, "months").add(1, "day").format("YYYY-MM-DD");
-              break;
-          }
-          let param = {
-            vipEndDate
-          };
-          formatAppLog("log", "at pages/my/my.vue:467", param, "param");
-          login$2.perfectInfo(param).then((res3) => {
-            if (res3.success)
-              ;
-          }).catch((err) => {
-          });
-          self2.payShow = false;
+          this.successChangeBusiness();
+          self.payShow = false;
+        } else {
+          this.successChangeBusiness();
+          self.payShow = false;
         }
       },
       createOrder(provider) {
@@ -20212,7 +20264,7 @@ if (uni.restoreGlobal) {
         } else {
           this.termOfValidity = false;
         }
-        formatAppLog("log", "at pages/my/my.vue:531", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:541", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -20246,7 +20298,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:565", "success");
+            formatAppLog("log", "at pages/my/my.vue:575", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3

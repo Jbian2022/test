@@ -314,8 +314,8 @@ export default {
       ],
       cardList: [
         {
-          hotMsg: '每天仅需1元钱',
-          text: '年卡',
+          hotMsg: '每天仅需0.26元',
+          text: '年卡限时特惠',
           money: '98',
           des: '365',
           unit: '元/年',
@@ -338,7 +338,7 @@ export default {
           vipLevel: 'annualCard'
         },
         {
-          hotMsg: '立省60元',
+          hotMsg: '立省90元',
           text: '三个月',
           money: '68',
           des: '158',
@@ -362,7 +362,7 @@ export default {
           vipLevel: 'quarterCard'
         },
         {
-          hotMsg: '立省20元',
+          hotMsg: '立省40元',
           text: '月卡',
           money: '38',
           des: '78',
@@ -433,49 +433,59 @@ export default {
       console.log('create: ', res)
       // 如果只是想生成支付二维码，不需要组件自带的弹窗，则在这里可以获取到支付二维码 qr_code_image
     },
+    // 成功更改业务
+    successChangeBusiness() {
+      let self = this
+      self.getUserInfo()
+      let vipEndDate = null
+      switch (self.payInfo.vipLevel) {
+        case 'annualCard':
+          vipEndDate = moment()
+            .add(1, 'years')
+            .add(1, 'day')
+            .format('YYYY-MM-DD') // 1年后
+          break
+        case 'quarterCard':
+          vipEndDate = moment()
+            .add(3, 'months')
+            .add(1, 'day')
+            .format('YYYY-MM-DD') // 三月之后
+          break
+        case 'monthlyCard':
+          vipEndDate = moment()
+            .add(1, 'months')
+            .add(1, 'day')
+            .format('YYYY-MM-DD') // 三月之后
+          break
+      }
+      let param = {
+        vipEndDate: vipEndDate,
+        vipLevel: self.payInfo.vipLevel
+      }
+      console.log(param, 'param')
+      login
+        .perfectInfo(param)
+        .then((res) => {
+          if (res.success) {
+          }
+        })
+        .catch((err) => {})
+    },
     // 监听事件 - 支付成功
     onSuccess(res) {
       console.log('success: ', res)
       // 充值成功添加有效期
-      let self = this
+
       if (res.user_order_success) {
         // 代表用户已付款，且你自己写的回调成功并正确执行了
-        let vipEndDate = null
-        switch (self.vipLevel) {
-          case 'annualCard':
-            vipEndDate = moment()
-              .add(1, 'years')
-              .add(1, 'day')
-              .format('YYYY-MM-DD') // 1年后
-            break
-          case 'quarterCard':
-            vipEndDate = moment()
-              .add(3, 'months')
-              .add(1, 'day')
-              .format('YYYY-MM-DD') // 三月之后
-            break
-          case 'monthlyCard':
-            vipEndDate = moment()
-              .add(1, 'months')
-              .add(1, 'day')
-              .format('YYYY-MM-DD') // 三月之后
-            break
-        }
-        let param = {
-          vipEndDate: vipEndDate
-        }
-        console.log(param, 'param')
-        login
-          .perfectInfo(param)
-          .then((res) => {
-            if (res.success) {
-            }
-          })
-          .catch((err) => {})
+        // 成功之后的业务逻辑
 
+        this.successChangeBusiness()
         self.payShow = false
       } else {
         // 代表用户已付款，但你自己写的回调执行失败（通常是因为你的回调代码有问题）
+        this.successChangeBusiness()
+        self.payShow = false
       }
     },
     createOrder(provider) {
@@ -1223,9 +1233,9 @@ export default {
           font-size: 28upx;
           color: #f4f7ff;
         }
-		.img:hover{
-			  opacity: 0.6;
-		}
+        .img:hover {
+          opacity: 0.6;
+        }
       }
     }
   }
