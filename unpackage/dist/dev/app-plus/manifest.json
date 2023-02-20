@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.2.8",
-    "code": 128
+    "name": "1.3.1",
+    "code": 131
   },
   "description": "一款健身APP",
   "developer": {
@@ -132,11 +132,15 @@
         "capabilities": {
           "entitlements": {
             "com.apple.developer.associated-domains": [
-              "applinks:static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com"
+              "applinks:static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com",
+              "applinks:jbian.net"
             ]
           }
         },
         "idfa": false,
+        "urlschemewhitelist": [
+          "weixin"
+        ],
         "privacyDescription": {
           "NSPhotoLibraryUsageDescription": "拍照或使用本地相册上传头像需要读取您的相册",
           "NSPhotoLibraryAddUsageDescription": "训练记录和体侧报告需要保存到本地，需要读取您的相册",
@@ -185,7 +189,7 @@
           "weixin": {
             "appid": "wxf790c35e4d544ded",
             "appsecret": "d622e34a6c359fa5c6977d9749530b62",
-            "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
+            "UniversalLinks": "https://jbian.net/uni-universallinks/__UNI__76A9E40/"
           }
         },
         "payment": {
@@ -199,13 +203,13 @@
               "ios"
             ],
             "appid": "wxf790c35e4d544ded",
-            "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
+            "UniversalLinks": "https://jbian.net/uni-universallinks/__UNI__76A9E40/"
           }
         },
         "share": {
           "weixin": {
             "appid": "wxf790c35e4d544ded",
-            "UniversalLinks": "https://static-mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.next.bspapp.com/uni-universallinks/__UNI__76A9E40/"
+            "UniversalLinks": "https://jbian.net/uni-universallinks/__UNI__76A9E40/"
           }
         },
         "audio": {

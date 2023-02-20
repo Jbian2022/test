@@ -181,7 +181,30 @@ export default {
           this.getSms()
           break
         case 'wx':
-          this.wxLoginCommon()
+          console.log(
+            plus.runtime.isApplicationExist({
+              pname: 'bodybuildingApp.myapp',
+              action: 'weixin://'
+            }),
+            '安装微信'
+          )
+          if (
+            plus.runtime.isApplicationExist({
+              pname: 'bodybuildingApp.myapp',
+              action: 'weixin://'
+            })
+          ) {
+            this.wxLoginCommon()
+          } else {
+            uni.showToast({
+              title: '未安装微信',
+              duration: 1000,
+              width: 180,
+              icon: 'none'
+            })
+            return
+          }
+
           break
         case 'apple':
           this.appleLoginCommon()
@@ -334,7 +357,29 @@ export default {
         // Toast('请同意隐私政策')
         this.needChecked = true
       } else {
-        this.wxLoginCommon()
+        console.log(
+          plus.runtime.isApplicationExist({
+            pname: 'bodybuildingApp.myapp',
+            action: 'weixin://'
+          }),
+          '安装微信'
+        )
+        if (
+          plus.runtime.isApplicationExist({
+            pname: 'bodybuildingApp.myapp',
+            action: 'weixin://'
+          })
+        ) {
+          this.wxLoginCommon()
+        } else {
+          uni.showToast({
+            title: '未安装微信',
+            duration: 1000,
+            width: 180,
+            icon: 'none'
+          })
+          return
+        }
       }
     },
     wxLoginCommon() {
