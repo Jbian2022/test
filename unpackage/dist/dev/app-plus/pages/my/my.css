@@ -1703,6 +1703,9 @@
   font-size: 0.875rem;
   color: #f4f7ff;
 }
+.my .payment-action-sheet .actions .action .img:hover {
+  opacity: 0.6;
+}
  .van-popup {
   background: #383d46;
   border-radius: 0.75rem 0.75rem 0 0;

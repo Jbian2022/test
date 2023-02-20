@@ -255,6 +255,9 @@
   font-weight: 500;
   color: #f4f7ff;
 }
+.training-record-detail .img:hover {
+  opacity: 0.6;
+}
 .training-record-detail .footer-button {
   position: fixed;
   bottom: 0;
