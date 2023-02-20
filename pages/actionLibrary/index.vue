@@ -714,7 +714,7 @@ export default {
       }
     }
     &.select-page {
-      height: calc(100vh - 380upx);
+      height: calc(100vh - 420upx - var(--status-bar-height));
     }
   }
   .dialog {
