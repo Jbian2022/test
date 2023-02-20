@@ -247,6 +247,20 @@ export default {
     this.selectActionList = []
     const type = uni.getStorageSync('actionLibraryType')
     if (type === 'select') {
+      const actionListStr = uni.getStorageSync('actionList')
+      if(actionListStr){
+        const actionList = JSON.parse(actionListStr)
+        actionList.forEach(item=>item.isOld = true)
+        this.selectActionList = actionList
+      }
+      const actionLibraryStr = uni.getStorageSync('actionLibrary')
+      if(actionLibraryStr){
+        const info = JSON.parse(actionLibraryStr)
+        this.mode = info.mode
+        this.actionIndex = info.actionIndex
+        this.actionClass = info.actionClass
+        this.actionClassName = info.actionClassName
+      }
       this.actionClassList.forEach((item) => {
         const list = this.selectActionList.filter(
           (child) => child.actionClass === item.value
@@ -338,6 +352,7 @@ export default {
         )
         item.badge = list.length || null
       })
+      console.log('this.selectActionList',this.selectActionList)
     },
     selectClick(item, info) {
       if (item.text === '删除动作') {
@@ -381,7 +396,6 @@ export default {
     },
     goBack() {
       uni.setStorageSync('actionLibraryType', 'show')
-      uni.setStorageSync('actionList', JSON.stringify([]))
       uni.reLaunch({
         url: '/pages/newWorkout/newWorkout'
       })
@@ -390,7 +404,42 @@ export default {
     },
     goNewWorkout() {
       uni.setStorageSync('actionLibraryType', 'show')
-      uni.setStorageSync('actionList', JSON.stringify(this.selectActionList))
+      const tempList = this.selectActionList.map(item=>{
+        if(item.isOld){
+          return item
+        } else {
+          return {
+            _id: item._id,
+            type: item.actionType,
+            actionName: item.actionName,
+            actionClass: item.actionClass,
+            actionClassName: item.actionClassName,
+            url: item.url,
+            load: 0,
+            times: 0,
+            mileage: 0,
+            frequency: 0,
+            weight: null,
+            groupList: [{
+              kg: null,
+              km: null,
+              time: null,
+              hour: null,
+              minute: null,
+              second: null,
+              active: false
+            }],
+            open: false
+          }
+        }
+      })
+      uni.setStorageSync('actionList', JSON.stringify(tempList))
+      uni.setStorageSync('actionLibrary', JSON.stringify({
+        mode:this.mode,
+        actionClass:this.actionClass,
+        actionClassName:this.actionClassName,
+        actionIndex: this.actionIndex
+      }))
       uni.reLaunch({
         url: '/pages/newWorkout/newWorkout'
       })

@@ -1056,7 +1056,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "26.70.42.247",\n        "192.168.1.114"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "E:/Program/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "10.102.22.173"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -4178,7 +4178,7 @@ if (uni.restoreGlobal) {
       },
       resultMeberList() {
         let list = this.meberList;
-        if (this.userInfo.vipLevel) {
+        if (this.userInfo && this.userInfo.vipLevel) {
           if (this.termOfValidity) {
             list = list.map((item) => {
               return {
@@ -4231,7 +4231,8 @@ if (uni.restoreGlobal) {
               debounce$1(this.searchMemberList(n2), 300);
             }
           }
-        }
+        },
+        deep: true
       }
     },
     methods: {
@@ -4263,7 +4264,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:304", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:305", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4327,7 +4328,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:375", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:376", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4335,14 +4336,14 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:386", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:387", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e) {
-        formatAppLog("log", "at components/memberList/memberList.vue:393", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:394", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e, index, item) {
@@ -4350,7 +4351,7 @@ if (uni.restoreGlobal) {
           return;
         }
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:402", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:403", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
         if (item.prohibitUserOpear) {
@@ -16386,6 +16387,20 @@ if (uni.restoreGlobal) {
       this.selectActionList = [];
       const type = uni.getStorageSync("actionLibraryType");
       if (type === "select") {
+        const actionListStr = uni.getStorageSync("actionList");
+        if (actionListStr) {
+          const actionList = JSON.parse(actionListStr);
+          actionList.forEach((item) => item.isOld = true);
+          this.selectActionList = actionList;
+        }
+        const actionLibraryStr = uni.getStorageSync("actionLibrary");
+        if (actionLibraryStr) {
+          const info = JSON.parse(actionLibraryStr);
+          this.mode = info.mode;
+          this.actionIndex = info.actionIndex;
+          this.actionClass = info.actionClass;
+          this.actionClassName = info.actionClassName;
+        }
         this.actionClassList.forEach((item) => {
           const list = this.selectActionList.filter(
             (child) => child.actionClass === item.value
@@ -16440,7 +16455,7 @@ if (uni.restoreGlobal) {
             children
           };
         });
-        formatAppLog("log", "at pages/actionLibrary/index.vue:304", this.actionList, 888);
+        formatAppLog("log", "at pages/actionLibrary/index.vue:318", this.actionList, 888);
       },
       modeChangeHandle(val) {
         this.mode = val;
@@ -16477,6 +16492,7 @@ if (uni.restoreGlobal) {
           );
           item.badge = list.length || null;
         });
+        formatAppLog("log", "at pages/actionLibrary/index.vue:355", "this.selectActionList", this.selectActionList);
       },
       selectClick(item, info) {
         if (item.text === "\u5220\u9664\u52A8\u4F5C") {
@@ -16516,7 +16532,6 @@ if (uni.restoreGlobal) {
       },
       goBack() {
         uni.setStorageSync("actionLibraryType", "show");
-        uni.setStorageSync("actionList", JSON.stringify([]));
         uni.reLaunch({
           url: "/pages/newWorkout/newWorkout"
         });
@@ -16525,7 +16540,42 @@ if (uni.restoreGlobal) {
       },
       goNewWorkout() {
         uni.setStorageSync("actionLibraryType", "show");
-        uni.setStorageSync("actionList", JSON.stringify(this.selectActionList));
+        const tempList = this.selectActionList.map((item) => {
+          if (item.isOld) {
+            return item;
+          } else {
+            return {
+              _id: item._id,
+              type: item.actionType,
+              actionName: item.actionName,
+              actionClass: item.actionClass,
+              actionClassName: item.actionClassName,
+              url: item.url,
+              load: 0,
+              times: 0,
+              mileage: 0,
+              frequency: 0,
+              weight: null,
+              groupList: [{
+                kg: null,
+                km: null,
+                time: null,
+                hour: null,
+                minute: null,
+                second: null,
+                active: false
+              }],
+              open: false
+            };
+          }
+        });
+        uni.setStorageSync("actionList", JSON.stringify(tempList));
+        uni.setStorageSync("actionLibrary", JSON.stringify({
+          mode: this.mode,
+          actionClass: this.actionClass,
+          actionClassName: this.actionClassName,
+          actionIndex: this.actionIndex
+        }));
         uni.reLaunch({
           url: "/pages/newWorkout/newWorkout"
         });
@@ -16979,13 +17029,13 @@ if (uni.restoreGlobal) {
         uni.setStorageSync("oldTrainInfo", JSON.stringify({
           workoutName: this.workoutName,
           traineeNo: this.traineeNo,
-          actionList: this.actionList,
           isNoOldInfo: this.isNoOldInfo,
           trainDate: this.trainDate,
           traineeName: this.traineeName,
           key: this.key,
           allWork: this.allWork
         }));
+        uni.setStorageSync("actionList", JSON.stringify(this.actionList));
       }
     },
     onShow() {
@@ -16994,7 +17044,6 @@ if (uni.restoreGlobal) {
         const oldTrainInfoStr = uni.getStorageSync("oldTrainInfo");
         if (oldTrainInfoStr) {
           const oldTrainInfo = JSON.parse(oldTrainInfoStr);
-          this.actionList = oldTrainInfo.actionList;
           this.workoutName = oldTrainInfo.workoutName;
           this.traineeNo = oldTrainInfo.traineeNo;
           this.isNoOldInfo = oldTrainInfo.isNoOldInfo;
@@ -17005,35 +17054,10 @@ if (uni.restoreGlobal) {
         }
         const actionListStr = uni.getStorageSync("actionList");
         if (actionListStr) {
-          const list = JSON.parse(actionListStr);
-          const tempList = list.map((item) => {
-            return {
-              type: item.actionType,
-              actionName: item.actionName,
-              actionClassName: item.actionClassName,
-              url: item.url,
-              load: 0,
-              times: 0,
-              mileage: 0,
-              frequency: 0,
-              weight: null,
-              groupList: [{
-                kg: null,
-                km: null,
-                time: null,
-                hour: null,
-                minute: null,
-                second: null,
-                active: false
-              }],
-              open: false
-            };
-          });
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:433", "tempList", tempList);
-          this.actionList.push(...tempList);
+          this.actionList = JSON.parse(actionListStr);
         }
-        uni.setStorageSync("actionList", JSON.stringify([]));
-        if (this.actionList && this.actionList.length > 0) {
+        const flag = this.actionList.some((item) => item.isOld);
+        if (!flag) {
           this.actionList.forEach((item, i2) => {
             if (i2 > 0) {
               item.open = false;
@@ -17087,6 +17111,7 @@ if (uni.restoreGlobal) {
           key: this.key,
           allWork: this.allWork
         }));
+        uni.setStorageSync("actionList", JSON.stringify(this.actionList));
         uni.switchTab({
           url: "/pages/actionLibrary/index"
         });
@@ -17152,6 +17177,7 @@ if (uni.restoreGlobal) {
         this.mode = "DELETE";
         uni.removeStorageSync("actionList");
         uni.removeStorageSync("oldTrainInfo");
+        uni.removeStorageSync("actionLibrary");
         const timer = setTimeout(() => {
           uni.reLaunch({
             url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
@@ -17172,6 +17198,7 @@ if (uni.restoreGlobal) {
         }
         uni.removeStorageSync("actionList");
         uni.removeStorageSync("oldTrainInfo");
+        uni.removeStorageSync("actionLibrary");
         uni.reLaunch({
           url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
         });
@@ -20039,8 +20066,8 @@ if (uni.restoreGlobal) {
           {
             hotMsg: "\u6BCF\u5929\u4EC5\u97001\u5143\u94B1",
             text: "\u5E74\u5361",
-            money: "365",
-            des: "468",
+            money: "98",
+            des: "365",
             unit: "\u5143/\u5E74",
             activity: "\u65E0\u9650\u4F1A\u5458\u6570",
             active: true,
@@ -20051,8 +20078,8 @@ if (uni.restoreGlobal) {
           {
             hotMsg: "\u7ACB\u770160\u5143",
             text: "\u4E09\u4E2A\u6708",
-            money: "158",
-            des: "218",
+            money: "68",
+            des: "158",
             unit: "\u5143/\u5B63\u5EA6",
             activity: "\u9650100\u4E2A\u4F1A\u5458",
             active: false,
@@ -20063,8 +20090,8 @@ if (uni.restoreGlobal) {
           {
             hotMsg: "\u7ACB\u770120\u5143",
             text: "\u6708\u5361",
-            money: "78",
-            des: "98",
+            money: "38",
+            des: "78",
             unit: "\u5143/\u6708",
             activity: "\u965030\u4E2A\u4F1A\u5458",
             active: false,
@@ -20074,8 +20101,8 @@ if (uni.restoreGlobal) {
           }
         ],
         hotInfo: {
-          text1: "103",
-          text2: "468\u5143/\u5E74"
+          text1: "267",
+          text2: "365\u5143/\u5E74"
         },
         payInfo: {},
         show: false,
@@ -21564,7 +21591,7 @@ if (uni.restoreGlobal) {
       };
     },
     onLoad: function(item) {
-      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:247", item);
+      formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:260", item);
       this.traineeNo = item.traineeNo;
       this.questionCode = item.questionCode;
       let leftNavTitle = item.pageTitle;
@@ -21663,30 +21690,30 @@ if (uni.restoreGlobal) {
         }
       },
       start(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:352", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:363", "\u5F00\u59CB\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         this.startData.clientX = e.changedTouches[0].clientX;
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:357", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:368", "\u7ED3\u675F\u4E0B\u6ED1\u5750\u6807", e.changedTouches[0].clientY);
         const subX = e.changedTouches[0].clientX - this.startData.clientX;
         const subY = e.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:361", "\u4E0B\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:372", "\u4E0B\u6ED1");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:364", "\u4E0A\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:375", "\u4E0A\u6ED1");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:366", "\u5DE6\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:377", "\u5DE6\u6ED1");
           uni.reLaunch({
             url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:371", "\u53F3\u6ED1");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:382", "\u53F3\u6ED1");
           uni.reLaunch({
             url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
           });
         } else {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:376", "\u65E0\u6548");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:387", "\u65E0\u6548");
         }
       },
       setup() {
@@ -21716,9 +21743,9 @@ if (uni.restoreGlobal) {
       getActionInfo() {
         if (this.type !== "") {
           busOb$2.getPhysicalChildAssessmentList(this.type).then((res2) => {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:406", res2.data);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:408", res2.data);
             let index = res2.data.length;
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:408", index);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:410", index);
             if (res2.success) {
               this.actionobs = res2.data;
               this.quession1 = this.actionobs[0].answer;
@@ -21736,16 +21763,16 @@ if (uni.restoreGlobal) {
         }
       },
       actionResDate() {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:427", this.actionobs);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:429", this.actionobs);
         const data = {};
         data["traineeNo"] = this.traineeNo;
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         data["actionTestResult"] = this.actionobs;
         data["status"] = "0";
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:434", data);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:436", data);
         tesOb.opearConfig(data, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:436", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:438", res2, "\u6211\u8981\u4FDD\u5B58\u4E86");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/dynamicEvaluation/dynamicEvaluation?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -21760,7 +21787,7 @@ if (uni.restoreGlobal) {
         });
       },
       clickQ(item, num) {
-        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:450", item);
+        formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:452", item);
         if (item.status) {
           item.status = 0;
         } else {
@@ -21778,9 +21805,9 @@ if (uni.restoreGlobal) {
         data["questionCode"] = this.questionCode;
         data["code"] = this.type;
         tesOb.opearPHConfigQuery(data).then((res2) => {
-          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:469", res2);
+          formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:471", res2);
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:471", res2.data[0].actionTestResult);
+            formatAppLog("log", "at pages/dynamicEvaluation/actionEvaluation/actionEvaluation.vue:473", res2.data[0].actionTestResult);
             this.actionobs = res2.data[0].actionTestResult;
             this.quession1 = this.actionobs[0].answer;
             this.testText1 = this.actionobs[0].answerRemark.detailArray;
@@ -23211,64 +23238,42 @@ if (uni.restoreGlobal) {
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1630", option.name, 8888);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1621", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1633", url);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1624", url);
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
           if (option.name === "\u4FDD\u5B58\u5230\u76F8\u518C") {
             this.downloadFile();
           } else {
             if (option.name === "\u5206\u4EAB\u5230\u5FAE\u4FE1") {
-              if (this.checkApp()) {
-                uni.share({
-                  provider: "weixin",
-                  scene: "WXSceneSession",
-                  type: 2,
-                  imageUrl: url,
-                  success: function(res2) {
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1647", "success:" + JSON.stringify(res2));
-                    uni.hideLoading();
-                  },
-                  fail: function(err) {
-                    uni.hideLoading();
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1652", "fail:" + JSON.stringify(err));
-                  }
-                });
-              } else {
-                uni.showToast({
-                  icon: "error",
-                  title: "\u672A\u68C0\u6D4B\u5230\u5FAE\u4FE1\uFF01",
-                  duration: 1500,
-                  width: 220,
-                  height: 1500
-                });
-              }
+              uni.share({
+                provider: "weixin",
+                scene: "WXSceneSession",
+                type: 2,
+                imageUrl: url,
+                success: function(res2) {
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1637", "success:" + JSON.stringify(res2));
+                  uni.hideLoading();
+                },
+                fail: function(err) {
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1641", "fail:" + JSON.stringify(err));
+                }
+              });
             } else if (option.name === "\u5206\u4EAB\u5230\u670B\u53CB\u5708") {
-              if (this.checkApp()) {
-                uni.share({
-                  provider: "weixin",
-                  scene: "WXSceneTimeline",
-                  type: 2,
-                  imageUrl: url,
-                  success: function(res2) {
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1673", "success:" + JSON.stringify(res2));
-                    uni.hideLoading();
-                  },
-                  fail: function(err) {
-                    uni.hideLoading();
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1678", "fail:" + JSON.stringify(err));
-                  }
-                });
-              } else {
-                uni.showToast({
-                  icon: "error",
-                  title: "\u672A\u68C0\u6D4B\u5230\u5FAE\u4FE1\uFF01",
-                  duration: 1500,
-                  width: 220,
-                  height: 1500
-                });
-              }
+              uni.share({
+                provider: "weixin",
+                scene: "WXSceneTimeline",
+                type: 2,
+                imageUrl: url,
+                success: function(res2) {
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1651", "success:" + JSON.stringify(res2));
+                  uni.hideLoading();
+                },
+                fail: function(err) {
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1655", "fail:" + JSON.stringify(err));
+                }
+              });
             }
           }
         });
@@ -23291,14 +23296,14 @@ if (uni.restoreGlobal) {
         const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1717", res2.data[0].testResult);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1684", res2.data[0].testResult);
             resData.push(res2.data[0].testResult);
             this.HQDate = resData;
           } else {
             this.showHQ = false;
           }
         });
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1741", resData);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1708", resData);
         return resData;
       },
       getHistroyDate() {
@@ -23308,9 +23313,9 @@ if (uni.restoreGlobal) {
           data["traineeNo"] = this.traineeNo;
           if (!this.openKey) {
             testOb.opearReportQuery(data).then((res2) => {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1753", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1720", res2);
               this.historyData = res2.data;
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1755", this.historyData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1722", this.historyData);
             });
           }
         } else {
@@ -23324,7 +23329,7 @@ if (uni.restoreGlobal) {
         this.queryData = item.queryData;
         this.assessmentTrueData = item.assessmentTrueData;
         this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData;
-        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1769", item);
+        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1736", item);
         this.$refs.popup.close();
       },
       gototest() {
@@ -23348,7 +23353,7 @@ if (uni.restoreGlobal) {
         return str.slice(a2 + 6, str.length);
       },
       onClickinfo(item) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1796", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1763", item);
         switch (item) {
           case "\u57FA\u7840\u4FE1\u606F":
             if (this.infoclick) {
@@ -23530,16 +23535,13 @@ if (uni.restoreGlobal) {
             }, [
               vue.createVNode(_component_van_row, { class: "titleTopText" }, {
                 default: vue.withCtx(() => [
-                  vue.createVNode(_component_van_col, { span: "14" }, {
+                  vue.createVNode(_component_van_col, { span: "15" }, {
                     default: vue.withCtx(() => [
                       vue.createTextVNode("\u8BC4\u4F30\u62A5\u544A")
                     ]),
                     _: 1
                   }),
-                  vue.createVNode(_component_van_col, {
-                    span: "8",
-                    style: { "text-align": "right !important" }
-                  }, {
+                  vue.createVNode(_component_van_col, { span: "7" }, {
                     default: vue.withCtx(() => [
                       vue.createTextVNode(vue.toDisplayString($data.nowDate), 1)
                     ]),
@@ -24719,7 +24721,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesCancelAgreementCancelAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "D:/project/bodybuilding-app/pages/cancelAgreement/cancelAgreement.vue"]]);
+  const PagesCancelAgreementCancelAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "D:/studyUninApp/bodybuilding-app/pages/cancelAgreement/cancelAgreement.vue"]]);
   const _imports_0 = "/static/app-plus/other/blackback.svg";
   const _sfc_main$4 = {
     data() {

@@ -206,7 +206,7 @@ export default {
     resultMeberList() {
       let list = this.meberList
 
-      if (this.userInfo.vipLevel) {
+      if (this.userInfo && this.userInfo.vipLevel) {
         // 出现 vip 等级 它一定充钱了
         if (this.termOfValidity) {
           // 在有效期内不做任何逻辑处理
@@ -265,7 +265,8 @@ export default {
             debounce(this.searchMemberList(n), 300)
           }
         }
-      }
+      },
+      deep: true
     }
   },
   methods: {
