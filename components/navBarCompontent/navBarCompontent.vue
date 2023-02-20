@@ -27,7 +27,7 @@ export default {
     'isAuthority',
     'traineeNo',
     'questionCode',
-	'routerAuth'
+    'routerAuth'
   ],
   data() {
     return {}
@@ -36,13 +36,13 @@ export default {
     goBack() {
       switch (this.jumpType) {
         case 'STPC':
-		if(this.routerAuth) {
-			 uni.navigateBack()
-		} else{
-			uni.reLaunch({
-			  url: '/pages/myMebers/myMebers'
-			})
-		}
+          if (this.routerAuth && this.routerAuth == 'Y') {
+            uni.navigateBack()
+          } else {
+            uni.reLaunch({
+              url: '/pages/myMebers/myMebers'
+            })
+          }
           break
         case 'DTPG':
           console.log('你贷款撒娇咖啡机')

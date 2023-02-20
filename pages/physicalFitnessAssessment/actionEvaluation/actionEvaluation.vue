@@ -4,7 +4,7 @@
     <NavBarCompontent :leftNavTitle="leftNavTitle"></NavBarCompontent>
     <view class="body_content" id="bodycontent">
       <view class="clickAction" @click="showPopup">
-		  点击查看标准动作描述
+        点击查看标准动作描述
         <image src="../../../static/app-plus/mebrs/openarrit.png"></image>
       </view>
       <van-popup
@@ -21,7 +21,7 @@
             autoplay
             :custom-cache="false"
             muted
-			v-if="show"
+            v-if="show"
           ></video>
           <view class="clickActionText">
             <view class="Actionname">标准动作：</view>
@@ -125,7 +125,7 @@ export default {
   setup() {
     const show = ref(false)
     const showPopup = () => {
-		console.log("11111");
+      console.log('11111')
       show.value = true
     }
     const closePopup = () => {
@@ -512,8 +512,8 @@ export default {
   border-radius: 36upx;
   opacity: 0.5;
   position: absolute;
-  top: 280upx;
-  left: calc(100vw - 717upx);
+  top: 230upx;
+  left: calc(100vw - 700upx);
   z-index: 1;
   font-size: 26upx;
   font-weight: 400;

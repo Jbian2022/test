@@ -1,11 +1,11 @@
 <template>
   <view class="content_style" @touchstart="start" @touchend="end">
-    <BgTheamCompontent :theamType="'currency'"  ></BgTheamCompontent>
+    <BgTheamCompontent :theamType="'currency'"></BgTheamCompontent>
     <NavBarCompontent
       :leftNavTitle="'身体评估'"
       :isAuthority="true"
-	  :jumpType="'STPC'"
-	  :routerAuth="pageSign"
+      :jumpType="'STPC'"
+      :routerAuth="routerAuth"
     ></NavBarCompontent>
     <view class="need_scoll list_style">
       <view
@@ -87,34 +87,32 @@ export default {
         clientX: 0,
         clientY: 0
       },
-	  pageSign: null
+      routerAuth: 'N'
     }
   },
   created() {
     this.requestDynamicEvaluationdata()
-
   },
   mounted() {
-  	// #ifdef APP-PLUS
-  	plus.webview.currentWebview().setStyle({
-  	   'popGesture': 'none'
-  	});
-  	// #endif
+    // #ifdef APP-PLUS
+    plus.webview.currentWebview().setStyle({
+      popGesture: 'none'
+    })
+    // #endif
   },
   onLoad(options) {
     if (JSON.stringify(options) !== '{}' && options.traineeNo) {
       this.traineeNo = options.traineeNo
     }
-	if (JSON.stringify(options) !== '{}' && options.pageSign) {
-	  this.pageSign = options.pageSign
-	}
+    if (JSON.stringify(options) !== '{}' && options.routerAuth) {
+      this.routerAuth = options.routerAuth
+    }
   },
   onBackPress(options) {
-	  console.log(options.from, 'from', options)
-	  if (options.from === 'backbutton') {
-		   return true;
-	  }
-	  
+    console.log(options.from, 'from', options)
+    if (options.from === 'backbutton') {
+      return true
+    }
   },
   methods: {
     start(e) {
@@ -161,8 +159,8 @@ export default {
           .then((res) => {
             if (res.success) {
               let childList = res.data
-			  let sortList = childList.sort(this.compare);
-			 
+              let sortList = childList.sort(this.compare)
+
               uni.navigateTo({
                 url:
                   item.path +
@@ -172,7 +170,9 @@ export default {
                   '&traineeNo=' +
                   this.traineeNo +
                   '&questionCode=' +
-                  item.code,
+                  item.code +
+                  '&routerAuth=' +
+                  this.routerAuth,
                 success: (res) => {},
                 fail: () => {},
                 complete: () => {}
@@ -184,10 +184,9 @@ export default {
           .catch((err) => {})
       }
     },
-	compare(x,y) {
-		return x.questionId - y.questionId
-
-	},
+    compare(x, y) {
+      return x.questionId - y.questionId
+    },
     requestDynamicEvaluationdata() {
       businessCloudObject
         .getPhysicalAssessmentList()
@@ -203,7 +202,6 @@ export default {
                 // console.log(item.code, '你是大傻逼')
                 if (allRes.affectedDocs > 0) {
                   allRes.data.forEach((v) => {
-                    
                     if (v.questionCode === item.code) {
                       let needCompareData = v.hasOwnProperty('testResult')
                         ? v.testResult.filter((c) => c.answer.length > 0)

@@ -188,7 +188,7 @@
   margin-left: 10px;
   font-size: 24px;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .headBox[data-v-5866a140] {
   width: 100vw;
@@ -206,10 +206,10 @@
   font-size: 0.9375rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 2.8125rem;
   text-align: center;
-  background: #383D46;
+  background: #383d46;
   margin-right: 0.6875rem;
 }
 .block1[data-v-5866a140] {
@@ -220,14 +220,14 @@
   font-size: 0.9375rem;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 2.8125rem;
   text-align: center;
-  background: #383D46;
+  background: #383d46;
   margin-right: 0.6875rem;
 }
 .block0[data-v-5866a140] {
-  background: #195BC2;
+  background: #195bc2;
 }
 .contentBody[data-v-5866a140] {
   width: calc(100vw - 1.875rem);
@@ -246,7 +246,7 @@
   opacity: 0.5;
   margin-top: -2.65625rem;
   border-bottom-radius: 0.5rem;
-  color: #BDC3CE;
+  color: #bdc3ce;
   font-weight: 400;
   font-size: 0.875rem;
   text-align: center;
@@ -283,7 +283,7 @@
 }
 .clickActionBody[data-v-5866a140] {
   /* height: 1400upx; */
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.5rem;
   /* backdrop-filter: blur(3upx); */
   z-index: 999;
@@ -292,7 +292,7 @@
   width: calc(100vw - 1.875rem);
   margin-top: 36%;
   margin-left: 0.9375rem;
-  --van-popup-background-color: #383D46;
+  --van-popup-background-color: #383d46;
   border-radius: 0.5rem;
   position: fixed;
 }
@@ -312,14 +312,14 @@
 .Actionname[data-v-5866a140] {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.3125rem;
   margin-bottom: 0.625rem;
 }
 .clickActionText p[data-v-5866a140] {
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
   line-height: 1.125rem;
 }
 .clickActionEnd[data-v-5866a140] {
@@ -329,7 +329,7 @@
   border-radius: 1.25rem;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 2.1875rem;
   text-align: center;
   margin: auto;
@@ -368,7 +368,7 @@
   border-radius: 0.5rem;
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   /* line-height: 80upx; */
   padding-top: 0.625rem;
   padding-bottom: 0.75rem;
@@ -381,22 +381,22 @@
   /* height: 164upx; */
   background: rgba(19, 112, 255, 0.9);
   border-radius: 0.5rem;
-  border: 0.0625rem solid #1370FF;
+  border: 0.0625rem solid #1370ff;
   padding: 0.625rem;
 }
 .quessonTitle[data-v-5866a140] {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .quessonText[data-v-5866a140] {
   font-size: 0.5625rem;
   font-weight: 400;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-top: 0.625rem;
 }
 [data-v-5866a140] .van-popup {
-  background: #383D46;
+  background: #383d46;
 }
 .list_style[data-v-5866a140] {
   flex: 1;

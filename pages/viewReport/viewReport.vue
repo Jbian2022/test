@@ -146,11 +146,13 @@
           <view class="titleText" v-if="openKey">
             <van-row class="titleTopText">
               <van-col span="14">评估报告</van-col>
-              <van-col span="8" style = "text-align: right !important;">{{ nowDate }}</van-col>
+              <van-col span="9" style="text-align: right !important">{{
+                nowDate
+              }}</van-col>
             </van-row>
             <van-row class="titleBottomText">
               <van-col span="15">数据评测来源于世界权威机构</van-col>
-              <van-col span="7">{{ nowYear }}年</van-col>
+              <van-col span="8">{{ nowYear }}年</van-col>
             </van-row>
           </view>
           <view class="titleText" v-if="!openKey">
@@ -160,7 +162,7 @@
                 <view class="titleTypeok" v-if="buyStatus">已购课</view>
                 <view class="titleTypeno" v-else>未购课</view>
               </van-col>
-              <van-col span="8">
+              <van-col span="9">
                 <!-- <input type="button" value="重新测试" class="titleButton"/> -->
                 <button class="titleButton" @click="gototest()">
                   重新评估
@@ -169,7 +171,7 @@
             </van-row>
             <van-row class="titleBottomText">
               <van-col span="9">{{ histroydate }}</van-col>
-              <van-col span="13">数据评测来源于世界权威机构</van-col>
+              <van-col span="14">数据评测来源于世界权威机构</van-col>
             </van-row>
           </view>
           <view class="backgroud-img"
@@ -505,11 +507,11 @@
                     <view
                       style="
                         width: 100%;
-                                  height: 40upx;
-                                  font-size: 28upx;
-                                  font-weight: 400;
-                                  color: #7a7f89;
-                                  text-align: center;
+                        height: 40upx;
+                        font-size: 28upx;
+                        font-weight: 400;
+                        color: #7a7f89;
+                        text-align: center;
                       "
                       >暂无评估内容，快去完善吧~</view
                     >
@@ -800,11 +802,11 @@
                     <view
                       style="
                         width: 100%;
-                                  height: 40upx;
-                                  font-size: 28upx;
-                                  font-weight: 400;
-                                  color: #7a7f89;
-                                  text-align: center;
+                        height: 40upx;
+                        font-size: 28upx;
+                        font-weight: 400;
+                        color: #7a7f89;
+                        text-align: center;
                       "
                       >暂无评估内容，快去完善吧~</view
                     >
@@ -929,7 +931,9 @@
                             </span>
                             <view class="assessmentContent">
                               <p style="color: #7a7f89; font-size: 26upx">
-                                <rich-text :nodes="itemss.answeerContent" ></rich-text>
+                                <rich-text
+                                  :nodes="itemss.answeerContent"
+                                ></rich-text>
                               </p>
                             </view>
                           </view>
@@ -963,11 +967,11 @@
                     <view
                       style="
                         width: 100%;
-                                  height: 40upx;
-                                  font-size: 28upx;
-                                  font-weight: 400;
-                                  color: #7a7f89;
-                                  text-align: center;
+                        height: 40upx;
+                        font-size: 28upx;
+                        font-weight: 400;
+                        color: #7a7f89;
+                        text-align: center;
                       "
                       >暂无评估内容，快去完善吧~</view
                     >
@@ -1308,7 +1312,12 @@ export default {
       let date = new Date()
       // 今天日期，数组，同 birthday
       let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
-      this.nowDate = date.getMonth() + 1 + '.' + date.getDate()
+      this.nowDate =
+        (date.getMonth() + 1 > 9
+          ? date.getMonth() + 1
+          : '0' + (date.getMonth() + 1)) +
+        '.' +
+        date.getDate()
       this.nowYear = date.getFullYear()
       this.histroydate = this.nowYear + '-' + this.nowDate
       // 分别计算年月日差值
@@ -1523,7 +1532,7 @@ export default {
         // this.physicalFitnessAssessmentData = res.data
         console.log(res.data)
         for (let r of res.data) {
-			this.physicalFitnessAssessmentData.push(r)
+          this.physicalFitnessAssessmentData.push(r)
         }
         console.log(this.physicalFitnessAssessmentData)
       })
@@ -1616,15 +1625,20 @@ export default {
         }
       })
     },
-	checkApp(){
-		if(plus.runtime.isApplicationExist({pname:'bodybuildingApp.myapp',action:'weixin://'})){
-			console.log("微信应用已安装");
-			return true;
-		}else{
-			console.log("微信应用未安装");
-			return false;
-		}
-	},
+    checkApp() {
+      if (
+        plus.runtime.isApplicationExist({
+          pname: 'bodybuildingApp.myapp',
+          action: 'weixin://'
+        })
+      ) {
+        console.log('微信应用已安装')
+        return true
+      } else {
+        console.log('微信应用未安装')
+        return false
+      }
+    },
     receiveRenderData(option) {
       this.$refs.popup.close()
       console.log(option.name, 8888)
@@ -1637,57 +1651,55 @@ export default {
           this.downloadFile()
         } else {
           if (option.name === '分享到微信') {
-			  if(this.checkApp()){
-				  uni.share({
-				    provider: 'weixin',
-				    scene: 'WXSceneSession',
-				    type: 2,
-				    imageUrl: url,
-				    success: function (res) {
-				      console.log('success:' + JSON.stringify(res))
-				      uni.hideLoading()
-				    },
-				    fail: function (err) {
-				  	uni.hideLoading()
-				      console.log('fail:' + JSON.stringify(err))
-				    }
-				  })
-			  }else{
-				  uni.showToast({
-				    icon: 'error',
-				    title: '未检测到微信！',
-				    duration: 1500,
-				    width: 220,
-					height: 1500
-				  })
-			  }
-            
+            if (this.checkApp()) {
+              uni.share({
+                provider: 'weixin',
+                scene: 'WXSceneSession',
+                type: 2,
+                imageUrl: url,
+                success: function (res) {
+                  console.log('success:' + JSON.stringify(res))
+                  uni.hideLoading()
+                },
+                fail: function (err) {
+                  uni.hideLoading()
+                  console.log('fail:' + JSON.stringify(err))
+                }
+              })
+            } else {
+              uni.showToast({
+                title: '未检测到微信应用',
+                duration: 1000,
+                width: 180,
+                icon: 'none'
+              })
+              return
+            }
           } else if (option.name === '分享到朋友圈') {
-			  if(this.checkApp()){
-				  uni.share({
-				    provider: 'weixin',
-				    scene: 'WXSceneTimeline',
-				    type: 2,
-				    imageUrl: url,
-				    success: function (res) {
-				      console.log('success:' + JSON.stringify(res))
-				      uni.hideLoading()
-				    },
-				    fail: function (err) {
-				  	  uni.hideLoading()
-				      console.log('fail:' + JSON.stringify(err))
-				    }
-				  })
-			  }else{
-				  uni.showToast({
-				    icon: 'error',
-				    title: '未检测到微信！',
-				    duration: 1500,
-				    width: 220,
-				  	height: 1500
-				  })
-			  }
-            
+            if (this.checkApp()) {
+              uni.share({
+                provider: 'weixin',
+                scene: 'WXSceneTimeline',
+                type: 2,
+                imageUrl: url,
+                success: function (res) {
+                  console.log('success:' + JSON.stringify(res))
+                  uni.hideLoading()
+                },
+                fail: function (err) {
+                  uni.hideLoading()
+                  console.log('fail:' + JSON.stringify(err))
+                }
+              })
+            } else {
+              uni.showToast({
+                title: '未检测到微信应用',
+                duration: 1000,
+                width: 180,
+                icon: 'none'
+              })
+              return
+            }
           }
         }
         // #endif
@@ -1770,11 +1782,12 @@ export default {
       this.$refs.popup.close()
     },
     gototest() {
-      uni.navigateTo({ 
+      uni.navigateTo({
         url:
           '/pages/physicalAssessment/physicalAssessment' +
           '?traineeNo=' +
-          this.traineeNo+'&pageSign=Y'
+          this.traineeNo +
+          '&routerAuth=Y'
       })
     },
     insertStr(str) {
@@ -2109,19 +2122,19 @@ export default {
   margin-right: 20upx;
   margin-bottom: 40upx;
 }
-.healthBlockorther{
-	min-width: 197upx;
-	min-height: 80upx;
-	background: #383d46;
-	border-radius: 16upx;
-	font-size: 28upx;
-	font-weight: 400;
-	line-height: 80upx;
-	text-align: left;
-	display: inline-block;
-	padding-left: 32upx;
-	color: #bdc3ce;
-	margin-bottom: 40upx;
+.healthBlockorther {
+  min-width: 197upx;
+  min-height: 80upx;
+  background: #383d46;
+  border-radius: 16upx;
+  font-size: 28upx;
+  font-weight: 400;
+  line-height: 80upx;
+  text-align: left;
+  display: inline-block;
+  padding-left: 32upx;
+  color: #bdc3ce;
+  margin-bottom: 40upx;
 }
 .healthBlocks {
   margin: 0;
@@ -2170,7 +2183,8 @@ export default {
   overflow: hidden;
   background-color: #383d46;
   /* margin-left: 30upx; */
-  margin-top: 30upx;
+  margin-bottom: 30upx !important;
+  margin-top: 0 !important;
   height: 280upx;
   border-radius: 24upx;
   position: relative;
@@ -2231,7 +2245,7 @@ export default {
 .titleButton {
   width: 170upx;
   height: 68upx;
-  background: #1370FF;
+  background: #1370ff;
   border-radius: 16upx;
   font-size: 30upx;
   font-weight: 600;
@@ -2243,11 +2257,11 @@ export default {
 .titleTypeok {
   width: 100upx;
   height: 50upx;
-  background: -webkit-linear-gradient(top,#FFF3D3,#FFE6A1);
+  background: -webkit-linear-gradient(top, #fff3d3, #ffe6a1);
   border-radius: 8upx;
   font-size: 24upx;
   font-weight: 600;
-  color: #93653C;
+  color: #93653c;
   line-height: 50upx;
   text-align: center;
   float: left;
@@ -2471,8 +2485,8 @@ export default {
       line-height: 40tpx;
     }
   }
-  .img:hover{
-	  opacity: 0.6;
+  .img:hover {
+    opacity: 0.6;
   }
 }
 .histroys {
