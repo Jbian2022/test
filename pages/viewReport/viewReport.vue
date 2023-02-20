@@ -1770,7 +1770,7 @@ export default {
       this.$refs.popup.close()
     },
     gototest() {
-      uni.navigateTo({
+      uni.navigateTo({ 
         url:
           '/pages/physicalAssessment/physicalAssessment' +
           '?traineeNo=' +
