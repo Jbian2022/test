@@ -5,6 +5,7 @@
       :leftNavTitle="'身体评估'"
       :isAuthority="true"
 	  :jumpType="'STPC'"
+	  :routerAuth="pageSign"
     ></NavBarCompontent>
     <view class="need_scoll list_style">
       <view
@@ -85,7 +86,8 @@ export default {
       startData: {
         clientX: 0,
         clientY: 0
-      }
+      },
+	  pageSign: null
     }
   },
   created() {
@@ -103,6 +105,9 @@ export default {
     if (JSON.stringify(options) !== '{}' && options.traineeNo) {
       this.traineeNo = options.traineeNo
     }
+	if (JSON.stringify(options) !== '{}' && options.pageSign) {
+	  this.pageSign = options.pageSign
+	}
   },
   onBackPress(options) {
 	  console.log(options.from, 'from', options)

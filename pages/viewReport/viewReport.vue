@@ -1770,11 +1770,11 @@ export default {
       this.$refs.popup.close()
     },
     gototest() {
-      uni.redirectTo({
+      uni.navigateTo({
         url:
           '/pages/physicalAssessment/physicalAssessment' +
           '?traineeNo=' +
-          this.traineeNo
+          this.traineeNo+'&pageSign=Y'
       })
     },
     insertStr(str) {
