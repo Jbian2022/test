@@ -15130,7 +15130,7 @@ if (uni.restoreGlobal) {
               this.wxLoginCommon();
             } else {
               uni.showToast({
-                title: "\u672A\u5B89\u88C5\u5FAE\u4FE1",
+                title: "\u672A\u68C0\u6D4B\u5230\u5FAE\u4FE1\u5E94\u7528",
                 duration: 1e3,
                 width: 180,
                 icon: "none"
@@ -15253,7 +15253,7 @@ if (uni.restoreGlobal) {
             this.wxLoginCommon();
           } else {
             uni.showToast({
-              title: "\u672A\u5B89\u88C5\u5FAE\u4FE1",
+              title: "\u672A\u68C0\u6D4B\u5230\u5FAE\u4FE1\u5E94\u7528",
               duration: 1e3,
               width: 180,
               icon: "none"
@@ -16444,6 +16444,9 @@ if (uni.restoreGlobal) {
           this.actionIndex = info.actionIndex;
           this.actionClass = info.actionClass;
           this.actionClassName = info.actionClassName;
+          if (this.mode == "1") {
+            this.modeChangeHandle(1, "back");
+          }
         }
         this.actionClassList.forEach((item) => {
           const list = this.selectActionList.filter(
@@ -16499,24 +16502,42 @@ if (uni.restoreGlobal) {
             children
           };
         });
-        formatAppLog("log", "at pages/actionLibrary/index.vue:318", this.actionList, 888);
+        this.actionClassList.forEach((item) => {
+          const list = this.selectActionList.filter(
+            (child) => child.actionClass === item.value
+          );
+          item.badge = list.length || null;
+        });
+        formatAppLog("log", "at pages/actionLibrary/index.vue:327", this.actionList, 888);
       },
-      modeChangeHandle(val) {
+      modeChangeHandle(val, type) {
         this.mode = val;
-        if (val === 0) {
-          this.actionIndex = 0;
-          this.actionClass = 0;
-          this.actionClassList = JSON.parse(
-            JSON.stringify(this.actionClassListAll)
-          );
+        if (type === "back") {
+          if (val === 0) {
+            this.actionClassList = JSON.parse(
+              JSON.stringify(this.actionClassListAll)
+            );
+          } else {
+            this.actionClassList = JSON.parse(
+              JSON.stringify(this.actionClassListPro)
+            );
+          }
         } else {
-          this.actionIndex = 0;
-          this.actionClass = 11;
-          this.actionClassList = JSON.parse(
-            JSON.stringify(this.actionClassListPro)
-          );
+          if (val === 0) {
+            this.actionIndex = 0;
+            this.actionClass = 0;
+            this.actionClassList = JSON.parse(
+              JSON.stringify(this.actionClassListAll)
+            );
+          } else {
+            this.actionIndex = 0;
+            this.actionClass = 11;
+            this.actionClassList = JSON.parse(
+              JSON.stringify(this.actionClassListPro)
+            );
+          }
+          this.getActionList();
         }
-        this.getActionList();
       },
       selectAction(i2) {
         if (!this.showSaveButton) {
@@ -16536,7 +16557,7 @@ if (uni.restoreGlobal) {
           );
           item.badge = list.length || null;
         });
-        formatAppLog("log", "at pages/actionLibrary/index.vue:355", "this.selectActionList", this.selectActionList);
+        formatAppLog("log", "at pages/actionLibrary/index.vue:376", "this.selectActionList", this.selectActionList);
       },
       selectClick(item, info) {
         if (item.text === "\u5220\u9664\u52A8\u4F5C") {

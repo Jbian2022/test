@@ -197,7 +197,7 @@ export default {
             this.wxLoginCommon()
           } else {
             uni.showToast({
-              title: '未安装微信',
+              title: '未检测到微信应用',
               duration: 1000,
               width: 180,
               icon: 'none'
@@ -373,7 +373,7 @@ export default {
           this.wxLoginCommon()
         } else {
           uni.showToast({
-            title: '未安装微信',
+            title: '未检测到微信应用',
             duration: 1000,
             width: 180,
             icon: 'none'
