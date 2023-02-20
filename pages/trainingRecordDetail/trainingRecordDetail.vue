@@ -426,6 +426,15 @@ export default {
         }
       })
     },
+	checkApp(){
+		if(plus.runtime.isApplicationExist({pname:'bodybuildingApp.myapp',action:'weixin://'})){
+			console.log("微信应用已安装");
+			return true;
+		}else{
+			console.log("微信应用未安装");
+			return false;
+		}
+	},
     receiveRenderData(option) {
       this.$refs.popup.close()
       console.log(option.name, 8888)
@@ -437,33 +446,55 @@ export default {
           this.downloadFile()
         } else {
           if (option.name === '分享到微信') {
-            uni.share({
-              provider: 'weixin',
-              scene: 'WXSceneSession',
-              type: 2,
-              imageUrl: url,
-              success: function (res) {
-                console.log('success:' + JSON.stringify(res))
-                uni.hideLoading()
-              },
-              fail: function (err) {
-                console.log('fail:' + JSON.stringify(err))
-              }
-            })
+			  if(this.checkApp()){
+				  uni.share({
+				    provider: 'weixin',
+				    scene: 'WXSceneSession',
+				    type: 2,
+				    imageUrl: url,
+				    success: function (res) {
+				      console.log('success:' + JSON.stringify(res))
+				      uni.hideLoading()
+				    },
+				    fail: function (err) {
+				      console.log('fail:' + JSON.stringify(err))
+				    }
+				  })
+			  }else{
+				  uni.showToast({
+				    icon: 'error',
+				    title: '未检测到微信！',
+				    duration: 1500,
+				    width: 220,
+				  	height: 1500
+				  })
+			  }
+            
           } else if (option.name === '分享到朋友圈') {
-            uni.share({
-              provider: 'weixin',
-              scene: 'WXSceneTimeline',
-              type: 2,
-              imageUrl: url,
-              success: function (res) {
-                console.log('success:' + JSON.stringify(res))
-                uni.hideLoading()
-              },
-              fail: function (err) {
-                console.log('fail:' + JSON.stringify(err))
-              }
-            })
+			  if(this.checkApp()){
+				  uni.share({
+				    provider: 'weixin',
+				    scene: 'WXSceneTimeline',
+				    type: 2,
+				    imageUrl: url,
+				    success: function (res) {
+				      console.log('success:' + JSON.stringify(res))
+				      uni.hideLoading()
+				    },
+				    fail: function (err) {
+				      console.log('fail:' + JSON.stringify(err))
+				    }
+				  })
+			  }else{
+				  uni.showToast({
+				    icon: 'error',
+				    title: '未检测到微信！',
+				    duration: 1500,
+				    width: 220,
+				  	height: 1500
+				  })
+			  }
+            
           }
         }
         // #endif

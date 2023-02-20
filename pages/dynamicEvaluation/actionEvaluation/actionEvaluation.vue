@@ -25,7 +25,7 @@
 			@click="closePopup"
 			>{{item.questionContent}}</view>
 		</view>
-		<view class="contentBody" v-show="changeValue">
+		<view class="contentBody" v-show="changeValue1">
 			<view
 			class="clickAction" 
 			@click.native="showPopup()">点击查看标准动作描述
@@ -69,45 +69,13 @@
 						</view>
 					</view>
 				</view>
-				<!-- <view style="position: absolute;
-							z-index: 2;
-							top: 670upx;
-							left: 530upx;">
-					<view class="quessonName" v-if="true">
-						<p>躯干一侧偏移</p>
-					</view>
-					<view class="clickQuessonName" v-if="false">
-						<view class="quessonTitle">
-							躯干一侧偏移
-						</view>
-						<view class="quessonText">
-							问题描述：股四头肌和髋关节屈肌活跃，臀部
-						</view>
-					</view>
-				</view>
-				<view style="position: absolute;
-							z-index: 2;
-							top: 1040upx;
-							left: 530upx;">
-					<view class="quessonName" v-if="true">
-						<p>足背屈不足</p>
-					</view>
-					<view class="clickQuessonName" v-if="false">
-						<view class="quessonTitle">
-							足背屈不足
-						</view>
-						<view class="quessonText">
-							问题描述：股四头肌和髋关节屈肌活跃，臀部
-						</view>
-					</view>
-				</view> -->
 			</view>
 			<image class="imagebg" :src="backimgFront"/>
 			<view class="imgbgText">
 				点击上方蓝色标签选择问题部位，可多选
 			</view>
 		</view> 
-		<view class="contentBody" v-show="!changeValue">
+		<view class="contentBody" v-show="changeValue2">
 			<view
 			class="clickAction"  
 			@click.native="showPopup">点击查看标准动作描述
@@ -159,54 +127,69 @@
 						</view>
 					</view>
 				</view>
-				<!-- <view style="position: absolute;
-							z-index: 2;
-							top: 800upx;
-							left: 60upx;">
-					<view class="quessonName" v-if="false">
-						<p>背部过度拱起</p>
+			</view>
+			
+			<image class="imagebg" :src="backimgSide"
+			/>
+			<view class="imgbgText">
+				点击上方蓝色标签选择问题部位
+			</view>
+			<!-- <image
+			  src="../../static/app-plus/bg/actionImg.png"
+			></image> -->
+		</view>
+		<view class="contentBody" v-show="changeValue3">
+			<view
+			class="clickAction"  
+			@click.native="showPopup">点击查看标准动作描述
+			<image src="../../../static/app-plus/mebrs/openarrit.png"></image>
+			</view>
+			<view>
+			<van-popup 
+			v-model:show="show" 
+			position="top" 
+			round
+			:overlay="false"
+			class="clickActionContent">
+				<view class="clickActionBody">
+					<video :src="SideVideoUrl" 
+					wid 
+					autoplay 
+					loop 
+					:controls="false"
+					:custom-cache="false"
+					muted
+					v-if="show2">
+					</video>
+					<view class="clickActionText">
+						<view class="Actionname">标准动作：</view>
+						<view>
+							<p v-for="(item,index) in testText3">{{item}}</p>
+						</view>
 					</view>
-					<view class="clickQuessonName" v-if="true">
+					<view class="clickActionEnd" @click.native="closePopup">收起
+					<image src="../../../static/app-plus/other/close.png"></image>
+					</view>
+				</view>
+			</van-popup>
+			</view>
+			<view class="actinQuessonContent">
+				<view
+				 v-for="(item,index) in quession3"
+				 :style="item.style">
+					<view class="quessonName" v-if="item.status" @click.stop="clickQ(item,1)">
+						<p>{{item.answerTitle}}</p>
+					</view>
+					<view class="clickQuessonName" v-if="!item.status" @click.stop="clickQ(item,1)">
 						<view class="quessonTitle">
-							背部过度拱起
+							{{item.answerTitle}}
 						</view>
 						<view class="quessonText">
-							问题描述：股四头肌和髋关节屈肌活跃，臀部
+							<p style="color: #F04242;display: initial;">问题描述：</p>
+							<rich-text :nodes="item.answeerContent"></rich-text>
 						</view>
 					</view>
 				</view>
-				<view style="position: absolute;
-							z-index: 2;
-							top: 670upx;
-							left: 530upx;">
-					<view class="quessonName" v-if="true">
-						<p>头部过度抬起</p>
-					</view>
-					<view class="clickQuessonName" v-if="false">
-						<view class="quessonTitle">
-							头部过度抬起
-						</view>
-						<view class="quessonText">
-							问题描述：股四头肌和髋关节屈肌活跃，臀部
-						</view>
-					</view>
-				</view>
-				<view style="position: absolute;
-							z-index: 2;
-							top: 1040upx;
-							left: 530upx;">
-					<view class="quessonName" v-if="true">
-						<p>胫骨和躯干不平衡</p>
-					</view>
-					<view class="clickQuessonName" v-if="false">
-						<view class="quessonTitle">
-							胫骨和躯干不平衡
-						</view>
-						<view class="quessonText">
-							问题描述：股四头肌和髋关节屈肌活跃，臀部
-						</view>
-					</view>
-				</view> -->
 			</view>
 			
 			<image class="imagebg" :src="backimgSide"
@@ -241,17 +224,21 @@
 		setup() {
 			const show = ref(false);
 			const show2 = ref(false);
+			const show3 = ref(false);
 			    const showPopup = () => {
 			      show.value = true;
 				  show2.value = true;
+				  show3.value = true;
 			    };
 				const closePopup = () =>{
 				  show.value = false;
 				  show2.value = false;
+				  show3.value = false;
 				};
 			    return {
 			      show,
 				  show2,
+				  show3,
 			      showPopup,
 				  closePopup,
 			    };
@@ -324,7 +311,9 @@
 				shoulderTest1img: "../../../static/app-plus/bg/shoulderTest1.jpg",
 				shoulderTest2img: "../../../static/app-plus/bg/shoulderTest2.jpg",
 				pushUpTestimg:"../../../static/app-plus/bg/pushUpTest.jpg",
-				changeValue: true,
+				changeValue1: true,
+				changeValue2: false,
+				changeValue3: false,
 				num: 0,
 				squatFrontVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/39e6eb66-787c-4615-b346-f80c490c69cf.mp4",
 				squatSideVideoUrl: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/6eb8e467-5798-49fd-9785-bfcde1fbb1e3.mp4",
@@ -395,10 +384,19 @@
 			},
 			changeFunction(index){
 				if(index==0){
-					this.changeValue = true
+					this.changeValue1 = true
+					this.changeValue2 = false
+					this.changeValue3 = false
+					this.num = index
+				}else if(index==1){
+					this.changeValue1 = false
+					this.changeValue2 = true
+					this.changeValue3 = false
 					this.num = index
 				}else{
-					this.changeValue = false
+					this.changeValue1 = false
+					this.changeValue2 = false
+					this.changeValue3 = true
 					this.num = index
 				}
 			},
