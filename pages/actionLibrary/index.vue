@@ -257,6 +257,9 @@ export default {
       if(actionLibraryStr){
         const info = JSON.parse(actionLibraryStr)
         this.mode = info.mode
+        if(this.mode == '1'){
+          this.modeChangeHandle(1)
+        }
         this.actionIndex = info.actionIndex
         this.actionClass = info.actionClass
         this.actionClassName = info.actionClassName
@@ -314,6 +317,12 @@ export default {
           actionType: item,
           children: children
         }
+      })
+      this.actionClassList.forEach((item) => {
+        const list = this.selectActionList.filter(
+          (child) => child.actionClass === item.value
+        )
+        item.badge = list.length || null
       })
       console.log(this.actionList, 888)
     },
