@@ -257,12 +257,12 @@ export default {
       if(actionLibraryStr){
         const info = JSON.parse(actionLibraryStr)
         this.mode = info.mode
-        if(this.mode == '1'){
-          this.modeChangeHandle(1)
-        }
         this.actionIndex = info.actionIndex
         this.actionClass = info.actionClass
         this.actionClassName = info.actionClassName
+        if(this.mode == '1'){
+          this.modeChangeHandle(1,'back')
+        }
       }
       this.actionClassList.forEach((item) => {
         const list = this.selectActionList.filter(
@@ -326,22 +326,34 @@ export default {
       })
       console.log(this.actionList, 888)
     },
-    modeChangeHandle(val) {
+    modeChangeHandle(val,type) {
       this.mode = val
-      if (val === 0) {
-        this.actionIndex = 0
-        this.actionClass = 0
-        this.actionClassList = JSON.parse(
-          JSON.stringify(this.actionClassListAll)
-        )
+      if(type === 'back'){
+        if (val === 0) {
+          this.actionClassList = JSON.parse(
+            JSON.stringify(this.actionClassListAll)
+          )
+        } else {
+          this.actionClassList = JSON.parse(
+            JSON.stringify(this.actionClassListPro)
+          )
+        }
       } else {
-        this.actionIndex = 0
-        this.actionClass = 11
-        this.actionClassList = JSON.parse(
-          JSON.stringify(this.actionClassListPro)
-        )
+        if (val === 0) {
+          this.actionIndex = 0
+          this.actionClass = 0
+          this.actionClassList = JSON.parse(
+            JSON.stringify(this.actionClassListAll)
+          )
+        } else {
+          this.actionIndex = 0
+          this.actionClass = 11
+          this.actionClassList = JSON.parse(
+            JSON.stringify(this.actionClassListPro)
+          )
+        }
+        this.getActionList()
       }
-      this.getActionList()
     },
     selectAction(i) {
       if (!this.showSaveButton) {
