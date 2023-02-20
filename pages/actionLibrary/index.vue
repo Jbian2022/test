@@ -257,6 +257,9 @@ export default {
       if(actionLibraryStr){
         const info = JSON.parse(actionLibraryStr)
         this.mode = info.mode
+        if(this.mode == '1'){
+          this.modeChangeHandle(1)
+        }
         this.actionIndex = info.actionIndex
         this.actionClass = info.actionClass
         this.actionClassName = info.actionClassName
