@@ -695,14 +695,24 @@ if (uni.restoreGlobal) {
       path: "pages/cancel/cancel",
       style: {
         navigationBarTitleText: "",
-        enablePullDownRefresh: false
+        enablePullDownRefresh: false,
+        navigationBarTextStyle: "white",
+        "app-plus": {
+          titleNView: false,
+          bounce: "none"
+        }
       }
     },
     {
       path: "pages/cancelAgreement/cancelAgreement",
       style: {
         navigationBarTitleText: "",
-        enablePullDownRefresh: false
+        enablePullDownRefresh: false,
+        navigationBarTextStyle: "white",
+        "app-plus": {
+          titleNView: false,
+          bounce: "none"
+        }
       }
     },
     {
@@ -4608,7 +4618,7 @@ if (uni.restoreGlobal) {
                       class: "loop_bottom_result_style",
                       onClick: vue.withModifiers(($event) => $options.getReport(item), ["stop"])
                     }, [
-                      vue.createElementVNode("view", { class: "result_last_remark_style" }, "\u67E5\u770B\u4F1A\u5458\u8BE6\u60C5"),
+                      vue.createElementVNode("view", { class: "result_last_remark_style" }, "\u67E5\u770B\u8BC4\u4F30\u62A5\u544A"),
                       vue.createElementVNode("image", {
                         class: "result_last_img_style",
                         src: "/static/app-plus/other/arrows.svg"
@@ -15061,7 +15071,7 @@ if (uni.restoreGlobal) {
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/logining/logining.vue:115", this.phone, "????");
+        formatAppLog("log", "at pages/logining/logining.vue:110", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -15070,7 +15080,7 @@ if (uni.restoreGlobal) {
       }
     },
     onLoad() {
-      formatAppLog("log", "at pages/logining/logining.vue:125", plus, ">>>>");
+      formatAppLog("log", "at pages/logining/logining.vue:120", plus, ">>>>");
       plus.oauth.getServices((services) => {
         weixinAuthService$1 = services.find((service) => {
           return service.id === "weixin";
@@ -15087,23 +15097,23 @@ if (uni.restoreGlobal) {
           }
         },
         fail: (error) => {
-          formatAppLog("log", "at pages/logining/logining.vue:143", "\u83B7\u53D6\u767B\u5F55\u901A\u9053\u5931\u8D25", error);
+          formatAppLog("log", "at pages/logining/logining.vue:138", "\u83B7\u53D6\u767B\u5F55\u901A\u9053\u5931\u8D25", error);
         }
       });
     },
     mounted() {
       let platform = uni.getSystemInfoSync().platform;
-      formatAppLog("log", "at pages/logining/logining.vue:150", platform, "????");
+      formatAppLog("log", "at pages/logining/logining.vue:145", platform, "????");
     },
     methods: {
       jumpAgree() {
-        formatAppLog("log", "at pages/logining/logining.vue:155", "11111");
+        formatAppLog("log", "at pages/logining/logining.vue:150", "11111");
         uni.navigateTo({
           url: "/pages/agreement/agreement"
         });
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/logining/logining.vue:161", event, "\u4F60tm");
+        formatAppLog("log", "at pages/logining/logining.vue:156", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       async getSms() {
@@ -15126,7 +15136,7 @@ if (uni.restoreGlobal) {
           case "wx":
             formatAppLog(
               "log",
-              "at pages/logining/logining.vue:184",
+              "at pages/logining/logining.vue:179",
               plus.runtime.isApplicationExist({
                 pname: "bodybuildingApp.myapp",
                 action: "weixin://"
@@ -15160,7 +15170,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:223", err);
+              formatAppLog("log", "at pages/logining/logining.vue:218", err);
               reject(new Error("\u5FAE\u4FE1\u767B\u5F55\u5931\u8D25"));
             }
           );
@@ -15170,7 +15180,7 @@ if (uni.restoreGlobal) {
         uni.login({
           provider: "apple",
           success: async (loginRes) => {
-            formatAppLog("log", "at pages/logining/logining.vue:234", loginRes, "\u4EC0\u4E48\u9B3C");
+            formatAppLog("log", "at pages/logining/logining.vue:229", loginRes, "\u4EC0\u4E48\u9B3C");
             const appleLogin = Es.importObject("login", {
               customUI: true
             });
@@ -15180,7 +15190,7 @@ if (uni.restoreGlobal) {
               );
               formatAppLog(
                 "log",
-                "at pages/logining/logining.vue:244",
+                "at pages/logining/logining.vue:239",
                 verifyAppleIdentityTokenRes,
                 "verifyAppleIdentityTokenRes"
               );
@@ -15188,7 +15198,7 @@ if (uni.restoreGlobal) {
                 let getLogingByAppleRes = await appleLogin.logingByApple(
                   loginRes.appleInfo.identityToken
                 );
-                formatAppLog("log", "at pages/logining/logining.vue:253", getLogingByAppleRes, "\u82F9\u679C\u767B\u9646\u4E86");
+                formatAppLog("log", "at pages/logining/logining.vue:248", getLogingByAppleRes, "\u82F9\u679C\u767B\u9646\u4E86");
                 if (getLogingByAppleRes.code == 0) {
                   try {
                     uni.setStorageSync(
@@ -15216,12 +15226,12 @@ if (uni.restoreGlobal) {
                       return;
                     }
                   } catch (e) {
-                    formatAppLog("log", "at pages/logining/logining.vue:327", e, ">>>>>");
+                    formatAppLog("log", "at pages/logining/logining.vue:322", e, ">>>>>");
                   }
                 }
               }
             } catch (e) {
-              formatAppLog("log", "at pages/logining/logining.vue:332", e, "222");
+              formatAppLog("log", "at pages/logining/logining.vue:327", e, "222");
             }
           },
           fail: function(loginErr) {
@@ -15234,12 +15244,12 @@ if (uni.restoreGlobal) {
       },
       loginByApple() {
         this.agreementType = "apple";
-        if (!this.haAuth)
-          return;
         if (!this.checkFlag) {
           this.needChecked = true;
           return;
         }
+        if (!this.haAuth)
+          return;
         this.appleLoginCommon();
       },
       loginByWeixin() {
@@ -15249,7 +15259,7 @@ if (uni.restoreGlobal) {
         } else {
           formatAppLog(
             "log",
-            "at pages/logining/logining.vue:360",
+            "at pages/logining/logining.vue:355",
             plus.runtime.isApplicationExist({
               pname: "bodybuildingApp.myapp",
               action: "weixin://"
@@ -15274,14 +15284,14 @@ if (uni.restoreGlobal) {
       },
       wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
-          formatAppLog("log", "at pages/logining/logining.vue:387", code, "\u4F60\u662F\u8C01");
+          formatAppLog("log", "at pages/logining/logining.vue:382", code, "\u4F60\u662F\u8C01");
           const wxLogin = Es.importObject("login", {
             customUI: true
           });
-          formatAppLog("log", "at pages/logining/logining.vue:391", wxLogin, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:386", wxLogin, "wxLogin");
           try {
             const wxLoginRes = await wxLogin.loginByWeixin(code);
-            formatAppLog("log", "at pages/logining/logining.vue:395", wxLoginRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:390", wxLoginRes, "\u767B\u5F55\u6210\u529F");
             if (wxLoginRes.code == 0) {
               try {
                 uni.setStorageSync(
@@ -15296,7 +15306,7 @@ if (uni.restoreGlobal) {
                   openid: wxLoginRes.openid
                 };
                 let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
-                formatAppLog("log", "at pages/logining/logining.vue:412", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
+                formatAppLog("log", "at pages/logining/logining.vue:407", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
                 let flag = false;
                 if (wxSchemaRes.affectedDocs === 0) {
                   flag = false;
@@ -15322,7 +15332,7 @@ if (uni.restoreGlobal) {
               }
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:444", err, "\u6211\u662F\u9519\u8BEF");
+            formatAppLog("log", "at pages/logining/logining.vue:439", err, "\u6211\u662F\u9519\u8BEF");
           }
         });
       }
@@ -15338,14 +15348,6 @@ if (uni.restoreGlobal) {
         })
       ]),
       vue.createElementVNode("view", { class: "middle" }, [
-        vue.createCommentVNode(' <input\r\n        :value="phone"\r\n        type="tel"\r\n        :maxlength="11"\r\n        @input="phoneInput"\r\n        class="phone"\r\n        focus\r\n        placeholder="\u8BF7\u8F93\u5165\u624B\u673A\u53F7"\r\n        :adjust-position="false"\r\n      /> '),
-        vue.createCommentVNode(` <button\r
-        class="btn"\r
-        :class="controlActiveFlag ? 'active_btn' : ''"\r
-        @click.native="getSms"\r
-      >\r
-        <span class="btn-text">\u83B7\u53D6\u9A8C\u8BC1\u7801</span>\r
-      </button> `),
         vue.createElementVNode("view", {
           class: "wx_icon_login_style",
           onClick: _cache[0] || (_cache[0] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args))
@@ -15356,10 +15358,21 @@ if (uni.restoreGlobal) {
           }),
           vue.createElementVNode("view", { class: "icon_remark_style" }, "\u5FAE\u4FE1\u5FEB\u6377\u767B\u5F55")
         ]),
+        $data.platform === "ios" ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "apple_icon_login_style wx_icon_login_style",
+          onClick: _cache[1] || (_cache[1] = (...args) => $options.loginByApple && $options.loginByApple(...args))
+        }, [
+          vue.createElementVNode("image", {
+            class: "icon_img_style apple_img_style",
+            src: "/static/login/apple.svg"
+          }),
+          vue.createElementVNode("view", { class: "icon_remark_style" }, "Apple\u8D26\u53F7\u767B\u5F55")
+        ])) : vue.createCommentVNode("v-if", true),
         vue.createElementVNode("view", { class: "ying_si_style" }, [
           vue.createElementVNode("view", {
             class: "check_style",
-            onClick: _cache[1] || (_cache[1] = ($event) => $data.checkFlag = !$data.checkFlag)
+            onClick: _cache[2] || (_cache[2] = ($event) => $data.checkFlag = !$data.checkFlag)
           }, [
             $data.checkFlag ? (vue.openBlock(), vue.createElementBlock("image", {
               key: 0,
@@ -15376,7 +15389,7 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("text", { class: "ying_si_remark" }, "\u540C\u610F"),
             vue.createElementVNode("text", {
               class: "ying_si_remark_middle",
-              onClick: _cache[2] || (_cache[2] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
+              onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
             }, [
               vue.createElementVNode("text", { class: "ying_si_jump_style" }, "\u300A\u7528\u6237\u9690\u79C1\u534F\u8BAE\u300B"),
               vue.createCommentVNode(' <text class="ying_si_jump_style">\u300A\u7528\u6237\u534F\u8BAE\u300B</text> ')
@@ -15395,19 +15408,19 @@ if (uni.restoreGlobal) {
                   vue.createTextVNode(" \u4E3A\u4E86\u66F4\u597D\u7684\u4FDD\u969C\u60A8\u7684\u5408\u6CD5\u6743\u76CA\uFF0C\u5728\u4F7F\u7528\u672C\u5E94\u7528\u4E4B\u524D\uFF0C\u8BF7\u60A8\u4ED4\u7EC6\u9605\u8BFB"),
                   vue.createElementVNode("text", {
                     style: { "color": "#1370ff" },
-                    onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
+                    onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.jumpAgree && $options.jumpAgree(...args), ["stop"]))
                   }, "\u300A\u7528\u6237\u9690\u79C1\u534F\u8BAE\u300B"),
                   vue.createTextVNode("\uFF0C\u70B9\u51FB\u540C\u610F\u5373\u8868\u793A\u60A8\u5DF2\u9605\u8BFB\u5E76\u540C\u610F\u63A5\u53D7\u6211\u4EEC\u7684\u670D\u52A1\uFF0C\u611F\u8C22\u60A8\u7684\u4FE1\u4EFB\uFF01 ")
                 ]),
                 vue.createElementVNode("button", {
                   class: "botter-top4",
-                  onClick: _cache[4] || (_cache[4] = (...args) => $options.agreeContiute && $options.agreeContiute(...args))
+                  onClick: _cache[5] || (_cache[5] = (...args) => $options.agreeContiute && $options.agreeContiute(...args))
                 }, [
                   vue.createElementVNode("span", { class: "botter-top4-text" }, "\u540C\u610F\u5E76\u7EE7\u7EED")
                 ]),
                 vue.createElementVNode("view", {
                   class: "botter-top5-text",
-                  onClick: _cache[5] || (_cache[5] = ($event) => $data.needChecked = false)
+                  onClick: _cache[6] || (_cache[6] = ($event) => $data.needChecked = false)
                 }, "\u4E0D\u540C\u610F")
               ])
             ])
@@ -15415,16 +15428,16 @@ if (uni.restoreGlobal) {
         ]),
         vue.createElementVNode("view", { class: "wx_loging_style" }, [
           vue.createElementVNode("image", {
-            onClick: _cache[6] || (_cache[6] = (...args) => $options.getSms && $options.getSms(...args)),
+            onClick: _cache[7] || (_cache[7] = (...args) => $options.getSms && $options.getSms(...args)),
             class: vue.normalizeClass(["wx_img_style", $data.platform === "ios" ? "common_style" : ""]),
             src: "/static/login/phonelogin.svg"
           }, null, 2),
-          $data.platform === "ios" ? (vue.openBlock(), vue.createElementBlock("image", {
-            key: 0,
-            onClick: _cache[7] || (_cache[7] = (...args) => $options.loginByApple && $options.loginByApple(...args)),
-            class: "wx_img_style",
-            src: "/static/login/ioslogin.svg"
-          })) : vue.createCommentVNode("v-if", true)
+          vue.createCommentVNode(` <image\r
+          @click.native="loginByApple"\r
+          v-if="platform === 'ios'"\r
+          class="wx_img_style"\r
+          src="../../static/login/ioslogin.svg"\r
+        ></image> `)
         ])
       ])
     ]);
@@ -16119,10 +16132,9 @@ if (uni.restoreGlobal) {
       jump() {
         try {
           let param = {
-            nickname: this.coachForm.nickname || this.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2"),
             avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
           };
-          formatAppLog("log", "at pages/personalnformation/personalnformation.vue:130", param, "param");
+          formatAppLog("log", "at pages/personalnformation/personalnformation.vue:127", param, "param");
           login$3.perfectInfo(param).then((res2) => {
             if (res2.success) {
               uni.reLaunch({
@@ -16135,7 +16147,7 @@ if (uni.restoreGlobal) {
         }
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:146", "1111");
+        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:143", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
           try {
             let param = {
@@ -16143,7 +16155,7 @@ if (uni.restoreGlobal) {
               gender: this.coachForm.gender,
               avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
             };
-            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:158", param, "param");
+            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:155", param, "param");
             login$3.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();
@@ -16451,29 +16463,30 @@ if (uni.restoreGlobal) {
           actionList.forEach((item) => item.isOld = true);
           this.selectActionList = actionList;
         }
-        const actionLibraryStr = uni.getStorageSync("actionLibrary");
-        if (actionLibraryStr) {
-          const info = JSON.parse(actionLibraryStr);
-          this.mode = info.mode;
-          this.actionIndex = info.actionIndex;
-          this.actionClass = info.actionClass;
-          this.actionClassName = info.actionClassName;
-          if (this.mode == "1") {
-            this.modeChangeHandle(1, "back");
-          }
-        }
-        this.actionClassList.forEach((item) => {
-          const list = this.selectActionList.filter(
-            (child) => child.actionClass === item.value
-          );
-          item.badge = list.length || null;
-        });
         uni.hideTabBar();
         this.showSaveButton = true;
       } else {
         uni.showTabBar();
         this.showSaveButton = false;
       }
+      const actionLibraryStr = uni.getStorageSync("actionLibrary");
+      if (actionLibraryStr) {
+        const info = JSON.parse(actionLibraryStr);
+        this.mode = info.mode;
+        this.actionIndex = info.actionIndex;
+        this.actionClass = info.actionClass;
+        this.actionClassName = info.actionClassName;
+        if (this.mode == "1") {
+          this.modeChangeHandle(1, "back");
+        }
+      }
+      this.actionClassList.forEach((item) => {
+        const list = this.selectActionList.filter(
+          (child) => child.actionClass === item.value
+        );
+        item.badge = list.length || null;
+      });
+      uni.removeStorageSync("actionLibrary");
       this.getActionList();
     },
     methods: {
@@ -16522,7 +16535,7 @@ if (uni.restoreGlobal) {
           );
           item.badge = list.length || null;
         });
-        formatAppLog("log", "at pages/actionLibrary/index.vue:327", this.actionList, 888);
+        formatAppLog("log", "at pages/actionLibrary/index.vue:328", this.actionList, 888);
       },
       modeChangeHandle(val, type) {
         this.mode = val;
@@ -16571,7 +16584,7 @@ if (uni.restoreGlobal) {
           );
           item.badge = list.length || null;
         });
-        formatAppLog("log", "at pages/actionLibrary/index.vue:376", "this.selectActionList", this.selectActionList);
+        formatAppLog("log", "at pages/actionLibrary/index.vue:377", "this.selectActionList", this.selectActionList);
       },
       selectClick(item, info) {
         if (item.text === "\u5220\u9664\u52A8\u4F5C") {
@@ -16584,6 +16597,12 @@ if (uni.restoreGlobal) {
         }
       },
       addActionHandle(z2) {
+        uni.setStorageSync("actionLibrary", JSON.stringify({
+          mode: this.mode,
+          actionClass: this.actionClass,
+          actionClassName: this.actionClassName,
+          actionIndex: this.actionIndex
+        }));
         const type = uni.getStorageSync("actionLibraryType");
         if (type === "select") {
           const tempList = this.selectActionList.map((item) => {
@@ -16615,52 +16634,45 @@ if (uni.restoreGlobal) {
               };
             }
           });
+          const actionListStr = uni.getStorageSync("actionList");
+          if (actionListStr) {
+            const actionList = JSON.parse(actionListStr);
+            if (!actionList || actionList.length === 0) {
+              tempList.forEach((item, i2) => {
+                if (i2 > 0) {
+                  item.open = false;
+                } else {
+                  item.open = true;
+                }
+              });
+            }
+          }
           uni.setStorageSync("actionList", JSON.stringify(tempList));
+        }
+        if (this.mode === 0 && z2 === "z") {
           uni.setStorageSync("actionLibrary", JSON.stringify({
             mode: this.mode,
-            actionClass: this.actionClass,
-            actionClassName: this.actionClassName,
-            actionIndex: this.actionIndex
+            actionClass: "10",
+            actionClassName: "\u81EA\u5B9A\u4E49\u52A8\u4F5C",
+            actionIndex: "10"
           }));
-          if (this.mode === 0 && z2 === "z") {
-            uni.setStorageSync("actionLibrary", JSON.stringify({
-              mode: this.mode,
-              actionClass: "10",
-              actionClassName: "\u81EA\u5B9A\u4E49\u52A8\u4F5C",
-              actionIndex: "10"
-            }));
-            uni.reLaunch({
-              url: `/pages/addAction/index?type=${this.mode}&actionClass=10`
-            });
-          } else if (this.mode === 1 && z2 === "z") {
-            uni.setStorageSync("actionLibrary", JSON.stringify({
-              mode: this.mode,
-              actionClass: "20",
-              actionClassName: "\u81EA\u5B9A\u4E49\u52A8\u4F5C",
-              actionIndex: "9"
-            }));
-            uni.reLaunch({
-              url: `/pages/addAction/index?type=${this.mode}&actionClass=20`
-            });
-          } else {
-            uni.reLaunch({
-              url: `/pages/addAction/index?type=${this.mode}&actionClass=${this.actionClass}`
-            });
-          }
+          uni.reLaunch({
+            url: `/pages/addAction/index?type=${this.mode}&actionClass=10`
+          });
+        } else if (this.mode === 1 && z2 === "z") {
+          uni.setStorageSync("actionLibrary", JSON.stringify({
+            mode: this.mode,
+            actionClass: "20",
+            actionClassName: "\u81EA\u5B9A\u4E49\u52A8\u4F5C",
+            actionIndex: "9"
+          }));
+          uni.reLaunch({
+            url: `/pages/addAction/index?type=${this.mode}&actionClass=20`
+          });
         } else {
-          if (this.mode === 0 && z2 === "z") {
-            uni.reLaunch({
-              url: `/pages/addAction/index?type=${this.mode}&actionClass=10`
-            });
-          } else if (this.mode === 1 && z2 === "z") {
-            uni.reLaunch({
-              url: `/pages/addAction/index?type=${this.mode}&actionClass=20`
-            });
-          } else {
-            uni.reLaunch({
-              url: `/pages/addAction/index?type=${this.mode}&actionClass=${this.actionClass}`
-            });
-          }
+          uni.reLaunch({
+            url: `/pages/addAction/index?type=${this.mode}&actionClass=${this.actionClass}`
+          });
         }
       },
       async deleteHandle() {
@@ -16713,6 +16725,19 @@ if (uni.restoreGlobal) {
             };
           }
         });
+        const actionListStr = uni.getStorageSync("actionList");
+        if (actionListStr) {
+          const actionList = JSON.parse(actionListStr);
+          if (!actionList || actionList.length === 0) {
+            tempList.forEach((item, i2) => {
+              if (i2 > 0) {
+                item.open = false;
+              } else {
+                item.open = true;
+              }
+            });
+          }
+        }
         uni.setStorageSync("actionList", JSON.stringify(tempList));
         uni.setStorageSync("actionLibrary", JSON.stringify({
           mode: this.mode,
@@ -17150,9 +17175,7 @@ if (uni.restoreGlobal) {
       return {
         workoutName: null,
         actionList: [],
-        actions: [
-          { text: "\u5220\u9664\u52A8\u4F5C\u9879" }
-        ],
+        actions: [{ text: "\u5220\u9664\u52A8\u4F5C\u9879" }],
         traineeNo: null,
         isNoOldInfo: false,
         mode: "ADD",
@@ -17170,15 +17193,18 @@ if (uni.restoreGlobal) {
     },
     onHide() {
       if (this.mode === "ADD") {
-        uni.setStorageSync("oldTrainInfo", JSON.stringify({
-          workoutName: this.workoutName,
-          traineeNo: this.traineeNo,
-          isNoOldInfo: this.isNoOldInfo,
-          trainDate: this.trainDate,
-          traineeName: this.traineeName,
-          key: this.key,
-          allWork: this.allWork
-        }));
+        uni.setStorageSync(
+          "oldTrainInfo",
+          JSON.stringify({
+            workoutName: this.workoutName,
+            traineeNo: this.traineeNo,
+            isNoOldInfo: this.isNoOldInfo,
+            trainDate: this.trainDate,
+            traineeName: this.traineeName,
+            key: this.key,
+            allWork: this.allWork
+          })
+        );
         uni.setStorageSync("actionList", JSON.stringify(this.actionList));
       }
     },
@@ -17200,16 +17226,6 @@ if (uni.restoreGlobal) {
         if (actionListStr) {
           this.actionList = JSON.parse(actionListStr);
         }
-        const flag = this.actionList.some((item) => item.isOld);
-        if (!flag) {
-          this.actionList.forEach((item, i2) => {
-            if (i2 > 0) {
-              item.open = false;
-            } else {
-              item.open = true;
-            }
-          });
-        }
       } catch (e) {
       }
     },
@@ -17219,7 +17235,10 @@ if (uni.restoreGlobal) {
         item.open = true;
       },
       async getOldInfo() {
-        const res2 = await train$3.getTrainList({ traineeNo: this.traineeNo, trainDate: this.trainDate });
+        const res2 = await train$3.getTrainList({
+          traineeNo: this.traineeNo,
+          trainDate: this.trainDate
+        });
         if (res2.data && res2.data.length > 0) {
           this.isNoOldInfo = true;
           const { trainContent } = res2.data[0];
@@ -17245,16 +17264,19 @@ if (uni.restoreGlobal) {
       },
       addActionHandle() {
         uni.setStorageSync("actionLibraryType", "select");
-        uni.setStorageSync("oldTrainInfo", JSON.stringify({
-          workoutName: this.workoutName,
-          traineeNo: this.traineeNo,
-          actionList: this.actionList,
-          isNoOldInfo: this.isNoOldInfo,
-          trainDate: this.trainDate,
-          traineeName: this.traineeName,
-          key: this.key,
-          allWork: this.allWork
-        }));
+        uni.setStorageSync(
+          "oldTrainInfo",
+          JSON.stringify({
+            workoutName: this.workoutName,
+            traineeNo: this.traineeNo,
+            actionList: this.actionList,
+            isNoOldInfo: this.isNoOldInfo,
+            trainDate: this.trainDate,
+            traineeName: this.traineeName,
+            key: this.key,
+            allWork: this.allWork
+          })
+        );
         uni.setStorageSync("actionList", JSON.stringify(this.actionList));
         uni.switchTab({
           url: "/pages/actionLibrary/index"
@@ -17279,7 +17301,11 @@ if (uni.restoreGlobal) {
       },
       async finish(traineeStatus) {
         if (!this.actionList || this.actionList.length === 0) {
-          return uni.showToast({ icon: "error", title: "\u8BF7\u6DFB\u52A0\u52A8\u4F5C", duration: 2e3 });
+          return uni.showToast({
+            icon: "error",
+            title: "\u8BF7\u6DFB\u52A0\u52A8\u4F5C",
+            duration: 2e3
+          });
         }
         if (!this.workoutName) {
           this.workoutName = this.actionList[0].actionClassName;
@@ -17298,11 +17324,13 @@ if (uni.restoreGlobal) {
               data: this.actionList
             });
           } else {
-            this.allWork = [{
-              traineeTitle: this.workoutName,
-              traineeStatus,
-              data: this.actionList
-            }];
+            this.allWork = [
+              {
+                traineeTitle: this.workoutName,
+                traineeStatus,
+                data: this.actionList
+              }
+            ];
           }
         }
         const params = {
@@ -17565,7 +17593,7 @@ if (uni.restoreGlobal) {
                   item: vue.withCtx(({ item }) => [
                     item.text === "\u5220\u9664\u52A8\u4F5C\u9879" ? (vue.openBlock(), vue.createElementBlock("text", {
                       key: 0,
-                      style: { "color": "#F04242" },
+                      style: { "color": "#f04242" },
                       onClick: ($event) => $options.deleteActionHandle(ix)
                     }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, vue.toDisplayString(item.text), 1))
                   ]),
@@ -17608,7 +17636,9 @@ if (uni.restoreGlobal) {
                     ]),
                     vue.createElementVNode("view", {
                       class: "yes",
-                      onClick: ($event) => (item.active = !item.active, $options.technicalData())
+                      onClick: ($event) => {
+                        item.active = !item.active, $options.technicalData();
+                      }
                     }, [
                       vue.createElementVNode("view", { class: "true-icon" })
                     ], 8, ["onClick"]),
@@ -17661,7 +17691,7 @@ if (uni.restoreGlobal) {
                   item: vue.withCtx(({ item }) => [
                     item.text === "\u5220\u9664\u52A8\u4F5C\u9879" ? (vue.openBlock(), vue.createElementBlock("text", {
                       key: 0,
-                      style: { "color": "#F04242" },
+                      style: { "color": "#f04242" },
                       onClick: ($event) => $options.deleteActionHandle(ix)
                     }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, vue.toDisplayString(item.text), 1))
                   ]),
@@ -17760,7 +17790,7 @@ if (uni.restoreGlobal) {
                   item: vue.withCtx(({ item }) => [
                     item.text === "\u5220\u9664\u52A8\u4F5C\u9879" ? (vue.openBlock(), vue.createElementBlock("text", {
                       key: 0,
-                      style: { "color": "#F04242" },
+                      style: { "color": "#f04242" },
                       onClick: ($event) => $options.deleteActionHandle(ix)
                     }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, vue.toDisplayString(item.text), 1))
                   ]),
@@ -17792,7 +17822,9 @@ if (uni.restoreGlobal) {
                     ]),
                     vue.createElementVNode("view", {
                       class: "yes",
-                      onClick: ($event) => (item.active = !item.active, $options.technicalData())
+                      onClick: ($event) => {
+                        item.active = !item.active, $options.technicalData();
+                      }
                     }, [
                       vue.createElementVNode("view", { class: "true-icon" })
                     ], 8, ["onClick"]),
@@ -17843,7 +17875,7 @@ if (uni.restoreGlobal) {
                   item: vue.withCtx(({ item }) => [
                     item.text === "\u5220\u9664\u52A8\u4F5C\u9879" ? (vue.openBlock(), vue.createElementBlock("text", {
                       key: 0,
-                      style: { "color": "#F04242" },
+                      style: { "color": "#f04242" },
                       onClick: ($event) => $options.deleteActionHandle(ix)
                     }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, vue.toDisplayString(item.text), 1))
                   ]),
@@ -17943,7 +17975,7 @@ if (uni.restoreGlobal) {
                   item: vue.withCtx(({ item }) => [
                     item.text === "\u5220\u9664\u52A8\u4F5C\u9879" ? (vue.openBlock(), vue.createElementBlock("text", {
                       key: 0,
-                      style: { "color": "#F04242" },
+                      style: { "color": "#f04242" },
                       onClick: ($event) => $options.deleteActionHandle(ix)
                     }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, vue.toDisplayString(item.text), 1))
                   ]),
@@ -17986,7 +18018,9 @@ if (uni.restoreGlobal) {
                     ]),
                     vue.createElementVNode("view", {
                       class: "yes",
-                      onClick: ($event) => (item.active = !item.active, $options.technicalData())
+                      onClick: ($event) => {
+                        item.active = !item.active, $options.technicalData();
+                      }
                     }, [
                       vue.createElementVNode("view", { class: "true-icon" })
                     ], 8, ["onClick"]),
@@ -18038,7 +18072,7 @@ if (uni.restoreGlobal) {
                   item: vue.withCtx(({ item }) => [
                     item.text === "\u5220\u9664\u52A8\u4F5C\u9879" ? (vue.openBlock(), vue.createElementBlock("text", {
                       key: 0,
-                      style: { "color": "#F04242" },
+                      style: { "color": "#f04242" },
                       onClick: ($event) => $options.deleteActionHandle(ix)
                     }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, vue.toDisplayString(item.text), 1))
                   ]),
@@ -18092,7 +18126,9 @@ if (uni.restoreGlobal) {
                     ]),
                     vue.createElementVNode("view", {
                       class: "yes",
-                      onClick: ($event) => (item.active = !item.active, $options.technicalData())
+                      onClick: ($event) => {
+                        item.active = !item.active, $options.technicalData();
+                      }
                     }, [
                       vue.createElementVNode("view", { class: "true-icon" })
                     ], 8, ["onClick"]),
@@ -18143,7 +18179,7 @@ if (uni.restoreGlobal) {
                   item: vue.withCtx(({ item }) => [
                     item.text === "\u5220\u9664\u52A8\u4F5C\u9879" ? (vue.openBlock(), vue.createElementBlock("text", {
                       key: 0,
-                      style: { "color": "#F04242" },
+                      style: { "color": "#f04242" },
                       onClick: ($event) => $options.deleteActionHandle(ix)
                     }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock("text", { key: 1 }, vue.toDisplayString(item.text), 1))
                   ]),
@@ -18831,6 +18867,9 @@ if (uni.restoreGlobal) {
         this.getTrainInfo();
       }
     },
+    onShow() {
+      uni.hideLoading();
+    },
     onPageScroll(e) {
       if (e.scrollTop > uni.getWindowInfo().statusBarHeight) {
         this.isFixedTop = true;
@@ -18885,7 +18924,7 @@ if (uni.restoreGlobal) {
         return week;
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:386", option, 88);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:389", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -18901,11 +18940,11 @@ if (uni.restoreGlobal) {
           url: this.url,
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:402", "\u4E0B\u8F7D\u6210\u529F", res2);
+              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:405", "\u4E0B\u8F7D\u6210\u529F", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:406", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:409", "\u4FDD\u5B58\u6210\u529F\uFF01", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -18913,15 +18952,15 @@ if (uni.restoreGlobal) {
                     content: "\u56FE\u7247\u5DF2\u7ECF\u4FDD\u5B58\u5230\u76F8\u518C\u8BF7\u67E5\u770B",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:414", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:417", "\u7528\u6237\u70B9\u51FB\u786E\u5B9A");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:416", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:419", "\u7528\u6237\u70B9\u51FB\u53D6\u6D88");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:422", "err", err);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:425", "err", err);
                 }
               });
             }
@@ -18933,16 +18972,16 @@ if (uni.restoreGlobal) {
           pname: "bodybuildingApp.myapp",
           action: "weixin://"
         })) {
-          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:436", "\u5FAE\u4FE1\u5E94\u7528\u5DF2\u5B89\u88C5");
+          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:439", "\u5FAE\u4FE1\u5E94\u7528\u5DF2\u5B89\u88C5");
           return true;
         } else {
-          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:439", "\u5FAE\u4FE1\u5E94\u7528\u672A\u5B89\u88C5");
+          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:442", "\u5FAE\u4FE1\u5E94\u7528\u672A\u5B89\u88C5");
           return false;
         }
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:445", option.name, 8888);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:448", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "\u52A0\u8F7D\u4E2D" });
@@ -18957,11 +18996,11 @@ if (uni.restoreGlobal) {
                   type: 2,
                   imageUrl: url,
                   success: function(res2) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:461", "success:" + JSON.stringify(res2));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:464", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
                   fail: function(err) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:465", "fail:" + JSON.stringify(err));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:468", "fail:" + JSON.stringify(err));
                   }
                 });
               } else {
@@ -18981,11 +19020,11 @@ if (uni.restoreGlobal) {
                   type: 2,
                   imageUrl: url,
                   success: function(res2) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:485", "success:" + JSON.stringify(res2));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:488", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
                   fail: function(err) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:489", "fail:" + JSON.stringify(err));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:492", "fail:" + JSON.stringify(err));
                   }
                 });
               } else {
@@ -21113,7 +21152,7 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "dialog" }, [
               vue.createElementVNode("view", { class: "dialog-section" }, [
                 vue.createElementVNode("view", { class: "dialog-title" }, "\u786E\u8BA4\u89E3\u7ED1"),
-                vue.createElementVNode("view", { class: "dialog-content" }, "\u786E\u5B9A\u8981\u89E3\u9664\u8D26\u53F7\u4E0E\u5FAE\u4FE1\u7684\u5173\u952E\u5417\uFF1F"),
+                vue.createElementVNode("view", { class: "dialog-content" }, "\u786E\u5B9A\u8981\u89E3\u9664\u8D26\u53F7\u4E0E\u5FAE\u4FE1\u7684\u5173\u8054\u5417\uFF1F"),
                 vue.createElementVNode("view", { class: "dialog-btn-box" }, [
                   vue.createVNode(_component_van_button, {
                     type: "default",
@@ -24748,7 +24787,7 @@ if (uni.restoreGlobal) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "cancel" }, [
-      vue.createCommentVNode(' <view class="status_bar"></view> '),
+      vue.createElementVNode("view", { class: "status_bar" }),
       vue.createElementVNode("view", { class: "top-bar" }, [
         vue.createVNode(_component_van_icon, {
           name: "arrow-left",
@@ -24874,22 +24913,22 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "agreement-box" }, [
         vue.createElementVNode("p", null, "\u5728\u4F60\u7533\u8BF7\u6CE8\u9500\u5065\u53D8\u8D26\u53F7\u4E4B\u524D\uFF0C\u8BF7\u8C28\u614E\u64CD\u4F5C\u3002"),
         vue.createElementVNode("p", null, "\u8BF7\u4F60\u8BA4\u771F\u9605\u8BFB\u3001\u7406\u89E3\u5E76\u540C\u610F\u300A\u8D26\u53F7\u6CE8\u9500\u987B\u77E5\u300B\uFF08\u4EE5\u4E0B\u79F0\u201C\u6CE8\u9500\u987B\u77E5\u201D\uFF09\u3002"),
-        vue.createElementVNode("p", null, "\u3010\u7279\u522B\u63D0\u793A\u3011\u5728\u6B64\u5584\u610F\u63D0\u9192\u4F60\uFF0C\u6CE8\u9500\u5065\u53D8\u8D26\u53F7\u4E3A\u4E0D\u53EF\u6062\u590D\u7684\u64CD\u4F5C\uFF0C\u6CE8\u9500\u8D26\u53F7\u540E\u4F60\u5C06\u65E0\u6CD5\u518D\u5728\u5065\u53D8\u53CA\u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u5185\u7684\u591A\u9879\u5173\u8054\u65B9\u4EA7\u54C1/\u670D\u52A1\u4E2D\u4F7F\u7528\u672C\u8D26\u53F7\u6216\u627E\u56DE\u4F60\u6DFB\u52A0\u3001\u7ED1\u5B9A\u7684\u4EFB\u4F55\u5185\u5BB9\u6216\u4FE1\u606F\uFF08\u5373\u4F7F\u4F60\u4F7F\u7528\u76F8\u540C\u7684\u624B\u673A\u53F7\u7801\u518D\u6B21\u6CE8\u518C\u5E76\u4F7F\u7528\u5065\u53D8)\u3002"),
-        vue.createElementVNode("p", null, " \u5EFA\u8BAE\u4F60\u5728\u6CE8\u9500\u524D\u81EA\u884C\u5907\u4EFD\u5065\u53D8\u8D26\u53F7\u76F8\u5173\u7684\u6240\u6709\u4FE1\u606F\uFF0C\u5E76\u8BF7\u786E\u8BA4\u4E0E\u672C\u5065\u53D8\u8D26\u53F7\u76F8\u5173\u7684\u6240\u6709\u670D\u52A1\u5747\u5DF2\u8FDB\u884C\u59A5\u5584\u5904\u7406\u3002\u6CE8\u9500\u6210\u529F\u540E\uFF0C\u6211\u4EEC\u5C06\u5220\u9664\u4F60\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6216\u5BF9\u5176\u8FDB\u884C\u533F\u540D\u5316\u5904\u7406\u3002\u8BF7\u4F60\u77E5\u6089\u5E76\u7406\u89E3\uFF0C\u6839\u636E\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u76F8\u5173\u65E5\u5FD7\u8BB0\u5F55\u5065\u53D8\u5C06\u4FDD\u7559\u4E0D\u5C11\u4E8E6\u4E2A\u6708\u7684\u65F6\u95F4\u3002"),
+        vue.createElementVNode("p", null, " \u3010\u7279\u522B\u63D0\u793A\u3011\u5728\u6B64\u5584\u610F\u63D0\u9192\u4F60\uFF0C\u6CE8\u9500\u5065\u53D8\u8D26\u53F7\u4E3A\u4E0D\u53EF\u6062\u590D\u7684\u64CD\u4F5C\uFF0C\u6CE8\u9500\u8D26\u53F7\u540E\u4F60\u5C06\u65E0\u6CD5\u518D\u5728\u5065\u53D8\u53CA\u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u5185\u7684\u591A\u9879\u5173\u8054\u65B9\u4EA7\u54C1/\u670D\u52A1\u4E2D\u4F7F\u7528\u672C\u8D26\u53F7\u6216\u627E\u56DE\u4F60\u6DFB\u52A0\u3001\u7ED1\u5B9A\u7684\u4EFB\u4F55\u5185\u5BB9\u6216\u4FE1\u606F\uFF08\u5373\u4F7F\u4F60\u4F7F\u7528\u76F8\u540C\u7684\u624B\u673A\u53F7\u7801\u518D\u6B21\u6CE8\u518C\u5E76\u4F7F\u7528\u5065\u53D8)\u3002 "),
+        vue.createElementVNode("p", null, " \u5EFA\u8BAE\u4F60\u5728\u6CE8\u9500\u524D\u81EA\u884C\u5907\u4EFD\u5065\u53D8\u8D26\u53F7\u76F8\u5173\u7684\u6240\u6709\u4FE1\u606F\uFF0C\u5E76\u8BF7\u786E\u8BA4\u4E0E\u672C\u5065\u53D8\u8D26\u53F7\u76F8\u5173\u7684\u6240\u6709\u670D\u52A1\u5747\u5DF2\u8FDB\u884C\u59A5\u5584\u5904\u7406\u3002\u6CE8\u9500\u6210\u529F\u540E\uFF0C\u6211\u4EEC\u5C06\u5220\u9664\u4F60\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6216\u5BF9\u5176\u8FDB\u884C\u533F\u540D\u5316\u5904\u7406\u3002\u8BF7\u4F60\u77E5\u6089\u5E76\u7406\u89E3\uFF0C\u6839\u636E\u76F8\u5173\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u76F8\u5173\u65E5\u5FD7\u8BB0\u5F55\u5065\u53D8\u5C06\u4FDD\u7559\u4E0D\u5C11\u4E8E6\u4E2A\u6708\u7684\u65F6\u95F4\u3002 "),
         vue.createElementVNode("p", null, "1 \u6211\u4EEC\u5BF9\u4F60\u6CE8\u9500\u5065\u53D8\u8D26\u53F7\u7684\u51B3\u5B9A\u6DF1\u8868\u9057\u61BE\u3002"),
         vue.createElementVNode("p", null, "\u5982\u679C\u4F60\u4ECD\u6267\u610F\u6CE8\u9500\u8D26\u53F7\uFF0C\u4F60\u7684\u8D26\u53F7\u9700\u540C\u65F6\u6EE1\u8DB3\u4EE5\u4E0B\u6761\u4EF6\uFF1A"),
         vue.createElementVNode("p", null, "1.1 \u8D26\u53F7\u5904\u4E8E\u5B89\u5168\u72B6\u6001\uFF1A\u8D26\u53F7\u5904\u4E8E\u6B63\u5E38\u4F7F\u7528\u72B6\u6001\uFF0C\u65E0\u88AB\u76D7\u98CE\u9669\u3002"),
-        vue.createElementVNode("p", null, "1.2 \u8D26\u53F7\u8D22\u4EA7\u5747\u5DF2\u7ED3\u6E05\uFF0C\u6CA1\u6709\u672A\u5B8C\u6210\u548C/\u6216\u5B58\u5728\u4E89\u8BAE\u7684\u670D\u52A1\uFF1A\u8D26\u53F7\u4E2D\u6CA1\u6709\u8D44\u4EA7\u3001\u6B20\u6B3E\u3001\u672A\u7ED3\u6E05\u7684\u8D44\u91D1\u548C\u865A\u62DF\u6743\u76CA\uFF1B\u672C\u8D26\u53F7\u53CA\u901A\u8FC7\u672C\u8D26\u53F7\u63A5\u5165\u7684\u7B2C\u4E09\u65B9\u4E2D\u6CA1\u6709\u672A\u5B8C\u6210\u548C/\u6216\u5B58\u5728\u4E89\u8BAE\u7684\u670D\u52A1\u3002"),
+        vue.createElementVNode("p", null, " 1.2 \u8D26\u53F7\u8D22\u4EA7\u5747\u5DF2\u7ED3\u6E05\uFF0C\u6CA1\u6709\u672A\u5B8C\u6210\u548C/\u6216\u5B58\u5728\u4E89\u8BAE\u7684\u670D\u52A1\uFF1A\u8D26\u53F7\u4E2D\u6CA1\u6709\u8D44\u4EA7\u3001\u6B20\u6B3E\u3001\u672A\u7ED3\u6E05\u7684\u8D44\u91D1\u548C\u865A\u62DF\u6743\u76CA\uFF1B\u672C\u8D26\u53F7\u53CA\u901A\u8FC7\u672C\u8D26\u53F7\u63A5\u5165\u7684\u7B2C\u4E09\u65B9\u4E2D\u6CA1\u6709\u672A\u5B8C\u6210\u548C/\u6216\u5B58\u5728\u4E89\u8BAE\u7684\u670D\u52A1\u3002 "),
         vue.createElementVNode("p", null, "1.3\u8D26\u53F7\u6743\u9650\u89E3\u9664\uFF1A\u8D26\u53F7\u5DF1\u89E3\u9664\u4E0E\u5176\u4ED6\u4EA7\u54C1\u3001\u7F51\u7AD9\u6388\u6743\u767B\u5F55\u6216\u7ED1\u5B9A\u5173\u7CFB\u3002"),
         vue.createElementVNode("p", null, "1.4 \u8D26\u53F7\u65E0\u4EFB\u4F55\u7EA0\u7EB7\uFF0C\u5305\u62EC\u6295\u8BC9\u4E3E\u62A5\u6216\u88AB\u6295\u8BC9\u4E3E\u62A5\u3002"),
         vue.createElementVNode("p", null, "2. \u5728\u4F60\u7684\u8D26\u53F7\u6CE8\u9500\u671F\u95F4\uFF0C\u5982\u679C\u4F60\u7684\u8D26\u53F7\u6D89\u53CA\u4E89\u8BAE\u7EA0\u7EB7\uFF0C\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\uFF1A"),
-        vue.createElementVNode("p", null, "2.1\u6295\u8BC9\u3001\u4E3E\u62A5\u3001\u8BC9\u8BBC\u3001\u4EF2\u88C1\u3001\u56FD\u5BB6\u6709\u6743\u673A\u5173\u8C03\u67E5\u7B49\uFF0C\u4F60\u77E5\u6653\u5E76\u7406\u89E3\uFF0C\u5065\u53D8\u6709\u6743\u81EA\u884C\u51B3\u5B9A\u662F\u5426\u7EC8\u6B62\u672C\u8D26\u53F7\u7684\u6CE8\u9500\u800C\u65E0\u9700\u53E6\u884C\u5F97\u5230\u4F60\u7684\u540C\u610F\u3002"),
-        vue.createElementVNode("p", null, "3. \u6CE8\u9500\u5065\u53D8\u8D26\u53F7\uFF0C\u4F60\u5C06\u65E0\u6CD5\u518D\u4F7F\u7528\u672C\u5065\u53D8\u8D26\u53F7\uFF0C\u4E5F\u5C06\u65E0\u6CD5\u627E\u56DE\u672C\u5065\u53D8\u8D26\u53F7\u4E2D\u53CA\u4E0E\u8D26\u53F7\u76F8\u5173\u7684\u4EFB\u4F55\u5185\u5BB9\u6216\u4FE1\u606F\uFF0C\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\uFF1A"),
-        vue.createElementVNode("p", null, "3.1\u672C\u5065\u53D8\u8D26\u53F7\u7684\u4E2A\u4EBA\u8D44\u6599\u548C\u5386\u53F2\u4FE1\u606F\uFF08\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\u5934\u50CF\u3001\u7528\u6237\u540D\u3001\u53D1\u5E03\u5185\u5BB9\u3001\u6D4F\u89C8\u8BB0\u5F55\u3001\u5173\u6CE8\u3001\u6536\u85CF\u7B49\uFF09\u90FD\u5C06\u65E0\u6CD5\u627E\u56DE\uFF1B"),
+        vue.createElementVNode("p", null, " 2.1\u6295\u8BC9\u3001\u4E3E\u62A5\u3001\u8BC9\u8BBC\u3001\u4EF2\u88C1\u3001\u56FD\u5BB6\u6709\u6743\u673A\u5173\u8C03\u67E5\u7B49\uFF0C\u4F60\u77E5\u6653\u5E76\u7406\u89E3\uFF0C\u5065\u53D8\u6709\u6743\u81EA\u884C\u51B3\u5B9A\u662F\u5426\u7EC8\u6B62\u672C\u8D26\u53F7\u7684\u6CE8\u9500\u800C\u65E0\u9700\u53E6\u884C\u5F97\u5230\u4F60\u7684\u540C\u610F\u3002 "),
+        vue.createElementVNode("p", null, " 3. \u6CE8\u9500\u5065\u53D8\u8D26\u53F7\uFF0C\u4F60\u5C06\u65E0\u6CD5\u518D\u4F7F\u7528\u672C\u5065\u53D8\u8D26\u53F7\uFF0C\u4E5F\u5C06\u65E0\u6CD5\u627E\u56DE\u672C\u5065\u53D8\u8D26\u53F7\u4E2D\u53CA\u4E0E\u8D26\u53F7\u76F8\u5173\u7684\u4EFB\u4F55\u5185\u5BB9\u6216\u4FE1\u606F\uFF0C\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\uFF1A "),
+        vue.createElementVNode("p", null, " 3.1\u672C\u5065\u53D8\u8D26\u53F7\u7684\u4E2A\u4EBA\u8D44\u6599\u548C\u5386\u53F2\u4FE1\u606F\uFF08\u5305\u62EC\u4F46\u4E0D\u9650\u4E8E\u5934\u50CF\u3001\u7528\u6237\u540D\u3001\u53D1\u5E03\u5185\u5BB9\u3001\u6D4F\u89C8\u8BB0\u5F55\u3001\u5173\u6CE8\u3001\u6536\u85CF\u7B49\uFF09\u90FD\u5C06\u65E0\u6CD5\u627E\u56DE\uFF1B "),
         vue.createElementVNode("p", null, "3.2 \u4F60\u5C06\u65E0\u6CD5\u767B\u5F55\u3001\u4F7F\u7528\u672C\u5065\u53D8\u8D26\u53F7\uFF1B"),
-        vue.createElementVNode("p", null, "3.3 \u4F60\u901A\u8FC7\u672C\u5065\u53D8\u8D26\u53F7\u4F7F\u7528\u3001\u6388\u6748\u767B\u5F55\u6216\u7ED1\u5B9A\u672C\u5065\u53D8\u8D26\u53F7\u540E\u4F7F\u7528\u7684\u5065\u53D8\u6216\u7B2C\u4E09\u65B9\u670D\u52A1\u7684\u76F8\u5173\u8BB0\u5F55\u5C06\u65E0\u6CD5\u627E\u56DE\u3002\u4F60\u5C06\u65E0\u6CD5\u518D\u767B\u5F55\u3001\u4F7F\u7528\u4E0A\u8FF0\u670D\u52A1\uFF0C\u4F60\u66FE\u83B7\u5F97\u7684\u865B\u62DF\u6743\u76CA\u7B49\u8D22\u4EA7\u6027\u5229\u76CA\u89C6\u4E3A\u4F60\u81EA\u52A8\u653E\u5954\uFF0C\u5C06\u65E0\u6CD5\u7EE7\u7EED\u4F7F\u7528\u3002"),
-        vue.createElementVNode("p", null, "3.4 \u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u8303\u56F4\u5185\u7684\u591A\u9879\u5173\u8054\u65B9\u4EA7\u54C1/\u670D\u52A1\u5C06\u65E0\u6CD5\u4F7F\u7528\u672C\u8D26\u53F7\uFF0C\u4E86\u89E3\u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u4F60\u7406\u89E3\u4E95\u540C\u610F\uFF0C\u5065\u53D8\u65E0\u6CD5\u534F\u52A9\u4F60\u91CD\u65B0\u6062\u590D\u4E0A\u8FF0\u670D\u52A1\u3002"),
-        vue.createElementVNode("p", null, "4. \u6CE8\u9500\u672C\u5065\u53D8\u8D26\u53F7\u5E76\u4E0D\u4EE3\u8868\u6CE8\u9500\u524D\u7684\u8D26\u53F7\u4E2D\u7684\u884C\u4E3A\u548C\u76F8\u5173\u8D23\u4EFB\u5F97\u5230\u8C41\u514D\u6216\u51CF\u8F7B\u3002")
+        vue.createElementVNode("p", null, " 3.3 \u4F60\u901A\u8FC7\u672C\u5065\u53D8\u8D26\u53F7\u4F7F\u7528\u3001\u6388\u6748\u767B\u5F55\u6216\u7ED1\u5B9A\u672C\u5065\u53D8\u8D26\u53F7\u540E\u4F7F\u7528\u7684\u5065\u53D8\u6216\u7B2C\u4E09\u65B9\u670D\u52A1\u7684\u76F8\u5173\u8BB0\u5F55\u5C06\u65E0\u6CD5\u627E\u56DE\u3002\u4F60\u5C06\u65E0\u6CD5\u518D\u767B\u5F55\u3001\u4F7F\u7528\u4E0A\u8FF0\u670D\u52A1\uFF0C\u4F60\u66FE\u83B7\u5F97\u7684\u865B\u62DF\u6743\u76CA\u7B49\u8D22\u4EA7\u6027\u5229\u76CA\u89C6\u4E3A\u4F60\u81EA\u52A8\u653E\u5954\uFF0C\u5C06\u65E0\u6CD5\u7EE7\u7EED\u4F7F\u7528\u3002 "),
+        vue.createElementVNode("p", null, " 3.4 \u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u8303\u56F4\u5185\u7684\u591A\u9879\u5173\u8054\u65B9\u4EA7\u54C1/\u670D\u52A1\u5C06\u65E0\u6CD5\u4F7F\u7528\u672C\u8D26\u53F7\uFF0C\u4E86\u89E3\u7EDF\u4E00\u670D\u52A1\u5E73\u53F0\u4F53\u7CFB\u4F60\u7406\u89E3\u4E95\u540C\u610F\uFF0C\u5065\u53D8\u65E0\u6CD5\u534F\u52A9\u4F60\u91CD\u65B0\u6062\u590D\u4E0A\u8FF0\u670D\u52A1\u3002 "),
+        vue.createElementVNode("p", null, " 4. \u6CE8\u9500\u672C\u5065\u53D8\u8D26\u53F7\u5E76\u4E0D\u4EE3\u8868\u6CE8\u9500\u524D\u7684\u8D26\u53F7\u4E2D\u7684\u884C\u4E3A\u548C\u76F8\u5173\u8D23\u4EFB\u5F97\u5230\u8C41\u514D\u6216\u51CF\u8F7B\u3002 ")
       ]),
       vue.createElementVNode("view", { class: "footer-box" }, [
         vue.createElementVNode("view", {

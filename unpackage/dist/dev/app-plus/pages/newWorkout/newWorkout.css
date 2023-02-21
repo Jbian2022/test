@@ -193,7 +193,7 @@
   align-items: center;
   padding: 0.9375rem;
   font-size: 1.5rem;
-  color: #FFFFFF;
+  color: #ffffff;
   background: transparent;
 }
 .new-workout .header .title {
@@ -202,17 +202,17 @@
 .new-workout .header .btn {
   padding: 0 0.9375rem;
   height: 2.125rem;
-  background: #1370FF;
+  background: #1370ff;
   border-radius: 0.5rem;
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 1.3125rem;
   border: none;
 }
 .new-workout .header .save {
   margin-right: 0.625rem;
-  background: #4B525E;
+  background: #4b525e;
 }
 .new-workout .workout-title {
   height: 4.0625rem;
@@ -223,18 +223,18 @@
 }
 .new-workout .workout-title .uni-input {
   height: 3.125rem;
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.75rem;
   font-size: 0.9375rem;
   font-weight: 400;
-  color: #F4F7FF;
+  color: #f4f7ff;
   padding-left: 1.25rem;
 }
 .new-workout .workout-title .uni-input::-webkit-input-placeholder {
-  color: #7A7F89;
+  color: #7a7f89;
 }
 .new-workout .workout-title .uni-input::placeholder {
-  color: #7A7F89;
+  color: #7a7f89;
 }
 .new-workout .action-list {
   height: calc(100vh - 14.4375rem - var(--status-bar-height));
@@ -244,7 +244,7 @@
 }
 .new-workout .action-list .action-tiem {
   padding: 1.25rem;
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.75rem;
 }
 .new-workout .action-list .action-tiem .action-tiem-header {
@@ -269,7 +269,7 @@
 .new-workout .action-list .action-tiem .action-tiem-header .des-info .des-title {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 1.3125rem;
   margin-bottom: 0.4375rem;
 }
@@ -277,7 +277,7 @@
   width: 11.875rem;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
   line-height: 1.125rem;
   display: inline-flex;
   justify-content: space-between;
@@ -286,7 +286,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .new-workout .action-list .action-tiem .action-tiem-header .config .img {
   width: 1rem;
@@ -301,7 +301,7 @@
 .new-workout .action-list .action-tiem .action-tiem-des .project-item {
   display: flex;
   height: 2.5rem;
-  color: #BDC3CE;
+  color: #bdc3ce;
   font-size: 0.8125rem;
   align-items: center;
 }
@@ -310,17 +310,19 @@
   background: transparent;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .new-workout .action-list .action-tiem .action-tiem-des .project-item .uni-input::-webkit-input-placeholder {
-  color: #7A7F89;
+  color: #7a7f89;
 }
 .new-workout .action-list .action-tiem .action-tiem-des .project-item .uni-input::placeholder {
-  color: #7A7F89;
+  color: #7a7f89;
 }
-.new-workout .action-list .action-tiem .action-tiem-des .project-item.active .kg, .new-workout .action-list .action-tiem .action-tiem-des .project-item.active .time, .new-workout .action-list .action-tiem .action-tiem-des .project-item.active .yes {
-  background: #01E08C;
-  color: #FFFFFF;
+.new-workout .action-list .action-tiem .action-tiem-des .project-item.active .kg,
+.new-workout .action-list .action-tiem .action-tiem-des .project-item.active .time,
+.new-workout .action-list .action-tiem .action-tiem-des .project-item.active .yes {
+  background: #01e08c;
+  color: #ffffff;
 }
 .new-workout .action-list .action-tiem .action-tiem-des .project-item .index {
   display: flex;
@@ -330,12 +332,13 @@
   height: 100%;
   border-radius: 0.5rem;
   padding: 0 0.625rem;
-  color: #BDC3CE;
+  color: #bdc3ce;
   font-size: 1rem;
   min-width: 1.875rem;
   box-sizing: border-box;
 }
-.new-workout .action-list .action-tiem .action-tiem-des .project-item .kg, .new-workout .action-list .action-tiem .action-tiem-des .project-item .time {
+.new-workout .action-list .action-tiem .action-tiem-des .project-item .kg,
+.new-workout .action-list .action-tiem .action-tiem-des .project-item .time {
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -357,7 +360,7 @@
   margin-left: 0.75rem;
   padding: 0 0.625rem;
   width: 3.125rem;
-  color: #F4F7FF;
+  color: #f4f7ff;
   box-sizing: border-box;
 }
 .new-workout .action-list .action-tiem .action-tiem-des .project-item .yes .true-icon {
@@ -393,13 +396,13 @@
   text-align: center;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .new-workout .action-list .action-tiem .weight .uni-input::-webkit-input-placeholder {
-  color: #BDC3CE;
+  color: #bdc3ce;
 }
 .new-workout .action-list .action-tiem .weight .uni-input::placeholder {
-  color: #BDC3CE;
+  color: #bdc3ce;
 }
 .new-workout .action-list .action-type-box + .action-type-box {
   margin-top: 0.9375rem;
@@ -408,7 +411,7 @@
   margin-top: 1.25rem;
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
 }
 .new-workout .action-list .add-project-item .add-text {
@@ -435,7 +438,7 @@
   border-radius: 100%;
   font-size: 1rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   padding: 0;
 }
@@ -452,12 +455,12 @@
 .new-workout .footer-button .add {
   flex: 1;
   height: 3.125rem;
-  background: #454951;
+  background: #1370ff;
   border-radius: 0.5rem;
   border: none;
   font-size: 1rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .new-workout .uni-popup [name=mask] {
   -webkit-backdrop-filter: blur(3px);
@@ -465,7 +468,7 @@
 }
 .new-workout .finish-dialog,
 .new-workout .delete-dialog {
-  background: linear-gradient(180deg, #343A44 0%, #212328 100%);
+  background: linear-gradient(180deg, #343a44 0%, #212328 100%);
   width: 19.0625rem;
   height: 25rem;
 }
@@ -474,7 +477,7 @@
   padding-left: 2.1875rem;
   padding-top: 2rem;
   font-size: 2.75rem;
-  color: #F4F7FF;
+  color: #f4f7ff;
   line-height: 3.875rem;
   font-weight: 600;
 }
@@ -485,7 +488,7 @@
   padding-bottom: 9.6875rem;
   font-size: 0.9375rem;
   font-weight: 400;
-  color: #BDC3CE;
+  color: #bdc3ce;
 }
 .new-workout .finish-dialog .botton-box,
 .new-workout .delete-dialog .botton-box {
@@ -499,7 +502,7 @@
   font-size: 1rem;
   font-weight: 600;
   border-radius: 0.5rem;
-  color: #BDC3CE;
+  color: #bdc3ce;
   margin-bottom: 0.25rem;
 }
 .new-workout .finish-dialog .botton-box .van-button::after,
@@ -511,17 +514,17 @@
   background-size: contain;
 }
 .new-workout .finish-dialog .van-button.finish {
-  background: #1370FF !important;
-  color: #FFFFFF !important;
+  background: #1370ff !important;
+  color: #ffffff !important;
 }
 .new-workout .delete-dialog {
   background-image: url("../../static/newWorkout/training delete.png");
   background-size: contain;
 }
 .new-workout .delete-dialog .van-button.delete {
-  background: #F04242 !important;
-  color: #FFFFFF !important;
+  background: #f04242 !important;
+  color: #ffffff !important;
 }
 .new-workout .bluecss {
-  background: #1370FF !important;
+  background: #1370ff !important;
 }

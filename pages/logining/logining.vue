@@ -5,23 +5,6 @@
       <image class="text1" src="@/static/app-plus/other/coach.png"></image>
     </view>
     <view class="middle">
-      <!-- <input
-        :value="phone"
-        type="tel"
-        :maxlength="11"
-        @input="phoneInput"
-        class="phone"
-        focus
-        placeholder="请输入手机号"
-        :adjust-position="false"
-      /> -->
-      <!-- <button
-        class="btn"
-        :class="controlActiveFlag ? 'active_btn' : ''"
-        @click.native="getSms"
-      >
-        <span class="btn-text">获取验证码</span>
-      </button> -->
       <view class="wx_icon_login_style" @click.native="loginByWeixin">
         <image
           class="icon_img_style"
@@ -29,6 +12,18 @@
         ></image>
         <view class="icon_remark_style">微信快捷登录</view>
       </view>
+      <view
+        class="apple_icon_login_style wx_icon_login_style"
+        @click.native="loginByApple"
+        v-if="platform === 'ios'"
+      >
+        <image
+          class="icon_img_style apple_img_style"
+          src="../../static/login/apple.svg"
+        ></image>
+        <view class="icon_remark_style">Apple账号登录</view>
+      </view>
+
       <view class="ying_si_style">
         <view class="check_style" @click="checkFlag = !checkFlag">
           <image
@@ -82,12 +77,12 @@
           :class="platform === 'ios' ? 'common_style' : ''"
           src="../../static/login/phonelogin.svg"
         ></image>
-        <image
+        <!-- <image
           @click.native="loginByApple"
           v-if="platform === 'ios'"
           class="wx_img_style"
           src="../../static/login/ioslogin.svg"
-        ></image>
+        ></image> -->
       </view>
     </view>
   </view>
@@ -342,12 +337,12 @@ export default {
     },
     loginByApple() {
       this.agreementType = 'apple'
-      if (!this.haAuth) return
       if (!this.checkFlag) {
         // Toast('请同意隐私政策')
         this.needChecked = true
         return
       }
+      if (!this.haAuth) return
       this.appleLoginCommon()
     },
 
@@ -576,9 +571,9 @@ export default {
       height: 100upx;
       object-fit: contain;
     }
-    .common_style:nth-child(1) {
-      margin-right: 100upx;
-    }
+    // .common_style:nth-child(1) {
+    //   margin-right: 100upx;
+    // }
   }
 }
 
@@ -686,6 +681,14 @@ export default {
     font-weight: 600;
     color: #f4f7ff;
     margin-left: 20upx;
+  }
+}
+.apple_icon_login_style {
+  background: #383d46 !important;
+  .apple_img_style {
+    width: 42upx !important;
+    height: 42upx !important;
+    object-fit: cover;
   }
 }
 

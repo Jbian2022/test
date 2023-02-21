@@ -83,6 +83,9 @@ body {
   height: var(--status-bar-height);
   width: 100%;
 }
+.cancel {
+  padding: 0 1.25rem;
+}
 .cancel .top-bar {
   height: 2.75rem;
   display: flex;

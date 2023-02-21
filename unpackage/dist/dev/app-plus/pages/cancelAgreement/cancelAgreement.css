@@ -23,15 +23,17 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-body {
-  background-color: #fff;
-}
 .status_bar {
   height: var(--status-bar-height);
   width: 100%;
 }
 .cancel-agreement {
+  width: calc(100vw - 1.875rem);
+  height: 100vh;
+  overflow: hidden;
   padding: 0 0.9375rem;
+  display: flex;
+  flex-direction: column;
 }
 .cancel-agreement .top-bar {
   position: -webkit-sticky;
@@ -59,8 +61,10 @@ body {
   padding-bottom: 5.625rem;
   font-size: 0.9375rem;
   font-weight: 400;
-  color: #6E7073;
+  color: #6e7073;
   line-height: 1.375rem;
+  overflow-y: auto;
+  flex: 0.95;
 }
 .cancel-agreement .footer-box {
   width: 100vw;

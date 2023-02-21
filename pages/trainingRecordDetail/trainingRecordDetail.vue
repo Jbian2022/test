@@ -326,6 +326,9 @@ export default {
       this.getTrainInfo()
     }
   },
+  onShow() {
+    uni.hideLoading()
+  },
   //监测页面滑动
   onPageScroll(e) {
     if (e.scrollTop > uni.getWindowInfo().statusBarHeight) {

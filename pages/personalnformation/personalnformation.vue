@@ -120,9 +120,6 @@ export default {
     jump() {
       try {
         let param = {
-          nickname:
-            this.coachForm.nickname ||
-            this.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2'),
           avatar:
             'https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png'
         }

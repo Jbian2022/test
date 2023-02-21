@@ -141,9 +141,6 @@
   height: 3.125rem;
   object-fit: contain;
 }
-.counter .wx_loging_style .common_style[data-v-62a93864]:nth-child(1) {
-  margin-right: 3.125rem;
-}
 .botter_dakuang_style[data-v-62a93864] {
   position: absolute;
   left: 0;
@@ -240,6 +237,14 @@
   font-weight: 600;
   color: #f4f7ff;
   margin-left: 0.625rem;
+}
+.apple_icon_login_style[data-v-62a93864] {
+  background: #383d46 !important;
+}
+.apple_icon_login_style .apple_img_style[data-v-62a93864] {
+  width: 1.3125rem !important;
+  height: 1.3125rem !important;
+  object-fit: cover;
 }
 [data-v-62a93864] .van-field__control {
   font-size: 1rem !important;

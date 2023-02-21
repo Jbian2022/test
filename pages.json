@@ -379,14 +379,24 @@
 			"path": "pages/cancel/cancel",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/cancelAgreement/cancelAgreement",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
 			}
 		},
 		{

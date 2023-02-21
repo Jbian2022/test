@@ -148,7 +148,7 @@
                 class="loop_bottom_result_style"
                 @click.stop="getReport(item)"
               >
-                <view class="result_last_remark_style">查看会员详情</view>
+                <view class="result_last_remark_style">查看评估报告</view>
                 <image
                   class="result_last_img_style"
                   src="../../static/app-plus/other/arrows.svg"
