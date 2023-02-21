@@ -407,16 +407,6 @@
 				if (actionListStr) {
 					this.actionList = JSON.parse(actionListStr)
 				}
-				const flag = this.actionList.some(item=>item.isOld)
-				if(!flag){
-					this.actionList.forEach((item,i)=>{
-						if(i>0){
-							item.open = false
-						} else {
-							item.open = true
-						}
-					})
-				}
 			} catch (e) {
 				// error
 			}
