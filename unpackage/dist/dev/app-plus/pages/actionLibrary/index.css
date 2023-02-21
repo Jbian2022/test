@@ -390,7 +390,7 @@
   color: #f4f7ff;
 }
 .action-library .content.select-page {
-  height: calc(100vh - 11.875rem);
+  height: calc(100vh - 13.125rem - var(--status-bar-height));
 }
 .action-library .dialog {
   background: #383d46;

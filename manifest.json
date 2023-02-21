@@ -2,8 +2,8 @@
     "name" : "健变",
     "appid" : "__UNI__76A9E40",
     "description" : "一款健身APP",
-    "versionName" : "1.3.1",
-    "versionCode" : 131,
+    "versionName" : "1.3.2",
+    "versionCode" : 132,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -68,7 +68,7 @@
                     }
                 },
                 "idfa" : false,
-				"urlschemewhitelist": ["weixin"],
+                "urlschemewhitelist" : [ "weixin" ],
                 "privacyDescription" : {
                     "NSPhotoLibraryUsageDescription" : "拍照或使用本地相册上传头像需要读取您的相册",
                     "NSPhotoLibraryAddUsageDescription" : "训练记录和体侧报告需要保存到本地，需要读取您的相册",

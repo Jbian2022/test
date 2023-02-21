@@ -16584,18 +16584,83 @@ if (uni.restoreGlobal) {
         }
       },
       addActionHandle(z2) {
-        if (this.mode === 0 && z2 === "z") {
-          uni.reLaunch({
-            url: `/pages/addAction/index?type=${this.mode}&actionClass=10`
+        const type = uni.getStorageSync("actionLibraryType");
+        if (type === "select") {
+          const tempList = this.selectActionList.map((item) => {
+            if (item.isOld) {
+              return item;
+            } else {
+              return {
+                _id: item._id,
+                type: item.actionType,
+                actionName: item.actionName,
+                actionClass: item.actionClass,
+                actionClassName: item.actionClassName,
+                url: item.url,
+                load: 0,
+                times: 0,
+                mileage: 0,
+                frequency: 0,
+                weight: null,
+                groupList: [{
+                  kg: null,
+                  km: null,
+                  time: null,
+                  hour: null,
+                  minute: null,
+                  second: null,
+                  active: false
+                }],
+                open: false
+              };
+            }
           });
-        } else if (this.mode === 1 && z2 === "z") {
-          uni.reLaunch({
-            url: `/pages/addAction/index?type=${this.mode}&actionClass=20`
-          });
+          uni.setStorageSync("actionList", JSON.stringify(tempList));
+          uni.setStorageSync("actionLibrary", JSON.stringify({
+            mode: this.mode,
+            actionClass: this.actionClass,
+            actionClassName: this.actionClassName,
+            actionIndex: this.actionIndex
+          }));
+          if (this.mode === 0 && z2 === "z") {
+            uni.setStorageSync("actionLibrary", JSON.stringify({
+              mode: this.mode,
+              actionClass: "10",
+              actionClassName: "\u81EA\u5B9A\u4E49\u52A8\u4F5C",
+              actionIndex: "10"
+            }));
+            uni.reLaunch({
+              url: `/pages/addAction/index?type=${this.mode}&actionClass=10`
+            });
+          } else if (this.mode === 1 && z2 === "z") {
+            uni.setStorageSync("actionLibrary", JSON.stringify({
+              mode: this.mode,
+              actionClass: "20",
+              actionClassName: "\u81EA\u5B9A\u4E49\u52A8\u4F5C",
+              actionIndex: "9"
+            }));
+            uni.reLaunch({
+              url: `/pages/addAction/index?type=${this.mode}&actionClass=20`
+            });
+          } else {
+            uni.reLaunch({
+              url: `/pages/addAction/index?type=${this.mode}&actionClass=${this.actionClass}`
+            });
+          }
         } else {
-          uni.reLaunch({
-            url: `/pages/addAction/index?type=${this.mode}&actionClass=${this.actionClass}`
-          });
+          if (this.mode === 0 && z2 === "z") {
+            uni.reLaunch({
+              url: `/pages/addAction/index?type=${this.mode}&actionClass=10`
+            });
+          } else if (this.mode === 1 && z2 === "z") {
+            uni.reLaunch({
+              url: `/pages/addAction/index?type=${this.mode}&actionClass=20`
+            });
+          } else {
+            uni.reLaunch({
+              url: `/pages/addAction/index?type=${this.mode}&actionClass=${this.actionClass}`
+            });
+          }
         }
       },
       async deleteHandle() {
