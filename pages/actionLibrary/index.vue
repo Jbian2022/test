@@ -253,29 +253,30 @@ export default {
         actionList.forEach(item=>item.isOld = true)
         this.selectActionList = actionList
       }
-      const actionLibraryStr = uni.getStorageSync('actionLibrary')
-      if(actionLibraryStr){
-        const info = JSON.parse(actionLibraryStr)
-        this.mode = info.mode
-        this.actionIndex = info.actionIndex
-        this.actionClass = info.actionClass
-        this.actionClassName = info.actionClassName
-        if(this.mode == '1'){
-          this.modeChangeHandle(1,'back')
-        }
-      }
-      this.actionClassList.forEach((item) => {
-        const list = this.selectActionList.filter(
-          (child) => child.actionClass === item.value
-        )
-        item.badge = list.length || null
-      })
       uni.hideTabBar()
       this.showSaveButton = true
     } else {
       uni.showTabBar()
       this.showSaveButton = false
     }
+    const actionLibraryStr = uni.getStorageSync('actionLibrary')
+    if(actionLibraryStr){
+      const info = JSON.parse(actionLibraryStr)
+      this.mode = info.mode
+      this.actionIndex = info.actionIndex
+      this.actionClass = info.actionClass
+      this.actionClassName = info.actionClassName
+      if(this.mode == '1'){
+        this.modeChangeHandle(1,'back')
+      }
+    }
+    this.actionClassList.forEach((item) => {
+      const list = this.selectActionList.filter(
+        (child) => child.actionClass === item.value
+      )
+      item.badge = list.length || null
+    })
+    uni.removeStorageSync('actionLibrary')
     this.getActionList()
   },
   methods: {
@@ -388,6 +389,12 @@ export default {
       }
     },
     addActionHandle(z) {
+      uni.setStorageSync('actionLibrary', JSON.stringify({
+        mode:this.mode,
+        actionClass:this.actionClass,
+        actionClassName:this.actionClassName,
+        actionIndex: this.actionIndex
+      }))
       const type = uni.getStorageSync('actionLibraryType')
       if (type === 'select') {
         const tempList = this.selectActionList.map(item=>{
@@ -419,56 +426,47 @@ export default {
             }
           }
         })
+        const actionListStr = uni.getStorageSync('actionList')
+        if(actionListStr){
+          const actionList = JSON.parse(actionListStr)
+          if(!actionList||actionList.length===0){
+            tempList.forEach((item,i)=>{
+              if(i>0){
+                item.open = false
+              } else {
+                item.open = true
+              }
+            })
+          }
+        }
         uni.setStorageSync('actionList', JSON.stringify(tempList))
+      }
+      if (this.mode === 0 && z === 'z') {
         uni.setStorageSync('actionLibrary', JSON.stringify({
           mode:this.mode,
-          actionClass:this.actionClass,
-          actionClassName:this.actionClassName,
-          actionIndex: this.actionIndex
+          actionClass:'10',
+          actionClassName:'自定义动作',
+          actionIndex: '10'
         }))
-        if (this.mode === 0 && z === 'z') {
-          uni.setStorageSync('actionLibrary', JSON.stringify({
-            mode:this.mode,
-            actionClass:'10',
-            actionClassName:'自定义动作',
-            actionIndex: '10'
-          }))
-          uni.reLaunch({
-            url: '/pages/addAction/index' + `?type=${this.mode}&actionClass=10`
-          })
-        } else if (this.mode === 1 && z === 'z') {
-          uni.setStorageSync('actionLibrary', JSON.stringify({
-            mode:this.mode,
-            actionClass: '20',
-            actionClassName: '自定义动作',
-            actionIndex: '9'
-          }))
-          uni.reLaunch({
-            url: '/pages/addAction/index' + `?type=${this.mode}&actionClass=20`
-          })
-        } else {
-          uni.reLaunch({
-            url:
-              '/pages/addAction/index' +
-              `?type=${this.mode}&actionClass=${this.actionClass}`
-          })
-        }
+        uni.reLaunch({
+          url: '/pages/addAction/index' + `?type=${this.mode}&actionClass=10`
+        })
+      } else if (this.mode === 1 && z === 'z') {
+        uni.setStorageSync('actionLibrary', JSON.stringify({
+          mode:this.mode,
+          actionClass: '20',
+          actionClassName: '自定义动作',
+          actionIndex: '9'
+        }))
+        uni.reLaunch({
+          url: '/pages/addAction/index' + `?type=${this.mode}&actionClass=20`
+        })
       } else {
-        if (this.mode === 0 && z === 'z') {
-          uni.reLaunch({
-            url: '/pages/addAction/index' + `?type=${this.mode}&actionClass=10`
-          })
-        } else if (this.mode === 1 && z === 'z') {
-          uni.reLaunch({
-            url: '/pages/addAction/index' + `?type=${this.mode}&actionClass=20`
-          })
-        } else {
-          uni.reLaunch({
-            url:
-              '/pages/addAction/index' +
-              `?type=${this.mode}&actionClass=${this.actionClass}`
-          })
-        }
+        uni.reLaunch({
+          url:
+            '/pages/addAction/index' +
+            `?type=${this.mode}&actionClass=${this.actionClass}`
+        })
       }
     },
     async deleteHandle() {
@@ -521,6 +519,19 @@ export default {
           }
         }
       })
+      const actionListStr = uni.getStorageSync('actionList')
+      if(actionListStr){
+        const actionList = JSON.parse(actionListStr)
+        if(!actionList||actionList.length===0){
+          tempList.forEach((item,i)=>{
+            if(i>0){
+              item.open = false
+            } else {
+              item.open = true
+            }
+          })
+        }
+      }
       uni.setStorageSync('actionList', JSON.stringify(tempList))
       uni.setStorageSync('actionLibrary', JSON.stringify({
         mode:this.mode,
