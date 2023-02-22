@@ -132,8 +132,8 @@
       <view class="contact-customer">
         <view class="title">联系客服</view>
         <view class="customer-info">
-          <view class="customer-item" @click="copyText('1234567890')">
-            <text>客服微信：1234567890</text>
+          <view class="customer-item" @click="copyText('FeiYun41')">
+            <text>客服微信：FeiYun41</text>
             <text>复制</text>
           </view>
           <view

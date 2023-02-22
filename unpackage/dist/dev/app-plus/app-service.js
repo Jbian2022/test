@@ -20683,9 +20683,9 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("view", { class: "customer-info" }, [
             vue.createElementVNode("view", {
               class: "customer-item",
-              onClick: _cache[2] || (_cache[2] = ($event) => $options.copyText("1234567890"))
+              onClick: _cache[2] || (_cache[2] = ($event) => $options.copyText("FeiYun41"))
             }, [
-              vue.createElementVNode("text", null, "\u5BA2\u670D\u5FAE\u4FE1\uFF1A1234567890"),
+              vue.createElementVNode("text", null, "\u5BA2\u670D\u5FAE\u4FE1\uFF1AFeiYun41"),
               vue.createElementVNode("text", null, "\u590D\u5236")
             ]),
             vue.createElementVNode("view", {

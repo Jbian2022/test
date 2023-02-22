@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.3.4",
-    "code": 134
+    "name": "1.3.5",
+    "code": 135
   },
   "description": "一款健身APP",
   "developer": {
@@ -195,12 +195,14 @@
         "payment": {
           "alipay": {
             "__platform__": [
-              "ios"
+              "ios",
+              "android"
             ]
           },
           "weixin": {
             "__platform__": [
-              "ios"
+              "ios",
+              "android"
             ],
             "appid": "wxf790c35e4d544ded",
             "UniversalLinks": "https://jbian.net/uni-universallinks/__UNI__76A9E40/"

@@ -122,10 +122,10 @@
                 },
                 "payment" : {
                     "alipay" : {
-                        "__platform__" : [ "ios" ]
+                        "__platform__" : [ "ios", "android" ]
                     },
                     "weixin" : {
-                        "__platform__" : [ "ios" ],
+                        "__platform__" : [ "ios", "android" ],
                         "appid" : "wxf790c35e4d544ded",
                         "UniversalLinks" : "https://jbian.net/uni-universallinks/__UNI__76A9E40/"
                     }
