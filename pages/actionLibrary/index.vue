@@ -381,6 +381,12 @@ export default {
         this.currentAction = info
         this.$refs.popup.open()
       } else if (item.text === '修改动作') {
+        uni.setStorageSync('actionLibrary', JSON.stringify({
+          mode:this.mode,
+          actionClass:this.actionClass,
+          actionClassName:this.actionClassName,
+          actionIndex: this.actionIndex
+        }))
         uni.reLaunch({
           url:
             '/pages/addAction/index' +

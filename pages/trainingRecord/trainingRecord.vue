@@ -123,7 +123,7 @@
 				this.currentDay = item.day
 				let str = item.day.replace('-','年')
 				str = str.replace('-','月')
-				str = str.replace('-','日')
+				str = str + '日'
 				this.actionBoxDate = str
 				this.isButton = this.trainListInfo[item.day]&&this.trainListInfo[item.day].length<3 || !this.trainListInfo[item.day]
 				console.log('打开弹框',this.trainListInfo[item.day]);
