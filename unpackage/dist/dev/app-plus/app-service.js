@@ -16671,6 +16671,12 @@ if (uni.restoreGlobal) {
           this.currentAction = info;
           this.$refs.popup.open();
         } else if (item.text === "\u4FEE\u6539\u52A8\u4F5C") {
+          uni.setStorageSync("actionLibrary", JSON.stringify({
+            mode: this.mode,
+            actionClass: this.actionClass,
+            actionClassName: this.actionClassName,
+            actionIndex: this.actionIndex
+          }));
           uni.reLaunch({
             url: `/pages/addAction/index?type=${this.mode}&actionClass=${this.actionClass}&update=1&id=${info._id}&actionName=${info.actionName}&actionType=${info.actionType}`
           });
@@ -18739,7 +18745,7 @@ if (uni.restoreGlobal) {
         this.currentDay = item.day;
         let str = item.day.replace("-", "\u5E74");
         str = str.replace("-", "\u6708");
-        str = str.replace("-", "\u65E5");
+        str = str + "\u65E5";
         this.actionBoxDate = str;
         this.isButton = this.trainListInfo[item.day] && this.trainListInfo[item.day].length < 3 || !this.trainListInfo[item.day];
         formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:129", "\u6253\u5F00\u5F39\u6846", this.trainListInfo[item.day]);
