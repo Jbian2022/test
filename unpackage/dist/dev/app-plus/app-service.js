@@ -1066,7 +1066,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.134"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.137"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -4159,7 +4159,8 @@ if (uni.restoreGlobal) {
         deleteRemarkFlag: true,
         delteIndex: 0,
         newActive: 0,
-        isFirstActiveFlag: false
+        isFirstActiveFlag: false,
+        originList: []
       };
     },
     props: {
@@ -4173,10 +4174,12 @@ if (uni.restoreGlobal) {
       userInfo: Object
     },
     created() {
+      this.getOriginList();
     },
     mounted() {
     },
     onShow() {
+      this.getOriginList();
     },
     computed: {
       needFlag() {
@@ -4197,7 +4200,7 @@ if (uni.restoreGlobal) {
               };
             });
           } else {
-            if (list.length <= 7) {
+            if (this.originList.length <= 7) {
               list = list.map((item) => {
                 return {
                   ...item,
@@ -4205,17 +4208,66 @@ if (uni.restoreGlobal) {
                 };
               });
             }
-            if (list.length > 7) {
-              formatAppLog("log", "at components/memberList/memberList.vue:230", list, "\u6211\u662F\u5C3C\u5DF4\u5DF4\u7238\u7238\u601D\u8003");
-              let sliceFirstList = list.slice(0, 7);
-              let sliceLastList = list.slice(7);
-              sliceLastList = sliceLastList.map((item) => {
-                return {
-                  ...item,
-                  prohibitUserOpear: true
-                };
-              });
-              list = [...sliceFirstList, ...sliceLastList];
+            formatAppLog("log", "at components/memberList/memberList.vue:213", this.originList, "\u6211\u662F\u6E90\u6570\u636E");
+            if (this.originList.length > 7) {
+              let yesBuyList = this.originList.filter(
+                (item) => item.buyStatus == 1
+              );
+              let noBuyList = this.originList.filter(
+                (item) => item.buyStatus == 0
+              );
+              if (yesBuyList.length === 7) {
+                noBuyList = noBuyList.map((item) => {
+                  return {
+                    ...item,
+                    prohibitUserOpear: true
+                  };
+                });
+                if (this.isActive == 0) {
+                  list = [...noBuyList];
+                } else {
+                  list = [...yesBuyList];
+                }
+              }
+              if (yesBuyList.length < 7) {
+                let differ = 7 - yesBuyList.length;
+                let sliceFirstList = noBuyList.slice(0, differ);
+                let sliceLastList = noBuyList.slice(differ);
+                sliceLastList = sliceLastList.map((item) => {
+                  return {
+                    ...item,
+                    prohibitUserOpear: true
+                  };
+                });
+                noBuyList = [...sliceFirstList, ...sliceLastList];
+                if (this.isActive == 0) {
+                  list = [...noBuyList];
+                } else {
+                  list = [...yesBuyList];
+                }
+              }
+              if (yesBuyList.length > 7) {
+                let sliceFirstList = yesBuyList.slice(0, 7);
+                let sliceLastList = yesBuyList.slice(7);
+                sliceLastList = sliceLastList.map((item) => {
+                  return {
+                    ...item,
+                    prohibitUserOpear: true
+                  };
+                });
+                yesBuyList = [...sliceFirstList, ...sliceLastList];
+                noBuyList = noBuyList.map((item) => {
+                  return {
+                    ...item,
+                    prohibitUserOpear: true
+                  };
+                });
+                if (this.isActive == 0) {
+                  list = [...noBuyList];
+                } else {
+                  list = [...yesBuyList];
+                }
+              }
             }
           }
         }
@@ -4236,7 +4288,7 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:263", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:300", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
@@ -4274,7 +4326,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:305", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:342", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4334,11 +4386,27 @@ if (uni.restoreGlobal) {
           }
         });
       },
+      getOriginList() {
+        let self2 = this;
+        this.$nextTick(() => {
+          businessCloudObject$3.getMemberList().then((meberListRes) => {
+            let originList = meberListRes.data.map((item) => {
+              return {
+                ...item,
+                prohibitUserOpear: false
+              };
+            }) || [];
+            self2.$set(self2, "originList", originList);
+            self2.$forceUpdate();
+          }).catch((err) => {
+          });
+        });
+      },
       getMemberList(buyStatus) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:376", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:438", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4346,14 +4414,14 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:387", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:448", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e) {
-        formatAppLog("log", "at components/memberList/memberList.vue:394", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:455", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e, index, item) {
@@ -4361,7 +4429,7 @@ if (uni.restoreGlobal) {
           return;
         }
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:403", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:464", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
         if (item.prohibitUserOpear) {
@@ -4509,8 +4577,7 @@ if (uni.restoreGlobal) {
                 }, 8, ["onClick"])
               ])
             ])
-          ]),
-          vue.createCommentVNode(' <view class="mask_popup_style">\r\n        <view class="confirm_dakuang_style">\r\n          <view class="confirm_top_style">\r\n            <text class="config_top_title_style">\u662F\u5426\u786E\u8BA4\u5220\u9664</text>\r\n            <image\r\n              class="delete_waring_style"\r\n              src="../../static/app-plus/mebrs/delete.svg"\r\n            ></image>\r\n          </view>\r\n          <view class="delet_remark">\u786E\u8BA4\u5220\u9664\u8BE5\u5B66\u5458\u5417\uFF1F\u5220\u9664\u540E\u65E0\u6CD5\u6062\u590D</view>\r\n          <view class="delete_btn_style">\r\n            <view class="delete_cacel_style" @click.stop="close">\u53D6\u6D88</view>\r\n            <view\r\n              class="delete_sure_style"\r\n              @click.stop.native="sureDeleteConfirm"\r\n              >\u786E\u8BA4</view\r\n            >\r\n          </view>\r\n        </view>\r\n      </view> ')
+          ])
         ]),
         _: 1
       }, 512),
@@ -8757,6 +8824,7 @@ if (uni.restoreGlobal) {
       uni.showTabBar();
     },
     created() {
+      this.getUserInfor();
     },
     mounted() {
       let self2 = this;
@@ -8773,7 +8841,7 @@ if (uni.restoreGlobal) {
             }
           },
           fail: function(err) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:161", err, ">>>>");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:163", err, ">>>>");
           }
         });
         try {
@@ -8815,14 +8883,14 @@ if (uni.restoreGlobal) {
         let self2 = this;
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:215", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:217", res2, "....");
             self2.avatar = res2.userInfo.avatar || null;
             self2.addUpperLimit = res2.userInfo.addUpperLimit || null;
             self2.userInfo = res2.userInfo || {};
             let currentDay = hooks().format("YYYY-MM-DD");
             if (res2.userInfo.vipEndDate || res2.userInfo.vipLevel) {
               let sameTime = hooks(currentDay).isSame(res2.userInfo.vipEndDate);
-              formatAppLog("log", "at pages/myMebers/myMebers.vue:226", "\u8865\u836F");
+              formatAppLog("log", "at pages/myMebers/myMebers.vue:228", "\u8865\u836F");
               if (sameTime) {
                 self2.termOfValidity = false;
               } else {
@@ -8843,7 +8911,7 @@ if (uni.restoreGlobal) {
           customUI: true
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:252", res2, "\u817B");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:254", res2, "\u817B");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -8855,11 +8923,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:264", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:266", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:269", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:271", "success");
           }
         });
         uni.navigateTo({
@@ -8873,13 +8941,13 @@ if (uni.restoreGlobal) {
         });
       },
       upper: function(e) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:280", e, "mmm");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:282", e, "mmm");
       },
       lower: function(e) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:283", e);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:285", e);
       },
       scroll(event) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:286", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:288", event.detail.scrollTop, "\u6211\u662F\u8DDD\u79BB");
         this.scrollTop = event.detail.scrollTop;
         if (event.detail.scrollTop > 50) {
           this.searchTopFlag = true;
@@ -8904,7 +8972,7 @@ if (uni.restoreGlobal) {
         });
         let that = this;
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:319", that.termOfValidity, that.userInfo, "\u4F60\u90FD\u662F\u5496\u5561\u53EF\u8003\u8651");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:321", that.termOfValidity, that.userInfo, "\u4F60\u90FD\u662F\u5496\u5561\u53EF\u8003\u8651");
           that.cocahMemberLimit = res2.affectedDocs;
           if (!that.termOfValidity || !that.userInfo.vipLevel) {
             if (!that.addUpperLimit && that.cocahMemberLimit >= 7) {
@@ -15227,11 +15295,18 @@ if (uni.restoreGlobal) {
                     }
                   } catch (e) {
                     formatAppLog("log", "at pages/logining/logining.vue:322", e, ">>>>>");
+                    return;
                   }
                 }
               }
-            } catch (e) {
-              formatAppLog("log", "at pages/logining/logining.vue:327", e, "222");
+            } catch (err) {
+              formatAppLog("log", "at pages/logining/logining.vue:329", err, "222", err.Error, err, JSON.stringify(err));
+              uni.showToast({
+                title: err.errMsg || err.message,
+                duration: 1e3,
+                width: 180,
+                icon: "none"
+              });
             }
           },
           fail: function(loginErr) {
@@ -15259,7 +15334,7 @@ if (uni.restoreGlobal) {
         } else {
           formatAppLog(
             "log",
-            "at pages/logining/logining.vue:355",
+            "at pages/logining/logining.vue:363",
             plus.runtime.isApplicationExist({
               pname: "bodybuildingApp.myapp",
               action: "weixin://"
@@ -15284,14 +15359,14 @@ if (uni.restoreGlobal) {
       },
       wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
-          formatAppLog("log", "at pages/logining/logining.vue:382", code, "\u4F60\u662F\u8C01");
+          formatAppLog("log", "at pages/logining/logining.vue:390", code, "\u4F60\u662F\u8C01");
           const wxLogin = Es.importObject("login", {
             customUI: true
           });
-          formatAppLog("log", "at pages/logining/logining.vue:386", wxLogin, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:394", wxLogin, "wxLogin");
           try {
             const wxLoginRes = await wxLogin.loginByWeixin(code);
-            formatAppLog("log", "at pages/logining/logining.vue:390", wxLoginRes, "\u767B\u5F55\u6210\u529F");
+            formatAppLog("log", "at pages/logining/logining.vue:398", wxLoginRes, "\u767B\u5F55\u6210\u529F");
             if (wxLoginRes.code == 0) {
               try {
                 uni.setStorageSync(
@@ -15306,7 +15381,7 @@ if (uni.restoreGlobal) {
                   openid: wxLoginRes.openid
                 };
                 let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
-                formatAppLog("log", "at pages/logining/logining.vue:407", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
+                formatAppLog("log", "at pages/logining/logining.vue:415", wxSchemaRes, "\u6211\u662F\u5FAE\u4FE1\u7684\u524D\u4E00\u6B65");
                 let flag = false;
                 if (wxSchemaRes.affectedDocs === 0) {
                   flag = false;
@@ -15332,7 +15407,12 @@ if (uni.restoreGlobal) {
               }
             }
           } catch (err) {
-            formatAppLog("log", "at pages/logining/logining.vue:439", err, "\u6211\u662F\u9519\u8BEF");
+            uni.showToast({
+              title: err.errMsg || err.message,
+              duration: 1e3,
+              width: 180,
+              icon: "none"
+            });
           }
         });
       }
@@ -21512,18 +21592,24 @@ if (uni.restoreGlobal) {
             }
           } catch (err) {
             formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:98", err, "\u6211\u662F\u9519\u8BEF");
+            uni.showToast({
+              title: err.errMsg || err.message,
+              duration: 1e3,
+              width: 180,
+              icon: "none"
+            });
           }
         }
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:103", event, "\u4F60tm");
+        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:109", event, "\u4F60tm");
         this.phone = event.detail.value;
       },
       goBack() {
         uni.navigateBack();
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:110", "1111");
+        formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:116", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
           const login2 = Es.importObject("login", {
             customUI: true
@@ -21532,7 +21618,7 @@ if (uni.restoreGlobal) {
             let param = {
               ...this.coachForm
             };
-            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:120", param, "param");
+            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:126", param, "param");
             login2.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();
@@ -24541,11 +24627,11 @@ if (uni.restoreGlobal) {
                               vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#ffc13c", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx", "margin-bottom": "2px" } }),
                               vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#f4f7ff", "line-height": "42upx" } }, vue.toDisplayString(item.title), 1),
                               vue.createElementVNode("view", { class: "assessmentContent" }, [
-                                vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx", "line-height": "44upx" } }, [
+                                vue.createElementVNode("p", { style: { "color": "#bdc3ce", "font-size": "26upx", "line-height": "44upx" } }, [
                                   vue.createElementVNode("view", { style: { "display": "initial", "color": "#ffc13c" } }, vue.toDisplayString($options.insertStr(item.text)), 1),
                                   vue.createTextVNode(vue.toDisplayString($options.insertStr2(item.text)), 1)
                                 ]),
-                                vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx", "line-height": "44upx" } }, [
+                                vue.createElementVNode("p", { style: { "color": "#bdc3ce", "font-size": "26upx", "line-height": "44upx" } }, [
                                   vue.createElementVNode("view", { style: { "display": "initial", "color": "#ffc13c" } }, vue.toDisplayString($options.insertStr3(item.text)), 1),
                                   vue.createTextVNode(vue.toDisplayString($options.insertStr4(item.text)), 1)
                                 ]),
@@ -24622,7 +24708,7 @@ if (uni.restoreGlobal) {
                                         vue.createElementVNode("view", { style: { "width": "5px", "height": "5px", "background": "#ffc13c", "border-radius": "100%", "display": "inline-flex", "margin-right": "20upx" } }),
                                         vue.createElementVNode("span", { style: { "font-size": "30upx", "font-weight": "400", "color": "#f4f7ff", "line-height": "42upx" } }, vue.toDisplayString(items.questionContent) + ":" + vue.toDisplayString(itemss.answerTitle), 1),
                                         vue.createElementVNode("view", { class: "assessmentContent" }, [
-                                          vue.createElementVNode("p", { style: { "color": "#7a7f89", "font-size": "26upx" } }, [
+                                          vue.createElementVNode("p", { style: { "color": "#bdc3ce", "font-size": "26upx" } }, [
                                             vue.createElementVNode("rich-text", {
                                               nodes: itemss.answeerContent
                                             }, null, 8, ["nodes"])

@@ -18,27 +18,6 @@
           </view>
         </view>
       </view>
-
-      <!-- <view class="mask_popup_style">
-        <view class="confirm_dakuang_style">
-          <view class="confirm_top_style">
-            <text class="config_top_title_style">是否确认删除</text>
-            <image
-              class="delete_waring_style"
-              src="../../static/app-plus/mebrs/delete.svg"
-            ></image>
-          </view>
-          <view class="delet_remark">确认删除该学员吗？删除后无法恢复</view>
-          <view class="delete_btn_style">
-            <view class="delete_cacel_style" @click.stop="close">取消</view>
-            <view
-              class="delete_sure_style"
-              @click.stop.native="sureDeleteConfirm"
-              >确认</view
-            >
-          </view>
-        </view>
-      </view> -->
     </uni-popup>
 
     <template v-if="needFlag">
@@ -175,7 +154,8 @@ export default {
       deleteRemarkFlag: true,
       delteIndex: 0,
       newActive: 0,
-      isFirstActiveFlag: false
+      isFirstActiveFlag: false,
+      originList: [] //原始数据
     }
   },
   props: {
@@ -189,9 +169,13 @@ export default {
     userInfo: Object
   },
 
-  created() {},
+  created() {
+    this.getOriginList()
+  },
   mounted() {},
-  onShow() {},
+  onShow() {
+    this.getOriginList()
+  },
 
   computed: {
     needFlag() {
@@ -217,7 +201,7 @@ export default {
             }
           })
         } else {
-          if (list.length <= 7) {
+          if (this.originList.length <= 7) {
             // 充钱不添加会员的大shamao
             list = list.map((item) => {
               return {
@@ -226,18 +210,71 @@ export default {
               }
             })
           }
-          if (list.length > 7) {
-            console.log(list, '我是尼巴巴爸爸思考')
+          console.log(this.originList, '我是源数据')
+
+          if (this.originList.length > 7) {
             // 充钱了且会员超过7
-            let sliceFirstList = list.slice(0, 7)
-            let sliceLastList = list.slice(7)
-            sliceLastList = sliceLastList.map((item) => {
-              return {
-                ...item,
-                prohibitUserOpear: true
+            let yesBuyList = this.originList.filter(
+              (item) => item.buyStatus == 1
+            )
+            let noBuyList = this.originList.filter(
+              (item) => item.buyStatus == 0
+            )
+            if (yesBuyList.length === 7) {
+              noBuyList = noBuyList.map((item) => {
+                return {
+                  ...item,
+                  prohibitUserOpear: true
+                }
+              })
+              if (this.isActive == 0) {
+                list = [...noBuyList]
+              } else {
+                list = [...yesBuyList]
               }
-            })
-            list = [...sliceFirstList, ...sliceLastList]
+            }
+
+            if (yesBuyList.length < 7) {
+              // 差值，优先保留购课会员
+              let differ = 7 - yesBuyList.length
+              let sliceFirstList = noBuyList.slice(0, differ)
+              let sliceLastList = noBuyList.slice(differ)
+              sliceLastList = sliceLastList.map((item) => {
+                return {
+                  ...item,
+                  prohibitUserOpear: true
+                }
+              })
+
+              noBuyList = [...sliceFirstList, ...sliceLastList]
+              if (this.isActive == 0) {
+                list = [...noBuyList]
+              } else {
+                list = [...yesBuyList]
+              }
+            }
+            if (yesBuyList.length > 7) {
+              let sliceFirstList = yesBuyList.slice(0, 7)
+              let sliceLastList = yesBuyList.slice(7)
+              sliceLastList = sliceLastList.map((item) => {
+                return {
+                  ...item,
+                  prohibitUserOpear: true
+                }
+              })
+              yesBuyList = [...sliceFirstList, ...sliceLastList]
+              noBuyList = noBuyList.map((item) => {
+                return {
+                  ...item,
+                  prohibitUserOpear: true
+                }
+              })
+              if (this.isActive == 0) {
+                list = [...noBuyList]
+              } else {
+                list = [...yesBuyList]
+              }
+            }
           }
         }
       } else {
@@ -367,8 +404,33 @@ export default {
       })
     },
 
+    getOriginList() {
+      let self = this
+
+      this.$nextTick(() => {
+        businessCloudObject
+          .getMemberList()
+          .then((meberListRes) => {
+            let originList =
+              meberListRes.data.map((item) => {
+                return {
+                  ...item,
+                  prohibitUserOpear: false
+                }
+              }) || []
+            // 判端是否过期
+
+            self.$set(self, 'originList', originList)
+
+            self.$forceUpdate()
+          })
+          .catch((err) => {})
+      })
+    },
+
     getMemberList(buyStatus) {
       let self = this
+
       this.$nextTick(() => {
         businessCloudObject
           .getMemberList(buyStatus)
@@ -381,7 +443,6 @@ export default {
                   prohibitUserOpear: false
                 }
               }) || []
-            // 判端是否过期
 
             self.$set(self, 'meberList', meberList)
             console.log(self.meberList, '?????')

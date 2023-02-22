@@ -320,11 +320,19 @@ export default {
                   // }
                 } catch (e) {
                   console.log(e, '>>>>>')
+
+                  return
                 }
               }
             }
-          } catch (e) {
-            console.log(e, '222')
+          } catch (err) {
+            console.log(err, '222', err.Error, err, JSON.stringify(err))
+            uni.showToast({
+              title: err.errMsg || err.message,
+              duration: 1000,
+              width: 180,
+              icon: 'none'
+            })
           }
         },
         fail: function (loginErr) {
@@ -436,7 +444,13 @@ export default {
             }
           }
         } catch (err) {
-          console.log(err, '我是错误')
+          // console.log(err, '222', err.Error, err, JSON.stringify(err))
+          uni.showToast({
+            title: err.errMsg || err.message,
+            duration: 1000,
+            width: 180,
+            icon: 'none'
+          })
         }
       })
     }

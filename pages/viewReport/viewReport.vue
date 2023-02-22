@@ -746,7 +746,7 @@
                       <view class="assessmentContent">
                         <p
                           style="
-                            color: #7a7f89;
+                            color: #bdc3ce;
                             font-size: 26upx;
                             line-height: 44upx;
                           "
@@ -758,7 +758,7 @@
                         </p>
                         <p
                           style="
-                            color: #7a7f89;
+                            color: #bdc3ce;
                             font-size: 26upx;
                             line-height: 44upx;
                           "
@@ -930,7 +930,7 @@
                               }}
                             </span>
                             <view class="assessmentContent">
-                              <p style="color: #7a7f89; font-size: 26upx">
+                              <p style="color: #bdc3ce; font-size: 26upx">
                                 <rich-text
                                   :nodes="itemss.answeerContent"
                                 ></rich-text>

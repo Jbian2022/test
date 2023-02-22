@@ -142,7 +142,9 @@ export default {
   onLoad() {
     uni.showTabBar()
   },
-  created() {},
+  created() {
+    this.getUserInfor()
+  },
   mounted() {
     let self = this
     this.$nextTick(() => {
