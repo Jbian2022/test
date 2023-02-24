@@ -1,0 +1,1 @@
+import{o as r,a as e,ae as o}from"./index.2d1e5cbb.js";import{_ as n}from"./_plugin-vue_export-helper.cdc0426e.js";const s=n({data:()=>({url:""}),onLoad(r){r&&r.url&&(this.url=decodeURIComponent(r.url))}},[["render",function(n,s,t,a,u,l){const c=o;return r(),e(c,{src:u.url},null,8,["src"])}]]);export{s as default};

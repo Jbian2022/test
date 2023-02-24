@@ -1066,7 +1066,7 @@ if (uni.restoreGlobal) {
   const y = true, _ = "app", v = m([]);
   let S;
   S = _;
-  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.137"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.145"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -4149,8 +4149,12 @@ if (uni.restoreGlobal) {
       }, delays);
     };
   };
-  var businessCloudObject$3 = Es.importObject("businessCloudObject");
-  const train$4 = Es.importObject("train");
+  var businessCloudObject$3 = Es.importObject("businessCloudObject", {
+    customUI: true
+  });
+  const train$4 = Es.importObject("train", {
+    customUI: true
+  });
   const _sfc_main$O = {
     name: "memberList",
     data() {
@@ -4208,7 +4212,7 @@ if (uni.restoreGlobal) {
                 };
               });
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:213", this.originList, "\u6211\u662F\u6E90\u6570\u636E");
+            formatAppLog("log", "at components/memberList/memberList.vue:217", this.originList, "\u6211\u662F\u6E90\u6570\u636E");
             if (this.originList.length > 7) {
               let yesBuyList = this.originList.filter(
                 (item) => item.buyStatus == 1
@@ -4288,7 +4292,7 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:300", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:304", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
@@ -4326,7 +4330,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:342", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:346", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4406,7 +4410,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:438", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:442", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4414,14 +4418,14 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:448", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:452", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e) {
-        formatAppLog("log", "at components/memberList/memberList.vue:455", "\u4F60\u597D");
+        formatAppLog("log", "at components/memberList/memberList.vue:459", "\u4F60\u597D");
         this.$refs.popup.open();
       },
       swipeChange(e, index, item) {
@@ -4429,7 +4433,7 @@ if (uni.restoreGlobal) {
           return;
         }
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:464", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:468", "\u5F53\u524D\u72B6\u6001\uFF1A" + e + "\uFF0C\u4E0B\u6807\uFF1A" + index);
       },
       goToTrainingRecord(item) {
         if (item.prohibitUserOpear) {
@@ -20345,6 +20349,7 @@ if (uni.restoreGlobal) {
             active: true,
             order_no: "20221027812838484891" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
             out_trade_no: "200123321321312" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
+            productid: "jianbiannianka",
             vipLevel: "annualCard"
           },
           {
@@ -20357,6 +20362,7 @@ if (uni.restoreGlobal) {
             active: false,
             order_no: "20221027812838483891" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
             out_trade_no: "200123321321323" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
+            productid: "jianbianjika",
             vipLevel: "quarterCard"
           },
           {
@@ -20369,6 +20375,7 @@ if (uni.restoreGlobal) {
             active: false,
             order_no: "20221027812838486891" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
             out_trade_no: "200123321321323" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
+            productid: "jianbianyueka",
             vipLevel: "monthlyCard"
           }
         ],
@@ -20378,7 +20385,8 @@ if (uni.restoreGlobal) {
         },
         payInfo: {},
         show: false,
-        termOfValidity: false
+        termOfValidity: false,
+        platform: uni.getSystemInfoSync().platform
       };
     },
     onShow() {
@@ -20386,7 +20394,7 @@ if (uni.restoreGlobal) {
     },
     mounted() {
       let c2 = hooks("2021-05-07").isSame("2021-05-08");
-      formatAppLog("log", "at pages/my/my.vue:407", c2, "???");
+      formatAppLog("log", "at pages/my/my.vue:411", c2, "???");
     },
     watch: {
       payShow: {
@@ -20410,7 +20418,7 @@ if (uni.restoreGlobal) {
     },
     methods: {
       onCreate(res2) {
-        formatAppLog("log", "at pages/my/my.vue:433", "create: ", res2);
+        formatAppLog("log", "at pages/my/my.vue:437", "create: ", res2);
       },
       successChangeBusiness() {
         let self2 = this;
@@ -20431,7 +20439,7 @@ if (uni.restoreGlobal) {
           vipEndDate,
           vipLevel: self2.payInfo.vipLevel
         };
-        formatAppLog("log", "at pages/my/my.vue:465", param, "param");
+        formatAppLog("log", "at pages/my/my.vue:469", param, "param");
         login$2.perfectInfo(param).then((res2) => {
           if (res2.success)
             ;
@@ -20439,7 +20447,7 @@ if (uni.restoreGlobal) {
         });
       },
       onSuccess(res2) {
-        formatAppLog("log", "at pages/my/my.vue:476", "success: ", res2);
+        formatAppLog("log", "at pages/my/my.vue:480", "success: ", res2);
         if (res2.user_order_success) {
           this.successChangeBusiness();
           self.payShow = false;
@@ -20449,20 +20457,38 @@ if (uni.restoreGlobal) {
         }
       },
       createOrder(provider) {
-        this.$refs.uniPay.createOrder({
-          provider,
-          total_fee: this.payInfo.money * 100,
-          type: "recharge",
-          order_no: String(this.payInfo.order_no),
-          out_trade_no: String(this.payInfo.out_trade_no),
-          description: "\u6559\u7EC3\u5145\u503CVIP",
-          qr_code: "",
-          openid: "",
-          custom: ""
-        });
+        let param = {};
+        if (provider === "appleiap") {
+          param = {
+            provider,
+            order_no: String(this.payInfo.order_no),
+            out_trade_no: String(this.payInfo.out_trade_no),
+            type: "appleiap",
+            productid: this.payInfo.productid,
+            custom: {}
+          };
+        } else {
+          param = {
+            provider,
+            total_fee: this.payInfo.money * 100,
+            type: "recharge",
+            order_no: String(this.payInfo.order_no),
+            out_trade_no: String(this.payInfo.out_trade_no),
+            description: "\u6559\u7EC3\u5145\u503CVIP",
+            qr_code: "",
+            openid: "",
+            custom: ""
+          };
+        }
+        formatAppLog("log", "at pages/my/my.vue:521", param, "\u6211\u662F\u652F\u4ED8\u7684\u53C2\u6570");
+        this.$refs.uniPay.createOrder(param);
       },
       payClick() {
-        this.payShow = true;
+        if (this.platform === "ios") {
+          this.createOrder("appleiap");
+        } else {
+          this.payShow = true;
+        }
       },
       pickerSelect(val) {
         this.columns.forEach((item) => item.active = false);
@@ -20492,7 +20518,7 @@ if (uni.restoreGlobal) {
         } else {
           this.termOfValidity = false;
         }
-        formatAppLog("log", "at pages/my/my.vue:541", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:564", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -20526,7 +20552,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:575", "success");
+            formatAppLog("log", "at pages/my/my.vue:598", "success");
             uni.showToast({
               title: "\u590D\u5236\u6210\u529F",
               duration: 2e3

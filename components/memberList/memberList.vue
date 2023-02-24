@@ -142,8 +142,12 @@
 </template>
 
 <script>
-var businessCloudObject = uniCloud.importObject('businessCloudObject')
-const train = uniCloud.importObject('train')
+var businessCloudObject = uniCloud.importObject('businessCloudObject', {
+  customUI: true // 取消自动展示的交互提示界面
+})
+const train = uniCloud.importObject('train', {
+  customUI: true // 取消自动展示的交互提示界面
+})
 import { debounce } from '../../common/util.js'
 
 export default {

@@ -335,6 +335,7 @@ export default {
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1),
+          productid: 'jianbiannianka',
           vipLevel: 'annualCard'
         },
         {
@@ -359,6 +360,7 @@ export default {
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1),
+          productid: 'jianbianjika',
           vipLevel: 'quarterCard'
         },
         {
@@ -383,6 +385,7 @@ export default {
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1),
+          productid: 'jianbianyueka',
           vipLevel: 'monthlyCard'
         }
       ],
@@ -394,7 +397,8 @@ export default {
       payInfo: {}, //支付情况
 
       show: false,
-      termOfValidity: false
+      termOfValidity: false,
+      platform: uni.getSystemInfoSync().platform
     }
   },
   onShow() {
@@ -490,21 +494,40 @@ export default {
     },
     createOrder(provider) {
       // 发起支付
+      let param = {}
+      if (provider === 'appleiap') {
+        param = {
+          provider: provider, // 支付供应商（这里固定未appleiap，代表ios内购支付）
+          order_no: String(this.payInfo.order_no), // 业务系统订单号
+          out_trade_no: String(this.payInfo.out_trade_no),
+          type: 'appleiap', // 支付回调类型（可自定义，建议填写appleiap）
+          productid: this.payInfo.productid, // ios内购产品id（仅ios内购生效）
+          // 自定义数据
+          custom: {}
+        }
+      } else {
+        param = {
+          provider: provider, // 支付供应商
+          total_fee: this.payInfo.money * 100, // 支付金额，单位分 100 = 1元
+          type: 'recharge', // 支付回调类型
+          order_no: String(this.payInfo.order_no), // 业务系统订单号
+          out_trade_no: String(this.payInfo.out_trade_no),
+          description: '教练充值VIP', // 支付描述
+          qr_code: '', // 是否强制使用扫码支付
+          openid: '', // 微信公众号需要
+          custom: '' // 自定义数据
+        }
+      }
+      console.log(param, '我是支付的参数')
 
-      this.$refs.uniPay.createOrder({
-        provider: provider, // 支付供应商
-        total_fee: this.payInfo.money * 100, // 支付金额，单位分 100 = 1元
-        type: 'recharge', // 支付回调类型
-        order_no: String(this.payInfo.order_no), // 业务系统订单号
-        out_trade_no: String(this.payInfo.out_trade_no),
-        description: '教练充值VIP', // 支付描述
-        qr_code: '', // 是否强制使用扫码支付
-        openid: '', // 微信公众号需要
-        custom: '' // 自定义数据
-      })
+      this.$refs.uniPay.createOrder(param)
     },
     payClick() {
-      this.payShow = true
+      if (this.platform === 'ios') {
+        this.createOrder('appleiap')
+      } else {
+        this.payShow = true
+      }
     },
     pickerSelect(val) {
       this.columns.forEach((item) => (item.active = false))
@@ -637,11 +660,13 @@ export default {
   position: relative;
   padding: 32upx 0 0;
   padding-bottom: 150upx;
+ 
   .header {
     display: flex;
     position: relative;
     .logo {
       position: relative;
+
       .van-image {
         width: 110upx;
         height: 110upx;
