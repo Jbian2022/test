@@ -192,6 +192,7 @@ export default {
     },
     // 最终的会员列表
     resultMeberList() {
+      console.log(this.userInfo, 'this.meberList:你是快快快')
       let list = this.meberList
 
       if (this.userInfo && this.userInfo.vipLevel) {

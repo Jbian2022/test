@@ -4291,6 +4291,7 @@ if (uni.restoreGlobal) {
       },
       // 最终的会员列表
       resultMeberList() {
+        formatAppLog("log", "at components/memberList/memberList.vue:195", this.userInfo, "this.meberList:你是快快快");
         let list = this.meberList;
         if (this.userInfo && this.userInfo.vipLevel) {
           if (this.termOfValidity) {
@@ -4309,7 +4310,7 @@ if (uni.restoreGlobal) {
                 };
               });
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:217", this.originList, "我是源数据");
+            formatAppLog("log", "at components/memberList/memberList.vue:218", this.originList, "我是源数据");
             if (this.originList.length > 7) {
               let yesBuyList = this.originList.filter(
                 (item) => item.buyStatus == 1
@@ -4389,7 +4390,7 @@ if (uni.restoreGlobal) {
               this.meberList = [];
               return;
             }
-            formatAppLog("log", "at components/memberList/memberList.vue:304", n2, ">>>>");
+            formatAppLog("log", "at components/memberList/memberList.vue:305", n2, ">>>>");
             if (n2) {
               debounce$1(this.searchMemberList(n2), 300);
             }
@@ -4428,7 +4429,7 @@ if (uni.restoreGlobal) {
       },
       searchMemberList(data) {
         businessCloudObject$3.getMoreList(data).then((meberListRes) => {
-          formatAppLog("log", "at components/memberList/memberList.vue:346", meberListRes, "meberListRes");
+          formatAppLog("log", "at components/memberList/memberList.vue:347", meberListRes, "meberListRes");
           this.meberList = meberListRes.data.map((item) => {
             return {
               ...item,
@@ -4510,7 +4511,7 @@ if (uni.restoreGlobal) {
         let self2 = this;
         this.$nextTick(() => {
           businessCloudObject$3.getMemberList(buyStatus).then((meberListRes) => {
-            formatAppLog("log", "at components/memberList/memberList.vue:442", meberListRes, "meberListRes");
+            formatAppLog("log", "at components/memberList/memberList.vue:443", meberListRes, "meberListRes");
             let meberList = meberListRes.data.map((item) => {
               return {
                 ...item,
@@ -4518,14 +4519,14 @@ if (uni.restoreGlobal) {
               };
             }) || [];
             self2.$set(self2, "meberList", meberList);
-            formatAppLog("log", "at components/memberList/memberList.vue:452", self2.meberList, "?????");
+            formatAppLog("log", "at components/memberList/memberList.vue:453", self2.meberList, "?????");
             self2.$forceUpdate();
           }).catch((err) => {
           });
         });
       },
       bindClick(e) {
-        formatAppLog("log", "at components/memberList/memberList.vue:459", "你好");
+        formatAppLog("log", "at components/memberList/memberList.vue:460", "你好");
         this.$refs.popup.open();
       },
       swipeChange(e, index, item) {
@@ -4533,7 +4534,7 @@ if (uni.restoreGlobal) {
           return;
         }
         this.delteIndex = index;
-        formatAppLog("log", "at components/memberList/memberList.vue:468", "当前状态：" + e + "，下标：" + index);
+        formatAppLog("log", "at components/memberList/memberList.vue:469", "当前状态：" + e + "，下标：" + index);
       },
       goToTrainingRecord(item) {
         if (item.prohibitUserOpear) {
@@ -16099,12 +16100,13 @@ if (uni.restoreGlobal) {
         needChecked: false,
         platform: uni.getSystemInfoSync().platform,
         agreementType: null,
-        hasAppleAuth: false
+        hasAppleAuth: false,
+        isInstallwx: true
       };
     },
     computed: {
       controlActiveFlag() {
-        formatAppLog("log", "at pages/logining/logining.vue:110", this.phone, "????");
+        formatAppLog("log", "at pages/logining/logining.vue:115", this.phone, "????");
         let flag = false;
         if (this.phone && this.phone.length === 11) {
           flag = true;
@@ -16113,7 +16115,7 @@ if (uni.restoreGlobal) {
       }
     },
     onLoad() {
-      formatAppLog("log", "at pages/logining/logining.vue:120", plus, ">>>>");
+      formatAppLog("log", "at pages/logining/logining.vue:125", plus, ">>>>");
       plus.oauth.getServices((services) => {
         weixinAuthService$1 = services.find((service) => {
           return service.id === "weixin";
@@ -16130,23 +16132,60 @@ if (uni.restoreGlobal) {
           }
         },
         fail: (error) => {
-          formatAppLog("log", "at pages/logining/logining.vue:138", "获取登录通道失败", error);
+          formatAppLog("log", "at pages/logining/logining.vue:143", "获取登录通道失败", error);
         }
       });
     },
+    onShow() {
+      formatAppLog(
+        "log",
+        "at pages/logining/logining.vue:152",
+        plus.runtime.isApplicationExist({
+          pname: "bodybuildingApp.myapp",
+          action: "weixin://"
+        }),
+        "安装微信"
+      );
+      if (plus.runtime.isApplicationExist({
+        pname: "bodybuildingApp.myapp",
+        action: "weixin://"
+      })) {
+        this.isInstallwx = true;
+      } else {
+        this.isInstallwx = false;
+        return;
+      }
+    },
     mounted() {
-      let platform = uni.getSystemInfoSync().platform;
-      formatAppLog("log", "at pages/logining/logining.vue:145", platform, "????");
+      uni.getSystemInfoSync().platform;
+      formatAppLog(
+        "log",
+        "at pages/logining/logining.vue:176",
+        plus.runtime.isApplicationExist({
+          pname: "bodybuildingApp.myapp",
+          action: "weixin://"
+        }),
+        "安装微信"
+      );
+      if (plus.runtime.isApplicationExist({
+        pname: "bodybuildingApp.myapp",
+        action: "weixin://"
+      })) {
+        this.isInstallwx = true;
+      } else {
+        this.isInstallwx = false;
+        return;
+      }
     },
     methods: {
       jumpAgree() {
-        formatAppLog("log", "at pages/logining/logining.vue:150", "11111");
+        formatAppLog("log", "at pages/logining/logining.vue:199", "11111");
         uni.navigateTo({
           url: "/pages/agreement/agreement"
         });
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/logining/logining.vue:156", event, "你tm");
+        formatAppLog("log", "at pages/logining/logining.vue:205", event, "你tm");
         this.phone = event.detail.value;
       },
       async getSms() {
@@ -16156,7 +16195,10 @@ if (uni.restoreGlobal) {
           return;
         }
         uni.navigateTo({
-          url: "/pages/phoneLoging/phoneLoging"
+          url: "/pages/phoneLoging/phoneLoging",
+          fail(error) {
+            formatAppLog("log", "at pages/logining/logining.vue:219", error);
+          }
         });
       },
       agreeContiute() {
@@ -16167,29 +16209,7 @@ if (uni.restoreGlobal) {
             this.getSms();
             break;
           case "wx":
-            formatAppLog(
-              "log",
-              "at pages/logining/logining.vue:179",
-              plus.runtime.isApplicationExist({
-                pname: "bodybuildingApp.myapp",
-                action: "weixin://"
-              }),
-              "安装微信"
-            );
-            if (plus.runtime.isApplicationExist({
-              pname: "bodybuildingApp.myapp",
-              action: "weixin://"
-            })) {
-              this.wxLoginCommon();
-            } else {
-              uni.showToast({
-                title: "未检测到微信应用",
-                duration: 1e3,
-                width: 180,
-                icon: "none"
-              });
-              return;
-            }
+            this.wxLoginCommon();
             break;
           case "apple":
             this.appleLoginCommon();
@@ -16203,7 +16223,7 @@ if (uni.restoreGlobal) {
               resolve(res2.code);
             },
             function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:218", err);
+              formatAppLog("log", "at pages/logining/logining.vue:248", err);
               reject(new Error("微信登录失败"));
             }
           );
@@ -16214,7 +16234,7 @@ if (uni.restoreGlobal) {
           provider: "apple",
           //使用苹果登录
           success: async (loginRes) => {
-            formatAppLog("log", "at pages/logining/logining.vue:229", loginRes, "什么鬼");
+            formatAppLog("log", "at pages/logining/logining.vue:259", loginRes, "什么鬼");
             const appleLogin = Es.importObject("login", {
               customUI: true
               // 取消自动展示的交互提示界面
@@ -16225,7 +16245,7 @@ if (uni.restoreGlobal) {
               );
               formatAppLog(
                 "log",
-                "at pages/logining/logining.vue:239",
+                "at pages/logining/logining.vue:269",
                 verifyAppleIdentityTokenRes,
                 "verifyAppleIdentityTokenRes"
               );
@@ -16233,7 +16253,7 @@ if (uni.restoreGlobal) {
                 let getLogingByAppleRes = await appleLogin.logingByApple(
                   loginRes.appleInfo.identityToken
                 );
-                formatAppLog("log", "at pages/logining/logining.vue:248", getLogingByAppleRes, "苹果登陆了");
+                formatAppLog("log", "at pages/logining/logining.vue:278", getLogingByAppleRes, "苹果登陆了");
                 if (getLogingByAppleRes.code == 0) {
                   try {
                     uni.setStorageSync(
@@ -16261,13 +16281,13 @@ if (uni.restoreGlobal) {
                       return;
                     }
                   } catch (e) {
-                    formatAppLog("log", "at pages/logining/logining.vue:322", e, ">>>>>");
+                    formatAppLog("log", "at pages/logining/logining.vue:352", e, ">>>>>");
                     return;
                   }
                 }
               }
             } catch (err) {
-              formatAppLog("log", "at pages/logining/logining.vue:329", err, "222", err.Error, err, JSON.stringify(err));
+              formatAppLog("log", "at pages/logining/logining.vue:359", err, "222", err.Error, err, JSON.stringify(err));
               uni.showToast({
                 title: err.errMsg || err.message,
                 duration: 1e3,
@@ -16299,42 +16319,20 @@ if (uni.restoreGlobal) {
         if (!this.checkFlag) {
           this.needChecked = true;
         } else {
-          formatAppLog(
-            "log",
-            "at pages/logining/logining.vue:363",
-            plus.runtime.isApplicationExist({
-              pname: "bodybuildingApp.myapp",
-              action: "weixin://"
-            }),
-            "安装微信"
-          );
-          if (plus.runtime.isApplicationExist({
-            pname: "bodybuildingApp.myapp",
-            action: "weixin://"
-          })) {
-            this.wxLoginCommon();
-          } else {
-            uni.showToast({
-              title: "未检测到微信应用",
-              duration: 1e3,
-              width: 180,
-              icon: "none"
-            });
-            return;
-          }
+          this.wxLoginCommon();
         }
       },
       wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
-          formatAppLog("log", "at pages/logining/logining.vue:390", code, "你是谁");
+          formatAppLog("log", "at pages/logining/logining.vue:398", code, "你是谁");
           const wxLogin = Es.importObject("login", {
             customUI: true
             // 取消自动展示的交互提示界面
           });
-          formatAppLog("log", "at pages/logining/logining.vue:394", wxLogin, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:402", wxLogin, "wxLogin");
           try {
             const wxLoginRes = await wxLogin.loginByWeixin(code);
-            formatAppLog("log", "at pages/logining/logining.vue:398", wxLoginRes, "登录成功");
+            formatAppLog("log", "at pages/logining/logining.vue:406", wxLoginRes, "登录成功");
             if (wxLoginRes.code == 0) {
               try {
                 uni.setStorageSync(
@@ -16349,7 +16347,7 @@ if (uni.restoreGlobal) {
                   openid: wxLoginRes.openid
                 };
                 let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
-                formatAppLog("log", "at pages/logining/logining.vue:415", wxSchemaRes, "我是微信的前一步");
+                formatAppLog("log", "at pages/logining/logining.vue:423", wxSchemaRes, "我是微信的前一步");
                 let flag = false;
                 if (wxSchemaRes.affectedDocs === 0) {
                   flag = false;
@@ -16396,7 +16394,8 @@ if (uni.restoreGlobal) {
         })
       ]),
       vue.createElementVNode("view", { class: "middle" }, [
-        vue.createElementVNode("view", {
+        $data.isInstallwx ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
           class: "wx_icon_login_style",
           onClick: _cache[0] || (_cache[0] = (...args) => $options.loginByWeixin && $options.loginByWeixin(...args))
         }, [
@@ -16405,9 +16404,9 @@ if (uni.restoreGlobal) {
             src: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/10fd0194-0323-410d-be1c-a6df7dab702d.svg"
           }),
           vue.createElementVNode("view", { class: "icon_remark_style" }, "微信快捷登录")
-        ]),
+        ])) : vue.createCommentVNode("v-if", true),
         $data.platform === "ios" ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
+          key: 1,
           class: "apple_icon_login_style wx_icon_login_style",
           onClick: _cache[1] || (_cache[1] = (...args) => $options.loginByApple && $options.loginByApple(...args))
         }, [
@@ -17303,9 +17302,10 @@ if (uni.restoreGlobal) {
       jump() {
         try {
           let param = {
-            avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
+            avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png",
+            nickname: this.mobile ? this.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2") : ""
           };
-          formatAppLog("log", "at pages/personalnformation/personalnformation.vue:127", param, "param");
+          formatAppLog("log", "at pages/personalnformation/personalnformation.vue:130", param, "param");
           login$3.perfectInfo(param).then((res2) => {
             if (res2.success) {
               uni.reLaunch({
@@ -17318,7 +17318,7 @@ if (uni.restoreGlobal) {
         }
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:143", "1111");
+        formatAppLog("log", "at pages/personalnformation/personalnformation.vue:146", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
           try {
             let param = {
@@ -17326,7 +17326,7 @@ if (uni.restoreGlobal) {
               gender: this.coachForm.gender,
               avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
             };
-            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:155", param, "param");
+            formatAppLog("log", "at pages/personalnformation/personalnformation.vue:158", param, "param");
             login$3.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();
@@ -28416,7 +28416,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, " * 发送通知。 我们可能会将您的个人信息用于发送重要通知，例如有关订单的通知和我们的条款、条件和政策的变更。由于此类信息对您和我们之间的沟通至关重要，不建议您拒绝接收此类信息； "),
           vue.createElementVNode("p", null, " * 进行促销活动。 如果您通过健变及相关互联网产品参与了抽奖、比赛或运动商城的促销，我们可能会使用您提供的个人信息以为您发送此类奖励； "),
           vue.createElementVNode("p", null, " * 进行设备的分析以提供更好的用户体验。 健变及相关互联网产品将会进行硬件及软件的分析，以进一步提升设备的使用体验。 "),
-          vue.createElementVNode("p", null, " 我们可能将这些信息与其他信息结合起来（包括跨不同服务或设备如电脑、手机、智能硬件和其他联网设备中的信息），用于提供和改进我们的产品、服务、内容和广告宣传。例如，我们可能会在所有需要健变及相关互联网产品账号的服务中使用您健变及相关互联网产品账号的详细信息。同时，为了让您有更好的体验以及改善我们的服务，在符合相关法律法规规定或经您同意时，我们可能会将来自您或与您相关的不同产品、服务或设备的信息整理成标签，来提供建议、定制内容和个性化功能。例如使用您在健变及相关互联网产品中的搜索历史在健变及相关互联网产品运动商城中向您推荐您感兴趣的商品或服务。根据我们合并信息的原因以及适用法律的要求，我们将为您提供此类整合的具体控制机制。您有权拒绝以直接营销目的进行的个人信息处理以及自动化决策等。为了行使上述权利，您可以发送邮件至kingtran@sina.cn或者参考各产品或服务的单独隐私政策中说明的控制机制。 "),
+          vue.createElementVNode("p", null, " 我们可能将这些信息与其他信息结合起来（包括跨不同服务或设备如电脑、手机、智能硬件和其他联网设备中的信息），用于提供和改进我们的产品、服务、内容和广告宣传。例如，我们可能会在所有需要健变及相关互联网产品账号的服务中使用您健变及相关互联网产品账号的详细信息。 "),
           vue.createElementVNode("p", null, "3. 我们承诺"),
           vue.createElementVNode("p", null, " 3.1 我们不会根据敏感类别（例如种族、宗教、性取向或健康状况）向您展示个性化广告； "),
           vue.createElementVNode("p", null, " 3.2 我们不会与广告主分享可用于识别您个人身份的信息，例如您的姓名或电子邮件地址（除非经您授权同意）； "),

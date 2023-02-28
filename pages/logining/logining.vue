@@ -5,7 +5,11 @@
       <image class="text1" src="@/static/app-plus/other/coach.png"></image>
     </view>
     <view class="middle">
-      <view class="wx_icon_login_style" @click.native="loginByWeixin">
+      <view
+        class="wx_icon_login_style"
+        @click.native="loginByWeixin"
+        v-if="isInstallwx"
+      >
         <image
           class="icon_img_style"
           src="https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/10fd0194-0323-410d-be1c-a6df7dab702d.svg"
@@ -101,7 +105,8 @@ export default {
       needChecked: false,
       platform: uni.getSystemInfoSync().platform,
       agreementType: null,
-      hasAppleAuth: false
+      hasAppleAuth: false,
+      isInstallwx: true
     }
   },
 
@@ -138,11 +143,55 @@ export default {
         console.log('获取登录通道失败', error)
       }
     })
+
+    // #endif
+  },
+  onShow() {
+    // #ifdef APP-PLUS
+
+    console.log(
+      plus.runtime.isApplicationExist({
+        pname: 'bodybuildingApp.myapp',
+        action: 'weixin://'
+      }),
+      '安装微信'
+    )
+    if (
+      plus.runtime.isApplicationExist({
+        pname: 'bodybuildingApp.myapp',
+        action: 'weixin://'
+      })
+    ) {
+      this.isInstallwx = true
+    } else {
+      this.isInstallwx = false
+      return
+    }
     // #endif
   },
   mounted() {
     let platform = uni.getSystemInfoSync().platform
-    console.log(platform, '????')
+    // console.log(platform, '????')
+    // #ifdef APP-PLUS
+    console.log(
+      plus.runtime.isApplicationExist({
+        pname: 'bodybuildingApp.myapp',
+        action: 'weixin://'
+      }),
+      '安装微信'
+    )
+    if (
+      plus.runtime.isApplicationExist({
+        pname: 'bodybuildingApp.myapp',
+        action: 'weixin://'
+      })
+    ) {
+      this.isInstallwx = true
+    } else {
+      this.isInstallwx = false
+      return
+    }
+    // #endif
   },
 
   methods: {
@@ -165,7 +214,10 @@ export default {
         return
       }
       uni.navigateTo({
-        url: '/pages/phoneLoging/phoneLoging'
+        url: '/pages/phoneLoging/phoneLoging',
+        fail(error) {
+          console.log(error)
+        }
       })
     },
     agreeContiute() {
@@ -176,29 +228,7 @@ export default {
           this.getSms()
           break
         case 'wx':
-          console.log(
-            plus.runtime.isApplicationExist({
-              pname: 'bodybuildingApp.myapp',
-              action: 'weixin://'
-            }),
-            '安装微信'
-          )
-          if (
-            plus.runtime.isApplicationExist({
-              pname: 'bodybuildingApp.myapp',
-              action: 'weixin://'
-            })
-          ) {
-            this.wxLoginCommon()
-          } else {
-            uni.showToast({
-              title: '未检测到微信应用',
-              duration: 1000,
-              width: 180,
-              icon: 'none'
-            })
-            return
-          }
+          this.wxLoginCommon()
 
           break
         case 'apple':
@@ -360,29 +390,7 @@ export default {
         // Toast('请同意隐私政策')
         this.needChecked = true
       } else {
-        console.log(
-          plus.runtime.isApplicationExist({
-            pname: 'bodybuildingApp.myapp',
-            action: 'weixin://'
-          }),
-          '安装微信'
-        )
-        if (
-          plus.runtime.isApplicationExist({
-            pname: 'bodybuildingApp.myapp',
-            action: 'weixin://'
-          })
-        ) {
-          this.wxLoginCommon()
-        } else {
-          uni.showToast({
-            title: '未检测到微信应用',
-            duration: 1000,
-            width: 180,
-            icon: 'none'
-          })
-          return
-        }
+        this.wxLoginCommon()
       }
     },
     wxLoginCommon() {
