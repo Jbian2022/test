@@ -15,27 +15,21 @@
         class="clickActionContent"
       >
         <view class="clickActionBody">
-          <view v-if="!checkFile(videoUrl)">
-            <video
-              :src="videoUrl"
-              wid
-              autoplay
-              :custom-cache="false"
-              muted
-              v-if="show"
-            ></video>
-          </view>
-
-          <view
-            v-else
-            style="margin: 0 auto; padding-left: 40upx; padding-top: 40upx"
-          >
-            <image
-              style="border-radius: 32upx; height: 400upx"
-              :src="videoUrl"
-            ></image>
-          </view>
-
+			<view v-if="!checkFile(videoUrl)">
+				<video
+				  :src="videoUrl"
+				  wid
+				  autoplay
+				  :custom-cache="false"
+				  muted
+				  v-if="show"
+				></video>
+			</view>
+			
+		  <view v-else style="margin: 0 auto;padding-left: 40upx;padding-top: 40upx;">
+			  <image style="border-radius: 32upx;height: 400upx;" :src="videoUrl"></image>
+		  </view>
+		  
           <view class="clickActionText">
             <view class="Actionname">标准动作：</view>
             <view>
@@ -251,20 +245,18 @@ export default {
         console.log('无效')
       }
     },
-    checkFile(url) {
-      console.log('url==' + url)
-      var index = url.indexOf('.') //（考虑严谨用lastIndexOf(".")得到）得到"."在第几位
-      var urlSuffix = url.substring(index) //截断"."之前的，得到后缀
-      if (!/(.*)\.(mp4|rmvb|avi|ts)$/.test(urlSuffix)) {
-        //根据后缀，判断是否符合视频格式
-        return true
-      }
-      if (!/(.*)\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(urlSuffix)) {
-        //根据后缀，判断是否符合图片格式
-        return false
-      }
-      return true
-    },
+	checkFile(url){
+		console.log("url==" + url);
+		    var index = url.indexOf("."); //（考虑严谨用lastIndexOf(".")得到）得到"."在第几位
+		    var urlSuffix = url.substring(index); //截断"."之前的，得到后缀
+		        if (!/(.*)\.(mp4|rmvb|avi|ts)$/.test(urlSuffix)) { //根据后缀，判断是否符合视频格式
+		            return true;
+		        }
+		        if (!/(.*)\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(urlSuffix)) { //根据后缀，判断是否符合图片格式
+		            return false;
+		        }
+		    return true;
+	},
     testResult(gender, age, resValue) {
       const type = {}
       console.log(gender, age, resValue)
