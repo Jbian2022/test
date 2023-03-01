@@ -1063,7 +1063,7 @@ if (uni.restoreGlobal) {
   function m(e) {
     return e && "string" == typeof e ? JSON.parse(e) : e;
   }
-  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.145"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.131"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -22554,9 +22554,9 @@ if (uni.restoreGlobal) {
             vipLevel: "quarterCard"
           },
           {
-            hotMsg: "立省40元",
+            hotMsg: "立省48元",
             text: "月卡",
-            money: "38",
+            money: "30",
             des: "78",
             unit: "元/月",
             activity: "限30个会员",
@@ -22582,8 +22582,7 @@ if (uni.restoreGlobal) {
       this.getUserInfo();
     },
     mounted() {
-      let c2 = hooks("2021-05-07").isSame("2021-05-08");
-      formatAppLog("log", "at pages/my/my.vue:411", c2, "???");
+      hooks("2021-05-07").isSame("2021-05-08");
     },
     watch: {
       payShow: {
@@ -22608,7 +22607,7 @@ if (uni.restoreGlobal) {
     methods: {
       // 监听事件 - 支付订单创建成功（此时用户还未支付）
       onCreate(res2) {
-        formatAppLog("log", "at pages/my/my.vue:437", "create: ", res2);
+        formatAppLog("log", "at pages/my/my.vue:447", "create: ", res2);
       },
       // 成功更改业务
       successChangeBusiness() {
@@ -22617,20 +22616,20 @@ if (uni.restoreGlobal) {
         let vipEndDate = null;
         switch (self2.payInfo.vipLevel) {
           case "annualCard":
-            vipEndDate = hooks().add(1, "years").add(1, "day").format("YYYY-MM-DD");
+            vipEndDate = self2.userInfo.vipEndDate ? hooks(self2.userInfo.vipEndDate).add(1, "years").add(1, "day").format("YYYY-MM-DD") : hooks().add(1, "years").add(1, "day").format("YYYY-MM-DD");
             break;
           case "quarterCard":
-            vipEndDate = hooks().add(3, "months").add(1, "day").format("YYYY-MM-DD");
+            vipEndDate = self2.userInfo.vipEndDate ? hooks(self2.userInfo.vipEndDate).add(3, "months").add(1, "day").format("YYYY-MM-DD") : hooks().add(3, "months").add(1, "day").format("YYYY-MM-DD");
             break;
           case "monthlyCard":
-            vipEndDate = hooks().add(1, "months").add(1, "day").format("YYYY-MM-DD");
+            vipEndDate = self2.userInfo.vipEndDate ? hooks(self2.userInfo.vipEndDate).add(1, "months").add(1, "day").format("YYYY-MM-DD") : hooks().add(1, "months").add(1, "day").format("YYYY-MM-DD");
             break;
         }
         let param = {
           vipEndDate,
           vipLevel: self2.payInfo.vipLevel
         };
-        formatAppLog("log", "at pages/my/my.vue:469", param, "param");
+        formatAppLog("log", "at pages/my/my.vue:485", param, "param");
         login$2.perfectInfo(param).then((res2) => {
           if (res2.success)
             ;
@@ -22639,7 +22638,7 @@ if (uni.restoreGlobal) {
       },
       // 监听事件 - 支付成功
       onSuccess(res2) {
-        formatAppLog("log", "at pages/my/my.vue:480", "success: ", res2);
+        formatAppLog("log", "at pages/my/my.vue:496", "success: ", res2);
         if (res2.user_order_success) {
           this.successChangeBusiness();
           self.payShow = false;
@@ -22685,7 +22684,7 @@ if (uni.restoreGlobal) {
             // 自定义数据
           };
         }
-        formatAppLog("log", "at pages/my/my.vue:521", param, "我是支付的参数");
+        formatAppLog("log", "at pages/my/my.vue:537", param, "我是支付的参数");
         this.$refs.uniPay.createOrder(param);
       },
       payClick() {
@@ -22723,7 +22722,7 @@ if (uni.restoreGlobal) {
         } else {
           this.termOfValidity = false;
         }
-        formatAppLog("log", "at pages/my/my.vue:564", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:580", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -22757,7 +22756,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:598", "success");
+            formatAppLog("log", "at pages/my/my.vue:614", "success");
             uni.showToast({
               title: "复制成功",
               duration: 2e3
@@ -22802,7 +22801,6 @@ if (uni.restoreGlobal) {
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
-    const _component_van_action_sheet = vue.resolveComponent("van-action-sheet");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     const _component_uni_pay = resolveEasycom(vue.resolveDynamicComponent("uni-pay"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "my" }, [
@@ -23049,38 +23047,27 @@ if (uni.restoreGlobal) {
           _: 1
           /* STABLE */
         }, 8, ["onClick"]),
-        vue.createVNode(_component_van_action_sheet, {
-          class: "payment-action-sheet",
-          show: $data.payShow,
-          "onUpdate:show": _cache[7] || (_cache[7] = ($event) => $data.payShow = $event)
-        }, {
-          default: vue.withCtx(() => [
-            vue.createElementVNode("view", {
-              class: "title",
-              onClick: _cache[4] || (_cache[4] = (...args) => _ctx.aliPayment && _ctx.aliPayment(...args))
-            }, "选择支付方式"),
-            vue.createElementVNode("view", { class: "actions" }, [
-              vue.createElementVNode("view", { class: "action" }, [
-                vue.createElementVNode("image", {
-                  class: "img",
-                  src: "/static/app-plus/other/zfb.svg",
-                  onClick: _cache[5] || (_cache[5] = ($event) => $options.createOrder("alipay"))
-                }),
-                vue.createElementVNode("view", { class: "text" }, "支付宝")
-              ]),
-              vue.createElementVNode("view", { class: "action" }, [
-                vue.createElementVNode("image", {
-                  class: "img",
-                  src: "/static/app-plus/other/saveWechat.svg",
-                  onClick: _cache[6] || (_cache[6] = ($event) => $options.createOrder("wxpay"))
-                }),
-                vue.createElementVNode("view", { class: "text" }, "微信")
-              ])
-            ])
-          ]),
-          _: 1
-          /* STABLE */
-        }, 8, ["show"])
+        vue.createCommentVNode(` <van-action-sheet class="payment-action-sheet" v-model:show="payShow">\r
+        <view class="title" @click.native="aliPayment">选择支付方式</view>\r
+        <view class="actions">\r
+          <view class="action">\r
+            <image\r
+              class="img"\r
+              src="../../static/app-plus/other/zfb.svg"\r
+              @click.native="createOrder('alipay')"\r
+            />\r
+            <view class="text">支付宝</view>\r
+          </view>\r
+          <view class="action">\r
+            <image\r
+              class="img"\r
+              src="../../static/app-plus/other/saveWechat.svg"\r
+              @click.native="createOrder('wxpay')"\r
+            />\r
+            <view class="text">微信</view>\r
+          </view>\r
+        </view>\r
+      </van-action-sheet> `)
       ]),
       vue.createVNode(_component_uni_popup, {
         ref: "popup",
@@ -23093,12 +23080,12 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "picker-header" }, [
               vue.createElementVNode("view", {
                 class: "cancel-btn",
-                onClick: _cache[8] || (_cache[8] = (...args) => $options.onCancel && $options.onCancel(...args))
+                onClick: _cache[4] || (_cache[4] = (...args) => $options.onCancel && $options.onCancel(...args))
               }, "取消"),
               vue.createElementVNode("view", { class: "title" }, "推荐人"),
               vue.createElementVNode("view", {
                 class: "success-btn",
-                onClick: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args))
+                onClick: _cache[5] || (_cache[5] = (...args) => $options.onConfirm && $options.onConfirm(...args))
               }, "确认")
             ]),
             vue.createElementVNode("view", { class: "message" }, [

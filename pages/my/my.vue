@@ -175,11 +175,11 @@
       <van-button block @click="payClick"
         >确认开通并支付￥{{ payInfo.money }}元</van-button
       >
-      <van-action-sheet class="payment-action-sheet" v-model:show="payShow">
+      <!-- #ifdef MP-ALIPAY || H5 || APP -->
+      <!-- <van-action-sheet class="payment-action-sheet" v-model:show="payShow">
         <view class="title" @click.native="aliPayment">选择支付方式</view>
         <view class="actions">
           <view class="action">
-            <!-- #ifdef MP-ALIPAY || H5 || APP -->
             <image
               class="img"
               src="../../static/app-plus/other/zfb.svg"
@@ -195,9 +195,9 @@
             />
             <view class="text">微信</view>
           </view>
-          <!-- #endif -->
         </view>
-      </van-action-sheet>
+      </van-action-sheet> -->
+      <!-- #endif -->
     </view>
     <uni-popup
       ref="popup"
@@ -364,9 +364,9 @@ export default {
           vipLevel: 'quarterCard'
         },
         {
-          hotMsg: '立省40元',
+          hotMsg: '立省48元',
           text: '月卡',
-          money: '38',
+          money: '30',
           des: '78',
           unit: '元/月',
           activity: '限30个会员',
@@ -403,12 +403,22 @@ export default {
   },
   onShow() {
     this.getUserInfo()
+    // let d = moment(this.userInfo.vipEndDate)
+    //   .add(1, 'years')
+    //   .add(1, 'day')
+    //   .format('YYYY-MM-DD')
+    // console.log('什么', d, this.userInfo.vipEndDate)
   },
   mounted() {
     // 用户有效判断
 
     let c = moment('2021-05-07').isSame('2021-05-08')
-    console.log(c, '???')
+    //
+    // let d = moment(this.userInfo.vipEndDate)
+    //   .add(1, 'years')
+    //   .add(1, 'day')
+    //   .format('YYYY-MM-DD')
+    // console.log(c, '???', d, this.userInfo)
   },
   watch: {
     payShow: {
@@ -444,22 +454,28 @@ export default {
       let vipEndDate = null
       switch (self.payInfo.vipLevel) {
         case 'annualCard':
-          vipEndDate = moment()
-            .add(1, 'years')
-            .add(1, 'day')
-            .format('YYYY-MM-DD') // 1年后
+          vipEndDate = self.userInfo.vipEndDate
+            ? moment(self.userInfo.vipEndDate)
+                .add(1, 'years')
+                .add(1, 'day')
+                .format('YYYY-MM-DD')
+            : moment().add(1, 'years').add(1, 'day').format('YYYY-MM-DD') // 存在到期时间,以到期时间加一年 1年后
           break
         case 'quarterCard':
-          vipEndDate = moment()
-            .add(3, 'months')
-            .add(1, 'day')
-            .format('YYYY-MM-DD') // 三月之后
+          vipEndDate = self.userInfo.vipEndDate
+            ? moment(self.userInfo.vipEndDate)
+                .add(3, 'months')
+                .add(1, 'day')
+                .format('YYYY-MM-DD')
+            : moment().add(3, 'months').add(1, 'day').format('YYYY-MM-DD') // 三月之后
           break
         case 'monthlyCard':
-          vipEndDate = moment()
-            .add(1, 'months')
-            .add(1, 'day')
-            .format('YYYY-MM-DD') // 三月之后
+          vipEndDate = self.userInfo.vipEndDate
+            ? moment(self.userInfo.vipEndDate)
+                .add(1, 'months')
+                .add(1, 'day')
+                .format('YYYY-MM-DD')
+            : moment().add(1, 'months').add(1, 'day').format('YYYY-MM-DD') // 1月之后
           break
       }
       let param = {
@@ -660,7 +676,7 @@ export default {
   position: relative;
   padding: 32upx 0 0;
   padding-bottom: 150upx;
- 
+
   .header {
     display: flex;
     position: relative;
