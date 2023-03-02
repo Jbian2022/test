@@ -140,6 +140,7 @@ export default {
       return function (item) {
         let whiteType = ['height', 'visceralfatgrade', 'bodyFraction']
         let type = whiteType.indexOf(item.key) > -1 ? 'ordinary' : 'ordinary'
+		console.log(item, '步骤')
         return type
       }
     }
