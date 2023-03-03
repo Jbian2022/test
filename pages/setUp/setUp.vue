@@ -165,11 +165,21 @@ export default {
       if (that.isBindValue === '未绑定') {
         // w未绑定做绑定的事情
         that.getWeixinCode().then(async (code) => {
-          console.log(code, '我是微信服务商')
-          let bindRes = await login.bindWeixin(code)
-          if (bindRes.code === 0) {
-            console.log('绑定成功')
-            that.getUserMessage()
+          try {
+            let bindRes = await login.bindWeixin(code)
+            console.log(bindRes, 'bindRes')
+            if (bindRes.code === 0) {
+              console.log('绑定成功')
+              that.getUserMessage()
+            }
+          } catch (err) {
+            uni.showToast({
+              title: err.errMsg || err.message,
+              duration: 1000,
+              width: 180,
+              icon: 'none'
+            })
+            console.log(err, '我是水')
           }
         })
       }

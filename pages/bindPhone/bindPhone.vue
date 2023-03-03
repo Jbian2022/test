@@ -89,6 +89,13 @@ export default {
       }) //第一步导入云对象
       if (this.controlActiveFlag) {
         try {
+          // 发送验证码之前验证手机号是否登录
+
+          // let getUserSchemaRes = await login.getUserSchema(this.phone)
+          // let type = 'bind'
+          // if (getUserSchemaRes.affectedDocs === 1) {
+          //   type = 'login'
+          // }
           const smsRes = await login.sendSmsCode(this.phone, 'bind')
           if (smsRes.code == 0) {
             console.log(this.phone, '窝时', this.scanel)

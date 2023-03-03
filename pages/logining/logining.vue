@@ -434,6 +434,7 @@ export default {
                 uni.reLaunch({
                   url: '/pages/myMebers/myMebers'
                 })
+                return
               } else {
                 // 用户未绑定
                 // 首次登录

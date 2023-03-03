@@ -234,7 +234,8 @@ module.exports = {
 	  	return res 
    },
    // 绑定手机号
-   bindMobile: async function (data) {
+	bindMobile: async function (data) {
+		console.log(data, '什么啊')
 		const token = this.getUniIdToken()
 		const { uid } = await this.uniID.checkToken(token)
 	   	const res = await uniID.bindMobile({
@@ -305,11 +306,12 @@ module.exports = {
    // 绑定微信
    bindWeixin: async function(code) {
 	    console.log(code, '我是发送的code')
-const {uid} = await this.uniID.checkToken(this.getUniIdToken());
-	   	const res = await uniID.bindWeixin({
-	      code,
-		  uid
-	     })
+		const {uid} = await this.uniID.checkToken(this.getUniIdToken());
+		let param = {
+			uid,
+			code
+		}
+	   	const res = await uniID.bindWeixin(param)
 	   	return res
    },
    // 解绑微信

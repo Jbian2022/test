@@ -16846,6 +16846,7 @@ if (uni.restoreGlobal) {
                   uni.reLaunch({
                     url: "/pages/myMebers/myMebers"
                   });
+                  return;
                 } else {
                   uni.setStorageSync("loginNum", "0");
                   uni.setStorageSync(
@@ -24001,11 +24002,21 @@ if (uni.restoreGlobal) {
         }
         if (that.isBindValue === "未绑定") {
           that.getWeixinCode().then(async (code) => {
-            formatAppLog("log", "at pages/setUp/setUp.vue:168", code, "我是微信服务商");
-            let bindRes = await login$1.bindWeixin(code);
-            if (bindRes.code === 0) {
-              formatAppLog("log", "at pages/setUp/setUp.vue:171", "绑定成功");
-              that.getUserMessage();
+            try {
+              let bindRes = await login$1.bindWeixin(code);
+              formatAppLog("log", "at pages/setUp/setUp.vue:170", bindRes, "bindRes");
+              if (bindRes.code === 0) {
+                formatAppLog("log", "at pages/setUp/setUp.vue:172", "绑定成功");
+                that.getUserMessage();
+              }
+            } catch (err) {
+              uni.showToast({
+                title: err.errMsg || err.message,
+                duration: 1e3,
+                width: 180,
+                icon: "none"
+              });
+              formatAppLog("log", "at pages/setUp/setUp.vue:182", err, "我是水");
             }
           });
         }
@@ -24026,9 +24037,9 @@ if (uni.restoreGlobal) {
         });
       },
       async logout() {
-        formatAppLog("log", "at pages/setUp/setUp.vue:193", "开始点了");
+        formatAppLog("log", "at pages/setUp/setUp.vue:203", "开始点了");
         let currentUserInfo = Es.getCurrentUserInfo();
-        formatAppLog("log", "at pages/setUp/setUp.vue:195", currentUserInfo, "currentUserInfo");
+        formatAppLog("log", "at pages/setUp/setUp.vue:205", currentUserInfo, "currentUserInfo");
         if (currentUserInfo.tokenExpired > 0) {
           await login$1.logout();
           await this.remove();
@@ -24334,25 +24345,25 @@ if (uni.restoreGlobal) {
           try {
             const smsRes = await login2.sendSmsCode(this.phone, "bind");
             if (smsRes.code == 0) {
-              formatAppLog("log", "at pages/bindPhone/bindPhone.vue:94", this.phone, "窝时", this.scanel);
+              formatAppLog("log", "at pages/bindPhone/bindPhone.vue:101", this.phone, "窝时", this.scanel);
               uni.navigateTo({
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + this.phone + "&scanel=" + this.scanel
               });
             }
           } catch (err) {
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:106", err, "我是错误");
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:113", err, "我是错误");
           }
         }
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:111", event, "你tm");
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:118", event, "你tm");
         this.phone = event.detail.value;
       },
       goBack() {
         uni.navigateBack();
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:118", "1111");
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:125", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
           const login2 = Es.importObject("login", {
             customUI: true
@@ -24362,7 +24373,7 @@ if (uni.restoreGlobal) {
             let param = {
               ...this.coachForm
             };
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:128", param, "param");
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:135", param, "param");
             login2.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();

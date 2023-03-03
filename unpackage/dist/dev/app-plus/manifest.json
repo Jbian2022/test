@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.4.4",
-    "code": 144
+    "name": "1.4.5",
+    "code": 145
   },
   "description": "一款健身APP",
   "developer": {
@@ -192,7 +192,7 @@
       }
     },
     "uniStatistics": {
-      "enable": true,
+      "enable": false,
       "version": "2",
       "uniCloud": {
         "provider": "aliyun",

@@ -2,8 +2,8 @@
     "name" : "健变",
     "appid" : "__UNI__76A9E40",
     "description" : "一款健身APP",
-    "versionName" : "1.4.4",
-    "versionCode" : 144,
+    "versionName" : "1.4.5",
+    "versionCode" : 145,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -160,7 +160,7 @@
             }
         },
         "uniStatistics" : {
-            "enable" : true
+            "enable" : false
         }
     },
     "quickapp" : {},
