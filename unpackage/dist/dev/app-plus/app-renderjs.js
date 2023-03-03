@@ -13998,16 +13998,16 @@ __renderjsModules["44880530"] = (() => {
             scale: 1.3
             // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
           }).then((canvas) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1874", canvas);
+            __f__("log", "at pages/viewReport/viewReport.vue:1886", canvas);
             const base64 = canvas.toDataURL("image/jpeg");
             callback && callback(base64);
           }).catch((err) => {
-            __f__("log", "at pages/viewReport/viewReport.vue:1878", JSON.stringify(err));
+            __f__("log", "at pages/viewReport/viewReport.vue:1890", JSON.stringify(err));
           });
         }, 300);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
-        __f__("log", "at pages/viewReport/viewReport.vue:1884", newValue);
+        __f__("log", "at pages/viewReport/viewReport.vue:1896", newValue);
         if (newValue) {
           this.generateImage((base64) => {
             ownerInstance.callMethod("receiveRenderData", { name: newValue, base64 });

@@ -138,9 +138,14 @@ export default {
     },
     controlType() {
       return function (item) {
-        let whiteType = ['height', 'visceralfatgrade', 'bodyFraction']
-        let type = whiteType.indexOf(item.key) > -1 ? 'ordinary' : 'ordinary'
-		console.log(item, '步骤')
+        let whiteType = [
+          'height',
+          'visceralfatgrade',
+          'bodyFraction',
+          'buttockPer'
+        ]
+        let type = whiteType.indexOf(item.key) > -1 ? 'ordinary' : item.key
+        console.log(item, '步骤')
         return type
       }
     }
@@ -164,8 +169,36 @@ export default {
     },
     pickeConfirm(event, item, itemIndex) {
       console.log(item, '我平时', itemIndex)
-      item.flag = false
-      item['value'] = item.configList[event].text || ''
+      switch (item.key) {
+        case 'weight':
+          item.flag = false
+          item['value'] = event || ''
+          break
+        case 'muscleMass':
+          item.flag = false
+          item['value'] = event || ''
+          break
+        case 'fatMass':
+          item.flag = false
+          item['value'] = event || ''
+          break
+        case 'fatPer':
+          item.flag = false
+          item['value'] = event || ''
+          break
+        case 'bodymoisture':
+          item.flag = false
+          item['value'] = event || ''
+          break
+        case 'bmi':
+          item.flag = false
+          item['value'] = event || ''
+          break
+        default:
+          item.flag = false
+          item['value'] = item.configList[event].text || ''
+          break
+      }
     },
     pickCancel(item) {
       item.flag = false

@@ -102,6 +102,118 @@
                     >
                   </picker-view-column>
                 </template>
+
+                <template v-if="pickerType === 'weight'">
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in weightList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in weightFixList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                </template>
+                <template v-if="pickerType === 'muscleMass'">
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in muscleMassList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in muscleMassFixList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                </template>
+
+                <template v-if="pickerType === 'fatMass'">
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in fatMassList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in fatMassFixList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                </template>
+                <template v-if="pickerType === 'fatPer'">
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in fatPerList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in fatPerFixList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                </template>
+
+                <template v-if="pickerType === 'bodymoisture'">
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in bodymoistureList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in bodymoistureFixList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                </template>
+
+                <template v-if="pickerType === 'bmi'">
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in bmiList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                  <picker-view-column>
+                    <view
+                      class="item"
+                      v-for="(item, index) in bmiFixList"
+                      :key="index"
+                      >{{ item }}</view
+                    >
+                  </picker-view-column>
+                </template>
               </picker-view>
             </view>
           </slot>
@@ -136,6 +248,71 @@ const months = []
 const month = date.getMonth() + 1
 const days = []
 const day = date.getDate()
+
+const weightList = []
+const weightFixList = []
+const muscleMassList = []
+const muscleMassFixList = []
+
+const fatMassList = []
+const fatMassFixList = []
+
+const fatPerList = []
+const fatPerFixList = []
+
+const bodymoistureList = []
+const bodymoistureFixList = []
+
+const bmiList = []
+const bmiFixList = []
+
+for (let i = 3; i <= 60; i++) {
+  bmiList.push(i)
+}
+
+for (let i = 0; i <= 10; i++) {
+  bmiFixList.push(i)
+}
+
+for (let i = 3; i <= 60; i++) {
+  bodymoistureList.push(i)
+}
+
+for (let i = 0; i <= 10; i++) {
+  bodymoistureFixList.push(i)
+}
+for (let i = 3; i <= 60; i++) {
+  fatPerList.push(i)
+}
+
+for (let i = 0; i <= 10; i++) {
+  fatPerFixList.push(i)
+}
+
+for (let i = 3; i <= 60; i++) {
+  fatMassList.push(i)
+}
+
+for (let i = 0; i <= 10; i++) {
+  fatMassFixList.push(i)
+}
+
+for (let i = 10; i <= 60; i++) {
+  muscleMassList.push(i)
+}
+
+for (let i = 0; i <= 10; i++) {
+  muscleMassFixList.push(i)
+}
+
+for (let i = 30; i <= 300; i++) {
+  weightList.push(i)
+}
+
+for (let i = 0; i <= 10; i++) {
+  weightFixList.push(i)
+}
+
 for (let i = 1770; i <= date.getFullYear(); i++) {
   years.push(i)
 }
@@ -161,7 +338,25 @@ export default {
       day,
       value: [9999, month - 1, day - 1],
       visible: true,
-      valueModel: ''
+      valueModel: '',
+      weightList,
+      weightFixList,
+      weightValue: '70.0',
+      muscleMassList,
+      muscleMassFixList,
+      muscleMassValue: '30.0',
+      fatMassList,
+      fatMassFixList,
+      fatMassValue: '15.0',
+      fatPerList,
+      fatPerFixList,
+      fatPerValue: '20.0',
+      bodymoistureList,
+      bodymoistureFixList,
+      bodymoistureValue: '30.0',
+      bmiList,
+      bmiFixList,
+      bmiValue: '19.0'
     }
   },
   computed: {
@@ -251,8 +446,48 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // console.log(this.range,'>>>>')
-      if (this.pickerType === 'ordinary') {
-        this.pickerValue = [this.defaultIndex]
+      switch (this.pickerType) {
+        case 'ordinary':
+          this.pickerValue = [this.defaultIndex]
+          break
+        case 'weight':
+          let weightFindexIndex = this.weightList.findIndex(
+            (item) => item == this.weightValue
+          )
+          this.pickerValue = [weightFindexIndex, 0]
+
+          break
+
+        case 'muscleMass':
+          let muscleMassFindeIndex = this.muscleMassList.findIndex(
+            (item) => item == this.muscleMassValue
+          )
+          this.pickerValue = [muscleMassFindeIndex, 0]
+          break
+        case 'fatMass':
+          let fatMassFindexIndex = this.fatMassList.findIndex(
+            (item) => item == this.fatMassValue
+          )
+          this.pickerValue = [fatMassFindexIndex, 0]
+          break
+        case 'fatPer':
+          let fatPerFindex = this.fatPerList.findIndex(
+            (item) => item == this.fatPerValue
+          )
+          this.pickerValue = [fatPerFindex, 0]
+          break
+        case 'bodymoisture':
+          let bodymoistureFindIndex = this.bodymoistureList.findIndex(
+            (item) => item == this.bodymoistureValue
+          )
+          this.pickerValue = [bodymoistureFindIndex, 0]
+          break
+        case 'bmi':
+          let bmiFindIndex = this.bodymoistureList.findIndex(
+            (item) => item == this.bmiValue
+          )
+          this.pickerValue = [bmiFindIndex, 0]
+          break
       }
     })
   },
@@ -268,14 +503,48 @@ export default {
     },
     // 确定
     confirm() {
-      if (this.pickerType === 'ordinary') {
-        console.log(this.pickerValue.Target, 'this.pickerValue')
-        this.$emit('confirm', this.pickerValue)
-        if (this.btnClose) this.close()
-      } else {
-        this.$emit('confirm', this.valueModel)
-        if (this.btnClose) this.close()
+      switch (this.pickerType) {
+        case 'ordinary':
+          this.$emit('confirm', this.pickerValue)
+          if (this.btnClose) this.close()
+          break
+        case 'date':
+          this.$emit('confirm', this.valueModel)
+          if (this.btnClose) this.close()
+          break
+        case 'weight':
+          this.$emit('confirm', this.weightValue)
+          if (this.btnClose) this.close()
+          break
+        case 'muscleMass':
+          this.$emit('confirm', this.muscleMassValue)
+          if (this.btnClose) this.close()
+          break
+        case 'fatMass':
+          this.$emit('confirm', this.fatMassValue)
+          if (this.btnClose) this.close()
+          break
+        case 'fatPer':
+          this.$emit('confirm', this.fatPerValue)
+          if (this.btnClose) this.close()
+          break
+        case 'bodymoisture':
+          this.$emit('confirm', this.bodymoistureValue)
+          if (this.btnClose) this.close()
+          break
+        case 'bmi':
+          this.$emit('confirm', this.bmiValue)
+          if (this.btnClose) this.close()
+          break
       }
+      // if (this.pickerType === 'ordinary') {
+      //   console.log(this.pickerValue.Target, 'this.pickerValue')
+      //   this.$emit('confirm', this.pickerValue)
+      //   if (this.btnClose) this.close()
+      // } else {
+      //   this.$emit('confirm', this.valueModel)
+      //   if (this.btnClose) this.close()
+      // }
     },
     // 点击遮罩
     clickMark() {
@@ -284,17 +553,63 @@ export default {
     bindChange(e) {
       console.log(e, '>>>>>')
       const val = e.detail.value
-      if (this.pickerType === 'ordinary') {
-        this.pickerValue = val
-      } else {
-        // this.pickerValue =val
-        this.year = this.years[val[0]]
-        this.month = this.months[val[1]]
-        this.day = this.days[val[2]]
-        // 新增需要的数据组装
-        this.valueModel = this.year + '-' + this.month + '-' + this.day
-        console.log(this.year, this.month, this.day)
+      switch (this.pickerType) {
+        case 'ordinary':
+          this.pickerValue = val
+          break
+        case 'weight':
+          this.pickerValue = val
+          this.weightValue =
+            this.weightList[val[0]] + '.' + this.weightFixList[val[1]]
+          break
+        case 'muscleMass':
+          this.pickerValue = val
+          this.muscleMassValue =
+            this.muscleMassList[val[0]] + '.' + this.muscleMassFixList[val[1]]
+          break
+        case 'fatMass':
+          this.pickerValue = val
+          this.fatMassValue =
+            this.fatMassList[val[0]] + '.' + this.fatMassFixList[val[1]]
+          break
+        case 'fatPer':
+          this.pickerValue = val
+          this.fatPerValue =
+            this.fatPerList[val[0]] + '.' + this.fatPerFixList[val[1]]
+          break
+        case 'bodymoisture':
+          this.pickerValue = val
+          this.bodymoistureValue =
+            this.bodymoistureList[val[0]] +
+            '.' +
+            this.bodymoistureFixList[val[1]]
+          break
+        case 'bmi':
+          this.pickerValue = val
+          this.bmi = this.bmiList[val[0]] + '.' + this.bmiFixList[val[1]]
+          break
+        case 'date':
+          this.pickerValue = val
+          this.year = this.years[val[0]]
+          this.month = this.months[val[1]]
+          this.day = this.days[val[2]]
+          // 新增需要的数据组装
+          this.valueModel = this.year + '-' + this.month + '-' + this.day
+          console.log(this.year, this.month, this.day)
+          break
       }
+
+      // if (this.pickerType === 'ordinary') {
+      //   this.pickerValue = val
+      // } else {
+      //   // this.pickerValue =val
+      //   this.year = this.years[val[0]]
+      //   this.month = this.months[val[1]]
+      //   this.day = this.days[val[2]]
+      //   // 新增需要的数据组装
+      //   this.valueModel = this.year + '-' + this.month + '-' + this.day
+      //   console.log(this.year, this.month, this.day)
+      // }
     },
     pickstart() {
       this.pickMove = true

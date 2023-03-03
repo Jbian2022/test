@@ -335,7 +335,7 @@ export default {
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1),
-          productid: 'jianbiannianka',
+          productid: 'niankaa',
           vipLevel: 'annualCard'
         },
         {
@@ -360,7 +360,7 @@ export default {
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1),
-          productid: 'jianbianjika',
+          productid: 'jikaa',
           vipLevel: 'quarterCard'
         },
         {
@@ -385,7 +385,7 @@ export default {
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1) +
             Math.floor(Math.random() * 10 + 1),
-          productid: 'jianbianyueka',
+          productid: 'yuekaa',
           vipLevel: 'monthlyCard'
         }
       ],
@@ -495,7 +495,7 @@ export default {
     onSuccess(res) {
       console.log('success: ', res)
       // 充值成功添加有效期
-
+      let self = this
       if (res.user_order_success) {
         // 代表用户已付款，且你自己写的回调成功并正确执行了
         // 成功之后的业务逻辑
@@ -519,7 +519,9 @@ export default {
           type: 'appleiap', // 支付回调类型（可自定义，建议填写appleiap）
           productid: this.payInfo.productid, // ios内购产品id（仅ios内购生效）
           // 自定义数据
-          custom: {}
+          custom: {
+            create_order_time: moment().format('YYYY-MM-DD HH:ss')
+          }
         }
       } else {
         param = {
@@ -531,7 +533,9 @@ export default {
           description: '教练充值VIP', // 支付描述
           qr_code: '', // 是否强制使用扫码支付
           openid: '', // 微信公众号需要
-          custom: '' // 自定义数据
+          custom: {
+            create_order_time: moment().format('YYYY-MM-DD HH:ss')
+          }
         }
       }
       console.log(param, '我是支付的参数')

@@ -256,16 +256,17 @@ export default {
       uni.login({
         provider: 'apple', //使用苹果登录
         success: async (loginRes) => {
-          console.log(loginRes, '什么鬼')
           const appleLogin = uniCloud.importObject('login', {
             customUI: true // 取消自动展示的交互提示界面
           })
+          let userInfo = uni.getUserInfo()
+          console.log(userInfo, '你是快乐萨的看法')
           // 先校验苹果identify
+          let identityToken = loginRes.appleInfo.identityToken
+          console.log(loginRes, '什么鬼')
           try {
             let verifyAppleIdentityTokenRes =
-              await appleLogin.verifyAppleIdentityToken(
-                loginRes.appleInfo.identityToken
-              )
+              await appleLogin.verifyAppleIdentityToken(identityToken)
             console.log(
               verifyAppleIdentityTokenRes,
               'verifyAppleIdentityTokenRes'

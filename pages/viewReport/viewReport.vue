@@ -12,6 +12,7 @@
       "
     >
       <view class="footer-button">
+        <view class="backpage" @click="backpage">返回首页</view>
         <view class="van-button" @click="openPopup"
           ><view class="share-icon"></view>分享报告</view
         >
@@ -1313,11 +1314,13 @@ export default {
       // 今天日期，数组，同 birthday
       let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
       this.nowDate =
-        (date.getMonth() + 1 > 9
+        date.getMonth() + 1 > 9
           ? date.getMonth() + 1
-          : '0' + (date.getMonth() + 1)) +
-        '.' +
-        date.getDate()
+          : '0' +
+            (date.getMonth() + 1) +
+            '.' +
+            (date.getDate() > 10 ? date.getDate() : '0' + date.getDate())
+
       this.nowYear = date.getFullYear()
       this.histroydate = this.nowYear + '-' + this.nowDate
       // 分别计算年月日差值
@@ -1563,6 +1566,11 @@ export default {
     openUIup() {
       this.$refs.popup.open()
     },
+    backpage() {
+      uni.reLaunch({
+        url: '/pages/myMebers/myMebers'
+      })
+    },
     saveReport() {
       console.log(this.openKey)
       if (this.openKey) {
@@ -1618,7 +1626,11 @@ export default {
                 })
               },
               fail: (err) => {
-                console.log('err', err)
+                uni.showModal({
+                  showCancel: false,
+                  title: '提示',
+                  content: '保存失败，请查是否开启保存权限'
+                })
               }
             })
           }
@@ -1957,9 +1969,21 @@ export default {
   z-index: 1;
   padding: 30upx;
   // background: #212328;
+  .backpage {
+    width: 240upx;
+    height: 100upx;
+    background: #454951;
+    border-radius: 16upx;
+    text-align: center;
+    color: #f4f7ff;
+    font-size: 32upx;
+    font-weight: 600;
+    line-height: 100upx;
+    float: left;
+  }
   .van-button {
     height: 100upx;
-    width: 100%;
+    width: 425upx !important;
     background: #1370ff;
     border-radius: 16upx;
     font-size: 32upx;
@@ -1968,6 +1992,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    float: right;
     border: none;
     .share-icon {
       width: 28upx;

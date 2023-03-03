@@ -1181,9 +1181,21 @@
   z-index: 1;
   padding: 0.9375rem;
 }
+.footer-button .backpage[data-v-62ef4d39] {
+  width: 7.5rem;
+  height: 3.125rem;
+  background: #454951;
+  border-radius: 0.5rem;
+  text-align: center;
+  color: #f4f7ff;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 3.125rem;
+  float: left;
+}
 .footer-button .van-button[data-v-62ef4d39] {
   height: 3.125rem;
-  width: 100%;
+  width: 13.28125rem !important;
   background: #1370ff;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -1192,6 +1204,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  float: right;
   border: none;
 }
 .footer-button .van-button .share-icon[data-v-62ef4d39] {

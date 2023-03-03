@@ -345,6 +345,7 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 		let param = {
 			identityToken
 		}
+		console.log(param, '我是苹果校验')
 		const res = await uniID.verifyAppleIdentityToken(param)
 		return res
 	},
@@ -500,6 +501,14 @@ const {uid} = await this.uniID.checkToken(this.getUniIdToken());
 			resolve(res)
 		})
 	},
+	// 发起退款
+	refund: async function(data) {
+		let param = {
+			...data
+		}
+		let res = await this.uniID.refund(param);
+		return res
+	}
 	
 	
 	

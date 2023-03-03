@@ -202,6 +202,7 @@ export default {
   },
   onShow() {
     this.getUserInfor()
+    uni.hideLoading()
   },
   methods: {
     // 获取用户信息

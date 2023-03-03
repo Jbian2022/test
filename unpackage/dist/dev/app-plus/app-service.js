@@ -1063,7 +1063,7 @@ if (uni.restoreGlobal) {
   function m(e) {
     return e && "string" == typeof e ? JSON.parse(e) : e;
   }
-  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.12"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.49"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -9058,6 +9058,7 @@ if (uni.restoreGlobal) {
     },
     onShow() {
       this.getUserInfor();
+      uni.hideLoading();
     },
     methods: {
       // 获取用户信息
@@ -9069,14 +9070,14 @@ if (uni.restoreGlobal) {
         let self2 = this;
         try {
           login2.getUserInfoMessage().then((res2) => {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:217", res2, "....");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:218", res2, "....");
             self2.avatar = res2.userInfo.avatar || null;
             self2.addUpperLimit = res2.userInfo.addUpperLimit || null;
             self2.userInfo = res2.userInfo || {};
             let currentDay = hooks().format("YYYY-MM-DD");
             if (res2.userInfo.vipEndDate || res2.userInfo.vipLevel) {
               let sameTime = hooks(currentDay).isSame(res2.userInfo.vipEndDate);
-              formatAppLog("log", "at pages/myMebers/myMebers.vue:228", "补药");
+              formatAppLog("log", "at pages/myMebers/myMebers.vue:229", "补药");
               if (sameTime) {
                 self2.termOfValidity = false;
               } else {
@@ -9099,7 +9100,7 @@ if (uni.restoreGlobal) {
           // 取消自动展示的交互提示界面
         });
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:254", res2, "腻");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:255", res2, "腻");
           this.cocahMemberLimit = res2.affectedDocs;
         }).catch((err) => {
         });
@@ -9111,11 +9112,11 @@ if (uni.restoreGlobal) {
         this.showMenuPop = false;
       },
       jumpQuery() {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:266", 111);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:267", 111);
         uni.removeStorage({
           key: "isActive",
           success: function(res2) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:271", "success");
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:272", "success");
           }
         });
         uni.navigateTo({
@@ -9129,13 +9130,13 @@ if (uni.restoreGlobal) {
         });
       },
       upper: function(e) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:282", e, "mmm");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:283", e, "mmm");
       },
       lower: function(e) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:285", e);
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:286", e);
       },
       scroll(event) {
-        formatAppLog("log", "at pages/myMebers/myMebers.vue:288", event.detail.scrollTop, "我是距离");
+        formatAppLog("log", "at pages/myMebers/myMebers.vue:289", event.detail.scrollTop, "我是距离");
         this.scrollTop = event.detail.scrollTop;
         if (event.detail.scrollTop > 50) {
           this.searchTopFlag = true;
@@ -9161,7 +9162,7 @@ if (uni.restoreGlobal) {
         });
         let that = this;
         businessCloudObject2.getCoachMemberList().then((res2) => {
-          formatAppLog("log", "at pages/myMebers/myMebers.vue:321", that.termOfValidity, that.userInfo, "你都是咖啡可考虑");
+          formatAppLog("log", "at pages/myMebers/myMebers.vue:322", that.termOfValidity, that.userInfo, "你都是咖啡可考虑");
           that.cocahMemberLimit = res2.affectedDocs;
           if (!that.termOfValidity || !that.userInfo.vipLevel) {
             if (!that.addUpperLimit && that.cocahMemberLimit >= 7) {
@@ -10985,6 +10986,54 @@ if (uni.restoreGlobal) {
   const month = date.getMonth() + 1;
   const days = [];
   const day = date.getDate();
+  const weightList = [];
+  const weightFixList = [];
+  const muscleMassList = [];
+  const muscleMassFixList = [];
+  const fatMassList = [];
+  const fatMassFixList = [];
+  const fatPerList = [];
+  const fatPerFixList = [];
+  const bodymoistureList = [];
+  const bodymoistureFixList = [];
+  const bmiList = [];
+  const bmiFixList = [];
+  for (let i2 = 3; i2 <= 60; i2++) {
+    bmiList.push(i2);
+  }
+  for (let i2 = 0; i2 <= 10; i2++) {
+    bmiFixList.push(i2);
+  }
+  for (let i2 = 3; i2 <= 60; i2++) {
+    bodymoistureList.push(i2);
+  }
+  for (let i2 = 0; i2 <= 10; i2++) {
+    bodymoistureFixList.push(i2);
+  }
+  for (let i2 = 3; i2 <= 60; i2++) {
+    fatPerList.push(i2);
+  }
+  for (let i2 = 0; i2 <= 10; i2++) {
+    fatPerFixList.push(i2);
+  }
+  for (let i2 = 3; i2 <= 60; i2++) {
+    fatMassList.push(i2);
+  }
+  for (let i2 = 0; i2 <= 10; i2++) {
+    fatMassFixList.push(i2);
+  }
+  for (let i2 = 10; i2 <= 60; i2++) {
+    muscleMassList.push(i2);
+  }
+  for (let i2 = 0; i2 <= 10; i2++) {
+    muscleMassFixList.push(i2);
+  }
+  for (let i2 = 30; i2 <= 300; i2++) {
+    weightList.push(i2);
+  }
+  for (let i2 = 0; i2 <= 10; i2++) {
+    weightFixList.push(i2);
+  }
   for (let i2 = 1770; i2 <= date.getFullYear(); i2++) {
     years.push(i2);
   }
@@ -11010,7 +11059,25 @@ if (uni.restoreGlobal) {
         day,
         value: [9999, month - 1, day - 1],
         visible: true,
-        valueModel: ""
+        valueModel: "",
+        weightList,
+        weightFixList,
+        weightValue: "70.0",
+        muscleMassList,
+        muscleMassFixList,
+        muscleMassValue: "30.0",
+        fatMassList,
+        fatMassFixList,
+        fatMassValue: "15.0",
+        fatPerList,
+        fatPerFixList,
+        fatPerValue: "20.0",
+        bodymoistureList,
+        bodymoistureFixList,
+        bodymoistureValue: "30.0",
+        bmiList,
+        bmiFixList,
+        bmiValue: "19.0"
       };
     },
     computed: {
@@ -11114,8 +11181,46 @@ if (uni.restoreGlobal) {
     },
     mounted() {
       this.$nextTick(() => {
-        if (this.pickerType === "ordinary") {
-          this.pickerValue = [this.defaultIndex];
+        switch (this.pickerType) {
+          case "ordinary":
+            this.pickerValue = [this.defaultIndex];
+            break;
+          case "weight":
+            let weightFindexIndex = this.weightList.findIndex(
+              (item) => item == this.weightValue
+            );
+            this.pickerValue = [weightFindexIndex, 0];
+            break;
+          case "muscleMass":
+            let muscleMassFindeIndex = this.muscleMassList.findIndex(
+              (item) => item == this.muscleMassValue
+            );
+            this.pickerValue = [muscleMassFindeIndex, 0];
+            break;
+          case "fatMass":
+            let fatMassFindexIndex = this.fatMassList.findIndex(
+              (item) => item == this.fatMassValue
+            );
+            this.pickerValue = [fatMassFindexIndex, 0];
+            break;
+          case "fatPer":
+            let fatPerFindex = this.fatPerList.findIndex(
+              (item) => item == this.fatPerValue
+            );
+            this.pickerValue = [fatPerFindex, 0];
+            break;
+          case "bodymoisture":
+            let bodymoistureFindIndex = this.bodymoistureList.findIndex(
+              (item) => item == this.bodymoistureValue
+            );
+            this.pickerValue = [bodymoistureFindIndex, 0];
+            break;
+          case "bmi":
+            let bmiFindIndex = this.bodymoistureList.findIndex(
+              (item) => item == this.bmiValue
+            );
+            this.pickerValue = [bmiFindIndex, 0];
+            break;
         }
       });
     },
@@ -11133,15 +11238,47 @@ if (uni.restoreGlobal) {
       },
       // 确定
       confirm() {
-        if (this.pickerType === "ordinary") {
-          formatAppLog("log", "at components/mPicker.vue/mPicker.vue:272", this.pickerValue.Target, "this.pickerValue");
-          this.$emit("confirm", this.pickerValue);
-          if (this.btnClose)
-            this.close();
-        } else {
-          this.$emit("confirm", this.valueModel);
-          if (this.btnClose)
-            this.close();
+        switch (this.pickerType) {
+          case "ordinary":
+            this.$emit("confirm", this.pickerValue);
+            if (this.btnClose)
+              this.close();
+            break;
+          case "date":
+            this.$emit("confirm", this.valueModel);
+            if (this.btnClose)
+              this.close();
+            break;
+          case "weight":
+            this.$emit("confirm", this.weightValue);
+            if (this.btnClose)
+              this.close();
+            break;
+          case "muscleMass":
+            this.$emit("confirm", this.muscleMassValue);
+            if (this.btnClose)
+              this.close();
+            break;
+          case "fatMass":
+            this.$emit("confirm", this.fatMassValue);
+            if (this.btnClose)
+              this.close();
+            break;
+          case "fatPer":
+            this.$emit("confirm", this.fatPerValue);
+            if (this.btnClose)
+              this.close();
+            break;
+          case "bodymoisture":
+            this.$emit("confirm", this.bodymoistureValue);
+            if (this.btnClose)
+              this.close();
+            break;
+          case "bmi":
+            this.$emit("confirm", this.bmiValue);
+            if (this.btnClose)
+              this.close();
+            break;
         }
       },
       // 点击遮罩
@@ -11150,16 +11287,44 @@ if (uni.restoreGlobal) {
           this.close();
       },
       bindChange(e) {
-        formatAppLog("log", "at components/mPicker.vue/mPicker.vue:285", e, ">>>>>");
+        formatAppLog("log", "at components/mPicker.vue/mPicker.vue:554", e, ">>>>>");
         const val = e.detail.value;
-        if (this.pickerType === "ordinary") {
-          this.pickerValue = val;
-        } else {
-          this.year = this.years[val[0]];
-          this.month = this.months[val[1]];
-          this.day = this.days[val[2]];
-          this.valueModel = this.year + "-" + this.month + "-" + this.day;
-          formatAppLog("log", "at components/mPicker.vue/mPicker.vue:296", this.year, this.month, this.day);
+        switch (this.pickerType) {
+          case "ordinary":
+            this.pickerValue = val;
+            break;
+          case "weight":
+            this.pickerValue = val;
+            this.weightValue = this.weightList[val[0]] + "." + this.weightFixList[val[1]];
+            break;
+          case "muscleMass":
+            this.pickerValue = val;
+            this.muscleMassValue = this.muscleMassList[val[0]] + "." + this.muscleMassFixList[val[1]];
+            break;
+          case "fatMass":
+            this.pickerValue = val;
+            this.fatMassValue = this.fatMassList[val[0]] + "." + this.fatMassFixList[val[1]];
+            break;
+          case "fatPer":
+            this.pickerValue = val;
+            this.fatPerValue = this.fatPerList[val[0]] + "." + this.fatPerFixList[val[1]];
+            break;
+          case "bodymoisture":
+            this.pickerValue = val;
+            this.bodymoistureValue = this.bodymoistureList[val[0]] + "." + this.bodymoistureFixList[val[1]];
+            break;
+          case "bmi":
+            this.pickerValue = val;
+            this.bmi = this.bmiList[val[0]] + "." + this.bmiFixList[val[1]];
+            break;
+          case "date":
+            this.pickerValue = val;
+            this.year = this.years[val[0]];
+            this.month = this.months[val[1]];
+            this.day = this.days[val[2]];
+            this.valueModel = this.year + "-" + this.month + "-" + this.day;
+            formatAppLog("log", "at components/mPicker.vue/mPicker.vue:598", this.year, this.month, this.day);
+            break;
         }
       },
       pickstart() {
@@ -11333,6 +11498,294 @@ if (uni.restoreGlobal) {
                                       key: index
                                     },
                                     vue.toDisplayString(item) + "日",
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ])
+                          ],
+                          64
+                          /* STABLE_FRAGMENT */
+                        )) : vue.createCommentVNode("v-if", true),
+                        _ctx.pickerType === "weight" ? (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          { key: 2 },
+                          [
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.weightList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]),
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.weightFixList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ])
+                          ],
+                          64
+                          /* STABLE_FRAGMENT */
+                        )) : vue.createCommentVNode("v-if", true),
+                        _ctx.pickerType === "muscleMass" ? (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          { key: 3 },
+                          [
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.muscleMassList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]),
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.muscleMassFixList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ])
+                          ],
+                          64
+                          /* STABLE_FRAGMENT */
+                        )) : vue.createCommentVNode("v-if", true),
+                        _ctx.pickerType === "fatMass" ? (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          { key: 4 },
+                          [
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.fatMassList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]),
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.fatMassFixList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ])
+                          ],
+                          64
+                          /* STABLE_FRAGMENT */
+                        )) : vue.createCommentVNode("v-if", true),
+                        _ctx.pickerType === "fatPer" ? (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          { key: 5 },
+                          [
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.fatPerList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]),
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.fatPerFixList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ])
+                          ],
+                          64
+                          /* STABLE_FRAGMENT */
+                        )) : vue.createCommentVNode("v-if", true),
+                        _ctx.pickerType === "bodymoisture" ? (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          { key: 6 },
+                          [
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.bodymoistureList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]),
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.bodymoistureFixList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ])
+                          ],
+                          64
+                          /* STABLE_FRAGMENT */
+                        )) : vue.createCommentVNode("v-if", true),
+                        _ctx.pickerType === "bmi" ? (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          { key: 7 },
+                          [
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.bmiList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
+                                    1
+                                    /* TEXT */
+                                  );
+                                }),
+                                128
+                                /* KEYED_FRAGMENT */
+                              ))
+                            ]),
+                            vue.createElementVNode("picker-view-column", null, [
+                              (vue.openBlock(true), vue.createElementBlock(
+                                vue.Fragment,
+                                null,
+                                vue.renderList($data.bmiFixList, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock(
+                                    "view",
+                                    {
+                                      class: "item",
+                                      key: index
+                                    },
+                                    vue.toDisplayString(item),
                                     1
                                     /* TEXT */
                                   );
@@ -12729,8 +13182,14 @@ if (uni.restoreGlobal) {
       },
       controlType() {
         return function(item) {
-          let whiteType = ["height", "visceralfatgrade", "bodyFraction"];
-          let type = whiteType.indexOf(item.key) > -1 ? "ordinary" : "ordinary";
+          let whiteType = [
+            "height",
+            "visceralfatgrade",
+            "bodyFraction",
+            "buttockPer"
+          ];
+          let type = whiteType.indexOf(item.key) > -1 ? "ordinary" : item.key;
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:148", item, "步骤");
           return type;
         };
       }
@@ -12753,9 +13212,37 @@ if (uni.restoreGlobal) {
         }
       },
       pickeConfirm(event, item, itemIndex) {
-        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:165", item, "我平时", itemIndex);
-        item.flag = false;
-        item["value"] = item.configList[event].text || "";
+        formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:171", item, "我平时", itemIndex);
+        switch (item.key) {
+          case "weight":
+            item.flag = false;
+            item["value"] = event || "";
+            break;
+          case "muscleMass":
+            item.flag = false;
+            item["value"] = event || "";
+            break;
+          case "fatMass":
+            item.flag = false;
+            item["value"] = event || "";
+            break;
+          case "fatPer":
+            item.flag = false;
+            item["value"] = event || "";
+            break;
+          case "bodymoisture":
+            item.flag = false;
+            item["value"] = event || "";
+            break;
+          case "bmi":
+            item.flag = false;
+            item["value"] = event || "";
+            break;
+          default:
+            item.flag = false;
+            item["value"] = item.configList[event].text || "";
+            break;
+        }
       },
       pickCancel(item) {
         item.flag = false;
@@ -12769,7 +13256,7 @@ if (uni.restoreGlobal) {
           let readyParam = {
             [value.key]: value.hasOwnProperty("value") ? value.value : ""
           };
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:184", readyParam, "readyParam");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:218", readyParam, "readyParam");
           Object.assign(resultParam, readyParam);
         });
         let saveParam = {
@@ -12778,7 +13265,7 @@ if (uni.restoreGlobal) {
           bodyTestReport: resultParam
         };
         businessCloudObject$2.opearConfig(saveParam, "bodyTestReport").then((res2) => {
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:197", res2, "我要保存了");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:231", res2, "我要保存了");
           if (res2.success) {
             uni.redirectTo({
               url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + this.traineeNo + "&questionCode=" + this.questionCode
@@ -12809,7 +13296,7 @@ if (uni.restoreGlobal) {
               flag: false
             };
           });
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:238", res2, "kkkkk");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:272", res2, "kkkkk");
           if (res2.affectedDocs === 0) {
             this.configForm = {};
             this.bodyTestReport = opearConfigList;
@@ -12834,7 +13321,7 @@ if (uni.restoreGlobal) {
                 value: resultValue
               };
             });
-            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:266", self2.configForm, "this.configForm", opearConfigList);
+            formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:300", self2.configForm, "this.configForm", opearConfigList);
             self2.bodyTestReport = opearConfigList;
           }
         }).catch((err) => {
@@ -12882,7 +13369,7 @@ if (uni.restoreGlobal) {
         var that = this;
         this.$refs.studentForm.validate().then(() => {
           let businessCloudObject2 = Es.importObject("businessCloudObject");
-          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:317", that.requestItem, "that.requestItem");
+          formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:351", that.requestItem, "that.requestItem");
           if (type == "edit" || that.requestItem) {
             businessCloudObject2.updateMember(that.studentForm).then((updateRes) => {
               if (updateRes.success) {
@@ -12918,13 +13405,13 @@ if (uni.restoreGlobal) {
           }
           businessCloudObject2.addMember(that.studentForm).then((res2) => {
             if (res2.success) {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:358", type, ">>>>");
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:392", type, ">>>>");
               if (type == "body") {
                 businessCloudObject2.getOnlyList({
                   traineeName: that.studentForm.traineeName,
                   mobile: that.studentForm.mobile
                 }).then((res3) => {
-                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:366", res3, "即将发送的res");
+                  formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:400", res3, "即将发送的res");
                   if (res3.success) {
                     let data = res3.data;
                     uni.navigateTo({
@@ -12950,7 +13437,7 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             } else {
-              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:392", 2);
+              formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:426", 2);
               uni.showToast({
                 icon: "fail",
                 title: res2.message,
@@ -16234,18 +16721,19 @@ if (uni.restoreGlobal) {
           provider: "apple",
           //使用苹果登录
           success: async (loginRes) => {
-            formatAppLog("log", "at pages/logining/logining.vue:259", loginRes, "什么鬼");
             const appleLogin = Es.importObject("login", {
               customUI: true
               // 取消自动展示的交互提示界面
             });
+            let userInfo = uni.getUserInfo();
+            formatAppLog("log", "at pages/logining/logining.vue:263", userInfo, "你是快乐萨的看法");
+            let identityToken = loginRes.appleInfo.identityToken;
+            formatAppLog("log", "at pages/logining/logining.vue:266", loginRes, "什么鬼");
             try {
-              let verifyAppleIdentityTokenRes = await appleLogin.verifyAppleIdentityToken(
-                loginRes.appleInfo.identityToken
-              );
+              let verifyAppleIdentityTokenRes = await appleLogin.verifyAppleIdentityToken(identityToken);
               formatAppLog(
                 "log",
-                "at pages/logining/logining.vue:269",
+                "at pages/logining/logining.vue:270",
                 verifyAppleIdentityTokenRes,
                 "verifyAppleIdentityTokenRes"
               );
@@ -16253,7 +16741,7 @@ if (uni.restoreGlobal) {
                 let getLogingByAppleRes = await appleLogin.logingByApple(
                   loginRes.appleInfo.identityToken
                 );
-                formatAppLog("log", "at pages/logining/logining.vue:278", getLogingByAppleRes, "苹果登陆了");
+                formatAppLog("log", "at pages/logining/logining.vue:279", getLogingByAppleRes, "苹果登陆了");
                 if (getLogingByAppleRes.code == 0) {
                   try {
                     uni.setStorageSync(
@@ -16281,13 +16769,13 @@ if (uni.restoreGlobal) {
                       return;
                     }
                   } catch (e) {
-                    formatAppLog("log", "at pages/logining/logining.vue:352", e, ">>>>>");
+                    formatAppLog("log", "at pages/logining/logining.vue:353", e, ">>>>>");
                     return;
                   }
                 }
               }
             } catch (err) {
-              formatAppLog("log", "at pages/logining/logining.vue:359", err, "222", err.Error, err, JSON.stringify(err));
+              formatAppLog("log", "at pages/logining/logining.vue:360", err, "222", err.Error, err, JSON.stringify(err));
               uni.showToast({
                 title: err.errMsg || err.message,
                 duration: 1e3,
@@ -16324,15 +16812,15 @@ if (uni.restoreGlobal) {
       },
       wxLoginCommon() {
         this.getWeixinCode().then(async (code) => {
-          formatAppLog("log", "at pages/logining/logining.vue:398", code, "你是谁");
+          formatAppLog("log", "at pages/logining/logining.vue:399", code, "你是谁");
           const wxLogin = Es.importObject("login", {
             customUI: true
             // 取消自动展示的交互提示界面
           });
-          formatAppLog("log", "at pages/logining/logining.vue:402", wxLogin, "wxLogin");
+          formatAppLog("log", "at pages/logining/logining.vue:403", wxLogin, "wxLogin");
           try {
             const wxLoginRes = await wxLogin.loginByWeixin(code);
-            formatAppLog("log", "at pages/logining/logining.vue:406", wxLoginRes, "登录成功");
+            formatAppLog("log", "at pages/logining/logining.vue:407", wxLoginRes, "登录成功");
             if (wxLoginRes.code == 0) {
               try {
                 uni.setStorageSync(
@@ -16347,7 +16835,7 @@ if (uni.restoreGlobal) {
                   openid: wxLoginRes.openid
                 };
                 let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
-                formatAppLog("log", "at pages/logining/logining.vue:423", wxSchemaRes, "我是微信的前一步");
+                formatAppLog("log", "at pages/logining/logining.vue:424", wxSchemaRes, "我是微信的前一步");
                 let flag = false;
                 if (wxSchemaRes.affectedDocs === 0) {
                   flag = false;
@@ -22537,7 +23025,7 @@ if (uni.restoreGlobal) {
             active: true,
             order_no: "20221027812838484891" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
             out_trade_no: "200123321321312" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
-            productid: "jianbiannianka",
+            productid: "niankaa",
             vipLevel: "annualCard"
           },
           {
@@ -22550,7 +23038,7 @@ if (uni.restoreGlobal) {
             active: false,
             order_no: "20221027812838483891" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
             out_trade_no: "200123321321323" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
-            productid: "jianbianjika",
+            productid: "jikaa",
             vipLevel: "quarterCard"
           },
           {
@@ -22563,7 +23051,7 @@ if (uni.restoreGlobal) {
             active: false,
             order_no: "20221027812838486891" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
             out_trade_no: "200123321321323" + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1) + Math.floor(Math.random() * 10 + 1),
-            productid: "jianbianyueka",
+            productid: "yuekaa",
             vipLevel: "monthlyCard"
           }
         ],
@@ -22639,12 +23127,13 @@ if (uni.restoreGlobal) {
       // 监听事件 - 支付成功
       onSuccess(res2) {
         formatAppLog("log", "at pages/my/my.vue:496", "success: ", res2);
+        let self2 = this;
         if (res2.user_order_success) {
           this.successChangeBusiness();
-          self.payShow = false;
+          self2.payShow = false;
         } else {
           this.successChangeBusiness();
-          self.payShow = false;
+          self2.payShow = false;
         }
       },
       createOrder(provider) {
@@ -22661,7 +23150,9 @@ if (uni.restoreGlobal) {
             productid: this.payInfo.productid,
             // ios内购产品id（仅ios内购生效）
             // 自定义数据
-            custom: {}
+            custom: {
+              create_order_time: hooks().format("YYYY-MM-DD HH:ss")
+            }
           };
         } else {
           param = {
@@ -22680,11 +23171,12 @@ if (uni.restoreGlobal) {
             // 是否强制使用扫码支付
             openid: "",
             // 微信公众号需要
-            custom: ""
-            // 自定义数据
+            custom: {
+              create_order_time: hooks().format("YYYY-MM-DD HH:ss")
+            }
           };
         }
-        formatAppLog("log", "at pages/my/my.vue:537", param, "我是支付的参数");
+        formatAppLog("log", "at pages/my/my.vue:541", param, "我是支付的参数");
         this.$refs.uniPay.createOrder(param);
       },
       payClick() {
@@ -22722,7 +23214,7 @@ if (uni.restoreGlobal) {
         } else {
           this.termOfValidity = false;
         }
-        formatAppLog("log", "at pages/my/my.vue:580", res2, 88888);
+        formatAppLog("log", "at pages/my/my.vue:584", res2, 88888);
       },
       async setReferrer() {
         await My$3.updateUserInfo({ referrer: this.userInfo.referrer });
@@ -22756,7 +23248,7 @@ if (uni.restoreGlobal) {
         uni.setClipboardData({
           data: text,
           success: function() {
-            formatAppLog("log", "at pages/my/my.vue:614", "success");
+            formatAppLog("log", "at pages/my/my.vue:618", "success");
             uni.showToast({
               title: "复制成功",
               duration: 2e3
@@ -24652,7 +25144,7 @@ if (uni.restoreGlobal) {
                 }, {
                   default: vue.withCtx(() => [
                     vue.createElementVNode("view", { class: "clickActionBody" }, [
-                      vue.createCommentVNode(' <video\n                :src="FrontVideoUrl"\n                wid\n                autoplay\n                loop\n                :controls="false"\n                muted\n                v-if="show"\n              ></video> '),
+                      vue.createCommentVNode(' <video\r\n                :src="FrontVideoUrl"\r\n                wid\r\n                autoplay\r\n                loop\r\n                :controls="false"\r\n                muted\r\n                v-if="show"\r\n              ></video> '),
                       !$options.checkFile($data.FrontVideoUrl) ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
                         $setup.show ? (vue.openBlock(), vue.createElementBlock("video", {
                           key: 0,
@@ -24899,7 +25391,7 @@ if (uni.restoreGlobal) {
                 src: $data.backimgSide
               }, null, 8, ["src"]),
               vue.createElementVNode("view", { class: "imgbgText" }, " 点击上方蓝色标签选择问题部位，可多选 "),
-              vue.createCommentVNode(' <image\n			  src="../../static/app-plus/bg/actionImg.png"\n			></image> ')
+              vue.createCommentVNode(' <image\r\n			  src="../../static/app-plus/bg/actionImg.png"\r\n			></image> ')
             ],
             512
             /* NEED_PATCH */
@@ -25038,7 +25530,7 @@ if (uni.restoreGlobal) {
                 src: $data.backimgSide
               }, null, 8, ["src"]),
               vue.createElementVNode("view", { class: "imgbgText" }, " 点击上方蓝色标签选择问题部位，可多选 "),
-              vue.createCommentVNode(' <image\n			  src="../../static/app-plus/bg/actionImg.png"\n			></image> ')
+              vue.createCommentVNode(' <image\r\n			  src="../../static/app-plus/bg/actionImg.png"\r\n			></image> ')
             ],
             512
             /* NEED_PATCH */
@@ -25659,7 +26151,7 @@ if (uni.restoreGlobal) {
                     }, "请填写数量（力竭）")),
                     vue.createElementVNode("view", { class: "testInput" }, [
                       vue.createElementVNode("view", null, [
-                        vue.createCommentVNode(' <van-field \n							  v-model.number="resultValue" \n							  class="inputBlock"\n							  @blur="testResult()"\n							  type="number"/> '),
+                        vue.createCommentVNode(' <van-field \r\n							  v-model.number="resultValue" \r\n							  class="inputBlock"\r\n							  @blur="testResult()"\r\n							  type="number"/> '),
                         vue.withDirectives(vue.createElementVNode(
                           "input",
                           {
@@ -25695,14 +26187,14 @@ if (uni.restoreGlobal) {
                 vue.createVNode(_component_van_col, { span: "8" }, {
                   default: vue.withCtx(() => [
                     vue.createElementVNode("view", { class: "dynamicshow_right" }, [
-                      vue.createCommentVNode(` <van-circle
-					      v-model:current-rate="currentRate"
-					      :rate="100"
-					      :speed="400"
-					      :text="typeText"
-					      :layer-color="typeColor"
-					      :color="typeColor"
-					      :style="'--van-circle-text-color:'+ typeColor"
+                      vue.createCommentVNode(` <van-circle\r
+					      v-model:current-rate="currentRate"\r
+					      :rate="100"\r
+					      :speed="400"\r
+					      :text="typeText"\r
+					      :layer-color="typeColor"\r
+					      :color="typeColor"\r
+					      :style="'--van-circle-text-color:'+ typeColor"\r
 					    /> `),
                       vue.createElementVNode(
                         "view",
@@ -25885,7 +26377,7 @@ if (uni.restoreGlobal) {
       };
     },
     onShow() {
-      formatAppLog("log", "at pages/viewReport/viewReport.vue:1221", this.key);
+      formatAppLog("log", "at pages/viewReport/viewReport.vue:1222", this.key);
       uni.hideLoading();
     },
     onLoad(options) {
@@ -25902,7 +26394,7 @@ if (uni.restoreGlobal) {
             this.openKey = false;
             this.getHistroyDate();
             this.pageName = "会员信息";
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1238", "1111");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1239", "1111");
             break;
         }
       }
@@ -25911,11 +26403,11 @@ if (uni.restoreGlobal) {
       setImage() {
         const img = document.getElementsByTagName("img");
         for (var i2 = 0; i2 < img.length; i2++) {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1247", img[i2]);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1248", img[i2]);
         }
       },
       openPopup() {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1251", "用户点击分享");
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1252", "用户点击分享");
         this.infoclick1 = true;
         this.infoclick2 = true;
         this.infoclick3 = true;
@@ -25924,7 +26416,7 @@ if (uni.restoreGlobal) {
         this.$refs.popup.open();
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1260", option, 88);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1261", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -25944,11 +26436,11 @@ if (uni.restoreGlobal) {
           this.getDynameEvaluation();
           this.getHealthQuesson();
           setTimeout(() => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1280", "数据加载成功");
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1281", "正在保存此次训练记录");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1281", "数据加载成功");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1282", "正在保存此次训练记录");
             this.saveReport();
           }, 3e3);
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1284", "保存成功！");
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1285", "保存成功！");
         });
       },
       async pageMethods() {
@@ -25968,7 +26460,7 @@ if (uni.restoreGlobal) {
             this.mobileNumber = res2.data[0].mobile;
             this.age = this.getAge(res2.data[0].birthday);
             this.birthdate = res2.data[0].birthday;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1304", "学员信息获取完毕，内容为：" + this.birthdate);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1305", "学员信息获取完毕，内容为：" + this.birthdate);
           }
         });
       },
@@ -25976,7 +26468,7 @@ if (uni.restoreGlobal) {
         birthday = birthday.split("-");
         let date2 = new Date();
         let today = [date2.getFullYear(), date2.getMonth() + 1, date2.getDate()];
-        this.nowDate = (date2.getMonth() + 1 > 9 ? date2.getMonth() + 1 : "0" + (date2.getMonth() + 1)) + "." + date2.getDate();
+        this.nowDate = date2.getMonth() + 1 > 9 ? date2.getMonth() + 1 : "0" + (date2.getMonth() + 1) + "." + (date2.getDate() > 10 ? date2.getDate() : "0" + date2.getDate());
         this.nowYear = date2.getFullYear();
         this.histroydate = this.nowYear + "-" + this.nowDate;
         let age = today.map((val, index) => {
@@ -26042,7 +26534,7 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1405", this.queryData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1408", this.queryData);
               resdata["data"] = this.queryData;
             }).catch((err) => {
             });
@@ -26123,7 +26615,7 @@ if (uni.restoreGlobal) {
               trueData = {};
             }
           } else {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1500", "没有数据哦");
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1503", "没有数据哦");
             this.postureData = true;
           }
         }).catch();
@@ -26137,9 +26629,9 @@ if (uni.restoreGlobal) {
           if (res2.data.length > 0) {
             this.bodyTestData = res2.data[0].bodyTestReport;
             this.bodyFraction = Number(this.bodyTestData.bodyFraction);
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1515", this.bodyTestData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1518", this.bodyTestData);
             resData["data"] = this.bodyTestData;
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1517", resData);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1520", resData);
           }
         });
         return resData;
@@ -26152,11 +26644,11 @@ if (uni.restoreGlobal) {
           if (res2.data.length == 0) {
             this.Dyname = true;
           }
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1533", res2.data);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1536", res2.data);
           for (let r2 of res2.data) {
             this.physicalFitnessAssessmentData.push(r2);
           }
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1537", this.physicalFitnessAssessmentData);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1540", this.physicalFitnessAssessmentData);
         });
       },
       setDyNameStatus(item) {
@@ -26183,8 +26675,13 @@ if (uni.restoreGlobal) {
       openUIup() {
         this.$refs.popup.open();
       },
+      backpage() {
+        uni.reLaunch({
+          url: "/pages/myMebers/myMebers"
+        });
+      },
       saveReport() {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1567", this.openKey);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1575", this.openKey);
         if (this.openKey) {
           const data = {};
           let date2 = new Date();
@@ -26197,9 +26694,9 @@ if (uni.restoreGlobal) {
           data["physicalFitnessAssessmentData"] = this.physicalFitnessAssessmentData;
           data["saveDate"] = today;
           data["name"] = this.personName;
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1586", data);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1594", data);
           testOb.saveReport(data).then((res2) => {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1588", res2);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1596", res2);
           });
         }
       },
@@ -26209,11 +26706,11 @@ if (uni.restoreGlobal) {
           //仅为示例，并非真实的资源
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1598", "下载成功", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1606", "下载成功", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1602", "保存成功！", res3);
+                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1610", "保存成功！", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -26221,18 +26718,22 @@ if (uni.restoreGlobal) {
                     content: "图片已经保存到相册请查看",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1610", "用户点击确定");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1618", "用户点击确定");
                         uni.reLaunch({
                           url: "/pages/myMebers/myMebers"
                         });
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1615", "用户点击取消");
+                        formatAppLog("log", "at pages/viewReport/viewReport.vue:1623", "用户点击取消");
                       }
                     }
                   });
                 },
                 fail: (err) => {
-                  formatAppLog("log", "at pages/viewReport/viewReport.vue:1621", "err", err);
+                  uni.showModal({
+                    showCancel: false,
+                    title: "提示",
+                    content: "保存失败，请查是否开启保存权限"
+                  });
                 }
               });
             }
@@ -26244,19 +26745,19 @@ if (uni.restoreGlobal) {
           pname: "bodybuildingApp.myapp",
           action: "weixin://"
         })) {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1635", "微信应用已安装");
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1647", "微信应用已安装");
           return true;
         } else {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1638", "微信应用未安装");
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1650", "微信应用未安装");
           return false;
         }
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1644", option.name, 8888);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1656", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
-          formatAppLog("log", "at pages/viewReport/viewReport.vue:1647", url);
+          formatAppLog("log", "at pages/viewReport/viewReport.vue:1659", url);
           uni.showLoading({ title: "加载中" });
           if (option.name === "保存到相册") {
             this.downloadFile();
@@ -26269,12 +26770,12 @@ if (uni.restoreGlobal) {
                   type: 2,
                   imageUrl: url,
                   success: function(res2) {
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1661", "success:" + JSON.stringify(res2));
+                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1673", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
                   fail: function(err) {
                     uni.hideLoading();
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1666", "fail:" + JSON.stringify(err));
+                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1678", "fail:" + JSON.stringify(err));
                   }
                 });
               } else {
@@ -26294,12 +26795,12 @@ if (uni.restoreGlobal) {
                   type: 2,
                   imageUrl: url,
                   success: function(res2) {
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1686", "success:" + JSON.stringify(res2));
+                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1698", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
                   fail: function(err) {
                     uni.hideLoading();
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1691", "fail:" + JSON.stringify(err));
+                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1703", "fail:" + JSON.stringify(err));
                   }
                 });
               } else {
@@ -26333,14 +26834,14 @@ if (uni.restoreGlobal) {
         const resData = [];
         testOb.opearConfigQuery(data).then((res2) => {
           if (res2.success && res2.data.length != 0) {
-            formatAppLog("log", "at pages/viewReport/viewReport.vue:1729", res2.data[0].testResult);
+            formatAppLog("log", "at pages/viewReport/viewReport.vue:1741", res2.data[0].testResult);
             resData.push(res2.data[0].testResult);
             this.HQDate = resData;
           } else {
             this.showHQ = false;
           }
         });
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1753", resData);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1765", resData);
         return resData;
       },
       getHistroyDate() {
@@ -26350,9 +26851,9 @@ if (uni.restoreGlobal) {
           data["traineeNo"] = this.traineeNo;
           if (!this.openKey) {
             testOb.opearReportQuery(data).then((res2) => {
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1765", res2);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1777", res2);
               this.historyData = res2.data;
-              formatAppLog("log", "at pages/viewReport/viewReport.vue:1767", this.historyData);
+              formatAppLog("log", "at pages/viewReport/viewReport.vue:1779", this.historyData);
             });
           }
         } else {
@@ -26366,7 +26867,7 @@ if (uni.restoreGlobal) {
         this.queryData = item.queryData;
         this.assessmentTrueData = item.assessmentTrueData;
         this.physicalFitnessAssessmentData = item.physicalFitnessAssessmentData;
-        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1781", item);
+        this.histroydate = item.saveDate, formatAppLog("log", "at pages/viewReport/viewReport.vue:1793", item);
         this.$refs.popup.close();
       },
       gototest() {
@@ -26390,7 +26891,7 @@ if (uni.restoreGlobal) {
         return str.slice(a2 + 6, str.length);
       },
       onClickinfo(item) {
-        formatAppLog("log", "at pages/viewReport/viewReport.vue:1809", item);
+        formatAppLog("log", "at pages/viewReport/viewReport.vue:1821", item);
         switch (item) {
           case "基础信息":
             if (this.infoclick) {
@@ -26458,8 +26959,12 @@ if (uni.restoreGlobal) {
       }, [
         vue.createElementVNode("view", { class: "footer-button" }, [
           vue.createElementVNode("view", {
+            class: "backpage",
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.backpage && $options.backpage(...args))
+          }, "返回首页"),
+          vue.createElementVNode("view", {
             class: "van-button",
-            onClick: _cache[0] || (_cache[0] = (...args) => $options.openPopup && $options.openPopup(...args))
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.openPopup && $options.openPopup(...args))
           }, [
             vue.createElementVNode("view", { class: "share-icon" }),
             vue.createTextVNode("分享报告")
@@ -26521,7 +27026,7 @@ if (uni.restoreGlobal) {
       }, [
         vue.createElementVNode("view", {
           class: "buttontrue",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.openUIup && $options.openUIup(...args))
+          onClick: _cache[2] || (_cache[2] = (...args) => $options.openUIup && $options.openUIup(...args))
         }, [
           vue.createTextVNode("历史评测记录 "),
           vue.createElementVNode("image", { src: "/static/app-plus/mebrs/openarrit.png" })
@@ -26592,7 +27097,7 @@ if (uni.restoreGlobal) {
         vue.createElementVNode(
           "scroll-view",
           {
-            onScroll: _cache[11] || (_cache[11] = (...args) => $options.viewReportScrrop && $options.viewReportScrrop(...args)),
+            onScroll: _cache[12] || (_cache[12] = (...args) => $options.viewReportScrrop && $options.viewReportScrrop(...args)),
             "scroll-y": "true"
           },
           [
@@ -26604,7 +27109,7 @@ if (uni.restoreGlobal) {
               "view",
               {
                 class: vue.normalizeClass(["arrow-left", { show: $data.isFixedTop }]),
-                onClick: _cache[2] || (_cache[2] = (...args) => $options.onClickLeft && $options.onClickLeft(...args))
+                onClick: _cache[3] || (_cache[3] = (...args) => $options.onClickLeft && $options.onClickLeft(...args))
               },
               [
                 vue.createVNode(_component_van_icon, { name: "arrow-left" }),
@@ -26706,7 +27211,7 @@ if (uni.restoreGlobal) {
                         vue.createCommentVNode(' <input type="button" value="重新测试" class="titleButton"/> '),
                         vue.createElementVNode("button", {
                           class: "titleButton",
-                          onClick: _cache[3] || (_cache[3] = ($event) => $options.gototest())
+                          onClick: _cache[4] || (_cache[4] = ($event) => $options.gototest())
                         }, " 重新评估 ")
                       ]),
                       _: 1
@@ -26752,7 +27257,7 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("view", { class: "basicInformation" }, [
                   vue.createVNode(_component_uni_collapse, {
                     modelValue: $setup.activeBasicInformation,
-                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $setup.activeBasicInformation = $event),
+                    "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $setup.activeBasicInformation = $event),
                     border: false,
                     class: "need_collapse_style",
                     "title-border": "none"
@@ -26770,7 +27275,7 @@ if (uni.restoreGlobal) {
                                 border: false,
                                 title: "基础信息",
                                 clickable: "",
-                                onClick: _cache[4] || (_cache[4] = ($event) => $options.onClickinfo("基础信息")),
+                                onClick: _cache[5] || (_cache[5] = ($event) => $options.onClickinfo("基础信息")),
                                 class: "titleclass"
                               }, {
                                 footer: vue.withCtx(() => [
@@ -26974,7 +27479,7 @@ if (uni.restoreGlobal) {
                         class: "informationCard",
                         "show-arrow": false,
                         open: $data.infoclick1,
-                        onClick: _cache[6] || (_cache[6] = ($event) => $options.onClickinfo("健康问答"))
+                        onClick: _cache[7] || (_cache[7] = ($event) => $options.onClickinfo("健康问答"))
                       }, {
                         title: vue.withCtx(() => [
                           vue.createVNode(_component_uni_list, null, {
@@ -27278,7 +27783,7 @@ if (uni.restoreGlobal) {
                         class: "informationCard",
                         open: $data.infoclick2,
                         showArrow: false,
-                        onClick: _cache[7] || (_cache[7] = ($event) => $options.onClickinfo("体测报告"))
+                        onClick: _cache[8] || (_cache[8] = ($event) => $options.onClickinfo("体测报告"))
                       }, {
                         title: vue.withCtx(() => [
                           vue.createVNode(_component_uni_list, null, {
@@ -27686,7 +28191,7 @@ if (uni.restoreGlobal) {
                         class: "informationCard",
                         open: $data.infoclick3,
                         showArrow: false,
-                        onClick: _cache[8] || (_cache[8] = ($event) => $options.onClickinfo("体态评估"))
+                        onClick: _cache[9] || (_cache[9] = ($event) => $options.onClickinfo("体态评估"))
                       }, {
                         title: vue.withCtx(() => [
                           vue.createVNode(_component_uni_list, null, {
@@ -27812,7 +28317,7 @@ if (uni.restoreGlobal) {
                         class: "informationCard",
                         open: $data.infoclick4,
                         showArrow: false,
-                        onClick: _cache[9] || (_cache[9] = ($event) => $options.onClickinfo("动态评估"))
+                        onClick: _cache[10] || (_cache[10] = ($event) => $options.onClickinfo("动态评估"))
                       }, {
                         title: vue.withCtx(() => [
                           vue.createVNode(_component_uni_list, null, {
@@ -27935,7 +28440,7 @@ if (uni.restoreGlobal) {
                         class: "informationCard",
                         open: $data.infoclick5,
                         showArrow: false,
-                        onClick: _cache[10] || (_cache[10] = ($event) => $options.onClickinfo("体能评估"))
+                        onClick: _cache[11] || (_cache[11] = ($event) => $options.onClickinfo("体能评估"))
                       }, {
                         title: vue.withCtx(() => [
                           vue.createVNode(_component_uni_list, null, {
@@ -38491,7 +38996,7 @@ if (uni.restoreGlobal) {
   uni.invokePushCallback({
     type: "enabled"
   });
-  const appid = "__UNI__76A9E40";
+  const appid$1 = "__UNI__76A9E40";
   {
     initPushNotification();
     if (typeof uni.onAppShow === "function") {
@@ -38500,7 +39005,7 @@ if (uni.restoreGlobal) {
       });
     }
     GtPush.init({
-      appid,
+      appid: appid$1,
       onError: (res2) => {
         console.error(res2.error);
         const data = {
@@ -45674,7 +46179,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Image = withInstall(stdin_default$13);
+  const Image$1 = withInstall(stdin_default$13);
   const [name$Y, bem$X] = createNamespace("card");
   const cardProps = {
     tag: String,
@@ -45723,7 +46228,7 @@ if (uni.restoreGlobal) {
         if (slots.thumb) {
           return slots.thumb();
         }
-        return vue.createVNode(Image, {
+        return vue.createVNode(Image$1, {
           "src": props2.thumb,
           "fit": "cover",
           "width": "100%",
@@ -48685,7 +49190,7 @@ if (uni.restoreGlobal) {
             "class": bem$z("image-wrap")
           }, [slots.image({
             src: props2.src
-          })]) : vue.createVNode(Image, {
+          })]) : vue.createVNode(Image$1, {
             "src": props2.src,
             "fit": "contain",
             "class": bem$z("image", {
@@ -50397,12 +50902,12 @@ if (uni.restoreGlobal) {
   var read = "read";
   var afterRead = "afterRead";
   var beforeMain = "beforeMain";
-  var main = "main";
+  var main$1 = "main";
   var afterMain = "afterMain";
   var beforeWrite = "beforeWrite";
   var write = "write";
   var afterWrite = "afterWrite";
-  var modifierPhases = [beforeRead, read, afterRead, beforeMain, main, afterMain, beforeWrite, write, afterWrite];
+  var modifierPhases = [beforeRead, read, afterRead, beforeMain, main$1, afterMain, beforeWrite, write, afterWrite];
   function order(modifiers) {
     var map2 = /* @__PURE__ */ new Map();
     var visited = /* @__PURE__ */ new Set();
@@ -53690,7 +54195,7 @@ if (uni.restoreGlobal) {
           previewSize
         } = props2;
         if (isImageFile(item)) {
-          return vue.createVNode(Image, {
+          return vue.createVNode(Image$1, {
             "fit": imageFit,
             "src": item.content || item.url,
             "class": bem("preview-image"),
@@ -53997,7 +54502,7 @@ if (uni.restoreGlobal) {
       Grid,
       GridItem,
       Icon,
-      Image,
+      Image$1,
       ImagePreview,
       IndexAnchor,
       IndexBar,
@@ -54063,6 +54568,1106 @@ if (uni.restoreGlobal) {
     install,
     version
   };
+  const sys = uni.getSystemInfoSync();
+  const STAT_VERSION = "3.7.3";
+  const STAT_URL = "https://tongji.dcloud.io/uni/stat";
+  const STAT_H5_URL = "https://tongji.dcloud.io/uni/stat.gif";
+  const PAGE_PVER_TIME = 1800;
+  const APP_PVER_TIME = 300;
+  const OPERATING_TIME = 10;
+  const DIFF_TIME = 60 * 1e3 * 60 * 24;
+  const appid = "__UNI__76A9E40";
+  const dbSet = (name2, value) => {
+    let data = uni.getStorageSync("$$STAT__DBDATA:" + appid) || {};
+    if (!data) {
+      data = {};
+    }
+    data[name2] = value;
+    uni.setStorageSync("$$STAT__DBDATA:" + appid, data);
+  };
+  const dbGet = (name2) => {
+    let data = uni.getStorageSync("$$STAT__DBDATA:" + appid) || {};
+    if (!data[name2]) {
+      let dbdata = uni.getStorageSync("$$STAT__DBDATA:" + appid);
+      if (!dbdata) {
+        dbdata = {};
+      }
+      if (!dbdata[name2]) {
+        return void 0;
+      }
+      data[name2] = dbdata[name2];
+    }
+    return data[name2];
+  };
+  const dbRemove = (name2) => {
+    let data = uni.getStorageSync("$$STAT__DBDATA:" + appid) || {};
+    if (data[name2]) {
+      delete data[name2];
+      uni.setStorageSync("$$STAT__DBDATA:" + appid, data);
+    } else {
+      data = uni.getStorageSync("$$STAT__DBDATA:" + appid);
+      if (data[name2]) {
+        delete data[name2];
+        uni.setStorageSync("$$STAT__DBDATA:" + appid, data);
+      }
+    }
+  };
+  const uniStatisticsConfig = { "enable": true, "version": "2" };
+  let statConfig = {
+    appid: "__UNI__76A9E40"
+  };
+  let titleJsons = {};
+  titleJsons = { "pages/myMebers/myMebers": "我的会员", "pages/addMyMebers/addMyMebers": "添加学员", "pages/postureAssessment/postureAssessment": "体测评估", "pages/bodyTestReport/bodyTestReport": "体测报告", "pages/physicalAssessment/physicalAssessment": "身体评估", "pages/healthQuesson/healthQuesson": "健康问答", "pages/physicalFitnessAssessment/physicalFitnessAssessment": "体能评估", "pages/actionLibrary/index": "动作库", "pages/addAction/index": "新增动作", "pages/newWorkout/newWorkout": "新建训练", "pages/trainingRecord/trainingRecord": "训练记录", "pages/trainingRecordDetail/trainingRecordDetail": "训练记录详情", "pages/my/my": "我的", "pages/openCard/openCard": "开卡", "pages/setUp/setUp": "设置", "pages/personalInfo/personalInfo": "个人信息", "pages/bindPhone/bindPhone": "绑定手机号", "pages/phoneLoging/phoneLoging": "手机号登录", "pages/updateSignature/updateSignature": "修改签名", "uni_modules/uni-pay/pages/success/success": "支付成功", "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview": "ad" };
+  const UUID_KEY = "__DC_STAT_UUID";
+  const UUID_VALUE = "__DC_UUID_VALUE";
+  function getUuid() {
+    let uuid = "";
+    if (get_platform_name() === "n") {
+      try {
+        uuid = plus.runtime.getDCloudId();
+      } catch (e) {
+        uuid = "";
+      }
+      return uuid;
+    }
+    try {
+      uuid = uni.getStorageSync(UUID_KEY);
+    } catch (e) {
+      uuid = UUID_VALUE;
+    }
+    if (!uuid) {
+      uuid = Date.now() + "" + Math.floor(Math.random() * 1e7);
+      try {
+        uni.setStorageSync(UUID_KEY, uuid);
+      } catch (e) {
+        uni.setStorageSync(UUID_KEY, UUID_VALUE);
+      }
+    }
+    return uuid;
+  }
+  const get_uuid = (statData2) => {
+    return sys.deviceId || getUuid();
+  };
+  const get_odid = (statData2) => {
+    let odid = "";
+    if (get_platform_name() === "n") {
+      try {
+        odid = plus.device.uuid;
+      } catch (e) {
+        odid = "";
+      }
+      return odid;
+    }
+    return sys.deviceId || getUuid();
+  };
+  const stat_config = statConfig;
+  const get_sgin = (statData2) => {
+    let arr = Object.keys(statData2);
+    let sortArr = arr.sort();
+    let sgin = {};
+    let sginStr = "";
+    for (var i2 in sortArr) {
+      sgin[sortArr[i2]] = statData2[sortArr[i2]];
+      sginStr += sortArr[i2] + "=" + statData2[sortArr[i2]] + "&";
+    }
+    return {
+      sign: "",
+      options: sginStr.substr(0, sginStr.length - 1)
+    };
+  };
+  const get_encodeURIComponent_options = (statData2) => {
+    let data = {};
+    for (let prop in statData2) {
+      data[prop] = encodeURIComponent(statData2[prop]);
+    }
+    return data;
+  };
+  const get_platform_name = () => {
+    const aliArr = ["y", "a", "p", "mp-ali"];
+    const platformList = {
+      app: "n",
+      "app-plus": "n",
+      h5: "h5",
+      "mp-weixin": "wx",
+      [aliArr.reverse().join("")]: "ali",
+      "mp-baidu": "bd",
+      "mp-toutiao": "tt",
+      "mp-qq": "qq",
+      "quickapp-native": "qn",
+      "mp-kuaishou": "ks",
+      "mp-lark": "lark",
+      "quickapp-webview": "qw"
+    };
+    if (platformList["app"] === "ali") {
+      if (my && my.env) {
+        const clientName = my.env.clientName;
+        if (clientName === "ap")
+          return "ali";
+        if (clientName === "dingtalk")
+          return "dt";
+      }
+    }
+    return platformList["app"];
+  };
+  const get_pack_name = () => {
+    let packName = "";
+    if (get_platform_name() === "wx" || get_platform_name() === "qq") {
+      if (uni.canIUse("getAccountInfoSync")) {
+        packName = uni.getAccountInfoSync().miniProgram.appId || "";
+      }
+    }
+    if (get_platform_name() === "n")
+      ;
+    return packName;
+  };
+  const get_version = () => {
+    return get_platform_name() === "n" ? plus.runtime.version : "";
+  };
+  const get_channel = () => {
+    const platformName = get_platform_name();
+    let channel = "";
+    if (platformName === "n") {
+      channel = plus.runtime.channel;
+    }
+    return channel;
+  };
+  const get_scene = (options) => {
+    const platformName = get_platform_name();
+    let scene = "";
+    if (options) {
+      return options;
+    }
+    if (platformName === "wx") {
+      scene = uni.getLaunchOptionsSync().scene;
+    }
+    return scene;
+  };
+  const get_route$1 = (pageVm) => {
+    let _self = pageVm || get_page_vm();
+    if (get_platform_name() === "bd") {
+      let mp_route = _self.$mp && _self.$mp.page && _self.$mp.page.is;
+      let scope_route = _self.$scope && _self.$scope.is;
+      return mp_route || scope_route || "";
+    } else {
+      return _self.route || _self.$scope && _self.$scope.route || _self.$mp && _self.$mp.page.route;
+    }
+  };
+  const get_page_route = (pageVm) => {
+    let page = pageVm && (pageVm.$page || pageVm.$scope && pageVm.$scope.$page);
+    let lastPageRoute = uni.getStorageSync("_STAT_LAST_PAGE_ROUTE");
+    if (!page)
+      return lastPageRoute || "";
+    return page.fullPath === "/" ? page.route : page.fullPath || page.route;
+  };
+  const get_page_vm = () => {
+    let pages2 = getCurrentPages();
+    let $page = pages2[pages2.length - 1];
+    if (!$page)
+      return null;
+    return $page.$vm;
+  };
+  const get_page_types = (self2) => {
+    if (self2.mpType === "page" || self2.$mpType === "page" || self2.$mp && self2.$mp.mpType === "page" || self2.$options.mpType === "page") {
+      return "page";
+    }
+    if (self2.mpType === "app" || self2.$mpType === "app" || self2.$mp && self2.$mp.mpType === "app" || self2.$options.mpType === "app") {
+      return "app";
+    }
+    return null;
+  };
+  const handle_data = (statData2) => {
+    let firstArr = [];
+    let contentArr = [];
+    let lastArr = [];
+    for (let i2 in statData2) {
+      const rd = statData2[i2];
+      rd.forEach((elm) => {
+        let newData = "";
+        {
+          newData = elm;
+        }
+        if (i2 === 0) {
+          firstArr.push(newData);
+        } else if (i2 === 3) {
+          lastArr.push(newData);
+        } else {
+          contentArr.push(newData);
+        }
+      });
+    }
+    firstArr.push(...contentArr, ...lastArr);
+    return JSON.stringify(firstArr);
+  };
+  const calibration = (eventName, options) => {
+    if (!eventName) {
+      console.error(`uni.report Missing [eventName] parameter`);
+      return true;
+    }
+    if (typeof eventName !== "string") {
+      console.error(
+        `uni.report [eventName] Parameter type error, it can only be of type String`
+      );
+      return true;
+    }
+    if (eventName.length > 255) {
+      console.error(
+        `uni.report [eventName] Parameter length cannot be greater than 255`
+      );
+      return true;
+    }
+    if (typeof options !== "string" && typeof options !== "object") {
+      console.error(
+        "uni.report [options] Parameter type error, Only supports String or Object type"
+      );
+      return true;
+    }
+    if (typeof options === "string" && options.length > 255) {
+      console.error(
+        `uni.report [options] Parameter length cannot be greater than 255`
+      );
+      return true;
+    }
+    if (eventName === "title" && typeof options !== "string") {
+      console.error(
+        `uni.report [eventName] When the parameter is title, the [options] parameter can only be of type String`
+      );
+      return true;
+    }
+  };
+  const get_page_name = (routepath) => {
+    return titleJsons && titleJsons[routepath] || "";
+  };
+  const Report_Data_Time = "Report_Data_Time";
+  const Report_Status = "Report_Status";
+  const is_report_data = () => {
+    return new Promise((resolve, reject) => {
+      let start_time = "";
+      let end_time = new Date().getTime();
+      let diff_time = DIFF_TIME;
+      let report_status = 1;
+      try {
+        start_time = uni.getStorageSync(Report_Data_Time);
+        report_status = uni.getStorageSync(Report_Status);
+      } catch (e) {
+        start_time = "";
+        report_status = 1;
+      }
+      if (report_status === "") {
+        requestData(({ enable }) => {
+          uni.setStorageSync(Report_Data_Time, end_time);
+          uni.setStorageSync(Report_Status, enable);
+          if (enable === 1) {
+            resolve();
+          }
+        });
+        return;
+      }
+      if (report_status === 1) {
+        resolve();
+      }
+      if (!start_time) {
+        uni.setStorageSync(Report_Data_Time, end_time);
+        start_time = end_time;
+      }
+      if (end_time - start_time > diff_time) {
+        requestData(({ enable }) => {
+          uni.setStorageSync(Report_Data_Time, end_time);
+          uni.setStorageSync(Report_Status, enable);
+        });
+      }
+    });
+  };
+  const requestData = (done) => {
+    const appid2 = "__UNI__76A9E40";
+    let formData = {
+      usv: STAT_VERSION,
+      conf: JSON.stringify({
+        ak: appid2
+      })
+    };
+    uni.request({
+      url: STAT_URL,
+      method: "GET",
+      data: formData,
+      success: (res2) => {
+        const { data } = res2;
+        if (data.ret === 0) {
+          typeof done === "function" && done({
+            enable: data.enable
+          });
+        }
+      },
+      fail: (e) => {
+        let report_status_code = 1;
+        try {
+          report_status_code = uni.getStorageSync(Report_Status);
+        } catch (e2) {
+          report_status_code = 1;
+        }
+        if (report_status_code === "") {
+          report_status_code = 1;
+        }
+        typeof done === "function" && done({
+          enable: report_status_code
+        });
+      }
+    });
+  };
+  const uni_cloud_config = () => {
+    return {};
+  };
+  const get_space = (config) => {
+    const uniCloudConfig = uni_cloud_config();
+    const { spaceId, provider, clientSecret } = uniCloudConfig;
+    const space_type = ["tcb", "tencent", "aliyun"];
+    const is_provider = space_type.indexOf(provider) !== -1;
+    const is_aliyun = provider === "aliyun" && spaceId && clientSecret;
+    const is_tcb = (provider === "tcb" || provider === "tencent") && spaceId;
+    if (is_provider && (is_aliyun || is_tcb)) {
+      return uniCloudConfig;
+    } else {
+      if (config && config.spaceId) {
+        return config;
+      }
+    }
+    return null;
+  };
+  const get_report_Interval = (defaultTime) => {
+    let time = uniStatisticsConfig.reportInterval;
+    if (Number(time) === 0)
+      return 0;
+    time = time || defaultTime;
+    let reg = /(^[1-9]\d*$)/;
+    if (!reg.test(time))
+      return defaultTime;
+    return Number(time);
+  };
+  const is_push_clientid = () => {
+    if (uniStatisticsConfig.collectItems) {
+      const ClientID = uniStatisticsConfig.collectItems.uniPushClientID;
+      return typeof ClientID === "boolean" ? ClientID : false;
+    }
+    return false;
+  };
+  const IS_HANDLE_DEVECE_ID = "is_handle_device_id";
+  const is_handle_device = () => {
+    let isHandleDevice = dbGet(IS_HANDLE_DEVECE_ID) || "";
+    dbSet(IS_HANDLE_DEVECE_ID, "1");
+    return isHandleDevice === "1";
+  };
+  const FIRST_VISIT_TIME_KEY = "__first__visit__time";
+  const LAST_VISIT_TIME_KEY = "__last__visit__time";
+  const get_time = () => {
+    return parseInt(new Date().getTime() / 1e3);
+  };
+  const get_first_visit_time = () => {
+    const timeStorge = dbGet(FIRST_VISIT_TIME_KEY);
+    let time = 0;
+    if (timeStorge) {
+      time = timeStorge;
+    } else {
+      time = get_time();
+      dbSet(FIRST_VISIT_TIME_KEY, time);
+      dbRemove(LAST_VISIT_TIME_KEY);
+    }
+    return time;
+  };
+  const get_last_visit_time = () => {
+    const timeStorge = dbGet(LAST_VISIT_TIME_KEY);
+    let time = 0;
+    if (timeStorge) {
+      time = timeStorge;
+    }
+    dbSet(LAST_VISIT_TIME_KEY, get_time());
+    return time;
+  };
+  const PAGE_RESIDENCE_TIME = "__page__residence__time";
+  let First_Page_Residence_Time = 0;
+  let Last_Page_Residence_Time = 0;
+  const set_page_residence_time = () => {
+    First_Page_Residence_Time = get_time();
+    dbSet(PAGE_RESIDENCE_TIME, First_Page_Residence_Time);
+    return First_Page_Residence_Time;
+  };
+  const get_page_residence_time = () => {
+    Last_Page_Residence_Time = get_time();
+    First_Page_Residence_Time = dbGet(PAGE_RESIDENCE_TIME);
+    return Last_Page_Residence_Time - First_Page_Residence_Time;
+  };
+  const TOTAL_VISIT_COUNT = "__total__visit__count";
+  const get_total_visit_count = () => {
+    const timeStorge = dbGet(TOTAL_VISIT_COUNT);
+    let count = 1;
+    if (timeStorge) {
+      count = timeStorge;
+      count++;
+    }
+    dbSet(TOTAL_VISIT_COUNT, count);
+    return count;
+  };
+  const FIRST_TIME = "__first_time";
+  const set_first_time = () => {
+    let time = get_time();
+    const timeStorge = dbSet(FIRST_TIME, time);
+    return timeStorge;
+  };
+  const get_residence_time = (type) => {
+    let residenceTime = 0;
+    const first_time = dbGet(FIRST_TIME);
+    const last_time = get_time();
+    if (first_time !== 0) {
+      residenceTime = last_time - first_time;
+    }
+    residenceTime = residenceTime < 1 ? 1 : residenceTime;
+    if (type === "app") {
+      let overtime = residenceTime > APP_PVER_TIME ? true : false;
+      return {
+        residenceTime,
+        overtime
+      };
+    }
+    if (type === "page") {
+      let overtime = residenceTime > PAGE_PVER_TIME ? true : false;
+      return {
+        residenceTime,
+        overtime
+      };
+    }
+    return {
+      residenceTime
+    };
+  };
+  const eport_Interval = get_report_Interval(OPERATING_TIME);
+  let statData = {
+    uuid: get_uuid(),
+    // 设备标识
+    ak: stat_config.appid,
+    // uni-app 应用 Appid
+    p: sys.platform === "android" ? "a" : "i",
+    // 手机系统
+    ut: get_platform_name(),
+    // 平台类型
+    mpn: get_pack_name(),
+    // 原生平台包名、小程序 appid
+    usv: STAT_VERSION,
+    // 统计 sdk 版本
+    v: get_version(),
+    // 应用版本，仅app
+    ch: get_channel(),
+    // 渠道信息
+    cn: "",
+    // 国家
+    pn: "",
+    // 省份
+    ct: "",
+    // 城市
+    t: get_time(),
+    // 上报数据时的时间戳
+    tt: "",
+    brand: sys.brand || "",
+    // 手机品牌
+    md: sys.model,
+    // 手机型号
+    sv: sys.system.replace(/(Android|iOS)\s/, ""),
+    // 手机系统版本
+    mpsdk: sys.SDKVersion || "",
+    // x程序 sdk version
+    mpv: sys.version || "",
+    // 小程序平台版本 ，如微信、支付宝
+    lang: sys.language,
+    // 语言
+    pr: sys.pixelRatio,
+    // pixelRatio 设备像素比
+    ww: sys.windowWidth,
+    // windowWidth 可使用窗口宽度
+    wh: sys.windowHeight,
+    // windowHeight 可使用窗口高度
+    sw: sys.screenWidth,
+    // screenWidth 屏幕宽度
+    sh: sys.screenHeight
+    // screenHeight 屏幕高度
+  };
+  class Report {
+    constructor() {
+      this.self = "";
+      this.__licationShow = false;
+      this.__licationHide = false;
+      this.statData = statData;
+      this._navigationBarTitle = {
+        config: "",
+        page: "",
+        report: "",
+        lt: ""
+      };
+      this._query = {};
+      let registerInterceptor = typeof uni.addInterceptor === "function";
+      if (registerInterceptor) {
+        this.addInterceptorInit();
+        this.interceptLogin();
+        this.interceptShare(true);
+        this.interceptRequestPayment();
+      }
+    }
+    addInterceptorInit() {
+      let self2 = this;
+      uni.addInterceptor("setNavigationBarTitle", {
+        invoke(args) {
+          self2._navigationBarTitle.page = args.title;
+        }
+      });
+    }
+    interceptLogin() {
+      let self2 = this;
+      uni.addInterceptor("login", {
+        complete() {
+          self2._login();
+        }
+      });
+    }
+    interceptShare(type) {
+      let self2 = this;
+      if (!type) {
+        self2._share();
+        return;
+      }
+      uni.addInterceptor("share", {
+        success() {
+          self2._share();
+        },
+        fail() {
+          self2._share();
+        }
+      });
+    }
+    interceptRequestPayment() {
+      let self2 = this;
+      uni.addInterceptor("requestPayment", {
+        success() {
+          self2._payment("pay_success");
+        },
+        fail() {
+          self2._payment("pay_fail");
+        }
+      });
+    }
+    _login() {
+      this.sendEventRequest(
+        {
+          key: "login"
+        },
+        0
+      );
+    }
+    _share() {
+      this.sendEventRequest(
+        {
+          key: "share"
+        },
+        0
+      );
+    }
+    _payment(key) {
+      this.sendEventRequest(
+        {
+          key
+        },
+        0
+      );
+    }
+    /**
+     * 进入应用触发
+     */
+    applicationShow() {
+      if (this.__licationHide) {
+        const time = get_residence_time("app");
+        if (time.overtime) {
+          let lastPageRoute = uni.getStorageSync("_STAT_LAST_PAGE_ROUTE");
+          let options = {
+            path: lastPageRoute,
+            scene: this.statData.sc,
+            cst: 2
+          };
+          this.sendReportRequest(options);
+        }
+        this.__licationHide = false;
+      }
+    }
+    /**
+     * 离开应用触发
+     * @param {Object} self
+     * @param {Object} type
+     */
+    applicationHide(self2, type) {
+      if (!self2) {
+        self2 = get_page_vm();
+      }
+      this.__licationHide = true;
+      const time = get_residence_time();
+      const route2 = get_page_route(self2);
+      uni.setStorageSync("_STAT_LAST_PAGE_ROUTE", route2);
+      this.sendHideRequest(
+        {
+          urlref: route2,
+          urlref_ts: time.residenceTime
+        },
+        type
+      );
+      set_first_time();
+    }
+    /**
+     * 进入页面触发
+     */
+    pageShow(self2) {
+      this._navigationBarTitle = {
+        config: "",
+        page: "",
+        report: "",
+        lt: ""
+      };
+      const route2 = get_page_route(self2);
+      const routepath = get_route$1(self2);
+      this._navigationBarTitle.config = get_page_name(routepath);
+      if (this.__licationShow) {
+        set_first_time();
+        uni.setStorageSync("_STAT_LAST_PAGE_ROUTE", route2);
+        this.__licationShow = false;
+        return;
+      }
+      const time = get_residence_time("page");
+      if (time.overtime) {
+        let options = {
+          path: route2,
+          scene: this.statData.sc,
+          cst: 3
+        };
+        this.sendReportRequest(options);
+      }
+      set_first_time();
+    }
+    /**
+     * 离开页面触发
+     */
+    pageHide(self2) {
+      if (!this.__licationHide) {
+        const time = get_residence_time("page");
+        let route2 = get_page_route(self2);
+        let lastPageRoute = uni.getStorageSync("_STAT_LAST_PAGE_ROUTE");
+        if (!lastPageRoute) {
+          lastPageRoute = route2;
+        }
+        uni.setStorageSync("_STAT_LAST_PAGE_ROUTE", route2);
+        this.sendPageRequest({
+          url: route2,
+          urlref: lastPageRoute,
+          urlref_ts: time.residenceTime
+        });
+        return;
+      }
+    }
+    /**
+     * 发送请求,应用维度上报
+     * @param {Object} options 页面信息
+     * @param {Boolean} type 是否立即上报
+     */
+    sendReportRequest(options, type) {
+      this._navigationBarTitle.lt = "1";
+      this._navigationBarTitle.config = get_page_name(options.path);
+      let is_opt = options.query && JSON.stringify(options.query) !== "{}";
+      let query = is_opt ? "?" + JSON.stringify(options.query) : "";
+      const last_time = get_last_visit_time();
+      if (last_time !== 0 || !last_time) {
+        const odid = get_odid();
+        {
+          const have_device = is_handle_device();
+          if (!have_device) {
+            this.statData.odid = odid;
+          }
+        }
+      }
+      Object.assign(this.statData, {
+        lt: "1",
+        url: options.path + query || "",
+        t: get_time(),
+        sc: get_scene(options.scene),
+        fvts: get_first_visit_time(),
+        lvts: last_time,
+        tvc: get_total_visit_count(),
+        // create session type  上报类型 ，1 应用进入 2.后台30min进入 3.页面30min进入
+        cst: options.cst || 1
+      });
+      if (get_platform_name() === "n") {
+        this.getProperty(type);
+      } else {
+        this.getNetworkInfo(type);
+      }
+    }
+    /**
+     * 发送请求,页面维度上报
+     * @param {Object} opt
+     */
+    sendPageRequest(opt) {
+      let { url, urlref, urlref_ts } = opt;
+      this._navigationBarTitle.lt = "11";
+      let options = {
+        ak: this.statData.ak,
+        uuid: this.statData.uuid,
+        p: this.statData.p,
+        lt: "11",
+        ut: this.statData.ut,
+        url,
+        tt: this.statData.tt,
+        urlref,
+        urlref_ts,
+        ch: this.statData.ch,
+        usv: this.statData.usv,
+        t: get_time()
+      };
+      this.request(options);
+    }
+    /**
+     * 进入后台上报数据
+     * @param {Object} opt
+     * @param {Object} type
+     */
+    sendHideRequest(opt, type) {
+      let { urlref, urlref_ts } = opt;
+      let options = {
+        ak: this.statData.ak,
+        uuid: this.statData.uuid,
+        p: this.statData.p,
+        lt: "3",
+        ut: this.statData.ut,
+        urlref,
+        urlref_ts,
+        ch: this.statData.ch,
+        usv: this.statData.usv,
+        t: get_time()
+      };
+      this.request(options, type);
+    }
+    /**
+     * 自定义事件上报
+     */
+    sendEventRequest({ key = "", value = "" } = {}) {
+      let routepath = "";
+      try {
+        routepath = get_route$1();
+      } catch (error) {
+        const launch_options = dbGet("__launch_options");
+        routepath = launch_options.path;
+      }
+      this._navigationBarTitle.config = get_page_name(routepath);
+      this._navigationBarTitle.lt = "21";
+      let options = {
+        ak: this.statData.ak,
+        uuid: this.statData.uuid,
+        p: this.statData.p,
+        lt: "21",
+        ut: this.statData.ut,
+        url: routepath,
+        ch: this.statData.ch,
+        e_n: key,
+        e_v: typeof value === "object" ? JSON.stringify(value) : value.toString(),
+        usv: this.statData.usv,
+        t: get_time()
+      };
+      this.request(options);
+    }
+    sendPushRequest(options, cid) {
+      let time = get_time();
+      const statData2 = {
+        lt: "101",
+        cid,
+        t: time,
+        ut: this.statData.ut
+      };
+      const stat_data = handle_data({
+        101: [statData2]
+      });
+      let optionsData = {
+        usv: STAT_VERSION,
+        //统计 SDK 版本号
+        t: time,
+        //发送请求时的时间戮
+        requests: stat_data
+      };
+      if (get_platform_name() === "n" && this.statData.p === "a") {
+        setTimeout(() => {
+          this.sendRequest(optionsData);
+        }, 200);
+        return;
+      }
+      this.sendRequest(optionsData);
+    }
+    /**
+     * 获取wgt资源版本
+     */
+    getProperty(type) {
+      plus.runtime.getProperty(plus.runtime.appid, (wgtinfo) => {
+        this.statData.v = wgtinfo.version || "";
+        this.getNetworkInfo(type);
+      });
+    }
+    /**
+     * 获取网络信息
+     */
+    getNetworkInfo(type) {
+      uni.getNetworkType({
+        success: (result) => {
+          this.statData.net = result.networkType;
+          this.getLocation(type);
+        }
+      });
+    }
+    /**
+     * 获取位置信息
+     */
+    getLocation(type) {
+      if (stat_config.getLocation) {
+        uni.getLocation({
+          type: "wgs84",
+          geocode: true,
+          success: (result) => {
+            if (result.address) {
+              this.statData.cn = result.address.country;
+              this.statData.pn = result.address.province;
+              this.statData.ct = result.address.city;
+            }
+            this.statData.lat = result.latitude;
+            this.statData.lng = result.longitude;
+            this.request(this.statData, type);
+          }
+        });
+      } else {
+        this.statData.lat = 0;
+        this.statData.lng = 0;
+        this.request(this.statData, type);
+      }
+    }
+    /**
+     * 发送请求
+     * @param {Object} data 上报数据
+     * @param {Object} type 类型
+     */
+    request(data, type) {
+      let time = get_time();
+      const title = this._navigationBarTitle;
+      Object.assign(data, {
+        ttn: title.page,
+        ttpj: title.config,
+        ttc: title.report
+      });
+      let uniStatData = dbGet("__UNI__STAT__DATA") || {};
+      if (!uniStatData[data.lt]) {
+        uniStatData[data.lt] = [];
+      }
+      uniStatData[data.lt].push(data);
+      dbSet("__UNI__STAT__DATA", uniStatData);
+      let page_residence_time = get_page_residence_time();
+      if (page_residence_time < eport_Interval && !type)
+        return;
+      set_page_residence_time();
+      const stat_data = handle_data(uniStatData);
+      let optionsData = {
+        usv: STAT_VERSION,
+        //统计 SDK 版本号
+        t: time,
+        //发送请求时的时间戮
+        requests: stat_data
+      };
+      dbRemove("__UNI__STAT__DATA");
+      if (get_platform_name() === "n" && this.statData.p === "a") {
+        setTimeout(() => {
+          this.sendRequest(optionsData);
+        }, 200);
+        return;
+      }
+      this.sendRequest(optionsData);
+    }
+    getIsReportData() {
+      return is_report_data();
+    }
+    /**
+     * 数据上报
+     * @param {Object} optionsData 需要上报的数据
+     */
+    sendRequest(optionsData) {
+      {
+        if (!uni.__stat_uniCloud_space) {
+          console.error(
+            "应用未关联服务空间，统计上报失败，请在uniCloud目录右键关联服务空间."
+          );
+          return;
+        }
+        const uniCloudObj = uni.__stat_uniCloud_space.importObject(
+          "uni-stat-receiver",
+          {
+            customUI: true
+          }
+        );
+        uniCloudObj.report(optionsData).then(() => {
+        }).catch((err) => {
+        });
+      }
+    }
+    /**
+     * h5 请求
+     */
+    imageRequest(data) {
+      this.getIsReportData().then(() => {
+        let image = new Image();
+        let options = get_sgin(get_encodeURIComponent_options(data)).options;
+        image.src = STAT_H5_URL + "?" + options;
+      });
+    }
+    sendEvent(key, value) {
+      if (calibration(key, value))
+        return;
+      if (key === "title") {
+        this._navigationBarTitle.report = value;
+        return;
+      }
+      this.sendEventRequest(
+        {
+          key,
+          value: typeof value === "object" ? JSON.stringify(value) : value
+        },
+        1
+      );
+    }
+  }
+  class Stat extends Report {
+    static getInstance() {
+      if (!uni.__stat_instance) {
+        uni.__stat_instance = new Stat();
+      }
+      {
+        let space = get_space(Es.config);
+        if (!uni.__stat_uniCloud_space) {
+          if (space && Object.keys(space).length !== 0) {
+            let spaceData = {
+              provider: space.provider,
+              spaceId: space.spaceId,
+              clientSecret: space.clientSecret
+            };
+            if (space.endpoint) {
+              spaceData.endpoint = space.endpoint;
+            }
+            uni.__stat_uniCloud_space = Es.init(spaceData);
+          } else {
+            console.error(
+              "应用未关联服务空间，请在uniCloud目录右键关联服务空间"
+            );
+          }
+        }
+      }
+      return uni.__stat_instance;
+    }
+    constructor() {
+      super();
+    }
+    /**
+     * 获取推送id
+     */
+    pushEvent(options) {
+      const ClientID = is_push_clientid();
+      if (uni.getPushClientId && ClientID) {
+        uni.getPushClientId({
+          success: (res2) => {
+            const cid = res2.cid || false;
+            if (cid) {
+              this.sendPushRequest(options, cid);
+            }
+          }
+        });
+      }
+    }
+    /**
+     * 进入应用
+     * @param {Object} options 页面参数
+     * @param {Object} self	当前页面实例
+     */
+    launch(options, self2) {
+      set_page_residence_time();
+      this.__licationShow = true;
+      dbSet("__launch_options", options);
+      options.cst = 1;
+      this.sendReportRequest(options, true);
+    }
+    load(options, self2) {
+      this.self = self2;
+      this._query = options;
+    }
+    appHide(self2) {
+      this.applicationHide(self2, true);
+    }
+    appShow(self2) {
+      this.applicationShow(self2);
+    }
+    show(self2) {
+      this.self = self2;
+      if (get_page_types(self2) === "page") {
+        this.pageShow(self2);
+      }
+      if (get_platform_name() === "h5" || get_platform_name() === "n") {
+        if (get_page_types(self2) === "app") {
+          this.appShow();
+        }
+      }
+    }
+    hide(self2) {
+      this.self = self2;
+      if (get_page_types(self2) === "page") {
+        this.pageHide(self2);
+      }
+      if (get_platform_name() === "h5" || get_platform_name() === "n") {
+        if (get_page_types(self2) === "app") {
+          this.appHide();
+        }
+      }
+    }
+    error(em) {
+      let emVal = "";
+      if (!em.message) {
+        emVal = JSON.stringify(em);
+      } else {
+        emVal = em.stack;
+      }
+      let route2 = "";
+      try {
+        route2 = get_route();
+      } catch (e) {
+        route2 = "";
+      }
+      let options = {
+        ak: this.statData.ak,
+        uuid: this.statData.uuid,
+        p: this.statData.p,
+        lt: "31",
+        url: route2,
+        ut: this.statData.ut,
+        ch: this.statData.ch,
+        mpsdk: this.statData.mpsdk,
+        mpv: this.statData.mpv,
+        v: this.statData.v,
+        em: emVal,
+        usv: this.statData.usv,
+        t: parseInt(new Date().getTime() / 1e3)
+      };
+      this.request(options);
+    }
+  }
+  var Stat$1 = Stat;
+  Stat$1.getInstance();
+  function main() {
+    {
+      {
+        uni.report = function(type, options) {
+        };
+      }
+    }
+  }
+  main();
   function createApp() {
     const app = vue.createVueApp(App);
     app.use(stdin_default);
