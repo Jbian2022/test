@@ -4436,7 +4436,7 @@ if (uni.restoreGlobal) {
               isOpened: "none"
             };
           }) || [];
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       // 确认删除会员信息
@@ -4459,10 +4459,10 @@ if (uni.restoreGlobal) {
             }
             this.$refs.popup.close();
           }
-        }).catch((err) => {
+        }).catch((err2) => {
           uni.showToast({
             icon: "fail",
-            title: err.message,
+            title: err2.message,
             duration: 800
           });
         });
@@ -4503,7 +4503,7 @@ if (uni.restoreGlobal) {
             }) || [];
             self2.$set(self2, "originList", originList);
             self2.$forceUpdate();
-          }).catch((err) => {
+          }).catch((err2) => {
           });
         });
       },
@@ -4521,7 +4521,7 @@ if (uni.restoreGlobal) {
             self2.$set(self2, "meberList", meberList);
             formatAppLog("log", "at components/memberList/memberList.vue:453", self2.meberList, "?????");
             self2.$forceUpdate();
-          }).catch((err) => {
+          }).catch((err2) => {
           });
         });
       },
@@ -9024,8 +9024,8 @@ if (uni.restoreGlobal) {
               }
             }
           },
-          fail: function(err) {
-            formatAppLog("log", "at pages/myMebers/myMebers.vue:163", err, ">>>>");
+          fail: function(err2) {
+            formatAppLog("log", "at pages/myMebers/myMebers.vue:163", err2, ">>>>");
           }
         });
         try {
@@ -9047,7 +9047,7 @@ if (uni.restoreGlobal) {
                   self2.$refs.memberListDom.getMemberList(Number(res3.data));
                 }
               },
-              fail: function(err) {
+              fail: function(err2) {
               }
             });
           }
@@ -9088,7 +9088,7 @@ if (uni.restoreGlobal) {
             } else {
               self2.termOfValidity = false;
             }
-          }).catch((err) => {
+          }).catch((err2) => {
           });
         } catch (e) {
         }
@@ -9102,7 +9102,7 @@ if (uni.restoreGlobal) {
         businessCloudObject2.getCoachMemberList().then((res2) => {
           formatAppLog("log", "at pages/myMebers/myMebers.vue:255", res2, "腻");
           this.cocahMemberLimit = res2.affectedDocs;
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       getMemberList(list) {
@@ -9246,7 +9246,7 @@ if (uni.restoreGlobal) {
                 break;
             }
           }
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       buyClick(type) {
@@ -12066,10 +12066,10 @@ if (uni.restoreGlobal) {
                   width: 220
                 });
               }
-            }).catch((err) => {
+            }).catch((err2) => {
               uni.showToast({
                 icon: "编辑失败",
-                title: err.message,
+                title: err2.message,
                 duration: 800,
                 width: 220
               });
@@ -12091,7 +12091,7 @@ if (uni.restoreGlobal) {
                       url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + data[0]._id
                     });
                   }
-                }).catch((err) => {
+                }).catch((err2) => {
                 });
               } else {
                 uni.reLaunch({
@@ -12119,9 +12119,9 @@ if (uni.restoreGlobal) {
                 width: 220
               });
             }
-          }).catch((err) => {
+          }).catch((err2) => {
           });
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       onConfirm() {
@@ -13324,7 +13324,7 @@ if (uni.restoreGlobal) {
             formatAppLog("log", "at pages/bodyTestReport/bodyTestReport.vue:300", self2.configForm, "this.configForm", opearConfigList);
             self2.bodyTestReport = opearConfigList;
           }
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       /**
@@ -13394,10 +13394,10 @@ if (uni.restoreGlobal) {
                   duration: 800
                 });
               }
-            }).catch((err) => {
+            }).catch((err2) => {
               uni.showToast({
                 icon: "编辑失败",
-                title: err.message,
+                title: err2.message,
                 duration: 800
               });
             });
@@ -13418,7 +13418,7 @@ if (uni.restoreGlobal) {
                       url: "/pages/physicalAssessment/physicalAssessment?traineeNo=" + data[0]._id
                     });
                   }
-                }).catch((err) => {
+                }).catch((err2) => {
                 });
               } else {
                 uni.switchTab({
@@ -13444,9 +13444,9 @@ if (uni.restoreGlobal) {
                 duration: 800
               });
             }
-          }).catch((err) => {
+          }).catch((err2) => {
           });
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       onConfirm() {
@@ -13679,7 +13679,7 @@ if (uni.restoreGlobal) {
               });
             }
             formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:181", res2, "我是子选项");
-          }).catch((err) => {
+          }).catch((err2) => {
           });
         }
       },
@@ -13729,7 +13729,7 @@ if (uni.restoreGlobal) {
             formatAppLog("log", "at pages/physicalAssessment/physicalAssessment.vue:254", firstData, "我恒强");
             this.dynamicEvaluationdata = firstData;
           });
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       }
     }
@@ -15393,9 +15393,9 @@ if (uni.restoreGlobal) {
               data: res2
             });
           },
-          fail: (err) => {
+          fail: (err2) => {
             this.$emit("click", {
-              data: err
+              data: err2
             });
           }
         };
@@ -16123,7 +16123,7 @@ if (uni.restoreGlobal) {
             formatAppLog("log", "at pages/healthQuesson/healthQuesson.vue:303", healthList, "hellow");
             this.healthList = healthList;
           }
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       quesionClick(item, itemIndex, itemChild, itemChildIndex) {
@@ -16435,7 +16435,7 @@ if (uni.restoreGlobal) {
                 }
               }
               formatAppLog("log", "at pages/physicalFitnessAssessment/physicalFitnessAssessment.vue:223", this.queryData);
-            }).catch((err) => {
+            }).catch((err2) => {
             });
           }
         }).catch();
@@ -16709,8 +16709,8 @@ if (uni.restoreGlobal) {
             function(res2) {
               resolve(res2.code);
             },
-            function(err) {
-              formatAppLog("log", "at pages/logining/logining.vue:248", err);
+            function(err2) {
+              formatAppLog("log", "at pages/logining/logining.vue:248", err2);
               reject(new Error("微信登录失败"));
             }
           );
@@ -16774,10 +16774,10 @@ if (uni.restoreGlobal) {
                   }
                 }
               }
-            } catch (err) {
-              formatAppLog("log", "at pages/logining/logining.vue:360", err, "222", err.Error, err, JSON.stringify(err));
+            } catch (err2) {
+              formatAppLog("log", "at pages/logining/logining.vue:360", err2, "222", err2.Error, err2, JSON.stringify(err2));
               uni.showToast({
-                title: err.errMsg || err.message,
+                title: err2.errMsg || err2.message,
                 duration: 1e3,
                 width: 180,
                 icon: "none"
@@ -16834,8 +16834,9 @@ if (uni.restoreGlobal) {
                   accessToken: wxLoginRes.accessToken,
                   openid: wxLoginRes.openid
                 };
+                formatAppLog("log", "at pages/logining/logining.vue:423", wxLoginRes.unionid, "我是wxLoginRes.unionid");
                 let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid);
-                formatAppLog("log", "at pages/logining/logining.vue:424", wxSchemaRes, "我是微信的前一步");
+                formatAppLog("log", "at pages/logining/logining.vue:425", wxSchemaRes, "我是微信的前一步");
                 let flag = false;
                 if (wxSchemaRes.affectedDocs === 0) {
                   flag = false;
@@ -16861,9 +16862,9 @@ if (uni.restoreGlobal) {
               } catch (e) {
               }
             }
-          } catch (err) {
+          } catch (err2) {
             uni.showToast({
-              title: err.errMsg || err.message,
+              title: err2.errMsg || err2.message,
               duration: 1e3,
               width: 180,
               icon: "none"
@@ -17529,8 +17530,8 @@ if (uni.restoreGlobal) {
               this.verifyCode();
               this.$refs.countDown.reset();
             }
-          } catch (err) {
-            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:124", err, "我是错误");
+          } catch (err2) {
+            formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:124", err2, "我是错误");
           }
         }
       },
@@ -17545,7 +17546,7 @@ if (uni.restoreGlobal) {
         const getVerifyRes = await login2.getVerifySchema();
         try {
           this.requestVerifyCode = getVerifyRes.length > 0 ? getVerifyRes[0].code : "0000";
-        } catch (err) {
+        } catch (err2) {
         }
       },
       // 上方退出标识
@@ -17558,32 +17559,43 @@ if (uni.restoreGlobal) {
               success: async function(res2) {
                 if (res2.data) {
                   formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:154", res2.data, "我是你爸爸");
-                  let param = {
-                    mobile: self2.mobile
-                  };
-                  let bindMobileRes = await login$4.bindMobile(param);
-                  if (bindMobileRes.code == 0) {
-                    let getWeixinRes = await login$4.getWeixinUserInfo(
-                      JSON.parse(res2.data)
-                    );
-                    if (getWeixinRes.code == 0) {
-                      let param2 = {
-                        avatar: getWeixinRes.avatar,
-                        nickname: getWeixinRes.nickname
-                        // mobile: self.mobile
-                      };
-                      formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:171", param2, "param");
-                      login$4.perfectInfo(param2).then((res3) => {
-                        if (res3.success) {
-                        }
-                      }).catch((err) => {
-                      });
+                  try {
+                    let param = {
+                      mobile: self2.mobile
+                    };
+                    let bindMobileRes = await login$4.bindMobile(param);
+                    formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:161", bindMobileRes, "你是刷");
+                    if (bindMobileRes.code == 0) {
+                      let getWeixinRes = await login$4.getWeixinUserInfo(
+                        JSON.parse(res2.data)
+                      );
+                      if (getWeixinRes.code == 0) {
+                        let param2 = {
+                          avatar: getWeixinRes.avatar,
+                          nickname: getWeixinRes.nickname
+                          // mobile: self.mobile
+                        };
+                        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:173", param2, "param");
+                        login$4.perfectInfo(param2).then((res3) => {
+                          if (res3.success) {
+                          }
+                        }).catch((err2) => {
+                        });
+                      }
                     }
+                  } catch (error) {
+                    uni.showToast({
+                      title: err.errMsg || err.message,
+                      duration: 1e3,
+                      width: 180,
+                      icon: "none"
+                    });
+                    formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:190", error, "绑上了吗");
                   }
                 }
               },
-              fail: function(err) {
-                formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:184", err, ">>>>");
+              fail: function(err2) {
+                formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:195", err2, ">>>>");
               }
             });
             uni.reLaunch({
@@ -17603,7 +17615,7 @@ if (uni.restoreGlobal) {
                 });
               }
             } catch (e) {
-              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:210", e, "我是苹果登录");
+              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:221", e, "我是苹果登录");
             }
             return;
           }
@@ -17624,8 +17636,8 @@ if (uni.restoreGlobal) {
               url: "/pages/myMebers/myMebers"
             });
           }
-        } catch (err) {
-          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:238", err, "我是错误");
+        } catch (err2) {
+          formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:249", err2, "我是错误");
         }
       },
       // 验证码登录
@@ -17639,18 +17651,18 @@ if (uni.restoreGlobal) {
           // 取消自动展示的交互提示界面
         });
         const loginRes = await vefiryLogin.loginBySms(param);
-        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:251", loginRes, "发送成功");
+        formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:262", loginRes, "发送成功");
         if (loginRes.code == 0) {
           if (type === "first") {
             try {
               let param2 = {
                 avatar: "https://mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3.cdn.bspapp.com/cloudstorage/65a7d49a-7fb3-4c1a-9bea-9d5e6b074fad.png"
               };
-              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:262", param2, "param");
+              formatAppLog("log", "at pages/verificatioCode/verificatioCode.vue:273", param2, "param");
               vefiryLogin.perfectInfo(param2).then((res2) => {
                 if (res2.success) {
                 }
-              }).catch((err) => {
+              }).catch((err2) => {
               });
             } catch (e) {
             }
@@ -17801,7 +17813,7 @@ if (uni.restoreGlobal) {
                 url: "/pages/myMebers/myMebers"
               });
             }
-          }).catch((err) => {
+          }).catch((err2) => {
           });
         } catch (e) {
         }
@@ -17820,7 +17832,7 @@ if (uni.restoreGlobal) {
               if (res2.success) {
                 this.jump();
               }
-            }).catch((err) => {
+            }).catch((err2) => {
             });
           } catch (e) {
           }
@@ -21274,8 +21286,8 @@ if (uni.restoreGlobal) {
                     }
                   });
                 },
-                fail: (err) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:425", "err", err);
+                fail: (err2) => {
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:425", "err", err2);
                 }
               });
             }
@@ -21314,8 +21326,8 @@ if (uni.restoreGlobal) {
                     formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:464", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
-                  fail: function(err) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:468", "fail:" + JSON.stringify(err));
+                  fail: function(err2) {
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:468", "fail:" + JSON.stringify(err2));
                   }
                 });
               } else {
@@ -21338,8 +21350,8 @@ if (uni.restoreGlobal) {
                     formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:488", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
-                  fail: function(err) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:492", "fail:" + JSON.stringify(err));
+                  fail: function(err2) {
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:492", "fail:" + JSON.stringify(err2));
                   }
                 });
               } else {
@@ -22061,8 +22073,8 @@ if (uni.restoreGlobal) {
         if (weixinAuthService2) {
           weixinAuthService2.authorize(function(res2) {
             resolve(res2.code);
-          }, function(err) {
-            formatAppLog("log", "at uni_modules/uni-pay/js_sdk/js_sdk.js:30", err);
+          }, function(err2) {
+            formatAppLog("log", "at uni_modules/uni-pay/js_sdk/js_sdk.js:30", err2);
             reject(new Error("获取微信code失败"));
           });
         }
@@ -22076,7 +22088,7 @@ if (uni.restoreGlobal) {
         success(res2) {
           resolve(res2.code);
         },
-        fail(err) {
+        fail(err2) {
           reject(new Error("获取支付宝code失败，可能是没有关联appid或你的支付宝开发者工具还没有登录"));
         }
       });
@@ -22144,7 +22156,7 @@ if (uni.restoreGlobal) {
         }
       }
       return fmt;
-    } catch (err) {
+    } catch (err2) {
       return time;
     }
   };
@@ -22172,8 +22184,8 @@ if (uni.restoreGlobal) {
         this.getChannels((channel) => {
           this.ready = true;
           resolve(channel);
-        }, (err) => {
-          reject(err);
+        }, (err2) => {
+          reject(err2);
         });
       });
     }
@@ -22181,8 +22193,8 @@ if (uni.restoreGlobal) {
       return new Promise((resolve, reject) => {
         this._channel.requestProduct(productIds || this._productIds, (res2) => {
           resolve(res2);
-        }, (err) => {
-          reject(err);
+        }, (err2) => {
+          reject(err2);
         });
       });
     }
@@ -22198,8 +22210,8 @@ if (uni.restoreGlobal) {
           success: (res2) => {
             resolve(res2);
           },
-          fail: (err) => {
-            reject(err);
+          fail: (err2) => {
+            reject(err2);
           }
         });
       });
@@ -22211,9 +22223,9 @@ if (uni.restoreGlobal) {
           username
         }, (res2) => {
           resolve(res2);
-        }, (err) => {
-          formatAppLog("log", "at uni_modules/uni-pay/js_sdk/appleiap.js:69", "restoreCompletedTransactions-err: ", err);
-          reject(err);
+        }, (err2) => {
+          formatAppLog("log", "at uni_modules/uni-pay/js_sdk/appleiap.js:69", "restoreCompletedTransactions-err: ", err2);
+          reject(err2);
         });
       });
     }
@@ -22221,8 +22233,8 @@ if (uni.restoreGlobal) {
       return new Promise((resolve, reject) => {
         this._channel.finishTransaction(transaction2, (res2) => {
           resolve(res2);
-        }, (err) => {
-          reject(err);
+        }, (err2) => {
+          reject(err2);
         });
       });
     }
@@ -22419,12 +22431,12 @@ if (uni.restoreGlobal) {
               success: (res3) => {
                 this._getOrder();
               },
-              fail: (err) => {
-                if (err.errMsg.indexOf("fail cancel") == -1) {
-                  formatAppLog("error", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:343", "uni.requestPayment:fail", err);
-                  this.$emit("fail", err);
+              fail: (err2) => {
+                if (err2.errMsg.indexOf("fail cancel") == -1) {
+                  formatAppLog("error", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:343", "uni.requestPayment:fail", err2);
+                  this.$emit("fail", err2);
                 } else {
-                  this.$emit("cancel", err);
+                  this.$emit("cancel", err2);
                 }
               }
             });
@@ -22438,9 +22450,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 发起退款（此接口需要admin角色才可以访问）
@@ -22450,9 +22462,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 查询退款（查询退款情况）
@@ -22462,9 +22474,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 关闭订单
@@ -22474,9 +22486,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 获取支持的支付供应商
@@ -22486,9 +22498,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 获取支付配置内的appid（主要用于获取获取微信公众号的appid，用以获取code）
@@ -22498,9 +22510,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 根据code获取openid
@@ -22510,9 +22522,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 验证iosIap苹果内购支付凭据
@@ -22522,9 +22534,9 @@ if (uni.restoreGlobal) {
           if (typeof data.success === "function")
             data.success(res2);
           return res2;
-        } catch (err) {
+        } catch (err2) {
           if (typeof data.fail === "function")
-            data.fail(err);
+            data.fail(err2);
         }
       },
       // 获取code
@@ -22645,15 +22657,15 @@ if (uni.restoreGlobal) {
               uni.hideLoading();
               this.paySuccess(verifyRes);
             }
-          } catch (err) {
-            let code = err.errCode || err.code;
+          } catch (err2) {
+            let code = err2.errCode || err2.code;
             if (code === 2) {
               if (this.debug)
                 formatAppLog("log", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:567", "用户取消支付");
-              this.$emit("cancel", err);
+              this.$emit("cancel", err2);
             } else {
-              formatAppLog("error", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:571", "appleiapCreateOrder:fail", err);
-              this.$emit("fail", err);
+              formatAppLog("error", "at uni_modules/uni-pay/components/uni-pay/uni-pay.vue:571", "appleiapCreateOrder:fail", err2);
+              this.$emit("fail", err2);
             }
             uni.hideLoading();
           }
@@ -23122,7 +23134,7 @@ if (uni.restoreGlobal) {
         login$2.perfectInfo(param).then((res2) => {
           if (res2.success)
             ;
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       },
       // 监听事件 - 支付成功
@@ -23958,7 +23970,7 @@ if (uni.restoreGlobal) {
             function(res2) {
               resolve(res2.code);
             },
-            function(err) {
+            function(err2) {
               reject(new Error("微信登录失败"));
             }
           );
@@ -24009,14 +24021,14 @@ if (uni.restoreGlobal) {
                 formatAppLog("log", "at pages/setUp/setUp.vue:172", "绑定成功");
                 that.getUserMessage();
               }
-            } catch (err) {
+            } catch (err2) {
               uni.showToast({
-                title: err.errMsg || err.message,
+                title: err2.errMsg || err2.message,
                 duration: 1e3,
                 width: 180,
                 icon: "none"
               });
-              formatAppLog("log", "at pages/setUp/setUp.vue:182", err, "我是水");
+              formatAppLog("log", "at pages/setUp/setUp.vue:182", err2, "我是水");
             }
           });
         }
@@ -24350,8 +24362,8 @@ if (uni.restoreGlobal) {
                 url: "/pages/verificatioCode/verificatioCode?mobile=" + this.phone + "&scanel=" + this.scanel
               });
             }
-          } catch (err) {
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:113", err, "我是错误");
+          } catch (err2) {
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:113", err2, "我是错误");
           }
         }
       },
@@ -24378,7 +24390,7 @@ if (uni.restoreGlobal) {
               if (res2.success) {
                 this.jump();
               }
-            }).catch((err) => {
+            }).catch((err2) => {
             });
           } catch (e) {
           }
@@ -24506,10 +24518,10 @@ if (uni.restoreGlobal) {
                 }
               });
             }
-          } catch (err) {
-            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:98", err, "我是错误");
+          } catch (err2) {
+            formatAppLog("log", "at pages/phoneLoging/phoneLoging.vue:98", err2, "我是错误");
             uni.showToast({
-              title: err.errMsg || err.message,
+              title: err2.errMsg || err2.message,
               duration: 1e3,
               width: 180,
               icon: "none"
@@ -24540,7 +24552,7 @@ if (uni.restoreGlobal) {
               if (res2.success) {
                 this.jump();
               }
-            }).catch((err) => {
+            }).catch((err2) => {
             });
           } catch (e) {
           }
@@ -26547,7 +26559,7 @@ if (uni.restoreGlobal) {
               }
               formatAppLog("log", "at pages/viewReport/viewReport.vue:1408", this.queryData);
               resdata["data"] = this.queryData;
-            }).catch((err) => {
+            }).catch((err2) => {
             });
           }
         }).catch();
@@ -26739,7 +26751,7 @@ if (uni.restoreGlobal) {
                     }
                   });
                 },
-                fail: (err) => {
+                fail: (err2) => {
                   uni.showModal({
                     showCancel: false,
                     title: "提示",
@@ -26784,9 +26796,9 @@ if (uni.restoreGlobal) {
                     formatAppLog("log", "at pages/viewReport/viewReport.vue:1673", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
-                  fail: function(err) {
+                  fail: function(err2) {
                     uni.hideLoading();
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1678", "fail:" + JSON.stringify(err));
+                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1678", "fail:" + JSON.stringify(err2));
                   }
                 });
               } else {
@@ -26809,9 +26821,9 @@ if (uni.restoreGlobal) {
                     formatAppLog("log", "at pages/viewReport/viewReport.vue:1698", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
-                  fail: function(err) {
+                  fail: function(err2) {
                     uni.hideLoading();
-                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1703", "fail:" + JSON.stringify(err));
+                    formatAppLog("log", "at pages/viewReport/viewReport.vue:1703", "fail:" + JSON.stringify(err2));
                   }
                 });
               } else {
@@ -29091,10 +29103,10 @@ if (uni.restoreGlobal) {
               this.$emit(events.error, errMsg);
             }
           },
-          fail: (err) => {
+          fail: (err2) => {
             this.$emit(events.error, {
               errCode: "",
-              errMsg: err.errMsg
+              errMsg: err2.errMsg
             });
           },
           complete: () => {
@@ -39173,8 +39185,8 @@ if (uni.restoreGlobal) {
                 });
                 login2.checkToken(res2.data).then((checkTokenRes) => {
                   plus.navigator.closeSplashscreen();
-                }).catch((err) => {
-                  formatAppLog("log", "at common/appInit.js:80", err, "我是错误");
+                }).catch((err2) => {
+                  formatAppLog("log", "at common/appInit.js:80", err2, "我是错误");
                   let tokenExpired = Es.getCurrentUserInfo().tokenExpired;
                   if (tokenExpired > 0) {
                     setTimeout(() => {
@@ -39197,7 +39209,7 @@ if (uni.restoreGlobal) {
                 });
               }
             },
-            fail: function(err) {
+            fail: function(err2) {
               let login2 = Es.importObject("login", {
                 customUI: true
                 // 取消自动展示的交互提示界面
@@ -55517,7 +55529,7 @@ if (uni.restoreGlobal) {
           }
         );
         uniCloudObj.report(optionsData).then(() => {
-        }).catch((err) => {
+        }).catch((err2) => {
         });
       }
     }

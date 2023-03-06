@@ -111,6 +111,12 @@ export default {
         } catch (err) {
           //TODO handle the exception
           console.log(err, '我是错误')
+          uni.showToast({
+            title: err.errMsg || err.message,
+            duration: 1000,
+            width: 180,
+            icon: 'none'
+          })
         }
       }
     },

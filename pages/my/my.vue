@@ -176,7 +176,7 @@
         >确认开通并支付￥{{ payInfo.money }}元</van-button
       >
       <!-- #ifdef MP-ALIPAY || H5 || APP -->
-      <!-- <van-action-sheet class="payment-action-sheet" v-model:show="payShow">
+      <van-action-sheet class="payment-action-sheet" v-model:show="payShow">
         <view class="title" @click.native="aliPayment">选择支付方式</view>
         <view class="actions">
           <view class="action">
@@ -196,7 +196,7 @@
             <view class="text">微信</view>
           </view>
         </view>
-      </van-action-sheet> -->
+      </van-action-sheet>
       <!-- #endif -->
     </view>
     <uni-popup

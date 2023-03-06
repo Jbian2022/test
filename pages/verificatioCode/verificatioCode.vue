@@ -153,30 +153,41 @@ export default {
                 // 获取用户信息
                 console.log(res.data, '我是你爸爸')
                 // 手机号绑定操作
-                let param = {
-                  mobile: self.mobile
-                }
-                let bindMobileRes = await login.bindMobile(param)
-                if (bindMobileRes.code == 0) {
-                  // 绑定手机号成功
-                  let getWeixinRes = await login.getWeixinUserInfo(
-                    JSON.parse(res.data)
-                  )
-                  if (getWeixinRes.code == 0) {
-                    let param = {
-                      avatar: getWeixinRes.avatar,
-                      nickname: getWeixinRes.nickname
-                      // mobile: self.mobile
-                    }
-                    console.log(param, 'param')
-                    login
-                      .perfectInfo(param)
-                      .then((res) => {
-                        if (res.success) {
-                        }
-                      })
-                      .catch((err) => {})
+                try {
+                  let param = {
+                    mobile: self.mobile
                   }
+                  let bindMobileRes = await login.bindMobile(param)
+                  console.log(bindMobileRes, '你是刷')
+                  if (bindMobileRes.code == 0) {
+                    // 绑定手机号成功
+                    let getWeixinRes = await login.getWeixinUserInfo(
+                      JSON.parse(res.data)
+                    )
+                    if (getWeixinRes.code == 0) {
+                      let param = {
+                        avatar: getWeixinRes.avatar,
+                        nickname: getWeixinRes.nickname
+                        // mobile: self.mobile
+                      }
+                      console.log(param, 'param')
+                      login
+                        .perfectInfo(param)
+                        .then((res) => {
+                          if (res.success) {
+                          }
+                        })
+                        .catch((err) => {})
+                    }
+                  }
+                } catch (error) {
+                  uni.showToast({
+                    title: err.errMsg || err.message,
+                    duration: 1000,
+                    width: 180,
+                    icon: 'none'
+                  })
+                  console.log(error, '绑上了吗')
                 }
               }
             },

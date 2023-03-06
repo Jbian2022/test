@@ -420,6 +420,7 @@ export default {
                 openid: wxLoginRes.openid
               }
               // 绑定手机号码
+              console.log(wxLoginRes.unionid, '我是wxLoginRes.unionid')
               let wxSchemaRes = await wxLogin.getWxSchema(wxLoginRes.unionid)
               console.log(wxSchemaRes, '我是微信的前一步')
               let flag = false
