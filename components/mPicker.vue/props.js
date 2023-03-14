@@ -103,6 +103,10 @@ const props = {
 	distinguishModel: {
 		type: String,
 		default: ''
+	},
+	defaultValue: {
+		type: String,
+		default: ''
 	}
 }
 

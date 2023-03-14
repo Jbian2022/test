@@ -1,5 +1,5 @@
 <template>
-  <view class="new-workout">
+  <view class="new-workout" @touchstart="start" @touchend="end">
     <view class="background-header"></view>
     <view class="background"></view>
     <view class="status_bar"> <!-- 这里是状态栏 --> </view>
@@ -648,7 +648,11 @@ export default {
       traineeNo: null,
       isNoOldInfo: false,
       mode: 'ADD',
-      allWork: null
+      allWork: null,
+      startData: {
+        clientX: 0,
+        clientY: 0
+      }
     }
   },
   onLoad: function (option) {
@@ -700,6 +704,40 @@ export default {
     }
   },
   methods: {
+    start(e) {
+      console.log('开始下滑坐标', e.changedTouches[0].clientY)
+      this.startData.clientX = e.changedTouches[0].clientX
+      this.startData.clientY = e.changedTouches[0].clientY
+    },
+    end(e) {
+      console.log('结束下滑坐标', e.changedTouches[0].clientY)
+      const subX = e.changedTouches[0].clientX - this.startData.clientX
+      const subY = e.changedTouches[0].clientY - this.startData.clientY
+      if (subY < -50) {
+        console.log('下滑')
+        // 翻页
+      } else if (subY > 50) {
+        console.log('上滑')
+      } else if (subX > 50) {
+        console.log('左滑')
+        if (this.actionList.length > 0) {
+          this.openDialog('popupFinish')
+        } else {
+          const timer = setTimeout(() => {
+            uni.reLaunch({
+              url:
+                '/pages/trainingRecord/trainingRecord' +
+                `?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+            })
+            clearTimeout(timer)
+          }, 1000)
+        }
+      } else if (subX < -50) {
+        console.log('右滑')
+      } else {
+        console.log('无效')
+      }
+    },
     changeOpen(item) {
       this.actionList.forEach((item) => (item.open = false))
       item.open = true

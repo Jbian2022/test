@@ -270,7 +270,7 @@ for (let i = 3; i <= 60; i++) {
   bmiList.push(i)
 }
 
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i < 10; i++) {
   bmiFixList.push(i)
 }
 
@@ -278,14 +278,14 @@ for (let i = 3; i <= 60; i++) {
   bodymoistureList.push(i)
 }
 
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i < 10; i++) {
   bodymoistureFixList.push(i)
 }
 for (let i = 3; i <= 60; i++) {
   fatPerList.push(i)
 }
 
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i < 10; i++) {
   fatPerFixList.push(i)
 }
 
@@ -293,7 +293,7 @@ for (let i = 3; i <= 60; i++) {
   fatMassList.push(i)
 }
 
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i < 10; i++) {
   fatMassFixList.push(i)
 }
 
@@ -301,7 +301,7 @@ for (let i = 10; i <= 60; i++) {
   muscleMassList.push(i)
 }
 
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i < 10; i++) {
   muscleMassFixList.push(i)
 }
 
@@ -309,7 +309,7 @@ for (let i = 30; i <= 300; i++) {
   weightList.push(i)
 }
 
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i < 10; i++) {
   weightFixList.push(i)
 }
 
@@ -451,42 +451,149 @@ export default {
           this.pickerValue = [this.defaultIndex]
           break
         case 'weight':
-          let weightFindexIndex = this.weightList.findIndex(
-            (item) => item == this.weightValue
-          )
-          this.pickerValue = [weightFindexIndex, 0]
+          if (this.defaultValue) {
+            let needSplitWeightList = this.defaultValue.split('.')
+            let findWeightIndex = 0
+            let findWeightFixIndex = 0
+            if (needSplitWeightList.length > 0) {
+              findWeightIndex = this.weightList.findIndex(
+                (item) => item == needSplitWeightList[0]
+              )
+            }
+            if (needSplitWeightList.length > 1) {
+              findWeightFixIndex = this.weightFixList.findIndex(
+                (item) => item == needSplitWeightList[1]
+              )
+            }
+            this.pickerValue = [findWeightIndex, findWeightFixIndex]
+          } else {
+            let weightFindexIndex = this.weightList.findIndex(
+              (item) => item == this.weightValue
+            )
+            this.pickerValue = [weightFindexIndex, 0]
+          }
 
           break
 
         case 'muscleMass':
-          let muscleMassFindeIndex = this.muscleMassList.findIndex(
-            (item) => item == this.muscleMassValue
-          )
-          this.pickerValue = [muscleMassFindeIndex, 0]
+          if (this.defaultValue) {
+            let needSplitMuscleMassList = this.defaultValue.split('.')
+            let findMuscleMassIndex = 0
+            let findMuscleMassFixIndex = 0
+            if (needSplitMuscleMassList.length > 0) {
+              findMuscleMassIndex = this.muscleMassList.findIndex(
+                (item) => item == needSplitMuscleMassList[0]
+              )
+            }
+            if (needSplitMuscleMassList.length > 1) {
+              findMuscleMassFixIndex = this.muscleMassFixList.findIndex(
+                (item) => item == needSplitMuscleMassList[1]
+              )
+            }
+            this.pickerValue = [findMuscleMassIndex, findMuscleMassFixIndex]
+          } else {
+            let muscleMassFindeIndex = this.muscleMassList.findIndex(
+              (item) => item == this.muscleMassValue
+            )
+            this.pickerValue = [muscleMassFindeIndex, 0]
+          }
+
           break
         case 'fatMass':
-          let fatMassFindexIndex = this.fatMassList.findIndex(
-            (item) => item == this.fatMassValue
-          )
-          this.pickerValue = [fatMassFindexIndex, 0]
+          if (this.defaultValue) {
+            let needSplitFatMassList = this.defaultValue.split('.')
+            let findFatMassIndex = 0
+            let findFatMassFixIndex = 0
+            if (needSplitFatMassList.length > 0) {
+              findFatMassIndex = this.fatMassList.findIndex(
+                (item) => item == needSplitFatMassList[0]
+              )
+            }
+            if (needSplitFatMassList.length > 1) {
+              findFatMassFixIndex = this.fatMassFixList.findIndex(
+                (item) => item == needSplitFatMassList[1]
+              )
+            }
+            this.pickerValue = [findFatMassIndex, findFatMassFixIndex]
+          } else {
+            let fatMassFindexIndex = this.fatMassList.findIndex(
+              (item) => item == this.fatMassValue
+            )
+            this.pickerValue = [fatMassFindexIndex, 0]
+          }
+
           break
         case 'fatPer':
-          let fatPerFindex = this.fatPerList.findIndex(
-            (item) => item == this.fatPerValue
-          )
-          this.pickerValue = [fatPerFindex, 0]
+          if (this.defaultValue) {
+            let needSplitFatPerList = this.defaultValue.split('.')
+            let findFatPerIndex = 0
+            let findFatPerFixIndex = 0
+            if (needSplitFatPerList.length > 0) {
+              findFatPerIndex = this.fatPerList.findIndex(
+                (item) => item == needSplitFatPerList[0]
+              )
+            }
+            if (needSplitFatPerList.length > 1) {
+              findFatPerFixIndex = this.fatPerFixList.findIndex(
+                (item) => item == needSplitFatPerList[1]
+              )
+            }
+            this.pickerValue = [findFatPerIndex, findFatPerFixIndex]
+          } else {
+            let fatPerFindex = this.fatPerList.findIndex(
+              (item) => item == this.fatPerValue
+            )
+            this.pickerValue = [fatPerFindex, 0]
+          }
+
           break
         case 'bodymoisture':
-          let bodymoistureFindIndex = this.bodymoistureList.findIndex(
-            (item) => item == this.bodymoistureValue
-          )
-          this.pickerValue = [bodymoistureFindIndex, 0]
+          if (this.defaultValue) {
+            let needSplitBodymoistureList = this.defaultValue.split('.')
+            let findBodymoistureIndex = 0
+            let findBodymoistureFixIndex = 0
+            if (needSplitBodymoistureList.length > 0) {
+              findBodymoistureIndex = this.bodymoistureList.findIndex(
+                (item) => item == needSplitBodymoistureList[0]
+              )
+            }
+            if (needSplitBodymoistureList.length > 1) {
+              findBodymoistureFixIndex = this.bodymoistureFixList.findIndex(
+                (item) => item == needSplitBodymoistureList[1]
+              )
+            }
+            this.pickerValue = [findBodymoistureIndex, findBodymoistureFixIndex]
+          } else {
+            let bodymoistureFindIndex = this.bodymoistureList.findIndex(
+              (item) => item == this.bodymoistureValue
+            )
+            this.pickerValue = [bodymoistureFindIndex, 0]
+          }
+
           break
         case 'bmi':
-          let bmiFindIndex = this.bodymoistureList.findIndex(
-            (item) => item == this.bmiValue
-          )
-          this.pickerValue = [bmiFindIndex, 0]
+          if (this.defaultValue) {
+            let needSplitBmiList = this.defaultValue.split('.')
+            let findBmiIndex = 0
+            let findBmiFixIndex = 0
+            if (needSplitBmiList.length > 0) {
+              findBmiIndex = this.bodymoistureList.findIndex(
+                (item) => item == needSplitBmiList[0]
+              )
+            }
+            if (needSplitBmiList.length > 1) {
+              findBmiFixIndex = this.bodymoistureFixList.findIndex(
+                (item) => item == needSplitBmiList[1]
+              )
+            }
+            this.pickerValue = [findBmiIndex, findBmiFixIndex]
+          } else {
+            let bmiFindIndex = this.bodymoistureList.findIndex(
+              (item) => item == this.bmiValue
+            )
+            this.pickerValue = [bmiFindIndex, 0]
+          }
+
           break
       }
     })
@@ -586,7 +693,7 @@ export default {
           break
         case 'bmi':
           this.pickerValue = val
-          this.bmi = this.bmiList[val[0]] + '.' + this.bmiFixList[val[1]]
+          this.bmiValue = this.bmiList[val[0]] + '.' + this.bmiFixList[val[1]]
           break
         case 'date':
           this.pickerValue = val

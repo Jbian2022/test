@@ -7,8 +7,8 @@
   "id": "__UNI__76A9E40",
   "name": "健变",
   "version": {
-    "name": "1.4.6",
-    "code": 146
+    "name": "1.4.9",
+    "code": 149
   },
   "description": "一款健身APP",
   "developer": {
@@ -19,11 +19,11 @@
   "permissions": {
     "Camera": {},
     "VideoPlayer": {},
-    "Push": {},
     "OAuth": {},
     "iBeacon": {},
     "Payment": {},
     "Share": {},
+    "Push": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -98,10 +98,14 @@
         "permissions": [
           "<uses-feature android:name=\"android.hardware.camera\"/>",
           "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
           "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
           "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
           "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-          "<uses-permission android:name=\"android.permission.INTERNET\"/>"
+          "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+          "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+          "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>"
         ],
         "minSdkVersion": 21,
         "abiFilters": [
@@ -176,7 +180,18 @@
           }
         },
         "payment": {
-          "appleiap": {}
+          "alipay": {
+            "__platform__": [
+              "android"
+            ]
+          },
+          "weixin": {
+            "__platform__": [
+              "android"
+            ],
+            "appid": "wxf790c35e4d544ded",
+            "UniversalLinks": "https://jbian.net/uni-universallinks/__UNI__76A9E40/"
+          }
         },
         "share": {
           "weixin": {

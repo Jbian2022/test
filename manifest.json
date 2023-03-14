@@ -2,8 +2,8 @@
     "name" : "健变",
     "appid" : "__UNI__76A9E40",
     "description" : "一款健身APP",
-    "versionName" : "1.4.6",
-    "versionCode" : 146,
+    "versionName" : "1.4.9",
+    "versionCode" : 149,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -20,21 +20,25 @@
         "modules" : {
             "Camera" : {},
             "VideoPlayer" : {},
-            "Push" : {},
             "OAuth" : {},
             "iBeacon" : {},
             "Payment" : {},
-            "Share" : {}
+            "Share" : {},
+            "Push" : {}
         },
         "distribute" : {
             "android" : {
                 "permissions" : [
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-                    "<uses-permission android:name=\"android.permission.INTERNET\"/>"
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>"
                 ],
                 "minSdkVersion" : 21,
                 "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ]
@@ -104,7 +108,14 @@
                     }
                 },
                 "payment" : {
-                    "appleiap" : {}
+                    "alipay" : {
+                        "__platform__" : [ "android" ]
+                    },
+                    "weixin" : {
+                        "__platform__" : [ "android" ],
+                        "appid" : "wxf790c35e4d544ded",
+                        "UniversalLinks" : "https://jbian.net/uni-universallinks/__UNI__76A9E40/"
+                    }
                 },
                 "share" : {
                     "weixin" : {
@@ -202,6 +213,9 @@
     "h5" : {
         "uniStatistics" : {
             "enable" : true
+        },
+        "unipush" : {
+            "enable" : false
         }
     },
     "_spaceID" : "mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3",

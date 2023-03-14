@@ -153,6 +153,7 @@ module.exports = {
 	 * 此api只有admin角色可以访问
 	 */
 	async refund(data) {
+		console.log(data, '我不存在吗')
 		let {
 			out_trade_no, // 插件订单号
 			out_refund_no, // 插件退款订单号

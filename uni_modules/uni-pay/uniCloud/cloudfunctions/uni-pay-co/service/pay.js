@@ -478,7 +478,7 @@ class service {
 		let uniPayConifg = await this.getUniPayConfig(payOrderInfo);
 		let uniPayInstance = await this.initUniPayInstance(payOrderInfo);
 
-		console.log(`---- ${out_trade_no} -- ${outRefundNo} -- ${totalFee/100} -- ${refundFee/100}`)
+		console.log(`---- ${out_trade_no} -- ${outRefundNo} -- ${totalFee/100} -- ${refundFee/100}---${payOrderInfo}`)
 		// 退款操作
 		try {
 			res.result = await uniPayInstance.refund({
@@ -845,6 +845,7 @@ class service {
 	 * let uniPayInstance = await service.pay.initUniPayInstance({ provider, provider_pay_type });
 	 */
 	async initUniPayInstance(data = {}) {
+		console.log(data, '我是退款数据')
 		let {
 			provider,
 		} = data;
@@ -861,6 +862,7 @@ class service {
 			// 支付宝
 			uniPayInstance = uniPay.initAlipay(uniPayConifg);
 		} else if (provider === "appleiap") {
+			console.log(uniPayConifg, '我是ios 最终数据')
 			// ios内购
 			uniPayInstance = uniPay.initAppleIapPayment(uniPayConifg);
 		} else {

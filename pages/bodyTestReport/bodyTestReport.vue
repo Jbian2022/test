@@ -42,6 +42,7 @@
                 @cancel="pickCancel(item)"
                 :pickerType="controlType(item)"
                 :defaultIndex="handleIndex(item)"
+                :defaultValue="item.value"
               ></Mpicker>
               <view class="change_picker_style" @click.stop="openDialog(item)">
                 <view
@@ -128,7 +129,6 @@ export default {
     },
     handleFormValue() {
       return function (item) {
-        debugger
         let value = ''
         if (item.hasOwnProperty('value')) {
           value = item.value || ''

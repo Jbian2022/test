@@ -1063,7 +1063,7 @@ if (uni.restoreGlobal) {
   function m(e) {
     return e && "string" == typeof e ? JSON.parse(e) : e;
   }
-  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.1.49"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.122"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -10977,6 +10977,10 @@ if (uni.restoreGlobal) {
     distinguishModel: {
       type: String,
       default: ""
+    },
+    defaultValue: {
+      type: String,
+      default: ""
     }
   };
   const date = new Date();
@@ -11001,37 +11005,37 @@ if (uni.restoreGlobal) {
   for (let i2 = 3; i2 <= 60; i2++) {
     bmiList.push(i2);
   }
-  for (let i2 = 0; i2 <= 10; i2++) {
+  for (let i2 = 0; i2 < 10; i2++) {
     bmiFixList.push(i2);
   }
   for (let i2 = 3; i2 <= 60; i2++) {
     bodymoistureList.push(i2);
   }
-  for (let i2 = 0; i2 <= 10; i2++) {
+  for (let i2 = 0; i2 < 10; i2++) {
     bodymoistureFixList.push(i2);
   }
   for (let i2 = 3; i2 <= 60; i2++) {
     fatPerList.push(i2);
   }
-  for (let i2 = 0; i2 <= 10; i2++) {
+  for (let i2 = 0; i2 < 10; i2++) {
     fatPerFixList.push(i2);
   }
   for (let i2 = 3; i2 <= 60; i2++) {
     fatMassList.push(i2);
   }
-  for (let i2 = 0; i2 <= 10; i2++) {
+  for (let i2 = 0; i2 < 10; i2++) {
     fatMassFixList.push(i2);
   }
   for (let i2 = 10; i2 <= 60; i2++) {
     muscleMassList.push(i2);
   }
-  for (let i2 = 0; i2 <= 10; i2++) {
+  for (let i2 = 0; i2 < 10; i2++) {
     muscleMassFixList.push(i2);
   }
   for (let i2 = 30; i2 <= 300; i2++) {
     weightList.push(i2);
   }
-  for (let i2 = 0; i2 <= 10; i2++) {
+  for (let i2 = 0; i2 < 10; i2++) {
     weightFixList.push(i2);
   }
   for (let i2 = 1770; i2 <= date.getFullYear(); i2++) {
@@ -11186,40 +11190,142 @@ if (uni.restoreGlobal) {
             this.pickerValue = [this.defaultIndex];
             break;
           case "weight":
-            let weightFindexIndex = this.weightList.findIndex(
-              (item) => item == this.weightValue
-            );
-            this.pickerValue = [weightFindexIndex, 0];
+            if (this.defaultValue) {
+              let needSplitWeightList = this.defaultValue.split(".");
+              let findWeightIndex = 0;
+              let findWeightFixIndex = 0;
+              if (needSplitWeightList.length > 0) {
+                findWeightIndex = this.weightList.findIndex(
+                  (item) => item == needSplitWeightList[0]
+                );
+              }
+              if (needSplitWeightList.length > 1) {
+                findWeightFixIndex = this.weightFixList.findIndex(
+                  (item) => item == needSplitWeightList[1]
+                );
+              }
+              this.pickerValue = [findWeightIndex, findWeightFixIndex];
+            } else {
+              let weightFindexIndex = this.weightList.findIndex(
+                (item) => item == this.weightValue
+              );
+              this.pickerValue = [weightFindexIndex, 0];
+            }
             break;
           case "muscleMass":
-            let muscleMassFindeIndex = this.muscleMassList.findIndex(
-              (item) => item == this.muscleMassValue
-            );
-            this.pickerValue = [muscleMassFindeIndex, 0];
+            if (this.defaultValue) {
+              let needSplitMuscleMassList = this.defaultValue.split(".");
+              let findMuscleMassIndex = 0;
+              let findMuscleMassFixIndex = 0;
+              if (needSplitMuscleMassList.length > 0) {
+                findMuscleMassIndex = this.muscleMassList.findIndex(
+                  (item) => item == needSplitMuscleMassList[0]
+                );
+              }
+              if (needSplitMuscleMassList.length > 1) {
+                findMuscleMassFixIndex = this.muscleMassFixList.findIndex(
+                  (item) => item == needSplitMuscleMassList[1]
+                );
+              }
+              this.pickerValue = [findMuscleMassIndex, findMuscleMassFixIndex];
+            } else {
+              let muscleMassFindeIndex = this.muscleMassList.findIndex(
+                (item) => item == this.muscleMassValue
+              );
+              this.pickerValue = [muscleMassFindeIndex, 0];
+            }
             break;
           case "fatMass":
-            let fatMassFindexIndex = this.fatMassList.findIndex(
-              (item) => item == this.fatMassValue
-            );
-            this.pickerValue = [fatMassFindexIndex, 0];
+            if (this.defaultValue) {
+              let needSplitFatMassList = this.defaultValue.split(".");
+              let findFatMassIndex = 0;
+              let findFatMassFixIndex = 0;
+              if (needSplitFatMassList.length > 0) {
+                findFatMassIndex = this.fatMassList.findIndex(
+                  (item) => item == needSplitFatMassList[0]
+                );
+              }
+              if (needSplitFatMassList.length > 1) {
+                findFatMassFixIndex = this.fatMassFixList.findIndex(
+                  (item) => item == needSplitFatMassList[1]
+                );
+              }
+              this.pickerValue = [findFatMassIndex, findFatMassFixIndex];
+            } else {
+              let fatMassFindexIndex = this.fatMassList.findIndex(
+                (item) => item == this.fatMassValue
+              );
+              this.pickerValue = [fatMassFindexIndex, 0];
+            }
             break;
           case "fatPer":
-            let fatPerFindex = this.fatPerList.findIndex(
-              (item) => item == this.fatPerValue
-            );
-            this.pickerValue = [fatPerFindex, 0];
+            if (this.defaultValue) {
+              let needSplitFatPerList = this.defaultValue.split(".");
+              let findFatPerIndex = 0;
+              let findFatPerFixIndex = 0;
+              if (needSplitFatPerList.length > 0) {
+                findFatPerIndex = this.fatPerList.findIndex(
+                  (item) => item == needSplitFatPerList[0]
+                );
+              }
+              if (needSplitFatPerList.length > 1) {
+                findFatPerFixIndex = this.fatPerFixList.findIndex(
+                  (item) => item == needSplitFatPerList[1]
+                );
+              }
+              this.pickerValue = [findFatPerIndex, findFatPerFixIndex];
+            } else {
+              let fatPerFindex = this.fatPerList.findIndex(
+                (item) => item == this.fatPerValue
+              );
+              this.pickerValue = [fatPerFindex, 0];
+            }
             break;
           case "bodymoisture":
-            let bodymoistureFindIndex = this.bodymoistureList.findIndex(
-              (item) => item == this.bodymoistureValue
-            );
-            this.pickerValue = [bodymoistureFindIndex, 0];
+            if (this.defaultValue) {
+              let needSplitBodymoistureList = this.defaultValue.split(".");
+              let findBodymoistureIndex = 0;
+              let findBodymoistureFixIndex = 0;
+              if (needSplitBodymoistureList.length > 0) {
+                findBodymoistureIndex = this.bodymoistureList.findIndex(
+                  (item) => item == needSplitBodymoistureList[0]
+                );
+              }
+              if (needSplitBodymoistureList.length > 1) {
+                findBodymoistureFixIndex = this.bodymoistureFixList.findIndex(
+                  (item) => item == needSplitBodymoistureList[1]
+                );
+              }
+              this.pickerValue = [findBodymoistureIndex, findBodymoistureFixIndex];
+            } else {
+              let bodymoistureFindIndex = this.bodymoistureList.findIndex(
+                (item) => item == this.bodymoistureValue
+              );
+              this.pickerValue = [bodymoistureFindIndex, 0];
+            }
             break;
           case "bmi":
-            let bmiFindIndex = this.bodymoistureList.findIndex(
-              (item) => item == this.bmiValue
-            );
-            this.pickerValue = [bmiFindIndex, 0];
+            if (this.defaultValue) {
+              let needSplitBmiList = this.defaultValue.split(".");
+              let findBmiIndex = 0;
+              let findBmiFixIndex = 0;
+              if (needSplitBmiList.length > 0) {
+                findBmiIndex = this.bodymoistureList.findIndex(
+                  (item) => item == needSplitBmiList[0]
+                );
+              }
+              if (needSplitBmiList.length > 1) {
+                findBmiFixIndex = this.bodymoistureFixList.findIndex(
+                  (item) => item == needSplitBmiList[1]
+                );
+              }
+              this.pickerValue = [findBmiIndex, findBmiFixIndex];
+            } else {
+              let bmiFindIndex = this.bodymoistureList.findIndex(
+                (item) => item == this.bmiValue
+              );
+              this.pickerValue = [bmiFindIndex, 0];
+            }
             break;
         }
       });
@@ -11287,7 +11393,7 @@ if (uni.restoreGlobal) {
           this.close();
       },
       bindChange(e) {
-        formatAppLog("log", "at components/mPicker.vue/mPicker.vue:554", e, ">>>>>");
+        formatAppLog("log", "at components/mPicker.vue/mPicker.vue:661", e, ">>>>>");
         const val = e.detail.value;
         switch (this.pickerType) {
           case "ordinary":
@@ -11315,7 +11421,7 @@ if (uni.restoreGlobal) {
             break;
           case "bmi":
             this.pickerValue = val;
-            this.bmi = this.bmiList[val[0]] + "." + this.bmiFixList[val[1]];
+            this.bmiValue = this.bmiList[val[0]] + "." + this.bmiFixList[val[1]];
             break;
           case "date":
             this.pickerValue = val;
@@ -11323,7 +11429,7 @@ if (uni.restoreGlobal) {
             this.month = this.months[val[1]];
             this.day = this.days[val[2]];
             this.valueModel = this.year + "-" + this.month + "-" + this.day;
-            formatAppLog("log", "at components/mPicker.vue/mPicker.vue:598", this.year, this.month, this.day);
+            formatAppLog("log", "at components/mPicker.vue/mPicker.vue:705", this.year, this.month, this.day);
             break;
         }
       },
@@ -13172,7 +13278,6 @@ if (uni.restoreGlobal) {
       },
       handleFormValue() {
         return function(item) {
-          debugger;
           let value = "";
           if (item.hasOwnProperty("value")) {
             value = item.value || "";
@@ -13519,8 +13624,9 @@ if (uni.restoreGlobal) {
                             onConfirm: ($event) => $options.pickeConfirm($event, item, itemIndex),
                             onCancel: ($event) => $options.pickCancel(item),
                             pickerType: $options.controlType(item),
-                            defaultIndex: $options.handleIndex(item)
-                          }, null, 8, ["show", "range", "onConfirm", "onCancel", "pickerType", "defaultIndex"]),
+                            defaultIndex: $options.handleIndex(item),
+                            defaultValue: item.value
+                          }, null, 8, ["show", "range", "onConfirm", "onCancel", "pickerType", "defaultIndex", "defaultValue"]),
                           vue.createElementVNode("view", {
                             class: "change_picker_style",
                             onClick: vue.withModifiers(($event) => $options.openDialog(item), ["stop"])
@@ -19051,7 +19157,11 @@ if (uni.restoreGlobal) {
         traineeNo: null,
         isNoOldInfo: false,
         mode: "ADD",
-        allWork: null
+        allWork: null,
+        startData: {
+          clientX: 0,
+          clientY: 0
+        }
       };
     },
     onLoad: function(option) {
@@ -19102,6 +19212,37 @@ if (uni.restoreGlobal) {
       }
     },
     methods: {
+      start(e) {
+        formatAppLog("log", "at pages/newWorkout/newWorkout.vue:708", "开始下滑坐标", e.changedTouches[0].clientY);
+        this.startData.clientX = e.changedTouches[0].clientX;
+        this.startData.clientY = e.changedTouches[0].clientY;
+      },
+      end(e) {
+        formatAppLog("log", "at pages/newWorkout/newWorkout.vue:713", "结束下滑坐标", e.changedTouches[0].clientY);
+        const subX = e.changedTouches[0].clientX - this.startData.clientX;
+        const subY = e.changedTouches[0].clientY - this.startData.clientY;
+        if (subY < -50) {
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:717", "下滑");
+        } else if (subY > 50) {
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:720", "上滑");
+        } else if (subX > 50) {
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:722", "左滑");
+          if (this.actionList.length > 0) {
+            this.openDialog("popupFinish");
+          } else {
+            const timer = setTimeout(() => {
+              uni.reLaunch({
+                url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+              });
+              clearTimeout(timer);
+            }, 1e3);
+          }
+        } else if (subX < -50) {
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:736", "右滑");
+        } else {
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:738", "无效");
+        }
+      },
       changeOpen(item) {
         this.actionList.forEach((item2) => item2.open = false);
         item.open = true;
@@ -19388,1192 +19529,1202 @@ if (uni.restoreGlobal) {
     const _component_van_button = vue.resolveComponent("van-button");
     const _component_popover = vue.resolveComponent("popover");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "new-workout" }, [
-      vue.createElementVNode("view", { class: "background-header" }),
-      vue.createElementVNode("view", { class: "background" }),
-      vue.createElementVNode("view", { class: "status_bar" }, [
-        vue.createCommentVNode(" 这里是状态栏 ")
-      ]),
-      vue.createElementVNode("view", { class: "header" }, [
-        vue.createElementVNode("view", { class: "title" }, "新建训练"),
-        vue.createElementVNode("view", null, [
-          $options.isShowSave ? (vue.openBlock(), vue.createBlock(_component_van_button, {
-            key: 0,
-            class: vue.normalizeClass($options.isShowSave && $options.isShowSuccess ? "btn save" : "bluecss btn save"),
-            onClick: _cache[0] || (_cache[0] = ($event) => $options.finish("save"))
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "new-workout",
+        onTouchstart: _cache[17] || (_cache[17] = (...args) => $options.start && $options.start(...args)),
+        onTouchend: _cache[18] || (_cache[18] = (...args) => $options.end && $options.end(...args))
+      },
+      [
+        vue.createElementVNode("view", { class: "background-header" }),
+        vue.createElementVNode("view", { class: "background" }),
+        vue.createElementVNode("view", { class: "status_bar" }, [
+          vue.createCommentVNode(" 这里是状态栏 ")
+        ]),
+        vue.createElementVNode("view", { class: "header" }, [
+          vue.createElementVNode("view", { class: "title" }, "新建训练"),
+          vue.createElementVNode("view", null, [
+            $options.isShowSave ? (vue.openBlock(), vue.createBlock(_component_van_button, {
+              key: 0,
+              class: vue.normalizeClass($options.isShowSave && $options.isShowSuccess ? "btn save" : "bluecss btn save"),
+              onClick: _cache[0] || (_cache[0] = ($event) => $options.finish("save"))
+            }, {
+              default: vue.withCtx(() => [
+                vue.createTextVNode("暂存")
+              ]),
+              _: 1
+              /* STABLE */
+            }, 8, ["class"])) : vue.createCommentVNode("v-if", true),
+            $options.isShowSave && $options.isShowSuccess ? (vue.openBlock(), vue.createBlock(_component_van_button, {
+              key: 1,
+              class: "btn",
+              onClick: _cache[1] || (_cache[1] = ($event) => $options.openDialog("popupFinish"))
+            }, {
+              default: vue.withCtx(() => [
+                vue.createTextVNode("完成训练")
+              ]),
+              _: 1
+              /* STABLE */
+            })) : vue.createCommentVNode("v-if", true)
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "workout-title" }, [
+          vue.withDirectives(vue.createElementVNode(
+            "input",
+            {
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.workoutName = $event),
+              maxlength: "8",
+              class: "uni-input",
+              placeholder: "请输入训练名称"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vModelText, $data.workoutName]
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "action-list" }, [
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($data.actionList, (i2, ix) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                key: ix,
+                class: "action-type-box"
+              }, [
+                i2.type === 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 0,
+                  class: "action-tiem",
+                  onClick: ($event) => $options.changeOpen(i2)
+                }, [
+                  vue.createElementVNode("view", { class: "action-tiem-header" }, [
+                    vue.createElementVNode("view", { class: "img" }, [
+                      i2.url ? (vue.openBlock(), vue.createElementBlock("image", {
+                        key: 0,
+                        class: "van-image",
+                        round: "",
+                        src: i2.url
+                      }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
+                    ]),
+                    vue.createElementVNode("view", { class: "des-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "des-title" },
+                        vue.toDisplayString(i2.actionName),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "info-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "负荷量：" + vue.toDisplayString(i2.load) + "kg",
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "已完成：" + vue.toDisplayString(i2.frequency) + "次",
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createVNode(_component_popover, {
+                      class: "config",
+                      list: $data.actions,
+                      position: "right",
+                      mode: "click"
+                    }, {
+                      item: vue.withCtx(({ item }) => [
+                        item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
+                          key: 0,
+                          style: { "color": "#f04242" },
+                          onClick: ($event) => $options.deleteActionHandle(ix)
+                        }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                          "text",
+                          { key: 1 },
+                          vue.toDisplayString(item.text),
+                          1
+                          /* TEXT */
+                        ))
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", { class: "img" })
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    }, 1032, ["list"])
+                  ]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "action-tiem-des" },
+                    [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(i2.groupList, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock(
+                            "view",
+                            {
+                              key: index,
+                              class: vue.normalizeClass(["project-item", { active: item.active }])
+                            },
+                            [
+                              vue.createElementVNode("view", { class: "index" }, [
+                                vue.createElementVNode(
+                                  "text",
+                                  null,
+                                  vue.toDisplayString(index + 1),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              vue.createElementVNode("view", { class: "kg" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.kg = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  disabled: item.active
+                                }, null, 8, ["onUpdate:modelValue", "disabled"]), [
+                                  [vue.vModelText, item.kg]
+                                ]),
+                                vue.createElementVNode("text", null, "kg")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.time = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  disabled: item.active
+                                }, null, 8, ["onUpdate:modelValue", "disabled"]), [
+                                  [vue.vModelText, item.time]
+                                ]),
+                                vue.createElementVNode("text", null, "次")
+                              ]),
+                              vue.createElementVNode("view", {
+                                class: "yes",
+                                onClick: ($event) => {
+                                  item.active = !item.active, $options.technicalData();
+                                }
+                              }, [
+                                vue.createElementVNode("view", { class: "true-icon" })
+                              ], 8, ["onClick"]),
+                              vue.createElementVNode("view", { class: "delete" }, [
+                                vue.createElementVNode("view", {
+                                  class: "img",
+                                  onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
+                                }, null, 8, ["onClick"])
+                              ])
+                            ],
+                            2
+                            /* CLASS */
+                          );
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      )),
+                      vue.createElementVNode("view", {
+                        class: "add-project-item",
+                        onClick: ($event) => $options.addProjectItem(i2.groupList)
+                      }, [
+                        vue.createElementVNode("text", { class: "add-text" }, "+"),
+                        vue.createTextVNode(" 新增一组")
+                      ], 8, ["onClick"])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, i2.open]
+                  ])
+                ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
+                i2.type === 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 1,
+                  class: "action-tiem",
+                  onClick: ($event) => $options.changeOpen(i2)
+                }, [
+                  vue.createElementVNode("view", { class: "action-tiem-header" }, [
+                    vue.createElementVNode("view", { class: "img" }, [
+                      i2.url ? (vue.openBlock(), vue.createElementBlock("image", {
+                        key: 0,
+                        class: "van-image",
+                        round: "",
+                        src: i2.url
+                      }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
+                    ]),
+                    vue.createElementVNode("view", { class: "des-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "des-title" },
+                        vue.toDisplayString(i2.actionName),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "info-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "总里程：" + vue.toDisplayString(i2.mileage) + "km",
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "用时：" + vue.toDisplayString($options.formaterTimes(i2.times, 2)),
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createVNode(_component_popover, {
+                      class: "config",
+                      list: $data.actions,
+                      position: "right",
+                      mode: "click"
+                    }, {
+                      item: vue.withCtx(({ item }) => [
+                        item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
+                          key: 0,
+                          style: { "color": "#f04242" },
+                          onClick: ($event) => $options.deleteActionHandle(ix)
+                        }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                          "text",
+                          { key: 1 },
+                          vue.toDisplayString(item.text),
+                          1
+                          /* TEXT */
+                        ))
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", { class: "img" })
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    }, 1032, ["list"])
+                  ]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "action-tiem-des" },
+                    [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(i2.groupList, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock(
+                            "view",
+                            {
+                              key: index,
+                              class: vue.normalizeClass(["project-item", { active: item.active }])
+                            },
+                            [
+                              vue.createElementVNode("view", { class: "index" }, [
+                                vue.createElementVNode(
+                                  "text",
+                                  null,
+                                  vue.toDisplayString(index + 1),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              vue.createElementVNode("view", { class: "kg" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.km = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[3] || (_cache[3] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.km]
+                                ]),
+                                vue.createElementVNode("text", null, "km")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.hour = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[4] || (_cache[4] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.hour]
+                                ]),
+                                vue.createElementVNode("text", null, "时")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.minute = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[5] || (_cache[5] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.minute]
+                                ]),
+                                vue.createElementVNode("text", null, "分")
+                              ]),
+                              vue.createElementVNode("view", { class: "delete" }, [
+                                vue.createElementVNode("view", {
+                                  class: "img",
+                                  onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
+                                }, null, 8, ["onClick"])
+                              ])
+                            ],
+                            2
+                            /* CLASS */
+                          );
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      )),
+                      vue.createElementVNode("view", {
+                        class: "add-project-item",
+                        onClick: ($event) => $options.addProjectItem(i2.groupList)
+                      }, [
+                        vue.createElementVNode("text", { class: "add-text" }, "+"),
+                        vue.createTextVNode(" 新增一组")
+                      ], 8, ["onClick"])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, i2.open]
+                  ])
+                ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
+                i2.type === 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 2,
+                  class: "action-tiem",
+                  onClick: ($event) => $options.changeOpen(i2)
+                }, [
+                  vue.createElementVNode("view", { class: "action-tiem-header" }, [
+                    vue.createElementVNode("view", { class: "img" }, [
+                      vue.createElementVNode("image", {
+                        class: "van-image",
+                        round: "",
+                        src: i2.url
+                      }, null, 8, ["src"])
+                    ]),
+                    vue.createElementVNode("view", { class: "des-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "des-title" },
+                        vue.toDisplayString(i2.actionName),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "info-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "已完成：" + vue.toDisplayString(i2.frequency) + "次",
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createVNode(_component_popover, {
+                      class: "config",
+                      list: $data.actions,
+                      position: "right",
+                      mode: "click"
+                    }, {
+                      item: vue.withCtx(({ item }) => [
+                        item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
+                          key: 0,
+                          style: { "color": "#f04242" },
+                          onClick: ($event) => $options.deleteActionHandle(ix)
+                        }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                          "text",
+                          { key: 1 },
+                          vue.toDisplayString(item.text),
+                          1
+                          /* TEXT */
+                        ))
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", { class: "img" })
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    }, 1032, ["list"])
+                  ]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "action-tiem-des" },
+                    [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(i2.groupList, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock(
+                            "view",
+                            {
+                              key: index,
+                              class: vue.normalizeClass(["project-item", { active: item.active }])
+                            },
+                            [
+                              vue.createElementVNode("view", { class: "index" }, [
+                                vue.createElementVNode(
+                                  "text",
+                                  null,
+                                  vue.toDisplayString(index + 1),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.time = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  disabled: item.active
+                                }, null, 8, ["onUpdate:modelValue", "disabled"]), [
+                                  [vue.vModelText, item.time]
+                                ]),
+                                vue.createElementVNode("text", null, "次")
+                              ]),
+                              vue.createElementVNode("view", {
+                                class: "yes",
+                                onClick: ($event) => {
+                                  item.active = !item.active, $options.technicalData();
+                                }
+                              }, [
+                                vue.createElementVNode("view", { class: "true-icon" })
+                              ], 8, ["onClick"]),
+                              vue.createElementVNode("view", { class: "delete" }, [
+                                vue.createElementVNode("view", {
+                                  class: "img",
+                                  onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
+                                }, null, 8, ["onClick"])
+                              ])
+                            ],
+                            2
+                            /* CLASS */
+                          );
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      )),
+                      vue.createElementVNode("view", {
+                        class: "add-project-item",
+                        onClick: ($event) => ($options.addProjectItem(i2.groupList), $options.technicalData())
+                      }, [
+                        vue.createElementVNode("text", { class: "add-text" }, "+"),
+                        vue.createTextVNode(" 新增一组")
+                      ], 8, ["onClick"])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, i2.open]
+                  ])
+                ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
+                i2.type === 3 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 3,
+                  class: "action-tiem",
+                  onClick: ($event) => $options.changeOpen(i2)
+                }, [
+                  vue.createElementVNode("view", { class: "action-tiem-header" }, [
+                    vue.createElementVNode("view", { class: "img" }, [
+                      vue.createElementVNode("image", {
+                        class: "van-image",
+                        round: "",
+                        src: i2.url
+                      }, null, 8, ["src"])
+                    ]),
+                    vue.createElementVNode("view", { class: "des-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "des-title" },
+                        vue.toDisplayString(i2.actionName),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "info-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "用时：" + vue.toDisplayString($options.formaterTimes(i2.times)),
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createVNode(_component_popover, {
+                      class: "config",
+                      list: $data.actions,
+                      position: "right",
+                      mode: "click"
+                    }, {
+                      item: vue.withCtx(({ item }) => [
+                        item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
+                          key: 0,
+                          style: { "color": "#f04242" },
+                          onClick: ($event) => $options.deleteActionHandle(ix)
+                        }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                          "text",
+                          { key: 1 },
+                          vue.toDisplayString(item.text),
+                          1
+                          /* TEXT */
+                        ))
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", { class: "img" })
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    }, 1032, ["list"])
+                  ]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "action-tiem-des" },
+                    [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(i2.groupList, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock(
+                            "view",
+                            {
+                              key: index,
+                              class: vue.normalizeClass(["project-item", { active: item.active }])
+                            },
+                            [
+                              vue.createElementVNode("view", { class: "index" }, [
+                                vue.createElementVNode(
+                                  "text",
+                                  null,
+                                  vue.toDisplayString(index + 1),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.hour = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[6] || (_cache[6] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.hour]
+                                ]),
+                                vue.createElementVNode("text", null, "时")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.minute = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[7] || (_cache[7] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.minute]
+                                ]),
+                                vue.createElementVNode("text", null, "分")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.second = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[8] || (_cache[8] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.second]
+                                ]),
+                                vue.createElementVNode("text", null, "秒")
+                              ]),
+                              vue.createElementVNode("view", { class: "delete" }, [
+                                vue.createElementVNode("view", {
+                                  class: "img",
+                                  onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
+                                }, null, 8, ["onClick"])
+                              ])
+                            ],
+                            2
+                            /* CLASS */
+                          );
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      )),
+                      vue.createElementVNode("view", {
+                        class: "add-project-item",
+                        onClick: ($event) => $options.addProjectItem(i2.groupList)
+                      }, [
+                        vue.createElementVNode("text", { class: "add-text" }, "+"),
+                        vue.createTextVNode(" 新增一组")
+                      ], 8, ["onClick"])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, i2.open]
+                  ])
+                ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
+                i2.type === 4 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 4,
+                  class: "action-tiem",
+                  onClick: ($event) => $options.changeOpen(i2)
+                }, [
+                  vue.createElementVNode("view", { class: "action-tiem-header" }, [
+                    vue.createElementVNode("view", { class: "img" }, [
+                      vue.createElementVNode("image", {
+                        class: "van-image",
+                        round: "",
+                        src: i2.url
+                      }, null, 8, ["src"])
+                    ]),
+                    vue.createElementVNode("view", { class: "des-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "des-title" },
+                        vue.toDisplayString(i2.actionName),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "info-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "负荷量：" + vue.toDisplayString(i2.load) + "kg",
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "已完成：" + vue.toDisplayString(i2.frequency) + "次",
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createVNode(_component_popover, {
+                      class: "config",
+                      list: $data.actions,
+                      position: "right",
+                      mode: "click"
+                    }, {
+                      item: vue.withCtx(({ item }) => [
+                        item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
+                          key: 0,
+                          style: { "color": "#f04242" },
+                          onClick: ($event) => $options.deleteActionHandle(ix)
+                        }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                          "text",
+                          { key: 1 },
+                          vue.toDisplayString(item.text),
+                          1
+                          /* TEXT */
+                        ))
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", { class: "img" })
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    }, 1032, ["list"])
+                  ]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "action-tiem-des" },
+                    [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(i2.groupList, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock(
+                            "view",
+                            {
+                              key: index,
+                              class: vue.normalizeClass(["project-item", { active: item.active }])
+                            },
+                            [
+                              vue.createElementVNode("view", { class: "index" }, [
+                                vue.createElementVNode(
+                                  "text",
+                                  null,
+                                  vue.toDisplayString(index + 1),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              vue.createElementVNode("view", { class: "kg" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.kg = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  disabled: item.active
+                                }, null, 8, ["onUpdate:modelValue", "disabled"]), [
+                                  [vue.vModelText, item.kg]
+                                ]),
+                                vue.createElementVNode("text", null, "kg")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.time = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  disabled: item.active
+                                }, null, 8, ["onUpdate:modelValue", "disabled"]), [
+                                  [vue.vModelText, item.time]
+                                ]),
+                                vue.createElementVNode("text", null, "次")
+                              ]),
+                              vue.createElementVNode("view", {
+                                class: "yes",
+                                onClick: ($event) => {
+                                  item.active = !item.active, $options.technicalData();
+                                }
+                              }, [
+                                vue.createElementVNode("view", { class: "true-icon" })
+                              ], 8, ["onClick"]),
+                              vue.createElementVNode("view", { class: "delete" }, [
+                                vue.createElementVNode("view", {
+                                  class: "img",
+                                  onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
+                                }, null, 8, ["onClick"])
+                              ])
+                            ],
+                            2
+                            /* CLASS */
+                          );
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      )),
+                      vue.createElementVNode("view", {
+                        class: "add-project-item",
+                        onClick: ($event) => $options.addProjectItem(i2.groupList)
+                      }, [
+                        vue.createElementVNode("text", { class: "add-text" }, "+"),
+                        vue.createTextVNode(" 新增一组")
+                      ], 8, ["onClick"])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, i2.open]
+                  ])
+                ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
+                i2.type === 5 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 5,
+                  class: "action-tiem",
+                  onClick: ($event) => $options.changeOpen(i2)
+                }, [
+                  vue.createElementVNode("view", { class: "action-tiem-header" }, [
+                    vue.createElementVNode("view", { class: "img" }, [
+                      vue.createElementVNode("image", {
+                        class: "van-image",
+                        round: "",
+                        src: i2.url
+                      }, null, 8, ["src"])
+                    ]),
+                    vue.createElementVNode("view", { class: "des-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "des-title" },
+                        vue.toDisplayString(i2.actionName),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "info-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "负荷量：" + vue.toDisplayString(i2.load) + "kg",
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "已完成：" + vue.toDisplayString(i2.frequency) + "次",
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createVNode(_component_popover, {
+                      class: "config",
+                      list: $data.actions,
+                      position: "right",
+                      mode: "click"
+                    }, {
+                      item: vue.withCtx(({ item }) => [
+                        item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
+                          key: 0,
+                          style: { "color": "#f04242" },
+                          onClick: ($event) => $options.deleteActionHandle(ix)
+                        }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                          "text",
+                          { key: 1 },
+                          vue.toDisplayString(item.text),
+                          1
+                          /* TEXT */
+                        ))
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", { class: "img" })
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    }, 1032, ["list"])
+                  ]),
+                  vue.createElementVNode("view", { class: "weight" }, [
+                    vue.withDirectives(vue.createElementVNode("input", {
+                      "onUpdate:modelValue": ($event) => i2.weight = $event,
+                      class: "uni-input",
+                      type: "number",
+                      placeholder: "请先设置当前体重",
+                      onBlur: _cache[9] || (_cache[9] = (...args) => $options.technicalData && $options.technicalData(...args))
+                    }, null, 40, ["onUpdate:modelValue"]), [
+                      [vue.vModelText, i2.weight]
+                    ])
+                  ]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "action-tiem-des" },
+                    [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(i2.groupList, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock(
+                            "view",
+                            {
+                              key: index,
+                              class: vue.normalizeClass(["project-item", { active: item.active }])
+                            },
+                            [
+                              vue.createElementVNode("view", { class: "index" }, [
+                                vue.createElementVNode(
+                                  "text",
+                                  null,
+                                  vue.toDisplayString(index + 1),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              vue.createElementVNode("view", { class: "kg" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.kg = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  disabled: item.active
+                                }, null, 8, ["onUpdate:modelValue", "disabled"]), [
+                                  [vue.vModelText, item.kg]
+                                ]),
+                                vue.createElementVNode("text", null, "kg")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.time = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  disabled: item.active
+                                }, null, 8, ["onUpdate:modelValue", "disabled"]), [
+                                  [vue.vModelText, item.time]
+                                ]),
+                                vue.createElementVNode("text", null, "次")
+                              ]),
+                              vue.createElementVNode("view", {
+                                class: "yes",
+                                onClick: ($event) => {
+                                  item.active = !item.active, $options.technicalData();
+                                }
+                              }, [
+                                vue.createElementVNode("view", { class: "true-icon" })
+                              ], 8, ["onClick"]),
+                              vue.createElementVNode("view", { class: "delete" }, [
+                                vue.createElementVNode("view", {
+                                  class: "img",
+                                  onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
+                                }, null, 8, ["onClick"])
+                              ])
+                            ],
+                            2
+                            /* CLASS */
+                          );
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      )),
+                      vue.createElementVNode("view", {
+                        class: "add-project-item",
+                        onClick: ($event) => $options.addProjectItem(i2.groupList)
+                      }, [
+                        vue.createElementVNode("text", { class: "add-text" }, "+"),
+                        vue.createTextVNode(" 新增一组")
+                      ], 8, ["onClick"])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, i2.open]
+                  ])
+                ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
+                i2.type === 6 ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 6,
+                  class: "action-tiem",
+                  onClick: ($event) => $options.changeOpen(i2)
+                }, [
+                  vue.createElementVNode("view", { class: "action-tiem-header" }, [
+                    vue.createElementVNode("view", { class: "img" }, [
+                      vue.createElementVNode("image", {
+                        class: "van-image",
+                        round: "",
+                        src: i2.url
+                      }, null, 8, ["src"])
+                    ]),
+                    vue.createElementVNode("view", { class: "des-info" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "des-title" },
+                        vue.toDisplayString(i2.actionName),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "info-text" }, [
+                        vue.createElementVNode(
+                          "text",
+                          null,
+                          "总用时：" + vue.toDisplayString($options.formaterTimes(i2.times)),
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    vue.createVNode(_component_popover, {
+                      class: "config",
+                      list: $data.actions,
+                      position: "right",
+                      mode: "click"
+                    }, {
+                      item: vue.withCtx(({ item }) => [
+                        item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
+                          key: 0,
+                          style: { "color": "#f04242" },
+                          onClick: ($event) => $options.deleteActionHandle(ix)
+                        }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
+                          "text",
+                          { key: 1 },
+                          vue.toDisplayString(item.text),
+                          1
+                          /* TEXT */
+                        ))
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", { class: "img" })
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    }, 1032, ["list"])
+                  ]),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "action-tiem-des" },
+                    [
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList(i2.groupList, (item, index) => {
+                          return vue.openBlock(), vue.createElementBlock(
+                            "view",
+                            {
+                              key: index,
+                              class: vue.normalizeClass(["project-item", { active: item.active }])
+                            },
+                            [
+                              vue.createElementVNode("view", { class: "index" }, [
+                                vue.createElementVNode(
+                                  "text",
+                                  null,
+                                  vue.toDisplayString(index + 1),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.hour = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[10] || (_cache[10] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.hour]
+                                ]),
+                                vue.createElementVNode("text", null, "时")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.minute = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[11] || (_cache[11] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.minute]
+                                ]),
+                                vue.createElementVNode("text", null, "分")
+                              ]),
+                              vue.createElementVNode("view", { class: "time" }, [
+                                vue.withDirectives(vue.createElementVNode("input", {
+                                  "onUpdate:modelValue": ($event) => item.second = $event,
+                                  class: "uni-input",
+                                  type: "number",
+                                  onBlur: _cache[12] || (_cache[12] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                }, null, 40, ["onUpdate:modelValue"]), [
+                                  [vue.vModelText, item.second]
+                                ]),
+                                vue.createElementVNode("text", null, "秒")
+                              ]),
+                              vue.createElementVNode("view", { class: "delete" }, [
+                                vue.createElementVNode("view", {
+                                  class: "img",
+                                  onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
+                                }, null, 8, ["onClick"])
+                              ])
+                            ],
+                            2
+                            /* CLASS */
+                          );
+                        }),
+                        128
+                        /* KEYED_FRAGMENT */
+                      )),
+                      vue.createElementVNode("view", {
+                        class: "add-project-item",
+                        onClick: ($event) => $options.addProjectItem(i2.groupList)
+                      }, [
+                        vue.createElementVNode("text", { class: "add-text" }, "+"),
+                        vue.createTextVNode(" 新增一组")
+                      ], 8, ["onClick"])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, i2.open]
+                  ])
+                ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true)
+              ]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ]),
+        vue.createElementVNode("view", { class: "footer-button" }, [
+          vue.createVNode(_component_van_button, {
+            class: "delete",
+            onClick: _cache[13] || (_cache[13] = ($event) => $options.openDialog("popupDelete"))
           }, {
             default: vue.withCtx(() => [
-              vue.createTextVNode("暂存")
+              vue.createElementVNode("view", { class: "img" })
             ]),
             _: 1
             /* STABLE */
-          }, 8, ["class"])) : vue.createCommentVNode("v-if", true),
-          $options.isShowSave && $options.isShowSuccess ? (vue.openBlock(), vue.createBlock(_component_van_button, {
-            key: 1,
-            class: "btn",
-            onClick: _cache[1] || (_cache[1] = ($event) => $options.openDialog("popupFinish"))
+          }),
+          vue.createVNode(_component_van_button, {
+            block: "",
+            class: "add",
+            onClick: $options.addActionHandle
           }, {
             default: vue.withCtx(() => [
-              vue.createTextVNode("完成训练")
+              vue.createTextVNode("+ 添加动作")
             ]),
             _: 1
             /* STABLE */
-          })) : vue.createCommentVNode("v-if", true)
-        ])
-      ]),
-      vue.createElementVNode("view", { class: "workout-title" }, [
-        vue.withDirectives(vue.createElementVNode(
-          "input",
+          }, 8, ["onClick"])
+        ]),
+        vue.createVNode(
+          _component_uni_popup,
           {
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.workoutName = $event),
-            maxlength: "8",
-            class: "uni-input",
-            placeholder: "请输入训练名称"
+            ref: "popupFinish",
+            type: "center",
+            "mask-background-color": "rgba(20, 21, 23, 0.6)"
           },
-          null,
+          {
+            default: vue.withCtx(() => [
+              vue.createElementVNode("view", { class: "finish-dialog" }, [
+                vue.createElementVNode("view", { class: "first-level-title" }, "完成训练"),
+                vue.createElementVNode("view", { class: "second-level-title" }, "是否已经完成训练了"),
+                vue.createElementVNode("view", { class: "botton-box" }, [
+                  vue.createVNode(_component_van_button, {
+                    class: "finish",
+                    block: "",
+                    onClick: _cache[14] || (_cache[14] = ($event) => $options.finish("success"))
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("确认完成")
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  }),
+                  vue.createVNode(_component_van_button, {
+                    block: "",
+                    onClick: _cache[15] || (_cache[15] = ($event) => $options.closeDialog("popupFinish"))
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("取消")
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  })
+                ])
+              ])
+            ]),
+            _: 1
+            /* STABLE */
+          },
           512
           /* NEED_PATCH */
-        ), [
-          [vue.vModelText, $data.workoutName]
-        ])
-      ]),
-      vue.createElementVNode("view", { class: "action-list" }, [
-        (vue.openBlock(true), vue.createElementBlock(
-          vue.Fragment,
-          null,
-          vue.renderList($data.actionList, (i2, ix) => {
-            return vue.openBlock(), vue.createElementBlock("view", {
-              key: ix,
-              class: "action-type-box"
-            }, [
-              i2.type === 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 0,
-                class: "action-tiem",
-                onClick: ($event) => $options.changeOpen(i2)
-              }, [
-                vue.createElementVNode("view", { class: "action-tiem-header" }, [
-                  vue.createElementVNode("view", { class: "img" }, [
-                    i2.url ? (vue.openBlock(), vue.createElementBlock("image", {
-                      key: 0,
-                      class: "van-image",
-                      round: "",
-                      src: i2.url
-                    }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
-                  ]),
-                  vue.createElementVNode("view", { class: "des-info" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "des-title" },
-                      vue.toDisplayString(i2.actionName),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "info-text" }, [
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "负荷量：" + vue.toDisplayString(i2.load) + "kg",
-                        1
-                        /* TEXT */
-                      ),
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "已完成：" + vue.toDisplayString(i2.frequency) + "次",
-                        1
-                        /* TEXT */
-                      )
-                    ])
-                  ]),
-                  vue.createVNode(_component_popover, {
-                    class: "config",
-                    list: $data.actions,
-                    position: "right",
-                    mode: "click"
+        ),
+        vue.createVNode(
+          _component_uni_popup,
+          {
+            ref: "popupDelete",
+            type: "center",
+            "mask-background-color": "rgba(20, 21, 23, 0.6)"
+          },
+          {
+            default: vue.withCtx(() => [
+              vue.createElementVNode("view", { class: "delete-dialog" }, [
+                vue.createElementVNode("view", { class: "first-level-title" }, "删除训练"),
+                vue.createElementVNode("view", { class: "second-level-title" }, "是否删除训练，删除后无法恢复"),
+                vue.createElementVNode("view", { class: "botton-box" }, [
+                  vue.createVNode(_component_van_button, {
+                    class: "delete",
+                    block: "",
+                    onClick: $options.deleteHandle
                   }, {
-                    item: vue.withCtx(({ item }) => [
-                      item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
-                        key: 0,
-                        style: { "color": "#f04242" },
-                        onClick: ($event) => $options.deleteActionHandle(ix)
-                      }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
-                        "text",
-                        { key: 1 },
-                        vue.toDisplayString(item.text),
-                        1
-                        /* TEXT */
-                      ))
-                    ]),
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("view", { class: "img" })
+                      vue.createTextVNode("确认删除")
                     ]),
-                    _: 2
-                    /* DYNAMIC */
-                  }, 1032, ["list"])
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "view",
-                  { class: "action-tiem-des" },
-                  [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(i2.groupList, (item, index) => {
-                        return vue.openBlock(), vue.createElementBlock(
-                          "view",
-                          {
-                            key: index,
-                            class: vue.normalizeClass(["project-item", { active: item.active }])
-                          },
-                          [
-                            vue.createElementVNode("view", { class: "index" }, [
-                              vue.createElementVNode(
-                                "text",
-                                null,
-                                vue.toDisplayString(index + 1),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createElementVNode("view", { class: "kg" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.kg = $event,
-                                class: "uni-input",
-                                type: "number",
-                                disabled: item.active
-                              }, null, 8, ["onUpdate:modelValue", "disabled"]), [
-                                [vue.vModelText, item.kg]
-                              ]),
-                              vue.createElementVNode("text", null, "kg")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.time = $event,
-                                class: "uni-input",
-                                type: "number",
-                                disabled: item.active
-                              }, null, 8, ["onUpdate:modelValue", "disabled"]), [
-                                [vue.vModelText, item.time]
-                              ]),
-                              vue.createElementVNode("text", null, "次")
-                            ]),
-                            vue.createElementVNode("view", {
-                              class: "yes",
-                              onClick: ($event) => {
-                                item.active = !item.active, $options.technicalData();
-                              }
-                            }, [
-                              vue.createElementVNode("view", { class: "true-icon" })
-                            ], 8, ["onClick"]),
-                            vue.createElementVNode("view", { class: "delete" }, [
-                              vue.createElementVNode("view", {
-                                class: "img",
-                                onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                              }, null, 8, ["onClick"])
-                            ])
-                          ],
-                          2
-                          /* CLASS */
-                        );
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    )),
-                    vue.createElementVNode("view", {
-                      class: "add-project-item",
-                      onClick: ($event) => $options.addProjectItem(i2.groupList)
-                    }, [
-                      vue.createElementVNode("text", { class: "add-text" }, "+"),
-                      vue.createTextVNode(" 新增一组")
-                    ], 8, ["onClick"])
-                  ],
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vShow, i2.open]
-                ])
-              ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
-              i2.type === 1 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 1,
-                class: "action-tiem",
-                onClick: ($event) => $options.changeOpen(i2)
-              }, [
-                vue.createElementVNode("view", { class: "action-tiem-header" }, [
-                  vue.createElementVNode("view", { class: "img" }, [
-                    i2.url ? (vue.openBlock(), vue.createElementBlock("image", {
-                      key: 0,
-                      class: "van-image",
-                      round: "",
-                      src: i2.url
-                    }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
-                  ]),
-                  vue.createElementVNode("view", { class: "des-info" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "des-title" },
-                      vue.toDisplayString(i2.actionName),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "info-text" }, [
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "总里程：" + vue.toDisplayString(i2.mileage) + "km",
-                        1
-                        /* TEXT */
-                      ),
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "用时：" + vue.toDisplayString($options.formaterTimes(i2.times, 2)),
-                        1
-                        /* TEXT */
-                      )
-                    ])
-                  ]),
-                  vue.createVNode(_component_popover, {
-                    class: "config",
-                    list: $data.actions,
-                    position: "right",
-                    mode: "click"
+                    _: 1
+                    /* STABLE */
+                  }, 8, ["onClick"]),
+                  vue.createVNode(_component_van_button, {
+                    block: "",
+                    onClick: _cache[16] || (_cache[16] = ($event) => $options.closeDialog("popupDelete"))
                   }, {
-                    item: vue.withCtx(({ item }) => [
-                      item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
-                        key: 0,
-                        style: { "color": "#f04242" },
-                        onClick: ($event) => $options.deleteActionHandle(ix)
-                      }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
-                        "text",
-                        { key: 1 },
-                        vue.toDisplayString(item.text),
-                        1
-                        /* TEXT */
-                      ))
-                    ]),
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("view", { class: "img" })
+                      vue.createTextVNode("取消")
                     ]),
-                    _: 2
-                    /* DYNAMIC */
-                  }, 1032, ["list"])
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "view",
-                  { class: "action-tiem-des" },
-                  [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(i2.groupList, (item, index) => {
-                        return vue.openBlock(), vue.createElementBlock(
-                          "view",
-                          {
-                            key: index,
-                            class: vue.normalizeClass(["project-item", { active: item.active }])
-                          },
-                          [
-                            vue.createElementVNode("view", { class: "index" }, [
-                              vue.createElementVNode(
-                                "text",
-                                null,
-                                vue.toDisplayString(index + 1),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createElementVNode("view", { class: "kg" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.km = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[3] || (_cache[3] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.km]
-                              ]),
-                              vue.createElementVNode("text", null, "km")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.hour = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[4] || (_cache[4] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.hour]
-                              ]),
-                              vue.createElementVNode("text", null, "时")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.minute = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[5] || (_cache[5] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.minute]
-                              ]),
-                              vue.createElementVNode("text", null, "分")
-                            ]),
-                            vue.createElementVNode("view", { class: "delete" }, [
-                              vue.createElementVNode("view", {
-                                class: "img",
-                                onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                              }, null, 8, ["onClick"])
-                            ])
-                          ],
-                          2
-                          /* CLASS */
-                        );
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    )),
-                    vue.createElementVNode("view", {
-                      class: "add-project-item",
-                      onClick: ($event) => $options.addProjectItem(i2.groupList)
-                    }, [
-                      vue.createElementVNode("text", { class: "add-text" }, "+"),
-                      vue.createTextVNode(" 新增一组")
-                    ], 8, ["onClick"])
-                  ],
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vShow, i2.open]
+                    _: 1
+                    /* STABLE */
+                  })
                 ])
-              ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
-              i2.type === 2 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 2,
-                class: "action-tiem",
-                onClick: ($event) => $options.changeOpen(i2)
-              }, [
-                vue.createElementVNode("view", { class: "action-tiem-header" }, [
-                  vue.createElementVNode("view", { class: "img" }, [
-                    vue.createElementVNode("image", {
-                      class: "van-image",
-                      round: "",
-                      src: i2.url
-                    }, null, 8, ["src"])
-                  ]),
-                  vue.createElementVNode("view", { class: "des-info" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "des-title" },
-                      vue.toDisplayString(i2.actionName),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "info-text" }, [
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "已完成：" + vue.toDisplayString(i2.frequency) + "次",
-                        1
-                        /* TEXT */
-                      )
-                    ])
-                  ]),
-                  vue.createVNode(_component_popover, {
-                    class: "config",
-                    list: $data.actions,
-                    position: "right",
-                    mode: "click"
-                  }, {
-                    item: vue.withCtx(({ item }) => [
-                      item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
-                        key: 0,
-                        style: { "color": "#f04242" },
-                        onClick: ($event) => $options.deleteActionHandle(ix)
-                      }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
-                        "text",
-                        { key: 1 },
-                        vue.toDisplayString(item.text),
-                        1
-                        /* TEXT */
-                      ))
-                    ]),
-                    default: vue.withCtx(() => [
-                      vue.createElementVNode("view", { class: "img" })
-                    ]),
-                    _: 2
-                    /* DYNAMIC */
-                  }, 1032, ["list"])
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "view",
-                  { class: "action-tiem-des" },
-                  [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(i2.groupList, (item, index) => {
-                        return vue.openBlock(), vue.createElementBlock(
-                          "view",
-                          {
-                            key: index,
-                            class: vue.normalizeClass(["project-item", { active: item.active }])
-                          },
-                          [
-                            vue.createElementVNode("view", { class: "index" }, [
-                              vue.createElementVNode(
-                                "text",
-                                null,
-                                vue.toDisplayString(index + 1),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.time = $event,
-                                class: "uni-input",
-                                type: "number",
-                                disabled: item.active
-                              }, null, 8, ["onUpdate:modelValue", "disabled"]), [
-                                [vue.vModelText, item.time]
-                              ]),
-                              vue.createElementVNode("text", null, "次")
-                            ]),
-                            vue.createElementVNode("view", {
-                              class: "yes",
-                              onClick: ($event) => {
-                                item.active = !item.active, $options.technicalData();
-                              }
-                            }, [
-                              vue.createElementVNode("view", { class: "true-icon" })
-                            ], 8, ["onClick"]),
-                            vue.createElementVNode("view", { class: "delete" }, [
-                              vue.createElementVNode("view", {
-                                class: "img",
-                                onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                              }, null, 8, ["onClick"])
-                            ])
-                          ],
-                          2
-                          /* CLASS */
-                        );
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    )),
-                    vue.createElementVNode("view", {
-                      class: "add-project-item",
-                      onClick: ($event) => ($options.addProjectItem(i2.groupList), $options.technicalData())
-                    }, [
-                      vue.createElementVNode("text", { class: "add-text" }, "+"),
-                      vue.createTextVNode(" 新增一组")
-                    ], 8, ["onClick"])
-                  ],
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vShow, i2.open]
-                ])
-              ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
-              i2.type === 3 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 3,
-                class: "action-tiem",
-                onClick: ($event) => $options.changeOpen(i2)
-              }, [
-                vue.createElementVNode("view", { class: "action-tiem-header" }, [
-                  vue.createElementVNode("view", { class: "img" }, [
-                    vue.createElementVNode("image", {
-                      class: "van-image",
-                      round: "",
-                      src: i2.url
-                    }, null, 8, ["src"])
-                  ]),
-                  vue.createElementVNode("view", { class: "des-info" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "des-title" },
-                      vue.toDisplayString(i2.actionName),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "info-text" }, [
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "用时：" + vue.toDisplayString($options.formaterTimes(i2.times)),
-                        1
-                        /* TEXT */
-                      )
-                    ])
-                  ]),
-                  vue.createVNode(_component_popover, {
-                    class: "config",
-                    list: $data.actions,
-                    position: "right",
-                    mode: "click"
-                  }, {
-                    item: vue.withCtx(({ item }) => [
-                      item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
-                        key: 0,
-                        style: { "color": "#f04242" },
-                        onClick: ($event) => $options.deleteActionHandle(ix)
-                      }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
-                        "text",
-                        { key: 1 },
-                        vue.toDisplayString(item.text),
-                        1
-                        /* TEXT */
-                      ))
-                    ]),
-                    default: vue.withCtx(() => [
-                      vue.createElementVNode("view", { class: "img" })
-                    ]),
-                    _: 2
-                    /* DYNAMIC */
-                  }, 1032, ["list"])
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "view",
-                  { class: "action-tiem-des" },
-                  [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(i2.groupList, (item, index) => {
-                        return vue.openBlock(), vue.createElementBlock(
-                          "view",
-                          {
-                            key: index,
-                            class: vue.normalizeClass(["project-item", { active: item.active }])
-                          },
-                          [
-                            vue.createElementVNode("view", { class: "index" }, [
-                              vue.createElementVNode(
-                                "text",
-                                null,
-                                vue.toDisplayString(index + 1),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.hour = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[6] || (_cache[6] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.hour]
-                              ]),
-                              vue.createElementVNode("text", null, "时")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.minute = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[7] || (_cache[7] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.minute]
-                              ]),
-                              vue.createElementVNode("text", null, "分")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.second = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[8] || (_cache[8] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.second]
-                              ]),
-                              vue.createElementVNode("text", null, "秒")
-                            ]),
-                            vue.createElementVNode("view", { class: "delete" }, [
-                              vue.createElementVNode("view", {
-                                class: "img",
-                                onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                              }, null, 8, ["onClick"])
-                            ])
-                          ],
-                          2
-                          /* CLASS */
-                        );
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    )),
-                    vue.createElementVNode("view", {
-                      class: "add-project-item",
-                      onClick: ($event) => $options.addProjectItem(i2.groupList)
-                    }, [
-                      vue.createElementVNode("text", { class: "add-text" }, "+"),
-                      vue.createTextVNode(" 新增一组")
-                    ], 8, ["onClick"])
-                  ],
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vShow, i2.open]
-                ])
-              ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
-              i2.type === 4 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 4,
-                class: "action-tiem",
-                onClick: ($event) => $options.changeOpen(i2)
-              }, [
-                vue.createElementVNode("view", { class: "action-tiem-header" }, [
-                  vue.createElementVNode("view", { class: "img" }, [
-                    vue.createElementVNode("image", {
-                      class: "van-image",
-                      round: "",
-                      src: i2.url
-                    }, null, 8, ["src"])
-                  ]),
-                  vue.createElementVNode("view", { class: "des-info" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "des-title" },
-                      vue.toDisplayString(i2.actionName),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "info-text" }, [
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "负荷量：" + vue.toDisplayString(i2.load) + "kg",
-                        1
-                        /* TEXT */
-                      ),
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "已完成：" + vue.toDisplayString(i2.frequency) + "次",
-                        1
-                        /* TEXT */
-                      )
-                    ])
-                  ]),
-                  vue.createVNode(_component_popover, {
-                    class: "config",
-                    list: $data.actions,
-                    position: "right",
-                    mode: "click"
-                  }, {
-                    item: vue.withCtx(({ item }) => [
-                      item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
-                        key: 0,
-                        style: { "color": "#f04242" },
-                        onClick: ($event) => $options.deleteActionHandle(ix)
-                      }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
-                        "text",
-                        { key: 1 },
-                        vue.toDisplayString(item.text),
-                        1
-                        /* TEXT */
-                      ))
-                    ]),
-                    default: vue.withCtx(() => [
-                      vue.createElementVNode("view", { class: "img" })
-                    ]),
-                    _: 2
-                    /* DYNAMIC */
-                  }, 1032, ["list"])
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "view",
-                  { class: "action-tiem-des" },
-                  [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(i2.groupList, (item, index) => {
-                        return vue.openBlock(), vue.createElementBlock(
-                          "view",
-                          {
-                            key: index,
-                            class: vue.normalizeClass(["project-item", { active: item.active }])
-                          },
-                          [
-                            vue.createElementVNode("view", { class: "index" }, [
-                              vue.createElementVNode(
-                                "text",
-                                null,
-                                vue.toDisplayString(index + 1),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createElementVNode("view", { class: "kg" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.kg = $event,
-                                class: "uni-input",
-                                type: "number",
-                                disabled: item.active
-                              }, null, 8, ["onUpdate:modelValue", "disabled"]), [
-                                [vue.vModelText, item.kg]
-                              ]),
-                              vue.createElementVNode("text", null, "kg")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.time = $event,
-                                class: "uni-input",
-                                type: "number",
-                                disabled: item.active
-                              }, null, 8, ["onUpdate:modelValue", "disabled"]), [
-                                [vue.vModelText, item.time]
-                              ]),
-                              vue.createElementVNode("text", null, "次")
-                            ]),
-                            vue.createElementVNode("view", {
-                              class: "yes",
-                              onClick: ($event) => {
-                                item.active = !item.active, $options.technicalData();
-                              }
-                            }, [
-                              vue.createElementVNode("view", { class: "true-icon" })
-                            ], 8, ["onClick"]),
-                            vue.createElementVNode("view", { class: "delete" }, [
-                              vue.createElementVNode("view", {
-                                class: "img",
-                                onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                              }, null, 8, ["onClick"])
-                            ])
-                          ],
-                          2
-                          /* CLASS */
-                        );
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    )),
-                    vue.createElementVNode("view", {
-                      class: "add-project-item",
-                      onClick: ($event) => $options.addProjectItem(i2.groupList)
-                    }, [
-                      vue.createElementVNode("text", { class: "add-text" }, "+"),
-                      vue.createTextVNode(" 新增一组")
-                    ], 8, ["onClick"])
-                  ],
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vShow, i2.open]
-                ])
-              ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
-              i2.type === 5 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 5,
-                class: "action-tiem",
-                onClick: ($event) => $options.changeOpen(i2)
-              }, [
-                vue.createElementVNode("view", { class: "action-tiem-header" }, [
-                  vue.createElementVNode("view", { class: "img" }, [
-                    vue.createElementVNode("image", {
-                      class: "van-image",
-                      round: "",
-                      src: i2.url
-                    }, null, 8, ["src"])
-                  ]),
-                  vue.createElementVNode("view", { class: "des-info" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "des-title" },
-                      vue.toDisplayString(i2.actionName),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "info-text" }, [
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "负荷量：" + vue.toDisplayString(i2.load) + "kg",
-                        1
-                        /* TEXT */
-                      ),
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "已完成：" + vue.toDisplayString(i2.frequency) + "次",
-                        1
-                        /* TEXT */
-                      )
-                    ])
-                  ]),
-                  vue.createVNode(_component_popover, {
-                    class: "config",
-                    list: $data.actions,
-                    position: "right",
-                    mode: "click"
-                  }, {
-                    item: vue.withCtx(({ item }) => [
-                      item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
-                        key: 0,
-                        style: { "color": "#f04242" },
-                        onClick: ($event) => $options.deleteActionHandle(ix)
-                      }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
-                        "text",
-                        { key: 1 },
-                        vue.toDisplayString(item.text),
-                        1
-                        /* TEXT */
-                      ))
-                    ]),
-                    default: vue.withCtx(() => [
-                      vue.createElementVNode("view", { class: "img" })
-                    ]),
-                    _: 2
-                    /* DYNAMIC */
-                  }, 1032, ["list"])
-                ]),
-                vue.createElementVNode("view", { class: "weight" }, [
-                  vue.withDirectives(vue.createElementVNode("input", {
-                    "onUpdate:modelValue": ($event) => i2.weight = $event,
-                    class: "uni-input",
-                    type: "number",
-                    placeholder: "请先设置当前体重",
-                    onBlur: _cache[9] || (_cache[9] = (...args) => $options.technicalData && $options.technicalData(...args))
-                  }, null, 40, ["onUpdate:modelValue"]), [
-                    [vue.vModelText, i2.weight]
-                  ])
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "view",
-                  { class: "action-tiem-des" },
-                  [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(i2.groupList, (item, index) => {
-                        return vue.openBlock(), vue.createElementBlock(
-                          "view",
-                          {
-                            key: index,
-                            class: vue.normalizeClass(["project-item", { active: item.active }])
-                          },
-                          [
-                            vue.createElementVNode("view", { class: "index" }, [
-                              vue.createElementVNode(
-                                "text",
-                                null,
-                                vue.toDisplayString(index + 1),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createElementVNode("view", { class: "kg" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.kg = $event,
-                                class: "uni-input",
-                                type: "number",
-                                disabled: item.active
-                              }, null, 8, ["onUpdate:modelValue", "disabled"]), [
-                                [vue.vModelText, item.kg]
-                              ]),
-                              vue.createElementVNode("text", null, "kg")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.time = $event,
-                                class: "uni-input",
-                                type: "number",
-                                disabled: item.active
-                              }, null, 8, ["onUpdate:modelValue", "disabled"]), [
-                                [vue.vModelText, item.time]
-                              ]),
-                              vue.createElementVNode("text", null, "次")
-                            ]),
-                            vue.createElementVNode("view", {
-                              class: "yes",
-                              onClick: ($event) => {
-                                item.active = !item.active, $options.technicalData();
-                              }
-                            }, [
-                              vue.createElementVNode("view", { class: "true-icon" })
-                            ], 8, ["onClick"]),
-                            vue.createElementVNode("view", { class: "delete" }, [
-                              vue.createElementVNode("view", {
-                                class: "img",
-                                onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                              }, null, 8, ["onClick"])
-                            ])
-                          ],
-                          2
-                          /* CLASS */
-                        );
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    )),
-                    vue.createElementVNode("view", {
-                      class: "add-project-item",
-                      onClick: ($event) => $options.addProjectItem(i2.groupList)
-                    }, [
-                      vue.createElementVNode("text", { class: "add-text" }, "+"),
-                      vue.createTextVNode(" 新增一组")
-                    ], 8, ["onClick"])
-                  ],
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vShow, i2.open]
-                ])
-              ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
-              i2.type === 6 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 6,
-                class: "action-tiem",
-                onClick: ($event) => $options.changeOpen(i2)
-              }, [
-                vue.createElementVNode("view", { class: "action-tiem-header" }, [
-                  vue.createElementVNode("view", { class: "img" }, [
-                    vue.createElementVNode("image", {
-                      class: "van-image",
-                      round: "",
-                      src: i2.url
-                    }, null, 8, ["src"])
-                  ]),
-                  vue.createElementVNode("view", { class: "des-info" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "des-title" },
-                      vue.toDisplayString(i2.actionName),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "info-text" }, [
-                      vue.createElementVNode(
-                        "text",
-                        null,
-                        "总用时：" + vue.toDisplayString($options.formaterTimes(i2.times)),
-                        1
-                        /* TEXT */
-                      )
-                    ])
-                  ]),
-                  vue.createVNode(_component_popover, {
-                    class: "config",
-                    list: $data.actions,
-                    position: "right",
-                    mode: "click"
-                  }, {
-                    item: vue.withCtx(({ item }) => [
-                      item.text === "删除动作项" ? (vue.openBlock(), vue.createElementBlock("text", {
-                        key: 0,
-                        style: { "color": "#f04242" },
-                        onClick: ($event) => $options.deleteActionHandle(ix)
-                      }, vue.toDisplayString(item.text), 9, ["onClick"])) : (vue.openBlock(), vue.createElementBlock(
-                        "text",
-                        { key: 1 },
-                        vue.toDisplayString(item.text),
-                        1
-                        /* TEXT */
-                      ))
-                    ]),
-                    default: vue.withCtx(() => [
-                      vue.createElementVNode("view", { class: "img" })
-                    ]),
-                    _: 2
-                    /* DYNAMIC */
-                  }, 1032, ["list"])
-                ]),
-                vue.withDirectives(vue.createElementVNode(
-                  "view",
-                  { class: "action-tiem-des" },
-                  [
-                    (vue.openBlock(true), vue.createElementBlock(
-                      vue.Fragment,
-                      null,
-                      vue.renderList(i2.groupList, (item, index) => {
-                        return vue.openBlock(), vue.createElementBlock(
-                          "view",
-                          {
-                            key: index,
-                            class: vue.normalizeClass(["project-item", { active: item.active }])
-                          },
-                          [
-                            vue.createElementVNode("view", { class: "index" }, [
-                              vue.createElementVNode(
-                                "text",
-                                null,
-                                vue.toDisplayString(index + 1),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.hour = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[10] || (_cache[10] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.hour]
-                              ]),
-                              vue.createElementVNode("text", null, "时")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.minute = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[11] || (_cache[11] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.minute]
-                              ]),
-                              vue.createElementVNode("text", null, "分")
-                            ]),
-                            vue.createElementVNode("view", { class: "time" }, [
-                              vue.withDirectives(vue.createElementVNode("input", {
-                                "onUpdate:modelValue": ($event) => item.second = $event,
-                                class: "uni-input",
-                                type: "number",
-                                onBlur: _cache[12] || (_cache[12] = (...args) => $options.technicalData && $options.technicalData(...args))
-                              }, null, 40, ["onUpdate:modelValue"]), [
-                                [vue.vModelText, item.second]
-                              ]),
-                              vue.createElementVNode("text", null, "秒")
-                            ]),
-                            vue.createElementVNode("view", { class: "delete" }, [
-                              vue.createElementVNode("view", {
-                                class: "img",
-                                onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                              }, null, 8, ["onClick"])
-                            ])
-                          ],
-                          2
-                          /* CLASS */
-                        );
-                      }),
-                      128
-                      /* KEYED_FRAGMENT */
-                    )),
-                    vue.createElementVNode("view", {
-                      class: "add-project-item",
-                      onClick: ($event) => $options.addProjectItem(i2.groupList)
-                    }, [
-                      vue.createElementVNode("text", { class: "add-text" }, "+"),
-                      vue.createTextVNode(" 新增一组")
-                    ], 8, ["onClick"])
-                  ],
-                  512
-                  /* NEED_PATCH */
-                ), [
-                  [vue.vShow, i2.open]
-                ])
-              ], 8, ["onClick"])) : vue.createCommentVNode("v-if", true)
-            ]);
-          }),
-          128
-          /* KEYED_FRAGMENT */
-        ))
-      ]),
-      vue.createElementVNode("view", { class: "footer-button" }, [
-        vue.createVNode(_component_van_button, {
-          class: "delete",
-          onClick: _cache[13] || (_cache[13] = ($event) => $options.openDialog("popupDelete"))
-        }, {
-          default: vue.withCtx(() => [
-            vue.createElementVNode("view", { class: "img" })
-          ]),
-          _: 1
-          /* STABLE */
-        }),
-        vue.createVNode(_component_van_button, {
-          block: "",
-          class: "add",
-          onClick: $options.addActionHandle
-        }, {
-          default: vue.withCtx(() => [
-            vue.createTextVNode("+ 添加动作")
-          ]),
-          _: 1
-          /* STABLE */
-        }, 8, ["onClick"])
-      ]),
-      vue.createVNode(
-        _component_uni_popup,
-        {
-          ref: "popupFinish",
-          type: "center",
-          "mask-background-color": "rgba(20, 21, 23, 0.6)"
-        },
-        {
-          default: vue.withCtx(() => [
-            vue.createElementVNode("view", { class: "finish-dialog" }, [
-              vue.createElementVNode("view", { class: "first-level-title" }, "完成训练"),
-              vue.createElementVNode("view", { class: "second-level-title" }, "是否已经完成训练了"),
-              vue.createElementVNode("view", { class: "botton-box" }, [
-                vue.createVNode(_component_van_button, {
-                  class: "finish",
-                  block: "",
-                  onClick: _cache[14] || (_cache[14] = ($event) => $options.finish("success"))
-                }, {
-                  default: vue.withCtx(() => [
-                    vue.createTextVNode("确认完成")
-                  ]),
-                  _: 1
-                  /* STABLE */
-                }),
-                vue.createVNode(_component_van_button, {
-                  block: "",
-                  onClick: _cache[15] || (_cache[15] = ($event) => $options.closeDialog("popupFinish"))
-                }, {
-                  default: vue.withCtx(() => [
-                    vue.createTextVNode("取消")
-                  ]),
-                  _: 1
-                  /* STABLE */
-                })
               ])
-            ])
-          ]),
-          _: 1
-          /* STABLE */
-        },
-        512
-        /* NEED_PATCH */
-      ),
-      vue.createVNode(
-        _component_uni_popup,
-        {
-          ref: "popupDelete",
-          type: "center",
-          "mask-background-color": "rgba(20, 21, 23, 0.6)"
-        },
-        {
-          default: vue.withCtx(() => [
-            vue.createElementVNode("view", { class: "delete-dialog" }, [
-              vue.createElementVNode("view", { class: "first-level-title" }, "删除训练"),
-              vue.createElementVNode("view", { class: "second-level-title" }, "是否删除训练，删除后无法恢复"),
-              vue.createElementVNode("view", { class: "botton-box" }, [
-                vue.createVNode(_component_van_button, {
-                  class: "delete",
-                  block: "",
-                  onClick: $options.deleteHandle
-                }, {
-                  default: vue.withCtx(() => [
-                    vue.createTextVNode("确认删除")
-                  ]),
-                  _: 1
-                  /* STABLE */
-                }, 8, ["onClick"]),
-                vue.createVNode(_component_van_button, {
-                  block: "",
-                  onClick: _cache[16] || (_cache[16] = ($event) => $options.closeDialog("popupDelete"))
-                }, {
-                  default: vue.withCtx(() => [
-                    vue.createTextVNode("取消")
-                  ]),
-                  _: 1
-                  /* STABLE */
-                })
-              ])
-            ])
-          ]),
-          _: 1
-          /* STABLE */
-        },
-        512
-        /* NEED_PATCH */
-      )
-    ]);
+            ]),
+            _: 1
+            /* STABLE */
+          },
+          512
+          /* NEED_PATCH */
+        )
+      ],
+      32
+      /* HYDRATE_EVENTS */
+    );
   }
   const PagesNewWorkoutNewWorkout = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "D:/studyUninApp/bodybuilding-app/pages/newWorkout/newWorkout.vue"]]);
   const _sfc_main$l = {
@@ -23306,6 +23457,7 @@ if (uni.restoreGlobal) {
     const _component_van_image = vue.resolveComponent("van-image");
     const _component_van_cell = vue.resolveComponent("van-cell");
     const _component_van_button = vue.resolveComponent("van-button");
+    const _component_van_action_sheet = vue.resolveComponent("van-action-sheet");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$4);
     const _component_uni_pay = resolveEasycom(vue.resolveDynamicComponent("uni-pay"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "my" }, [
@@ -23552,27 +23704,38 @@ if (uni.restoreGlobal) {
           _: 1
           /* STABLE */
         }, 8, ["onClick"]),
-        vue.createCommentVNode(` <van-action-sheet class="payment-action-sheet" v-model:show="payShow">\r
-        <view class="title" @click.native="aliPayment">选择支付方式</view>\r
-        <view class="actions">\r
-          <view class="action">\r
-            <image\r
-              class="img"\r
-              src="../../static/app-plus/other/zfb.svg"\r
-              @click.native="createOrder('alipay')"\r
-            />\r
-            <view class="text">支付宝</view>\r
-          </view>\r
-          <view class="action">\r
-            <image\r
-              class="img"\r
-              src="../../static/app-plus/other/saveWechat.svg"\r
-              @click.native="createOrder('wxpay')"\r
-            />\r
-            <view class="text">微信</view>\r
-          </view>\r
-        </view>\r
-      </van-action-sheet> `)
+        vue.createVNode(_component_van_action_sheet, {
+          class: "payment-action-sheet",
+          show: $data.payShow,
+          "onUpdate:show": _cache[7] || (_cache[7] = ($event) => $data.payShow = $event)
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", {
+              class: "title",
+              onClick: _cache[4] || (_cache[4] = (...args) => _ctx.aliPayment && _ctx.aliPayment(...args))
+            }, "选择支付方式"),
+            vue.createElementVNode("view", { class: "actions" }, [
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createElementVNode("image", {
+                  class: "img",
+                  src: "/static/app-plus/other/zfb.svg",
+                  onClick: _cache[5] || (_cache[5] = ($event) => $options.createOrder("alipay"))
+                }),
+                vue.createElementVNode("view", { class: "text" }, "支付宝")
+              ]),
+              vue.createElementVNode("view", { class: "action" }, [
+                vue.createElementVNode("image", {
+                  class: "img",
+                  src: "/static/app-plus/other/saveWechat.svg",
+                  onClick: _cache[6] || (_cache[6] = ($event) => $options.createOrder("wxpay"))
+                }),
+                vue.createElementVNode("view", { class: "text" }, "微信")
+              ])
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        }, 8, ["show"])
       ]),
       vue.createVNode(_component_uni_popup, {
         ref: "popup",
@@ -23585,12 +23748,12 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "picker-header" }, [
               vue.createElementVNode("view", {
                 class: "cancel-btn",
-                onClick: _cache[4] || (_cache[4] = (...args) => $options.onCancel && $options.onCancel(...args))
+                onClick: _cache[8] || (_cache[8] = (...args) => $options.onCancel && $options.onCancel(...args))
               }, "取消"),
               vue.createElementVNode("view", { class: "title" }, "推荐人"),
               vue.createElementVNode("view", {
                 class: "success-btn",
-                onClick: _cache[5] || (_cache[5] = (...args) => $options.onConfirm && $options.onConfirm(...args))
+                onClick: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args))
               }, "确认")
             ]),
             vue.createElementVNode("view", { class: "message" }, [
@@ -24364,18 +24527,24 @@ if (uni.restoreGlobal) {
             }
           } catch (err2) {
             formatAppLog("log", "at pages/bindPhone/bindPhone.vue:113", err2, "我是错误");
+            uni.showToast({
+              title: err2.errMsg || err2.message,
+              duration: 1e3,
+              width: 180,
+              icon: "none"
+            });
           }
         }
       },
       phoneInput(event) {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:118", event, "你tm");
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:124", event, "你tm");
         this.phone = event.detail.value;
       },
       goBack() {
         uni.navigateBack();
       },
       savePersonInfo() {
-        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:125", "1111");
+        formatAppLog("log", "at pages/bindPhone/bindPhone.vue:131", "1111");
         if (this.coachForm.nickname || this.coachForm.gender) {
           const login2 = Es.importObject("login", {
             customUI: true
@@ -24385,7 +24554,7 @@ if (uni.restoreGlobal) {
             let param = {
               ...this.coachForm
             };
-            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:135", param, "param");
+            formatAppLog("log", "at pages/bindPhone/bindPhone.vue:141", param, "param");
             login2.perfectInfo(param).then((res2) => {
               if (res2.success) {
                 this.jump();
@@ -39019,7 +39188,7 @@ if (uni.restoreGlobal) {
   uni.invokePushCallback({
     type: "enabled"
   });
-  const appid$1 = "__UNI__76A9E40";
+  const appid = "__UNI__76A9E40";
   {
     initPushNotification();
     if (typeof uni.onAppShow === "function") {
@@ -39028,7 +39197,7 @@ if (uni.restoreGlobal) {
       });
     }
     GtPush.init({
-      appid: appid$1,
+      appid,
       onError: (res2) => {
         console.error(res2.error);
         const data = {
@@ -46202,7 +46371,7 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const Image$1 = withInstall(stdin_default$13);
+  const Image = withInstall(stdin_default$13);
   const [name$Y, bem$X] = createNamespace("card");
   const cardProps = {
     tag: String,
@@ -46251,7 +46420,7 @@ if (uni.restoreGlobal) {
         if (slots.thumb) {
           return slots.thumb();
         }
-        return vue.createVNode(Image$1, {
+        return vue.createVNode(Image, {
           "src": props2.thumb,
           "fit": "cover",
           "width": "100%",
@@ -49213,7 +49382,7 @@ if (uni.restoreGlobal) {
             "class": bem$z("image-wrap")
           }, [slots.image({
             src: props2.src
-          })]) : vue.createVNode(Image$1, {
+          })]) : vue.createVNode(Image, {
             "src": props2.src,
             "fit": "contain",
             "class": bem$z("image", {
@@ -50925,12 +51094,12 @@ if (uni.restoreGlobal) {
   var read = "read";
   var afterRead = "afterRead";
   var beforeMain = "beforeMain";
-  var main$1 = "main";
+  var main = "main";
   var afterMain = "afterMain";
   var beforeWrite = "beforeWrite";
   var write = "write";
   var afterWrite = "afterWrite";
-  var modifierPhases = [beforeRead, read, afterRead, beforeMain, main$1, afterMain, beforeWrite, write, afterWrite];
+  var modifierPhases = [beforeRead, read, afterRead, beforeMain, main, afterMain, beforeWrite, write, afterWrite];
   function order(modifiers) {
     var map2 = /* @__PURE__ */ new Map();
     var visited = /* @__PURE__ */ new Set();
@@ -54218,7 +54387,7 @@ if (uni.restoreGlobal) {
           previewSize
         } = props2;
         if (isImageFile(item)) {
-          return vue.createVNode(Image$1, {
+          return vue.createVNode(Image, {
             "fit": imageFit,
             "src": item.content || item.url,
             "class": bem("preview-image"),
@@ -54525,7 +54694,7 @@ if (uni.restoreGlobal) {
       Grid,
       GridItem,
       Icon,
-      Image$1,
+      Image,
       ImagePreview,
       IndexAnchor,
       IndexBar,
@@ -54591,1106 +54760,6 @@ if (uni.restoreGlobal) {
     install,
     version
   };
-  const sys = uni.getSystemInfoSync();
-  const STAT_VERSION = "3.7.3";
-  const STAT_URL = "https://tongji.dcloud.io/uni/stat";
-  const STAT_H5_URL = "https://tongji.dcloud.io/uni/stat.gif";
-  const PAGE_PVER_TIME = 1800;
-  const APP_PVER_TIME = 300;
-  const OPERATING_TIME = 10;
-  const DIFF_TIME = 60 * 1e3 * 60 * 24;
-  const appid = "__UNI__76A9E40";
-  const dbSet = (name2, value) => {
-    let data = uni.getStorageSync("$$STAT__DBDATA:" + appid) || {};
-    if (!data) {
-      data = {};
-    }
-    data[name2] = value;
-    uni.setStorageSync("$$STAT__DBDATA:" + appid, data);
-  };
-  const dbGet = (name2) => {
-    let data = uni.getStorageSync("$$STAT__DBDATA:" + appid) || {};
-    if (!data[name2]) {
-      let dbdata = uni.getStorageSync("$$STAT__DBDATA:" + appid);
-      if (!dbdata) {
-        dbdata = {};
-      }
-      if (!dbdata[name2]) {
-        return void 0;
-      }
-      data[name2] = dbdata[name2];
-    }
-    return data[name2];
-  };
-  const dbRemove = (name2) => {
-    let data = uni.getStorageSync("$$STAT__DBDATA:" + appid) || {};
-    if (data[name2]) {
-      delete data[name2];
-      uni.setStorageSync("$$STAT__DBDATA:" + appid, data);
-    } else {
-      data = uni.getStorageSync("$$STAT__DBDATA:" + appid);
-      if (data[name2]) {
-        delete data[name2];
-        uni.setStorageSync("$$STAT__DBDATA:" + appid, data);
-      }
-    }
-  };
-  const uniStatisticsConfig = { "enable": true, "version": "2" };
-  let statConfig = {
-    appid: "__UNI__76A9E40"
-  };
-  let titleJsons = {};
-  titleJsons = { "pages/myMebers/myMebers": "我的会员", "pages/addMyMebers/addMyMebers": "添加学员", "pages/postureAssessment/postureAssessment": "体测评估", "pages/bodyTestReport/bodyTestReport": "体测报告", "pages/physicalAssessment/physicalAssessment": "身体评估", "pages/healthQuesson/healthQuesson": "健康问答", "pages/physicalFitnessAssessment/physicalFitnessAssessment": "体能评估", "pages/actionLibrary/index": "动作库", "pages/addAction/index": "新增动作", "pages/newWorkout/newWorkout": "新建训练", "pages/trainingRecord/trainingRecord": "训练记录", "pages/trainingRecordDetail/trainingRecordDetail": "训练记录详情", "pages/my/my": "我的", "pages/openCard/openCard": "开卡", "pages/setUp/setUp": "设置", "pages/personalInfo/personalInfo": "个人信息", "pages/bindPhone/bindPhone": "绑定手机号", "pages/phoneLoging/phoneLoging": "手机号登录", "pages/updateSignature/updateSignature": "修改签名", "uni_modules/uni-pay/pages/success/success": "支付成功", "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview": "ad" };
-  const UUID_KEY = "__DC_STAT_UUID";
-  const UUID_VALUE = "__DC_UUID_VALUE";
-  function getUuid() {
-    let uuid = "";
-    if (get_platform_name() === "n") {
-      try {
-        uuid = plus.runtime.getDCloudId();
-      } catch (e) {
-        uuid = "";
-      }
-      return uuid;
-    }
-    try {
-      uuid = uni.getStorageSync(UUID_KEY);
-    } catch (e) {
-      uuid = UUID_VALUE;
-    }
-    if (!uuid) {
-      uuid = Date.now() + "" + Math.floor(Math.random() * 1e7);
-      try {
-        uni.setStorageSync(UUID_KEY, uuid);
-      } catch (e) {
-        uni.setStorageSync(UUID_KEY, UUID_VALUE);
-      }
-    }
-    return uuid;
-  }
-  const get_uuid = (statData2) => {
-    return sys.deviceId || getUuid();
-  };
-  const get_odid = (statData2) => {
-    let odid = "";
-    if (get_platform_name() === "n") {
-      try {
-        odid = plus.device.uuid;
-      } catch (e) {
-        odid = "";
-      }
-      return odid;
-    }
-    return sys.deviceId || getUuid();
-  };
-  const stat_config = statConfig;
-  const get_sgin = (statData2) => {
-    let arr = Object.keys(statData2);
-    let sortArr = arr.sort();
-    let sgin = {};
-    let sginStr = "";
-    for (var i2 in sortArr) {
-      sgin[sortArr[i2]] = statData2[sortArr[i2]];
-      sginStr += sortArr[i2] + "=" + statData2[sortArr[i2]] + "&";
-    }
-    return {
-      sign: "",
-      options: sginStr.substr(0, sginStr.length - 1)
-    };
-  };
-  const get_encodeURIComponent_options = (statData2) => {
-    let data = {};
-    for (let prop in statData2) {
-      data[prop] = encodeURIComponent(statData2[prop]);
-    }
-    return data;
-  };
-  const get_platform_name = () => {
-    const aliArr = ["y", "a", "p", "mp-ali"];
-    const platformList = {
-      app: "n",
-      "app-plus": "n",
-      h5: "h5",
-      "mp-weixin": "wx",
-      [aliArr.reverse().join("")]: "ali",
-      "mp-baidu": "bd",
-      "mp-toutiao": "tt",
-      "mp-qq": "qq",
-      "quickapp-native": "qn",
-      "mp-kuaishou": "ks",
-      "mp-lark": "lark",
-      "quickapp-webview": "qw"
-    };
-    if (platformList["app"] === "ali") {
-      if (my && my.env) {
-        const clientName = my.env.clientName;
-        if (clientName === "ap")
-          return "ali";
-        if (clientName === "dingtalk")
-          return "dt";
-      }
-    }
-    return platformList["app"];
-  };
-  const get_pack_name = () => {
-    let packName = "";
-    if (get_platform_name() === "wx" || get_platform_name() === "qq") {
-      if (uni.canIUse("getAccountInfoSync")) {
-        packName = uni.getAccountInfoSync().miniProgram.appId || "";
-      }
-    }
-    if (get_platform_name() === "n")
-      ;
-    return packName;
-  };
-  const get_version = () => {
-    return get_platform_name() === "n" ? plus.runtime.version : "";
-  };
-  const get_channel = () => {
-    const platformName = get_platform_name();
-    let channel = "";
-    if (platformName === "n") {
-      channel = plus.runtime.channel;
-    }
-    return channel;
-  };
-  const get_scene = (options) => {
-    const platformName = get_platform_name();
-    let scene = "";
-    if (options) {
-      return options;
-    }
-    if (platformName === "wx") {
-      scene = uni.getLaunchOptionsSync().scene;
-    }
-    return scene;
-  };
-  const get_route$1 = (pageVm) => {
-    let _self = pageVm || get_page_vm();
-    if (get_platform_name() === "bd") {
-      let mp_route = _self.$mp && _self.$mp.page && _self.$mp.page.is;
-      let scope_route = _self.$scope && _self.$scope.is;
-      return mp_route || scope_route || "";
-    } else {
-      return _self.route || _self.$scope && _self.$scope.route || _self.$mp && _self.$mp.page.route;
-    }
-  };
-  const get_page_route = (pageVm) => {
-    let page = pageVm && (pageVm.$page || pageVm.$scope && pageVm.$scope.$page);
-    let lastPageRoute = uni.getStorageSync("_STAT_LAST_PAGE_ROUTE");
-    if (!page)
-      return lastPageRoute || "";
-    return page.fullPath === "/" ? page.route : page.fullPath || page.route;
-  };
-  const get_page_vm = () => {
-    let pages2 = getCurrentPages();
-    let $page = pages2[pages2.length - 1];
-    if (!$page)
-      return null;
-    return $page.$vm;
-  };
-  const get_page_types = (self2) => {
-    if (self2.mpType === "page" || self2.$mpType === "page" || self2.$mp && self2.$mp.mpType === "page" || self2.$options.mpType === "page") {
-      return "page";
-    }
-    if (self2.mpType === "app" || self2.$mpType === "app" || self2.$mp && self2.$mp.mpType === "app" || self2.$options.mpType === "app") {
-      return "app";
-    }
-    return null;
-  };
-  const handle_data = (statData2) => {
-    let firstArr = [];
-    let contentArr = [];
-    let lastArr = [];
-    for (let i2 in statData2) {
-      const rd = statData2[i2];
-      rd.forEach((elm) => {
-        let newData = "";
-        {
-          newData = elm;
-        }
-        if (i2 === 0) {
-          firstArr.push(newData);
-        } else if (i2 === 3) {
-          lastArr.push(newData);
-        } else {
-          contentArr.push(newData);
-        }
-      });
-    }
-    firstArr.push(...contentArr, ...lastArr);
-    return JSON.stringify(firstArr);
-  };
-  const calibration = (eventName, options) => {
-    if (!eventName) {
-      console.error(`uni.report Missing [eventName] parameter`);
-      return true;
-    }
-    if (typeof eventName !== "string") {
-      console.error(
-        `uni.report [eventName] Parameter type error, it can only be of type String`
-      );
-      return true;
-    }
-    if (eventName.length > 255) {
-      console.error(
-        `uni.report [eventName] Parameter length cannot be greater than 255`
-      );
-      return true;
-    }
-    if (typeof options !== "string" && typeof options !== "object") {
-      console.error(
-        "uni.report [options] Parameter type error, Only supports String or Object type"
-      );
-      return true;
-    }
-    if (typeof options === "string" && options.length > 255) {
-      console.error(
-        `uni.report [options] Parameter length cannot be greater than 255`
-      );
-      return true;
-    }
-    if (eventName === "title" && typeof options !== "string") {
-      console.error(
-        `uni.report [eventName] When the parameter is title, the [options] parameter can only be of type String`
-      );
-      return true;
-    }
-  };
-  const get_page_name = (routepath) => {
-    return titleJsons && titleJsons[routepath] || "";
-  };
-  const Report_Data_Time = "Report_Data_Time";
-  const Report_Status = "Report_Status";
-  const is_report_data = () => {
-    return new Promise((resolve, reject) => {
-      let start_time = "";
-      let end_time = new Date().getTime();
-      let diff_time = DIFF_TIME;
-      let report_status = 1;
-      try {
-        start_time = uni.getStorageSync(Report_Data_Time);
-        report_status = uni.getStorageSync(Report_Status);
-      } catch (e) {
-        start_time = "";
-        report_status = 1;
-      }
-      if (report_status === "") {
-        requestData(({ enable }) => {
-          uni.setStorageSync(Report_Data_Time, end_time);
-          uni.setStorageSync(Report_Status, enable);
-          if (enable === 1) {
-            resolve();
-          }
-        });
-        return;
-      }
-      if (report_status === 1) {
-        resolve();
-      }
-      if (!start_time) {
-        uni.setStorageSync(Report_Data_Time, end_time);
-        start_time = end_time;
-      }
-      if (end_time - start_time > diff_time) {
-        requestData(({ enable }) => {
-          uni.setStorageSync(Report_Data_Time, end_time);
-          uni.setStorageSync(Report_Status, enable);
-        });
-      }
-    });
-  };
-  const requestData = (done) => {
-    const appid2 = "__UNI__76A9E40";
-    let formData = {
-      usv: STAT_VERSION,
-      conf: JSON.stringify({
-        ak: appid2
-      })
-    };
-    uni.request({
-      url: STAT_URL,
-      method: "GET",
-      data: formData,
-      success: (res2) => {
-        const { data } = res2;
-        if (data.ret === 0) {
-          typeof done === "function" && done({
-            enable: data.enable
-          });
-        }
-      },
-      fail: (e) => {
-        let report_status_code = 1;
-        try {
-          report_status_code = uni.getStorageSync(Report_Status);
-        } catch (e2) {
-          report_status_code = 1;
-        }
-        if (report_status_code === "") {
-          report_status_code = 1;
-        }
-        typeof done === "function" && done({
-          enable: report_status_code
-        });
-      }
-    });
-  };
-  const uni_cloud_config = () => {
-    return {};
-  };
-  const get_space = (config) => {
-    const uniCloudConfig = uni_cloud_config();
-    const { spaceId, provider, clientSecret } = uniCloudConfig;
-    const space_type = ["tcb", "tencent", "aliyun"];
-    const is_provider = space_type.indexOf(provider) !== -1;
-    const is_aliyun = provider === "aliyun" && spaceId && clientSecret;
-    const is_tcb = (provider === "tcb" || provider === "tencent") && spaceId;
-    if (is_provider && (is_aliyun || is_tcb)) {
-      return uniCloudConfig;
-    } else {
-      if (config && config.spaceId) {
-        return config;
-      }
-    }
-    return null;
-  };
-  const get_report_Interval = (defaultTime) => {
-    let time = uniStatisticsConfig.reportInterval;
-    if (Number(time) === 0)
-      return 0;
-    time = time || defaultTime;
-    let reg = /(^[1-9]\d*$)/;
-    if (!reg.test(time))
-      return defaultTime;
-    return Number(time);
-  };
-  const is_push_clientid = () => {
-    if (uniStatisticsConfig.collectItems) {
-      const ClientID = uniStatisticsConfig.collectItems.uniPushClientID;
-      return typeof ClientID === "boolean" ? ClientID : false;
-    }
-    return false;
-  };
-  const IS_HANDLE_DEVECE_ID = "is_handle_device_id";
-  const is_handle_device = () => {
-    let isHandleDevice = dbGet(IS_HANDLE_DEVECE_ID) || "";
-    dbSet(IS_HANDLE_DEVECE_ID, "1");
-    return isHandleDevice === "1";
-  };
-  const FIRST_VISIT_TIME_KEY = "__first__visit__time";
-  const LAST_VISIT_TIME_KEY = "__last__visit__time";
-  const get_time = () => {
-    return parseInt(new Date().getTime() / 1e3);
-  };
-  const get_first_visit_time = () => {
-    const timeStorge = dbGet(FIRST_VISIT_TIME_KEY);
-    let time = 0;
-    if (timeStorge) {
-      time = timeStorge;
-    } else {
-      time = get_time();
-      dbSet(FIRST_VISIT_TIME_KEY, time);
-      dbRemove(LAST_VISIT_TIME_KEY);
-    }
-    return time;
-  };
-  const get_last_visit_time = () => {
-    const timeStorge = dbGet(LAST_VISIT_TIME_KEY);
-    let time = 0;
-    if (timeStorge) {
-      time = timeStorge;
-    }
-    dbSet(LAST_VISIT_TIME_KEY, get_time());
-    return time;
-  };
-  const PAGE_RESIDENCE_TIME = "__page__residence__time";
-  let First_Page_Residence_Time = 0;
-  let Last_Page_Residence_Time = 0;
-  const set_page_residence_time = () => {
-    First_Page_Residence_Time = get_time();
-    dbSet(PAGE_RESIDENCE_TIME, First_Page_Residence_Time);
-    return First_Page_Residence_Time;
-  };
-  const get_page_residence_time = () => {
-    Last_Page_Residence_Time = get_time();
-    First_Page_Residence_Time = dbGet(PAGE_RESIDENCE_TIME);
-    return Last_Page_Residence_Time - First_Page_Residence_Time;
-  };
-  const TOTAL_VISIT_COUNT = "__total__visit__count";
-  const get_total_visit_count = () => {
-    const timeStorge = dbGet(TOTAL_VISIT_COUNT);
-    let count = 1;
-    if (timeStorge) {
-      count = timeStorge;
-      count++;
-    }
-    dbSet(TOTAL_VISIT_COUNT, count);
-    return count;
-  };
-  const FIRST_TIME = "__first_time";
-  const set_first_time = () => {
-    let time = get_time();
-    const timeStorge = dbSet(FIRST_TIME, time);
-    return timeStorge;
-  };
-  const get_residence_time = (type) => {
-    let residenceTime = 0;
-    const first_time = dbGet(FIRST_TIME);
-    const last_time = get_time();
-    if (first_time !== 0) {
-      residenceTime = last_time - first_time;
-    }
-    residenceTime = residenceTime < 1 ? 1 : residenceTime;
-    if (type === "app") {
-      let overtime = residenceTime > APP_PVER_TIME ? true : false;
-      return {
-        residenceTime,
-        overtime
-      };
-    }
-    if (type === "page") {
-      let overtime = residenceTime > PAGE_PVER_TIME ? true : false;
-      return {
-        residenceTime,
-        overtime
-      };
-    }
-    return {
-      residenceTime
-    };
-  };
-  const eport_Interval = get_report_Interval(OPERATING_TIME);
-  let statData = {
-    uuid: get_uuid(),
-    // 设备标识
-    ak: stat_config.appid,
-    // uni-app 应用 Appid
-    p: sys.platform === "android" ? "a" : "i",
-    // 手机系统
-    ut: get_platform_name(),
-    // 平台类型
-    mpn: get_pack_name(),
-    // 原生平台包名、小程序 appid
-    usv: STAT_VERSION,
-    // 统计 sdk 版本
-    v: get_version(),
-    // 应用版本，仅app
-    ch: get_channel(),
-    // 渠道信息
-    cn: "",
-    // 国家
-    pn: "",
-    // 省份
-    ct: "",
-    // 城市
-    t: get_time(),
-    // 上报数据时的时间戳
-    tt: "",
-    brand: sys.brand || "",
-    // 手机品牌
-    md: sys.model,
-    // 手机型号
-    sv: sys.system.replace(/(Android|iOS)\s/, ""),
-    // 手机系统版本
-    mpsdk: sys.SDKVersion || "",
-    // x程序 sdk version
-    mpv: sys.version || "",
-    // 小程序平台版本 ，如微信、支付宝
-    lang: sys.language,
-    // 语言
-    pr: sys.pixelRatio,
-    // pixelRatio 设备像素比
-    ww: sys.windowWidth,
-    // windowWidth 可使用窗口宽度
-    wh: sys.windowHeight,
-    // windowHeight 可使用窗口高度
-    sw: sys.screenWidth,
-    // screenWidth 屏幕宽度
-    sh: sys.screenHeight
-    // screenHeight 屏幕高度
-  };
-  class Report {
-    constructor() {
-      this.self = "";
-      this.__licationShow = false;
-      this.__licationHide = false;
-      this.statData = statData;
-      this._navigationBarTitle = {
-        config: "",
-        page: "",
-        report: "",
-        lt: ""
-      };
-      this._query = {};
-      let registerInterceptor = typeof uni.addInterceptor === "function";
-      if (registerInterceptor) {
-        this.addInterceptorInit();
-        this.interceptLogin();
-        this.interceptShare(true);
-        this.interceptRequestPayment();
-      }
-    }
-    addInterceptorInit() {
-      let self2 = this;
-      uni.addInterceptor("setNavigationBarTitle", {
-        invoke(args) {
-          self2._navigationBarTitle.page = args.title;
-        }
-      });
-    }
-    interceptLogin() {
-      let self2 = this;
-      uni.addInterceptor("login", {
-        complete() {
-          self2._login();
-        }
-      });
-    }
-    interceptShare(type) {
-      let self2 = this;
-      if (!type) {
-        self2._share();
-        return;
-      }
-      uni.addInterceptor("share", {
-        success() {
-          self2._share();
-        },
-        fail() {
-          self2._share();
-        }
-      });
-    }
-    interceptRequestPayment() {
-      let self2 = this;
-      uni.addInterceptor("requestPayment", {
-        success() {
-          self2._payment("pay_success");
-        },
-        fail() {
-          self2._payment("pay_fail");
-        }
-      });
-    }
-    _login() {
-      this.sendEventRequest(
-        {
-          key: "login"
-        },
-        0
-      );
-    }
-    _share() {
-      this.sendEventRequest(
-        {
-          key: "share"
-        },
-        0
-      );
-    }
-    _payment(key) {
-      this.sendEventRequest(
-        {
-          key
-        },
-        0
-      );
-    }
-    /**
-     * 进入应用触发
-     */
-    applicationShow() {
-      if (this.__licationHide) {
-        const time = get_residence_time("app");
-        if (time.overtime) {
-          let lastPageRoute = uni.getStorageSync("_STAT_LAST_PAGE_ROUTE");
-          let options = {
-            path: lastPageRoute,
-            scene: this.statData.sc,
-            cst: 2
-          };
-          this.sendReportRequest(options);
-        }
-        this.__licationHide = false;
-      }
-    }
-    /**
-     * 离开应用触发
-     * @param {Object} self
-     * @param {Object} type
-     */
-    applicationHide(self2, type) {
-      if (!self2) {
-        self2 = get_page_vm();
-      }
-      this.__licationHide = true;
-      const time = get_residence_time();
-      const route2 = get_page_route(self2);
-      uni.setStorageSync("_STAT_LAST_PAGE_ROUTE", route2);
-      this.sendHideRequest(
-        {
-          urlref: route2,
-          urlref_ts: time.residenceTime
-        },
-        type
-      );
-      set_first_time();
-    }
-    /**
-     * 进入页面触发
-     */
-    pageShow(self2) {
-      this._navigationBarTitle = {
-        config: "",
-        page: "",
-        report: "",
-        lt: ""
-      };
-      const route2 = get_page_route(self2);
-      const routepath = get_route$1(self2);
-      this._navigationBarTitle.config = get_page_name(routepath);
-      if (this.__licationShow) {
-        set_first_time();
-        uni.setStorageSync("_STAT_LAST_PAGE_ROUTE", route2);
-        this.__licationShow = false;
-        return;
-      }
-      const time = get_residence_time("page");
-      if (time.overtime) {
-        let options = {
-          path: route2,
-          scene: this.statData.sc,
-          cst: 3
-        };
-        this.sendReportRequest(options);
-      }
-      set_first_time();
-    }
-    /**
-     * 离开页面触发
-     */
-    pageHide(self2) {
-      if (!this.__licationHide) {
-        const time = get_residence_time("page");
-        let route2 = get_page_route(self2);
-        let lastPageRoute = uni.getStorageSync("_STAT_LAST_PAGE_ROUTE");
-        if (!lastPageRoute) {
-          lastPageRoute = route2;
-        }
-        uni.setStorageSync("_STAT_LAST_PAGE_ROUTE", route2);
-        this.sendPageRequest({
-          url: route2,
-          urlref: lastPageRoute,
-          urlref_ts: time.residenceTime
-        });
-        return;
-      }
-    }
-    /**
-     * 发送请求,应用维度上报
-     * @param {Object} options 页面信息
-     * @param {Boolean} type 是否立即上报
-     */
-    sendReportRequest(options, type) {
-      this._navigationBarTitle.lt = "1";
-      this._navigationBarTitle.config = get_page_name(options.path);
-      let is_opt = options.query && JSON.stringify(options.query) !== "{}";
-      let query = is_opt ? "?" + JSON.stringify(options.query) : "";
-      const last_time = get_last_visit_time();
-      if (last_time !== 0 || !last_time) {
-        const odid = get_odid();
-        {
-          const have_device = is_handle_device();
-          if (!have_device) {
-            this.statData.odid = odid;
-          }
-        }
-      }
-      Object.assign(this.statData, {
-        lt: "1",
-        url: options.path + query || "",
-        t: get_time(),
-        sc: get_scene(options.scene),
-        fvts: get_first_visit_time(),
-        lvts: last_time,
-        tvc: get_total_visit_count(),
-        // create session type  上报类型 ，1 应用进入 2.后台30min进入 3.页面30min进入
-        cst: options.cst || 1
-      });
-      if (get_platform_name() === "n") {
-        this.getProperty(type);
-      } else {
-        this.getNetworkInfo(type);
-      }
-    }
-    /**
-     * 发送请求,页面维度上报
-     * @param {Object} opt
-     */
-    sendPageRequest(opt) {
-      let { url, urlref, urlref_ts } = opt;
-      this._navigationBarTitle.lt = "11";
-      let options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        p: this.statData.p,
-        lt: "11",
-        ut: this.statData.ut,
-        url,
-        tt: this.statData.tt,
-        urlref,
-        urlref_ts,
-        ch: this.statData.ch,
-        usv: this.statData.usv,
-        t: get_time()
-      };
-      this.request(options);
-    }
-    /**
-     * 进入后台上报数据
-     * @param {Object} opt
-     * @param {Object} type
-     */
-    sendHideRequest(opt, type) {
-      let { urlref, urlref_ts } = opt;
-      let options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        p: this.statData.p,
-        lt: "3",
-        ut: this.statData.ut,
-        urlref,
-        urlref_ts,
-        ch: this.statData.ch,
-        usv: this.statData.usv,
-        t: get_time()
-      };
-      this.request(options, type);
-    }
-    /**
-     * 自定义事件上报
-     */
-    sendEventRequest({ key = "", value = "" } = {}) {
-      let routepath = "";
-      try {
-        routepath = get_route$1();
-      } catch (error) {
-        const launch_options = dbGet("__launch_options");
-        routepath = launch_options.path;
-      }
-      this._navigationBarTitle.config = get_page_name(routepath);
-      this._navigationBarTitle.lt = "21";
-      let options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        p: this.statData.p,
-        lt: "21",
-        ut: this.statData.ut,
-        url: routepath,
-        ch: this.statData.ch,
-        e_n: key,
-        e_v: typeof value === "object" ? JSON.stringify(value) : value.toString(),
-        usv: this.statData.usv,
-        t: get_time()
-      };
-      this.request(options);
-    }
-    sendPushRequest(options, cid) {
-      let time = get_time();
-      const statData2 = {
-        lt: "101",
-        cid,
-        t: time,
-        ut: this.statData.ut
-      };
-      const stat_data = handle_data({
-        101: [statData2]
-      });
-      let optionsData = {
-        usv: STAT_VERSION,
-        //统计 SDK 版本号
-        t: time,
-        //发送请求时的时间戮
-        requests: stat_data
-      };
-      if (get_platform_name() === "n" && this.statData.p === "a") {
-        setTimeout(() => {
-          this.sendRequest(optionsData);
-        }, 200);
-        return;
-      }
-      this.sendRequest(optionsData);
-    }
-    /**
-     * 获取wgt资源版本
-     */
-    getProperty(type) {
-      plus.runtime.getProperty(plus.runtime.appid, (wgtinfo) => {
-        this.statData.v = wgtinfo.version || "";
-        this.getNetworkInfo(type);
-      });
-    }
-    /**
-     * 获取网络信息
-     */
-    getNetworkInfo(type) {
-      uni.getNetworkType({
-        success: (result) => {
-          this.statData.net = result.networkType;
-          this.getLocation(type);
-        }
-      });
-    }
-    /**
-     * 获取位置信息
-     */
-    getLocation(type) {
-      if (stat_config.getLocation) {
-        uni.getLocation({
-          type: "wgs84",
-          geocode: true,
-          success: (result) => {
-            if (result.address) {
-              this.statData.cn = result.address.country;
-              this.statData.pn = result.address.province;
-              this.statData.ct = result.address.city;
-            }
-            this.statData.lat = result.latitude;
-            this.statData.lng = result.longitude;
-            this.request(this.statData, type);
-          }
-        });
-      } else {
-        this.statData.lat = 0;
-        this.statData.lng = 0;
-        this.request(this.statData, type);
-      }
-    }
-    /**
-     * 发送请求
-     * @param {Object} data 上报数据
-     * @param {Object} type 类型
-     */
-    request(data, type) {
-      let time = get_time();
-      const title = this._navigationBarTitle;
-      Object.assign(data, {
-        ttn: title.page,
-        ttpj: title.config,
-        ttc: title.report
-      });
-      let uniStatData = dbGet("__UNI__STAT__DATA") || {};
-      if (!uniStatData[data.lt]) {
-        uniStatData[data.lt] = [];
-      }
-      uniStatData[data.lt].push(data);
-      dbSet("__UNI__STAT__DATA", uniStatData);
-      let page_residence_time = get_page_residence_time();
-      if (page_residence_time < eport_Interval && !type)
-        return;
-      set_page_residence_time();
-      const stat_data = handle_data(uniStatData);
-      let optionsData = {
-        usv: STAT_VERSION,
-        //统计 SDK 版本号
-        t: time,
-        //发送请求时的时间戮
-        requests: stat_data
-      };
-      dbRemove("__UNI__STAT__DATA");
-      if (get_platform_name() === "n" && this.statData.p === "a") {
-        setTimeout(() => {
-          this.sendRequest(optionsData);
-        }, 200);
-        return;
-      }
-      this.sendRequest(optionsData);
-    }
-    getIsReportData() {
-      return is_report_data();
-    }
-    /**
-     * 数据上报
-     * @param {Object} optionsData 需要上报的数据
-     */
-    sendRequest(optionsData) {
-      {
-        if (!uni.__stat_uniCloud_space) {
-          console.error(
-            "应用未关联服务空间，统计上报失败，请在uniCloud目录右键关联服务空间."
-          );
-          return;
-        }
-        const uniCloudObj = uni.__stat_uniCloud_space.importObject(
-          "uni-stat-receiver",
-          {
-            customUI: true
-          }
-        );
-        uniCloudObj.report(optionsData).then(() => {
-        }).catch((err2) => {
-        });
-      }
-    }
-    /**
-     * h5 请求
-     */
-    imageRequest(data) {
-      this.getIsReportData().then(() => {
-        let image = new Image();
-        let options = get_sgin(get_encodeURIComponent_options(data)).options;
-        image.src = STAT_H5_URL + "?" + options;
-      });
-    }
-    sendEvent(key, value) {
-      if (calibration(key, value))
-        return;
-      if (key === "title") {
-        this._navigationBarTitle.report = value;
-        return;
-      }
-      this.sendEventRequest(
-        {
-          key,
-          value: typeof value === "object" ? JSON.stringify(value) : value
-        },
-        1
-      );
-    }
-  }
-  class Stat extends Report {
-    static getInstance() {
-      if (!uni.__stat_instance) {
-        uni.__stat_instance = new Stat();
-      }
-      {
-        let space = get_space(Es.config);
-        if (!uni.__stat_uniCloud_space) {
-          if (space && Object.keys(space).length !== 0) {
-            let spaceData = {
-              provider: space.provider,
-              spaceId: space.spaceId,
-              clientSecret: space.clientSecret
-            };
-            if (space.endpoint) {
-              spaceData.endpoint = space.endpoint;
-            }
-            uni.__stat_uniCloud_space = Es.init(spaceData);
-          } else {
-            console.error(
-              "应用未关联服务空间，请在uniCloud目录右键关联服务空间"
-            );
-          }
-        }
-      }
-      return uni.__stat_instance;
-    }
-    constructor() {
-      super();
-    }
-    /**
-     * 获取推送id
-     */
-    pushEvent(options) {
-      const ClientID = is_push_clientid();
-      if (uni.getPushClientId && ClientID) {
-        uni.getPushClientId({
-          success: (res2) => {
-            const cid = res2.cid || false;
-            if (cid) {
-              this.sendPushRequest(options, cid);
-            }
-          }
-        });
-      }
-    }
-    /**
-     * 进入应用
-     * @param {Object} options 页面参数
-     * @param {Object} self	当前页面实例
-     */
-    launch(options, self2) {
-      set_page_residence_time();
-      this.__licationShow = true;
-      dbSet("__launch_options", options);
-      options.cst = 1;
-      this.sendReportRequest(options, true);
-    }
-    load(options, self2) {
-      this.self = self2;
-      this._query = options;
-    }
-    appHide(self2) {
-      this.applicationHide(self2, true);
-    }
-    appShow(self2) {
-      this.applicationShow(self2);
-    }
-    show(self2) {
-      this.self = self2;
-      if (get_page_types(self2) === "page") {
-        this.pageShow(self2);
-      }
-      if (get_platform_name() === "h5" || get_platform_name() === "n") {
-        if (get_page_types(self2) === "app") {
-          this.appShow();
-        }
-      }
-    }
-    hide(self2) {
-      this.self = self2;
-      if (get_page_types(self2) === "page") {
-        this.pageHide(self2);
-      }
-      if (get_platform_name() === "h5" || get_platform_name() === "n") {
-        if (get_page_types(self2) === "app") {
-          this.appHide();
-        }
-      }
-    }
-    error(em) {
-      let emVal = "";
-      if (!em.message) {
-        emVal = JSON.stringify(em);
-      } else {
-        emVal = em.stack;
-      }
-      let route2 = "";
-      try {
-        route2 = get_route();
-      } catch (e) {
-        route2 = "";
-      }
-      let options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        p: this.statData.p,
-        lt: "31",
-        url: route2,
-        ut: this.statData.ut,
-        ch: this.statData.ch,
-        mpsdk: this.statData.mpsdk,
-        mpv: this.statData.mpv,
-        v: this.statData.v,
-        em: emVal,
-        usv: this.statData.usv,
-        t: parseInt(new Date().getTime() / 1e3)
-      };
-      this.request(options);
-    }
-  }
-  var Stat$1 = Stat;
-  Stat$1.getInstance();
-  function main() {
-    {
-      {
-        uni.report = function(type, options) {
-        };
-      }
-    }
-  }
-  main();
   function createApp() {
     const app = vue.createVueApp(App);
     app.use(stdin_default);
