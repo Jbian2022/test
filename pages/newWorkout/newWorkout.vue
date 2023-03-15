@@ -4,7 +4,14 @@
     <view class="background"></view>
     <view class="status_bar"> <!-- 这里是状态栏 --> </view>
     <view class="header">
-      <view class="title">新建训练</view>
+      <view class="title_dakuang">
+        <image
+          class="back_img_style"
+          src="../../static/app-plus/mebrs/back.svg"
+          @click.native="goBack"
+        ></image>
+        <view class="nav_title_style">新建训练</view>
+      </view>
       <view>
         <van-button
           :class="isShowSave && isShowSuccess ? 'btn save' : 'bluecss btn save'"
@@ -74,7 +81,7 @@
                 <input
                   v-model="item.kg"
                   class="uni-input"
-                  type="number"
+                  type="digit"
                   :disabled="item.active"
                 />
                 <text>kg</text>
@@ -83,7 +90,7 @@
                 <input
                   v-model="item.time"
                   class="uni-input"
-                  type="number"
+                  type="digit"
                   :disabled="item.active"
                 />
                 <text>次</text>
@@ -566,6 +573,7 @@
                   v-model="item.second"
                   class="uni-input"
                   type="number"
+                  openDialog
                   @blur="technicalData"
                 />
                 <text>秒</text>
@@ -576,7 +584,8 @@
                   @click="
                     deleteProjectItem(i.groupList, index), technicalData()
                   "
-                ></view>
+                ></view
+                >finish
               </view>
             </view>
             <view class="add-project-item" @click="addProjectItem(i.groupList)"
@@ -603,9 +612,13 @@
         <view class="first-level-title">完成训练</view>
         <view class="second-level-title">是否已经完成训练了</view>
         <view class="botton-box">
-          <van-button class="finish" block @click="finish('success')"
-            >确认完成</van-button
+          <van-button class="finish_share" block @click="finish('successShare')"
+            >完成训练并生成分享</van-button
           >
+          <van-button class="finish" block @click="finish('success')"
+            >完成训练</van-button
+          >
+
           <van-button block @click="closeDialog('popupFinish')"
             >取消</van-button
           >
@@ -634,8 +647,11 @@
 </template>
 
 <script>
-const train = uniCloud.importObject('train')
+const train = uniCloud.importObject('train', {
+  customUI: true // 取消自动展示的交互提示界面
+})
 import popover from '../../components/popover/index.vue'
+import moment from 'moment'
 export default {
   components: {
     popover
@@ -652,7 +668,9 @@ export default {
       startData: {
         clientX: 0,
         clientY: 0
-      }
+      },
+      trainListInfo: {},
+      resultShareList: []
     }
   },
   onLoad: function (option) {
@@ -703,7 +721,22 @@ export default {
       // error
     }
   },
+  mounted() {
+    this.getBeforeList()
+  },
   methods: {
+    goBack() {
+      // 有数据并且是完成
+      if (this.actionList.length > 0 && this.isShowSuccess) {
+        this.openDialog('popupFinish')
+      }
+      if (this.actionList.length > 0 && !this.isShowSuccess) {
+        this.openDialog('popupDelete')
+      }
+      if (this.actionList.length === 0) {
+        this.deleteHandle()
+      }
+    },
     start(e) {
       console.log('开始下滑坐标', e.changedTouches[0].clientY)
       this.startData.clientX = e.changedTouches[0].clientX
@@ -807,7 +840,25 @@ export default {
         active: false
       })
     },
+    // 分享之前日历的数据结构
+    async getBeforeList() {
+      const res = await train.getTrainList({ traineeNo: this.traineeNo })
+      if (res.data && res.data.length > 0) {
+        const trainListInfo = {}
+        res.data.forEach((item) => {
+          const list = JSON.parse(item.trainContent) || []
+          list.forEach((item1) => {
+            item1.traineeTitle = item1.traineeTitle.substring(0, 5)
+          })
+          trainListInfo[item.trainDate] = list
+        })
+        this.trainListInfo = trainListInfo
+        let currentDate = moment().format('YYYY-MM-DD')
+        this.resultShareList = this.trainListInfo[currentDate] || []
+      }
+    },
     async finish(traineeStatus) {
+      console.log('我点击了完成')
       if (!this.actionList || this.actionList.length === 0) {
         return uni.showToast({
           icon: 'error',
@@ -863,11 +914,25 @@ export default {
       uni.removeStorageSync('oldTrainInfo')
       uni.removeStorageSync('actionLibrary')
       const timer = setTimeout(() => {
+        if (traineeStatus === 'successShare') {
+          this.getBeforeList()
+          let currentDate = moment().format('YYYY-MM-DD')
+          let key = this.resultShareList.length - 1
+
+          uni.navigateTo({
+            url:
+              '/pages/trainingRecordDetail/trainingRecordDetail' +
+              `?traineeNo=${this.traineeNo}&trainDate=${currentDate}&traineeName=${this.traineeName}&key=${key}`
+          })
+          return
+        }
+
         uni.reLaunch({
           url:
             '/pages/trainingRecord/trainingRecord' +
             `?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
         })
+
         clearTimeout(timer)
       }, 1000)
     },
@@ -1076,8 +1141,16 @@ export default {
     font-size: 48upx;
     color: #ffffff;
     background: transparent;
-    .title {
+    .title_dakuang {
       font-weight: 600;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      .back_img_style {
+        margin-right: 20upx;
+        width: 40upx;
+        height: 40upx;
+      }
     }
     .btn {
       padding: 0 30upx;
@@ -1343,7 +1416,7 @@ export default {
   ::v-deep .delete-dialog {
     background: linear-gradient(180deg, #343a44 0%, #212328 100%);
     width: 610upx;
-    height: 800upx;
+
     .first-level-title {
       padding-left: 70upx;
       padding-top: 64upx;
@@ -1379,13 +1452,21 @@ export default {
   }
   ::v-deep .finish-dialog {
     background-image: url('../../static/newWorkout/training completed.png');
+    background-repeat: no-repeat;
     background-size: contain;
-    .van-button.finish {
+    height: 932upx;
+    .van-button.finish_share {
       background: #1370ff !important;
+      color: #ffffff !important;
+    }
+    .van-button.finish {
+      margin-top: 30upx;
+      background: #454951 !important;
       color: #ffffff !important;
     }
   }
   ::v-deep .delete-dialog {
+    height: 800upx;
     background-image: url('../../static/newWorkout/training delete.png');
     background-size: contain;
     .van-button.delete {

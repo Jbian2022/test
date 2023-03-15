@@ -323,6 +323,7 @@ export default {
       this.traineeNo = option.traineeNo
       this.trainDate = option.trainDate
       this.key = option.key
+      this.traineeName = option.traineeName
       this.getTrainInfo()
     }
   },
@@ -356,7 +357,11 @@ export default {
       }
     },
     onClickLeft() {
-      uni.navigateBack()
+      uni.redirectTo({
+        url:
+          '/pages/trainingRecord/trainingRecord' +
+          `?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+      })
     },
     formaterTimes(times, type = 3) {
       const hour = Math.floor(times / 3600)

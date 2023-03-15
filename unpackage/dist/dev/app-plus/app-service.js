@@ -1063,7 +1063,7 @@ if (uni.restoreGlobal) {
   function m(e) {
     return e && "string" == typeof e ? JSON.parse(e) : e;
   }
-  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.122"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.160.1",\n        "192.168.32.1",\n        "192.168.0.132"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/hbuilderX/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"completeapp","spaceId":"mp-4e6f1c48-a4dc-4897-a866-0a1a071023c3","clientSecret":"hnLvmNQF/W9ZY06q5wYD/Q==","endpoint":"https://api.next.bspapp.com"}]') || [];
   let T = "";
   try {
     T = "__UNI__76A9E40";
@@ -19144,7 +19144,10 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesAddActionIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "D:/studyUninApp/bodybuilding-app/pages/addAction/index.vue"]]);
-  const train$3 = Es.importObject("train");
+  const train$3 = Es.importObject("train", {
+    customUI: true
+    // 取消自动展示的交互提示界面
+  });
   const _sfc_main$m = {
     components: {
       popover
@@ -19161,7 +19164,9 @@ if (uni.restoreGlobal) {
         startData: {
           clientX: 0,
           clientY: 0
-        }
+        },
+        trainListInfo: {},
+        resultShareList: []
       };
     },
     onLoad: function(option) {
@@ -19211,22 +19216,36 @@ if (uni.restoreGlobal) {
       } catch (e) {
       }
     },
+    mounted() {
+      this.getBeforeList();
+    },
     methods: {
+      goBack() {
+        if (this.actionList.length > 0 && this.isShowSuccess) {
+          this.openDialog("popupFinish");
+        }
+        if (this.actionList.length > 0 && !this.isShowSuccess) {
+          this.openDialog("popupDelete");
+        }
+        if (this.actionList.length === 0) {
+          this.deleteHandle();
+        }
+      },
       start(e) {
-        formatAppLog("log", "at pages/newWorkout/newWorkout.vue:708", "开始下滑坐标", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/newWorkout/newWorkout.vue:741", "开始下滑坐标", e.changedTouches[0].clientY);
         this.startData.clientX = e.changedTouches[0].clientX;
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/newWorkout/newWorkout.vue:713", "结束下滑坐标", e.changedTouches[0].clientY);
+        formatAppLog("log", "at pages/newWorkout/newWorkout.vue:746", "结束下滑坐标", e.changedTouches[0].clientY);
         const subX = e.changedTouches[0].clientX - this.startData.clientX;
         const subY = e.changedTouches[0].clientY - this.startData.clientY;
         if (subY < -50) {
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:717", "下滑");
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:750", "下滑");
         } else if (subY > 50) {
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:720", "上滑");
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:753", "上滑");
         } else if (subX > 50) {
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:722", "左滑");
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:755", "左滑");
           if (this.actionList.length > 0) {
             this.openDialog("popupFinish");
           } else {
@@ -19238,9 +19257,9 @@ if (uni.restoreGlobal) {
             }, 1e3);
           }
         } else if (subX < -50) {
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:736", "右滑");
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:769", "右滑");
         } else {
-          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:738", "无效");
+          formatAppLog("log", "at pages/newWorkout/newWorkout.vue:771", "无效");
         }
       },
       changeOpen(item) {
@@ -19312,7 +19331,25 @@ if (uni.restoreGlobal) {
           active: false
         });
       },
+      // 分享之前日历的数据结构
+      async getBeforeList() {
+        const res2 = await train$3.getTrainList({ traineeNo: this.traineeNo });
+        if (res2.data && res2.data.length > 0) {
+          const trainListInfo = {};
+          res2.data.forEach((item) => {
+            const list = JSON.parse(item.trainContent) || [];
+            list.forEach((item1) => {
+              item1.traineeTitle = item1.traineeTitle.substring(0, 5);
+            });
+            trainListInfo[item.trainDate] = list;
+          });
+          this.trainListInfo = trainListInfo;
+          let currentDate = hooks().format("YYYY-MM-DD");
+          this.resultShareList = this.trainListInfo[currentDate] || [];
+        }
+      },
       async finish(traineeStatus) {
+        formatAppLog("log", "at pages/newWorkout/newWorkout.vue:861", "我点击了完成");
         if (!this.actionList || this.actionList.length === 0) {
           return uni.showToast({
             icon: "error",
@@ -19364,6 +19401,15 @@ if (uni.restoreGlobal) {
         uni.removeStorageSync("oldTrainInfo");
         uni.removeStorageSync("actionLibrary");
         const timer = setTimeout(() => {
+          if (traineeStatus === "successShare") {
+            this.getBeforeList();
+            let currentDate = hooks().format("YYYY-MM-DD");
+            let key = this.resultShareList.length - 1;
+            uni.navigateTo({
+              url: `/pages/trainingRecordDetail/trainingRecordDetail?traineeNo=${this.traineeNo}&trainDate=${currentDate}&traineeName=${this.traineeName}&key=${key}`
+            });
+            return;
+          }
           uni.reLaunch({
             url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
           });
@@ -19533,8 +19579,8 @@ if (uni.restoreGlobal) {
       "view",
       {
         class: "new-workout",
-        onTouchstart: _cache[17] || (_cache[17] = (...args) => $options.start && $options.start(...args)),
-        onTouchend: _cache[18] || (_cache[18] = (...args) => $options.end && $options.end(...args))
+        onTouchstart: _cache[19] || (_cache[19] = (...args) => $options.start && $options.start(...args)),
+        onTouchend: _cache[20] || (_cache[20] = (...args) => $options.end && $options.end(...args))
       },
       [
         vue.createElementVNode("view", { class: "background-header" }),
@@ -19543,12 +19589,19 @@ if (uni.restoreGlobal) {
           vue.createCommentVNode(" 这里是状态栏 ")
         ]),
         vue.createElementVNode("view", { class: "header" }, [
-          vue.createElementVNode("view", { class: "title" }, "新建训练"),
+          vue.createElementVNode("view", { class: "title_dakuang" }, [
+            vue.createElementVNode("image", {
+              class: "back_img_style",
+              src: "/static/app-plus/mebrs/back.svg",
+              onClick: _cache[0] || (_cache[0] = (...args) => $options.goBack && $options.goBack(...args))
+            }),
+            vue.createElementVNode("view", { class: "nav_title_style" }, "新建训练")
+          ]),
           vue.createElementVNode("view", null, [
             $options.isShowSave ? (vue.openBlock(), vue.createBlock(_component_van_button, {
               key: 0,
               class: vue.normalizeClass($options.isShowSave && $options.isShowSuccess ? "btn save" : "bluecss btn save"),
-              onClick: _cache[0] || (_cache[0] = ($event) => $options.finish("save"))
+              onClick: _cache[1] || (_cache[1] = ($event) => $options.finish("save"))
             }, {
               default: vue.withCtx(() => [
                 vue.createTextVNode("暂存")
@@ -19559,7 +19612,7 @@ if (uni.restoreGlobal) {
             $options.isShowSave && $options.isShowSuccess ? (vue.openBlock(), vue.createBlock(_component_van_button, {
               key: 1,
               class: "btn",
-              onClick: _cache[1] || (_cache[1] = ($event) => $options.openDialog("popupFinish"))
+              onClick: _cache[2] || (_cache[2] = ($event) => $options.openDialog("popupFinish"))
             }, {
               default: vue.withCtx(() => [
                 vue.createTextVNode("完成训练")
@@ -19573,7 +19626,7 @@ if (uni.restoreGlobal) {
           vue.withDirectives(vue.createElementVNode(
             "input",
             {
-              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.workoutName = $event),
+              "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.workoutName = $event),
               maxlength: "8",
               class: "uni-input",
               placeholder: "请输入训练名称"
@@ -19687,7 +19740,7 @@ if (uni.restoreGlobal) {
                                 vue.withDirectives(vue.createElementVNode("input", {
                                   "onUpdate:modelValue": ($event) => item.kg = $event,
                                   class: "uni-input",
-                                  type: "number",
+                                  type: "digit",
                                   disabled: item.active
                                 }, null, 8, ["onUpdate:modelValue", "disabled"]), [
                                   [vue.vModelText, item.kg]
@@ -19698,7 +19751,7 @@ if (uni.restoreGlobal) {
                                 vue.withDirectives(vue.createElementVNode("input", {
                                   "onUpdate:modelValue": ($event) => item.time = $event,
                                   class: "uni-input",
-                                  type: "number",
+                                  type: "digit",
                                   disabled: item.active
                                 }, null, 8, ["onUpdate:modelValue", "disabled"]), [
                                   [vue.vModelText, item.time]
@@ -19835,7 +19888,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.km = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[3] || (_cache[3] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[4] || (_cache[4] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.km]
                                 ]),
@@ -19846,7 +19899,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.hour = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[4] || (_cache[4] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[5] || (_cache[5] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.hour]
                                 ]),
@@ -19857,7 +19910,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.minute = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[5] || (_cache[5] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[6] || (_cache[6] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.minute]
                                 ]),
@@ -20105,7 +20158,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.hour = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[6] || (_cache[6] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[7] || (_cache[7] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.hour]
                                 ]),
@@ -20116,7 +20169,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.minute = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[7] || (_cache[7] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[8] || (_cache[8] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.minute]
                                 ]),
@@ -20127,7 +20180,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.second = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[8] || (_cache[8] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[9] || (_cache[9] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.second]
                                 ]),
@@ -20377,7 +20430,7 @@ if (uni.restoreGlobal) {
                       class: "uni-input",
                       type: "number",
                       placeholder: "请先设置当前体重",
-                      onBlur: _cache[9] || (_cache[9] = (...args) => $options.technicalData && $options.technicalData(...args))
+                      onBlur: _cache[10] || (_cache[10] = (...args) => $options.technicalData && $options.technicalData(...args))
                     }, null, 40, ["onUpdate:modelValue"]), [
                       [vue.vModelText, i2.weight]
                     ])
@@ -20550,7 +20603,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.hour = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[10] || (_cache[10] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[11] || (_cache[11] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.hour]
                                 ]),
@@ -20561,7 +20614,7 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.minute = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[11] || (_cache[11] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  onBlur: _cache[12] || (_cache[12] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.minute]
                                 ]),
@@ -20572,7 +20625,8 @@ if (uni.restoreGlobal) {
                                   "onUpdate:modelValue": ($event) => item.second = $event,
                                   class: "uni-input",
                                   type: "number",
-                                  onBlur: _cache[12] || (_cache[12] = (...args) => $options.technicalData && $options.technicalData(...args))
+                                  openDialog: "",
+                                  onBlur: _cache[13] || (_cache[13] = (...args) => $options.technicalData && $options.technicalData(...args))
                                 }, null, 40, ["onUpdate:modelValue"]), [
                                   [vue.vModelText, item.second]
                                 ]),
@@ -20582,7 +20636,8 @@ if (uni.restoreGlobal) {
                                 vue.createElementVNode("view", {
                                   class: "img",
                                   onClick: ($event) => ($options.deleteProjectItem(i2.groupList, index), $options.technicalData())
-                                }, null, 8, ["onClick"])
+                                }, null, 8, ["onClick"]),
+                                vue.createTextVNode("finish ")
                               ])
                             ],
                             2
@@ -20615,7 +20670,7 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("view", { class: "footer-button" }, [
           vue.createVNode(_component_van_button, {
             class: "delete",
-            onClick: _cache[13] || (_cache[13] = ($event) => $options.openDialog("popupDelete"))
+            onClick: _cache[14] || (_cache[14] = ($event) => $options.openDialog("popupDelete"))
           }, {
             default: vue.withCtx(() => [
               vue.createElementVNode("view", { class: "img" })
@@ -20649,19 +20704,30 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("view", { class: "second-level-title" }, "是否已经完成训练了"),
                 vue.createElementVNode("view", { class: "botton-box" }, [
                   vue.createVNode(_component_van_button, {
-                    class: "finish",
+                    class: "finish_share",
                     block: "",
-                    onClick: _cache[14] || (_cache[14] = ($event) => $options.finish("success"))
+                    onClick: _cache[15] || (_cache[15] = ($event) => $options.finish("successShare"))
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createTextVNode("确认完成")
+                      vue.createTextVNode("完成训练并生成分享")
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  }),
+                  vue.createVNode(_component_van_button, {
+                    class: "finish",
+                    block: "",
+                    onClick: _cache[16] || (_cache[16] = ($event) => $options.finish("success"))
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("完成训练")
                     ]),
                     _: 1
                     /* STABLE */
                   }),
                   vue.createVNode(_component_van_button, {
                     block: "",
-                    onClick: _cache[15] || (_cache[15] = ($event) => $options.closeDialog("popupFinish"))
+                    onClick: _cache[17] || (_cache[17] = ($event) => $options.closeDialog("popupFinish"))
                   }, {
                     default: vue.withCtx(() => [
                       vue.createTextVNode("取消")
@@ -20704,7 +20770,7 @@ if (uni.restoreGlobal) {
                   }, 8, ["onClick"]),
                   vue.createVNode(_component_van_button, {
                     block: "",
-                    onClick: _cache[16] || (_cache[16] = ($event) => $options.closeDialog("popupDelete"))
+                    onClick: _cache[18] || (_cache[18] = ($event) => $options.closeDialog("popupDelete"))
                   }, {
                     default: vue.withCtx(() => [
                       vue.createTextVNode("取消")
@@ -21012,7 +21078,10 @@ if (uni.restoreGlobal) {
     ]);
   }
   const calendar = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-76b2c24f"], ["__file", "D:/studyUninApp/bodybuilding-app/components/calendar/index.vue"]]);
-  const train$2 = Es.importObject("train");
+  const train$2 = Es.importObject("train", {
+    customUI: true
+    // 取消自动展示的交互提示界面
+  });
   const _sfc_main$k = {
     components: {
       calendar
@@ -21077,7 +21146,7 @@ if (uni.restoreGlobal) {
         this.$refs.popup.close();
       },
       dataAndLabelHandle(item) {
-        formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:118", item, "item");
+        formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:148", item, "item");
         if (!this.trainListInfo[item.day] && item.disabled || item.type !== "current") {
           return;
         }
@@ -21088,7 +21157,7 @@ if (uni.restoreGlobal) {
         str = str + "日";
         this.actionBoxDate = str;
         this.isButton = this.trainListInfo[item.day] && this.trainListInfo[item.day].length < 3 || !this.trainListInfo[item.day];
-        formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:129", "打开弹框", this.trainListInfo[item.day]);
+        formatAppLog("log", "at pages/trainingRecord/trainingRecord.vue:165", "打开弹框", this.trainListInfo[item.day]);
         this.$refs.popup.open();
       },
       selectHandle(day2) {
@@ -21111,10 +21180,16 @@ if (uni.restoreGlobal) {
       },
       addWorkout() {
         if (this.trainListInfo[this.getDay(new Date())] && this.trainListInfo[this.getDay(new Date())].length >= 3) {
-          return uni.showToast({ icon: "none", title: "每日最多添加三次训练记录", duration: 2e3 });
+          return uni.showToast({
+            icon: "none",
+            title: "每日最多添加三次训练记录",
+            duration: 2e3
+          });
         }
         uni.navigateTo({
-          url: `/pages/newWorkout/newWorkout?traineeNo=${this.traineeNo}&trainDate=${this.getDay(new Date())}&traineeName=${this.memberName}`
+          url: `/pages/newWorkout/newWorkout?traineeNo=${this.traineeNo}&trainDate=${this.getDay(
+            new Date()
+          )}&traineeName=${this.memberName}`
         });
       },
       getYearMonth(val) {
@@ -21340,6 +21415,7 @@ if (uni.restoreGlobal) {
         this.traineeNo = option.traineeNo;
         this.trainDate = option.trainDate;
         this.key = option.key;
+        this.traineeName = option.traineeName;
         this.getTrainInfo();
       }
     },
@@ -21373,7 +21449,9 @@ if (uni.restoreGlobal) {
         }
       },
       onClickLeft() {
-        uni.navigateBack();
+        uni.redirectTo({
+          url: `/pages/trainingRecord/trainingRecord?traineeNo=${this.traineeNo}&memberName=${this.traineeName}`
+        });
       },
       formaterTimes(times2, type = 3) {
         const hour = Math.floor(times2 / 3600);
@@ -21401,7 +21479,7 @@ if (uni.restoreGlobal) {
         return week;
       },
       onSelect(option) {
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:389", option, 88);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:394", option, 88);
         this.canvasImageMsg = option.name;
       },
       async uploadImage(callback) {
@@ -21418,11 +21496,11 @@ if (uni.restoreGlobal) {
           //仅为示例，并非真实的资源
           success: (res2) => {
             if (res2.statusCode === 200) {
-              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:405", "下载成功", res2);
+              formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:410", "下载成功", res2);
               uni.saveImageToPhotosAlbum({
                 filePath: res2.tempFilePath,
                 success: (res3) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:409", "保存成功！", res3);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:414", "保存成功！", res3);
                   uni.hideLoading();
                   uni.showModal({
                     showCancel: false,
@@ -21430,15 +21508,15 @@ if (uni.restoreGlobal) {
                     content: "图片已经保存到相册请查看",
                     success: function(res4) {
                       if (res4.confirm) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:417", "用户点击确定");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:422", "用户点击确定");
                       } else if (res4.cancel) {
-                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:419", "用户点击取消");
+                        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:424", "用户点击取消");
                       }
                     }
                   });
                 },
                 fail: (err2) => {
-                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:425", "err", err2);
+                  formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:430", "err", err2);
                 }
               });
             }
@@ -21450,16 +21528,16 @@ if (uni.restoreGlobal) {
           pname: "bodybuildingApp.myapp",
           action: "weixin://"
         })) {
-          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:439", "微信应用已安装");
+          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:444", "微信应用已安装");
           return true;
         } else {
-          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:442", "微信应用未安装");
+          formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:447", "微信应用未安装");
           return false;
         }
       },
       receiveRenderData(option) {
         this.$refs.popup.close();
-        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:448", option.name, 8888);
+        formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:453", option.name, 8888);
         this.baseUrl = option.base64;
         this.uploadImage((url) => {
           uni.showLoading({ title: "加载中" });
@@ -21474,11 +21552,11 @@ if (uni.restoreGlobal) {
                   type: 2,
                   imageUrl: url,
                   success: function(res2) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:464", "success:" + JSON.stringify(res2));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:469", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
                   fail: function(err2) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:468", "fail:" + JSON.stringify(err2));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:473", "fail:" + JSON.stringify(err2));
                   }
                 });
               } else {
@@ -21498,11 +21576,11 @@ if (uni.restoreGlobal) {
                   type: 2,
                   imageUrl: url,
                   success: function(res2) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:488", "success:" + JSON.stringify(res2));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:493", "success:" + JSON.stringify(res2));
                     uni.hideLoading();
                   },
                   fail: function(err2) {
-                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:492", "fail:" + JSON.stringify(err2));
+                    formatAppLog("log", "at pages/trainingRecordDetail/trainingRecordDetail.vue:497", "fail:" + JSON.stringify(err2));
                   }
                 });
               } else {
@@ -29014,6 +29092,8 @@ if (uni.restoreGlobal) {
       ]),
       vue.createElementVNode("scroll-view", { "scroll-y": "true" }, [
         vue.createElementVNode("view", { class: "content" }, [
+          vue.createElementVNode("p", null, "更新日期：2023年3月13日"),
+          vue.createElementVNode("p", null, "生效日期：2023年3月13日"),
           vue.createElementVNode("p", null, " 上海星宇健变科技有限公司及关联公司（以下简称我们）非常重视您的个人信息，并让您对个人信息拥有控制权，我们会使用强大的加密技术来保护您的隐私，同时制定严格的政策来管理所有数据。当您访问健变相关互联网产品时，或使用我们提供的服务前，您需要同意本政策中关于我们如何收集、使用、储存和分享您的相关信息的规定。如果您不同意本隐私政策中的任何内容，请立即停止使用或访问我们的产品和服务。若您对本政策有任何问题，请联系： kingtran@sina.cn。本隐私政策要点如下： "),
           vue.createElementVNode("p", null, " 1.我们将逐一说明我们收集的您的个人信息类型及其对应的用途，以便您了解我们针对某一特定功能所收集的具体个人信息的类别、使用理由及收集方式。 "),
           vue.createElementVNode("p", null, " 2.当您使用一些功能时，我们会在获得您的同意后，收集您的一些敏感信息，除非按照相关法律法规要求必须收集，拒绝提供这些信息仅会使您无法使用相关特定功能，但不影响您正常使用健变及相关互联 "),
@@ -29021,8 +29101,8 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, " 4. 目前，健变及相关互联网产品不会主动从健变及相关互联网产品外的第三方获取您的个人信息。如未来为业务发展需要从第三方间接获取您的个人信息，我们会在获取前向您明示您个人信息的来源、类型及使用范围，如健变及相关互联网产品开展业务需进行的个人信息处理活动超出您原本向第三方提供个人信息时的授权同意范围，我们将在处理您的该等个人信息前，征得您的明示同意；此外，我们也将会严格遵守相关法律法规的规定，并要求第三方保障其提供的信息的合法性。 "),
           vue.createElementVNode("p", null, " 5.您可以通过本指引所列途径访问、更正、删除您的个人信息，也可以撤回同意、注销帐号、投诉举报以及设置隐私功能。 "),
           vue.createElementVNode("p", null, "如您想了解更加详尽的信息，请根据以下索引阅读相应章节："),
-          vue.createElementVNode("p", null, "如您想了解更加详尽的信息，请根据以下索引阅读相应章节："),
           vue.createElementVNode("p", null, "1. 我们如何搜集和使用您的信息"),
+          vue.createElementVNode("p", null, "2、第三方SDK目录"),
           vue.createElementVNode("p", null, "3. 如何更新、变更、导出、删除您的信息"),
           vue.createElementVNode("p", null, "4. 我们如何保护您的个人信息"),
           vue.createElementVNode("p", null, "5. 我们如何处理未成年人提供的个人信息"),
@@ -29032,46 +29112,74 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, "9. 本政策的更新"),
           vue.createElementVNode("p", null, "10. 适用范围"),
           vue.createElementVNode("p", null, "11. 如何联系我们"),
-          vue.createElementVNode("p", null, "一. 我们如何搜集和使用您的信息？"),
+          vue.createElementVNode("h3", null, "一. 我们如何搜集和使用您的信息？"),
           vue.createElementVNode("p", null, "1. 我们如何搜集您的信息？"),
           vue.createElementVNode("p", null, "我们提供服务时，可能会收集、储存和使用下列信息："),
-          vue.createElementVNode("p", null, "1.1 您提供的信息"),
-          vue.createElementVNode("p", null, " 1.1.1 您在注册账户或使用我们的服务时，向我们提供的可用于识别用户的个人身份的信息，例如姓名、电话号码、或我们可以正当地通过链接找到此类信息的其他数据。如果您想充分使用我们提供的各种分享功能，可能还需要创建公开显示的个人资料，其中可能会包含您的姓名和照片。 "),
-          vue.createElementVNode("p", null, " 1.1.2 您通过我们的服务向其他方提供的共享信息，以及您使用我们的服务时上传、提交、存储、发送或接收的信息。 "),
-          vue.createElementVNode("p", null, " 1.1.3 我们会使用第三方SDK采集您的设备信息(设备MAC地址、IMEI和Android id)、浏览信息、点击信息，并将该等信息储存为日志信息，用于记住您的身份、分析您使用我们服务的情况、优化广告投放。在为用户提供服务时，我们还会使用以下SDK技术，SDK提供的功能，所需的权限与收集的用户信息为：  SDK权限与收集用户信息 "),
+          vue.createElementVNode("p", null, "1.1 注册、登录账号"),
+          vue.createElementVNode("p", null, " 1.1.1 当您在注册、登录健变时，您可以通过手机号登录创建账号，并可以完善您的资料（包括姓名、性别），收集这些信息是为了帮助您完成注册。 "),
+          vue.createElementVNode("p", null, " 1.1.2您也使用第三方账号登录健变，我们在得到您的授权后，会获取您的微信头像和昵称，用于与健变账号的绑定，使您可以直接登录并使用本产品相关服务，收集这些信息是为了帮助您完成注册。 "),
           vue.createElementVNode("p", null, "1.2 您在使用服务过程中，我们获取的信息"),
           vue.createElementVNode("p", null, " 我们会收集您使用的服务以及使用方式的信息，如您使用 健变及相关互联网产品 运动、在 健变 会员以及在使用 健变 会员、使用 健变 硬件产品或服务时可能产生的相关信息。此类信息包括： "),
           vue.createElementVNode("p", null, " 1.2.1 设备信息：我们会根据您在软件安装及/或使用授权的具体权限，接收并记录您所使用的设备相关信息，例如您的设备型号、操作系统版本信息、设备设置、移动设备版本、设备识别码、屏幕分表率、设备环境等软硬件特征信息、设备所在位置相关信息，例如IP地址、GPS位置以及能够提供相关信息的WLAN接入点、蓝牙和基站等传感器信息。如果您在安装及/或使用过程中拒绝授予我们相应权限的，我们并不会记录您上述对应的信息。 "),
           vue.createElementVNode("p", null, "1.2.2 日志信息"),
           vue.createElementVNode("p", null, " A. 设备或软件信息，例如您的移动设备、网页浏览器或用于接入我们服务的其他程序所提供的配置信息、您的IP地址和移动设备所用的版本和设备识别码； "),
-          vue.createElementVNode("p", null, " B. 在使用我们服务时搜索或浏览的信息，例如您使用的网页搜索词语、访问的社交媒体页面URL地址，以及您在使用我们服务时浏览或要求提供的其他信息和内容详情； "),
           vue.createElementVNode("p", null, "1.2.3 IP地址"),
           vue.createElementVNode("p", null, " A. 有关您曾使用的移动应用（APP）和其他软件的信息，以及您曾经使用该等移动应用和软件的信息； "),
           vue.createElementVNode("p", null, "B. 您通过我们的服务进行通讯的信息，例如曾通讯的账号，数据和时长；"),
           vue.createElementVNode("p", null, " C. 您通过我们的服务分享的内容所包含的信息（元数据），例如拍摄或上传的共享照片或录像的日期、时间。 "),
           vue.createElementVNode("p", null, "1.2.5 扫描二维码、拍摄照片"),
           vue.createElementVNode("p", null, " 当您使用扫描二维码、拍摄照片、拍摄视频功能时，我们将访问您的设备相机相关权限，并收集您提供的基于扫描二维码、拍摄照片后向我们上传的图片、视频信息。如您拒绝提供权限和内容的，仅会使您无法使用该功能，但并不影响您正常使用 健变 的其他功能。同时，您也可以随时通过相关功能设置取消该权限。当您取消该授权后，我们将不再收集该信息，也无法再为您提供上述与之对应的服务；但除非您依照法律的规定删除了您的信息，否则您的取消行为不会影响我们基于您之前的授权进行的信息的处理、存储。 "),
-          vue.createElementVNode("p", null, "1.2.9 交易信息"),
+          vue.createElementVNode("p", null, "1.2.6 交易信息"),
           vue.createElementVNode("p", null, " 您可以在 健变及相关互联网产品内购买商品/服务（如：健变 会员服务）。在您使用该功能的过程中可能会需要进行支付，在支付过程中，我们可能会收集您的第三方支付账号（例如支付宝账号、微信账号、银联账号）。 "),
-          vue.createElementVNode("p", null, "1.2.11 来源于第三方的信息"),
+          vue.createElementVNode("p", null, "1.2.7 来源于第三方的信息"),
           vue.createElementVNode("p", null, " 在一些法律允许的情况下，我们可能从第三方处获得您的个人信息。例如： "),
           vue.createElementVNode("p", null, " * 出于安全和防欺诈的目的，针对特定账号、金融交易等服务，在您授权的前提下，通过合法来源核实您的信息（如电话号码）； "),
           vue.createElementVNode("p", null, " * 通过指定的唯一标识符（如从广告主处获得的IMEI编号）为您对应提供广告服务； "),
           vue.createElementVNode("p", null, " * 我们还可能从第三方社交网络服务中获取某些信息，例如账户、昵称（例如，当您使用社交网络账户登录 健变及相关互联网产品 服务时）； "),
-          vue.createElementVNode("p", null, "1.2.12 非个人信息"),
+          vue.createElementVNode("p", null, "1.2.8 非个人信息"),
           vue.createElementVNode("p", null, " 我们还可能收集其他无法识别到特定个人、根据当地适用法律不属于个人信息的信息，例如您使用特定服务时产生的统计类数据，如匿名设备相关信息、日活事件、页面访问事件、页面访问时长事件、会话事件；网络监控数据如请求时长、请求与错误请求数等；以及应用崩溃事件。收集此类信息的目的在于改善我们向您提供的服务。所收集信息的类别和数量取决于您如何使用我们产品或服务。 "),
-          vue.createElementVNode("p", null, "2. 我们如何使用您的信息"),
+          vue.createElementVNode("p", null, " 2.第三方SDK目录(我们会对接入第三方SDK进行严格检测，并对您及时公开的说明接入SDK的最新情况，具体请以第三方SDK的官方隐私政策为准) "),
+          vue.createTextVNode(" 2.1、微信开发平台 "),
+          vue.createElementVNode("p", null, "SDK名称：微信开放平台"),
+          vue.createElementVNode("p", null, "包名信息：com.tencent.mm"),
+          vue.createElementVNode("p", null, " 使用目的：接入微信开放平台是为了您在使用本应用时，可以正常使用微信登录、身体评估报告的微信分享和微信朋友圈分享、购买金卡教练时使用微信支付功能。 "),
+          vue.createElementVNode("p", null, "使用的权限：android.permission.ACCESS_NETWORK_STATE"),
+          vue.createElementVNode("p", null, "android.permission.ACCESS_WIFI_STATE"),
+          vue.createElementVNode("p", null, "收集个人数据类型：存储的个人文件、网络信息"),
+          vue.createElementVNode("p", null, " 第三方SDK隐私协议地址：https://weixin.qq.com/cgi-bin/readtemplate?lang=zh_CN&t=weixin_agreement&s=privacy "),
+          vue.createElementVNode("p", null, "2.2、支付宝开放平台"),
+          vue.createElementVNode("p", null, "SDK名称：支付宝开放平台"),
+          vue.createElementVNode("p", null, "包名信息：com.alipay"),
+          vue.createElementVNode("p", null, " 使用目的：接入支付宝开放平台是为了您在使用本应用购买金卡教练时可以正常使用支付宝支付功能。 "),
+          vue.createElementVNode("p", null, "使用的权限：android.permission.ACCESS_NETWORK_STATE"),
+          vue.createElementVNode("p", null, "android.permission.ACCESS_WIFI_STATE"),
+          vue.createElementVNode("p", null, "收集个人数据类型：网络信息"),
+          vue.createElementVNode("p", null, " 第三方SDK隐私协议地址：https://render.alipay.com/p/yuyan/180020010001196791/preview.html?agreementId=AG00000132 "),
+          vue.createElementVNode("p", null, "2.3、个推·消息推送"),
+          vue.createElementVNode("p", null, "SDK名称：个推·消息推送"),
+          vue.createElementVNode("p", null, "包名信息：com.igexin"),
+          vue.createElementVNode("p", null, " 使用目的：消息推送服务供应商：由每日互动股份有限公司提供推送技术服务，我们可能会将您的设备平台、设备厂商、设备品牌、设备识别码等设备信息，应用列表信息、网络信息以及位置相关信息提供给每日互动股份有限公司，用于为您提供消息推送技术服务。我们在向您推送消息时，我们可能会授权每日互动股份有限公司进行链路调节，相互促活被关闭的SDK推送进程，保障您可以及时接收到我们向您推送的消息。详细内容请访问《个推用户隐私政策》 "),
+          vue.createElementVNode("p", null, "使用的权限：android.permission.ACCESS_NETWORK_STATE"),
+          vue.createElementVNode("p", null, "android.permission.ACCESS_WIFI_STATE"),
+          vue.createElementVNode("p", null, "android.permission.READ_PHONE_STATE"),
+          vue.createElementVNode("p", null, "android.permission.VIBRATE"),
+          vue.createElementVNode("p", null, "android.permission.GET_TASKS"),
+          vue.createElementVNode("p", null, " 收集个人数据类型：设备信息（IMEI、ANDROID_ID、DEVICE_ID、IMSI）、应用已安装列表、网络信息 "),
+          vue.createElementVNode("p", null, "第三方SDK隐私协议地址：http://docs.getui.com/privacy"),
+          vue.createElementVNode("p", null, "3. 我们如何使用您的信息"),
           vue.createElementVNode("p", null, " 收集个人信息的目的在于向您提供产品或服务，并且保证我们遵守适用的相关法律、法规及其他规范性文件。我们可能将上述收集的信息用作以下用途： "),
-          vue.createElementVNode("p", null, " 2.1 向您提供、处理、维护、改善、开发我们的产品或提供给您的服务， 例如交付、验证、售后、客户支持和广告宣传； "),
-          vue.createElementVNode("p", null, " 2.2 在我们提供服务时，用于身份验证、客户服务、安全防范、诈骗监测、存档和备份用途，确保我们向您提供的产品和服务的安全性； "),
-          vue.createElementVNode("p", null, " 2.3 内部目的，如数据分析、研究和开发与我们产品或服务的使用相关的统计信息，以更好地改进我们的产品或服务； "),
-          vue.createElementVNode("p", null, "2.4 帮助我们设计新服务，改善我们现有服务；"),
-          vue.createElementVNode("p", null, "2.5 执行软件验证、升级服务；"),
-          vue.createElementVNode("p", null, " 2.6 应用户特殊要求而提供特定服务时，需要将信息提供给我们的关联公司、第三方或其他用户； "),
-          vue.createElementVNode("p", null, "2.7 其他不违反任何强制性法律法规的情况；"),
-          vue.createElementVNode("p", null, "2.8 让您参与有关我们产品和服务的调查；"),
-          vue.createElementVNode("p", null, " 2.9 储存并维护与您相关的信息，用于我们的业务运营 （例如业务统计）或履行法律义务； "),
-          vue.createElementVNode("p", null, "2.10 其他征得您同意的目的。"),
+          vue.createElementVNode("p", null, " 3.1 向您提供、处理、维护、改善、开发我们的产品或提供给您的服务， 例如交付、验证、售后、客户支持和广告宣传； "),
+          vue.createElementVNode("p", null, " 3.2 在我们提供服务时，用于身份验证、客户服务、安全防范、诈骗监测、存档和备份用途，确保我们向您提供的产品和服务的安全性； "),
+          vue.createElementVNode("p", null, " 3.3 内部目的，如数据分析、研究和开发与我们产品或服务的使用相关的统计信息，以更好地改进我们的产品或服务； "),
+          vue.createElementVNode("p", null, "3.4 帮助我们设计新服务，改善我们现有服务；"),
+          vue.createElementVNode("p", null, "3.5 执行软件验证、升级服务；"),
+          vue.createElementVNode("p", null, " 3.6 应用户特殊要求而提供特定服务时，需要将信息提供给我们的关联公司、第三方或其他用户； "),
+          vue.createElementVNode("p", null, "3.7 其他不违反任何强制性法律法规的情况；"),
+          vue.createElementVNode("p", null, "3.8 让您参与有关我们产品和服务的调查；"),
+          vue.createElementVNode("p", null, " 3.9 储存并维护与您相关的信息，用于我们的业务运营 （例如业务统计）或履行法律义务； "),
+          vue.createElementVNode("p", null, " 3.10应用内推送服务的授权合作伙伴：推送合作伙伴会在我们提供的服务中使用SDK（软件程序开发包），可能将访问诸如您的系统语言、网络类型、IP 地址、相册、设备信息、外部存储状态、最近一次地理位置信息、网络位置信息、持续定位、WiFi 信息、应用安装列表，但不会采集您的个人身份信息。这些信息是为了用于创建内部用户编号以帮助我们更好地进行精准的信息推送，避免重复投递信息，对您造成信息干扰。 "),
+          vue.createElementVNode("p", null, " 3.11统计服务的授权合作伙伴：统计合作伙伴会在我们提供的服务中使用SDK（软件程序开发包），可能将访问诸如您的网络类型、WiFi信息、IDFA、IDFV，但不会采集您的个人身份信息。这些信息是为了用于帮助我们分析产品功能的使用情况，以更好地改进我们的产品和/或服务，提高您的用户体验。 "),
+          vue.createElementVNode("p", null, "3.12 其他征得您同意的目的。"),
           vue.createElementVNode("p", null, " 关于我们如何使用您的信息（其中可能包含个人信息），下面提供了更多详细示例： "),
           vue.createElementVNode("p", null, "* 登录使用健变及相关互联网产品产品或服务"),
           vue.createElementVNode("p", null, " * 创建及维护您的健变及相关互联网产品账号。 您通过网站或移动设备创建健变及相关互联网产品账号时提供的个人信息可用于建立您个人健变及相关互联网产品账号和个人资料； "),
@@ -29079,9 +29187,8 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, " * 进行设备的分析以提供更好的用户体验。 健变及相关互联网产品将会进行硬件及软件的分析，以进一步提升设备的使用体验。 "),
           vue.createElementVNode("p", null, " 我们可能将这些信息与其他信息结合起来（包括跨不同服务或设备如电脑、手机、智能硬件和其他联网设备中的信息），用于提供和改进我们的产品、服务、内容和广告宣传。例如，我们可能会在所有需要健变及相关互联网产品账号的服务中使用您健变及相关互联网产品账号的详细信息。 "),
           vue.createElementVNode("p", null, "3. 我们承诺"),
-          vue.createElementVNode("p", null, " 3.2 我们不会与广告主分享可用于识别您个人身份的信息，例如您的姓名或电子邮件地址（除非经您授权同意）； "),
-          vue.createElementVNode("p", null, " 3.3 在任何时候、任何情况下都不会向任何第三方出售您的个人信息，我们只会在法律允许的范围内使用根据本协议获得的信息。我们会制定严格的政策保护您的个人信息，除非事先获得您的授权或本声明另有规定之外，不会将您的这些信息对外公开或向第三方提供。 "),
-          vue.createElementVNode("p"),
+          vue.createElementVNode("p", null, " 3.1 我们不会与广告主分享可用于识别您个人身份的信息，例如您的姓名或电子邮件地址（除非经您授权同意）； "),
+          vue.createElementVNode("p", null, " 3.2 在任何时候、任何情况下都不会向任何第三方出售您的个人信息，我们只会在法律允许的范围内使用根据本协议获得的信息。我们会制定严格的政策保护您的个人信息，除非事先获得您的授权或本声明另有规定之外，不会将您的这些信息对外公开或向第三方提供。 "),
           vue.createElementVNode("p", null, " 4. 健变及相关互联网产品服务中的第三方服务由外部第三方主体提供，健变及相关互联网产品无法获得您在使用该类第三方服务时产生的信息。但是，如果您已明示同意该第三方获得您的地理位置信息，该第三方将通过健变及相关互联网产品接口获得您的终端地理位置信息。该信息属于敏感信息，拒绝提供该信息仅会使您无法使用上述第三方服务，但不影响您正常使用健变及相关互联网产品的功能。 "),
           vue.createElementVNode("p", null, " 另外，根据相关法律法规及国家标准，以下情形中，我们可能会收集、使用您的相关个人信息无需征求您的授权同意： "),
           vue.createElementVNode("p", null, " 4.1 与国家安全、国防安全等国家利益直接相关的；与公共安全、公共卫生、公众知情等重大公共利益直接相关的； "),
@@ -29100,7 +29207,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, "5. 除非经过您的同意，否则我们不会向任何人提供您的敏感个人信息。"),
           vue.createElementVNode("p", null, "6. 个人信息的匿名化处理"),
           vue.createElementVNode("p", null, " 在收集到您的个人信息后，我们将通过技术手段及时对数据进行匿名化处理。在不泄露您个人信息的前提下，健变及相关互联网产品有权对匿名化处理后的用户数据库进行挖掘、分析和利用（包括商业性使用），有权对产品/服务使用情况进行统计并与公众/第三方共享脱敏的统计信息。 "),
-          vue.createElementVNode("p", null, "二. 如何更新、变更、导出、删除您的信息"),
+          vue.createElementVNode("h3", null, "二. 如何更新、变更、导出、删除您的信息"),
           vue.createElementVNode("p", null, "依据某些司法管辖区的法律规定："),
           vue.createElementVNode("p", null, " 1. 您在使用我们的产品和服务时，会被要求提供您真实的个人信息，您应当对您所提供信息的真实性、合法性、有效性及完整性负责，并及时更新和维护您的个人信息，以保证信息的真实、合法和有效。您可以随时管理您的个人信息，例如您的个人账户注册信息。 "),
           vue.createElementVNode("p", null, " 2. 您可以自行从 健变 账号中删除您的内容或个人信息，或要求我们删除或修改信息，例如您想要删除个人帐户，可以发送邮件到 kingtran@sina.cn 与我们联络并提出您的要求，我们将在收到后15个工作日内联络您并完成核查和处理。 "),
@@ -29113,7 +29220,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, " 如您希望注销具体产品或服务， 您可以通过「我」-「设置」-「注销账号」进行账号的注销。当您注销账号后，我们将删除或匿名化处理您的个人信息。 "),
           vue.createElementVNode("p", null, " 如您希望注销健变及相关互联网产品账号，由于注销健变及相关互联网产品账号的操作将使您无法使用健变及相关互联网产品全线产品或服务，请您谨慎操作。 "),
           vue.createElementVNode("p", null, " 当您通过第三方账号授权登录健变及相关互联网产品时，需要向第三方申请注销账号。 "),
-          vue.createElementVNode("p", null, "三. 我们如何保护您的个人信息"),
+          vue.createElementVNode("h3", null, "三. 我们如何保护您的个人信息"),
           vue.createElementVNode("p", null, " 1. 所有 健变 产品都内置了强大的安全功能，并且我们制定了严格的信息管理政策，配备专业的技术团队，采取了一系列合理的预防措施，以保护您的个人信息不会遭受未经授权的浏览、披露、滥用、变更、破坏以及损失，其中包括：（1）使用加密技术来确保您的数据在传输过程中保持私密性；（2）提供多种安全功能来协助您保护自己的帐号安全；（3）审查我们在收集、存储和处理信息方面的做法（包括实体安全措施），以防未经授权的人员访问我们的系统；（4）所有因提供服务而必须接触个人信息的 健变 员工、承包商和代理商等，都需要遵守合同中规定的严格保密义务，否则可将被处分或被解约。 "),
           vue.createElementVNode("p", null, " 2. 尽管已经采取了上述合理有效措施，并已经遵守了相关法律规定要求的标准，但请您理解，由于技术的限制以及可能存在的各种恶意手段，在互联网行业，即便竭尽所能加强安全措施，也不可能始终保证信息百分之百的安全，我们将尽力确保您提供给我们的个人信息的安全性。您确认知悉并理解，您接入我们的服务所用的系统和通讯网络，有可能因我们可控范围外的因素而出现问题。因此，我们强烈建议您采取积极措施保护个人信息的安全，包括但不限于使用复杂密码、定期修改密码、不将自己的账号密码等个人信息透露给他人。 "),
           vue.createElementVNode("p", null, " 3. 我们会制定应急处理预案，并在发生用户信息安全事件时立即应急预案，努力阻止该等安全事件的影响和后果扩大。在不幸发生用户信息安全事件（泄露、丢失等）后，我们将按照法律法规的要求，及时向您告知：安全事件的基本情况和可能的影响、我们已采取或将要采取的处置措施、您可自主防范和降低风险的建议、对您的补救措施等。事件相关情况我们将以邮件、信函、电话、通知等方式告知您，难以逐一告知个人信息主体时，我们会采取合理、有效的方式发布公告。同时，我们还将按照监管部门要求，上报个人信息安全事件的处置情况。 "),
@@ -29121,11 +29228,11 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, " 您可以通过不向任何人（除非此人经您正式授权）披露您的登录密码或账号信息，您可以为健变及相关互联网产品设置唯一的密码，以防止其他网站密码泄露危害您在健变及相关互联网产品的账号安全。无论何时，请不要向任何人（包括自称是健变及相关互联网产品客服的人士）透露您收到的验证码。无论您何时作为健变及相关互联网产品账号用户登录健变及相关互联网产品，尤其是在他人的计算机、手机或公共互联网终端上登录时，在使用结束时您总应注销登出。 "),
           vue.createElementVNode("p", null, " 健变及相关互联网产品不对因您未能保持个人信息的私密性而导致第三方访问您的个人信息进而造成的安全疏漏承担责任。尽管有上述规定，如果发生其他任何互联网用户未经授权使用您账号的情况或其他任何安全漏洞，您应当立即通知我们。 "),
           vue.createElementVNode("p", null, "您的协助将有助于我们保护您个人信息的私密性。"),
-          vue.createElementVNode("p", null, "四. 我们如何处理未成年人提供的个人信息"),
+          vue.createElementVNode("h3", null, "四. 我们如何处理未成年人提供的个人信息"),
           vue.createElementVNode("p", null, " 1. 我们将不满 18 周岁的任何人均视为未成年人，我们非常重视未成年人信息的保护。在电子商务活动中我们推定您具有相应的民事行为能力。如您为未成年人，我们要求您请您的父母或监护人监护、指导下共同仔细阅读本隐私政策，并在征得您的父母或监护人同意的前提下使用我们的服务或向我们提供信息。 "),
           vue.createElementVNode("p", null, " 2. 对于经父母或监护人同意使用我们的产品或服务而收集未成年人个人信息的情况，我们只会在法律允许的范围内，或依当地法律取得监护人的同意，或是为了保护未成年人而使用或披露有关未成年人的个人数据。 "),
           vue.createElementVNode("p", null, " 3. 我们认为监督孩子使用我们的产品或服务是家长或监护人的责任。我们不直接向儿童提供服务，也不将儿童的个人信息用于营销目的。若您是未成年人的家长或监护人，当您对您所监护的未成年人的个人信息有相关疑问时，或认为未成年人向健变及相关互联网产品提交了个人信息，请通过本隐私政策第十一条中公示的联系方式与我们联系。 "),
-          vue.createElementVNode("p", null, "五. 我们如何共享、转让、公开披露您的个人信息"),
+          vue.createElementVNode("h3", null, "五. 我们如何共享、转让、公开披露您的个人信息"),
           vue.createElementVNode("p", null, "5.1 共享"),
           vue.createElementVNode("p", null, "我们不会将任何个人信息出售给第三方。"),
           vue.createElementVNode("p", null, " 我们有时可能会向第三方共享您的个人信息，以便提供或改进我们的产品或服务，包括根据您的要求提供产品或服务。如果您不再希望我们共享这些信息，请发送电子邮件到kingtran@sina.cn联系我们。 "),
@@ -29139,7 +29246,6 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, " 为保证向您提供本隐私政策目的所述的服务，我们可能会向第三方服务提供商与业务合作伙伴等第三方共享必要的个人信息。 "),
           vue.createElementVNode("p", null, " 这包括我们的物流供应商、数据中心、数据存储设施、客户服务供应商、广告和营销服务供应商以及其他业务合作伙伴，比如：支付宝（中国）网络技术有限公司、深圳市腾讯计算机系统有限公司、高德软件有限公司等。这些第三方可能代表健变及相关互联网产品或出于本隐私政策的一项或多项目的处理您的个人信息。我们保证仅出于正当、合法、必要、特定、明确的目的共享为您提供服务所必要的个人信息。 健变及相关互联网产品将进行尽职调查并签订合同，以确保第三方服务提供商遵守您所属司法管辖区中适用的隐私法律。第三方服务提供商也可能拥有其子处理者。 "),
           vue.createElementVNode("p", null, " 为提供成效衡量、分析和其他商业服务，我们还可能以汇总的形式与第三方（例如向我们的广告商）共享信息（非个人信息）。我们使用所掌握的信息来帮助广告主和其他合作伙伴评估他们广告和服务的成效及覆盖情况，并了解使用他们服务的人群类型以及人们如何与其网站、应用和服务互动。我们也可能与其共享我们服务的一般使用趋势，例如购买某些产品或从事某些交易的特定人群中的客户数量。 "),
-          vue.createElementVNode("p", null, " 接入第三方服务的情形，我们可能会接入第三方SDK服务，并将我们依照本政策收集的您某些信息共享给该等第三方服务商，以便提高更好的客户服务和用户体验。 "),
           vue.createElementVNode("p", null, " 目前，我们接入的第三方服务商主要包括以下几种类型：1.包括收集厂商Push推送、特定事件提醒等；2.用于支付相关服务，包括订单支付、交易行为核验、收入结算、支付信息汇总统计等；3.用于在您同意的情况下获取设备位置权限、搜集设备信息和日志信息等；4.用于第三方授权服务，包括第三方账号登陆、将有关内容分享至第三方产品等；5.用于广告相关服务，包括广告展示、广告统计及监控等；6.用于支持产品功能模块，包括直播、视频播放、智能客服、内容存储等；7.用于优化产品性能，包括提高硬件配网能力、减低服务器成本、功能热修复等；8.用于账号安全、产品加固相关服务，包括网络监测、域名解析、防劫持、反垃圾反作弊、加解密服务等。我们仅会出于正当、必要、特定的目的共享您的信息。对我们与之共享信息的第三方服务商，我们会要求他们履行相关保密义务并采取相应的安全措施。第三方社交媒体或其他服务由相关的第三方负责运营。您使用该等第三方的社交媒体服务或其他服务（包括您向该等第三方提供的任何信息），须受第三方自己的服务条款及信息保护声明（而非本政策）约束，您需要仔细阅读其条款。本政策仅适用于我们所收集的个人信息，并不适用于任何第三方提供的服务或第三方的信息使用规则。如您发现这些第三方社交媒体或其他服务存在风险时，建议您终止相关操作以保护您的合法权益。 "),
           vue.createElementVNode("p", null, "5.1.4 其他"),
           vue.createElementVNode("p", null, " 根据法律法规规定要求、法律程序、诉讼和/或公共机构和政府部门依法提出的要求，健变及相关互联网产品可能有必要披露您的个人信息。如果我们确定就国家安全、执法或具有公众重要性的其他事宜而言，披露是必须的或适当的，我们也可能会披露关于您的信息。 "),
@@ -29151,23 +29257,23 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("p", null, " 除在公布中奖活动名单时会脱敏展示中奖者的手机号或者健变及相关互联网产品账号、用户名外，健变及相关互联网产品仅会在以下情况下，公开披露您的个人信息： "),
           vue.createElementVNode("p", null, "* 获得您的明确同意；"),
           vue.createElementVNode("p", null, " * 基于法律或合理依据的公开披露：包括法律法规规范、法律程序、诉讼或应政府主管部门要求。 "),
-          vue.createElementVNode("p", null, "六. 信息的存储"),
+          vue.createElementVNode("h3", null, "六. 信息的存储"),
           vue.createElementVNode("p", null, "1. 信息存储的地点"),
           vue.createElementVNode("p", null, "我们会按照法律法规规定，将境内收集的用户个人信息存储于中国境内。"),
           vue.createElementVNode("p", null, "2. 信息存储的期限"),
           vue.createElementVNode("p", null, "一般而言，我们仅为实现目的所必需的时间保留您的个人信息，例如："),
           vue.createElementVNode("p", null, " 手机号码：若您需要使用健变及相关互联网产品服务，我们需要一直保存您的手机号码，以保证您正常使用该服务，当您注销 健变 帐户后，我们将删除相应的信息； "),
           vue.createElementVNode("p", null, " 当我们的产品或服务发生停止运营的情形时，公告等形式通知您，并在合理的期限内删除您的个人信息或进行匿名化处理。 "),
-          vue.createElementVNode("p", null, "七. 第三方服务提供商"),
+          vue.createElementVNode("h3", null, "七. 第三方服务提供商"),
           vue.createElementVNode("p", null, " 1. 为方便您的访问并丰富您的体验，可能会有第三方提供的产品或服务。您可以选择是否访问这类内容或链接，或是否使用该第三方的产品或服务。但我们对于第三方提供的产品或服务没有控制权。我们无法控制第三方掌握的您的任何个人信息。您在使用第三方产品或服务过程中的信息保护问题，不适用于本政策的管理。本政策也不适用于您自行选择提供给第三方的任何信息。请您查看该第三方的隐私保护政策。 "),
           vue.createElementVNode("p", null, " 2. 参加营销推广活动。当您选择参加我们举办的有关营销活动时，根据活动需要您需要提供姓名、通信地址、联系方式、银行账号等信息，以便第三方能及时向您提供奖品。当您选择参加我们举办的有关营销活动时，根据活动需要您需要提供姓名、通信地址、联系方式、银行账号等信息。经过您的明示同意，我们会将上述信息与第三方共享，以便我们能委托第三方及时向您提供奖品。 "),
-          vue.createElementVNode("p", null, "八.本政策的更新"),
+          vue.createElementVNode("h3", null, "八.本政策的更新"),
           vue.createElementVNode("p", null, " 1. 我们可能会不定期修改、更新本隐私政策，有关隐私政策的更新，我们会在 健变及相关互联网产品 中以通知公告等形式发布，您可以访问 健变及相关互联网产品 查询最新版本的隐私政策。对于重大变更，我们会向您发出郑重通知（包括对于某些服务，我们会通过电子邮件发送通知，说明对隐私政策进行的更改）。 "),
-          vue.createElementVNode("p", null, "九. 适用范围"),
+          vue.createElementVNode("h3", null, "九. 适用范围"),
           vue.createElementVNode("p", null, " 1. 我们的隐私政策适用于由乐途（广州）健身科技有限公司及其关联公司提供的所有服务，包括健变及相关互联网产品上提供的服务，但是不包括附有独立隐私政策的服务（如第三方提供的产品和服务）。 "),
           vue.createElementVNode("p", null, " 2. 我们的隐私权政策不适用于第三方提供的产品和服务，例如在 健变及相关互联网产品上由第三方提供的产品和服务，以及在我们的服务中链接到的其他网站，这些产品、服务或网站会有独立的隐私政策予以规范，请另行查阅相应的政策规定。 "),
           vue.createElementVNode("p", null, " 3. 对于为我们的服务进行广告宣传，以及可能使用我们的 Cookie 或其他日志信息来投放和使用广告的其他公司和组织，我们的隐私权政策并未涵盖其信息处理政策。 "),
-          vue.createElementVNode("p", null, "十. 如何联系我们"),
+          vue.createElementVNode("h3", null, "十. 如何联系我们"),
           vue.createElementVNode("p", null, "您可通过以下方式与我们联系："),
           vue.createElementVNode("p", null, " 1. 如对本政策内容有任何疑问、意见或建议，您可通过 健变及相关互联网产品 在线客服与我们联系； "),
           vue.createElementVNode("p", null, " 2. 如果发现个人信息可能被泄露，您可以通过 健变及相关互联网产品 投诉举报，我们将在15个工作日内联络您并完成核查和处理； "),
@@ -39339,8 +39445,6 @@ if (uni.restoreGlobal) {
         params
         // 参数列表
       }) {
-        formatAppLog("log", "at common/appInit.js:56", objectName, "objectName");
-        formatAppLog("log", "at common/appInit.js:57", methodName, "methodName");
         if (objectName == "login")
           ;
         else {

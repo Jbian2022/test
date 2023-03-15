@@ -53,8 +53,8 @@ export default async function() {
 			// 	params // 参数列表
 			// });
 			// 接入自己逻辑
-				console.log(objectName, 'objectName')
-				console.log(methodName, 'methodName')
+				// console.log(objectName, 'objectName')
+				// console.log(methodName, 'methodName')
 				// 后台到前台
 		
 				   // 校验token的合法性每个接口都要加token

@@ -240,10 +240,11 @@
 }
 .training-record .van-nav-bar .van-nav-bar__title {
   font-weight: 500;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.9375rem;
 }
-.training-record .van-nav-bar .van-nav-bar__text, .training-record .van-nav-bar .van-icon-arrow-left {
+.training-record .van-nav-bar .van-nav-bar__text,
+.training-record .van-nav-bar .van-icon-arrow-left {
   color: #eff3fc;
   font-size: 0.9375rem;
 }
@@ -260,18 +261,18 @@
 .training-record .calendar-box .calendar-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .training-record .calendar-box .calendar-date {
   font-size: 1rem;
   font-weight: 600;
-  color: #BDC3CE;
+  color: #bdc3ce;
 }
 .training-record .calendar-box .cell-box {
   padding: 0 0.125rem 0.3125rem 0.125rem;
 }
 .training-record .calendar-box .cell-key {
-  color: #F4F7FF;
+  color: #f4f7ff;
   width: 1.9375rem;
   height: 1.9375rem;
   text-align: center;
@@ -282,7 +283,7 @@
   width: 1.9375rem;
   height: 1.9375rem;
   line-height: 1.9375rem;
-  background: #1370FF;
+  background: #1370ff;
   font-weight: 600;
   border-radius: 100%;
 }
@@ -296,11 +297,12 @@
   background: rgba(19, 112, 255, 0.3);
   border-radius: 0.25rem;
   font-size: 0.4375rem;
-  color: #F4F7FF;
+  color: #f4f7ff;
   padding: 0.0625rem;
 }
-.training-record .calendar-box .prev .cell-key, .training-record .calendar-box .next .cell-key {
-  color: #7A7F89;
+.training-record .calendar-box .prev .cell-key,
+.training-record .calendar-box .next .cell-key {
+  color: #7a7f89;
 }
 .training-record .footer-button {
   position: fixed;
@@ -320,10 +322,10 @@
   height: 2.5rem;
   width: 7.5625rem;
   border-radius: 0.5rem;
-  background: #4B525E;
+  background: #4b525e;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 2.5rem;
   text-align: center;
   z-index: 88;
@@ -334,7 +336,7 @@
   bottom: -0.4375rem;
   width: 0.75rem;
   height: 0.75rem;
-  background: #4B525E;
+  background: #4b525e;
   left: 50%;
   transform: rotate(45deg) translateX(-50%);
 }
@@ -350,7 +352,7 @@
 .training-record .action-box {
   position: relative;
   height: 26.5rem;
-  background: #383D46;
+  background: #383d46;
   border-radius: 0.75rem 0.75rem 0 0;
   padding: 1.25rem 1.25rem 0 1.25rem;
 }
@@ -363,26 +365,26 @@
 .training-record .action-box .action-date {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
 }
 .training-record .action-box .box-close {
   font-size: 1.125rem;
   font-weight: 500;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 1.5625rem;
   height: 1.5625rem;
   line-height: 1.5625rem;
   border-radius: 100%;
-  background: #4B525E;
+  background: #4b525e;
 }
 .training-record .action-box .action-item {
   padding: 1.5rem 1.25rem;
-  background: #4B525E;
+  background: #4b525e;
   border-radius: 0.75rem;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #F4F7FF;
+  color: #f4f7ff;
   display: flex;
   justify-content: space-between;
 }
@@ -394,7 +396,7 @@
   text-align: center;
   font-size: 0.875rem;
   font-weight: 400;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 1.25rem;
 }
 .training-record .action-box .action-button {
@@ -404,10 +406,10 @@
   right: 1.25rem;
   height: 3.125rem;
   line-height: 3.125rem;
-  background: #1370FF;
+  background: #1370ff;
   border-radius: 0.5rem;
   text-align: center;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 1rem;
 }

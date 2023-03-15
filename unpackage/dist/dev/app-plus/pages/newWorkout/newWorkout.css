@@ -196,8 +196,16 @@
   color: #ffffff;
   background: transparent;
 }
-.new-workout .header .title {
+.new-workout .header .title_dakuang {
   font-weight: 600;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+.new-workout .header .title_dakuang .back_img_style {
+  margin-right: 0.625rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 .new-workout .header .btn {
   padding: 0 0.9375rem;
@@ -470,7 +478,6 @@
 .new-workout .delete-dialog {
   background: linear-gradient(180deg, #343a44 0%, #212328 100%);
   width: 19.0625rem;
-  height: 25rem;
 }
 .new-workout .finish-dialog .first-level-title,
 .new-workout .delete-dialog .first-level-title {
@@ -511,13 +518,21 @@
 }
 .new-workout .finish-dialog {
   background-image: url("../../static/newWorkout/training completed.png");
+  background-repeat: no-repeat;
   background-size: contain;
+  height: 29.125rem;
 }
-.new-workout .finish-dialog .van-button.finish {
+.new-workout .finish-dialog .van-button.finish_share {
   background: #1370ff !important;
   color: #ffffff !important;
 }
+.new-workout .finish-dialog .van-button.finish {
+  margin-top: 0.9375rem;
+  background: #454951 !important;
+  color: #ffffff !important;
+}
 .new-workout .delete-dialog {
+  height: 25rem;
   background-image: url("../../static/newWorkout/training delete.png");
   background-size: contain;
 }
